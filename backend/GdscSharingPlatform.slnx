@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/GdscSharingPlatform.Api/GdscSharingPlatform.Api.csproj" />
+    <Project Path="src/GdscSharingPlatform.Application/GdscSharingPlatform.Application.csproj" />
+    <Project Path="src/GdscSharingPlatform.Domain/GdscSharingPlatform.Domain.csproj" />
+    <Project Path="src/GdscSharingPlatform.Infrastructure/GdscSharingPlatform.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/GdscSharingPlatform.UnitTests/GdscSharingPlatform.UnitTests.csproj" />
+  </Folder>
+</Solution>
