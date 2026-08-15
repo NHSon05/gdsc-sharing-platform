@@ -6,6 +6,7 @@
     <Project Path="src/GdscSharingPlatform.Infrastructure/GdscSharingPlatform.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/GdscSharingPlatform.IntegrationTests/GdscSharingPlatform.IntegrationTests.csproj" />
     <Project Path="tests/GdscSharingPlatform.UnitTests/GdscSharingPlatform.UnitTests.csproj" />
   </Folder>
 </Solution>
