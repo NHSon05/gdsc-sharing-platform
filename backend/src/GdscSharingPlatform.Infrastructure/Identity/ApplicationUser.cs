@@ -1,0 +1,41 @@
+using GdscSharingPlatform.Domain.Entities;
+using GdscSharingPlatform.Domain.Enums;
+using Microsoft.AspNetCore.Identity;
+
+namespace GdscSharingPlatform.Infrastructure.Identity;
+
+public class ApplicationUser : IdentityUser<Guid>
+{
+    public string FullName { get; set; } = string.Empty;
+
+    public string? DisplayName { get; set; }
+
+    public string? AvatarUrl { get; set; }
+
+    public string? Bio { get; set; }
+
+    public Guid? DepartmentId { get; set; }
+
+    public Department? Department { get; set; }
+
+    public UserStatus Status { get; set; } = UserStatus.Active;
+
+    public DateTimeOffset? JoinedAt { get; set; }
+
+    public DateTimeOffset? LastLoginAt { get; set; }
+
+    public DateTimeOffset? LastActiveAt { get; set; }
+
+    public string TimeZone { get; set; } = "Asia/Ho_Chi_Minh";
+
+    public string Locale { get; set; } = "vi-VN";
+
+    public DateTimeOffset CreatedAt { get; set; }
+        = DateTimeOffset.UtcNow;
+
+    public DateTimeOffset? UpdatedAt { get; set; }
+
+    public bool IsDeleted { get; set; }
+
+    public DateTimeOffset? DeletedAt { get; set; }
+}
