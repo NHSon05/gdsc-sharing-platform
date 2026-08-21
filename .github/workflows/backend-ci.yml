@@ -1,0 +1,33 @@
+name: Backend CI
+
+on:
+  push:
+    branches: ["main", "develop"]
+  pull_request:
+    branches: ["main", "develop"]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - name: Checkout mã nguồn
+        uses: actions/checkout@v4
+
+      - name: Cài đặt .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: backend/global.json
+
+      - name: Restore dependencies
+        run: dotnet restore GdscSharingPlatform.slnx
+
+      - name: Build dự án
+        run: dotnet build GdscSharingPlatform.slnx --no-restore --configuration Release
+
+      - name: Chạy Tests
+        run: dotnet test GdscSharingPlatform.slnx --no-build --configuration Release --verbosity normal
