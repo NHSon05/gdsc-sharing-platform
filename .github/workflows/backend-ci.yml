@@ -10,6 +10,10 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: backend
+
     steps:
       - name: Checkout mã nguồn
         uses: actions/checkout@v4
@@ -17,13 +21,13 @@ jobs:
       - name: Cài đặt .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: "8.0.x" # Hoặc '9.0.x' tùy phiên bản bạn dùng
+          global-json-file: backend/global.json
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore GdscSharingPlatform.slnx
 
       - name: Build dự án
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build GdscSharingPlatform.slnx --no-restore --configuration Release
 
-      - name: Chạy Unit Tests
-        run: dotnet test --no-build --configuration Release --verbosity normal
+      - name: Chạy Tests
+        run: dotnet test GdscSharingPlatform.slnx --no-build --configuration Release --verbosity normal
