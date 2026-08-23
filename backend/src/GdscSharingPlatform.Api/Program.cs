@@ -1,7 +1,9 @@
+using GdscSharingPlatform.Api.HealthChecks;
 using GdscSharingPlatform.Api.ExceptionHandling;
 using GdscSharingPlatform.Application.Common.Exceptions;
 using GdscSharingPlatform.Infrastructure;
 using GdscSharingPlatform.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 // Khởi tạo builder
 var builder = WebApplication.CreateBuilder(args);
@@ -33,36 +35,51 @@ app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {
-    // app.MapOpenApi();
-    app.MapGet(
-        "/development/errors/not-found",
-        () =>
-        {
-            throw new NotFoundException(
-                "Department",
-                Guid.NewGuid());
-        });
+    app.MapOpenApi();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint(
+            "/openapi/v1.json",
+            "GDSC Sharing Platform API v1"
+        );
+        options.RoutePrefix = "swagger";
 
-    app.MapGet(
-        "/development/errors/conflict",
-        () =>
-        {
-            throw new ConflictException(
-                "A Department with this code already exists.");
-        });
-
-    app.MapGet(
-        "/development/errors/unexpected",
-        () =>
-        {
-            throw new InvalidOperationException(
-                "Example unexpected error.");
-        });
+        options.DocumentTitle = "GDSC Sharing Platform API";
+    });
 }
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.MapHealthChecks(
+   "/health/live",
+   new HealthCheckOptions
+   {
+       Predicate = _ => false,
+       ResponseWriter =
+           HealthCheckResponseWriter.WriteAsync
+   });
+
+app.MapHealthChecks(
+    "/health/ready",
+    new HealthCheckOptions
+    {
+        Predicate = registration =>
+            registration.Tags.Contains("ready"),
+        ResponseWriter =
+            HealthCheckResponseWriter.WriteAsync
+    });
+
+app.MapHealthChecks(
+    "/health",
+    new HealthCheckOptions
+    {
+        Predicate = registration =>
+            registration.Tags.Contains("ready"),
+        ResponseWriter =
+            HealthCheckResponseWriter.WriteAsync
+    });
 
 app.MapControllers();
 

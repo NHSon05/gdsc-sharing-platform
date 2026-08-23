@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace GdscSharingPlatform.Infrastructure;
 
@@ -25,6 +26,18 @@ public static class DependencyInjection
             {
                 options.UseNpgsql(connectionString);
             });
+
+        services
+            .AddHealthChecks()
+            .AddDbContextCheck<ApplicationDbContext>(
+                name: "postgresql",
+                failureStatus: HealthStatus.Unhealthy,
+                tags:
+                [
+                    "ready",
+                    "database"
+                ]
+            );
 
         services
             .AddIdentityCore<ApplicationUser>(
