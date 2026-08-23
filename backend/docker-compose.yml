@@ -1,21 +1,81 @@
+name: gdsc-sharing-platform
+
 services:
   postgres:
     image: postgres:17-alpine
     container_name: gdsc-sharing-platform-postgres
     restart: unless-stopped
+
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-gdsc_sharing_platform}
       POSTGRES_USER: ${POSTGRES_USER:-admin}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in your environment or .env file}
+
     ports:
       - "${POSTGRES_PORT:-5433}:5432"
+
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"
+        ]
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 10s
+
+  api:
+    container_name: gdsc-sharing-platform-api
+    restart: unless-stopped
+
+    build:
+      context: .
+      dockerfile: src/GdscSharingPlatform.Api/Dockerfile
+      args:
+        BUILD_CONFIGURATION: Release
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+        restart: true
+
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+      ASPNETCORE_HTTP_PORTS: "8080"
+
+      ConnectionStrings__DefaultConnection: >-
+        Host=postgres;
+        Port=5432;
+        Database=${POSTGRES_DB:-gdsc_sharing_platform};
+        Username=${POSTGRES_USER:-admin};
+        Password=${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in your environment or .env file}
+
+      SeedAdmin__Enabled: ${SEED_ADMIN_ENABLED:-false}
+      SeedAdmin__Email: ${SEED_ADMIN_EMAIL:-}
+      SeedAdmin__FullName: ${SEED_ADMIN_FULL_NAME:-}
+      SeedAdmin__DepartmentCode: ${SEED_ADMIN_DEPARTMENT_CODE:-MANAGEMENT}
+      SeedAdmin__Password: ${SEED_ADMIN_PASSWORD:-}
+
+    ports:
+      - "${API_PORT:-8080}:8080"
+
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "--fail",
+          "--silent",
+          "http://localhost:8080/health/live"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
 volumes:
   postgres_data:
