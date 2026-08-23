@@ -1,3 +1,5 @@
+using GdscSharingPlatform.Api.ExceptionHandling;
+using GdscSharingPlatform.Application.Common.Exceptions;
 using GdscSharingPlatform.Infrastructure;
 using GdscSharingPlatform.Infrastructure.Persistence;
 
@@ -14,12 +16,48 @@ builder.Services.AddOpenApi();
 builder.Services.AddInfrastructure(
     builder.Configuration);
 
+builder.Services.AddProblemDetails(options =>
+{
+    options.CustomizeProblemDetails = context =>
+    {
+        context.ProblemDetails.Extensions["traceId"] = context.HttpContext.TraceIdentifier;
+    };
+});
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+
 var app = builder.Build();
 await app.Services.InitializeDatabaseAsync();
 
+app.UseExceptionHandler();
+
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    // app.MapOpenApi();
+    app.MapGet(
+        "/development/errors/not-found",
+        () =>
+        {
+            throw new NotFoundException(
+                "Department",
+                Guid.NewGuid());
+        });
+
+    app.MapGet(
+        "/development/errors/conflict",
+        () =>
+        {
+            throw new ConflictException(
+                "A Department with this code already exists.");
+        });
+
+    app.MapGet(
+        "/development/errors/unexpected",
+        () =>
+        {
+            throw new InvalidOperationException(
+                "Example unexpected error.");
+        });
 }
 
 app.UseHttpsRedirection();

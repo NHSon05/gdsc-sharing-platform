@@ -98,22 +98,16 @@ public sealed class DatabaseSeeder
                 2),
 
             CreateDepartment(
-                "DESIGN",
-                "Design",
-                "Graphic and product design department",
+                "R&D",
+                "R&D",
+                "Research and development department",
                 3),
 
             CreateDepartment(
-                "PHOTOGRAPHY",
-                "Photography",
-                "Photography department",
-                4),
-
-            CreateDepartment(
-                "MEDIA",
-                "Media",
-                "Media and communication department",
-                5)
+                "MARKETING",
+                "Marketing",
+                "Marketing department",
+                4)
         };
 
         var hasChanges = false;
