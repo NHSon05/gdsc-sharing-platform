@@ -2,6 +2,7 @@
 bin/
 obj/
 .dotnet/
+.local/
 
 # User-specific files
 *.user
