@@ -18,6 +18,9 @@ public class ApplicationUser : IdentityUser<Guid>
 
     public Department? Department { get; set; }
 
+    public ICollection<RefreshToken> RefreshTokens { get; set; }
+        = new List<RefreshToken>();
+
     public UserStatus Status { get; set; } = UserStatus.Active;
 
     public DateTimeOffset? JoinedAt { get; set; }

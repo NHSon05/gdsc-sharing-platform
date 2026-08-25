@@ -13,7 +13,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     ) : base(options)
     {
     }
+
     public DbSet<Department> Departments => Set<Department>();
+
+    public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
