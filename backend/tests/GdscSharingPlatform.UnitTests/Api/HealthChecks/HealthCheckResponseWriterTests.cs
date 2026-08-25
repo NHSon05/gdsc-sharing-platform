@@ -21,6 +21,7 @@ public class HealthCheckResponseWriterTests
         // Làm nơi chứa dữ liệu mà hàm sắp ghi ra
         context.Response.Body = new MemoryStream();
 
+        // Tạo dữ liệu báo cáo giả
         var report = new HealthReport(
             new Dictionary<string, HealthReportEntry>(),
             HealthStatus.Healthy,
