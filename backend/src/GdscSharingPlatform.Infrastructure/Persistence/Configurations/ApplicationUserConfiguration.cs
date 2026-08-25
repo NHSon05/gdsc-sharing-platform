@@ -2,7 +2,7 @@ using GdscSharingPlatform.Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace GdscSharingPlaform.Infrastructure.Persistence.Configurations;
+namespace GdscSharingPlatform.Infrastructure.Persistence.Configurations;
 
 public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
 {

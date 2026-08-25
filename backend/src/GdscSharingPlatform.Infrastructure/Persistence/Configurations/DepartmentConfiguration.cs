@@ -3,7 +3,7 @@ using GdscSharingPlatform.Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace GdscSharing.Infrastructure.Persistence.Configurations;
+namespace GdscSharingPlatform.Infrastructure.Persistence.Configurations;
 
 public class DepartmentConfiguration
     : IEntityTypeConfiguration<Department>
