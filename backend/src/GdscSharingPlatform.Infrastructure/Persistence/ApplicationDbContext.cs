@@ -24,7 +24,19 @@ public class ApplicationDbContext(
     {
         base.OnModelCreating(builder);
 
-        // Tự động quét và áp dụng tất cả các cấu hình EntityTypeConfiguration trong Assembly
+        // 1. Cấu hình Schema mặc định trong cơ sở dữ liệu
+        builder.HasDefaultSchema("gdsc");
+
+        // 2. Đổi tên các bảng mặc định của ASP.NET Core Identity thành tên ngắn gọn, chuẩn REST
+        builder.Entity<ApplicationUser>().ToTable("Users");
+        builder.Entity<IdentityRole<Guid>>().ToTable("Roles");
+        builder.Entity<IdentityUserRole<Guid>>().ToTable("UserRoles");
+        builder.Entity<IdentityUserClaim<Guid>>().ToTable("UserClaims");
+        builder.Entity<IdentityUserLogin<Guid>>().ToTable("UserLogins");
+        builder.Entity<IdentityRoleClaim<Guid>>().ToTable("RoleClaims");
+        builder.Entity<IdentityUserToken<Guid>>().ToTable("UserTokens");
+
+        // 3. Tự động quét và nạp toàn bộ cấu hình chi tiết từ các file IEntityTypeConfiguration<T>
         builder.ApplyConfigurationsFromAssembly(
             typeof(ApplicationDbContext).Assembly);
     }
