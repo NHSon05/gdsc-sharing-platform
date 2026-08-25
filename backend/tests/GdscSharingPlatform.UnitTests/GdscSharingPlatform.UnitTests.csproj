@@ -22,6 +22,7 @@
     <ProjectReference Include="..\..\src\GdscSharingPlatform.Application\GdscSharingPlatform.Application.csproj" />
     <ProjectReference Include="..\..\src\GdscSharingPlatform.Domain\GdscSharingPlatform.Domain.csproj" />
     <ProjectReference Include="..\..\src\GdscSharingPlatform.Infrastructure\GdscSharingPlatform.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\GdscSharingPlatform.Api\GdscSharingPlatform.Api.csproj" />
   </ItemGroup>
 
   <ItemGroup>
