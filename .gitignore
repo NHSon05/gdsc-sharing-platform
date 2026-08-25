@@ -21,3 +21,8 @@ obj/
 
 # macOS
 .DS_Store
+
+# AI/Agent local configs
+.agents/
+.claude/
+skills-lock.json
