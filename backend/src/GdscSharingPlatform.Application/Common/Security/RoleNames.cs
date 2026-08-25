@@ -11,3 +11,16 @@ public static class RoleNames
         Member
     ];
 }
+
+public static class PolicyNames
+{
+    public const string AdminOnly = "AdminOnly";
+    public const string MemberOnly = "MemberOnly";
+    public const string RequireActiveUser = "RequireActiveUser";
+}
+
+public static class AuthClaimNames
+{
+    public const string DepartmentId = "department_id";
+    public const string Status = "status";
+}
