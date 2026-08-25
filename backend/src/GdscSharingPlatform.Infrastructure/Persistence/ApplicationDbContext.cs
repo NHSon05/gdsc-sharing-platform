@@ -1,28 +1,30 @@
-using GdscSharingPlatform.Infrastructure.Identity;
 using GdscSharingPlatform.Domain.Entities;
+using GdscSharingPlatform.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace GdscSharingPlatform.Infrastructure.Persistence;
 
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
+public class ApplicationDbContext(
+    DbContextOptions<ApplicationDbContext> options)
+    : IdentityDbContext<
+        ApplicationUser,
+        IdentityRole<Guid>,
+        Guid>(options)
 {
-    public ApplicationDbContext(
-        DbContextOptions<ApplicationDbContext> options
-    ) : base(options)
-    {
-    }
+    public DbSet<Department> Departments =>
+        Set<Department>();
 
-    public DbSet<Department> Departments => Set<Department>();
+    public DbSet<RefreshToken> RefreshTokens =>
+        Set<RefreshToken>();
 
-    public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
-
-    protected override void OnModelCreating(ModelBuilder builder)
+    protected override void OnModelCreating(
+        ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
-        // EF Core sẽ tywh tùn tất cả class để triển khai
+        // Tự động quét và áp dụng tất cả các cấu hình EntityTypeConfiguration trong Assembly
         builder.ApplyConfigurationsFromAssembly(
             typeof(ApplicationDbContext).Assembly);
     }
