@@ -8,7 +8,8 @@ public interface IJwtTokenGenerator
         string fullName,
         IEnumerable<string> roles,
         Guid? departmentId,
-        string status
+        string status,
+        int tokenVersion
     );
     string GenerateRefreshToken();
     string HashToken(string rawToken);

@@ -37,10 +37,11 @@ public class JwtTokenGeneratorTests
         var roles = new[] { RoleNames.Admin, RoleNames.Member };
         var departmentId = Guid.NewGuid();
         var status = "Active";
+        var tokenVersion = 1;
 
         // Act
         var (token, expiresInSeconds) = _generator.GenerateAccessToken(
-            userId, email, fullName, roles, departmentId, status);
+            userId, email, fullName, roles, departmentId, status, tokenVersion);
 
         // Assert
         Assert.NotNull(token);
@@ -61,6 +62,7 @@ public class JwtTokenGeneratorTests
         Assert.Equal(fullName, jwtToken.Claims.First(c => c.Type == JwtRegisteredClaimNames.Name).Value);
         Assert.NotNull(jwtToken.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Jti));
         Assert.Equal(status, jwtToken.Claims.First(c => c.Type == AuthClaimTypes.Status).Value);
+        Assert.Equal(tokenVersion.ToString(), jwtToken.Claims.First(c => c.Type == AuthClaimTypes.TokenVersion).Value);
         Assert.Equal(departmentId.ToString(), jwtToken.Claims.First(c => c.Type == AuthClaimTypes.DepartmentId).Value);
 
         var roleClaims = jwtToken.Claims.Where(c => c.Type == "role").Select(c => c.Value).ToList();
@@ -76,7 +78,7 @@ public class JwtTokenGeneratorTests
 
         // Act
         var (token, _) = _generator.GenerateAccessToken(
-            userId, "user@gdsc.app", "Test User", [RoleNames.Member], null, "Active");
+            userId, "user@gdsc.app", "Test User", [RoleNames.Member], null, "Active", 1);
 
         // Assert
         var handler = new JwtSecurityTokenHandler();
@@ -94,7 +96,7 @@ public class JwtTokenGeneratorTests
 
         // Act
         var (token, _) = _generator.GenerateAccessToken(
-            userId, "user@gdsc.app", "Test User", duplicateRoles, null, "Active");
+            userId, "user@gdsc.app", "Test User", duplicateRoles, null, "Active", 1);
 
         // Assert
         var handler = new JwtSecurityTokenHandler();
@@ -117,7 +119,7 @@ public class JwtTokenGeneratorTests
 
         // Act & Assert
         Assert.Throws<ArgumentException>(() =>
-            _generator.GenerateAccessToken(userId, email, fullName, [RoleNames.Member], null, status));
+            _generator.GenerateAccessToken(userId, email, fullName, [RoleNames.Member], null, status, 1));
     }
 
     [Fact]
@@ -125,7 +127,7 @@ public class JwtTokenGeneratorTests
     {
         // Act & Assert
         Assert.Throws<ArgumentException>(() =>
-            _generator.GenerateAccessToken(Guid.Empty, "user@gdsc.app", "User", [RoleNames.Member], null, "Active"));
+            _generator.GenerateAccessToken(Guid.Empty, "user@gdsc.app", "User", [RoleNames.Member], null, "Active", 1));
     }
 
     [Fact]

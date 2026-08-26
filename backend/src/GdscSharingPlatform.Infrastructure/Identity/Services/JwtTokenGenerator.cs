@@ -27,7 +27,8 @@ public sealed class JwtTokenGenerator : IJwtTokenGenerator
         string fullName,
         IEnumerable<string> roles,
         Guid? departmentId,
-        string status)
+        string status,
+        int tokenVersion)
     {
         if (userId == Guid.Empty)
         {
@@ -49,8 +50,8 @@ public sealed class JwtTokenGenerator : IJwtTokenGenerator
             new(JwtRegisteredClaimNames.Email, email),
             new(JwtRegisteredClaimNames.Name, fullName),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new(AuthClaimTypes.Status, status)
-
+            new(AuthClaimTypes.Status, status),
+            new(AuthClaimTypes.TokenVersion, tokenVersion.ToString())
         };
 
         if (departmentId.HasValue)
