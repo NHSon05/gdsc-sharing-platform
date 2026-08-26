@@ -46,7 +46,7 @@ public class DatabaseSeederTests
             DepartmentCode = "MANAGEMENT"
         };
 
-        services.AddSingleton(Options.Create(optionsModel));
+        services.AddSingleton(Microsoft.Extensions.Options.Options.Create(optionsModel));
         services.AddScoped<DatabaseSeeder>();
 
         var provider = services.BuildServiceProvider();

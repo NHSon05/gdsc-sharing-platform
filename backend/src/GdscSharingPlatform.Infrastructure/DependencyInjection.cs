@@ -1,11 +1,15 @@
+using GdscSharingPlatform.Application.Common.Interfaces;
 using GdscSharingPlatform.Infrastructure.Identity;
+using GdscSharingPlatform.Infrastructure.Identity.Options;
 using GdscSharingPlatform.Infrastructure.Identity.Seeding;
+using GdscSharingPlatform.Infrastructure.Identity.Services;
 using GdscSharingPlatform.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Options;
 
 namespace GdscSharingPlatform.Infrastructure;
 
@@ -86,6 +90,26 @@ public static class DependencyInjection
                         options.DepartmentCode),
                 "SeedAdmin:DepartmentCode is required.")
             .ValidateOnStart();
+
+        services.AddOptions<JwtOptions>()
+            .Bind(
+                configuration.GetSection(
+                    JwtOptions.SectionName))
+            .ValidateOnStart();
+
+        services.AddSingleton<
+            IValidateOptions<JwtOptions>,
+            JwtOptionValidator>();
+
+        services.AddHttpContextAccessor();
+
+        services.AddSingleton<
+            IJwtTokenGenerator,
+            JwtTokenGenerator>();
+
+        services.AddScoped<
+            ICurrentUserService,
+            CurrentUserService>();
 
         services.AddScoped<DatabaseSeeder>();
 
