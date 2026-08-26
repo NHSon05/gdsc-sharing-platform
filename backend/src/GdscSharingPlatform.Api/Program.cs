@@ -1,5 +1,6 @@
 using GdscSharingPlatform.Api.HealthChecks;
 using GdscSharingPlatform.Api.ExceptionHandling;
+using GdscSharingPlatform.Application;
 using GdscSharingPlatform.Application.Common.Exceptions;
 using GdscSharingPlatform.Infrastructure;
 using GdscSharingPlatform.Infrastructure.Persistence;
@@ -14,7 +15,8 @@ builder.Services.AddControllers();
 // API Documents (OpenAPI/Swagger)
 builder.Services.AddOpenApi();
 
-// Đăng ký toàn bộ dịch vụ thuộc tầng Infracstructure
+// Đăng ký dịch vụ thuộc tầng Application & Infrastructure
+builder.Services.AddApplication();
 builder.Services.AddInfrastructure(
     builder.Configuration);
 

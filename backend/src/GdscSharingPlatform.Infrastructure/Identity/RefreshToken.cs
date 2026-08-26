@@ -92,7 +92,9 @@ public sealed class RefreshToken
         IsRevoked = true;
         RevokedAt = revokedAt;
         RevocationReason = reason.Trim();
-        ReplacedByTokenHash = NormalizeOptional(replacedByTokenHash);
+        ReplacedByTokenHash = string.IsNullOrWhiteSpace(replacedByTokenHash)
+            ? null
+            : replacedByTokenHash.Trim();
     }
 
     private static string? NormalizeOptional(string? value)

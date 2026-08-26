@@ -1,4 +1,5 @@
 using GdscSharingPlatform.Application.Common.Interfaces;
+using GdscSharingPlatform.Application.Features.Auth.Interfaces;
 using GdscSharingPlatform.Infrastructure.Identity;
 using GdscSharingPlatform.Infrastructure.Identity.Options;
 using GdscSharingPlatform.Infrastructure.Identity.Seeding;
@@ -61,7 +62,10 @@ public static class DependencyInjection
                         TimeSpan.FromMinutes(15);
                 })
             .AddRoles<IdentityRole<Guid>>()
+            .AddSignInManager()
             .AddEntityFrameworkStores<ApplicationDbContext>();
+
+        services.AddAuthentication();
 
         services
             .AddOptions<AdminSeedOptions>()
@@ -111,7 +115,10 @@ public static class DependencyInjection
             ICurrentUserService,
             CurrentUserService>();
 
+        services.AddScoped<IAuthService, AuthService>();
+
         services.AddScoped<DatabaseSeeder>();
+
 
         return services;
     }

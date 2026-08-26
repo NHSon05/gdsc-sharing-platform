@@ -71,6 +71,12 @@ public sealed class GlobalExceptionHandler(
                     "Validation failed",
                     "https://httpstatuses.com/400"),
 
+            AuthenticationException =>
+                new ErrorMetadata(
+                    StatusCodes.Status401Unauthorized,
+                    "Unauthorized",
+                    "https://httpstatuses.com/401"),
+
             UnauthorizedAccessException =>
                 new ErrorMetadata(
                     StatusCodes.Status401Unauthorized,
