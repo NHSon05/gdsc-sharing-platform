@@ -11,6 +11,7 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
 COPY ["global.json", "./"]
+COPY ["Directory.Packages.props", "./"]
 COPY ["src/GdscSharingPlatform.Api/GdscSharingPlatform.Api.csproj", "src/GdscSharingPlatform.Api/"]
 COPY ["src/GdscSharingPlatform.Application/GdscSharingPlatform.Application.csproj", "src/GdscSharingPlatform.Application/"]
 COPY ["src/GdscSharingPlatform.Infrastructure/GdscSharingPlatform.Infrastructure.csproj", "src/GdscSharingPlatform.Infrastructure/"]
