@@ -152,7 +152,7 @@ public static class DependencyInjection
                 // Giữ nguyên tên claim: sub, role, status...
                 options.MapInboundClaims = false;
 
-                options.RequireHttpsMetadata = true;
+                options.RequireHttpsMetadata = false;
                 options.SaveToken = false;
 
                 options.TokenValidationParameters =

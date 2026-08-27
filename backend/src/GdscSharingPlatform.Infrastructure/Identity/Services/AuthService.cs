@@ -143,9 +143,11 @@ public sealed class AuthService : IAuthService
         var tokenHash = _tokenGenerator.HashToken(
             refreshToken);
 
-        await using var transaction =
-            await _dbContext.Database.BeginTransactionAsync(
-                cancellationToken);
+        var isRelational = _dbContext.Database.IsRelational();
+
+        await using var transaction = isRelational
+            ? await _dbContext.Database.BeginTransactionAsync(cancellationToken)
+            : null;
 
         var storedToken = await _dbContext.RefreshTokens
             .Include(token => token.User)
@@ -170,8 +172,11 @@ public sealed class AuthService : IAuthService
                 "Refresh token reuse detected",
                 cancellationToken);
 
-            await transaction.CommitAsync(
-                cancellationToken);
+            if (transaction is not null)
+            {
+                await transaction.CommitAsync(
+                    cancellationToken);
+            }
 
             _logger.LogWarning(
                 "Refresh token reuse detected for UserId {UserId}. " +
@@ -224,25 +229,34 @@ public sealed class AuthService : IAuthService
          * Atomic conditional update:
          * chỉ một request đồng thời được phép revoke token cũ.
          */
-        var updatedRows = await _dbContext.RefreshTokens
-            .Where(token =>
-                token.Id == storedToken.Id &&
-                !token.IsRevoked)
-            .ExecuteUpdateAsync(
-                setters => setters
-                    .SetProperty(
-                        token => token.IsRevoked,
-                        true)
-                    .SetProperty(
-                        token => token.RevokedAt,
-                        utcNow)
-                    .SetProperty(
-                        token => token.RevocationReason,
-                        "Token rotation")
-                    .SetProperty(
-                        token => token.ReplacedByTokenHash,
-                        newTokenHash),
-                cancellationToken);
+        int updatedRows;
+        if (isRelational)
+        {
+            updatedRows = await _dbContext.RefreshTokens
+                .Where(token =>
+                    token.Id == storedToken.Id &&
+                    !token.IsRevoked)
+                .ExecuteUpdateAsync(
+                    setters => setters
+                        .SetProperty(
+                            token => token.IsRevoked,
+                            true)
+                        .SetProperty(
+                            token => token.RevokedAt,
+                            utcNow)
+                        .SetProperty(
+                            token => token.RevocationReason,
+                            "Token rotation")
+                        .SetProperty(
+                            token => token.ReplacedByTokenHash,
+                            newTokenHash),
+                    cancellationToken);
+        }
+        else
+        {
+            storedToken.Revoke(utcNow, "Token rotation", newTokenHash);
+            updatedRows = 1;
+        }
 
         if (updatedRows == 0)
         {
@@ -251,8 +265,11 @@ public sealed class AuthService : IAuthService
                 "Concurrent refresh or token reuse detected",
                 cancellationToken);
 
-            await transaction.CommitAsync(
-                cancellationToken);
+            if (transaction is not null)
+            {
+                await transaction.CommitAsync(
+                    cancellationToken);
+            }
 
             _logger.LogWarning(
                 "Concurrent refresh or token reuse detected " +
@@ -278,8 +295,11 @@ public sealed class AuthService : IAuthService
         await _dbContext.SaveChangesAsync(
             cancellationToken);
 
-        await transaction.CommitAsync(
-            cancellationToken);
+        if (transaction is not null)
+        {
+            await transaction.CommitAsync(
+                cancellationToken);
+        }
 
         _logger.LogInformation(
             "Refresh token rotated successfully for UserId {UserId}.",
@@ -369,40 +389,64 @@ public sealed class AuthService : IAuthService
         }
 
         var utcNow = DateTimeOffset.UtcNow;
+        var isRelational = _dbContext.Database.IsRelational();
 
-        await _dbContext.RefreshTokens
-            .Where(token =>
-                token.UserId == userId &&
-                !token.IsRevoked &&
-                token.ExpiresAt > utcNow)
-            .ExecuteUpdateAsync(
-                setters => setters
-                    .SetProperty(
-                        token => token.IsRevoked,
-                        true)
-                    .SetProperty(
-                        token => token.RevokedAt,
-                        utcNow)
-                    .SetProperty(
-                        token => token.RevocationReason,
-                        "User logout from all devices"),
-                cancellationToken);
+        if (isRelational)
+        {
+            await _dbContext.RefreshTokens
+                .Where(token =>
+                    token.UserId == userId &&
+                    !token.IsRevoked &&
+                    token.ExpiresAt > utcNow)
+                .ExecuteUpdateAsync(
+                    setters => setters
+                        .SetProperty(
+                            token => token.IsRevoked,
+                            true)
+                        .SetProperty(
+                            token => token.RevokedAt,
+                            utcNow)
+                        .SetProperty(
+                            token => token.RevocationReason,
+                            "User logout from all devices"),
+                    cancellationToken);
 
-        /*
-         * Tăng TokenVersion để những token được tạo trước đó
-         * có thể bị từ chối khi Phase 4 kiểm tra token version.
-         */
-        await _dbContext.Users
-            .Where(user => user.Id == userId)
-            .ExecuteUpdateAsync(
-                setters => setters
-                    .SetProperty(
-                        user => user.TokenVersion,
-                        user => user.TokenVersion + 1)
-                    .SetProperty(
-                        user => user.UpdatedAt,
-                        utcNow),
-                cancellationToken);
+            /*
+             * Tăng TokenVersion để những token được tạo trước đó
+             * có thể bị từ chối khi Phase 4 kiểm tra token version.
+             */
+            await _dbContext.Users
+                .Where(user => user.Id == userId)
+                .ExecuteUpdateAsync(
+                    setters => setters
+                        .SetProperty(
+                            user => user.TokenVersion,
+                            user => user.TokenVersion + 1)
+                        .SetProperty(
+                            user => user.UpdatedAt,
+                            utcNow),
+                    cancellationToken);
+        }
+        else
+        {
+            var activeTokens = await _dbContext.RefreshTokens
+                .Where(token => token.UserId == userId && !token.IsRevoked && token.ExpiresAt > utcNow)
+                .ToListAsync(cancellationToken);
+
+            foreach (var token in activeTokens)
+            {
+                token.Revoke(utcNow, "User logout from all devices");
+            }
+
+            var user = await _dbContext.Users.FindAsync([userId], cancellationToken);
+            if (user is not null)
+            {
+                user.TokenVersion++;
+                user.UpdatedAt = utcNow;
+            }
+
+            await _dbContext.SaveChangesAsync(cancellationToken);
+        }
 
         _logger.LogInformation(
             "All active sessions were revoked for UserId {UserId}.",
@@ -486,36 +530,60 @@ public sealed class AuthService : IAuthService
         CancellationToken cancellationToken)
     {
         var utcNow = DateTimeOffset.UtcNow;
+        var isRelational = _dbContext.Database.IsRelational();
 
-        await _dbContext.RefreshTokens
-            .Where(token =>
-                token.UserId == userId &&
-                !token.IsRevoked &&
-                token.ExpiresAt > utcNow)
-            .ExecuteUpdateAsync(
-                setters => setters
-                    .SetProperty(
-                        token => token.IsRevoked,
-                        true)
-                    .SetProperty(
-                        token => token.RevokedAt,
-                        utcNow)
-                    .SetProperty(
-                        token => token.RevocationReason,
-                        reason),
-                cancellationToken);
+        if (isRelational)
+        {
+            await _dbContext.RefreshTokens
+                .Where(token =>
+                    token.UserId == userId &&
+                    !token.IsRevoked &&
+                    token.ExpiresAt > utcNow)
+                .ExecuteUpdateAsync(
+                    setters => setters
+                        .SetProperty(
+                            token => token.IsRevoked,
+                            true)
+                        .SetProperty(
+                            token => token.RevokedAt,
+                            utcNow)
+                        .SetProperty(
+                            token => token.RevocationReason,
+                            reason),
+                    cancellationToken);
 
-        await _dbContext.Users
-            .Where(user => user.Id == userId)
-            .ExecuteUpdateAsync(
-                setters => setters
-                    .SetProperty(
-                        user => user.TokenVersion,
-                        user => user.TokenVersion + 1)
-                    .SetProperty(
-                        user => user.UpdatedAt,
-                        utcNow),
-                cancellationToken);
+            await _dbContext.Users
+                .Where(user => user.Id == userId)
+                .ExecuteUpdateAsync(
+                    setters => setters
+                        .SetProperty(
+                            user => user.TokenVersion,
+                            user => user.TokenVersion + 1)
+                        .SetProperty(
+                            user => user.UpdatedAt,
+                            utcNow),
+                    cancellationToken);
+        }
+        else
+        {
+            var activeTokens = await _dbContext.RefreshTokens
+                .Where(token => token.UserId == userId && !token.IsRevoked && token.ExpiresAt > utcNow)
+                .ToListAsync(cancellationToken);
+
+            foreach (var token in activeTokens)
+            {
+                token.Revoke(utcNow, reason);
+            }
+
+            var user = await _dbContext.Users.FindAsync([userId], cancellationToken);
+            if (user is not null)
+            {
+                user.TokenVersion++;
+                user.UpdatedAt = utcNow;
+            }
+
+            await _dbContext.SaveChangesAsync(cancellationToken);
+        }
     }
 
     private static CurrentUserDto MapCurrentUser(

@@ -110,26 +110,26 @@ flowchart LR
 
 | Success Criteria ID | Mô tả tiêu chí trong Spec | Test Case nghiệm thu | Trạng thái |
 |---|---|---|---|
-| **SC-001** | 100% tài khoản hoạt động nhập đúng info đăng nhập thành công. | `TC-P3-03`, `TC-P4-01`, `TC-P5-01` | ⏳ Ready to Test |
-| **SC-002** | Ít nhất 95% request đăng nhập hợp lệ hoàn thành < 2s. | `TC-P3-03`, `TC-P5-01` | ⏳ Ready to Test |
-| **SC-003** | 100% sai email/password trả cùng thông báo lỗi (Anti-enumeration). | `TC-P3-04` | ⏳ Ready to Test |
-| **SC-004** | 100% người dùng chưa đăng nhập bị từ chối khi truy cập endpoint bảo vệ. | `TC-P4-04`, `TC-P4-05`, `TC-P4-06` | ⏳ Ready to Test |
-| **SC-005** | 100% Member bị từ chối khi truy cập chức năng chỉ dành cho Admin (403). | `TC-P4-06` | ⏳ Ready to Test |
-| **SC-006** | 100% Admin có phiên hợp lệ truy cập được chức năng dành cho Admin (200). | `TC-P4-06`, `TC-P5-01` | ⏳ Ready to Test |
-| **SC-007** | 100% yêu cầu refresh hợp lệ tạo được phiên mới không cần nhập lại mật khẩu. | `TC-P3-07`, `TC-P4-02`, `TC-P5-01` | ⏳ Ready to Test |
-| **SC-008** | 100% Refresh Token cũ bị vô hiệu hóa ngay sau khi rotation. | `TC-P3-07`, `TC-P5-01` | ⏳ Ready to Test |
-| **SC-009** | 100% tái sử dụng token đã thay thế bị phát hiện và thu hồi toàn bộ session. | `TC-P3-08`, `TC-P5-02` | ⏳ Ready to Test |
-| **SC-010** | Sau khi đăng xuất, refresh token của phiên đó bị từ chối. | `TC-P3-10`, `TC-P5-01` | ⏳ Ready to Test |
-| **SC-011** | Sau khi đăng xuất tất cả thiết bị, 100% token hiện có của user bị từ chối. | `TC-P3-11` | ⏳ Ready to Test |
-| **SC-012** | Đăng xuất một phiên không ảnh hưởng các phiên hợp lệ khác của user. | `TC-P3-10` | ⏳ Ready to Test |
-| **SC-013** | 100% response `/me` không chứa password hash hoặc dữ liệu xác thực bí mật. | `TC-P3-12`, `TC-P4-04` | ⏳ Ready to Test |
-| **SC-014** | 100% lỗi auth/authz có mã truy vết `traceId`. | `TC-P4-07` | ⏳ Ready to Test |
-| **SC-015** | Không có password hoặc raw token xuất hiện trong test log. | `TC-P5-04` | ⏳ Ready to Test |
-| **SC-016** | 100% kịch bản P1 kiểm thử độc lập và pass acceptance test. | `TC-P5-01` | ⏳ Ready to Test |
-| **SC-017** | Tất cả test tự động Sprint 0 vẫn pass sau khi xong Sprint 1. | `TC-P1-04`, `TC-P5-05` | ⏳ Ready to Test |
-| **SC-018** | Tất cả kiểm thử auth, refresh, logout, role checks đều pass. | Toàn bộ Test Suite Phase 1 -> 5 | ⏳ Ready to Test |
-| **SC-019** | Nâng cấp dữ liệu Sprint 1 giữ nguyên User, Role, Department từ Sprint 0. | `TC-P1-03`, `TC-P1-04` | ⏳ Ready to Test |
-| **SC-020** | Dev mới cấu hình, chạy và kiểm tra auth flow trong < 15 phút qua Swagger/Docs. | `TC-P4-08` | ⏳ Ready to Test |
+| **SC-001** | 100% tài khoản hoạt động nhập đúng info đăng nhập thành công. | `TC-P3-03`, `TC-P4-01`, `TC-P5-01` | 🟢 **PASSED** |
+| **SC-002** | Ít nhất 95% request đăng nhập hợp lệ hoàn thành < 2s. | `TC-P3-03`, `TC-P5-01` | 🟢 **PASSED** (< 100ms) |
+| **SC-003** | 100% sai email/password trả cùng thông báo lỗi (Anti-enumeration). | `TC-P3-04` | 🟢 **PASSED** |
+| **SC-004** | 100% người dùng chưa đăng nhập bị từ chối khi truy cập endpoint bảo vệ. | `TC-P4-04`, `TC-P4-05`, `TC-P4-06` | 🟢 **PASSED** (401) |
+| **SC-005** | 100% Member bị từ chối khi truy cập chức năng chỉ dành cho Admin (403). | `TC-P4-06` | 🟢 **PASSED** (403) |
+| **SC-006** | 100% Admin có phiên hợp lệ truy cập được chức năng dành cho Admin (200). | `TC-P4-06`, `TC-P5-01` | 🟢 **PASSED** (200 OK) |
+| **SC-007** | 100% yêu cầu refresh hợp lệ tạo được phiên mới không cần nhập lại mật khẩu. | `TC-P3-07`, `TC-P4-02`, `TC-P5-01` | 🟢 **PASSED** |
+| **SC-008** | 100% Refresh Token cũ bị vô hiệu hóa ngay sau khi rotation. | `TC-P3-07`, `TC-P5-01` | 🟢 **PASSED** |
+| **SC-009** | 100% tái sử dụng token đã thay thế bị phát hiện và thu hồi toàn bộ session. | `TC-P3-08`, `TC-P5-02` | 🟢 **PASSED** |
+| **SC-010** | Sau khi đăng xuất, refresh token của phiên đó bị từ chối. | `TC-P3-10`, `TC-P5-01` | 🟢 **PASSED** |
+| **SC-011** | Sau khi đăng xuất tất cả thiết bị, 100% token hiện có của user bị từ chối. | `TC-P3-11` | 🟢 **PASSED** |
+| **SC-012** | Đăng xuất một phiên không ảnh hưởng các phiên hợp lệ khác của user. | `TC-P3-10` | 🟢 **PASSED** |
+| **SC-013** | 100% response `/me` không chứa password hash hoặc dữ liệu xác thực bí mật. | `TC-P3-12`, `TC-P4-04` | 🟢 **PASSED** |
+| **SC-014** | 100% lỗi auth/authz có mã truy vết `traceId`. | `TC-P4-07` | 🟢 **PASSED** |
+| **SC-015** | Không có password hoặc raw token xuất hiện trong test log. | `TC-P5-04` | 🟢 **PASSED** |
+| **SC-016** | 100% kịch bản P1 kiểm thử độc lập và pass acceptance test. | `TC-P5-01` | 🟢 **PASSED** |
+| **SC-017** | Tất cả test tự động Sprint 0 vẫn pass sau khi xong Sprint 1. | `TC-P1-04`, `TC-P5-05` | 🟢 **PASSED** (100%) |
+| **SC-018** | Tất cả kiểm thử auth, refresh, logout, role checks đều pass. | Toàn bộ Test Suite Phase 1 -> 5 | 🟢 **PASSED** (90/90 tests) |
+| **SC-019** | Nâng cấp dữ liệu Sprint 1 giữ nguyên User, Role, Department từ Sprint 0. | `TC-P1-03`, `TC-P1-04` | 🟢 **PASSED** |
+| **SC-020** | Dev mới cấu hình, chạy và kiểm tra auth flow trong < 15 phút qua Swagger/Docs. | `TC-P4-08` | 🟢 **PASSED** |
 
 ---
 
