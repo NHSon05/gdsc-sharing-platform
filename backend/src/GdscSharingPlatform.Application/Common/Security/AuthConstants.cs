@@ -21,6 +21,7 @@ public static class AuthPolicies
 
 public static class AuthClaimTypes
 {
+    public const string Role = "role";
     public const string DepartmentId = "department_id";
     public const string Status = "status";
     public const string TokenVersion = "token_version";

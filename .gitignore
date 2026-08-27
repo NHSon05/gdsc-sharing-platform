@@ -3,6 +3,10 @@ bin/
 obj/
 .dotnet/
 .local/
+.nuget/
+packages/
+Library/
+
 
 # User-specific files
 *.user
