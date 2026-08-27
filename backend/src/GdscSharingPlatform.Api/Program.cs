@@ -1,7 +1,7 @@
-using GdscSharingPlatform.Api.HealthChecks;
 using GdscSharingPlatform.Api.ExceptionHandling;
+using GdscSharingPlatform.Api.Extensions;
+using GdscSharingPlatform.Api.HealthChecks;
 using GdscSharingPlatform.Application;
-using GdscSharingPlatform.Application.Common.Exceptions;
 using GdscSharingPlatform.Infrastructure;
 using GdscSharingPlatform.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -9,16 +9,15 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 // Khởi tạo builder
 var builder = WebApplication.CreateBuilder(args);
 
-// đăng ký dịch vụ
+// Đăng ký dịch vụ Controllers
 builder.Services.AddControllers();
 
 // API Documents (OpenAPI/Swagger)
-builder.Services.AddOpenApi();
+builder.Services.AddApiDocumentation();
 
 // Đăng ký dịch vụ thuộc tầng Application & Infrastructure
 builder.Services.AddApplication();
-builder.Services.AddInfrastructure(
-    builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddProblemDetails(options =>
 {
@@ -35,23 +34,12 @@ await app.Services.InitializeDatabaseAsync();
 
 app.UseExceptionHandler();
 
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint(
-            "/openapi/v1.json",
-            "GDSC Sharing Platform API v1"
-        );
-        options.RoutePrefix = "swagger";
-
-        options.DocumentTitle = "GDSC Sharing Platform API";
-    });
-}
+// Swagger UI & OpenAPI document
+app.UseApiDocumentation();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapHealthChecks(
@@ -59,28 +47,23 @@ app.MapHealthChecks(
    new HealthCheckOptions
    {
        Predicate = _ => false,
-       ResponseWriter =
-           HealthCheckResponseWriter.WriteAsync
+       ResponseWriter = HealthCheckResponseWriter.WriteAsync
    });
 
 app.MapHealthChecks(
     "/health/ready",
     new HealthCheckOptions
     {
-        Predicate = registration =>
-            registration.Tags.Contains("ready"),
-        ResponseWriter =
-            HealthCheckResponseWriter.WriteAsync
+        Predicate = registration => registration.Tags.Contains("ready"),
+        ResponseWriter = HealthCheckResponseWriter.WriteAsync
     });
 
 app.MapHealthChecks(
     "/health",
     new HealthCheckOptions
     {
-        Predicate = registration =>
-            registration.Tags.Contains("ready"),
-        ResponseWriter =
-            HealthCheckResponseWriter.WriteAsync
+        Predicate = registration => registration.Tags.Contains("ready"),
+        ResponseWriter = HealthCheckResponseWriter.WriteAsync
     });
 
 app.MapControllers();
@@ -88,8 +71,3 @@ app.MapControllers();
 app.Run();
 
 public partial class Program;
-
-// Điểm khởi chạy (Entry Point) chính của dự án ASP.NET Core Web API
-// File này thực hiện 2 nhiệm vụ quan trọng chính.
-// 1. Đăng ký các dịch vụ (Dependency Injection) vào builder.services
-// 2. Cấu hình các luồng HTTP Request thông qua app
