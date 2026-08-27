@@ -69,15 +69,6 @@ services:
 
       Cors__AllowedOrigins__0: http://localhost:3000
 
-      Jwt__Issuer: ${JWT_ISSUER:-GdscSharingPlatform.Api}
-      Jwt__Audience: ${JWT_AUDIENCE:-GdscSharingPlatform.Web}
-      Jwt__SecretKey: ${JWT_SECRET:?Set JWT_SECRET in deploy/.env}
-      Jwt__AccessTokenExpirationMinutes: ${JWT_ACCESS_TOKEN_MINUTES:-15}
-      Jwt__RefreshTokenExpirationDays: ${JWT_REFRESH_TOKEN_DAYS:-7}
-      Jwt__ClockSkewSeconds: ${JWT_CLOCK_SKEW_SECONDS:-0}
-
-      Cors__AllowedOrigins__0: http://localhost:3000
-
     ports:
       - "${API_PORT:-8080}:8080"
 
