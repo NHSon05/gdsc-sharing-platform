@@ -22,13 +22,15 @@ function getServerSnapshot(): "light" | "dark" {
   return "light";
 }
 
-export function ThemeToggle() {
-  const [mounted, setMounted] = React.useState(false);
-  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+const emptySubscribe = () => () => {};
 
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
+export function ThemeToggle() {
+  const isMounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const toggleTheme = () => {
     const isDark = document.documentElement.classList.contains("dark");
@@ -43,7 +45,7 @@ export function ThemeToggle() {
     window.dispatchEvent(new Event("storage"));
   };
 
-  if (!mounted) {
+  if (!isMounted) {
     return (
       <div className="w-10 h-10 rounded-full bg-neutral-100 dark:bg-zinc-900 border border-neutral-200/80 dark:border-zinc-800" />
     );
