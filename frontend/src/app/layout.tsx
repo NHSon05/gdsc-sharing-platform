@@ -1,20 +1,11 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import { Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { AppProviders } from "./provider";
 
-const plusJakartaSans = localFont({
-  src: [
-    {
-      path: "../../public/fonts/PlusJakartaSans-VariableFont_wght.woff2",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/PlusJakartaSans-Italic-VariableFont_wght.woff2",
-      style: "italic",
-    },
-  ],
+const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
+  subsets: ["latin", "vietnamese"],
   display: "swap",
 });
 
@@ -25,7 +16,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "GDSC Sharing Platform",
-  description: "Ship faster, build better. Transform your development workflow.",
+  description:
+    "Ship faster, build better. Transform your development workflow.",
 };
 
 const themeInitScript = `
@@ -55,8 +47,12 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body
+        suppressHydrationWarning
+        className="flex min-h-full flex-col font-sans"
+      >
+        <AppProviders>{children}</AppProviders>
+      </body>
     </html>
   );
 }
-

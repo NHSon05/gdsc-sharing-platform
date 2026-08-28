@@ -1,7 +1,7 @@
-import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
   "group/button relative inline-flex shrink-0 items-center justify-center font-sans font-medium whitespace-nowrap rounded-full transition-all duration-200 outline-none select-none cursor-pointer disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 active:scale-[0.98]",
@@ -45,7 +45,8 @@ const buttonVariants = cva(
         lg: "h-12 px-6 text-[15px] gap-2.5 [&_svg:not([class*='size-'])]:size-5",
 
         // Medium / Default: 40px height (Image 1 Middle Row)
-        default: "h-10 px-5 text-sm gap-2 [&_svg:not([class*='size-'])]:size-4.5",
+        default:
+          "h-10 px-5 text-sm gap-2 [&_svg:not([class*='size-'])]:size-4.5",
         md: "h-10 px-5 text-sm gap-2 [&_svg:not([class*='size-'])]:size-4.5",
 
         // Small: 32px height (Image 1 Bottom Row)
@@ -63,15 +64,16 @@ const buttonVariants = cva(
       size: "default",
     },
   }
-)
+);
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-  asChild?: boolean
-  leftIcon?: React.ReactNode
-  rightIcon?: React.ReactNode
-  loading?: boolean
+  asChild?: boolean;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
+  loading?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -99,7 +101,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {loading && (
           <svg
-            className="animate-spin -ml-1 mr-2 size-4 text-current"
+            className="mr-2 -ml-1 size-4 animate-spin text-current"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -119,14 +121,18 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             />
           </svg>
         )}
-        {!loading && leftIcon && <span className="inline-flex shrink-0">{leftIcon}</span>}
+        {!loading && leftIcon && (
+          <span className="inline-flex shrink-0">{leftIcon}</span>
+        )}
         {children && <span>{children}</span>}
-        {!loading && rightIcon && <span className="inline-flex shrink-0">{rightIcon}</span>}
+        {!loading && rightIcon && (
+          <span className="inline-flex shrink-0">{rightIcon}</span>
+        )}
       </button>
-    )
+    );
   }
-)
+);
 
-Button.displayName = "Button"
+Button.displayName = "Button";
 
-export { Button, buttonVariants }
+export { Button, buttonVariants };
