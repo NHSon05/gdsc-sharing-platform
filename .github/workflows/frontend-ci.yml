@@ -18,18 +18,23 @@ jobs:
       - name: Checkout mã nguồn
         uses: actions/checkout@v4
 
+      - name: Cài đặt pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Cài đặt Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: "npm"
-          cache-dependency-path: frontend/package-lock.json
+          cache: "pnpm"
+          cache-dependency-path: frontend/pnpm-lock.yaml
 
       - name: Cài đặt Dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile --config.minimum-release-age=0
 
       - name: Kiểm tra Lint (ESLint)
-        run: npm run lint
+        run: pnpm run lint
 
       - name: Build thử nghiệm dự án
-        run: npm run build
+        run: pnpm run build
