@@ -1,0 +1,73 @@
+import type { TranslationDictionary } from "./en";
+
+export const vi: TranslationDictionary = {
+  common: {
+    backToHome: "Quay về trang chủ",
+    login: "Đăng nhập",
+    signUp: "Đăng ký",
+    viewDetail: "Xem chi tiết",
+    language: "Ngôn ngữ",
+    theme: "Giao diện",
+    orContinueWith: "Hoặc tiếp tục với",
+    termsNotice: "Bằng việc tiếp tục, bạn đồng ý với",
+    termsOfService: "Điều khoản dịch vụ",
+    and: "và",
+    privacyPolicy: "Chính sách bảo mật",
+    dontHaveAccount: "Chưa có tài khoản?",
+    footerNote: "GDSC Sharing Platform © 2026. Xây dựng bởi cộng đồng GDSC.",
+  },
+  hero: {
+    slogan: "Vì cộng đồng, do cộng đồng",
+    title: "Vì cộng đồng, do cộng đồng.",
+    subtitle:
+      "Nền tảng chia sẻ kiến thức và học tập dành riêng cho thành viên GDSC để cùng phát triển roadmap, trao đổi góc nhìn và tự tin xây dựng dự án.",
+    trustedBy: "được tin cậy bởi 50+ thành viên GDSC",
+  },
+  metrics: {
+    apiOptimizationTitle: "Tối ưu hóa thời gian phản hồi API",
+    apiOptimizationDesc:
+      "Giảm 47% độ trễ nhờ sử dụng edge caching và tối ưu hóa câu lệnh truy vấn.",
+    systemHealthTitle: "Kiểm tra trạng thái hệ thống",
+    allServicesOperational: "Tất cả dịch vụ hoạt động bình thường",
+    uptime: "Thời gian hoạt động 99.9%",
+  },
+  tracks: {
+    heading: "Các lĩnh vực chuyên môn",
+    subheading:
+      "Lộ trình học tập bài bản và các roadmap chia sẻ chuyên sâu được thiết kế cho lập trình viên GDSC.",
+    frontend: {
+      title: "Frontend & UI/UX",
+      desc: "Kiến trúc giao diện hiện đại, máy trạng thái, kỹ nghệ web hiệu năng cao và trải nghiệm người dùng tối ưu cùng Next.js, React 19 và Tailwind CSS.",
+    },
+    backend: {
+      title: "Backend & Thiết kế hệ thống",
+      desc: "Hệ thống phân tán thông lượng cao, Clean Architecture, microservices bền bỉ và API mạnh mẽ phát triển trên ASP.NET Core, Go và PostgreSQL.",
+    },
+    ai: {
+      title: "Trí tuệ nhân tạo (AI & ML)",
+      desc: "Ứng dụng Generative AI, các agent tự hành, đường ống RAG, prompt engineering và quy trình machine learning sẵn sàng cho môi trường production.",
+    },
+    devops: {
+      title: "DevOps & Điện toán đám mây",
+      desc: "Quy trình CI/CD tự động hóa, đóng gói container với Docker, điều phối Kubernetes và hạ tầng đám mây mở rộng linh hoạt trên GCP và AWS.",
+    },
+    business: {
+      title: "Kinh doanh & Phát triển sản phẩm",
+      desc: "Khám phá sản phẩm, phân tích nghiệp vụ kỹ thuật, vận hành sprint linh hoạt, thẩm định MVP và thuyết trình gọi vốn dự án ấn tượng.",
+    },
+    marketing: {
+      title: "Marketing & Quan hệ nhà phát triển",
+      desc: "Developer Relations (DevRel), định vị thương hiệu công nghệ, tổ chức sự kiện cộng đồng, content marketing và phát triển mạng lưới nhà phát triển.",
+    },
+  },
+  login: {
+    title: "Chào mừng trở lại",
+    subtitle: "Đăng nhập vào tài khoản nền tảng GDSC của bạn",
+    emailLabel: "Email",
+    emailPlaceholder: "member@gdsc.dev",
+    passwordLabel: "Mật khẩu",
+    passwordPlaceholder: "••••••••",
+    forgotPassword: "Quên mật khẩu?",
+    signInButton: "Đăng nhập",
+  },
+};

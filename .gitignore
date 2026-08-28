@@ -5,6 +5,7 @@ obj/
 .local/
 .nuget/
 packages/
+Library/
 # Node / Frontend / pnpm
 node_modules/
 .pnpm-store/
@@ -23,6 +24,7 @@ dist/
 # Visual Studio / Rider
 .vs/
 .idea/
+.vscode/
 
 # Environment files
 .env

@@ -181,6 +181,18 @@ public static class DependencyInjection
 
                 options.Events = new JwtBearerEvents
                 {
+                    OnMessageReceived = context =>
+                    {
+                        // Ưu tiên Authorization Header (Mobile/API clients), nếu không có thì đọc từ HttpOnly Cookie
+                        if (string.IsNullOrEmpty(context.Token) &&
+                            context.Request.Cookies.TryGetValue("accessToken", out var cookieToken))
+                        {
+                            context.Token = cookieToken;
+                        }
+
+                        return Task.CompletedTask;
+                    },
+
                     OnChallenge = async context =>
                     {
                         context.HandleResponse();

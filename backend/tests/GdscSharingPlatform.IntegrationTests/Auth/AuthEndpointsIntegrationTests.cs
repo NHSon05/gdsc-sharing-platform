@@ -229,4 +229,46 @@ public class AuthEndpointsIntegrationTests : IClassFixture<WebApplicationFactory
         Assert.Equal(HttpStatusCode.Unauthorized, refresh1.StatusCode);
         Assert.Equal(HttpStatusCode.Unauthorized, refresh2.StatusCode);
     }
+
+    [Fact]
+    public async Task Login_ShouldSetHttpOnlyCookies_AndAllowAccessToProtectedEndpointsWithoutBearerHeader()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+        await SeedUserAsync("cookie_user@test.app", "Password123!", RoleNames.Member, "SOFTWARE", "Cookie User");
+
+        // Act 1: Login
+        var loginResponse = await client.PostAsJsonAsync("/api/auth/login", new LoginRequest("cookie_user@test.app", "Password123!"));
+        Assert.Equal(HttpStatusCode.OK, loginResponse.StatusCode);
+
+        // Check Set-Cookie headers in response
+        Assert.True(loginResponse.Headers.Contains("Set-Cookie"));
+        var cookies = loginResponse.Headers.GetValues("Set-Cookie").ToList();
+        Assert.Contains(cookies, c => c.Contains("accessToken") && c.Contains("httponly"));
+        Assert.Contains(cookies, c => c.Contains("refreshToken") && c.Contains("httponly"));
+
+        // Act 2: Call protected /me with Cookie header
+        var cookieHeader = string.Join("; ", cookies.Select(c => c.Split(';')[0]));
+        var meRequest = new HttpRequestMessage(HttpMethod.Get, "/api/auth/me");
+        meRequest.Headers.Add("Cookie", cookieHeader);
+        var meResponse = await client.SendAsync(meRequest);
+
+        // Assert
+        Assert.Equal(HttpStatusCode.OK, meResponse.StatusCode);
+        var currentUser = await meResponse.Content.ReadFromJsonAsync<CurrentUserDto>();
+        Assert.NotNull(currentUser);
+        Assert.Equal("cookie_user@test.app", currentUser.Email);
+
+        // Act 3: Refresh without body (reading refreshToken from cookie)
+        var refreshRequest = new HttpRequestMessage(HttpMethod.Post, "/api/auth/refresh");
+        refreshRequest.Headers.Add("Cookie", cookieHeader);
+        var refreshResponse = await client.SendAsync(refreshRequest);
+        Assert.Equal(HttpStatusCode.OK, refreshResponse.StatusCode);
+
+        // Act 4: Logout without body (reading refreshToken from cookie and clearing cookies)
+        var logoutRequest = new HttpRequestMessage(HttpMethod.Post, "/api/auth/logout");
+        logoutRequest.Headers.Add("Cookie", cookieHeader);
+        var logoutResponse = await client.SendAsync(logoutRequest);
+        Assert.Equal(HttpStatusCode.NoContent, logoutResponse.StatusCode);
+    }
 }

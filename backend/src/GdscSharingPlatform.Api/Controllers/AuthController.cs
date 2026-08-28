@@ -59,6 +59,8 @@ public sealed class AuthController : ControllerBase
             GetUserAgent(),
             cancellationToken);
 
+        SetTokenCookies(response.AccessToken, response.RefreshToken);
+
         return Ok(response);
     }
 
@@ -74,18 +76,31 @@ public sealed class AuthController : ControllerBase
         typeof(ProblemDetails),
         StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult<TokenResponse>> RefreshToken(
-        [FromBody] RefreshTokenRequest request,
+        [FromBody(EmptyBodyBehavior = Microsoft.AspNetCore.Mvc.ModelBinding.EmptyBodyBehavior.Allow)] RefreshTokenRequest? request,
         CancellationToken cancellationToken)
     {
-        await _refreshValidator.ValidateAndThrowAsync(
-            request,
-            cancellationToken);
+        // Hỗ trợ lấy refresh token từ Cookie hoặc Request Body (cho backward compatibility với mobile/swagger)
+        var rawRefreshToken = request?.RefreshToken;
+        if (string.IsNullOrWhiteSpace(rawRefreshToken) &&
+            Request.Cookies.TryGetValue("refreshToken", out var cookieRefreshToken))
+        {
+            rawRefreshToken = cookieRefreshToken;
+        }
+
+        if (string.IsNullOrWhiteSpace(rawRefreshToken))
+        {
+            await _refreshValidator.ValidateAndThrowAsync(
+                request ?? new RefreshTokenRequest(string.Empty),
+                cancellationToken);
+        }
 
         var response = await _authService.RefreshTokenAsync(
-            request.RefreshToken,
+            rawRefreshToken!,
             GetClientIpAddress(),
             GetUserAgent(),
             cancellationToken);
+
+        SetTokenCookies(response.AccessToken, response.RefreshToken);
 
         return Ok(response);
     }
@@ -99,21 +114,29 @@ public sealed class AuthController : ControllerBase
         typeof(HttpValidationProblemDetails),
         StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Logout(
-        [FromBody] LogoutRequest request,
+        [FromBody(EmptyBodyBehavior = Microsoft.AspNetCore.Mvc.ModelBinding.EmptyBodyBehavior.Allow)] LogoutRequest? request,
         CancellationToken cancellationToken)
     {
-        await _logoutValidator.ValidateAndThrowAsync(
-            request,
-            cancellationToken);
+        var rawRefreshToken = request?.RefreshToken;
+        if (string.IsNullOrWhiteSpace(rawRefreshToken) &&
+            Request.Cookies.TryGetValue("refreshToken", out var cookieRefreshToken))
+        {
+            rawRefreshToken = cookieRefreshToken;
+        }
 
-        Guid? currentUserId = _currentUserService.IsAuthenticated
-            ? _currentUserService.UserId
-            : null;
+        if (!string.IsNullOrWhiteSpace(rawRefreshToken))
+        {
+            Guid? currentUserId = _currentUserService.IsAuthenticated
+                ? _currentUserService.UserId
+                : null;
 
-        await _authService.LogoutAsync(
-            request.RefreshToken,
-            currentUserId,
-            cancellationToken);
+            await _authService.LogoutAsync(
+                rawRefreshToken,
+                currentUserId,
+                cancellationToken);
+        }
+
+        ClearTokenCookies();
 
         return NoContent();
     }
@@ -131,6 +154,8 @@ public sealed class AuthController : ControllerBase
         await _authService.LogoutAllAsync(
             userId,
             cancellationToken);
+
+        ClearTokenCookies();
 
         return NoContent();
     }
@@ -178,5 +203,32 @@ public sealed class AuthController : ControllerBase
         return string.IsNullOrWhiteSpace(userAgent)
             ? null
             : userAgent;
+    }
+
+    private void SetTokenCookies(string accessToken, string refreshToken)
+    {
+        var cookieOptions = new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.Strict,
+            Expires = DateTimeOffset.UtcNow.AddMinutes(15)
+        };
+
+        Response.Cookies.Append("accessToken", accessToken, cookieOptions);
+
+        var refreshCookieOptions = new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.Strict,
+            Expires = DateTimeOffset.UtcNow.AddDays(7)
+        };
+        Response.Cookies.Append("refreshToken", refreshToken, refreshCookieOptions);
+    }
+    private void ClearTokenCookies()
+    {
+        Response.Cookies.Delete("accessToken");
+        Response.Cookies.Delete("refreshToken");
     }
 }

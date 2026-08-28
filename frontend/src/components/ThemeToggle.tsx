@@ -47,7 +47,7 @@ export function ThemeToggle() {
 
   if (!isMounted) {
     return (
-      <div className="w-10 h-10 rounded-full bg-neutral-100 dark:bg-zinc-900 border border-neutral-200/80 dark:border-zinc-800" />
+      <div className="h-10 w-10 rounded-full border border-neutral-200/80 bg-neutral-100 dark:border-zinc-800 dark:bg-zinc-900" />
     );
   }
 
@@ -56,12 +56,12 @@ export function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       aria-label="Toggle theme"
-      className="relative flex items-center justify-center w-10 h-10 rounded-full bg-neutral-100 dark:bg-zinc-900 border border-neutral-200/80 dark:border-zinc-800 text-neutral-700 dark:text-zinc-300 hover:text-neutral-900 dark:hover:text-white transition-all shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
+      className="relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-neutral-200/80 bg-neutral-100 text-neutral-700 shadow-xs transition-all hover:scale-105 hover:text-neutral-900 active:scale-95 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:text-white"
     >
       {theme === "light" ? (
         /* Sun Icon */
         <svg
-          className="w-4 h-4 transition-transform duration-300 rotate-0 hover:rotate-45"
+          className="h-4 w-4 rotate-0 transition-transform duration-300 hover:rotate-45"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -82,7 +82,7 @@ export function ThemeToggle() {
       ) : (
         /* Moon Icon */
         <svg
-          className="w-4 h-4 transition-transform duration-300 -rotate-12 hover:rotate-0"
+          className="h-4 w-4 -rotate-12 transition-transform duration-300 hover:rotate-0"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -96,4 +96,3 @@ export function ThemeToggle() {
     </button>
   );
 }
-
