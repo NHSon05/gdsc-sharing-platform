@@ -5,8 +5,13 @@ obj/
 .local/
 .nuget/
 packages/
-Library/
-
+# Node / Frontend / pnpm
+node_modules/
+.pnpm-store/
+.next/
+out/
+build/
+dist/
 
 # User-specific files
 *.user
