@@ -14,7 +14,8 @@ namespace GdscSharingPlatform.UnitTests.Infrastructure.Identity.Seeding;
 public class DatabaseSeederTests
 {
     private (ServiceProvider Provider, ApplicationDbContext DbContext, DatabaseSeeder Seeder) CreateSeederEnvironment(
-        AdminSeedOptions? adminOptions = null)
+        AdminSeedOptions? adminOptions = null,
+        MemberSeedOptions? memberOptions = null)
     {
         var services = new ServiceCollection();
         var dbName = Guid.NewGuid().ToString();
@@ -37,7 +38,7 @@ public class DatabaseSeederTests
         .AddRoles<IdentityRole<Guid>>()
         .AddEntityFrameworkStores<ApplicationDbContext>();
 
-        var optionsModel = adminOptions ?? new AdminSeedOptions
+        var adminModel = adminOptions ?? new AdminSeedOptions
         {
             Enabled = true,
             Email = "admin@gdsc.test",
@@ -46,7 +47,17 @@ public class DatabaseSeederTests
             DepartmentCode = "MANAGEMENT"
         };
 
-        services.AddSingleton(Microsoft.Extensions.Options.Options.Create(optionsModel));
+        var memberModel = memberOptions ?? new MemberSeedOptions
+        {
+            Enabled = false,
+            Email = "member@gdsc.test",
+            Password = "Password123!",
+            FullName = "Platform Member",
+            DepartmentCode = "SOFTWARE"
+        };
+
+        services.AddSingleton(Microsoft.Extensions.Options.Options.Create(adminModel));
+        services.AddSingleton(Microsoft.Extensions.Options.Options.Create(memberModel));
         services.AddScoped<DatabaseSeeder>();
 
         var provider = services.BuildServiceProvider();
@@ -111,7 +122,7 @@ public class DatabaseSeederTests
     }
 
     [Fact]
-    public async Task SeedAsync_WhenAdminEnabled_ShouldCreateAdminUserAndAssignRoles()
+    public async Task SeedAsync_WhenAdminEnabled_ShouldCreateAdminUserAndAssignAdminRoleOnly()
     {
         // Arrange
         var adminOptions = new AdminSeedOptions
@@ -142,22 +153,23 @@ public class DatabaseSeederTests
         var isInAdminRole = await userManager.IsInRoleAsync(user, RoleNames.Admin);
         var isInMemberRole = await userManager.IsInRoleAsync(user, RoleNames.Member);
         Assert.True(isInAdminRole);
-        Assert.True(isInMemberRole);
+        Assert.False(isInMemberRole); // Admin chỉ có role Admin
     }
 
     [Fact]
-    public async Task SeedAsync_WhenAdminDisabled_ShouldNotCreateAdminUser()
+    public async Task SeedAsync_WhenMemberEnabled_ShouldCreateMemberUserAndAssignMemberRoleOnly()
     {
         // Arrange
-        var adminOptions = new AdminSeedOptions
+        var adminOptions = new AdminSeedOptions { Enabled = false };
+        var memberOptions = new MemberSeedOptions
         {
-            Enabled = false,
-            Email = "disabled@gdsc.club",
-            Password = "Password123!",
-            FullName = "Disabled Admin",
-            DepartmentCode = "MANAGEMENT"
+            Enabled = true,
+            Email = "member@gdsc.club",
+            Password = "StrongPassword123!",
+            FullName = "Club Member",
+            DepartmentCode = "SOFTWARE"
         };
-        var (provider, dbContext, seeder) = CreateSeederEnvironment(adminOptions);
+        var (provider, dbContext, seeder) = CreateSeederEnvironment(adminOptions, memberOptions);
         using var scope = provider.CreateScope();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
@@ -165,8 +177,36 @@ public class DatabaseSeederTests
         await seeder.SeedAsync();
 
         // Assert
-        var user = await userManager.FindByEmailAsync("disabled@gdsc.club");
-        Assert.Null(user);
+        var user = await userManager.FindByEmailAsync("member@gdsc.club");
+        Assert.NotNull(user);
+        Assert.Equal("Club Member", user.FullName);
+        Assert.Equal(UserStatus.Active, user.Status);
+
+        var softDept = await dbContext.Departments.SingleAsync(d => d.Code == "SOFTWARE");
+        Assert.Equal(softDept.Id, user.DepartmentId);
+
+        var isInAdminRole = await userManager.IsInRoleAsync(user, RoleNames.Admin);
+        var isInMemberRole = await userManager.IsInRoleAsync(user, RoleNames.Member);
+        Assert.False(isInAdminRole);
+        Assert.True(isInMemberRole); // Member chỉ có role Member
+    }
+
+    [Fact]
+    public async Task SeedAsync_WhenUsersDisabled_ShouldNotCreateUsers()
+    {
+        // Arrange
+        var adminOptions = new AdminSeedOptions { Enabled = false };
+        var memberOptions = new MemberSeedOptions { Enabled = false };
+        var (provider, dbContext, seeder) = CreateSeederEnvironment(adminOptions, memberOptions);
+        using var scope = provider.CreateScope();
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+        // Act
+        await seeder.SeedAsync();
+
+        // Assert
+        var users = await dbContext.Users.ToListAsync();
+        Assert.Empty(users);
 
         // Departments & Roles should still be seeded
         var roles = await dbContext.Roles.ToListAsync();
@@ -187,7 +227,15 @@ public class DatabaseSeederTests
             FullName = "Repeat Admin",
             DepartmentCode = "SOFTWARE"
         };
-        var (_, dbContext, seeder) = CreateSeederEnvironment(adminOptions);
+        var memberOptions = new MemberSeedOptions
+        {
+            Enabled = true,
+            Email = "repeat.member@gdsc.club",
+            Password = "Password123!",
+            FullName = "Repeat Member",
+            DepartmentCode = "R&D"
+        };
+        var (_, dbContext, seeder) = CreateSeederEnvironment(adminOptions, memberOptions);
 
         // Act
         await seeder.SeedAsync();
@@ -195,7 +243,7 @@ public class DatabaseSeederTests
 
         // Assert
         Assert.Null(exception);
-        var users = await dbContext.Users.Where(u => u.Email == "repeat@gdsc.club").ToListAsync();
-        Assert.Single(users);
+        var users = await dbContext.Users.ToListAsync();
+        Assert.Equal(2, users.Count);
     }
 }

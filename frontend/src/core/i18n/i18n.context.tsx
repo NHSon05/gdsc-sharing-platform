@@ -19,19 +19,21 @@ const dictionaries: Record<Locale, TranslationDictionary> = {
   vi,
 };
 
-interface I18nContextType {
-  locale: Locale;
-  setLocale: (locale: Locale) => void;
-  dict: TranslationDictionary;
-  t: (key: NestedKeyOf<TranslationDictionary>) => string;
-}
-
 // Type-safe nested key path helper (e.g. "hero.title", "login.emailLabel")
-type NestedKeyOf<ObjectType extends object> = {
+export type NestedKeyOf<ObjectType extends object> = {
   [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object
     ? `${Key}.${NestedKeyOf<ObjectType[Key]>}`
     : `${Key}`;
 }[keyof ObjectType & (string | number)];
+
+export type TranslationKey = NestedKeyOf<TranslationDictionary>;
+
+interface I18nContextType {
+  locale: Locale;
+  setLocale: (locale: Locale) => void;
+  dict: TranslationDictionary;
+  t: (key: TranslationKey) => string;
+}
 
 const I18nContext = createContext<I18nContextType | null>(null);
 

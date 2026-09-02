@@ -22,7 +22,7 @@ public class DatabaseSeederIntegrationTests : IClassFixture<WebApplicationFactor
     }
 
     [Fact]
-    public async Task AppStartup_WithAdminEnabled_ShouldSeedRolesDepartmentsAndAdminUser()
+    public async Task AppStartup_WithAdminAndMemberEnabled_ShouldSeedRolesDepartmentsAndBothUsers()
     {
         // Arrange
         var testDbName = $"SeederIntegrationDb_{Guid.NewGuid()}";
@@ -37,7 +37,13 @@ public class DatabaseSeederIntegrationTests : IClassFixture<WebApplicationFactor
                         ["SeedAdmin:Email"] = "bootstrap.admin@gdsc.test",
                         ["SeedAdmin:Password"] = "AdminPassword123!",
                         ["SeedAdmin:FullName"] = "Bootstrap Admin",
-                        ["SeedAdmin:DepartmentCode"] = "MANAGEMENT"
+                        ["SeedAdmin:DepartmentCode"] = "MANAGEMENT",
+
+                        ["SeedMember:Enabled"] = "true",
+                        ["SeedMember:Email"] = "bootstrap.member@gdsc.test",
+                        ["SeedMember:Password"] = "MemberPassword123!",
+                        ["SeedMember:FullName"] = "Bootstrap Member",
+                        ["SeedMember:DepartmentCode"] = "SOFTWARE"
                     });
             });
 
@@ -77,7 +83,7 @@ public class DatabaseSeederIntegrationTests : IClassFixture<WebApplicationFactor
         Assert.Contains(departments, d => d.Code == "R&D");
         Assert.Contains(departments, d => d.Code == "MARKETING");
 
-        // 3. Admin user assertion
+        // 3. Admin user assertion (Chỉ có role Admin)
         var admin = await userManager.FindByEmailAsync("bootstrap.admin@gdsc.test");
         Assert.NotNull(admin);
         Assert.Equal("Bootstrap Admin", admin.FullName);
@@ -85,16 +91,27 @@ public class DatabaseSeederIntegrationTests : IClassFixture<WebApplicationFactor
         Assert.True(admin.EmailConfirmed);
 
         var hasAdminRole = await userManager.IsInRoleAsync(admin, RoleNames.Admin);
-        var hasMemberRole = await userManager.IsInRoleAsync(admin, RoleNames.Member);
+        var adminHasMemberRole = await userManager.IsInRoleAsync(admin, RoleNames.Member);
         Assert.True(hasAdminRole);
+        Assert.False(adminHasMemberRole);
+
+        // 4. Member user assertion (Chỉ có role Member)
+        var member = await userManager.FindByEmailAsync("bootstrap.member@gdsc.test");
+        Assert.NotNull(member);
+        Assert.Equal("Bootstrap Member", member.FullName);
+        Assert.Equal(UserStatus.Active, member.Status);
+
+        var hasMemberRole = await userManager.IsInRoleAsync(member, RoleNames.Member);
+        var memberHasAdminRole = await userManager.IsInRoleAsync(member, RoleNames.Admin);
         Assert.True(hasMemberRole);
+        Assert.False(memberHasAdminRole);
     }
 
     [Fact]
-    public async Task AppStartup_WithAdminDisabled_ShouldSeedRolesAndDepartmentsOnly()
+    public async Task AppStartup_WithUsersDisabled_ShouldSeedRolesAndDepartmentsOnly()
     {
         // Arrange
-        var testDbName = $"SeederIntegrationDb_NoAdmin_{Guid.NewGuid()}";
+        var testDbName = $"SeederIntegrationDb_NoUsers_{Guid.NewGuid()}";
         var customFactory = _factory.WithWebHostBuilder(builder =>
         {
             builder.ConfigureAppConfiguration((_, configuration) =>
@@ -102,7 +119,8 @@ public class DatabaseSeederIntegrationTests : IClassFixture<WebApplicationFactor
                 configuration.AddInMemoryCollection(
                     new Dictionary<string, string?>
                     {
-                        ["SeedAdmin:Enabled"] = "false"
+                        ["SeedAdmin:Enabled"] = "false",
+                        ["SeedMember:Enabled"] = "false"
                     });
             });
 

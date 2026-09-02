@@ -18,6 +18,14 @@ export const metadata: Metadata = {
   title: "GDSC Sharing Platform",
   description:
     "Ship faster, build better. Transform your development workflow.",
+  icons: {
+    icon: [
+      {
+        url: "/icon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+  },
 };
 
 const themeInitScript = `

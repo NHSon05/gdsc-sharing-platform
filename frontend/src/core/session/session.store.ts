@@ -7,10 +7,27 @@ import {
   removeAuthCookie,
 } from "./session.cookies";
 
+function getInitialSessionState() {
+  if (typeof document === "undefined") {
+    return {
+      accessToken: null,
+      refreshToken: null,
+      status: "idle" as const,
+    };
+  }
+
+  const accessToken = getAuthCookie(AUTH_COOKIE_NAMES.ACCESS_TOKEN);
+  const refreshToken = getAuthCookie(AUTH_COOKIE_NAMES.REFRESH_TOKEN);
+
+  return {
+    accessToken,
+    refreshToken,
+    status: accessToken ? ("authenticated" as const) : ("idle" as const),
+  };
+}
+
 export const useSessionStore = create<SessionState>((set) => ({
-  accessToken: null,
-  refreshToken: null,
-  status: "idle",
+  ...getInitialSessionState(),
 
   setTokens: ({ accessToken, refreshToken }) => {
     // 1. Sync with cookies for Next.js Middleware & SSR

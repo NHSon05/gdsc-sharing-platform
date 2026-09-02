@@ -34,6 +34,11 @@ public class DatabaseInitializationTests
             Enabled = false
         }));
 
+        services.AddSingleton(Options.Create(new MemberSeedOptions
+        {
+            Enabled = false
+        }));
+
         services.AddScoped<DatabaseSeeder>();
 
         var provider = services.BuildServiceProvider();

@@ -7,6 +7,9 @@ import type {
   LogoutRequest,
 } from "../types/auth.types";
 
+/**
+ * CLIENT-SIDE API: Sends login request to backend.
+ */
 export async function loginApi(
   request: LoginRequest,
   signal?: AbortSignal
@@ -19,6 +22,10 @@ export async function loginApi(
   return response.data;
 }
 
+/**
+ * CLIENT-SIDE API: Fetches current user profile from backend via Axios httpClient.
+ * Automatically attaches Bearer token from Zustand store and handles silent token refresh on 401.
+ */
 export async function getCurrentUserApi(
   signal?: AbortSignal
 ): Promise<UserProfile> {
@@ -28,6 +35,9 @@ export async function getCurrentUserApi(
   return response.data;
 }
 
+/**
+ * CLIENT-SIDE API: Logs out current session.
+ */
 export async function logoutApi(
   request?: LogoutRequest,
   signal?: AbortSignal
@@ -35,6 +45,9 @@ export async function logoutApi(
   await httpClient.post("/api/auth/logout", request, { signal });
 }
 
+/**
+ * CLIENT-SIDE API: Logs out from all active devices/sessions.
+ */
 export async function logoutAllApi(signal?: AbortSignal): Promise<void> {
   await httpClient.post("/api/auth/logout-all", {}, { signal });
 }

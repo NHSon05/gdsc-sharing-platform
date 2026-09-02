@@ -39,6 +39,19 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
+  if (pathname.startsWith("/admin")) {
+    if (!accessToken) {
+      return NextResponse.redirect(
+        new URL("/login?returnUrl=" + pathname, request.url)
+      );
+    }
+
+    const userRole = request.cookies.get("userRole")?.value;
+    if (userRole !== "Admin") {
+      return NextResponse.redirect(new URL("403", request.url));
+    }
+  }
+
   return NextResponse.next();
 }
 

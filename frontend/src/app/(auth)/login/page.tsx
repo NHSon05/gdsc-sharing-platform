@@ -52,7 +52,11 @@ export default function LoginPage() {
 
       {/* Centered Liquid Glass Login Form */}
       <div className="relative z-10 my-auto w-full max-w-md">
-        <React.Suspense fallback={<div className="h-[400px] w-full animate-pulse rounded-3xl bg-white/10" />}>
+        <React.Suspense
+          fallback={
+            <div className="h-100 w-full animate-pulse rounded-3xl bg-white/10" />
+          }
+        >
           <LoginForm />
         </React.Suspense>
       </div>

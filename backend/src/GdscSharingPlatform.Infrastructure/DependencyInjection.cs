@@ -103,6 +103,34 @@ public static class DependencyInjection
                 "SeedAdmin:DepartmentCode is required.")
             .ValidateOnStart();
 
+        services
+            .AddOptions<MemberSeedOptions>()
+            .Bind(
+                configuration.GetSection(
+                    MemberSeedOptions.SectionName))
+            .Validate(
+                options =>
+                    !options.Enabled ||
+                    !string.IsNullOrWhiteSpace(options.Email),
+                "SeedMember:Email is required.")
+            .Validate(
+                options =>
+                    !options.Enabled ||
+                    !string.IsNullOrWhiteSpace(options.Password),
+                "SeedMember:Password is required.")
+            .Validate(
+                options =>
+                    !options.Enabled ||
+                    !string.IsNullOrWhiteSpace(options.FullName),
+                "SeedMember:FullName is required.")
+            .Validate(
+                options =>
+                    !options.Enabled ||
+                    !string.IsNullOrWhiteSpace(
+                        options.DepartmentCode),
+                "SeedMember:DepartmentCode is required.")
+            .ValidateOnStart();
+
         services.AddOptions<JwtOptions>()
             .Bind(
                 configuration.GetSection(

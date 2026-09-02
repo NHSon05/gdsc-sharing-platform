@@ -9,7 +9,7 @@ export const AUTH_COOKIE_NAMES = {
 export function getAuthCookie(name: string): string | null {
   if (typeof document === "undefined") return null;
 
-  const cookies = document.cookie ? document.cookie.split("; ") : [];
+  const cookies = document.cookie ? document.cookie.split(/;\s*/) : [];
   for (const cookie of cookies) {
     const [cookieKey, ...cookieValParts] = cookie.split("=");
     if (cookieKey === name) {
