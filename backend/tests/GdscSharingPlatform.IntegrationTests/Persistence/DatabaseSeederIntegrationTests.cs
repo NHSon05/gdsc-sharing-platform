@@ -77,7 +77,7 @@ public class DatabaseSeederIntegrationTests : IClassFixture<WebApplicationFactor
 
         // 2. Department assertion
         var departments = await dbContext.Departments.ToListAsync();
-        Assert.Equal(4, departments.Count);
+        Assert.Equal(7, departments.Count);
         Assert.Contains(departments, d => d.Code == "MANAGEMENT");
         Assert.Contains(departments, d => d.Code == "SOFTWARE");
         Assert.Contains(departments, d => d.Code == "R&D");
@@ -147,7 +147,7 @@ public class DatabaseSeederIntegrationTests : IClassFixture<WebApplicationFactor
         Assert.NotEmpty(roles);
 
         var departments = await dbContext.Departments.ToListAsync();
-        Assert.Equal(4, departments.Count);
+        Assert.Equal(7, departments.Count);
 
         var users = await dbContext.Users.ToListAsync();
         Assert.Empty(users);

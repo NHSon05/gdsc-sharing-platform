@@ -1,4 +1,4 @@
-using GdscSharingPlatform.Domain.Entities;
+using GdscSharingPlatform.Domain.Departments;
 using GdscSharingPlatform.Infrastructure.Identity;
 using GdscSharingPlatform.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +23,7 @@ public class DatabaseMigrationIntegrationTests
         Assert.NotEmpty(migrationTypes);
         Assert.Contains(migrationTypes, t => t.Name.Contains("InitialIdentity"));
         Assert.Contains(migrationTypes, t => t.Name.Contains("AddRefreshTokenTable"));
+        Assert.Contains(migrationTypes, t => t.Name.Contains("AddMultiMembershipProfileModel"));
     }
 
     [Fact]
@@ -42,10 +43,20 @@ public class DatabaseMigrationIntegrationTests
         var userEntity = model.FindEntityType(typeof(ApplicationUser));
         var departmentEntity = model.FindEntityType(typeof(Department));
         var refreshTokenEntity = model.FindEntityType(typeof(RefreshToken));
+        var clubGenEntity = model.FindEntityType(typeof(GdscSharingPlatform.Domain.Memberships.ClubGeneration));
+        var clubRoleEntity = model.FindEntityType(typeof(GdscSharingPlatform.Domain.Memberships.ClubRole));
+        var clubMembershipEntity = model.FindEntityType(typeof(GdscSharingPlatform.Domain.Memberships.ClubMembership));
+        var deptMembershipEntity = model.FindEntityType(typeof(GdscSharingPlatform.Domain.Memberships.DepartmentMembership));
+        var roleAssignmentEntity = model.FindEntityType(typeof(GdscSharingPlatform.Domain.Memberships.RoleAssignment));
 
         Assert.NotNull(userEntity);
         Assert.NotNull(departmentEntity);
         Assert.NotNull(refreshTokenEntity);
+        Assert.NotNull(clubGenEntity);
+        Assert.NotNull(clubRoleEntity);
+        Assert.NotNull(clubMembershipEntity);
+        Assert.NotNull(deptMembershipEntity);
+        Assert.NotNull(roleAssignmentEntity);
 
         // Verify Department primary key
         var deptPk = departmentEntity.FindPrimaryKey();

@@ -26,7 +26,7 @@ export function AuthenticatedLayout({
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const displayName = user?.displayName || "Hoang Thuan";
+  const displayName = user?.displayName || "User";
   const avatarInitial = displayName.charAt(0).toUpperCase();
 
   return (

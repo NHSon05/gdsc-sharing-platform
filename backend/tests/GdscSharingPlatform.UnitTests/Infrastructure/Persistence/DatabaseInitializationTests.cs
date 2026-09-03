@@ -54,7 +54,7 @@ public class DatabaseInitializationTests
         Assert.Equal(RoleNames.All.Count, roles.Count);
 
         var departments = await dbContext.Departments.ToListAsync();
-        Assert.Equal(4, departments.Count);
+        Assert.Equal(7, departments.Count);
     }
 
     [Fact]
@@ -72,7 +72,7 @@ public class DatabaseInitializationTests
 
         // Assert
         var userEntity = model.FindEntityType(typeof(ApplicationUser));
-        var deptEntity = model.FindEntityType(typeof(GdscSharingPlatform.Domain.Entities.Department));
+        var deptEntity = model.FindEntityType(typeof(GdscSharingPlatform.Domain.Departments.Department));
 
         Assert.NotNull(userEntity);
         Assert.NotNull(deptEntity);

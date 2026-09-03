@@ -2,7 +2,7 @@ using GdscSharingPlatform.Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace GdscSharingPlatform.Infrastructure.Persistence.Configurations;
+namespace GdscSharingPlatform.Infrastructure.Persistence.Configurations.Identity;
 
 public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
 {
@@ -17,8 +17,14 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
         builder.Property(user => user.AvatarUrl)
             .HasMaxLength(2048);
 
+        builder.Property(user => user.StudentCode)
+            .HasMaxLength(30);
+
+        builder.Property(user => user.GitHubUrl)
+            .HasMaxLength(200);
+
         builder.Property(user => user.Bio)
-            .HasMaxLength(1000);
+            .HasMaxLength(500);
 
         builder.Property(user => user.Status)
             .HasConversion<int>()
@@ -46,9 +52,18 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
 
         builder.HasIndex(user => user.IsDeleted);
 
+        builder.HasIndex(user => user.StudentCode)
+            .IsUnique()
+            .HasFilter("\"StudentCode\" IS NOT NULL");
+
         builder.HasOne(user => user.Department)
             .WithMany()
             .HasForeignKey(user => user.DepartmentId)
             .OnDelete(DeleteBehavior.SetNull);
+
+        builder.HasMany(user => user.ClubMemberships)
+            .WithOne()
+            .HasForeignKey(cm => cm.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

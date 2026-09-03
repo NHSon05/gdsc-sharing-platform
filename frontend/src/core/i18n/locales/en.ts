@@ -129,7 +129,7 @@ export const en = {
     passwordLabel: "Password",
     passwordPlaceholder: "••••••••",
     forgotPassword: "Forgot password?",
-    signInButton: "Sign in",
+    signInButton: "Login",
   },
 } as const;
 

@@ -2,7 +2,7 @@ using GdscSharingPlatform.Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace GdscSharingPlatform.Infrastructure.Persistence.Configurations;
+namespace GdscSharingPlatform.Infrastructure.Persistence.Configurations.Identity;
 
 public class RefreshTokenConfiguration
     : IEntityTypeConfiguration<RefreshToken>

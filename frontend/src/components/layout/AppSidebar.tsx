@@ -8,7 +8,7 @@ import logoSvg from "@/assets/images/logo.svg";
 import { useTranslation } from "@/core/i18n/i18n.context";
 import { useLogoutMutation } from "@/features/auth/hooks/use-logout-mutation";
 import type { CurrentUserDto } from "@/features/auth/types/auth.types";
-import { LogOut, Sparkles } from "lucide-react";
+import { LogOut } from "lucide-react";
 import {
   Sidebar,
   SidebarHeader,
@@ -18,7 +18,6 @@ import {
   SidebarAccordion,
   SidebarFooter,
   SidebarUserProfile,
-  SidebarUpgradeCard,
 } from "@/components/ui/side-bar";
 import { getSidebarNavItems } from "./sidebar.config";
 
@@ -40,7 +39,7 @@ export function AppSidebar({ user, collapsed, className }: AppSidebarProps) {
   const { mainNavItems, utilityNavItems, categoryItems, moreItems } =
     getSidebarNavItems(t);
 
-  const displayName = user?.displayName || "Hoang Thuan";
+  const displayName = user?.displayName || "User";
   const userRole = user?.roles?.[0] || t("sidebar.proMember");
   const avatarInitial = displayName.charAt(0).toUpperCase();
 
@@ -149,14 +148,6 @@ export function AppSidebar({ user, collapsed, className }: AppSidebarProps) {
 
       {/* Bottom Footer: Upgrade Card & User Profile */}
       <SidebarFooter>
-        {/* Optional Upgrade Plan Card */}
-        <SidebarUpgradeCard
-          title={t("sidebar.upgradePlan")}
-          description={t("sidebar.unlockFeatures")}
-          buttonText={t("sidebar.upgrade")}
-          icon={<Sparkles className="text-brand size-4" />}
-        />
-
         {/* User Profile Pill */}
         <SidebarUserProfile
           displayName={displayName}

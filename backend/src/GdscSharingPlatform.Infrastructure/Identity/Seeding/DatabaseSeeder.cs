@@ -1,7 +1,9 @@
 using GdscSharingPlatform.Application.Common.Security;
-using GdscSharingPlatform.Domain.Entities;
+using GdscSharingPlatform.Domain.Departments;
 using GdscSharingPlatform.Domain.Enums;
+using GdscSharingPlatform.Domain.Memberships;
 using GdscSharingPlatform.Infrastructure.Persistence;
+using GdscSharingPlatform.Infrastructure.Persistence.Backfill;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -16,6 +18,7 @@ public sealed class DatabaseSeeder
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly AdminSeedOptions _adminOptions;
     private readonly MemberSeedOptions _memberOptions;
+    private readonly LegacyProfileBackfillService? _backfillService;
     private readonly ILogger<DatabaseSeeder> _logger;
 
     public DatabaseSeeder(
@@ -24,7 +27,8 @@ public sealed class DatabaseSeeder
         UserManager<ApplicationUser> userManager,
         IOptions<AdminSeedOptions> adminOptions,
         IOptions<MemberSeedOptions> memberOptions,
-        ILogger<DatabaseSeeder> logger)
+        ILogger<DatabaseSeeder> logger,
+        LegacyProfileBackfillService? backfillService = null)
     {
         _dbContext = dbContext;
         _roleManager = roleManager;
@@ -32,11 +36,14 @@ public sealed class DatabaseSeeder
         _adminOptions = adminOptions.Value;
         _memberOptions = memberOptions.Value;
         _logger = logger;
+        _backfillService = backfillService;
     }
 
     public async Task SeedAsync(CancellationToken cancellationToken = default)
     {
         await SeedRolesAsync();
+
+        await SeedClubRolesAsync(cancellationToken);
 
         await SeedDepartmentAsync(cancellationToken);
 
@@ -48,6 +55,11 @@ public sealed class DatabaseSeeder
         if (_memberOptions.Enabled)
         {
             await SeedMemberAsync(cancellationToken);
+        }
+
+        if (_backfillService is not null)
+        {
+            await _backfillService.BackfillAsync(cancellationToken);
         }
     }
 
@@ -79,6 +91,38 @@ public sealed class DatabaseSeeder
         }
     }
 
+    public async Task SeedClubRolesAsync(CancellationToken cancellationToken = default)
+    {
+        var hasChanges = false;
+        foreach (var (code, name, sortOrder) in SystemClubRoles.All)
+        {
+            var exists = await _dbContext.ClubRoles
+                .AnyAsync(r => r.Code == code, cancellationToken);
+
+            if (exists)
+            {
+                continue;
+            }
+
+            var clubRole = new ClubRole(
+                code: code,
+                name: name,
+                level: sortOrder,
+                isActive: true);
+
+            _dbContext.ClubRoles.Add(clubRole);
+            hasChanges = true;
+
+            _logger.LogInformation(
+                "Created Club Role {ClubRoleCode} - {ClubRoleName}.", code, name);
+        }
+
+        if (hasChanges)
+        {
+            await _dbContext.SaveChangesAsync(cancellationToken);
+        }
+    }
+
     private async Task SeedDepartmentAsync(CancellationToken cancellationToken)
     {
         var departments = new[]
@@ -86,49 +130,106 @@ public sealed class DatabaseSeeder
             CreateDepartment(
                 "MANAGEMENT",
                 "Management",
+                "management",
                 "Club management department",
-                1),
+                1,
+                "#64748B",
+                "briefcase"),
 
             CreateDepartment(
                 "SOFTWARE",
-                "Software",
+                SystemDepartments.Software,
+                "software",
                 "Software development department",
-                2),
+                10,
+                "#3B82F6",
+                "code"),
+
+            CreateDepartment(
+                "AI",
+                SystemDepartments.AI,
+                "ai",
+                "Artificial intelligence and data science department",
+                20,
+                "#8B5CF6",
+                "cpu"),
 
             CreateDepartment(
                 "R&D",
                 "R&D",
+                "rd",
                 "Research and development department",
-                3),
+                3,
+                "#06B6D4",
+                "flask"),
 
             CreateDepartment(
                 "MARKETING",
-                "Marketing",
+                SystemDepartments.Marketing,
+                "marketing",
                 "Marketing department",
-                4)
+                30,
+                "#EC4899",
+                "megaphone"),
+
+            CreateDepartment(
+                "MEDIA",
+                SystemDepartments.Media,
+                "media",
+                "Media and design department",
+                40,
+                "#F59E0B",
+                "camera"),
+
+            CreateDepartment(
+                "COMMUNITY",
+                SystemDepartments.Community,
+                "community",
+                "Community engagement department",
+                50,
+                "#10B981",
+                "users")
         };
 
         var hasChanges = false;
         foreach (var department in departments)
         {
-            var exists = await _dbContext.Departments
+            var existing = await _dbContext.Departments
                 .IgnoreQueryFilters()
-                .AnyAsync(
+                .SingleOrDefaultAsync(
                     item => item.Code == department.Code,
                     cancellationToken
                 );
 
-            if (exists)
+            if (existing is null)
             {
-                continue;
+                _dbContext.Departments.Add(department);
+                hasChanges = true;
+
+                _logger.LogInformation(
+                    "Preparing Department {DepartmentCode}", department.Code
+                );
             }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(existing.Slug))
+                {
+                    existing.Slug = department.Slug;
+                    hasChanges = true;
+                }
 
-            _dbContext.Departments.Add(department);
-            hasChanges = true;
+                if (string.IsNullOrWhiteSpace(existing.Color) && !string.IsNullOrWhiteSpace(department.Color))
+                {
+                    existing.Color = department.Color;
+                    hasChanges = true;
+                }
 
-            _logger.LogInformation(
-                "Preparing Department {DepartmentCode}", department.Code
-            );
+                if (string.IsNullOrWhiteSpace(existing.Icon) && !string.IsNullOrWhiteSpace(department.Icon))
+                {
+                    existing.Icon = department.Icon;
+                    hasChanges = true;
+                }
+            }
         }
 
         if (hasChanges)
@@ -215,6 +316,7 @@ public sealed class DatabaseSeeder
             DisplayName = fullName,
 
             DepartmentId = department.Id,
+            Generation = "Gen 1",
             Status = UserStatus.Active,
 
             JoinedAt = DateTimeOffset.UtcNow,
@@ -266,16 +368,22 @@ public sealed class DatabaseSeeder
     private static Department CreateDepartment(
         string code,
         string name,
+        string slug,
         string description,
-        int displayOrder)
+        int displayOrder,
+        string? color = null,
+        string? icon = null)
     {
         return new Department
         {
             Id = Guid.NewGuid(),
             Code = code,
             Name = name,
+            Slug = slug,
             Description = description,
             DisplayOrder = displayOrder,
+            Color = color,
+            Icon = icon,
             IsActive = true,
             IsDeleted = false,
             CreatedAt = DateTimeOffset.UtcNow

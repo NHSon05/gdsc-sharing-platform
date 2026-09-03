@@ -1,9 +1,9 @@
-using GdscSharingPlatform.Domain.Entities;
+using GdscSharingPlatform.Domain.Departments;
 using GdscSharingPlatform.Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace GdscSharingPlatform.Infrastructure.Persistence.Configurations;
+namespace GdscSharingPlatform.Infrastructure.Persistence.Configurations.Departments;
 
 public class DepartmentConfiguration
     : IEntityTypeConfiguration<Department>
@@ -22,14 +22,30 @@ public class DepartmentConfiguration
             .IsRequired();
 
         builder.Property(department => department.Name)
-            .HasMaxLength(150)
+            .HasMaxLength(100)
+            .IsRequired();
+
+        builder.Property(department => department.Slug)
+            .HasMaxLength(100)
             .IsRequired();
 
         builder.Property(department => department.Description)
-            .HasMaxLength(1000);
+            .HasMaxLength(500);
 
-        builder.Property(department => department.DisplayOrder)
+        builder.Property(department => department.Color)
+            .HasMaxLength(20);
+
+        builder.Property(department => department.Icon)
+            .HasMaxLength(100);
+
+        builder.Property(department => department.SortOrder)
+            .HasColumnName("DisplayOrder")
             .HasDefaultValue(0);
+
+        builder.Ignore(department => department.DisplayOrder);
+        builder.Ignore(department => department.CreatedAtUtc);
+        builder.Ignore(department => department.UpdatedAtUtc);
+        builder.Ignore(department => department.DeletedAtUtc);
 
         builder.Property(department => department.IsActive)
             .HasDefaultValue(true);
@@ -41,6 +57,9 @@ public class DepartmentConfiguration
             .HasDefaultValue(false);
 
         builder.HasIndex(department => department.Code)
+            .IsUnique();
+
+        builder.HasIndex(department => department.Slug)
             .IsUnique();
 
         builder.HasIndex(department => department.Name);

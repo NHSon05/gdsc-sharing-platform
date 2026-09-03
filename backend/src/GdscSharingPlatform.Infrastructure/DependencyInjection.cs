@@ -7,6 +7,7 @@ using GdscSharingPlatform.Infrastructure.Identity.Options;
 using GdscSharingPlatform.Infrastructure.Identity.Seeding;
 using GdscSharingPlatform.Infrastructure.Identity.Services;
 using GdscSharingPlatform.Infrastructure.Persistence;
+using GdscSharingPlatform.Infrastructure.Persistence.Backfill;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -148,7 +149,7 @@ public static class DependencyInjection
         services.AddScoped<IAuthService, AuthService>();
 
         services.AddScoped<DatabaseSeeder>();
-
+        services.AddScoped<LegacyProfileBackfillService>();
 
         return services;
     }
