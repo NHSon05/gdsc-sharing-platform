@@ -1,13 +1,18 @@
 using GdscSharingPlatform.Application.Common.Interfaces;
 using GdscSharingPlatform.Application.Common.Security;
 using GdscSharingPlatform.Application.Features.Auth.Interfaces;
+using GdscSharingPlatform.Application.Features.Memberships.Interfaces;
+using GdscSharingPlatform.Application.Features.Profile.Interfaces;
 using GdscSharingPlatform.Domain.Enums;
+using GdscSharingPlatform.Infrastructure.Email;
 using GdscSharingPlatform.Infrastructure.Identity;
 using GdscSharingPlatform.Infrastructure.Identity.Options;
 using GdscSharingPlatform.Infrastructure.Identity.Seeding;
 using GdscSharingPlatform.Infrastructure.Identity.Services;
 using GdscSharingPlatform.Infrastructure.Persistence;
 using GdscSharingPlatform.Infrastructure.Persistence.Backfill;
+using GdscSharingPlatform.Infrastructure.Services;
+using GdscSharingPlatform.Infrastructure.Storage;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -71,7 +76,8 @@ public static class DependencyInjection
                 })
             .AddRoles<IdentityRole<Guid>>()
             .AddSignInManager()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
 
         services.AddJwtAuthentication(configuration);
         services.AddApplicationAuthorization();
@@ -147,6 +153,14 @@ public static class DependencyInjection
         services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
         services.AddScoped<ICurrentUserService, CurrentUserService>();
         services.AddScoped<IAuthService, AuthService>();
+
+        services.AddScoped<IFileStorageService, LocalFileStorageService>();
+        services.AddScoped<IEmailSender, LoggingEmailSender>();
+        services.AddScoped<IProfileService, ProfileService>();
+        services.AddScoped<ILookupService, LookupService>();
+        services.AddScoped<IDepartmentService, DepartmentService>();
+        services.AddScoped<IGenerationService, GenerationService>();
+        services.AddScoped<IMemberMembershipService, MemberMembershipService>();
 
         services.AddScoped<DatabaseSeeder>();
         services.AddScoped<LegacyProfileBackfillService>();

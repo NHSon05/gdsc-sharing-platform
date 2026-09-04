@@ -47,6 +47,8 @@ public sealed class DatabaseSeeder
 
         await SeedDepartmentAsync(cancellationToken);
 
+        await CleanupOldSeedDataAsync(cancellationToken);
+
         if (_adminOptions.Enabled)
         {
             await SeedAdminAsync(cancellationToken);
@@ -238,50 +240,263 @@ public sealed class DatabaseSeeder
         }
     }
 
+    private async Task CleanupOldSeedDataAsync(CancellationToken cancellationToken)
+    {
+        var candidateStaleEmails = new[] { "member@gdsc.dev", "admin@gdsc.com" };
+        foreach (var staleEmail in candidateStaleEmails)
+        {
+            if (string.Equals(_memberOptions.Email, staleEmail, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(_adminOptions.Email, staleEmail, StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            var staleUser = await _userManager.FindByEmailAsync(staleEmail);
+            if (staleUser is not null)
+            {
+                var clubMemberships = await _dbContext.ClubMemberships
+                    .Where(cm => cm.UserId == staleUser.Id)
+                    .ToListAsync(cancellationToken);
+
+                var clubMembershipIds = clubMemberships.Select(cm => cm.Id).ToList();
+
+                var deptMemberships = await _dbContext.DepartmentMemberships
+                    .Where(dm => clubMembershipIds.Contains(dm.ClubMembershipId))
+                    .ToListAsync(cancellationToken);
+
+                var deptMembershipIds = deptMemberships.Select(dm => dm.Id).ToList();
+
+                var roleAssignments = await _dbContext.RoleAssignments
+                    .Where(ra => deptMembershipIds.Contains(ra.DepartmentMembershipId) || ra.AssignedByUserId == staleUser.Id)
+                    .ToListAsync(cancellationToken);
+
+                _dbContext.RoleAssignments.RemoveRange(roleAssignments);
+                _dbContext.DepartmentMemberships.RemoveRange(deptMemberships);
+                _dbContext.ClubMemberships.RemoveRange(clubMemberships);
+                await _dbContext.SaveChangesAsync(cancellationToken);
+
+                await _userManager.DeleteAsync(staleUser);
+                _logger.LogInformation("Cleaned up old seed account: {Email}", staleEmail);
+            }
+        }
+    }
+
     private async Task SeedAdminAsync(CancellationToken cancellationToken)
     {
         var email = _adminOptions.Email.Trim();
-
         var admin = await _userManager.FindByEmailAsync(email);
+
+        var department = await _dbContext.Departments
+            .SingleOrDefaultAsync(
+                item => item.Code == _adminOptions.DepartmentCode.Trim().ToUpperInvariant(),
+                cancellationToken)
+            ?? throw new InvalidOperationException(
+                $"Department '{_adminOptions.DepartmentCode}' was not found.");
+
+        var normalizedStudentCode = string.IsNullOrWhiteSpace(_adminOptions.StudentCode)
+            ? null
+            : _adminOptions.StudentCode.Trim().ToUpperInvariant();
+
+        if (admin is null && normalizedStudentCode is not null)
+        {
+            admin = await _dbContext.Users
+                .FirstOrDefaultAsync(u => u.StudentCode == normalizedStudentCode, cancellationToken);
+
+            if (admin is not null)
+            {
+                _logger.LogInformation("Found Admin by StudentCode {StudentCode}. Syncing email to {Email}.", normalizedStudentCode, email);
+                admin.Email = email;
+                admin.NormalizedEmail = email.ToUpperInvariant();
+                admin.UserName = email;
+                admin.NormalizedUserName = email.ToUpperInvariant();
+                await _userManager.UpdateAsync(admin);
+            }
+        }
 
         if (admin is null)
         {
-            admin = await CreateUserAsync(
-                email: email,
-                fullName: _adminOptions.FullName.Trim(),
-                password: _adminOptions.Password,
-                departmentCode: _adminOptions.DepartmentCode.Trim().ToUpperInvariant(),
-                cancellationToken: cancellationToken);
+            if (normalizedStudentCode is not null)
+            {
+                var conflict = await _dbContext.Users
+                    .FirstOrDefaultAsync(u => u.StudentCode == normalizedStudentCode, cancellationToken);
+                if (conflict is not null)
+                {
+                    _logger.LogWarning("Clearing conflicting StudentCode {StudentCode} from user {Email}.", normalizedStudentCode, conflict.Email);
+                    conflict.StudentCode = null;
+                    await _dbContext.SaveChangesAsync(cancellationToken);
+                }
+            }
+
+            admin = new ApplicationUser
+            {
+                Id = Guid.NewGuid(),
+                UserName = email,
+                Email = email,
+                EmailConfirmed = true,
+                FullName = _adminOptions.FullName.Trim(),
+                DisplayName = string.IsNullOrWhiteSpace(_adminOptions.DisplayName) ? _adminOptions.FullName.Trim() : _adminOptions.DisplayName.Trim(),
+                PhoneNumber = _adminOptions.PhoneNumber,
+                StudentCode = normalizedStudentCode,
+                GitHubUrl = _adminOptions.GithubUrl,
+                Bio = _adminOptions.Bio,
+                AvatarUrl = _adminOptions.AvatarUrl,
+                DepartmentId = department.Id,
+                Generation = $"Gen {_adminOptions.GenerationNumber}",
+                Status = UserStatus.Active,
+                JoinedAt = DateTimeOffset.UtcNow,
+                CreatedAt = DateTimeOffset.UtcNow,
+                TimeZone = "Asia/Ho_Chi_Minh",
+                Locale = "vi-VN",
+                IsDeleted = false
+            };
+
+            var result = await _userManager.CreateAsync(admin, _adminOptions.Password);
+            EnsureSuccess(result, $"Failed to create account with email '{email}'.");
+            _logger.LogInformation("Created Admin account with ID {UserId} and email {Email}.", admin.Id, email);
+        }
+        else
+        {
+            if (normalizedStudentCode is not null)
+            {
+                var conflict = await _dbContext.Users
+                    .FirstOrDefaultAsync(u => u.Id != admin.Id && u.StudentCode == normalizedStudentCode, cancellationToken);
+                if (conflict is not null)
+                {
+                    _logger.LogWarning("Clearing conflicting StudentCode {StudentCode} from user {Email}.", normalizedStudentCode, conflict.Email);
+                    conflict.StudentCode = null;
+                    await _dbContext.SaveChangesAsync(cancellationToken);
+                }
+            }
+
+            admin.FullName = _adminOptions.FullName.Trim();
+            admin.DisplayName = string.IsNullOrWhiteSpace(_adminOptions.DisplayName) ? _adminOptions.FullName.Trim() : _adminOptions.DisplayName.Trim();
+            admin.PhoneNumber = _adminOptions.PhoneNumber;
+            admin.StudentCode = normalizedStudentCode;
+            admin.GitHubUrl = _adminOptions.GithubUrl;
+            admin.Bio = _adminOptions.Bio;
+            admin.AvatarUrl = _adminOptions.AvatarUrl;
+            admin.DepartmentId = department.Id;
+            admin.Generation = $"Gen {_adminOptions.GenerationNumber}";
+            admin.UpdatedAt = DateTimeOffset.UtcNow;
+            await _userManager.UpdateAsync(admin);
         }
 
-        // Chỉ gán role Admin cho tài khoản admin
         await AddRoleIfMissingAsync(admin, RoleNames.Admin);
 
-        // Nếu admin trước đó có role Member thì gỡ bỏ để chỉ giữ role Admin
         if (await _userManager.IsInRoleAsync(admin, RoleNames.Member))
         {
             await _userManager.RemoveFromRoleAsync(admin, RoleNames.Member);
             _logger.LogInformation("Removed Member role from Admin user {UserId}.", admin.Id);
         }
+
+        await EnsureUserMembershipAsync(
+            admin,
+            _adminOptions.GenerationNumber,
+            _adminOptions.DepartmentCode.Trim().ToUpperInvariant(),
+            _adminOptions.RoleCode.Trim().ToUpperInvariant(),
+            cancellationToken);
     }
 
     private async Task SeedMemberAsync(CancellationToken cancellationToken)
     {
         var email = _memberOptions.Email.Trim();
-
         var member = await _userManager.FindByEmailAsync(email);
+
+        var department = await _dbContext.Departments
+            .SingleOrDefaultAsync(
+                item => item.Code == _memberOptions.DepartmentCode.Trim().ToUpperInvariant(),
+                cancellationToken)
+            ?? throw new InvalidOperationException(
+                $"Department '{_memberOptions.DepartmentCode}' was not found.");
+
+        var normalizedStudentCode = string.IsNullOrWhiteSpace(_memberOptions.StudentCode)
+            ? null
+            : _memberOptions.StudentCode.Trim().ToUpperInvariant();
+
+        if (member is null && normalizedStudentCode is not null)
+        {
+            member = await _dbContext.Users
+                .FirstOrDefaultAsync(u => u.StudentCode == normalizedStudentCode, cancellationToken);
+
+            if (member is not null)
+            {
+                _logger.LogInformation("Found Member by StudentCode {StudentCode}. Syncing email to {Email}.", normalizedStudentCode, email);
+                member.Email = email;
+                member.NormalizedEmail = email.ToUpperInvariant();
+                member.UserName = email;
+                member.NormalizedUserName = email.ToUpperInvariant();
+                await _userManager.UpdateAsync(member);
+            }
+        }
 
         if (member is null)
         {
-            member = await CreateUserAsync(
-                email: email,
-                fullName: _memberOptions.FullName.Trim(),
-                password: _memberOptions.Password,
-                departmentCode: _memberOptions.DepartmentCode.Trim().ToUpperInvariant(),
-                cancellationToken: cancellationToken);
+            if (normalizedStudentCode is not null)
+            {
+                var conflict = await _dbContext.Users
+                    .FirstOrDefaultAsync(u => u.StudentCode == normalizedStudentCode, cancellationToken);
+                if (conflict is not null)
+                {
+                    _logger.LogWarning("Clearing conflicting StudentCode {StudentCode} from user {Email}.", normalizedStudentCode, conflict.Email);
+                    conflict.StudentCode = null;
+                    await _dbContext.SaveChangesAsync(cancellationToken);
+                }
+            }
+
+            member = new ApplicationUser
+            {
+                Id = Guid.NewGuid(),
+                UserName = email,
+                Email = email,
+                EmailConfirmed = true,
+                FullName = _memberOptions.FullName.Trim(),
+                DisplayName = string.IsNullOrWhiteSpace(_memberOptions.DisplayName) ? _memberOptions.FullName.Trim() : _memberOptions.DisplayName.Trim(),
+                PhoneNumber = _memberOptions.PhoneNumber,
+                StudentCode = normalizedStudentCode,
+                GitHubUrl = _memberOptions.GithubUrl,
+                Bio = _memberOptions.Bio,
+                AvatarUrl = _memberOptions.AvatarUrl,
+                DepartmentId = department.Id,
+                Generation = $"Gen {_memberOptions.GenerationNumber}",
+                Status = UserStatus.Active,
+                JoinedAt = DateTimeOffset.UtcNow,
+                CreatedAt = DateTimeOffset.UtcNow,
+                TimeZone = "Asia/Ho_Chi_Minh",
+                Locale = "vi-VN",
+                IsDeleted = false
+            };
+
+            var result = await _userManager.CreateAsync(member, _memberOptions.Password);
+            EnsureSuccess(result, $"Failed to create account with email '{email}'.");
+            _logger.LogInformation("Created Member account with ID {UserId} and email {Email}.", member.Id, email);
+        }
+        else
+        {
+            if (normalizedStudentCode is not null)
+            {
+                var conflict = await _dbContext.Users
+                    .FirstOrDefaultAsync(u => u.Id != member.Id && u.StudentCode == normalizedStudentCode, cancellationToken);
+                if (conflict is not null)
+                {
+                    _logger.LogWarning("Clearing conflicting StudentCode {StudentCode} from user {Email}.", normalizedStudentCode, conflict.Email);
+                    conflict.StudentCode = null;
+                    await _dbContext.SaveChangesAsync(cancellationToken);
+                }
+            }
+
+            member.FullName = _memberOptions.FullName.Trim();
+            member.DisplayName = string.IsNullOrWhiteSpace(_memberOptions.DisplayName) ? _memberOptions.FullName.Trim() : _memberOptions.DisplayName.Trim();
+            member.PhoneNumber = _memberOptions.PhoneNumber;
+            member.StudentCode = normalizedStudentCode;
+            member.GitHubUrl = _memberOptions.GithubUrl;
+            member.Bio = _memberOptions.Bio;
+            member.AvatarUrl = _memberOptions.AvatarUrl;
+            member.DepartmentId = department.Id;
+            member.Generation = $"Gen {_memberOptions.GenerationNumber}";
+            member.UpdatedAt = DateTimeOffset.UtcNow;
+            await _userManager.UpdateAsync(member);
         }
 
-        // Chỉ gán role Member cho tài khoản member
         await AddRoleIfMissingAsync(member, RoleNames.Member);
 
         if (await _userManager.IsInRoleAsync(member, RoleNames.Admin))
@@ -289,57 +504,100 @@ public sealed class DatabaseSeeder
             await _userManager.RemoveFromRoleAsync(member, RoleNames.Admin);
             _logger.LogInformation("Removed Admin role from Member user {UserId}.", member.Id);
         }
+
+        await EnsureUserMembershipAsync(
+            member,
+            _memberOptions.GenerationNumber,
+            _memberOptions.DepartmentCode.Trim().ToUpperInvariant(),
+            _memberOptions.RoleCode.Trim().ToUpperInvariant(),
+            cancellationToken);
     }
 
-    private async Task<ApplicationUser> CreateUserAsync(
-        string email,
-        string fullName,
-        string password,
+    private async Task<ClubGeneration> GetOrCreateGenerationAsync(int generationNumber, CancellationToken cancellationToken)
+    {
+        var generation = await _dbContext.ClubGenerations
+            .SingleOrDefaultAsync(g => g.Number == generationNumber, cancellationToken);
+
+        if (generation is null)
+        {
+            generation = new ClubGeneration(
+                number: generationNumber,
+                startDate: new DateOnly(2025, 9, 1),
+                endDate: new DateOnly(2026, 8, 31));
+
+            _dbContext.ClubGenerations.Add(generation);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+            _logger.LogInformation("Created Club Generation {GenNumber} - {GenName}", generation.Number, generation.Name);
+        }
+
+        return generation;
+    }
+
+    private async Task EnsureUserMembershipAsync(
+        ApplicationUser user,
+        int generationNumber,
         string departmentCode,
+        string roleCode,
         CancellationToken cancellationToken)
     {
+        var generation = await GetOrCreateGenerationAsync(generationNumber, cancellationToken);
+
         var department = await _dbContext.Departments
-            .SingleOrDefaultAsync(
-                item => item.Code == departmentCode,
-                cancellationToken)
-            ?? throw new InvalidOperationException(
-                $"Department '{departmentCode}' was not found.");
+            .SingleOrDefaultAsync(d => d.Code == departmentCode, cancellationToken)
+            ?? throw new InvalidOperationException($"Department '{departmentCode}' was not found.");
 
-        var user = new ApplicationUser
+        var clubRole = await _dbContext.ClubRoles
+            .SingleOrDefaultAsync(r => r.Code == roleCode, cancellationToken)
+            ?? throw new InvalidOperationException($"Club Role '{roleCode}' was not found.");
+
+        // 1. ClubMembership
+        var clubMembership = await _dbContext.ClubMemberships
+            .Include(cm => cm.DepartmentMemberships)
+                .ThenInclude(dm => dm.RoleAssignments)
+            .FirstOrDefaultAsync(cm => cm.UserId == user.Id && cm.GenerationId == generation.Id, cancellationToken);
+
+        if (clubMembership is null)
         {
-            Id = Guid.NewGuid(),
-            UserName = email,
-            Email = email,
-            EmailConfirmed = true,
+            clubMembership = new ClubMembership(user.Id, generation.Id, joinedAt: DateOnly.FromDateTime(DateTime.UtcNow));
+            _dbContext.ClubMemberships.Add(clubMembership);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+        }
 
-            FullName = fullName,
-            DisplayName = fullName,
+        // 2. DepartmentMembership
+        var deptMembership = clubMembership.DepartmentMemberships
+            .FirstOrDefault(dm => dm.DepartmentId == department.Id);
 
-            DepartmentId = department.Id,
-            Generation = "Gen 1",
-            Status = UserStatus.Active,
+        if (deptMembership is null)
+        {
+            deptMembership = new DepartmentMembership(
+                clubMembership.Id,
+                department.Id,
+                isPrimary: true,
+                joinedAt: DateOnly.FromDateTime(DateTime.UtcNow));
+            _dbContext.DepartmentMemberships.Add(deptMembership);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+        }
+        else if (!deptMembership.IsPrimary)
+        {
+            deptMembership.SetPrimary(true);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+        }
 
-            JoinedAt = DateTimeOffset.UtcNow,
-            CreatedAt = DateTimeOffset.UtcNow,
+        // 3. RoleAssignment
+        var roleAssignment = deptMembership.RoleAssignments
+            .FirstOrDefault(ra => ra.ClubRoleId == clubRole.Id);
 
-            TimeZone = "Asia/Ho_Chi_Minh",
-            Locale = "vi-VN",
-
-            IsDeleted = false
-        };
-
-        var result = await _userManager.CreateAsync(user, password);
-
-        EnsureSuccess(
-            result,
-            $"Failed to create account with email '{email}'.");
-
-        _logger.LogInformation(
-            "Created account with ID {UserId} and email {Email}.",
-            user.Id,
-            email);
-
-        return user;
+        if (roleAssignment is null)
+        {
+            roleAssignment = new RoleAssignment(deptMembership.Id, clubRole.Id, user.Id);
+            _dbContext.RoleAssignments.Add(roleAssignment);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+        }
+        else if (!roleAssignment.IsActive)
+        {
+            roleAssignment.Reactivate();
+            await _dbContext.SaveChangesAsync(cancellationToken);
+        }
     }
 
     private async Task AddRoleIfMissingAsync(
@@ -370,9 +628,9 @@ public sealed class DatabaseSeeder
         string name,
         string slug,
         string description,
-        int displayOrder,
-        string? color = null,
-        string? icon = null)
+        int sortOrder,
+        string color,
+        string icon)
     {
         return new Department
         {
@@ -381,18 +639,16 @@ public sealed class DatabaseSeeder
             Name = name,
             Slug = slug,
             Description = description,
-            DisplayOrder = displayOrder,
+            SortOrder = sortOrder,
             Color = color,
             Icon = icon,
-            IsActive = true,
-            IsDeleted = false,
-            CreatedAt = DateTimeOffset.UtcNow
+            IsActive = true
         };
     }
 
     private static void EnsureSuccess(
         IdentityResult result,
-        string message)
+        string errorMessage)
     {
         if (result.Succeeded)
         {
@@ -400,11 +656,12 @@ public sealed class DatabaseSeeder
         }
 
         var errors = string.Join(
-            ";",
-            result.Errors.Select(
-                error => $"{error.Code}: {error.Description}"));
+            ", ",
+            result.Errors.Select(error => error.Description)
+        );
+
         throw new InvalidOperationException(
-            $"{message} {errors}"
+            $"{errorMessage} Errors: {errors}"
         );
     }
 }

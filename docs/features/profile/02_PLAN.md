@@ -17,20 +17,20 @@
 
 ### Backend — Application và API
 
-- [ ] Tạo Profile DTO/validator/service.
-- [ ] Tạo membership DTO/validator/service.
-- [ ] Tạo Department CRUD service.
-- [ ] Tạo Generation CRUD service.
-- [ ] Tạo ProfileController.
-- [ ] Tạo lookup endpoints.
-- [ ] Tạo Admin Department endpoints.
-- [ ] Tạo Admin Generation endpoints.
-- [ ] Tạo Admin Member Membership endpoints.
-- [ ] Thực hiện role replacement transaction.
-- [ ] Thực hiện avatar storage.
-- [ ] Thực hiện email change flow.
-- [ ] Thêm audit.
-- [ ] Viết Unit Test và Integration Test.
+- [x] Tạo Profile DTO/validator/service.
+- [x] Tạo membership DTO/validator/service.
+- [x] Tạo Department CRUD service.
+- [x] Tạo Generation CRUD service.
+- [x] Tạo ProfileController.
+- [x] Tạo lookup endpoints.
+- [x] Tạo Admin Department endpoints.
+- [x] Tạo Admin Generation endpoints.
+- [x] Tạo Admin Member Membership endpoints.
+- [x] Thực hiện role replacement transaction.
+- [x] Thực hiện avatar storage.
+- [x] Thực hiện email change flow.
+- [x] Thêm audit.
+- [x] Viết Unit Test và Integration Test.
 
 ### Frontend
 
