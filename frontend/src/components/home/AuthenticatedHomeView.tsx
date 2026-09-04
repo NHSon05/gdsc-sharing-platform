@@ -24,17 +24,24 @@ import {
 } from "lucide-react";
 
 import { useCurrentUserQuery } from "@/features/auth/hooks/use-current-user-query";
+import { useSessionStore } from "@/core/session/session.store";
+import { selectCurrentUser } from "@/core/session/session.selectors";
 
 interface AuthenticatedHomeViewProps {
   user?: CurrentUserDto | null;
+  accessToken?: string | null;
+  refreshToken?: string | null;
 }
 
 export function AuthenticatedHomeView({
   user: initialUser,
+  accessToken,
+  refreshToken,
 }: AuthenticatedHomeViewProps) {
   const { t } = useTranslation();
-  const { data: userQuery } = useCurrentUserQuery();
-  const user = initialUser || userQuery;
+  const { data: userQuery } = useCurrentUserQuery(initialUser);
+  const storeUser = useSessionStore(selectCurrentUser);
+  const user = initialUser || userQuery || storeUser;
   const [searchQuery, setSearchQuery] = useState("");
 
   const roadmaps = [
@@ -110,7 +117,11 @@ export function AuthenticatedHomeView({
   const userRoles = user?.roles || ["Member"];
 
   return (
-    <AuthenticatedLayout user={user}>
+    <AuthenticatedLayout
+      user={user}
+      accessToken={accessToken}
+      refreshToken={refreshToken}
+    >
       {/* Main Container Content */}
       <div className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
         {/* Welcome Hero Banner with Liquid Glass */}
@@ -197,7 +208,7 @@ export function AuthenticatedHomeView({
                 <Card
                   key={rm.id}
                   variant="default"
-                  className={`group relative overflow-hidden bg-gradient-to-br p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-zinc-950/50 ${rm.color}`}
+                  className={`group relative overflow-hidden bg-linear-to-br p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-zinc-950/50 ${rm.color}`}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex size-10 items-center justify-center rounded-xl bg-white shadow-2xs dark:bg-zinc-800">

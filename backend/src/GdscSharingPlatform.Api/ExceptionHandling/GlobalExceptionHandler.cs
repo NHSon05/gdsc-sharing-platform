@@ -45,11 +45,15 @@ public sealed class GlobalExceptionHandler(
         problemDetails.Extensions["traceId"] =
             httpContext.TraceIdentifier;
 
-        if (exception is ApplicationValidationException
-            validationException)
+        if (exception is ApplicationValidationException validationException)
         {
-            problemDetails.Extensions["errors"] =
-                validationException.Errors;
+            problemDetails.Extensions["errors"] = validationException.Errors;
+        }
+        else if (exception is FluentValidation.ValidationException fvException)
+        {
+            problemDetails.Extensions["errors"] = fvException.Errors
+                .GroupBy(e => e.PropertyName)
+                .ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray());
         }
 
         return await _problemDetailsService.TryWriteAsync(
@@ -65,7 +69,7 @@ public sealed class GlobalExceptionHandler(
     {
         return exception switch
         {
-            ApplicationValidationException =>
+            ApplicationValidationException or FluentValidation.ValidationException =>
                 new ErrorMetadata(
                     StatusCodes.Status400BadRequest,
                     "Validation failed",
@@ -100,6 +104,18 @@ public sealed class GlobalExceptionHandler(
                     StatusCodes.Status409Conflict,
                     "Resource conflict",
                     "https://httpstatuses.com/409"),
+
+            PayloadTooLargeException =>
+                new ErrorMetadata(
+                    StatusCodes.Status413PayloadTooLarge,
+                    "Payload too large",
+                    "https://httpstatuses.com/413"),
+
+            UnsupportedMediaTypeException =>
+                new ErrorMetadata(
+                    StatusCodes.Status415UnsupportedMediaType,
+                    "Unsupported media type",
+                    "https://httpstatuses.com/415"),
 
             BadHttpRequestException =>
                 new ErrorMetadata(

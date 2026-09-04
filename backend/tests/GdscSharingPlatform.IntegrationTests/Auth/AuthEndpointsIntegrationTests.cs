@@ -3,7 +3,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using GdscSharingPlatform.Application.Common.Security;
 using GdscSharingPlatform.Application.Features.Auth.Models;
-using GdscSharingPlatform.Domain.Entities;
+using GdscSharingPlatform.Domain.Departments;
 using GdscSharingPlatform.Domain.Enums;
 using GdscSharingPlatform.Infrastructure.Identity;
 using GdscSharingPlatform.Infrastructure.Persistence;

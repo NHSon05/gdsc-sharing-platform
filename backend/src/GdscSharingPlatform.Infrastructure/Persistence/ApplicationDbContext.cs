@@ -1,4 +1,5 @@
-using GdscSharingPlatform.Domain.Entities;
+using GdscSharingPlatform.Domain.Departments;
+using GdscSharingPlatform.Domain.Memberships;
 using GdscSharingPlatform.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -18,6 +19,22 @@ public class ApplicationDbContext(
 
     public DbSet<RefreshToken> RefreshTokens =>
         Set<RefreshToken>();
+
+    public DbSet<ClubGeneration> ClubGenerations =>
+        Set<ClubGeneration>();
+
+    public DbSet<ClubRole> ClubRoles =>
+        Set<ClubRole>();
+
+    public DbSet<ClubMembership> ClubMemberships =>
+        Set<ClubMembership>();
+
+    public DbSet<DepartmentMembership> DepartmentMemberships =>
+        Set<DepartmentMembership>();
+
+    public DbSet<RoleAssignment> RoleAssignments =>
+        Set<RoleAssignment>();
+
 
     protected override void OnModelCreating(
         ModelBuilder builder)

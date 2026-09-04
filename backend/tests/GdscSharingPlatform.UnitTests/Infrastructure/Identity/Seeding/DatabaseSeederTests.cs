@@ -1,5 +1,6 @@
 using GdscSharingPlatform.Application.Common.Security;
 using GdscSharingPlatform.Domain.Enums;
+using GdscSharingPlatform.Domain.Memberships;
 using GdscSharingPlatform.Infrastructure.Identity;
 using GdscSharingPlatform.Infrastructure.Identity.Seeding;
 using GdscSharingPlatform.Infrastructure.Persistence;
@@ -112,13 +113,16 @@ public class DatabaseSeederTests
 
         // Assert
         var departments = await dbContext.Departments.ToListAsync();
-        Assert.Equal(4, departments.Count);
+        Assert.Equal(7, departments.Count);
 
         var codes = departments.Select(d => d.Code).ToList();
         Assert.Contains("MANAGEMENT", codes);
         Assert.Contains("SOFTWARE", codes);
         Assert.Contains("R&D", codes);
         Assert.Contains("MARKETING", codes);
+        Assert.Contains("AI", codes);
+        Assert.Contains("MEDIA", codes);
+        Assert.Contains("COMMUNITY", codes);
     }
 
     [Fact]
@@ -245,5 +249,43 @@ public class DatabaseSeederTests
         Assert.Null(exception);
         var users = await dbContext.Users.ToListAsync();
         Assert.Equal(2, users.Count);
+    }
+
+    [Fact]
+    public async Task SeedClubRolesAsync_ShouldCreateAllRolesDefinedInSystemClubRoles()
+    {
+        // Arrange
+        var (_, dbContext, seeder) = CreateSeederEnvironment();
+
+        // Act
+        await seeder.SeedClubRolesAsync();
+
+        // Assert
+        var clubRoles = await dbContext.ClubRoles.ToListAsync();
+        Assert.Equal(SystemClubRoles.All.Count, clubRoles.Count);
+
+        foreach (var (code, name, sortOrder) in SystemClubRoles.All)
+        {
+            var role = clubRoles.SingleOrDefault(r => r.Code == code);
+            Assert.NotNull(role);
+            Assert.Equal(name, role.Name);
+            Assert.Equal(sortOrder, role.Level);
+            Assert.True(role.IsActive);
+        }
+    }
+
+    [Fact]
+    public async Task SeedClubRolesAsync_WhenRunMultipleTimes_ShouldBeIdempotent()
+    {
+        // Arrange
+        var (_, dbContext, seeder) = CreateSeederEnvironment();
+
+        // Act
+        await seeder.SeedClubRolesAsync();
+        await seeder.SeedClubRolesAsync();
+
+        // Assert
+        var clubRoles = await dbContext.ClubRoles.ToListAsync();
+        Assert.Equal(SystemClubRoles.All.Count, clubRoles.Count);
     }
 }

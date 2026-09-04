@@ -1,5 +1,6 @@
-using GdscSharingPlatform.Domain.Entities;
+using GdscSharingPlatform.Domain.Departments;
 using GdscSharingPlatform.Domain.Enums;
+using GdscSharingPlatform.Domain.Memberships;
 using Microsoft.AspNetCore.Identity;
 
 namespace GdscSharingPlatform.Infrastructure.Identity;
@@ -11,11 +12,15 @@ public class ApplicationUser : IdentityUser<Guid>
     public string? Generation { get; set; }
     public string? DisplayName { get; set; }
     public string? AvatarUrl { get; set; }
+    public string? GitHubUrl { get; set; }
     public string? Bio { get; set; }
     public Guid? DepartmentId { get; set; }
     public Department? Department { get; set; }
+    public ICollection<ClubMembership> ClubMemberships { get; set; }
+        = new List<ClubMembership>();
     public ICollection<RefreshToken> RefreshTokens { get; set; }
         = new List<RefreshToken>();
+
     public UserStatus Status { get; set; } = UserStatus.Active;
     public DateTimeOffset? JoinedAt { get; set; }
     public DateTimeOffset? LastLoginAt { get; set; }

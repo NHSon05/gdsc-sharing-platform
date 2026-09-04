@@ -57,8 +57,29 @@ services:
       SeedAdmin__Enabled: ${SEED_ADMIN_ENABLED:-true}
       SeedAdmin__Email: ${SEED_ADMIN_EMAIL:-admin@gdsc.dev}
       SeedAdmin__FullName: ${SEED_ADMIN_FULL_NAME:-System Administrator}
+      SeedAdmin__DisplayName: ${SEED_ADMIN_DISPLAY_NAME:-System Administrator}
       SeedAdmin__DepartmentCode: ${SEED_ADMIN_DEPARTMENT_CODE:-MANAGEMENT}
       SeedAdmin__Password: ${SEED_ADMIN_PASSWORD:-AdminPassword@123!}
+      SeedAdmin__PhoneNumber: ${SEED_ADMIN_PHONE:-0901234567}
+      SeedAdmin__StudentCode: ${SEED_ADMIN_STUDENT_CODE:-ADMIN001}
+      SeedAdmin__GithubUrl: ${SEED_ADMIN_GITHUB:-https://github.com/gdsc-admin}
+      SeedAdmin__Bio: ${SEED_ADMIN_BIO:-System Administrator of GDSC Sharing Platform}
+      SeedAdmin__GenerationNumber: ${SEED_ADMIN_GENERATION:-8}
+      SeedAdmin__RoleCode: ${SEED_ADMIN_ROLE_CODE:-LEAD}
+
+      SeedMember__Enabled: ${SEED_MEMBER_ENABLED:-false}
+      SeedMember__Email: ${SEED_MEMBER_EMAIL:-member@gdsc.dev}
+      SeedMember__Password: ${SEED_MEMBER_PASSWORD:-MemberPassword@123!}
+      SeedMember__FullName: ${SEED_MEMBER_FULL_NAME:-Club Member}
+      SeedMember__DisplayName: ${SEED_MEMBER_DISPLAY_NAME:-Club Member}
+      SeedMember__DepartmentCode: ${SEED_MEMBER_DEPARTMENT_CODE:-SOFTWARE}
+      SeedMember__PhoneNumber: ${SEED_MEMBER_PHONE:-0901234568}
+      SeedMember__StudentCode: ${SEED_MEMBER_STUDENT_CODE:-MEM001}
+      SeedMember__GithubUrl: ${SEED_MEMBER_GITHUB:-https://github.com/gdsc-dev}
+      SeedMember__Bio: ${SEED_MEMBER_BIO:-Software Team Member}
+      SeedMember__GenerationNumber: ${SEED_MEMBER_GENERATION:-8}
+      SeedMember__RoleCode: ${SEED_MEMBER_ROLE_CODE:-CORETEAM}
+
 
       Jwt__Issuer: ${JWT_ISSUER:-GdscSharingPlatform.Api}
       Jwt__Audience: ${JWT_AUDIENCE:-GdscSharingPlatform.Web}
@@ -71,6 +92,9 @@ services:
 
     ports:
       - "${API_PORT:-8080}:8080"
+
+    volumes:
+      - api_uploads:/app/wwwroot/uploads
 
     healthcheck:
       test:
@@ -88,3 +112,4 @@ services:
 
 volumes:
   postgres_data:
+  api_uploads:

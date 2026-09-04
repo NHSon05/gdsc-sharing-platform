@@ -19,16 +19,11 @@ export async function coordinateRefreshToken(): Promise<string> {
 
   const { refreshToken, clearSession, setTokens } = useSessionStore.getState();
 
-  if (!refreshToken) {
-    clearSession();
-    throw new Error("No refresh token available");
-  }
-
   activeRefreshPromise = (async () => {
     try {
       const response = await publicHttpClient.post<RefreshResponse>(
         "/api/auth/refresh",
-        { refreshToken }
+        refreshToken ? { refreshToken } : {}
       );
 
       const { accessToken: newAccessToken, refreshToken: newRefreshToken } =

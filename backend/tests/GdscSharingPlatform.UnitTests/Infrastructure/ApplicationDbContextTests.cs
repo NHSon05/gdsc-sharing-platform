@@ -1,4 +1,4 @@
-using GdscSharingPlatform.Domain.Entities;
+using GdscSharingPlatform.Domain.Departments;
 using GdscSharingPlatform.Infrastructure.Identity;
 using GdscSharingPlatform.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;

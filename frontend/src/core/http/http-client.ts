@@ -4,6 +4,10 @@ import axios, {
 } from "axios";
 import { ENV } from "@/core/config/env";
 import { useSessionStore } from "@/core/session/session.store";
+import {
+  AUTH_COOKIE_NAMES,
+  getAuthCookie,
+} from "@/core/session/session.cookies";
 import { normalizeAxiosError } from "./api-error";
 import { coordinateRefreshToken } from "./refresh-coordinator";
 
@@ -22,7 +26,14 @@ export const httpClient: AxiosInstance = axios.create({
 // Request Interceptor: Attach current access token
 httpClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const accessToken = useSessionStore.getState().accessToken;
+    let accessToken = useSessionStore.getState().accessToken;
+
+    if (!accessToken && typeof document !== "undefined") {
+      accessToken = getAuthCookie(AUTH_COOKIE_NAMES.ACCESS_TOKEN);
+      if (accessToken) {
+        useSessionStore.setState({ accessToken, status: "authenticated" });
+      }
+    }
 
     if (accessToken && !config.headers.Authorization) {
       config.headers.Authorization = `Bearer ${accessToken}`;

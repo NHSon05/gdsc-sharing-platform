@@ -11,6 +11,18 @@ public sealed class ApplicationValidationException : Exception
         Errors = errors;
     }
 
+    public ApplicationValidationException(string propertyName, string errorMessage)
+        : base("One or more validation errors occurred.")
+    {
+        Errors = new Dictionary<string, string[]> { [propertyName] = [errorMessage] };
+    }
+
+    public ApplicationValidationException(string message)
+        : base(message)
+    {
+        Errors = new Dictionary<string, string[]> { ["general"] = [message] };
+    }
+
     public IReadOnlyDictionary<string, string[]> Errors
     {
         get;

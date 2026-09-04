@@ -6,7 +6,6 @@ const API_DESTINATION =
   "http://localhost:5184";
 
 const nextConfig: NextConfig = {
-  reactCompiler: true,
   images: {
     qualities: [75, 100],
   },

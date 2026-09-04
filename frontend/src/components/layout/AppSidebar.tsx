@@ -8,7 +8,7 @@ import logoSvg from "@/assets/images/logo.svg";
 import { useTranslation } from "@/core/i18n/i18n.context";
 import { useLogoutMutation } from "@/features/auth/hooks/use-logout-mutation";
 import type { CurrentUserDto } from "@/features/auth/types/auth.types";
-import { LogOut, Sparkles } from "lucide-react";
+import { LogOut } from "lucide-react";
 import {
   Sidebar,
   SidebarHeader,
@@ -18,9 +18,11 @@ import {
   SidebarAccordion,
   SidebarFooter,
   SidebarUserProfile,
-  SidebarUpgradeCard,
 } from "@/components/ui/side-bar";
 import { getSidebarNavItems } from "./sidebar.config";
+
+import { useSessionStore } from "@/core/session/session.store";
+import { selectCurrentUser } from "@/core/session/session.selectors";
 
 interface AppSidebarProps {
   user?: CurrentUserDto | null;
@@ -29,10 +31,16 @@ interface AppSidebarProps {
   className?: string;
 }
 
-export function AppSidebar({ user, collapsed, className }: AppSidebarProps) {
+export function AppSidebar({
+  user: userProp,
+  collapsed,
+  className,
+}: AppSidebarProps) {
   const { t } = useTranslation();
   const pathname = usePathname();
   const logoutMutation = useLogoutMutation();
+  const storeUser = useSessionStore(selectCurrentUser);
+  const user = userProp || storeUser;
 
   const [categoriesOpen, setCategoriesOpen] = useState(true);
   const [moreFromUsOpen, setMoreFromUsOpen] = useState(true);
@@ -40,8 +48,9 @@ export function AppSidebar({ user, collapsed, className }: AppSidebarProps) {
   const { mainNavItems, utilityNavItems, categoryItems, moreItems } =
     getSidebarNavItems(t);
 
-  const displayName = user?.displayName || "Hoang Thuan";
+  const displayName = user?.displayName || "User";
   const userRole = user?.roles?.[0] || t("sidebar.proMember");
+  const avatarUrl = user?.avatarUrl;
   const avatarInitial = displayName.charAt(0).toUpperCase();
 
   const isLinkActive = (href: string, exact = false) => {
@@ -149,19 +158,12 @@ export function AppSidebar({ user, collapsed, className }: AppSidebarProps) {
 
       {/* Bottom Footer: Upgrade Card & User Profile */}
       <SidebarFooter>
-        {/* Optional Upgrade Plan Card */}
-        <SidebarUpgradeCard
-          title={t("sidebar.upgradePlan")}
-          description={t("sidebar.unlockFeatures")}
-          buttonText={t("sidebar.upgrade")}
-          icon={<Sparkles className="text-brand size-4" />}
-        />
-
         {/* User Profile Pill */}
         <SidebarUserProfile
           displayName={displayName}
           role={userRole}
           avatarInitial={avatarInitial}
+          avatarSrc={avatarUrl}
           actionSlot={
             <button
               type="button"
