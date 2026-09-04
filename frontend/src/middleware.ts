@@ -19,6 +19,9 @@ export function middleware(request: NextRequest) {
   const accessToken = request.cookies.get(
     AUTH_COOKIE_NAMES.ACCESS_TOKEN
   )?.value;
+  const refreshToken = request.cookies.get(
+    AUTH_COOKIE_NAMES.REFRESH_TOKEN
+  )?.value;
 
   const isProtectedRoute = PROTECTED_ROUTES.some(
     (route) => pathname === route || pathname.startsWith(`${route}/`)
@@ -27,20 +30,20 @@ export function middleware(request: NextRequest) {
     (route) => pathname === route || pathname.startsWith(`${route}/`)
   );
 
-  // 1. If accessing protected route without access token -> Redirect to /login
-  if (isProtectedRoute && !accessToken) {
+  // 1. If accessing protected route without access token AND without refresh token -> Redirect to /login
+  if (isProtectedRoute && !accessToken && !refreshToken) {
     const returnUrl = encodeURIComponent(`${pathname}${search}`);
     const loginUrl = new URL(`/login?returnUrl=${returnUrl}`, request.url);
     return NextResponse.redirect(loginUrl);
   }
 
-  // 2. If accessing login/register while already authenticated -> Redirect to home
-  if (isAuthRoute && accessToken) {
+  // 2. If accessing login/register while already having an active session -> Redirect to home
+  if (isAuthRoute && (accessToken || refreshToken)) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
   if (pathname.startsWith("/admin")) {
-    if (!accessToken) {
+    if (!accessToken && !refreshToken) {
       return NextResponse.redirect(
         new URL("/login?returnUrl=" + pathname, request.url)
       );

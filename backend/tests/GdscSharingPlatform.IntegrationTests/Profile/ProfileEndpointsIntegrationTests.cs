@@ -298,4 +298,24 @@ public class ProfileEndpointsIntegrationTests : IClassFixture<WebApplicationFact
         var response = await client.PutAsJsonAsync("/api/profile/me", new UpdateProfileRequest("Put Test"));
         Assert.Equal(HttpStatusCode.MethodNotAllowed, response.StatusCode);
     }
+
+    [Fact]
+    public async Task PatchMyProfile_WithTrailingCommaJson_ShouldSucceed()
+    {
+        var client = _factory.CreateClient();
+        var token = await SeedAndLoginUserAsync("trailing_comma@profile.app", "Password123!");
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        var jsonContent = new StringContent(
+            "{\n  \"displayName\": \"Trailing Comma User\",\n}",
+            System.Text.Encoding.UTF8,
+            "application/json");
+
+        var response = await client.PatchAsync("/api/profile/me", jsonContent);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+        var profile = await response.Content.ReadFromJsonAsync<ProfileDto>();
+        Assert.NotNull(profile);
+        Assert.Equal("Trailing Comma User", profile.DisplayName);
+    }
 }

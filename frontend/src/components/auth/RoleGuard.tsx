@@ -2,6 +2,8 @@
 
 import React from "react";
 import { useCurrentUserQuery } from "@/features/auth/hooks/use-current-user-query";
+import { useSessionStore } from "@/core/session/session.store";
+import { selectCurrentUser } from "@/core/session/session.selectors";
 import { hasAnyRole } from "@/features/auth/utils/rbac";
 
 export interface RoleGuardProps {
@@ -22,7 +24,9 @@ export function RoleGuard({
   fallback = null,
   children,
 }: RoleGuardProps) {
-  const { data: user } = useCurrentUserQuery();
+  const { data: queriedUser } = useCurrentUserQuery();
+  const storeUser = useSessionStore(selectCurrentUser);
+  const user = queriedUser || storeUser;
 
   const isAllowed = hasAnyRole(user, allowedRoles);
 

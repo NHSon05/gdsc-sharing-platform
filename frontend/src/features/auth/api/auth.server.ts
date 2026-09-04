@@ -5,6 +5,7 @@ import { hasRole, isAdmin } from "../utils/rbac";
 
 const BACKEND_INTERNAL_URL =
   process.env.INTERNAL_API_URL ||
+  process.env.BACKEND_API_URL ||
   process.env.NEXT_PUBLIC_API_URL ||
   "http://localhost:5184";
 
@@ -46,6 +47,44 @@ export async function getCurrentUserServerSide(
       "[getCurrentUserServerSide] Failed to fetch user on server:",
       error
     );
+    return null;
+  }
+}
+
+/**
+ * SERVER-SIDE API: Calls backend to rotate refresh token and get a new access token.
+ */
+export async function refreshTokensServerSide(
+  refreshTokenParam?: string
+): Promise<{ accessToken: string; refreshToken: string } | null> {
+  let refreshToken = refreshTokenParam;
+
+  if (!refreshToken) {
+    const cookieStore = await cookies();
+    refreshToken = cookieStore.get(AUTH_COOKIE_NAMES.REFRESH_TOKEN)?.value;
+  }
+
+  if (!refreshToken) {
+    return null;
+  }
+
+  try {
+    const res = await fetch(`${BACKEND_INTERNAL_URL}/api/auth/refresh`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ refreshToken }),
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      return null;
+    }
+
+    return (await res.json()) as { accessToken: string; refreshToken: string };
+  } catch (error) {
+    console.error("[refreshTokensServerSide] Failed to refresh tokens on server:", error);
     return null;
   }
 }

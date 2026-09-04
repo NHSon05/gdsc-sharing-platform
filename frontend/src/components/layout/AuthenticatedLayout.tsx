@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AppSidebar } from "./AppSidebar";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageToggle } from "@/components/LanguageToggle";
@@ -11,22 +11,60 @@ import Link from "next/link";
 import Image from "next/image";
 import logoSvg from "@/assets/images/logo.svg";
 
+import { useSessionStore } from "@/core/session/session.store";
+import { selectCurrentUser } from "@/core/session/session.selectors";
+
 interface AuthenticatedLayoutProps {
   children: React.ReactNode;
   user?: CurrentUserDto | null;
+  accessToken?: string | null;
+  refreshToken?: string | null;
 }
 
 export function AuthenticatedLayout({
   children,
   user: initialUser,
+  accessToken: initialAccessToken,
+  refreshToken: initialRefreshToken,
 }: AuthenticatedLayoutProps) {
-  const { data: queriedUser } = useCurrentUserQuery();
-  const user = initialUser !== undefined ? initialUser : queriedUser;
+  // 1. Immediately hydrate Zustand store from server-provided props on client
+  if (typeof window !== "undefined") {
+    const currentState = useSessionStore.getState();
+    if (initialAccessToken && currentState.accessToken !== initialAccessToken) {
+      useSessionStore.setState({
+        accessToken: initialAccessToken,
+        refreshToken: initialRefreshToken ?? currentState.refreshToken,
+        user: initialUser ?? currentState.user,
+        status: "authenticated",
+      });
+    } else if (initialUser && !currentState.user) {
+      useSessionStore.setState({ user: initialUser });
+    }
+  }
+
+  useEffect(() => {
+    if (initialAccessToken || initialUser) {
+      useSessionStore.setState((state) => ({
+        accessToken: initialAccessToken ?? state.accessToken,
+        refreshToken: initialRefreshToken ?? state.refreshToken,
+        user: initialUser ?? state.user,
+        status:
+          (initialAccessToken ?? state.accessToken)
+            ? "authenticated"
+            : state.status,
+      }));
+    }
+  }, [initialAccessToken, initialRefreshToken, initialUser]);
+
+  const { data: queriedUser } = useCurrentUserQuery(initialUser);
+  const storeUser = useSessionStore(selectCurrentUser);
+  const user = initialUser || queriedUser || storeUser;
 
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const displayName = user?.displayName || "User";
+  const avatarUrl = user?.avatarUrl;
   const avatarInitial = displayName.charAt(0).toUpperCase();
 
   return (
@@ -125,8 +163,17 @@ export function AuthenticatedLayout({
               href="/profile"
               className="group hover:border-brand/60 flex items-center gap-2 rounded-full border border-neutral-200/80 bg-white/70 py-1 pr-3 pl-1.5 shadow-2xs backdrop-blur-md transition-all dark:border-zinc-800 dark:bg-zinc-900/70"
             >
-              <div className="bg-brand flex size-7 items-center justify-center rounded-full text-xs font-bold text-white shadow-xs">
-                {avatarInitial}
+              <div className="bg-brand relative flex size-7 shrink-0 items-center justify-center overflow-hidden rounded-full text-xs font-bold text-white shadow-xs">
+                {avatarUrl ? (
+                  <Image
+                    src={avatarUrl}
+                    alt={displayName}
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  avatarInitial
+                )}
               </div>
               <span className="hidden max-w-30 truncate text-xs font-semibold text-neutral-800 sm:inline-block dark:text-zinc-200">
                 {displayName}

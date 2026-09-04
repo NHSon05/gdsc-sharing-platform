@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { ChevronUp, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -262,6 +263,7 @@ export function SidebarUserProfile({
   displayName,
   role,
   avatarInitial,
+  avatarSrc,
   actionSlot,
   className,
 }: SidebarUserProfileProps) {
@@ -278,8 +280,17 @@ export function SidebarUserProfile({
       )}
     >
       <div className="flex min-w-0 items-center gap-2.5">
-        <div className="bg-brand text-brand-foreground flex size-9 shrink-0 items-center justify-center rounded-full text-xs font-bold shadow-xs">
-          {initial}
+        <div className="bg-brand text-brand-foreground relative flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-full text-xs font-bold shadow-xs">
+          {avatarSrc ? (
+            <Image
+              src={avatarSrc}
+              alt={displayName}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            initial
+          )}
         </div>
         {!collapsed && (
           <div className="min-w-0">

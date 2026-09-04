@@ -21,6 +21,9 @@ import {
 } from "@/components/ui/side-bar";
 import { getSidebarNavItems } from "./sidebar.config";
 
+import { useSessionStore } from "@/core/session/session.store";
+import { selectCurrentUser } from "@/core/session/session.selectors";
+
 interface AppSidebarProps {
   user?: CurrentUserDto | null;
   collapsed: boolean;
@@ -28,10 +31,16 @@ interface AppSidebarProps {
   className?: string;
 }
 
-export function AppSidebar({ user, collapsed, className }: AppSidebarProps) {
+export function AppSidebar({
+  user: userProp,
+  collapsed,
+  className,
+}: AppSidebarProps) {
   const { t } = useTranslation();
   const pathname = usePathname();
   const logoutMutation = useLogoutMutation();
+  const storeUser = useSessionStore(selectCurrentUser);
+  const user = userProp || storeUser;
 
   const [categoriesOpen, setCategoriesOpen] = useState(true);
   const [moreFromUsOpen, setMoreFromUsOpen] = useState(true);
@@ -41,6 +50,7 @@ export function AppSidebar({ user, collapsed, className }: AppSidebarProps) {
 
   const displayName = user?.displayName || "User";
   const userRole = user?.roles?.[0] || t("sidebar.proMember");
+  const avatarUrl = user?.avatarUrl;
   const avatarInitial = displayName.charAt(0).toUpperCase();
 
   const isLinkActive = (href: string, exact = false) => {
@@ -153,6 +163,7 @@ export function AppSidebar({ user, collapsed, className }: AppSidebarProps) {
           displayName={displayName}
           role={userRole}
           avatarInitial={avatarInitial}
+          avatarSrc={avatarUrl}
           actionSlot={
             <button
               type="button"
