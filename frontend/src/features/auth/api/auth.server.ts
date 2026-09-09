@@ -22,6 +22,17 @@ export async function getCurrentUserServerSide(
   if (!accessToken) {
     const cookieStore = await cookies();
     accessToken = cookieStore.get(AUTH_COOKIE_NAMES.ACCESS_TOKEN)?.value;
+
+    // If accessToken is missing in cookies, check if refreshToken is present
+    if (!accessToken) {
+      const refreshToken = cookieStore.get(AUTH_COOKIE_NAMES.REFRESH_TOKEN)?.value;
+      if (refreshToken) {
+        const refreshed = await refreshTokensServerSide(refreshToken);
+        if (refreshed?.accessToken) {
+          accessToken = refreshed.accessToken;
+        }
+      }
+    }
   }
 
   if (!accessToken) {

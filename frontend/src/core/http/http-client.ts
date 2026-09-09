@@ -24,14 +24,28 @@ export const httpClient: AxiosInstance = axios.create({
 });
 
 // Request Interceptor: Attach current access token
+// If accessToken is missing from cookies but refreshToken exists, fetch a new accessToken before sending
 httpClient.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
+  async (config: InternalAxiosRequestConfig) => {
     let accessToken = useSessionStore.getState().accessToken;
 
     if (!accessToken && typeof document !== "undefined") {
       accessToken = getAuthCookie(AUTH_COOKIE_NAMES.ACCESS_TOKEN);
       if (accessToken) {
         useSessionStore.setState({ accessToken, status: "authenticated" });
+      } else {
+        // Access token is missing from cookies, check if refreshToken is present
+        const refreshToken =
+          useSessionStore.getState().refreshToken ||
+          getAuthCookie(AUTH_COOKIE_NAMES.REFRESH_TOKEN);
+
+        if (refreshToken) {
+          try {
+            accessToken = await coordinateRefreshToken();
+          } catch {
+            // Refresh failed, proceed without token
+          }
+        }
       }
     }
 

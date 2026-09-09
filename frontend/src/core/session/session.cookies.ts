@@ -3,6 +3,11 @@ export const AUTH_COOKIE_NAMES = {
   REFRESH_TOKEN: "refreshToken",
 } as const;
 
+export const AUTH_COOKIE_MAX_AGE = {
+  ACCESS_TOKEN: 15 * 60, // 15 minutes
+  REFRESH_TOKEN: 7 * 24 * 60 * 60, // 7 days
+} as const;
+
 /**
  * Safely reads a cookie by name from the browser document.
  */
