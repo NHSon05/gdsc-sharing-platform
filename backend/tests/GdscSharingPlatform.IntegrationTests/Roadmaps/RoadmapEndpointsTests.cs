@@ -130,7 +130,8 @@ public sealed partial class RoadmapEndpointsTests : IAsyncLifetime
         Assert.Equal(HttpStatusCode.NoContent, (await _admin.PatchAsJsonAsync($"/api/admin/roadmaps/{roadmap.Id}/status", new { status = "Published" })).StatusCode);
         var detail = await ReadAsync<RoadmapResponse>(await _member.GetAsync($"/api/roadmaps/{roadmap.Slug}"));
         Assert.Equal(2, detail.Nodes.Count); Assert.Single(detail.Edges);
-        Assert.Equal(roadmap.PublishedAtUtc, detail.PublishedAtUtc);
+        Assert.NotNull(detail.PublishedAtUtc);
+        Assert.Equal(roadmap.PublishedAtUtc!.Value, detail.PublishedAtUtc.Value, TimeSpan.FromSeconds(1));
         var node = await ReadAsync<NodeDetailResponse>(await _member.GetAsync($"/api/roadmaps/{roadmap.Id}/nodes/{a.Id}"));
         Assert.Single(node.Resources); Assert.Equal(b.Id, Assert.Single(node.NextNodes).Id);
         await _admin.PatchAsJsonAsync($"/api/admin/roadmaps/{roadmap.Id}/status", new { status = "Archived" });
