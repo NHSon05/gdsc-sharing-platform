@@ -41,7 +41,7 @@ public sealed class AdminDepartmentsController : ControllerBase
         return StatusCode(StatusCodes.Status201Created, created);
     }
 
-    [HttpPut("{departmentId:guid}")]
+    [HttpPatch("{departmentId:guid}")]
     [ProducesResponseType(typeof(DepartmentDetailDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]

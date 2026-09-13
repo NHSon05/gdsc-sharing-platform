@@ -56,6 +56,12 @@ public sealed class GlobalExceptionHandler(
                 .ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray());
         }
 
+        if (problemDetails.Extensions.TryGetValue("errors", out var errors)
+            && errors is IEnumerable<KeyValuePair<string, string[]>> validationErrors)
+        {
+            problemDetails.Extensions["validationErrors"] = ValidationErrorNames.ForJson(validationErrors);
+        }
+
         return await _problemDetailsService.TryWriteAsync(
             new ProblemDetailsContext
             {
@@ -116,6 +122,9 @@ public sealed class GlobalExceptionHandler(
                     StatusCodes.Status415UnsupportedMediaType,
                     "Unsupported media type",
                     "https://httpstatuses.com/415"),
+
+            BadHttpRequestException { StatusCode: StatusCodes.Status413PayloadTooLarge } =>
+                new ErrorMetadata(StatusCodes.Status413PayloadTooLarge, "Payload too large", "https://httpstatuses.com/413"),
 
             BadHttpRequestException =>
                 new ErrorMetadata(

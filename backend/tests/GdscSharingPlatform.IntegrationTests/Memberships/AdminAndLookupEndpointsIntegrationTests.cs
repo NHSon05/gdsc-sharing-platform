@@ -138,7 +138,7 @@ public class AdminAndLookupEndpointsIntegrationTests : IClassFixture<WebApplicat
 
         // 2. Update
         var updateRequest = new UpdateDepartmentRequest("Research & Development", "research-dev", "Updated desc", "#1D4ED8", "flask", 60);
-        var updateResponse = await client.PutAsJsonAsync($"/api/admin/departments/{created.Id}", updateRequest);
+        var updateResponse = await client.PatchAsJsonAsync($"/api/admin/departments/{created.Id}", updateRequest);
         Assert.Equal(HttpStatusCode.OK, updateResponse.StatusCode);
         var updated = await updateResponse.Content.ReadFromJsonAsync<DepartmentDetailDto>();
         Assert.Equal("Research & Development", updated!.Name);

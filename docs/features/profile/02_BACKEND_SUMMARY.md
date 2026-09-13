@@ -41,12 +41,12 @@ Tài liệu này tổng hợp toàn diện các tính năng đã thay đổi, s�
 | | `Configurations/` | **REFACTOR** | Tổ chức lại cấu hình EF Core vào các thư mục con: `Departments/`, `Memberships/`, `Identity/`. |
 | | `LegacyProfileBackfillService.cs` | **NEW** | Migration và backfill dữ liệu cũ sang cấu trúc đa nhiệm kỳ, đa ban, đa chức danh. |
 | | `DatabaseSeeder.cs` | **UPDATE** | Seed idempotent Club Roles và Departments động. |
-| **API** | `ProfileController.cs` | **NEW** | 5 endpoints: `GET /me`, `PATCH /me` (hỗ trợ cập nhật thông tin hồ sơ từng phần & email), `PATCH /me/email` (đổi email trực tiếp không cần confirm), `POST /me/avatar`, `DELETE /me/avatar` (hỗ trợ backward-compatible cả PUT). |
+| **API** | `ProfileController.cs` | **NEW** | 5 endpoints: `GET /me`, `PATCH /me` (hỗ trợ cập nhật thông tin hồ sơ từng phần & email), `PATCH /me/email` (đổi email trực tiếp không cần confirm), `POST /me/avatar`, `DELETE /me/avatar`. |
 | | `GenerationsController.cs` | **NEW** | Lookup Generation (`GET /api/generations`). |
 | | `DepartmentsController.cs` | **NEW** | Lookup Department (`GET /api/departments`). |
 | | `ClubRolesController.cs` | **NEW** | Lookup Club Role (`GET /api/club-roles`). |
-| | `AdminDepartmentsController.cs` | **NEW** | Admin CRUD Department (`POST`, `PUT`, `DELETE`, `POST /activate`). |
-| | `AdminGenerationsController.cs` | **NEW** | Admin CRUD Generation (`POST`, `PUT`, `DELETE`). |
+| | `AdminDepartmentsController.cs` | **NEW** | Admin CRUD Department (`POST`, `PATCH`, `DELETE`, `POST /activate`). |
+| | `AdminGenerationsController.cs` | **NEW** | Admin CRUD Generation (`POST`, `PATCH`, `DELETE`). |
 | | `AdminMemberMembershipsController.cs` | **NEW** | Admin Member Membership & Role Assignment management. |
 | | `GlobalExceptionHandler.cs` | **UPDATE** | Bổ sung ánh xạ FluentValidation (400), `PayloadTooLargeException` (413), `UnsupportedMediaTypeException` (415). |
 | | `Program.cs` | **UPDATE** | Thêm `app.UseStaticFiles()` phục vụ ảnh avatar. |
@@ -174,11 +174,11 @@ sequenceDiagram
 
 ---
 
-### 2.5. Transaction Thay thế Chức danh (`PUT /api/admin/.../roles`)
+### 2.5. Transaction Thay thế Chức danh (`PATCH /api/admin/.../roles`)
 
 ```mermaid
 flowchart TD
-    A["Admin: PUT /api/admin/members/{userId}/department-memberships/{deptMemId}/roles"] --> B["Validate danh sách RoleIds gửi lên"]
+    A["Admin: PATCH /api/admin/members/{userId}/department-memberships/{deptMemId}/roles"] --> B["Validate danh sách RoleIds gửi lên"]
     B --> C{"Tất cả RoleIds có tồn tại và IsActive = true?"}
     C -- Không --> D["404 Not Found hoặc 400 Bad Request"]
     C -- Có --> E["Bắt đầu Transaction CSDL"]
@@ -325,7 +325,7 @@ Passed:  166 / 166 tests (100%) - Thời gian: ~2s
 Project: GdscSharingPlatform.IntegrationTests.dll (net10.0)
 Passed:  28 / 28 tests (100%) - Thời gian: ~6s
 - Auth endpoints tests (Login, Refresh, Logout)
-- Profile endpoints tests (GET /me, PUT /me, Avatar upload/delete, direct Email change)
+- Profile endpoints tests (GET /me, PATCH /me, Avatar upload/delete, direct Email change)
 - Lookup endpoints tests (Generations, Departments, ClubRoles with Member vs Admin permissions)
 - Admin Department endpoints tests (Create, Update, Deactivate, Activate, 403 Forbidden check)
 - Admin Generation endpoints tests (Create, Deactivate)

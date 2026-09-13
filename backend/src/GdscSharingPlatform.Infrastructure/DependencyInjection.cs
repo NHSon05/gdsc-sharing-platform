@@ -1,3 +1,5 @@
+using GdscSharingPlatform.Application.Features.Roadmaps.Interfaces;
+using GdscSharingPlatform.Infrastructure.Services.Roadmaps;
 using GdscSharingPlatform.Application.Common.Interfaces;
 using GdscSharingPlatform.Application.Common.Security;
 using GdscSharingPlatform.Application.Features.Auth.Interfaces;
@@ -161,6 +163,20 @@ public static class DependencyInjection
         services.AddScoped<IDepartmentService, DepartmentService>();
         services.AddScoped<IGenerationService, GenerationService>();
         services.AddScoped<IMemberMembershipService, MemberMembershipService>();
+
+        services.AddOptions<RoadmapStorageOptions>()
+            .Bind(configuration.GetSection(RoadmapStorageOptions.SectionName))
+            .Validate(x => !string.IsNullOrWhiteSpace(x.RootPath), "Roadmap storage root is required.")
+            .Validate(x => x.MaxFileBytes > 0 && x.MaxFileBytes <= RoadmapStorageOptions.MaximumFileBytes,
+                "Roadmap file limit must be between 1 byte and 20 MiB.")
+            .ValidateOnStart();
+        services.AddScoped<IFileStorage, LocalRoadmapFileStorage>();
+        services.AddScoped<RoadmapOperations>();
+        services.AddScoped<IRoadmapCategoryService, RoadmapCategoryService>();
+        services.AddScoped<IRoadmapService, RoadmapService>();
+        services.AddScoped<IRoadmapNodeService, RoadmapNodeService>();
+        services.AddScoped<IRoadmapEdgeService, RoadmapEdgeService>();
+        services.AddScoped<ILearningResourceService, LearningResourceService>();
 
         services.AddScoped<DatabaseSeeder>();
         services.AddScoped<LegacyProfileBackfillService>();

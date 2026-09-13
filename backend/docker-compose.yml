@@ -95,6 +95,7 @@ services:
 
     volumes:
       - api_uploads:/app/wwwroot/uploads
+      - roadmap_resources:/app/App_Data/roadmap-resources
 
     healthcheck:
       test:
@@ -113,3 +114,4 @@ services:
 volumes:
   postgres_data:
   api_uploads:
+  roadmap_resources:

@@ -1,3 +1,6 @@
+using System.Text.Json.Serialization;
+using GdscSharingPlatform.Domain.Enums;
+using Microsoft.AspNetCore.Mvc;
 using GdscSharingPlatform.Api.ExceptionHandling;
 using GdscSharingPlatform.Api.Extensions;
 using GdscSharingPlatform.Api.HealthChecks;
@@ -13,9 +16,39 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<RoadmapStatus>());
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<RoadmapLevel>());
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<RoadmapNodeType>());
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<RoadmapRelationType>());
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<RoadmapLineStyle>());
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<ResourceType>());
         options.JsonSerializerOptions.AllowTrailingCommas = true;
         options.JsonSerializerOptions.ReadCommentHandling = System.Text.Json.JsonCommentHandling.Skip;
     });
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.InvalidModelStateResponseFactory = context =>
+    {
+        if (context.HttpContext.Request.HasFormContentType && context.ModelState.Values
+            .SelectMany(x => x.Errors).Any(x => x.ErrorMessage.Contains("length limit", StringComparison.OrdinalIgnoreCase)
+                || x.Exception is BadHttpRequestException { StatusCode: StatusCodes.Status413PayloadTooLarge }))
+        {
+            var oversized = new ProblemDetails { Status = 413, Title = "Payload too large", Detail = "The upload exceeds the request limit." };
+            oversized.Extensions["traceId"] = context.HttpContext.TraceIdentifier;
+            return new ObjectResult(oversized) { StatusCode = 413, ContentTypes = { "application/problem+json" } };
+        }
+        var problem = new ValidationProblemDetails(context.ModelState)
+        {
+            Status = StatusCodes.Status400BadRequest,
+            Title = "Validation failed",
+            Detail = "The submitted data is invalid."
+        };
+        problem.Extensions["validationErrors"] = ValidationErrorNames.ForJson(problem.Errors);
+        problem.Extensions["traceId"] = context.HttpContext.TraceIdentifier;
+        return new BadRequestObjectResult(problem) { ContentTypes = { "application/problem+json" } };
+    };
+});
 
 // API Documents (OpenAPI/Swagger)
 builder.Services.AddApiDocumentation();

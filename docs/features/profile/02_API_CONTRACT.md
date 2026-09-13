@@ -91,7 +91,7 @@ Response `200 OK`:
 ### 14.2. Cập nhật thông tin cá nhân
 
 ```http
-PUT /api/profile/me
+PATCH /api/profile/me
 Authorization: Bearer <access-token>
 Content-Type: application/json
 ```
@@ -245,7 +245,7 @@ Response:
 ### 16.2. Cập nhật Department
 
 ```http
-PUT /api/admin/departments/{departmentId}
+PATCH /api/admin/departments/{departmentId}
 Authorization: Bearer <admin-access-token>
 ```
 
@@ -287,7 +287,7 @@ Request:
 ### 17.2. Cập nhật Gen
 
 ```http
-PUT /api/admin/generations/{generationId}
+PATCH /api/admin/generations/{generationId}
 ```
 
 ### 17.3. Deactivate Gen
@@ -344,7 +344,7 @@ Hệ thống tạo DepartmentMembership và nhiều RoleAssignment trong một t
 ### 18.3. Cập nhật Department Membership
 
 ```http
-PUT /api/admin/members/{userId}/department-memberships/{departmentMembershipId}
+PATCH /api/admin/members/{userId}/department-memberships/{departmentMembershipId}
 ```
 
 Request:
@@ -359,7 +359,7 @@ Request:
 ### 18.4. Thay thế danh sách Role đang hoạt động
 
 ```http
-PUT /api/admin/members/{userId}/department-memberships/{departmentMembershipId}/roles
+PATCH /api/admin/members/{userId}/department-memberships/{departmentMembershipId}/roles
 ```
 
 Request:

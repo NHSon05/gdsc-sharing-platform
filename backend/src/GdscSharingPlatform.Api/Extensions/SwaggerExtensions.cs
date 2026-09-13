@@ -36,6 +36,7 @@ public static class SwaggerExtensions
                 });
 
             options.OperationFilter<AuthorizeCheckOperationFilter>();
+            options.OperationFilter<RoadmapOperationFilter>();
         });
 
         return services;

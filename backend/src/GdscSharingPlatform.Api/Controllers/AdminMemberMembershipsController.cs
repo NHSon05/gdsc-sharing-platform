@@ -69,7 +69,7 @@ public sealed class AdminMemberMembershipsController : ControllerBase
         return StatusCode(StatusCodes.Status201Created, result);
     }
 
-    [HttpPut("{userId:guid}/department-memberships/{departmentMembershipId:guid}")]
+    [HttpPatch("{userId:guid}/department-memberships/{departmentMembershipId:guid}")]
     [ProducesResponseType(typeof(DepartmentMembershipSummaryDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -85,7 +85,7 @@ public sealed class AdminMemberMembershipsController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPut("{userId:guid}/department-memberships/{departmentMembershipId:guid}/roles")]
+    [HttpPatch("{userId:guid}/department-memberships/{departmentMembershipId:guid}/roles")]
     [ProducesResponseType(typeof(IReadOnlyList<ClubRoleDetailDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]

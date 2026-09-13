@@ -41,7 +41,7 @@ public sealed class AdminGenerationsController : ControllerBase
         return StatusCode(StatusCodes.Status201Created, created);
     }
 
-    [HttpPut("{generationId:guid}")]
+    [HttpPatch("{generationId:guid}")]
     [ProducesResponseType(typeof(GenerationDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]

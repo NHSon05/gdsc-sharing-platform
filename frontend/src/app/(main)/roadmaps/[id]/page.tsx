@@ -1,4 +1,10 @@
 import React from "react";
+import { VisualRoadmapView } from "@/features/roadmap";
+
+export const metadata = {
+  title: "Roadmap Sơ đồ — GDSC Sharing Platform",
+  description: "Interactive visual roadmap node graph and study guides.",
+};
 
 export default async function RoadmapDetailPage({
   params,
@@ -6,9 +12,5 @@ export default async function RoadmapDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold">Roadmap Detail: {id}</h1>
-    </div>
-  );
+  return <VisualRoadmapView slugOrId={id} />;
 }
