@@ -20,7 +20,7 @@ export async function getProfileMeApi(
 }
 
 /**
- * PUT /api/profile/me - Updates personal profile fields.
+ * PATCH /api/profile/me - Updates personal profile fields.
  */
 export async function updateProfileMeApi(
   request: UpdateProfileRequest,

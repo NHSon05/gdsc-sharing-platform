@@ -1,5 +1,6 @@
 using GdscSharingPlatform.Domain.Departments;
 using GdscSharingPlatform.Domain.Memberships;
+using GdscSharingPlatform.Domain.Roadmaps;
 using GdscSharingPlatform.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -35,6 +36,16 @@ public class ApplicationDbContext(
     public DbSet<RoleAssignment> RoleAssignments =>
         Set<RoleAssignment>();
 
+
+    public DbSet<RoadmapCategory> RoadmapCategories => Set<RoadmapCategory>();
+
+    public DbSet<Roadmap> Roadmaps => Set<Roadmap>();
+
+    public DbSet<RoadmapNode> RoadmapNodes => Set<RoadmapNode>();
+
+    public DbSet<RoadmapEdge> RoadmapEdges => Set<RoadmapEdge>();
+
+    public DbSet<LearningResource> LearningResources => Set<LearningResource>();
 
     protected override void OnModelCreating(
         ModelBuilder builder)

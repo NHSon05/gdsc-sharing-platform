@@ -1,9 +1,11 @@
 import React from "react";
+import { RoadmapCatalogView } from "@/features/roadmap";
+
+export const metadata = {
+  title: "Roadmaps — GDSC Sharing Platform",
+  description: "Explore interactive technology roadmaps and structured learning paths.",
+};
 
 export default function RoadmapsPage() {
-  return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold">Roadmaps</h1>
-    </div>
-  );
+  return <RoadmapCatalogView />;
 }

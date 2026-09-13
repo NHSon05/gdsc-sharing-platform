@@ -2,6 +2,7 @@ using GdscSharingPlatform.Application.Common.Security;
 using GdscSharingPlatform.Domain.Departments;
 using GdscSharingPlatform.Domain.Enums;
 using GdscSharingPlatform.Domain.Memberships;
+using GdscSharingPlatform.Domain.Roadmaps;
 using GdscSharingPlatform.Infrastructure.Persistence;
 using GdscSharingPlatform.Infrastructure.Persistence.Backfill;
 using Microsoft.AspNetCore.Identity;
@@ -11,7 +12,7 @@ using Microsoft.Extensions.Options;
 
 namespace GdscSharingPlatform.Infrastructure.Identity.Seeding;
 
-public sealed class DatabaseSeeder
+public sealed partial class DatabaseSeeder
 {
     private readonly ApplicationDbContext _dbContext;
     private readonly RoleManager<IdentityRole<Guid>> _roleManager;
@@ -47,6 +48,8 @@ public sealed class DatabaseSeeder
 
         await SeedDepartmentAsync(cancellationToken);
 
+        await SeedRoadmapCategoriesAsync(cancellationToken);
+
         await CleanupOldSeedDataAsync(cancellationToken);
 
         if (_adminOptions.Enabled)
@@ -59,9 +62,45 @@ public sealed class DatabaseSeeder
             await SeedMemberAsync(cancellationToken);
         }
 
+        await SeedRoadmapsAsync(cancellationToken);
+
         if (_backfillService is not null)
         {
             await _backfillService.BackfillAsync(cancellationToken);
+        }
+    }
+
+    public async Task SeedRoadmapCategoriesAsync(CancellationToken cancellationToken = default)
+    {
+        // Phase 1 baseline; preserve any category changes made by administrators.
+        (string Name, string Slug)[] defaults =
+        [
+            ("Frontend", "frontend"),
+            ("Backend", "backend"),
+            ("Database", "database"),
+            ("Software Engineering", "software-engineering"),
+            ("Fullstack", "fullstack"),
+            ("Artificial Intelligence", "artificial-intelligence")
+        ];
+        var existingSlugs = (await _dbContext.RoadmapCategories
+            .Select(category => category.Slug)
+            .ToListAsync(cancellationToken)).ToHashSet(StringComparer.Ordinal);
+        var hasChanges = false;
+        for (var index = 0; index < defaults.Length; index++)
+        {
+            var (name, slug) = defaults[index];
+            if (existingSlugs.Contains(slug))
+            {
+                continue;
+            }
+
+            _dbContext.RoadmapCategories.Add(new RoadmapCategory(name, slug, index));
+            hasChanges = true;
+        }
+
+        if (hasChanges)
+        {
+            await _dbContext.SaveChangesAsync(cancellationToken);
         }
     }
 

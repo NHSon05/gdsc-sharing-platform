@@ -76,7 +76,7 @@ export async function updateDepartmentApi(
   request: UpdateDepartmentRequest,
   signal?: AbortSignal
 ): Promise<AdminDepartmentDto> {
-  const response = await httpClient.put<AdminDepartmentDto>(
+  const response = await httpClient.patch<AdminDepartmentDto>(
     `/api/admin/departments/${id}`,
     request,
     { signal }
@@ -123,7 +123,7 @@ export async function updateGenerationApi(
   request: UpdateGenerationRequest,
   signal?: AbortSignal
 ): Promise<AdminGenerationDto> {
-  const response = await httpClient.put<AdminGenerationDto>(
+  const response = await httpClient.patch<AdminGenerationDto>(
     `/api/admin/generations/${id}`,
     request,
     { signal }
@@ -182,7 +182,7 @@ export async function updateMemberDepartmentApi(
   request: UpdateMemberDepartmentRequest,
   signal?: AbortSignal
 ): Promise<void> {
-  await httpClient.put(
+  await httpClient.patch(
     `/api/admin/members/${userId}/department-memberships/${departmentMembershipId}`,
     request,
     { signal }
@@ -195,7 +195,7 @@ export async function replaceMemberRolesApi(
   request: ReplaceMemberRolesRequest,
   signal?: AbortSignal
 ): Promise<void> {
-  await httpClient.put(
+  await httpClient.patch(
     `/api/admin/members/${userId}/department-memberships/${departmentMembershipId}/roles`,
     request,
     { signal }

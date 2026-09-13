@@ -293,33 +293,36 @@ A user may have both roles.
 
 ### 7.2. Roadmap
 
-Responsibilities:
+Sprint 3 implements the visual node–edge model defined in
+`docs/features/roadmap-management/01_REQUIREMENTS.md` through
+`06_IMPLEMENTATION_PLAN.md`.
 
-- Knowledge areas
-- Roadmaps
-- Hierarchical roadmap nodes
-- Node prerequisites
-- Assignments
-- Deadlines
-- Learning resources
-- Completion state
+Phase 1 persistence consists of:
 
-Roadmap nodes use a self-referencing relationship:
+- `RoadmapCategory`: dynamic categories with unique slugs and active status.
+- `Roadmap`: category, metadata, publication status and author audit fields.
+- `RoadmapNode`: topic/group/milestone nodes with persisted canvas coordinates.
+- `RoadmapEdge`: directed Required/Recommended/Optional relationships.
+- `LearningResource`: mutually exclusive Link or File metadata attached to nodes.
 
-```text
-RoadmapNode
-├── ParentId
-├── Children
-└── RoadmapId
-```
+Nodes and edges form a graph. A separate edge entity supports branching and
+multiple prerequisites. Composite foreign keys on `(RoadmapId, SourceNodeId)`
+and `(RoadmapId, TargetNodeId)` ensure both endpoints belong to the same roadmap.
+All foreign keys in this module use `Restrict`, including author references;
+archiving/deactivation retains related records. Member visibility is applied by services: Published and Archived are readable,
+while Draft and inactive nodes/resources are hidden. Admin services retain
+access to inactive content; no global query filters are used.
 
-Rules:
-
-- A node and its parent must belong to the same roadmap.
-- A node cannot be its own parent.
-- Cycles are forbidden.
-- MVP display depth is limited to four levels.
-- Only authorized Admin users can mark final completion.
+Roadmaps default to `Published` and record `PublishedAtUtc` on creation, as
+confirmed for this feature. The runtime seeder adds six initial categories by
+slug and preserves existing category data. Phases 2–4 implement request/response contracts, FluentValidation,
+application mapping/rules, five infrastructure services and authenticated API routes.
+`RoadmapOperations` wraps each write in a Serializable transaction; concurrent
+predicate conflicts (including cycles) return 409. Local `IFileStorage` stores
+resources outside wwwroot, validates uploads and opens files only after service
+authorization. New files are cleaned after failed database writes when confirmed
+unreferenced; replacement deletes the previous file after commit. See feature
+`08_PHASE_2_4_NOTES.md` for contracts and operational details.
 
 ### 7.3. Sharing Content
 

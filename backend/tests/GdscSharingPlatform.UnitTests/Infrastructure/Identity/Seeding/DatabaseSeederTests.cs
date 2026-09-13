@@ -288,4 +288,116 @@ public class DatabaseSeederTests
         var clubRoles = await dbContext.ClubRoles.ToListAsync();
         Assert.Equal(SystemClubRoles.All.Count, clubRoles.Count);
     }
+    [Fact]
+    public async Task RoadmapCategories_SeedIsIdempotentAndPreservesAdminChanges()
+    {
+        var (_, dbContext, seeder) = CreateSeederEnvironment(
+            new AdminSeedOptions { Enabled = false }, new MemberSeedOptions { Enabled = false });
+        await seeder.SeedAsync();
+        var category = await dbContext.RoadmapCategories.SingleAsync(x => x.Slug == "frontend");
+        var originalId = category.Id;
+        category.Update("Custom Frontend", "frontend", 99);
+        category.SetActive(false);
+        category.Description = "Admin description";
+        await dbContext.SaveChangesAsync();
+
+        await seeder.SeedAsync();
+        var categories = await dbContext.RoadmapCategories.ToListAsync();
+        Assert.Equal(6, categories.Count);
+        Assert.Equal(6, categories.Select(x => x.Slug).Distinct().Count());
+        Assert.Contains(categories, x => x.Name == "Artificial Intelligence");
+        var preserved = categories.Single(x => x.Id == originalId);
+        Assert.Equal("Custom Frontend", preserved.Name);
+        Assert.Equal("Admin description", preserved.Description);
+        Assert.Equal(99, preserved.SortOrder);
+        Assert.False(preserved.IsActive);
+    }
+
+
+    [Fact]
+    public async Task Roadmaps_SeedPublishedGraphsAndPreserveAdminEditsIncludingSlug()
+    {
+        var (_, db, seeder) = CreateSeederEnvironment();
+        await seeder.SeedAsync();
+        var roadmaps = await db.Roadmaps.Include(x => x.Nodes).Include(x => x.Edges).ToListAsync();
+        Assert.Equal(6, roadmaps.Count);
+        Assert.All(roadmaps, roadmap =>
+        {
+            Assert.Equal(RoadmapStatus.Published, roadmap.Status);
+            Assert.NotNull(roadmap.PublishedAtUtc);
+            Assert.Equal(5, roadmap.Nodes.Count);
+            Assert.Equal(4, roadmap.Edges.Count);
+            Assert.All(roadmap.Edges, edge =>
+            {
+                Assert.Contains(roadmap.Nodes, node => node.Id == edge.SourceNodeId);
+                Assert.Contains(roadmap.Nodes, node => node.Id == edge.TargetNodeId);
+                Assert.Equal(RoadmapRelationType.Required, edge.RelationType);
+            });
+        });
+        var frontend = roadmaps.Single(x => x.Slug == "frontend");
+        frontend.Update(frontend.CategoryId, "Admin curriculum", "admin-curriculum", "Edited summary",
+            RoadmapLevel.Advanced, 99, frontend.CreatedByUserId);
+        frontend.ChangeStatus(RoadmapStatus.Draft, true, frontend.CreatedByUserId);
+        var node = frontend.Nodes.First();
+        node.SetPosition(10, 20, 350);
+        node.SetActive(false);
+        frontend.Edges.First().SetActive(false);
+        await db.SaveChangesAsync();
+        db.ChangeTracker.Clear();
+
+        await seeder.SeedAsync();
+        Assert.Equal(6, await db.Roadmaps.CountAsync());
+        Assert.Equal(30, await db.RoadmapNodes.CountAsync());
+        Assert.Equal(24, await db.RoadmapEdges.CountAsync());
+        var preserved = await db.Roadmaps.FindAsync(frontend.Id);
+        Assert.Equal("Admin curriculum", preserved!.Title);
+        Assert.Equal("admin-curriculum", preserved.Slug);
+        Assert.Equal(RoadmapStatus.Draft, preserved.Status);
+        Assert.Equal(99, preserved.SortOrder);
+        var preservedNode = await db.RoadmapNodes.FindAsync(node.Id);
+        Assert.False(preservedNode!.IsActive);
+        Assert.Equal(10, preservedNode.PositionX);
+        Assert.Equal(350, preservedNode.Width);
+        Assert.Equal(1, await db.RoadmapEdges.CountAsync(x => !x.IsActive));
+    }
+
+    [Fact]
+    public async Task Roadmaps_WithoutAdminDeferSeedUntilAnAdminExists()
+    {
+        var (_, db, seeder) = CreateSeederEnvironment(new AdminSeedOptions { Enabled = false });
+        await seeder.SeedAsync();
+        Assert.Empty(await db.Roadmaps.ToListAsync());
+        Assert.Empty(await db.Users.ToListAsync());
+
+        var admin = new ApplicationUser { UserName = "existing-admin", Status = UserStatus.Active };
+        db.Users.Add(admin);
+        var role = await db.Roles.SingleAsync(x => x.Name == RoleNames.Admin);
+        db.UserRoles.Add(new IdentityUserRole<Guid> { UserId = admin.Id, RoleId = role.Id });
+        await db.SaveChangesAsync();
+        await seeder.SeedRoadmapsAsync();
+        Assert.Equal(6, await db.Roadmaps.CountAsync());
+        Assert.All(await db.Roadmaps.ToListAsync(), x => Assert.Equal(admin.Id, x.CreatedByUserId));
+    }
+
+    [Fact]
+    public async Task Roadmaps_ExistingSlugIsNotOverwrittenOrGivenSeedNodes()
+    {
+        var (_, db, seeder) = CreateSeederEnvironment();
+        await seeder.SeedAsync();
+        var frontend = await db.Roadmaps.SingleAsync(x => x.Slug == "frontend");
+        db.RoadmapEdges.RemoveRange(await db.RoadmapEdges.Where(x => x.RoadmapId == frontend.Id).ToListAsync());
+        db.RoadmapNodes.RemoveRange(await db.RoadmapNodes.Where(x => x.RoadmapId == frontend.Id).ToListAsync());
+        db.Roadmaps.Remove(frontend);
+        await db.SaveChangesAsync();
+        var custom = new GdscSharingPlatform.Domain.Roadmaps.Roadmap(frontend.CategoryId,
+            "Existing curriculum", "frontend", "Keep my content", RoadmapLevel.Advanced, frontend.CreatedByUserId);
+        db.Roadmaps.Add(custom);
+        await db.SaveChangesAsync();
+
+        await seeder.SeedRoadmapsAsync();
+        Assert.Equal(6, await db.Roadmaps.CountAsync());
+        Assert.Equal(custom.Id, (await db.Roadmaps.SingleAsync(x => x.Slug == "frontend")).Id);
+        Assert.False(await db.RoadmapNodes.AnyAsync(x => x.RoadmapId == custom.Id));
+    }
+
 }

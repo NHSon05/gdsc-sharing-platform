@@ -15,6 +15,7 @@ public static class RoleNames
 public static class AuthPolicies
 {
     public const string AdminOnly = nameof(AdminOnly);
+    public const string AdminPolicy = AdminOnly;
     public const string MemberOnly = nameof(MemberOnly);
     public const string RequireActiveUser = nameof(RequireActiveUser);
 }
