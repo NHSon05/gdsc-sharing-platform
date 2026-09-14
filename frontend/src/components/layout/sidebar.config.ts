@@ -13,6 +13,7 @@ import {
   ArrowLeftRight,
   Boxes,
   Layers,
+  BookOpen,
 } from "lucide-react";
 
 export interface SidebarNavItemConfig {
@@ -35,10 +36,16 @@ export const MAIN_NAV_ITEMS: SidebarNavItemConfig[] = [
     icon: Map,
   },
   {
+    titleKey: "sharing.title",
+    href: "/sharing",
+    icon: BookOpen,
+  },
+  {
     titleKey: "sidebar.schedule",
     href: "/schedule",
     icon: Calendar,
   },
+
   {
     titleKey: "sidebar.memberDirectory",
     href: "/dashboard/users",

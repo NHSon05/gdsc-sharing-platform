@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useCallback, useMemo } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
 import type {
   RoadmapResponse,
   RoadmapNodeDto,
@@ -120,7 +126,8 @@ export function VisualRoadmapCanvas({
     let maxY = -Infinity;
 
     nodes.forEach((n) => {
-      const width = n.nodeType === "Group" ? 220 : n.width ? Number(n.width) : 190;
+      const width =
+        n.nodeType === "Group" ? 220 : n.width ? Number(n.width) : 190;
       const height = n.nodeType === "Milestone" ? 72 : 50;
       minX = Math.min(minX, n.position.x);
       minY = Math.min(minY, n.position.y);
@@ -200,8 +207,12 @@ export function VisualRoadmapCanvas({
     const targetZoom = Math.max(zoom, 0.9);
     setZoom(targetZoom);
     setPan({
-      x: Math.round(rect.width / 2 - targetNode.position.x * targetZoom - 100 * targetZoom),
-      y: Math.round(rect.height / 2 - targetNode.position.y * targetZoom - 30 * targetZoom),
+      x: Math.round(
+        rect.width / 2 - targetNode.position.x * targetZoom - 100 * targetZoom
+      ),
+      y: Math.round(
+        rect.height / 2 - targetNode.position.y * targetZoom - 30 * targetZoom
+      ),
     });
     onSelectNode(targetNode);
   };
@@ -330,8 +341,8 @@ export function VisualRoadmapCanvas({
         isPanning
           ? "cursor-grabbing"
           : isEditMode
-          ? "cursor-default"
-          : "cursor-grab"
+            ? "cursor-default"
+            : "cursor-grab"
       }`}
       style={{
         backgroundColor: "var(--background)",
@@ -341,21 +352,21 @@ export function VisualRoadmapCanvas({
       }}
     >
       {/* Search Bar inside Canvas */}
-      <div className="absolute top-4 left-4 z-30 flex items-center gap-2 max-w-sm">
+      <div className="absolute top-4 left-4 z-30 flex max-w-sm items-center gap-2">
         <form onSubmit={handleSearchSubmit} className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 size-3.5 -translate-y-1/2 text-neutral-400 dark:text-zinc-500" />
+          <Search className="absolute top-1/2 left-3 size-3.5 -translate-y-1/2 text-neutral-400 dark:text-zinc-500" />
           <input
             type="text"
             value={nodeSearch}
             onChange={(e) => setNodeSearch(e.target.value)}
             placeholder="Search topic or milestone..."
-            className="h-9 w-64 rounded-xl border border-neutral-200/90 bg-white/90 pl-8 pr-8 text-xs text-neutral-900 shadow-md backdrop-blur-md transition-all placeholder:text-neutral-400 focus:w-72 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 dark:border-zinc-800 dark:bg-zinc-900/90 dark:text-zinc-100 dark:placeholder:text-zinc-500"
+            className="focus:border-brand focus:ring-brand/20 h-9 w-64 rounded-xl border border-neutral-200/90 bg-white/90 pr-8 pl-8 text-xs text-neutral-900 shadow-md backdrop-blur-md transition-all placeholder:text-neutral-400 focus:w-72 focus:ring-2 focus:outline-none dark:border-zinc-800 dark:bg-zinc-900/90 dark:text-zinc-100 dark:placeholder:text-zinc-500"
           />
           {nodeSearch && (
             <button
               type="button"
               onClick={() => setNodeSearch("")}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600 dark:text-zinc-500 dark:hover:text-zinc-300"
+              className="absolute top-1/2 right-2.5 -translate-y-1/2 text-neutral-400 hover:text-neutral-600 dark:text-zinc-500 dark:hover:text-zinc-300"
             >
               <X className="size-3.5" />
             </button>
@@ -370,10 +381,11 @@ export function VisualRoadmapCanvas({
               const firstMatch = nodes.find((n) => matchingNodeIds.has(n.id));
               if (firstMatch) handleJumpToNode(firstMatch);
             }}
-            className="rounded-full bg-brand px-2.5 py-1 text-[11px] font-semibold text-white shadow-xs hover:bg-brand-hover transition-colors"
+            className="bg-brand hover:bg-brand-hover rounded-full px-2.5 py-1 text-[11px] font-semibold text-white shadow-xs transition-colors"
             title="Jump to matching node"
           >
-            {matchingNodeIds.size} {matchingNodeIds.size === 1 ? "match" : "matches"}
+            {matchingNodeIds.size}{" "}
+            {matchingNodeIds.size === 1 ? "match" : "matches"}
           </button>
         )}
       </div>
@@ -417,7 +429,7 @@ export function VisualRoadmapCanvas({
       >
         {/* SVG Layer for Directed Arrows */}
         <svg
-          className="absolute inset-0 pointer-events-none"
+          className="pointer-events-none absolute inset-0"
           style={{ width: "100%", height: "100%", overflow: "visible" }}
         >
           <defs>

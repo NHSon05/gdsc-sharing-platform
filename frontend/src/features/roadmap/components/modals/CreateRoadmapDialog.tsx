@@ -142,7 +142,7 @@ export function CreateRoadmapDialog({
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
                 placeholder="e.g. modern-frontend-developer"
-                className="mt-1 h-9 w-full rounded-xl border border-neutral-200 bg-white px-3 text-xs font-mono dark:border-zinc-800 dark:bg-zinc-900"
+                className="mt-1 h-9 w-full rounded-xl border border-neutral-200 bg-white px-3 font-mono text-xs dark:border-zinc-800 dark:bg-zinc-900"
                 required
               />
             </div>

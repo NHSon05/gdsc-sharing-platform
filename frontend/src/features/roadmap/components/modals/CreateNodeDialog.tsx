@@ -135,7 +135,9 @@ export function CreateNodeDialog({
                 </label>
                 <select
                   value={nodeType}
-                  onChange={(e) => setNodeType(e.target.value as RoadmapNodeType)}
+                  onChange={(e) =>
+                    setNodeType(e.target.value as RoadmapNodeType)
+                  }
                   className="mt-1 h-9 w-full rounded-xl border border-neutral-200 bg-white px-3 text-xs dark:border-zinc-800 dark:bg-zinc-900"
                 >
                   <option value="Topic">Topic (Core Skill)</option>
@@ -177,7 +179,7 @@ export function CreateNodeDialog({
                     style={{ backgroundColor: c.hex }}
                     className={`size-6 rounded-full transition-transform ${
                       color === c.hex
-                        ? "ring-2 ring-offset-2 ring-neutral-800 scale-110 dark:ring-white"
+                        ? "scale-110 ring-2 ring-neutral-800 ring-offset-2 dark:ring-white"
                         : "opacity-80 hover:opacity-100"
                     }`}
                     title={c.name}

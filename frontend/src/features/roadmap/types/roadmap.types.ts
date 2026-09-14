@@ -1,10 +1,7 @@
 export type RoadmapStatus = "Draft" | "Published" | "Archived";
 
 export type RoadmapLevel =
-  | "Beginner"
-  | "Intermediate"
-  | "Advanced"
-  | "AllLevels";
+  "Beginner" | "Intermediate" | "Advanced" | "AllLevels";
 
 export type RoadmapNodeType = "Topic" | "Group" | "Milestone";
 

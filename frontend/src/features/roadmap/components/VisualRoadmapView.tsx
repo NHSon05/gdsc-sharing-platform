@@ -108,7 +108,7 @@ export function VisualRoadmapView({ slugOrId }: VisualRoadmapViewProps) {
   if (isLoading) {
     return (
       <div className="flex h-[calc(100dvh-4rem)] w-full flex-col items-center justify-center gap-3">
-        <div className="size-8 animate-spin rounded-full border-3 border-brand border-t-transparent" />
+        <div className="border-brand size-8 animate-spin rounded-full border-3 border-t-transparent" />
         <p className="text-xs font-semibold text-neutral-500 dark:text-zinc-400">
           Loading roadmap graph...
         </p>
@@ -126,7 +126,8 @@ export function VisualRoadmapView({ slugOrId }: VisualRoadmapViewProps) {
           Roadmap Not Found
         </h2>
         <p className="mt-1.5 text-xs text-neutral-500 dark:text-zinc-400">
-          The requested roadmap might be private, unpublished, or the link is invalid.
+          The requested roadmap might be private, unpublished, or the link is
+          invalid.
         </p>
         <div className="mt-6 flex items-center gap-3">
           <Link href="/roadmaps">
@@ -138,7 +139,7 @@ export function VisualRoadmapView({ slugOrId }: VisualRoadmapViewProps) {
             variant="brand"
             size="sm"
             onClick={() => refetch()}
-            className="rounded-full gap-1.5"
+            className="gap-1.5 rounded-full"
           >
             <RefreshCw className="size-3.5" />
             <span>Try Again</span>
@@ -151,8 +152,8 @@ export function VisualRoadmapView({ slugOrId }: VisualRoadmapViewProps) {
   return (
     <div className="relative flex h-[calc(100dvh-4rem)] w-full flex-col overflow-hidden">
       {/* Top Header Bar */}
-      <header className="z-20 flex h-14 shrink-0 items-center justify-between border-b border-neutral-200/80 bg-white/90 px-4 backdrop-blur-md dark:border-zinc-800/80 dark:bg-zinc-900/90 sm:px-6">
-        <div className="flex items-center gap-3 min-w-0">
+      <header className="z-20 flex h-14 shrink-0 items-center justify-between border-b border-neutral-200/80 bg-white/90 px-4 backdrop-blur-md sm:px-6 dark:border-zinc-800/80 dark:bg-zinc-900/90">
+        <div className="flex min-w-0 items-center gap-3">
           <Link
             href="/roadmaps"
             className="flex size-8 items-center justify-center rounded-xl border border-neutral-200 bg-white text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
@@ -161,14 +162,14 @@ export function VisualRoadmapView({ slugOrId }: VisualRoadmapViewProps) {
             <ArrowLeft className="size-4" />
           </Link>
 
-          <div className="flex items-center gap-2 min-w-0">
+          <div className="flex min-w-0 items-center gap-2">
             <h1 className="truncate text-sm font-bold text-neutral-900 sm:text-base dark:text-white">
               {roadmap.title}
             </h1>
 
             <Badge
               variant="outline"
-              className="hidden text-[10px] sm:inline-flex border-brand/30 bg-brand/10 text-brand"
+              className="border-brand/30 bg-brand/10 text-brand hidden text-[10px] sm:inline-flex"
             >
               {roadmap.category.name}
             </Badge>
@@ -184,7 +185,7 @@ export function VisualRoadmapView({ slugOrId }: VisualRoadmapViewProps) {
             {roadmap.status === "Archived" && (
               <Badge
                 variant="outline"
-                className="gap-1 border-amber-300 bg-amber-50 text-amber-800 text-[10px] dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-300"
+                className="gap-1 border-amber-300 bg-amber-50 text-[10px] text-amber-800 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-300"
               >
                 <Archive className="size-2.5" />
                 Archived
@@ -194,7 +195,7 @@ export function VisualRoadmapView({ slugOrId }: VisualRoadmapViewProps) {
             {roadmap.status === "Draft" && (
               <Badge
                 variant="outline"
-                className="gap-1 border-neutral-300 bg-neutral-100 text-neutral-700 text-[10px] dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
+                className="gap-1 border-neutral-300 bg-neutral-100 text-[10px] text-neutral-700 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
               >
                 <FileCheck className="size-2.5" />
                 Draft
@@ -206,7 +207,7 @@ export function VisualRoadmapView({ slugOrId }: VisualRoadmapViewProps) {
         {/* Right meta details */}
         <div className="flex items-center gap-4 text-xs text-neutral-500 dark:text-zinc-400">
           <div className="hidden items-center gap-1.5 md:flex">
-            <Layers className="size-3.5 text-brand" />
+            <Layers className="text-brand size-3.5" />
             <span>{roadmap.nodes.length} nodes</span>
           </div>
 
@@ -220,7 +221,7 @@ export function VisualRoadmapView({ slugOrId }: VisualRoadmapViewProps) {
       </header>
 
       {/* Main Canvas Area */}
-      <div className="relative flex-1 w-full h-full overflow-hidden">
+      <div className="relative h-full w-full flex-1 overflow-hidden">
         <VisualRoadmapCanvas
           roadmap={roadmap}
           isAdmin={userIsAdmin}

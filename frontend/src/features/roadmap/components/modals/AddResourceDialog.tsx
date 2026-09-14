@@ -101,7 +101,7 @@ export function AddResourceDialog({
           </DialogHeader>
 
           {/* Type Toggle Tabs */}
-          <div className="flex gap-2 border-b border-neutral-200 pb-3 pt-1 dark:border-zinc-800">
+          <div className="flex gap-2 border-b border-neutral-200 pt-1 pb-3 dark:border-zinc-800">
             <button
               type="button"
               onClick={() => {
@@ -179,7 +179,7 @@ export function AddResourceDialog({
                   value={externalUrl}
                   onChange={(e) => setExternalUrl(e.target.value)}
                   placeholder="https://react.dev"
-                  className="mt-1 h-9 w-full rounded-xl border border-neutral-200 bg-white px-3 text-xs font-mono dark:border-zinc-800 dark:bg-zinc-900"
+                  className="mt-1 h-9 w-full rounded-xl border border-neutral-200 bg-white px-3 font-mono text-xs dark:border-zinc-800 dark:bg-zinc-900"
                   required
                 />
               </div>
@@ -190,10 +190,8 @@ export function AddResourceDialog({
                 </label>
                 <input
                   type="file"
-                  onChange={(e) =>
-                    setSelectedFile(e.target.files?.[0] || null)
-                  }
-                  className="mt-1 block w-full text-xs text-neutral-600 file:mr-3 file:rounded-full file:border-0 file:bg-brand/10 file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-brand hover:file:bg-brand/20 dark:text-zinc-400 dark:file:bg-brand/20 dark:file:text-brand"
+                  onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
+                  className="file:bg-brand/10 file:text-brand hover:file:bg-brand/20 dark:file:bg-brand/20 dark:file:text-brand mt-1 block w-full text-xs text-neutral-600 file:mr-3 file:rounded-full file:border-0 file:px-3 file:py-1.5 file:text-xs file:font-semibold dark:text-zinc-400"
                   required
                 />
               </div>

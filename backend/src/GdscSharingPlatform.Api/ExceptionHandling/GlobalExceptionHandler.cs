@@ -105,6 +105,9 @@ public sealed class GlobalExceptionHandler(
                     "Resource not found",
                     "https://httpstatuses.com/404"),
 
+            PreconditionFailedException =>
+                new ErrorMetadata(StatusCodes.Status412PreconditionFailed, "Precondition failed", "https://httpstatuses.com/412"),
+
             ConflictException =>
                 new ErrorMetadata(
                     StatusCodes.Status409Conflict,

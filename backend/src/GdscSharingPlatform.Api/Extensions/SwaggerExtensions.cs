@@ -14,6 +14,8 @@ public static class SwaggerExtensions
 
         services.AddSwaggerGen(options =>
         {
+            // Sharing DTO names can overlap with existing Roadmap DTOs.
+            options.CustomSchemaIds(SchemaId);
             options.SwaggerDoc(
                 "v1",
                 new OpenApiInfo
@@ -37,9 +39,18 @@ public static class SwaggerExtensions
 
             options.OperationFilter<AuthorizeCheckOperationFilter>();
             options.OperationFilter<RoadmapOperationFilter>();
+            options.OperationFilter<SharingOperationFilter>();
         });
 
         return services;
+    }
+
+    private static string SchemaId(Type type)
+    {
+        var name = type.IsConstructedGenericType
+            ? string.Concat(type.GetGenericArguments().Select(SchemaId)) + type.Name.Split('`')[0]
+            : type.Name.Replace("[]", "Array");
+        return type.Namespace == "GdscSharingPlatform.Application.Features.Sharing" ? "Sharing" + name : name;
     }
 
     public static IApplicationBuilder UseApiDocumentation(

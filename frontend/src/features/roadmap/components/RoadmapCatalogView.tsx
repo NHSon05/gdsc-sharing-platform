@@ -229,8 +229,8 @@ export function RoadmapCatalogView() {
               {search || showBookmarksOnly
                 ? "Try adjusting your search query or removing the favorites filter."
                 : userIsAdmin
-                ? "Create your first roadmap using the button below to get started."
-                : "No roadmaps have been published yet. Please check back later."}
+                  ? "Create your first roadmap using the button below to get started."
+                  : "No roadmaps have been published yet. Please check back later."}
             </p>
             {search || showBookmarksOnly ? (
               <Button

@@ -22,6 +22,13 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<RoadmapRelationType>());
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<RoadmapLineStyle>());
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<ResourceType>());
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<SharingContentStatus>());
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<SharingScheduleStatus>());
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<SharingAuthorRole>());
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<SharingType>());
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<DeliveryMode>());
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<AudienceScope>());
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<PresenterRole>());
         options.JsonSerializerOptions.AllowTrailingCommas = true;
         options.JsonSerializerOptions.ReadCommentHandling = System.Text.Json.JsonCommentHandling.Skip;
     });
@@ -52,6 +59,7 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 
 // API Documents (OpenAPI/Swagger)
 builder.Services.AddApiDocumentation();
+builder.Services.AddSharingRateLimits();
 
 // Đăng ký dịch vụ thuộc tầng Application & Infrastructure
 builder.Services.AddApplication();
@@ -63,6 +71,7 @@ builder.Services.AddCors(options =>
     {
         policy.SetIsOriginAllowed(_ => true)
               .AllowAnyHeader()
+              .WithExposedHeaders("ETag", "Retry-After", "Content-Disposition")
               .AllowAnyMethod()
               .AllowCredentials();
     });
@@ -97,6 +106,7 @@ app.UseStaticFiles();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseRateLimiter();
 
 app.MapHealthChecks(
    "/health/live",

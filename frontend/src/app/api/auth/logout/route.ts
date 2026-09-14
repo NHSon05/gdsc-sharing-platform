@@ -12,7 +12,9 @@ export async function POST(request: Request) {
   try {
     const cookieStore = await cookies();
     const accessToken = cookieStore.get(AUTH_COOKIE_NAMES.ACCESS_TOKEN)?.value;
-    const refreshToken = cookieStore.get(AUTH_COOKIE_NAMES.REFRESH_TOKEN)?.value;
+    const refreshToken = cookieStore.get(
+      AUTH_COOKIE_NAMES.REFRESH_TOKEN
+    )?.value;
 
     let body = {};
     try {
@@ -29,7 +31,8 @@ export async function POST(request: Request) {
         ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
       },
       body: JSON.stringify({
-        refreshToken: refreshToken || (body as { refreshToken?: string })?.refreshToken,
+        refreshToken:
+          refreshToken || (body as { refreshToken?: string })?.refreshToken,
       }),
     }).catch(() => {
       // Ignore backend logout errors to always ensure local session is cleared

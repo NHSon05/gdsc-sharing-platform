@@ -1,19 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
+import { format, parseISO } from "date-fns";
+import { vi, enUS } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { TextField } from "@/components/ui/input";
 import { useTranslation } from "@/core/i18n/i18n.context";
 import { AuthenticatedLayout } from "@/components/layout/AuthenticatedLayout";
 import type { CurrentUserDto } from "@/features/auth/types/auth.types";
 import {
   BookOpen,
   Calendar,
-  PlusCircle,
-  Search,
-  Sparkles,
   ArrowRight,
   Clock,
   MapPin,
@@ -21,11 +19,22 @@ import {
   Cpu,
   Server,
   ChevronRight,
+  ShieldCheck,
+  FileText,
+  Video,
 } from "lucide-react";
 
 import { useCurrentUserQuery } from "@/features/auth/hooks/use-current-user-query";
 import { useSessionStore } from "@/core/session/session.store";
 import { selectCurrentUser } from "@/core/session/session.selectors";
+import {
+  QuickShareComposer,
+  InfiniteFeedStream,
+  useSchedulesQuery,
+  DeliveryModeBadge,
+  useCurrentTime,
+  getScheduleRealtimeState,
+} from "@/features/sharing";
 
 interface AuthenticatedHomeViewProps {
   user?: CurrentUserDto | null;
@@ -38,83 +47,51 @@ export function AuthenticatedHomeView({
   accessToken,
   refreshToken,
 }: AuthenticatedHomeViewProps) {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
+  const now = useCurrentTime(10_000);
   const { data: userQuery } = useCurrentUserQuery(initialUser);
   const storeUser = useSessionStore(selectCurrentUser);
   const user = initialUser || userQuery || storeUser;
-  const [searchQuery, setSearchQuery] = useState("");
+
+  // Fetch real upcoming sharing sessions
+  const { data: schedulesData } = useSchedulesQuery({
+    pageSize: 3,
+  });
+  const upcomingSchedules = schedulesData?.items ?? [];
+
+  const userRoles = user?.roles || ["Member"];
+  const isAdminOrLead = userRoles.some((r) =>
+    ["Admin", "Lead", "SubLead", "CoreTeam"].includes(r)
+  );
 
   const roadmaps = [
     {
       id: "frontend",
       title: "Frontend Engineering 2026",
       category: "Frontend & UI/UX",
-      icon: <Code2 className="size-5 text-blue-500" />,
+      icon: <Code2 className="text-brand size-4" />,
       progress: 68,
-      totalTopics: 24,
-      completedTopics: 16,
-      badge: "In Progress",
-      color:
-        "from-blue-500/10 to-sky-500/10 border-blue-200 dark:border-blue-900/50",
+      color: "border-brand-border/40 bg-brand-muted/20",
     },
     {
       id: "backend",
       title: "Clean Architecture & ASP.NET Core",
-      category: "Backend & System Design",
-      icon: <Server className="size-5 text-emerald-500" />,
+      category: "Backend & Systems",
+      icon: <Server className="size-4 text-emerald-500" />,
       progress: 42,
-      totalTopics: 18,
-      completedTopics: 8,
-      badge: "In Progress",
       color:
-        "from-emerald-500/10 to-teal-500/10 border-emerald-200 dark:border-emerald-900/50",
+        "border-emerald-200 dark:border-emerald-900/40 bg-emerald-50/30 dark:bg-emerald-950/20",
     },
     {
       id: "ai",
       title: "Generative AI & Agentic Workflows",
       category: "AI & Machine Learning",
-      icon: <Cpu className="size-5 text-purple-500" />,
+      icon: <Cpu className="size-4 text-violet-500" />,
       progress: 25,
-      totalTopics: 12,
-      completedTopics: 3,
-      badge: "New",
       color:
-        "from-purple-500/10 to-pink-500/10 border-purple-200 dark:border-purple-900/50",
+        "border-violet-200 dark:border-violet-900/40 bg-violet-50/30 dark:bg-violet-950/20",
     },
   ];
-
-  const upcomingSessions = [
-    {
-      id: "1",
-      title:
-        "Building Production-Ready Next.js 16 Applications with Tailwind v4",
-      speaker: "Son Nguyen",
-      speakerRole: "Tech Lead - GDSC",
-      date: "Saturday, Sep 05, 2026",
-      time: "09:00 AM - 11:30 AM",
-      location: "Room F302, DUT & Google Meet",
-      track: "Frontend",
-      tagColor:
-        "bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300 border-blue-200 dark:border-blue-800",
-    },
-    {
-      id: "2",
-      title:
-        "Scalable Microservices with ASP.NET Core & Event-Driven Architecture",
-      speaker: "Alex Tran",
-      speakerRole: "Backend Core Member",
-      date: "Wednesday, Sep 09, 2026",
-      time: "07:30 PM - 09:30 PM",
-      location: "Google Meet",
-      track: "Backend",
-      tagColor:
-        "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800",
-    },
-  ];
-
-  const displayName = user?.displayName || "Member";
-  const departmentName = user?.department?.name || "Software Engineering";
-  const userRoles = user?.roles || ["Member"];
 
   return (
     <AuthenticatedLayout
@@ -122,219 +99,238 @@ export function AuthenticatedHomeView({
       accessToken={accessToken}
       refreshToken={refreshToken}
     >
-      {/* Main Container Content */}
+      {/* Main Container */}
       <div className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
-        {/* Welcome Hero Banner with Liquid Glass */}
-        <Card
-          variant="liquid-glass"
-          className="border-brand-border/40 relative overflow-hidden p-6 sm:p-8"
-        >
-          <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-            <div className="max-w-2xl space-y-2">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="bg-brand-muted text-brand inline-flex items-center gap-1.5 rounded-full px-3 py-0.5 text-xs font-semibold">
-                  <Sparkles className="size-3.5" />
-                  {departmentName}
-                </span>
-                {userRoles.map((role) => (
-                  <span
-                    key={role}
-                    className="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-100 px-2.5 py-0.5 text-xs font-medium text-neutral-700 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
-                  >
-                    {role}
-                  </span>
-                ))}
-              </div>
-
-              <h1 className="text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl dark:text-white">
-                {t("dashboard.greeting")}, {displayName}!
-              </h1>
-              <p className="text-sm leading-relaxed text-neutral-600 dark:text-zinc-400">
-                {t("dashboard.subtitle")}
-              </p>
-            </div>
-
-            {/* Quick Action Button */}
-            <div className="flex shrink-0 items-center gap-3">
-              <Link href="/schedule">
-                <Button
-                  variant="brand"
-                  size="md"
-                  leftIcon={<PlusCircle className="size-4" />}
-                  className="font-semibold shadow-md"
-                >
-                  {t("dashboard.createSharing")}
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </Card>
-
-        {/* Search & Filter Bar */}
-        <div className="w-full">
-          <TextField
-            placeholder={t("dashboard.searchPlaceholder")}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            startIcon={<Search className="size-4" />}
-            clearable
-            onClear={() => setSearchQuery("")}
-            className="w-full shadow-2xs"
-          />
-        </div>
-
-        {/* Grid Layout: Active Roadmaps & Upcoming Sharing Sessions */}
+        {/* 2-Column Community Layout */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          {/* Left 2 Columns: Active Learning Roadmaps */}
-          <div className="space-y-5 lg:col-span-2">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <BookOpen className="text-brand size-5" />
-                <h2 className="text-lg font-bold tracking-tight text-neutral-900 dark:text-zinc-100">
-                  {t("dashboard.activeRoadmaps")}
-                </h2>
-              </div>
-              <Link
-                href="/roadmaps"
-                className="text-brand hover:text-brand-hover flex items-center gap-1 text-xs font-semibold hover:underline"
-              >
-                <span>{t("dashboard.viewAllRoadmaps")}</span>
-                <ChevronRight className="size-3.5" />
-              </Link>
-            </div>
+          {/* Main Column (2/3): Creator Box & Community Feed with Infinite Scroll */}
+          <div className="space-y-6 lg:col-span-2">
+            {/* 1. Quick Share Composer Box */}
+            <QuickShareComposer user={user} />
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {roadmaps.map((rm) => (
-                <Card
-                  key={rm.id}
-                  variant="default"
-                  className={`group relative overflow-hidden bg-linear-to-br p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-zinc-950/50 ${rm.color}`}
+            {/* 2. Infinite Feed Stream */}
+            <InfiniteFeedStream />
+          </div>
+
+          {/* Sidebar Column (1/3): Upcoming Sessions, Roadmaps, Quick Links */}
+          <div className="space-y-6">
+            {/* Upcoming Sharing Sessions Widget */}
+            <Card
+              variant="default"
+              className="rounded-2xl border border-neutral-200/80 bg-white p-5 shadow-2xs dark:border-zinc-800 dark:bg-zinc-900/90"
+            >
+              <div className="flex items-center justify-between border-b border-neutral-100 pb-3 dark:border-zinc-800">
+                <div className="flex items-center gap-2">
+                  <div className="bg-brand/10 text-brand flex size-7 items-center justify-center rounded-lg">
+                    <Calendar className="size-4" />
+                  </div>
+                  <h3 className="text-sm font-bold text-neutral-900 dark:text-white">
+                    {t("dashboard.upcomingSessions")}
+                  </h3>
+                </div>
+                <Link
+                  href="/schedule"
+                  className="text-brand flex items-center gap-1 text-xs font-semibold hover:underline"
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex size-10 items-center justify-center rounded-xl bg-white shadow-2xs dark:bg-zinc-800">
-                      {rm.icon}
-                    </div>
-                    <span className="rounded-full bg-white/80 px-2.5 py-0.5 text-[11px] font-semibold text-neutral-700 shadow-2xs dark:bg-zinc-800/80 dark:text-zinc-300">
-                      {rm.badge}
-                    </span>
-                  </div>
+                  <span>View all</span>
+                  <ChevronRight className="size-3" />
+                </Link>
+              </div>
 
-                  <div className="mt-4 space-y-1">
-                    <span className="text-[11px] font-medium tracking-tight text-neutral-500 dark:text-zinc-400">
-                      {rm.category}
-                    </span>
-                    <h3 className="group-hover:text-brand text-base font-bold tracking-tight text-neutral-900 transition-colors dark:text-zinc-100">
-                      {rm.title}
-                    </h3>
-                  </div>
+              <div className="mt-3 space-y-3">
+                {upcomingSchedules.length > 0 ? (
+                  upcomingSchedules.map((session) => {
+                    const realtime = getScheduleRealtimeState(
+                      session,
+                      now,
+                      locale
+                    );
 
-                  {/* Progress bar */}
-                  <div className="mt-4 space-y-1.5">
-                    <div className="flex items-center justify-between text-xs text-neutral-600 dark:text-zinc-400">
-                      <span>{t("dashboard.progress")}</span>
-                      <span className="text-brand font-semibold">
+                    let formattedDate = "";
+                    try {
+                      formattedDate = format(
+                        parseISO(session.startsAtUtc),
+                        "EEE, dd/MM • HH:mm",
+                        { locale: locale === "vi" ? vi : enUS }
+                      );
+                    } catch {
+                      formattedDate = session.startsAtUtc;
+                    }
+
+                    return (
+                      <Link
+                        key={session.id}
+                        href="/schedule"
+                        className={`group block rounded-xl border p-3 transition-all ${
+                          realtime.isLive
+                            ? "border-rose-400/80 bg-rose-50/20 ring-1 ring-rose-500/20 dark:border-rose-800 dark:bg-rose-950/20"
+                            : "hover:border-brand/40 hover:bg-brand-muted/10 border-neutral-100 dark:border-zinc-800/80"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="flex items-center gap-1.5">
+                            <DeliveryModeBadge mode={session.deliveryMode} />
+                            {realtime.isLive ? (
+                              <span className="inline-flex animate-pulse items-center gap-1 rounded-full border border-rose-200 bg-rose-50 px-2 py-0.5 text-[10px] font-bold text-rose-600 dark:border-rose-900/60 dark:bg-rose-950/40 dark:text-rose-300">
+                                <span className="size-1.5 animate-ping rounded-full bg-rose-500" />
+                                LIVE
+                              </span>
+                            ) : (
+                              realtime.relativeTimeText && (
+                                <span className="rounded-md border border-blue-200/60 bg-blue-50/60 px-1.5 py-0.5 text-[10px] font-semibold text-blue-700 dark:border-blue-900/60 dark:bg-blue-950/40 dark:text-blue-300">
+                                  {realtime.relativeTimeText}
+                                </span>
+                              )
+                            )}
+                          </div>
+                          <span className="text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
+                            {session.sharingType}
+                          </span>
+                        </div>
+
+                        <h4 className="group-hover:text-brand mt-1.5 line-clamp-1 text-xs font-bold text-neutral-900 transition-colors dark:text-zinc-100">
+                          {session.title}
+                        </h4>
+
+                        <div className="mt-2 flex items-center justify-between text-[11px] text-neutral-500 dark:text-zinc-400">
+                          <span className="flex items-center gap-1">
+                            <Clock className="size-3 text-neutral-400" />
+                            {formattedDate}
+                          </span>
+                          {session.location ? (
+                            <span className="flex max-w-30 items-center gap-1 truncate">
+                              <MapPin className="size-3 shrink-0 text-neutral-400" />
+                              <span className="truncate">
+                                {session.location}
+                              </span>
+                            </span>
+                          ) : session.meetingUrl ? (
+                            <span className="flex items-center gap-1 text-sky-600 dark:text-sky-400">
+                              <Video className="size-3" />
+                              Online
+                            </span>
+                          ) : null}
+                        </div>
+                      </Link>
+                    );
+                  })
+                ) : (
+                  <div className="py-4 text-center">
+                    <p className="text-xs text-neutral-500 dark:text-zinc-400">
+                      {t("sharing.emptySchedules")}
+                    </p>
+                    <Link href="/schedule">
+                      <Button
+                        variant="brand"
+                        size="sm"
+                        className="mt-2 text-xs font-semibold shadow-xs"
+                      >
+                        {t("sharing.createSchedule")}
+                      </Button>
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </Card>
+
+            {/* Active Roadmaps Quick Progress Widget */}
+            <Card
+              variant="default"
+              className="rounded-2xl border border-neutral-200/80 bg-white p-5 shadow-2xs dark:border-zinc-800 dark:bg-zinc-900/90"
+            >
+              <div className="flex items-center justify-between border-b border-neutral-100 pb-3 dark:border-zinc-800">
+                <div className="flex items-center gap-2">
+                  <div className="flex size-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 dark:bg-emerald-950/50 dark:text-emerald-400">
+                    <BookOpen className="size-4" />
+                  </div>
+                  <h3 className="text-sm font-bold text-neutral-900 dark:text-white">
+                    {t("dashboard.activeRoadmaps")}
+                  </h3>
+                </div>
+                <Link
+                  href="/roadmaps"
+                  className="text-brand flex items-center gap-1 text-xs font-semibold hover:underline"
+                >
+                  <span>View all</span>
+                  <ChevronRight className="size-3" />
+                </Link>
+              </div>
+
+              <div className="mt-3 space-y-2.5">
+                {roadmaps.map((rm) => (
+                  <Link
+                    key={rm.id}
+                    href={`/roadmaps/${rm.id}`}
+                    className="group hover:border-brand/40 dark:hover:border-brand/40 block rounded-xl border border-neutral-100 p-3 transition-all hover:bg-neutral-50/60 dark:border-zinc-800/80 dark:hover:bg-zinc-800/40"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        {rm.icon}
+                        <span className="group-hover:text-brand line-clamp-1 text-xs font-bold text-neutral-900 transition-colors dark:text-zinc-100">
+                          {rm.title}
+                        </span>
+                      </div>
+                      <span className="text-brand text-xs font-bold">
                         {rm.progress}%
                       </span>
                     </div>
-                    <div className="h-2 w-full overflow-hidden rounded-full bg-neutral-200/80 dark:bg-zinc-800">
+
+                    <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-neutral-100 dark:bg-zinc-800">
                       <div
                         className="bg-brand h-full rounded-full transition-all duration-500"
                         style={{ width: `${rm.progress}%` }}
                       />
                     </div>
-                    <div className="flex items-center justify-between pt-1 text-[11px] text-neutral-500 dark:text-zinc-500">
-                      <span>
-                        {rm.completedTopics}/{rm.totalTopics} topics completed
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 flex justify-end border-t border-neutral-200/50 pt-3 dark:border-zinc-800/50">
-                    <Link
-                      href={`/roadmaps/${rm.id}`}
-                      className="text-brand inline-flex items-center gap-1 text-xs font-semibold hover:underline"
-                    >
-                      <span>Continue</span>
-                      <ArrowRight className="size-3" />
-                    </Link>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          {/* Right 1 Column: Upcoming Sharing Sessions */}
-          <div className="space-y-5">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Calendar className="size-5 text-[#34A853]" />
-                <h2 className="text-lg font-bold tracking-tight text-neutral-900 dark:text-zinc-100">
-                  {t("dashboard.upcomingSessions")}
-                </h2>
+                  </Link>
+                ))}
               </div>
-              <Link
-                href="/schedule"
-                className="text-brand text-xs font-semibold hover:underline"
-              >
-                View all
-              </Link>
-            </div>
+            </Card>
 
-            <div className="space-y-4">
-              {upcomingSessions.map((session) => (
-                <Card
-                  key={session.id}
-                  variant="default"
-                  className="hover:border-brand/60 dark:hover:border-brand/40 p-4 transition-all hover:shadow-md"
+            {/* Quick Shortcuts & Management Card */}
+            <Card
+              variant="default"
+              className="from-brand-muted/30 dark:from-brand-muted/10 rounded-2xl border border-neutral-200/80 bg-linear-to-br to-sky-50/20 p-5 shadow-2xs dark:border-zinc-800 dark:to-zinc-900"
+            >
+              <h3 className="text-brand text-xs font-bold tracking-wider uppercase">
+                Quick Shortcuts
+              </h3>
+              <div className="mt-3 space-y-2 text-xs">
+                <Link
+                  href="/sharing/mine"
+                  className="hover:border-brand/40 hover:text-brand flex items-center justify-between rounded-xl border border-neutral-200/60 bg-white/80 p-2.5 font-semibold text-neutral-800 transition-all hover:shadow-2xs dark:border-zinc-700/60 dark:bg-zinc-800/80 dark:text-zinc-200"
                 >
-                  <div className="flex items-start justify-between gap-2">
-                    <span
-                      className={`inline-block rounded-md border px-2 py-0.5 text-[10px] font-semibold ${session.tagColor}`}
-                    >
-                      {session.track}
+                  <span className="flex items-center gap-2">
+                    <FileText className="text-brand size-4" />
+                    <span>{t("sharing.myContents")}</span>
+                  </span>
+                  <ArrowRight className="size-3.5 text-neutral-400" />
+                </Link>
+
+                <Link
+                  href="/schedule"
+                  className="hover:border-brand/40 hover:text-brand flex items-center justify-between rounded-xl border border-neutral-200/60 bg-white/80 p-2.5 font-semibold text-neutral-800 transition-all hover:shadow-2xs dark:border-zinc-700/60 dark:bg-zinc-800/80 dark:text-zinc-200"
+                >
+                  <span className="flex items-center gap-2">
+                    <Calendar className="size-4 text-emerald-600" />
+                    <span>{t("sharing.scheduleTitle")}</span>
+                  </span>
+                  <ArrowRight className="size-3.5 text-neutral-400" />
+                </Link>
+
+                {isAdminOrLead && (
+                  <Link
+                    href="/admin/sharing/review"
+                    className="flex items-center justify-between rounded-xl border border-amber-200/60 bg-amber-50/50 p-2.5 font-semibold text-amber-900 transition-all hover:border-amber-400 hover:shadow-2xs dark:border-amber-900/60 dark:bg-amber-950/30 dark:text-amber-200"
+                  >
+                    <span className="flex items-center gap-2">
+                      <ShieldCheck className="size-4 text-amber-600" />
+                      <span>{t("sharing.reviewQueue")}</span>
                     </span>
-                  </div>
-
-                  <h3 className="mt-2 text-sm leading-snug font-bold tracking-tight text-neutral-900 dark:text-zinc-100">
-                    {session.title}
-                  </h3>
-
-                  <div className="mt-3 space-y-1.5 text-xs text-neutral-600 dark:text-zinc-400">
-                    <div className="flex items-center gap-2">
-                      <Clock className="size-3.5 shrink-0 text-neutral-400" />
-                      <span>
-                        {session.date} • {session.time}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="size-3.5 shrink-0 text-neutral-400" />
-                      <span className="truncate">{session.location}</span>
-                    </div>
-                    <div className="flex items-center gap-2 pt-1">
-                      <div className="bg-brand/10 text-brand flex size-5 items-center justify-center rounded-full text-[10px] font-bold">
-                        {session.speaker.charAt(0)}
-                      </div>
-                      <span className="font-medium text-neutral-800 dark:text-zinc-200">
-                        {session.speaker}
-                      </span>
-                      <span className="text-[11px] text-neutral-400">
-                        ({session.speakerRole})
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 flex justify-end border-t border-neutral-100 pt-3 dark:border-zinc-800">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="text-brand hover:bg-brand w-full text-xs font-semibold hover:text-white"
-                    >
-                      {t("dashboard.joinSession")}
-                    </Button>
-                  </div>
-                </Card>
-              ))}
-            </div>
+                    <ArrowRight className="size-3.5 text-amber-500" />
+                  </Link>
+                )}
+              </div>
+            </Card>
           </div>
         </div>
       </div>

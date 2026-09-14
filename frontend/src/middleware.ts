@@ -25,9 +25,7 @@ const AUTH_ROUTES = ["/login", "/register"];
 
 export async function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
-  let accessToken = request.cookies.get(
-    AUTH_COOKIE_NAMES.ACCESS_TOKEN
-  )?.value;
+  let accessToken = request.cookies.get(AUTH_COOKIE_NAMES.ACCESS_TOKEN)?.value;
   const refreshToken = request.cookies.get(
     AUTH_COOKIE_NAMES.REFRESH_TOKEN
   )?.value;
@@ -78,7 +76,10 @@ export async function middleware(request: NextRequest) {
         );
 
         if (data.refreshToken) {
-          request.cookies.set(AUTH_COOKIE_NAMES.REFRESH_TOKEN, data.refreshToken);
+          request.cookies.set(
+            AUTH_COOKIE_NAMES.REFRESH_TOKEN,
+            data.refreshToken
+          );
           refreshedResponse.cookies.set(
             AUTH_COOKIE_NAMES.REFRESH_TOKEN,
             data.refreshToken,

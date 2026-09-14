@@ -56,7 +56,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       aria-label="Toggle theme"
-      className="relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-neutral-200/80 bg-neutral-100 text-neutral-700 shadow-xs transition-all hover:scale-105 hover:text-neutral-900 active:scale-95 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:text-white"
+      className="relative flex cursor-pointer items-center justify-center rounded-full border border-neutral-200/80 bg-neutral-100 p-2 text-neutral-700 shadow-xs transition-all hover:scale-105 hover:text-neutral-900 active:scale-95 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:text-white"
     >
       {theme === "light" ? (
         /* Sun Icon */

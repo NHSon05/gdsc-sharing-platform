@@ -1,183 +1,228 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import {
-  EventCalendar,
-  type CalendarEvent,
-} from "@/components/ui/event-calendar";
-import { useTranslation } from "@/core/i18n/i18n.context";
+  ScheduleListView,
+  ScheduleCalendarView,
+  ScheduleFilterSidebar,
+  ScheduleDetailDialog,
+  ScheduleFormDialog,
+  useSchedulesQuery,
+  useScheduleDetailQuery,
+} from "@/features/sharing";
+import type {
+  ScheduleResponse,
+  DeliveryMode,
+  SharingType,
+} from "@/features/sharing";
+import { Calendar as CalendarIcon, List as ListIcon } from "lucide-react";
+
+const ALL_DELIVERY_MODES: DeliveryMode[] = ["Offline", "Online", "Hybrid"];
+const ALL_SHARING_TYPES: SharingType[] = [
+  "TechTalk",
+  "Workshop",
+  "PanelDiscussion",
+  "InternalSharing",
+];
 
 export default function SchedulePage() {
-  const { t } = useTranslation();
-  const baseDate = new Date(2025, 11, 9); // Dec 09, 2025
+  const searchParams = useSearchParams();
+  const initialId = searchParams.get("id");
 
-  const sampleEvents: CalendarEvent[] = [
-    {
-      id: "1",
-      title: "Council Chamber",
-      startDate: new Date(2025, 11, 7, 1, 0), // Tue 01:00
-      endDate: new Date(2025, 11, 7, 1, 45),
-      location: "Location",
-      color: "blue",
-    },
-    {
-      id: "2",
-      title: "Event Name",
-      startDate: new Date(2025, 11, 7, 1, 50), // Tue 01:50
-      endDate: new Date(2025, 11, 7, 2, 45),
-      location: "Conference Cosmos",
-      color: "cyan",
-    },
-    {
-      id: "3",
-      title: "Daily Standup",
-      startDate: new Date(2025, 11, 11, 1, 0), // Sat 01:00
-      endDate: new Date(2025, 11, 11, 1, 45),
-      location: "Executive Exchange",
-      color: "blue",
-    },
-    {
-      id: "4",
-      title: "1-on-1: Daphna <> Richard",
-      startDate: new Date(2025, 11, 12, 1, 20), // Sun 01:20
-      endDate: new Date(2025, 11, 12, 2, 15),
-      location: "Idea Factory",
-      color: "rose",
-    },
-    {
-      id: "5",
-      title: "Leadership Sync",
-      startDate: new Date(2025, 11, 9, 2, 0), // Thu 02:00
-      endDate: new Date(2025, 11, 9, 2, 50),
-      location: "Meeting Mirage",
-      color: "rose",
-    },
-    {
-      id: "6",
-      title: "Council Chamber",
-      startDate: new Date(2025, 11, 6, 3, 0), // Mon 03:00
-      endDate: new Date(2025, 11, 6, 3, 40),
-      location: "Location",
-      color: "blue",
-    },
-    {
-      id: "7",
-      title: "Product Demo",
-      startDate: new Date(2025, 11, 6, 3, 45), // Mon 03:45
-      endDate: new Date(2025, 11, 6, 4, 45),
-      location: "Brainstorm Boulevard",
-      color: "rose",
-    },
-    {
-      id: "8",
-      title: "1-on-1: Daphna <> Richard",
-      startDate: new Date(2025, 11, 8, 3, 0), // Wed 03:00
-      endDate: new Date(2025, 11, 8, 6, 30),
-      location: "Power Playground",
-      color: "amber",
-    },
-    {
-      id: "9",
-      title: "Usability Test: John S. from Mavenlink",
-      startDate: new Date(2025, 11, 10, 4, 0), // Fri 04:00
-      endDate: new Date(2025, 11, 10, 5, 30),
-      location: "Discussion Den",
-      color: "white",
-    },
-    {
-      id: "10",
-      title: "1-on-1: Daphna <> Richard",
-      startDate: new Date(2025, 11, 10, 5, 45), // Fri 05:45
-      endDate: new Date(2025, 11, 10, 6, 45),
-      location: "Discussion Den",
-      color: "white",
-    },
-    {
-      id: "11",
-      title: "Leadership Sync",
-      startDate: new Date(2025, 11, 7, 6, 0), // Tue 06:00
-      endDate: new Date(2025, 11, 7, 6, 20),
-      location: "Brainstorm Bay",
-      color: "white",
-    },
-    {
-      id: "12",
-      title: "Leadership Sync",
-      startDate: new Date(2025, 11, 7, 6, 25), // Tue 06:25
-      endDate: new Date(2025, 11, 7, 7, 15),
-      location: "Brainstorm Bay",
-      color: "cyan",
-    },
-    {
-      id: "13",
-      title: "Daily Standup",
-      startDate: new Date(2025, 11, 9, 7, 0), // Thu 07:00
-      endDate: new Date(2025, 11, 9, 7, 45),
-      location: "Location",
-      color: "white",
-    },
-    {
-      id: "14",
-      title: "1-on-1: Daphna <> Richard",
-      startDate: new Date(2025, 11, 9, 7, 20), // Thu 07:20
-      endDate: new Date(2025, 11, 9, 8, 10),
-      location: "Conference Cosmos",
-      color: "rose",
-    },
-    {
-      id: "15",
-      title: "Product Demo",
-      startDate: new Date(2025, 11, 11, 8, 0), // Sat 08:00
-      endDate: new Date(2025, 11, 11, 8, 45),
-      location: "Room 102",
-      color: "white",
-    },
-  ];
+  const [viewMode, setViewMode] = useState<"calendar" | "list">("calendar");
+  const [selectedDeliveryModes, setSelectedDeliveryModes] =
+    useState<DeliveryMode[]>(ALL_DELIVERY_MODES);
+  const [selectedSharingTypes, setSelectedSharingTypes] =
+    useState<SharingType[]>(ALL_SHARING_TYPES);
 
-  const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(
-    null
+  // Fetch real schedules from API
+  const {
+    data: schedulePage,
+    isLoading,
+    refetch,
+  } = useSchedulesQuery({
+    pageSize: 100,
+  });
+
+  const allSchedules = useMemo(
+    () => schedulePage?.items ?? [],
+    [schedulePage?.items]
+  );
+
+  // Filter schedules based on checkbox selections
+  const filteredSchedules = useMemo(() => {
+    return allSchedules.filter((item) => {
+      const matchesDelivery =
+        selectedDeliveryModes.length === 0 ||
+        selectedDeliveryModes.includes(item.deliveryMode);
+
+      const matchesType =
+        selectedSharingTypes.length === 0 ||
+        selectedSharingTypes.includes(item.sharingType);
+
+      return matchesDelivery && matchesType;
+    });
+  }, [allSchedules, selectedDeliveryModes, selectedSharingTypes]);
+
+  // Counts for each mode and type
+  const filterCounts = useMemo(() => {
+    const deliveryCounts: Record<DeliveryMode, number> = {
+      Offline: 0,
+      Online: 0,
+      Hybrid: 0,
+    };
+    const typeCounts: Record<SharingType, number> = {
+      TechTalk: 0,
+      Workshop: 0,
+      PanelDiscussion: 0,
+      InternalSharing: 0,
+    };
+
+    allSchedules.forEach((s) => {
+      if (deliveryCounts[s.deliveryMode] !== undefined) {
+        deliveryCounts[s.deliveryMode]++;
+      }
+      if (typeCounts[s.sharingType] !== undefined) {
+        typeCounts[s.sharingType]++;
+      }
+    });
+
+    return { deliveryModes: deliveryCounts, sharingTypes: typeCounts };
+  }, [allSchedules]);
+
+  const handleToggleDeliveryMode = (mode: DeliveryMode) => {
+    setSelectedDeliveryModes((prev) =>
+      prev.includes(mode) ? prev.filter((m) => m !== mode) : [...prev, mode]
+    );
+  };
+
+  const handleToggleSharingType = (type: SharingType) => {
+    setSelectedSharingTypes((prev) =>
+      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+    );
+  };
+
+  const handleResetFilters = () => {
+    setSelectedDeliveryModes(ALL_DELIVERY_MODES);
+    setSelectedSharingTypes(ALL_SHARING_TYPES);
+  };
+
+  // Dialog states
+  const [selectedSchedule, setSelectedSchedule] =
+    useState<ScheduleResponse | null>(null);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [editingSchedule, setEditingSchedule] =
+    useState<ScheduleResponse | null>(null);
+
+  // Auto-open schedule if ?id=xyz in searchParams
+  const { data: linkedSchedule } = useScheduleDetailQuery(
+    initialId || "",
+    Boolean(initialId)
+  );
+
+  const activeSchedule =
+    selectedSchedule || (initialId ? linkedSchedule || null : null);
+
+  const handleCreateNew = () => {
+    setEditingSchedule(null);
+    setIsFormOpen(true);
+  };
+
+  const handleEdit = (schedule: ScheduleResponse) => {
+    setEditingSchedule(schedule);
+    setIsFormOpen(true);
+  };
+
+  const viewModeToggle = (
+    <div className="flex items-center gap-1 rounded-full border border-neutral-200 bg-white shadow-2xs dark:border-zinc-800 dark:bg-zinc-900">
+      <button
+        type="button"
+        onClick={() => setViewMode("calendar")}
+        className={`flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold transition-all ${
+          viewMode === "calendar"
+            ? "bg-brand text-white shadow-xs"
+            : "text-neutral-600 hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+        }`}
+      >
+        <CalendarIcon className="size-4" />
+      </button>
+      <button
+        type="button"
+        onClick={() => setViewMode("list")}
+        className={`flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold transition-all ${
+          viewMode === "list"
+            ? "bg-brand text-white shadow-xs"
+            : "text-neutral-600 hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+        }`}
+      >
+        <ListIcon className="size-4" />
+      </button>
+    </div>
   );
 
   return (
-    <div className="mx-auto space-y-6">
-      {/* Main Event Calendar UI Component */}
-      <EventCalendar
-        date={baseDate}
-        events={sampleEvents}
-        onEventClick={(ev) => setSelectedEvent(ev)}
-        onAddEvent={() => alert("Open Add Event Modal")}
-        onSlotClick={(day, hour) =>
-          alert(`Selected slot: ${day.toDateString()} at ${hour}:00`)
-        }
+    <div className="mx-auto">
+      {/* Main View Area */}
+      {viewMode === "calendar" ? (
+        <ScheduleCalendarView
+          schedules={filteredSchedules}
+          onSelectSchedule={setSelectedSchedule}
+          onAddSchedule={handleCreateNew}
+          headerActions={viewModeToggle}
+          sidebarFilters={
+            <ScheduleFilterSidebar
+              selectedDeliveryModes={selectedDeliveryModes}
+              onToggleDeliveryMode={handleToggleDeliveryMode}
+              selectedSharingTypes={selectedSharingTypes}
+              onToggleSharingType={handleToggleSharingType}
+              onResetFilters={handleResetFilters}
+              counts={filterCounts}
+            />
+          }
+        />
+      ) : (
+        <ScheduleListView
+          schedules={filteredSchedules}
+          isLoading={isLoading}
+          onSelectSchedule={setSelectedSchedule}
+          onAddSchedule={handleCreateNew}
+          headerActions={viewModeToggle}
+          sidebarFilters={
+            <ScheduleFilterSidebar
+              selectedDeliveryModes={selectedDeliveryModes}
+              onToggleDeliveryMode={handleToggleDeliveryMode}
+              selectedSharingTypes={selectedSharingTypes}
+              onToggleSharingType={handleToggleSharingType}
+              onResetFilters={handleResetFilters}
+              counts={filterCounts}
+            />
+          }
+        />
+      )}
+
+      {/* Event Detail Dialog */}
+      <ScheduleDetailDialog
+        schedule={activeSchedule}
+        isOpen={Boolean(activeSchedule)}
+        onClose={() => setSelectedSchedule(null)}
+        onEdit={handleEdit}
+        canManage={true}
       />
 
-      {/* Event Details Toast / Notification */}
-      {selectedEvent && (
-        <div className="animate-in fade-in slide-in-from-bottom-3 fixed right-6 bottom-6 z-50 rounded-2xl border border-neutral-200 bg-white p-4 shadow-xl dark:border-zinc-800 dark:bg-zinc-900">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <span className="text-brand text-[11px] font-bold tracking-wider uppercase">
-                {t("schedule.eventSelected")}
-              </span>
-              <h3 className="text-sm font-bold text-neutral-900 dark:text-white">
-                {selectedEvent.title}
-              </h3>
-              <p className="mt-1 text-xs text-neutral-500 dark:text-zinc-400">
-                {selectedEvent.startDate.toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}{" "}
-                - {selectedEvent.location}
-              </p>
-            </div>
-            <button
-              onClick={() => setSelectedEvent(null)}
-              className="cursor-pointer text-xs font-semibold text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
+      {/* Form Dialog for Create / Edit */}
+      {isFormOpen && (
+        <ScheduleFormDialog
+          isOpen={isFormOpen}
+          onClose={() => {
+            setIsFormOpen(false);
+            setEditingSchedule(null);
+          }}
+          initialData={editingSchedule}
+          onSuccess={() => {
+            refetch();
+          }}
+        />
       )}
     </div>
   );
