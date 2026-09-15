@@ -145,7 +145,7 @@ public sealed class SharingOperations(ApplicationDbContext db, ICurrentUserServi
         {
             Authors = x.Authors.OrderBy(a => a.SortOrder).ThenBy(a => a.Id)
                 .Select(a => new AuthorResponse(a.UserId, db.Users.Where(u => u.Id == a.UserId)
-                    .Select(u => u.FullName).First(), a.AuthorRole, a.SortOrder)).ToList(),
+                    .Select(u => !string.IsNullOrEmpty(u.DisplayName) ? u.DisplayName : u.FullName).First(), a.AuthorRole, a.SortOrder)).ToList(),
             Tags = x.Tags.OrderBy(t => t.Tag.Name).ThenBy(t => t.SharingTagId)
                 .Select(t => new TagResponse(t.Tag.Id, t.Tag.Name, t.Tag.Slug, t.Tag.Color, t.Tag.IsActive)).ToList()
         };

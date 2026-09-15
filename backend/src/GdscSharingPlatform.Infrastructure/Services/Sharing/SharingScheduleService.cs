@@ -47,7 +47,7 @@ public sealed class SharingScheduleService(SharingOperations op) : ISharingSched
                 ? x.MeetingUrl : null,
             x.Status, x.AudienceScope, x.CancellationReason, x.CreatedByUserId, x.Version,
             x.Presenters.OrderBy(p => p.SortOrder).ThenBy(p => p.Id).Select(p => new PresenterResponse(p.UserId,
-                op.Db.Users.Where(u => u.Id == p.UserId).Select(u => u.FullName).First(), p.PresenterRole, p.SortOrder)).ToList(),
+                op.Db.Users.Where(u => u.Id == p.UserId).Select(u => !string.IsNullOrEmpty(u.DisplayName) ? u.DisplayName : u.FullName).First(), p.PresenterRole, p.SortOrder)).ToList(),
             x.Contents.Where(c => admin || c.Content.Status == SharingContentStatus.Published
                 || c.Content.Authors.Any(a => a.UserId == uid && (a.AuthorRole == SharingAuthorRole.Owner || c.Content.Status != SharingContentStatus.Draft)))
                 .OrderBy(c => c.SortOrder).Select(c => new ContentReference(c.SharingContentId, c.Content.Title, c.Content.Slug, c.SortOrder)).ToList(),

@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "../common/StatusBadge";
 import { useTranslation } from "@/core/i18n/i18n.context";
+import { UserAvatar } from "@/components/ui/user-avatar";
 import type { ContentSummary } from "../../types/sharing.types";
 import {
   Clock,
@@ -31,14 +32,13 @@ export function FeedPostCard({ content, className }: FeedPostCardProps) {
   const primaryAuthor =
     content.authors.find((a) => a.role === "Owner") ?? content.authors[0];
 
-  const authorInitials = primaryAuthor?.fullName
-    ? primaryAuthor.fullName
-        .split(" ")
-        .map((n) => n[0])
-        .join("")
-        .slice(0, 2)
-        .toUpperCase()
-    : "GD";
+  const isAuthorAdmin =
+    primaryAuthor?.fullName === "System Administrator" ||
+    primaryAuthor?.fullName?.toLowerCase().includes("admin");
+
+  const authorRoleBadge = isAuthorAdmin
+    ? "Admin"
+    : (primaryAuthor?.role || "Member");
 
   let timeAgo = "";
   if (content.publishedAtUtc) {
@@ -77,9 +77,12 @@ export function FeedPostCard({ content, className }: FeedPostCardProps) {
       {/* Top Author & Meta Row */}
       <div className="flex items-center justify-between gap-4 pb-4">
         <div className="flex items-center gap-3">
-          <div className="bg-brand/10 text-brand ring-brand/20 flex size-11 items-center justify-center rounded-full text-sm font-bold ring-2">
-            {authorInitials}
-          </div>
+          <UserAvatar
+            name={primaryAuthor?.fullName}
+            size="md"
+            isAdmin={isAuthorAdmin}
+            showAdminBadge={isAuthorAdmin}
+          />
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
@@ -88,7 +91,7 @@ export function FeedPostCard({ content, className }: FeedPostCardProps) {
               </span>
               <span className="border-brand-border/40 bg-brand-muted text-brand inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-[10px] font-semibold">
                 <Sparkles className="size-2.5" />
-                {primaryAuthor?.role || "Member"}
+                {authorRoleBadge}
               </span>
             </div>
             <div className="flex items-center gap-2 text-xs text-neutral-500 dark:text-zinc-400">

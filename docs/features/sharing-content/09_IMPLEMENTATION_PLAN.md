@@ -64,6 +64,8 @@ Phase 3–5 đã triển khai backend. Hành vi API và phạm vi kiểm thử �
 
 ## Phase 7 — Testing
 
+Đã bổ sung và chạy backend test ngày 2026-09-15: **367 unit + 77 integration passed, 0 skipped**. Xem [11_PHASE_7_TESTING.md](./11_PHASE_7_TESTING.md) để biết phạm vi, lệnh chạy lại và các finding review vẫn còn mở. Kết quả này không thay thế frontend/E2E testing.
+
 - Unit Test domain và validator.
 - Integration Test quyền và workflow.
 - Test file storage rollback.

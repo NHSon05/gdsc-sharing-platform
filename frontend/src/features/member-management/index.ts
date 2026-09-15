@@ -11,3 +11,4 @@ export * from "./components/role-multi-selector";
 export * from "./components/membership-editor-dialog";
 export * from "./components/department-crud-dialog";
 export * from "./components/generation-crud-dialog";
+export * from "./components/admin-users-view";

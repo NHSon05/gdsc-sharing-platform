@@ -41,6 +41,7 @@ export * from "./components/schedule/ScheduleCalendarView";
 export * from "./components/schedule/ScheduleDetailDialog";
 export * from "./components/schedule/ScheduleFormDialog";
 export * from "./components/schedule/ScheduleFilterSidebar";
+export * from "./components/schedule/AdminSchedulesView";
 
 // Feed components
 export * from "./components/feed/FeedPostCard";

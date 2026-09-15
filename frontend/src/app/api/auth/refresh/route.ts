@@ -78,6 +78,37 @@ export async function POST(request: Request) {
       });
     }
 
+    try {
+      const parts = data.accessToken.split(".");
+      if (parts.length >= 2) {
+        const payload = JSON.parse(
+          Buffer.from(parts[1], "base64").toString("utf-8")
+        );
+        const roleClaim =
+          payload["role"] ||
+          payload["roles"] ||
+          payload[
+            "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+          ];
+        const roles = Array.isArray(roleClaim)
+          ? roleClaim
+          : roleClaim
+            ? [roleClaim]
+            : [];
+        const primaryRole = roles.includes("Admin")
+          ? "Admin"
+          : roles[0] || "Member";
+        cookieStore.set("userRole", primaryRole, {
+          secure: isProd,
+          sameSite: "lax",
+          path: "/",
+          maxAge: 7 * 24 * 60 * 60,
+        });
+      }
+    } catch {
+      // ignore
+    }
+
     return NextResponse.json(data);
   } catch (error) {
     console.error("[Route /api/auth/refresh] Error:", error);

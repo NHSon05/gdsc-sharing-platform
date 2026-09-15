@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { UserAvatar } from "@/components/ui/user-avatar";
 import { ContentFormDialog } from "../content/ContentFormDialog";
 import { useTranslation } from "@/core/i18n/i18n.context";
 import { useSessionStore } from "@/core/session/session.store";
@@ -36,12 +36,6 @@ export function QuickShareComposer({
   const [showSuccessToast, setShowSuccessToast] = useState(false);
 
   const displayName = user?.displayName || "Member";
-  const userInitials = displayName
-    .split(" ")
-    .map((n) => n[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
 
   const handleSuccess = () => {
     setShowSuccessToast(true);
@@ -60,14 +54,13 @@ export function QuickShareComposer({
         {/* Top Header Row */}
         <div className="flex items-center gap-3">
           {/* User Avatar with graceful fallback */}
-          <Avatar className="ring-brand/30 size-11 shrink-0 ring-2">
-            {user?.avatarUrl && (
-              <AvatarImage src={user.avatarUrl} alt={displayName} />
-            )}
-            <AvatarFallback className="bg-brand/10 text-brand text-sm font-bold">
-              {userInitials}
-            </AvatarFallback>
-          </Avatar>
+          <UserAvatar
+            name={displayName}
+            avatarUrl={user?.avatarUrl}
+            size="md"
+            isAdmin={user?.roles?.includes("Admin")}
+            showAdminBadge={user?.roles?.includes("Admin")}
+          />
 
           {/* Quick Input Trigger with min-w-0 so text truncates cleanly */}
           <button

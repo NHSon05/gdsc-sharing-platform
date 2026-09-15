@@ -2,12 +2,12 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { format } from "date-fns";
 import type { ContentSummary } from "../../types/sharing.types";
 import { StatusBadge } from "../common/StatusBadge";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Calendar, User } from "lucide-react";
+import { UserAvatar } from "@/components/ui/user-avatar";
+import { BookOpen, Calendar } from "lucide-react";
 
 interface ContentCardProps {
   content: ContentSummary;
@@ -37,12 +37,12 @@ export function ContentCard({
         className="relative aspect-16/9 w-full overflow-hidden bg-neutral-100 dark:bg-zinc-800"
       >
         {content.coverImageUrl ? (
-          <Image
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
             src={content.coverImageUrl}
             alt={content.title}
-            fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
           />
         ) : (
           <div className="from-brand/10 dark:from-brand/20 flex size-full items-center justify-center bg-linear-to-br via-sky-500/10 to-indigo-500/10 dark:via-sky-950/40 dark:to-indigo-950/40">
@@ -101,9 +101,15 @@ export function ContentCard({
           <div className="flex items-center justify-between border-t border-neutral-100 pt-3 text-xs text-neutral-500 dark:border-zinc-800/80 dark:text-zinc-400">
             {/* Author */}
             <div className="flex min-w-0 items-center gap-1.5">
-              <div className="flex size-5 shrink-0 items-center justify-center rounded-full bg-neutral-200 text-neutral-700 dark:bg-zinc-700 dark:text-zinc-200">
-                <User className="size-3" />
-              </div>
+              <UserAvatar
+                name={primaryAuthor?.fullName}
+                size="xs"
+                isAdmin={
+                  primaryAuthor?.fullName === "System Administrator" ||
+                  primaryAuthor?.fullName?.toLowerCase().includes("admin")
+                }
+                showAdminBadge={false}
+              />
               <span className="truncate font-medium text-neutral-700 dark:text-zinc-300">
                 {primaryAuthor ? primaryAuthor.fullName : "Unknown"}
               </span>

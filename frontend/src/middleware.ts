@@ -23,6 +23,32 @@ const PROTECTED_ROUTES = [
 // Define auth routes (where logged-in users shouldn't re-enter)
 const AUTH_ROUTES = ["/login", "/register"];
 
+function parseRolesFromJwt(token?: string): string[] {
+  if (!token) return [];
+  try {
+    const parts = token.split(".");
+    if (parts.length < 2) return [];
+    const base64Url = parts[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join("")
+    );
+    const payload = JSON.parse(jsonPayload);
+    const roleClaim =
+      payload["role"] ||
+      payload["roles"] ||
+      payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+    if (Array.isArray(roleClaim)) return roleClaim;
+    if (typeof roleClaim === "string") return [roleClaim];
+    return [];
+  } catch {
+    return [];
+  }
+}
+
 export async function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   let accessToken = request.cookies.get(AUTH_COOKIE_NAMES.ACCESS_TOKEN)?.value;
@@ -124,8 +150,12 @@ export async function middleware(request: NextRequest) {
       );
     }
 
-    const userRole = request.cookies.get("userRole")?.value;
-    if (userRole !== "Admin") {
+    const cookieRole = request.cookies.get("userRole")?.value;
+    const tokenRoles = parseRolesFromJwt(accessToken);
+    const hasAdminRole = cookieRole === "Admin" || tokenRoles.includes("Admin");
+
+    // If we have token/cookie info and user is NOT Admin -> 403
+    if ((cookieRole || tokenRoles.length > 0) && !hasAdminRole) {
       return NextResponse.redirect(new URL("/403", request.url));
     }
   }

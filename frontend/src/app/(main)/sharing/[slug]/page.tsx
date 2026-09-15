@@ -2,7 +2,6 @@
 
 import React from "react";
 import { useParams, useRouter } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
 import {
@@ -14,6 +13,7 @@ import {
 import { useTranslation } from "@/core/i18n/i18n.context";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { UserAvatar } from "@/components/ui/user-avatar";
 import {
   ArrowLeft,
   Calendar,
@@ -118,16 +118,28 @@ export default function ContentDetailPage() {
           <div className="flex flex-wrap items-center gap-4">
             {/* Primary Author */}
             {primaryAuthor && (
-              <div className="flex items-center gap-2">
-                <div className="flex size-9 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-700 dark:bg-blue-950/60 dark:text-blue-300">
-                  {primaryAuthor.fullName.charAt(0).toUpperCase()}
-                </div>
+              <div className="flex items-center gap-2.5">
+                <UserAvatar
+                  name={primaryAuthor.fullName}
+                  size="sm"
+                  isAdmin={
+                    primaryAuthor.fullName === "System Administrator" ||
+                    primaryAuthor.fullName.toLowerCase().includes("admin")
+                  }
+                  showAdminBadge={
+                    primaryAuthor.fullName === "System Administrator" ||
+                    primaryAuthor.fullName.toLowerCase().includes("admin")
+                  }
+                />
                 <div>
                   <p className="text-xs font-bold text-neutral-900 dark:text-white">
                     {primaryAuthor.fullName}
                   </p>
                   <p className="text-[11px] text-neutral-400 dark:text-zinc-500">
-                    {primaryAuthor.role}
+                    {primaryAuthor.fullName === "System Administrator" ||
+                    primaryAuthor.fullName.toLowerCase().includes("admin")
+                      ? "Admin"
+                      : primaryAuthor.role}
                   </p>
                 </div>
               </div>
@@ -157,12 +169,11 @@ export default function ContentDetailPage() {
       {/* Cover Image */}
       {content.coverImageUrl && (
         <div className="relative aspect-16/9 w-full overflow-hidden rounded-3xl border border-neutral-200 bg-neutral-100 dark:border-zinc-800 dark:bg-zinc-800">
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={content.coverImageUrl}
             alt={content.title}
-            fill
-            className="object-cover"
-            priority
+            className="size-full object-cover"
           />
         </div>
       )}

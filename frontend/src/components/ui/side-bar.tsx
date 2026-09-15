@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import { ChevronUp, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { UserAvatar } from "./user-avatar";
 
 interface SidebarContextValue {
   collapsed: boolean;
@@ -255,6 +255,7 @@ export interface SidebarUserProfileProps {
   role?: string;
   avatarInitial?: string;
   avatarSrc?: string;
+  isAdmin?: boolean;
   actionSlot?: React.ReactNode;
   className?: string;
 }
@@ -264,12 +265,16 @@ export function SidebarUserProfile({
   role,
   avatarInitial,
   avatarSrc,
+  isAdmin: propIsAdmin,
   actionSlot,
   className,
 }: SidebarUserProfileProps) {
   const { collapsed } = useSidebar();
-  const initial =
-    avatarInitial || (displayName ? displayName.charAt(0).toUpperCase() : "U");
+
+  const isAdmin =
+    propIsAdmin !== undefined
+      ? propIsAdmin
+      : Boolean(role?.toLowerCase().includes("admin"));
 
   return (
     <div
@@ -280,18 +285,14 @@ export function SidebarUserProfile({
       )}
     >
       <div className="flex min-w-0 items-center gap-2.5">
-        <div className="bg-brand text-brand-foreground relative flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-full text-xs font-bold shadow-xs">
-          {avatarSrc ? (
-            <Image
-              src={avatarSrc}
-              alt={displayName}
-              fill
-              className="object-cover"
-            />
-          ) : (
-            initial
-          )}
-        </div>
+        <UserAvatar
+          name={displayName}
+          avatarUrl={avatarSrc}
+          avatarInitial={avatarInitial}
+          size={collapsed ? "sm" : "md"}
+          isAdmin={isAdmin}
+          showAdminBadge={isAdmin}
+        />
         {!collapsed && (
           <div className="min-w-0">
             <p className="truncate text-xs font-bold text-neutral-900 dark:text-white">

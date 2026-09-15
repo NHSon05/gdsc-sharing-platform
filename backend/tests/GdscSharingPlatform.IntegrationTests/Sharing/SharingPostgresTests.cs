@@ -12,6 +12,8 @@ using GdscSharingPlatform.Infrastructure.Services.Sharing;
 using GdscSharingPlatform.IntegrationTests.Support;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GdscSharingPlatform.IntegrationTests.Sharing;
@@ -85,6 +87,82 @@ public sealed class SharingPostgresTests : IAsyncLifetime
         Assert.Equal(1, (await db.SharingContents.AsNoTracking().SingleAsync()).Version);
         Assert.Equal(1, await db.Set<SharingAuditEntry>().CountAsync(x => x.Action == "Update"));
     }
+    [PostgresFact]
+    public async Task ConcurrentScheduleEdits_Return412AndCommitOneAudit()
+    {
+        await using var db = Context();
+        var start = new DateTimeOffset(2026, 10, 1, 7, 0, 0, TimeSpan.Zero);
+        var schedule = new SharingSchedule("Talk", SharingType.TechTalk, DeliveryMode.Online, start,
+            start.AddHours(1), "UTC", AudienceScope.AllMembers, _uid, meetingUrl: "https://meet.example.com");
+        schedule.Presenters.Add(new(schedule.Id, _uid, PresenterRole.Speaker, 0));
+        db.Add(schedule); await db.SaveChangesAsync();
+        await using var services = Services(new OverlapBarrier());
+        async Task<Exception?> Update(string title)
+        {
+            await using var scope = services.CreateAsyncScope();
+            var request = new ScheduleRequest(title, SharingType.TechTalk, DeliveryMode.Online,
+                DateTime.SpecifyKind(start.UtcDateTime, DateTimeKind.Unspecified),
+                DateTime.SpecifyKind(start.AddHours(1).UtcDateTime, DateTimeKind.Unspecified),
+                "UTC", AudienceScope.AllMembers, [new(_uid, PresenterRole.Speaker)], [], [], [],
+                MeetingUrl: "https://meet.example.com");
+            return await Record.ExceptionAsync(() => scope.ServiceProvider.GetRequiredService<SharingScheduleService>()
+                .UpdateAsync(schedule.Id, request, 0, default));
+        }
+        var results = await Task.WhenAll(Update("First"), Update("Second"));
+        Assert.Single(results, x => x is null);
+        Assert.IsType<PreconditionFailedException>(Assert.Single(results, x => x is not null));
+        Assert.Equal(1, (await db.SharingSchedules.AsNoTracking().SingleAsync()).Version);
+        Assert.Equal(1, await db.Set<SharingAuditEntry>().CountAsync(x => x.Action == "Update"));
+    }
+
+    [PostgresFact]
+    public async Task SharingMigrationsPreserveExistingSprint3Graph_AndCanRunTwice()
+    {
+        var database = PostgresTestDatabase.FromEnvironment()!;
+        await database.CreateAsync();
+        try
+        {
+            await using var db = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseNpgsql(database.ConnectionString).Options);
+            await db.GetService<IMigrator>().MigrateAsync("20260909190532_AddRoadmapManagement");
+            var user = new ApplicationUser { Id = Guid.NewGuid(), FullName = "Existing member" };
+            var category = new GdscSharingPlatform.Domain.Roadmaps.RoadmapCategory("Backend", "backend");
+            var roadmap = new GdscSharingPlatform.Domain.Roadmaps.Roadmap(category.Id, "Roadmap", "roadmap", "Summary", RoadmapLevel.Beginner, user.Id);
+            var first = new GdscSharingPlatform.Domain.Roadmaps.RoadmapNode(roadmap.Id, "First", "first", positionX: 123m);
+            var second = new GdscSharingPlatform.Domain.Roadmaps.RoadmapNode(roadmap.Id, "Second", "second");
+            var edge = new GdscSharingPlatform.Domain.Roadmaps.RoadmapEdge(roadmap.Id, first.Id, second.Id);
+            db.AddRange(user, category, roadmap, first, second, edge);
+            await db.SaveChangesAsync();
+            await db.Database.MigrateAsync();
+            await db.Database.MigrateAsync();
+            db.ChangeTracker.Clear();
+            Assert.Equal(user.Id, (await db.Users.SingleAsync()).Id);
+            Assert.Equal(roadmap.Id, (await db.Roadmaps.SingleAsync()).Id);
+            Assert.Equal(2, await db.RoadmapNodes.CountAsync());
+            Assert.Equal(123m, (await db.RoadmapNodes.SingleAsync(x => x.Id == first.Id)).PositionX);
+            Assert.Equal(edge.Id, (await db.RoadmapEdges.SingleAsync()).Id);
+            Assert.Empty(await db.SharingContents.ToListAsync());
+            Assert.Empty(await db.SharingSchedules.ToListAsync());
+            Assert.Empty(await db.Set<SharingAuditEntry>().ToListAsync());
+            Assert.Empty(await db.Database.GetPendingMigrationsAsync());
+            Assert.False(db.Database.HasPendingModelChanges());
+        }
+        finally { await database.DropAsync(); }
+    }
+
+    [PostgresFact]
+    public async Task DatabaseRejectsSecondOwner()
+    {
+        await using var db = Context();
+        var content = new SharingContent("Title", "title", "Summary", "Body", _uid);
+        var other = new ApplicationUser { Id = Guid.NewGuid(), FullName = "Other" };
+        db.AddRange(content, other); await db.SaveChangesAsync();
+        db.Add(new SharingContentAuthor(content.Id, other.Id, SharingAuthorRole.Owner, 1));
+        var error = await Assert.ThrowsAsync<DbUpdateException>(() => db.SaveChangesAsync());
+        Assert.Equal(Npgsql.PostgresErrorCodes.UniqueViolation, Assert.IsType<Npgsql.PostgresException>(error.InnerException).SqlState);
+        Assert.Equal(1, await db.Set<SharingContentAuthor>().AsNoTracking().CountAsync(x => x.SharingContentId == content.Id));
+    }
+
     [PostgresFact]
     public async Task FailedFileWrites_RollBackMetadataVersionAndAudit_AndCleanNewBytes()
     {

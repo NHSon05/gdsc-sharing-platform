@@ -16,6 +16,8 @@ import type {
   AddMemberDepartmentRequest,
   UpdateMemberDepartmentRequest,
   ReplaceMemberRolesRequest,
+  AdminMemberListQuery,
+  AdminMemberPageDto,
 } from "../types/member-management.types";
 
 /* ==========================================================================
@@ -220,6 +222,44 @@ export async function endClubMembershipApi(
 ): Promise<void> {
   await httpClient.delete(
     `/api/admin/members/${userId}/memberships/${clubMembershipId}`,
+    { signal }
+  );
+}
+
+export async function getAdminMembersApi(
+  query?: AdminMemberListQuery,
+  signal?: AbortSignal
+): Promise<AdminMemberPageDto> {
+  const response = await httpClient.get<AdminMemberPageDto>(
+    "/api/admin/members",
+    {
+      params: query,
+      signal,
+    }
+  );
+  return response.data;
+}
+
+export async function updateMemberStatusApi(
+  userId: string,
+  status: number,
+  signal?: AbortSignal
+): Promise<void> {
+  await httpClient.patch(
+    `/api/admin/members/${userId}/status`,
+    { status },
+    { signal }
+  );
+}
+
+export async function updateMemberSystemRolesApi(
+  userId: string,
+  roles: string[],
+  signal?: AbortSignal
+): Promise<void> {
+  await httpClient.post(
+    `/api/admin/members/${userId}/system-roles`,
+    { roles },
     { signal }
   );
 }

@@ -6,6 +6,7 @@ import {
   getDepartmentsApi,
   getClubRolesApi,
   getMemberProfileByIdApi,
+  getAdminMembersApi,
 } from "../api/member-management.api";
 import { memberManagementKeys } from "../queries/member-management.keys";
 import type {
@@ -14,6 +15,10 @@ import type {
   ClubRoleDto,
   UserProfileDto,
 } from "@/features/profile/types/profile.types";
+import type {
+  AdminMemberListQuery,
+  AdminMemberPageDto,
+} from "../types/member-management.types";
 import type { ApiError } from "@/core/http/api-error";
 
 export function useGenerationsQuery(includeInactive = false) {
@@ -46,5 +51,13 @@ export function useMemberProfileQuery(userId: string) {
     queryFn: ({ signal }) => getMemberProfileByIdApi(userId, signal),
     enabled: Boolean(userId),
     staleTime: 1000 * 60 * 2,
+  });
+}
+
+export function useAdminMembersQuery(query?: AdminMemberListQuery) {
+  return useQuery<AdminMemberPageDto, ApiError>({
+    queryKey: memberManagementKeys.members(query as Record<string, unknown>),
+    queryFn: ({ signal }) => getAdminMembersApi(query, signal),
+    staleTime: 1000 * 30,
   });
 }

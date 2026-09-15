@@ -41,6 +41,7 @@ export async function POST(request: Request) {
     // Clear HttpOnly cookies
     cookieStore.delete(AUTH_COOKIE_NAMES.ACCESS_TOKEN);
     cookieStore.delete(AUTH_COOKIE_NAMES.REFRESH_TOKEN);
+    cookieStore.delete("userRole");
 
     return new NextResponse(null, { status: 204 });
   } catch (error) {

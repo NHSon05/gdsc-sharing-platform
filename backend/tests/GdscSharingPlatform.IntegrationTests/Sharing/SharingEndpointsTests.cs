@@ -287,6 +287,87 @@ public sealed class SharingEndpointsTests : IAsyncLifetime
     }
 
     [Fact]
+    public async Task DepartmentAudience_UsesActiveDepartmentMembership_AndGenerationOrDepartment()
+    {
+        Guid generationId, departmentId, departmentMembershipId;
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            var generation = new ClubGeneration(98);
+            var department = new GdscSharingPlatform.Domain.Departments.Department
+            { Code = "PHASE7", Name = "Testing", Slug = "phase7" };
+            var membership = new ClubMembership(_otherId, generation.Id);
+            var departmentMembership = new DepartmentMembership(membership.Id, department.Id);
+            generationId = generation.Id; departmentId = department.Id; departmentMembershipId = departmentMembership.Id;
+            db.AddRange(generation, department, membership, departmentMembership);
+            await db.SaveChangesAsync();
+        }
+        var request = Schedule([new(_ownerId, PresenterRole.Speaker)]) with
+        { AudienceScope = AudienceScope.SelectedAudience, DepartmentIds = [departmentId] };
+        var schedule = await Read<ScheduleResponse>(await _admin.PostAsJsonAsync("/api/admin/sharing/schedules", request, Json), HttpStatusCode.Created);
+        schedule = await Read<ScheduleResponse>(await Mutate(_admin, HttpMethod.Post, $"/api/admin/sharing/schedules/{schedule.Id}/publish", schedule.Version));
+        Assert.NotNull((await Read<ScheduleResponse>(await _other.GetAsync($"/api/sharing/schedules/{schedule.Id}"))).MeetingUrl);
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            (await db.Set<DepartmentMembership>().SingleAsync(x => x.Id == departmentMembershipId)).End();
+            await db.SaveChangesAsync();
+        }
+        Assert.Equal(HttpStatusCode.NotFound, (await _other.GetAsync($"/api/sharing/schedules/{schedule.Id}")).StatusCode);
+        Assert.Empty((await Read<SharingPage<ScheduleResponse>>(await _other.GetAsync("/api/sharing/schedules"))).Items);
+        schedule = await Read<ScheduleResponse>(await Mutate(_admin, HttpMethod.Patch, $"/api/admin/sharing/schedules/{schedule.Id}/audience",
+            schedule.Version, new AudienceRequest(AudienceScope.SelectedAudience, [generationId], [departmentId])));
+        Assert.NotNull((await Read<ScheduleResponse>(await _other.GetAsync($"/api/sharing/schedules/{schedule.Id}"))).MeetingUrl);
+    }
+
+    [Fact]
+    public async Task CancelledScheduleReleasesOverlap_ButCannotRestartOrEdit()
+    {
+        var request = Schedule([new(_ownerId, PresenterRole.Speaker)]);
+        var schedule = await Read<ScheduleResponse>(await _admin.PostAsJsonAsync("/api/admin/sharing/schedules", request, Json), HttpStatusCode.Created);
+        Assert.Equal(HttpStatusCode.Forbidden, (await Mutate(_owner, HttpMethod.Post, $"/api/admin/sharing/schedules/{schedule.Id}/publish", 0)).StatusCode);
+        schedule = await Read<ScheduleResponse>(await Mutate(_admin, HttpMethod.Post, $"/api/admin/sharing/schedules/{schedule.Id}/publish", 0));
+        Assert.Equal(HttpStatusCode.BadRequest, (await Mutate(_admin, HttpMethod.Post, $"/api/admin/sharing/schedules/{schedule.Id}/cancel", 1, new CancelScheduleRequest(" "))).StatusCode);
+        schedule = await Read<ScheduleResponse>(await Mutate(_admin, HttpMethod.Post, $"/api/admin/sharing/schedules/{schedule.Id}/cancel", 1, new CancelScheduleRequest("Presenter unavailable")));
+        Assert.Equal(SharingScheduleStatus.Cancelled, schedule.Status);
+        Assert.Equal("Presenter unavailable", schedule.CancellationReason);
+        Assert.Equal(HttpStatusCode.BadRequest, (await Mutate(_admin, HttpMethod.Post, $"/api/admin/sharing/schedules/{schedule.Id}/start", 2)).StatusCode);
+        Assert.Equal(HttpStatusCode.BadRequest, (await Mutate(_admin, HttpMethod.Patch, $"/api/admin/sharing/schedules/{schedule.Id}", 2, request)).StatusCode);
+        Assert.Equal(HttpStatusCode.Created, (await _admin.PostAsJsonAsync("/api/admin/sharing/schedules", request, Json)).StatusCode);
+    }
+
+    [Fact]
+    public async Task PendingReviewLocksResources_WithdrawRestoresEditing_AndOversizeUploadLeavesNoFile()
+    {
+        var content = await Read<ContentResponse>(await _owner.PostAsJsonAsync("/api/sharing/contents", Content(), Json), HttpStatusCode.Created);
+        var id = content.Content.Id;
+        var path = $"/api/sharing/contents/{id}/resources/files";
+        Assert.Equal(HttpStatusCode.RequestEntityTooLarge, (await Upload(path, 0, "%PDF-1.7" + new string('x', 1024), true)).StatusCode);
+        Assert.True(!Directory.Exists(_root) || Directory.GetFiles(_root).Length == 0);
+        await Read<ContentResponse>(await Mutate(_owner, HttpMethod.Post, $"/api/sharing/contents/{id}/submit", 0));
+        Assert.Equal(HttpStatusCode.BadRequest, (await Upload(path, 1, "%PDF-1.7 locked", true)).StatusCode);
+        var withdrawn = await Read<ContentResponse>(await Mutate(_owner, HttpMethod.Post, $"/api/sharing/contents/{id}/withdraw", 1));
+        Assert.Equal(SharingContentStatus.Draft, withdrawn.Content.Status);
+        Assert.Equal(HttpStatusCode.Created, (await Upload(path, 2, "%PDF-1.7 editable", true)).StatusCode);
+    }
+
+    [Fact]
+    public async Task Tags_AdminCanEditAndDeactivate_MembersCannotManageOrAssignInactiveTags()
+    {
+        var request = new TagRequest("Testing", "testing", "#112233");
+        Assert.Equal(HttpStatusCode.Forbidden, (await _owner.PostAsJsonAsync("/api/admin/sharing/tags", request, Json)).StatusCode);
+        var tag = await Read<TagResponse>(await _admin.PostAsJsonAsync("/api/admin/sharing/tags", request, Json), HttpStatusCode.Created);
+        tag = await Read<TagResponse>(await _admin.PatchAsJsonAsync($"/api/admin/sharing/tags/{tag.Id}", request with { Name = "Updated" }, Json));
+        Assert.Equal("Updated", tag.Name);
+        Assert.Contains(await Read<List<TagResponse>>(await _owner.GetAsync("/api/sharing/tags")), x => x.Id == tag.Id);
+        tag = await Read<TagResponse>(await _admin.PatchAsJsonAsync($"/api/admin/sharing/tags/{tag.Id}/status", new TagStatusRequest(false), Json));
+        Assert.False(tag.IsActive);
+        Assert.DoesNotContain(await Read<List<TagResponse>>(await _owner.GetAsync("/api/sharing/tags")), x => x.Id == tag.Id);
+        Assert.Contains(await Read<List<TagResponse>>(await _admin.GetAsync("/api/admin/sharing/tags")), x => x.Id == tag.Id && !x.IsActive);
+        Assert.Equal(HttpStatusCode.BadRequest, (await _owner.PostAsJsonAsync("/api/sharing/contents", Content() with { TagIds = [tag.Id] }, Json)).StatusCode);
+    }
+
+    [Fact]
     public async Task ApiContracts_ValidationErrors_AdminAuthorization_SwaggerAndSubmitRateLimit()
     {
         using var anonymous = _factory.CreateClient();

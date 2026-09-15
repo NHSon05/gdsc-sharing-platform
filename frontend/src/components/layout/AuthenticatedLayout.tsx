@@ -10,6 +10,7 @@ import { Menu, X, PanelLeftOpen, PanelLeftClose } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import logoSvg from "@/assets/images/logo.svg";
+import { UserAvatar } from "@/components/ui/user-avatar";
 
 import { useSessionStore } from "@/core/session/session.store";
 import { selectCurrentUser } from "@/core/session/session.selectors";
@@ -65,7 +66,6 @@ export function AuthenticatedLayout({
 
   const displayName = user?.displayName || "User";
   const avatarUrl = user?.avatarUrl;
-  const avatarInitial = displayName.charAt(0).toUpperCase();
 
   return (
     <div className="relative flex min-h-dvh w-full bg-[#F4F4F6] font-sans text-neutral-900 transition-colors duration-300 dark:bg-[#09090B] dark:text-zinc-100">
@@ -163,18 +163,17 @@ export function AuthenticatedLayout({
               href="/profile"
               className="group hover:border-brand/60 flex items-center gap-2 rounded-full border border-neutral-200/80 bg-white/70 py-1 pr-3 pl-1.5 shadow-2xs backdrop-blur-md transition-all dark:border-zinc-800 dark:bg-zinc-900/70"
             >
-              <div className="bg-brand relative flex size-7 shrink-0 items-center justify-center overflow-hidden rounded-full text-xs font-bold text-white shadow-xs">
-                {avatarUrl ? (
-                  <Image
-                    src={avatarUrl}
-                    alt={displayName}
-                    fill
-                    className="object-cover"
-                  />
-                ) : (
-                  avatarInitial
+              <UserAvatar
+                name={displayName}
+                avatarUrl={avatarUrl}
+                size="xs"
+                isAdmin={Boolean(
+                  user?.roles?.some(
+                    (r) => typeof r === "string" && r.toLowerCase() === "admin"
+                  )
                 )}
-              </div>
+                showAdminBadge={false}
+              />
               <span className="hidden max-w-30 truncate text-xs font-semibold text-neutral-800 sm:inline-block dark:text-zinc-200">
                 {displayName}
               </span>
