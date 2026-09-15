@@ -138,6 +138,7 @@ export const vi: TranslationDictionary = {
     title: "Hồ Sơ Thành Viên",
     subtitle:
       "Quản lý thông tin cá nhân và lịch sử tham gia các nhiệm kỳ câu lạc bộ.",
+    tabBlog: "Blog & Bài viết",
     tabPersonalInfo: "Thông tin cá nhân",
     tabClubHistory: "Lịch sử tham gia GDSC",
     displayName: "Họ và tên",

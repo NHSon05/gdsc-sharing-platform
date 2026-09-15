@@ -303,7 +303,7 @@ export function AuthenticatedHomeView({
                     <FileText className="text-brand size-4" />
                     <span>{t("sharing.myContents")}</span>
                   </span>
-                  <ArrowRight className="size-3.5 text-neutral-400" />
+                  <ArrowRight className="size-4 text-neutral-400" />
                 </Link>
 
                 <Link
@@ -314,7 +314,7 @@ export function AuthenticatedHomeView({
                     <Calendar className="size-4 text-emerald-600" />
                     <span>{t("sharing.scheduleTitle")}</span>
                   </span>
-                  <ArrowRight className="size-3.5 text-neutral-400" />
+                  <ArrowRight className="size-4 text-neutral-400" />
                 </Link>
 
                 {isAdminOrLead && (
@@ -326,7 +326,7 @@ export function AuthenticatedHomeView({
                       <ShieldCheck className="size-4 text-amber-600" />
                       <span>{t("sharing.reviewQueue")}</span>
                     </span>
-                    <ArrowRight className="size-3.5 text-amber-500" />
+                    <ArrowRight className="size-4 text-amber-500" />
                   </Link>
                 )}
               </div>

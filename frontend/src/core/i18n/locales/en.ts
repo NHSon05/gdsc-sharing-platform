@@ -134,6 +134,7 @@ export const en = {
   profile: {
     title: "Member Profile",
     subtitle: "Manage your personal information and club membership history.",
+    tabBlog: "Blog & Articles",
     tabPersonalInfo: "Personal Information",
     tabClubHistory: "Club Membership History",
     displayName: "Display Name",

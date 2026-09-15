@@ -2,13 +2,7 @@
 
 import React, { Suspense } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import {
-  Users,
-  FileCheck,
-  Calendar,
-  ShieldCheck,
-  Loader2,
-} from "lucide-react";
+import { Users, FileCheck, Calendar, ShieldCheck, Loader2 } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { AdminUsersView } from "@/features/member-management";
 import { AdminReviewQueue, AdminSchedulesView } from "@/features/sharing";
@@ -38,20 +32,25 @@ function AdminDashboardContent() {
       <div className="flex flex-col gap-3 border-b border-neutral-200 pb-5 sm:flex-row sm:items-end sm:justify-between dark:border-zinc-800">
         <div className="space-y-1.5">
           <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 dark:border-blue-900/60 dark:bg-blue-950/50 dark:text-blue-300">
-            <ShieldCheck className="size-3.5" />
+            <ShieldCheck className="size-4" />
             <span>Administration Center</span>
           </div>
           <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
             Admin Portal
           </h1>
           <p className="text-sm text-neutral-500 dark:text-zinc-400">
-            Quản lý tập trung thành viên, bài viết chia sẻ và lịch sinh hoạt câu lạc bộ.
+            Quản lý tập trung thành viên, bài viết chia sẻ và lịch sinh hoạt câu
+            lạc bộ.
           </p>
         </div>
       </div>
 
       {/* Main Views Container (Replaced 3 cards with direct interactive views) */}
-      <Tabs value={currentTab} onValueChange={handleTabChange} className="space-y-6">
+      <Tabs
+        value={currentTab}
+        onValueChange={handleTabChange}
+        className="space-y-6"
+      >
         <div className="border-b border-neutral-200/80 pb-1 dark:border-zinc-800/80">
           <TabsList className="h-11 p-1">
             <TabsTrigger

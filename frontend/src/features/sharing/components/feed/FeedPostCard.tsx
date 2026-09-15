@@ -18,14 +18,33 @@ import {
   ArrowRight,
   Sparkles,
   BookOpen,
+  FileEdit,
+  Send,
+  RotateCcw,
+  MessageSquare,
 } from "lucide-react";
 
-interface FeedPostCardProps {
+export interface FeedPostCardProps {
   content: ContentSummary;
   className?: string;
+  onEdit?: (content: ContentSummary) => void;
+  onSubmitReview?: (content: ContentSummary) => void;
+  onWithdraw?: (content: ContentSummary) => void;
+  onViewNote?: (content: ContentSummary) => void;
+  isSubmitting?: boolean;
+  isWithdrawing?: boolean;
 }
 
-export function FeedPostCard({ content, className }: FeedPostCardProps) {
+export function FeedPostCard({
+  content,
+  className,
+  onEdit,
+  onSubmitReview,
+  onWithdraw,
+  onViewNote,
+  isSubmitting = false,
+  isWithdrawing = false,
+}: FeedPostCardProps) {
   const { t, locale } = useTranslation();
   const [copied, setCopied] = useState(false);
 
@@ -185,18 +204,86 @@ export function FeedPostCard({ content, className }: FeedPostCardProps) {
           )}
         </div>
 
-        {/* Read More CTA */}
-        <Link href={`/sharing/${content.slug}`}>
-          <Button
-            variant="brand"
-            size="sm"
-            className="font-semibold shadow-xs"
-            rightIcon={<ArrowRight className="size-3.5" />}
-          >
-            <BookOpen className="size-3.5" />
-            <span>{t("sharing.readMore")}</span>
-          </Button>
-        </Link>
+        {/* Read More CTA & Author Actions */}
+        <div className="flex flex-wrap items-center gap-2">
+          {onEdit && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onEdit(content);
+              }}
+              className="h-8 text-xs font-semibold"
+            >
+              <FileEdit className="mr-1.5 size-3.5" />
+              <span>{t("sharing.editContent") || "Chỉnh sửa"}</span>
+            </Button>
+          )}
+
+          {content.status === "Draft" && onSubmitReview && (
+            <Button
+              variant="brand"
+              size="sm"
+              disabled={isSubmitting}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onSubmitReview(content);
+              }}
+              className="h-8 text-xs font-semibold"
+            >
+              <Send className="mr-1.5 size-3.5" />
+              <span>{t("sharing.submitForReview") || "Gửi duyệt"}</span>
+            </Button>
+          )}
+
+          {content.status === "PendingReview" && onWithdraw && (
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={isWithdrawing}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onWithdraw(content);
+              }}
+              className="h-8 text-xs font-semibold text-amber-600 hover:text-amber-700 dark:text-amber-400"
+            >
+              <RotateCcw className="mr-1.5 size-3.5" />
+              <span>{t("sharing.withdraw") || "Thu hồi"}</span>
+            </Button>
+          )}
+
+          {content.status === "Rejected" && onViewNote && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onViewNote(content);
+              }}
+              className="h-8 text-xs font-semibold text-rose-600 hover:text-rose-700 dark:text-rose-400"
+            >
+              <MessageSquare className="mr-1.5 size-3.5 text-rose-500" />
+              <span>{t("sharing.reviewNote") || "Lý do từ chối"}</span>
+            </Button>
+          )}
+
+          <Link href={`/sharing/${content.slug}`}>
+            <Button
+              variant="brand"
+              size="sm"
+              className="font-semibold shadow-xs"
+              rightIcon={<ArrowRight className="size-3.5" />}
+            >
+              <BookOpen className="size-3.5" />
+              <span>{t("sharing.readMore")}</span>
+            </Button>
+          </Link>
+        </div>
       </div>
     </Card>
   );

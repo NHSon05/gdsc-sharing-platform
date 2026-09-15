@@ -189,9 +189,9 @@ export function Calendar({
           <span>{format(currentDate, "MMMM yyyy")}</span>
           {showYearPicker &&
             (isYearPickerOpen ? (
-              <ChevronUp className="size-3.5 text-neutral-500" />
+              <ChevronUp className="size-4 text-neutral-500" />
             ) : (
-              <ChevronDown className="size-3.5 text-neutral-500" />
+              <ChevronDown className="size-4 text-neutral-500" />
             ))}
         </button>
 
@@ -602,7 +602,7 @@ function MonthCalendarGrid({
   const days = eachDayOfInterval({ start: startDate, end: endDate });
 
   return (
-    <div className="w-[280px]">
+    <div className="w-70">
       {/* Header */}
       <div className="flex items-center justify-between pb-3">
         {showPrevButton ? (
@@ -620,7 +620,7 @@ function MonthCalendarGrid({
 
         <div className="flex items-center gap-1.5 text-sm font-bold text-neutral-900 dark:text-white">
           <span>{format(monthDate, "MMMM yyyy")}</span>
-          <ChevronDown className="size-3.5 text-neutral-400" />
+          <ChevronDown className="size-4 text-neutral-400" />
         </div>
 
         {showNextButton ? (

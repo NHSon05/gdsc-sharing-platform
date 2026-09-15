@@ -17,7 +17,7 @@ export default function MyContentsPage() {
           href="/sharing"
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-500 transition-colors hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-white"
         >
-          <ArrowLeft className="size-3.5" />
+          <ArrowLeft className="size-4" />
           <span>Back to all content</span>
         </Link>
       </div>

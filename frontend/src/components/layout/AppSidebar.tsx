@@ -123,7 +123,7 @@ export function AppSidebar({
         </SidebarNav>
 
         {/* Utility Items: Search, History, Favorites */}
-        <div className="mt-4 border-t border-neutral-200/60 pt-3 dark:border-zinc-800/60">
+        <div className="mt-4 border-t border-neutral-200/60 pt-4 dark:border-zinc-800/60">
           <SidebarNav>
             {utilityNavItems.map((item) => (
               <Link key={item.title} href={item.href}>
@@ -190,7 +190,7 @@ export function AppSidebar({
               aria-label={t("common.logout")}
               className="flex size-7 cursor-pointer items-center justify-center rounded-lg text-neutral-400 transition-colors hover:bg-rose-50 hover:text-rose-600 dark:text-zinc-500 dark:hover:bg-rose-950/40 dark:hover:text-rose-400"
             >
-              <LogOut className="size-3.5" />
+              <LogOut className="size-4" />
             </button>
           }
         />

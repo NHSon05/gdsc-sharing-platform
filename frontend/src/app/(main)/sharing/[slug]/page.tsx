@@ -75,7 +75,7 @@ export default function ContentDetailPage() {
           href="/sharing"
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-500 transition-colors hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-white"
         >
-          <ArrowLeft className="size-3.5" />
+          <ArrowLeft className="size-4" />
           <span>Back to all content</span>
         </Link>
       </div>
@@ -168,7 +168,7 @@ export default function ContentDetailPage() {
 
       {/* Cover Image */}
       {content.coverImageUrl && (
-        <div className="relative aspect-16/9 w-full overflow-hidden rounded-3xl border border-neutral-200 bg-neutral-100 dark:border-zinc-800 dark:bg-zinc-800">
+        <div className="relative aspect-video w-full overflow-hidden rounded-3xl border border-neutral-200 bg-neutral-100 dark:border-zinc-800 dark:bg-zinc-800">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={content.coverImageUrl}
