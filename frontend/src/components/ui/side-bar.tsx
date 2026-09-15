@@ -33,7 +33,7 @@ export function Sidebar({
       <aside
         data-collapsed={collapsed}
         className={cn(
-          "relative flex flex-col justify-between border-r border-neutral-200/80 bg-[#FAFAFA] transition-all duration-300 ease-in-out select-none dark:border-zinc-800/80 dark:bg-[#0C0C0E]",
+          "relative flex flex-col justify-between border-r border-neutral-200/80 bg-[#FFFFFF] transition-all duration-300 ease-in-out select-none dark:border-zinc-800/80 dark:bg-[#0C0C0E]",
           collapsed ? "w-18" : "w-64",
           className
         )}
@@ -156,10 +156,10 @@ export function SidebarNavItem({
       {Icon && (
         <Icon
           className={cn(
-            "size-4.5 shrink-0 transition-colors",
+            "size-6 shrink-0 transition-colors",
             active
               ? "text-brand dark:text-brand-hover stroke-[2.2]"
-              : "stroke-[1.8] text-neutral-500 group-hover:text-neutral-800 dark:text-zinc-400 dark:group-hover:text-zinc-200"
+              : "stroke-[1.8] text-neutral-800 group-hover:text-neutral-800 dark:text-zinc-400 dark:group-hover:text-zinc-200"
           )}
         />
       )}
@@ -177,7 +177,7 @@ export function SidebarNavItem({
       title={collapsed ? title : undefined}
       className={cn(
         "group flex cursor-pointer items-center rounded-xl text-sm font-medium transition-all duration-200",
-        collapsed ? "mx-auto size-10 justify-center" : "gap-3 px-3 py-2.5",
+        collapsed ? "mx-auto size-10 justify-center" : "gap-4 px-3 py-2.5",
         active
           ? "bg-brand/10 text-brand dark:bg-brand/15 dark:text-brand-hover border-brand/20 dark:border-brand/30 border font-semibold shadow-2xs"
           : "text-neutral-600 hover:bg-neutral-200/50 hover:text-neutral-900 dark:text-zinc-400 dark:hover:bg-zinc-800/40 dark:hover:text-zinc-100",
@@ -235,9 +235,9 @@ export function SidebarAccordion({
       >
         <span>{title}</span>
         {open ? (
-          <ChevronUp className="size-3.5" />
+          <ChevronUp className="size-4" />
         ) : (
-          <ChevronDown className="size-3.5" />
+          <ChevronDown className="size-4" />
         )}
       </button>
 

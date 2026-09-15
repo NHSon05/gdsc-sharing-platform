@@ -30,7 +30,7 @@ export default function AdminReviewPage() {
             href="/admin"
             className="inline-flex items-center gap-1 text-xs font-semibold text-neutral-500 hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-white"
           >
-            <ArrowLeft className="size-3.5" />
+            <ArrowLeft className="size-4" />
             <span>Quay lại Admin Dashboard</span>
           </Link>
         </div>

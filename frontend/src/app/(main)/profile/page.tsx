@@ -1,20 +1,39 @@
 "use client";
 
-import React, { useState } from "react";
-import { User, Layers, Loader2, AlertCircle } from "lucide-react";
+import React, { useState, Suspense } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { BookOpen, User, Layers } from "lucide-react";
 import {
-  ProfileHeader,
-  ProfileForm,
+  ProfileHeroCard,
+  ProfileSummaryCard,
+  ProfileAskMeAboutCard,
+  ProfileAdditionalDetailsCard,
+  ProfileBlogSection,
   MembershipHistory,
+  ProfileEditDialog,
+  ProfilePageSkeleton,
+  ProfilePageError,
   useProfileQuery,
 } from "@/features/profile";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/core/i18n/i18n.context";
 
-export default function ProfilePage() {
+type ProfileTab = "posts" | "overview" | "groups";
+
+function ProfilePageContent() {
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState("personal");
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+
+  const tabParam = searchParams.get("tab") as ProfileTab | null;
+  // Default to "posts" (Blog) as requested: user enters profile, this section appears first
+  const currentTab: ProfileTab =
+    tabParam && ["posts", "overview", "groups"].includes(tabParam)
+      ? tabParam
+      : "posts";
 
   const {
     data: profile,
@@ -24,68 +43,120 @@ export default function ProfilePage() {
     refetch,
   } = useProfileQuery();
 
+  const handleTabChange = (value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("tab", value);
+    router.replace(`${pathname}?${params.toString()}`);
+  };
+
   if (isLoading) {
-    return (
-      <div className="mx-auto flex min-h-[60vh] max-w-5xl flex-col items-center justify-center p-6 text-center">
-        <Loader2 className="text-brand size-10 animate-spin" />
-        <p className="mt-4 text-xs font-semibold text-neutral-500 dark:text-zinc-400">
-          Đang tải hồ sơ thành viên...
-        </p>
-      </div>
-    );
+    return <ProfilePageSkeleton />;
   }
 
   if (isError || !profile) {
     return (
-      <div className="mx-auto flex min-h-[60vh] max-w-5xl flex-col items-center justify-center p-6 text-center">
-        <div className="mb-4 flex size-14 items-center justify-center rounded-2xl border border-rose-200 bg-rose-50 text-rose-600 dark:border-rose-900 dark:bg-rose-950/40 dark:text-rose-400">
-          <AlertCircle className="size-7" />
-        </div>
-        <h2 className="text-lg font-bold text-neutral-900 dark:text-white">
-          Không thể tải thông tin hồ sơ
-        </h2>
-        <p className="mt-1.5 max-w-md text-xs text-neutral-500 dark:text-zinc-400">
-          {error?.message ||
-            "Đã xảy ra lỗi trong quá trình truy vấn dữ liệu từ máy chủ."}
-        </p>
-        <Button
-          variant="brand"
-          size="md"
-          onClick={() => refetch()}
-          className="mt-6 font-semibold"
-        >
-          Thử lại
-        </Button>
-      </div>
+      <ProfilePageError
+        errorMessage={error?.message}
+        onRetry={() => refetch()}
+      />
     );
   }
 
   return (
-    <div className="animate-in fade-in mx-auto max-w-5xl space-y-8 px-4 py-8 font-sans duration-300 sm:px-6 lg:px-8">
-      {/* Profile Header Banner */}
-      <ProfileHeader profile={profile} />
+    <div className="animate-in fade-in mx-auto max-w-7xl space-y-6 px-4 py-8 font-sans duration-300 sm:px-6 lg:px-8">
+      {/* 2-Column Responsive Layout matching reference design */}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+        {/* Left / Main Column (approx 68% width on desktop) */}
+        <div className="space-y-6 lg:col-span-8">
+          {/* Top Hero Card (Cover Banner + Avatar + Bio Meta + Social Icons + Edit Button) */}
+          <ProfileHeroCard
+            profile={profile}
+            onEditProfile={() => setEditDialogOpen(true)}
+          />
 
-      {/* Tabs Navigation: Personal Information vs Club Membership History */}
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="mb-6">
-          <TabsTrigger value="personal" icon={<User className="size-4" />}>
-            {t("profile.tabPersonalInfo")}
-          </TabsTrigger>
-          <TabsTrigger value="memberships" icon={<Layers className="size-4" />}>
-            {t("profile.tabClubHistory")}
-          </TabsTrigger>
-        </TabsList>
+          {/* Navigation Tabs Bar matching reference (Overview, Groups, Posts, etc.) */}
+          <Tabs value={currentTab} onValueChange={handleTabChange}>
+            <TabsList className="mb-6 rounded-2xl bg-neutral-100/90 p-1.5 dark:bg-zinc-900/90">
+              <TabsTrigger
+                value="posts"
+                icon={<BookOpen className="size-4" />}
+                className="rounded-xl px-4 text-xs font-semibold"
+              >
+                {t("profile.tabBlog") || "Bài viết & Blog (Posts)"}
+              </TabsTrigger>
+              <TabsTrigger
+                value="overview"
+                icon={<User className="size-4" />}
+                className="rounded-xl px-4 text-xs font-semibold"
+              >
+                {t("profile.tabPersonalInfo") || "Tổng quan (Overview)"}
+              </TabsTrigger>
+              <TabsTrigger
+                value="groups"
+                icon={<Layers className="size-4" />}
+                className="rounded-xl px-4 text-xs font-semibold"
+              >
+                {t("profile.tabClubHistory") || "Nhiệm kỳ CLB (Groups)"}
+              </TabsTrigger>
+            </TabsList>
 
-        {/* Tab 1: Personal Info Form */}
-        <TabsContent value="personal">
-          <ProfileForm profile={profile} />
-        </TabsContent>
+            {/* Tab 1: Posts (Blog) - Default */}
+            <TabsContent
+              value="posts"
+              className="space-y-6 focus:outline-hidden"
+            >
+              <ProfileBlogSection />
+            </TabsContent>
 
-        {/* Tab 2: Multi-Gen Club Membership History */}
-        <TabsContent value="memberships">
-          <MembershipHistory memberships={profile.memberships} />
-        </TabsContent>
-      </Tabs>
+            {/* Tab 2: Overview (Summary & Ask Me About cards matching reference image) */}
+            <TabsContent
+              value="overview"
+              className="space-y-6 focus:outline-hidden"
+            >
+              {/* Summary Card */}
+              <ProfileSummaryCard
+                bio={profile.bio}
+                onEdit={() => setEditDialogOpen(true)}
+              />
+
+              {/* Ask Me About Card */}
+              <ProfileAskMeAboutCard onEdit={() => setEditDialogOpen(true)} />
+            </TabsContent>
+
+            {/* Tab 3: Groups / Membership History */}
+            <TabsContent
+              value="groups"
+              className="space-y-6 focus:outline-hidden"
+            >
+              <MembershipHistory memberships={profile.memberships} />
+            </TabsContent>
+          </Tabs>
+        </div>
+
+        {/* Right Sidebar Column (approx 32% width on desktop) */}
+        <div className="space-y-6 lg:col-span-4">
+          {/* Additional Details Card */}
+          <ProfileAdditionalDetailsCard
+            profile={profile}
+            onEdit={() => setEditDialogOpen(true)}
+          />
+        </div>
+      </div>
+
+      {/* Global Profile Edit Dialog */}
+      <ProfileEditDialog
+        profile={profile}
+        open={editDialogOpen}
+        onOpenChange={setEditDialogOpen}
+      />
     </div>
+  );
+}
+
+export default function ProfilePage() {
+  return (
+    <Suspense fallback={<ProfilePageSkeleton />}>
+      <ProfilePageContent />
+    </Suspense>
   );
 }

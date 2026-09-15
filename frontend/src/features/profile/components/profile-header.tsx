@@ -2,19 +2,12 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import {
-  Camera,
-  Mail,
-  Shield,
-  Sparkles,
-  Layers,
-  AlertCircle,
-  CheckCircle2,
-} from "lucide-react";
+import { Camera } from "lucide-react";
 import type { UserProfileDto } from "../types/profile.types";
-import { Progress } from "@/components/ui/progress";
 import { AvatarUploader } from "./avatar-uploader";
 import { EmailChangeDialog } from "./email-change-dialog";
+import { ProfileUserInfo } from "./header/profile-user-info";
+import { ProfileCompletionCard } from "./header/profile-completion-card";
 import { useTranslation } from "@/core/i18n/i18n.context";
 import { cn } from "@/lib/utils";
 
@@ -30,15 +23,6 @@ export function ProfileHeader({ profile, className }: ProfileHeaderProps) {
 
   const initialLetter = profile.displayName.charAt(0).toUpperCase() || "U";
 
-  // Find active generation and primary department
-  const activeMembership = profile.memberships?.find((m) => m.isActive);
-  const primaryDept =
-    activeMembership?.departments?.find((d) => d.isPrimary) ||
-    activeMembership?.departments?.[0];
-
-  const completion = profile.profileCompletionPercentage ?? 100;
-  const missingFields = profile.missingProfileFields || [];
-
   return (
     <div
       className={cn(
@@ -46,7 +30,7 @@ export function ProfileHeader({ profile, className }: ProfileHeaderProps) {
         className
       )}
     >
-      {/* Top Banner Content: Avatar + User Info */}
+      {/* Top Banner Content: Avatar + User Info + Completion Card */}
       <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
           {/* Avatar with Camera Overlay */}
@@ -76,83 +60,18 @@ export function ProfileHeader({ profile, className }: ProfileHeaderProps) {
             </button>
           </div>
 
-          {/* User Meta Information */}
-          <div className="space-y-2">
-            <div className="flex flex-wrap items-center gap-2">
-              <h1 className="text-xl font-bold tracking-tight text-neutral-900 sm:text-2xl dark:text-white">
-                {profile.displayName}
-              </h1>
-
-              {/* System Roles Badge */}
-              <span className="bg-brand/10 text-brand border-brand/30 dark:bg-brand/15 dark:text-brand-hover inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-semibold">
-                <Shield className="size-3.5" />
-                <span>{profile.systemRoles || "Member"}</span>
-              </span>
-            </div>
-
-            {/* Email and Change Trigger */}
-            <div className="flex flex-wrap items-center gap-2 text-xs text-neutral-500 dark:text-zinc-400">
-              <div className="flex items-center gap-1.5">
-                <Mail className="size-3.5" />
-                <span>{profile.email}</span>
-              </div>
-              <span>•</span>
-              <button
-                type="button"
-                onClick={() => setEmailOpen(true)}
-                className="text-brand hover:text-brand-hover cursor-pointer font-semibold underline-offset-2 hover:underline"
-              >
-                {t("profile.emailChangeTitle")}
-              </button>
-            </div>
-
-            {/* Active Gen & Primary Department Chips */}
-            <div className="flex flex-wrap items-center gap-2 pt-1">
-              {activeMembership && (
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-neutral-100 px-3 py-0.5 text-xs font-medium text-neutral-700 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
-                  <Layers className="size-3 text-neutral-400" />
-                  <span>
-                    {activeMembership.generation.name ||
-                      `Gen ${activeMembership.generation.number}`}
-                  </span>
-                </span>
-              )}
-
-              {primaryDept && (
-                <span className="bg-brand-muted text-brand inline-flex items-center gap-1.5 rounded-full px-3 py-0.5 text-xs font-semibold">
-                  <Sparkles className="size-3" />
-                  <span>{primaryDept.department.name}</span>
-                </span>
-              )}
-            </div>
-          </div>
+          {/* User Information Details */}
+          <ProfileUserInfo
+            profile={profile}
+            onOpenEmailChange={() => setEmailOpen(true)}
+          />
         </div>
 
-        {/* Profile Completion Card */}
-        <div className="flex w-full flex-col gap-2 rounded-2xl border border-neutral-200/80 bg-neutral-50/70 p-4 sm:max-w-xs dark:border-zinc-800 dark:bg-zinc-900/60">
-          <div className="flex items-center justify-between text-xs">
-            <span className="flex items-center gap-1.5 font-semibold text-neutral-700 dark:text-zinc-300">
-              {completion === 100 ? (
-                <CheckCircle2 className="size-3.5 text-emerald-500" />
-              ) : (
-                <AlertCircle className="size-3.5 text-amber-500" />
-              )}
-              {t("profile.completionTitle")}
-            </span>
-            <span className="text-brand font-bold">{completion}%</span>
-          </div>
-
-          <Progress value={completion} className="h-2" />
-
-          {missingFields.length > 0 && (
-            <div className="text-[11px] leading-tight text-neutral-400 dark:text-zinc-500">
-              <span className="font-medium text-neutral-500 dark:text-zinc-400">
-                {t("profile.missingFields")}{" "}
-              </span>
-              <span className="italic">{missingFields.join(", ")}</span>
-            </div>
-          )}
-        </div>
+        {/* Profile Completion Indicator */}
+        <ProfileCompletionCard
+          completionPercentage={profile.profileCompletionPercentage ?? 100}
+          missingFields={profile.missingProfileFields || []}
+        />
       </div>
 
       {/* Avatar Uploader Dialog */}
