@@ -56,6 +56,7 @@ export function ProfileHeader({ profile, className }: ProfileHeaderProps) {
                 src={profile.avatarUrl}
                 alt={profile.displayName}
                 fill
+                sizes="96px"
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
               />
             ) : (

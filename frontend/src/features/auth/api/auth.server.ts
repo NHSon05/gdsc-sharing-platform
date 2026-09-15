@@ -25,7 +25,9 @@ export async function getCurrentUserServerSide(
 
     // If accessToken is missing in cookies, check if refreshToken is present
     if (!accessToken) {
-      const refreshToken = cookieStore.get(AUTH_COOKIE_NAMES.REFRESH_TOKEN)?.value;
+      const refreshToken = cookieStore.get(
+        AUTH_COOKIE_NAMES.REFRESH_TOKEN
+      )?.value;
       if (refreshToken) {
         const refreshed = await refreshTokensServerSide(refreshToken);
         if (refreshed?.accessToken) {
@@ -95,7 +97,10 @@ export async function refreshTokensServerSide(
 
     return (await res.json()) as { accessToken: string; refreshToken: string };
   } catch (error) {
-    console.error("[refreshTokensServerSide] Failed to refresh tokens on server:", error);
+    console.error(
+      "[refreshTokensServerSide] Failed to refresh tokens on server:",
+      error
+    );
     return null;
   }
 }

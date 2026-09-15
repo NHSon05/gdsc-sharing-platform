@@ -172,6 +172,11 @@ public static class DependencyInjection
             .ValidateOnStart();
         services.AddScoped<IFileStorage, LocalRoadmapFileStorage>();
         services.AddScoped<RoadmapOperations>();
+        services.AddScoped<GdscSharingPlatform.Infrastructure.Services.Sharing.SharingOperations>();
+        services.AddScoped<GdscSharingPlatform.Application.Features.Sharing.ISharingContentService, GdscSharingPlatform.Infrastructure.Services.Sharing.SharingContentService>();
+        services.AddScoped<GdscSharingPlatform.Application.Features.Sharing.ISharingTagService, GdscSharingPlatform.Infrastructure.Services.Sharing.SharingTagService>();
+        services.AddScoped<GdscSharingPlatform.Application.Features.Sharing.ISharingResourceService, GdscSharingPlatform.Infrastructure.Services.Sharing.SharingResourceService>();
+        services.AddScoped<GdscSharingPlatform.Application.Features.Sharing.ISharingScheduleService, GdscSharingPlatform.Infrastructure.Services.Sharing.SharingScheduleService>();
         services.AddScoped<IRoadmapCategoryService, RoadmapCategoryService>();
         services.AddScoped<IRoadmapService, RoadmapService>();
         services.AddScoped<IRoadmapNodeService, RoadmapNodeService>();

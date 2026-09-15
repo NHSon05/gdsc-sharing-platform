@@ -85,6 +85,10 @@ export interface EventCalendarProps {
   startHour?: number;
   /** End hour for schedule grid (default: 23 for 23:00) */
   endHour?: number;
+  /** Custom sidebar filters content */
+  sidebarFilters?: React.ReactNode;
+  /** Custom header actions placed next to view mode pills */
+  headerActions?: React.ReactNode;
   /** Custom container class */
   className?: string;
 }
@@ -124,6 +128,8 @@ export function EventCalendar({
   timezone = "GMT +7",
   startHour = 0,
   endHour = 12,
+  sidebarFilters,
+  headerActions,
   className,
 }: EventCalendarProps) {
   const { t } = useTranslation();
@@ -139,7 +145,7 @@ export function EventCalendar({
   );
 
   const [uncontrolledDate, setUncontrolledDate] = React.useState<Date>(
-    new Date(2025, 11, 9)
+    () => new Date()
   );
   const activeDate =
     controlledDate !== undefined ? controlledDate : uncontrolledDate;
@@ -257,38 +263,42 @@ export function EventCalendar({
           />
         </div>
 
-        {/* Account Email Dropdown & Category Checkboxes */}
-        <div className="space-y-3 border-t border-neutral-200/70 pt-5 dark:border-zinc-800/70">
-          <button
-            type="button"
-            className="flex w-full items-center justify-between text-xs font-semibold text-neutral-800 hover:text-neutral-950 dark:text-zinc-200 dark:hover:text-white"
-          >
-            <span className="truncate">{accountEmail}</span>
-            <ChevronDown className="size-3.5 shrink-0 text-neutral-400" />
-          </button>
+        {/* Sidebar Filters */}
+        {sidebarFilters !== undefined ? (
+          sidebarFilters
+        ) : (
+          <div className="space-y-3 border-t border-neutral-200/70 pt-5 dark:border-zinc-800/70">
+            <button
+              type="button"
+              className="flex w-full items-center justify-between text-xs font-semibold text-neutral-800 hover:text-neutral-950 dark:text-zinc-200 dark:hover:text-white"
+            >
+              <span className="truncate">{accountEmail}</span>
+              <ChevronDown className="size-3.5 shrink-0 text-neutral-400" />
+            </button>
 
-          <div className="space-y-2.5 pt-1">
-            {categoryList.map((cat) => (
-              <label
-                key={cat.id}
-                onClick={() => handleToggleCategory(cat.id)}
-                className="flex cursor-pointer items-center gap-2.5 text-xs font-medium text-neutral-700 hover:text-neutral-950 dark:text-zinc-300 dark:hover:text-white"
-              >
-                <div
-                  className={cn(
-                    "flex size-4 items-center justify-center rounded-md border transition-all duration-150",
-                    cat.checked
-                      ? "border-brand bg-brand text-white shadow-2xs"
-                      : "border-neutral-300 bg-white hover:border-neutral-400 dark:border-zinc-700 dark:bg-zinc-900"
-                  )}
+            <div className="space-y-2.5 pt-1">
+              {categoryList.map((cat) => (
+                <label
+                  key={cat.id}
+                  onClick={() => handleToggleCategory(cat.id)}
+                  className="flex cursor-pointer items-center gap-2.5 text-xs font-medium text-neutral-700 hover:text-neutral-950 dark:text-zinc-300 dark:hover:text-white"
                 >
-                  {cat.checked && <Check className="size-3 stroke-[3]" />}
-                </div>
-                <span>{cat.label}</span>
-              </label>
-            ))}
+                  <div
+                    className={cn(
+                      "flex size-4 items-center justify-center rounded-md border transition-all duration-150",
+                      cat.checked
+                        ? "border-brand bg-brand text-white shadow-2xs"
+                        : "border-neutral-300 bg-white hover:border-neutral-400 dark:border-zinc-700 dark:bg-zinc-900"
+                    )}
+                  >
+                    {cat.checked && <Check className="size-3 stroke-[3]" />}
+                  </div>
+                  <span>{cat.label}</span>
+                </label>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* ====================================================================
@@ -308,15 +318,15 @@ export function EventCalendar({
                 type="button"
                 onClick={handlePrev}
                 aria-label="Previous"
-                className="flex size-8 cursor-pointer items-center justify-center rounded-xl border border-neutral-200/80 bg-white text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white"
+                className="flex cursor-pointer items-center justify-center bg-white text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white"
               >
-                <ChevronLeft className="size-4" />
+                <ChevronLeft className="size-6" />
               </button>
 
               <button
                 type="button"
                 onClick={handleToday}
-                className="cursor-pointer rounded-xl border border-neutral-200/80 bg-white px-3 py-1.5 text-xs font-semibold text-neutral-800 transition-colors hover:bg-neutral-100 hover:text-neutral-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 dark:hover:text-white"
+                className="text-md cursor-pointer rounded-xl bg-white px-3 py-1.5 font-semibold text-neutral-800 transition-colors hover:bg-neutral-100 hover:text-neutral-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 dark:hover:text-white"
               >
                 {t("schedule.today")}
               </button>
@@ -325,30 +335,35 @@ export function EventCalendar({
                 type="button"
                 onClick={handleNext}
                 aria-label="Next"
-                className="flex size-8 cursor-pointer items-center justify-center rounded-xl border border-neutral-200/80 bg-white text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white"
+                className="flex cursor-pointer items-center justify-center bg-white text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white"
               >
-                <ChevronRight className="size-4" />
+                <ChevronRight className="size-6" />
               </button>
             </div>
           </div>
 
-          {/* Right View Mode Pill Group: Day | Week | Month | Year */}
-          <div className="flex items-center rounded-2xl border border-neutral-200/80 bg-neutral-100/80 p-1 dark:border-zinc-800 dark:bg-zinc-900">
-            {viewModes.map((vm) => (
-              <button
-                key={vm.key}
-                type="button"
-                onClick={() => handleViewModeChange(vm.key)}
-                className={cn(
-                  "cursor-pointer rounded-xl px-3.5 py-1.5 text-xs font-semibold transition-all duration-150",
-                  activeViewMode === vm.key
-                    ? "text-brand dark:text-brand-hover bg-white font-bold shadow-xs dark:bg-zinc-800"
-                    : "text-neutral-500 hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-white"
-                )}
-              >
-                {vm.label}
-              </button>
-            ))}
+          {/* Right Controls: View Mode Pill Group + Header Actions (e.g. Calendar/List Toggle) */}
+          <div className="flex flex-wrap items-center gap-2.5">
+            {/* View Mode Pill Group: Day | Week | Month | Year */}
+            <div className="flex items-center rounded-2xl border border-neutral-200/80 bg-neutral-100/80 p-1 dark:border-zinc-800 dark:bg-zinc-900">
+              {viewModes.map((vm) => (
+                <button
+                  key={vm.key}
+                  type="button"
+                  onClick={() => handleViewModeChange(vm.key)}
+                  className={cn(
+                    "cursor-pointer rounded-xl px-3.5 py-1.5 text-xs font-semibold transition-all duration-150",
+                    activeViewMode === vm.key
+                      ? "text-brand dark:text-brand-hover bg-white font-bold shadow-xs dark:bg-zinc-800"
+                      : "text-neutral-500 hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-white"
+                  )}
+                >
+                  {vm.label}
+                </button>
+              ))}
+            </div>
+
+            {headerActions}
           </div>
         </div>
 

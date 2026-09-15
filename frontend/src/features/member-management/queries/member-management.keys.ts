@@ -8,4 +8,6 @@ export const memberManagementKeys = {
     [...memberManagementKeys.all, "clubRoles", { includeInactive }] as const,
   memberProfile: (userId: string) =>
     [...memberManagementKeys.all, "memberProfile", userId] as const,
+  members: (query?: Record<string, unknown>) =>
+    [...memberManagementKeys.all, "members", query] as const,
 };

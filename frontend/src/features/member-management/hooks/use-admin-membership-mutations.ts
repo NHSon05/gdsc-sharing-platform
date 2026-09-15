@@ -8,6 +8,8 @@ import {
   replaceMemberRolesApi,
   endDepartmentMembershipApi,
   endClubMembershipApi,
+  updateMemberStatusApi,
+  updateMemberSystemRolesApi,
 } from "../api/member-management.api";
 import { memberManagementKeys } from "../queries/member-management.keys";
 import { profileKeys } from "@/features/profile/queries/profile.keys";
@@ -28,6 +30,7 @@ export function useAssignMemberGenerationMutation(userId: string) {
       queryClient.invalidateQueries({
         queryKey: memberManagementKeys.memberProfile(userId),
       });
+      queryClient.invalidateQueries({ queryKey: memberManagementKeys.all });
       queryClient.invalidateQueries({ queryKey: profileKeys.all });
     },
   });
@@ -47,6 +50,7 @@ export function useAddMemberDepartmentMutation(userId: string) {
       queryClient.invalidateQueries({
         queryKey: memberManagementKeys.memberProfile(userId),
       });
+      queryClient.invalidateQueries({ queryKey: memberManagementKeys.all });
       queryClient.invalidateQueries({ queryKey: profileKeys.all });
     },
   });
@@ -66,6 +70,7 @@ export function useUpdateMemberDepartmentMutation(userId: string) {
       queryClient.invalidateQueries({
         queryKey: memberManagementKeys.memberProfile(userId),
       });
+      queryClient.invalidateQueries({ queryKey: memberManagementKeys.all });
       queryClient.invalidateQueries({ queryKey: profileKeys.all });
     },
   });
@@ -85,6 +90,7 @@ export function useReplaceMemberRolesMutation(userId: string) {
       queryClient.invalidateQueries({
         queryKey: memberManagementKeys.memberProfile(userId),
       });
+      queryClient.invalidateQueries({ queryKey: memberManagementKeys.all });
       queryClient.invalidateQueries({ queryKey: profileKeys.all });
     },
   });
@@ -100,6 +106,7 @@ export function useEndDepartmentMembershipMutation(userId: string) {
       queryClient.invalidateQueries({
         queryKey: memberManagementKeys.memberProfile(userId),
       });
+      queryClient.invalidateQueries({ queryKey: memberManagementKeys.all });
       queryClient.invalidateQueries({ queryKey: profileKeys.all });
     },
   });
@@ -115,6 +122,38 @@ export function useEndClubMembershipMutation(userId: string) {
       queryClient.invalidateQueries({
         queryKey: memberManagementKeys.memberProfile(userId),
       });
+      queryClient.invalidateQueries({ queryKey: memberManagementKeys.all });
+      queryClient.invalidateQueries({ queryKey: profileKeys.all });
+    },
+  });
+}
+
+export function useUpdateMemberStatusMutation() {
+  const queryClient = useQueryClient();
+
+  return useMutation<void, ApiError, { userId: string; status: number }>({
+    mutationFn: ({ userId, status }) => updateMemberStatusApi(userId, status),
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: memberManagementKeys.memberProfile(variables.userId),
+      });
+      queryClient.invalidateQueries({ queryKey: memberManagementKeys.all });
+      queryClient.invalidateQueries({ queryKey: profileKeys.all });
+    },
+  });
+}
+
+export function useUpdateMemberSystemRolesMutation() {
+  const queryClient = useQueryClient();
+
+  return useMutation<void, ApiError, { userId: string; roles: string[] }>({
+    mutationFn: ({ userId, roles }) =>
+      updateMemberSystemRolesApi(userId, roles),
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: memberManagementKeys.memberProfile(variables.userId),
+      });
+      queryClient.invalidateQueries({ queryKey: memberManagementKeys.all });
       queryClient.invalidateQueries({ queryKey: profileKeys.all });
     },
   });

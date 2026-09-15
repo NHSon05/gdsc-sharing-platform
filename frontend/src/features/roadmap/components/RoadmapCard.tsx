@@ -27,7 +27,7 @@ interface RoadmapCardProps {
 function getCategoryIcon(categoryName: string) {
   const lower = categoryName.toLowerCase();
   if (lower.includes("front") || lower.includes("web"))
-    return <Globe className="size-5 text-brand" />;
+    return <Globe className="text-brand size-5" />;
   if (lower.includes("back") || lower.includes("server"))
     return <Code2 className="size-5 text-emerald-500" />;
   if (lower.includes("data") || lower.includes("database"))
@@ -36,7 +36,7 @@ function getCategoryIcon(categoryName: string) {
     return <Cpu className="size-5 text-purple-500" />;
   if (lower.includes("mobile") || lower.includes("app"))
     return <Smartphone className="size-5 text-rose-500" />;
-  return <Compass className="size-5 text-brand" />;
+  return <Compass className="text-brand size-5" />;
 }
 
 function getLevelBadge(level: string) {
@@ -74,7 +74,7 @@ export function RoadmapCard({ roadmap }: RoadmapCardProps) {
   return (
     <Card
       variant="liquid-glass"
-      className="group relative flex flex-col justify-between overflow-hidden p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand/40 hover:shadow-xl dark:hover:shadow-zinc-950/50"
+      className="group hover:border-brand/40 relative flex flex-col justify-between overflow-hidden p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:hover:shadow-zinc-950/50"
     >
       {/* Top row: Category info & Level */}
       <div>
@@ -84,7 +84,7 @@ export function RoadmapCard({ roadmap }: RoadmapCardProps) {
               {getCategoryIcon(roadmap.category.name)}
             </div>
             <div>
-              <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wider dark:text-zinc-400">
+              <span className="text-xs font-semibold tracking-wider text-neutral-500 uppercase dark:text-zinc-400">
                 {roadmap.category.name}
               </span>
             </div>
@@ -93,7 +93,7 @@ export function RoadmapCard({ roadmap }: RoadmapCardProps) {
             {roadmap.status === "Archived" && (
               <Badge
                 variant="outline"
-                className="gap-1 border-amber-300 bg-amber-50 text-amber-800 text-[11px] dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-300"
+                className="gap-1 border-amber-300 bg-amber-50 text-[11px] text-amber-800 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-300"
               >
                 <Archive className="size-3" />
                 Archived
@@ -102,7 +102,7 @@ export function RoadmapCard({ roadmap }: RoadmapCardProps) {
             {roadmap.status === "Draft" && (
               <Badge
                 variant="outline"
-                className="gap-1 border-neutral-300 bg-neutral-100 text-neutral-700 text-[11px] dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
+                className="gap-1 border-neutral-300 bg-neutral-100 text-[11px] text-neutral-700 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
               >
                 <FileCheck className="size-3" />
                 Draft
@@ -118,7 +118,8 @@ export function RoadmapCard({ roadmap }: RoadmapCardProps) {
             {roadmap.title}
           </h3>
           <p className="line-clamp-2 text-sm leading-relaxed text-neutral-600 dark:text-zinc-400">
-            {roadmap.shortDescription || "Structured roadmap with nodes, guides and learning checkpoints."}
+            {roadmap.shortDescription ||
+              "Structured roadmap with nodes, guides and learning checkpoints."}
           </p>
         </div>
       </div>
@@ -127,12 +128,20 @@ export function RoadmapCard({ roadmap }: RoadmapCardProps) {
       <div className="mt-6 border-t border-neutral-200/60 pt-4 dark:border-zinc-800/60">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4 text-xs text-neutral-500 dark:text-zinc-400">
-            <div className="flex items-center gap-1" title="Interactive topics & milestones">
-              <Layers className="size-3.5 text-brand" />
-              <span>{nodeCount} {nodeCount === 1 ? "node" : "nodes"}</span>
+            <div
+              className="flex items-center gap-1"
+              title="Interactive topics & milestones"
+            >
+              <Layers className="text-brand size-3.5" />
+              <span>
+                {nodeCount} {nodeCount === 1 ? "node" : "nodes"}
+              </span>
             </div>
             {roadmap.estimatedDuration && (
-              <div className="flex items-center gap-1" title="Estimated duration">
+              <div
+                className="flex items-center gap-1"
+                title="Estimated duration"
+              >
                 <Clock className="size-3.5 text-amber-500" />
                 <span>{roadmap.estimatedDuration}</span>
               </div>
@@ -149,7 +158,7 @@ export function RoadmapCard({ roadmap }: RoadmapCardProps) {
               rightIcon={
                 <ArrowRight className="size-3.5 transition-transform duration-200 group-hover/btn:translate-x-0.5" />
               }
-              className="group/btn shrink-0 whitespace-nowrap rounded-full px-4 text-xs font-semibold shadow-xs"
+              className="group/btn shrink-0 rounded-full px-4 text-xs font-semibold whitespace-nowrap shadow-xs"
             >
               Explore
             </Button>

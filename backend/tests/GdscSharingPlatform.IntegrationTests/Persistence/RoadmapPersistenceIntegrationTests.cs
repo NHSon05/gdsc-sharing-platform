@@ -241,7 +241,7 @@ public sealed partial class RoadmapPersistenceIntegrationTests : IAsyncLifetime
         foreach (var sql in deletes)
         {
             var error = await Assert.ThrowsAsync<PostgresException>(() => db.Database.ExecuteSqlRawAsync(sql));
-            Assert.Equal(PostgresErrorCodes.ForeignKeyViolation, error.SqlState);
+            Assert.Contains(error.SqlState, new[] { PostgresErrorCodes.ForeignKeyViolation, PostgresErrorCodes.RestrictViolation });
         }
         Assert.Equal(2, await db.LearningResources.CountAsync());
         Assert.Single(await db.RoadmapEdges.ToListAsync());

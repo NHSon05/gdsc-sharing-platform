@@ -66,7 +66,7 @@ export function CanvasControls({
           <ZoomOut className="size-4" />
         </button>
 
-        <span className="w-12 text-center text-xs font-semibold text-neutral-700 dark:text-zinc-300 select-none">
+        <span className="w-12 text-center text-xs font-semibold text-neutral-700 select-none dark:text-zinc-300">
           {zoomPercent}%
         </span>
 
@@ -156,7 +156,7 @@ export function CanvasControls({
                   size="sm"
                   onClick={onSavePositions}
                   disabled={isSavingPositions}
-                  className="gap-1.5 rounded-xl bg-emerald-600 px-3 text-xs text-white hover:bg-emerald-700 animate-pulse"
+                  className="animate-pulse gap-1.5 rounded-xl bg-emerald-600 px-3 text-xs text-white hover:bg-emerald-700"
                 >
                   {isSavingPositions ? (
                     <Loader2 className="size-3.5 animate-spin" />

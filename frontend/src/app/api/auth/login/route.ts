@@ -49,6 +49,18 @@ export async function POST(request: Request) {
       });
     }
 
+    if (data.user?.roles) {
+      const primaryRole = data.user.roles.includes("Admin")
+        ? "Admin"
+        : data.user.roles[0] || "Member";
+      cookieStore.set("userRole", primaryRole, {
+        secure: isProd,
+        sameSite: "lax",
+        path: "/",
+        maxAge: 7 * 24 * 60 * 60,
+      });
+    }
+
     return NextResponse.json(data);
   } catch (error) {
     console.error("[Route /api/auth/login] Error:", error);

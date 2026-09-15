@@ -8,7 +8,7 @@ import logoSvg from "@/assets/images/logo.svg";
 import { useTranslation } from "@/core/i18n/i18n.context";
 import { useLogoutMutation } from "@/features/auth/hooks/use-logout-mutation";
 import type { CurrentUserDto } from "@/features/auth/types/auth.types";
-import { LogOut } from "lucide-react";
+import { LogOut, ShieldCheck } from "lucide-react";
 import {
   Sidebar,
   SidebarHeader,
@@ -23,6 +23,8 @@ import { getSidebarNavItems } from "./sidebar.config";
 
 import { useSessionStore } from "@/core/session/session.store";
 import { selectCurrentUser } from "@/core/session/session.selectors";
+
+import { getAvatarInitials } from "@/components/ui/user-avatar";
 
 interface AppSidebarProps {
   user?: CurrentUserDto | null;
@@ -51,7 +53,12 @@ export function AppSidebar({
   const displayName = user?.displayName || "User";
   const userRole = user?.roles?.[0] || t("sidebar.proMember");
   const avatarUrl = user?.avatarUrl;
-  const avatarInitial = displayName.charAt(0).toUpperCase();
+  const avatarInitial = getAvatarInitials(displayName);
+  const isAdmin = Boolean(
+    user?.roles?.some(
+      (r) => typeof r === "string" && r.toLowerCase() === "admin"
+    ) || pathname.startsWith("/admin")
+  );
 
   const isLinkActive = (href: string, exact = false) => {
     if (href.startsWith("#")) return false;
@@ -95,6 +102,15 @@ export function AppSidebar({
 
         {/* Primary Navigation */}
         <SidebarNav>
+          {isAdmin && (
+            <Link href="/admin">
+              <SidebarNavItem
+                title={t("sidebar.adminPortal") || "Admin Portal"}
+                icon={ShieldCheck}
+                active={isLinkActive("/admin")}
+              />
+            </Link>
+          )}
           {mainNavItems.map((item) => (
             <Link key={item.title} href={item.href}>
               <SidebarNavItem
@@ -164,6 +180,7 @@ export function AppSidebar({
           role={userRole}
           avatarInitial={avatarInitial}
           avatarSrc={avatarUrl}
+          isAdmin={isAdmin}
           actionSlot={
             <button
               type="button"

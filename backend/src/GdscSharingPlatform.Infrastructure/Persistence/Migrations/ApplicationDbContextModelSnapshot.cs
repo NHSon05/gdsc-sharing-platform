@@ -714,6 +714,411 @@ namespace GdscSharingPlatform.Infrastructure.Persistence.Migrations
                         });
                 });
 
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingContent", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("BodyMarkdown")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("CoverImageUrl")
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)");
+
+                    b.Property<DateTimeOffset>("CreatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("CreatedByUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset?>("PublishedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("ReviewNote")
+                        .HasMaxLength(4000)
+                        .HasColumnType("character varying(4000)");
+
+                    b.Property<DateTimeOffset?>("ReviewedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("ReviewedByUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset?>("SubmittedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Summary")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<DateTimeOffset?>("UpdatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedByUserId");
+
+                    b.HasIndex("ReviewedByUserId");
+
+                    b.HasIndex("Slug")
+                        .IsUnique();
+
+                    b.HasIndex("Status", "PublishedAtUtc");
+
+                    b.ToTable("SharingContents", "gdsc", t =>
+                        {
+                            t.HasCheckConstraint("CK_SharingContents_Status", "\"Status\" IN (0,1,2,3,4)");
+
+                            t.HasCheckConstraint("CK_SharingContents_Version", "\"Version\" >= 0");
+                        });
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingContentAuthor", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("AuthorRole")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset>("CreatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("SharingContentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset?>("UpdatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SharingContentId")
+                        .IsUnique()
+                        .HasFilter("\"AuthorRole\" = 0");
+
+                    b.HasIndex("SharingContentId", "UserId")
+                        .IsUnique();
+
+                    b.HasIndex("UserId", "SharingContentId");
+
+                    b.ToTable("SharingContentAuthors", "gdsc");
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingContentTag", b =>
+                {
+                    b.Property<Guid>("SharingContentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SharingTagId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("SharingContentId", "SharingTagId");
+
+                    b.HasIndex("SharingTagId");
+
+                    b.ToTable("SharingContentTags", "gdsc");
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingResource", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ContentType")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<DateTimeOffset>("CreatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("CreatedByUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<string>("ExternalUrl")
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)");
+
+                    b.Property<long?>("FileSize")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true);
+
+                    b.Property<string>("OriginalFileName")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<int>("ResourceType")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("SharingContentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("StorageKey")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<DateTimeOffset?>("UpdatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedByUserId");
+
+                    b.HasIndex("SharingContentId", "IsActive", "SortOrder");
+
+                    b.ToTable("SharingResources", "gdsc", t =>
+                        {
+                            t.HasCheckConstraint("CK_SharingResources_SortOrder", "\"SortOrder\" >= 0");
+                        });
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingSchedule", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("AudienceScope")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CancellationReason")
+                        .HasMaxLength(4000)
+                        .HasColumnType("character varying(4000)");
+
+                    b.Property<DateTimeOffset>("CreatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("CreatedByUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("DeliveryMode")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<DateTimeOffset>("EndsAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Location")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<string>("MeetingUrl")
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)");
+
+                    b.Property<int>("SharingType")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset>("StartsAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TimeZoneId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<DateTimeOffset?>("UpdatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedByUserId");
+
+                    b.HasIndex("StartsAtUtc", "EndsAtUtc");
+
+                    b.HasIndex("Status", "StartsAtUtc");
+
+                    b.ToTable("SharingSchedules", "gdsc", t =>
+                        {
+                            t.HasCheckConstraint("CK_SharingSchedules_DeliveryMode", "(\"DeliveryMode\" = 0 AND \"MeetingUrl\" IS NOT NULL) OR (\"DeliveryMode\" = 1 AND \"Location\" IS NOT NULL) OR (\"DeliveryMode\" = 2 AND \"MeetingUrl\" IS NOT NULL AND \"Location\" IS NOT NULL)");
+
+                            t.HasCheckConstraint("CK_SharingSchedules_Status", "\"Status\" IN (0,1,2,3,4)");
+
+                            t.HasCheckConstraint("CK_SharingSchedules_Times", "\"EndsAtUtc\" > \"StartsAtUtc\"");
+                        });
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingScheduleAudienceDepartment", b =>
+                {
+                    b.Property<Guid>("SharingScheduleId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("DepartmentId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("SharingScheduleId", "DepartmentId");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.ToTable("SharingScheduleAudienceDepartments", "gdsc");
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingScheduleAudienceGeneration", b =>
+                {
+                    b.Property<Guid>("SharingScheduleId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ClubGenerationId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("SharingScheduleId", "ClubGenerationId");
+
+                    b.HasIndex("ClubGenerationId");
+
+                    b.ToTable("SharingScheduleAudienceGenerations", "gdsc");
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingScheduleContent", b =>
+                {
+                    b.Property<Guid>("SharingScheduleId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SharingContentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
+
+                    b.HasKey("SharingScheduleId", "SharingContentId");
+
+                    b.HasIndex("SharingContentId");
+
+                    b.HasIndex("SharingScheduleId", "SortOrder");
+
+                    b.ToTable("SharingScheduleContents", "gdsc");
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingSchedulePresenter", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("CreatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("PresenterRole")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("SharingScheduleId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset?>("UpdatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId", "SharingScheduleId");
+
+                    b.HasIndex("SharingScheduleId", "UserId", "PresenterRole")
+                        .IsUnique();
+
+                    b.ToTable("SharingSchedulePresenters", "gdsc");
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingTag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Color")
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
+
+                    b.Property<DateTimeOffset>("CreatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<DateTimeOffset?>("UpdatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Slug")
+                        .IsUnique();
+
+                    b.ToTable("SharingTags", "gdsc");
+                });
+
             modelBuilder.Entity("GdscSharingPlatform.Infrastructure.Identity.ApplicationUser", b =>
                 {
                     b.Property<Guid>("Id")
@@ -915,6 +1320,49 @@ namespace GdscSharingPlatform.Infrastructure.Persistence.Migrations
                     b.HasIndex("UserId", "IsRevoked", "ExpiresAt");
 
                     b.ToTable("RefreshTokens", "gdsc");
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Infrastructure.Persistence.SharingAuditEntry", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("character varying(80)");
+
+                    b.Property<Guid>("ActorUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Entity")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("character varying(80)");
+
+                    b.Property<Guid>("EntityId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Metadata")
+                        .IsRequired()
+                        .HasColumnType("jsonb");
+
+                    b.Property<DateTimeOffset>("TimestampUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("TraceId")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActorUserId");
+
+                    b.HasIndex("Entity", "EntityId", "TimestampUtc");
+
+                    b.ToTable("SharingAuditEntries", "gdsc");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -1194,6 +1642,148 @@ namespace GdscSharingPlatform.Infrastructure.Persistence.Migrations
                     b.Navigation("Roadmap");
                 });
 
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingContent", b =>
+                {
+                    b.HasOne("GdscSharingPlatform.Infrastructure.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("GdscSharingPlatform.Infrastructure.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("ReviewedByUserId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingContentAuthor", b =>
+                {
+                    b.HasOne("GdscSharingPlatform.Domain.Sharing.SharingContent", null)
+                        .WithMany("Authors")
+                        .HasForeignKey("SharingContentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("GdscSharingPlatform.Infrastructure.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingContentTag", b =>
+                {
+                    b.HasOne("GdscSharingPlatform.Domain.Sharing.SharingContent", "Content")
+                        .WithMany("Tags")
+                        .HasForeignKey("SharingContentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("GdscSharingPlatform.Domain.Sharing.SharingTag", "Tag")
+                        .WithMany("Contents")
+                        .HasForeignKey("SharingTagId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Content");
+
+                    b.Navigation("Tag");
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingResource", b =>
+                {
+                    b.HasOne("GdscSharingPlatform.Infrastructure.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("GdscSharingPlatform.Domain.Sharing.SharingContent", null)
+                        .WithMany("Resources")
+                        .HasForeignKey("SharingContentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingSchedule", b =>
+                {
+                    b.HasOne("GdscSharingPlatform.Infrastructure.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingScheduleAudienceDepartment", b =>
+                {
+                    b.HasOne("GdscSharingPlatform.Domain.Departments.Department", null)
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("GdscSharingPlatform.Domain.Sharing.SharingSchedule", "Schedule")
+                        .WithMany("AudienceDepartments")
+                        .HasForeignKey("SharingScheduleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Schedule");
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingScheduleAudienceGeneration", b =>
+                {
+                    b.HasOne("GdscSharingPlatform.Domain.Memberships.ClubGeneration", null)
+                        .WithMany()
+                        .HasForeignKey("ClubGenerationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("GdscSharingPlatform.Domain.Sharing.SharingSchedule", "Schedule")
+                        .WithMany("AudienceGenerations")
+                        .HasForeignKey("SharingScheduleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Schedule");
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingScheduleContent", b =>
+                {
+                    b.HasOne("GdscSharingPlatform.Domain.Sharing.SharingContent", "Content")
+                        .WithMany("Schedules")
+                        .HasForeignKey("SharingContentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("GdscSharingPlatform.Domain.Sharing.SharingSchedule", "Schedule")
+                        .WithMany("Contents")
+                        .HasForeignKey("SharingScheduleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Content");
+
+                    b.Navigation("Schedule");
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingSchedulePresenter", b =>
+                {
+                    b.HasOne("GdscSharingPlatform.Domain.Sharing.SharingSchedule", "Schedule")
+                        .WithMany("Presenters")
+                        .HasForeignKey("SharingScheduleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("GdscSharingPlatform.Infrastructure.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Schedule");
+                });
+
             modelBuilder.Entity("GdscSharingPlatform.Infrastructure.Identity.ApplicationUser", b =>
                 {
                     b.HasOne("GdscSharingPlatform.Domain.Departments.Department", "Department")
@@ -1213,6 +1803,15 @@ namespace GdscSharingPlatform.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Infrastructure.Persistence.SharingAuditEntry", b =>
+                {
+                    b.HasOne("GdscSharingPlatform.Infrastructure.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("ActorUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -1310,6 +1909,33 @@ namespace GdscSharingPlatform.Infrastructure.Persistence.Migrations
                     b.Navigation("OutgoingEdges");
 
                     b.Navigation("Resources");
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingContent", b =>
+                {
+                    b.Navigation("Authors");
+
+                    b.Navigation("Resources");
+
+                    b.Navigation("Schedules");
+
+                    b.Navigation("Tags");
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingSchedule", b =>
+                {
+                    b.Navigation("AudienceDepartments");
+
+                    b.Navigation("AudienceGenerations");
+
+                    b.Navigation("Contents");
+
+                    b.Navigation("Presenters");
+                });
+
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Sharing.SharingTag", b =>
+                {
+                    b.Navigation("Contents");
                 });
 
             modelBuilder.Entity("GdscSharingPlatform.Infrastructure.Identity.ApplicationUser", b =>

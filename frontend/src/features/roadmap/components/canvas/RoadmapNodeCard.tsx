@@ -2,13 +2,7 @@
 
 import React from "react";
 import type { RoadmapNodeDto } from "../../types/roadmap.types";
-import {
-  Flag,
-  Layers,
-  BookOpen,
-  GripVertical,
-  Check,
-} from "lucide-react";
+import { Flag, Layers, BookOpen, GripVertical, Check } from "lucide-react";
 
 interface RoadmapNodeCardProps {
   node: RoadmapNodeDto;
@@ -90,17 +84,17 @@ export function RoadmapNodeCard({
           }
         }}
         className={`group relative flex items-center gap-2.5 rounded-xl border-2 border-black bg-amber-400 px-3.5 py-3 shadow-sm transition-all duration-150 select-none ${
-          !node.isActive ? "opacity-50 ring-1 ring-dashed ring-neutral-400" : ""
+          !node.isActive ? "ring-dashed opacity-50 ring-1 ring-neutral-400" : ""
         } ${
           isSelected
-            ? "ring-4 ring-blue-500/60 scale-105 z-20 shadow-md"
+            ? "z-20 scale-105 shadow-md ring-4 ring-blue-500/60"
             : isHighlighted
-            ? "ring-2 ring-blue-500/40 z-10"
-            : "hover:-translate-y-0.5 hover:shadow-md"
+              ? "z-10 ring-2 ring-blue-500/40"
+              : "hover:-translate-y-0.5 hover:shadow-md"
         }`}
       >
         {isEditMode && (
-          <GripVertical className="size-4 text-black/60 shrink-0 cursor-grab active:cursor-grabbing" />
+          <GripVertical className="size-4 shrink-0 cursor-grab text-black/60 active:cursor-grabbing" />
         )}
         <div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-black text-white shadow-xs">
           <Flag className="size-3.5 fill-white" />
@@ -140,16 +134,16 @@ export function RoadmapNodeCard({
           !node.isActive ? "opacity-50" : ""
         } ${
           isSelected
-            ? "ring-4 ring-blue-500/60 scale-105 z-20 shadow-md"
+            ? "z-20 scale-105 shadow-md ring-4 ring-blue-500/60"
             : isHighlighted
-            ? "ring-2 ring-blue-500/40 z-10"
-            : "hover:border-black hover:shadow-sm"
+              ? "z-10 ring-2 ring-blue-500/40"
+              : "hover:border-black hover:shadow-sm"
         }`}
       >
         <div className="flex items-center justify-between gap-1.5">
           <div className="flex items-center gap-1.5">
             <Layers className="size-3.5 text-neutral-600 dark:text-zinc-400" />
-            <span className="text-[11px] font-bold text-neutral-800 uppercase tracking-tight dark:text-zinc-200">
+            <span className="text-[11px] font-bold tracking-tight text-neutral-800 uppercase dark:text-zinc-200">
               {node.title}
             </span>
           </div>
@@ -181,18 +175,18 @@ export function RoadmapNodeCard({
             onDragStart(e, node);
           }
         }}
-        className={`group relative flex items-center justify-center rounded-md border border-blue-700 bg-[#2563EB] px-3 h-[40px] text-center text-white shadow-xs transition-all duration-150 select-none ${
-          !node.isActive ? "opacity-50 ring-1 ring-dashed ring-neutral-400" : ""
+        className={`group relative flex h-[40px] items-center justify-center rounded-md border border-blue-700 bg-[#2563EB] px-3 text-center text-white shadow-xs transition-all duration-150 select-none ${
+          !node.isActive ? "ring-dashed opacity-50 ring-1 ring-neutral-400" : ""
         } ${
           isSelected
-            ? "ring-4 ring-amber-400/70 scale-105 z-20 shadow-md"
+            ? "z-20 scale-105 shadow-md ring-4 ring-amber-400/70"
             : isHighlighted
-            ? "ring-2 ring-amber-400/50 z-10"
-            : "hover:-translate-y-0.5 hover:shadow-md"
+              ? "z-10 ring-2 ring-amber-400/50"
+              : "hover:-translate-y-0.5 hover:shadow-md"
         }`}
       >
         {isEditMode && (
-          <GripVertical className="size-3.5 text-white/60 shrink-0 cursor-grab active:cursor-grabbing absolute left-1.5" />
+          <GripVertical className="absolute left-1.5 size-3.5 shrink-0 cursor-grab text-white/60 active:cursor-grabbing" />
         )}
         <span className="truncate text-xs font-bold tracking-tight text-white">
           {node.title}
@@ -202,7 +196,11 @@ export function RoadmapNodeCard({
   }
 
   // 4. Sub-Topic Pale Yellow / Cream Node (e.g. How does the internet work?, npm, React, Vite, etc.)
-  if (nodeColor === "#FFF4C2" || nodeColor === "#FFEBB2" || nodeColor === "#FFF2B2") {
+  if (
+    nodeColor === "#FFF4C2" ||
+    nodeColor === "#FFEBB2" ||
+    nodeColor === "#FFF2B2"
+  ) {
     return (
       <div
         id={`node-${node.id}`}
@@ -223,21 +221,21 @@ export function RoadmapNodeCard({
             onDragStart(e, node);
           }
         }}
-        className={`group relative flex items-center justify-between gap-2 rounded-md border-[1.5px] border-black bg-[#FFF4C2] px-2.5 h-[38px] shadow-2xs transition-all duration-150 select-none ${
-          !node.isActive ? "opacity-50 ring-1 ring-dashed ring-neutral-400" : ""
+        className={`group relative flex h-[38px] items-center justify-between gap-2 rounded-md border-[1.5px] border-black bg-[#FFF4C2] px-2.5 shadow-2xs transition-all duration-150 select-none ${
+          !node.isActive ? "ring-dashed opacity-50 ring-1 ring-neutral-400" : ""
         } ${
           isSelected
-            ? "ring-4 ring-blue-500/60 scale-105 z-20 shadow-md"
+            ? "z-20 scale-105 shadow-md ring-4 ring-blue-500/60"
             : isHighlighted
-            ? "ring-2 ring-blue-500/40 z-10"
-            : "hover:-translate-y-0.5 hover:shadow-md"
+              ? "z-10 ring-2 ring-blue-500/40"
+              : "hover:-translate-y-0.5 hover:shadow-md"
         }`}
       >
         {isEditMode && (
-          <GripVertical className="size-3 text-black/50 shrink-0 cursor-grab active:cursor-grabbing" />
+          <GripVertical className="size-3 shrink-0 cursor-grab text-black/50 active:cursor-grabbing" />
         )}
 
-        <span className="truncate text-[12px] font-semibold text-black leading-tight flex-1 text-center">
+        <span className="flex-1 truncate text-center text-[12px] leading-tight font-semibold text-black">
           {node.title}
         </span>
 
@@ -279,35 +277,31 @@ export function RoadmapNodeCard({
           onDragStart(e, node);
         }
       }}
-      className={`group relative flex items-center justify-center rounded-md border-2 border-black bg-[#FFE600] px-3 h-[44px] text-center shadow-xs transition-all duration-150 select-none ${
-        !node.isActive ? "opacity-50 ring-1 ring-dashed ring-neutral-400" : ""
+      className={`group relative flex h-[44px] items-center justify-center rounded-md border-2 border-black bg-[#FFE600] px-3 text-center shadow-xs transition-all duration-150 select-none ${
+        !node.isActive ? "ring-dashed opacity-50 ring-1 ring-neutral-400" : ""
       } ${
         isSelected
-          ? "ring-4 ring-blue-500/60 scale-105 z-20 shadow-md"
+          ? "z-20 scale-105 shadow-md ring-4 ring-blue-500/60"
           : isHighlighted
-          ? "ring-2 ring-blue-500/40 z-10"
-          : "hover:-translate-y-0.5 hover:shadow-md"
+            ? "z-10 ring-2 ring-blue-500/40"
+            : "hover:-translate-y-0.5 hover:shadow-md"
       }`}
     >
       {isEditMode && (
-        <GripVertical className="size-3.5 text-black/60 shrink-0 cursor-grab active:cursor-grabbing absolute left-2" />
+        <GripVertical className="absolute left-2 size-3.5 shrink-0 cursor-grab text-black/60 active:cursor-grabbing" />
       )}
 
-      <span className="truncate text-xs font-black text-black tracking-tight uppercase sm:text-[13px]">
+      <span className="truncate text-xs font-black tracking-tight text-black uppercase sm:text-[13px]">
         {node.title}
       </span>
 
       {/* Right-aligned badge if present (e.g. on GraphQL, PWAs, Mobile Apps) */}
-      {badge && (
-        <div className="absolute right-2 shrink-0">
-          {badge}
-        </div>
-      )}
+      {badge && <div className="absolute right-2 shrink-0">{badge}</div>}
 
       {/* Resource Count Badge */}
       {node.resourceCount > 0 && (
         <span
-          className="absolute -top-2 -right-2 flex size-4.5 items-center justify-center rounded-full bg-black text-white text-[9px] font-bold shadow-xs"
+          className="absolute -top-2 -right-2 flex size-4.5 items-center justify-center rounded-full bg-black text-[9px] font-bold text-white shadow-xs"
           title={`${node.resourceCount} resources`}
         >
           {node.resourceCount}

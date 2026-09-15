@@ -59,10 +59,7 @@ export function NodeDetailDrawer({
 }: NodeDetailDrawerProps) {
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
 
-  const { data: detail, isLoading } = useNodeDetailQuery(
-    roadmapId,
-    node?.id
-  );
+  const { data: detail, isLoading } = useNodeDetailQuery(roadmapId, node?.id);
 
   if (!isOpen || !node) return null;
 
@@ -81,9 +78,9 @@ export function NodeDetailDrawer({
   };
 
   const learningObjectives =
-    detail?.learningObjectives || "Master the core principles and apply in practical projects.";
-  const estimatedDuration =
-    detail?.estimatedDuration || "1-2 weeks";
+    detail?.learningObjectives ||
+    "Master the core principles and apply in practical projects.";
+  const estimatedDuration = detail?.estimatedDuration || "1-2 weeks";
   const prerequisites = detail?.prerequisites ?? [];
   const nextNodes = detail?.nextNodes ?? [];
   const resources = detail?.resources ?? [];
@@ -97,10 +94,10 @@ export function NodeDetailDrawer({
       />
 
       {/* Slide-over panel */}
-      <aside className="fixed inset-y-0 right-0 z-50 flex w-full max-w-md flex-col border-l border-neutral-200/90 bg-white shadow-2xl transition-all duration-300 sm:max-w-lg dark:border-zinc-800 dark:bg-zinc-900 animate-in slide-in-from-right">
+      <aside className="animate-in slide-in-from-right fixed inset-y-0 right-0 z-50 flex w-full max-w-md flex-col border-l border-neutral-200/90 bg-white shadow-2xl transition-all duration-300 sm:max-w-lg dark:border-zinc-800 dark:bg-zinc-900">
         {/* Header */}
         <div className="flex items-start justify-between border-b border-neutral-200/80 p-5 dark:border-zinc-800/80">
-          <div className="space-y-1.5 min-w-0 pr-4">
+          <div className="min-w-0 space-y-1.5 pr-4">
             <div className="flex items-center gap-2">
               <Badge
                 variant="outline"
@@ -108,8 +105,8 @@ export function NodeDetailDrawer({
                   node.nodeType === "Milestone"
                     ? "border-amber-400 bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300"
                     : node.nodeType === "Group"
-                    ? "border-purple-300 bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300"
-                    : "border-brand-border bg-brand-muted text-brand"
+                      ? "border-purple-300 bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300"
+                      : "border-brand-border bg-brand-muted text-brand"
                 }`}
               >
                 {node.nodeType}
@@ -122,7 +119,7 @@ export function NodeDetailDrawer({
               )}
             </div>
 
-            <h2 className="text-xl font-bold tracking-tight text-neutral-900 break-words dark:text-zinc-100">
+            <h2 className="text-xl font-bold tracking-tight break-words text-neutral-900 dark:text-zinc-100">
               {node.title}
             </h2>
           </div>
@@ -138,9 +135,9 @@ export function NodeDetailDrawer({
         </div>
 
         {/* Body content */}
-        <div className="flex-1 overflow-y-auto p-5 space-y-6">
+        <div className="flex-1 space-y-6 overflow-y-auto p-5">
           {isLoading ? (
-            <div className="space-y-4 animate-pulse">
+            <div className="animate-pulse space-y-4">
               <div className="h-20 rounded-xl bg-neutral-100 dark:bg-zinc-800" />
               <div className="h-32 rounded-xl bg-neutral-100 dark:bg-zinc-800" />
               <div className="h-28 rounded-xl bg-neutral-100 dark:bg-zinc-800" />
@@ -158,18 +155,19 @@ export function NodeDetailDrawer({
 
               {/* Description */}
               <div className="space-y-2">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-zinc-400">
+                <h3 className="text-xs font-bold tracking-wider text-neutral-500 uppercase dark:text-zinc-400">
                   Overview
                 </h3>
                 <p className="text-sm leading-relaxed text-neutral-700 dark:text-zinc-300">
-                  {node.description || "Detailed conceptual overview and foundational understanding."}
+                  {node.description ||
+                    "Detailed conceptual overview and foundational understanding."}
                 </p>
               </div>
 
               {/* Learning Objectives */}
               <div className="space-y-2">
-                <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-zinc-400">
-                  <Target className="size-3.5 text-brand" />
+                <div className="flex items-center gap-1.5 text-xs font-bold tracking-wider text-neutral-500 uppercase dark:text-zinc-400">
+                  <Target className="text-brand size-3.5" />
                   <span>Learning Objectives</span>
                 </div>
                 <div className="rounded-2xl border border-neutral-200/80 bg-neutral-50/60 p-4 text-xs leading-relaxed text-neutral-700 dark:border-zinc-800 dark:bg-zinc-800/40 dark:text-zinc-300">
@@ -180,7 +178,7 @@ export function NodeDetailDrawer({
               {/* Prerequisites */}
               {prerequisites.length > 0 && (
                 <div className="space-y-2">
-                  <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-zinc-400">
+                  <div className="flex items-center gap-1.5 text-xs font-bold tracking-wider text-neutral-500 uppercase dark:text-zinc-400">
                     <ArrowLeft className="size-3.5 text-amber-500" />
                     <span>Prerequisites</span>
                   </div>
@@ -190,7 +188,7 @@ export function NodeDetailDrawer({
                         key={p.id}
                         type="button"
                         onClick={() => onSelectNodeById(p.id)}
-                        className="group flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-semibold text-neutral-800 shadow-2xs hover:border-brand hover:text-brand dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:border-brand"
+                        className="group hover:border-brand hover:text-brand dark:hover:border-brand flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-semibold text-neutral-800 shadow-2xs dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200"
                       >
                         <span>{p.title}</span>
                         <ArrowRight className="size-3 transition-transform group-hover:translate-x-0.5" />
@@ -203,7 +201,7 @@ export function NodeDetailDrawer({
               {/* Next Nodes */}
               {nextNodes.length > 0 && (
                 <div className="space-y-2">
-                  <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-zinc-400">
+                  <div className="flex items-center gap-1.5 text-xs font-bold tracking-wider text-neutral-500 uppercase dark:text-zinc-400">
                     <ArrowRight className="size-3.5 text-emerald-500" />
                     <span>Recommended Next Steps</span>
                   </div>
@@ -226,8 +224,8 @@ export function NodeDetailDrawer({
               {/* Learning Resources (Links & Files) */}
               <div className="space-y-3 pt-2">
                 <div className="flex items-center justify-between border-t border-neutral-200/80 pt-4 dark:border-zinc-800/80">
-                  <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-zinc-400">
-                    <BookOpen className="size-3.5 text-brand" />
+                  <div className="flex items-center gap-1.5 text-xs font-bold tracking-wider text-neutral-500 uppercase dark:text-zinc-400">
+                    <BookOpen className="text-brand size-3.5" />
                     <span>Resources & Attachments ({resources.length})</span>
                   </div>
 
@@ -236,7 +234,7 @@ export function NodeDetailDrawer({
                       variant="outline"
                       size="sm"
                       onClick={() => onOpenAddResource(node.id)}
-                      className="gap-1 rounded-full text-xs h-7 px-2.5"
+                      className="h-7 gap-1 rounded-full px-2.5 text-xs"
                     >
                       <Plus className="size-3" />
                       <span>Add</span>
@@ -255,7 +253,7 @@ export function NodeDetailDrawer({
                         key={res.id}
                         className="flex items-center justify-between gap-3 rounded-xl border border-neutral-200/80 bg-white p-3 shadow-2xs dark:border-zinc-800 dark:bg-zinc-800/60"
                       >
-                        <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                        <div className="flex min-w-0 flex-1 items-center gap-2.5">
                           <div
                             className={`flex size-8 shrink-0 items-center justify-center rounded-lg ${
                               res.resourceType === "Link"
@@ -279,7 +277,7 @@ export function NodeDetailDrawer({
                                 <span>{formatFileSize(res.fileSize)}</span>
                               )}
                               {res.description && (
-                                <span className="truncate max-w-[150px]">
+                                <span className="max-w-[150px] truncate">
                                   {res.description}
                                 </span>
                               )}
@@ -287,13 +285,13 @@ export function NodeDetailDrawer({
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-1.5 shrink-0">
+                        <div className="flex shrink-0 items-center gap-1.5">
                           {res.resourceType === "Link" && res.externalUrl && (
                             <a
                               href={res.externalUrl}
                               target="_blank"
                               rel="noreferrer noopener"
-                              className="flex size-7 items-center justify-center rounded-lg border border-neutral-200 text-neutral-600 hover:bg-neutral-100 hover:text-brand dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-700"
+                              className="hover:text-brand flex size-7 items-center justify-center rounded-lg border border-neutral-200 text-neutral-600 hover:bg-neutral-100 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-700"
                               title="Open in new tab"
                             >
                               <ExternalLink className="size-3.5" />
@@ -306,11 +304,11 @@ export function NodeDetailDrawer({
                               size="sm"
                               disabled={downloadingId === res.id}
                               onClick={() => handleDownload(res)}
-                              className="size-7 p-0 rounded-lg"
+                              className="size-7 rounded-lg p-0"
                               title="Download file"
                             >
                               {downloadingId === res.id ? (
-                                <Loader2 className="size-3.5 animate-spin text-brand" />
+                                <Loader2 className="text-brand size-3.5 animate-spin" />
                               ) : (
                                 <Download className="size-3.5" />
                               )}
@@ -339,17 +337,15 @@ export function NodeDetailDrawer({
 
         {/* Admin Footer Controls */}
         {isAdmin && onToggleNodeStatus && (
-          <div className="border-t border-neutral-200/80 p-4 bg-neutral-50/50 dark:border-zinc-800 dark:bg-zinc-900/50">
+          <div className="border-t border-neutral-200/80 bg-neutral-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/50">
             <Button
               variant={node.isActive ? "outline" : "brand"}
               size="sm"
               onClick={() => onToggleNodeStatus(node.id, node.isActive)}
-              className="w-full gap-2 text-xs rounded-xl"
+              className="w-full gap-2 rounded-xl text-xs"
             >
               <Power className="size-3.5" />
-              <span>
-                {node.isActive ? "Deactivate Node" : "Activate Node"}
-              </span>
+              <span>{node.isActive ? "Deactivate Node" : "Activate Node"}</span>
             </Button>
           </div>
         )}

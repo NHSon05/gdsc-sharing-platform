@@ -1,6 +1,7 @@
 using GdscSharingPlatform.Domain.Departments;
 using GdscSharingPlatform.Domain.Memberships;
 using GdscSharingPlatform.Domain.Roadmaps;
+using GdscSharingPlatform.Domain.Sharing;
 using GdscSharingPlatform.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -46,6 +47,17 @@ public class ApplicationDbContext(
     public DbSet<RoadmapEdge> RoadmapEdges => Set<RoadmapEdge>();
 
     public DbSet<LearningResource> LearningResources => Set<LearningResource>();
+
+    public DbSet<SharingContent> SharingContents => Set<SharingContent>();
+    public DbSet<SharingContentAuthor> SharingContentAuthors => Set<SharingContentAuthor>();
+    public DbSet<SharingResource> SharingResources => Set<SharingResource>();
+    public DbSet<SharingTag> SharingTags => Set<SharingTag>();
+    public DbSet<SharingContentTag> SharingContentTags => Set<SharingContentTag>();
+    public DbSet<SharingSchedule> SharingSchedules => Set<SharingSchedule>();
+    public DbSet<SharingSchedulePresenter> SharingSchedulePresenters => Set<SharingSchedulePresenter>();
+    public DbSet<SharingScheduleContent> SharingScheduleContents => Set<SharingScheduleContent>();
+    public DbSet<SharingScheduleAudienceGeneration> SharingScheduleAudienceGenerations => Set<SharingScheduleAudienceGeneration>();
+    public DbSet<SharingScheduleAudienceDepartment> SharingScheduleAudienceDepartments => Set<SharingScheduleAudienceDepartment>();
 
     protected override void OnModelCreating(
         ModelBuilder builder)

@@ -143,6 +143,7 @@ export function AvatarUploader({
                   src={displayImage}
                   alt={displayName}
                   fill
+                  sizes="112px"
                   className="object-cover"
                 />
               ) : (

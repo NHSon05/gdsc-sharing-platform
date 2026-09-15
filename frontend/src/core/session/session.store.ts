@@ -55,8 +55,8 @@ function getInitialSessionState() {
     status: accessToken
       ? ("authenticated" as const)
       : refreshToken
-      ? ("loading" as const)
-      : ("idle" as const),
+        ? ("loading" as const)
+        : ("idle" as const),
   };
 }
 

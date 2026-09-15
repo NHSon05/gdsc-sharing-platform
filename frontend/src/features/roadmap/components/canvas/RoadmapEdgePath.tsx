@@ -1,10 +1,7 @@
 "use client";
 
 import React from "react";
-import type {
-  RoadmapEdgeDto,
-  RoadmapNodeDto,
-} from "../../types/roadmap.types";
+import type { RoadmapEdgeDto, RoadmapNodeDto } from "../../types/roadmap.types";
 
 interface RoadmapEdgePathProps {
   edge: RoadmapEdgeDto;
@@ -16,11 +13,16 @@ interface RoadmapEdgePathProps {
 }
 
 function getNodeDimensions(node: RoadmapNodeDto) {
-  const width = node.width ? Number(node.width) : node.nodeType === "Group" ? 220 : 180;
+  const width = node.width
+    ? Number(node.width)
+    : node.nodeType === "Group"
+      ? 220
+      : 180;
   const color = (node.color || "").toUpperCase();
   const isTopic = !node.color || color === "#FFE600";
   const isBlue = color === "#2563EB" || color === "#3B82F6";
-  const height = node.nodeType === "Milestone" ? 72 : isTopic ? 44 : isBlue ? 40 : 38;
+  const height =
+    node.nodeType === "Milestone" ? 72 : isTopic ? 44 : isBlue ? 40 : 38;
   return { width, height };
 }
 
@@ -157,7 +159,7 @@ export function RoadmapEdgePath({
             x={0}
             y={3}
             textAnchor="middle"
-            className="text-[10px] font-semibold fill-neutral-600 dark:fill-zinc-300 select-none"
+            className="fill-neutral-600 text-[10px] font-semibold select-none dark:fill-zinc-300"
           >
             {edge.label}
           </text>
@@ -168,7 +170,7 @@ export function RoadmapEdgePath({
       {isEditMode && onDeleteEdge && (
         <g
           transform={`translate(${midX}, ${midY})`}
-          className="cursor-pointer group"
+          className="group cursor-pointer"
           onClick={(e) => {
             e.stopPropagation();
             onDeleteEdge(edge.id);
@@ -176,13 +178,13 @@ export function RoadmapEdgePath({
         >
           <circle
             r={10}
-            className="fill-rose-500 hover:fill-rose-600 shadow-sm transition-all"
+            className="fill-rose-500 shadow-sm transition-all hover:fill-rose-600"
           />
           <text
             x={0}
             y={3.5}
             textAnchor="middle"
-            className="text-[11px] font-bold fill-white select-none pointer-events-none"
+            className="pointer-events-none fill-white text-[11px] font-bold select-none"
           >
             ×
           </text>
