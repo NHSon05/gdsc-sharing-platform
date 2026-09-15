@@ -7,6 +7,7 @@ import { Shield } from "lucide-react";
 export interface UserAvatarProps {
   name?: string | null;
   avatarUrl?: string | null;
+  avatarInitial?: string;
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   isAdmin?: boolean;
   showAdminBadge?: boolean;
@@ -45,6 +46,7 @@ const badgeSizeClasses = {
 export function UserAvatar({
   name,
   avatarUrl,
+  avatarInitial,
   size = "md",
   isAdmin: propIsAdmin,
   showAdminBadge = false,
@@ -54,7 +56,7 @@ export function UserAvatar({
   const [imageError, setImageError] = React.useState(false);
 
   const trimmedName = name?.trim() || "";
-  const initials = getAvatarInitials(trimmedName);
+  const initials = avatarInitial?.trim() || getAvatarInitials(trimmedName);
 
   const isAdmin =
     propIsAdmin !== undefined
