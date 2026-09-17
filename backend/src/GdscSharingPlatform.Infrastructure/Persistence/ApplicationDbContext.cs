@@ -16,6 +16,7 @@ public class ApplicationDbContext(
         IdentityRole<Guid>,
         Guid>(options)
 {
+    public DbSet<GdscSharingPlatform.Domain.Interviews.InterviewQuestion> InterviewQuestions => Set<GdscSharingPlatform.Domain.Interviews.InterviewQuestion>();
     public DbSet<Department> Departments =>
         Set<Department>();
 

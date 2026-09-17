@@ -1,0 +1,1214 @@
+[
+  {
+    "id": "4cb9ccd4-7b4f-5773-b5a0-b21abb60e85e",
+    "question": "GraphQL là gì và khác REST ở điểm cốt lõi nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100001-graphql-la-gi-va-khac-rest-o-diem-cot-loi-nao",
+    "slug": "graphql-la-gi-va-khac-rest-o-diem-cot-loi-nao-4cb9ccd4-7b4f-5773-b5a0-b21abb60e85e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "GraphQL là ngôn ngữ truy vấn cho API, trong đó client mô tả chính xác dữ liệu mình cần và server trả về đúng shape đó. REST thì mỗi endpoint có response shape cố định, nên client hoặc bị over-fetching, hoặc phải gọi nhiều lần rồi tự ghép."
+      ],
+      "details": [
+        "Hai vấn đề GraphQL sinh ra để giải quyết là over-fetching và under-fetching. Với màn hình cần dữ liệu từ ba nguồn, REST thường tốn ba round trip còn GraphQL chỉ một.",
+        "Trade-off cần nói rõ trong phỏng vấn: cache ở tầng HTTP khó hơn nhiều vì mọi truy vấn đi qua một địa chỉ; việc giới hạn chi phí truy vấn trở thành trách nhiệm của server; và execution layer phức tạp hơn. GraphQL không phải database và không thay thế database — nó là tầng contract giữa client và server."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "100001-graphql-la-gi-va-khac-rest-o-diem-cot-loi-nao"
+  },
+  {
+    "id": "ee9186e2-eef5-5f01-9048-534cfecd46cb",
+    "question": "Schema trong GraphQL là gì và vì sao nó quan trọng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100002-schema-trong-graphql-la-gi-va-vi-sao-no-quan-trong",
+    "slug": "schema-trong-graphql-la-gi-va-vi-sao-no-quan-trong-ee9186e2-eef5-5f01-9048-534cfecd46cb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Schema là contract mô tả mọi kiểu, field và tham số mà client truy vấn được. Cả hai phía dựa vào nó, nên truy vấn sai tên field hay sai kiểu bị từ chối trước khi thực thi, và mọi công cụ codegen, autocomplete trong editor, docs tự sinh đều lấy từ đây."
+      ],
+      "details": [
+        "Điểm cần tách bạch: schema mô tả API chứ không phản chiếu cấu trúc lưu trữ. Sao chép nguyên bảng database thành kiểu GraphQL là sai lầm phổ biến vì nó rò rỉ chi tiết lưu trữ và khiến việc đổi bảng breaking change với client.",
+        "Một kiểu trong schema có thể gộp dữ liệu từ nhiều bảng hoặc từ dịch vụ bên ngoài. Thực hành nên có là đưa schema vào CI và chặn các breaking change trước khi hợp nhất."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "100002-schema-trong-graphql-la-gi-va-vi-sao-no-quan-trong"
+  },
+  {
+    "id": "1839089d-be0b-5387-b749-df6b08356732",
+    "question": "Query, Mutation và Subscription khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100003-query-mutation-va-subscription-khac-nhau-the-nao",
+    "slug": "query-mutation-va-subscription-khac-nhau-the-nao-1839089d-be0b-5387-b749-df6b08356732",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Query là đọc, Mutation là ghi, Subscription là luồng dữ liệu server đẩy về. Về mặt thực thi có một khác biệt quan trọng: các top-level field của mutation chạy tuần tự để thứ tự thay đổi dữ liệu là xác định, còn các field của query chạy song song được vì chỉ đọc."
+      ],
+      "details": [
+        "Một chi tiết hay bị hiểu nhầm: chỉ top-level field của mutation mới tuần tự. Các field bên trong phần trả về vẫn được giải quyết như query bình thường, nên đừng dựa vào thứ tự của chúng cho logic nghiệp vụ.",
+        "Quy ước nên theo khi thiết kế: mutation trả về đủ dữ liệu để client cập nhật giao diện mà không phải gọi lại. Trả về mỗi giá trị đúng sai buộc client tốn thêm một round trip."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "100003-query-mutation-va-subscription-khac-nhau-the-nao"
+  },
+  {
+    "id": "e33e61d3-cc49-56bb-b4b0-e09f79c0d456",
+    "question": "Resolver là gì và nhận vào những tham số nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100004-resolver-la-gi-va-nhan-vao-nhung-tham-so-nao",
+    "slug": "resolver-la-gi-va-nhan-vao-nhung-tham-so-nao-e33e61d3-cc49-56bb-b4b0-e09f79c0d456",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Resolver là hàm trả về giá trị cho một field."
+      ],
+      "details": [
+        "Server đi theo shape truy vấn và gọi resolver tương ứng cho từng field, nên một truy vấn lồng nhiều tầng kích hoạt cả một cây lời gọi.",
+        "Ngữ cảnh là chỗ đặt các thứ theo từng yêu cầu như phiên đăng nhập, DataLoader và cache ngắn hạn. Đặt chúng ở phạm vi toàn cục là lỗi bảo mật nghiêm trọng vì dữ liệu người dùng này có thể rò sang yêu cầu của người khác.",
+        "Một chi tiết về hiệu năng: nếu không viết resolver cho một field, server dùng resolver mặc định đọc thuộc tính cùng tên từ object cha — đây là lý do một truy vấn trông đơn giản vẫn sinh rất nhiều lời gọi dữ liệu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const resolvers = {\n  Post: {\n    // parent = the Post object, args = field args, ctx = per-request, info = query AST\n    author: (parent, args, ctx, info) => ctx.loaders.user.load(parent.authorId),\n  },\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "100004-resolver-la-gi-va-nhan-vao-nhung-tham-so-nao"
+  },
+  {
+    "id": "09fc332a-ee95-5c59-8146-23ab147428e7",
+    "question": "Dấu chấm than trong schema nghĩa là gì và vì sao nên cân nhắc khi dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100005-dau-cham-than-trong-schema-nghia-la-gi-va-vi-sao-nen-can-nhac-khi-dung",
+    "slug": "dau-cham-than-trong-schema-nghia-la-gi-va-vi-sao-nen-can-nhac-khi-dung-09fc332a-ee95-5c59-8146-23ab147428e7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dấu chấm than nghĩa là field không bao giờ trả về null."
+      ],
+      "details": [
+        "Đây là cam kết mạnh: nếu resolver trả về null cho field đó, lỗi sẽ lan lên field cha gần nhất cho phép null, và có thể xoá cả một nhánh dữ liệu lớn.",
+        "Cách cân bằng thường dùng: giữ không null cho các field thật sự luôn tồn tại như id và các giá trị tính từ chính record; cho phép null ở các field lấy từ dịch vụ khác hoặc có thể chậm.",
+        "Với danh sách, ký hiệu áp cho cả danh sách lẫn phần tử nên có bốn tổ hợp — chọn nhầm là nguồn của lỗi một phần tử hỏng làm rỗng cả danh sách."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GRAPHQL",
+          "code": "type Post {\n  id: ID!            # always present\n  tags: [String!]!   # list non-null AND items non-null\n  images: [String]   # both nullable — one bad item cannot empty the list\n  author: User       # nullable on purpose: fetched from another service\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "100005-dau-cham-than-trong-schema-nghia-la-gi-va-vi-sao-nen-can-nhac-khi-dung"
+  },
+  {
+    "id": "abdba03a-75f0-54de-987e-d2955732577a",
+    "question": "Vì sao nên dùng biến thay vì ghép giá trị thẳng vào chuỗi truy vấn?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100006-vi-sao-nen-dung-bien-thay-vi-ghep-gia-tri-thang-vao-chuoi-truy-van",
+    "slug": "vi-sao-nen-dung-bien-thay-vi-ghep-gia-tri-thang-vao-chuoi-truy-van-abdba03a-75f0-54de-987e-d2955732577a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng biến thì query document giữ nguyên shape cho mọi giá trị, nên server phân tích và cache được, còn giá trị được kiểm tra kiểu theo schema."
+      ],
+      "details": [
+        "Ghép chuỗi tạo ra một truy vấn khác nhau mỗi lần và cho phép người dùng ảnh hưởng tới cấu trúc truy vấn.",
+        "Một lợi ích thực dụng khác: với biến, công cụ codegen tạo ra kiểu chính xác cho tham số ở phía client, nên gõ sai tên hay sai kiểu bị bắt lúc biên dịch thay vì lúc chạy."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GRAPHQL",
+          "code": "query GetPost($id: ID!) { post(id: $id) { title } }\n# variables travel separately: { \"id\": \"42\" } — the document shape never changes"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "100006-vi-sao-nen-dung-bien-thay-vi-ghep-gia-tri-thang-vao-chuoi-truy-van"
+  },
+  {
+    "id": "e0c7287d-78e5-5efc-a777-0d82778fba6e",
+    "question": "Fragment dùng để làm gì trong ứng dụng thực tế?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100007-fragment-dung-de-lam-gi-trong-ung-dung-thuc-te",
+    "slug": "fragment-dung-de-lam-gi-trong-ung-dung-thuc-te-e0c7287d-78e5-5efc-a777-0d82778fba6e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Fragment gom một nhóm field dùng lại được."
+      ],
+      "details": [
+        "Trong thực tế, nó cho phép mỗi thành phần giao diện khai báo dữ liệu nó cần, rồi màn hình ghép các fragment lại thành một truy vấn duy nhất.",
+        "Dạng thứ hai là fragment theo kiểu, dùng khi field trả về một giao diện hoặc union — client khai báo field riêng cho từng kiểu con và server chỉ trả phần khớp.",
+        "Lưu ý: fragment không giảm chi phí ở server. Ghép mười fragment vẫn tạo ra một truy vấn lớn, nên vẫn cần giới hạn Depth và Complexity."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GRAPHQL",
+          "code": "fragment PostCard on Post { id title author { name } }\n\nquery Feed {\n  feed { ...PostCard }\n  search(term: \"graphql\") {\n    ... on Post { ...PostCard }   # inline fragment: only for the matching type\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "100007-fragment-dung-de-lam-gi-trong-ung-dung-thuc-te"
+  },
+  {
+    "id": "077500bd-5cc8-5e78-911e-ab88f0be2a17",
+    "question": "Phản hồi GraphQL có thể vừa có dữ liệu vừa có lỗi không? Client nên xử lý thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100008-phan-hoi-graphql-co-the-vua-co-du-lieu-vua-co-loi-khong-client-nen-xu-ly-the-nao",
+    "slug": "phan-hoi-graphql-co-the-vua-co-du-lieu-vua-co-loi-khong-client-nen-xu-ly-the-nao-077500bd-5cc8-5e78-911e-ab88f0be2a17",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "không thể chỉ nhìn HTTP status"
+      ],
+      "details": [
+        "Phản hồi gồm phần data và mảng errors, nên một truy vấn có thể trả về partial result: nhánh nào lỗi thì null và được ghi vào mảng errors, nhánh khác vẫn có dữ liệu.",
+        "Cách phân loại thường dùng: lỗi kỹ thuật như downstream service chết thì để trong mảng errors; còn lỗi nghiệp vụ như sai mật khẩu hay hết hàng nên mô hình hoá thành kiểu trả về, vì client cần xử lý chúng như một kết quả hợp lệ.",
+        "Về bảo mật: error message trả cho client không nên chứa stack trace hay câu truy vấn nội bộ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "100008-phan-hoi-graphql-co-the-vua-co-du-lieu-vua-co-loi-khong-client-nen-xu-ly-the-nao"
+  },
+  {
+    "id": "0d89aea7-e544-592c-b1f7-034961c40a02",
+    "question": "Vấn đề N+1 trong GraphQL là gì và giải quyết ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100009-van-de-n-1-trong-graphql-la-gi-va-giai-quyet-ra-sao",
+    "slug": "van-de-n-1-trong-graphql-la-gi-va-giai-quyet-ra-sao-0d89aea7-e544-592c-b1f7-034961c40a02",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cách xử lý chuẩn là DataLoader: hoãn các yêu cầu lẻ trong cùng một tick của event loop, gom thành một danh sách khoá, rồi gọi một lần duy nhất. Nó cũng cache theo khoá trong phạm vi một yêu cầu nên cùng một tác giả không bị lấy hai lần."
+      ],
+      "details": [
+        "Hai điều kiện quan trọng: DataLoader phải được tạo mới cho mỗi yêu cầu vì cache của nó có thể rò dữ liệu giữa các người dùng; và hàm lấy theo lô phải trả kết quả đúng thứ tự với danh sách khoá nhận vào.",
+        "Một chi tiết dễ sai: DataLoader chỉ gom được các lời gọi trong cùng một tick. Nếu resolver chờ một thao tác khác trước khi gọi DataLoader, lời gọi rơi sang tick sau và lợi ích biến mất mà không có dấu hiệu gì."
+      ],
+      "points": [],
+      "sections": [
+        "Truy vấn danh sách 50 bài viết kèm tác giả sinh ra 51 lời gọi database: một lời gọi lấy danh sách, rồi resolver của field tác giả chạy riêng cho từng bài."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// created per request — a module-scope loader leaks data between users\nconst userLoader = new DataLoader((ids) => usersByIds(ids))\n// usersByIds MUST return rows in the same order as ids, nulls for misses\n\nconst resolvers = { Post: { author: (p, _a, ctx) => ctx.userLoader.load(p.authorId) } }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "100009-van-de-n-1-trong-graphql-la-gi-va-giai-quyet-ra-sao"
+  },
+  {
+    "id": "6047e070-80ed-5464-b9bf-17c52d6d474d",
+    "question": "Normalized cache ở client GraphQL hoạt động thế nào và cần điều kiện gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100010-normalized-cache-o-client-graphql-hoat-dong-the-nao-va-can-dieu-kien-gi",
+    "slug": "normalized-cache-o-client-graphql-hoat-dong-the-nao-va-can-dieu-kien-gi-6047e070-80ed-5464-b9bf-17c52d6d474d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Nó nhận diện object bằng __typename + id của record."
+      ],
+      "details": [
+        "Nhờ vậy cùng một object xuất hiện trong nhiều truy vấn chỉ được lưu một bản, và cập nhật nó ở một nơi tự phản ánh ở mọi màn hình đang hiển thị.",
+        "Phần vẫn phải làm tay: thêm và xoá phần tử khỏi danh sách, vì thư viện không biết record mới thuộc danh sách nào. Đây là phần tốn công nhất khi làm việc với normalized cache.",
+        "Một lựa chọn nhẹ hơn cho ứng dụng vừa và nhỏ: dùng thư viện đệm theo truy vấn và làm mới các truy vấn liên quan sau khi ghi."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// the store is flat, keyed by __typename + id\n{\n  \"Post:42\": { id: \"42\", title: \"Hello\", author: { __ref: \"User:7\" } },\n  \"User:7\":  { id: \"7\", name: \"An\" }   // updating this reflects on every screen\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "100010-normalized-cache-o-client-graphql-hoat-dong-the-nao-va-can-dieu-kien-gi"
+  },
+  {
+    "id": "4b8c6991-5469-5c02-a757-e97aab8b3a24",
+    "question": "Vì sao cursor pagination được ưa dùng trong GraphQL?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100011-vi-sao-cursor-pagination-duoc-ua-dung-trong-graphql",
+    "slug": "vi-sao-cursor-pagination-duoc-ua-dung-trong-graphql-4b8c6991-5469-5c02-a757-e97aab8b3a24",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cursor trỏ vào một vị trí xác định trong tập kết quả, nên record mới chèn vào không làm lệch trang như phân trang theo số trang.",
+        "Connection pattern"
+      ],
+      "details": [
+        "Đổi lại, nhảy thẳng tới trang thứ mười là việc khó.",
+        "Một lưu ý về hiệu năng: trả về tổng số record thường tốn kém vì phải đếm toàn bộ. Nhiều đội chọn không trả tổng số hoặc trả con số ước lượng, và thiết kế giao diện theo hướng cuộn vô hạn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GRAPHQL",
+          "code": "query { posts(first: 20, after: \"Y3Vyc29yOjIw\") {\n  edges { cursor node { id title } }\n  pageInfo { hasNextPage endCursor }\n} }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "100011-vi-sao-cursor-pagination-duoc-ua-dung-trong-graphql"
+  },
+  {
+    "id": "900d7400-cea4-5098-a24f-60dfce57139f",
+    "question": "Phân quyền trong GraphQL nên đặt ở tầng nào và vì sao khó hơn REST?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100012-phan-quyen-trong-graphql-nen-dat-o-tang-nao-va-vi-sao-kho-hon-rest",
+    "slug": "phan-quyen-trong-graphql-nen-dat-o-tang-nao-va-vi-sao-kho-hon-rest-900d7400-cea4-5098-a24f-60dfce57139f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Đặt ở business logic phía sau resolver, nơi biết cả người dùng lẫn record cụ thể.",
+        "cùng một kiểu dữ liệu được với tới từ nhiều đường trong đồ thị"
+      ],
+      "details": [
+        "Kiểm tra chỉ ở gateway là chưa đủ vì nó chỉ biết người dùng là ai, không biết họ có quyền xem đúng record đang yêu cầu hay không.",
+        "Các mức phân quyền: theo thao tác, theo kiểu, theo field, và theo từng record. Mức theo record khó nhất và hay bị bỏ sót nhất.",
+        "Lưu ý hiệu năng: kiểm tra quyền theo từng record trong danh sách dài dễ tạo ra chính vấn đề N+1 — nên tải dữ liệu phân quyền theo lô hoặc đẩy điều kiện xuống truy vấn database."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// authorize per field, not per route — one query can touch many types\nconst resolvers = {\n  Post: {\n    revenue: (post, _a, ctx) => (ctx.can('read:revenue', post) ? post.revenue : null),\n  },\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "100012-phan-quyen-trong-graphql-nen-dat-o-tang-nao-va-vi-sao-kho-hon-rest"
+  },
+  {
+    "id": "2b43dfe0-c8c0-56ec-8f54-8c616eaf0694",
+    "question": "Vì sao API GraphQL công khai cần giới hạn Depth và chi phí truy vấn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100013-vi-sao-api-graphql-cong-khai-can-gioi-han-depth-va-chi-phi-truy-van",
+    "slug": "vi-sao-api-graphql-cong-khai-can-gioi-han-depth-va-chi-phi-truy-van-2b43dfe0-c8c0-56ec-8f54-8c616eaf0694",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì client tự quyết định shape truy vấn, một truy vấn lồng sâu qua quan hệ hai chiều có thể tăng khối lượng theo cấp số nhân và làm quá tải server chỉ với một yêu cầu."
+      ],
+      "details": [
+        "Ví dụ kinh điển: bài viết có tác giả, tác giả có danh sách bài viết, mỗi bài lại có tác giả. Lồng mười tầng là một truy vấn ngắn nhưng có thể tạo hàng triệu lượt giải quyết field.",
+        "Các biện pháp nên áp dụng cùng nhau: giới hạn Depth; tính điểm chi phí theo số field và số record ước lượng rồi chặn khi vượt ngưỡng; bắt buộc tham số giới hạn cho mọi field danh sách; rate limit theo điểm đã dùng; và đặt thời gian chờ thực thi.",
+        "Với API chỉ phục vụ client của mình, allowlist là biện pháp mạnh và đơn giản hơn: server chỉ chấp nhận truy vấn đã đăng ký lúc build."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "100013-vi-sao-api-graphql-cong-khai-can-gioi-han-depth-va-chi-phi-truy-van"
+  },
+  {
+    "id": "ac4174a6-9a2b-5197-9cc6-bb3ef6aeea55",
+    "question": "Persisted query và allowlist khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100014-persisted-query-va-allowlist-khac-nhau-the-nao",
+    "slug": "persisted-query-va-allowlist-khac-nhau-the-nao-ac4174a6-9a2b-5197-9cc6-bb3ef6aeea55",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Persisted query tự động cho phép server học truy vấn mới khi gặp lần đầu, sau đó client chỉ gửi hash."
+      ],
+      "details": [
+        "Mục đích chính là giảm dung lượng gửi lên.",
+        "Lợi ích kèm theo của allowlist: tập truy vấn hữu hạn nên theo dõi vận hành có ý nghĩa vì mỗi truy vấn có tên cố định, và việc ước lượng chi phí trở nên khả thi.",
+        "Cái giá: quy trình phát hành phức tạp hơn vì phải đăng ký truy vấn khi build và giữ các phiên bản cũ cho tới khi mọi client cũ ngừng dùng. Với ứng dụng di động, khoảng thời gian đó có thể kéo dài nhiều tháng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JSON",
+          "code": "POST /graphql\n{\n  \"extensions\": { \"persistedQuery\": { \"sha256Hash\": \"b1e4...\" } },\n  \"variables\":  { \"id\": \"42\" }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "100014-persisted-query-va-allowlist-khac-nhau-the-nao"
+  },
+  {
+    "id": "1ad721f4-02c5-53c1-9c5a-fba2ace89bd3",
+    "question": "Mutation nên trả về gì và thiết kế tham số đầu vào ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100015-mutation-nen-tra-ve-gi-va-thiet-ke-tham-so-dau-vao-ra-sao",
+    "slug": "mutation-nen-tra-ve-gi-va-thiet-ke-tham-so-dau-vao-ra-sao-1ad721f4-02c5-53c1-9c5a-fba2ace89bd3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Trả về record vừa thay đổi kèm các field liên quan, để client cập nhật cache và giao diện ngay."
+      ],
+      "details": [
+        "Với normalized cache, chỉ cần id và các field đã đổi là mọi màn hình tự cập nhật.",
+        "Về tham số: nhận qua một kiểu đầu vào duy nhất để thêm field về sau không breaking change. Thêm field vào kiểu đầu vào là thay đổi an toàn, còn thêm tham số bắt buộc thì không.",
+        "Đặt tên theo hành động nghiệp vụ thay vì thao tác lưu trữ: một mutation mô tả việc xuất bản bài viết rõ ràng hơn một mutation cập nhật field trạng thái."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GRAPHQL",
+          "code": "input UpdatePostInput { id: ID!, title: String }\n\ntype UpdatePostPayload {\n  post: Post                 # enough for the client to update its cache\n  errors: [UserError!]!      # business errors modelled as data, not thrown\n}\n\ntype Mutation { updatePost(input: UpdatePostInput!): UpdatePostPayload! }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "100015-mutation-nen-tra-ve-gi-va-thiet-ke-tham-so-dau-vao-ra-sao"
+  },
+  {
+    "id": "f1dcd0b6-ec36-5f99-8458-8cf88dd06347",
+    "question": "GraphQL xử lý việc thay đổi API thế nào khi không đánh số phiên bản?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100016-graphql-xu-ly-viec-thay-doi-api-the-nao-khi-khong-danh-so-phien-ban",
+    "slug": "graphql-xu-ly-viec-thay-doi-api-the-nao-khi-khong-danh-so-phien-ban-f1dcd0b6-ec36-5f99-8458-8cf88dd06347",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "GraphQL tiến hoá bằng cách thêm field mới và đánh dấu field cũ là không dùng nữa.",
+        "biết ai đang dùng field nào"
+      ],
+      "details": [
+        "Client cũ vẫn chạy vì field cũ còn đó, và field cũ chỉ bị gỡ khi không còn ai truy vấn tới.",
+        "Các breaking change cần chặn trong CI: gỡ field hoặc kiểu; đổi kiểu trả về; thêm tham số bắt buộc; và đổi một field cho phép null thành không null theo chiều sai.",
+        "Với ứng dụng di động, thời gian sống của một phiên bản client tính bằng năm vì luôn có người không cập nhật. Lịch gỡ field nên tính theo số liệu sử dụng thật chứ không theo mốc thời gian định sẵn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GRAPHQL",
+          "code": "type User {\n  firstName: String!\n  fullName: String! @deprecated(reason: \"Use firstName/lastName. Removed 2026-12-01\")\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "100016-graphql-xu-ly-viec-thay-doi-api-the-nao-khi-khong-danh-so-phien-ban"
+  },
+  {
+    "id": "9ba24540-a101-54f0-983d-72d8128f1614",
+    "question": "Vì sao cache HTTP khó áp dụng cho GraphQL và có cách nào lấy lại?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100017-vi-sao-cache-http-kho-ap-dung-cho-graphql-va-co-cach-nao-lay-lai",
+    "slug": "vi-sao-cache-http-kho-ap-dung-cho-graphql-va-co-cach-nao-lay-lai-9ba24540-a101-54f0-983d-72d8128f1614",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì mọi truy vấn đi qua một địa chỉ duy nhất và thường dùng POST, nên cache trung gian không phân biệt được các truy vấn khác nhau. Bù lại, GraphQL đẩy việc cache về phía client với normalized cache theo object."
+      ],
+      "details": [
+        "Cách lấy lại khả năng cache ở tầng mạng: dùng persisted query kèm phương thức GET để địa chỉ trở nên duy nhất theo hash và biến; đặt tiêu đề thời hạn theo từng truy vấn; và tách rõ truy vấn công khai với truy vấn cần đăng nhập.",
+        "Một tầng đệm hay bị bỏ qua là ở chính server: đệm kết quả resolver theo khoá dữ liệu, đặc biệt cho các tra cứu ít thay đổi như danh mục hay cấu hình.",
+        "Cảnh báo về tính đúng đắn: nếu cùng một truy vấn trả dữ liệu khác nhau tuỳ người dùng, khoá cache phải chứa thông tin người dùng, nếu không sẽ rò dữ liệu giữa các tài khoản."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "100017-vi-sao-cache-http-kho-ap-dung-cho-graphql-va-co-cach-nao-lay-lai"
+  },
+  {
+    "id": "513a0f11-4139-56ce-b80c-459e2874afc1",
+    "question": "Codegen từ schema đem lại lợi ích gì cho đội client?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100018-codegen-tu-schema-dem-lai-loi-ich-gi-cho-doi-client",
+    "slug": "codegen-tu-schema-dem-lai-loi-ich-gi-cho-doi-client-513a0f11-4139-56ce-b80c-459e2874afc1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Codegen tạo ra kiểu chính xác cho từng truy vấn, nên gõ sai tên field hay dùng sai kiểu bị bắt lúc biên dịch. Kết hợp với kiểm tra schema trong CI, một breaking change sẽ làm hỏng build thay vì hỏng ứng dụng của người dùng."
+      ],
+      "details": [
+        "Quy trình thường dùng: lấy schema từ tệp đã cam kết trong kho mã; chạy công cụ sinh kiểu cho mọi truy vấn; và chạy lại trong CI để phát hiện lệch.",
+        "Một quyết định cần chốt: lấy schema động từ server đang chạy hay từ tệp trong kho. Tệp trong kho cho kết quả tái lập được và không phụ thuộc môi trường, đổi lại phải nhớ cập nhật.",
+        "Lợi ích phụ đáng kể: kiểu sinh ra cho biết chính xác field nào có thể null theo schema, buộc client xử lý các nhánh đó — chỗ nhiều lỗi giao diện xuất phát khi viết tay."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "100018-codegen-tu-schema-dem-lai-loi-ich-gi-cho-doi-client"
+  },
+  {
+    "id": "0f1acf03-303a-5d0d-8fb9-1f8c212138d7",
+    "question": "Khi nào nên dùng subscription và chi phí vận hành của nó là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100019-khi-nao-nen-dung-subscription-va-chi-phi-van-hanh-cua-no-la-gi",
+    "slug": "khi-nao-nen-dung-subscription-va-chi-phi-van-hanh-cua-no-la-gi-0f1acf03-303a-5d0d-8fb9-1f8c212138d7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Subscription hợp với sự kiện không đoán trước và cần đẩy ngay: tin nhắn mới, giá thay đổi, trạng thái đơn hàng. Với dữ liệu đổi đều đặn, hỏi lại theo lịch thường đơn giản và rẻ hơn nhiều."
+      ],
+      "details": [
+        "Chi phí vận hành hay bị đánh giá thấp: mỗi client giữ một kết nối lâu dài nên server chịu tải kết nối chứ không chỉ tải yêu cầu, và việc mở rộng theo chiều ngang cần một lớp phát tán sự kiện giữa các server.",
+        "Các vấn đề phải xử lý ở client: kết nối rớt và nối lại; dữ liệu bỏ lỡ trong lúc mất kết nối; và trùng lặp khi vừa nhận sự kiện vừa tải lại. Mẫu thường dùng là nối lại rồi tải lại một lần để đồng bộ.",
+        "Một lựa chọn nhẹ hơn: server đẩy một thông báo ngắn báo có dữ liệu mới, còn client tự gọi truy vấn để lấy — giữ được đường dẫn dữ liệu duy nhất."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "100019-khi-nao-nen-dung-subscription-va-chi-phi-van-hanh-cua-no-la-gi"
+  },
+  {
+    "id": "2f50867a-94bf-52ca-9df4-29ab1cd5c9af",
+    "question": "Interface và union khác nhau thế nào và dùng cho trường hợp nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100020-interface-va-union-khac-nhau-the-nao-va-dung-cho-truong-hop-nao",
+    "slug": "interface-va-union-khac-nhau-the-nao-va-dung-cho-truong-hop-nao-2f50867a-94bf-52ca-9df4-29ab1cd5c9af",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Chọn theo ngữ nghĩa: dùng interface khi các kiểu thật sự chia sẻ thuộc tính, ví dụ mọi nội dung đều có id và thời điểm tạo. Dùng union khi kết quả có thể là những thứ khác hẳn nhau, ví dụ tìm kiếm trả về người dùng, bài viết hoặc sản phẩm."
+      ],
+      "details": [
+        "Một ứng dụng đáng chú ý của union là mô hình hoá kết quả mutation: trả về hoặc record thành công, hoặc một trong các kiểu lỗi nghiệp vụ. Client buộc phải viết fragment cho từng kiểu nên không bỏ sót trường hợp lỗi.",
+        "Chi tiết kỹ thuật: server phải có cách xác định kiểu cụ thể cho mỗi giá trị trả về — thiếu bước này là lỗi lúc chạy thường gặp khi mới dùng abstract type."
+      ],
+      "points": [],
+      "sections": [
+        "Interface buộc mọi kiểu cài đặt nó phải có chung một tập field, nên truy vấn được các field đó mà không cần biết kiểu cụ thể. Union gom các kiểu không có gì chung, nên phải dùng fragment theo từng kiểu."
+      ],
+      "codeExamples": [
+        {
+          "language": "GRAPHQL",
+          "code": "interface Node { id: ID! }          # shared fields — queryable directly\nunion SearchResult = Post | User   # nothing in common — needs inline fragments\n\nquery { search(term: \"a\") { ... on Post { title } ... on User { name } } }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "100020-interface-va-union-khac-nhau-the-nao-va-dung-cho-truong-hop-nao"
+  },
+  {
+    "id": "0c2c72e7-2ff2-5e44-a2c1-bd23b0a0d620",
+    "question": "Custom scalar dùng để làm gì và có bẫy nào cần tránh?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100021-custom-scalar-dung-de-lam-gi-va-co-bay-nao-can-tranh",
+    "slug": "custom-scalar-dung-de-lam-gi-va-co-bay-nao-can-tranh-0c2c72e7-2ff2-5e44-a2c1-bd23b0a0d620",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Custom scalar cho phép kiểm tra và chuẩn hoá định dạng ngay ở tầng schema: giá trị sai bị từ chối trước khi vào resolver, và mọi client nhận cùng một định dạng.",
+        "đánh mất toàn bộ lợi ích của hệ kiểu"
+      ],
+      "details": [
+        "Các kiểu hay dùng: ngày giờ, thư điện tử, địa chỉ web, số thập phân chính xác cho tiền tệ.",
+        "Một lưu ý riêng về tiền tệ: dùng số thực là sai lầm quen thuộc vì phép làm tròn nhị phân gây lệch. Cách an toàn là truyền dưới dạng chuỗi hoặc số nguyên đơn vị nhỏ nhất, và mô tả rõ quy ước đó trong schema."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GRAPHQL",
+          "code": "scalar DateTime   # you must implement serialize / parseValue / parseLiteral\n\ntype Post { publishedAt: DateTime! }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "100021-custom-scalar-dung-de-lam-gi-va-co-bay-nao-can-tranh"
+  },
+  {
+    "id": "b718a96c-b7f9-50cd-bca1-a0c0b03a0df4",
+    "question": "Directive include và skip dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100022-directive-include-va-skip-dung-khi-nao",
+    "slug": "directive-include-va-skip-dung-khi-nao-b718a96c-b7f9-50cd-bca1-a0c0b03a0df4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Chúng bật tắt một phần truy vấn theo giá trị biến, nên cùng một document phục vụ được nhiều trường hợp."
+      ],
+      "details": [
+        "Điều này quan trọng với persisted query, nơi số lượng document khác nhau cần được giữ ở mức tối thiểu.",
+        "Chỉ thị tuỳ chỉnh ở schema là công cụ mạnh nhưng dễ bị lạm dụng: đưa quá nhiều logic vào đó khiến hành vi bị giấu khỏi mã và khó theo dõi khi gỡ lỗi.",
+        "Một lưu ý khi dùng directive bật tắt: field bị tắt biến mất khỏi phản hồi thay vì trả về null, nên client phải xử lý được cả hai trạng thái, và với normalized cache điều này ảnh hưởng tới việc ghi đè dữ liệu đã có."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GRAPHQL",
+          "code": "query Feed($withAuthor: Boolean!, $skipBody: Boolean!) {\n  feed {\n    title\n    body   @skip(if: $skipBody)\n    author @include(if: $withAuthor) { name }\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "100022-directive-include-va-skip-dung-khi-nao"
+  },
+  {
+    "id": "273a743e-c889-5827-bf29-c2f96d3dae85",
+    "question": "Validation của mutation nên đặt ở đâu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100023-validation-cua-mutation-nen-dat-o-dau",
+    "slug": "validation-cua-mutation-nen-dat-o-dau-273a743e-c889-5827-bf29-c2f96d3dae85",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Schema lo phần kiểu và tính bắt buộc, còn luật nghiệp vụ nằm ở business logic. Hệ kiểu không diễn tả được các luật như số tiền phải dương, mã giảm giá còn hiệu lực, hay ngày kết thúc phải sau ngày bắt đầu."
+      ],
+      "details": [
+        "Cách trả lỗi cũng là quyết định thiết kế: trả trong mảng errors kỹ thuật thì client khó xử lý theo từng field; trả trong kiểu payload với mảng errors có mã và tên field thì client hiển thị được lỗi ngay cạnh ô nhập tương ứng.",
+        "Nguyên tắc nên giữ: kiểm tra ở client là để giúp người dùng sửa nhanh, còn server vẫn phải kiểm tra lại toàn bộ vì client có thể bị bỏ qua bằng cách gọi API trực tiếp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "100023-validation-cua-mutation-nen-dat-o-dau"
+  },
+  {
+    "id": "af409df7-55a9-59c9-9316-cb3395fe878e",
+    "question": "Rate limit cho API GraphQL nên tính theo gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100024-rate-limit-cho-api-graphql-nen-tinh-theo-gi",
+    "slug": "rate-limit-cho-api-graphql-nen-tinh-theo-gi-af409df7-55a9-59c9-9316-cb3395fe878e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Tính theo chi phí ước lượng của truy vấn, không phải số yêu cầu. Một truy vấn lấy một record và một truy vấn lồng ba tầng qua danh sách nghìn phần tử là hai khối lượng công việc chênh nhau hàng nghìn lần."
+      ],
+      "details": [
+        "Cách tính chi phí thường dùng: gán điểm cho từng field, nhân với số record ước lượng từ tham số phân trang, cộng dồn theo cây truy vấn. Truy vấn vượt ngưỡng bị từ chối trước khi chạy, và điểm đã dùng được trừ vào hạn mức của client.",
+        "Các biện pháp nên đi cùng: giới hạn Depth; bắt buộc tham số giới hạn trên mọi field trả về danh sách; đặt thời gian chờ; và giới hạn số alias trong một truy vấn, vì lặp cùng một field qua alias là cách nhân chi phí mà không tăng Depth."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "100024-rate-limit-cho-api-graphql-nen-tinh-theo-gi"
+  },
+  {
+    "id": "a97818e3-6e27-553f-aabc-93205c26552a",
+    "question": "Cách tiếp cận schema-first và code-first khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100025-cach-tiep-can-schema-first-va-code-first-khac-nhau-the-nao",
+    "slug": "cach-tiep-can-schema-first-va-code-first-khac-nhau-the-nao-a97818e3-6e27-553f-aabc-93205c26552a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Schema-first: viết schema bằng SDL rồi cài đặt resolver theo nó. Code-first: định nghĩa kiểu bằng mã và schema được sinh ra. Khác biệt thật nằm ở nguồn sự thật của contract và cách các đội phối hợp."
+      ],
+      "details": [
+        "Schema trước hợp khi contract cần bàn bạc trước giữa đội client và đội server, vì tệp schema là thứ cụ thể để cùng xem. Rủi ro là mã cài đặt và schema có thể lệch nhau nếu không có kiểm tra tự động.",
+        "Mã trước hợp khi một đội sở hữu cả hai phía, vì kiểu trong mã và schema không thể lệch. Rủi ro là schema dễ bị định hình theo cấu trúc lưu trữ vì người viết nhìn từ phía mã ra.",
+        "Dù chọn cách nào, hai thực hành nên có: cam kết tệp schema vào kho mã; và chạy kiểm tra breaking change trong CI."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "100025-cach-tiep-can-schema-first-va-code-first-khac-nhau-the-nao"
+  },
+  {
+    "id": "cdc453d8-71db-526b-9211-ae65b70bd4e7",
+    "question": "Trạng thái chỉ tồn tại ở giao diện nên đặt ở đâu khi dùng GraphQL?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100026-trang-thai-chi-ton-tai-o-giao-dien-nen-dat-o-dau-khi-dung-graphql",
+    "slug": "trang-thai-chi-ton-tai-o-giao-dien-nen-dat-o-dau-khi-dung-graphql-cdc453d8-71db-526b-9211-ae65b70bd4e7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Đặt ở state của ứng dụng chứ không nhét vào cache GraphQL. Cache được thiết kế cho dữ liệu server với cơ chế làm mới và hết hạn riêng, còn trạng thái giao diện có vòng đời hoàn toàn khác."
+      ],
+      "details": [
+        "Ranh giới nên giữ: dữ liệu server thuộc về thư viện dữ liệu với cache, làm mới và thử lại; trạng thái giao diện như bộ lọc, tab đang chọn, biểu mẫu đang nhập thuộc về state ứng dụng; và một số trạng thái nên nằm trong địa chỉ trang để chia sẻ và quay lại được.",
+        "Một cách nghĩ hữu ích: nếu tải lại trang mà mất thì đó là trạng thái giao diện; nếu vẫn còn vì server giữ thì đó là dữ liệu server; nếu cần chia sẻ bằng liên kết thì nên nằm trong địa chỉ.",
+        "Lỗi hay gặp khi trộn: bộ lọc đặt trong cache bị xoá khi cache được dọn sau một thao tác ghi, khiến giao diện tự đặt lại về mặc định mà người dùng không hiểu vì sao."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "100026-trang-thai-chi-ton-tai-o-giao-dien-nen-dat-o-dau-khi-dung-graphql"
+  },
+  {
+    "id": "69069056-11a2-5c80-a30f-c26e84cb8414",
+    "question": "Theo dõi hiệu năng server GraphQL nên đo ở mức nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100027-theo-doi-hieu-nang-server-graphql-nen-do-o-muc-nao",
+    "slug": "theo-doi-hieu-nang-server-graphql-nen-do-o-muc-nao-69069056-11a2-5c80-a30f-c26e84cb8414",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Đo theo tên truy vấn và theo thời gian giải quyết từng field. Đo ở mức endpoint là vô nghĩa vì mọi truy vấn dùng chung một địa chỉ, và status code thường là 200 kể cả khi phản hồi chứa lỗi."
+      ],
+      "details": [
+        "Các số liệu đáng theo dõi: thời gian thực thi theo từng truy vấn có tên ở nhóm phần trăm cao; số lời gọi tới data source cho mỗi truy vấn, vì đây là chỗ vấn đề N+1 lộ ra; tỉ lệ lỗi theo field; và các field đã đánh dấu bỏ dần mà vẫn có lưu lượng.",
+        "Số liệu cuối cùng đặc biệt giá trị vì nó là điều kiện để gỡ field cũ một cách an toàn.",
+        "Một yêu cầu thực dụng đi kèm: bắt buộc mọi truy vấn từ client phải có tên. Truy vấn không tên làm mọi số liệu gộp lại thành một nhóm vô danh."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "100027-theo-doi-hieu-nang-server-graphql-nen-do-o-muc-nao"
+  },
+  {
+    "id": "a035610a-c574-59e7-b489-5776ae5916fc",
+    "question": "Test một server GraphQL nên tập trung vào phần nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100028-test-mot-server-graphql-nen-tap-trung-vao-phan-nao",
+    "slug": "test-mot-server-graphql-nen-tap-trung-vao-phan-nao-a035610a-c574-59e7-b489-5776ae5916fc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Chạy truy vấn thật qua schema rồi so kết quả, vì cách này phủ cả schema, resolver và business logic đúng như client sẽ gặp. Data source bên dưới thì giả lập để test nhanh và ổn định."
+      ],
+      "details": [
+        "Các trường hợp nên phủ ngoài đường đi thành công: lỗi ở một nhánh và partial result; phân quyền cho từng vai trò; giá trị null ở các field cho phép null; và các giới hạn như Depth, Complexity cùng phân trang ở biên.",
+        "Một dạng test riêng đáng có trong CI là kiểm tra thay đổi schema có breaking change không — nó bắt được các thay đổi như gỡ field hay thêm tham số bắt buộc trước khi ra tới client.",
+        "Về phía client, nên giả lập ở mức phản hồi HTTP thay vì giả lập từng hàm, để phần phân tích dữ liệu và ánh xạ kiểu vẫn chạy thật."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "100028-test-mot-server-graphql-nen-tap-trung-vao-phan-nao"
+  },
+  {
+    "id": "5f0e4175-b794-52a4-b6a2-2fb350461ef1",
+    "question": "Upload file qua GraphQL nên làm thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100029-upload-file-qua-graphql-nen-lam-the-nao",
+    "slug": "upload-file-qua-graphql-nen-lam-the-nao-5f0e4175-b794-52a4-b6a2-2fb350461ef1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cách bền nhất là xin địa chỉ ký sẵn qua một mutation, tải tệp thẳng lên kho lưu trữ, rồi gọi mutation thứ hai để gắn tệp vào record. Tệp không đi qua server API nên tránh được giới hạn kích thước và tải nặng."
+      ],
+      "details": [
+        "Đặc tả GraphQL không định nghĩa việc truyền tệp nhị phân, nên mọi cách gửi tệp trực tiếp đều là phần mở rộng — đó là lý do các đội lớn thường tách hẳn việc tải tệp ra khỏi tầng GraphQL.",
+        "Các chi tiết cần xử lý cho luồng ký sẵn: đặt thời hạn ngắn cho địa chỉ; giới hạn kiểu nội dung và kích thước ngay trong chính sách; và dọn các tệp mồ côi khi người dùng bỏ dở.",
+        "Với di động, nên thu nhỏ ảnh ở phía thiết bị trước khi tải lên và hiển thị tiến độ thật."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "100029-upload-file-qua-graphql-nen-lam-the-nao"
+  },
+  {
+    "id": "373c2a7d-0ef4-513b-8e7e-db75a8beb8cf",
+    "question": "Khi nào nên gửi truy vấn bằng GET thay vì POST?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100030-khi-nao-nen-gui-truy-van-bang-get-thay-vi-post",
+    "slug": "khi-nao-nen-gui-truy-van-bang-get-thay-vi-post-373c2a7d-0ef4-513b-8e7e-db75a8beb8cf",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng GET khi kết hợp với persisted query: địa chỉ trở nên duy nhất theo hash và biến, nên tầng phân phối nội dung và cache trung gian đệm được."
+      ],
+      "details": [
+        "Với truy vấn dài viết thẳng thì POST an toàn hơn vì không vướng giới hạn độ dài địa chỉ.",
+        "Điều kiện an toàn: chỉ áp cho truy vấn đọc; tách rõ truy vấn công khai và truy vấn cần đăng nhập vì đệm dữ liệu riêng tư ở tầng chung là rò rỉ; và đưa các thông tin ảnh hưởng kết quả như ngôn ngữ vào khoá cache."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# GET is cacheable by CDN/browser, but the URL length caps the document\nGET /graphql?query=%7Bme%7Bname%7D%7D&variables=%7B%7D\n# in practice: use it together with persisted queries (send the hash, not the text)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "100030-khi-nao-nen-gui-truy-van-bang-get-thay-vi-post"
+  },
+  {
+    "id": "85c641c6-de25-5dd1-bba9-536aef087026",
+    "question": "Federation giải quyết vấn đề gì và khi nào đáng dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "federation-giai-quyet-van-de-gi-va-khi-nao-dang-dung-85c641c6-de25-5dd1-bba9-536aef087026",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": null
+  },
+  {
+    "id": "5938fceb-aac2-583f-851f-1b2ac6a670ff",
+    "question": "Mutation chạy tuần tự có phải là transaction không?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mutation-chay-tuan-tu-co-phai-la-transaction-khong-5938fceb-aac2-583f-851f-1b2ac6a670ff",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": null
+  },
+  {
+    "id": "db310b13-1a1e-5b20-8667-7fee26ae1281",
+    "question": "Directive trả dữ liệu theo phần giải quyết vấn đề gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "directive-tra-du-lieu-theo-phan-giai-quyet-van-de-gi-db310b13-1a1e-5b20-8667-7fee26ae1281",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": null
+  },
+  {
+    "id": "3a49516e-70b4-543a-8b57-04238fcd75f7",
+    "question": "Kiểm tra schema trong CI nên chặn những thay đổi nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "kiem-tra-schema-trong-ci-nen-chan-nhung-thay-doi-nao-3a49516e-70b4-543a-8b57-04238fcd75f7",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": null
+  },
+  {
+    "id": "eaa48a3f-9608-5acd-af3c-a2da7eef82e6",
+    "question": "Hệ multi-tenant dùng GraphQL cần chú ý điều gì nhất?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "he-multi-tenant-dung-graphql-can-chu-y-dieu-gi-nhat-eaa48a3f-9608-5acd-af3c-a2da7eef82e6",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": null
+  },
+  {
+    "id": "cb4fd1ce-525d-5f0d-90a3-c7512536ded7",
+    "question": "Một downstream service chết làm toàn bộ phản hồi thành null. Vì sao và xử lý ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mot-downstream-service-chet-lam-toan-bo-phan-hoi-thanh-null-vi-sao-va-xu-ly-ra-sao-cb4fd1ce-525d-5f0d-90a3-c7512536ded7",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": null
+  },
+  {
+    "id": "04a4b1b1-d1fe-5266-b970-d0e893f15d11",
+    "question": "Chuyển một hệ thống REST sang GraphQL nên bắt đầu thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "chuyen-mot-he-thong-rest-sang-graphql-nen-bat-dau-the-nao-04a4b1b1-d1fe-5266-b970-d0e893f15d11",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": null
+  },
+  {
+    "id": "954cf36f-47a6-5a9c-b48b-e176c28bb45b",
+    "question": "Vì sao không nên thiết kế schema phản chiếu đúng cấu trúc bảng database?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vi-sao-khong-nen-thiet-ke-schema-phan-chieu-dung-cau-truc-bang-database-954cf36f-47a6-5a9c-b48b-e176c28bb45b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": null
+  },
+  {
+    "id": "e7bd1d8f-cb4a-5d7a-a402-bc9a7c905ec2",
+    "question": "Đánh giá sức khoẻ của một API GraphQL đang chạy nên nhìn vào đâu trước?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "danh-gia-suc-khoe-cua-mot-api-graphql-dang-chay-nen-nhin-vao-dau-truoc-e7bd1d8f-cb4a-5d7a-a402-bc9a7c905ec2",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": null
+  },
+  {
+    "id": "48a9cb12-27b8-556d-8c64-9fa8749d6544",
+    "question": "Trường hợp nào GraphQL không phải lựa chọn phù hợp?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "truong-hop-nao-graphql-khong-phai-lua-chon-phu-hop-48a9cb12-27b8-556d-8c64-9fa8749d6544",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": null
+  }
+]

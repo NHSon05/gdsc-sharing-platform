@@ -12,6 +12,14 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
+        source: "/api/v1/interview-question",
+        destination: `${API_DESTINATION.replace(/\/+$/, "")}/api/v1/interview-questions`,
+      },
+      {
+        source: "/api/v1/interview-question/:id",
+        destination: `${API_DESTINATION.replace(/\/+$/, "")}/api/v1/interview-questions/:id`,
+      },
+      {
         source: "/api/:path*",
         destination: `${API_DESTINATION.replace(/\/+$/, "")}/api/:path*`,
       },

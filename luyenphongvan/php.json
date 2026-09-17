@@ -1,0 +1,1264 @@
+[
+  {
+    "id": "0d4db2e0-c897-58fd-943e-86678361e122",
+    "question": "PHP là gì và tên viết tắt này có nghĩa là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2601-php-la-gi-va-ten-viet-tat-nay-co-nghia-la-gi",
+    "slug": "php-la-gi-va-ten-viet-tat-nay-co-nghia-la-gi-0d4db2e0-c897-58fd-943e-86678361e122",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "PHP viết tắt của Hypertext Preprocessor, là ngôn ngữ lập trình phía server dùng để tạo trang web động."
+      ],
+      "details": [],
+      "points": [
+        "Khi người dùng truy cập một trang PHP, server sẽ thực thi mã PHP rồi trả về HTML cho trình duyệt.",
+        "Khác với JavaScript chạy trên trình duyệt, PHP chạy hoàn toàn trên server trước khi gửi kết quả về cho client.",
+        "PHP là mã nguồn mở, đa nền tảng và tích hợp tốt với các cơ sở dữ liệu như MySQL, PostgreSQL."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "2601-php-la-gi-va-ten-viet-tat-nay-co-nghia-la-gi"
+  },
+  {
+    "id": "dff422fa-7f7b-5fbb-b577-2d9a2f27ce53",
+    "question": "Superglobal trong PHP là gì? Cho ví dụ.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2602-superglobal-trong-php-la-gi-cho-vi-du",
+    "slug": "superglobal-trong-php-la-gi-cho-vi-du-dff422fa-7f7b-5fbb-b577-2d9a2f27ce53",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Superglobal là các biến được PHP định nghĩa sẵn, có thể truy cập ở bất kỳ đâu trong script mà không cần khai báo global."
+      ],
+      "details": [],
+      "points": [
+        "Các superglobal quan trọng: $_GET (dữ liệu gửi qua URL), $_POST (dữ liệu gửi ẩn qua form), $_SERVER (thông tin server), $_FILES (file được upload), $_COOKIE (dữ liệu cookie), $_SESSION (lưu trữ session), $GLOBALS (chứa tất cả biến toàn cục).",
+        "PHP tự động gán giá trị cho các biến này và có thể dùng trong mọi hàm hay phạm vi."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "2602-superglobal-trong-php-la-gi-cho-vi-du"
+  },
+  {
+    "id": "30862b5d-d6d1-571f-b3bc-bf0482c5842f",
+    "question": "Sự khác biệt giữa $_GET và $_POST là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2603-su-khac-biet-giua-get-va-post-la-gi",
+    "slug": "su-khac-biet-giua-get-va-post-la-gi-30862b5d-d6d1-571f-b3bc-bf0482c5842f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai đều thu thập dữ liệu từ form nhưng khác nhau về tính bảo mật và giới hạn dữ liệu. $_GET đính kèm dữ liệu vào URL (dễ nhìn thấy), giới hạn khoảng 2KB và không an toàn cho dữ liệu nhạy cảm. $_POST gửi dữ liệu trong body của request (ẩn với URL), có giới hạn dung lượng lớn hơn nhiều (do post_max_size trong php.ini, mặc định ~8MB) và an toàn hơn cho mật khẩu hay thông tin cá nhân."
+      ],
+      "details": [
+        "Dùng $_GET khi lọc/tìm kiếm và muốn bookmark URL, dùng $_POST cho các form nhập dữ liệu nhạy cảm."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "2603-su-khac-biet-giua-get-va-post-la-gi"
+  },
+  {
+    "id": "fa535679-2dec-5ae5-b941-048f3d616bd8",
+    "question": "PHP có những kiểu dữ liệu nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2605-php-co-nhung-kieu-du-lieu-nao",
+    "slug": "php-co-nhung-kieu-du-lieu-nao-fa535679-2dec-5ae5-b941-048f3d616bd8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "PHP có 8 kiểu dữ liệu cơ bản: String (chuỗi như \"Hello\"), Integer (số nguyên), Float (số thập phân), Boolean (true/false), Array (tập hợp giá trị), Object (thực thể của lớp), NULL (không có giá trị), và Resource (tham chiếu tài nguyên bên ngoài)."
+      ],
+      "details": [],
+      "points": [
+        "Bốn kiểu đầu là scalar (kiểu đơn giản), Array và Object là kiểu phức hợp, NULL là kiểu đặc biệt, còn Resource dùng cho kết nối database hay file handle.",
+        "PHP 8.1+ bổ sung Enum như là first-class type với type safety đầy đủ, cùng với union types (8.0: int|string), intersection types (8.1: A&B), và never type (8.1)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "2605-php-co-nhung-kieu-du-lieu-nao"
+  },
+  {
+    "id": "175cc470-e18d-5688-b5df-67fa848fe5a2",
+    "question": "Sự khác biệt giữa toán tử == và === trong PHP là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2606-su-khac-biet-giua-toan-tu-va-trong-php-la-gi",
+    "slug": "su-khac-biet-giua-toan-tu-va-trong-php-la-gi-175cc470-e18d-5688-b5df-67fa848fe5a2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "== kiểm tra giá trị có bằng nhau không nhưng cho phép chuyển đổi kiểu dữ liệu."
+      ],
+      "details": [
+        "Ví dụ \"5\" == 5 trả về true vì PHP tự đổi chuỗi thành số."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "2606-su-khac-biet-giua-toan-tu-va-trong-php-la-gi"
+  },
+  {
+    "id": "cc75055e-e024-5c72-8189-bbeabf8131d6",
+    "question": "Cách làm việc với mảng trong PHP? Có mấy loại mảng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2607-cach-lam-viec-voi-mang-trong-php-co-may-loai-mang",
+    "slug": "cach-lam-viec-voi-mang-trong-php-co-may-loai-mang-cc75055e-e024-5c72-8189-bbeabf8131d6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "PHP có ba loại mảng: Indexed array (truy cập theo vị trí: $fruits[0]), Associative array (truy cập theo key: $person[\"name\"]), và Multidimensional array (mảng chứa mảng khác).",
+        "Tạo mảng indexed: $arr = [\"apple\", \"banana\"], mảng associative: $arr = [\"name\" => \"John\", \"age\" => 30].",
+        "Các hàm thông dụng: count() đếm phần tử, array_push() thêm phần tử, array_merge() gộp mảng, in_array() kiểm tra tồn tại, array_keys() và array_values() lấy key hoặc value."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "2607-cach-lam-viec-voi-mang-trong-php-co-may-loai-mang"
+  },
+  {
+    "id": "bb1d8c0d-3d04-524d-89d8-a6a0bfebfbe3",
+    "question": "Các hàm xử lý chuỗi phổ biến trong PHP là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2608-cac-ham-xu-ly-chuoi-pho-bien-trong-php-la-gi",
+    "slug": "cac-ham-xu-ly-chuoi-pho-bien-trong-php-la-gi-bb1d8c0d-3d04-524d-89d8-a6a0bfebfbe3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Các hàm chuỗi quan trọng gồm: strlen() (lấy độ dài), strpos() (tìm vị trí chuỗi con), str_replace() (thay thế text), substr() (cắt chuỗi), strtolower() và strtoupper() (đổi chữ hoa/thường), trim() (xóa khoảng trắng đầu cuối), explode() (tách chuỗi thành mảng), implode() (ghép mảng thành chuỗi), htmlspecialchars() (escape HTML để bảo mật)."
+      ],
+      "details": [
+        "Ví dụ: explode(\",\", \"apple,banana,orange\") tạo ra [\"apple\", \"banana\", \"orange\"]."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "2608-cac-ham-xu-ly-chuoi-pho-bien-trong-php-la-gi"
+  },
+  {
+    "id": "66d23b49-a7da-57b4-930a-b51fc22bc76d",
+    "question": "Sự khác biệt giữa include và require trong PHP là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2609-su-khac-biet-giua-include-va-require-trong-php-la-gi",
+    "slug": "su-khac-biet-giua-include-va-require-trong-php-la-gi-66d23b49-a7da-57b4-930a-b51fc22bc76d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai đều nhúng file PHP bên ngoài, nhưng khác nhau ở cách xử lý lỗi. include chỉ cảnh báo (E_WARNING) nếu file không tồn tại và tiếp tục chạy, còn require báo lỗi nghiêm trọng (E_ERROR) và dừng thực thi ngay. include_once và require_once chỉ nhúng file một lần duy nhất trong cùng script."
+      ],
+      "details": [
+        "Dùng require cho các file thiết yếu (như kết nối database) và include cho các thành phần không bắt buộc (như sidebar template)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "2609-su-khac-biet-giua-include-va-require-trong-php-la-gi"
+  },
+  {
+    "id": "c74978c8-414b-5dba-979a-f5e9c8d1cacd",
+    "question": "Làm thế nào để xử lý dữ liệu form trong PHP?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2610-lam-the-nao-de-xu-ly-du-lieu-form-trong-php",
+    "slug": "lam-the-nao-de-xu-ly-du-lieu-form-trong-php-c74978c8-414b-5dba-979a-f5e9c8d1cacd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Truy cập dữ liệu form qua superglobal: method GET dùng $_GET[\"fieldname\"], POST dùng $_POST[\"fieldname\"]. Luôn validate và sanitize: kiểm tra tồn tại với isset($_POST[\"email\"]), validate định dạng với filter_var(), escape output với htmlspecialchars() để ngăn XSS."
+      ],
+      "details": [
+        "Ví dụ:\nCopy\n$email = htmlspecialchars($_POST[\"email\"]); if(filter_var($email, FILTER_VALIDATE_EMAIL)) { // hợp lệ }\n. Không bao giờ tin tưởng dữ liệu từ người dùng—luôn validate trước khi sử dụng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "$email = htmlspecialchars($_POST[\"email\"]); if(filter_var($email, FILTER_VALIDATE_EMAIL)) { // hợp lệ }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "2610-lam-the-nao-de-xu-ly-du-lieu-form-trong-php"
+  },
+  {
+    "id": "6720a48c-84d2-5704-a83a-b5866d6bb85e",
+    "question": "Các loại lỗi trong PHP là gì và cách xử lý chúng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2611-cac-loai-loi-trong-php-la-gi-va-cach-xu-ly-chung",
+    "slug": "cac-loai-loi-trong-php-la-gi-va-cach-xu-ly-chung-6720a48c-84d2-5704-a83a-b5866d6bb85e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "PHP có ba loại lỗi truyền thống: Notice (không nghiêm trọng, không dừng script như truy cập biến chưa định nghĩa), Warning (nghiêm trọng hơn nhưng script vẫn chạy như mở file không hợp lệ), và Fatal error (nghiêm trọng, dừng thực thi như gọi hàm chưa định nghĩa)."
+      ],
+      "details": [],
+      "points": [
+        "PHP 7+ bổ sung hệ thống Error class: Error và Exception đều implement Throwable, bao gồm TypeError, ValueError, ParseError.",
+        "Xử lý lỗi bằng: error_reporting(E_ALL) hiển thị mọi lỗi, set_error_handler() xử lý tùy chỉnh, hoặc dùng try-catch cho Throwable.",
+        "Trên môi trường production, ghi lỗi vào file log thay vì hiển thị cho người dùng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "2611-cac-loai-loi-trong-php-la-gi-va-cach-xu-ly-chung"
+  },
+  {
+    "id": "6551bff5-a7b7-5e56-a7a1-c5d2a68d59b4",
+    "question": "Cách định nghĩa và sử dụng hằng số (constant) trong PHP?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2612-cach-dinh-nghia-va-su-dung-hang-so-constant-trong-php",
+    "slug": "cach-dinh-nghia-va-su-dung-hang-so-constant-trong-php-6551bff5-a7b7-5e56-a7a1-c5d2a68d59b4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Định nghĩa hằng số bằng define(\"CONSTANT_NAME\", value) hoặc const CONSTANT_NAME = value;."
+      ],
+      "details": [],
+      "points": [
+        "Hằng số không có dấu $, không thể thay đổi sau khi định nghĩa, là global mà không cần dùng từ khóa global.",
+        "Từ PHP 8.0, hằng số luôn case-sensitive (tham số $case_insensitive của define() đã bị xóa).",
+        "Dùng hằng cho giá trị cấu hình: define(\"DB_HOST\", \"localhost\"); echo DB_HOST;."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "2612-cach-dinh-nghia-va-su-dung-hang-so-constant-trong-php"
+  },
+  {
+    "id": "0df40d8d-82da-5ae4-a61f-80529c231be1",
+    "question": "Nullable type (?type) trong PHP là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94042-nullable-type-type-trong-php-la-gi",
+    "slug": "nullable-type-type-trong-php-la-gi-0df40d8d-82da-5ae4-a61f-80529c231be1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "?T khai báo giá trị hoặc là kiểu T, hoặc là null."
+      ],
+      "details": [],
+      "points": [
+        "Dùng được cho tham số, kiểu trả về, và property (từ 7.4).",
+        "Đây là ràng buộc rõ ràng: ?int nhận int hoặc null, nhưng không nhận string.",
+        "Từ PHP 8, ?T tương đương union T|null — có thể viết int|null cho rõ nghĩa hơn khi union nhiều kiểu.",
+        "bắt buộc truyền",
+        "Khi hàm trả ?User, caller phải xử lý null để tránh lỗi gọi method trên null."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "function find(?int $id): ?User {   // nhận int|null, trả User|null\n  if ($id === null) return null;\n  return User::find($id);\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "94042-nullable-type-type-trong-php-la-gi"
+  },
+  {
+    "id": "9dee0409-c121-5ae0-a82b-94d8811bc2bc",
+    "question": "Composer là gì và Laravel dùng nó thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94047-composer-la-gi-va-laravel-dung-no-the-nao",
+    "slug": "composer-la-gi-va-laravel-dung-no-the-nao-9dee0409-c121-5ae0-a82b-94d8811bc2bc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Composer là trình quản lý dependency theo từng project cho PHP (vai trò như npm với Node). Nó giải quyết cây phụ thuộc và tự sinh autoloader."
+      ],
+      "details": [
+        "Laravel dựa hoàn toàn vào Composer:"
+      ],
+      "points": [
+        "composer.json — khai báo package + ràng buộc version theo semver (^8.0, ~2.3).",
+        "composer.lock — ghim version chính xác đã cài để build tái lập được. Commit file này; không commit thư mục vendor/.",
+        "composer install cài đúng theo lock; composer update nâng cấp và ghi lại lock.",
+        "Autoload PSR-4: require 'vendor/autoload.php' rồi dùng class theo namespace, không cần require thủ công."
+      ],
+      "sections": [
+        "Package Laravel còn được nạp tự động qua package auto-discovery (khai báo trong extra.laravel của package) nên thường không cần đăng ký service provider bằng tay."
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "composer create-project laravel/laravel my-app\ncomposer require laravel/sanctum"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "94047-composer-la-gi-va-laravel-dung-no-the-nao"
+  },
+  {
+    "id": "7981a1b7-8dd5-5136-a147-04112b73571b",
+    "question": "match trong PHP 8 khác switch ở những điểm nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96652-match-trong-php-8-khac-switch-o-nhung-diem-nao",
+    "slug": "match-trong-php-8-khac-switch-o-nhung-diem-nao-7981a1b7-8dd5-5136-a147-04112b73571b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Bốn khác biệt cần nêu được:",
+        "1, 2 => 'active'"
+      ],
+      "details": [
+        "1. So sánh nghiêm ngặt. match dùng ===, switch dùng ==. Đây là điểm hay bị hỏi lại.\n2. Là biểu thức (expression). match trả về giá trị, gán thẳng vào biến hoặc return được. switch là câu lệnh.\n3. Không fall-through. Không cần break; mỗi nhánh là một biểu thức duy nhất.\n4. Không khớp thì ném lỗi. Nếu không nhánh nào khớp và không có default, PHP ném UnhandledMatchError thay vì im lặng bỏ qua như switch."
+      ],
+      "points": [
+        "Dùng match (true) khi cần điều kiện thay vì so khớp giá trị.",
+        "Mặc định nên chọn match; chỉ giữ switch khi một nhánh cần chạy nhiều câu lệnh."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "$status = '1';\n\nswitch ($status) {\n    case 1: $label = 'paid'; break;    // trúng: '1' == 1\n    default: $label = 'unknown';\n}\n\n$label = match ($status) {\n    1 => 'paid',                        // KHÔNG trúng: '1' !== 1\n    default => 'unknown',\n};"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "96652-match-trong-php-8-khac-switch-o-nhung-diem-nao"
+  },
+  {
+    "id": "e489d40f-ff72-5161-83df-c2b1ecad11f1",
+    "question": "Named arguments và constructor property promotion trong PHP 8 giải quyết vấn đề gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96653-named-arguments-va-constructor-property-promotion-trong-php-8-giai-quyet-van-de",
+    "slug": "named-arguments-va-constructor-property-promotion-trong-php-8-giai-quyet-van-de-gi-e489d40f-ff72-5161-83df-c2b1ecad11f1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Lợi ích: gọi hàm nhiều tham số boolean/null dễ đọc hơn, và bỏ qua được tham số optional ở giữa mà không phải truyền lại giá trị mặc định."
+      ],
+      "details": [
+        "Cần lưu ý: khi đã có người dùng named argument, tên tham số trở thành phần của API công khai — đổi tên tham số là breaking change. Named argument phải đứng sau các positional argument, và không được truyền trùng một tham số hai lần."
+      ],
+      "points": [],
+      "sections": [
+        "Constructor property promotion cho phép khai báo và gán property ngay trên tham số constructor, bỏ đi phần lặp private X $x; ... $this->x = $x;.",
+        "Named arguments"
+      ],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "final class Money\n{\n    public function __construct(\n        public readonly int $amount,\n        public readonly string $currency = 'VND',\n    ) {}\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "96653-named-arguments-va-constructor-property-promotion-trong-php-8-giai-quyet-van-de"
+  },
+  {
+    "id": "34a6cf5c-f7c7-58b1-b2b3-9c0743623145",
+    "question": "Class và Object trong PHP khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2613-class-va-object-trong-php-khac-nhau-nhu-the-nao",
+    "slug": "class-va-object-trong-php-khac-nhau-nhu-the-nao-34a6cf5c-f7c7-58b1-b2b3-9c0743623145",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Class là bản thiết kế (blueprint) định nghĩa thuộc tính và phương thức, còn object là một thực thể cụ thể tạo ra từ class đó."
+      ],
+      "details": [
+        "Hãy nghĩ class như khuôn bánh, object là những chiếc bánh thực sự."
+      ],
+      "points": [],
+      "sections": [
+        "Mỗi object có bản sao thuộc tính riêng nhưng dùng chung phần code của phương thức."
+      ],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "class User {\n    public $name;\n\n    public function getName() {\n        return $this->name;\n    }\n}\n\n$user = new User();"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "2613-class-va-object-trong-php-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "14eb35db-ad8f-58a6-9a03-e2b12702b251",
+    "question": "Kế thừa (inheritance) trong PHP là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2614-ke-thua-inheritance-trong-php-la-gi",
+    "slug": "ke-thua-inheritance-trong-php-la-gi-14eb35db-ad8f-58a6-9a03-e2b12702b251",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Kế thừa cho phép class con kế thừa thuộc tính và phương thức từ class cha, giúp tái sử dụng code. Dùng class Student extends User để kế thừa. Class con có thể truy cập các thành phần public và protected của cha, override phương thức cha, và thêm chức năng mới. Gọi phương thức cha bằng parent::methodName()."
+      ],
+      "details": [
+        "Ví dụ: class Admin extends User nghĩa là Admin có tất cả thuộc tính của User nhưng bổ sung thêm các phương thức đặc thù của admin. Giúp giảm trùng lặp code và tạo ra cấu trúc phân cấp hợp lý."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "2614-ke-thua-inheritance-trong-php-la-gi"
+  },
+  {
+    "id": "5bba7262-d819-547a-ae72-3cef030cd931",
+    "question": "PHP có hỗ trợ đa kế thừa không? Làm thế nào để đạt được chức năng tương tự?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2615-php-co-ho-tro-da-ke-thua-khong-lam-the-nao-de-dat-duoc-chuc-nang-tuong-tu",
+    "slug": "php-co-ho-tro-da-ke-thua-khong-lam-the-nao-de-dat-duoc-chuc-nang-tuong-tu-5bba7262-d819-547a-ae72-3cef030cd931",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "PHP không hỗ trợ đa kế thừa (một class chỉ có thể extends một class cha). Thay vào đó, dùng interface: một class có thể implement nhiều interface."
+      ],
+      "details": [
+        "Ví dụ: class Employee implements Payable, Manageable trong đó cả hai interface đều định nghĩa contract mà class phải thực hiện. Ngoài ra còn có trait để tái sử dụng code: trait Logger { public function log() {} } rồi class User { use Logger; } để chia sẻ phương thức giữa các class không liên quan mà không cần kế thừa."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "2615-php-co-ho-tro-da-ke-thua-khong-lam-the-nao-de-dat-duoc-chuc-nang-tuong-tu"
+  },
+  {
+    "id": "987e5da7-c7c3-52bf-a4d9-2f302cfcfec0",
+    "question": "Interface trong PHP là gì và khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2616-interface-trong-php-la-gi-va-khi-nao-nen-dung",
+    "slug": "interface-trong-php-la-gi-va-khi-nao-nen-dung-987e5da7-c7c3-52bf-a4d9-2f302cfcfec0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Bất kỳ class nào implement interface này đều phải triển khai đủ các phương thức đó."
+      ],
+      "details": [
+        "Lợi ích: đảm bảo tính nhất quán giữa các implementation, cho phép polymorphism, dễ viết test với mock. Dùng interface khi cần bảo đảm một số phương thức luôn tồn tại, bất kể cách hiện thực cụ thể ra sao."
+      ],
+      "points": [],
+      "sections": [
+        "Interface định nghĩa một hợp đồng (contract) — tập phương thức mà class implement bắt buộc phải có."
+      ],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "interface UserRepository {\n    public function find($id);\n    public function save($user);\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "2616-interface-trong-php-la-gi-va-khi-nao-nen-dung"
+  },
+  {
+    "id": "669508b0-e1ce-5c95-bb41-3759560c8b4e",
+    "question": "Trait trong PHP là gì và chúng giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2617-trait-trong-php-la-gi-va-chung-giai-quyet-van-de-gi",
+    "slug": "trait-trong-php-la-gi-va-chung-giai-quyet-van-de-gi-669508b0-e1ce-5c95-bb41-3759560c8b4e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Trait cho phép tái sử dụng phương thức trong nhiều class không liên quan mà không cần kế thừa."
+      ],
+      "details": [],
+      "points": [
+        "Khai báo: trait Logger { public function log($msg) { echo $msg; } }.",
+        "Dùng trong bất kỳ class nào: class User { use Logger; } và class Product { use Logger; } thì cả hai đều có phương thức log.",
+        "Trait giải quyết vấn đề trùng lặp code khi nhiều class cần chức năng giống nhau nhưng không chia sẻ class cha.",
+        "Chúng giống như tái sử dụng \"ngang\" trong khi kế thừa là tái sử dụng \"dọc\"."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "2617-trait-trong-php-la-gi-va-chung-giai-quyet-van-de-gi"
+  },
+  {
+    "id": "e9336972-6ddd-5717-8ec6-31db28a49ccb",
+    "question": "Magic methods trong PHP là gì? Cho ví dụ.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2618-magic-methods-trong-php-la-gi-cho-vi-du",
+    "slug": "magic-methods-trong-php-la-gi-cho-vi-du-e9336972-6ddd-5717-8ec6-31db28a49ccb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Magic methods là các phương thức đặc biệt tự động được gọi khi có hành động tương ứng xảy ra. Các magic method quan trọng: __construct() (chạy khi tạo object), __destruct() (chạy khi hủy object), __get() (truy cập thuộc tính không tồn tại), __set() (gán thuộc tính không tồn tại), __call() (gọi phương thức không tồn tại), __toString() (khi object được in như chuỗi)."
+      ],
+      "details": [
+        "Ví dụ: truy cập $user->email private sẽ kích hoạt __get(\"email\") để kiểm soát quyền truy cập. Hầu hết magic method phải là public; __construct có thể là protected hoặc private khi dùng cho singleton pattern."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "2618-magic-methods-trong-php-la-gi-cho-vi-du"
+  },
+  {
+    "id": "64ccf3d7-0581-59fc-adea-a1fa68a1c893",
+    "question": "Sự khác biệt giữa static method và instance method là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2619-su-khac-biet-giua-static-method-va-instance-method-la-gi",
+    "slug": "su-khac-biet-giua-static-method-va-instance-method-la-gi-64ccf3d7-0581-59fc-adea-a1fa68a1c893",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Instance method thuộc về object và truy cập dữ liệu riêng của object qua $this. Gọi bằng $object->method(). Static method thuộc về chính class, không phải instance, và không thể truy cập $this. Khai báo với static function và gọi bằng ClassName::method()."
+      ],
+      "details": [
+        "Ví dụ: User::count() (static, đếm tổng user) vs $user->getName() (instance, lấy tên user cụ thể). Static method hữu ích cho utility functions, factory methods, hoặc theo dõi dữ liệu cấp class."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "2619-su-khac-biet-giua-static-method-va-instance-method-la-gi"
+  },
+  {
+    "id": "b2b024a2-048d-5207-a3a0-9aa47cbc5039",
+    "question": "Access modifier (public, private, protected) trong PHP là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2620-access-modifier-public-private-protected-trong-php-la-gi",
+    "slug": "access-modifier-public-private-protected-trong-php-la-gi-b2b024a2-048d-5207-a3a0-9aa47cbc5039",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Access modifier kiểm soát khả năng hiển thị của thuộc tính và phương thức: public truy cập được từ mọi nơi (trong/ngoài class và subclass), private chỉ truy cập được bên trong class đó (không phải subclass), protected truy cập được trong class và subclass nhưng không từ bên ngoài."
+      ],
+      "details": [
+        "Ví dụ: private $password ngăn truy cập trực tiếp như $user->password = \"hacked\", buộc phải dùng setter method để kiểm tra. Dùng private cho dữ liệu nội bộ, protected để subclass dùng, public cho giao diện ra bên ngoài."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "2620-access-modifier-public-private-protected-trong-php-la-gi"
+  },
+  {
+    "id": "421c9081-5229-5f61-9a55-c24aa7d094b1",
+    "question": "Typed class constants trong PHP 8.3 là gì và tại sao nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2661-typed-class-constants-trong-php-8-3-la-gi-va-tai-sao-nen-dung",
+    "slug": "typed-class-constants-trong-php-8-3-la-gi-va-tai-sao-nen-dung-421c9081-5229-5f61-9a55-c24aa7d094b1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Typed class constants cho phép khai báo kiểu dữ liệu cho hằng số trong class, tương tự typed properties."
+      ],
+      "details": [
+        "Ví dụ: public const int MAX_USERS = 1000; hoặc public const string API_KEY = \"secret\";.",
+        "Lợi ích:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "2661-typed-class-constants-trong-php-8-3-la-gi-va-tai-sao-nen-dung"
+  },
+  {
+    "id": "69740714-48a5-5649-8ccc-155eefaa686f",
+    "question": "Readonly classes trong PHP 8.2 có những ràng buộc gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2664-readonly-classes-trong-php-8-2-co-nhung-rang-buoc-gi",
+    "slug": "readonly-classes-trong-php-8-2-co-nhung-rang-buoc-gi-69740714-48a5-5649-8ccc-155eefaa686f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ràng buộc: mọi property phải có kiểu (không được untyped), không được khai báo static property, không dùng được #[AllowDynamicProperties], và mỗi property phải được gán giá trị ngay trong constructor."
+      ],
+      "details": [
+        "Rất hợp để dựng Value Object và DTO bất biến.",
+        "Ràng buộc kế thừa:"
+      ],
+      "points": [],
+      "sections": [
+        "Readonly class chặn sửa đổi public property sau khi khởi tạo:"
+      ],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "readonly class Address {\n    public function __construct(\n        public string $street,\n        public string $city,\n    ) {}\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "2664-readonly-classes-trong-php-8-2-co-nhung-rang-buoc-gi"
+  },
+  {
+    "id": "f911ede1-a86c-5a5b-aefd-2bd74a2f416b",
+    "question": "Enums trong PHP 8.1 là gì và khi nào nên dùng thay constants?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2665-enums-trong-php-8-1-la-gi-va-khi-nao-nen-dung-thay-constants",
+    "slug": "enums-trong-php-8-1-la-gi-va-khi-nao-nen-dung-thay-constants-f911ede1-a86c-5a5b-aefd-2bd74a2f416b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Hơn hằng số ở chỗ: được type-check (không gán bừa giá trị khác), cho phép viết method ngay trong enum, và tích hợp với Eloquent qua cast."
+      ],
+      "details": [
+        "Dùng cho trạng thái đơn hàng, vai trò người dùng, phương thức thanh toán — bất kỳ tập giá trị hữu hạn nào cần type safety."
+      ],
+      "points": [],
+      "sections": [
+        "Enum định nghĩa một tập giá trị cố định, hợp lệ, với type safety đầy đủ:"
+      ],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "enum OrderStatus {\n    case PENDING;\n    case SHIPPED;\n    case DELIVERED;\n}\n\n$order->status = OrderStatus::PENDING;\n\n// backed enum có value — lưu xuống DB gọn\nenum Status: string {\n    case ACTIVE = 'active';\n    case INACTIVE = 'inactive';\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "2665-enums-trong-php-8-1-la-gi-va-khi-nao-nen-dung-thay-constants"
+  },
+  {
+    "id": "66731f71-0bbb-5ae1-8c12-cd67129d520e",
+    "question": "Tại sao lưu mật khẩu bằng password_hash() / password_verify() thay vì md5/sha1?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94040-tai-sao-luu-mat-khau-bang-password-hash-password-verify-thay-vi-md5-sha1",
+    "slug": "tai-sao-luu-mat-khau-bang-password-hash-password-verify-thay-vi-md5-sha1-66731f71-0bbb-5ae1-8c12-cd67129d520e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "cost (mặc định 10 với bcrypt) điều chỉnh độ chậm → tăng theo phần cứng để chống brute-force.",
+        "password_verify() so sánh constant-time, chống timing attack — đừng tự so sánh bằng ==.",
+        "Không bao giờ lưu plaintext hay hàm băm nhanh; luôn để PASSWORD_DEFAULT (theo chuẩn mới nhất của PHP)."
+      ],
+      "sections": [
+        "md5/sha1 là hàm băm nhanh và không có salt → dễ brute-force bằng GPU và tra rainbow table. password_hash() dùng thuật toán chậm có chủ đích (mặc định bcrypt, hoặc Argon2) với salt ngẫu nhiên nhúng sẵn trong chuỗi kết quả, nên không cần cột salt riêng."
+      ],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "$hash = password_hash($plain, PASSWORD_DEFAULT); // salt tự sinh + cost nhúng trong chuỗi\n// lưu $hash vào DB — cột nên rộng 255 ký tự\n\nif (password_verify($plain, $hash)) { /* đăng nhập hợp lệ */ }\n\nif (password_needs_rehash($hash, PASSWORD_DEFAULT)) {\n  $hash = password_hash($plain, PASSWORD_DEFAULT); // rehash khi tăng cost\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "94040-tai-sao-luu-mat-khau-bang-password-hash-password-verify-thay-vi-md5-sha1"
+  },
+  {
+    "id": "7dbb8905-62ab-52c7-9d0f-c376c5799d32",
+    "question": "SOLID gồm những nguyên tắc nào (áp dụng trong PHP)?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94045-solid-gom-nhung-nguyen-tac-nao-ap-dung-trong-php",
+    "slug": "solid-gom-nhung-nguyen-tac-nao-ap-dung-trong-php-7dbb8905-62ab-52c7-9d0f-c376c5799d32",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Năm nguyên tắc thiết kế OOP do Robert C. Martin đúc kết:"
+      ],
+      "details": [],
+      "points": [
+        "S — Single Responsibility: mỗi class chỉ có một lý do để thay đổi. Tách logic gửi mail ra khỏi class User.",
+        "O — Open/Closed: mở cho mở rộng, đóng cho sửa. Thêm class PayPalGateway mới thay vì nhét thêm case vào một switch cũ.",
+        "L — Liskov Substitution: object class con phải thay được cho class cha mà không phá hành vi mong đợi.",
+        "I — Interface Segregation: nhiều interface nhỏ, chuyên biệt tốt hơn một interface cồng kềnh buộc class phải cài method không dùng."
+      ],
+      "sections": [
+        "Trong Laravel, service container tự inject dependency qua type-hint ở constructor — đó chính là DIP áp dụng ở tầng framework."
+      ],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "class ReportService {\n  public function __construct(private MailerInterface $mailer) {}\n  // inject interface, không `new SmtpMailer()` bên trong → dễ đổi/mock\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "94045-solid-gom-nhung-nguyen-tac-nao-ap-dung-trong-php"
+  },
+  {
+    "id": "f583e89e-cdad-5c4c-9071-b031c5e50723",
+    "question": "PDO là gì và cách phòng chống SQL injection bằng PDO?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "pdo-la-gi-va-cach-phong-chong-sql-injection-bang-pdo-f583e89e-cdad-5c4c-9071-b031c5e50723",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": null
+  },
+  {
+    "id": "a31b02e3-c915-5849-806d-69e3ad699a0a",
+    "question": "Session trong PHP hoạt động như thế nào và khác gì so với Cookie?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "session-trong-php-hoat-dong-nhu-the-nao-va-khac-gi-so-voi-cookie-a31b02e3-c915-5849-806d-69e3ad699a0a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": null
+  },
+  {
+    "id": "ed704c04-4916-56cd-96e9-564f45a983d2",
+    "question": "Namespace trong PHP là gì và tại sao nên dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "namespace-trong-php-la-gi-va-tai-sao-nen-dung-ed704c04-4916-56cd-96e9-564f45a983d2",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": null
+  },
+  {
+    "id": "a42ea8b5-0720-57f6-9225-054a9f09819c",
+    "question": "Autoloading trong PHP là gì và cách triển khai?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "autoloading-trong-php-la-gi-va-cach-trien-khai-a42ea8b5-0720-57f6-9225-054a9f09819c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": null
+  },
+  {
+    "id": "5a12e65a-0c33-562e-8fc4-eb74c524a284",
+    "question": "Generator trong PHP là gì và khi nào nên dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "generator-trong-php-la-gi-va-khi-nao-nen-dung-5a12e65a-0c33-562e-8fc4-eb74c524a284",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": null
+  },
+  {
+    "id": "3004c5f9-a8da-588a-9bd7-e6a4cd97f8db",
+    "question": "Sự khác biệt giữa unset() và unlink() là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "su-khac-biet-giua-unset-va-unlink-la-gi-3004c5f9-a8da-588a-9bd7-e6a4cd97f8db",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": null
+  },
+  {
+    "id": "50a49b65-679c-5b69-9aca-eb5112c39c79",
+    "question": "Làm thế nào để phòng chống tấn công XSS trong PHP?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-the-nao-de-phong-chong-tan-cong-xss-trong-php-50a49b65-679c-5b69-9aca-eb5112c39c79",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": null
+  },
+  {
+    "id": "fde5feff-9917-5cda-a339-fa3c869ea87b",
+    "question": "Cách xử lý ngoại lệ (exception) trong PHP?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cach-xu-ly-ngoai-le-exception-trong-php-fde5feff-9917-5cda-a339-fa3c869ea87b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": null
+  },
+  {
+    "id": "5d346664-6cb6-5883-94d6-1ac20c48b772",
+    "question": "Type hinting trong PHP là gì và tại sao quan trọng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "type-hinting-trong-php-la-gi-va-tai-sao-quan-trong-5d346664-6cb6-5883-94d6-1ac20c48b772",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": null
+  },
+  {
+    "id": "2ccfd9b9-aa50-5233-8821-1bd15f84f180",
+    "question": "Abstract class trong PHP là gì và khi nào nên dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "abstract-class-trong-php-la-gi-va-khi-nao-nen-dung-2ccfd9b9-aa50-5233-8821-1bd15f84f180",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": null
+  },
+  {
+    "id": "49462a99-ca1a-5643-97e9-76d7bbdab960",
+    "question": "Fibers trong PHP 8.1 là gì và khác threads như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "fibers-trong-php-8-1-la-gi-va-khac-threads-nhu-the-nao-49462a99-ca1a-5643-97e9-76d7bbdab960",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": null
+  },
+  {
+    "id": "6beb90d7-27f8-5a06-bcac-bb1e31bd1fd1",
+    "question": "Value Objects trong PHP là gì và khi nào nên dùng thay vì kiểu nguyên thủy?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "value-objects-trong-php-la-gi-va-khi-nao-nen-dung-thay-vi-kieu-nguyen-thuy-6beb90d7-27f8-5a06-bcac-bb1e31bd1fd1",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": null
+  },
+  {
+    "id": "dc36d1b4-9112-5204-abb9-a8d32060da34",
+    "question": "Streams và stream wrapper trong PHP là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "streams-va-stream-wrapper-trong-php-la-gi-dc36d1b4-9112-5204-abb9-a8d32060da34",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": null
+  },
+  {
+    "id": "c7ae536e-525b-599c-a264-bbeb54fd24f0",
+    "question": "OPcache là gì và tối ưu hiệu năng PHP ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "opcache-la-gi-va-toi-uu-hieu-nang-php-ra-sao-c7ae536e-525b-599c-a264-bbeb54fd24f0",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": null
+  },
+  {
+    "id": "3e19c84d-1c31-50a0-b6d4-cd0e1b80e3ed",
+    "question": "Attribute trong PHP 8 là gì? Khác annotation trong docblock ra sao và framework dùng nó thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "attribute-trong-php-8-la-gi-khac-annotation-trong-docblock-ra-sao-va-framework-dung-no-the-nao-3e19c84d-1c31-50a0-b6d4-cd0e1b80e3ed",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": null
+  }
+]

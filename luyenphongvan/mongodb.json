@@ -1,0 +1,1617 @@
+[
+  {
+    "id": "eb576095-e814-526e-84b8-fbd5605d5604",
+    "question": "MongoDB là gì và khi nào nên chọn?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8200-mongodb-la-gi-va-khi-nao-nen-chon",
+    "slug": "mongodb-la-gi-va-khi-nao-nen-chon-eb576095-e814-526e-84b8-fbd5605d5604",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "MongoDB là document database: thay vì bẻ dữ liệu thành nhiều bảng, nó lưu cả một \"cục\" dữ liệu liên quan trong một document (giống một object JSON) nằm trong collection. Bên dưới, document được lưu dạng BSON."
+      ],
+      "details": [
+        "Nên chọn khi:\n- Dữ liệu có hình dạng document tự nhiên (một đơn hàng kèm luôn các dòng hàng...).\n- Schema thay đổi nhanh, cần linh hoạt.\n- Cần scale ngang (chia dữ liệu ra nhiều máy) dễ dàng.\n- Thường đọc/ghi trọn cả document một lần.",
+        "Không nên chọn khi:\n- Dữ liệu quan hệ chặt, cần join phức tạp hay transaction trên nhiều bảng.\n- Cần ràng buộc dữ liệu mạnh (lúc đó PostgreSQL/RDBMS hợp hơn).",
+        "Lưu ý: đừng chọn MongoDB chỉ để né việc thiết kế schema — sớm muộn vẫn phải thiết kế."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "8200-mongodb-la-gi-va-khi-nao-nen-chon"
+  },
+  {
+    "id": "40befd1b-ad28-5f33-a4fb-d2c3c5298760",
+    "question": "Document, collection và database trong MongoDB là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8201-document-collection-va-database-trong-mongodb-la-gi",
+    "slug": "document-collection-va-database-trong-mongodb-la-gi-40befd1b-ad28-5f33-a4fb-d2c3c5298760",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Xếp theo độ lớn: database ⊃ collection ⊃ document."
+      ],
+      "details": [
+        "Lưu ý: schema linh hoạt không có nghĩa là \"vô kỷ luật\". Lên production vẫn nên quy ước schema rõ ở tầng app hoặc dùng JSON Schema validation, nếu không dữ liệu sẽ loạn và rất khó query về sau."
+      ],
+      "points": [
+        "Document: đơn vị dữ liệu, lưu dạng BSON, giống một object JSON (gồm các cặp key-value).",
+        "Collection: một nhóm các document, tương tự \"bảng\" (table) trong RDBMS — nhưng không bắt buộc mọi document cùng cấu trúc.",
+        "Database: một namespace chứa nhiều collection."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "8201-document-collection-va-database-trong-mongodb-la-gi"
+  },
+  {
+    "id": "ea417323-b049-5606-a927-f20fbd6ad858",
+    "question": "BSON khác JSON thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8202-bson-khac-json-the-nao",
+    "slug": "bson-khac-json-the-nao-ea417323-b049-5606-a927-f20fbd6ad858",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Hiểu đơn giản: JSON là văn bản (text) để người và máy trao đổi dữ liệu; BSON (Binary JSON) là dạng nhị phân mà MongoDB dùng để lưu document — tối ưu cho tốc độ đọc và kích thước."
+      ],
+      "details": [
+        "Khác biệt quan trọng: BSON hỗ trợ nhiều kiểu dữ liệu hơn JSON, như ObjectId, Date, Decimal128, binary, int32/int64.",
+        "Điểm dễ bị hỏi khi phỏng vấn: document MongoDB không chỉ là \"JSON text\". Nếu lẫn lộn kiểu dữ liệu — lưu ngày dưới dạng string thay vì Date, sai độ chính xác số, hay nhầm string với ObjectId thật — thì query và index có thể không khớp như mong đợi."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "8202-bson-khac-json-the-nao"
+  },
+  {
+    "id": "ff72ce8d-ca29-53b8-bbcb-1bbb5f4982d6",
+    "question": "findOne, find, insertOne, updateOne trong MongoDB dùng thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8203-findone-find-insertone-updateone-trong-mongodb-dung-the-nao",
+    "slug": "findone-find-insertone-updateone-trong-mongodb-dung-the-nao-ff72ce8d-ca29-53b8-bbcb-1bbb5f4982d6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Bốn thao tác CRUD cơ bản trên một collection:\n- findOne: lấy đúng một document khớp điều kiện (hoặc null).\n- find: trả về một cursor (con trỏ) tới nhiều document khớp.\n- insertOne: thêm một document mới.\n- updateOne: cập nhật document đầu tiên khớp filter.",
+        "Lưu ý: luôn biết filter của mình có dùng index không."
+      ],
+      "details": [
+        "Nếu không, MongoDB phải quét cả collection (collection scan) và sẽ rất chậm khi dữ liệu lớn.",
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "await users.insertOne({ email: \"a@example.com\", name: \"Ada\" })\nawait users.updateOne({ email: \"a@example.com\" }, { $set: { name: \"Ada Lovelace\" } })\nconst user = await users.findOne({ email: \"a@example.com\" })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "8203-findone-find-insertone-updateone-trong-mongodb-dung-the-nao"
+  },
+  {
+    "id": "c7957f26-2f64-5fd0-9048-7cdbda7dc2a7",
+    "question": "Index trong MongoDB giúp gì và có trade-off gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8206-index-trong-mongodb-giup-gi-va-co-trade-off-gi",
+    "slug": "index-trong-mongodb-giup-gi-va-co-trade-off-gi-c7957f26-2f64-5fd0-9048-7cdbda7dc2a7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Giống mục lục sách: index giúp MongoDB tìm thẳng tới document cần thay vì lật cả collection.",
+        "Lưu ý: đừng index tràn lan mọi field."
+      ],
+      "details": [
+        "Lợi ích:\n- Tìm kiếm nhanh hơn (tránh collection scan).\n- Hỗ trợ sắp xếp (sort) hiệu quả.",
+        "Đánh đổi:\n- Tốn thêm dung lượng (disk và RAM).\n- Ghi chậm hơn, vì mỗi insert/update/delete đều phải cập nhật cả index.",
+        "Hãy dựa vào query shape thực tế (hình dạng truy vấn), độ chọn lọc, kiểu sort, và phân tích bằng explain(\"executionStats\").",
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "db.users.createIndex({ email: 1 }, { unique: true })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "8206-index-trong-mongodb-giup-gi-va-co-trade-off-gi"
+  },
+  {
+    "id": "1047cbee-5923-5fa6-8e87-88cbf04d4af1",
+    "question": "Multikey index là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8208-multikey-index-la-gi",
+    "slug": "multikey-index-la-gi-1047cbee-5923-5fa6-8e87-88cbf04d4af1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Khi bạn index một field chứa mảng, MongoDB tự tạo multikey index: nó index từng phần tử trong mảng thay vì cả mảng, nên tìm document chứa một phần tử nào đó rất nhanh.",
+        "Lưu ý: cẩn thận với compound multikey index."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [
+        "Nếu index nhiều field mảng cùng lúc (hoặc mảng lồng nhau), số lượng entry index có thể bùng nổ theo kiểu tích Descartes — phình storage và làm chậm ghi.",
+        "(MongoDB cũng không cho index hai field mảng trong cùng một compound index.)"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "db.posts.createIndex({ tags: 1 })\ndb.posts.find({ tags: \"mongodb\" })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "8208-multikey-index-la-gi"
+  },
+  {
+    "id": "db9975a9-6670-53e4-8e07-36c32059f080",
+    "question": "ObjectId trong MongoDB là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8210-objectid-trong-mongodb-la-gi",
+    "slug": "objectid-trong-mongodb-la-gi-db9975a9-6670-53e4-8e07-36c32059f080",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "ObjectId là kiểu dữ liệu mặc định cho field _id trong MongoDB. Nó dài 12 byte, được sinh sao cho gần như duy nhất kể cả trên nhiều máy, và chứa sẵn phần timestamp nên có thể suy ra thời điểm tạo gần đúng (đỡ cần thêm cột createdAt nếu chỉ cần tương đối)."
+      ],
+      "details": [
+        "Lưu ý: đừng nhầm ObjectId(\"...\") với string thường. Nếu app lưu id dạng string nhưng query bằng ObjectId (hoặc ngược lại), query sẽ không khớp và index cũng không phát huy tác dụng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "8210-objectid-trong-mongodb-la-gi"
+  },
+  {
+    "id": "f351960b-0cfc-556b-a24d-206fd1cb2d74",
+    "question": "MongoDB có hỗ trợ ACID transaction không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8214-mongodb-co-ho-tro-acid-transaction-khong",
+    "slug": "mongodb-co-ho-tro-acid-transaction-khong-f351960b-0cfc-556b-a24d-206fd1cb2d74",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Có. Từ bản 4.0, MongoDB hỗ trợ transaction ACID trên nhiều document (trên replica set), và từ 4.2 mở rộng cho sharded cluster."
+      ],
+      "details": [
+        "Nhưng nên nhớ:\n- MongoDB không sinh ra để lạm dụng transaction như RDBMS.\n- Chạy transaction làm giảm hiệu năng và giữ khóa tài nguyên.\n- Nếu bạn liên tục phải transaction qua nhiều collection, hãy xem lại schema: có khi nên embed dữ liệu vào cùng một document để update atomic một phát, thay vì chẻ nhỏ rồi phải gói transaction."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "8214-mongodb-co-ho-tro-acid-transaction-khong"
+  },
+  {
+    "id": "31143345-b868-5a32-9e75-8ab7a44ca2d3",
+    "question": "Sharding trong MongoDB giải quyết vấn đề gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8216-sharding-trong-mongodb-giai-quyet-van-de-gi",
+    "slug": "sharding-trong-mongodb-giai-quyet-van-de-gi-31143345-b868-5a32-9e75-8ab7a44ca2d3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Sharding giải quyết giới hạn vật lý của một server đơn lẻ bằng cách chia dữ liệu ra nhiều server (scale ngang)."
+      ],
+      "details": [
+        "Dùng khi collection quá lớn không chứa nổi trên một đĩa, hoặc traffic đọc/ghi vượt CPU/RAM của con replica set mạnh nhất.",
+        "Lưu ý: chọn shard key rất quan trọng. Chọn sai dễ gây hot-spot (mọi traffic dồn vào một shard) hoặc scatter-gather (một query phải đi hỏi tất cả các shard → rất chậm). Đây là loại quyết định khó sửa về sau, nên cần cân nhắc kỹ từ đầu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "8216-sharding-trong-mongodb-giai-quyet-van-de-gi"
+  },
+  {
+    "id": "e3371728-4ebf-5f8e-bcc7-58f99bc2747e",
+    "question": "Read preference trong MongoDB là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8219-read-preference-trong-mongodb-la-gi",
+    "slug": "read-preference-trong-mongodb-la-gi-e3371728-4ebf-5f8e-bcc7-58f99bc2747e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Read preference quyết định node nào trong replica set sẽ phục vụ lệnh đọc của client."
+      ],
+      "details": [
+        "Các lựa chọn hay gặp:\n- primary (mặc định): mọi lệnh đọc vào Primary → luôn thấy dữ liệu mới nhất (strong consistency).\n- secondaryPreferred: ưu tiên đọc ở Secondary để giảm tải Primary; hợp cho báo cáo/dashboard chấp nhận dữ liệu trễ chút (eventual consistency).\n- nearest: đọc ở node có độ trễ mạng thấp nhất."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "8219-read-preference-trong-mongodb-la-gi"
+  },
+  {
+    "id": "f976e622-d843-55f4-a167-c6aa3030e181",
+    "question": "Chạy explain() xong thì nhìn vào đâu để biết query có vấn đề?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97900-chay-explain-xong-thi-nhin-vao-dau-de-biet-query-co-van-de",
+    "slug": "chay-explain-xong-thi-nhin-vao-dau-de-biet-query-co-van-de-f976e622-d843-55f4-a167-c6aa3030e181",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Hai chi tiết hay bị bỏ qua:\n- SORT stage xuất hiện nghĩa là MongoDB sắp xếp trong bộ nhớ, không dùng index để sort.\n- rejectedPlans cho biết optimizer đã cân nhắc index nào rồi loại — hữu ích khi query dùng nhầm index."
+      ],
+      "details": [
+        "explain() mặc định (queryPlanner) chỉ cho biết kế hoạch, không chạy thật nên không có số liệu; muốn số liệu phải truyền executionStats."
+      ],
+      "points": [
+        "stage: COLLSCAN nghĩa là quét toàn bộ collection — thiếu index. IXSCAN là đang dùng index.",
+        "totalDocsExamined so với nReturned: đọc 500.000 document để trả về 20 là dấu hiệu index sai hoặc không đủ chọn lọc. Tỉ lệ lý tưởng gần 1:1.",
+        "executionTimeMillis: thời gian thực thi thật của kế hoạch đã chọn."
+      ],
+      "sections": [
+        "Dùng explain('executionStats') và đọc ba con số trước, phần còn lại tính sau."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "db.orders.find({ userId: 12, status: 'paid' }).explain('executionStats')"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "97900-chay-explain-xong-thi-nhin-vao-dau-de-biet-query-co-van-de"
+  },
+  {
+    "id": "03861077-fffd-56cd-8a69-3bcb25d92dd9",
+    "question": "Trong aggregation pipeline, vì sao $match nên đặt càng sớm càng tốt?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97901-trong-aggregation-pipeline-vi-sao-match-nen-dat-cang-som-cang-tot",
+    "slug": "trong-aggregation-pipeline-vi-sao-match-nen-dat-cang-som-cang-tot-03861077-fffd-56cd-8a69-3bcb25d92dd9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Vì $match đứng đầu pipeline là stage duy nhất còn dùng được index.",
+        "Hai điểm liên quan hay bị hỏi kèm:\n- $unwind nhân dòng: một order có 10 item sẽ thành 10 document trong pipeline. Đặt $unwind sau $match để không nhân dữ liệu thừa.\n- $facet chạy nhiều nhánh trên cùng một tập input, tiện cho việc vừa lấy trang dữ liệu vừa đếm tổng trong một lần gọi — nhưng các stage bên trong $facet không dùng được index."
+      ],
+      "details": [
+        "Sau khi dữ liệu đã đi qua $group, $project hay $unwind, nó chỉ còn nằm trong bộ nhớ — mọi $match sau đó phải quét tuần tự.",
+        "Optimizer của MongoDB có tự đẩy $match lên trước trong một số trường hợp, nhưng không phải lúc nào cũng làm được — viết đúng thứ tự ngay từ đầu là chắc chắn hơn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// tốt: lọc trước, giảm dữ liệu đi vào các stage sau\ndb.orders.aggregate([\n  { $match: { createdAt: { $gte: startOfMonth } } },\n  { $unwind: '$items' },\n  { $group: { _id: '$items.sku', total: { $sum: '$items.qty' } } }\n])"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "97901-trong-aggregation-pipeline-vi-sao-match-nen-dat-cang-som-cang-tot"
+  },
+  {
+    "id": "adc02b40-dced-5ac3-9a5a-11ccd2d5f5f0",
+    "question": "Vì sao không nên để một mảng trong document tăng không giới hạn?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97902-vi-sao-khong-nen-de-mot-mang-trong-document-tang-khong-gioi-han",
+    "slug": "vi-sao-khong-nen-de-mot-mang-trong-document-tang-khong-gioi-han-adc02b40-dced-5ac3-9a5a-11ccd2d5f5f0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Vì mảng không giới hạn dẫn tới ba hệ quả xấu cùng lúc:",
+        "Nguyên tắc: mảng chỉ nên embed khi số phần tử có giới hạn tự nhiên và biết trước (địa chỉ giao hàng, biến thể sản phẩm)."
+      ],
+      "details": [
+        "1. Chạm trần 16MB. Một document tối đa 16MB. Mảng comments của bài viết viral sẽ đụng trần và mọi lệnh ghi tiếp theo báo lỗi.\n2. Ghi chậm dần. Document lớn lên thì WiredTiger phải cấp lại chỗ và ghi lại toàn bộ document mỗi lần $push, kể cả khi chỉ thêm một phần tử.\n3. Đọc tốn băng thông. Chỉ cần tiêu đề bài viết nhưng vẫn kéo về cả nghìn comment, trừ khi luôn nhớ $slice/projection.",
+        "Hai cách xử lý:",
+        "Còn thứ tăng theo thời gian không giới hạn thì tách ra."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// A. giữ mảng có trần: chỉ lưu 20 comment mới nhất để hiển thị nhanh\ndb.posts.updateOne(\n  { _id: postId },\n  { $push: { recentComments: { $each: [comment], $slice: -20 } } }\n)\n// B. tách comments ra collection riêng, tham chiếu postId + index theo postId"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "97902-vi-sao-khong-nen-de-mot-mang-trong-document-tang-khong-gioi-han"
+  },
+  {
+    "id": "38c18bb0-1bbc-5879-ba1c-3a9367f77ac9",
+    "question": "Change stream trong MongoDB là gì và dùng vào việc gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97903-change-stream-trong-mongodb-la-gi-va-dung-vao-viec-gi",
+    "slug": "change-stream-trong-mongodb-la-gi-va-dung-vao-viec-gi-38c18bb0-1bbc-5879-ba1c-3a9367f77ac9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Change stream cho phép ứng dụng lắng nghe thay đổi dữ liệu (insert/update/delete) theo thời gian thực mà không cần polling.",
+        "Các việc hay dùng: đẩy thông báo real-time, đồng bộ sang Elasticsearch/cache, ghi audit log, kích hoạt job nền khi đơn chuyển trạng thái."
+      ],
+      "details": [
+        "Nó đọc từ oplog của replica set, nên chỉ chạy được trên replica set hoặc sharded cluster, không chạy trên standalone.",
+        "Hai điểm phải nhớ khi dùng thật:\n- Mặc định event update chỉ chứa phần thay đổi, muốn cả document phải bật fullDocument: 'updateLookup'.\n- Mỗi event có _id là resume token. Lưu lại token đã xử lý để khi service restart thì resumeAfter từ đó, không mất event — miễn là oplog chưa bị ghi đè."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const stream = db.collection('orders').watch([\n  { $match: { 'fullDocument.status': 'paid' } }\n], { fullDocument: 'updateLookup' })\n\nfor await (const change of stream) {\n  await sendInvoice(change.fullDocument)\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "97903-change-stream-trong-mongodb-la-gi-va-dung-vao-viec-gi"
+  },
+  {
+    "id": "1f68b6ff-eaeb-5567-be74-2f5e76c74df7",
+    "question": "Embed document hay reference document trong MongoDB?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8204-embed-document-hay-reference-document-trong-mongodb",
+    "slug": "embed-document-hay-reference-document-trong-mongodb-1f68b6ff-eaeb-5567-be74-2f5e76c74df7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Câu hỏi cốt lõi: dữ liệu con nên nằm bên trong document cha (embed) hay nằm ở collection riêng rồi trỏ tới (reference)?"
+      ],
+      "details": [
+        "Nên Embed (nhúng) khi:\n- Dữ liệu con thuộc hẳn về cha và thường đọc cùng nhau.\n- Số lượng con nhỏ và có giới hạn.\n- Ít khi cần update con một cách độc lập.",
+        "Nên Reference (tham chiếu) khi:\n- Dữ liệu con lớn hoặc tăng không giới hạn.\n- Quan hệ nhiều-nhiều.\n- Cần query con độc lập.\n- Có nguy cơ vượt giới hạn 16MB của một document.",
+        "Ví dụ embed vài địa chỉ vào user (số lượng nhỏ):"
+      ],
+      "points": [],
+      "sections": [
+        "Lưu ý: thiết kế MongoDB nên bám theo cách bạn truy vấn dữ liệu (query pattern), đừng bê nguyên 1-1 sơ đồ ERD của DB quan hệ sang."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "{\n  _id: ObjectId(\"...\"),\n  email: \"a@example.com\",\n  addresses: [{ city: \"HCM\", type: \"shipping\" }]\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "8204-embed-document-hay-reference-document-trong-mongodb"
+  },
+  {
+    "id": "b28d2eb5-76b8-5e0f-8695-5b0a2af311f1",
+    "question": "MongoDB document size limit ảnh hưởng schema design thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8205-mongodb-document-size-limit-anh-huong-schema-design-the-nao",
+    "slug": "mongodb-document-size-limit-anh-huong-schema-design-the-nao-b28d2eb5-76b8-5e0f-8695-5b0a2af311f1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Mỗi document MongoDB tối đa 16MB. Hệ quả lên thiết kế:"
+      ],
+      "details": [],
+      "points": [
+        "Đừng embed vô hạn: các mảng có thể phình mãi như comments, events, logs, transactions thì không nên cứ nhồi vào document cha — sớm muộn sẽ chạm trần 16MB.",
+        "Dùng Reference hoặc Bucket pattern: nếu dữ liệu con có thể tăng không giới hạn, hãy tách ra. Ví dụ: một đơn hàng có số dòng hàng giới hạn thì embed được; nhưng một user có hàng triệu event thì event nên ở collection riêng, đánh index theo userId và createdAt."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "8205-mongodb-document-size-limit-anh-huong-schema-design-the-nao"
+  },
+  {
+    "id": "edd06b0e-ceab-5f68-80a5-edf297f6de7f",
+    "question": "Compound index trong MongoDB cần chọn thứ tự field thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8207-compound-index-trong-mongodb-can-chon-thu-tu-field-the-nao",
+    "slug": "compound-index-trong-mongodb-can-chon-thu-tu-field-the-nao-edd06b0e-ceab-5f68-80a5-edf297f6de7f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Như danh bạ sắp theo \"họ rồi tên\", thứ tự field trong compound index quyết định query nào dùng được nó. Quy tắc thực dụng là ESR (Equality → Sort → Range):\n- Equality trước: field lọc bằng (vd tenantId).\n- Sort tiếp theo: field dùng để sắp xếp.\n- Range sau cùng: field lọc khoảng như >, <, $in (vd createdAt).",
+        "Lưu ý: không có thứ tự nào đúng cho mọi query."
+      ],
+      "details": [
+        "Ví dụ: index { tenantId: 1, status: 1, createdAt: -1 } tốt cho query lọc bằng tenantId/status rồi sort theo createdAt.",
+        "Nếu các query khác nhau nhiều, cân nhắc tạo index riêng hoặc đổi access pattern."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "db.orders.createIndex({ tenantId: 1, status: 1, createdAt: -1 })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "8207-compound-index-trong-mongodb-can-chon-thu-tu-field-the-nao"
+  },
+  {
+    "id": "cf425a36-f955-53db-a7bc-29d4ddd198ab",
+    "question": "TTL index trong MongoDB dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8209-ttl-index-trong-mongodb-dung-khi-nao",
+    "slug": "ttl-index-trong-mongodb-dung-khi-nao-cf425a36-f955-53db-a7bc-29d4ddd198ab",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "TTL (Time-To-Live) index dùng để tự động xóa document sau một khoảng thời gian, dựa trên một field kiểu Date.",
+        "Lưu ý: việc xóa không tức thời tuyệt đối — một tiến trình nền chạy định kỳ (khoảng 60 giây/lần) mới dọn."
+      ],
+      "details": [
+        "Hợp cho: dữ liệu tạm như session, token/OTP, link xác thực, log ngắn hạn, cache.",
+        "Vì vậy đừng dùng TTL cho nghiệp vụ cần xóa chính xác đến từng giây.",
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "db.sessions.createIndex({ expiresAt: 1 }, { expireAfterSeconds: 0 })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "8209-ttl-index-trong-mongodb-dung-khi-nao"
+  },
+  {
+    "id": "51eb1f2e-822e-54de-80eb-e25ff1e5c07d",
+    "question": "$lookup trong MongoDB là gì và có rủi ro gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8212-lookup-trong-mongodb-la-gi-va-co-rui-ro-gi",
+    "slug": "lookup-trong-mongodb-la-gi-va-co-rui-ro-gi-51eb1f2e-822e-54de-80eb-e25ff1e5c07d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "$lookup làm việc giống LEFT OUTER JOIN trong SQL: kéo dữ liệu từ một collection khác vào trong lúc aggregate."
+      ],
+      "details": [
+        "Rủi ro: MongoDB không phải DB quan hệ, nên $lookup thường chậm hơn nhiều khi collection lớn và điều kiện join không có index. Nếu bạn thấy mình phải $lookup liên tục, nhiều khả năng schema đang bị thiết kế ngược với tinh thần document DB — cân nhắc embed lại hoặc denormalize dữ liệu hay đọc cùng nhau."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "8212-lookup-trong-mongodb-la-gi-va-co-rui-ro-gi"
+  },
+  {
+    "id": "f091a156-8b56-5c12-93f8-017fe01494eb",
+    "question": "Write concern trong MongoDB là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8218-write-concern-trong-mongodb-la-gi",
+    "slug": "write-concern-trong-mongodb-la-gi-f091a156-8b56-5c12-93f8-017fe01494eb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Write concern là mức \"đảm bảo đã ghi\" mà client yêu cầu MongoDB xác nhận trước khi coi lệnh ghi là thành công."
+      ],
+      "details": [
+        "Các mức hay gặp:\n- w: 1 (mặc định): chỉ cần Primary nhận và ghi xong là báo thành công.\n- w: \"majority\": đợi đa số node (Primary + Secondaries) ghi xong mới báo thành công.",
+        "Chọn theo độ quan trọng của dữ liệu. w: \"majority\" chậm hơn nhưng tránh được tình huống: vừa báo \"ghi xong\" thì Primary mất kết nối và bị thay thế, khiến ghi đó bị rollback và biến mất."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "8218-write-concern-trong-mongodb-la-gi"
+  },
+  {
+    "id": "f29a905a-45c8-5c85-8b5b-4b7055f6dad8",
+    "question": "Cursor trong MongoDB là gì và vì sao cần pagination?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8220-cursor-trong-mongodb-la-gi-va-vi-sao-can-pagination",
+    "slug": "cursor-trong-mongodb-la-gi-va-vi-sao-can-pagination-f29a905a-45c8-5c85-8b5b-4b7055f6dad8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Hàm find() không nạp hết kết quả vào RAM ngay, mà trả về một cursor — con trỏ tới tập kết quả. Khi bạn duyệt cursor, MongoDB lấy dữ liệu theo từng batch nhỏ."
+      ],
+      "details": [
+        "Vì vậy khi làm API trả danh sách, đừng toArray() trên collection lớn (dễ nổ RAM). Hãy phân trang: limit() + skip() cho dữ liệu nhỏ, hoặc keyset/cursor pagination (lọc theo _id/timestamp của trang trước) cho dữ liệu lớn — vì skip() càng về sau càng chậm."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "8220-cursor-trong-mongodb-la-gi-va-vi-sao-can-pagination"
+  },
+  {
+    "id": "c6282c63-3808-5995-aba0-6370763821df",
+    "question": "Oplog trong MongoDB là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8222-oplog-trong-mongodb-la-gi",
+    "slug": "oplog-trong-mongodb-la-gi-c6282c63-3808-5995-aba0-6370763821df",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Oplog (Operations Log) là một capped collection đặc biệt ghi lại mọi thao tác thay đổi dữ liệu (insert/update/delete) trên Primary."
+      ],
+      "details": [
+        "Các Secondary \"đọc đuôi\" (tail) oplog này và thực thi lại để đồng bộ với Primary — đây chính là cơ chế replication.",
+        "Lưu ý vận hành: oplog có kích thước giới hạn (cuốn vòng). Nếu một Secondary chết quá lâu, tụt lại xa hơn cả những gì oplog còn lưu, nó không \"đuổi kịp\" được nữa và phải làm Initial Sync (copy lại toàn bộ dữ liệu từ đầu) rất tốn thời gian."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "8222-oplog-trong-mongodb-la-gi"
+  },
+  {
+    "id": "7bffa38d-3949-5f9c-bb69-cf910957a94e",
+    "question": "Schema versioning pattern là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8223-schema-versioning-pattern-la-gi",
+    "slug": "schema-versioning-pattern-la-gi-7bffa38d-3949-5f9c-bb69-cf910957a94e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Đây là pattern thêm một field như schemaVersion: 2 vào mỗi document để xử lý việc cấu trúc dữ liệu thay đổi theo thời gian."
+      ],
+      "details": [
+        "Thay vì chạy migration trên hàng triệu bản ghi (dễ gây downtime), app kiểm tra schemaVersion lúc đọc: nếu là bản cũ thì map sang cấu trúc mới ngay trong code (RAM), và lưu lại dạng mới khi user có thao tác update. Nhờ vậy đổi cấu trúc mà không cần downtime, chi phí migration được rải dần."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "8223-schema-versioning-pattern-la-gi"
+  },
+  {
+    "id": "b58d32ef-3746-5805-96e5-d9f89ba6cd9f",
+    "question": "Sharding key trong MongoDB là gì và chọn thế nào cho đúng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8224-sharding-key-trong-mongodb-la-gi-va-chon-the-nao-cho-dung",
+    "slug": "sharding-key-trong-mongodb-la-gi-va-chon-the-nao-cho-dung-b58d32ef-3746-5805-96e5-d9f89ba6cd9f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Shard key là field (hoặc nhóm field) dùng để chia dữ liệu ra các shard. Chọn đúng là cực kỳ quan trọng vì rất khó đổi sau này."
+      ],
+      "details": [
+        "Ba tiêu chí:\n- Cardinality cao (nhiều giá trị khác nhau): chọn status chỉ có active/inactive thì tối đa chỉ chia được 2 nhóm — vô dụng.\n- Phân bố đều: tránh hot-spot. Key tăng dần đều theo thời gian/ObjectId sẽ khiến mọi lệnh ghi dồn vào shard mới nhất.\n- Hỗ trợ query: query thường dùng nên chứa shard key để tránh \"scatter-gather\" (hỏi mọi shard). Hashed shard key chia tải rất đều nhưng kém cho range query; ranged shard key thì ngược lại."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "8224-sharding-key-trong-mongodb-la-gi-va-chon-the-nao-cho-dung"
+  },
+  {
+    "id": "ebbe4ecd-9019-517c-93e1-45bb43ce9d0e",
+    "question": "Toán tử $in và $or khác nhau khi nào về mặt hiệu suất?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8230-toan-tu-in-va-or-khac-nhau-khi-nao-ve-mat-hieu-suat",
+    "slug": "toan-tu-in-va-or-khac-nhau-khi-nao-ve-mat-hieu-suat-ebbe4ecd-9019-517c-93e1-45bb43ce9d0e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai đều khớp nhiều điều kiện, nhưng khác nhau:"
+      ],
+      "details": [
+        "Lời khuyên: nếu chỉ lọc trên một field, luôn ưu tiên $in hơn $or."
+      ],
+      "points": [
+        "$in: tìm nhiều giá trị trên cùng một field. Dễ tận dụng một index duy nhất, hiệu năng rất tốt.",
+        "$or: thường nối các điều kiện trên các field khác nhau. MongoDB có thể dùng index riêng cho từng nhánh (index intersection), nhưng chỉ cần một nhánh thiếu index là cả query có thể tụt xuống collection scan."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "8230-toan-tu-in-va-or-khac-nhau-khi-nao-ve-mat-hieu-suat"
+  },
+  {
+    "id": "6a9f9df6-3fca-5553-a7f6-9c7056308e83",
+    "question": "Giải thích hiện tượng \"Eventual Consistency\" khi đọc từ Secondary node.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8231-giai-thich-hien-tuong-eventual-consistency-khi-doc-tu-secondary-node",
+    "slug": "giai-thich-hien-tuong-eventual-consistency-khi-doc-tu-secondary-node-6a9f9df6-3fca-5553-a7f6-9c7056308e83",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Mặc định, đọc từ Primary cho bạn \"strong consistency\" (luôn mới nhất). Nhưng nếu đặt readPreference về secondary, bạn có thể nhận dữ liệu cũ."
+      ],
+      "details": [
+        "Vì sao: khi Primary cập nhật, cần một chút thời gian (replication lag) để ghi vào oplog rồi truyền sang các Secondary. Nếu bạn ghi vào Primary rồi đọc ngay từ Secondary, có thể chưa thấy dữ liệu vừa ghi; đọc lại lát sau mới thấy. Đó chính là \"eventual consistency\" — nhất quán cuối cùng, không phải tức thì."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "8231-giai-thich-hien-tuong-eventual-consistency-khi-doc-tu-secondary-node"
+  },
+  {
+    "id": "3f21debd-874f-58b2-b5ed-ec3911b527d0",
+    "question": "GridFS là gì? Khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8232-gridfs-la-gi-khi-nao-nen-dung",
+    "slug": "gridfs-la-gi-khi-nao-nen-dung-3f21debd-874f-58b2-b5ed-ec3911b527d0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "GridFS là một đặc tả của MongoDB để lưu và truy xuất file lớn hơn giới hạn 16MB của một document."
+      ],
+      "details": [
+        "Nó chẻ file thành nhiều mảnh nhỏ (chunk, mặc định 255KB) và lưu vào hai collection: fs.files (metadata) và fs.chunks (dữ liệu nhị phân).",
+        "Nên dùng khi: phải lưu file (audio, video, ảnh lớn) mà kiến trúc không cho dùng object storage (như S3); hoặc muốn file cũng được backup/replicate cùng DB.\nKhông nên dùng khi: có thể dùng S3/Cloud Storage — chúng rẻ hơn, nhanh hơn và sinh ra để chứa file, tốt hơn nhét file vào database."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "8232-gridfs-la-gi-khi-nao-nen-dung"
+  },
+  {
+    "id": "faffe192-aab3-5c7c-b890-2fdecbbc5c9c",
+    "question": "Transaction multi-document trong MongoDB hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8233-transaction-multi-document-trong-mongodb-hoat-dong-nhu-the-nao",
+    "slug": "transaction-multi-document-trong-mongodb-hoat-dong-nhu-the-nao-faffe192-aab3-5c7c-b890-2fdecbbc5c9c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Transaction cho phép chạy một loạt thao tác (đọc/ghi) trên nhiều document hay nhiều collection mà vẫn đảm bảo atomicity: một lệnh lỗi thì toàn bộ rollback, và dữ liệu chưa commit không bị transaction khác đọc thấy (isolation)."
+      ],
+      "details": [
+        "Trong MongoDB (từ 4.0), transaction chạy qua session: client mở session → startTransaction → chạy các lệnh → commitTransaction (lỗi thì abortTransaction). Với sharded cluster, bên dưới MongoDB dùng giao thức two-phase commit (2PC) để giữ nhất quán giữa các shard."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "8233-transaction-multi-document-trong-mongodb-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "9cbe578c-dea2-532b-ba1b-8d3ee5f54c09",
+    "question": "Sự khác biệt giữa updateOne và replaceOne?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8234-su-khac-biet-giua-updateone-va-replaceone",
+    "slug": "su-khac-biet-giua-updateone-va-replaceone-9cbe578c-dea2-532b-ba1b-8d3ee5f54c09",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Liên hệ HTTP cho dễ nhớ: updateOne giống PATCH (sửa vài field), replaceOne giống PUT (ghi đè toàn bộ)."
+      ],
+      "details": [],
+      "points": [
+        "updateOne: chỉ sửa một phần document qua các toán tử như $set, $inc, $push. Field nào không nhắc tới thì giữ nguyên.",
+        "replaceOne: thay toàn bộ nội dung document bằng document mới (vẫn giữ nguyên _id). Quên field nào là field đó mất."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "8234-su-khac-biet-giua-updateone-va-replaceone"
+  },
+  {
+    "id": "db3e4683-e34e-5193-814f-a012beb9cbf1",
+    "question": "Thiết kế bài viết và bình luận: embed comment vào post hay tách collection riêng? Quyết định dựa trên gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97904-thiet-ke-bai-viet-va-binh-luan-embed-comment-vao-post-hay-tach-collection-rieng",
+    "slug": "thiet-ke-bai-viet-va-binh-luan-embed-comment-vao-post-hay-tach-collection-rieng-quyet-dinh-dua-tren-db3e4683-e34e-5193-814f-a012beb9cbf1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Quyết định theo cách truy cập dữ liệu và giới hạn tăng trưởng, không theo cảm tính \"NoSQL thì embed\".",
+        "Với bài viết + bình luận, cách thường dùng là lai: embed 3-5 comment mới nhất để render trang chi tiết trong một lần đọc, phần còn lại nằm ở collection comments và tải khi người dùng bấm \"xem thêm\"."
+      ],
+      "details": [
+        "Embed khi: dữ liệu con luôn được đọc cùng cha, số lượng có trần, và ít cập nhật riêng lẻ.",
+        "Câu hỏi tự kiểm tra: \"Dữ liệu này có bao giờ được đọc mà không cần cha không?\" Nếu có, khả năng cao nên tách."
+      ],
+      "points": [],
+      "sections": [
+        "Tách reference khi: dữ liệu con tăng không giới hạn, cần phân trang riêng, hoặc được truy vấn độc lập."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// đơn hàng: item luôn đọc cùng đơn, số dòng có trần, giá đã snapshot\n{ _id, userId, items: [{ sku, name, price, qty }], total, status }"
+        },
+        {
+          "language": "JS",
+          "code": "// bình luận: tăng vô hạn, cần phân trang, cần query theo tác giả\n{ _id, postId, authorId, body, createdAt }   // index { postId: 1, createdAt: -1 }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "97904-thiet-ke-bai-viet-va-binh-luan-embed-comment-vao-post-hay-tach-collection-rieng"
+  },
+  {
+    "id": "bda91d8e-9ceb-56a2-8ce1-719fa81c3daf",
+    "question": "Quy tắc ESR khi xếp thứ tự field trong compound index là gì? Vì sao query có sort hay báo lỗi vượt bộ nhớ?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97905-quy-tac-esr-khi-xep-thu-tu-field-trong-compound-index-la-gi-vi-sao-query-co-sort",
+    "slug": "quy-tac-esr-khi-xep-thu-tu-field-trong-compound-index-la-gi-vi-sao-query-co-sort-hay-bao-loi-vuot-bo-bda91d8e-9ceb-56a2-8ce1-719fa81c3daf",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Lý do: index là cấu trúc có thứ tự. Field equality thu hẹp về một dải liên tục; trong dải đó các entry đã sắp sẵn theo field kế tiếp nên sort đọc thẳng không cần sắp lại. Nếu đặt field range trước field sort, dải kết quả không còn thứ tự theo createdAt → MongoDB phải gom hết vào bộ nhớ rồi sắp.",
+        "Sort trong bộ nhớ bị giới hạn 32MB cho query thường (stage $sort trong aggregation giới hạn 100MB)."
+      ],
+      "details": [
+        "Đó cũng là nguyên nhân lỗi quen thuộc:",
+        "Cách sửa đúng là thêm index phủ được sort theo ESR, không phải nâng giới hạn hay bật allowDiskUse."
+      ],
+      "points": [],
+      "sections": [
+        "ESR = Equality, Sort, Range — thứ tự field trong compound index nên là: field so sánh bằng trước, rồi field dùng để sort, cuối cùng là field so sánh khoảng ($gt, $lt, $in dạng dải)."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// query: status bằng, sort theo createdAt, lọc amount theo khoảng\ndb.orders.find({ status: 'paid', amount: { $gte: 100000 } }).sort({ createdAt: -1 })\n\ndb.orders.createIndex({ status: 1, createdAt: -1, amount: 1 })  // E - S - R"
+        },
+        {
+          "language": "JS",
+          "code": "Sort exceeded memory limit of 33554432 bytes, but did not opt in to external sorting"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "97905-quy-tac-esr-khi-xep-thu-tu-field-trong-compound-index-la-gi-vi-sao-query-co-sort"
+  },
+  {
+    "id": "da329649-4791-509e-af99-9f1db5785194",
+    "question": "Có index rồi nhưng query vẫn quét toàn bộ collection — những trường hợp nào index không được dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97906-co-index-roi-nhung-query-van-quet-toan-bo-collection-nhung-truong-hop-nao-index",
+    "slug": "co-index-roi-nhung-query-van-quet-toan-bo-collection-nhung-truong-hop-nao-index-khong-duoc-dung-da329649-4791-509e-af99-9f1db5785194",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Các trường hợp hay gặp nhất:"
+      ],
+      "details": [
+        "Cách xác nhận: chạy explain('executionStats'), nếu thấy COLLSCAN thì đối chiếu danh sách trên."
+      ],
+      "points": [
+        "$regex không neo đầu chuỗi. /^abc/ dùng được index (là một dải liên tục); /abc/ hay /abc$/ thì không. Regex có i (không phân biệt hoa thường) cũng không dùng được index thường — cần index có collation tương ứng hoặc text index.",
+        "Sai kiểu dữ liệu. Field lưu \"12\" (string) mà query { userId: 12 } (number) sẽ không khớp entry nào; BSON phân biệt kiểu. Đây là lỗi thường gặp khi dữ liệu import từ CSV.",
+        "$ne, $nin, $not. Là điều kiện phủ định, phải duyệt gần như toàn bộ index nên optimizer thường bỏ qua."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "97906-co-index-roi-nhung-query-van-quet-toan-bo-collection-nhung-truong-hop-nao-index"
+  },
+  {
+    "id": "5207dda5-d2b0-546a-81c4-80c236bf6c62",
+    "question": "Covered query là gì và làm sao để query của bạn được \"covered\"?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97907-covered-query-la-gi-va-lam-sao-de-query-cua-ban-duoc-covered",
+    "slug": "covered-query-la-gi-va-lam-sao-de-query-cua-ban-duoc-covered-5207dda5-d2b0-546a-81c4-80c236bf6c62",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Covered query là query mà MongoDB trả kết quả chỉ bằng index, không cần đọc document trong collection. Trong explain bạn thấy stage IXSCAN mà không có FETCH theo sau, và totalDocsExamined bằng 0."
+      ],
+      "details": [
+        "Điều kiện:\n1. Mọi field trong điều kiện lọc đều nằm trong index.\n2. Mọi field trong kết quả trả về cũng nằm trong index.\n3. Phải loại _id khỏi projection nếu _id không có trong index.\n4. Field truy vấn không phải mảng (multikey index không cover được)."
+      ],
+      "points": [],
+      "sections": [
+        "Lợi ích rõ nhất ở các query danh sách/autocomplete tần suất cao: index thường nhỏ hơn dữ liệu nhiều lần nên khả năng nằm sẵn trong RAM cao hơn, tránh được một lần đọc ngẫu nhiên xuống đĩa cho mỗi kết quả."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "db.users.createIndex({ status: 1, email: 1 })\n\n// covered: lọc theo status, chỉ lấy email, tắt _id\ndb.users.find({ status: 'active' }, { _id: 0, email: 1 })\n\n// không covered: lấy thêm name (không có trong index) → phải FETCH document\ndb.users.find({ status: 'active' }, { _id: 0, email: 1, name: 1 })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "97907-covered-query-la-gi-va-lam-sao-de-query-cua-ban-duoc-covered"
+  },
+  {
+    "id": "8176d78c-24c4-57eb-b968-dc1aa86efbbf",
+    "question": "Partial index và sparse index khác nhau thế nào? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97908-partial-index-va-sparse-index-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "slug": "partial-index-va-sparse-index-khac-nhau-the-nao-khi-nao-dung-cai-nao-8176d78c-24c4-57eb-b968-dc1aa86efbbf",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Lợi ích của partial: nếu 95% đơn đã completed thì index chỉ còn 5% kích thước, ghi cũng nhẹ hơn vì đơn completed không phải cập nhật index."
+      ],
+      "details": [
+        "Ba điểm hay bị hỏi thêm:\n- Query phải khớp được điều kiện trong partialFilterExpression thì optimizer mới dùng index đó. Query không lọc status sẽ không dùng được.\n- Unique + partial là cách làm \"unique có điều kiện\": ví dụ email phải duy nhất nhưng chỉ trong nhóm tài khoản chưa xóa mềm (deletedAt: { $exists: false }).\n- Sparse index kết hợp unique cho phép nhiều document thiếu field cùng tồn tại, trong khi unique index thường coi mọi document thiếu field là cùng giá trị null và chỉ cho phép một cái."
+      ],
+      "points": [],
+      "sections": [
+        "Sparse index chỉ bỏ qua document không có field được index. Partial index chỉ index document thỏa một điều kiện filter bất kỳ — nó là bản tổng quát hơn và là lựa chọn mặc định nên dùng."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// sparse: chỉ index user có field phone\ndb.users.createIndex({ phone: 1 }, { sparse: true })\n\n// partial: chỉ index đơn chưa hoàn tất — thứ mà dashboard truy vấn liên tục\ndb.orders.createIndex(\n  { createdAt: -1 },\n  { partialFilterExpression: { status: { $in: ['pending', 'processing'] } } }\n)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "97908-partial-index-va-sparse-index-khac-nhau-the-nao-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "6ffba496-2ecd-5ac7-87f3-55d79f555a8e",
+    "question": "Aggregation báo lỗi vượt 100MB ở stage $group. Bật allowDiskUse có phải là cách đúng không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97909-aggregation-bao-loi-vuot-100mb-o-stage-group-bat-allowdiskuse-co-phai-la-cach-du",
+    "slug": "aggregation-bao-loi-vuot-100mb-o-stage-group-bat-allowdiskuse-co-phai-la-cach-dung-khong-6ffba496-2ecd-5ac7-87f3-55d79f555a8e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Nhưng nó là giải pháp tình thế, không phải cách sửa gốc: ghi/đọc file tạm chậm hơn nhiều lần và tạo tải I/O lên node đang phục vụ. Nên xem lại pipeline trước:"
+      ],
+      "details": [
+        "1. Thu hẹp input: thêm $match theo khoảng thời gian ở đầu pipeline; báo cáo thường không cần toàn bộ lịch sử.\n2. Bỏ field không dùng bằng $project sớm — $group chỉ giữ trong bộ nhớ những gì nó nhận.\n3. Giảm số nhóm: $group theo userId trên 50 triệu user thì tự nó đã vượt trần; gom theo ngày/khu vực trước rồi mới tổng hợp.\n4. Tiền tính toán (computed pattern): cập nhật sẵn số liệu tổng hợp khi ghi, thay vì quét lại toàn bộ mỗi lần đọc báo cáo.",
+        "Lưu ý từ MongoDB 6.0, allowDiskUse bật mặc định cho các stage cần nó; giới hạn có thể chỉnh qua allowDiskUseByDefault. Trong phỏng vấn, câu trả lời được đánh giá cao là \"sửa pipeline trước, bật disk sau\"."
+      ],
+      "points": [],
+      "sections": [
+        "Đó là giới hạn 100MB bộ nhớ cho mỗi stage của aggregation pipeline (áp dụng cho $group, $sort, $bucket...). allowDiskUse: true cho phép stage ghi tạm ra đĩa để vượt trần."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "db.events.aggregate(pipeline, { allowDiskUse: true })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "97909-aggregation-bao-loi-vuot-100mb-o-stage-group-bat-allowdiskuse-co-phai-la-cach-du"
+  },
+  {
+    "id": "2ffc7e62-4fff-5809-9aff-82e7ffbebe28",
+    "question": "MongoDB không có schema cố định thì làm sao chặn dữ liệu sai định dạng vào collection?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97910-mongodb-khong-co-schema-co-dinh-thi-lam-sao-chan-du-lieu-sai-dinh-dang-vao-colle",
+    "slug": "mongodb-khong-co-schema-co-dinh-thi-lam-sao-chan-du-lieu-sai-dinh-dang-vao-collection-2ffc7e62-4fff-5809-9aff-82e7ffbebe28",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng schema validation ở tầng database bằng $jsonSchema.",
+        "Hai tham số quyết định hành vi:\n- validationLevel: strict áp cho mọi insert/update; moderate chỉ áp cho document mới và document cũ đã hợp lệ — đúng cho collection đang có dữ liệu cũ chưa chuẩn hóa.\n- validationAction: error từ chối ghi; warn vẫn ghi nhưng ghi log — dùng khi triển khai dần để đo mức độ vi phạm trước khi siết."
+      ],
+      "details": [
+        "Đây là lớp bảo vệ cuối, độc lập với validation của Mongoose/ứng dụng — quan trọng vì script thủ công và job nền thường ghi thẳng vào DB, không đi qua ORM.",
+        "Cách áp dụng an toàn cho collection đang chạy: bật warn + moderate, đọc log để dọn dữ liệu cũ, sau đó mới chuyển sang error/strict."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "db.createCollection('orders', {\n  validator: {\n    $jsonSchema: {\n      bsonType: 'object',\n      required: ['userId', 'total', 'status'],\n      properties: {\n        userId: { bsonType: 'objectId' },\n        total: { bsonType: 'int', minimum: 0 },\n        status: { enum: ['pending', 'paid', 'cancelled'] }\n      }\n    }\n  },\n  validationLevel: 'moderate',\n  validationAction: 'error'\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "97910-mongodb-khong-co-schema-co-dinh-thi-lam-sao-chan-du-lieu-sai-dinh-dang-vao-colle"
+  },
+  {
+    "id": "825e5b9e-da5c-5157-873d-51cc29c0bc02",
+    "question": "$unwind trong aggregation pipeline dùng làm gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "unwind-trong-aggregation-pipeline-dung-lam-gi-825e5b9e-da5c-5157-873d-51cc29c0bc02",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": null
+  },
+  {
+    "id": "15b811f6-8eb3-55ff-a84d-dba3e8c4f524",
+    "question": "Upsert trong MongoDB là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "upsert-trong-mongodb-la-gi-15b811f6-8eb3-55ff-a84d-dba3e8c4f524",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": null
+  },
+  {
+    "id": "33a14a83-a82e-53ee-901c-b2984283c82a",
+    "question": "Bulk operations trong MongoDB dùng khi nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "bulk-operations-trong-mongodb-dung-khi-nao-33a14a83-a82e-53ee-901c-b2984283c82a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": null
+  },
+  {
+    "id": "9c70467b-d587-546f-8dc8-f8f033843183",
+    "question": "Làm sao để thực hiện schema migration trong MongoDB?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-sao-de-thuc-hien-schema-migration-trong-mongodb-9c70467b-d587-546f-8dc8-f8f033843183",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": null
+  },
+  {
+    "id": "a3482933-4ab8-5134-b7b6-7de7625367bf",
+    "question": "Phân biệt B-tree index của PostgreSQL và B-tree index của MongoDB?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "phan-biet-b-tree-index-cua-postgresql-va-b-tree-index-cua-mongodb-a3482933-4ab8-5134-b7b6-7de7625367bf",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": null
+  },
+  {
+    "id": "3a3b7500-ec8d-5740-8ed4-043d56ec07cf",
+    "question": "Tại sao MongoDB dùng BSON thay vì JSON?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "tai-sao-mongodb-dung-bson-thay-vi-json-3a3b7500-ec8d-5740-8ed4-043d56ec07cf",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": null
+  },
+  {
+    "id": "4b99d170-fcca-5989-815e-f8d61244a2dc",
+    "question": "Lỗi \"16MB document size limit\" thường xảy ra khi nào và cách khắc phục?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "loi-16mb-document-size-limit-thuong-xay-ra-khi-nao-va-cach-khac-phuc-4b99d170-fcca-5989-815e-f8d61244a2dc",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": null
+  },
+  {
+    "id": "2013425b-cb7c-5b8c-9877-0e0a2fb3c973",
+    "question": "Capped Collections trong MongoDB là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "capped-collections-trong-mongodb-la-gi-2013425b-cb7c-5b8c-9877-0e0a2fb3c973",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": null
+  },
+  {
+    "id": "31c0414b-6ef5-5b2a-bb85-b0e63add02b1",
+    "question": "Cơ chế khoá (Locking) của MongoDB hoạt động ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "co-che-khoa-locking-cua-mongodb-hoat-dong-ra-sao-31c0414b-6ef5-5b2a-bb85-b0e63add02b1",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": null
+  },
+  {
+    "id": "1d092b69-300d-5eaf-a4b0-c8fba8e6772d",
+    "question": "Optimistic concurrency trong MongoDB làm thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "optimistic-concurrency-trong-mongodb-lam-the-nao-1d092b69-300d-5eaf-a4b0-c8fba8e6772d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": null
+  },
+  {
+    "id": "b1b6aba9-4804-52f7-86e1-51fbe7c8da8b",
+    "question": "Multi-tenant MongoDB nên thiết kế thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "multi-tenant-mongodb-nen-thiet-ke-the-nao-b1b6aba9-4804-52f7-86e1-51fbe7c8da8b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": null
+  },
+  {
+    "id": "18dc22f5-5bb0-5ca5-85f9-3f1e1a4492f5",
+    "question": "Khi MongoDB query chậm thì debug từ đâu?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-mongodb-query-cham-thi-debug-tu-dau-18dc22f5-5bb0-5ca5-85f9-3f1e1a4492f5",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": null
+  },
+  {
+    "id": "cfcd517a-f724-50ac-92de-ed212c540a9f",
+    "question": "Khi nào không nên dùng MongoDB?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-khong-nen-dung-mongodb-cfcd517a-f724-50ac-92de-ed212c540a9f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": null
+  },
+  {
+    "id": "7fa0e179-dad8-553e-976d-9166770be272",
+    "question": "Hệ thống ghi 1 bản ghi cảm biến mỗi giây cho mỗi thiết bị. Thiết kế collection thế nào để không tạo hàng tỉ document nhỏ?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "he-thong-ghi-1-ban-ghi-cam-bien-moi-giay-cho-moi-thiet-bi-thiet-ke-collection-the-nao-de-khong-tao-h-7fa0e179-dad8-553e-976d-9166770be272",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": null
+  },
+  {
+    "id": "7caa09aa-e111-5817-829c-40877c10fd2f",
+    "question": "Chọn nhầm shard key thì hậu quả cụ thể là gì và sửa được không?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "chon-nham-shard-key-thi-hau-qua-cu-the-la-gi-va-sua-duoc-khong-7caa09aa-e111-5817-829c-40877c10fd2f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": null
+  },
+  {
+    "id": "73b78f85-affe-5708-aaf1-00eeb6fa15b5",
+    "question": "Chunk và balancer trong sharded cluster hoạt động ra sao? Jumbo chunk xử lý thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "chunk-va-balancer-trong-sharded-cluster-hoat-dong-ra-sao-jumbo-chunk-xu-ly-the-nao-73b78f85-affe-5708-aaf1-00eeb6fa15b5",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": null
+  },
+  {
+    "id": "eb99bbba-981d-5aff-a7b2-6897b9aa7ea5",
+    "question": "Primary của replica set chết giữa lúc đang ghi thì chuyện gì xảy ra với các write đang dở?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "primary-cua-replica-set-chet-giua-luc-dang-ghi-thi-chuyen-gi-xay-ra-voi-cac-write-dang-do-eb99bbba-981d-5aff-a7b2-6897b9aa7ea5",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": null
+  },
+  {
+    "id": "a88f5fc4-ae6b-51b7-aa2b-9e01e5b28b79",
+    "question": "Code mới cần một field mà 50 triệu document cũ chưa có. Triển khai thế nào để không downtime?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "code-moi-can-mot-field-ma-50-trieu-document-cu-chua-co-trien-khai-the-nao-de-khong-downtime-a88f5fc4-ae6b-51b7-aa2b-9e01e5b28b79",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": null
+  }
+]

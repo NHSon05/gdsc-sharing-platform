@@ -50,8 +50,6 @@ public sealed partial class DatabaseSeeder
 
         await SeedRoadmapCategoriesAsync(cancellationToken);
 
-        await CleanupOldSeedDataAsync(cancellationToken);
-
         if (_adminOptions.Enabled)
         {
             await SeedAdminAsync(cancellationToken);
@@ -279,46 +277,6 @@ public sealed partial class DatabaseSeeder
         }
     }
 
-    private async Task CleanupOldSeedDataAsync(CancellationToken cancellationToken)
-    {
-        var candidateStaleEmails = new[] { "member@gdsc.dev", "admin@gdsc.com" };
-        foreach (var staleEmail in candidateStaleEmails)
-        {
-            if (string.Equals(_memberOptions.Email, staleEmail, StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(_adminOptions.Email, staleEmail, StringComparison.OrdinalIgnoreCase))
-            {
-                continue;
-            }
-
-            var staleUser = await _userManager.FindByEmailAsync(staleEmail);
-            if (staleUser is not null)
-            {
-                var clubMemberships = await _dbContext.ClubMemberships
-                    .Where(cm => cm.UserId == staleUser.Id)
-                    .ToListAsync(cancellationToken);
-
-                var clubMembershipIds = clubMemberships.Select(cm => cm.Id).ToList();
-
-                var deptMemberships = await _dbContext.DepartmentMemberships
-                    .Where(dm => clubMembershipIds.Contains(dm.ClubMembershipId))
-                    .ToListAsync(cancellationToken);
-
-                var deptMembershipIds = deptMemberships.Select(dm => dm.Id).ToList();
-
-                var roleAssignments = await _dbContext.RoleAssignments
-                    .Where(ra => deptMembershipIds.Contains(ra.DepartmentMembershipId) || ra.AssignedByUserId == staleUser.Id)
-                    .ToListAsync(cancellationToken);
-
-                _dbContext.RoleAssignments.RemoveRange(roleAssignments);
-                _dbContext.DepartmentMemberships.RemoveRange(deptMemberships);
-                _dbContext.ClubMemberships.RemoveRange(clubMemberships);
-                await _dbContext.SaveChangesAsync(cancellationToken);
-
-                await _userManager.DeleteAsync(staleUser);
-                _logger.LogInformation("Cleaned up old seed account: {Email}", staleEmail);
-            }
-        }
-    }
 
     private async Task SeedAdminAsync(CancellationToken cancellationToken)
     {

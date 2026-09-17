@@ -1,0 +1,2473 @@
+[
+  {
+    "id": "a23dbc50-d21f-55e9-853e-07cfd7cba1eb",
+    "question": "Ruby on Rails là gì? Triết lý thiết kế cốt lõi của framework là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10300-ruby-on-rails-la-gi-triet-ly-thiet-ke-cot-loi-cua-framework-la-gi",
+    "slug": "ruby-on-rails-la-gi-triet-ly-thiet-ke-cot-loi-cua-framework-la-gi-a23dbc50-d21f-55e9-853e-07cfd7cba1eb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ruby on Rails (Rails) là web framework viết bằng Ruby, ra đời năm 2004 bởi David Heinemeier Hansson (DHH). Rails nổi tiếng với hai triết lý cốt lõi:"
+      ],
+      "details": [
+        "Kết hợp CoC + DRY, Rails cho phép xây dựng ứng dụng CRUD đầy đủ trong vài phút — đó là lý do GitHub, Shopify, Basecamp đều chọn Rails ở giai đoạn đầu."
+      ],
+      "points": [
+        "Convention over Configuration (CoC): Rails đặt ra quy ước mặc định — tên file, tên bảng DB, tên route — thay vì bắt developer khai báo từng thứ. Ít config = ít code lặp.",
+        "Don't Repeat Yourself (DRY): mỗi logic chỉ tồn tại ở một nơi duy nhất trong codebase."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "10300-ruby-on-rails-la-gi-triet-ly-thiet-ke-cot-loi-cua-framework-la-gi"
+  },
+  {
+    "id": "75c4e268-e969-5e03-9b12-5f5885588806",
+    "question": "Giải thích kiến trúc MVC trong Rails.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10301-giai-thich-kien-truc-mvc-trong-rails",
+    "slug": "giai-thich-kien-truc-mvc-trong-rails-75c4e268-e969-5e03-9b12-5f5885588806",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Rails chia ứng dụng thành 3 tầng:"
+      ],
+      "details": [
+        "Luồng một request:"
+      ],
+      "points": [],
+      "sections": [
+        "MVC giúp tách biệt concern: UI thay đổi không ảnh hưởng logic DB, business rules không rò rỉ vào template."
+      ],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "Browser → Router → Controller#action → Model → DB\n                                     ↓\n                              View (render HTML) → Browser"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Tầng",
+            "Trách nhiệm",
+            "Ví dụ",
+            "Model",
+            "Dữ liệu + business logic; giao tiếp DB qua Active Record",
+            "app/models/user.rb",
+            "View",
+            "Trình bày HTML cho người dùng (ERB/Haml/Slim)",
+            "app/views/users/show.html.erb",
+            "Nhận request, gọi model, chọn view để render",
+            "app/controllers/users_controller.rb"
+          ]
+        }
+      ]
+    },
+    "legacyId": 2,
+    "sourceSlug": "10301-giai-thich-kien-truc-mvc-trong-rails"
+  },
+  {
+    "id": "61a9ac25-1dc7-53bc-80ad-c5b6ce96c1ad",
+    "question": "Cấu trúc thư mục của một Rails app chuẩn trông như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10302-cau-truc-thu-muc-cua-mot-rails-app-chuan-trong-nhu-the-nao",
+    "slug": "cau-truc-thu-muc-cua-mot-rails-app-chuan-trong-nhu-the-nao-61a9ac25-1dc7-53bc-80ad-c5b6ce96c1ad",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "CoC quy định: model User → file app/models/user.rb → bảng DB users."
+      ],
+      "details": [
+        "Không cần khai báo mapping — Rails suy ra từ tên."
+      ],
+      "points": [],
+      "sections": [
+        "Các thư mục quan trọng cần biết:"
+      ],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "app/\n  controllers/   # Controller classes\n  models/        # Model classes (Active Record)\n  views/         # ERB templates\n  jobs/          # Active Job classes\n  mailers/       # Action Mailer classes\nconfig/\n  routes.rb      # Toàn bộ định nghĩa route\n  database.yml   # Cấu hình DB (dev/test/prod)\ndb/\n  schema.rb      # Schema hiện tại (auto-generated)\n  migrate/       # Migration files\ntest/ (hoặc spec/)  # Tests\nGemfile         # Dependencies"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "10302-cau-truc-thu-muc-cua-mot-rails-app-chuan-trong-nhu-the-nao"
+  },
+  {
+    "id": "94699a8e-caff-5a68-abdc-c7cb2b6a281c",
+    "question": "Gem là gì trong hệ sinh thái Ruby/Rails?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10303-gem-la-gi-trong-he-sinh-thai-ruby-rails",
+    "slug": "gem-la-gi-trong-he-sinh-thai-ruby-rails-94699a8e-caff-5a68-abdc-c7cb2b6a281c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Gem là thư viện (package) Ruby được phân phối qua RubyGems.org."
+      ],
+      "details": [],
+      "points": [
+        "Rails chính nó cũng là một gem.",
+        "Trong project, dependency được khai báo trong Gemfile và quản lý bởi Bundler."
+      ],
+      "sections": [
+        "Gemfile.lock lưu phiên bản đúng đắn đang dùng — commit file này vào git để mọi người trong team dùng cùng phiên bản."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# Gemfile\ngem \"devise\"        # authentication\ngem \"pundit\"        # authorization\ngem \"sidekiq\"       # background jobs\n\ngroup :development, :test do\n  gem \"rspec-rails\"\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "10303-gem-la-gi-trong-he-sinh-thai-ruby-rails"
+  },
+  {
+    "id": "d861cb18-dbfd-55e3-b199-5e94adfcb3b5",
+    "question": "resources trong Rails Router làm gì? Nó tạo ra những route nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10310-resources-trong-rails-router-lam-gi-no-tao-ra-nhung-route-nao",
+    "slug": "resources-trong-rails-router-lam-gi-no-tao-ra-nhung-route-nao-d861cb18-dbfd-55e3-b199-5e94adfcb3b5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "resources :posts tự động tạo 7 route RESTful chuẩn:"
+      ],
+      "details": [
+        "Dùng only: / except: để giới hạn: resources :comments, only: [:index, :create, :destroy]."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "HTTP Verb",
+            "Path",
+            "Action",
+            "GET",
+            "posts_path",
+            "/posts",
+            "new_post_path",
+            "index",
+            "posts_path",
+            "POST",
+            "/posts",
+            "create",
+            "GET",
+            "/posts/:id",
+            "show",
+            "post_path(id)",
+            "GET",
+            "edit_post_path(id)",
+            "post_path(id)",
+            "post_path(id)"
+          ]
+        }
+      ]
+    },
+    "legacyId": 5,
+    "sourceSlug": "10310-resources-trong-rails-router-lam-gi-no-tao-ra-nhung-route-nao"
+  },
+  {
+    "id": "308c1f6a-96fa-50ee-aa8d-90128b1a9c6f",
+    "question": "Phân biệt render và redirect_to trong Rails Controller.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10311-phan-biet-render-va-redirect-to-trong-rails-controller",
+    "slug": "phan-biet-render-va-redirect-to-trong-rails-controller-308c1f6a-96fa-50ee-aa8d-90128b1a9c6f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "render dựng view ngay trong request hiện tại — không tạo request mới, URL giữ nguyên, instance variables vẫn còn.\nredirect_to gửi HTTP 302, bảo browser tạo request mới đến URL khác — controller hiện tại kết thúc, action mới chạy từ đầu."
+      ],
+      "details": [
+        "Lỗi thường gặp: dùng render sau POST tạo record → F5 submit lại form (double-submit). Quy tắc PRG (Post → Redirect → Get): sau POST thành công luôn dùng redirect_to."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "def create\n  @post = Post.new(post_params)\n  if @post.save\n    redirect_to @post, notice: \"Tạo thành công!\"\n  else\n    render :new, status: :unprocessable_entity  # giữ lại lỗi validation\n  end\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "10311-phan-biet-render-va-redirect-to-trong-rails-controller"
+  },
+  {
+    "id": "4da978c7-a646-5ce2-9bdd-1de7b1796c0d",
+    "question": "Active Record là gì? Rails mapping tên model với bảng DB như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10320-active-record-la-gi-rails-mapping-ten-model-voi-bang-db-nhu-the-nao",
+    "slug": "active-record-la-gi-rails-mapping-ten-model-voi-bang-db-nhu-the-nao-4da978c7-a646-5ce2-9bdd-1de7b1796c0d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Active Record là ORM (Object-Relational Mapper) của Rails — mỗi model Ruby class tương ứng với 1 bảng DB, mỗi instance tương ứng với 1 row."
+      ],
+      "details": [
+        "Model tự hiểu schema từ DB — không cần khai báo column trong code. Gọi User.create!(...), User.where(...) là đủ; Rails tự map.",
+        "Quy ước đặt tên (CoC):"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Model class",
+            "Bảng DB",
+            "User",
+            "users",
+            "BlogPost",
+            "blog_posts",
+            "OrderItem",
+            "order_items"
+          ]
+        }
+      ]
+    },
+    "legacyId": 7,
+    "sourceSlug": "10320-active-record-la-gi-rails-mapping-ten-model-voi-bang-db-nhu-the-nao"
+  },
+  {
+    "id": "1fb19216-35de-5fc2-aad6-500536a6cfff",
+    "question": "Các loại associations (quan hệ) trong Active Record là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10321-cac-loai-associations-quan-he-trong-active-record-la-gi",
+    "slug": "cac-loai-associations-quan-he-trong-active-record-la-gi-1fb19216-35de-5fc2-aad6-500536a6cfff",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Quy tắc foreign key: belongs_to bên nào thì bảng đó chứa foreign key."
+      ],
+      "details": [
+        "has_many :through (3 bảng) dùng khi join table cần thêm attributes. has_and_belongs_to_many (2 bảng) dùng khi join table thuần túy không cần id/attrs."
+      ],
+      "points": [],
+      "sections": [
+        "Active Record hỗ trợ 6 loại association:"
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# 1:1 — User có 1 profile\nclass User < ApplicationRecord\n  has_one :profile\nend\nclass Profile < ApplicationRecord\n  belongs_to :user   # foreign key: user_id trên bảng profiles\nend\n\n# 1:N — User có nhiều posts\nclass User < ApplicationRecord\n  has_many :posts, dependent: :destroy\nend\n\n# N:N — Post có nhiều tags, Tag có nhiều posts\nclass Post < ApplicationRecord\n  has_many :post_tags\n  has_many :tags, through: :post_tags\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "10321-cac-loai-associations-quan-he-trong-active-record-la-gi"
+  },
+  {
+    "id": "77576b53-3725-5d97-8476-69e8dd511806",
+    "question": "Migrations trong Rails là gì? Tại sao cần dùng thay vì viết SQL trực tiếp?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10330-migrations-trong-rails-la-gi-tai-sao-can-dung-thay-vi-viet-sql-truc-tiep",
+    "slug": "migrations-trong-rails-la-gi-tai-sao-can-dung-thay-vi-viet-sql-truc-tiep-77576b53-3725-5d97-8476-69e8dd511806",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Tại sao không viết SQL trực tiếp:\n- Version control được (mỗi migration là 1 file commit-able).\n- Portable: change method tự sinh SQL cho mọi DB (PostgreSQL/MySQL/SQLite).\n- Team sync: rails db:migrate áp đúng những migration chưa chạy.\n- Rollback an toàn: rails db:rollback undo migration gần nhất."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Migration là Ruby class mô tả thay đổi schema DB theo thời gian — có thể chạy lên (up/change) hoặc rollback xuống (down)."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class AddAgeToUsers < ActiveRecord::Migration[7.1]\n  def change\n    add_column :users, :age, :integer\n  end\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "10330-migrations-trong-rails-la-gi-tai-sao-can-dung-thay-vi-viet-sql-truc-tiep"
+  },
+  {
+    "id": "1c9acc13-bd42-5a8f-89e9-a873823d3de0",
+    "question": "db/schema.rb là gì? Khác gì với các migration files?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10331-db-schema-rb-la-gi-khac-gi-voi-cac-migration-files",
+    "slug": "db-schema-rb-la-gi-khac-gi-voi-cac-migration-files-1c9acc13-bd42-5a8f-89e9-a873823d3de0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "db/schema.rb là snapshot toàn bộ schema hiện tại — được Rails tự sinh sau mỗi lần db:migrate.",
+        "Tại sao quan trọng:\n- rails db:schema:load tạo DB mới từ schema.rb (nhanh hơn replay toàn bộ migrations).\n- Dùng để setup DB cho test environment: rails db:test:prepare.\n- Commit vào git để PR reviewer thấy schema thay đổi."
+      ],
+      "details": [
+        "Nó không phải migration, mà là trạng thái cuối cùng của DB."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# db/schema.rb (auto-generated)\nActiveRecord::Schema[7.1].define(version: 2025_05_01_000001) do\n  create_table \"users\", force: :cascade do |t|\n    t.string \"email\", null: false\n    t.integer \"age\"\n    t.timestamps\n  end\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "10331-db-schema-rb-la-gi-khac-gi-voi-cac-migration-files"
+  },
+  {
+    "id": "22843c5b-7624-571a-bef3-b4c12f60b461",
+    "question": "Partial trong Rails Views là gì? Cách dùng render partial?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10340-partial-trong-rails-views-la-gi-cach-dung-render-partial",
+    "slug": "partial-trong-rails-views-la-gi-cach-dung-render-partial-22843c5b-7624-571a-bef3-b4c12f60b461",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Partial là fragment ERB tái sử dụng — file tên bắt đầu bằng _ (underscore).",
+        "Khi truyền collection (render @posts), Rails tự lặp và dùng local variable khớp tên partial (post cho _post.html.erb) — không cần .each trong view."
+      ],
+      "codeExamples": [
+        {
+          "language": "ERB",
+          "code": "<%# app/views/posts/_post.html.erb %>\n<article>\n  <h2><%= post.title %></h2>\n  <p><%= post.body %></p>\n</article>"
+        },
+        {
+          "language": "ERB",
+          "code": "<%# app/views/posts/index.html.erb %>\n<%= render @posts %>          <%# Rails tự render _post.html.erb cho mỗi item %>\n<%= render partial: \"post\", locals: { post: @featured_post } %>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "10340-partial-trong-rails-views-la-gi-cach-dung-render-partial"
+  },
+  {
+    "id": "644f061c-1ac5-5034-83bd-5bd36f9d1f12",
+    "question": "Flash messages trong Rails là gì? Phân biệt flash và flash.now.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10341-flash-messages-trong-rails-la-gi-phan-biet-flash-va-flash-now",
+    "slug": "flash-messages-trong-rails-la-gi-phan-biet-flash-va-flash-now-644f061c-1ac5-5034-83bd-5bd36f9d1f12",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "flash lưu thông báo ngắn cho request tiếp theo — thường dùng sau redirect_to.\nflash.now lưu cho request hiện tại — dùng khi render (không redirect).",
+        "Flash tự xóa sau khi được đọc — không cần clean up thủ công."
+      ],
+      "details": [
+        "Trong layout, đọc bằng flash[:notice] / flash[:alert]."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "def create\n  @post = Post.new(post_params)\n  if @post.save\n    flash[:notice] = \"Tạo thành công!\"  # sẽ hiện ở request kế tiếp\n    redirect_to @post\n  else\n    flash.now[:alert] = \"Lỗi dữ liệu!\"  # hiện ngay trong render này\n    render :new, status: :unprocessable_entity\n  end\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "10341-flash-messages-trong-rails-la-gi-phan-biet-flash-va-flash-now"
+  },
+  {
+    "id": "8005f677-d730-5494-8677-38d8e4661cb9",
+    "question": "Rails hỗ trợ những loại test nào? Phân biệt unit test, integration test và system test.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10350-rails-ho-tro-nhung-loai-test-nao-phan-biet-unit-test-integration-test-va-system",
+    "slug": "rails-ho-tro-nhung-loai-test-nao-phan-biet-unit-test-integration-test-va-system-test-8005f677-d730-5494-8677-38d8e4661cb9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Rails tích hợp sẵn Minitest. Hầu hết project thực tế dùng RSpec thay thế."
+      ],
+      "details": [
+        "Chạy test: bundle exec rspec hoặc rails test."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Loại test",
+            "Phạm vi",
+            "Tool",
+            "Unit (model)",
+            "type: :model",
+            "Test 1 model, không browser",
+            "ActiveSupport::TestCase",
+            "type: :model (RSpec) / ActiveSupport::TestCase",
+            "type: :request",
+            "Controller/Request",
+            "Test action, params, response code",
+            "type: :request (RSpec)",
+            "Integration",
+            "Test nhiều layer, DB thật, không browser",
+            "System",
+            "ActionDispatch::IntegrationTest",
+            "Full browser (JS), Capybara + Selenium",
+            "ApplicationSystemTestCase"
+          ]
+        }
+      ]
+    },
+    "legacyId": 13,
+    "sourceSlug": "10350-rails-ho-tro-nhung-loai-test-nao-phan-biet-unit-test-integration-test-va-system"
+  },
+  {
+    "id": "f5bc6a3b-dcfa-5dc1-9b64-67194f53d33e",
+    "question": "Active Job là gì? Tại sao cần xử lý background job trong Rails?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10351-active-job-la-gi-tai-sao-can-xu-ly-background-job-trong-rails",
+    "slug": "active-job-la-gi-tai-sao-can-xu-ly-background-job-trong-rails-f5bc6a3b-dcfa-5dc1-9b64-67194f53d33e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Active Job là interface thống nhất để tạo và enqueue background jobs — có thể chạy với nhiều backend (Sidekiq, Resque, GoodJob) mà không đổi code job."
+      ],
+      "details": [
+        "Tại sao cần: một số tác vụ không nên chạy trong HTTP request vì tốn thời gian hoặc dễ fail (gửi email, resize ảnh, gọi API bên ngoài, generate report)."
+      ],
+      "points": [],
+      "sections": [
+        "Lưu user.id thay vì object — object có thể stale khi job thực thi."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class WelcomeEmailJob < ApplicationJob\n  queue_as :default\n\n  def perform(user_id)\n    user = User.find(user_id)\n    UserMailer.welcome(user).deliver_now\n  end\nend\n\nWelcomeEmailJob.perform_later(user.id)                       # async\nWelcomeEmailJob.set(wait: 5.minutes).perform_later(user.id)  # delayed"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "10351-active-job-la-gi-tai-sao-can-xu-ly-background-job-trong-rails"
+  },
+  {
+    "id": "a8cb9d31-47d4-5995-a531-c511f8bb21e4",
+    "question": "Helper methods trong Rails Views là gì? Phân biệt link_to, form_with.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10358-helper-methods-trong-rails-views-la-gi-phan-biet-link-to-form-with",
+    "slug": "helper-methods-trong-rails-views-la-gi-phan-biet-link-to-form-with-a8cb9d31-47d4-5995-a531-c511f8bb21e4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "form_with model: @post tự biết dùng POST /posts (tạo mới) hay PATCH /posts/:id (cập nhật) dựa vào @post.persisted?."
+      ],
+      "details": [
+        "Từ Rails 5.1+ form_with thay thế form_for và form_tag."
+      ],
+      "points": [],
+      "sections": [
+        "Helper method là Ruby method available trong view/template để tạo HTML tags và link."
+      ],
+      "codeExamples": [
+        {
+          "language": "ERB",
+          "code": "<%# link_to: tạo <a> tag %>\n<%= link_to \"Xem bài viết\", post_path(@post), class: \"btn\" %>\n<%= link_to \"Xóa\", post_path(@post), method: :delete, data: { confirm: \"Chắc chưa?\" } %>\n\n<%# form_with: tạo form (RESTful-aware) %>\n<%= form_with model: @post do |f| %>\n  <%= f.text_field :title %>\n  <%= f.submit \"Lưu\" %>\n<% end %>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "10358-helper-methods-trong-rails-views-la-gi-phan-biet-link-to-form-with"
+  },
+  {
+    "id": "878e753c-5f1c-5838-978a-64726be7bf98",
+    "question": "Layout trong Rails là gì? Cách chọn layout khác nhau cho từng controller?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10366-layout-trong-rails-la-gi-cach-chon-layout-khac-nhau-cho-tung-controller",
+    "slug": "layout-trong-rails-la-gi-cach-chon-layout-khac-nhau-cho-tung-controller-878e753c-5f1c-5838-978a-64726be7bf98",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Layout là \"wrapper\" HTML chứa phần chung của trang (header, footer, nav)."
+      ],
+      "details": [
+        "Mặc định mọi action dùng app/views/layouts/application.html.erb."
+      ],
+      "points": [],
+      "sections": [
+        "Dùng render layout: false để render không có layout (API response JSON).",
+        "Chọn layout theo controller:"
+      ],
+      "codeExamples": [
+        {
+          "language": "ERB",
+          "code": "<%# app/views/layouts/application.html.erb %>\n<!DOCTYPE html>\n<html>\n  <head>...</head>\n  <body>\n    <%= yield %>  <%# nội dung của từng action render vào đây %>\n  </body>\n</html>"
+        },
+        {
+          "language": "RUBY",
+          "code": "class AdminController < ApplicationController\n  layout \"admin\"  # dùng app/views/layouts/admin.html.erb\nend\n\n# Hoặc điều kiện:\nclass PostsController < ApplicationController\n  layout :choose_layout\n\n  private\n\n  def choose_layout\n    current_user&.admin? ? \"admin\" : \"application\"\n  end\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "10366-layout-trong-rails-la-gi-cach-chon-layout-khac-nhau-cho-tung-controller"
+  },
+  {
+    "id": "49ca6825-0968-5843-80d0-075016a021d2",
+    "question": "Factory Bot là gì? Khác fixture như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10370-factory-bot-la-gi-khac-fixture-nhu-the-nao",
+    "slug": "factory-bot-la-gi-khac-fixture-nhu-the-nao-49ca6825-0968-5843-80d0-075016a021d2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Factory Bot (trước là FactoryGirl) là gem tạo test data linh hoạt — thay thế fixtures (file YAML static) bằng Ruby code.",
+        "Fixture load toàn bộ vào DB trước khi test — nhanh nhưng cứng, khó hiểu quan hệ. Factory Bot tạo khi cần — linh hoạt hơn, dễ đọc hơn, cho phép override attributes."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# spec/factories/users.rb\nFactoryBot.define do\n  factory :user do\n    name  { \"John\" }\n    email { Faker::Internet.email }\n    role  { :member }\n\n    trait :admin do\n      role { :admin }\n    end\n  end\nend\n\n# Trong test:\nuser       = create(:user)           # tạo + lưu DB\nadmin      = create(:user, :admin)   # dùng trait\nguest_user = build(:user)            # không lưu DB"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "10370-factory-bot-la-gi-khac-fixture-nhu-the-nao"
+  },
+  {
+    "id": "ece93789-7b1e-5896-9935-579ef78ce5f4",
+    "question": "Scaffolding trong Rails là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94064-scaffolding-trong-rails-la-gi",
+    "slug": "scaffolding-trong-rails-la-gi-ece93789-7b1e-5896-9935-579ef78ce5f4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Sau lệnh này bạn có ngay:\n- app/models/post.rb và migration tạo bảng posts.\n- PostsController với 7 action REST (index, show, new, create, edit, update, destroy).\n- Views ERB cho từng action + resources :posts trong routes.rb."
+      ],
+      "details": [
+        "Dùng khi nào: rất hợp để học Rails, dựng prototype hay demo nhanh — thấy ngay một resource chạy đầu-cuối.",
+        "Lưu ý thực tế: scaffold đẻ khá nhiều code boilerplate (view, controller generic) mà app thật thường phải sửa lại nhiều; nhiều team production tránh dùng thẳng, chỉ generate model/controller riêng lẻ rồi tự viết view. Xóa nhanh bằng rails destroy scaffold Post."
+      ],
+      "points": [],
+      "sections": [
+        "Scaffolding là generator sinh sẵn toàn bộ stack CRUD cho một resource chỉ bằng một lệnh: model + migration + controller + views + route + test."
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "bin/rails generate scaffold Post title:string body:text\nbin/rails db:migrate"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "94064-scaffolding-trong-rails-la-gi"
+  },
+  {
+    "id": "c3068d00-2663-56c1-a835-9642acde6f23",
+    "question": "save, save!, update và update_attribute khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96700-save-save-update-va-update-attribute-khac-nhau-the-nao",
+    "slug": "save-save-update-va-update-attribute-khac-nhau-the-nao-c3068d00-2663-56c1-a835-9642acde6f23",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác nhau ở hai trục: có chạy validation không và thất bại thì báo bằng cách nào."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Thực tế: trong controller dùng bản không có ! rồi rẽ nhánh render; trong transaction hoặc background job dùng bản có ! để lỗi làm rollback thay vì trôi qua âm thầm. update_attribute / update_column chỉ dùng cho cột kỹ thuật (đếm, cờ trạng thái nội bộ), không dùng cho dữ liệu do người dùng nhập."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "order.save          # => false if invalid, you must check the return value\norder.save!         # => raises, good inside a transaction\norder.update(status: 'paid')\norder.update_column(:status, 'paid')  # straight UPDATE, no validation, no callback"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Method",
+            "Chạy validation",
+            "Khi thất bại",
+            "Không",
+            "Có",
+            "save",
+            "Không",
+            "Trả false",
+            "false",
+            "Có",
+            "save!",
+            "Ném ActiveRecord::RecordInvalid",
+            "Có",
+            "Trả false",
+            "Có",
+            "Ném exception",
+            "Bỏ qua validation, vẫn chạy callback",
+            "ActiveRecord::RecordInvalid",
+            "Bỏ qua cả callback và updated_at",
+            "update",
+            "false",
+            "update!"
+          ]
+        }
+      ]
+    },
+    "legacyId": 19,
+    "sourceSlug": "96700-save-save-update-va-update-attribute-khac-nhau-the-nao"
+  },
+  {
+    "id": "e64ba095-2132-5682-a88f-9dba0faba4d5",
+    "question": "pluck, select và map khác nhau thế nào khi chỉ cần một cột?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96701-pluck-select-va-map-khac-nhau-the-nao-khi-chi-can-mot-cot",
+    "slug": "pluck-select-va-map-khac-nhau-the-nao-khi-chi-can-mot-cot-e64ba095-2132-5682-a88f-9dba0faba4d5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Chọn: chỉ cần danh sách giá trị (id, email để gửi mail, mảng cho IN) → pluck. Cần gọi method trên record → select hoặc query bình thường. map trên all chỉ dùng khi tập dữ liệu nhỏ."
+      ],
+      "details": [],
+      "points": [
+        "map tải toàn bộ cột và khởi tạo đầy đủ model cho mỗi dòng — tốn RAM nhất.",
+        "select vẫn dựng model nhưng chỉ nạp cột được chọn; chạm vào cột không select sẽ ném ActiveModel::MissingAttributeError.",
+        "pluck không dựng model → nhanh và nhẹ nhất, nhưng cũng không chạy callback, không dùng được method của model."
+      ],
+      "sections": [
+        "pluck lấy thẳng cột từ DB và trả về mảng giá trị thuần, không dựng object Active Record."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "User.pluck(:email)        # SELECT \"users\".\"email\" FROM \"users\"  => [\"a@x.com\", ...]\nUser.select(:email)       # SELECT \"users\".\"email\" => Relation of User objects\nUser.all.map(&:email)     # SELECT * FROM \"users\", then instantiate every row"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "96701-pluck-select-va-map-khac-nhau-the-nao-khi-chi-can-mot-cot"
+  },
+  {
+    "id": "198abb90-89df-5cab-9290-4639a83254a4",
+    "question": "ActiveRecord::Relation lazy nghĩa là gì? Khi nào query mới thực sự chạy DB?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96702-activerecord-relation-lazy-nghia-la-gi-khi-nao-query-moi-thuc-su-chay-db",
+    "slug": "activerecord-relation-lazy-nghia-la-gi-khi-nao-query-moi-thuc-su-chay-db-198abb90-89df-5cab-9290-4639a83254a4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Relation là một mô tả query chưa chạy.",
+        "Kích hoạt query: to_a, each, first, last, find, count, sum, pluck, any?, hoặc khi render trong view. Không kích hoạt: where, order, limit, joins, includes, select — chúng chỉ trả về Relation mới."
+      ],
+      "details": [
+        "Rails chỉ gửi SQL xuống DB khi bạn yêu cầu dữ liệu thật — gọi là loading.",
+        "Hai điểm hay bị hỏi tiếp:\n- Relation cache kết quả sau lần load đầu; gọi each lần hai không chạy lại SQL. Muốn ép chạy lại thì dùng reload.\n- Mỗi lần chain là một Relation mới (bất biến), nên scope.where(...) không sửa scope gốc.",
+        "Lazy chính là lý do có thể tách điều kiện ra nhiều tầng (scope, controller, service) mà cuối cùng vẫn chỉ có một câu SQL."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "scope = User.where(active: true).order(:created_at)  # no SQL yet\nscope = scope.limit(10)                              # still no SQL, just chaining\nscope.to_a                                           # SQL runs here"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "96702-activerecord-relation-lazy-nghia-la-gi-khi-nao-query-moi-thuc-su-chay-db"
+  },
+  {
+    "id": "316b8366-93c1-59b6-82be-759ecc966a63",
+    "question": "Xử lý 5 triệu record thì dùng each hay find_each? Vì sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96703-xu-ly-5-trieu-record-thi-dung-each-hay-find-each-vi-sao",
+    "slug": "xu-ly-5-trieu-record-thi-dung-each-hay-find-each-vi-sao-316b8366-93c1-59b6-82be-759ecc966a63",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng find_each. User.all.each nạp toàn bộ 5 triệu dòng vào RAM trước khi lặp — process rất dễ bị OOM kill.",
+        "Lưu ý: find_each ép sắp xếp theo primary key và bỏ qua order bạn đặt (Rails sẽ cảnh báo)."
+      ],
+      "details": [
+        "find_each chia thành từng lô (mặc định 1000 record), nạp lô nào xử lý lô đó rồi giải phóng:",
+        "Nếu bắt buộc phải theo thứ tự khác thì phải tự phân trang bằng khoá (keyset pagination) chứ không dùng find_each."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "User.where(active: true).find_each(batch_size: 500) do |user|\n  ReportJob.perform_later(user.id)\nend\n\n# find_in_batches yields the whole batch as an array\nUser.find_in_batches(batch_size: 1000) { |batch| Mailer.bulk(batch).deliver_later }\n\n# in_batches yields a Relation, so you can run a set-based UPDATE per batch\nUser.in_batches(of: 1000) { |rel| rel.update_all(synced_at: Time.current) }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "96703-xu-ly-5-trieu-record-thi-dung-each-hay-find-each-vi-sao"
+  },
+  {
+    "id": "beed3a09-9f9f-551d-ab10-87a1e5047e18",
+    "question": "Before action (before_action) trong Rails dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10312-before-action-before-action-trong-rails-dung-de-lam-gi",
+    "slug": "before-action-before-action-trong-rails-dung-de-lam-gi-beed3a09-9f9f-551d-ab10-87a1e5047e18",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Nếu before_action gọi render hoặc redirect_to, chuỗi callback dừng và action gốc không chạy."
+      ],
+      "details": [
+        "Các loại khác: after_action, around_action."
+      ],
+      "points": [],
+      "sections": [
+        "before_action là callback chạy trước một hoặc nhiều action của controller — dùng để factoring logic dùng chung (authentication, authorization, load record)."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class PostsController < ApplicationController\n  before_action :authenticate_user!\n  before_action :set_post, only: [:show, :edit, :update, :destroy]\n\n  def show\n    # @post đã sẵn sàng từ set_post\n  end\n\n  private\n\n  def set_post\n    @post = Post.find(params[:id])\n  end\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "10312-before-action-before-action-trong-rails-dung-de-lam-gi"
+  },
+  {
+    "id": "470aaa20-7286-5075-9814-ca85387e7cb7",
+    "question": "Nested resources trong Rails là gì? Khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10313-nested-resources-trong-rails-la-gi-khi-nao-nen-dung",
+    "slug": "nested-resources-trong-rails-la-gi-khi-nao-nen-dung-470aaa20-7286-5075-9814-ca85387e7cb7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Route được tạo: GET /posts/:post_id/comments, POST /posts/:post_id/comments, ..."
+      ],
+      "details": [
+        "Trong CommentsController, lấy post qua Post.find(params[:post_id]) rồi build comment từ @post.comments.",
+        "Best practice: chỉ nest 1 cấp — /posts/:post_id/comments OK, nhưng nest sâu hơn khó đọc và khó maintain."
+      ],
+      "points": [],
+      "sections": [
+        "Nested resources biểu diễn quan hệ cha-con trong URL: /posts/:post_id/comments — comment luôn thuộc về 1 post cụ thể."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# config/routes.rb\nresources :posts do\n  resources :comments, only: [:index, :create, :destroy]\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "10313-nested-resources-trong-rails-la-gi-khi-nao-nen-dung"
+  },
+  {
+    "id": "1c5be81c-2603-56e9-aaff-cc3b5ddb526e",
+    "question": "Strong Parameters trong Rails là gì và tại sao cần thiết?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10314-strong-parameters-trong-rails-la-gi-va-tai-sao-can-thiet",
+    "slug": "strong-parameters-trong-rails-la-gi-va-tai-sao-can-thiet-1c5be81c-2603-56e9-aaff-cc3b5ddb526e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Nếu params chứa field không được permit, nó bị bỏ qua."
+      ],
+      "details": [
+        "Nếu field được require thiếu, Rails raise ActionController::ParameterMissing."
+      ],
+      "points": [],
+      "sections": [
+        "Strong Parameters (Rails 4+) bắt controller khai báo tường minh những tham số nào được phép gán vào model — ngăn mass assignment vulnerability (attacker gửi param ẩn như admin=true để leo quyền)."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# KHÔNG an toàn (Rails 2 style):\nUser.create(params[:user])  # có thể truyền bất kỳ field nào\n\n# AN TOÀN với Strong Parameters:\ndef user_params\n  params.require(:user).permit(:name, :email, :password)\nend\n\nUser.create(user_params)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "10314-strong-parameters-trong-rails-la-gi-va-tai-sao-can-thiet"
+  },
+  {
+    "id": "1d8ca390-fa13-56a8-8441-73ab29e01f0a",
+    "question": "N+1 Query là gì và Rails giải quyết bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10322-n-1-query-la-gi-va-rails-giai-quyet-bang-cach-nao",
+    "slug": "n-1-query-la-gi-va-rails-giai-quyet-bang-cach-nao-1d8ca390-fa13-56a8-8441-73ab29e01f0a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "includes vs eager_load vs preload:\n- includes → Rails tự chọn strategy (preload hoặc eager_load).\n- preload → luôn 2 query riêng.\n- eager_load → luôn 1 query JOIN (dùng khi cần filter theo association)."
+      ],
+      "details": [
+        "Gem bullet tự phát hiện N+1 trong development."
+      ],
+      "points": [],
+      "sections": [
+        "N+1 xảy ra khi load 1 collection rồi lặp để lấy association của mỗi item → 1 query lấy list + N query con."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# N+1: 1 query lấy posts + N query lấy user của mỗi post\nPost.all.each { |p| puts p.user.name }\n\n# FIX: includes eager-loads user cùng lúc\nPost.includes(:user).each { |p| puts p.user.name }\n# SQL: SELECT * FROM posts + SELECT * FROM users WHERE id IN (1, 2, ...)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "10322-n-1-query-la-gi-va-rails-giai-quyet-bang-cach-nao"
+  },
+  {
+    "id": "f45379f5-5379-595e-83cd-cae0e7fa6ac3",
+    "question": "Validations trong Active Record — các validation phổ biến nhất là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10323-validations-trong-active-record-cac-validation-pho-bien-nhat-la-gi",
+    "slug": "validations-trong-active-record-cac-validation-pho-bien-nhat-la-gi-f45379f5-5379-595e-83cd-cae0e7fa6ac3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Validations chạy trước save / create / update."
+      ],
+      "details": [
+        "Nếu fail, record không được lưu và lỗi nằm trong record.errors."
+      ],
+      "points": [],
+      "sections": [
+        "Dùng save! / create! để raise ActiveRecord::RecordInvalid thay vì trả false — tốt hơn trong business logic cần fail-fast."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class User < ApplicationRecord\n  validates :name,  presence: true, length: { minimum: 2, maximum: 50 }\n  validates :email, presence: true,\n                    format: { with: URI::MailTo::EMAIL_REGEXP },\n                    uniqueness: { case_sensitive: false }\n  validates :age,   numericality: { greater_than: 0 }, allow_nil: true\nend\n\nuser = User.new(name: \"\", email: \"bad\")\nuser.valid?        # => false\nuser.errors.full_messages  # => [\"Name can't be blank\", \"Email is invalid\"]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "10323-validations-trong-active-record-cac-validation-pho-bien-nhat-la-gi"
+  },
+  {
+    "id": "451d7b65-501a-57ad-81aa-38e6ce9a5b47",
+    "question": "Active Record Callbacks là gì? Liệt kê các callback quan trọng.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10324-active-record-callbacks-la-gi-liet-ke-cac-callback-quan-trong",
+    "slug": "active-record-callbacks-la-gi-liet-ke-cac-callback-quan-trong-451d7b65-501a-57ad-81aa-38e6ce9a5b47",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Callbacks là hooks vào lifecycle của model — chạy tự động khi object được create/update/destroy.",
+        "after_commit chạy sau khi transaction commit — dùng cho side-effects (gửi mail, enqueue job)."
+      ],
+      "details": [
+        "Dùng after_save có thể gửi mail dù transaction sau đó rollback.",
+        "Thứ tự khi save một record mới:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "before_validation → after_validation\n→ before_save → before_create\n→ (INSERT INTO DB)\n→ after_create → after_save → after_commit"
+        },
+        {
+          "language": "RUBY",
+          "code": "class Order < ApplicationRecord\n  before_create  :generate_reference_code\n  after_commit   :send_confirmation_email, on: :create\n\n  private\n\n  def generate_reference_code\n    self.ref = SecureRandom.hex(6)\n  end\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "10324-active-record-callbacks-la-gi-liet-ke-cac-callback-quan-trong"
+  },
+  {
+    "id": "8cf2f6df-da69-53b8-a658-75c072f0eee8",
+    "question": "Scopes trong Active Record là gì? Khi nào dùng scope thay vì class method?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10325-scopes-trong-active-record-la-gi-khi-nao-dung-scope-thay-vi-class-method",
+    "slug": "scopes-trong-active-record-la-gi-khi-nao-dung-scope-thay-vi-class-method-8cf2f6df-da69-53b8-a658-75c072f0eee8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Scope vs class method: scope luôn trả về ActiveRecord::Relation (kể cả khi condition false → trả toàn bộ)."
+      ],
+      "details": [],
+      "points": [
+        "Class method có thể trả nil → chain bị gãy.",
+        "Với logic phức tạp hoặc cần trả nil có chủ đích → class method."
+      ],
+      "sections": [
+        "Scope là named query được định nghĩa trong model, trả về ActiveRecord::Relation → chainable."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class Article < ApplicationRecord\n  scope :published, -> { where(status: \"published\") }\n  scope :recent,    -> { order(created_at: :desc).limit(10) }\n  scope :by_tag,    ->(tag) { joins(:tags).where(tags: { name: tag }) }\nend\n\nArticle.published.recent\nArticle.published.by_tag(\"ruby\")"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "10325-scopes-trong-active-record-la-gi-khi-nao-dung-scope-thay-vi-class-method"
+  },
+  {
+    "id": "37d74c2c-e8bd-5f85-84dc-e9f03a5ef219",
+    "question": "Khi nào dùng change và khi nào cần viết up/down riêng trong migration?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10332-khi-nao-dung-change-va-khi-nao-can-viet-up-down-rieng-trong-migration",
+    "slug": "khi-nao-dung-change-va-khi-nao-can-viet-up-down-rieng-trong-migration-37d74c2c-e8bd-5f85-84dc-e9f03a5ef219",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "change dùng cho các operations tự reversible — Rails biết cách đảo ngược:",
+        "Một số operations không reversible → phải viết up/down rõ ràng:",
+        "remove_column",
+        "change_column"
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "def change\n  add_column :users, :age, :integer   # down: remove_column\n  add_index :users, :email             # down: remove_index\n  create_table :posts do |t| ... end  # down: drop_table\nend"
+        },
+        {
+          "language": "RUBY",
+          "code": "def up\n  execute \"UPDATE users SET role = 'member' WHERE role IS NULL\"\nend\n\ndef down\n  raise ActiveRecord::IrreversibleMigration,\n    \"Cannot reverse a data-only migration\"\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "10332-khi-nao-dung-change-va-khi-nao-can-viet-up-down-rieng-trong-migration"
+  },
+  {
+    "id": "d35091da-6f00-54c4-9f5e-06141d5cd240",
+    "question": "Index trong DB là gì và Rails thêm index như thế nào trong migration?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10333-index-trong-db-la-gi-va-rails-them-index-nhu-the-nao-trong-migration",
+    "slug": "index-trong-db-la-gi-va-rails-them-index-nhu-the-nao-trong-migration-d35091da-6f00-54c4-9f5e-06141d5cd240",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khi nào cần index:\n- Foreign key columns (user_id, post_id) → luôn cần để JOIN nhanh.\n- Columns thường xuất hiện trong WHERE / ORDER BY.\n- uniqueness: true validation → cần unique index để đảm bảo ở tầng DB."
+      ],
+      "details": [
+        "Cẩn thận: index tăng tốc SELECT nhưng làm chậm INSERT/UPDATE — không index mọi column."
+      ],
+      "points": [],
+      "sections": [
+        "Index là cấu trúc dữ liệu phụ (B-tree) giúp DB tìm kiếm nhanh theo column mà không phải scan toàn bảng."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class AddIndexToUsersEmail < ActiveRecord::Migration[7.1]\n  def change\n    add_index :users, :email, unique: true\n    add_index :posts, [:user_id, :status]  # composite index\n  end\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "10333-index-trong-db-la-gi-va-rails-them-index-nhu-the-nao-trong-migration"
+  },
+  {
+    "id": "9f1f8083-adf6-574a-99d6-68def308a60f",
+    "question": "CSRF protection trong Rails hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10342-csrf-protection-trong-rails-hoat-dong-nhu-the-nao",
+    "slug": "csrf-protection-trong-rails-hoat-dong-nhu-the-nao-9f1f8083-adf6-574a-99d6-68def308a60f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "CSRF (Cross-Site Request Forgery) là tấn công khiến trình duyệt nạn nhân gửi request đến server thay mặt họ.",
+        "Request từ site khác không có token → ActionController::InvalidAuthenticityToken (403)."
+      ],
+      "details": [
+        "Rails bảo vệ bằng cách nhúng authenticity token (random string unique per session) vào mọi form. Controller kiểm tra token trước mọi non-GET request:",
+        "API mode: ActionController::API không include CSRF protection (stateless API dùng JWT/token thay thế, không dùng session cookie)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class ApplicationController < ActionController::Base\n  protect_from_forgery with: :exception  # default\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "10342-csrf-protection-trong-rails-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "38de036a-ade0-58eb-b97a-64e967d8186d",
+    "question": "Concern trong Rails là gì và dùng trong Controller/Model thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10343-concern-trong-rails-la-gi-va-dung-trong-controller-model-the-nao",
+    "slug": "concern-trong-rails-la-gi-va-dung-trong-controller-model-the-nao-38de036a-ade0-58eb-b97a-64e967d8186d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Concern là module được include vào nhiều class để tái sử dụng logic.",
+        "Model Concern hoạt động tương tự — thường dùng để share scope, callback, hay helper method giữa nhiều model."
+      ],
+      "details": [
+        "Rails cung cấp ActiveSupport::Concern để tránh boilerplate.",
+        "Concern tốt cho logic dùng ở nhiều nơi, nhưng không nên lạm dụng để \"giấu\" logic phức tạp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# app/controllers/concerns/authenticatable.rb\nmodule Authenticatable\n  extend ActiveSupport::Concern\n\n  included do\n    before_action :require_login\n  end\n\n  def require_login\n    redirect_to login_path unless current_user\n  end\nend\n\nclass PostsController < ApplicationController\n  include Authenticatable\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "10343-concern-trong-rails-la-gi-va-dung-trong-controller-model-the-nao"
+  },
+  {
+    "id": "55a4f24b-8af4-5298-9cbe-9ba8b090bbbf",
+    "question": "Session và Cookie trong Rails khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10344-session-va-cookie-trong-rails-khac-nhau-nhu-the-nao",
+    "slug": "session-va-cookie-trong-rails-khac-nhau-nhu-the-nao-55a4f24b-8af4-5298-9cbe-9ba8b090bbbf",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cookies lưu plaintext hoặc signed (cookies.signed[:user_id]). Session mặc định dùng CookieStore — toàn bộ session được mã hóa và lưu trong cookie. Đọc/ghi session: session[:user_id] = id / session.delete(:user_id)."
+      ],
+      "details": [
+        "Không lưu thông tin nhạy cảm lớn vào session (giới hạn ~4KB)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Cookie",
+            "Session",
+            "Lưu ở đâu",
+            "Trình duyệt",
+            "Server (hoặc encrypted cookie)",
+            "Xem được",
+            "Có (dễ đọc)",
+            "Không (mã hóa hoặc server-side)",
+            "Kích thước",
+            "4KB",
+            "Không giới hạn (server-side)"
+          ]
+        }
+      ]
+    },
+    "legacyId": 34,
+    "sourceSlug": "10344-session-va-cookie-trong-rails-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "841d7fbe-582e-542c-bf60-b14263c795e8",
+    "question": "Sidekiq là gì và khác Active Job như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10352-sidekiq-la-gi-va-khac-active-job-nhu-the-nao",
+    "slug": "sidekiq-la-gi-va-khac-active-job-nhu-the-nao-841d7fbe-582e-542c-bf60-b14263c795e8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Active Job là abstraction layer — định nghĩa interface chung, Rails tích hợp sẵn.\nSidekiq là backend cụ thể dùng Redis để store và process job — nổi tiếng nhất cho Rails.",
+        "Sidekiq dùng multi-threading (concurrency ~25 mặc định) → xử lý nhiều job song song."
+      ],
+      "details": [],
+      "points": [
+        "Resque dùng multi-process (chậm hơn, tốn RAM hơn).",
+        "Sidekiq tự retry khi job fail với exponential backoff, và có Web UI tích hợp (mount Sidekiq::Web) để xem queue, failed jobs, workers."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# config/application.rb\nconfig.active_job.queue_adapter = :sidekiq"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "10352-sidekiq-la-gi-va-khac-active-job-nhu-the-nao"
+  },
+  {
+    "id": "3542899e-73b5-5213-a165-ddc99a29c346",
+    "question": "Test Active Job / Sidekiq như thế nào với RSpec?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10353-test-active-job-sidekiq-nhu-the-nao-voi-rspec",
+    "slug": "test-active-job-sidekiq-nhu-the-nao-voi-rspec-3542899e-73b5-5213-a165-ddc99a29c346",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng perform_enqueued_jobs để flush queue ngay trong test."
+      ],
+      "details": [
+        "Để test job perform trực tiếp, gọi described_class.perform_now(id) và assert side-effect (mail gửi, record thay đổi, v.v.)."
+      ],
+      "points": [],
+      "sections": [
+        "Rails cung cấp ActiveJob::TestHelper với matchers tích hợp."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "RSpec.describe PostsController, type: :request do\n  include ActiveJob::TestHelper\n\n  it \"enqueues a welcome email after user creation\" do\n    expect {\n      post \"/users\", params: { user: { email: \"test@example.com\" } }\n    }.to have_enqueued_job(WelcomeEmailJob)\n      .with(instance_of(Integer))\n      .on_queue(\"default\")\n  end\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "10353-test-active-job-sidekiq-nhu-the-nao-voi-rspec"
+  },
+  {
+    "id": "ac9032ea-0151-5917-ad43-e0af26c69575",
+    "question": "Action Mailer trong Rails dùng để làm gì? Cách gửi email async?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10354-action-mailer-trong-rails-dung-de-lam-gi-cach-gui-email-async",
+    "slug": "action-mailer-trong-rails-dung-de-lam-gi-cach-gui-email-async-ac9032ea-0151-5917-ad43-e0af26c69575",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "View nằm ở app/views/user_mailer/welcome.html.erb."
+      ],
+      "details": [
+        "Test với ActionMailer::Base.deliveries (test mode tích hợp sẵn)."
+      ],
+      "points": [],
+      "sections": [
+        "Action Mailer cho phép tạo và gửi email từ Rails, tương tự như Controller nhưng cho email."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# app/mailers/user_mailer.rb\nclass UserMailer < ApplicationMailer\n  default from: \"no-reply@example.com\"\n\n  def welcome(user)\n    @user = user\n    mail(to: @user.email, subject: \"Chào mừng bạn!\")\n  end\nend\n\n# Gửi sync (trong request) — chặn response\nUserMailer.welcome(user).deliver_now\n\n# Gửi async qua Active Job — không chặn\nUserMailer.welcome(user).deliver_later"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "10354-action-mailer-trong-rails-dung-de-lam-gi-cach-gui-email-async"
+  },
+  {
+    "id": "838e6966-5989-579c-a99d-5eda2287c83d",
+    "question": "Asset Pipeline trong Rails là gì? Vai trò của nó là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10356-asset-pipeline-trong-rails-la-gi-vai-tro-cua-no-la-gi",
+    "slug": "asset-pipeline-trong-rails-la-gi-vai-tro-cua-no-la-gi-838e6966-5989-579c-a99d-5eda2287c83d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Asset Pipeline (Sprockets) là framework gom, minify và fingerprint static assets (JS, CSS, images) trước khi deploy."
+      ],
+      "details": [
+        "Vai trò chính:\n- Concatenation: gộp nhiều file JS/CSS thành 1 file → giảm HTTP requests.\n- Minification: xóa whitespace/comments → file nhỏ hơn.\n- Fingerprinting: thêm hash vào tên file (application-abc123.css) → cache busting tự động.",
+        "Rails 7+ chuyển sang Propshaft (nhẹ hơn, không gộp file vì HTTP/2 làm điều đó tốt hơn) hoặc import maps + jsbundling-rails. Asset Pipeline vẫn là câu hỏi phổ biến vì nhiều app cũ còn dùng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "10356-asset-pipeline-trong-rails-la-gi-vai-tro-cua-no-la-gi"
+  },
+  {
+    "id": "e95262b4-77d5-5cc3-b5f3-4bf044c490ec",
+    "question": "Namespace và Scope trong Rails Router khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10359-namespace-va-scope-trong-rails-router-khac-nhau-nhu-the-nao",
+    "slug": "namespace-va-scope-trong-rails-router-khac-nhau-nhu-the-nao-e95262b4-77d5-5cc3-b5f3-4bf044c490ec",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "namespace và scope đều nhóm route, nhưng ảnh hưởng khác nhau:",
+        "Dùng namespace cho admin panel (muốn tất cả đều tách biệt)."
+      ],
+      "details": [
+        "Dùng scope cho API versioning khi muốn giữ controller cũ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# namespace: URL + module + helper\nnamespace :admin do\n  resources :posts  # Admin::PostsController\nend\n\n# scope: chỉ URL prefix, controller không đổi\nscope :v1 do\n  resources :posts  # PostsController\nend"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "URL prefix",
+            "/admin/posts",
+            "Controller",
+            "/admin/posts",
+            "Named helper",
+            "Admin::PostsController",
+            "PostsController",
+            "admin_posts_path",
+            "posts_path",
+            "namespace :admin"
+          ]
+        }
+      ]
+    },
+    "legacyId": 39,
+    "sourceSlug": "10359-namespace-va-scope-trong-rails-router-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "be4d8b05-c8f3-5538-8a3e-1043fef4d92d",
+    "question": "Polymorphic Association trong Rails là gì? Cho ví dụ thực tế.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10360-polymorphic-association-trong-rails-la-gi-cho-vi-du-thuc-te",
+    "slug": "polymorphic-association-trong-rails-la-gi-cho-vi-du-thuc-te-be4d8b05-c8f3-5538-8a3e-1043fef4d92d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Polymorphic association cho phép một model belongs_to nhiều model khác nhau qua cùng một association.",
+        "Cột commentable_type lưu tên class, commentable_id lưu id."
+      ],
+      "details": [
+        "Ví dụ: Comment có thể thuộc về Post hoặc Video.",
+        "Rails tự handle việc lọc."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# Migration\ncreate_table :comments do |t|\n  t.text    :body\n  t.references :commentable, polymorphic: true  # tạo commentable_id + commentable_type\nend\n\n# Models\nclass Comment < ApplicationRecord\n  belongs_to :commentable, polymorphic: true\nend\n\nclass Post < ApplicationRecord\n  has_many :comments, as: :commentable\nend\n\nclass Video < ApplicationRecord\n  has_many :comments, as: :commentable\nend\n\n# Query\npost.comments      # Comments với commentable_type=\"Post\", commentable_id=post.id\nvideo.comments     # Comments với commentable_type=\"Video\", commentable_id=video.id"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "10360-polymorphic-association-trong-rails-la-gi-cho-vi-du-thuc-te"
+  },
+  {
+    "id": "37902e18-399b-5307-8d29-2b0f50a2d453",
+    "question": "Single Table Inheritance (STI) trong Active Record là gì? Khi nào dùng, khi nào không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10361-single-table-inheritance-sti-trong-active-record-la-gi-khi-nao-dung-khi-nao-khon",
+    "slug": "single-table-inheritance-sti-trong-active-record-la-gi-khi-nao-dung-khi-nao-khong-37902e18-399b-5307-8d29-2b0f50a2d453",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng khi: các subclass có phần lớn attribute giống nhau, chỉ khác behavior."
+      ],
+      "details": [
+        "Không dùng khi: subclass có nhiều attribute riêng → bảng sẽ rỗng (sparse columns), khó maintain. Thay bằng polymorphic association hoặc separate tables."
+      ],
+      "points": [],
+      "sections": [
+        "STI lưu nhiều subclass khác nhau vào một bảng DB dùng cột type để phân biệt."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# Migration\ncreate_table :vehicles do |t|\n  t.string :type   # STI column\n  t.string :name\n  t.integer :seats\n  t.integer :cargo_capacity  # chỉ dùng cho Truck\nend\n\n# Models\nclass Vehicle < ApplicationRecord; end\nclass Car < Vehicle; end\nclass Truck < Vehicle; end\nclass Motorcycle < Vehicle; end\n\nCar.create!(name: \"Toyota\")  # type=\"Car\"\nVehicle.all  # trả về Car, Truck, Motorcycle cùng lúc"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "10361-single-table-inheritance-sti-trong-active-record-la-gi-khi-nao-dung-khi-nao-khon"
+  },
+  {
+    "id": "52aed741-5b12-5238-b7fb-3a593f5b0def",
+    "question": "Transactions trong Active Record là gì? Khi nào cần dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10362-transactions-trong-active-record-la-gi-khi-nao-can-dung",
+    "slug": "transactions-trong-active-record-la-gi-khi-nao-can-dung-52aed741-5b12-5238-b7fb-3a593f5b0def",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Transaction tự động bao quanh mỗi save / create / destroy. Cần explicit transaction khi:\n- Nhiều thao tác DB phụ thuộc nhau (chuyển tiền, đặt hàng + trừ kho).\n- Dùng save! (raise) để trigger rollback thay vì return false."
+      ],
+      "details": [
+        "Lưu ý: callback after_commit chạy sau khi transaction commit thành công — dùng cho side-effects để không trigger khi rollback."
+      ],
+      "points": [],
+      "sections": [
+        "Transaction đảm bảo tất cả hoặc không có thao tác DB nào được commit — nếu bất kỳ bước nào fail, toàn bộ rollback."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "ActiveRecord::Base.transaction do\n  sender.update!(balance: sender.balance - amount)\n  receiver.update!(balance: receiver.balance + amount)\n  Transfer.create!(from: sender, to: receiver, amount: amount)\nend\n# Nếu receiver.update! raise → sender.balance cũng bị rollback"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "10362-transactions-trong-active-record-la-gi-khi-nao-can-dung"
+  },
+  {
+    "id": "0b0df848-194c-5a53-b5de-c0a519388965",
+    "question": "Tại sao không nên dùng model class trong migration? Cách xử lý đúng khi cần migrate data.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10365-tai-sao-khong-nen-dung-model-class-trong-migration-cach-xu-ly-dung-khi-can-migra",
+    "slug": "tai-sao-khong-nen-dung-model-class-trong-migration-cach-xu-ly-dung-khi-can-migrate-data-0b0df848-194c-5a53-b5de-c0a519388965",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Gọi model class (VD: User.update_all(...)) trong migration nguy hiểm vì model thay đổi theo thời gian — migration cũ sẽ fail khi replay (setup fresh DB) vì model không còn method/association đó nữa."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Đúng — dùng anonymous model hoặc raw SQL:"
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class BackfillUserRole < ActiveRecord::Migration[7.1]\n  def up\n    User.where(role: nil).update_all(role: \"member\")  # nguy hiểm!\n  end\nend"
+        },
+        {
+          "language": "RUBY",
+          "code": "class BackfillUserRole < ActiveRecord::Migration[7.1]\n  # Anonymous class chỉ biết schema hiện tại của migration này\n  class User < ApplicationRecord; end\n\n  def up\n    User.where(role: nil).update_all(role: \"member\")\n  end\nend\n\n# Hoặc đơn giản hơn:\ndef up\n  execute \"UPDATE users SET role = 'member' WHERE role IS NULL\"\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "10365-tai-sao-khong-nen-dung-model-class-trong-migration-cach-xu-ly-dung-khi-can-migra"
+  },
+  {
+    "id": "11b60b0d-0909-551b-99b8-c28203b886be",
+    "question": "Caching trong Rails — fragment cache và Russian-doll cache là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10367-caching-trong-rails-fragment-cache-va-russian-doll-cache-la-gi",
+    "slug": "caching-trong-rails-fragment-cache-va-russian-doll-cache-la-gi-11b60b0d-0909-551b-99b8-c28203b886be",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Caching giảm số lần tính toán/query tốn kém bằng cách lưu kết quả HTML.",
+        "cache_key_with_version",
+        "Russian-doll cache — cache lồng nhau: outer cache bao inner cache."
+      ],
+      "details": [
+        "Fragment cache — cache một đoạn view:",
+        "Outer chỉ expired khi inner thay đổi.",
+        "Configure store:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "ERB",
+          "code": "<%# cache @article do %>\n  <%= render @article %>\n<%# end %>"
+        },
+        {
+          "language": "ERB",
+          "code": "<%# cache @article do  — outer: cache cả article %>\n  <h1><%= @article.title %></h1>\n  <%# cache @article.comments do  — inner: cache list comments %>\n    <%= render @article.comments %>\n  <%# end %>\n<%# end %>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "10367-caching-trong-rails-fragment-cache-va-russian-doll-cache-la-gi"
+  },
+  {
+    "id": "31cafd05-2e36-5c48-9a20-5812711a34fc",
+    "question": "Content negotiation trong Rails — respond_to và respond_with dùng như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10368-content-negotiation-trong-rails-respond-to-va-respond-with-dung-nhu-the-nao",
+    "slug": "content-negotiation-trong-rails-respond-to-va-respond-with-dung-nhu-the-nao-31cafd05-2e36-5c48-9a20-5812711a34fc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Request GET /posts/1 → HTML. GET /posts/1.json hoặc header Accept: application/json → JSON."
+      ],
+      "details": [
+        "respond_with (từ gem responders) ngắn gọn hơn cho CRUD chuẩn nhưng ít tùy biến hơn. Với Rails API mode (ActionController::API), response mặc định là JSON và không cần respond_to."
+      ],
+      "points": [],
+      "sections": [
+        "Content negotiation cho phép một action phản hồi theo format khác nhau (HTML, JSON, XML) tùy Accept header hoặc URL extension."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class PostsController < ApplicationController\n  def show\n    @post = Post.find(params[:id])\n\n    respond_to do |format|\n      format.html  # render app/views/posts/show.html.erb\n      format.json { render json: @post }\n      format.xml  { render xml: @post }\n    end\n  end\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "10368-content-negotiation-trong-rails-respond-to-va-respond-with-dung-nhu-the-nao"
+  },
+  {
+    "id": "c33bce9b-a2e8-5899-aa33-ef826b898323",
+    "question": "Mocks và Stubs trong RSpec là gì? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10371-mocks-va-stubs-trong-rspec-la-gi-khi-nao-dung-cai-nao",
+    "slug": "mocks-va-stubs-trong-rspec-la-gi-khi-nao-dung-cai-nao-c33bce9b-a2e8-5899-aa33-ef826b898323",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Stub thay thế method thật bằng kết quả giả — kiểm soát đầu ra, không quan tâm có gọi hay không.\nMock là stub + có kỳ vọng rằng method phải được gọi — test sẽ fail nếu không gọi.",
+        "Khi nào dùng:\n- Stub: cô lập dependency (HTTP call, time, external service) để test nhanh và reliable.\n- Mock: verify behavior — \"code này CÓ gọi service kia không\" (integration point)."
+      ],
+      "details": [
+        "Lạm dụng mock làm test brittle (test biết quá nhiều về implementation). Ưu tiên test behavior/output thật khi có thể."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# Stub\nallow(UserMailer).to receive(:welcome).and_return(double(deliver_later: nil))\n\n# Mock (expect phải được gọi)\nexpect(UserMailer).to receive(:welcome)\n  .with(user)\n  .once\n  .and_return(double(deliver_later: nil))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "10371-mocks-va-stubs-trong-rspec-la-gi-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "12051e3e-0f2e-54d0-b835-b9b30e9e01aa",
+    "question": "DatabaseCleaner trong Rails testing dùng để làm gì? Các strategy phổ biến?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10372-databasecleaner-trong-rails-testing-dung-de-lam-gi-cac-strategy-pho-bien",
+    "slug": "databasecleaner-trong-rails-testing-dung-de-lam-gi-cac-strategy-pho-bien-12051e3e-0f2e-54d0-b835-b9b30e9e01aa",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "DatabaseCleaner đảm bảo mỗi test bắt đầu với DB sạch — tránh test state rò rỉ sang test khác."
+      ],
+      "details": [
+        "Ba strategy chính:"
+      ],
+      "points": [],
+      "sections": [
+        "RSpec transactional fixtures (use_transactional_fixtures: true) cũng làm được điều tương tự nhưng DatabaseCleaner linh hoạt hơn khi mix nhiều loại test."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# spec/support/database_cleaner.rb\nRSpec.configure do |config|\n  config.before(:suite) { DatabaseCleaner.strategy = :transaction }\n  config.around(:each)  { |ex| DatabaseCleaner.cleaning { ex.run } }\n\n  # System tests cần truncation vì Capybara dùng thread riêng\n  config.before(:each, type: :system) { DatabaseCleaner.strategy = :truncation }\nend"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Strategy",
+            "Cơ chế",
+            "Tốc độ",
+            "Wrap test trong transaction, rollback sau",
+            "transaction",
+            "Nhanh nhất",
+            "truncation",
+            "Unit/request test không cần JS",
+            "deletion",
+            "TRUNCATE tất cả bảng",
+            "Chậm",
+            "System test (Capybara + JS), cần data persist",
+            "DELETE FROM từng bảng",
+            "Trung bình",
+            "Ít dùng"
+          ]
+        }
+      ]
+    },
+    "legacyId": 47,
+    "sourceSlug": "10372-databasecleaner-trong-rails-testing-dung-de-lam-gi-cac-strategy-pho-bien"
+  },
+  {
+    "id": "7bf10367-1f7a-525c-a5ea-5a7fc61ab8b6",
+    "question": "delete và destroy trong Active Record khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94060-delete-va-destroy-trong-active-record-khac-nhau-the-nao",
+    "slug": "delete-va-destroy-trong-active-record-khac-nhau-the-nao-7bf10367-1f7a-525c-a5ea-5a7fc61ab8b6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai đều xóa bản ghi, nhưng đi qua hai đường khác nhau:",
+        "Quy tắc: cần callback/dọn dữ liệu liên quan → destroy."
+      ],
+      "details": [
+        "Xóa số lượng lớn không có side-effect → delete/delete_all để tránh nạp N object."
+      ],
+      "points": [
+        "destroy: nạp object lên, chạy callbacks (before_destroy, after_destroy, after_commit) và xử lý association khai báo dependent: :destroy. Đây là đường \"an toàn\" khi có logic phụ thuộc.",
+        "delete: bắn thẳng một câu SQL DELETE, bỏ qua callbacks lẫn validations, không đụng tới bản ghi liên quan. Nhanh hơn nhưng nguy hiểm nếu model dựa vào callback để dọn dẹp."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "user.destroy   # chạy callback + xóa comment con (dependent: :destroy)\nuser.delete    # chỉ 1 câu DELETE, không callback\n\nUser.where(active: false).destroy_all  # nạp từng record, chạy callback\nUser.where(active: false).delete_all   # 1 câu DELETE hàng loạt, bỏ callback"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "94060-delete-va-destroy-trong-active-record-khac-nhau-the-nao"
+  },
+  {
+    "id": "79a9cdf5-78ac-5bca-88e1-7299d99cd655",
+    "question": "after_save và after_commit khác nhau ở thời điểm nào trong transaction?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94061-after-save-va-after-commit-khac-nhau-o-thoi-diem-nao-trong-transaction",
+    "slug": "after-save-va-after-commit-khac-nhau-o-thoi-diem-nao-trong-transaction-79a9cdf5-78ac-5bca-88e1-7299d99cd655",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác biệt nằm ở quan hệ với transaction của database:",
+        "Vì sao quan trọng: enqueue background job trong after_save dễ gây race — worker có thể chạy và query record trước khi transaction commit, thấy dữ liệu chưa tồn tại."
+      ],
+      "details": [
+        "Mọi side-effect ra thế giới bên ngoài (mail, job, webhook) nên đặt ở after_commit."
+      ],
+      "points": [
+        "after_save: chạy bên trong transaction, ngay sau khi INSERT/UPDATE được gửi nhưng trước khi COMMIT. Nếu về sau transaction rollback, mọi thứ after_save làm cũng bị hủy theo nếu nằm trong DB — nhưng side-effect ngoài DB (gửi mail, enqueue job) thì không rollback được.",
+        "after_commit: chỉ chạy sau khi COMMIT thành công, tức dữ liệu đã bền vững. Không chạy nếu transaction rollback."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class Order < ApplicationRecord\n  after_save    { Rails.logger.info \"trong transaction\" }\n  after_commit  { PaymentMailer.receipt(self).deliver_later }\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "94061-after-save-va-after-commit-khac-nhau-o-thoi-diem-nao-trong-transaction"
+  },
+  {
+    "id": "bf4ce1b9-53d7-5604-b6fb-3ed80e00a798",
+    "question": "Khi nào dùng has_many :through thay vì has_and_belongs_to_many?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94062-khi-nao-dung-has-many-through-thay-vi-has-and-belongs-to-many",
+    "slug": "khi-nao-dung-has-many-through-thay-vi-has-and-belongs-to-many-bf4ce1b9-53d7-5604-b6fb-3ed80e00a798",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai mô hình quan hệ nhiều-nhiều, khác nhau ở chỗ có model trung gian hay không:",
+        "Chọn thế nào: cần thuộc tính trên quan hệ, hoặc muốn validate/hook trên bản ghi nối → has_many :through."
+      ],
+      "details": [
+        "Rails Guides khuyên mặc định ưu tiên through vì linh hoạt hơn; chỉ dùng HABTM khi chắc chắn không bao giờ cần làm việc trực tiếp với bảng nối."
+      ],
+      "points": [
+        "has_and_belongs_to_many (HABTM): chỉ cần một bảng nối (vd authors_books), không có model cho nó. Gọn khi quan hệ thuần túy là \"nối\", không có dữ liệu kèm theo.",
+        "has_many :through: đi qua một model join thật (vd Authorship). Model này có thể mang cột riêng, validations, callbacks, và bạn thao tác trực tiếp với nó."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# through: bảng nối là model thật, có thêm thuộc tính\nclass Authorship < ApplicationRecord\n  belongs_to :author\n  belongs_to :book\n  # cột riêng: role, royalty_percent...\nend\nclass Author < ApplicationRecord\n  has_many :authorships\n  has_many :books, through: :authorships\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "94062-khi-nao-dung-has-many-through-thay-vi-has-and-belongs-to-many"
+  },
+  {
+    "id": "c88cdf03-be38-5e4c-9b00-a95f3dc94169",
+    "question": "Active Storage đính kèm file vào model như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94063-active-storage-dinh-kem-file-vao-model-nhu-the-nao",
+    "slug": "active-storage-dinh-kem-file-vao-model-nhu-the-nao-c88cdf03-be38-5e4c-9b00-a95f3dc94169",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Active Storage là framework tích hợp sẵn để đính kèm file (ảnh, PDF...) và upload lên cloud (S3, GCS, Azure) hoặc disk local. Cần chạy rails active_storage:install một lần để tạo các bảng active_storage_blobs, active_storage_attachments.",
+        "Điểm cốt lõi:\n- File thực nằm ở storage service (khai báo trong config/storage.yml), DB chỉ giữ metadata (blob) và liên kết (attachment).\n- Với ảnh, dùng variant để resize on-the-fly: user.avatar.variant(resize_to_limit: [100, 100]).\n- Không cần gem ngoài (paperclip/carrierwave) cho nhu cầu cơ bản."
+      ],
+      "details": [
+        "Khai báo trên model và attach:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class User < ApplicationRecord\n  has_one_attached :avatar       # 1 file\n  has_many_attached :documents   # nhiều file\nend\n\nuser.avatar.attach(params[:avatar])   # gắn file từ form upload\nuser.avatar.attached?                 # kiểm tra đã có chưa\nurl_for(user.avatar)                  # sinh URL để hiển thị/tải"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "94063-active-storage-dinh-kem-file-vao-model-nhu-the-nao"
+  },
+  {
+    "id": "0774f958-c2a5-5265-bcd3-360ef0b5fbea",
+    "question": "includes, preload và eager_load khác nhau thế nào? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96704-includes-preload-va-eager-load-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "slug": "includes-preload-va-eager-load-khac-nhau-the-nao-khi-nao-dung-cai-nao-0774f958-c2a5-5265-bcd3-360ef0b5fbea",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả ba đều nạp trước association để tránh N+1, khác ở SQL sinh ra.",
+        "Chọn: chỉ hiển thị dữ liệu liên kết → preload (hai query nhỏ thường nhanh hơn một join lớn). Cần lọc hoặc sắp xếp theo cột của bảng liên kết → eager_load. Không chắc → includes."
+      ],
+      "details": [
+        "Gotcha hay bị hỏi: joins không nạp sẵn association — vẫn N+1 nếu sau đó truy cập post.comments. Dùng gem bullet ở môi trường dev để phát hiện."
+      ],
+      "points": [
+        "preload — luôn chạy query riêng cho mỗi association (SELECT ... WHERE post_id IN (...)). Không thể lọc theo cột của bảng liên kết.",
+        "eager_load — gộp thành một query dùng LEFT OUTER JOIN. Lọc được theo cột bảng liên kết, nhưng dòng bị nhân bản và kết quả nặng hơn.",
+        "includes — để Rails tự chọn: mặc định hành xử như preload; nếu bạn tham chiếu bảng liên kết trong where (kèm references) thì nó chuyển sang eager_load."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "Post.includes(:comments).where(comments: { spam: false }).references(:comments)\n# => switches to LEFT OUTER JOIN\n\nPost.preload(:comments)    # always 2 queries\nPost.eager_load(:comments) # always 1 query with LEFT OUTER JOIN"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "96704-includes-preload-va-eager-load-khac-nhau-the-nao-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "408441c6-aea7-5b0a-b76d-d920de2b07d6",
+    "question": "Khi nào **không** nên dùng Active Record callback? Thay bằng gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96705-khi-nao-khong-nen-dung-active-record-callback-thay-bang-gi",
+    "slug": "khi-nao-khong-nen-dung-active-record-callback-thay-bang-gi-408441c6-aea7-5b0a-b76d-d920de2b07d6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Callback hợp lý khi việc cần làm là thuộc tính nội tại của bản ghi và phải đúng trong mọi ngữ cảnh: chuẩn hoá dữ liệu (before_save { self.email = email.downcase }), sinh slug, dọn file đính kèm khi destroy.",
+        "Chốt: đưa tác dụng phụ ra service object (hoặc controller action) để nó tường minh và chỉ chạy đúng luồng cần."
+      ],
+      "details": [
+        "Nên tránh khi callback gây tác dụng phụ ra bên ngoài:\n- Gửi email, gọi API bên thứ ba, enqueue job, ghi log nghiệp vụ.\n- Sửa model khác, tạo bản ghi liên quan.\n- Logic chỉ đúng cho một luồng (đăng ký qua web) nhưng sai cho luồng khác (import CSV, seed, sửa trong console, factory trong test).",
+        "Lý do: callback chạy ngầm với mọi thao tác save, nên import 10.000 dòng sẽ vô tình gửi 10.000 email; test phải stub khắp nơi; và nếu callback gọi API mà đang nằm trong transaction thì transaction bị giữ mở suốt thời gian chờ mạng.",
+        "Nếu buộc phải dùng callback kèm side effect, dùng after_commit để tránh phát tín hiệu khi transaction còn có thể rollback."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# instead of after_create :send_welcome_email in the model\nclass RegisterUser\n  def call(params)\n    user = User.create!(params)\n    WelcomeMailer.welcome(user).deliver_later\n    user\n  end\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "96705-khi-nao-khong-nen-dung-active-record-callback-thay-bang-gi"
+  },
+  {
+    "id": "580a47a3-c483-5760-8195-32dff47ddd95",
+    "question": "Low-level caching với Rails.cache.fetch dùng thế nào? Cần lưu ý gì về key và hết hạn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96706-low-level-caching-voi-rails-cache-fetch-dung-the-nao-can-luu-y-gi-ve-key-va-het",
+    "slug": "low-level-caching-voi-rails-cache-fetch-dung-the-nao-can-luu-y-gi-ve-key-va-het-han-580a47a3-c483-5760-8195-32dff47ddd95",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Key phải chứa mọi thứ ảnh hưởng tới kết quả — id, locale, phiên bản dữ liệu.",
+        "Lưu ý thực tế:\n- Block không chạy khi có cache, nên đừng đặt side effect trong đó.\n- fetch lưu cả nil/false được hay không tuỳ store; muốn chắc thì tránh cache giá trị rỗng hoặc dùng skip_nil: true.\n- Nhiều request cùng miss một key nặng sẽ cùng lúc chạy block (cache stampede). Với key đắt tiền, dùng race_condition_ttl để một request gia hạn key cũ trong lúc tính lại.\n- Store dùng chung (:redis_cache_store, :mem_cache_store) mới có tác dụng khi chạy nhiều process; :memory_store chỉ nằm trong một process."
+      ],
+      "details": [
+        "Cách thông dụng là dùng chính record làm key vì cache_key_with_version đã gắn updated_at, nên khi record đổi thì key đổi, không cần đi xoá cache:"
+      ],
+      "points": [],
+      "sections": [
+        "Rails.cache.fetch đọc cache theo key; nếu chưa có (cache miss) thì chạy block, lưu kết quả rồi trả về."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "def exchange_rate\n  Rails.cache.fetch('usd_vnd_rate', expires_in: 10.minutes) do\n    RateApi.fetch_usd_vnd  # only runs on a miss\n  end\nend"
+        },
+        {
+          "language": "RUBY",
+          "code": "Rails.cache.fetch([user, 'unread_count'], expires_in: 1.hour) { user.notifications.unread.count }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "96706-low-level-caching-voi-rails-cache-fetch-dung-the-nao-can-luu-y-gi-ve-key-va-het"
+  },
+  {
+    "id": "04259724-7a46-54f4-95ad-6b75fb29f52a",
+    "question": "Truyền tham số cho perform_later cần lưu ý gì? Truyền object Active Record được không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96707-truyen-tham-so-cho-perform-later-can-luu-y-gi-truyen-object-active-record-duoc-k",
+    "slug": "truyen-tham-so-cho-perform-later-can-luu-y-gi-truyen-object-active-record-duoc-khong-04259724-7a46-54f4-95ad-6b75fb29f52a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Hệ quả cần biết:\n- Nếu record bị xoá trước khi job chạy, job ném ActiveJob::DeserializationError (bọc RecordNotFound). Rails mặc định discard job này thay vì retry vô hạn.\n- Job luôn đọc trạng thái mới nhất trong DB, không phải trạng thái lúc enqueue. Nếu cần chụp lại giá trị tại thời điểm enqueue (vd giá tiền), phải truyền giá trị đó tường minh chứ không truyền object.\n- Chỉ các kiểu cơ bản (String, Integer, Hash, Array, Symbol, Date/Time, và object có GlobalID) mới serialize được. Truyền một object thường sẽ ném SerializationError; muốn hỗ trợ thì đăng ký custom serializer."
+      ],
+      "details": [
+        "Thực tế nhiều team chọn truyền id thuần cho rõ ràng và tránh phụ thuộc vào GlobalID; đổi lại phải tự xử lý trường hợp record không còn tồn tại. Kiểu gì cũng phải giữ payload nhỏ — hàng đợi lưu payload dưới dạng JSON, không phải chỗ để nhét cả object lớn."
+      ],
+      "points": [],
+      "sections": [
+        "Được, nhưng chỉ vì Active Job không gửi object đi — nó serialize thành GlobalID (chuỗi dạng gid://app/User/42) rồi khi worker chạy mới find lại từ DB."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "WelcomeJob.perform_later(user)   # queued as gid://app/User/42"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": "96707-truyen-tham-so-cho-perform-later-can-luu-y-gi-truyen-object-active-record-duoc-k"
+  },
+  {
+    "id": "545a5fe5-334f-5a13-bf34-27d13264b698",
+    "question": "Viết một Rack middleware để log thời gian xử lý request như thế nào? Chèn vào stack ở đâu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96708-viet-mot-rack-middleware-de-log-thoi-gian-xu-ly-request-nhu-the-nao-chen-vao-sta",
+    "slug": "viet-mot-rack-middleware-de-log-thoi-gian-xu-ly-request-nhu-the-nao-chen-vao-stack-o-dau-545a5fe5-334f-5a13-bf34-27d13264b698",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Vị trí quan trọng: đặt càng gần đầu stack thì càng đo được nhiều (kể cả thời gian của các middleware khác), nhưng lúc đó session và params chưa được parse. Nếu middleware cần đọc session hay current_user thì phải chèn sau ActionDispatch::Session::CookieStore. Xem stack thật bằng bin/rails middleware."
+      ],
+      "details": [
+        "Dùng middleware cho việc cắt ngang mọi request không cần biết route: rate limit theo IP, health check, đo thời gian, chặn host lạ. Việc phụ thuộc controller/route thì dùng before_action chứ không dùng middleware."
+      ],
+      "points": [],
+      "sections": [
+        "Middleware Rack là một object có call(env) trả về mảng [status, headers, body], và giữ tham chiếu tới middleware kế tiếp (@app).",
+        "Đăng ký trong config/application.rb:"
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# lib/middleware/request_timer.rb\nclass RequestTimer\n  def initialize(app)\n    @app = app\n  end\n\n  def call(env)\n    started = Process.clock_gettime(Process::CLOCK_MONOTONIC)\n    status, headers, body = @app.call(env)   # pass down the stack\n    elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - started\n    headers['X-Runtime-Custom'] = elapsed.round(4).to_s\n    [status, headers, body]\n  end\nend"
+        },
+        {
+          "language": "RUBY",
+          "code": "config.middleware.use RequestTimer               # append to the end\nconfig.middleware.insert_before Rack::Runtime, RequestTimer\nconfig.middleware.insert_after ActionDispatch::Static, RequestTimer"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "96708-viet-mot-rack-middleware-de-log-thoi-gian-xu-ly-request-nhu-the-nao-chen-vao-sta"
+  },
+  {
+    "id": "15b644d0-53de-5fea-b5bb-fc188e589409",
+    "question": "Trên association, size, count và length khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96709-tren-association-size-count-va-length-khac-nhau-the-nao",
+    "slug": "tren-association-size-count-va-length-khac-nhau-the-nao-15b644d0-53de-5fea-b5bb-fc188e589409",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác ở chỗ có chạy SQL không và có nạp record vào bộ nhớ không.",
+        "Chọn trong thực tế:\n- Chỉ cần con số, không cần record → count.\n- Đằng nào cũng render danh sách ở ngay dưới → length (hoặc size sau khi đã includes), tránh chạy thêm một query đếm.\n- Không chắc → size là mặc định an toàn nhất."
+      ],
+      "details": [
+        "Gotcha thường gặp: trong view lặp qua nhiều post mà gọi post.comments.count sẽ tạo một COUNT query cho mỗi post — đây là dạng N+1 mà includes không cứu được; phải dùng counter cache hoặc gom đếm bằng group(:post_id).count."
+      ],
+      "points": [
+        "count — luôn chạy SELECT COUNT(*), kể cả khi association đã được nạp. Không giữ record.",
+        "length — luôn nạp toàn bộ record vào mảng rồi đếm trong Ruby.",
+        "size — thông minh: nếu association đã nạp thì đếm trong bộ nhớ; nếu chưa thì chạy COUNT(*). Nếu model có counter cache thì size đọc thẳng cột đếm, không chạy SQL nào."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "post.comments.count   # always SELECT COUNT(*)\npost.comments.length  # always loads all rows\npost.comments.size    # COUNT(*), or in-memory, or counter cache column"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "96709-tren-association-size-count-va-length-khac-nhau-the-nao"
+  },
+  {
+    "id": "88826c99-f324-5b76-9213-90216fffa26d",
+    "question": "find, find_by và where khác nhau như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "find-find-by-va-where-khac-nhau-nhu-the-nao-88826c99-f324-5b76-9213-90216fffa26d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": null
+  },
+  {
+    "id": "f5e85ba3-3623-532b-8d4e-efd38d03c3e1",
+    "question": "Làm thế nào để viết migration an toàn trên production DB lớn (zero-downtime)?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-the-nao-de-viet-migration-an-toan-tren-production-db-lon-zero-downtime-f5e85ba3-3623-532b-8d4e-efd38d03c3e1",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": null
+  },
+  {
+    "id": "f74f17cb-a1a8-5141-8886-6ae4a50075c1",
+    "question": "Service Object trong Rails là gì và vì sao nên dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "service-object-trong-rails-la-gi-va-vi-sao-nen-dung-f74f17cb-a1a8-5141-8886-6ae4a50075c1",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": null
+  },
+  {
+    "id": "a5c5779f-7f85-5ad7-b428-197c58104bc2",
+    "question": "Idempotency trong background job là gì và tại sao quan trọng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "idempotency-trong-background-job-la-gi-va-tai-sao-quan-trong-a5c5779f-7f85-5ad7-b428-197c58104bc2",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": null
+  },
+  {
+    "id": "3a5e1a38-53ee-5f88-b2f6-81729525de0c",
+    "question": "Rack là gì? Rails liên quan đến Rack như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "rack-la-gi-rails-lien-quan-den-rack-nhu-the-nao-3a5e1a38-53ee-5f88-b2f6-81729525de0c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": null
+  },
+  {
+    "id": "09907ff6-3558-5823-bf8a-513a5b5fd042",
+    "question": "Optimistic vs Pessimistic Locking trong Rails là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "optimistic-vs-pessimistic-locking-trong-rails-la-gi-09907ff6-3558-5823-bf8a-513a5b5fd042",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": null
+  },
+  {
+    "id": "18729220-5bea-5865-abba-9392c13bb739",
+    "question": "Counter Cache trong Rails là gì và dùng như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "counter-cache-trong-rails-la-gi-va-dung-nhu-the-nao-18729220-5bea-5865-abba-9392c13bb739",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": null
+  },
+  {
+    "id": "1a05fb7d-d628-532f-a675-a2241ee86c1b",
+    "question": "Rails API mode là gì? Khác gì so với full Rails app?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "rails-api-mode-la-gi-khac-gi-so-voi-full-rails-app-1a05fb7d-d628-532f-a675-a2241ee86c1b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": null
+  },
+  {
+    "id": "22fac548-83f3-5998-b132-37237a7ac057",
+    "question": "Cron job trong Rails — Active Job scheduler vs gem whenever? Cách setup scheduled job?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cron-job-trong-rails-active-job-scheduler-vs-gem-whenever-cach-setup-scheduled-job-22fac548-83f3-5998-b132-37237a7ac057",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": null
+  },
+  {
+    "id": "90d95025-2412-58d7-8c87-e39d7c11f0a4",
+    "question": "Retry và dead queue trong Sidekiq hoạt động như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "retry-va-dead-queue-trong-sidekiq-hoat-dong-nhu-the-nao-90d95025-2412-58d7-8c87-e39d7c11f0a4",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": null
+  },
+  {
+    "id": "d4817485-7dc7-5be8-aa1b-0e73489b4400",
+    "question": "Enum trong Active Record là gì? Cách định nghĩa và dùng trong query?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "enum-trong-active-record-la-gi-cach-dinh-nghia-va-dung-trong-query-d4817485-7dc7-5be8-aa1b-0e73489b4400",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": null
+  },
+  {
+    "id": "118d06ee-37f3-5cc8-af37-1d213910ac92",
+    "question": "Model Order đã phình lên 900 dòng. Bạn refactor thế nào — concern, service object hay POR O?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "model-order-da-phinh-len-900-dong-ban-refactor-the-nao-concern-service-object-hay-por-o-118d06ee-37f3-5cc8-af37-1d213910ac92",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": null
+  },
+  {
+    "id": "5fcffa40-7dfe-553e-881c-f7bd7b1f6c27",
+    "question": "User bấm nút \"Đặt hàng\" hai lần liên tiếp, hàng chỉ còn 1 sản phẩm. Bạn thiết kế luồng thế nào để không bán quá tồn kho và không tạo trùng đơn?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "user-bam-nut-dat-hang-hai-lan-lien-tiep-hang-chi-con-1-san-pham-ban-thiet-ke-luong-the-nao-de-khong-5fcffa40-7dfe-553e-881c-f7bd7b1f6c27",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": null
+  },
+  {
+    "id": "7761faf4-2419-5843-b209-816579caa72d",
+    "question": "Thêm index vào bảng 50 triệu dòng trên Postgres production. Migration viết thế nào để không khoá ghi?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "them-index-vao-bang-50-trieu-dong-tren-postgres-production-migration-viet-the-nao-de-khong-khoa-ghi-7761faf4-2419-5843-b209-816579caa72d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": null
+  }
+]

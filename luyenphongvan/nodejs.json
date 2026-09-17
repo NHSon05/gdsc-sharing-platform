@@ -1,0 +1,2802 @@
+[
+  {
+    "id": "ababe452-c017-5673-85bb-211a686cedb2",
+    "question": "Node.js là gì? Điểm khác biệt với JavaScript trên trình duyệt?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/651-node-js-la-gi-diem-khac-biet-voi-javascript-tren-trinh-duyet",
+    "slug": "node-js-la-gi-diem-khac-biet-voi-javascript-tren-trinh-duyet-ababe452-c017-5673-85bb-211a686cedb2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Node.js là runtime cho phép chạy JavaScript ngoài trình duyệt, ở phía server hoặc công cụ dòng lệnh, được xây dựng trên V8 engine của Chrome và thư viện libuv để xử lý I/O bất đồng bộ. Khác với JavaScript trên trình duyệt vốn bị giới hạn trong sandbox và gắn với Web APIs, Node.js cho phép code truy cập trực tiếp tài nguyên hệ thống."
+      ],
+      "details": [
+        "Node.js không tự thực thi JavaScript một mình. V8 biên dịch và chạy code JS trên một thread chính duy nhất, còn libuv đảm nhận phần I/O nặng. Khi bạn gọi fs.readFile hay http.request, libuv đẩy thao tác xuống hệ điều hành hoặc thread pool ở nền, rồi đưa callback vào event loop khi xong. Nhờ mô hình non-blocking này, một process Node.js duy trì hàng nghìn kết nối đồng thời mà không tạo thread mới cho mỗi request, phù hợp với workload I/O-heavy. Ngược lại, trình duyệt cung cấp window, document, DOM, localStorage, fetch để tương tác với trang web, nhưng không có fs, http server, path, os, crypto ở mức hệ thống hay quyền truy cập file tùy ý vì lý do bảo mật.",
+        "Lỗi thường gặp là dùng API đồng bộ như fs.readFileSync trong request handler hoặc chạy tác vụ nặng CPU như mã hóa, nén ảnh ngay trên event loop, khiến toàn bộ server bị khựng. Nhiều bạn cũng nhầm single-threaded nghĩa là Node.js không tận dụng được đa nhân — thực tế libuv và cluster/worker_threads vẫn dùng thread/process phụ cho I/O và CPU.",
+        "Lưu ý: Chọn Node.js cho API server, realtime, tooling nơi I/O chiếm phần lớn thời gian chờ; cân nhắc tách worker riêng hoặc dùng ngôn ngữ khác cho tác vụ CPU-intensive để tránh block event loop."
+      ],
+      "points": [
+        "Trình duyệt: có DOM/CSSOM, Web APIs, sandbox, không truy cập file hệ thống.",
+        "Node.js: không có DOM/window, thay vào đó có module hệ thống (fs, http, path, os), quản lý package qua npm, chạy như process hệ điều hành."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "651-node-js-la-gi-diem-khac-biet-voi-javascript-tren-trinh-duyet"
+  },
+  {
+    "id": "18784d68-ffe0-599c-b2aa-aba3cdfacf6d",
+    "question": "V8 engine là gì? Vai trò của nó trong Node.js?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/652-v8-engine-la-gi-vai-tro-cua-no-trong-node-js",
+    "slug": "v8-engine-la-gi-vai-tro-cua-no-trong-node-js-18784d68-ffe0-599c-b2aa-aba3cdfacf6d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "V8 là JavaScript engine mã nguồn mở của Google, viết bằng C++, dùng trong Chrome và là lõi thực thi JavaScript trong Node.js. V8 biên dịch JavaScript thành native machine code bằng JIT (Just-In-Time) compilation, giúp code chạy nhanh gần bằng C++."
+      ],
+      "details": [
+        "Hãy nghĩ V8 như động cơ xe: nó tạo ra chuyển động (thực thi JS), còn Node.js là cả chiếc xe — thêm bánh, vô lăng (libuv, built-in modules) để chạy trên đường đời thực ngoài trình duyệt.",
+        "--max-old-space-size",
+        "Cơ chế: V8 không interpret JS từng dòng. Ban đầu nó parse code thành AST, rồi biên dịch sang bytecode (Ignition interpreter). Khi một hàm chạy nhiều lần, V8 đánh dấu là \"hot\" và biên dịch tiếp sang machine code tối ưu (TurboFan). Nó còn dùng hidden class: object cùng shape (cùng thứ tự properties) sẽ dùng chung internal class, giúp property access nhanh hơn. Node.js nhúng V8 vào C++ runtime và bổ sung libuv cho async I/O, các module như fs, http, crypto để tạo môi trường chạy JS hoàn chỉnh ngoài browser.",
+        "Ví dụ: nếu bạn tạo object rồi thêm property mới sau đó, V8 phải tạo hidden class mới, làm chậm property access. Trong hot path, hãy khởi tạo object với đầy đủ properties ngay từ đầu.",
+        "Lưu ý:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "652-v8-engine-la-gi-vai-tro-cua-no-trong-node-js"
+  },
+  {
+    "id": "6ac8963b-024d-5eca-a882-a4dccd02876e",
+    "question": "Event-driven architecture trong Node.js nghĩa là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/653-event-driven-architecture-trong-node-js-nghia-la-gi",
+    "slug": "event-driven-architecture-trong-node-js-nghia-la-gi-6ac8963b-024d-5eca-a882-a4dccd02876e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Event-driven architecture là mô hình mà luồng điều khiển được quyết định bởi sự kiện thay vì chạy tuần tự từ trên xuống. Trong Node.js, bạn đăng ký hàm xử lý cho một sự kiện và runtime sẽ gọi hàm đó khi sự kiện xảy ra, thay vì block để chờ."
+      ],
+      "details": [
+        "Hãy hình dung như quầy lễ tân: nhân viên không đứng chờ một khách làm xong thủ tục mới tiếp người tiếp theo. Nhân viên ghi nhận yêu cầu, chuyển cho bộ phận phía sau xử lý và tiếp khách khác. Khi xong việc, chuông báo reo và nhân viên quay lại hoàn tất.",
+        "Cơ chế này dựa trên event loop và I/O không block. Hầu hết đối tượng như http.Server, fs.ReadStream, Socket đều kế thừa EventEmitter và cho phép on() để lắng nghe. Khi bạn gọi thao tác I/O như đọc file hay query DB, Node.js ủy thác việc chờ cho hệ thống qua libuv và tiếp tục chạy code khác. Khi hệ điều hành báo I/O hoàn tất, event được đưa vào hàng đợi và callback chạy trên main thread duy nhất. Nhờ vậy một thread có thể phục vụ nhiều kết nối đồng thời vì thời gian chờ I/O không chiếm CPU.",
+        "Lỗi thường gặp là block event loop. Vòng lặp for nặng, JSON.parse với payload lớn hay crypto.pbkdf2Sync chạy đồng bộ sẽ giữ main thread và khiến mọi request, timer khác phải xếp hàng. Lỗi khác là quên gỡ listener bằng removeListener() hoặc dùng on() thay vì once() khi chỉ cần chạy một lần, dẫn tới rò rỉ bộ nhớ. Nếu không lắng nghe sự kiện 'error' trên EventEmitter, lỗi có thể làm crash process.",
+        "Lưu ý:",
+        "worker_threads"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "653-event-driven-architecture-trong-node-js-nghia-la-gi"
+  },
+  {
+    "id": "a4f9ade7-c21b-5f5c-a248-9643a9bf5d9c",
+    "question": "Non-blocking I/O trong Node.js là gì? Tại sao quan trọng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/654-non-blocking-i-o-trong-node-js-la-gi-tai-sao-quan-trong",
+    "slug": "non-blocking-i-o-trong-node-js-la-gi-tai-sao-quan-trong-a4f9ade7-c21b-5f5c-a248-9643a9bf5d9c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Non-blocking I/O là mô hình mà Node.js gửi thao tác I/O (đọc ghi file, query DB, gọi HTTP…) xuống kernel hoặc thread pool rồi trả quyền điều khiển về event loop ngay lập tức, không chờ kết quả. Khi I/O xong, callback được đẩy vào queue để event loop gọi lại."
+      ],
+      "details": [
+        "Mỏ neo trực giác: giống nhà hàng một đầu bếp (event loop) — khách gọi món, đầu bếp chuyển order xuống bếp (OS kernel), rồi nhận khách tiếp. Món xong, bưng ra bàn. Đầu bếp không đứng chờ mỗi bàn mà luân chuyển liên tục.",
+        "fs.readFileSync()",
+        "JSON.parse()",
+        "crypto.pbkdf2Sync()",
+        "fs.readFileSync",
+        "Cơ chế cụ thể: khi bạn gọi fs.readFile(path, callback), Node.js đăng ký thao tác với libuv. libuv quyết định gửi xuống OS kernel (nếu OS hỗ trợ async, ví dụ epoll trên Linux) hoặc dùng internal thread pool (mặc định 4 thread, chỉnh được qua UV_THREADPOOL_SIZE). Dù theo đường nào, event loop đều không bị chặn.",
+        "So với mô hình thread-per-request: Apache cấp một thread cho mỗi request — thread đó nằm chờ khi query DB. 1000 request đồng thời cần 1000 thread, tốn khoảng 1GB RAM. Node.js xử lý 1000 request trên một thread, vì phần lớn thời gian chờ I/O là thời gian nhàn. Trải nghiệm thực tế: Node.js thường đạt 10k–50k req/s trên API nặng I/O, Apache khoảng 1k–5k req/s.",
+        "Lưu ý:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "654-non-blocking-i-o-trong-node-js-la-gi-tai-sao-quan-trong"
+  },
+  {
+    "id": "f6fe6169-5310-5e8e-a3f9-9db4383a762d",
+    "question": "npm là gì? Phân biệt npm install, npm install --save-dev?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/655-npm-la-gi-phan-biet-npm-install-npm-install-save-dev",
+    "slug": "npm-la-gi-phan-biet-npm-install-npm-install-save-dev-f6fe6169-5310-5e8e-a3f9-9db4383a762d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "dependencies cho production; devDependencies cho build/test tools (không được bundle vào production) — npm ci trong CI/CD đảm bảo deterministic install từ lock file. npm (Node Package Manager) là công cụ quản lý packages mặc định đi kèm Node.js, với registry hơn 2 triệu packages."
+      ],
+      "details": [
+        "khi deploy lên server, chạy npm install --production sẽ bỏ qua devDependencies, giảm đáng kể dung lượng node_modules."
+      ],
+      "points": [
+        "Phân biệt quan trọng: npm install react cài vào dependencies — những gì cần thiết để app chạy trên production. npm install --save-dev jest typescript eslint cài vào devDependencies — chỉ cần trong quá trình development, không được bundle vào production build."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "655-npm-la-gi-phan-biet-npm-install-npm-install-save-dev"
+  },
+  {
+    "id": "8975ddfb-ea27-53c4-8e11-75668c3a201c",
+    "question": "package.json là gì? Các trường quan trọng trong package.json?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/656-package-json-la-gi-cac-truong-quan-trong-trong-package-json",
+    "slug": "package-json-la-gi-cac-truong-quan-trong-trong-package-json-8975ddfb-ea27-53c4-8e11-75668c3a201c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "package.json manifest chứa scripts (lifecycle hooks), dependencies/devDependencies, engines (Node version), exports (conditional entry points), và workspaces (monorepo). package.json là manifest file của Node.js project. scripts hỗ trợ lifecycle hooks: preinstall/postinstall chạy trước/sau npm install, prebuild/postbuild bao quanh build — dùng để codegen, copy assets. engines: { node: '>=18.0.0' } báo CI/CD và người dùng version Node cần thiết, npm cảnh báo nếu không match."
+      ],
+      "details": [
+        "Entry points: main (CJS fallback), module (ESM cho bundlers hỗ trợ), exports (field mới nhất — conditional exports theo environment): { '.': { import: './dist/index.mjs', require: './dist/index.cjs' } }. type: 'module' đặt default module system là ESM cho tất cả .js files. workspaces: ['packages/*'] cho monorepo — npm install một lần, symlink packages. peerDependencies khai báo packages host app phải cung cấp (tránh duplicate React trong component libraries)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "656-package-json-la-gi-cac-truong-quan-trong-trong-package-json"
+  },
+  {
+    "id": "2ccd9ba0-bb92-57f5-a988-97f8d8e68a1f",
+    "question": "package-lock.json là gì? Tại sao nên commit file này?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/657-package-lock-json-la-gi-tai-sao-nen-commit-file-nay",
+    "slug": "package-lock-json-la-gi-tai-sao-nen-commit-file-nay-2ccd9ba0-bb92-57f5-a988-97f8d8e68a1f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "package-lock.json lưu exact versions + integrity hashes (sha512) của tất cả packages kể cả transitive dependencies — đảm bảo install reproducible trên mọi máy/CI. npm install cập nhật lock file nếu package.json thay đổi; npm ci (clean install) xóa node_modules rồi install chính xác từ lock file, không bao giờ update lock — dùng trong CI/CD để đảm bảo deterministic builds."
+      ],
+      "details": [],
+      "points": [
+        "Khi nào xóa và regenerate: khi lock file bị corrupt, sau major Node.js upgrade, hoặc khi muốn update tất cả dependencies lên latest compatible.",
+        "Integrity field: 'integrity': 'sha512-abc...' — npm verify hash sau download, phát hiện supply chain attacks (tampered packages).",
+        "pnpm-lock.yaml",
+        "Quan trọng: KHÔNG commit lock file của library packages lên npm registry (chỉ commit lock của applications)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "657-package-lock-json-la-gi-tai-sao-nen-commit-file-nay"
+  },
+  {
+    "id": "b2fd5f7c-af4d-5829-8f33-e6383af3d482",
+    "question": "CommonJS modules (require/module.exports) và ES Modules (import/export) trong Node.js khác nhau như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/658-commonjs-modules-require-module-exports-va-es-modules-import-export-trong-node-j",
+    "slug": "commonjs-modules-require-module-exports-va-es-modules-import-export-trong-node-js-khac-nhau-nhu-the-b2fd5f7c-af4d-5829-8f33-e6383af3d482",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "CommonJS (CJS): require() load đồng bộ và blocking, nên gọi được ở bất cứ đâu — kể cả trong if hay trong function. module.exports gán được bất kỳ giá trị gì, đổi lại là không tree-shaking được."
+      ],
+      "details": [
+        "ESM: import bắt buộc ở top-level để bundler phân tích tĩnh được, load bất đồng bộ nên fetch song song, và tree-shakeable vì bundler biết chính xác export nào có dùng. Ba thứ chỉ ESM mới có: top-level await, import.meta.url, và import() động.",
+        "Chỗ hai bên va nhau:\n- CJS require() một file ESM: không được, phải dùng import() động.\n- ESM import một file CJS: được, nhưng chỉ lấy được default import.\n- Dual package hazard: publish cả CJS lẫn ESM trong cùng package, app lỡ nạp cả hai thì có 2 instance của module — state và class không dùng chung được nữa. Cách chữa là conditional exports trong package.json.",
+        "Lưu ý: đặt type: 'module' trong package.json nghĩa là mọi file .js thành ESM, file CJS còn lại phải đổi đuôi .cjs. Node.js 22+ có cờ --experimental-require-module để require() được ESM."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "658-commonjs-modules-require-module-exports-va-es-modules-import-export-trong-node-j"
+  },
+  {
+    "id": "fabc3128-9558-53cd-b7f1-dc1a4fbc0c32",
+    "question": "Cách tạo HTTP server với module http trong Node.js?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/671-cach-tao-http-server-voi-module-http-trong-node-js",
+    "slug": "cach-tao-http-server-voi-module-http-trong-node-js-fabc3128-9558-53cd-b7f1-dc1a4fbc0c32",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Thực tế hiếm ai dùng http trực tiếp vì quá verbose; Express, Fastify, Hono bọc lại kèm routing, middleware, body parsing. Nhưng hiểu module này giúp debug vấn đề networking và biết framework chạy gì bên dưới."
+      ],
+      "details": [],
+      "points": [
+        "req chứa method, url, headers và là Readable stream — đọc body qua req.on('data', chunk => ...).",
+        "res là Writable stream — phải gọi res.end() để kết thúc, không thì client treo mãi."
+      ],
+      "sections": [
+        "Module http là built-in, không cần cài thêm:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const server = http.createServer((req, res) => {\n  res.writeHead(200, { 'Content-Type': 'application/json' })\n  res.end(JSON.stringify({ ok: true }))\n})\n\nserver.listen(3000)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "671-cach-tao-http-server-voi-module-http-trong-node-js"
+  },
+  {
+    "id": "bfb926b5-5726-58bb-959f-2e86818f9a35",
+    "question": "Express.js là gì? Tại sao phổ biến trong Node.js ecosystem?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/672-express-js-la-gi-tai-sao-pho-bien-trong-node-js-ecosystem",
+    "slug": "express-js-la-gi-tai-sao-pho-bien-trong-node-js-ecosystem-bfb926b5-5726-58bb-959f-2e86818f9a35",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Express là web framework minimal cho Node.js, cung cấp routing và middleware system mà không áp đặt cấu trúc dự án."
+      ],
+      "details": [],
+      "points": [
+        "Phổ biến nhất trong Node.js ecosystem vì: API cực đơn giản (app.get('/users', handler)), middleware pipeline linh hoạt cho phép compose nhiều concerns (auth, logging, validation) thành chuỗi, và hệ sinh thái packages khổng lồ như cors, helmet, multer, passport.",
+        "Express cũng là nền tảng để nhiều framework khác xây dựng lên như NestJS.",
+        "Tuy nhiên nhược điểm là quá minimal — không có validation, ORM, hay structure built-in, dev phải tự lắp ghép.",
+        "Với TypeScript projects hiện đại, nhiều team chuyển sang NestJS (opinionated, decorator-based) hoặc Fastify (nhanh hơn 2-3x, schema validation built-in)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "672-express-js-la-gi-tai-sao-pho-bien-trong-node-js-ecosystem"
+  },
+  {
+    "id": "b87f5a72-10a0-5396-82f6-fa1cea922134",
+    "question": "Middleware trong Express là gì? Cách hoạt động?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/673-middleware-trong-express-la-gi-cach-hoat-dong",
+    "slug": "middleware-trong-express-la-gi-cach-hoat-dong-b87f5a72-10a0-5396-82f6-fa1cea922134",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Middleware là function có signature (req, res, next), chạy tuần tự đúng theo thứ tự đăng ký — và thứ tự ở đây là tuyệt đối."
+      ],
+      "details": [
+        "Luồng đi: next() chuyển sang middleware kế tiếp; next(err) nhảy thẳng tới error handler, bỏ qua mọi middleware thường; còn không gọi next() mà cũng không res.send() thì request treo vô hạn.",
+        "Hệ sinh thái bên thứ ba đáng dùng: helmet (security header), morgan (logging), compression (gzip), passport (chiến lược auth).",
+        "Lưu ý: đặt express.json() sau route handler thì req.body thành undefined; đặt cors() sau route thì preflight OPTIONS trả về 404."
+      ],
+      "points": [
+        "App-level: app.use(helmet()) áp cho toàn bộ app.",
+        "Router-level: router.use(authMiddleware) chỉ áp cho nhóm route đó.",
+        "Error-handling: nhận 4 tham số (err, req, res, next) và phải đăng ký SAU tất cả route."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "673-middleware-trong-express-la-gi-cach-hoat-dong"
+  },
+  {
+    "id": "1617717b-334b-5a6a-9035-f18d10a06a79",
+    "question": "Environment variables trong Node.js: cách dùng và tại sao quan trọng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/692-environment-variables-trong-node-js-cach-dung-va-tai-sao-quan-trong",
+    "slug": "environment-variables-trong-node-js-cach-dung-va-tai-sao-quan-trong-1617717b-334b-5a6a-9035-f18d10a06a79",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "require('dotenv').config() nạp .env vào process.env và KHÔNG ghi đè biến đã có — production inject thẳng qua Docker/K8s/CI, không cần file .env. dotenv-safe đối chiếu với .env.example lúc khởi động và throw nếu thiếu biến, thay vì để undefined trôi đi.",
+        "Export một module config.ts đã có type thay vì rải process.env khắp nơi — dễ test và type-safe hơn."
+      ],
+      "details": [
+        "Validate config bằng Zod để fail fast với thông báo rõ ràng:",
+        "Lưu ý: process.env.PORT luôn là string nên phải coerce sang number; và đừng commit .env — dùng .gitignore cùng .env.example làm template."
+      ],
+      "points": [],
+      "sections": [
+        "Environment variable tách config khỏi code theo 12-factor app: config là bất cứ thứ gì đổi giữa các môi trường (dev/staging/prod)."
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# .env\nDATABASE_URL=postgresql://...\nJWT_SECRET=...\nNODE_ENV=development"
+        },
+        {
+          "language": "TS",
+          "code": "export const config = z.object({\n  DATABASE_URL: z.string().url(),\n  PORT: z.coerce.number().default(3000),\n  JWT_SECRET: z.string().min(32),\n}).parse(process.env)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "692-environment-variables-trong-node-js-cach-dung-va-tai-sao-quan-trong"
+  },
+  {
+    "id": "22cb0612-be54-5c22-afb7-f5ba9ec0ff8e",
+    "question": "Node.js là gì? Tại sao dùng cho backend?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/831-node-js-la-gi-tai-sao-dung-cho-backend",
+    "slug": "node-js-la-gi-tai-sao-dung-cho-backend-22cb0612-be54-5c22-afb7-f5ba9ec0ff8e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Node.js là runtime JavaScript trên server, dùng V8 engine."
+      ],
+      "details": [],
+      "points": [
+        "Ưu điểm: non-blocking I/O xử lý nhiều requests đồng thời, cùng ngôn ngữ với frontend (JS) nên team dùng chung tooling và type definitions, npm ecosystem khổng lồ với hàng triệu packages, fit cho real-time apps (chat, notifications) nhờ event-driven model.",
+        "Thường dùng cho API servers, microservices, BFF (Backend for Frontend) — không phù hợp CPU-intensive workloads (video encoding, ML inference) vì single-threaded event loop bị block."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "831-node-js-la-gi-tai-sao-dung-cho-backend"
+  },
+  {
+    "id": "105ba422-d719-5cd2-9c95-c92c1eb9aef3",
+    "question": "Buffer.alloc, Buffer.allocUnsafe và Buffer.from khác nhau thế nào? Vì sao allocUnsafe bị coi là rủi ro?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96200-buffer-alloc-buffer-allocunsafe-va-buffer-from-khac-nhau-the-nao-vi-sao-allocuns",
+    "slug": "buffer-alloc-buffer-allocunsafe-va-buffer-from-khac-nhau-the-nao-vi-sao-allocunsafe-bi-coi-la-rui-ro-105ba422-d719-5cd2-9c95-c92c1eb9aef3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Rủi ro: nếu bạn allocUnsafe rồi chỉ ghi đè một phần và gửi cả buffer ra ngoài (response HTTP, ghi file), phần chưa ghi có thể mang dữ liệu của request khác — đây là kiểu lộ dữ liệu đã từng xảy ra trong thực tế."
+      ],
+      "details": [
+        "Quy tắc dùng: mặc định dùng Buffer.alloc. Chỉ dùng allocUnsafe khi bạn ghi đè toàn bộ buffer ngay lập tức (vd đọc đúng n byte từ socket vào rồi mới dùng) và đã đo được rằng việc zero-fill là điểm nghẽn."
+      ],
+      "points": [
+        "Buffer.alloc(n) cấp phát n byte và ghi 0 toàn bộ vùng nhớ.",
+        "Buffer.allocUnsafe(n) cấp phát n byte nhưng không khởi tạo — nội dung là phần bộ nhớ vừa được giải phóng trước đó, có thể còn dữ liệu cũ của tiến trình.",
+        "Buffer.from(...) tạo buffer từ dữ liệu có sẵn: chuỗi, mảng byte, hoặc ArrayBuffer."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const safe = Buffer.alloc(8)          // <Buffer 00 00 00 00 00 00 00 00>\nconst fast = Buffer.allocUnsafe(8)    // contents are unknown, may be leftover data\nconst data = Buffer.from('hi', 'utf8')"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "96200-buffer-alloc-buffer-allocunsafe-va-buffer-from-khac-nhau-the-nao-vi-sao-allocuns"
+  },
+  {
+    "id": "a8cb06a5-205d-5537-a762-e809dea5e77c",
+    "question": "Gặp lỗi ERR_REQUIRE_ESM hoặc Cannot use import statement outside a module thì nguyên nhân là gì và xử lý ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96202-gap-loi-err-require-esm-hoac-cannot-use-import-statement-outside-a-module-thi-ng",
+    "slug": "gap-loi-err-require-esm-hoac-cannot-use-import-statement-outside-a-module-thi-nguyen-nhan-la-gi-va-x-a8cb06a5-205d-5537-a762-e809dea5e77c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai lỗi đều là lệch hệ module: file đang được Node hiểu theo một hệ (CommonJS hoặc ESM) nhưng code viết theo hệ kia."
+      ],
+      "details": [
+        "Node quyết định hệ module theo: đuôi file (.mjs = ESM, .cjs = CommonJS) → nếu là .js thì xét \"type\" trong package.json gần nhất (\"module\" = ESM, mặc định/thiếu = CommonJS).",
+        "Cách xử lý, theo thứ tự nên thử:\n1. Chuyển project sang ESM: thêm \"type\": \"module\" vào package.json. Lưu ý phải bỏ require, module.exports, __dirname (thay bằng import.meta.dirname).\n2. Giữ CommonJS nhưng nạp package ESM bằng dynamic import: const mod = await import('pkg').\n3. Đổi đuôi file lẻ sang .mjs / .cjs khi project trộn hai hệ.",
+        "Từ Node 22.12 (LTS), require() một ES module đã hoạt động mặc định (không còn cần cờ), trừ khi module đó dùng top-level await. Kiểm tra bằng process.features.require_module."
+      ],
+      "points": [
+        "Cannot use import statement outside a module: file bị coi là CommonJS nhưng dùng import.",
+        "ERR_REQUIRE_ESM: code CommonJS require() một package chỉ phát hành ESM."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "96202-gap-loi-err-require-esm-hoac-cannot-use-import-statement-outside-a-module-thi-ng"
+  },
+  {
+    "id": "e98f0078-42c7-5827-819d-3dde49bc7409",
+    "question": "Log production hiện MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 listeners added — nghĩa là gì và sửa thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96203-log-production-hien-maxlistenersexceededwarning-possible-eventemitter-memory-lea",
+    "slug": "log-production-hien-maxlistenersexceededwarning-possible-eventemitter-memory-leak-detected-11-listen-e98f0078-42c7-5827-819d-3dde49bc7409",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Node cảnh báo khi một EventEmitter có hơn 10 listener cho cùng một sự kiện (ngưỡng mặc định). Đây là cảnh báo, không phải lỗi — nhưng nó thường chỉ đúng vào một rò rỉ thật.",
+        "Mỗi request thêm một listener, mảng listener lớn dần, closure giữ luôn req/res → bộ nhớ tăng theo thời gian."
+      ],
+      "details": [
+        "Nguyên nhân điển hình: đăng ký listener bên trong đường chạy lặp lại mà không gỡ.",
+        "Cách sửa, theo thứ tự:\n1. Chuyển việc đăng ký ra ngoài đường chạy lặp lại (đăng ký một lần lúc khởi động).\n2. Dùng once() nếu chỉ cần nghe một lần, hoặc gỡ bằng off() / removeListener() trong nhánh kết thúc.\n3. Với listener theo vòng đời request, dùng AbortSignal ({ signal } trong addListener) để gỡ hàng loạt.\n4. Chỉ khi số listener thực sự hợp lệ mới nâng ngưỡng bằng emitter.setMaxListeners(n). Nâng ngưỡng để làm im cảnh báo mà không hiểu nguyên nhân là cách giấu rò rỉ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "app.get('/report', (req, res) => {\n  process.on('SIGTERM', cleanup)   // one more listener on every request\n  // ...\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "96203-log-production-hien-maxlistenersexceededwarning-possible-eventemitter-memory-lea"
+  },
+  {
+    "id": "4d336bce-7693-5846-9a5a-197e3c161796",
+    "question": "Thứ tự đăng ký middleware trong Express quan trọng thế nào? Vì sao middleware khai báo sau route lại không chạy?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96250-thu-tu-dang-ky-middleware-trong-express-quan-trong-the-nao-vi-sao-middleware-kha",
+    "slug": "thu-tu-dang-ky-middleware-trong-express-quan-trong-the-nao-vi-sao-middleware-khai-bao-sau-route-lai-4d336bce-7693-5846-9a5a-197e3c161796",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Express xếp mọi app.use() và route handler vào một stack theo đúng thứ tự khai báo, rồi duyệt từ trên xuống cho mỗi request. Một middleware chỉ chạy nếu request đi tới được vị trí của nó.",
+        "Trật tự chuẩn của một app: middleware hạ tầng (helmet, cors, body parser, logger) → routes → handler 404 → error-handling middleware đặt cuối cùng."
+      ],
+      "details": [
+        "Hai điều kiện làm dòng chảy dừng lại:\n- Handler phía trên kết thúc response (res.send, res.json) và không gọi next().\n- Handler phía trên quên gọi next() — request treo đến khi timeout.",
+        "Đặt sai chỗ là nguyên nhân phổ biến của \"CORS không có tác dụng\" hoặc \"req.body undefined\"."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "app.get('/users', (req, res) => res.json([]))  // response ends here\napp.use(logger)                                // never reached for GET /users\n\n// đúng order\napp.use(logger)\napp.get('/users', (req, res) => res.json([]))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "96250-thu-tu-dang-ky-middleware-trong-express-quan-trong-the-nao-vi-sao-middleware-kha"
+  },
+  {
+    "id": "c42385db-738f-50e8-9cfb-ca2bc05a51de",
+    "question": "Phân biệt next(), next(err) và next('route') trong Express?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96251-phan-biet-next-next-err-va-next-route-trong-express",
+    "slug": "phan-biet-next-next-err-va-next-route-trong-express-c42385db-738f-50e8-9cfb-ca2bc05a51de",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba cách gọi next cho ba luồng khác nhau:"
+      ],
+      "details": [],
+      "points": [
+        "next() — chuyển sang middleware/handler kế tiếp trong stack, luồng bình thường.",
+        "next(err) — truyền bất kỳ giá trị nào khác chuỗi 'route' sẽ nhảy thẳng tới error-handling middleware (loại 4 tham số), bỏ qua toàn bộ middleware thường còn lại.",
+        "next('route') — bỏ qua các handler còn lại của chính route đó và chuyển sang route tiếp theo khớp path. Chỉ có tác dụng trong app.METHOD() / router.METHOD(), không dùng với app.use()."
+      ],
+      "sections": [
+        "Lưu ý: next() sau khi đã gửi response sẽ dẫn tới lỗi ERR_HTTP_HEADERS_SENT nếu handler sau đó cũng ghi response."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "app.get('/user/:id', (req, res, next) => {\n  if (req.params.id === '0') return next('route')  // skip to the next matching route\n  next()\n}, (req, res) => res.send('regular user'))\n\napp.get('/user/:id', (req, res) => res.send('special user'))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "96251-phan-biet-next-next-err-va-next-route-trong-express"
+  },
+  {
+    "id": "d44ce93a-ad4f-5bc3-add2-3d3844090456",
+    "question": "Vì sao express.json() không đọc được file upload? Xử lý multipart/form-data thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96252-vi-sao-express-json-khong-doc-duoc-file-upload-xu-ly-multipart-form-data-the-nao",
+    "slug": "vi-sao-express-json-khong-doc-duoc-file-upload-xu-ly-multipart-form-data-the-nao-d44ce93a-ad4f-5bc3-add2-3d3844090456",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "express.json() chỉ parse body có Content-Type: application/json; express.urlencoded() chỉ parse application/x-www-form-urlencoded. Form có file được browser gửi dưới dạng multipart/form-data — body bị chia thành nhiều phần ngăn bởi chuỗi boundary, mỗi phần có header riêng. Không parser nào trong hai cái trên hiểu định dạng đó, nên req.body rỗng và req.file không tồn tại.",
+        "Multer điền req.file (hoặc req.files) và vẫn đặt các field text vào req.body."
+      ],
+      "details": [
+        "Dùng multer (middleware chính thức của Express):",
+        "Luôn khai báo limits.fileSize và kiểm tra mimetype — thiếu giới hạn là một lối tấn công cạn tài nguyên."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "import multer from 'multer'\n\nconst upload = multer({\n  storage: multer.diskStorage({ destination: '/tmp/uploads' }),\n  limits: { fileSize: 5 * 1024 * 1024 },  // 5 MB\n})\n\napp.post('/avatar', upload.single('avatar'), (req, res) => {\n  res.json({ path: req.file.path, name: req.body.name })\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "96252-vi-sao-express-json-khong-doc-duoc-file-upload-xu-ly-multipart-form-data-the-nao"
+  },
+  {
+    "id": "48fca2ca-61cc-50c0-9a7f-5f6c80c5f80a",
+    "question": "process object trong Node.js cung cấp những gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/659-process-object-trong-node-js-cung-cap-nhung-gi",
+    "slug": "process-object-trong-node-js-cung-cap-nhung-gi-48fca2ca-61cc-50c0-9a7f-5f6c80c5f80a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "process là global object không cần require. process.env: chứa environment variables — KHÔNG bao giờ log toàn bộ process.env vì chứa secrets; validate với zod/envalid ngay startup để fail fast nếu thiếu. process.argv: array [nodePath, scriptPath, ...userArgs] — dùng yargs hoặc commander để parse thay vì thủ công."
+      ],
+      "details": [
+        "Signal handling: process.on('SIGTERM', gracefulShutdown) — xử lý khi container/PM2 dừng process (close DB connections, finish in-flight requests); SIGINT = Ctrl+C. process.memoryUsage() trả về { rss, heapTotal, heapUsed, external } — monitor memory leaks bằng cách log định kỳ. process.hrtime.bigint() cho high-resolution timestamps (nanoseconds) để benchmark code. process.exit(1) exit với error code — quan trọng cho CI pipelines biết lệnh fail. process.on('uncaughtException') và process.on('unhandledRejection') — log error rồi process.exit(1), không recover vì process state có thể corrupt."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "659-process-object-trong-node-js-cung-cap-nhung-gi"
+  },
+  {
+    "id": "c5934e8b-d437-5304-8d76-6ca3914bc026",
+    "question": "Sự khác biệt giữa __dirname và __filename trong Node.js?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/660-su-khac-biet-giua-dirname-va-filename-trong-node-js",
+    "slug": "su-khac-biet-giua-dirname-va-filename-trong-node-js-c5934e8b-d437-5304-8d76-6ca3914bc026",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "__dirname là đường dẫn tuyệt đối đến thư mục chứa file đang chạy, __filename là đường dẫn đến chính file đó."
+      ],
+      "details": [
+        "Cả hai resolve từ vị trí file, không phải từ process.cwd()."
+      ],
+      "points": [],
+      "sections": [
+        "Trong ES Modules (file .mjs hoặc type: module trong package.json) hai biến này không tồn tại, phải dựng lại từ import.meta.url:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// đúng: đọc được template bất kể app chạy từ thư mục nào\npath.join(__dirname, 'templates', 'email.html')\n\n// sai: resolve từ process.cwd(), lệch khi chạy từ nơi khác\n'./templates/email.html'"
+        },
+        {
+          "language": "JS",
+          "code": "import { fileURLToPath } from 'url'\nimport { dirname } from 'path'\n\nconst __filename = fileURLToPath(import.meta.url)\nconst __dirname = dirname(__filename)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "660-su-khac-biet-giua-dirname-va-filename-trong-node-js"
+  },
+  {
+    "id": "73e9d4f9-d4df-5675-b03d-c9e00777e6d4",
+    "question": "Event loop trong Node.js hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/661-event-loop-trong-node-js-hoat-dong-nhu-the-nao",
+    "slug": "event-loop-trong-node-js-hoat-dong-nhu-the-nao-73e9d4f9-d4df-5675-b03d-c9e00777e6d4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Event loop là vòng lặp chạy liên tục, xử lý callback qua sáu phase:"
+      ],
+      "details": [
+        "1. Timers — chạy callback của setTimeout/setInterval đã đến hạn.\n2. Pending callbacks — lỗi I/O còn tồn từ vòng trước.\n3. Idle/prepare — dùng nội bộ.\n4. Poll — nhận I/O event mới; nếu queue rỗng và không còn timer nào chờ, event loop nằm chờ I/O ngay tại đây.\n5. Check — callback của setImmediate.\n6. Close callbacks — socket.on('close').",
+        "Giữa mỗi phase, Node.js dọn sạch microtask queue: callback của Promise (then/catch), queueMicrotask() và process.nextTick() — trong đó nextTick được ưu tiên hơn Promise."
+      ],
+      "points": [],
+      "sections": [
+        "Lưu ý: microtask queue mà không bao giờ rỗng (Promise resolve xong lại tạo Promise mới) thì event loop kẹt luôn, không bao giờ sang được phase kế tiếp — đây gọi là starvation."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "setTimeout(A, 0)               // phase Timers\nPromise.resolve().then(B)      // microtask\nprocess.nextTick(C)            // microtask, ưu tiên cao nhất\n// thứ tự chạy: C → B → A"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "661-event-loop-trong-node-js-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "9e5bb18e-e77a-5614-bbda-747da0b6b1aa",
+    "question": "Sự khác biệt giữa setTimeout(fn, 0) và setImmediate() là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/662-su-khac-biet-giua-settimeout-fn-0-va-setimmediate-la-gi",
+    "slug": "su-khac-biet-giua-settimeout-fn-0-va-setimmediate-la-gi-9e5bb18e-e77a-5614-bbda-747da0b6b1aa",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "setTimeout(fn, 0) thực ra là setTimeout(fn, 1) tối thiểu, chạy ở timers phase khi timer đã hết hạn. setImmediate() chạy ở check phase, ngay sau poll phase."
+      ],
+      "details": [
+        "Ngoài I/O context (ví dụ chạy thẳng trong main script) thứ tự giữa hai cái không đảm bảo — phụ thuộc độ phân giải đồng hồ hệ thống và thời gian dựng event loop. Nhưng bên trong một I/O callback thì setImmediate() LUÔN chạy trước, vì I/O callback nằm ở poll phase, sau poll là check phase rồi mới quay lại timers phase:"
+      ],
+      "points": [],
+      "sections": [
+        "Vì thế khi cần chạy code ngay sau thao tác I/O hiện tại nhưng trước mọi timer, dùng setImmediate."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "fs.readFile(file, () => {\n  setImmediate(() => console.log('immediate'))\n  setTimeout(() => console.log('timeout'), 0)\n})\n// luôn in: immediate → timeout"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "662-su-khac-biet-giua-settimeout-fn-0-va-setimmediate-la-gi"
+  },
+  {
+    "id": "d3f54eeb-17ea-5284-bf77-8ba077d9d26e",
+    "question": "Callback hell là gì? Cách giải quyết?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/664-callback-hell-la-gi-cach-giai-quyet",
+    "slug": "callback-hell-la-gi-cach-giai-quyet-d3f54eeb-17ea-5284-bf77-8ba077d9d26e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác biệt lớn nhất nằm ở đường đi của lỗi: callback phải tự kiểm tra err ở mọi tầng, bỏ sót một chỗ là lỗi trôi đi im lặng; còn Promise/async thì lỗi tự bubble lên .catch/try-catch."
+      ],
+      "details": [
+        "Lưu ý: await trong vòng lặp for...of chạy tuần tự — cần song song thì dùng Promise.all(items.map(item => process(item)))."
+      ],
+      "points": [],
+      "sections": [
+        "Callback hell (pyramid of doom) là chuỗi callback lồng nhau nhiều tầng, error handling lặp lại ở từng tầng và logic khó theo dõi:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "fs.readFile('a.txt', (err, data) => {\n  if (err) throw err\n  db.query(data, (err, rows) => {\n    if (err) throw err\n    sendEmail(rows[0], (err) => {\n      if (err) throw err\n      console.log('done')\n    })\n  })\n})"
+        },
+        {
+          "language": "JS",
+          "code": "readFile('a.txt')\n  .then((data) => db.query(data))\n  .then((rows) => sendEmail(rows[0]))\n  .catch((err) => console.error(err))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "664-callback-hell-la-gi-cach-giai-quyet"
+  },
+  {
+    "id": "d6c49adf-7a60-506f-ac18-7679e95141df",
+    "question": "Promise trong Node.js hoạt động như thế nào? Các states của Promise?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/665-promise-trong-node-js-hoat-dong-nhu-the-nao-cac-states-cua-promise",
+    "slug": "promise-trong-node-js-hoat-dong-nhu-the-nao-cac-states-cua-promise-d6c49adf-7a60-506f-ac18-7679e95141df",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Promise là object đại diện cho async operation, có 3 states không thể revert: pending → fulfilled/rejected."
+      ],
+      "details": [],
+      "points": [
+        "Microtask queue: .then() callbacks được đặt vào microtask queue (ưu tiên cao hơn setTimeout), chạy sau synchronous code nhưng trước event loop phases.",
+        "Static methods quan trọng: Promise.all([p1,p2]) — chờ tất cả resolve, reject ngay khi 1 cái reject (fail-fast); Promise.allSettled([p1,p2]) — chờ tất cả settle bất kể kết quả, trả về [{status, value/reason}] — dùng khi muốn biết kết quả từng cái; Promise.race([p1,p2]) — resolve/reject theo cái đầu tiên settle (dùng cho timeout pattern); Promise.any([p1,p2]) — resolve khi 1 cái fulfilled, reject chỉ khi tất cả reject.",
+        "Error handling chain: nếu không có .catch(), unhandled rejection — Node.js 15+ crash process mặc định. Promise.resolve(value) tạo fulfilled promise ngay, hữu ích để normalize sync/async APIs.",
+        "Lưu ý: error swallowing trong .then(onFulfilled) không có .catch() — luôn chain .catch() hoặc dùng try/catch với await."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "665-promise-trong-node-js-hoat-dong-nhu-the-nao-cac-states-cua-promise"
+  },
+  {
+    "id": "297962a0-e854-55a4-9aef-8257986e9688",
+    "question": "async/await trong Node.js là gì? Lợi ích so với Promise chains?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/666-async-await-trong-node-js-la-gi-loi-ich-so-voi-promise-chains",
+    "slug": "async-await-trong-node-js-la-gi-loi-ich-so-voi-promise-chains-297962a0-e854-55a4-9aef-8257986e9688",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "async/await là syntactic sugar trên Promise — async function luôn trả về Promise, còn await tạm dừng thực thi của chính function đó (không block thread) cho đến khi Promise settle."
+      ],
+      "details": [
+        "Try/catch bắt rejected Promise như exception thường:"
+      ],
+      "points": [
+        "Gọi foo() mà không await/catch một async function có throw = unhandled rejection.",
+        "ESM module hỗ trợ top-level await (ngoài function) — tiện cho dynamic import, khởi tạo DB.",
+        "Khi debug: stack trace của async/await rõ hơn hẳn Promise chain."
+      ],
+      "sections": [
+        "Chạy song song hay tuần tự quyết định tổng thời gian:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "try {\n  const data = await fetch(url).then(r => r.json())\n} catch (e) {\n  // lỗi mạng, lỗi parse JSON\n}"
+        },
+        {
+          "language": "JS",
+          "code": "// tuần tự — tổng = a + b\nawait a()\nawait b()\n\n// song song — tổng = max(a, b)\nconst [ra, rb] = await Promise.all([a(), b()])\n\n// await trong vòng lặp cũng là tuần tự, rất chậm\nfor (const id of ids) { await fetchUser(id) }\n// sửa:\nawait Promise.all(ids.map(id => fetchUser(id)))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "666-async-await-trong-node-js-la-gi-loi-ich-so-voi-promise-chains"
+  },
+  {
+    "id": "f82eb775-de1c-58d9-b755-c75c6bda3318",
+    "question": "Buffer trong Node.js là gì? Khi nào cần dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/669-buffer-trong-node-js-la-gi-khi-nao-can-dung",
+    "slug": "buffer-trong-node-js-la-gi-khi-nao-can-dung-f82eb775-de1c-58d9-b755-c75c6bda3318",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Buffer là class built-in xử lý binary data — vùng nhớ raw bytes nằm ngoài V8 heap."
+      ],
+      "details": [
+        "upload ảnh qua API, req.body là Buffer chứa raw bytes của file, cần convert hoặc pipe trực tiếp lên S3."
+      ],
+      "points": [
+        "JavaScript thuần không có kiểu dữ liệu binary, Buffer lấp đầy khoảng trống này cho Node.js.",
+        "Cần dùng khi: đọc file binary (ảnh, PDF, executable), xử lý network packets TCP/UDP, mã hóa/giải mã base64 (Buffer.from('hello').toString('base64')), tính hash với crypto.createHash."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "669-buffer-trong-node-js-la-gi-khi-nao-can-dung"
+  },
+  {
+    "id": "27682f3a-5284-51b1-bba3-b0bb275fbc08",
+    "question": "Router trong Express là gì? Cách tổ chức routes?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/674-router-trong-express-la-gi-cach-to-chuc-routes",
+    "slug": "router-trong-express-la-gi-cach-to-chuc-routes-27682f3a-5284-51b1-bba3-b0bb275fbc08",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: router.use(middleware) đặt sau router.get(...) thì route đó không được áp middleware — middleware phải nằm TRƯỚC những route mà nó cần bảo vệ."
+      ],
+      "details": [],
+      "points": [
+        "Nested router: adminRouter.use('/users', adminUserRouter) để lồng sâu hơn.",
+        "Versioned API: app.use('/api/v1', v1Router) và app.use('/api/v2', v2Router) — hai version độc lập hoàn toàn nên deprecate v1 rất gọn.",
+        "Cấu trúc file thực tế: routes/users.ts export router, routes/index.ts gom tất cả router lại, app.ts chỉ còn một dòng app.use('/api', mainRouter)."
+      ],
+      "sections": [
+        "express.Router() tạo một mini-app có route và middleware riêng — đây là cách chính để tổ chức code theo feature."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "// routes/users.ts\nconst router = express.Router()\nrouter.use(authMiddleware)          // chỉ áp cho route trong router này\nrouter.get('/', listUsers)\nexport default router\n\n// app.ts\napp.use('/api/v1/users', userRouter)   // prefix cho toàn bộ route bên trong"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "674-router-trong-express-la-gi-cach-to-chuc-routes"
+  },
+  {
+    "id": "a423f919-18ab-59be-8294-584899c4c01c",
+    "question": "REST API trong Express: cách định nghĩa các HTTP methods?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/675-rest-api-trong-express-cach-dinh-nghia-cac-http-methods",
+    "slug": "rest-api-trong-express-cach-dinh-nghia-cac-http-methods-a423f919-18ab-59be-8294-584899c4c01c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Express map trực tiếp tới HTTP methods với semantics rõ ràng: GET (idempotent, safe — chỉ đọc, không side effects), POST (không idempotent — tạo resource mới, mỗi call tạo record mới), PUT (idempotent — replace toàn bộ resource, gửi thiếu field thì field đó bị null/default), PATCH (idempotent — partial update, chỉ gửi fields cần thay đổi), DELETE (idempotent — xóa, gọi nhiều lần kết quả như nhau)."
+      ],
+      "details": [],
+      "points": [
+        "CRUD thực tế: GET /users (list), POST /users (create, trả 201), GET /users/:id (read), PUT /users/:id (replace, trả 200), PATCH /users/:id (update, trả 200), DELETE /users/:id (delete, trả 204 no content).",
+        "Status codes quan trọng: 200 OK, 201 Created, 204 No Content, 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 409 Conflict, 422 Unprocessable Entity, 500 Internal Server Error.",
+        "Content negotiation: req.accepts('json') kiểm tra client Accept header.",
+        "Lưu ý: dùng GET với body để filter — không đúng semantics, dùng query params thay thế."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "675-rest-api-trong-express-cach-dinh-nghia-cac-http-methods"
+  },
+  {
+    "id": "bdbe1e4a-e58c-5d99-a2c4-24c4963548b6",
+    "question": "Error handling middleware trong Express hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/676-error-handling-middleware-trong-express-hoat-dong-nhu-the-nao",
+    "slug": "error-handling-middleware-trong-express-hoat-dong-nhu-the-nao-bdbe1e4a-e58c-5d99-a2c4-24c4963548b6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: quên tham số next thứ tư thì Express không nhận ra đây là error handler. Gọi next() sau res.json() trong error handler sẽ gây lỗi double response."
+      ],
+      "details": [],
+      "points": [
+        "AppError tách operational error (404, validation fail — lường trước được) khỏi programming error (null reference — bug thật).",
+        "Express 5 tự forward lỗi từ async route nên không cần asyncHandler nữa."
+      ],
+      "sections": [
+        "Error handling middleware có 4 tham số (err, req, res, next) và phải đăng ký CUỐI CÙNG, sau tất cả routes."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "class AppError extends Error {\n  constructor(\n    public statusCode: number,\n    message: string,\n    public isOperational = true,\n  ) {\n    super(message)\n  }\n}\n\n// bọc route async để khỏi lặp try/catch\nconst asyncHandler = (fn) => (req, res, next) =>\n  Promise.resolve(fn(req, res, next)).catch(next)\n\napp.use((err, req, res, next) => {\n  if (err.isOperational) return res.status(err.statusCode).json({ message: err.message })\n  logger.error(err)\n  res.status(500).json({ message: 'Internal server error' })\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "676-error-handling-middleware-trong-express-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "f726d5b0-4b58-51db-931b-24f2e745a0f7",
+    "question": "CORS trong Express: cách cấu hình cho phép cross-origin requests?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/677-cors-trong-express-cach-cau-hinh-cho-phep-cross-origin-requests",
+    "slug": "cors-trong-express-cach-cau-hinh-cho-phep-cross-origin-requests-f726d5b0-4b58-51db-931b-24f2e745a0f7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "CORS là cơ chế trình duyệt bảo vệ user — server phải opt-in mới cho phép request cross-origin.",
+        "Lưu ý: CORS do trình duyệt thực thi — Postman hay curl không bị chặn, nên đừng coi nó là lớp bảo mật phía server."
+      ],
+      "details": [
+        "Trình duyệt tự gửi request OPTIONS trước nếu là preflighted request (method ngoài GET/POST/HEAD, hoặc header không đơn giản như Content-Type: application/json); simple request (GET với header đơn giản) thì không cần preflight."
+      ],
+      "points": [
+        "credentials: true bắt buộc khi gửi cookie hoặc header Authorization. Khi bật cờ này, origin KHÔNG được để * — phải liệt kê tường minh.",
+        "Đặt cors() TRƯỚC routes để OPTIONS preflight được xử lý.",
+        "Debug: xem header Access-Control-Allow-Origin trong tab Network của DevTools; credentials: true mà server trả * thì trình duyệt chặn."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "app.use(cors({\n  origin: ['https://app.example.com'],\n  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],\n  allowedHeaders: ['Content-Type', 'Authorization'],\n  credentials: true,\n}))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "677-cors-trong-express-cach-cau-hinh-cho-phep-cross-origin-requests"
+  },
+  {
+    "id": "b5db1689-166b-5175-b3d5-6e27c33e03b9",
+    "question": "express.json() và express.urlencoded() middleware dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/678-express-json-va-express-urlencoded-middleware-dung-de-lam-gi",
+    "slug": "express-json-va-express-urlencoded-middleware-dung-de-lam-gi-b5db1689-166b-5175-b3d5-6e27c33e03b9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "express.json() parse Content-Type: application/json thành object req.body — có sẵn từ Express 4.16+, không cần cài body-parser nữa."
+      ],
+      "details": [
+        "Lưu ý: express.json() KHÔNG parse multipart/form-data (upload file) — chỗ đó cần multer. Nếu req.body ra undefined, kiểm tra middleware đã đăng ký chưa và có đúng thứ tự không."
+      ],
+      "points": [
+        "express.urlencoded({ extended: true }) parse form HTML (application/x-www-form-urlencoded). extended: true dùng thư viện qs nên nhận được object lồng nhau; extended: false dùng querystring, chỉ phẳng.",
+        "Giới hạn kích thước mặc định là 100kb, đổi bằng express.json({ limit: '10mb' }). Payload lớn là một đường DoS, nên luôn đặt limit hợp lý và đừng để mặc định ở endpoint upload.",
+        "Content type riêng: express.json({ type: 'application/vnd.api+json' }).",
+        "Binary thì express.raw({ type: 'application/octet-stream' }); webhook dạng text thuần thì express.text()."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "678-express-json-va-express-urlencoded-middleware-dung-de-lam-gi"
+  },
+  {
+    "id": "2c9a0df2-b747-5a94-b499-c0ba8e603b7e",
+    "question": "Rate limiting trong Express là gì? Cách implement?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/679-rate-limiting-trong-express-la-gi-cach-implement",
+    "slug": "rate-limiting-trong-express-la-gi-cach-implement-2c9a0df2-b747-5a94-b499-c0ba8e603b7e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Rate limiting che API khỏi spam, brute-force và DDoS.",
+        "Lưu ý: đứng sau reverse proxy thì req.ip là IP của proxy — phải app.set('trust proxy', 1) để lấy IP thật từ X-Forwarded-For, không thì cả thế giới chung một counter."
+      ],
+      "details": [
+        "Fixed window đếm request trong khung cố định (0:00-0:15) — dễ lách bằng cách dồn burst vào cuối khung cũ rồi đầu khung mới. Sliding window trượt theo thời gian thực nên chính xác hơn, đổi lại cần Redis.",
+        "express-rate-limit dùng fixed window:"
+      ],
+      "points": [
+        "Distributed: dùng store rate-limit-redis để nhiều instance chia sẻ counter — bắt buộc khi chạy cluster hoặc nhiều server. Để in-memory thì mỗi instance đếm riêng, hạn mức thật thành max * số instance.",
+        "Hạn mức theo endpoint: auth 5 req/15 phút, API thường 100 req/15 phút, endpoint public 1000 req/15 phút."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "rateLimit({\n  windowMs: 15 * 60 * 1000,\n  max: 100,\n  standardHeaders: true,   // trả RateLimit-Limit / Remaining / Reset\n  legacyHeaders: false,\n  keyGenerator: (req) => req.user?.id || req.ip,  // user đăng nhập tính theo userId\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "679-rate-limiting-trong-express-la-gi-cach-implement"
+  },
+  {
+    "id": "abd9b4da-3bf0-54ee-9bc6-6ec17ff57b50",
+    "question": "JWT (JSON Web Token) là gì? Cấu trúc của JWT?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/681-jwt-json-web-token-la-gi-cau-truc-cua-jwt",
+    "slug": "jwt-json-web-token-la-gi-cau-truc-cua-jwt-abd9b4da-3bf0-54ee-9bc6-6ec17ff57b50",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "JWT là chuẩn mở (RFC 7519) để truyền thông tin dưới dạng JSON có ký số bảo đảm toàn vẹn. Chuỗi token gồm ba phần ngăn bởi dấu chấm, mỗi phần mã hoá base64url:"
+      ],
+      "details": [
+        "Được gì: server không phải lưu session, chỉ cần verify chữ ký — rất hợp microservice và scale ngang.",
+        "Mất gì: không revoke được token trước khi hết hạn vì không có blacklist tập trung. Vì vậy access token phải để exp ngắn (15 phút) và đi kèm refresh token.",
+        "Lưu ý: sai lầm phổ biến nhất là để JWT trong localStorage thay vì httpOnly cookie — XSS lấy được ngay. Và nhớ rằng payload chỉ là base64 chứ không mã hoá, ai cầm token cũng đọc được claim."
+      ],
+      "points": [
+        "Header — { alg: 'HS256', typ: 'JWT' }",
+        "Payload — các claim như { sub: userId, exp: timestamp, role: 'admin' }",
+        "Signature — HMAC của header + payload bằng secret key"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "681-jwt-json-web-token-la-gi-cau-truc-cua-jwt"
+  },
+  {
+    "id": "35ccf4c9-9edd-5d1a-a1db-9d6c6d151e38",
+    "question": "Cách implement JWT authentication trong Express API?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/682-cach-implement-jwt-authentication-trong-express-api",
+    "slug": "cach-implement-jwt-authentication-trong-express-api-35ccf4c9-9edd-5d1a-a1db-9d6c6d151e38",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: không chốt algorithms khi verify thì attacker đổi header sang alg: none và tự ký token."
+      ],
+      "details": [],
+      "points": [
+        "httpOnly cookie chặn được XSS đọc token (nhưng cần chống CSRF); localStorage tiện hơn nhưng XSS lấy được — cookie httpOnly là best practice cho web app.",
+        "Refresh token rotation: mỗi lần dùng refresh token thì phát cặp mới và vô hiệu token cũ; lưu hash của refresh token trong DB để revoke được. POST /refresh đọc cookie, verify rồi trả access token mới; POST /logout xoá cookie và blacklist refresh token."
+      ],
+      "sections": [
+        "Luồng đầy đủ: POST /login xác thực credentials, ký hai token, trả access token trong response body và refresh token trong httpOnly cookie."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const accessToken = jwt.sign({ sub: user.id, role: user.role }, secret, { expiresIn: '15m' })\nconst refreshToken = jwt.sign({ sub: user.id }, refreshSecret, { expiresIn: '7d' })\n\nres.cookie('refreshToken', refreshToken, {\n  httpOnly: true,\n  secure: true,\n  sameSite: 'strict',\n})\nres.json({ accessToken })"
+        },
+        {
+          "language": "JS",
+          "code": "const token = req.headers.authorization?.split(' ')[1]\nreq.user = jwt.verify(token, secret, { algorithms: ['HS256'] })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "682-cach-implement-jwt-authentication-trong-express-api"
+  },
+  {
+    "id": "fa7b6893-113d-5557-aef6-99ba8d0341ca",
+    "question": "bcrypt là gì? Cách dùng để hash password?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/683-bcrypt-la-gi-cach-dung-de-hash-password",
+    "slug": "bcrypt-la-gi-cach-dung-de-hash-password-fa7b6893-113d-5557-aef6-99ba8d0341ca",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "bcrypt sinh ra để hash password, khác hẳn SHA-256/MD5 vốn tối ưu cho nhanh: GPU hash SHA-256 được 10 tỷ lần mỗi giây, còn bcrypt cost=12 chỉ chừng 250 lần mỗi giây."
+      ],
+      "details": [
+        "Argon2 là lựa chọn hiện đại hơn (thắng Password Hashing Competition 2015): argon2id kháng GPU lẫn side-channel tốt hơn và được OWASP khuyến nghị từ 2023 — trong Node.js dùng package argon2.",
+        "Lưu ý: hash password ở service layer chứ đừng đặt trong model hook — hook chạy lại khi update field khác là dính double-hash, user không đăng nhập được nữa."
+      ],
+      "points": [
+        "Adaptive cost factor: mỗi nấc saltRounds làm thời gian tăng gấp đôi — cost=10 khoảng 100ms, cost=12 khoảng 400ms, cost=14 khoảng 1,6s. Chọn cost sao cho rơi vào tầm 250ms trên server của bạn, rồi nâng dần theo năm khi phần cứng khoẻ lên.",
+        "Salt có sẵn: bcrypt tự sinh salt ngẫu nhiên riêng cho từng password và nhúng luôn vào chuỗi hash — nhờ vậy rainbow table vô dụng, và cùng một password hash hai lần vẫn ra hai chuỗi khác nhau.",
+        "Timing attack: bcrypt.compare() so sánh theo thời gian hằng định; đừng bao giờ so hash bằng ===."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "683-bcrypt-la-gi-cach-dung-de-hash-password"
+  },
+  {
+    "id": "e774f7e6-04b8-5d7a-a120-85ed7403416c",
+    "question": "Caching trong Node.js API: các chiến lược phổ biến?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/688-caching-trong-node-js-api-cac-chien-luoc-pho-bien",
+    "slug": "caching-trong-node-js-api-cac-chien-luoc-pho-bien-e774f7e6-04b8-5d7a-a120-85ed7403416c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai biến thể còn lại đánh đổi khác nhau: write-through ghi cache và DB cùng lúc — data luôn fresh nhưng write chậm hơn; write-behind ghi cache trước rồi flush xuống DB bất đồng bộ — write rất nhanh nhưng mất data nếu cache sập."
+      ],
+      "details": [
+        "Lưu ý: tránh đụng key bằng cách luôn đặt namespace ${service}:${resource}:${id}."
+      ],
+      "points": [
+        "Invalidation: TTL (đơn giản, chấp nhận data cũ), event-based (update xong thì xoá key), hoặc versioned key (user:${id}:v${version}).",
+        "Chọn TTL theo tần suất đổi: data ít đổi → 1 giờ; data đổi nhiều → 30 giây hoặc invalidate ngay khi ghi.",
+        "Cache warming: gọi warmCache() sau khi server start để tránh cold start.",
+        "Thundering herd: nhiều request cùng lúc trượt một key vừa hết hạn rồi đồng loạt truy vấn DB. Cách chữa: renew sớm theo xác suất, mutex cho một request đi query, hoặc stale-while-revalidate."
+      ],
+      "sections": [
+        "Cache-aside (lazy loading) là pattern phổ biến nhất: đọc cache → miss → truy vấn DB → ghi cache → trả về."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const cached = await redis.get(key)\nif (cached) return JSON.parse(cached)\n\nconst data = await db.query(...)\nawait redis.setex(key, 300, JSON.stringify(data))\nreturn data"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "688-caching-trong-node-js-api-cac-chien-luoc-pho-bien"
+  },
+  {
+    "id": "2b4ba12e-8d66-5baa-8fa6-aebd4a69d249",
+    "question": "Cách xử lý unhandled Promise rejections trong Node.js?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/689-cach-xu-ly-unhandled-promise-rejections-trong-node-js",
+    "slug": "cach-xu-ly-unhandled-promise-rejections-trong-node-js-2b4ba12e-8d66-5baa-8fa6-aebd4a69d249",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Node.js 14 trở về trước chỉ in cảnh báo rồi chạy tiếp — lỗi trôi đi im lặng. Từ Node.js 15 mặc định process crash với exit code 1, đây là breaking change.",
+        "Lưu ý: bật ESLint rule @typescript-eslint/no-floating-promises để bắt thiếu await ngay lúc compile — tốt hơn nhiều so với phát hiện lúc chạy."
+      ],
+      "details": [
+        "Thứ tự xử lý đúng: try/catch trong async function là chính, .catch() cho promise fire-and-forget, còn handler cấp process chỉ là lưới an toàn cuối cùng chứ không phải cơ chế chính."
+      ],
+      "points": [
+        "Gửi lỗi lên Sentry rồi await Sentry.flush(2000) trước khi thoát, nếu không sự kiện chưa kịp bay đi.",
+        "Graceful shutdown: ngừng nhận request mới, chờ request đang chạy, đóng DB, rồi exit."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "process.on('unhandledRejection', (reason) => {\n  Sentry.captureException(reason)\n  logger.error('Unhandled rejection', reason)\n  gracefulShutdown(1)\n})\n\nprocess.on('uncaughtException', (err) => {\n  logger.error(err)\n  gracefulShutdown(1)\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "689-cach-xu-ly-unhandled-promise-rejections-trong-node-js"
+  },
+  {
+    "id": "97d4311e-8122-5fda-9bf7-7b3597d32d6c",
+    "question": "fs module trong Node.js: fs.readFile vs fs.createReadStream khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/690-fs-module-trong-node-js-fs-readfile-vs-fs-createreadstream-khac-nhau-nhu-the-nao",
+    "slug": "fs-module-trong-node-js-fs-readfile-vs-fs-createreadstream-khac-nhau-nhu-the-nao-97d4311e-8122-5fda-9bf7-7b3597d32d6c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "fs.readFile() load toàn bộ file vào RAM trước khi callback — file 100MB chiếm ít nhất 100MB heap; 100 concurrent requests = 10GB RAM, dễ OOM crash. fs.createReadStream() đọc theo chunks (default highWaterMark 64KB) — file 100MB chỉ dùng ~64KB RAM bất kể bao nhiêu requests đồng thời."
+      ],
+      "details": [],
+      "points": [
+        "Serve file thực tế: fs.createReadStream(filePath).pipe(res) stream thẳng đến TCP buffer không qua RAM. pipeline() API (Node 10+) tốt hơn pipe(): await pipeline(fs.createReadStream(path), res) — tự cleanup khi error, tránh memory leak khi client disconnect.",
+        "Backpressure tự động: pipe/pipeline dừng đọc file khi client chậm, tiếp tục khi TCP buffer drain.",
+        "Khi nào dùng readFile: config files < 1MB đọc lúc startup, JSON parse một lần.",
+        "Khi nào dùng createReadStream: file download, log streaming, CSV export, bất kỳ file > vài MB."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "690-fs-module-trong-node-js-fs-readfile-vs-fs-createreadstream-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "fcdf65a5-3f95-5869-b176-167d9bfabaf2",
+    "question": "Sự khác biệt giữa fs.readFile và fs.readFileSync là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/691-su-khac-biet-giua-fs-readfile-va-fs-readfilesync-la-gi",
+    "slug": "su-khac-biet-giua-fs-readfile-va-fs-readfilesync-la-gi-fcdf65a5-3f95-5869-b176-167d9bfabaf2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "readFileSync blocking — giữ event loop hoàn toàn cho đến khi OS trả data, không xử lý request nào khác trong thời gian đó. readFile non-blocking — gửi I/O request đến libuv thread pool, event loop tự do xử lý requests khác."
+      ],
+      "details": [
+        "Impact thực tế: readFileSync đọc file 50ms trên server 1000 req/s → mỗi request xếp hàng bị delay 50ms cộng dồn → latency spike hàng giây.",
+        "node --prof app.js",
+        "node --prof-process isolate-*.log",
+        "Khi sync chấp nhận được:",
+        "Quy tắc: bất kỳ code nào chạy SAU server.listen() trong request path — bắt buộc dùng async."
+      ],
+      "points": [
+        "module initialization trước server.listen() — const config = JSON.parse(fs.readFileSync('config.json', 'utf8')) chạy một lần duy nhất lúc startup, không có traffic;",
+        "build scripts"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "691-su-khac-biet-giua-fs-readfile-va-fs-readfilesync-la-gi"
+  },
+  {
+    "id": "43965518-08ea-5417-ba6f-7debd2cf3334",
+    "question": "Cách debug Node.js application?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/695-cach-debug-node-js-application",
+    "slug": "cach-debug-node-js-application-43965518-08ea-5417-ba6f-7debd2cf3334",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: chạy --inspect trên production mà mở cổng ra internet là lỗ hổng thực thi mã từ xa — chỉ bind vào localhost."
+      ],
+      "details": [],
+      "points": [
+        "Memory profiling: DevTools → Memory → Heap Snapshot, so sánh hai snapshot để tìm rò rỉ; cột retained size cho biết object đang giữ những gì.",
+        "CPU profiling: DevTools → Performance → Record → tạo tải → đọc flame graph tìm hàm chiếm nhiều CPU.",
+        "sourceMap: true",
+        "clinic doctor -- node app.js tự phát hiện độ trễ event loop, vấn đề I/O và bộ nhớ rồi xuất báo cáo HTML.",
+        "0x app.js dựng flamegraph CPU tương tác, xem call stack nào chiếm CPU."
+      ],
+      "sections": [
+        "Breakpoint debugging: node --inspect app.js mở debugger ở cổng 9229, vào chrome://inspect để attach. --inspect-brk dừng ngay dòng đầu — dùng khi cần debug đoạn khởi tạo."
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "695-cach-debug-node-js-application"
+  },
+  {
+    "id": "1abf6939-e29d-5b9b-b6a8-8d94d9792a84",
+    "question": "Các lỗ hổng bảo mật phổ biến trong Node.js API và cách phòng tránh?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/697-cac-lo-hong-bao-mat-pho-bien-trong-node-js-api-va-cach-phong-tranh",
+    "slug": "cac-lo-hong-bao-mat-pho-bien-trong-node-js-api-va-cach-phong-tranh-1abf6939-e29d-5b9b-b6a8-8d94d9792a84",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Bảy lỗ hổng hay gặp nhất trong một Node.js API, kèm cách bịt:"
+      ],
+      "details": [
+        "Cuối cùng, app.use(helmet()) chỉ một dòng nhưng set luôn 11 security header (X-Frame-Options, HSTS, CSP cơ bản, nosniff)."
+      ],
+      "points": [
+        "SQL injection (OWASP A03): db.query('SELECT * FROM users WHERE id = ' + req.params.id) — attacker truyền 1 OR 1=1 là dump sạch DB. Sửa bằng parameterized query db.query('SELECT * FROM users WHERE id = $1', [id]) hoặc dùng ORM.",
+        "NoSQL injection (MongoDB): query { username: req.body.username } với body { username: { $gt: '' } } là qua mặt được auth. Sửa bằng validate với Zod/Joi trước khi query.",
+        "XSS (A07): lưu <script>alert(1)</script> vào DB rồi render không escape là mất cookie người dùng. Sửa bằng escape output, CSP header, DOMPurify.",
+        "ReDoS: /(a+)+/.test(userInput) với input 'aaaaaaaaab' gây backtracking hàm mũ, block event loop hàng giây. Sửa bằng package safe-regex để soát pattern và đặt timeout cho regex.",
+        "Directory traversal: fs.readFile('/uploads/' + req.query.file) với file=../../etc/passwd. Sửa bằng path.resolve() rồi kiểm tra kết quả có nằm trong thư mục cho phép không.",
+        "Prototype pollution:",
+        "obj[userKey] = userValue",
+        "Object.create(null)",
+        "Dependency vulnerabilities:"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "697-cac-lo-hong-bao-mat-pho-bien-trong-node-js-api-va-cach-phong-tranh"
+  },
+  {
+    "id": "68c8f913-399f-5fcc-b28e-833e4b509a46",
+    "question": "Cách viết unit tests cho Node.js API với Jest?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/699-cach-viet-unit-tests-cho-node-js-api-voi-jest",
+    "slug": "cach-viet-unit-tests-cho-node-js-api-voi-jest-68c8f913-399f-5fcc-b28e-833e4b509a46",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Test pyramid cho một Node.js API: unit test (logic service/utils) → integration test (controller + DB thật) → e2e test (HTTP đầy đủ).",
+        "Lưu ý: không cô lập test thì sẽ dính lỗi phụ thuộc thứ tự chạy; và mock hết external call (HTTP, email) để test còn deterministic."
+      ],
+      "details": [
+        "Controller test bằng supertest, không cần start server vì supertest inject request thẳng vào app:"
+      ],
+      "points": [
+        "Middleware: gọi thẳng middleware với req, res, next giả rồi kiểm tra next() có được gọi hay res.status() có được set đúng không.",
+        "Integration: dùng DB test riêng (TEST_DATABASE_URL), chạy migration trước cả test suite, truncate bảng giữa các test trong afterEach.",
+        "Mock: jest.mock() cho module, jest.spyOn() cho method, jest.useFakeTimers() cho code phụ thuộc thời gian.",
+        "Vòng đời DB test: globalSetup chạy migration một lần, beforeEach truncate data, afterAll disconnect.",
+        "Coverage: jest --coverage kèm coverageThreshold: { global: { lines: 80 } } để ép mức tối thiểu."
+      ],
+      "sections": [
+        "Service thì mock tầng DB để test business logic độc lập:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const res = await request(app).post('/users').send({ email: 'test@test.com' })\nexpect(res.status).toBe(201)"
+        },
+        {
+          "language": "JS",
+          "code": "jest.mock('../db')\n;(db.findUser as jest.Mock).mockResolvedValue({ id: 1 })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "699-cach-viet-unit-tests-cho-node-js-api-voi-jest"
+  },
+  {
+    "id": "e33e664d-4902-54ff-b50e-8313ca17fb96",
+    "question": "REST API là gì? Thiết kế REST API cần tuân thủ những nguyên tắc nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/835-rest-api-la-gi-thiet-ke-rest-api-can-tuan-thu-nhung-nguyen-tac-nao",
+    "slug": "rest-api-la-gi-thiet-ke-rest-api-can-tuan-thu-nhung-nguyen-tac-nao-e33e664d-4902-54ff-b50e-8313ca17fb96",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "REST (Representational State Transfer) là kiến trúc thiết kế API dựa trên HTTP, trong đó mỗi URL đại diện cho một resource (tài nguyên)."
+      ],
+      "details": [],
+      "points": [
+        "Nguyên tắc quan trọng: dùng danh từ số nhiều cho endpoints (/users, /products), dùng đúng HTTP methods — GET lấy dữ liệu, POST tạo mới, PUT/PATCH cập nhật, DELETE xóa.",
+        "Status codes phải chính xác: 200 thành công, 201 tạo mới OK, 400 request sai, 401 chưa đăng nhập, 404 không tìm thấy, 500 lỗi server.",
+        "Ngoài ra cần versioning (/api/v1/), pagination (?page=1&limit=20), và response format thống nhất dạng { data, error, meta } để frontend dễ xử lý."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "835-rest-api-la-gi-thiet-ke-rest-api-can-tuan-thu-nhung-nguyen-tac-nao"
+  },
+  {
+    "id": "81510f5e-3b0b-537f-8501-113802a79a88",
+    "question": "Cách handle file upload trong Node.js?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/840-cach-handle-file-upload-trong-node-js",
+    "slug": "cach-handle-file-upload-trong-node-js-81510f5e-3b0b-537f-8501-113802a79a88",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Để xử lý file upload trong Express, thư viện phổ biến nhất là multer hoạt động như một middleware, cấu hình bằng const upload = multer({ dest: 'uploads/' }) rồi gắn vào route cụ thể như app.post('/upload', upload.single('file'), handler)."
+      ],
+      "details": [
+        "Khi nhận file cần validate kỹ hai thứ: kích thước file (giới hạn bằng option limits: { fileSize: 5 * 1024 * 1024 } cho 5MB) và loại file qua mimetype để chặn file độc hại.",
+        "Trong môi trường production, không nên lưu file vào server local mà upload thẳng lên cloud storage như AWS S3 hoặc Google Cloud Storage để đảm bảo scalability và reliability. Với file lớn hàng trăm MB trở lên, nên dùng stream upload thay vì đọc toàn bộ file vào memory để tránh crash server."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "840-cach-handle-file-upload-trong-node-js"
+  },
+  {
+    "id": "50963aee-44aa-58be-85e1-29049e324412",
+    "question": "Streams trong Node.js là gì? Tại sao cần dùng Streams thay vì đọc toàn bộ file?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/917-streams-trong-node-js-la-gi-tai-sao-can-dung-streams-thay-vi-doc-toan-bo-file",
+    "slug": "streams-trong-node-js-la-gi-tai-sao-can-dung-streams-thay-vi-doc-toan-bo-file-50963aee-44aa-58be-85e1-29049e324412",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Streams xử lý data theo từng phần nhỏ (chunks) thay vì load toàn bộ vào memory — rất quan trọng khi xử lý file lớn (CSV hàng GB, video)."
+      ],
+      "details": [
+        "Có 4 loại: Readable (đọc data, ví dụ fs.createReadStream), Writable (ghi data, ví dụ fs.createWriteStream), Duplex (vừa đọc vừa ghi, ví dụ TCP socket), Transform (biến đổi data trong quá trình truyền, ví dụ compression). Dùng .pipe() để nối streams: fs.createReadStream('big.csv').pipe(transform).pipe(res).",
+        "Nếu đọc file 2GB bằng fs.readFile sẽ cần 2GB RAM, nhưng Stream chỉ cần vài MB."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "917-streams-trong-node-js-la-gi-tai-sao-can-dung-streams-thay-vi-doc-toan-bo-file"
+  },
+  {
+    "id": "43a38c28-864d-5b73-bfdf-7a490db878be",
+    "question": "Process.env và dotenv hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/918-process-env-va-dotenv-hoat-dong-the-nao",
+    "slug": "process-env-va-dotenv-hoat-dong-the-nao-43a38c28-864d-5b73-bfdf-7a490db878be",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "process.env là object chứa tất cả environment variables của hệ điều hành mà Node.js process có thể truy cập, ví dụ process.env.DATABASE_URL để lấy connection string. Thư viện dotenv đọc file .env ở root project và inject các biến vào process.env lúc khởi động app, giúp developer không cần set biến môi trường thủ công."
+      ],
+      "details": [
+        "Nguyên tắc quan trọng: file .env phải nằm trong .gitignore để không commit secrets lên repository, và tạo file .env.example chứa danh sách biến cần thiết (không có giá trị thật) làm template cho team.",
+        "Nên validate tất cả env vars lúc app startup bằng thư viện như Zod hoặc envalid để crash sớm nếu thiếu biến, thay vì gặp lỗi runtime khó debug khi app đang chạy."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "918-process-env-va-dotenv-hoat-dong-the-nao"
+  },
+  {
+    "id": "382f1341-c8ee-50b1-bd98-05c58b8a1ae3",
+    "question": "Validation input trong Express dùng gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/920-validation-input-trong-express-dung-gi",
+    "slug": "validation-input-trong-express-dung-gi-382f1341-c8ee-50b1-bd98-05c58b8a1ae3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Alternatives: Joi, Yup, class-validator."
+      ],
+      "details": [
+        "Validate ở layer đầu tiên — trước bất kỳ business logic nào."
+      ],
+      "points": [],
+      "sections": [
+        "Zod là lựa chọn tốt nhất cho Express + TS: schema-first, type-safe, safeParse trả structured errors."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const schema = z.object({ email: z.string().email(), age: z.number().min(18) });\napp.post('/users', (req, res) => {\n  const result = schema.safeParse(req.body);\n  if (!result.success) return res.status(400).json(result.error);\n});"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "920-validation-input-trong-express-dung-gi"
+  },
+  {
+    "id": "9caec206-c46e-59a2-a862-5bfaed4ce8bc",
+    "question": "Logging best practices cho Node.js production?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/924-logging-best-practices-cho-node-js-production",
+    "slug": "logging-best-practices-cho-node-js-production-9caec206-c46e-59a2-a862-5bfaed4ce8bc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Logging trong production cần có cấu trúc và chiến lược rõ ràng để debug hiệu quả khi có sự cố. Nên dùng Pino (nhanh nhất, gấp 5 lần Winston) hoặc Winston (linh hoạt hơn, nhiều transports), và format log dưới dạng JSON thay vì text thuần vì JSON dễ parse bởi log aggregators như ELK Stack, Datadog, hay CloudWatch."
+      ],
+      "details": [
+        "Phân chia log levels hợp lý: error cho lỗi cần xử lý ngay, warn cho tình huống bất thường nhưng chưa lỗi, info cho business events quan trọng, debug cho chi tiết kỹ thuật chỉ bật khi cần.",
+        "Mỗi request nên có correlation ID (UUID) truyền qua tất cả services để trace toàn bộ luồng xử lý, và tuyệt đối không log sensitive data như passwords, tokens, hay thông tin cá nhân người dùng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "924-logging-best-practices-cho-node-js-production"
+  },
+  {
+    "id": "7bb798a7-7e19-56fb-8411-01c57c029d9f",
+    "question": "Websocket với Socket.io trong Node.js dùng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/925-websocket-voi-socket-io-trong-node-js-dung-the-nao",
+    "slug": "websocket-voi-socket-io-trong-node-js-dung-the-nao-7bb798a7-7e19-56fb-8411-01c57c029d9f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Rooms cho group chat, namespaces cho tách concerns."
+      ],
+      "details": [
+        "Reconnection tự động."
+      ],
+      "points": [],
+      "sections": [
+        "Socket.io wraps WebSocket với automatic reconnection, rooms, và namespace support."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// Server\nconst io = new Server(httpServer);\nio.on('connection', socket => {\n  socket.on('message', data => { io.emit('message', data); });\n});\n// Client\nconst socket = io('http://localhost:3000');\nsocket.emit('message', 'hello');"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "925-websocket-voi-socket-io-trong-node-js-dung-the-nao"
+  },
+  {
+    "id": "98e2a776-1866-5a9e-9b4b-35f083b72239",
+    "question": "Node.js single-threaded. Tại sao vẫn handle multiple request? Event loop explain.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/959-node-js-single-threaded-tai-sao-van-handle-multiple-request-event-loop-explain",
+    "slug": "node-js-single-threaded-tai-sao-van-handle-multiple-request-event-loop-explain-98e2a776-1866-5a9e-9b4b-35f083b72239",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Node.js chạy JavaScript trên một thread duy nhất, nhưng vẫn xử lý được nhiều request đồng thời nhờ cơ chế non-blocking I/O và event loop. Khi có tác vụ I/O (đọc file, gọi database, HTTP request), Node.js giao cho libuv xử lý trong thread pool riêng và tiếp tục nhận request mới. Khi tác vụ I/O hoàn thành, callback được đưa vào event queue và event loop sẽ đẩy lên call stack khi stack trống."
+      ],
+      "details": [
+        "Tuy nhiên, nếu có tác vụ tính toán nặng (CPU-intensive) thì sẽ block main thread, lúc này cần dùng Worker Threads để chạy song song."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "959-node-js-single-threaded-tai-sao-van-handle-multiple-request-event-loop-explain"
+  },
+  {
+    "id": "2e56ce49-0e70-50f8-8cc0-01f42ac9ac7c",
+    "question": "Callback vs Promise vs async/await. Cách handle error trong mỗi?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/960-callback-vs-promise-vs-async-await-cach-handle-error-trong-moi",
+    "slug": "callback-vs-promise-vs-async-await-cach-handle-error-trong-moi-2e56ce49-0e70-50f8-8cc0-01f42ac9ac7c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Callback là cách xử lý bất đồng bộ đầu tiên trong JavaScript, nhưng dễ dẫn đến callback hell khi lồng nhiều tầng và khó xử lý lỗi vì phải kiểm tra error ở mỗi callback."
+      ],
+      "details": [],
+      "points": [
+        "Promise cải thiện bằng cách dùng .then() để chain và .catch() để bắt lỗi tập trung, nhưng vẫn có thể dài dòng.",
+        "Async/await là cú pháp mới nhất, dùng try/catch để bắt lỗi giống code đồng bộ, dễ đọc và debug nhất.",
+        "Khuyến nghị: dùng async/await làm mặc định, Promise.all() khi cần chạy song song nhiều request, và Promise.allSettled() khi muốn biết kết quả của tất cả request dù có lỗi."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "960-callback-vs-promise-vs-async-await-cach-handle-error-trong-moi"
+  },
+  {
+    "id": "a46aec8a-6e28-51b5-a277-26937a66433f",
+    "question": "Environment variable trong Node.js. Tại sao cần? .env file?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/963-environment-variable-trong-node-js-tai-sao-can-env-file",
+    "slug": "environment-variable-trong-node-js-tai-sao-can-env-file-a46aec8a-6e28-51b5-a277-26937a66433f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Environment variable dùng để lưu trữ cấu hình thay đổi theo từng môi trường (development, staging, production) như database URL, API key, port number, mà không cần thay đổi code. File .env chứa các biến này cho môi trường phát triển local, và package dotenv sẽ tự động load chúng vào process.env."
+      ],
+      "details": [
+        "Tuyệt đối không được commit file .env lên git vì chứa thông tin nhạy cảm — thay vào đó tạo file .env.example chỉ chứa tên biến không có giá trị để người khác biết cần cấu hình gì. Trên production, environment variable được cấu hình trực tiếp trên hosting platform như Vercel, AWS, hoặc Docker."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "963-environment-variable-trong-node-js-tai-sao-can-env-file"
+  },
+  {
+    "id": "cba4186a-ebf4-5e26-8ca2-04188249ead8",
+    "question": "Child process trong Node.js: spawn(), fork() và exec() khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93400-child-process-trong-node-js-spawn-fork-va-exec-khac-nhau-the-nao",
+    "slug": "child-process-trong-node-js-spawn-fork-va-exec-khac-nhau-the-nao-cba4186a-ebf4-5e26-8ca2-04188249ead8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả ba đều thuộc module child_process, tạo tiến trình con để chạy việc ngoài event loop, nhưng khác về cách nhận kết quả:"
+      ],
+      "details": [
+        "Mẹo nhớ: spawn = stream, exec = buffer + shell, fork = spawn Node có IPC."
+      ],
+      "points": [
+        "spawn(cmd, args): chạy lệnh và trả về stream stdout/stderr. Không buffer toàn bộ output → hợp với dữ liệu lớn hoặc tiến trình chạy lâu. Mặc định không qua shell.",
+        "exec(cmd, cb): chạy lệnh trong shell, buffer toàn bộ output rồi trả một lần qua callback. Tiện cho lệnh ngắn; output vượt maxBuffer (mặc định ~1MB) sẽ lỗi. Vì qua shell nên cẩn thận command injection.",
+        "fork(module): trường hợp đặc biệt của spawn chỉ để chạy một file Node.js khác, tự lập sẵn kênh IPC để cha–con send() message cho nhau. Dùng cho worker/tiến trình nền."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "93400-child-process-trong-node-js-spawn-fork-va-exec-khac-nhau-the-nao"
+  },
+  {
+    "id": "de7175c7-b66b-5bca-9bcd-a031b44e21c1",
+    "question": "Nhược điểm của Node.js là gì? Khi nào KHÔNG nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93402-nhuoc-diem-cua-node-js-la-gi-khi-nao-khong-nen-dung",
+    "slug": "nhuoc-diem-cua-node-js-la-gi-khi-nao-khong-nen-dung-de7175c7-b66b-5bca-9bcd-a031b44e21c1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Điểm mạnh của Node (một luồng + event loop) cũng là điểm yếu: mọi request chia sẻ một luồng chạy JS."
+      ],
+      "details": [
+        "Khi nào không nên dùng: workload chủ yếu là CPU-bound. Nếu vẫn dùng Node, hãy đẩy phần nặng sang worker_threads, child process, hàng đợi job, hoặc service riêng — để event loop luôn rảnh phục vụ I/O. Node tỏa sáng ở việc I/O-bound (API, realtime, proxy), không phải tính toán thô."
+      ],
+      "points": [
+        "Tác vụ CPU-bound làm nghẽn event loop: một vòng lặp nặng hay hàm đồng bộ tốn CPU sẽ chặn luồng, khiến mọi request khác phải chờ. Đây là lý do chính khiến Node không hợp cho việc tính toán nặng.",
+        "Ví dụ nên tránh: xử lý ảnh/video, mã hóa/hash quy mô lớn, nén dữ liệu lớn, tính toán khoa học.",
+        "Callback lồng nhau dễ rối (giảm nhẹ bằng async/await)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": "93402-nhuoc-diem-cua-node-js-la-gi-khi-nao-khong-nen-dung"
+  },
+  {
+    "id": "613d2a77-af25-5085-9489-e66a9d2d3823",
+    "question": "Module crypto của Node.js cung cấp những gì? (hashing, HMAC, cipher)",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93403-module-crypto-cua-node-js-cung-cap-nhung-gi-hashing-hmac-cipher",
+    "slug": "module-crypto-cua-node-js-cung-cap-nhung-gi-hashing-hmac-cipher-613d2a77-af25-5085-9489-e66a9d2d3823",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Module built-in crypto bọc OpenSSL, gom các nhóm nguyên thủy mật mã:"
+      ],
+      "details": [
+        "Lưu ý: mật khẩu KHÔNG dùng createHash trơn — hãy dùng KDF có salt như scrypt/pbkdf2 (hoặc bcrypt/argon2). Hash để kiểm tra toàn vẹn, KDF để lưu mật khẩu."
+      ],
+      "points": [
+        "Hashing — createHash('sha256'): băm một chiều, không khóa. Dùng cho checksum/toàn vẹn dữ liệu.",
+        "HMAC — createHmac('sha256', key): băm có khóa bí mật, để xác thực rằng dữ liệu do bên biết khóa tạo ra (verify webhook, ký token).",
+        "Mã hóa đối xứng — createCipheriv/createDecipheriv (vd AES-256-GCM): mã hóa/giải mã bằng cùng một khóa + IV.",
+        "Bất đối xứng — generateKeyPair, sign/verify, publicEncrypt (RSA/EC).",
+        "Ngẫu nhiên & KDF — randomBytes, randomUUID, scrypt/pbkdf2 để dẫn xuất khóa."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "93403-module-crypto-cua-node-js-cung-cap-nhung-gi-hashing-hmac-cipher"
+  },
+  {
+    "id": "60de6ccc-0246-56cf-be3d-2171f0ac87c1",
+    "question": "Quản lý session trong Node.js: express-session khác JWT thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93405-quan-ly-session-trong-node-js-express-session-khac-jwt-the-nao",
+    "slug": "quan-ly-session-trong-node-js-express-session-khac-jwt-the-nao-60de6ccc-0246-56cf-be3d-2171f0ac87c1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai cách giữ trạng thái đăng nhập, khác nhau ở chỗ state nằm đâu:"
+      ],
+      "details": [
+        "express-session (stateful, server-side)\n- Server lưu dữ liệu session; client chỉ giữ một session id trong cookie.\n- Cần một store (Redis/DB) để scale ngang nhiều instance — không nên để MemoryStore ở production.\n- Server thu hồi tức thì được (xóa session) → logout/ban hiệu lực ngay.",
+        "JWT (stateless, self-contained)\n- Token tự chứa claim + chữ ký; server chỉ verify chữ ký, không cần lưu gì → dễ scale, hợp kiến trúc nhiều service.\n- Nhược điểm: khó thu hồi trước khi hết hạn → dùng token ngắn hạn + refresh token; payload chỉ base64 (đọc được) nên không đặt dữ liệu nhạy cảm.",
+        "Theo OWASP, mặc định ưu tiên session phía server vì kiểm soát vòng đời tốt hơn; chọn JWT khi thực sự cần stateless. Dù cách nào, cookie phải HttpOnly + Secure + SameSite."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "93405-quan-ly-session-trong-node-js-express-session-khac-jwt-the-nao"
+  },
+  {
+    "id": "a4bb9f6c-a233-55d9-aac3-e13a6e80a11b",
+    "question": "Thread pool của libuv là gì? API nào của Node dùng nó, API nào không? UV_THREADPOOL_SIZE ảnh hưởng ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96205-thread-pool-cua-libuv-la-gi-api-nao-cua-node-dung-no-api-nao-khong-uv-threadpool",
+    "slug": "thread-pool-cua-libuv-la-gi-api-nao-cua-node-dung-no-api-nao-khong-uv-threadpool-size-anh-huong-ra-s-a4bb9f6c-a233-55d9-aac3-e13a6e80a11b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Node chỉ chạy JavaScript trên một thread, nhưng libuv giữ một thread pool để làm những việc hệ điều hành không cung cấp API bất đồng bộ tốt. Mặc định pool có 4 thread, chỉnh qua biến môi trường UV_THREADPOOL_SIZE (tối đa 1024, phải đặt trước khi thread pool được dùng lần đầu)."
+      ],
+      "details": [
+        "Dùng thread pool:\n- fs.* (mọi thao tác file, trừ FSWatcher)\n- dns.lookup() (vì nó gọi getaddrinfo của hệ thống)\n- Một số hàm crypto: pbkdf2, scrypt, randomBytes, randomFill\n- zlib (nén/giải nén)",
+        "Không dùng thread pool — chạy trên epoll/kqueue của kernel, gần như không giới hạn số kết nối song song:\n- TCP/HTTP socket (net, http, https)\n- dns.resolve*() (tự query DNS qua socket)",
+        "Triệu chứng hay gặp khi phỏng vấn hỏi: API hash mật khẩu bằng pbkdf2/bcrypt, đo thấy 4 request đầu nhanh, request thứ 5 phải xếp hàng đợi — vì pool chỉ có 4 thread. Tăng UV_THREADPOOL_SIZE lên xấp xỉ số core giúp phần nào, nhưng tăng không giới hạn chỉ đổi chỗ nghẽn sang tranh chấp CPU. Với việc CPU nặng và kéo dài, giải pháp đúng là worker pool riêng hoặc đẩy sang job queue."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": "96205-thread-pool-cua-libuv-la-gi-api-nao-cua-node-dung-no-api-nao-khong-uv-threadpool"
+  },
+  {
+    "id": "0f4cb11c-e9b6-5f20-97e0-711c8707d445",
+    "question": "Vì sao nên dùng stream.pipeline() thay vì nối .pipe()?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96206-vi-sao-nen-dung-stream-pipeline-thay-vi-noi-pipe",
+    "slug": "vi-sao-nen-dung-stream-pipeline-thay-vi-noi-pipe-0f4cb11c-e9b6-5f20-97e0-711c8707d445",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        ".pipe() chỉ làm một việc: chuyển dữ liệu và tôn trọng backpressure. Nó không lan truyền lỗi và không dọn dẹp.",
+        "Trường hợp hay gặp nhất trong production: client ngắt kết nối giữa chừng khi đang tải file."
+      ],
+      "details": [
+        "Khi một stream trong chuỗi a.pipe(b).pipe(c) phát error:\n- Các stream còn lại không bị destroy → file descriptor, socket, buffer vẫn treo.\n- Nếu không gắn handler error cho từng stream, lỗi trở thành uncaught và làm chết tiến trình.",
+        "pipeline() gom cả ba việc đó: nối stream, destroy toàn bộ chuỗi khi có lỗi, và trả về một callback/promise duy nhất báo hoàn tất hay thất bại.",
+        "Với .pipe(), sự kiện finish không bao giờ đến nên phần dọn dẹp không chạy → rò rỉ tích tụ. pipeline() phát hiện đóng sớm, ném ERR_STREAM_PREMATURE_CLOSE và destroy stream nguồn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "import { pipeline } from 'node:stream/promises'\nimport { createReadStream, createWriteStream } from 'node:fs'\nimport { createGzip } from 'node:zlib'\n\nawait pipeline(\n  createReadStream('input.log'),\n  createGzip(),\n  createWriteStream('input.log.gz'),\n)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": "96206-vi-sao-nen-dung-stream-pipeline-thay-vi-noi-pipe"
+  },
+  {
+    "id": "46034f93-7410-58ed-bebc-0288bcf09293",
+    "question": "Cần import file CSV 2GB vào database. Em thiết kế luồng thế nào để không hết bộ nhớ?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96207-can-import-file-csv-2gb-vao-database-em-thiet-ke-luong-the-nao-de-khong-het-bo-n",
+    "slug": "can-import-file-csv-2gb-vao-database-em-thiet-ke-luong-the-nao-de-khong-het-bo-nho-46034f93-7410-58ed-bebc-0288bcf09293",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Không đọc cả file vào RAM.",
+        "Vì sao không hết bộ nhớ: writer._write chỉ gọi cb() sau khi DB ghi xong. Chừng nào chưa gọi, hàng đợi nội bộ đầy tới highWaterMark, write() trả false và stream phía trên ngừng đọc cho tới khi có drain. Bộ nhớ giữ ở mức một lô, không phụ thuộc kích thước file."
+      ],
+      "details": [
+        "Dựng một pipeline đọc → parse → gom lô → ghi, để backpressure tự điều tiết tốc độ theo DB.",
+        "Các điểm cần nói thêm khi phỏng vấn:\n- Ghi theo lô (500–2000 dòng) thay vì từng dòng để giảm round-trip.\n- Idempotency: dùng ON CONFLICT DO NOTHING hoặc unique key để chạy lại an toàn khi job hỏng giữa chừng.\n- Ghi checkpoint số dòng đã xử lý để có thể tiếp tục.\n- Nếu import chạy trong API service, đẩy sang worker/queue để không chiếm event loop của các request khác."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "import { pipeline } from 'node:stream/promises'\nimport { createReadStream } from 'node:fs'\nimport { Transform, Writable } from 'node:stream'\nimport { parse } from 'csv-parse'\n\nconst BATCH = 1000\n\nconst batcher = new Transform({\n  objectMode: true,\n  transform(row, _enc, cb) {\n    this.rows ??= []\n    this.rows.push(row)\n    if (this.rows.length >= BATCH) { const b = this.rows; this.rows = []; return cb(null, b) }\n    cb()\n  },\n  flush(cb) { cb(null, this.rows?.length ? this.rows : undefined) },\n})\n\nconst writer = new Writable({\n  objectMode: true,\n  async write(batch, _enc, cb) {\n    try { await db.insertMany(batch); cb() } catch (err) { cb(err) }\n  },\n})\n\nawait pipeline(createReadStream('data.csv'), parse({ columns: true }), batcher, writer)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": "96207-can-import-file-csv-2gb-vao-database-em-thiet-ke-luong-the-nao-de-khong-het-bo-n"
+  },
+  {
+    "id": "371c3822-3a3a-5e94-bd43-460a5bbfbc84",
+    "question": "AsyncLocalStorage giải quyết vấn đề gì? Dùng nó để gắn request id vào log như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96208-asynclocalstorage-giai-quyet-van-de-gi-dung-no-de-gan-request-id-vao-log-nhu-the",
+    "slug": "asynclocalstorage-giai-quyet-van-de-gi-dung-no-de-gan-request-id-vao-log-nhu-the-nao-371c3822-3a3a-5e94-bd43-460a5bbfbc84",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Nó giải quyết bài toán truyền context xuyên qua chuỗi bất đồng bộ mà không phải thêm tham số vào mọi hàm.",
+        "Hàm ở tầng sâu (repository, service) gọi log() là tự có requestId, không cần nhận thêm tham số."
+      ],
+      "details": [
+        "Trong Node không có thread-local storage; AsyncLocalStorage là bản tương đương cho môi trường async: một store gắn với \"vùng chạy\" và tự theo suốt các await, callback, promise chain sinh ra từ đó.",
+        "Ứng dụng thường gặp: correlation id cho log, trace context của APM (OpenTelemetry dùng chính cơ chế này), thông tin user/tenant cho multi-tenant, transaction handle của DB.",
+        "Lưu ý:\n- getStore() trả undefined nếu code chạy ngoài run() — vd trong setInterval khởi tạo lúc boot. Luôn xử lý trường hợp thiếu store.\n- Store là một object bình thường: mutate được, nhưng đừng nhét dữ liệu lớn vào vì nó sống hết vòng đời request.\n- API đã stable, nhưng nó vẫn dựa trên async_hooks nên có chi phí; đo trước khi dùng ở đường chạy siêu nóng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "import { AsyncLocalStorage } from 'node:async_hooks'\nimport { randomUUID } from 'node:crypto'\n\nconst context = new AsyncLocalStorage()\n\napp.use((req, res, next) => {\n  const store = { requestId: req.headers['x-request-id'] ?? randomUUID() }\n  context.run(store, next)\n})\n\nexport function log(message) {\n  const store = context.getStore()\n  console.log(JSON.stringify({ requestId: store?.requestId, message }))\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": "96208-asynclocalstorage-giai-quyet-van-de-gi-dung-no-de-gan-request-id-vao-log-nhu-the"
+  },
+  {
+    "id": "a6ef7834-e66d-5dab-91e6-73b72c95a59d",
+    "question": "Service Node trên Kubernetes vẫn trả 502 mỗi lần rolling update dù đã bắt SIGTERM và gọi server.close(). Nguyên nhân và cách khắc phục?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96209-service-node-tren-kubernetes-van-tra-502-moi-lan-rolling-update-du-da-bat-sigter",
+    "slug": "service-node-tren-kubernetes-van-tra-502-moi-lan-rolling-update-du-da-bat-sigterm-va-goi-server-clos-a6ef7834-e66d-5dab-91e6-73b72c95a59d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Có hai nguyên nhân riêng biệt, thường xảy ra cùng lúc.",
+        "Sau khi listener đóng, mới đóng DB pool, consumer message queue rồi thoát."
+      ],
+      "details": [
+        "1. Đóng quá sớm so với việc cập nhật routing. Khi pod bị xóa, Kubernetes gửi SIGTERM và gỡ pod khỏi Endpoints song song, không tuần tự. Các kube-proxy/ingress cần thời gian để cập nhật. Nếu tiến trình đóng listener ngay, request vẫn được định tuyến tới pod đã ngừng nghe → 502.",
+        "server.closeIdleConnections()",
+        "server.closeAllConnections()",
+        "Xử lý: khi nhận SIGTERM, cho readiness probe fail trước, đợi vài giây (hoặc dùng preStop hook có sleep) rồi mới server.close().",
+        "2. Keep-alive giữ server.close() treo. server.close() chỉ ngừng nhận kết nối mới và chờ mọi kết nối hiện có đóng lại. Kết nối keep-alive đang rảnh vẫn mở, nên callback không bao giờ chạy, tới hạn terminationGracePeriodSeconds thì bị SIGKILL và cắt ngang request đang xử lý."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "process.on('SIGTERM', async () => {\n  isShuttingDown = true               // readiness probe now returns 503\n  await sleep(5000)                   // let endpoints propagate\n  server.close(() => process.exit(0))\n  server.closeIdleConnections()\n  setTimeout(() => {\n    server.closeAllConnections()\n    process.exit(1)\n  }, 15000).unref()\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": "96209-service-node-tren-kubernetes-van-tra-502-moi-lan-rolling-update-du-da-bat-sigter"
+  },
+  {
+    "id": "a0c28153-9a47-5d78-bbbc-0f4ad25b59f7",
+    "question": "Từ Node 15, promise bị reject mà không ai bắt sẽ gây chuyện gì? Nên xử lý unhandledRejection và uncaughtException thế nào trong production?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96210-tu-node-15-promise-bi-reject-ma-khong-ai-bat-se-gay-chuyen-gi-nen-xu-ly-unhandle",
+    "slug": "tu-node-15-promise-bi-reject-ma-khong-ai-bat-se-gay-chuyen-gi-nen-xu-ly-unhandledrejection-va-uncaug-a0c28153-9a47-5d78-bbbc-0f4ad25b59f7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Từ Node 15, mặc định của --unhandled-rejections đổi từ warn sang throw: nếu không có handler unhandledRejection, rejection không bắt được sẽ nổi lên thành uncaught exception và làm chết tiến trình. Trước đó nó chỉ in cảnh báo và app chạy tiếp — đây là lý do code cũ nâng version Node xong bỗng bị crash.",
+        "Lý do không nuốt lỗi rồi chạy tiếp: khi tới uncaughtException, một handler đã bị bỏ dở giữa chừng — connection, transaction, biến trạng thái có thể đang ở trạng thái không nhất quán. Tiếp tục phục vụ request trên trạng thái đó là nguồn của bug khó tái hiện. Cho tiến trình khởi động lại (K8s, PM2, systemd) là đường an toàn."
+      ],
+      "details": [
+        "Phòng ngừa ở tầng code: luôn await hoặc .catch() mọi promise; bọc handler async của Express bằng wrapper bắt lỗi (Express 4 không tự bắt lỗi async); bật rule lint no-floating-promises của typescript-eslint.",
+        "Cách xử lý được khuyến nghị: để tiến trình chết, nhưng chết có kiểm soát."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "process.on('unhandledRejection', (reason) => {\n  logger.fatal({ err: reason }, 'unhandled rejection')\n  throw reason                       // turn it into uncaughtException\n})\n\nprocess.on('uncaughtException', (err) => {\n  logger.fatal({ err }, 'uncaught exception')\n  gracefulShutdown()                 // stop taking traffic, then exit\n  setTimeout(() => process.exit(1), 10000).unref()\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": "96210-tu-node-15-promise-bi-reject-ma-khong-ai-bat-se-gay-chuyen-gi-nen-xu-ly-unhandle"
+  },
+  {
+    "id": "393b70c3-6222-5385-b8b3-45f2cfc1e494",
+    "question": "Vì sao error-handling middleware trong Express bắt buộc phải khai báo đủ 4 tham số?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96254-vi-sao-error-handling-middleware-trong-express-bat-buoc-phai-khai-bao-du-4-tham",
+    "slug": "vi-sao-error-handling-middleware-trong-express-bat-buoc-phai-khai-bao-du-4-tham-so-393b70c3-6222-5385-b8b3-45f2cfc1e494",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Express nhận diện error handler hoàn toàn dựa vào số tham số của hàm (fn.length === 4).",
+        "Hai điểm hay bị hỏi thêm:\n- Error middleware phải đặt sau tất cả app.use() và route, nếu không lỗi từ route sẽ không đi qua nó.\n- Nếu response đã bắt đầu gửi (res.headersSent === true) thì phải next(err) để default handler đóng kết nối, không được ghi thêm."
+      ],
+      "details": [
+        "Nếu bạn viết (err, req, res) — bỏ next — Express coi đó là middleware thường với err được hiểu là req, và lỗi sẽ rơi xuống default error handler thay vì hàm của bạn.",
+        "Không cần đặt tên tham số là next — chỉ số lượng tham số mới quan trọng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// wrong: only 3 params -> treated as a normal middleware\napp.use((err, req, res) => res.status(500).json({ message: err.message }))\n\n// đúng: 4 params, even if next is unused\napp.use((err, req, res, next) => {\n  if (res.headersSent) return next(err)\n  res.status(err.status ?? 500).json({ message: err.message })\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": "96254-vi-sao-error-handling-middleware-trong-express-bat-buoc-phai-khai-bao-du-4-tham"
+  },
+  {
+    "id": "611b6130-d2b2-5019-a38d-737ad979f6dc",
+    "question": "Trong Express 4, handler async ném lỗi thì error middleware không bắt được — vì sao? Express 5 thay đổi gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96255-trong-express-4-handler-async-nem-loi-thi-error-middleware-khong-bat-duoc-vi-sao",
+    "slug": "trong-express-4-handler-async-nem-loi-thi-error-middleware-khong-bat-duoc-vi-sao-express-5-thay-doi-611b6130-d2b2-5019-a38d-737ad979f6dc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Express 4 chỉ bọc try/catch quanh lời gọi handler đồng bộ.",
+        "Ba cách xử lý ở Express 4:\n- try/catch rồi next(err) trong từng handler.\n- Bọc bằng wrapper:\nCopy\nconst wrap = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)\n.\n- Dùng express-async-errors (patch toàn cục) hoặc express-async-handler."
+      ],
+      "details": [
+        "Một hàm async trả về Promise ngay lập tức, lỗi xảy ra sau đó nằm ở dạng rejected promise — Express không biết tới, request treo cho tới timeout và Node ghi UnhandledPromiseRejection.",
+        "Express 5 đưa việc này vào core: mọi lỗi ném ra hoặc promise bị reject từ middleware/handler đều được tự động forward tới error-handling middleware, nên wrapper không còn cần thiết. Đây là lý do khi phỏng vấn hỏi \"code này chạy trên Express mấy\" thì phải hỏi lại phiên bản trước khi trả lời."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// Express 4: this error never reaches the error middleware\napp.get('/users', async (req, res) => {\n  const users = await db.query('...')  // throws -> unhandled rejection\n  res.json(users)\n})"
+        },
+        {
+          "language": "JS",
+          "code": "const wrap = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": "96255-trong-express-4-handler-async-nem-loi-thi-error-middleware-khong-bat-duoc-vi-sao"
+  },
+  {
+    "id": "1db0c622-64d0-5928-9181-c5ca46c98639",
+    "question": "Lỗi ERR_HTTP_HEADERS_SENT — \"Cannot set headers after they are sent to the client\" — do đâu và sửa thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96256-loi-err-http-headers-sent-cannot-set-headers-after-they-are-sent-to-the-client-d",
+    "slug": "loi-err-http-headers-sent-cannot-set-headers-after-they-are-sent-to-the-client-do-dau-va-sua-the-nao-1db0c622-64d0-5928-9181-c5ca46c98639",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khi headers đã được flush xuống client, Node cấm sửa header hoặc bắt đầu một response thứ hai trên cùng request. Bản chất lỗi luôn là gửi response hai lần cho một request.",
+        "Cách sửa:\n- Luôn return res.json(...) ở mọi nhánh thoát sớm.\n- Không gọi next() sau khi đã gửi response.\n- Trong error middleware, kiểm tra res.headersSent trước khi ghi: nếu đã gửi thì next(err) để Node đóng kết nối.\n- Gom việc trả lời về một chỗ duy nhất mỗi handler thay vì rải res.send nhiều nhánh."
+      ],
+      "details": [
+        "Ba mẫu code hay gây ra:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// 1. missing return before res.json\napp.get('/user/:id', async (req, res) => {\n  const user = await findUser(req.params.id)\n  if (!user) res.status(404).json({ message: 'not found' })  // no return\n  res.json(user)                                              // runs anyway -> throws\n})\n\n// 2. responding then calling next() -> a later handler responds again\n// 3. an async callback replies after the sync path already replied"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": "96256-loi-err-http-headers-sent-cannot-set-headers-after-they-are-sent-to-the-client-d"
+  },
+  {
+    "id": "271f6039-2e8c-5fe4-ba8f-af36d5b5fdcd",
+    "question": "process.nextTick() khác setImmediate() như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "process-nexttick-khac-setimmediate-nhu-the-nao-271f6039-2e8c-5fe4-ba8f-af36d5b5fdcd",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": null
+  },
+  {
+    "id": "b1de2596-f406-5b5b-b9d8-2cc5f0a44c49",
+    "question": "Streams trong Node.js là gì? Có những loại stream nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "streams-trong-node-js-la-gi-co-nhung-loai-stream-nao-b1de2596-f406-5b5b-b9d8-2cc5f0a44c49",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": null
+  },
+  {
+    "id": "205801b9-fb48-5bdd-9f61-d4fe8c25a3be",
+    "question": "Libuv là gì? Vai trò trong Node.js?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "libuv-la-gi-vai-tro-trong-node-js-205801b9-fb48-5bdd-9f61-d4fe8c25a3be",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": null
+  },
+  {
+    "id": "3d66d302-1720-5329-9580-7e9f19a24b17",
+    "question": "Sự khác biệt giữa Express 4 và Express 5 là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "su-khac-biet-giua-express-4-va-express-5-la-gi-3d66d302-1720-5329-9580-7e9f19a24b17",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": null
+  },
+  {
+    "id": "1cd2399f-ffa9-5cbe-a6a4-0c67fcb04eec",
+    "question": "Access token và Refresh token khác nhau như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "access-token-va-refresh-token-khac-nhau-nhu-the-nao-1cd2399f-ffa9-5cbe-a6a4-0c67fcb04eec",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": null
+  },
+  {
+    "id": "7b97701a-cff2-5825-8c7b-dbd01dcd1d69",
+    "question": "Clustering trong Node.js là gì? Tại sao cần thiết?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "clustering-trong-node-js-la-gi-tai-sao-can-thiet-7b97701a-cff2-5825-8c7b-dbd01dcd1d69",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": null
+  },
+  {
+    "id": "548720b7-bce4-5d94-a5ff-51bd8e50725a",
+    "question": "Worker Threads trong Node.js là gì? Khác gì với Cluster?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "worker-threads-trong-node-js-la-gi-khac-gi-voi-cluster-548720b7-bce4-5d94-a5ff-51bd8e50725a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": null
+  },
+  {
+    "id": "4b44d944-2915-5a8c-a00a-feab0c172bfc",
+    "question": "Microservices architecture với Node.js: ưu và nhược điểm?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "microservices-architecture-voi-node-js-uu-va-nhuoc-diem-4b44d944-2915-5a8c-a00a-feab0c172bfc",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": null
+  },
+  {
+    "id": "a0d272bc-34aa-5085-ac6b-a11b905f22f6",
+    "question": "Event loop blocking trong Node.js là gì? Làm thế nào để tránh?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "event-loop-blocking-trong-node-js-la-gi-lam-the-nao-de-tranh-a0d272bc-34aa-5085-ac6b-a11b905f22f6",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": null
+  },
+  {
+    "id": "51c142af-64ea-5cbb-aa51-b88f8f5163a1",
+    "question": "Backpressure trong Node.js streams là gì? Tại sao quan trọng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "backpressure-trong-node-js-streams-la-gi-tai-sao-quan-trong-51c142af-64ea-5cbb-aa51-b88f8f5163a1",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 76,
+    "sourceSlug": null
+  },
+  {
+    "id": "73eeebd7-fae4-545b-978b-19ddbabbda4f",
+    "question": "Event Emitter trong Node.js là gì? Cách dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "event-emitter-trong-node-js-la-gi-cach-dung-73eeebd7-fae4-545b-978b-19ddbabbda4f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 77,
+    "sourceSlug": null
+  },
+  {
+    "id": "9101a4bc-5793-508f-b176-55dcc3af97df",
+    "question": "Graceful shutdown trong Node.js là gì? Tại sao quan trọng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "graceful-shutdown-trong-node-js-la-gi-tai-sao-quan-trong-9101a4bc-5793-508f-b176-55dcc3af97df",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 78,
+    "sourceSlug": null
+  },
+  {
+    "id": "746721aa-de30-55c7-8692-bce30a486c01",
+    "question": "PM2 là gì? Tại sao dùng PM2 trong production?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "pm2-la-gi-tai-sao-dung-pm2-trong-production-746721aa-de30-55c7-8692-bce30a486c01",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 79,
+    "sourceSlug": null
+  },
+  {
+    "id": "1d7dd320-96d3-5d83-8b71-d3f007849f7a",
+    "question": "Caching strategy cho Node.js API?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "caching-strategy-cho-node-js-api-1d7dd320-96d3-5d83-8b71-d3f007849f7a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 80,
+    "sourceSlug": null
+  },
+  {
+    "id": "174d2f7b-6e27-57ef-bbd0-3d2c27539fd3",
+    "question": "Error handling strategy cho production Node.js?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "error-handling-strategy-cho-production-node-js-174d2f7b-6e27-57ef-bbd0-3d2c27539fd3",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 81,
+    "sourceSlug": null
+  },
+  {
+    "id": "23c41a1a-1500-5b00-8375-53d170e610d3",
+    "question": "Microservices communication patterns?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "microservices-communication-patterns-23c41a1a-1500-5b00-8375-53d170e610d3",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 82,
+    "sourceSlug": null
+  },
+  {
+    "id": "ea1d8f26-9ee0-5f66-9ad8-06b3570c3024",
+    "question": "Reactor pattern trong Node.js là gì và nó là nền tảng cho event loop ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "reactor-pattern-trong-node-js-la-gi-va-no-la-nen-tang-cho-event-loop-ra-sao-ea1d8f26-9ee0-5f66-9ad8-06b3570c3024",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 83,
+    "sourceSlug": null
+  },
+  {
+    "id": "25a4292a-de3b-5b54-b759-add3910b87e8",
+    "question": "Piping stream bằng .pipe() trong Node.js là gì và liên hệ với backpressure ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "piping-stream-bang-pipe-trong-node-js-la-gi-va-lien-he-voi-backpressure-ra-sao-25a4292a-de3b-5b54-b759-add3910b87e8",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 84,
+    "sourceSlug": null
+  },
+  {
+    "id": "1967f110-782e-5953-a176-c94a77f492d3",
+    "question": "Một endpoint xử lý CPU nặng (resize ảnh, xuất Excel 200k dòng) làm treo toàn bộ API. Em cân nhắc worker_threads, cluster, child_process và job queue thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mot-endpoint-xu-ly-cpu-nang-resize-anh-xuat-excel-200k-dong-lam-treo-toan-bo-api-em-can-nhac-worker-1967f110-782e-5953-a176-c94a77f492d3",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 85,
+    "sourceSlug": null
+  },
+  {
+    "id": "b9ea24a5-0929-5644-9be5-2531ce7e74eb",
+    "question": "Service Node có RSS tăng dần rồi bị OOM sau vài ngày. Em điều tra bằng heap snapshot ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "service-node-co-rss-tang-dan-roi-bi-oom-sau-vai-ngay-em-dieu-tra-bang-heap-snapshot-ra-sao-b9ea24a5-0929-5644-9be5-2531ce7e74eb",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 86,
+    "sourceSlug": null
+  },
+  {
+    "id": "09997134-57bd-58a6-89c2-e3ea065c8da6",
+    "question": "Truyền dữ liệu giữa main thread và worker_threads tốn kém ra sao? transferList và SharedArrayBuffer khác gì nhau?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "truyen-du-lieu-giua-main-thread-va-worker-threads-ton-kem-ra-sao-transferlist-va-sharedarraybuffer-k-09997134-57bd-58a6-89c2-e3ea065c8da6",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 87,
+    "sourceSlug": null
+  },
+  {
+    "id": "7f43582e-bf61-52bc-84e2-2e083b85b246",
+    "question": "Router lồng nhau trong Express: vì sao router con đọc req.params.userId ra undefined? Sửa thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "router-long-nhau-trong-express-vi-sao-router-con-doc-req-params-userid-ra-undefined-sua-the-nao-7f43582e-bf61-52bc-84e2-2e083b85b246",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 88,
+    "sourceSlug": null
+  },
+  {
+    "id": "c90c18ae-f4f1-5284-9811-46497b949247",
+    "question": "Thiết kế luồng upload file dung lượng lớn (hàng GB) trong Node.js sao cho không tràn RAM?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "thiet-ke-luong-upload-file-dung-luong-lon-hang-gb-trong-node-js-sao-cho-khong-tran-ram-c90c18ae-f4f1-5284-9811-46497b949247",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 89,
+    "sourceSlug": null
+  }
+]

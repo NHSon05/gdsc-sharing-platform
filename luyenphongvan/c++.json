@@ -1,0 +1,2045 @@
+[
+  {
+    "id": "36b34f03-e2d7-58df-8b39-c7e735728751",
+    "question": "C++ khác C ở những điểm nào quan trọng nhất?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10500-c-khac-c-o-nhung-diem-nao-quan-trong-nhat",
+    "slug": "c-khac-c-o-nhung-diem-nao-quan-trong-nhat-36b34f03-e2d7-58df-8b39-c7e735728751",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "C++ mở rộng C với:\n- OOP: class, kế thừa, đa hình, encapsulation.\n- Tham chiếu (&): alias an toàn hơn con trỏ raw.\n- new/delete thay malloc/free — gọi constructor/destructor.\n- Templates: code generic type-safe.\n- Ngoại lệ (try/catch): thay if-else kiểm tra lỗi thủ công.\n- Namespace: tránh xung đột tên.\n- STL: vector, map, algorithm — không cần tự cài."
+      ],
+      "details": [
+        "C vẫn dùng khi cần tối giản (embedded, kernel); C++ dùng khi cần cấu trúc lớn và an toàn hơn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "10500-c-khac-c-o-nhung-diem-nao-quan-trong-nhat"
+  },
+  {
+    "id": "0b52a94f-11bb-5804-90a5-38aed1739d19",
+    "question": "Tham chiếu (&) trong C++ là gì? Khác con trỏ thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10501-tham-chieu-trong-c-la-gi-khac-con-tro-the-nao",
+    "slug": "tham-chieu-trong-c-la-gi-khac-con-tro-the-nao-0b52a94f-11bb-5804-90a5-38aed1739d19",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác con trỏ:"
+      ],
+      "details": [
+        "Hình dung: tham chiếu là \"tên khác\" của cùng một căn nhà; con trỏ là \"địa chỉ\" trên bản đồ."
+      ],
+      "points": [],
+      "sections": [
+        "Tham chiếu là alias của một biến đã tồn tại — cùng địa chỉ, cùng giá trị, khác tên gọi."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "int x = 10;\nint& ref = x;  // ref là bí danh của x\nref = 20;      // x cũng thành 20"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Tham chiếu",
+            "Con trỏ",
+            "Null",
+            "Không được null",
+            "Có thể null",
+            "Reassign",
+            "Không đổi được target",
+            "Có thể",
+            "Cú pháp",
+            "dùng .",
+            ".",
+            "dùng -> hoặc *",
+            "->",
+            "*",
+            "Phép toán",
+            "không có arithmetic",
+            "có pointer arithmetic"
+          ]
+        }
+      ]
+    },
+    "legacyId": 2,
+    "sourceSlug": "10501-tham-chieu-trong-c-la-gi-khac-con-tro-the-nao"
+  },
+  {
+    "id": "190164f4-1d4c-5779-a2cc-a96f69084294",
+    "question": "new và malloc khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10502-new-va-malloc-khac-nhau-the-nao",
+    "slug": "new-va-malloc-khac-nhau-the-nao-190164f4-1d4c-5779-a2cc-a96f69084294",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Không trộn lẫn: new phải delete, malloc phải free. Trong C++ hiện đại nên ưu tiên smart pointer thay vì new thủ công."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Loại",
+            "toán tử C++",
+            "hàm C",
+            "Constructor",
+            "Có, gọi tự động",
+            "Không gọi",
+            "Kiểu trả về",
+            "typed pointer",
+            "void*",
+            "Khi thất bại",
+            "std::bad_alloc",
+            "nullptr",
+            "throw std::bad_alloc",
+            "trả nullptr",
+            "Giải phóng",
+            "new",
+            "delete",
+            "delete[]",
+            "free()"
+          ]
+        }
+      ]
+    },
+    "legacyId": 3,
+    "sourceSlug": "10502-new-va-malloc-khac-nhau-the-nao"
+  },
+  {
+    "id": "f7c4ae1c-2961-5c32-85b8-fc7ab8b2c083",
+    "question": "Stack và Heap trong C++ khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10503-stack-va-heap-trong-c-khac-nhau-the-nao",
+    "slug": "stack-va-heap-trong-c-khac-nhau-the-nao-f7c4ae1c-2961-5c32-85b8-fc7ab8b2c083",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Stack: vùng nhớ tĩnh, cấp phát tự động khi hàm được gọi, giải phóng khi hàm trả về. Truy cập nhanh, kích thước hạn chế (thường vài MB)."
+      ],
+      "details": [
+        "Heap: vùng nhớ động, cấp phát qua new/malloc, phải giải phóng thủ công bằng delete/free. Kích thước lớn hơn nhưng truy cập chậm hơn và dễ bị memory leak.",
+        "Hình dung: stack như chồng khay cafeteria — LIFO tự động; heap như kho chứa — lấy gì tự quản lý chỗ để."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "10503-stack-va-heap-trong-c-khac-nhau-the-nao"
+  },
+  {
+    "id": "0831fcbb-4e4e-5b2a-b033-ee84219ec5fb",
+    "question": "Inline function là gì? Khi nào nên dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10504-inline-function-la-gi-khi-nao-nen-dung",
+    "slug": "inline-function-la-gi-khi-nao-nen-dung-0831fcbb-4e4e-5b2a-b033-ee84219ec5fb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "inline gợi ý compiler chèn thân hàm tại điểm gọi thay vì tạo stack frame mới — giảm overhead function call với hàm nhỏ."
+      ],
+      "details": [
+        "Khi nên dùng: hàm rất nhỏ (1–3 dòng), được gọi nhiều trong hot path.\nKhi không nên: hàm lớn — code bloat tăng, cache instruction miss nhiều hơn.",
+        "Lưu ý: inline chỉ là hint — compiler tự quyết định có expand hay không. Hàm virtual không thể inline (dispatch time là lúc chạy)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "10504-inline-function-la-gi-khi-nao-nen-dung"
+  },
+  {
+    "id": "50e4dc2e-9681-5daa-8c83-6c2c335afbd8",
+    "question": "Function overloading và operator overloading trong C++ là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10505-function-overloading-va-operator-overloading-trong-c-la-gi",
+    "slug": "function-overloading-va-operator-overloading-trong-c-la-gi-50e4dc2e-9681-5daa-8c83-6c2c335afbd8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Function overloading: nhiều hàm cùng tên, khác signature (số/kiểu tham số). Compiler chọn đúng bản tại compile-time."
+      ],
+      "details": [
+        "Operator overloading: tái định nghĩa toán tử (+, <<, ==, ...) cho kiểu tự định nghĩa."
+      ],
+      "points": [],
+      "sections": [
+        "Khác biệt với overriding: override là ghi đè hàm ở lớp con (runtime polymorphism), overloading là cùng tên khác signature (compile-time)."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "struct Vec2 {\n  float x, y;\n  Vec2 operator+(const Vec2& o) const {\n    return { x + o.x, y + o.y };\n  }\n};\n\nVec2 a{1,2}, b{3,4};\nVec2 c = a + b;  // gọi operator+"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "10505-function-overloading-va-operator-overloading-trong-c-la-gi"
+  },
+  {
+    "id": "4a64da53-1864-55fe-9693-b17952ed5521",
+    "question": "Dangling pointer là gì? Làm sao tránh?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10506-dangling-pointer-la-gi-lam-sao-tranh",
+    "slug": "dangling-pointer-la-gi-lam-sao-tranh-4a64da53-1864-55fe-9693-b17952ed5521",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Dangling pointer là con trỏ trỏ tới vùng nhớ đã bị giải phóng — đọc/ghi vào đó là undefined behavior (crash hoặc corrupt dữ liệu ngầm).",
+        "Cách tránh tốt hơn: dùng smart pointer (std::unique_ptr, std::shared_ptr) — tự giải phóng khi ra scope, không bao giờ để con trỏ trỏ vào vùng nhớ đã giải phóng."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "int* p = new int(10);\ndelete p;\np = nullptr;        // gán null ngay sau delete — an toàn\nif (p) { *p = 20; } // điều kiện false, không vào"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "10506-dangling-pointer-la-gi-lam-sao-tranh"
+  },
+  {
+    "id": "81efb5f6-7d38-5fa7-8697-29dcfdbe6783",
+    "question": "4 tính chất của OOP trong C++ là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10511-4-tinh-chat-cua-oop-trong-c-la-gi",
+    "slug": "4-tinh-chat-cua-oop-trong-c-la-gi-81efb5f6-7d38-5fa7-8697-29dcfdbe6783",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "1. Encapsulation (Đóng gói): gom data + method vào class; che giấu chi tiết nội bộ qua private/protected.\n2. Inheritance (Kế thừa): class con kế thừa thuộc tính/method từ class cha → tái sử dụng code, mở rộng dễ.\n3. Polymorphism (Đa hình): cùng interface, nhiều hành vi — compile-time (overloading) và runtime (virtual function).\n4. Abstraction (Trừu tượng hóa): ẩn chi tiết cài đặt, chỉ lộ interface cần thiết — thường qua abstract class hoặc interface."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "10511-4-tinh-chat-cua-oop-trong-c-la-gi"
+  },
+  {
+    "id": "5c5d2a55-6ad9-5a20-a4bc-aa7f391acd50",
+    "question": "STL trong C++ là gì? Gồm những thành phần nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10516-stl-trong-c-la-gi-gom-nhung-thanh-phan-nao",
+    "slug": "stl-trong-c-la-gi-gom-nhung-thanh-phan-nao-5c5d2a55-6ad9-5a20-a4bc-aa7f391acd50",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "STL (Standard Template Library) là thư viện chuẩn C++ cung cấp các cấu trúc dữ liệu và thuật toán đã được tối ưu hoá, dùng qua templates."
+      ],
+      "details": [
+        "1. Containers: lưu trữ dữ liệu.\n- Sequence: vector, list, deque, array\n- Associative: set, map, multiset, multimap\n- Unordered: unordered_map, unordered_set\n- Adapters: stack, queue, priority_queue",
+        "3 thành phần chính:",
+        "2. Iterators: đối tượng để duyệt container — cầu nối giữa container và algorithm.",
+        "3. Algorithms: hàm generic như std::sort, std::find, std::for_each, std::accumulate — hoạt động trên bất kỳ container nào qua iterator."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "10516-stl-trong-c-la-gi-gom-nhung-thanh-phan-nao"
+  },
+  {
+    "id": "abc35c07-a77c-554a-bdc2-1f7654d21f44",
+    "question": "explicit keyword trong C++ dùng để làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10532-explicit-keyword-trong-c-dung-de-lam-gi",
+    "slug": "explicit-keyword-trong-c-dung-de-lam-gi-abc35c07-a77c-554a-bdc2-1f7654d21f44",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "explicit ngăn compiler tự động chuyển đổi ngầm (implicit conversion) khi gọi constructor hoặc toán tử chuyển đổi.",
+        "Quy tắc thực tế: constructor có 1 tham số nên khai báo explicit trừ khi conversion ngầm đó có ý nghĩa rõ ràng (ví dụ std::string từ const char*)."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "class Width {\npublic:\n  Width(int w) {}  // không có explicit\n};\n\nvoid process(Width w) {}\nprocess(42);  // OK: int → Width ngầm — dễ gây nhầm\n\n// Dùng explicit:\nclass Width2 {\npublic:\n  explicit Width2(int w) {}\n};\n\n// process(42);          // lỗi compile — không ngầm convert\nprocess(Width2(42));     // OK — convert tường minh"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "10532-explicit-keyword-trong-c-dung-de-lam-gi"
+  },
+  {
+    "id": "9c866ad4-1f6f-55d8-a583-47984a707118",
+    "question": "Namespace trong C++ là gì? Tại sao không nên using namespace std; trong header?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10547-namespace-trong-c-la-gi-tai-sao-khong-nen-using-namespace-std-trong-header",
+    "slug": "namespace-trong-c-la-gi-tai-sao-khong-nen-using-namespace-std-trong-header-9c866ad4-1f6f-55d8-a583-47984a707118",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "using namespace std; đưa toàn bộ tên trong std vào scope hiện tại — tiện cho ví dụ nhỏ nhưng nguy hiểm trong code thực."
+      ],
+      "details": [
+        "Vấn đề khi dùng trong header:\n- Header được #include vào nhiều file → áp using namespace std lên toàn bộ codebase.\n- Có thể gây xung đột tên ngầm (ví dụ: std::move vs function local move) và lỗi khó debug.",
+        "Thực hành tốt: trong header, luôn viết đầy đủ std::vector, std::string. Trong .cpp có thể dùng using std::cout; cụ thể thay vì using namespace std;."
+      ],
+      "points": [],
+      "sections": [
+        "Namespace là vùng tên để nhóm các identifier — tránh xung đột tên khi dùng nhiều library."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "namespace math {\n  double sqrt(double x) { /* ... */ }\n}\nnamespace game {\n  double sqrt(double x) { /* ... */ }\n}\n\nmath::sqrt(4.0);  // gọi rõ ràng\ngame::sqrt(4.0);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "10547-namespace-trong-c-la-gi-tai-sao-khong-nen-using-namespace-std-trong-header"
+  },
+  {
+    "id": "182c2141-15e2-5170-9ae4-6938f4998a72",
+    "question": "struct và class trong C++ khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93600-struct-va-class-trong-c-khac-nhau-the-nao",
+    "slug": "struct-va-class-trong-c-khac-nhau-the-nao-182c2141-15e2-5170-9ae4-6938f4998a72",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác biệt kỹ thuật duy nhất: mức truy cập mặc định.\n- struct: thành viên và kế thừa mặc định public.\n- class: mặc định private."
+      ],
+      "details": [
+        "Ngoài ra hai từ khóa hoàn toàn tương đương — struct vẫn có method, constructor, kế thừa, template như class."
+      ],
+      "points": [],
+      "sections": [
+        "Quy ước: dùng struct cho kiểu chứa dữ liệu thuần (không invariant); dùng class khi có bất biến cần đóng gói bằng private + method."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "struct A { int x; };        // x public\nclass  B { int x; };        // x private"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "93600-struct-va-class-trong-c-khac-nhau-the-nao"
+  },
+  {
+    "id": "ce375aa8-2638-53f3-875d-986ca8ec752e",
+    "question": "const và #define — nên dùng cái nào, vì sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93601-const-va-define-nen-dung-cai-nao-vi-sao",
+    "slug": "const-va-define-nen-dung-cai-nao-vi-sao-ce375aa8-2638-53f3-875d-986ca8ec752e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ưu tiên const (Effective C++, Item 2: \"Prefer consts to #defines\")."
+      ],
+      "details": [
+        "#define chỉ là thay thế văn bản ở giai đoạn tiền xử lý:\n- Không có kiểu, không có scope — không tuân theo namespace hay class.\n- Tên biến mất trước khi compiler thấy → debugger không hiển thị tên, thông báo lỗi khó truy.",
+        "const có kiểu, có scope, được compiler kiểm tra:",
+        "Chỉ giữ #define cho include guard và biên dịch có điều kiện."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "#define PI 3.14159      // không kiểu, không scope\nconst double kPi = 3.14159;   // có kiểu, debug được"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "93601-const-va-define-nen-dung-cai-nao-vi-sao"
+  },
+  {
+    "id": "8f6341b3-8e8c-5633-bdd2-06843d927e5a",
+    "question": "delete và delete[] khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93606-delete-va-delete-khac-nhau-the-nao",
+    "slug": "delete-va-delete-khac-nhau-the-nao-8f6341b3-8e8c-5633-bdd2-06843d927e5a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Phải khớp cặp: new↔delete, new[]↔delete[]. Trộn lẫn (dùng delete trên mảng, hoặc delete[] trên object đơn) là undefined behavior — có thể chỉ hủy 1 phần tử hoặc làm hỏng heap."
+      ],
+      "details": [
+        "Modern C++: dùng std::vector hoặc std::unique_ptr<T[]> để khỏi tự tay delete[]."
+      ],
+      "points": [
+        "delete: hủy một object đơn (cấp bằng new). Gọi 1 destructor rồi giải phóng vùng nhớ.",
+        "delete[]: hủy một mảng (cấp bằng new[]). Gọi destructor cho từng phần tử rồi giải phóng."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "int*  a = new int(5);      delete a;      // đơn\nint*  b = new int[10];     delete[] b;    // mảng"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "93606-delete-va-delete-khac-nhau-the-nao"
+  },
+  {
+    "id": "09946bb0-a4cf-5b02-9a75-2c70fd91985e",
+    "question": "RAII trong C++ là gì? Tại sao quan trọng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10507-raii-trong-c-la-gi-tai-sao-quan-trong",
+    "slug": "raii-trong-c-la-gi-tai-sao-quan-trong-09946bb0-a4cf-5b02-9a75-2c70fd91985e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "RAII (Resource Acquisition Is Initialization): gắn vòng đời tài nguyên (bộ nhớ, file, lock...) vào vòng đời một object trên stack."
+      ],
+      "details": [
+        "Đây là nền tảng của std::unique_ptr, std::lock_guard, std::fstream."
+      ],
+      "points": [
+        "Cấp tài nguyên trong constructor, giải phóng trong destructor.",
+        "Khi object ra khỏi scope, destructor tự chạy — tài nguyên được trả lại kể cả khi có exception."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "void bad() {\n  FILE* f = fopen(\"x.txt\", \"r\");\n  do_work();    // throw exception → fclose không bao giờ chạy → leak\n  fclose(f);\n}\n\nvoid good() {\n  std::ifstream f(\"x.txt\");  // constructor mở file\n  do_work();                 // throw cũng được\n}                            // destructor đóng file tự động"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "10507-raii-trong-c-la-gi-tai-sao-quan-trong"
+  },
+  {
+    "id": "424616aa-1609-5da9-958e-4acdf7e95d51",
+    "question": "Smart pointer trong C++11: unique_ptr, shared_ptr, weak_ptr khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10508-smart-pointer-trong-c-11-unique-ptr-shared-ptr-weak-ptr-khac-nhau-the-nao",
+    "slug": "smart-pointer-trong-c-11-unique-ptr-shared-ptr-weak-ptr-khac-nhau-the-nao-424616aa-1609-5da9-958e-4acdf7e95d51",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "unique_ptr: sở hữu độc quyền — chỉ có 1 owner, không copy được, chỉ move. Khi ra scope, tự delete."
+      ],
+      "details": [
+        "shared_ptr: sở hữu chia sẻ — nhiều pointer cùng quản lý 1 object qua reference count. Khi count về 0 thì object bị xóa.",
+        "weak_ptr: quan sát, không tăng ref count — dùng để phá vòng tròn tham chiếu (circular reference)."
+      ],
+      "points": [],
+      "sections": [
+        "Hình dung: unique_ptr = chìa khoá nhà duy nhất; shared_ptr = nhiều bản sao chìa; weak_ptr = biết nhà ở đó nhưng không giữ chìa."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "auto u = std::make_unique<int>(10);\nauto u2 = std::move(u);  // ownership chuyển sang u2; u = null\n\nauto s1 = std::make_shared<int>(20);\nauto s2 = s1;            // ref count = 2\n\nstd::weak_ptr<int> w = s1;     // ref count vẫn = 2\nif (auto sp = w.lock()) {       // kiểm tra còn tồn tại\n  std::cout << *sp;\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "10508-smart-pointer-trong-c-11-unique-ptr-shared-ptr-weak-ptr-khac-nhau-the-nao"
+  },
+  {
+    "id": "a977a97f-ffd3-5c88-aa75-e89d84c21ac1",
+    "question": "Shallow copy và deep copy khác nhau thế nào? Khi nào cần deep copy?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10509-shallow-copy-va-deep-copy-khac-nhau-the-nao-khi-nao-can-deep-copy",
+    "slug": "shallow-copy-va-deep-copy-khac-nhau-the-nao-khi-nao-can-deep-copy-a977a97f-ffd3-5c88-aa75-e89d84c21ac1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Shallow copy (mặc định của compiler): copy từng byte — với member là pointer, cả hai object cùng trỏ về cùng vùng nhớ. Giải phóng một cái → cái kia thành dangling pointer."
+      ],
+      "details": [
+        "Deep copy: copy cả nội dung mà pointer trỏ tới — hai object hoàn toàn độc lập."
+      ],
+      "points": [],
+      "sections": [
+        "Quy tắc kinh nghiệm: nếu class tự quản lý tài nguyên (raw pointer, file handle...) → phải định nghĩa cả destructor + copy constructor + copy assignment (Rule of Three)."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "struct Good {\n  int* data;\n  Good(int v) { data = new int(v); }\n  ~Good() { delete data; }\n  Good(const Good& o) { data = new int(*o.data); }  // deep copy\n  Good& operator=(const Good& o) {\n    if (this != &o) { *data = *o.data; }\n    return *this;\n  }\n};"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "10509-shallow-copy-va-deep-copy-khac-nhau-the-nao-khi-nao-can-deep-copy"
+  },
+  {
+    "id": "56d6acd9-2013-5626-881f-f956dd69fe25",
+    "question": "const với con trỏ: const int*, int* const, const int* const khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10510-const-voi-con-tro-const-int-int-const-const-int-const-khac-nhau-the-nao",
+    "slug": "const-voi-con-tro-const-int-int-const-const-int-const-khac-nhau-the-nao-56d6acd9-2013-5626-881f-f956dd69fe25",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Đọc từ phải sang trái: \"const\" gần nhất áp dụng cho phần tử đứng trước nó.",
+        "Ví dụ thực tế:"
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "const int* p;       // pointer to const int  — địa chỉ có thể đổi, *p không đổi được\nint* const p;       // const pointer to int  — địa chỉ không đổi, *p đổi được\nconst int* const p; // const pointer to const int — cả hai đều không đổi"
+        },
+        {
+          "language": "CPP",
+          "code": "int x = 1, y = 2;\n\nconst int* p1 = &x;\n// *p1 = 10;  // lỗi — giá trị không sửa được\np1 = &y;    // OK — pointer có thể trỏ chỗ khác\n\nint* const p2 = &x;\n*p2 = 10;   // OK — giá trị sửa được\n// p2 = &y; // lỗi — pointer không trỏ lại được"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "10510-const-voi-con-tro-const-int-int-const-const-int-const-khac-nhau-the-nao"
+  },
+  {
+    "id": "e635c8cf-390e-5a2e-b657-64f511635249",
+    "question": "Virtual function và pure virtual function khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10512-virtual-function-va-pure-virtual-function-khac-nhau-the-nao",
+    "slug": "virtual-function-va-pure-virtual-function-khac-nhau-the-nao-e635c8cf-390e-5a2e-b657-64f511635249",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Virtual function: có cài đặt mặc định ở base class, class con có thể override.\nPure virtual function (= 0): không có cài đặt ở base class, class con bắt buộc override. Class chứa pure virtual → abstract class, không thể tạo instance trực tiếp."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "class Shape {\npublic:\n  virtual void draw() { std::cout << \"Generic shape\"; }  // virtual — có default\n  virtual double area() = 0;    // pure virtual — bắt buộc override\n  virtual ~Shape() {}           // virtual destructor — bắt buộc khi có virtual method\n};\n\nclass Circle : public Shape {\n  double r;\npublic:\n  Circle(double r) : r(r) {}\n  double area() override { return 3.14 * r * r; }\n  // draw() không override → dùng bản của Shape\n};\n\nShape* c = new Circle(5);\nc->area();  // Circle::area qua vtable"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "10512-virtual-function-va-pure-virtual-function-khac-nhau-the-nao"
+  },
+  {
+    "id": "5a04bba3-b553-5865-94c7-3a837fbbe8e1",
+    "question": "Vtable (virtual table) hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10513-vtable-virtual-table-hoat-dong-the-nao",
+    "slug": "vtable-virtual-table-hoat-dong-the-nao-5a04bba3-b553-5865-94c7-3a837fbbe8e1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khi class có ít nhất 1 virtual function, compiler tạo một vtable — mảng các con trỏ hàm cho class đó.",
+        "Circle::area"
+      ],
+      "details": [
+        "Mỗi object có thêm một hidden pointer (vptr) trỏ tới vtable của class thực sự.",
+        "Chi phí: thêm 1 pointer (~8 bytes) mỗi object + 1 indirect function call. Trong phần lớn ứng dụng, chi phí này không đáng kể.",
+        "Lý do phải khai báo virtual destructor: nếu không, khi delete shape_ptr compiler chỉ gọi Shape::~Shape bỏ qua Circle::~Circle → undefined behavior (biểu hiện thường là memory leak hoặc resource không được giải phóng)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "Shape vtable: [ draw → Shape::draw, area → 0 (pure) ]\nCircle vtable: [ draw → Shape::draw, area → Circle::area ]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "10513-vtable-virtual-table-hoat-dong-the-nao"
+  },
+  {
+    "id": "6d1a717c-1516-5f51-a80e-a7ad4dfbf459",
+    "question": "Diamond problem trong C++ là gì? Giải quyết bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10514-diamond-problem-trong-c-la-gi-giai-quyet-bang-cach-nao",
+    "slug": "diamond-problem-trong-c-la-gi-giai-quyet-bang-cach-nao-6d1a717c-1516-5f51-a80e-a7ad4dfbf459",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Diamond problem xảy ra khi class D kế thừa từ B và C, cả hai đều kế thừa từ A."
+      ],
+      "details": [
+        "Kết quả: D có 2 bản sao của A, gây nhập nhằng."
+      ],
+      "points": [],
+      "sections": [
+        "Giải pháp: virtual inheritance — A chỉ tồn tại 1 lần trong D.",
+        "Virtual inheritance tốn thêm overhead (thêm vptr); thường nên tránh diamond bằng cách thiết kế lại (dùng interface/composition)."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "A\n   / \\\n  B   C\n   \\ /\n    D"
+        },
+        {
+          "language": "CPP",
+          "code": "class A { public: int x; };\nclass B : public A {};\nclass C : public A {};\nclass D : public B, public C {};\n\nD d;\n// d.x;  // lỗi: ambiguous — B::x hay C::x?"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "10514-diamond-problem-trong-c-la-gi-giai-quyet-bang-cach-nao"
+  },
+  {
+    "id": "a91dc7fa-69bb-508f-9a88-3df3f42c0f8c",
+    "question": "std::vector hoạt động thế nào? size() và capacity() khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10517-std-vector-hoat-dong-the-nao-size-va-capacity-khac-nhau-the-nao",
+    "slug": "std-vector-hoat-dong-the-nao-size-va-capacity-khac-nhau-the-nao-a91dc7fa-69bb-508f-9a88-3df3f42c0f8c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "std::vector là dynamic array — tự quản lý vùng nhớ liên tục trên heap, tự resize khi cần."
+      ],
+      "details": [
+        "Khi size == capacity và thêm phần tử mới, vector cấp phát vùng nhớ mới (thường gấp đôi capacity cũ), copy/move toàn bộ, rồi giải phóng vùng cũ (thao tác reallocate là O(n), nhưng mỗi push_back có chi phí O(1) amortized tính chung)."
+      ],
+      "points": [
+        "size(): số phần tử hiện có.",
+        "capacity(): số phần tử có thể chứa trước khi cần cấp phát lại bộ nhớ."
+      ],
+      "sections": [
+        "Best practice: dùng reserve() trước khi push nhiều phần tử nếu biết trước kích thước — tránh tốn chi phí reallocate."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "std::vector<int> v;\nv.reserve(8);  // capacity = 8, size = 0 — tránh reallocate\nfor (int i = 0; i < 8; ++i) v.push_back(i);\nv.push_back(99);  // size=9, capacity=16 — đã reallocate"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "10517-std-vector-hoat-dong-the-nao-size-va-capacity-khac-nhau-the-nao"
+  },
+  {
+    "id": "7b0caccd-4d07-5f19-a6cf-7a1919d052be",
+    "question": "std::map và std::unordered_map khác nhau thế nào? Khi nào chọn cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10518-std-map-va-std-unordered-map-khac-nhau-the-nao-khi-nao-chon-cai-nao",
+    "slug": "std-map-va-std-unordered-map-khac-nhau-the-nao-khi-nao-chon-cai-nao-7b0caccd-4d07-5f19-a6cf-7a1919d052be",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Chọn map khi: cần duyệt theo thứ tự key, range query (lower_bound), key là kiểu không hash được.\nChọn unordered_map khi: ưu tiên tốc độ lookup, không cần thứ tự, key là string/int thông thường."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Cấu trúc nội bộ",
+            "Red-Black Tree",
+            "Hash Table",
+            "Thứ tự key",
+            "Có thứ tự",
+            "Không có thứ tự",
+            "find / insert / erase",
+            "O(log n)",
+            "operator<",
+            "O(1) trung bình, O(n) worst",
+            "std::hash<K>",
+            "operator==",
+            "Iterator hợp lệ",
+            "giữ nguyên sau insert",
+            "có thể invalid sau rehash",
+            "std::map",
+            "std::unordered_map"
+          ]
+        }
+      ]
+    },
+    "legacyId": 23,
+    "sourceSlug": "10518-std-map-va-std-unordered-map-khac-nhau-the-nao-khi-nao-chon-cai-nao"
+  },
+  {
+    "id": "ad53bb4d-fed9-5479-b5ce-b4eae412ff67",
+    "question": "Iterator trong STL là gì? Có bao nhiêu loại?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10519-iterator-trong-stl-la-gi-co-bao-nhieu-loai",
+    "slug": "iterator-trong-stl-la-gi-co-bao-nhieu-loai-ad53bb4d-fed9-5479-b5ce-b4eae412ff67",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Iterator là object đóng vai trò con trỏ tổng quát để duyệt container — tách algorithm ra khỏi cấu trúc nội bộ của container."
+      ],
+      "details": [
+        "Lưu ý: C++17 thêm Contiguous Iterator (đảm bảo vùng nhớ liên tục — vector, array, string) như một refinement của Random Access.",
+        "5 loại cổ điển (từ ít đến nhiều khả năng):",
+        "Range-based for (C++11) là syntactic sugar trên iterator — for (int x : v) tương đương dùng v.begin()/v.end() ngầm."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Loại",
+            "Đọc",
+            "Input",
+            "Có",
+            "Không",
+            "Có",
+            "Không",
+            "Không",
+            "Output",
+            "Không",
+            "istream_iterator",
+            "Có",
+            "ostream_iterator",
+            "forward_list",
+            "Có",
+            "Không",
+            "Không",
+            "[]",
+            "list",
+            "set",
+            "map",
+            "Forward",
+            "Có",
+            "Có",
+            "Có",
+            "vector",
+            "deque",
+            "array"
+          ]
+        }
+      ]
+    },
+    "legacyId": 24,
+    "sourceSlug": "10519-iterator-trong-stl-la-gi-co-bao-nhieu-loai"
+  },
+  {
+    "id": "297c22a9-46ef-5131-98e5-93c4f1d11694",
+    "question": "Lambda expression trong C++11 là gì? Cú pháp và capture clause hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10521-lambda-expression-trong-c-11-la-gi-cu-phap-va-capture-clause-hoat-dong-the-nao",
+    "slug": "lambda-expression-trong-c-11-la-gi-cu-phap-va-capture-clause-hoat-dong-the-nao-297c22a9-46ef-5131-98e5-93c4f1d11694",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: capture by reference khi lambda tồn tại lâu hơn biến captured → dangling reference."
+      ],
+      "details": [
+        "Dùng capture by value hoặc std::shared_ptr để an toàn."
+      ],
+      "points": [],
+      "sections": [
+        "Lambda là hàm vô danh inline, thường dùng cùng STL algorithm."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "// Cú pháp: [capture](params) -> return_type { body }\nauto add = [](int a, int b) { return a + b; };\n\n// Capture clause — truy cập biến ngoài scope:\nint base = 10;\nauto addBase  = [base](int x)  { return base + x; };   // by value\nauto addBase2 = [&base](int x) { return base + x; };   // by reference\n\n// [=] bắt tất cả by value; [&] bắt tất cả by reference\nstd::sort(v.begin(), v.end(), [](int a, int b) { return a > b; });"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "10521-lambda-expression-trong-c-11-la-gi-cu-phap-va-capture-clause-hoat-dong-the-nao"
+  },
+  {
+    "id": "e4300386-fab2-55af-b4a3-9dd2f8deeb1d",
+    "question": "Move semantics và rvalue reference (&&) trong C++11 là gì? Tại sao quan trọng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10522-move-semantics-va-rvalue-reference-trong-c-11-la-gi-tai-sao-quan-trong",
+    "slug": "move-semantics-va-rvalue-reference-trong-c-11-la-gi-tai-sao-quan-trong-e4300386-fab2-55af-b4a3-9dd2f8deeb1d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Trước C++11, truyền object lớn (vector, string) vào hàm luôn copy → tốn kém. Move semantics cho phép \"chuyển nhượng\" tài nguyên thay vì copy."
+      ],
+      "details": [
+        "Return value từ hàm (RVO/NRVO) cũng được tối ưu tương tự."
+      ],
+      "points": [
+        "lvalue: object có địa chỉ xác định (có thể lấy &).",
+        "rvalue: giá trị tạm thời, không có địa chỉ bền vững (kết quả biểu thức, literal)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "std::vector<int> a = {1, 2, 3};\nstd::vector<int> b = std::move(a);  // a rỗng sau move, b có data\n// std::move: cast sang rvalue reference — không move gì cả, chỉ cast"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "10522-move-semantics-va-rvalue-reference-trong-c-11-la-gi-tai-sao-quan-trong"
+  },
+  {
+    "id": "6d4c0660-5e2c-5909-8243-711deefd68ec",
+    "question": "auto keyword và range-based for loop trong C++11 dùng như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10523-auto-keyword-va-range-based-for-loop-trong-c-11-dung-nhu-the-nao",
+    "slug": "auto-keyword-va-range-based-for-loop-trong-c-11-dung-nhu-the-nao-6d4c0660-5e2c-5909-8243-711deefd68ec",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "auto: yêu cầu compiler tự suy kiểu (type deduction) từ biểu thức khởi tạo.",
+        "Lưu ý: auto& x giữ reference; auto x luôn copy kể cả với reference source.",
+        "Range-based for (C++11):"
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "auto x = 42;          // int\nauto y = 3.14;        // double\n\n// Đặc biệt hữu ích với kiểu dài:\nstd::map<std::string, std::vector<int>> m;\nauto it = m.begin();  // thay vì: std::map<std::string, std::vector<int>>::iterator"
+        },
+        {
+          "language": "CPP",
+          "code": "std::vector<int> v = {1, 2, 3};\n\nfor (int x : v)        // copy\nfor (int& x : v)       // reference — có thể sửa\nfor (const int& x : v) // const ref — đọc không copy\nfor (auto& x : v)      // auto + ref — tốt nhất cho mọi kiểu"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "10523-auto-keyword-va-range-based-for-loop-trong-c-11-dung-nhu-the-nao"
+  },
+  {
+    "id": "f76e3344-4130-5091-8557-7e673fdedc41",
+    "question": "nullptr trong C++11 khác NULL và 0 thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10524-nullptr-trong-c-11-khac-null-va-0-the-nao",
+    "slug": "nullptr-trong-c-11-khac-null-va-0-the-nao-f76e3344-4130-5091-8557-7e673fdedc41",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "nullptr là literal kiểu std::nullptr_t, chuyển đổi ngầm về bất kỳ pointer type nào nhưng không về int."
+      ],
+      "details": [
+        "Quy tắc hiện đại: luôn dùng nullptr thay NULL hoặc 0 trong C++ — rõ ràng về ý định và type-safe."
+      ],
+      "points": [],
+      "sections": [
+        "Trước C++11, NULL thường là macro #define NULL 0 — kiểu int, gây nhập nhằng khi overloading."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "void foo(int x)   { std::cout << \"int\"; }\nvoid foo(char* p) { std::cout << \"pointer\"; }\n\nfoo(NULL);    // trước C++11: \"int\" — sai ý định!\nfoo(nullptr); // C++11: \"pointer\" — đúng"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "10524-nullptr-trong-c-11-khac-null-va-0-the-nao"
+  },
+  {
+    "id": "4e493a76-8e6d-502c-b567-13f14a65db92",
+    "question": "Undefined behavior (UB) trong C++ là gì? Cho ví dụ thường gặp.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10529-undefined-behavior-ub-trong-c-la-gi-cho-vi-du-thuong-gap",
+    "slug": "undefined-behavior-ub-trong-c-la-gi-cho-vi-du-thuong-gap-4e493a76-8e6d-502c-b567-13f14a65db92",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Undefined behavior là hành vi mà chuẩn C++ không quy định kết quả — compiler được phép làm bất cứ điều gì: crash, kết quả sai, hoặc \"chạy đúng\" vô tình."
+      ],
+      "details": [
+        "Tại sao nguy hiểm: compiler tối ưu hóa dựa trên giả định \"không có UB\" — code trông đúng vẫn bị compile thành hành vi sai hoàn toàn, thường chỉ lộ ra ở production build với -O2.",
+        "Ví dụ phổ biến:",
+        "Lưu ý: unsigned integer overflow không phải UB — wrap modulo 2^N theo chuẩn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Tình huống",
+            "Lý do UB",
+            "dereference null pointer",
+            "out-of-bounds array access",
+            "đọc biến chưa khởi tạo",
+            "double-free",
+            "Trả về reference tới biến local",
+            "biến đã ra scope khi dùng",
+            "Signed integer overflow",
+            "INT_MAX + 1 không wrap",
+            "int* p = nullptr; *p = 1;",
+            "int a[5]; a[10] = 0;",
+            "int x; int y = x + 1;",
+            "delete p; delete p;",
+            "INT_MAX + 1"
+          ]
+        }
+      ]
+    },
+    "legacyId": 29,
+    "sourceSlug": "10529-undefined-behavior-ub-trong-c-la-gi-cho-vi-du-thuong-gap"
+  },
+  {
+    "id": "07415a24-639d-5290-9870-0ae9f65037e3",
+    "question": "Memory leak trong C++ xảy ra khi nào? Cách phát hiện và ngăn chặn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10530-memory-leak-trong-c-xay-ra-khi-nao-cach-phat-hien-va-ngan-chan",
+    "slug": "memory-leak-trong-c-xay-ra-khi-nao-cach-phat-hien-va-ngan-chan-07415a24-639d-5290-9870-0ae9f65037e3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Nguyên nhân thường gặp:\n- Quên delete (đặc biệt khi có exception hoặc early return)\n- Mất pointer trước khi delete (pointer bị ghi đè)\n- Circular reference giữa các shared_ptr"
+      ],
+      "details": [
+        "Cách phát hiện:\n- valgrind --leak-check=full ./program (Linux)\n- AddressSanitizer: g++ -fsanitize=address\n- Visual Leak Detector (Windows)",
+        "Cách ngăn (tốt nhất): dùng smart pointer — unique_ptr/shared_ptr tự giải phóng khi ra scope, không cần delete thủ công."
+      ],
+      "points": [],
+      "sections": [
+        "Memory leak xảy ra khi bộ nhớ được cấp phát bằng new/malloc nhưng không bao giờ được giải phóng — chương trình dần dần ăn hết RAM."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "void leak() {\n  int* p = new int[1000];\n  if (error) return;   // trả về sớm → delete[] không bao giờ chạy\n  delete[] p;\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "10530-memory-leak-trong-c-xay-ra-khi-nao-cach-phat-hien-va-ngan-chan"
+  },
+  {
+    "id": "f0fc3dcc-7f6a-5cde-9b68-2f48edf279de",
+    "question": "4 loại type casting trong C++ (static_cast, dynamic_cast, reinterpret_cast, const_cast) — mỗi loại dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10531-4-loai-type-casting-trong-c-static-cast-dynamic-cast-reinterpret-cast-const-cast",
+    "slug": "4-loai-type-casting-trong-c-static-cast-dynamic-cast-reinterpret-cast-const-cast-moi-loai-dung-khi-n-f0fc3dcc-7f6a-5cde-9b68-2f48edf279de",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Ưu tiên: static_cast trước tiên; tránh reinterpret_cast và const_cast trừ khi thực sự cần."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "// static_cast\ndouble x = static_cast<double>(42);\n\n// dynamic_cast — cần virtual function trong hierarchy\nBase* b = new Derived();\nDerived* d = dynamic_cast<Derived*>(b);  // d != nullptr nếu đúng kiểu\n\n// const_cast\nvoid print(char* s) { std::cout << s; }\nconst char* cs = \"hello\";\nprint(const_cast<char*>(cs));  // bỏ const để gọi legacy API"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Cast",
+            "Thời điểm",
+            "compile-time",
+            "chuyển đổi an toàn: int→double, upcast, void→T",
+            "runtime (RTTI)",
+            "downcast qua hierarchy — trả nullptr/throw nếu sai kiểu",
+            "compile-time",
+            "tái diễn giải raw bit — pointer↔integer, hoàn toàn unsafe",
+            "compile-time",
+            "thêm/bỏ const/volatile — chỉ hợp lệ khi object gốc không const",
+            "static_cast",
+            "dynamic_cast",
+            "nullptr",
+            "reinterpret_cast",
+            "const_cast",
+            "const",
+            "volatile"
+          ]
+        }
+      ]
+    },
+    "legacyId": 31,
+    "sourceSlug": "10531-4-loai-type-casting-trong-c-static-cast-dynamic-cast-reinterpret-cast-const-cast"
+  },
+  {
+    "id": "0020fc3d-94ff-5533-a983-e97854e90b92",
+    "question": "Const member function trong C++ là gì? Tại sao cần?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10533-const-member-function-trong-c-la-gi-tai-sao-can",
+    "slug": "const-member-function-trong-c-la-gi-tai-sao-can-0020fc3d-94ff-5533-a983-e97854e90b92",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Tại sao quan trọng (const-correctness):\n- Cho phép truyền object bằng const& và vẫn gọi được các getter.\n- Compiler phát hiện tại compile-time khi code vi phạm — không tốn chi phí runtime.\n- Phân biệt rõ \"hàm đọc\" và \"hàm sửa\" ngay trên signature."
+      ],
+      "details": [
+        "Lưu ý: member khai báo mutable có thể bị sửa ngay cả trong const method (dùng cho cache/lazy init)."
+      ],
+      "points": [],
+      "sections": [
+        "Const member function được khai báo với const sau danh sách tham số — cam kết không thay đổi trạng thái object (không sửa any non-mutable member)."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "class Counter {\n  int count_ = 0;\npublic:\n  void increment()      { count_++; }   // non-const — sửa state\n  int  value()    const { return count_; }  // const — chỉ đọc\n};\n\nconst Counter c;\n// c.increment();  // lỗi — không gọi non-const method trên const object\nc.value();         // OK"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "10533-const-member-function-trong-c-la-gi-tai-sao-can"
+  },
+  {
+    "id": "683e6df2-53bb-5e1b-8e59-c90712b9cab6",
+    "question": "friend function và friend class trong C++ là gì? Khi nào dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10534-friend-function-va-friend-class-trong-c-la-gi-khi-nao-dung",
+    "slug": "friend-function-va-friend-class-trong-c-la-gi-khi-nao-dung-683e6df2-53bb-5e1b-8e59-c90712b9cab6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khi dùng hợp lý:\n- Operator overloading cần truy cập private của cả 2 bên (ví dụ operator<<).\n- Unit test class cần inspect nội bộ.\n- 2 class cộng tác chặt chẽ mà getter/setter sẽ quá lộn xộn."
+      ],
+      "details": [
+        "Lưu ý: friend không kế thừa — class con không tự động là friend. Dùng tiết kiệm; quá nhiều friend thường là dấu hiệu thiết kế cần refactor."
+      ],
+      "points": [],
+      "sections": [
+        "friend cho phép một hàm hoặc class truy cập trực tiếp các thành viên private/protected của class khác — phá encapsulation có kiểm soát."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "class Box {\n  double width_;\npublic:\n  Box(double w) : width_(w) {}\n  friend double getWidth(const Box& b);  // hàm bạn\n};\n\ndouble getWidth(const Box& b) {\n  return b.width_;  // truy cập private trực tiếp\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "10534-friend-function-va-friend-class-trong-c-la-gi-khi-nao-dung"
+  },
+  {
+    "id": "aa688a01-9712-5556-971e-02264839313d",
+    "question": "static member trong C++ là gì? Khác member thông thường thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10535-static-member-trong-c-la-gi-khac-member-thong-thuong-the-nao",
+    "slug": "static-member-trong-c-la-gi-khac-member-thong-thuong-the-nao-aa688a01-9712-5556-971e-02264839313d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Đặc điểm:\n- Static member variable phải định nghĩa ngoài class (trừ inline static C++17).\n- Static method không có this — không truy cập non-static member.\n- Dùng cho singleton, factory method, global counter, shared config."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "static member (variable hoặc function) thuộc về class, không thuộc về instance cụ thể nào — tất cả object chia sẻ cùng 1 bản."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "class Counter {\npublic:\n  static int total;  // 1 biến cho toàn bộ class\n  Counter() { total++; }\n  ~Counter() { total--; }\n\n  static int getTotal() { return total; }  // không có `this`\n};\n\nint Counter::total = 0;  // phải định nghĩa ngoài class\n\nCounter a, b, c;\nstd::cout << Counter::total;        // 3\nstd::cout << Counter::getTotal();   // gọi qua class name"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "10535-static-member-trong-c-la-gi-khac-member-thong-thuong-the-nao"
+  },
+  {
+    "id": "626c8ec1-920d-550f-9806-c7448cac3d0d",
+    "question": "Một số STL algorithms quan trọng: std::sort, std::find, std::accumulate, std::transform — dùng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10536-mot-so-stl-algorithms-quan-trong-std-sort-std-find-std-accumulate-std-transform",
+    "slug": "mot-so-stl-algorithms-quan-trong-std-sort-std-find-std-accumulate-std-transform-dung-the-nao-626c8ec1-920d-550f-9806-c7448cac3d0d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "STL algorithms hoạt động trên bất kỳ container nào qua iterator — tách logic khỏi cấu trúc dữ liệu.",
+        "Lưu ý: dùng std::sort trên std::list sẽ không compile — list không có random access iterator; phải dùng list.sort()."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "std::vector<int> v = {3, 1, 4, 1, 5, 9};\n\n// sort — O(n log n), sửa tại chỗ\nstd::sort(v.begin(), v.end());\nstd::sort(v.begin(), v.end(), std::greater<int>());  // giảm dần\n\n// find — O(n), trả iterator (v.end() nếu không thấy)\nauto it = std::find(v.begin(), v.end(), 5);\nif (it != v.end()) { /* tìm thấy */ }\n\n// accumulate — fold từ trái sang phải\nint sum = std::accumulate(v.begin(), v.end(), 0);  // 23\n\n// transform — apply function, ghi vào output range\nstd::vector<int> doubled;\nstd::transform(v.begin(), v.end(), std::back_inserter(doubled),\n               [](int x) { return x * 2; });"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "10536-mot-so-stl-algorithms-quan-trong-std-sort-std-find-std-accumulate-std-transform"
+  },
+  {
+    "id": "8a05c897-4caa-5a30-9d59-99dc11fcde7a",
+    "question": "std::set và std::multiset khác nhau thế nào? Khi nào dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10537-std-set-va-std-multiset-khac-nhau-the-nao-khi-nao-dung",
+    "slug": "std-set-va-std-multiset-khac-nhau-the-nao-khi-nao-dung-8a05c897-4caa-5a30-9d59-99dc11fcde7a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng set khi: cần tập hợp phần tử duy nhất, kiểm tra membership O(log n).\nDùng multiset khi: cần đếm tần số, nhiều phần tử trùng cùng thứ tự."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "std::set<int> s = {3, 1, 4, 1, 5};  // {1, 3, 4, 5} — 1 bị loại bỏ\ns.insert(3);  // không thêm — 3 đã có\n\nstd::multiset<int> ms = {3, 1, 4, 1, 5};  // {1, 1, 3, 4, 5}\nms.insert(3);  // {1, 1, 3, 3, 4, 5}\n\n// Xoá một bản sao:\nauto it = ms.find(1);\nif (it != ms.end()) ms.erase(it);  // chỉ xoá 1 bản\n// ms.erase(1);  // xoá TẤT CẢ bản sao của 1"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Duplicate keys",
+            "Không cho phép",
+            "Cho phép",
+            "Cấu trúc",
+            "Red-Black Tree",
+            "Red-Black Tree",
+            "insert",
+            "O(log n)",
+            "O(log n)",
+            "Thứ tự",
+            "Có (tăng dần mặc định)",
+            "Có",
+            "std::set",
+            "std::multiset"
+          ]
+        }
+      ]
+    },
+    "legacyId": 36,
+    "sourceSlug": "10537-std-set-va-std-multiset-khac-nhau-the-nao-khi-nao-dung"
+  },
+  {
+    "id": "660dc6c2-8e19-5ba1-ac1a-cac5e7268c85",
+    "question": "Exception handling trong C++: try/catch/throw hoạt động thế nào? noexcept là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10538-exception-handling-trong-c-try-catch-throw-hoat-dong-the-nao-noexcept-la-gi",
+    "slug": "exception-handling-trong-c-try-catch-throw-hoat-dong-the-nao-noexcept-la-gi-660dc6c2-8e19-5ba1-ac1a-cac5e7268c85",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Stack unwinding: khi exception được throw, destructor của mọi object trên stack được gọi theo thứ tự ngược — đây là lý do RAII hoạt động ngay cả khi có exception."
+      ],
+      "details": [
+        "noexcept: khai báo hàm không ném exception. Nếu vi phạm → std::terminate() được gọi."
+      ],
+      "points": [],
+      "sections": [
+        "Move constructor/destructor nên noexcept để std::vector dùng move thay copy khi resize.",
+        "Cơ chế:"
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "void openFile(const std::string& path) {\n  if (path.empty()) throw std::invalid_argument(\"path rỗng\");\n  // ...\n}\n\ntry {\n  openFile(\"\");\n} catch (const std::invalid_argument& e) {\n  std::cerr << \"Lỗi: \" << e.what();\n} catch (const std::exception& e) {\n  std::cerr << \"Exception chung: \" << e.what();\n} catch (...) {\n  std::cerr << \"Exception không xác định\";\n}"
+        },
+        {
+          "language": "CPP",
+          "code": "void swap(int& a, int& b) noexcept { int t = a; a = b; b = t; }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "10538-exception-handling-trong-c-try-catch-throw-hoat-dong-the-nao-noexcept-la-gi"
+  },
+  {
+    "id": "fb9cb7ca-f1f1-5f95-8cfa-0cc070b42516",
+    "question": "std::optional<T> (C++17) là gì? Khi nào dùng thay cho pointer hoặc sentinel value?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10539-std-optional-t-c-17-la-gi-khi-nao-dung-thay-cho-pointer-hoac-sentinel-value",
+    "slug": "std-optional-t-c-17-la-gi-khi-nao-dung-thay-cho-pointer-hoac-sentinel-value-fb9cb7ca-f1f1-5f95-8cfa-0cc070b42516",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng khi: hàm có thể thất bại mà không phải lỗi (lookup, parse), optional config field.\nKhông dùng khi: lỗi thực sự — dùng exception; polymorphism — dùng pointer."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "std::optional<T> đại diện cho giá trị có thể có hoặc không — thay thế cho nullptr, -1, hoặc out-param bool."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "// Trước C++17: trả pointer (nguy hiểm) hoặc sentinel\nint* findUser(int id);  // nullptr nếu không tìm thấy\n\n// C++17: rõ ràng, type-safe\nstd::optional<User> findUser(int id) {\n  if (id == 42) return User{\"Alice\"};\n  return std::nullopt;  // không có giá trị\n}\n\nauto u = findUser(42);\nif (u.has_value()) {\n  std::cout << u->name;  // dùng -> như pointer\n  std::cout << u.value().name;  // hoặc .value() — throw nếu nullopt\n}\nstd::string name = u.value_or(\"Unknown\");  // fallback"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "10539-std-optional-t-c-17-la-gi-khi-nao-dung-thay-cho-pointer-hoac-sentinel-value"
+  },
+  {
+    "id": "186030a1-8c99-51cf-9396-05e438e81d5c",
+    "question": "std::variant<Types...> (C++17) là gì? Khác union thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10540-std-variant-types-c-17-la-gi-khac-union-the-nao",
+    "slug": "std-variant-types-c-17-la-gi-khac-union-the-nao-186030a1-8c99-51cf-9396-05e438e81d5c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác union:"
+      ],
+      "details": [
+        "Dùng khi: cần lưu một trong nhiều kiểu (kết quả parse, AST node, lỗi/giá trị)."
+      ],
+      "points": [],
+      "sections": [
+        "std::variant là type-safe union — tại một thời điểm chỉ giữ một giá trị, nhưng luôn biết kiểu đang giữ là gì."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "std::variant<int, double, std::string> v;\nv = 42;          // giữ int\nv = 3.14;        // giữ double\nv = \"hello\";     // giữ string\n\n// Truy cập:\nstd::cout << std::get<double>(v);       // OK\n// std::get<int>(v);                    // throw std::bad_variant_access\n\n// Pattern matching:\nstd::visit([](auto&& val) {\n  std::cout << val;\n}, v);"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Type tracking",
+            "Không",
+            "Có",
+            "Destructor",
+            "Không tự gọi",
+            "Tự gọi",
+            "An toàn",
+            "Không (UB nếu đọc sai kiểu)",
+            "An toàn",
+            "union",
+            "std::variant"
+          ]
+        }
+      ]
+    },
+    "legacyId": 39,
+    "sourceSlug": "10540-std-variant-types-c-17-la-gi-khac-union-the-nao"
+  },
+  {
+    "id": "b6b62a44-c3c2-59e2-b35d-2d2e479bca05",
+    "question": "std::string_view (C++17) là gì? Ưu điểm so với const std::string&?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10543-std-string-view-c-17-la-gi-uu-diem-so-voi-const-std-string",
+    "slug": "std-string-view-c-17-la-gi-uu-diem-so-voi-const-std-string-b6b62a44-c3c2-59e2-b35d-2d2e479bca05",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "So với const std::string&:"
+      ],
+      "details": [
+        "Dùng khi: hàm chỉ đọc string, không cần null-terminated, không store lại.\nKhông dùng khi: cần lưu string lâu dài — nguy cơ dangling view."
+      ],
+      "points": [],
+      "sections": [
+        "std::string_view là view không sở hữu (non-owning view) vào một chuỗi ký tự — chỉ là con trỏ + độ dài, không copy."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "void print(std::string_view sv) {\n  std::cout << sv;  // không copy\n}\n\nprint(\"hello\");                    // const char* — không tạo std::string\nprint(std::string{\"world\"});       // std::string — không copy\nprint(large_string.substr(0, 5));  // không tạo substring thật"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "const char* argument",
+            "Tạo temporary string",
+            "Không tạo",
+            "Substring",
+            "Tạo string mới",
+            "Zero-copy",
+            "Non-null-terminated",
+            "Không hỗ trợ",
+            "const char*",
+            "Hỗ trợ",
+            "Có thể dangle",
+            "Không",
+            "Có (nếu string gốc bị xóa)",
+            "const std::string&",
+            "std::string_view"
+          ]
+        }
+      ]
+    },
+    "legacyId": 40,
+    "sourceSlug": "10543-std-string-view-c-17-la-gi-uu-diem-so-voi-const-std-string"
+  },
+  {
+    "id": "024008aa-9ab3-58f3-b9d1-fdf2f4a5325d",
+    "question": "std::initializer_list<T> trong C++11 là gì? Hoạt động thế nào với constructor?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10544-std-initializer-list-t-trong-c-11-la-gi-hoat-dong-the-nao-voi-constructor",
+    "slug": "std-initializer-list-t-trong-c-11-la-gi-hoat-dong-the-nao-voi-constructor-024008aa-9ab3-58f3-b9d1-fdf2f4a5325d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "std::initializer_list<T> cho phép khởi tạo object bằng cú pháp {...} (brace initialization) với nhiều giá trị — đặc biệt hữu ích cho container.",
+        "Hành vi ưu tiên initializer_list constructor khi dùng {} là nguồn gốc nhiều bug ngầm trong C++11.",
+        "Lưu ý về priority:"
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "class NumberSet {\n  std::vector<int> data_;\npublic:\n  NumberSet(std::initializer_list<int> list) : data_(list) {}\n};\n\nNumberSet s = {1, 2, 3, 4, 5};  // gọi constructor nhận initializer_list\n\n// STL containers hỗ trợ sẵn:\nstd::vector<int> v = {10, 20, 30};\nstd::map<std::string, int> m = {{\"a\", 1}, {\"b\", 2}};"
+        },
+        {
+          "language": "CPP",
+          "code": "class Foo {\npublic:\n  Foo(int size) {}                             // constructor A\n  Foo(std::initializer_list<int> l) {}         // constructor B\n};\n\nFoo f1(5);    // gọi A — round-bracket: không ưu tiên initializer_list\nFoo f2{5};    // gọi B — brace: ưu tiên initializer_list constructor"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "10544-std-initializer-list-t-trong-c-11-la-gi-hoat-dong-the-nao-voi-constructor"
+  },
+  {
+    "id": "e29e42a2-fe93-56e9-aac7-860bc9457306",
+    "question": "Sự khác nhau giữa pass-by-value, pass-by-reference, pass-by-pointer trong C++ — khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10546-su-khac-nhau-giua-pass-by-value-pass-by-reference-pass-by-pointer-trong-c-khi-na",
+    "slug": "su-khac-nhau-giua-pass-by-value-pass-by-reference-pass-by-pointer-trong-c-khi-nao-dung-cai-nao-e29e42a2-fe93-56e9-aac7-860bc9457306",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Quy tắc thực tế:\n- Kiểu nhỏ (int, char, bool, raw pointer): pass-by-value.\n- Object lớn, chỉ đọc: const T&.\n- Cần sửa: T&.\n- Optional hoặc array: pointer."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "void byValue(int x) { x = 100; }    // không ảnh hưởng caller\nvoid byRef(int& x)  { x = 100; }    // sửa biến gốc\nvoid byPtr(int* x)  { *x = 100; }   // sửa qua dereferencing\n\nint n = 5;\nbyValue(n);  // n = 5\nbyRef(n);    // n = 100\nbyPtr(&n);   // n = 100"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Pass-by-value",
+            "Pass-by-reference (&)",
+            "Luôn copy",
+            "Không copy",
+            "Không copy (copy địa chỉ)",
+            "Null",
+            "Không thể null",
+            "Không thể null",
+            "Có thể null",
+            "Reassign",
+            "Không ảnh hưởng caller",
+            "Không reassign target",
+            "Có thể trỏ chỗ khác",
+            "&",
+            "*",
+            "Dùng",
+            "Kiểu nhỏ (int, bool)",
+            "Object lớn đọc/sửa",
+            "Optional arg, array"
+          ]
+        }
+      ]
+    },
+    "legacyId": 42,
+    "sourceSlug": "10546-su-khac-nhau-giua-pass-by-value-pass-by-reference-pass-by-pointer-trong-c-khi-na"
+  },
+  {
+    "id": "77272fff-7506-5661-b416-fc6e948ff7ec",
+    "question": "std::stack, std::queue, std::priority_queue — cấu trúc và độ phức tạp?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10549-std-stack-std-queue-std-priority-queue-cau-truc-va-do-phuc-tap",
+    "slug": "std-stack-std-queue-std-priority-queue-cau-truc-va-do-phuc-tap-77272fff-7506-5661-b416-fc6e948ff7ec",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba container adapter trong STL — xây trên container thật (mặc định deque hoặc vector)."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Điểm khác biệt: không có iterator — chỉ truy cập phần tử đầu/cuối, phù hợp với thuật toán cần kiểm soát thứ tự truy cập."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "std::stack<int> s;\ns.push(1); s.push(2); s.push(3);\ns.top();   // 3\ns.pop();   // bỏ 3\n\nstd::priority_queue<int> pq;\npq.push(5); pq.push(1); pq.push(3);\npq.top();  // 5 — max-heap mặc định\n\n// Min-heap:\nstd::priority_queue<int, std::vector<int>, std::greater<int>> minpq;"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Container",
+            "Thứ tự",
+            "LIFO",
+            "O(1)",
+            "O(1)",
+            "FIFO",
+            "O(1)",
+            "O(1)",
+            "Heap (max ở đầu)",
+            "O(log n)",
+            "stack",
+            "O(log n)",
+            "deque",
+            "top()",
+            "queue",
+            "deque",
+            "front()",
+            "priority_queue",
+            "vector",
+            "top()"
+          ]
+        }
+      ]
+    },
+    "legacyId": 43,
+    "sourceSlug": "10549-std-stack-std-queue-std-priority-queue-cau-truc-va-do-phuc-tap"
+  },
+  {
+    "id": "5a1a7659-8384-5cb4-b790-a84881686dc8",
+    "question": "Đa hình compile-time và runtime khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93602-da-hinh-compile-time-va-runtime-khac-nhau-the-nao",
+    "slug": "da-hinh-compile-time-va-runtime-khac-nhau-the-nao-5a1a7659-8384-5cb4-b790-a84881686dc8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Compile-time (static polymorphism): lời gọi được phân giải lúc biên dịch — qua function overloading, template, CRTP. Không tốn chi phí runtime và có thể inline, nhưng kiểu phải biết trước lúc biên dịch."
+      ],
+      "details": [
+        "Runtime (dynamic polymorphism): phân giải lúc chạy qua virtual function + vtable. Cho phép xử lý object qua con trỏ/tham chiếu lớp cơ sở, nhưng thêm một lần gián tiếp (tra vptr) và thường không inline được."
+      ],
+      "points": [],
+      "sections": [
+        "Chọn: template khi kiểu biết lúc biên dịch và cần tốc độ; virtual khi cần chọn hành vi lúc chạy."
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "template<class T> void f(T& x){ x.run(); }  // static\nbase->run();                                // dynamic (virtual)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "93602-da-hinh-compile-time-va-runtime-khac-nhau-the-nao"
+  },
+  {
+    "id": "dc00e070-dddb-5bb2-97ff-e8dc2d4c6718",
+    "question": "Vì sao destructor của lớp cơ sở nên là virtual?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93603-vi-sao-destructor-cua-lop-co-so-nen-la-virtual",
+    "slug": "vi-sao-destructor-cua-lop-co-so-nen-la-virtual-dc00e070-dddb-5bb2-97ff-e8dc2d4c6718",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Nếu destructor của Base không virtual, chỉ ~Base() chạy — phần Derived không được hủy → rò rỉ tài nguyên / undefined behavior."
+      ],
+      "details": [
+        "Đánh dấu virtual ~Base() để delete tra vtable và gọi đúng ~Derived(), hủy đầy đủ chuỗi từ dẫn xuất về cơ sở.",
+        "Quy tắc (Effective C++, Item 7): lớp dùng làm base đa hình (có bất kỳ virtual function nào) phải có virtual destructor. Ngược lại, lớp không định dùng làm base thì đừng thêm — tránh chi phí vptr."
+      ],
+      "points": [],
+      "sections": [
+        "Khi xóa object dẫn xuất qua con trỏ lớp cơ sở:"
+      ],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "Base* p = new Derived();\ndelete p;   // destructor nào chạy?"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "93603-vi-sao-destructor-cua-lop-co-so-nen-la-virtual"
+  },
+  {
+    "id": "664e8e27-be56-5205-8e28-478faaea789a",
+    "question": "Từ khóa volatile dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93604-tu-khoa-volatile-dung-de-lam-gi",
+    "slug": "tu-khoa-volatile-dung-de-lam-gi-664e8e27-be56-5205-8e28-478faaea789a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "volatile báo compiler rằng giá trị biến có thể bị thay đổi bởi tác nhân ngoài luồng chương trình: thanh ghi phần cứng, interrupt/ISR, memory-mapped I/O.",
+        "Lưu ý quan trọng:"
+      ],
+      "details": [
+        "Compiler khi đó không được tối ưu kiểu cache biến vào thanh ghi hay bỏ đi lần đọc \"thừa\" — mỗi lần truy cập phải đọc/ghi thẳng bộ nhớ.",
+        "Dùng std::atomic / mutex cho threading."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CPP",
+          "code": "volatile int* reg = ...;\nwhile (*reg == 0) { }   // đọc lại thật mỗi vòng, không bị tối ưu bỏ"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "93604-tu-khoa-volatile-dung-de-lam-gi"
+  },
+  {
+    "id": "ef94a7fd-4f62-5f02-afb4-7f33598ee02f",
+    "question": "Khi nào constructor và destructor được gọi? Thứ tự trong kế thừa?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-constructor-va-destructor-duoc-goi-thu-tu-trong-ke-thua-ef94a7fd-4f62-5f02-afb4-7f33598ee02f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": null
+  },
+  {
+    "id": "8faf5779-fcd3-5588-98ca-6f5122f840a7",
+    "question": "std::vector vs std::list — khi nào dùng cái nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "std-vector-vs-std-list-khi-nao-dung-cai-nao-8faf5779-fcd3-5588-98ca-6f5122f840a7",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": null
+  },
+  {
+    "id": "e5378bbb-20e6-531f-b698-4a63996e4159",
+    "question": "Rule of Three, Rule of Five trong C++ là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "rule-of-three-rule-of-five-trong-c-la-gi-e5378bbb-20e6-531f-b698-4a63996e4159",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": null
+  },
+  {
+    "id": "887e7cb2-9157-5d27-a60a-f5a2bfa83377",
+    "question": "Template trong C++ là gì? Function template và class template khác nhau thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "template-trong-c-la-gi-function-template-va-class-template-khac-nhau-the-nao-887e7cb2-9157-5d27-a60a-f5a2bfa83377",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": null
+  },
+  {
+    "id": "24aabd7d-549f-57a4-a299-184eb882a00c",
+    "question": "constexpr trong C++11/14 là gì? Khác const thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "constexpr-trong-c-11-14-la-gi-khac-const-the-nao-24aabd7d-549f-57a4-a299-184eb882a00c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": null
+  },
+  {
+    "id": "3c3d2808-6045-5430-87df-e788ad5f6ffa",
+    "question": "Structured bindings (C++17) là gì? Cho ví dụ thực tế.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "structured-bindings-c-17-la-gi-cho-vi-du-thuc-te-3c3d2808-6045-5430-87df-e788ad5f6ffa",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": null
+  },
+  {
+    "id": "e10d1afa-efcf-5a44-8e27-1b0d4a639830",
+    "question": "Copy elision, RVO và NRVO trong C++ là gì? Tại sao quan trọng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "copy-elision-rvo-va-nrvo-trong-c-la-gi-tai-sao-quan-trong-e10d1afa-efcf-5a44-8e27-1b0d4a639830",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": null
+  },
+  {
+    "id": "cae23828-b79e-5a07-8e69-d32fb287e4ee",
+    "question": "std::move vs std::forward — khác nhau thế nào? Perfect forwarding là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "std-move-vs-std-forward-khac-nhau-the-nao-perfect-forwarding-la-gi-cae23828-b79e-5a07-8e69-d32fb287e4ee",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": null
+  },
+  {
+    "id": "cdfcbdd9-f51e-518e-a9c3-7f52722bb36a",
+    "question": "std::thread và std::mutex trong C++11 — cách tạo thread và bảo vệ shared data?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "std-thread-va-std-mutex-trong-c-11-cach-tao-thread-va-bao-ve-shared-data-cdfcbdd9-f51e-518e-a9c3-7f52722bb36a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": null
+  },
+  {
+    "id": "4627ebb4-eda3-5f06-b29e-248909c86293",
+    "question": "Pimpl idiom (Pointer to Implementation) trong C++ là gì? Lợi ích?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "pimpl-idiom-pointer-to-implementation-trong-c-la-gi-loi-ich-4627ebb4-eda3-5f06-b29e-248909c86293",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": null
+  },
+  {
+    "id": "3d5f3ba8-8dfd-517d-99b3-dad2f0c933f1",
+    "question": "Gọi virtual function trong constructor/destructor thì điều gì xảy ra?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "goi-virtual-function-trong-constructor-destructor-thi-dieu-gi-xay-ra-3d5f3ba8-8dfd-517d-99b3-dad2f0c933f1",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": null
+  }
+]

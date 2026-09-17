@@ -1,0 +1,30 @@
+record_no,generation_term,generation_name,full_name,email,phone,gender,birthday,department,source_role,club_role,department_role,is_department_lead,password_hash
+1,7,GDGoC-DUT Gen 7,Phạm Văn Tiến,tienphamvan2005@gmail.com,0355520704,Nam,2005-10-19,,Community Leader,LEAD_COMMUNITY,,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+2,7,GDGoC-DUT Gen 7,Hồ Đình Tuấn Kiệt,hodinhtuankiet@gmail.com,0395590963,Nam,2004-01-05,Backend,Back-End Head,LEAD,LEAD,true,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+3,7,GDGoC-DUT Gen 7,Nguyễn Văn Trung Ánh,anhnon0106@gmail.com,0768406235,Nam,2005-01-06,Backend,Back-End,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+4,7,GDGoC-DUT Gen 7,Trương Bùi Diễn,dientruong2104@gmail.com,0359377430,Nam,2006-04-21,Backend,Back-End,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+5,7,GDGoC-DUT Gen 7,Lương Duy Toàn,luongduytoan2006@gmail.com,0905669785,Nam,2006-05-09,Backend,Back-End,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+6,7,GDGoC-DUT Gen 7,Phạm Như Quỳnh,nhuquynhpham16102004@gmail.com,0867942231,Nữ,2004-10-16,Backend,Back-End,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+7,7,GDGoC-DUT Gen 7,Nguyễn Anh Thư,nguyenanhthu.work2004@gmail.com,0961092176,Nữ,2004-05-29,Backend,Back-End,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+8,7,GDGoC-DUT Gen 7,Phạm Hoàng Vũ,phamvuhoang486@gmail.com,0348778659,Nam,2007-05-24,Backend,Back-End,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+9,7,GDGoC-DUT Gen 7,Hồ An Ninh,anninh2508@gmail.com,0876868957,Nam,2006-08-25,Backend,Back-End,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+10,7,GDGoC-DUT Gen 7,Đỗ Quảng Giác,doquanggiac@gmail.com,0765748845,Nam,2007-04-27,Backend,Back-End,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+11,7,GDGoC-DUT Gen 7,Đàm Phú Quý,phuquydam06@gmail.com,0356780244,Nam,2006-05-16,Backend,Back-End,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+12,7,GDGoC-DUT Gen 7,Trương Công Hoàng Thành,thanhtruong16092004@gmail.com,0931959195,Nam,2004-09-16,Frontend,Front-End Head,LEAD,LEAD,true,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+13,7,GDGoC-DUT Gen 7,Trần Thị Hạnh Nguyên,hanhnguyen17122006@gmail.com,0935009725,Nữ,2006-12-17,Frontend,Front-End,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+14,7,GDGoC-DUT Gen 7,Nguyễn Như Ngọc,minneeeeee68@gmail.com,0777535051,Nữ,2007-08-05,Frontend,Front-End,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+15,7,GDGoC-DUT Gen 7,Nguyễn Văn Duy,duynguyenvan19102005@gmail.com,0773976337,Nam,2005-10-19,Frontend,Front-End,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+16,7,GDGoC-DUT Gen 7,Hoàng Thị Ngọc Phương,hoangngocphuongcute@gmail.com,0344633262,Nữ,2007-07-15,Frontend,Front-End,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+17,7,GDGoC-DUT Gen 7,Võ Trung Khang,trungkhang1704@gmail.com,0333393117,Nam,2007-04-17,Frontend,Front-End,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+18,7,GDGoC-DUT Gen 7,Nguyễn Quốc Duy,quocduy0322@gmail.com,0979783396,Nam,2004-01-13,Frontend,Front-End,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+19,7,GDGoC-DUT Gen 7,Nguyễn Hồng Sơn,snguyenhong8@gmail.com,0387756949,Nam,2005-05-20,Frontend,Front-End,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+20,7,GDGoC-DUT Gen 7,Nguyễn Đình Anh Quân,ndaqquan2006@gmail.com,0934972302,Nam,2006-03-30,Frontend,Front-End,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+21,7,GDGoC-DUT Gen 7,Trần Quốc Kiệt,kiettranquoc850@gmail.com,0905709804,Nam,2005-02-28,Frontend,Front-End,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+22,7,GDGoC-DUT Gen 7,Lê Minh Thư,thule160104@gmail.com,0344390161,Nữ,2004-01-16,Marketing,Marketing Head,LEAD,LEAD,true,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+23,7,GDGoC-DUT Gen 7,Nguyễn Thị Hồng Phúc,nguyenthihongphuc232@gmail.com,0702471712,Nữ,2006-02-23,Marketing,Content Creator,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+24,7,GDGoC-DUT Gen 7,Võ Thị Hường,thihuongvo699@gmail.com,0348589442,Nữ,2004-08-10,Marketing,Designer,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+25,7,GDGoC-DUT Gen 7,Trương Đức Nguyên Hùng,rairon1938@gmail.com,0703606422,Nam,2006-04-23,Marketing,Content Creator,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+26,7,GDGoC-DUT Gen 7,Đặng Thị Thương Hoài,th316942@gmail.com,0332412514,Nữ,2004-08-19,Human Resources,Human Resources Head,LEAD,LEAD,true,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+27,7,GDGoC-DUT Gen 7,Ngô Thị Lưu Thanh,kiera.ngo264@gmail.com,0766644875,Nữ,2004-02-06,Event,Event Head,LEAD,LEAD,true,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+28,7,GDGoC-DUT Gen 7,Huỳnh Châu Thúy Vy,cuncun260506@gmail.com,0899213042,Nữ,2006-05-26,Event,Event,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2
+29,7,GDGoC-DUT Gen 7,Nguyễn Đại Phú,daiphunguyen98@gmail.com,0919087556,Nam,2007-10-09,Event,Event,MEMBER,MEMBER,false,$2b$10$EsB43U91g9KvlCeLptjSw.oBR0322FXrzT2HE/HzODeYQ4zqh1CE2

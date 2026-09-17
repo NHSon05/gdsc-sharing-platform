@@ -1,0 +1,2365 @@
+[
+  {
+    "id": "3bad14ae-b0ab-5d26-9789-f0f9e3b39a96",
+    "question": "Zustand là gì? So sánh với Redux về độ phức tạp?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/616-zustand-la-gi-so-sanh-voi-redux-ve-do-phuc-tap",
+    "slug": "zustand-la-gi-so-sanh-voi-redux-ve-do-phuc-tap-3bad14ae-b0ab-5d26-9789-f0f9e3b39a96",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Zustand là thư viện quản lý state nhỏ gọn cho React, không yêu cầu boilerplate như Redux — không cần actions, reducers, dispatch, hay Provider wrapper."
+      ],
+      "details": [],
+      "points": [
+        "API chỉ gồm hàm create trả về một hook, state và actions định nghĩa cùng chỗ.",
+        "Bundle size ~1KB so với Redux Toolkit ~40KB khi đầy đủ."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "const useStore = create(set => ({ count: 0, inc: () => set(s => ({ count: s.count + 1 })) }))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "616-zustand-la-gi-so-sanh-voi-redux-ve-do-phuc-tap"
+  },
+  {
+    "id": "ad3f5a60-ae5a-5c70-abe0-b4139b7bb439",
+    "question": "Cách tạo một store với Zustand như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/617-cach-tao-mot-store-voi-zustand-nhu-the-nao",
+    "slug": "cach-tao-mot-store-voi-zustand-nhu-the-nao-ad3f5a60-ae5a-5c70-abe0-b4139b7bb439",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Không cần Provider, không cần dispatch — gọi action như gọi function bình thường."
+      ],
+      "details": [
+        "So với Redux: một file slice Zustand thay được cả actions + actionTypes + reducer + selectors + thunk."
+      ],
+      "points": [],
+      "sections": [
+        "Dùng create từ 'zustand', truyền vào initializer nhận (set, get) và trả về object chứa cả state lẫn action trong cùng một chỗ. set() merge partial state (không cần spread toàn bộ như Redux), get() đọc state hiện tại từ bên trong action.",
+        "Store trả về là một React hook, dùng thẳng trong component:"
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const useCartStore = create((set, get) => ({\n  items: [],\n  total: 0,\n  addItem: (item) => set((s) => ({\n    items: [...s.items, item],\n    total: s.total + item.price,\n  })),\n  clearCart: () => set({ items: [], total: 0 }),\n  getItemCount: () => get().items.length,\n}))"
+        },
+        {
+          "language": "TS",
+          "code": "const items = useCartStore((s) => s.items)\nconst addItem = useCartStore((s) => s.addItem)\n\naddItem(product)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "617-cach-tao-mot-store-voi-zustand-nhu-the-nao"
+  },
+  {
+    "id": "e89e525f-29c2-5650-80a8-89d43700bd2e",
+    "question": "React Query (TanStack Query) là gì? Mục đích chính của nó là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/626-react-query-tanstack-query-la-gi-muc-dich-chinh-cua-no-la-gi",
+    "slug": "react-query-tanstack-query-la-gi-muc-dich-chinh-cua-no-la-gi-e89e525f-29c2-5650-80a8-89d43700bd2e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "React Query (nay là TanStack Query v5) là thư viện quản lý server state cho React, giải quyết bài toán mà useState + useEffect không làm tốt: fetching, caching, synchronizing và updating data từ API."
+      ],
+      "details": [
+        "không cần React Query, bạn phải tự viết loading state, error handling, cache, deduplication, refetch khi focus window, retry khi fail — React Query làm tất cả tự động."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "626-react-query-tanstack-query-la-gi-muc-dich-chinh-cua-no-la-gi"
+  },
+  {
+    "id": "1e23663d-6662-5879-8436-61c951ad43f3",
+    "question": "useQuery hook hoạt động như thế nào? Các tham số cơ bản là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/627-usequery-hook-hoat-dong-nhu-the-nao-cac-tham-so-co-ban-la-gi",
+    "slug": "usequery-hook-hoat-dong-nhu-the-nao-cac-tham-so-co-ban-la-gi-1e23663d-6662-5879-8436-61c951ad43f3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "useQuery là hook chính để đọc data, nhận 2 tham số bắt buộc: queryKey (mảng định danh duy nhất, ví dụ ['todos', { status: 'active' }]) và queryFn (async function trả về data, ví dụ () => fetch('/api/todos').then(r => r.json()))."
+      ],
+      "details": [],
+      "points": [
+        "Trả về object gồm: data (kết quả), isLoading (true lần fetch đầu), isFetching (true khi đang fetch kể cả background), isError/error (lỗi), isSuccess, status.",
+        "Cơ chế: component mount → check cache theo queryKey → nếu có data fresh thì dùng luôn, nếu stale thì vừa show cached data vừa refetch background.",
+        "Đây là pattern stale-while-revalidate."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "627-usequery-hook-hoat-dong-nhu-the-nao-cac-tham-so-co-ban-la-gi"
+  },
+  {
+    "id": "6418a606-1c49-5d87-9b86-6e1782356ecb",
+    "question": "QueryClientProvider là gì? Tại sao cần wrap app bằng nó?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/4060-queryclientprovider-la-gi-tai-sao-can-wrap-app-bang-no",
+    "slug": "queryclientprovider-la-gi-tai-sao-can-wrap-app-bang-no-6418a606-1c49-5d87-9b86-6e1782356ecb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Trong Next.js App Router: đặt provider ở root layout nhưng phải bọc trong một Client Component ('use client'), và tạo QueryClient bằng useState/useRef để mỗi phiên người dùng có instance riêng."
+      ],
+      "details": [
+        "Lưu ý: khai báo QueryClient ở cấp module trong môi trường server là sai — instance đó bị dùng chung giữa các request, dẫn tới rò rỉ data giữa các user."
+      ],
+      "points": [],
+      "sections": [
+        "QueryClientProvider là React Context Provider mang instance QueryClient xuống toàn bộ cây component. QueryClient chính là bộ não giữ cache, trạng thái query và config — mọi useQuery/useMutation bên dưới đều cần truy cập nó."
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "// tạo BÊN NGOÀI component để không dựng lại mỗi lần render\nconst queryClient = new QueryClient({\n  defaultOptions: { queries: { staleTime: 60_000, retry: 2 } },\n})\n\nexport function App() {\n  return (\n    <QueryClientProvider client={queryClient}>\n      <Routes />\n    </QueryClientProvider>\n  )\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "4060-queryclientprovider-la-gi-tai-sao-can-wrap-app-bang-no"
+  },
+  {
+    "id": "c2dde215-868a-5ce8-8947-c19f2a0129a5",
+    "question": "Sự khác biệt giữa isLoading và isFetching trong useQuery?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/4061-su-khac-biet-giua-isloading-va-isfetching-trong-usequery",
+    "slug": "su-khac-biet-giua-isloading-va-isfetching-trong-usequery-c2dde215-868a-5ce8-8947-c19f2a0129a5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "isLoading = true chỉ lần fetch đầu chưa có cache (show skeleton toàn trang); isFetching = true MỌI KHI đang fetch kể cả background refetch (show subtle indicator)."
+      ],
+      "details": [
+        "user vào trang Products lần đầu → isLoading=true, show skeleton."
+      ],
+      "points": [
+        "Đây là câu phỏng vấn rất phổ biến. isLoading (hay status === 'pending'): true CHỈ khi fetch lần đầu VÀ chưa có cached data — dùng để show loading skeleton/spinner toàn trang. isFetching: true MỌI KHI đang fetch, kể cả background refetch khi đã có cached data — dùng để show subtle indicator (spinning icon nhỏ, progress bar mờ)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "4061-su-khac-biet-giua-isloading-va-isfetching-trong-usequery"
+  },
+  {
+    "id": "b075d6f5-5003-588e-88ae-d5429da519c9",
+    "question": "Redux là gì? Tại sao chúng ta cần sử dụng Redux?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/13021-redux-la-gi-tai-sao-chung-ta-can-su-dung-redux",
+    "slug": "redux-la-gi-tai-sao-chung-ta-can-su-dung-redux-b075d6f5-5003-588e-88ae-d5429da519c9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Redux phù hợp cho complex global state cần time-travel debug; RTK là cách dùng Redux 2025."
+      ],
+      "details": [
+        "trong app có UserProfile ở header và ShoppingCart ở sidebar cùng cần thông tin user đang đăng nhập — không cần prop drilling qua nhiều cấp, cả hai đọc thẳng từ Redux store."
+      ],
+      "points": [
+        "Redux là thư viện quản lý state tập trung cho JavaScript, thường dùng với React.",
+        "Nó lưu toàn bộ state ứng dụng trong một store duy nhất, giúp dễ dàng theo dõi, debug và chia sẻ state giữa các component không liên kết trực tiếp."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "13021-redux-la-gi-tai-sao-chung-ta-can-su-dung-redux"
+  },
+  {
+    "id": "3ec5e0b3-4cdb-54ff-b289-ae66d843dc7d",
+    "question": "Ba nguyên tắc cốt lõi của Redux là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/13022-ba-nguyen-tac-cot-loi-cua-redux-la-gi",
+    "slug": "ba-nguyen-tac-cot-loi-cua-redux-la-gi-3ec5e0b3-4cdb-54ff-b289-ae66d843dc7d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Redux đứng trên ba nguyên tắc:"
+      ],
+      "details": [
+        "1. Single source of truth — toàn bộ state nằm trong một store duy nhất. Nhờ vậy data đồng bộ giữa các component, và serialize rồi restore lại rất dễ (lưu state xuống localStorage rồi hydrate khi reload).\n2. State is read-only — không mutate state trực tiếp, mọi thay đổi phải đi qua dispatch một action. Chính điều này tạo ra audit trail rõ ràng và là nền cho time-travel của Redux DevTools.\n3. Changes are made with pure functions — reducer phải thuần: cùng input luôn ra cùng output, không side effect.",
+        "Lưu ý: vi phạm nguyên tắc",
+        "Redux Toolkit sinh ra để dẹp boilerplate của cả ba nguyên tắc này, thông qua createSlice, createAsyncThunk và RTK Query."
+      ],
+      "points": [
+        "hay gặp nhất là gọi API hay Date.now() ngay trong reducer — side effect thuộc về middleware (thunk/saga). Người mới cũng hay vi phạm nguyên tắc",
+        "bằng state.items.push(item); cú pháp đó chỉ hợp lệ trong Redux Toolkit nhờ Immer, còn Redux thuần thì đó là mutate thật"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "13022-ba-nguyen-tac-cot-loi-cua-redux-la-gi"
+  },
+  {
+    "id": "2fd829d2-dcfb-5035-a001-f1815dd1c2bf",
+    "question": "Action trong Redux là gì? Cấu trúc của một action như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/13023-action-trong-redux-la-gi-cau-truc-cua-mot-action-nhu-the-nao",
+    "slug": "action-trong-redux-la-gi-cau-truc-cua-mot-action-nhu-the-nao-2fd829d2-dcfb-5035-a001-f1815dd1c2bf",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Action là plain JavaScript object mô tả sự kiện xảy ra trong ứng dụng, bắt buộc có trường type (string định danh) và thường có payload chứa dữ liệu."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "{ type: 'cart/addItem', payload: { id: 1, name: 'iPhone', qty: 1 } }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "13023-action-trong-redux-la-gi-cau-truc-cua-mot-action-nhu-the-nao"
+  },
+  {
+    "id": "1d975111-e14b-505e-9b09-26fd76b1c154",
+    "question": "Reducer trong Redux là gì? Cách viết một reducer đúng chuẩn?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/13024-reducer-trong-redux-la-gi-cach-viet-mot-reducer-dung-chuan",
+    "slug": "reducer-trong-redux-la-gi-cach-viet-mot-reducer-dung-chuan-1d975111-e14b-505e-9b09-26fd76b1c154",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Reducer là pure function nhận (state, action) và trả về state mới — không được mutate state trực tiếp mà phải tạo bản sao mới."
+      ],
+      "details": [
+        "Ví dụ đúng: case 'ADD_TODO': return [...state, action.payload] thay vì state.push(action.payload). Pure function nghĩa là không có side effects, không gọi API, không random — cùng input luôn cho cùng output, điều này giúp Redux DevTools time-travel hoạt động được. Luôn có default: return state để tránh trả về undefined khi action không khớp. Với Redux Toolkit, dùng Immer bên trong nên được phép viết state.todos.push(item) mà vẫn immutable thật sự."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "13024-reducer-trong-redux-la-gi-cach-viet-mot-reducer-dung-chuan"
+  },
+  {
+    "id": "5b70bb34-70fe-585e-bd10-d5ac2bf4e2d5",
+    "question": "Store trong Redux là gì? Các phương thức chính của store là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/13025-store-trong-redux-la-gi-cac-phuong-thuc-chinh-cua-store-la-gi",
+    "slug": "store-trong-redux-la-gi-cac-phuong-thuc-chinh-cua-store-la-gi-5b70bb34-70fe-585e-bd10-d5ac2bf4e2d5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Store là object trung tâm giữ toàn bộ state tree của app, tạo bằng configureStore() (RTK) hoặc createStore() (bản cũ)."
+      ],
+      "details": [
+        "Ba phương thức chính:\n- getState() trả về state hiện tại.\n- dispatch(action) đẩy action qua middleware rồi tới reducer để cập nhật state.\n- subscribe(listener) đăng ký callback chạy sau mỗi lần dispatch.",
+        "Thực tế làm React thì hiếm khi gọi trực tiếp ba hàm này, vì react-redux đã bọc chúng lại: useSelector thay cho getState + subscribe, còn useDispatch thay cho dispatch.",
+        "Lưu ý: một app chỉ nên có ĐÚNG MỘT store — nhiều store là phá vỡ nguyên tắc single source of truth và làm DevTools chạy sai.",
+        "Dùng configureStore của RTK thì Redux DevTools, thunk middleware và các development check (phát hiện mutate ngoài ý muốn) đều được bật sẵn, không phải cấu hình tay."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "13025-store-trong-redux-la-gi-cac-phuong-thuc-chinh-cua-store-la-gi"
+  },
+  {
+    "id": "6ab3f625-54bf-5bd3-8125-31f380a7b48e",
+    "question": "Trong một app React thực tế, bạn phân loại state thành mấy nhóm? Mỗi nhóm dùng công cụ gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97550-trong-mot-app-react-thuc-te-ban-phan-loai-state-thanh-may-nhom-moi-nhom-dung-con",
+    "slug": "trong-mot-app-react-thuc-te-ban-phan-loai-state-thanh-may-nhom-moi-nhom-dung-cong-cu-gi-6ab3f625-54bf-5bd3-8125-31f380a7b48e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Chia theo nguồn sở hữu dữ liệu, không chia theo \"global hay local\". Bốn nhóm hay gặp:"
+      ],
+      "details": [
+        "Lỗi phổ biến khi trả lời: gộp tất cả vào một store global. Nhét server state vào Redux là tự viết lại cache, loading, retry, invalidate — phần khó nhất của bài toán."
+      ],
+      "points": [
+        "Server state — dữ liệu thuộc về backend, client chỉ giữ bản sao có thể cũ: danh sách đơn hàng, hồ sơ user. Đặc trưng: bất đồng bộ, có thể stale, cần cache/refetch/invalidate. Công cụ: React Query / RTK Query / SWR.",
+        "Client state (UI state) — chỉ tồn tại ở trình duyệt: modal đang mở, tab đang chọn, theme, giỏ hàng tạm. Công cụ: useState → lift state → Zustand / Jotai / Redux khi nhiều nhánh cây cùng đọc.",
+        "URL state — bộ lọc, từ khoá tìm kiếm, số trang, id đang xem. Để trên searchParams thì link chia sẻ được, F5 không mất, nút back hoạt động đúng.",
+        "Form state — giá trị đang gõ, touched, dirty, lỗi validate. Để cục bộ trong form (react-hook-form hoặc uncontrolled), chỉ đẩy ra ngoài khi submit."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "97550-trong-mot-app-react-thuc-te-ban-phan-loai-state-thanh-may-nhom-moi-nhom-dung-con"
+  },
+  {
+    "id": "ce4b0ad7-787c-5462-82a9-79ec347cf450",
+    "question": "Khi nào một dự án React chưa cần thư viện quản lý state?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97551-khi-nao-mot-du-an-react-chua-can-thu-vien-quan-ly-state",
+    "slug": "khi-nao-mot-du-an-react-chua-can-thu-vien-quan-ly-state-ce4b0ad7-787c-5462-82a9-79ec347cf450",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Phần lớn dự án vừa và nhỏ chưa cần. Thứ tự leo thang nên theo:"
+      ],
+      "details": [
+        "1. useState ngay tại component dùng nó.\n2. Lift state up — đưa lên cha chung gần nhất khi hai component anh em cần cùng dữ liệu.\n3. Truyền props / composition — đưa JSX qua children để tránh chuỗi prop drilling dài.\n4. Context cho vài giá trị ít đổi: theme, locale, user đăng nhập.\n5. Thư viện chỉ khi có đủ tín hiệu: state client thật sự dùng chéo nhiều nhánh, cập nhật thường xuyên gây re-render diện rộng, hoặc cần đọc/ghi state từ ngoài React.",
+        "Dấu hiệu ngược lại rất quan trọng: nếu 80% state trong app là dữ liệu fetch từ API, thứ cần thêm là thư viện data-fetching chứ không phải store global. Sau khi đưa server state cho React Query, phần client state còn lại thường nhỏ tới mức useState là đủ.",
+        "Cũng đừng lưu derived state vào store: cái gì tính được từ state khác thì tính lúc render, đừng tạo thêm một biến rồi phải đồng bộ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "97551-khi-nao-mot-du-an-react-chua-can-thu-vien-quan-ly-state"
+  },
+  {
+    "id": "93d879bf-fb73-51d7-b7a1-335dad7c2ec8",
+    "question": "Context API có thay thế được Redux/Zustand không? Nó thiếu gì so với một state manager?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97552-context-api-co-thay-the-duoc-redux-zustand-khong-no-thieu-gi-so-voi-mot-state-ma",
+    "slug": "context-api-co-thay-the-duoc-redux-zustand-khong-no-thieu-gi-so-voi-mot-state-manager-93d879bf-fb73-51d7-b7a1-335dad7c2ec8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Context là cơ chế truyền giá trị xuống cây component (dependency injection), không phải state manager. Bản thân nó không lưu state — state vẫn nằm ở useState/useReducer của Provider."
+      ],
+      "details": [
+        "Ba thứ nó không có:",
+        "Cách dùng đúng: Context hợp cho dữ liệu ít thay đổi và cần ở khắp nơi (theme, locale, session). Với state đổi liên tục, hoặc tách một context \"giá trị\" và một context \"hàm dispatch\" (hàm ổn định nên consumer chỉ-dispatch không re-render), hoặc dùng store có selector."
+      ],
+      "points": [
+        "Không có selector. Mọi consumer của một context re-render khi giá trị context đổi, dù chỉ đọc một field. Store thật cho phép useStore(s => s.count) để chỉ subscribe phần cần.",
+        "Không có tối ưu cập nhật. Nếu value={{ user, setUser }} là object mới mỗi lần render Provider, toàn bộ subtree consumer re-render theo.",
+        "Không có hệ sinh thái — devtools/time-travel, middleware, persist, đọc state ngoài React."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "97552-context-api-co-thay-the-duoc-redux-zustand-khong-no-thieu-gi-so-voi-mot-state-ma"
+  },
+  {
+    "id": "537b8546-2dd1-5f52-bd6b-3910e40f760e",
+    "question": "Bộ lọc và phân trang của trang danh sách nên lưu ở đâu? Vì sao nên đẩy lên URL?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97553-bo-loc-va-phan-trang-cua-trang-danh-sach-nen-luu-o-dau-vi-sao-nen-day-len-url",
+    "slug": "bo-loc-va-phan-trang-cua-trang-danh-sach-nen-luu-o-dau-vi-sao-nen-day-len-url-537b8546-2dd1-5f52-bd6b-3910e40f760e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu trên URL query param, không phải useState hay store global. URL là nơi state đó thuộc về vì nó mô tả \"user đang xem cái gì\"."
+      ],
+      "details": [
+        "Lợi ích cụ thể:\n- Chia sẻ được: copy link gửi đồng nghiệp ra đúng kết quả đã lọc.\n- F5 không mất, nút back/forward hoạt động đúng như kỳ vọng.\n- Trở thành một phần queryKey của React Query nên cache tự tách theo bộ lọc."
+      ],
+      "points": [],
+      "sections": [
+        "Hai lưu ý khi triển khai: ô search nên debounce rồi mới ghi URL để không tạo hàng chục entry history (dùng router.replace thay vì push cho thao tác gõ phím); và trong Next.js App Router, component gọi useSearchParams cần nằm trong <Suspense> để phần còn lại của trang vẫn prerender được."
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "const params = useSearchParams()\nconst page = Number(params.get('page') ?? 1)\nconst q = params.get('q') ?? ''\n\nconst { data } = useQuery({\n  queryKey: ['products', { q, page }],\n  queryFn: () => fetchProducts({ q, page }),\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "97553-bo-loc-va-phan-trang-cua-trang-danh-sach-nen-luu-o-dau-vi-sao-nen-day-len-url"
+  },
+  {
+    "id": "43d6988a-aa62-53dd-bb7b-9a9c5b4873df",
+    "question": "Redux Toolkit (RTK) là gì? Tại sao nên dùng RTK thay vì Redux thuần?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/606-redux-toolkit-rtk-la-gi-tai-sao-nen-dung-rtk-thay-vi-redux-thuan",
+    "slug": "redux-toolkit-rtk-la-gi-tai-sao-nen-dung-rtk-thay-vi-redux-thuan-43d6988a-aa62-53dd-bb7b-9a9c5b4873df",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "RTK là cách duy nhất được khuyến nghị để viết Redux hiện đại — createSlice gộp actions+reducer, Immer cho phép write mutable syntax, RTK Query thay thế thunk cho data fetching."
+      ],
+      "details": [
+        "Redux Toolkit (RTK) là bộ công cụ chính thức và là cách duy nhất được khuyến nghị để viết Redux hiện đại — Redux thuần giờ được coi là legacy.",
+        "RTK giải quyết 3 vấn đề lớn của Redux thuần:",
+        "Thêm RTK Query cho data fetching và caching, cạnh tranh trực tiếp với React Query.",
+        "1 feature Redux thuần cần 4-5 files (types, actions, reducer, selectors, thunks), RTK chỉ cần 1 file slice."
+      ],
+      "points": [
+        "quá nhiều boilerplate (actions, action types, reducers, combineReducers riêng biệt) → createSlice gộp tất cả vào một chỗ.",
+        "Immutable update phức tạp ({...state, nested: {...state.nested, value: newVal}}) → Immer bên trong cho phép viết state.nested.value = newVal.",
+        "Async logic verbose → createAsyncThunk xử lý pending/fulfilled/rejected tự động"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "606-redux-toolkit-rtk-la-gi-tai-sao-nen-dung-rtk-thay-vi-redux-thuan"
+  },
+  {
+    "id": "5891b7af-91de-5554-8b14-fb6d9754b89c",
+    "question": "createSlice trong RTK hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/607-createslice-trong-rtk-hoat-dong-nhu-the-nao",
+    "slug": "createslice-trong-rtk-hoat-dong-nhu-the-nao-5891b7af-91de-5554-8b14-fb6d9754b89c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "createSlice gộp actions, action types, và reducer vào một chỗ — Immer bên trong cho phép viết mutable syntax mà vẫn immutable thật sự. createSlice là API quan trọng nhất của RTK, nhận object gồm name (prefix cho action types), initialState, và reducers (object chứa các reducer functions)."
+      ],
+      "details": [],
+      "points": [
+        "Nó tự động tạo action creators và action types — ví dụ: reducer increment trong slice tên 'counter' tạo ra action type counter/increment và action creator counterSlice.actions.increment().",
+        "Bên trong dùng Immer nên viết state.value += 1 thay vì return { ...state, value: state.value + 1 } — code ngắn hơn 3-4 lần với nested state.",
+        "Export 2 thứ: counterSlice.actions (dùng trong component dispatch) và counterSlice.reducer (dùng trong configureStore).",
+        "Lưu ý thường gặp: trong reducers của createSlice, hoặc mutate state HOẶC return state mới, KHÔNG làm cả hai — Immer sẽ throw error."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "state.items.push(item); return state;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "607-createslice-trong-rtk-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "6d8b2e10-ab75-554f-b0d0-99b60e596975",
+    "question": "createAsyncThunk được dùng để làm gì? Các trạng thái lifecycle của nó là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/608-createasyncthunk-duoc-dung-de-lam-gi-cac-trang-thai-lifecycle-cua-no-la-gi",
+    "slug": "createasyncthunk-duoc-dung-de-lam-gi-cac-trang-thai-lifecycle-cua-no-la-gi-6d8b2e10-ab75-554f-b0d0-99b60e596975",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: luôn dùng rejectWithValue thay vì throw trực tiếp — error object không serializable sẽ khiến DevTools hiển thị sai."
+      ],
+      "details": [],
+      "points": [
+        "Option condition huỷ thunk khi data đã có trong cache, tránh gọi API trùng.",
+        "Với RTK Query, phần lớn use case của createAsyncThunk được thay thế hoàn toàn mà không cần viết reducer."
+      ],
+      "sections": [
+        "createAsyncThunk tạo thunk action creator cho async logic (gọi API) và tự dispatch ba lifecycle action: pending (bắt đầu → bật loading), fulfilled (thành công → cập nhật data), rejected (thất bại → hiện lỗi).",
+        "Xử lý trong slice bằng extraReducers với builder pattern:"
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const fetchUser = createAsyncThunk(\n  'users/fetch',\n  async (userId, { rejectWithValue }) => {\n    try {\n      return await api.getUser(userId)\n    } catch (err) {\n      return rejectWithValue(err.response.data)\n    }\n  },\n)"
+        },
+        {
+          "language": "TS",
+          "code": "extraReducers: (builder) => {\n  builder\n    .addCase(fetchUser.pending, (state) => { state.loading = true })\n    .addCase(fetchUser.fulfilled, (state, action) => {\n      state.loading = false\n      state.data = action.payload\n    })\n    .addCase(fetchUser.rejected, (state, action) => {\n      state.loading = false\n      state.error = action.payload\n    })\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "608-createasyncthunk-duoc-dung-de-lam-gi-cac-trang-thai-lifecycle-cua-no-la-gi"
+  },
+  {
+    "id": "e7d98e21-b0f2-5021-8221-0a14711281e2",
+    "question": "Selector trong Redux là gì? Tại sao nên dùng createSelector?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/609-selector-trong-redux-la-gi-tai-sao-nen-dung-createselector",
+    "slug": "selector-trong-redux-la-gi-tai-sao-nen-dung-createselector-e7d98e21-b0f2-5021-8221-0a14711281e2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "createSelector memoize kết quả selector — chỉ recompute khi input thay đổi, tránh re-render không cần thiết khi filter/map trả về reference mới."
+      ],
+      "details": [
+        "Selector là function nhận toàn bộ Redux state và trích xuất/tính toán phần data cần thiết, ví dụ:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "const selectActiveTodos = state => state.todos.filter(t => !t.completed)"
+        },
+        {
+          "language": null,
+          "code": "createSelector([selectTodos, selectFilter], (todos, filter) => todos.filter(t => t.status === filter))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "609-selector-trong-redux-la-gi-tai-sao-nen-dung-createselector"
+  },
+  {
+    "id": "ca22b0f1-2f73-57f7-8ae4-2f1270b09b81",
+    "question": "Redux middleware là gì? Cho ví dụ về middleware phổ biến?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/612-redux-middleware-la-gi-cho-vi-du-ve-middleware-pho-bien",
+    "slug": "redux-middleware-la-gi-cho-vi-du-ve-middleware-pho-bien-ca22b0f1-2f73-57f7-8ae4-2f1270b09b81",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Middleware là function nằm giữa dispatch(action) và reducer, có thể inspect, modify, delay, hoặc cancel action trước khi đến reducer."
+      ],
+      "details": [],
+      "points": [
+        "Flow: dispatch → middleware1 → middleware2 → reducer.",
+        "Middleware phổ biến: redux-thunk (cho phép dispatch function thay vì object, xử lý async — RTK include mặc định), redux-saga (dùng generator functions cho complex async flows như race conditions, cancellation, debounce), redux-logger (log action type, prev state, next state — hữu ích cho debug)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "const logger = store => next => action => { console.log(action.type); return next(action) }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "612-redux-middleware-la-gi-cho-vi-du-ve-middleware-pho-bien"
+  },
+  {
+    "id": "b62f3951-83df-5ad4-900d-7ad38c323f4c",
+    "question": "useSelector và useDispatch hook trong React-Redux hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/614-useselector-va-usedispatch-hook-trong-react-redux-hoat-dong-nhu-the-nao",
+    "slug": "useselector-va-usedispatch-hook-trong-react-redux-hoat-dong-nhu-the-nao-b62f3951-83df-5ad4-900d-7ad38c323f4c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "useSelector nhận selector function, subscribe vào Redux store, và dùng strict === comparison (reference equality) để quyết định có re-render không."
+      ],
+      "details": [
+        "useSelector(s => ({ a: s.a, b: s.b })) tạo object mới mỗi render → infinite re-render loop khi có dispatch trong useEffect — fix bằng 2 useSelector riêng biệt hoặc shallowEqual."
+      ],
+      "points": [
+        "Lưu ý quan trọng: nếu selector trả về object/array mới mỗi lần gọi — ví dụ useSelector(s => s.items.filter(...)) — reference luôn khác nên component re-render liên tục dù data không đổi.",
+        "Fix: dùng shallowEqual từ react-redux làm argument thứ hai (useSelector(selector, shallowEqual)) để so sánh từng property, hoặc dùng createSelector (Reselect) để memoize. useDispatch trả về stable dispatch reference — không bao giờ thay đổi giữa các render, an toàn khi đặt vào dependency array.",
+        "So sánh với connect() HOC cũ: connect() dùng shallowEqual mặc định nên ít gặp re-render issue hơn, nhưng code verbose (mapStateToProps, mapDispatchToProps) và wrap component trong HOC gây khó debug. useSelector/useDispatch code gọn hơn 50% nhưng developer phải tự xử lý equality."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "614-useselector-va-usedispatch-hook-trong-react-redux-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "eff581a0-6772-5493-b00d-c83b871ea096",
+    "question": "Cách định nghĩa actions trong Zustand store?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/618-cach-dinh-nghia-actions-trong-zustand-store",
+    "slug": "cach-dinh-nghia-actions-trong-zustand-store-eff581a0-6772-5493-b00d-c83b871ea096",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Action trong Zustand là function thường sống cùng state trong store object — không action type, không dispatch, không reducer.",
+        "set"
+      ],
+      "details": [
+        "Ba pattern hay dùng:",
+        "Lưu ý: set merge nông — object lồng nhau phải tự spread: set(s => ({ config: { ...s.config, theme: 'dark' } }))."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "// 1. Partial update với set\nincrement: () => set((s) => ({ count: s.count + 1 })),\n\n// 2. Đọc state hiện tại bằng get() trước khi ghi\naddItem: (item) => {\n  const existing = get().items.find((i) => i.id === item.id)\n  set((s) => ({\n    items: existing\n      ? s.items.map((i) => (i.id === item.id ? { ...i, qty: i.qty + 1 } : i))\n      : [...s.items, item],\n  }))\n},\n\n// 3. Async — không cần thunk middleware, viết async/await thẳng\nfetchUser: async (id) => {\n  set({ loading: true })\n  const user = await api.getUser(id)\n  set({ user, loading: false })\n},"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "618-cach-dinh-nghia-actions-trong-zustand-store"
+  },
+  {
+    "id": "18ffc0bb-7c35-53ad-8081-cd5657a63d03",
+    "question": "Zustand khác Redux như thế nào về kiến trúc?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/619-zustand-khac-redux-nhu-the-nao-ve-kien-truc",
+    "slug": "zustand-khac-redux-nhu-the-nao-ve-kien-truc-18ffc0bb-7c35-53ad-8081-cd5657a63d03",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai kiến trúc khác nhau từ gốc. Redux đi theo Flux: action object → dispatch → middleware → reducer → state mới. Zustand không có khái niệm action type hay reducer — chỉ là function gọi set()."
+      ],
+      "details": [
+        "Redux bắt buộc kèm theo Provider wrapper, combineReducers, action creator, selector viết riêng và middleware để xử lý async. Zustand không cần thứ nào trong số đó.",
+        "Đổi lại, Redux ép một luồng dữ liệu nghiêm ngặt, rất hợp team lớn và nhu cầu audit; còn Zustand linh hoạt hơn nên được DX và tốc độ.",
+        "Chọn Zustand khi cần prototype nhanh, app cỡ vừa, team nhỏ. Chọn Redux khi team lớn cần sự nhất quán, cần RTK Query, cần audit trail đầy đủ, hoặc cần time-travel debugging xuyên suốt."
+      ],
+      "points": [
+        "Middleware: Redux có hệ sinh thái dày (thunk, saga, logger, sentry). Zustand nhẹ hơn nhiều (devtools, persist, immer) nhưng đủ cho phần lớn trường hợp.",
+        "DevTools: cả hai đều cắm được vào Redux DevTools Extension."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "619-zustand-khac-redux-nhu-the-nao-ve-kien-truc"
+  },
+  {
+    "id": "59f6f616-7bdb-5bde-8d22-b620911e60d5",
+    "question": "Làm thế nào để tránh re-render không cần thiết trong Zustand?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/620-lam-the-nao-de-tranh-re-render-khong-can-thiet-trong-zustand",
+    "slug": "lam-the-nao-de-tranh-re-render-khong-can-thiet-trong-zustand-59f6f616-7bdb-5bde-8d22-b620911e60d5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Luôn dùng selector cụ thể — gọi useStore() không selector là subscribe toàn bộ store, re-render khi bất kỳ state nào đổi."
+      ],
+      "details": [
+        "Zustand so sánh bằng === nên selector trả primitive thì không có vấn đề; rắc rối chỉ xảy ra khi selector tạo object/array mới mỗi lần."
+      ],
+      "points": [],
+      "sections": [
+        "Cách 3 là tự sinh selector cho từng property, dùng useStore.use.count() thay vì viết tay:"
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "// re-render mọi lúc: object mới sau mỗi render\nconst { a, b } = useStore((s) => ({ a: s.a, b: s.b }))\n\n// cách 1 — tách thành hai selector primitive\nconst a = useStore((s) => s.a)\nconst b = useStore((s) => s.b)\n\n// cách 2 — useShallow để so sánh nông object/array\nimport { useShallow } from 'zustand/react/shallow'\nconst { a, b } = useStore(useShallow((s) => ({ a: s.a, b: s.b })))"
+        },
+        {
+          "language": "TS",
+          "code": "const createSelectors = (store) => {\n  store.use = {}\n  Object.keys(store.getState()).forEach((k) => {\n    store.use[k] = () => store((s) => s[k])\n  })\n  return store\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "620-lam-the-nao-de-tranh-re-render-khong-can-thiet-trong-zustand"
+  },
+  {
+    "id": "91e3e0f4-a3ff-581b-b9e1-9e7aad70d1b8",
+    "question": "Zustand middleware là gì? Cho ví dụ về devtools middleware?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/621-zustand-middleware-la-gi-cho-vi-du-ve-devtools-middleware",
+    "slug": "zustand-middleware-la-gi-cho-vi-du-ve-devtools-middleware-91e3e0f4-a3ff-581b-b9e1-9e7aad70d1b8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Zustand middleware wrap store creator với higher-order function — devtools, immer, persist là ba middleware phổ biến nhất; compose bằng cách nest lồng nhau, devtools ở ngoài cùng."
+      ],
+      "details": [
+        "Zustand middleware dùng pattern higher-order function wrap store creator.",
+        "(config) => (set, get, api) => config(set, get, api)",
+        "Import từ 'zustand/middleware'.",
+        "Compose nhiều middleware bằng cú pháp lồng nhau:\nCopy\ncreate(devtools(immer(persist(storeCreator, persistOptions)), devtoolsOptions))\n— thứ tự quan trọng: devtools nên ở ngoài cùng để capture đúng actions.",
+        "Middleware phổ biến:"
+      ],
+      "points": [
+        "devtools — kết nối Redux DevTools Extension, đặt tên action cho mỗi set call: set(updater, false, 'addItem') để log đẹp trong DevTools;",
+        "immer — cho phép mutate state trực tiếp trong set: set(s => { s.items.push(item) }) thay vì phải spread;",
+        "persist — lưu/khôi phục state vào storage;",
+        "subscribeWithSelector — cho phép subscribe vào một phần state với selector và equality function, hữu ích cho side effects"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "create(devtools(immer(persist(storeCreator, persistOptions)), devtoolsOptions))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "621-zustand-middleware-la-gi-cho-vi-du-ve-devtools-middleware"
+  },
+  {
+    "id": "ed1e2618-850f-5dc8-92ad-952c7a8e04c2",
+    "question": "persist middleware trong Zustand hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/622-persist-middleware-trong-zustand-hoat-dong-nhu-the-nao",
+    "slug": "persist-middleware-trong-zustand-hoat-dong-nhu-the-nao-ed1e2618-850f-5dc8-92ad-952c7a8e04c2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: persist không merge sâu — đổi cấu trúc state mà quên migrate thì rehydrate ra state không hợp lệ."
+      ],
+      "details": [],
+      "points": [
+        "name là storage key, bắt buộc.",
+        "partialize chọn phần state cần lưu — bỏ qua loading/error state cho gọn.",
+        "storage đổi engine: sessionStorage, hoặc AsyncStorage cho React Native.",
+        "version + migrate xử lý thay đổi cấu trúc state giữa các bản phát hành."
+      ],
+      "sections": [
+        "Middleware persist từ 'zustand/middleware' serialize state thành JSON, lưu vào storage và rehydrate khi app khởi động."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const useAuthStore = create(\n  persist(\n    (set) => ({ user: null, theme: 'light', loading: false }),\n    {\n      name: 'auth-storage',\n      partialize: (s) => ({ user: s.user, theme: s.theme }),\n      storage: createJSONStorage(() => sessionStorage),\n      version: 2,\n      migrate: (persistedState, version) =>\n        version === 1 ? { ...persistedState, newField: 'default' } : persistedState,\n      onRehydrateStorage: () => (state, error) => {\n        if (error) console.error('hydration failed', error)\n      },\n    },\n  ),\n)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "622-persist-middleware-trong-zustand-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "d6ee5bd7-7573-5940-a2c0-1819ea5cd971",
+    "question": "useMutation hook dùng để làm gì? Cách xử lý optimistic updates?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/628-usemutation-hook-dung-de-lam-gi-cach-xu-ly-optimistic-updates",
+    "slug": "usemutation-hook-dung-de-lam-gi-cach-xu-ly-optimistic-updates-d6ee5bd7-7573-5940-a2c0-1819ea5cd971",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "useMutation xử lý write operations (POST/PUT/DELETE) — khác useQuery chỉ đọc."
+      ],
+      "details": [
+        "Cung cấp mutate() (fire-and-forget) hoặc mutateAsync() (trả về Promise).",
+        "States: isPending, isError, isSuccess, data, error.",
+        "Optimistic update flow:",
+        "user like bài viết → heart đỏ ngay lập tức (optimistic), nếu API fail → rollback heart về trắng."
+      ],
+      "points": [
+        "onMutate: cancel ongoing queries, snapshot data cũ, set cache mới ngay → UI cập nhật tức thì.",
+        "onError: nhận snapshot từ onMutate context, rollback cache.",
+        "onSettled: invalidate queries để sync với server"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "628-usemutation-hook-dung-de-lam-gi-cach-xu-ly-optimistic-updates"
+  },
+  {
+    "id": "8a58010d-f4be-566f-afba-099df72a657e",
+    "question": "Cache invalidation trong React Query hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/629-cache-invalidation-trong-react-query-hoat-dong-nhu-the-nao",
+    "slug": "cache-invalidation-trong-react-query-hoat-dong-nhu-the-nao-8a58010d-f4be-566f-afba-099df72a657e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Cache invalidation là cơ chế đánh dấu data đã cũ (stale) để trigger refetch."
+      ],
+      "details": [],
+      "points": [
+        "Cách dùng: queryClient.invalidateQueries({ queryKey: ['todos'] }) — tất cả queries có key bắt đầu bằng 'todos' bị đánh dấu stale.",
+        "Nếu component đang mount thì refetch ngay, nếu không thì refetch khi component mount lại.",
+        "Thường gọi sau mutation thành công: thêm todo mới → invalidate todo list → list tự động refetch.",
+        "Ngoài ra có queryClient.setQueryData() để update cache trực tiếp mà không cần refetch — hữu ích khi mutation trả về data mới."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "629-cache-invalidation-trong-react-query-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "850c6dc3-5884-5572-9d97-f6a6f63b7467",
+    "question": "staleTime và gcTime (cacheTime) trong React Query là gì? Sự khác biệt?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/630-staletime-va-gctime-cachetime-trong-react-query-la-gi-su-khac-biet",
+    "slug": "staletime-va-gctime-cachetime-trong-react-query-la-gi-su-khac-biet-850c6dc3-5884-5572-9d97-f6a6f63b7467",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "staleTime kiểm soát khi nào refetch; gcTime kiểm soát khi nào xóa cache — staleTime nên ≤ gcTime."
+      ],
+      "details": [
+        "staleTime: 5 * 60 * 1000 (5 phút) → trong 5 phút, navigate qua lại giữa các page sẽ show cached data ngay, không loading. gcTime (mặc định 5 phút): thời gian data ở lại trong cache SAU KHI không còn component nào subscribe."
+      ],
+      "points": [
+        "Hai config quan trọng nhất quyết định caching behavior. staleTime (mặc định 0): thời gian data được coi là 'fresh' — trong khoảng này component mount mới sẽ dùng cached data mà KHÔNG refetch."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "630-staletime-va-gctime-cachetime-trong-react-query-la-gi-su-khac-biet"
+  },
+  {
+    "id": "55a7ab69-1cac-5734-9ce8-2193c174b965",
+    "question": "Tại sao React Query được coi là giải pháp 'server state' không phải 'global state'?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/631-tai-sao-react-query-duoc-coi-la-giai-phap-server-state-khong-phai-global-state",
+    "slug": "tai-sao-react-query-duoc-coi-la-giai-phap-server-state-khong-phai-global-state-55a7ab69-1cac-5734-9ce8-2193c174b965",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Có hai loại state khác nhau về bản chất:"
+      ],
+      "details": [
+        "Redux nhét cả hai vào chung một store, thành ra phải tự dựng loading state, error state, normalization — phức tạp mà không cần thiết.",
+        "React Query tách hẳn ra: nó chỉ lo server state, kèm caching, background refetch, retry và deduplication. Client state để useState/useReducer/Zustand lo.",
+        "Kết quả thực tế ở hầu hết project: lượng code Redux giảm 50-80%.",
+        "Lưu ý: đừng nghĩ React Query là \"global state\" thay Redux — nó là lớp đồng bộ cache với server, hai vai trò khác nhau."
+      ],
+      "points": [
+        "Client state (theme, sidebar đang mở, nội dung form) — client sở hữu hoàn toàn, cập nhật là thấy ngay, và không bao giờ \"cũ\".",
+        "Server state (profile user, danh sách todo, catalog sản phẩm) — server sở hữu, người khác có thể sửa bất cứ lúc nào, phải đồng bộ liên tục, và luôn có khả năng đã cũ so với thực tế."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "631-tai-sao-react-query-duoc-coi-la-giai-phap-server-state-khong-phai-global-state"
+  },
+  {
+    "id": "ddce7ee3-0d35-54c8-883e-1d59d8321d80",
+    "question": "Cách cấu hình React Query với QueryClient và QueryClientProvider?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/632-cach-cau-hinh-react-query-voi-queryclient-va-queryclientprovider",
+    "slug": "cach-cau-hinh-react-query-voi-queryclient-va-queryclientprovider-ddce7ee3-0d35-54c8-883e-1d59d8321d80",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "QueryClient là singleton quản lý toàn bộ cache và config.",
+        "makeQueryClient()",
+        "cache()"
+      ],
+      "details": [
+        "Tạo BÊN NGOÀI component để không bị dựng lại sau mỗi render. defaultOptions áp cho mọi query/mutation trừ khi override ở từng query."
+      ],
+      "points": [
+        "Mặc định retry 3 lần với exponential backoff; ví dụ trên bỏ retry cho lỗi 404.",
+        "staleTime chọn theo loại data: data tĩnh (tiền tệ, quốc gia) → Infinity, data người dùng → 5 phút, data real-time → 0."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const queryClient = new QueryClient({\n  defaultOptions: {\n    queries: {\n      staleTime: 60_000,\n      gcTime: 5 * 60_000,\n      retry: (count, error) => error.status !== 404 && count < 3,\n      retryDelay: (attempt) => Math.min(1000 * 2 ** attempt, 30_000),\n      refetchOnWindowFocus: false,\n    },\n  },\n  // v5 bỏ onError toàn cục — bắt lỗi qua QueryCache listener\n  queryCache: new QueryCache({\n    onError: (error) => toast.error(error.message),\n  }),\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "632-cach-cau-hinh-react-query-voi-queryclient-va-queryclientprovider"
+  },
+  {
+    "id": "87dcfa56-fd24-54a3-a125-aa4c374bad82",
+    "question": "refetchOnWindowFocus trong React Query là gì? Khi nào nên tắt nó?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/633-refetchonwindowfocus-trong-react-query-la-gi-khi-nao-nen-tat-no",
+    "slug": "refetchonwindowfocus-trong-react-query-la-gi-khi-nao-nen-tat-no-87dcfa56-fd24-54a3-a125-aa4c374bad82",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "refetchOnWindowFocus (mặc định bật) refetch tất cả stale queries khi user quay lại tab — tắt khi data ít thay đổi hoặc refetch gây UX kém. refetchOnWindowFocus là behavior mặc định: khi user chuyển tab rồi quay lại, React Query tự động refetch tất cả stale queries."
+      ],
+      "details": [
+        "Mục đích: đảm bảo data luôn fresh — ví dụ user đang xem dashboard, chuyển qua Slack 5 phút, quay lại thì data cập nhật mới nhất.",
+        "Nên tắt (refetchOnWindowFocus: false) khi:",
+        "Có thể set global qua defaultOptions hoặc per-query.",
+        "Tương tự có refetchOnReconnect (khi mạng khôi phục) và refetchInterval (polling định kỳ)."
+      ],
+      "points": [
+        "data ít thay đổi (config, static content),",
+        "refetch gây UX tệ (reset scroll, flash loading),",
+        "API có rate limit"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "633-refetchonwindowfocus-trong-react-query-la-gi-khi-nao-nen-tat-no"
+  },
+  {
+    "id": "9f175163-8cdd-596c-9f42-28cf6efdc060",
+    "question": "Cách xử lý error trong React Query?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/637-cach-xu-ly-error-trong-react-query",
+    "slug": "cach-xu-ly-error-trong-react-query-9f175163-8cdd-596c-9f42-28cf6efdc060",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: onError ở useMutation vẫn dùng được, chỉ bản toàn cục trong defaultOptions mới bị xoá."
+      ],
+      "details": [],
+      "points": [
+        "throwOnError: true đẩy lỗi lên Error Boundary thay vì trả isError; useSuspenseQuery throw sẵn.",
+        "Với fetch, HTTP error không tự throw — phải tự viết if (!res.ok) throw new Error(res.statusText) trong queryFn."
+      ],
+      "sections": [
+        "React Query v5 đổi cách xử lý lỗi so với v4: onError toàn cục trong defaultOptions đã bị gỡ, thay bằng throwOnError hoặc meta."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const queryClient = new QueryClient({\n  queryCache: new QueryCache({\n    onError: (error, query) => {\n      if (query.meta?.showErrorToast) toast.error(error.message)\n    },\n  }),\n})\n\n// opt-in ở từng query\nuseQuery({ queryKey: ['todos'], queryFn: fetchTodos, meta: { showErrorToast: true } })"
+        },
+        {
+          "language": null,
+          "code": "retry: (failureCount, error) => error.status !== 401 && failureCount < 3"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "637-cach-xu-ly-error-trong-react-query"
+  },
+  {
+    "id": "78a47982-82cb-527c-89d5-18806b8c6ae8",
+    "question": "QueryKey trong React Query nên được thiết kế như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/638-querykey-trong-react-query-nen-duoc-thiet-ke-nhu-the-nao",
+    "slug": "querykey-trong-react-query-nen-duoc-thiet-ke-nhu-the-nao-78a47982-82cb-527c-89d5-18806b8c6ae8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "QueryKey là nền của kiến trúc cache. Ba nguyên tắc: đưa MỌI dependency dùng trong queryFn vào key (['todos', userId, { status, page, sort }]); dùng array chứ đừng dùng string thuần, vì array mới invalidate fuzzy được; xếp từ tổng quát đến cụ thể (['todos'] → ['todos', todoId] → ['todos', todoId, 'comments'])."
+      ],
+      "details": [
+        "Factory pattern là cách tổ chức key được khuyến nghị:"
+      ],
+      "points": [
+        "Fuzzy matching: invalidateQueries({ queryKey: ['todos'] }) invalidate mọi key bắt đầu bằng 'todos' — cả ['todos', 1] lẫn ['todos', { status: 'active' }].",
+        "React Query serialize key thành string ổn định để tra cache; object được serialize theo thứ tự key."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const todoKeys = {\n  all: ['todos'] as const,\n  lists: () => [...todoKeys.all, 'list'] as const,\n  list: (filters) => [...todoKeys.lists(), filters] as const,\n  detail: (id) => [...todoKeys.all, 'detail', id] as const,\n}\n\nuseQuery({ queryKey: todoKeys.detail(id), queryFn: () => fetchTodo(id) })\nqueryClient.invalidateQueries({ queryKey: todoKeys.lists() })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "638-querykey-trong-react-query-nen-duoc-thiet-ke-nhu-the-nao"
+  },
+  {
+    "id": "3a49f537-2739-59ff-8156-0db2f27fe6e1",
+    "question": "Jotai là gì? So sánh với Recoil?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/644-jotai-la-gi-so-sanh-voi-recoil",
+    "slug": "jotai-la-gi-so-sanh-voi-recoil-3a49f537-2739-59ff-8156-0db2f27fe6e1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Jotai là thư viện atomic state management tương tự Recoil nhưng nhỏ gọn hơn (~3KB vs ~21KB) và API đơn giản hơn đáng kể."
+      ],
+      "details": [],
+      "points": [
+        "Điểm khác biệt chính: Jotai không yêu cầu key string duy nhất cho mỗi atom (Recoil bắt buộc, dễ gây conflict trong large codebase), không cần RecoilRoot wrapper (Jotai dùng WeakMap nên hoạt động không cần Provider).",
+        "Cú pháp gần với useState hơn: const countAtom = atom(0), trong component: const [count, setCount] = useAtom(countAtom).",
+        "Jotai cũng hỗ trợ derived atoms, async atoms với Suspense, và có thể dùng atomWithStorage để persist.",
+        "Tính đến 2024-2026, Jotai đã thay thế Recoil thực tế: Meta archive repo Recoil đầu 2024 (không còn maintain), Jotai trở thành lựa chọn mặc định cho atomic state."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "644-jotai-la-gi-so-sanh-voi-recoil"
+  },
+  {
+    "id": "58d26d89-7e4c-5c93-af24-6132d07b737a",
+    "question": "Cách tạo và sử dụng atom trong Jotai?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/645-cach-tao-va-su-dung-atom-trong-jotai",
+    "slug": "cach-tao-va-su-dung-atom-trong-jotai-58d26d89-7e4c-5c93-af24-6132d07b737a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "Primitive atom: const countAtom = atom(0) — trong component dùng useAtom(countAtom) trả về [value, setValue].",
+        "Derived read-only: const doubleAtom = atom(get => get(countAtom) * 2) — dùng useAtomValue.",
+        "Derived read-write:\nCopy\natom(get => get(baseAtom), (get, set, newVal) => set(baseAtom, newVal * 2))\n. atomWithStorage('key', defaultVal) từ jotai/utils tự đồng bộ localStorage, handle SSR hydration. atomWithDefault(get => get(otherAtom)) tạo atom có thể override nhưng mặc định derive.",
+        "Architecture Provider-less: Jotai dùng WeakMap lưu state theo atom object reference thay vì string key như Recoil — atoms tự nhiên unique, hỗ trợ code-split, không lo duplicate key. useAtomValue (chỉ đọc) và useSetAtom (chỉ ghi, không subscribe, không re-render) là hooks tối ưu performance."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "atom(get => get(baseAtom), (get, set, newVal) => set(baseAtom, newVal * 2))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "645-cach-tao-va-su-dung-atom-trong-jotai"
+  },
+  {
+    "id": "153016e4-f85d-5b5d-883c-f63620d62572",
+    "question": "Jotai Provider là gì? Khi nào cần dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/649-jotai-provider-la-gi-khi-nao-can-dung",
+    "slug": "jotai-provider-la-gi-khi-nao-can-dung-153016e4-f85d-5b5d-883c-f63620d62572",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Provider-less là mặc định: Jotai dùng global WeakMap store nên mọi component share cùng atom value mà không phải bọc Provider."
+      ],
+      "details": [
+        "Khi nào cần Provider:\n- Testing — <Provider store={createStore()}> tạo store cô lập cho từng test, tránh state rò rỉ giữa các test.\n- Micro-frontend — mỗi widget giữ store riêng.\n- Reset toàn bộ atom khi component unmount (ví dụ modal dialog).",
+        "Store API dùng để thao tác với atom từ ngoài React (WebSocket handler, analytics):"
+      ],
+      "points": [],
+      "sections": [
+        "Đánh đổi: provider-less tiện nhưng dễ gây test pollution nếu quên reset; dùng Provider an toàn hơn cho test nhưng thêm boilerplate. <Provider store={store}> cũng chính là cách để gắn DevTools hoặc persist toàn bộ state của store."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const myStore = createStore()\nmyStore.get(atom)\nmyStore.set(atom, value)\nmyStore.sub(atom, callback)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "649-jotai-provider-la-gi-khi-nao-can-dung"
+  },
+  {
+    "id": "460513c1-5ab3-5918-8d65-8975cee102e0",
+    "question": "So sánh các thư viện quản lý state phổ biến: Redux Toolkit, Zustand, Context API, Jotai? Khi nào dùng gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/808-so-sanh-cac-thu-vien-quan-ly-state-pho-bien-redux-toolkit-zustand-context-api-jo",
+    "slug": "so-sanh-cac-thu-vien-quan-ly-state-pho-bien-redux-toolkit-zustand-context-api-jotai-khi-nao-dung-gi-460513c1-5ab3-5918-8d65-8975cee102e0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Context API: state đơn giản, ít thay đổi (theme, auth, locale) — không cần cài thêm gì. Zustand: nhẹ (~1KB), ít boilerplate, API đơn giản, phù hợp đa số projects. Redux Toolkit: enterprise, complex state cần middleware (async thunks, saga), DevTools mạnh, team lớn cần convention rõ ràng. Jotai: atomic state (mỗi state là 1 atom độc lập), tối ưu re-render vì chỉ component dùng atom đó mới update."
+      ],
+      "details": [
+        "Lưu ý: Recoil (Meta) đã ngừng phát triển — nên chuyển sang Jotai. Thực tế hiện tại: Zustand phổ biến nhất cho project mới vì đơn giản và đủ mạnh."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "808-so-sanh-cac-thu-vien-quan-ly-state-pho-bien-redux-toolkit-zustand-context-api-jo"
+  },
+  {
+    "id": "c1d980d6-3fba-5d7b-b001-41182500e398",
+    "question": "Redux Toolkit createSlice hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/809-redux-toolkit-createslice-hoat-dong-the-nao",
+    "slug": "redux-toolkit-createslice-hoat-dong-the-nao-c1d980d6-3fba-5d7b-b001-41182500e398",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "createSlice kết hợp action creators + reducer trong cùng một file, dùng Immer nên có thể mutate state trực tiếp."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const userSlice = createSlice({\n  name: 'user',\n  initialState,\n  reducers: {\n    setUser(state, action) { state.name = action.payload; }\n  }\n});\nexport const { setUser } = userSlice.actions;\nexport default userSlice.reducer;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "809-redux-toolkit-createslice-hoat-dong-the-nao"
+  },
+  {
+    "id": "5b09f2eb-bb94-5f85-ac97-08fd6da20d7b",
+    "question": "Placeholder data và initial data trong React Query khác gì nhau?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4062-placeholder-data-va-initial-data-trong-react-query-khac-gi-nhau",
+    "slug": "placeholder-data-va-initial-data-trong-react-query-khac-gi-nhau-5b09f2eb-bb94-5f85-ac97-08fd6da20d7b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "initialData được treat như real cached data và ảnh hưởng staleTime; placeholderData là temporary fill UI (isPlaceholderData=true), không persist vào cache — dùng placeholderData: prev => prev để giữ data trang trước khi paginate."
+      ],
+      "details": [],
+      "points": [
+        "Hai option này phục vụ mục đích khác nhau. placeholderData: data tạm thời để fill UI trong khi fetch, KHÔNG được lưu vào cache, không có timestamp, isPlaceholderData: true để component biết đang hiển thị placeholder.",
+        "Dùng khi: muốn show skeleton data có structure (ví dụ array 5 empty items), hoặc placeholderData: (prev) => prev để giữ data page trước khi chuyển page (keepPreviousData pattern). initialData: được treat như real cached data — có dataUpdatedAt, ảnh hưởng staleTime (nếu initialData đủ fresh thì không refetch ngay).",
+        "Dùng khi: data đã có từ nguồn khác (ví dụ đã fetch list, giờ dùng item từ list làm initialData cho detail query:\nCopy\ninitialData: () => queryClient.getQueryData(['todos'])?.find(t => t.id === id)\n,\nCopy\ninitialDataUpdatedAt: () => queryClient.getQueryDataState(['todos'])?.dataUpdatedAt\n).",
+        "Lưu ý: dùng sai initialData với hardcoded value sẽ ngăn query refetch vì React Query nghĩ data còn fresh — luôn kết hợp với initialDataUpdatedAt: 0 nếu muốn force refetch."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "initialDataUpdatedAt: () => queryClient.getQueryDataState(['todos'])?.dataUpdatedAt"
+        },
+        {
+          "language": null,
+          "code": "initialData: () => queryClient.getQueryData(['todos'])?.find(t => t.id === id)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "4062-placeholder-data-va-initial-data-trong-react-query-khac-gi-nhau"
+  },
+  {
+    "id": "21e53aa6-27e4-5608-989b-12ed10f8cca0",
+    "question": "select option trong useQuery dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4063-select-option-trong-usequery-dung-de-lam-gi",
+    "slug": "select-option-trong-usequery-dung-de-lam-gi-21e53aa6-27e4-5608-989b-12ed10f8cca0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "select transform data sau fetch trước khi component nhận — cache vẫn lưu raw data; component chỉ re-render khi select result thay đổi; stabilize function với useCallback để tránh re-render không cần thiết. select là transform function chạy sau khi queryFn trả về data, trước khi component nhận — không ảnh hưởng gì đến cache (cache vẫn lưu raw data)."
+      ],
+      "details": [
+        "Re-render optimization: React Query memoize select result — component chỉ re-render khi select(data) trả về giá trị khác (dùng structural equality).",
+        "Ví dụ: nhiều components dùng cùng query ['todos'] nhưng mỗi component có select khác nhau — select: d => d.filter(t => !t.done) (incomplete) và select: d => d.filter(t => t.done) (complete) — component nào chỉ re-render khi phần data của nó thay đổi.",
+        "Patterns thực tế:",
+        "Lưu ý: nếu select là inline arrow function, memoization không hoạt động vì function reference thay đổi mỗi render — stabilize bằng useCallback hoặc định nghĩa outside component."
+      ],
+      "points": [
+        "Pick fields: select: d => ({ name: d.name, avatar: d.avatar }) giảm re-render khi các field khác thay đổi.",
+        "Sort/filter: select: d => [...d].sort((a,b) => b.date - a.date).",
+        "Normalize: select: d => Object.fromEntries(d.map(i => [i.id, i]))"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "4063-select-option-trong-usequery-dung-de-lam-gi"
+  },
+  {
+    "id": "44d2c8dd-d522-5ebf-abbc-8979adba1ee3",
+    "question": "Parallel queries và useQueries trong React Query là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4064-parallel-queries-va-usequeries-trong-react-query-la-gi",
+    "slug": "parallel-queries-va-usequeries-trong-react-query-la-gi-44d2c8dd-d522-5ebf-abbc-8979adba1ee3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Parallel queries là kỹ thuật fetch nhiều API endpoints cùng lúc thay vì tuần tự (waterfall)."
+      ],
+      "details": [
+        "dashboard cần user info + notifications + stats → 3 useQuery hooks chạy song song, tổng thời gian = query chậm nhất (thay vì cộng dồn)."
+      ],
+      "points": [
+        "Cách 1: gọi nhiều useQuery hooks trong cùng component — React Query tự động chạy chúng parallel.",
+        "Cách 2: useQueries hook nhận mảng query configs, hữu ích khi số lượng queries dynamic (ví dụ fetch details cho danh sách product IDs).",
+        "Kết quả trả về mảng objects, mỗi object giống useQuery result."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "4064-parallel-queries-va-usequeries-trong-react-query-la-gi"
+  },
+  {
+    "id": "b9a6b17d-55a4-52a6-8581-cc6ee1bdacdc",
+    "question": "Cách cancel queries trong React Query khi component unmount?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4065-cach-cancel-queries-trong-react-query-khi-component-unmount",
+    "slug": "cach-cancel-queries-trong-react-query-khi-component-unmount-b9a6b17d-55a4-52a6-8581-cc6ee1bdacdc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Khi component unmount hoặc queryKey đổi, React Query abort signal và trình duyệt huỷ request đang chờ. Huỷ xảy ra trong ba tình huống:"
+      ],
+      "details": [
+        "Lưu ý: không dùng signal thì query vẫn chạy đến hết dù component đã unmount — React Query tự bỏ kết quả, nên đây là lãng phí băng thông chứ không phải bug."
+      ],
+      "points": [
+        "Component unmount trước lúc fetch xong (user chuyển trang).",
+        "queryKey đổi liên tục (ô tìm kiếm) — request cũ bị huỷ khi có key mới.",
+        "Gọi tay queryClient.cancelQueries(), thường nằm trong onMutate của optimistic update."
+      ],
+      "sections": [
+        "queryFn nhận signal (AbortSignal) trong context — truyền signal xuống fetch là bật được huỷ request."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "useQuery({\n  queryKey: ['user', id],\n  queryFn: ({ signal }) => fetch(`/api/users/${id}`, { signal }),\n})\n\n// axios từ v0.22 nhận AbortSignal trực tiếp\nuseQuery({\n  queryKey: ['user', id],\n  queryFn: ({ signal }) => axios.get(`/api/users/${id}`, { signal }),\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "4065-cach-cancel-queries-trong-react-query-khi-component-unmount"
+  },
+  {
+    "id": "2df32428-85de-5a22-b5b1-52e5d81da68e",
+    "question": "keepPreviousData (placeholderData với identity function) dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4070-keeppreviousdata-placeholderdata-voi-identity-function-dung-khi-nao",
+    "slug": "keeppreviousdata-placeholderdata-voi-identity-function-dung-khi-nao-2df32428-85de-5a22-b5b1-52e5d81da68e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "keepPreviousData (v4) đổi thành placeholderData: (prev) => prev ở v5: khi queryKey đổi (trang 1 → trang 2), React Query giữ data trang cũ trên màn hình thay vì xoá đi và hiện loading.",
+        "select",
+        "previousData"
+      ],
+      "details": [
+        "Cờ isPlaceholderData cho biết đang hiển thị data cũ."
+      ],
+      "points": [
+        "Phân trang: user vẫn thấy trang hiện tại (có thể làm mờ để báo đang tải), trang mới xong thì thay — không có flash trắng.",
+        "Lọc/tìm kiếm: giữ kết quả cũ trong lúc chạy truy vấn mới, tránh nháy rỗng giữa hai lần gõ."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const { data, isPlaceholderData } = useQuery({\n  queryKey: ['todos', page],\n  queryFn: () => fetchTodos(page),\n  placeholderData: keepPreviousData, // hoặc: (prev) => prev\n})\n\nuseEffect(() => {\n  if (!isPlaceholderData && hasNextPage) {\n    queryClient.prefetchQuery({\n      queryKey: ['todos', page + 1],\n      queryFn: () => fetchTodos(page + 1),\n    })\n  }\n}, [data, page, isPlaceholderData, queryClient])"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "4070-keeppreviousdata-placeholderdata-voi-identity-function-dung-khi-nao"
+  },
+  {
+    "id": "c23a003a-5070-540c-bc51-4f57e430339a",
+    "question": "enabled option trong useQuery dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4073-enabled-option-trong-usequery-dung-de-lam-gi",
+    "slug": "enabled-option-trong-usequery-dung-de-lam-gi-c23a003a-5070-540c-bc51-4f57e430339a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "enabled: !!dependency là pattern chuẩn cho dependent queries — query không fetch cho đến khi dependency có giá trị; enabled: false + refetch() cho lazy queries triggered by user action. enabled option kiểm soát khi nào query được phép chạy — là boolean hoặc function trả về boolean."
+      ],
+      "details": [
+        "Khi enabled: false, query ở trạng thái 'disabled': không auto-fetch, status là 'pending' với fetchStatus: 'idle' (không phải loading).",
+        "Khi enabled chuyển từ false sang true, query tự động fetch ngay.",
+        "Use cases:",
+        "enabled: someExpensiveCheck()",
+        "Pattern với TypeScript: khi enabled: !!userId, TypeScript vẫn thấy userId có thể undefined trong queryFn — workaround: queryFn: () => fetchUser(userId!) hoặc queryFn: () => fetchUser(userId as string)."
+      ],
+      "points": [
+        "Dependent queries — chỉ fetch khi dependency sẵn sàng: enabled: !!userId && !!orgId.",
+        "Lazy queries — chỉ fetch khi user trigger: const [enabled, setEnabled] = useState(false) → button onClick: setEnabled(true).",
+        "Conditional skip — skip query dựa trên route hay feature flag.",
+        "Pause queries khi offline: enabled: isOnline"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "4073-enabled-option-trong-usequery-dung-de-lam-gi"
+  },
+  {
+    "id": "b9835a7f-b5d3-5bc5-b68a-12d196ffc1fb",
+    "question": "Component dùng Zustand bị re-render liên tục (thậm chí lặp vô hạn) khi select nhiều field. Nguyên nhân và cách sửa?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97554-component-dung-zustand-bi-re-render-lien-tuc-tham-chi-lap-vo-han-khi-select-nhie",
+    "slug": "component-dung-zustand-bi-re-render-lien-tuc-tham-chi-lap-vo-han-khi-select-nhieu-field-nguyen-nhan-b9835a7f-b5d3-5bc5-b68a-12d196ffc1fb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Nguyên nhân: selector trả về object/array mới mỗi lần chạy."
+      ],
+      "details": [
+        "Zustand so sánh kết quả selector bằng Object.is, object mới luôn khác object cũ nên component re-render, selector lại chạy, tạo vòng lặp.",
+        "Sai lầm thường thấy: const state = useUserStore() (không selector) — component subscribe toàn bộ store, mọi thay đổi ở bất kỳ field nào cũng làm nó render lại."
+      ],
+      "points": [],
+      "sections": [
+        "Ba cách sửa:"
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "// sai: object literal mới mỗi lần → re-render không dừng\nconst { name, age } = useUserStore(s => ({ name: s.name, age: s.age }))"
+        },
+        {
+          "language": "TS",
+          "code": "// 1. tách từng field — mỗi selector trả về giá trị nguyên thuỷ\nconst name = useUserStore(s => s.name)\nconst age = useUserStore(s => s.age)\n\n// 2. useShallow khi cần gom nhiều field\nimport { useShallow } from 'zustand/react/shallow'\nconst { name, age } = useUserStore(useShallow(s => ({ name: s.name, age: s.age })))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "97554-component-dung-zustand-bi-re-render-lien-tuc-tham-chi-lap-vo-han-khi-select-nhie"
+  },
+  {
+    "id": "b5e4ae80-bed6-5167-9bfa-ac89cec03bd2",
+    "question": "Làm sao đọc/ghi Zustand store từ code ngoài React (interceptor, socket handler)? Và reset store giữa các test bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97555-lam-sao-doc-ghi-zustand-store-tu-code-ngoai-react-interceptor-socket-handler-va",
+    "slug": "lam-sao-doc-ghi-zustand-store-tu-code-ngoai-react-interceptor-socket-handler-va-reset-store-giua-cac-b5e4ae80-bed6-5167-9bfa-ac89cec03bd2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: getState() chỉ trả về giá trị tại thời điểm gọi, không phản ứng với thay đổi sau đó — đừng dùng trong render, chỉ dùng trong event handler, interceptor, hàm tiện ích."
+      ],
+      "details": [
+        "Test: store là module-level singleton nên state rò rỉ giữa các test. Chuẩn hoá bằng cách lưu initial state rồi reset:"
+      ],
+      "points": [],
+      "sections": [
+        "Store của Zustand là một object độc lập với React, nên gọi trực tiếp được ở bất kỳ đâu:",
+        "Tham số thứ hai true là replace — thay toàn bộ state thay vì merge, đảm bảo không còn field thừa từ test trước."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "import { useAuthStore } from '@/store/auth'\n\n// đọc snapshot hiện tại (không subscribe)\nconst token = useAuthStore.getState().token\n\n// ghi từ axios interceptor khi gặp 401\nuseAuthStore.getState().clearSession()\n\n// lắng nghe thay đổi ngoài component\nconst unsub = useAuthStore.subscribe(s => console.log(s.token))"
+        },
+        {
+          "language": "TS",
+          "code": "const initial = useAuthStore.getInitialState()\nbeforeEach(() => useAuthStore.setState(initial, true))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "97555-lam-sao-doc-ghi-zustand-store-tu-code-ngoai-react-interceptor-socket-handler-va"
+  },
+  {
+    "id": "c7fb27dd-a155-5723-8055-5d0d68fb1aa3",
+    "question": "Trong createSlice của Redux Toolkit vì sao viết state.value += 1 lại không vi phạm nguyên tắc immutability? Có bẫy gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97557-trong-createslice-cua-redux-toolkit-vi-sao-viet-state-value-1-lai-khong-vi-pham",
+    "slug": "trong-createslice-cua-redux-toolkit-vi-sao-viet-state-value-1-lai-khong-vi-pham-nguyen-tac-immutabil-c7fb27dd-a155-5723-8055-5d0d68fb1aa3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì reducer của RTK được bọc bởi Immer."
+      ],
+      "details": [
+        "1. Vừa mutate vừa return. Trong một reducer, hoặc mutate draft, hoặc return state mới — làm cả hai thì Immer ném lỗi. Ngoại lệ hợp lệ: return initialState để reset.\n2. Gán vào biến rồi mutate biến đó. const arr = state.items; arr = [...] không thay đổi gì cả, vì gán lại biến cục bộ chứ không ghi vào draft. Phải viết state.items = [...].\n3. Immer chỉ hoạt động bên trong createSlice/createReducer. Trong component hoặc hàm helper ngoài reducer, không có draft — mutate ở đó là mutate thật, vi phạm immutability và có thể gây bug không re-render.",
+        "Cũng lưu ý: không được đưa giá trị không serialize được (Date, Map, class instance, Promise) vào state — RTK bật middleware cảnh báo mặc định vì DevTools và persist đều cần state serialize được."
+      ],
+      "points": [
+        "Cái bạn nhận không phải state thật mà là draft proxy: mọi thao tác \"mutate\" được ghi lại, sau đó Immer tạo ra state mới, chỉ copy những nhánh thực sự đổi (structural sharing).",
+        "Store vẫn nhận về object bất biến hoàn toàn mới."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "reducers: {\n  addItem(state, action) {\n    state.items.push(action.payload)   // an toàn: đang mutate draft\n  },\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "97557-trong-createslice-cua-redux-toolkit-vi-sao-viet-state-value-1-lai-khong-vi-pham"
+  },
+  {
+    "id": "e433ca3c-3542-5c54-9c0f-d0de3be9e7a7",
+    "question": "Normalize state là gì? Vì sao không nên lưu mảng lồng nhau nguyên trạng từ API vào store?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97558-normalize-state-la-gi-vi-sao-khong-nen-luu-mang-long-nhau-nguyen-trang-tu-api-va",
+    "slug": "normalize-state-la-gi-vi-sao-khong-nen-luu-mang-long-nhau-nguyen-trang-tu-api-vao-store-e433ca3c-3542-5c54-9c0f-d0de3be9e7a7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vấn đề của nested:\n- Một user xuất hiện ở nhiều post → dữ liệu trùng lặp, sửa tên phải quét mọi chỗ, dễ lệch.\n- Cập nhật một comment sâu 3 tầng phải spread lồng nhau nhiều lớp, dễ sai và làm mọi tầng cha đổi reference → re-render diện rộng.\n- Tra cứu theo id là O(n) với mảng, O(1) với map."
+      ],
+      "details": [
+        "Trong RTK, createEntityAdapter sinh sẵn state shape { ids, entities } cùng các reducer addOne/upsertMany/removeOne và selector selectAll/selectById, khỏi tự viết. Nếu đã dùng RTK Query hoặc React Query thì việc này ít cần hơn — cache của chúng đã tách theo query key."
+      ],
+      "points": [],
+      "sections": [
+        "Normalize là lưu dữ liệu dạng bảng phẳng giống database: mỗi loại entity một map byId, kèm mảng allIds giữ thứ tự — thay vì giữ nguyên cây JSON lồng nhau mà API trả về."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "// nested (khó cập nhật)\n{ posts: [{ id: 1, author: { id: 7, name: 'An' }, comments: [...] }] }\n\n// normalized\n{\n  posts:   { ids: [1], entities: { 1: { id: 1, author: 7, comments: [11, 12] } } },\n  users:   { ids: [7], entities: { 7: { id: 7, name: 'An' } } },\n  comments:{ ids: [11, 12], entities: { /* ... */ } },\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "97558-normalize-state-la-gi-vi-sao-khong-nen-luu-mang-long-nhau-nguyen-trang-tu-api-va"
+  },
+  {
+    "id": "ed43bb8a-f2a5-57ee-8d38-2642e8783340",
+    "question": "Có nên đưa state của form (giá trị đang gõ) vào Redux/Zustand không? Vì sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97559-co-nen-dua-state-cua-form-gia-tri-dang-go-vao-redux-zustand-khong-vi-sao",
+    "slug": "co-nen-dua-state-cua-form-gia-tri-dang-go-vao-redux-zustand-khong-vi-sao-ed43bb8a-f2a5-57ee-8d38-2642e8783340",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Mặc định là không. Giá trị đang gõ là state cục bộ, vòng đời bằng vòng đời form, và thay đổi theo từng ký tự."
+      ],
+      "details": [
+        "Đưa vào store global gây ba vấn đề:\n- Mỗi phím gõ dispatch một action → mọi subscriber của store phải chạy selector, DevTools ngập log.\n- Phải tự dọn state khi rời trang, nếu quên thì lần mở form sau còn dữ liệu cũ.\n- Trộn dữ liệu chưa hợp lệ (đang gõ dở) vào chung nơi chứa dữ liệu đã xác nhận.",
+        "Cách làm phổ biến: giữ form uncontrolled hoặc dùng react-hook-form, chỉ đẩy dữ liệu ra ngoài khi submit — lúc đó gọi mutation, và kết quả server mới đi vào cache/store.",
+        "Ngoại lệ hợp lý:\n- Wizard nhiều bước cần giữ dữ liệu khi chuyển step hoặc F5 → một store riêng cho luồng đó (thường kèm persist), không phải store chung của app.\n- Field nào là bộ lọc danh sách thì không thuộc form state — đưa lên URL.",
+        "Trường hợp một field trong form cần hiển thị ở nơi khác theo thời gian thực, hãy lift state lên cha chung gần nhất trước, chỉ đụng tới store khi đã hết cách."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "97559-co-nen-dua-state-cua-form-gia-tri-dang-go-vao-redux-zustand-khong-vi-sao"
+  },
+  {
+    "id": "a4afbb4d-d688-54c6-8a26-fe164ee0b00d",
+    "question": "Lưu state vào localStorage để giữ giỏ hàng/theme sau khi F5 — vấn đề hydration khi SSR là gì và xử lý ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97560-luu-state-vao-localstorage-de-giu-gio-hang-theme-sau-khi-f5-van-de-hydration-khi",
+    "slug": "luu-state-vao-localstorage-de-giu-gio-hang-theme-sau-khi-f5-van-de-hydration-khi-ssr-la-gi-va-xu-ly-a4afbb4d-d688-54c6-8a26-fe164ee0b00d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: server render không có localStorage nên dựng HTML bằng giá trị mặc định; client dựng lại bằng giá trị đã lưu. Hai bản khác nhau → React báo hydration mismatch và có thể vứt HTML server để render lại toàn bộ trên client.",
+        "useEffect",
+        "setState",
+        "persist",
+        "hasHydrated",
+        "onRehydrateStorage"
+      ],
+      "details": [
+        "Sai lầm thường gặp là đọc storage ngay khi khởi tạo state:",
+        "Hai lưu ý khác: localStorage đồng bộ nên đừng ghi mỗi keystroke (throttle lại), và đừng persist token nhạy cảm hay dữ liệu server đã có cache riêng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "// sai khi SSR: server và client cho kết quả khác nhau\nconst [theme, setTheme] = useState(localStorage.getItem('theme') ?? 'light')"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "97560-luu-state-vao-localstorage-de-giu-gio-hang-theme-sau-khi-f5-van-de-hydration-khi"
+  },
+  {
+    "id": "6007a5bb-313d-5118-b852-7048bd68a144",
+    "question": "RTK Query là gì? Lợi ích so với cách fetch data thủ công?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "rtk-query-la-gi-loi-ich-so-voi-cach-fetch-data-thu-cong-6007a5bb-313d-5118-b852-7048bd68a144",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": null
+  },
+  {
+    "id": "0aac1f6b-d817-59ac-bc3c-c264f69a9e67",
+    "question": "Cách định nghĩa API với createApi trong RTK Query như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cach-dinh-nghia-api-voi-createapi-trong-rtk-query-nhu-the-nao-0aac1f6b-d817-59ac-bc3c-c264f69a9e67",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": null
+  },
+  {
+    "id": "06d3ad90-efd0-5391-ab3d-46021de377db",
+    "question": "Redux DevTools hoạt động như thế nào? Tính năng time-travel debugging là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "redux-devtools-hoat-dong-nhu-the-nao-tinh-nang-time-travel-debugging-la-gi-06d3ad90-efd0-5391-ab3d-46021de377db",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": null
+  },
+  {
+    "id": "1179f64a-cf7c-5df5-ba9a-11cc3fb0dd82",
+    "question": "Khi nào nên dùng Redux và khi nào không cần?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-nen-dung-redux-va-khi-nao-khong-can-1179f64a-cf7c-5df5-ba9a-11cc3fb0dd82",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": null
+  },
+  {
+    "id": "d7ca0589-e345-56f2-8108-7d2fffe04a3b",
+    "question": "Cách chia nhỏ Zustand store thành nhiều slices?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cach-chia-nho-zustand-store-thanh-nhieu-slices-d7ca0589-e345-56f2-8108-7d2fffe04a3b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": null
+  },
+  {
+    "id": "2b66bc76-a7d3-5358-8bad-a4a8cf4beb7a",
+    "question": "Cách sử dụng Zustand với TypeScript để có type safety?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cach-su-dung-zustand-voi-typescript-de-co-type-safety-2b66bc76-a7d3-5358-8bad-a4a8cf4beb7a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": null
+  },
+  {
+    "id": "585dba9b-12e1-52d9-b2c1-2653e31da029",
+    "question": "Khi nào nên chọn Zustand thay vì Redux Toolkit?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-nen-chon-zustand-thay-vi-redux-toolkit-585dba9b-12e1-52d9-b2c1-2653e31da029",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": null
+  },
+  {
+    "id": "8c911f17-5a9d-53fd-9400-3e1c684c9d2e",
+    "question": "Prefetching trong React Query hoạt động như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "prefetching-trong-react-query-hoat-dong-nhu-the-nao-8c911f17-5a9d-53fd-9400-3e1c684c9d2e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": null
+  },
+  {
+    "id": "825cb14b-0081-5896-8aec-087663145691",
+    "question": "Infinite queries trong React Query là gì? Dùng cho pagination như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "infinite-queries-trong-react-query-la-gi-dung-cho-pagination-nhu-the-nao-825cb14b-0081-5896-8aec-087663145691",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": null
+  },
+  {
+    "id": "f45d383a-3e71-5b96-a705-b2693fd1cf7a",
+    "question": "Dependent queries trong React Query là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dependent-queries-trong-react-query-la-gi-f45d383a-3e71-5b96-a705-b2693fd1cf7a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": null
+  },
+  {
+    "id": "c9a29cfc-e08c-54d9-97f2-bf87f91e6246",
+    "question": "Optimistic updates trong React Query thực hiện như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "optimistic-updates-trong-react-query-thuc-hien-nhu-the-nao-c9a29cfc-e08c-54d9-97f2-bf87f91e6246",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": null
+  },
+  {
+    "id": "5f23038b-756e-5625-8bb7-cc28b2289468",
+    "question": "Cách kết hợp React Query với Next.js Server Components?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cach-ket-hop-react-query-voi-next-js-server-components-5f23038b-756e-5625-8bb7-cc28b2289468",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": null
+  },
+  {
+    "id": "ba1ab66a-3c98-5c81-8696-d481f86e6a33",
+    "question": "Async atoms trong Jotai hoạt động như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "async-atoms-trong-jotai-hoat-dong-nhu-the-nao-ba1ab66a-3c98-5c81-8696-d481f86e6a33",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": null
+  },
+  {
+    "id": "ad9e3c99-79f1-5d4e-ac68-08a89182518c",
+    "question": "So sánh bundle size và performance giữa Jotai và Zustand?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "so-sanh-bundle-size-va-performance-giua-jotai-va-zustand-ad9e3c99-79f1-5d4e-ac68-08a89182518c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": null
+  },
+  {
+    "id": "3245af1a-3ec9-5ccc-a5d4-8af2b693eae1",
+    "question": "Khi nào nên dùng atomic state management (Jotai) thay vì Redux/Zustand?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-nen-dung-atomic-state-management-jotai-thay-vi-redux-zustand-3245af1a-3ec9-5ccc-a5d4-8af2b693eae1",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": null
+  },
+  {
+    "id": "7a3f98de-b9ae-5b87-82e3-94b6f2b45fbf",
+    "question": "Query Filters trong React Query là gì? Dùng ở đâu?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "query-filters-trong-react-query-la-gi-dung-o-dau-7a3f98de-b9ae-5b87-82e3-94b6f2b45fbf",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": null
+  },
+  {
+    "id": "1078e51b-58be-57f2-9417-55e80cf32033",
+    "question": "useSuspenseQuery khác gì useQuery? Khi nào dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "usesuspensequery-khac-gi-usequery-khi-nao-dung-1078e51b-58be-57f2-9417-55e80cf32033",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": null
+  },
+  {
+    "id": "9224e5b5-54cc-5e34-9a8c-e845c5455789",
+    "question": "persistQueryClient trong React Query dùng để làm gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "persistqueryclient-trong-react-query-dung-de-lam-gi-9224e5b5-54cc-5e34-9a8c-e845c5455789",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": null
+  },
+  {
+    "id": "9b8e4f19-99ac-5c04-a2ae-d2f9d0204159",
+    "question": "Mutation side effects: onMutate, onSuccess, onError, onSettled hoạt động ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mutation-side-effects-onmutate-onsuccess-onerror-onsettled-hoat-dong-ra-sao-9b8e4f19-99ac-5c04-a2ae-d2f9d0204159",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": null
+  },
+  {
+    "id": "3c5f0ce3-4e44-5984-88da-a020abfc2478",
+    "question": "React Query DevTools là gì? Cách sử dụng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "react-query-devtools-la-gi-cach-su-dung-3c5f0ce3-4e44-5984-88da-a020abfc2478",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": null
+  },
+  {
+    "id": "d8813f3f-c5ca-5f37-863a-0f156f19f949",
+    "question": "Cách xử lý race conditions trong React Query?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cach-xu-ly-race-conditions-trong-react-query-d8813f3f-c5ca-5f37-863a-0f156f19f949",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": null
+  },
+  {
+    "id": "315111e0-29ec-5aff-afd1-c717c1632080",
+    "question": "So sánh React Query với SWR? Khi nào chọn cái nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "so-sanh-react-query-voi-swr-khi-nao-chon-cai-nao-315111e0-29ec-5aff-afd1-c717c1632080",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": null
+  },
+  {
+    "id": "44e50033-21e9-5bcf-a74f-074666d9f79d",
+    "question": "Dự án đã có Redux Toolkit, khi nào vẫn nên viết createAsyncThunk và khi nào chuyển hẳn sang RTK Query? Xử lý huỷ request trùng thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "du-an-da-co-redux-toolkit-khi-nao-van-nen-viet-createasyncthunk-va-khi-nao-chuyen-han-sang-rtk-query-44e50033-21e9-5bcf-a74f-074666d9f79d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": null
+  },
+  {
+    "id": "40891617-52d4-55a5-9108-e4ee1ed4f7e3",
+    "question": "Vì sao trong Next.js không nên tạo Zustand store ở cấp module? Cách làm đúng là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vi-sao-trong-next-js-khong-nen-tao-zustand-store-o-cap-module-cach-lam-dung-la-gi-40891617-52d4-55a5-9108-e4ee1ed4f7e3",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": null
+  }
+]

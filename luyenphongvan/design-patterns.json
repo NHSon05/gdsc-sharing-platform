@@ -1,0 +1,1865 @@
+[
+  {
+    "id": "f6c607ad-fce5-5817-a36b-38d6f2c7fc9f",
+    "question": "Single Responsibility Principle (SRP) là gì và tại sao nó quan trọng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2101-single-responsibility-principle-srp-la-gi-va-tai-sao-no-quan-trong",
+    "slug": "single-responsibility-principle-srp-la-gi-va-tai-sao-no-quan-trong-f6c607ad-fce5-5817-a36b-38d6f2c7fc9f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "SRP quy định mỗi class/module chỉ nên có một lý do để thay đổi, tức là chỉ chịu trách nhiệm cho một chức năng duy nhất.",
+        "Lợi ích: code dễ test, dễ maintain."
+      ],
+      "details": [
+        "Ví dụ trong TypeScript:",
+        "Dấu hiệu vi phạm: class có nhiều method không liên quan nhau hoặc file dài hàng nghìn dòng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "// Vi phạm SRP — 1 class làm 3 việc\nclass UserService {\n  handleLogin() { /* ... */ }\n  log(msg: string) { /* ... */ }\n  sendEmail() { /* ... */ }\n}\n// Đúng SRP — tách riêng\nclass UserService { handleLogin() { /* ... */ } }\nclass Logger { log(msg: string) { /* ... */ } }\nclass EmailService { sendEmail() { /* ... */ } }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "2101-single-responsibility-principle-srp-la-gi-va-tai-sao-no-quan-trong"
+  },
+  {
+    "id": "2359c482-dc1d-5ce5-abf1-f94d7db8327b",
+    "question": "Open/Closed Principle (OCP) là gì? Cho ví dụ thực tế.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2102-open-closed-principle-ocp-la-gi-cho-vi-du-thuc-te",
+    "slug": "open-closed-principle-ocp-la-gi-cho-vi-du-thuc-te-2359c482-dc1d-5ce5-abf1-f94d7db8327b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "OCP quy định một module phải mở để mở rộng nhưng đóng để sửa đổi — thêm tính năng mới mà không cần chỉnh sửa code hiện có.",
+        "OCP thường được triển khai qua Strategy pattern, Template Method hoặc polymorphism."
+      ],
+      "details": [
+        "Ví dụ TypeScript:",
+        "Vi phạm OCP thường biểu hiện ở switch/case hay if/else if dài dần theo thời gian."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "interface DiscountStrategy {\n  apply(price: number): number\n}\nclass SeasonalDiscount implements DiscountStrategy {\n  apply(price: number) { return price * 0.8 }\n}\nclass LoyaltyDiscount implements DiscountStrategy {\n  apply(price: number) { return price * 0.9 }\n}\n// Thêm loại discount mới: chỉ cần tạo class mới, không sửa calculatePrice()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "2102-open-closed-principle-ocp-la-gi-cho-vi-du-thuc-te"
+  },
+  {
+    "id": "27bbb7e9-ee5f-59d1-ab21-429d4fa16120",
+    "question": "DRY, KISS, YAGNI là gì? Khi nào nên áp dụng và khi nào không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2106-dry-kiss-yagni-la-gi-khi-nao-nen-ap-dung-va-khi-nao-khong",
+    "slug": "dry-kiss-yagni-la-gi-khi-nao-nen-ap-dung-va-khi-nao-khong-27bbb7e9-ee5f-59d1-ab21-429d4fa16120",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Ba nguyên tắc cơ bản của software engineering:"
+      ],
+      "details": [
+        "Khi KHÔNG áp dụng DRY quá mức: đôi khi hai đoạn code trông giống nhau nhưng thuộc về hai domain khác nhau, ép DRY tạo coupling không cần thiết ('wrong abstraction' — Sandi Metz). YAGNI đặc biệt quan trọng trong startup/agile — code thừa tăng độ phức tạp và maintenance cost."
+      ],
+      "points": [
+        "DRY (Don't Repeat Yourself): mỗi piece of knowledge chỉ nên có một đại diện duy nhất — trùng lặp logic nên được extract thành function/module tái sử dụng.",
+        "KISS (Keep It Simple, Stupid): ưu tiên giải pháp đơn giản nhất có thể hoạt động, tránh over-engineering.",
+        "YAGNI (You Aren't Gonna Need It): không viết code cho tính năng chưa cần ngay bây giờ."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "2106-dry-kiss-yagni-la-gi-khi-nao-nen-ap-dung-va-khi-nao-khong"
+  },
+  {
+    "id": "212b2e41-c1cd-53c0-a469-17562816c385",
+    "question": "Tại sao SOLID quan trọng trong phát triển phần mềm thực tế?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2107-tai-sao-solid-quan-trong-trong-phat-trien-phan-mem-thuc-te",
+    "slug": "tai-sao-solid-quan-trong-trong-phat-trien-phan-mem-thuc-te-212b2e41-c1cd-53c0-a469-17562816c385",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "SOLID giúp viết code có khả năng bảo trì cao (maintainable), dễ mở rộng (extensible) và dễ test (testable) — ba yếu tố quyết định tuổi thọ của một dự án phần mềm."
+      ],
+      "details": [
+        "Khi team scale up, SOLID giúp nhiều developer làm việc song song trên cùng codebase mà ít conflict hơn vì các module có ranh giới rõ ràng. SOLID cũng giảm technical debt: vi phạm SOLID thường dẫn đến 'spaghetti code' cực kỳ khó refactor về sau.",
+        "Tuy nhiên, áp dụng SOLID có đánh đổi: tăng số lượng file/class, có thể gây over-engineering nếu áp dụng mù quáng cho codebase nhỏ. Nguyên tắc thực tế: áp dụng SOLID khi codebase có dấu hiệu đau (khó test, khó sửa, nhiều bug regression) chứ không phải từ đầu cho mọi project."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "2107-tai-sao-solid-quan-trong-trong-phat-trien-phan-mem-thuc-te"
+  },
+  {
+    "id": "cb06208f-a1b8-590f-ad6a-7c2733c1e625",
+    "question": "Bốn trụ cột của lập trình hướng đối tượng (OOP) là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93907-bon-tru-cot-cua-lap-trinh-huong-doi-tuong-oop-la-gi",
+    "slug": "bon-tru-cot-cua-lap-trinh-huong-doi-tuong-oop-la-gi-cb06208f-a1b8-590f-ad6a-7c2733c1e625",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Bốn trụ cột này độc lập với ngôn ngữ — biểu hiện khác nhau ở Java, C#, Python, TypeScript nhưng ý niệm giống nhau."
+      ],
+      "details": [],
+      "points": [
+        "Encapsulation (đóng gói): gói dữ liệu và hành vi thao tác trên dữ liệu vào một object, ẩn trạng thái nội bộ; bên ngoài chỉ truy cập qua interface công khai. Bảo vệ bất biến (invariant), giảm coupling.",
+        "Abstraction (trừu tượng): lộ ra \"làm gì\", giấu \"làm thế nào\". Hình dung như bảng điều khiển xe: bạn dùng vô-lăng mà không cần biết cơ cấu bên dưới.",
+        "Inheritance (kế thừa): class con tái sử dụng và mở rộng class cha, thiết lập quan hệ \"is-a\". Tránh lặp code nhưng dễ tạo hierarchy cứng — ưu tiên composition khi quan hệ không thực sự là \"is-a\".",
+        "Polymorphism (đa hình): cùng một lời gọi method cho kết quả khác nhau tùy kiểu thực tế của object (override / interface). Cho phép code phụ thuộc abstraction, thêm kiểu mới mà không sửa nơi gọi."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "93907-bon-tru-cot-cua-lap-trinh-huong-doi-tuong-oop-la-gi"
+  },
+  {
+    "id": "c843f4c0-bafe-5a7c-8502-2480aa551029",
+    "question": "Hàm tính phí ship của em có chuỗi if/else theo loại nhà vận chuyển, mỗi lần thêm hãng mới lại phải sửa hàm đó. Em refactor thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98200-ham-tinh-phi-ship-cua-em-co-chuoi-if-else-theo-loai-nha-van-chuyen-moi-lan-them",
+    "slug": "ham-tinh-phi-ship-cua-em-co-chuoi-if-else-theo-loai-nha-van-chuyen-moi-lan-them-hang-moi-lai-phai-su-c843f4c0-bafe-5a7c-8502-2480aa551029",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Đây là mùi code switch statements thường gặp: một hàm phân nhánh theo loại và phải sửa mỗi khi có loại mới.",
+        "Thêm hãng mới = thêm một entry, không đụng vào shippingFee. Mỗi công thức tách riêng nên test được độc lập."
+      ],
+      "details": [
+        "Cách xử lý là tách mỗi nhánh thành một strategy cùng interface, rồi chọn strategy qua một bảng tra.",
+        "Đừng làm quá: nếu chỉ có 2 nhánh và chúng gần như không đổi, if/else vẫn dễ đọc hơn. Chuyển sang Strategy khi nhánh đã bắt đầu lặp lại ở nhiều chỗ hoặc mỗi nhánh dài hơn vài dòng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "interface ShippingRate {\n  calculate(order: Order): number\n}\n\nconst rates: Record<string, ShippingRate> = {\n  ghtk: { calculate: (o) => 15000 + o.weightKg * 4000 },\n  ghn: { calculate: (o) => 18000 + o.weightKg * 3500 },\n}\n\nfunction shippingFee(carrier: string, order: Order) {\n  const rate = rates[carrier]\n  if (!rate) throw new Error(`unknown carrier: ${carrier}`)\n  return rate.calculate(order)\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "98200-ham-tinh-phi-ship-cua-em-co-chuoi-if-else-theo-loai-nha-van-chuyen-moi-lan-them"
+  },
+  {
+    "id": "9ddf92dd-93ce-5577-917d-c927505fb47d",
+    "question": "Constructor của em có 8 tham số, nhiều cái optional, gọi ra toàn null, null, true. Nên xử lý sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98201-constructor-cua-em-co-8-tham-so-nhieu-cai-optional-goi-ra-toan-null-null-true-ne",
+    "slug": "constructor-cua-em-co-8-tham-so-nhieu-cai-optional-goi-ra-toan-null-null-true-nen-xu-ly-sao-9ddf92dd-93ce-5577-917d-c927505fb47d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Đó là telescoping constructor — người đọc không biết true ở vị trí thứ 6 nghĩa là gì, và hoán đổi hai tham số cùng kiểu thì compiler không bắt được. Hai hướng:",
+        "Tên field làm rõ nghĩa, optional bỏ hẳn thay vì truyền null."
+      ],
+      "details": [
+        "2. Builder — khi việc tạo object gồm nhiều bước có thứ tự hoặc cần validate trước khi trả về instance:",
+        "Chọn cái nào: cấu hình phẳng, tạo một phát → object tham số. Dựng dần qua nhiều bước, hoặc cần nhiều biến thể từ cùng một quy trình → Builder.",
+        "1. Object tham số (đủ dùng cho phần lớn trường hợp trong TS/JS):"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "new Report({ from, to, includeDraft: true, format: 'pdf' })"
+        },
+        {
+          "language": "TS",
+          "code": "const query = new QueryBuilder()\n  .from('orders')\n  .where('status', 'paid')\n  .orderBy('created_at')\n  .build()   // Hợp lệate rồi mới tạo object bất biến"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "98201-constructor-cua-em-co-8-tham-so-nhieu-cai-optional-goi-ra-toan-null-null-true-ne"
+  },
+  {
+    "id": "2534e1f7-e376-57c5-852b-8464f6ea3958",
+    "question": "Khi đơn hàng chuyển sang trạng thái đã thanh toán, em phải gửi mail, trừ tồn kho, ghi log, đẩy notification. Hàm markPaid càng ngày càng dài. Xử lý sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98204-khi-don-hang-chuyen-sang-trang-thai-da-thanh-toan-em-phai-gui-mail-tru-ton-kho-g",
+    "slug": "khi-don-hang-chuyen-sang-trang-thai-da-thanh-toan-em-phai-gui-mail-tru-ton-kho-ghi-log-day-notificat-2534e1f7-e376-57c5-852b-8464f6ea3958",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Vấn đề là markPaid đang biết quá nhiều về hệ thống xung quanh: thêm một việc phải-làm-khi-thanh-toán là lại sửa nó.",
+        "Thêm hành vi mới = thêm một subscriber, không đụng vào logic đơn hàng."
+      ],
+      "details": [
+        "Tách theo hướng Observer / publish-subscribe: markPaid chỉ cập nhật trạng thái rồi phát ra một sự kiện, các bên quan tâm tự đăng ký.",
+        "Ba điểm phải trả lời được khi bị hỏi tiếp:\n- Lỗi của subscriber. Một handler ném exception không được làm hỏng handler khác và không được làm rollback việc đã cập nhật trạng thái. Bọc từng handler.\n- Trong process hay qua queue. Event emitter trong process mất sạch khi server restart giữa chừng. Việc quan trọng (gửi mail, trừ kho) nên đẩy qua message queue để có retry và ghi bền.\n- Khó lần vết. Luồng trở nên gián tiếp, khó đọc bằng cách \"nhảy vào định nghĩa\". Đặt tên event theo nghiệp vụ và giữ danh sách subscriber ở một chỗ đăng ký tập trung."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "orderEvents.on('order.paid', sendReceiptMail)\norderEvents.on('order.paid', reserveStock)\norderEvents.on('order.paid', pushNotification)\n\nasync function markPaid(id: string) {\n  await orders.update(id, { status: 'paid' })\n  orderEvents.emit('order.paid', { id })\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "98204-khi-don-hang-chuyen-sang-trang-thai-da-thanh-toan-em-phai-gui-mail-tru-ton-kho-g"
+  },
+  {
+    "id": "41e044c6-3ba7-5444-8471-5efc30518b96",
+    "question": "Team em gọi SDK của một cổng thanh toán rải rác khắp code. Sau này đổi cổng thì sửa rất nhiều chỗ. Nên bọc lại thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98206-team-em-goi-sdk-cua-mot-cong-thanh-toan-rai-rac-khap-code-sau-nay-doi-cong-thi-s",
+    "slug": "team-em-goi-sdk-cua-mot-cong-thanh-toan-rai-rac-khap-code-sau-nay-doi-cong-thi-sua-rat-nhieu-cho-nen-41e044c6-3ba7-5444-8471-5efc30518b96",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Code nghiệp vụ chỉ nhìn thấy PaymentGateway. Đổi cổng = viết adapter mới, phần còn lại không đổi. Test cũng dễ vì thay adapter bằng bản giả."
+      ],
+      "details": [
+        "Điểm mấu chốt hay bị làm sai: đừng để interface của bạn là bản sao chữ ký của SDK. Nếu PaymentGateway cũng có charge_id, metadata giống hệt nhà cung cấp thì mô hình của họ đã rò vào domain của bạn, và lần đổi nhà cung cấp sau vẫn phải sửa khắp nơi. Interface phải phản ánh cái ứng dụng của bạn cần, adapter chịu trách nhiệm dịch — đây chính là ý tưởng anti-corruption layer ở quy mô lớn hơn."
+      ],
+      "points": [],
+      "sections": [
+        "Định nghĩa interface theo ngôn ngữ nghiệp vụ của bạn, rồi viết một Adapter dịch từ interface đó sang SDK."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "// interface do domain của bạn định nghĩa, không copy tên của SDK\ninterface PaymentGateway {\n  createPayment(input: { orderId: string; amount: number }): Promise<{ payUrl: string }>\n  verifyWebhook(raw: string, signature: string): boolean\n}\n\nclass SepayGateway implements PaymentGateway {\n  async createPayment(input) {\n    const res = await sepaySdk.transactions.create({ /* map field ở đây */ })\n    return { payUrl: res.checkout_url }\n  }\n  verifyWebhook(raw, signature) { /* ... */ }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "98206-team-em-goi-sdk-cua-mot-cong-thanh-toan-rai-rac-khap-code-sau-nay-doi-cong-thi-s"
+  },
+  {
+    "id": "784653bd-a575-5c8a-96d4-0a4d6be79b39",
+    "question": "Liskov Substitution Principle (LSP) là gì? Khi nào bị vi phạm?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2103-liskov-substitution-principle-lsp-la-gi-khi-nao-bi-vi-pham",
+    "slug": "liskov-substitution-principle-lsp-la-gi-khi-nao-bi-vi-pham-784653bd-a575-5c8a-96d4-0a4d6be79b39",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "LSP quy định rằng các object của subclass phải có thể thay thế object của superclass mà không làm hỏng tính đúng đắn của chương trình."
+      ],
+      "details": [
+        "Ví dụ vi phạm thường gặp: class Rectangle có setWidth/setHeight, class Square extends Rectangle override cả hai để giữ tỷ lệ — khi code gọi setWidth(5) trên Square kỳ vọng height không đổi nhưng thực tế height cũng thay đổi, phá vỡ kỳ vọng. Dấu hiệu vi phạm LSP: subclass override method rồi throw exception, hoặc kiểm tra instanceof trước khi gọi method. Cách sửa: tách interface, dùng composition thay inheritance, hoặc tái thiết kế hierarchy."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "2103-liskov-substitution-principle-lsp-la-gi-khi-nao-bi-vi-pham"
+  },
+  {
+    "id": "88b542ab-4a2d-5907-abea-77e7eaaf4ecd",
+    "question": "Interface Segregation Principle (ISP) là gì? Ví dụ trong TypeScript?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2104-interface-segregation-principle-isp-la-gi-vi-du-trong-typescript",
+    "slug": "interface-segregation-principle-isp-la-gi-vi-du-trong-typescript-88b542ab-4a2d-5907-abea-77e7eaaf4ecd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "ISP quy định không nên bắt client implement những interface mà nó không sử dụng — thay vì một interface lớn, hãy tách thành nhiều interface nhỏ, chuyên biệt."
+      ],
+      "details": [
+        "Ví dụ: thay vì interface Animal { fly(): void; swim(): void; run(): void } bắt Dog phải implement fly(), ta tách thành Flyable, Swimmable, Runnable rồi class Dog implements Runnable, Swimmable. Trong TypeScript, ISP rất tự nhiên vì có thể dùng intersection types và multiple interface implementation. Dấu hiệu vi phạm: class implement interface nhưng để các method trống hoặc throw NotImplementedException. ISP đặc biệt quan trọng khi thiết kế API/SDK public — interface nhỏ giúp người dùng dễ hiểu và ít bị breaking change hơn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "2104-interface-segregation-principle-isp-la-gi-vi-du-trong-typescript"
+  },
+  {
+    "id": "85ccb1d7-4761-57aa-aa91-5a6570c9f41d",
+    "question": "Dependency Inversion Principle (DIP) là gì? Liên quan gì đến Dependency Injection?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2105-dependency-inversion-principle-dip-la-gi-lien-quan-gi-den-dependency-injection",
+    "slug": "dependency-inversion-principle-dip-la-gi-lien-quan-gi-den-dependency-injection-85ccb1d7-4761-57aa-aa91-5a6570c9f41d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "DIP có hai quy tắc:"
+      ],
+      "details": [
+        "Ví dụ: UserService không nên new MySQLDatabase() trực tiếp mà nhận DatabaseInterface qua constructor — class UserService { constructor(private db: DatabaseInterface) {} }. Dependency Injection (DI) là cơ chế triển khai DIP: thay vì class tự tạo dependency, dependency được inject từ bên ngoài (qua constructor, setter, hoặc DI container như NestJS IoC).",
+        "Lợi ích: dễ swap implementation (đổi từ MySQL sang PostgreSQL không cần sửa UserService), dễ mock trong unit test. DIP là nền tảng của các framework như NestJS, Spring, Angular."
+      ],
+      "points": [
+        "module high-level không nên phụ thuộc module low-level, cả hai nên phụ thuộc abstraction",
+        "abstraction không nên phụ thuộc detail, mà detail phụ thuộc abstraction"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "2105-dependency-inversion-principle-dip-la-gi-lien-quan-gi-den-dependency-injection"
+  },
+  {
+    "id": "fdf0eb76-5278-5ec4-845c-3b7412218636",
+    "question": "Làm thế nào để áp dụng SOLID trong dự án Next.js/React thực tế?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2108-lam-the-nao-de-ap-dung-solid-trong-du-an-next-js-react-thuc-te",
+    "slug": "lam-the-nao-de-ap-dung-solid-trong-du-an-next-js-react-thuc-te-fdf0eb76-5278-5ec4-845c-3b7412218636",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Trong React/Next.js, SRP áp dụng cho component (mỗi component một trách nhiệm), custom hook (tách logic ra khỏi UI), và service layer (tách API call ra file riêng). OCP áp dụng qua component composition và render props/children thay vì if/else trong component. DIP áp dụng qua dependency injection pattern trong custom hook: useUserService(api: ApiClient) nhận API client từ ngoài thay vì hard-code."
+      ],
+      "details": [
+        "Ví dụ thực tế: tách UserProfile thành UserAvatar, UserInfo, UserActions components (SRP); dùng AuthContext inject authService vào app (DIP); tạo useFormValidation(validators: Validator[]) nhận validators từ ngoài (OCP + DIP). SOLID trong frontend thường ít formal hơn backend nhưng nguyên tắc vẫn có giá trị tương đương."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "2108-lam-the-nao-de-ap-dung-solid-trong-du-an-next-js-react-thuc-te"
+  },
+  {
+    "id": "286d8b80-32de-53b0-ba91-bc26137d6f0f",
+    "question": "Singleton pattern là gì? Vấn đề của nó trong môi trường hiện đại?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2109-singleton-pattern-la-gi-van-de-cua-no-trong-moi-truong-hien-dai",
+    "slug": "singleton-pattern-la-gi-van-de-cua-no-trong-moi-truong-hien-dai-286d8b80-32de-53b0-ba91-bc26137d6f0f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Singleton đảm bảo một class chỉ có duy nhất một instance và cung cấp global access point đến instance đó.",
+        "Vấn đề:"
+      ],
+      "details": [
+        "Triển khai TypeScript:",
+        "Thay thế tốt hơn: dùng DI container (NestJS, InversifyJS) quản lý scope của dependency."
+      ],
+      "points": [
+        "khó unit test vì global state — mock singleton phức tạp;",
+        "trong Node.js multi-worker hoặc serverless, mỗi worker/function instance có Singleton riêng, không đảm bảo 'single' instance toàn hệ thống;",
+        "vi phạm SRP và DIP khi class tự quản lý lifecycle của mình;",
+        "hidden dependency — code dùng Database.getInstance() thay vì inject rõ ràng"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "class DatabaseConnection {\n  private static instance: DatabaseConnection\n  private constructor() {}\n  static getInstance() {\n    if (!this.instance) this.instance = new DatabaseConnection()\n    return this.instance\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "2109-singleton-pattern-la-gi-van-de-cua-no-trong-moi-truong-hien-dai"
+  },
+  {
+    "id": "2d2f7eb7-7931-5910-91bf-f8d34f556514",
+    "question": "Factory Method pattern là gì? Khác gì Simple Factory?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2110-factory-method-pattern-la-gi-khac-gi-simple-factory",
+    "slug": "factory-method-pattern-la-gi-khac-gi-simple-factory-2d2f7eb7-7931-5910-91bf-f8d34f556514",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Factory Method định nghĩa interface để tạo object nhưng để subclass quyết định class nào sẽ được instantiate — class cha không hard-code class con cụ thể.",
+        "Khác với Simple Factory (không phải GoF pattern): Simple Factory chỉ là một method/class có logic if/else tạo object — dễ hiểu nhưng vi phạm OCP vì phải sửa khi thêm type mới."
+      ],
+      "details": [
+        "Ví dụ TypeScript:"
+      ],
+      "points": [
+        "Factory Method tuân thủ OCP vì thêm type mới chỉ cần tạo subclass mới.",
+        "Dùng Factory Method khi: framework cần cho phép extension mà không biết trước loại object sẽ tạo; khi muốn user override cách tạo object.",
+        "Không dùng khi: hierarchy đơn giản, Simple Factory đủ dùng."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "abstract class Notification {\n  abstract createSender(): Sender\n  send(msg: string) {\n    this.createSender().send(msg)\n  }\n}\nclass EmailNotification extends Notification {\n  createSender() { return new EmailSender() }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "2110-factory-method-pattern-la-gi-khac-gi-simple-factory"
+  },
+  {
+    "id": "5627b958-dc9b-59d7-973e-20aadfdc2153",
+    "question": "Abstract Factory pattern là gì? Khi nào nên dùng thay Factory Method?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2111-abstract-factory-pattern-la-gi-khi-nao-nen-dung-thay-factory-method",
+    "slug": "abstract-factory-pattern-la-gi-khi-nao-nen-dung-thay-factory-method-5627b958-dc9b-59d7-973e-20aadfdc2153",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "WindowsUIFactory và MacUIFactory cùng implement interface này — nhờ vậy Button và Checkbox luôn thuộc cùng một theme."
+      ],
+      "details": [
+        "Khác Factory Method ở chỗ: Factory Method tạo một loại product, còn Abstract Factory tạo nhiều loại product có quan hệ với nhau.",
+        "Trong React, pattern này xuất hiện dưới dạng Context + Provider cung cấp một nhóm service liên quan."
+      ],
+      "points": [
+        "Dùng khi: cần bảo đảm tính nhất quán giữa các component liên quan (UI theme, widget đa nền tảng, database driver + connection pool); hoặc hệ thống hỗ trợ nhiều variant và bạn muốn hoán đổi cả variant cùng lúc.",
+        "Không dùng khi: chỉ có một loại product cần tạo (Factory Method là đủ), hoặc family chỉ có đúng một variant."
+      ],
+      "sections": [
+        "Abstract Factory cung cấp interface để tạo ra một family các object liên quan mà không cần chỉ rõ concrete class."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "interface UIFactory {\n  createButton(): Button\n  createCheckbox(): Checkbox\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "2111-abstract-factory-pattern-la-gi-khi-nao-nen-dung-thay-factory-method"
+  },
+  {
+    "id": "b6078940-9923-5d52-8ac5-462cce212f99",
+    "question": "Builder pattern là gì? Ưu điểm so với constructor có nhiều tham số?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2112-builder-pattern-la-gi-uu-diem-so-voi-constructor-co-nhieu-tham-so",
+    "slug": "builder-pattern-la-gi-uu-diem-so-voi-constructor-co-nhieu-tham-so-b6078940-9923-5d52-8ac5-462cce212f99",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Builder tách quá trình xây dựng object phức tạp thành các bước riêng biệt, cho phép tạo nhiều biểu diễn khác nhau của cùng một object.",
+        "Ưu điểm so với constructor nhiều tham số: không cần nhớ thứ tự tham số, tham số optional không cần truyền undefined, code readable hơn, có thể validate từng bước."
+      ],
+      "details": [
+        "Ví dụ TypeScript với method chaining:"
+      ],
+      "points": [
+        "Dùng khi: object có nhiều optional parameter (Telescoping Constructor anti-pattern); khi quá trình khởi tạo phức tạp có nhiều bước; khi cần tạo nhiều variant của cùng object.",
+        "Trong Go, Builder thường implement bằng functional options pattern: NewServer(WithPort(8080), WithTimeout(30*time.Second))."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "const query = new QueryBuilder()\n  .select('*')\n  .from('users')\n  .where('age > 18')\n  .orderBy('name')\n  .limit(10)\n  .build()\n// thay vì: new Query('*', 'users', 'age > 18', 'name', 10, undefined, undefined)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "2112-builder-pattern-la-gi-uu-diem-so-voi-constructor-co-nhieu-tham-so"
+  },
+  {
+    "id": "fdd9bdf1-b1a9-5eb6-ad43-d756bc0221e2",
+    "question": "Prototype pattern là gì? Khi nào dùng trong JavaScript/TypeScript?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2113-prototype-pattern-la-gi-khi-nao-dung-trong-javascript-typescript",
+    "slug": "prototype-pattern-la-gi-khi-nao-dung-trong-javascript-typescript-fdd9bdf1-b1a9-5eb6-ad43-d756bc0221e2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Prototype cho phép copy (clone) object hiện có mà không phụ thuộc vào class của nó — tạo object mới bằng cách sao chép prototype. JavaScript đặc biệt phù hợp vì có prototype-based inheritance tự nhiên."
+      ],
+      "details": [
+        "Ví dụ:\nCopy\nconst config = { timeout: 3000, retries: 3 }; const apiConfig = { ...config, baseURL: '/api' }\n— spread operator là Shallow Prototype. Dùng khi: khởi tạo object tốn kém (DB query, file I/O) và muốn clone thay vì tạo mới; khi có nhiều preset configuration chỉ khác nhau vài thuộc tính. Chú ý Shallow vs Deep clone: Object.assign() và spread {...} chỉ shallow clone, object nested vẫn shared reference — dùng structuredClone() (ES2022) hoặc JSON.parse(JSON.stringify()) cho deep clone. Không dùng khi object có circular reference hoặc function (JSON.stringify sẽ mất)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "const config = { timeout: 3000, retries: 3 }; const apiConfig = { ...config, baseURL: '/api' }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "2113-prototype-pattern-la-gi-khi-nao-dung-trong-javascript-typescript"
+  },
+  {
+    "id": "7f608e8d-dada-59e6-8be8-9b8568810c90",
+    "question": "Object Pool pattern là gì? Ứng dụng thực tế trong Node.js/Go?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2114-object-pool-pattern-la-gi-ung-dung-thuc-te-trong-node-js-go",
+    "slug": "object-pool-pattern-la-gi-ung-dung-thuc-te-trong-node-js-go-7f608e8d-dada-59e6-8be8-9b8568810c90",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Object Pool giữ sẵn một tập object đã khởi tạo để tái sử dụng thay vì liên tục tạo rồi huỷ — đáng dùng khi object tốn kém lúc khởi tạo."
+      ],
+      "details": [
+        "Ứng dụng phổ biến nhất là database connection pool: thay vì mở connection mới cho mỗi request, pool giữ sẵn N connection."
+      ],
+      "points": [
+        "Dùng khi: object đắt để tạo (DB connection, thread, buffer lớn) và ứng dụng có throughput cao.",
+        "Không dùng khi: object khởi tạo nhanh nên overhead của pool lớn hơn lợi ích; pool quá nhỏ gây contention; hoặc object có state phức tạp, khó reset sạch."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// Node.js với pg — pool tự quản lý vòng đời connection\nconst pool = new Pool({ max: 10, min: 2, idleTimeoutMillis: 30000 })"
+        },
+        {
+          "language": "GO",
+          "code": "// Go dùng sync.Pool cho object được cấp phát liên tục\nvar bufPool = sync.Pool{\n  New: func() interface{} { return new(bytes.Buffer) },\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "2114-object-pool-pattern-la-gi-ung-dung-thuc-te-trong-node-js-go"
+  },
+  {
+    "id": "4032706c-abf8-5f4c-a98c-6c1e497f82b9",
+    "question": "Dependency Injection (DI) là gì? Các loại DI và framework hỗ trợ?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2115-dependency-injection-di-la-gi-cac-loai-di-va-framework-ho-tro",
+    "slug": "dependency-injection-di-la-gi-cac-loai-di-va-framework-ho-tro-4032706c-abf8-5f4c-a98c-6c1e497f82b9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "DI là technique mà object nhận dependencies từ bên ngoài thay vì tự tạo — là cơ chế triển khai DIP.",
+        "Framework DI: NestJS dùng IoC container với decorators @Injectable(), @Inject() — tự động resolve dependency tree. Trong Go không có framework DI phổ biến, thường dùng manual DI qua wire (Google) hoặc constructor functions."
+      ],
+      "details": [
+        "Ba loại DI:",
+        "Lợi ích: loose coupling, dễ test (inject mock), dễ swap implementation. Anti-pattern: Service Locator (class tự gọi container.get('UserRepo')) — tạo hidden dependency."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "// (1) Constructor Injection (phổ biến nhất)\nclass UserService {\n  constructor(private userRepo: UserRepository) {}\n}\n\n// (2) Setter/Property Injection (cho optional dependency)\nclass UserService {\n  setRepository(repo: UserRepository) { this.repo = repo }\n}\n\n// (3) Method Injection (chỉ cần cho một operation)\nclass UserService {\n  getUser(id: string, repo: UserRepository) { return repo.find(id) }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "2115-dependency-injection-di-la-gi-cac-loai-di-va-framework-ho-tro"
+  },
+  {
+    "id": "aa17f263-5ac9-5e5b-a9cb-12196a67ce65",
+    "question": "Khi nào nên dùng Creational patterns? Cách chọn pattern phù hợp?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2116-khi-nao-nen-dung-creational-patterns-cach-chon-pattern-phu-hop",
+    "slug": "khi-nao-nen-dung-creational-patterns-cach-chon-pattern-phu-hop-aa17f263-5ac9-5e5b-a9cb-12196a67ce65",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Creational patterns giải quyết vấn đề tạo object một cách linh hoạt. Cách chọn:"
+      ],
+      "details": [
+        "Quy tắc thực tế: bắt đầu simple (new Constructor()), refactor sang pattern khi thấy pain point rõ ràng. YAGNI áp dụng cho cả design patterns."
+      ],
+      "points": [
+        "Singleton: cần đúng một instance shared toàn app (logger, config) — nhưng ưu tiên DI container thay vì tự implement.",
+        "Factory Method: framework cần cho phép subclass override cách tạo object.",
+        "Abstract Factory: cần tạo nhóm object liên quan phải consistent với nhau.",
+        "Builder: object có nhiều optional params hoặc construction process phức tạp nhiều bước.",
+        "Prototype: clone nhanh hơn tạo mới (object expensive to initialize).",
+        "Object Pool: object expensive to create và cần reuse ở high throughput."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "2116-khi-nao-nen-dung-creational-patterns-cach-chon-pattern-phu-hop"
+  },
+  {
+    "id": "aa337e07-de8e-5657-ad12-5148fff55421",
+    "question": "Adapter pattern là gì? Ví dụ thực tế trong TypeScript?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2117-adapter-pattern-la-gi-vi-du-thuc-te-trong-typescript",
+    "slug": "adapter-pattern-la-gi-vi-du-thuc-te-trong-typescript-aa337e07-de8e-5657-ad12-5148fff55421",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Adapter cho phép các interface incompatible làm việc cùng nhau bằng cách bọc một object trong wrapper cung cấp interface mà client kỳ vọng.",
+        "Hai loại Adapter: Object Adapter (composition, prefer này) và Class Adapter (multiple inheritance — không có trong TS/JS)."
+      ],
+      "details": [
+        "Ví dụ thực tế: tích hợp third-party payment SDK:"
+      ],
+      "points": [
+        "Dùng khi: tích hợp legacy code hoặc third-party library có interface không phù hợp; khi không thể sửa source code của class cần adapt.",
+        "Trong frontend, Adapter thường dùng để normalize API response format khác nhau về một schema thống nhất."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "interface PaymentProvider {\n  charge(cents: number): Promise<Receipt>\n}\n\nclass PayPalAdapter implements PaymentProvider {\n  constructor(private sdk: PayPalSDK) {}\n  charge(cents: number) {\n    return this.sdk.makePayment(cents / 100, 'USD')\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "2117-adapter-pattern-la-gi-vi-du-thuc-te-trong-typescript"
+  },
+  {
+    "id": "b5fc40a1-999f-5f9b-8eba-99110ca10aac",
+    "question": "Bridge pattern là gì? Khác gì Adapter?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2118-bridge-pattern-la-gi-khac-gi-adapter",
+    "slug": "bridge-pattern-la-gi-khac-gi-adapter-b5fc40a1-999f-5f9b-8eba-99110ca10aac",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Bridge tách abstraction khỏi implementation để cả hai có thể thay đổi độc lập — giải quyết 'Cartesian product' explosion khi có nhiều dimension."
+      ],
+      "details": [
+        "Ví dụ: Shape (Circle, Square) × Renderer (SVGRenderer, CanvasRenderer) = 4 class nếu dùng inheritance, nhưng với Bridge chỉ cần 2+2 class:"
+      ],
+      "points": [
+        "Khác Adapter: Adapter giải quyết incompatibility giữa existing interfaces (fix sau); Bridge thiết kế từ đầu để tách abstraction-implementation (design upfront).",
+        "Dùng Bridge khi: muốn tránh class explosion do kết hợp nhiều dimension; khi abstraction và implementation cần thay đổi độc lập; khi muốn share implementation giữa nhiều object.",
+        "Không dùng khi: chỉ có một dimension biến đổi — over-engineering."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "class Circle {\n  constructor(private renderer: Renderer, private radius: number) {}\n  draw() {\n    this.renderer.renderCircle(this.radius)\n  }\n}\nclass Square {\n  constructor(private renderer: Renderer, private side: number) {}\n  draw() {\n    this.renderer.renderSquare(this.side)\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "2118-bridge-pattern-la-gi-khac-gi-adapter"
+  },
+  {
+    "id": "bb76cb36-ade3-5ac5-a0bc-df6832c8144e",
+    "question": "Composite pattern là gì? Khi nào dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2119-composite-pattern-la-gi-khi-nao-dung",
+    "slug": "composite-pattern-la-gi-khi-nao-dung-bb76cb36-ade3-5ac5-a0bc-df6832c8144e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Composite cho phép compose objects thành tree structures để biểu diễn part-whole hierarchies — client xử lý individual objects và compositions đồng nhất qua cùng một interface.",
+        "Client gọi getSize() trên cả File và Folder mà không cần biết loại."
+      ],
+      "details": [
+        "Ví dụ: file system:"
+      ],
+      "points": [
+        "Trong React, component tree là ứng dụng tự nhiên của Composite — component con và cha đều là React component.",
+        "Dùng khi: cần biểu diễn tree hierarchy; khi muốn client treat leaf và composite đồng nhất.",
+        "Không dùng khi: hierarchy phẳng hoặc interface chung quá generic, khó type-safe."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "interface FileSystemItem {\n  getSize(): number\n}\n\nclass File implements FileSystemItem {\n  constructor(private size: number) {}\n  getSize() { return this.size }\n}\n\nclass Folder implements FileSystemItem {\n  private children: FileSystemItem[] = []\n  add(item: FileSystemItem) { this.children.push(item) }\n  getSize() {\n    return this.children.reduce((sum, c) => sum + c.getSize(), 0)\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "2119-composite-pattern-la-gi-khi-nao-dung"
+  },
+  {
+    "id": "d8144b8f-0f18-50ed-86c5-d57c6837bee0",
+    "question": "Decorator pattern là gì? Khác gì Inheritance? Ví dụ trong TypeScript?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2120-decorator-pattern-la-gi-khac-gi-inheritance-vi-du-trong-typescript",
+    "slug": "decorator-pattern-la-gi-khac-gi-inheritance-vi-du-trong-typescript-d8144b8f-0f18-50ed-86c5-d57c6837bee0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Decorator đính kèm thêm behavior vào object tại runtime bằng cách bọc chúng trong decorator objects — thay thế cho inheritance khi cần linh hoạt.",
+        "Khác Inheritance: Decorator thêm behavior tại runtime và có thể stack nhiều lớp; inheritance static tại compile time và có thể gây explosion."
+      ],
+      "details": [
+        "Ví dụ TypeScript:"
+      ],
+      "points": [
+        "TypeScript @decorator syntax là Decorator pattern nhưng dành cho class/method metadata, không hẳn là GoF Decorator.",
+        "Dùng khi: cần thêm behavior mà không muốn sửa class gốc; khi cần combine nhiều behavior tùy chọn.",
+        "Không dùng khi: decorator stack quá sâu gây khó debug."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "interface Coffee { cost(): number }\n\nclass SimpleCoffee implements Coffee {\n  cost() { return 10 }\n}\n\nclass MilkDecorator implements Coffee {\n  constructor(private coffee: Coffee) {}\n  cost() { return this.coffee.cost() + 2 }\n}\n\nclass SugarDecorator implements Coffee {\n  constructor(private coffee: Coffee) {}\n  cost() { return this.coffee.cost() + 1 }\n}\n\n// Stack decorators:\nconst myCoffee = new SugarDecorator(new MilkDecorator(new SimpleCoffee()))\nmyCoffee.cost() // 13"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "2120-decorator-pattern-la-gi-khac-gi-inheritance-vi-du-trong-typescript"
+  },
+  {
+    "id": "ddcc5607-8de4-5c3e-a4c9-50443119d20e",
+    "question": "Facade pattern là gì? Ứng dụng trong frontend development?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2121-facade-pattern-la-gi-ung-dung-trong-frontend-development",
+    "slug": "facade-pattern-la-gi-ung-dung-trong-frontend-development-ddcc5607-8de4-5c3e-a4c9-50443119d20e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Facade cung cấp simplified interface cho một hệ thống phức tạp, subsystem hoặc library — giảm dependency giữa client code và internals phức tạp."
+      ],
+      "details": [
+        "Ví dụ: thay vì client gọi trực tiếp 5 service (AuthService, UserService, ProfileService, CacheService, LogService), ta tạo UserFacade với method đơn giản như getUserProfile(id) tự phối hợp các service. Trong frontend: custom hook là Facade xuất sắc — useAuth() ẩn đi chi tiết của JWT storage, API call, state management; component chỉ gọi const { user, login, logout } = useAuth(). Facade không ngăn client access subsystem trực tiếp nếu cần — khác với Proxy. Dùng khi: có subsystem phức tạp cần đơn giản hóa; khi muốn layer hóa architecture (presentation → service facade → domain). Không dùng khi: tạo ra 'God Facade' ôm quá nhiều thứ — vi phạm SRP."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "2121-facade-pattern-la-gi-ung-dung-trong-frontend-development"
+  },
+  {
+    "id": "81b3dfbf-6ba6-5096-9d3a-1ebb8b675c0e",
+    "question": "Proxy pattern là gì? Các loại Proxy phổ biến?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2122-proxy-pattern-la-gi-cac-loai-proxy-pho-bien",
+    "slug": "proxy-pattern-la-gi-cac-loai-proxy-pho-bien-81b3dfbf-6ba6-5096-9d3a-1ebb8b675c0e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Proxy cung cấp surrogate object thay thế cho object khác — control access đến object gốc và có thể thêm logic trước/sau.",
+        "Trong NestJS, Guards và Interceptors là Proxy pattern."
+      ],
+      "details": [
+        "Các loại phổ biến:",
+        "JavaScript Proxy object là triển khai native:"
+      ],
+      "points": [
+        "Virtual Proxy (lazy initialization): chỉ tạo object nặng khi thực sự cần — ví dụ lazy load image;",
+        "Protection Proxy (access control): kiểm tra permission trước khi delegate;",
+        "Caching Proxy: cache result của expensive operation;",
+        "Logging Proxy: ghi log mọi request đến object",
+        "Khác Decorator: Proxy thường quản lý lifecycle của subject; Decorator thêm behavior mà client biết.",
+        "Dùng khi: cần access control, lazy init, caching, logging mà không sửa class gốc."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "const handler = {\n  get(obj, prop) {\n    console.log(`Getting ${String(prop)}`)\n    return obj[prop]\n  }\n}\nconst proxy = new Proxy(target, handler)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "2122-proxy-pattern-la-gi-cac-loai-proxy-pho-bien"
+  },
+  {
+    "id": "fd562587-bc88-5401-8151-0063a8a966a0",
+    "question": "Flyweight pattern là gì? Khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2123-flyweight-pattern-la-gi-khi-nao-nen-dung",
+    "slug": "flyweight-pattern-la-gi-khi-nao-nen-dung-fd562587-bc88-5401-8151-0063a8a966a0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Flyweight giảm memory usage bằng cách chia sẻ state chung (intrinsic state) giữa nhiều objects tương tự — chỉ lưu state riêng (extrinsic state) trong object cụ thể."
+      ],
+      "details": [
+        "Ví dụ game: render 10,000 cây trong rừng — thay vì mỗi Tree object lưu texture/mesh riêng, tạo TreeType flyweight lưu shared data, Tree chỉ lưu position/scale. Trong JavaScript: string interning, Symbol, React key reconciliation có elements của Flyweight.",
+        "Dùng khi: app cần số lượng rất lớn objects tương đồng và memory là bottleneck. Không dùng khi: số lượng object ít; khi overhead quản lý flyweight > memory saved. Flyweight tăng code complexity đáng kể — chỉ dùng khi profiling chứng minh memory là vấn đề thực sự."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "2123-flyweight-pattern-la-gi-khi-nao-nen-dung"
+  },
+  {
+    "id": "8b25f6b8-0487-5c0a-a210-e3969125b7f2",
+    "question": "Khi nào nên dùng Structural patterns? Cách chọn đúng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2124-khi-nao-nen-dung-structural-patterns-cach-chon-dung",
+    "slug": "khi-nao-nen-dung-structural-patterns-cach-chon-dung-8b25f6b8-0487-5c0a-a210-e3969125b7f2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Structural patterns giải quyết cách compose class và object thành larger structures. Chọn theo use case:"
+      ],
+      "details": [
+        "Nhiều pattern Structural có thể kết hợp — Facade có thể dùng bên trong các Proxy; Decorator và Composite hay đi cùng nhau trong UI tree."
+      ],
+      "points": [
+        "Adapter: tích hợp incompatible interface (thường là third-party lib)",
+        "Bridge: thiết kế mới cần tách abstraction-implementation để scale độc lập",
+        "Composite: dữ liệu có dạng tree, cần treat leaf/branch đồng nhất",
+        "Decorator: thêm behavior tại runtime mà không sửa class gốc",
+        "Facade: đơn giản hóa subsystem phức tạp cho client",
+        "Proxy: control access hoặc add cross-cutting concern (logging, caching, auth)"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "2124-khi-nao-nen-dung-structural-patterns-cach-chon-dung"
+  },
+  {
+    "id": "d5ed27b6-b1a6-56c9-bafd-a57008613a0f",
+    "question": "Observer pattern là gì? Ứng dụng trong JavaScript/React?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2125-observer-pattern-la-gi-ung-dung-trong-javascript-react",
+    "slug": "observer-pattern-la-gi-ung-dung-trong-javascript-react-d5ed27b6-b1a6-56c9-bafd-a57008613a0f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Observer định nghĩa one-to-many dependency: khi một object (Subject/Observable) thay đổi state, tất cả dependents (Observers) được notify tự động."
+      ],
+      "details": [
+        "Ví dụ TypeScript:"
+      ],
+      "points": [
+        "Trong JavaScript: EventEmitter của Node.js, addEventListener trong DOM, RxJS Observable đều là Observer pattern.",
+        "React: useEffect với dependency array là lazy Observer; Redux store notify components khi state thay đổi.",
+        "Pub/Sub là biến thể: thêm message broker trung gian, subject và observer không biết nhau trực tiếp (khác Observer thuần).",
+        "Dùng khi: cần event-driven architecture; khi một thay đổi trigger nhiều phản ứng không biết trước.",
+        "Không dùng khi: dependency graph phức tạp gây 'observer hell' — khó trace execution flow."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "class EventEmitter {\n  private listeners = new Map<string, Function[]>()\n\n  on(event: string, cb: Function) {\n    if (!this.listeners.has(event)) this.listeners.set(event, [])\n    this.listeners.get(event)!.push(cb)\n  }\n\n  emit(event: string, data?: unknown) {\n    this.listeners.get(event)?.forEach(cb => cb(data))\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "2125-observer-pattern-la-gi-ung-dung-trong-javascript-react"
+  },
+  {
+    "id": "4a238e15-0817-5931-8987-c527c262cbec",
+    "question": "Strategy pattern là gì? So sánh với if/else và switch/case?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2126-strategy-pattern-la-gi-so-sanh-voi-if-else-va-switch-case",
+    "slug": "strategy-pattern-la-gi-so-sanh-voi-if-else-va-switch-case-4a238e15-0817-5931-8987-c527c262cbec",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Strategy định nghĩa family of algorithms, encapsulate mỗi cái, và làm chúng interchangeable — cho phép algorithm thay đổi độc lập với client sử dụng nó.",
+        "So với if/else: Strategy tuân thủ OCP — thêm algorithm mới không cần sửa Sorter; if/else vi phạm OCP, dài dần theo thời gian."
+      ],
+      "details": [
+        "Ví dụ TypeScript:",
+        "Trong React, strategy hay xuất hiện dưới dạng render props hoặc component props nhận function:"
+      ],
+      "points": [
+        "Dùng Strategy khi: có nhiều variant của một algorithm; khi muốn swap algorithm tại runtime; khi muốn isolate algorithm logic để dễ test riêng từng cái."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "interface SortStrategy {\n  sort(data: number[]): number[]\n}\n\nclass QuickSort implements SortStrategy {\n  sort(data: number[]) { /* ... */ return data }\n}\n\nclass MergeSort implements SortStrategy {\n  sort(data: number[]) { /* ... */ return data }\n}\n\nclass Sorter {\n  constructor(private strategy: SortStrategy) {}\n  sort(data: number[]) { return this.strategy.sort(data) }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "2126-strategy-pattern-la-gi-so-sanh-voi-if-else-va-switch-case"
+  },
+  {
+    "id": "74255d39-6d0a-5fd0-9578-bb710623b149",
+    "question": "Command pattern là gì? Ứng dụng Undo/Redo?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2127-command-pattern-la-gi-ung-dung-undo-redo",
+    "slug": "command-pattern-la-gi-ung-dung-undo-redo-74255d39-6d0a-5fd0-9578-bb710623b149",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Command encapsulate một request thành object, cho phép parameterize clients với different requests, queue/log requests, và support undoable operations.",
+        "Ứng dụng thực tế: text editor (Ctrl+Z), transaction trong database, task queue (Bull, BullMQ), HTTP request retry."
+      ],
+      "details": [
+        "Cấu trúc:"
+      ],
+      "points": [
+        "Trong Redux, mỗi dispatch(action) là Command — redux-undo library implement Undo/Redo bằng Command pattern.",
+        "Dùng khi: cần undo/redo, transaction, audit log, retry; khi muốn queue và schedule requests.",
+        "Không dùng khi: simple method call đủ dùng — Command overhead không cần thiết."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "interface Command {\n  execute(): void\n  undo(): void\n}\n\nclass CommandManager {\n  private historyStack: Command[] = []\n  private redoStack: Command[] = []\n\n  run(cmd: Command) {\n    cmd.execute()\n    this.historyStack.push(cmd)\n    this.redoStack = []\n  }\n\n  undo() {\n    const cmd = this.historyStack.pop()\n    if (cmd) { cmd.undo(); this.redoStack.push(cmd) }\n  }\n\n  redo() {\n    const cmd = this.redoStack.pop()\n    if (cmd) { cmd.execute(); this.historyStack.push(cmd) }\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "2127-command-pattern-la-gi-ung-dung-undo-redo"
+  },
+  {
+    "id": "91d65e50-7de7-5629-abdf-1f94cd24a071",
+    "question": "Template Method pattern là gì? Khác Strategy ở điểm nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2128-template-method-pattern-la-gi-khac-strategy-o-diem-nao",
+    "slug": "template-method-pattern-la-gi-khac-strategy-o-diem-nao-91d65e50-7de7-5629-abdf-1f94cd24a071",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Template Method định nghĩa skeleton của algorithm trong method của superclass, để subclass override các bước cụ thể mà không thay đổi cấu trúc tổng thể.",
+        "Khác Strategy: Template Method dùng inheritance (lúc compile time); Strategy dùng composition (lúc runtime)."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [
+        "Template Method khi biết trước structure cố định nhưng detail thay đổi theo subclass; Strategy khi muốn thay đổi toàn bộ algorithm tại runtime.",
+        "Dùng khi: nhiều class share cùng algorithm skeleton nhưng differ ở implementation chi tiết; khi muốn tránh code duplication trong step chung.",
+        "Không dùng khi: cần thay đổi algorithm tại runtime (dùng Strategy); khi hierarchy quá sâu gây khó hiểu flow."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "abstract class DataProcessor {\n  // Template method — skeleton cố định\n  process() {\n    this.readData()\n    this.parseData()\n    this.analyze()\n    this.report()\n  }\n\n  abstract readData(): void\n  abstract parseData(): void\n\n  analyze() { console.log('Analyzing...') }   // hook có default\n  report() { console.log('Done') }\n}\n\nclass CSVProcessor extends DataProcessor {\n  readData() { /* đọc file CSV */ }\n  parseData() { /* parse CSV */ }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "2128-template-method-pattern-la-gi-khac-strategy-o-diem-nao"
+  },
+  {
+    "id": "da1f0762-063f-5952-af9a-6c5c0da501c2",
+    "question": "Chain of Responsibility là gì? Ứng dụng trong Express.js middleware?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2129-chain-of-responsibility-la-gi-ung-dung-trong-express-js-middleware",
+    "slug": "chain-of-responsibility-la-gi-ung-dung-trong-express-js-middleware-da1f0762-063f-5952-af9a-6c5c0da501c2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Chain of Responsibility cho phép pass request qua chain of handlers — mỗi handler quyết định xử lý hoặc pass cho handler tiếp theo."
+      ],
+      "details": [
+        "Ví dụ TypeScript:"
+      ],
+      "points": [
+        "Express.js middleware là ví dụ điển hình:\nCopy\napp.use(authMiddleware, rateLimitMiddleware, validationMiddleware, routeHandler)\n— mỗi middleware gọi next() để pass request.",
+        "Dùng khi: nhiều object có thể handle request và muốn decouple sender từ receiver; khi handlers nên được configurable hoặc reorderable tại runtime.",
+        "Khác Observer: Chain of Responsibility chỉ một handler xử lý; Observer notify tất cả.",
+        "Không dùng khi: chain quá dài gây performance issue; khi không rõ handler nào sẽ xử lý gây khó debug."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "interface Handler {\n  setNext(h: Handler): Handler\n  handle(request: number): string | null\n}\n\nabstract class AbstractHandler implements Handler {\n  protected nextHandler?: Handler\n\n  setNext(h: Handler) {\n    this.nextHandler = h\n    return h\n  }\n\n  handle(r: number): string | null {\n    return this.nextHandler?.handle(r) ?? null\n  }\n}\n\nclass AuthHandler extends AbstractHandler {\n  handle(r: number) {\n    if (r < 0) return 'Unauthorized'\n    return super.handle(r)\n  }\n}"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "app.use(authMiddleware, rateLimitMiddleware, validationMiddleware, routeHandler)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "2129-chain-of-responsibility-la-gi-ung-dung-trong-express-js-middleware"
+  },
+  {
+    "id": "4fa15a25-c07f-583c-95cf-81722135732e",
+    "question": "State pattern là gì? Khác FSM (Finite State Machine) ở đâu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2130-state-pattern-la-gi-khac-fsm-finite-state-machine-o-dau",
+    "slug": "state-pattern-la-gi-khac-fsm-finite-state-machine-o-dau-4fa15a25-c07f-583c-95cf-81722135732e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "State pattern cho phép object đổi hành vi khi state nội tại đổi — nhìn từ ngoài như thể object đổi class.",
+        "TrafficLight có RedState, GreenState, YellowState — mỗi state implement interface trên."
+      ],
+      "details": [
+        "Thay vì rải if (state === 'idle') ... else if (state === 'loading') ... khắp codebase, mỗi state là một class mang hành vi riêng.",
+        "State pattern và FSM (Finite State Machine) rất gần nhau: FSM là khái niệm toán học (state, transition, input), còn State pattern là cách hiện thực FSM theo hướng OOP. Thư viện XState cho JavaScript hiện thực FSM/Statechart theo kiểu declarative, hợp hơn State pattern thuần khi luồng phức tạp."
+      ],
+      "points": [
+        "Dùng khi: hành vi của object phụ thuộc rõ vào state, và các transition đủ phức tạp để cần dễ bảo trì.",
+        "Không dùng khi: chỉ có 2-3 state đơn giản — enum + switch/case dễ đọc hơn."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "interface TrafficLightState {\n  next(light: TrafficLight): void\n  getColor(): string\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "2130-state-pattern-la-gi-khac-fsm-finite-state-machine-o-dau"
+  },
+  {
+    "id": "0d119be1-1371-5903-9bd3-919986e41e67",
+    "question": "Iterator pattern là gì? JavaScript Iterator Protocol hoạt động ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2132-iterator-pattern-la-gi-javascript-iterator-protocol-hoat-dong-ra-sao",
+    "slug": "iterator-pattern-la-gi-javascript-iterator-protocol-hoat-dong-ra-sao-0d119be1-1371-5903-9bd3-919986e41e67",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Iterator cung cấp cách access tuần tự các elements của collection mà không expose underlying representation.",
+        "Generator functions (function*) là sugar syntax tạo iterator/iterable."
+      ],
+      "details": [
+        "Ví dụ custom iterator:"
+      ],
+      "points": [
+        "JavaScript triển khai Iterator Protocol tự nhiên: object là iterator nếu có next() method trả về { value, done }.",
+        "Dùng khi: cần traverse collection mà không expose structure; khi muốn lazy evaluation (generate values on demand — tiết kiệm memory cho large datasets).",
+        "Trong React, Suspense và streaming server rendering dùng iterator concept."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "class Range {\n  constructor(private start: number, private end: number) {}\n\n  [Symbol.iterator]() {\n    let current = this.start\n    const end = this.end\n    return {\n      next() {\n        return current <= end\n          ? { value: current++, done: false as const }\n          : { value: undefined, done: true as const }\n      }\n    }\n  }\n}\n\n// Dùng trong for...of, spread, destructuring:\nconst range = new Range(1, 5)\nfor (const n of range) console.log(n) // 1 2 3 4 5\nconsole.log([...new Range(1, 3)]) // [1, 2, 3]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "2132-iterator-pattern-la-gi-javascript-iterator-protocol-hoat-dong-ra-sao"
+  },
+  {
+    "id": "4de368f1-03d5-5d22-a2a9-581ddcb289b6",
+    "question": "MVC, MVP, MVVM là gì? Sự khác biệt và ứng dụng trong frontend hiện đại?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2134-mvc-mvp-mvvm-la-gi-su-khac-biet-va-ung-dung-trong-frontend-hien-dai",
+    "slug": "mvc-mvp-mvvm-la-gi-su-khac-biet-va-ung-dung-trong-frontend-hien-dai-4de368f1-03d5-5d22-a2a9-581ddcb289b6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Ba architectural patterns tách UI logic:"
+      ],
+      "details": [
+        "Trong React hiện đại: Component = View, Custom Hook = ViewModel (logic + state), Service/Store = Model. Data flow: MVC hai chiều; MVVM data binding tự động; MVP qua interface contract."
+      ],
+      "points": [
+        "MVC (Model-View-Controller): Controller xử lý input, update Model, View render Model — Controller và View biết nhau; truyền thống trong server-side (Rails, Laravel, Express).",
+        "MVP (Model-View-Presenter): Presenter xử lý logic thay Controller, View passive hơn chỉ nhận data từ Presenter và forward events — testable hơn vì Presenter pure class, không phụ thuộc UI.",
+        "MVVM (Model-View-ViewModel): ViewModel expose Observable state, View bind tự động qua data binding — Vue.js, Angular, WPF, React với hooks."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "2134-mvc-mvp-mvvm-la-gi-su-khac-biet-va-ung-dung-trong-frontend-hien-dai"
+  },
+  {
+    "id": "2412f377-3593-51de-9e83-c164de17dabb",
+    "question": "Memento pattern là gì? Nó hỗ trợ undo/redo như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93908-memento-pattern-la-gi-no-ho-tro-undo-redo-nhu-the-nao",
+    "slug": "memento-pattern-la-gi-no-ho-tro-undo-redo-nhu-the-nao-2412f377-3593-51de-9e83-c164de17dabb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Ý tưởng: chụp và lưu lại trạng thái nội bộ của một object để sau này khôi phục, mà không phá vỡ encapsulation (không lộ chi tiết bên trong ra ngoài)."
+      ],
+      "details": [
+        "Ba vai:\n- Originator: object có trạng thái cần lưu; tạo memento (save()) và phục hồi từ memento (restore(m)).\n- Memento: object bất biến giữ ảnh chụp trạng thái; chỉ Originator đọc được nội dung.\n- Caretaker: giữ danh sách memento (thường là một stack), yêu cầu save/restore nhưng không xem nội dung.",
+        "Undo/redo: mỗi thay đổi → Caretaker push một memento vào stack undo; khi Undo → pop và restore; Redo dùng stack thứ hai. Editor văn bản, phần mềm đồ họa dùng đúng cơ chế này.",
+        "Đánh đổi: lưu full snapshot tốn bộ nhớ nếu state lớn hoặc thay đổi liên tục → cân nhắc lưu delta (Command pattern) thay vì snapshot đầy đủ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "93908-memento-pattern-la-gi-no-ho-tro-undo-redo-nhu-the-nao"
+  },
+  {
+    "id": "46e13df4-e9d6-5e7c-809f-e7b92a2c564e",
+    "question": "Null Object pattern là gì? Nó giúp loại bỏ việc kiểm tra null ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93909-null-object-pattern-la-gi-no-giup-loai-bo-viec-kiem-tra-null-ra-sao",
+    "slug": "null-object-pattern-la-gi-no-giup-loai-bo-viec-kiem-tra-null-ra-sao-46e13df4-e9d6-5e7c-809f-e7b92a2c564e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Vấn đề: code rải rác if (obj != null) obj.doSomething() gây rối, dễ quên, và dẫn tới NullPointerException."
+      ],
+      "details": [
+        "Ý tưởng: thay vì trả null khi \"không có gì\", trả về một object triển khai cùng interface nhưng hành vi trung tính / không làm gì (do-nothing).",
+        "Ví dụ: interface Logger { log(msg) }. Thay vì để logger có thể null, dùng NullLogger với log() rỗng. Nơi gọi logger.log(...) luôn an toàn, không cần kiểm tra null.",
+        "Lợi ích: bỏ được các nhánh null-check, code sạch hơn, và định nghĩa hành vi mặc định ở một chỗ duy nhất."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "93909-null-object-pattern-la-gi-no-giup-loai-bo-viec-kiem-tra-null-ra-sao"
+  },
+  {
+    "id": "300fc852-be8d-58a1-8784-a9bf7219a713",
+    "question": "Association, Aggregation và Composition khác nhau thế nào trong quan hệ đối tượng (UML)?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93910-association-aggregation-va-composition-khac-nhau-the-nao-trong-quan-he-doi-tuong",
+    "slug": "association-aggregation-va-composition-khac-nhau-the-nao-trong-quan-he-doi-tuong-uml-300fc852-be8d-58a1-8784-a9bf7219a713",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Ba mức quan hệ giữa object, ràng buộc vòng đời mạnh dần:"
+      ],
+      "details": [
+        "Cách nhớ: hỏi \"part có sống được khi whole biến mất không?\" — có → aggregation, không → composition. Cả hai đều là \"has-a\"; association là quan hệ chung hơn."
+      ],
+      "points": [
+        "Association (kết hợp): hai object có liên hệ và dùng nhau nhưng độc lập vòng đời. Vd: Teacher và Student — biết nhau nhưng tồn tại riêng. UML: đường thẳng.",
+        "Aggregation (tập hợp, \"has-a\" lỏng): quan hệ whole–part nhưng part sống độc lập với whole. Vd: Team chứa Player — giải tán team, cầu thủ vẫn còn và có thể sang team khác. UML: hình thoi rỗng phía whole.",
+        "Composition (hợp thành, \"has-a\" chặt): whole sở hữu part; part không tồn tại nếu thiếu whole, hủy whole thì hủy luôn part. Vd: House và Room — phá nhà thì phòng không còn. UML: hình thoi đặc."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "93910-association-aggregation-va-composition-khac-nhau-the-nao-trong-quan-he-doi-tuong"
+  },
+  {
+    "id": "5de72398-32d4-5412-8614-439e24af9cba",
+    "question": "Cohesion và Coupling là gì? Vì sao nên hướng tới high cohesion và low coupling?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93911-cohesion-va-coupling-la-gi-vi-sao-nen-huong-toi-high-cohesion-va-low-coupling",
+    "slug": "cohesion-va-coupling-la-gi-vi-sao-nen-huong-toi-high-cohesion-va-low-coupling-5de72398-32d4-5412-8614-439e24af9cba",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Vì sao high cohesion + low coupling:\n- Dễ hiểu: mỗi module có một lý do tồn tại rõ ràng.\n- Dễ sửa/thay: đổi một module ít lan sang module khác (giảm ripple effect).\n- Dễ test & tái sử dụng: module tự chứa, mock dependency đơn giản."
+      ],
+      "details": [
+        "Hình dung: high cohesion là các thứ liên quan nằm gần nhau; low coupling là các nhóm đó nối với nhau bằng \"dây mảnh\", không dính chặt. Đây là thước đo cốt lõi của thiết kế module tốt (Constantine/Yourdon, được nhắc lại trong Clean Architecture)."
+      ],
+      "points": [
+        "Cohesion (độ gắn kết): mức độ các phần bên trong một module cùng phục vụ một mục đích rõ ràng. High cohesion = mọi hàm/thuộc tính trong module liên quan chặt tới một trách nhiệm (gần với SRP).",
+        "Coupling (độ phụ thuộc): mức độ một module lệ thuộc vào chi tiết của module khác. Low coupling = các module giao tiếp qua interface ổn định, ít biết nội bộ của nhau."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "93911-cohesion-va-coupling-la-gi-vi-sao-nen-huong-toi-high-cohesion-va-low-coupling"
+  },
+  {
+    "id": "e934ae6c-9688-57ac-a16d-9287bac102ca",
+    "question": "Hệ thống cần khởi tạo storage/payment khác nhau theo config môi trường. Khi nào dùng Factory Method, khi nào Abstract Factory?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98202-he-thong-can-khoi-tao-storage-payment-khac-nhau-theo-config-moi-truong-khi-nao-d",
+    "slug": "he-thong-can-khoi-tao-storage-payment-khac-nhau-theo-config-moi-truong-khi-nao-dung-factory-method-k-e934ae6c-9688-57ac-a16d-9287bac102ca",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Abstract Factory giải quyết một nhóm object phải khớp nhau.",
+        "Quy tắc chọn: một sản phẩm → Factory Method. Một họ sản phẩm cần đồng bộ, không được lắp lẫn → Abstract Factory."
+      ],
+      "details": [
+        "Ví dụ chọn nhà thanh toán: mỗi nhà có client tạo giao dịch, verifier chữ ký webhook và refunder riêng — trộn client của A với verifier của B là sai.",
+        "Thực tế: đa số ứng dụng chỉ cần một hàm factory đơn giản như trên. Chỉ dựng cả interface factory khi đã có từ 2 nhà cung cấp thật sự cùng chạy, không phải vì \"sau này biết đâu cần\"."
+      ],
+      "points": [],
+      "sections": [
+        "Factory Method giải quyết một loại object: bạn có một hàm/method quyết định tạo instance nào dựa trên input, phần code gọi chỉ thấy interface."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "function createStorage(cfg: Config): Storage {\n  switch (cfg.driver) {\n    case 's3': return new S3Storage(cfg.s3)\n    case 'local': return new LocalStorage(cfg.path)\n  }\n}"
+        },
+        {
+          "language": "TS",
+          "code": "interface PaymentProvider {\n  createCharge(): ChargeClient\n  createWebhookVerifier(): WebhookVerifier\n}\n// SepayProvider và StripeProvider mỗi bên trả về bộ khớp nhau"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "98202-he-thong-can-khoi-tao-storage-payment-khac-nhau-theo-config-moi-truong-khi-nao-d"
+  },
+  {
+    "id": "3141976b-08d7-5d03-bbea-3c00d76f86a5",
+    "question": "Vì sao Singleton hay bị gọi là anti-pattern, nhất là trong code có unit test?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98203-vi-sao-singleton-hay-bi-goi-la-anti-pattern-nhat-la-trong-code-co-unit-test",
+    "slug": "vi-sao-singleton-hay-bi-goi-la-anti-pattern-nhat-la-trong-code-co-unit-test-3141976b-08d7-5d03-bbea-3c00d76f86a5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Bản thân \"một instance duy nhất\" không sai — vấn đề nằm ở cách Singleton cổ điển tự quản lý instance và được gọi thẳng từ mọi nơi.",
+        "Bạn giữ được tính duy nhất mà không mất khả năng thay thế."
+      ],
+      "details": [
+        "Hệ quả:\n- Phụ thuộc ẩn. OrderService gọi Database.getInstance() bên trong, nên chữ ký hàm không hề cho biết nó cần DB. Đọc constructor không đủ hiểu service phụ thuộc gì.\n- Khó thay thế khi test. Muốn test với DB giả thì phải chọc vào biến static toàn cục hoặc dùng cơ chế mock module.\n- Trạng thái rò rỉ giữa các test. Instance sống suốt process nên test này ảnh hưởng test kia, gây flaky theo thứ tự chạy.\n- Vi phạm DIP. Code phụ thuộc trực tiếp vào lớp cụ thể chứ không phải abstraction.",
+        "Cách làm thay thế: vẫn tạo đúng một instance ở tầng khởi động (composition root), nhưng truyền vào nơi cần thay vì để nơi đó tự lấy.",
+        "Singleton \"thật\" chỉ còn hợp lý cho những thứ vô hại và không trạng thái nghiệp vụ, ví dụ logger hay bộ đọc config chỉ đọc."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const db = createDb(env.DATABASE_URL)   // tạo một lần khi boot\nconst orders = new OrderService(db)      // phụ thuộc lộ rõ, test thay được"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "98203-vi-sao-singleton-hay-bi-goi-la-anti-pattern-nhat-la-trong-code-co-unit-test"
+  },
+  {
+    "id": "7fec4f46-301f-5555-8ef1-086ac76f5979",
+    "question": "Em cần thêm cache, retry và đo thời gian cho một service đang chạy nhưng không muốn sửa class đó. Làm thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98205-em-can-them-cache-retry-va-do-thoi-gian-cho-mot-service-dang-chay-nhung-khong-mu",
+    "slug": "em-can-them-cache-retry-va-do-thoi-gian-cho-mot-service-dang-chay-nhung-khong-muon-sua-class-do-lam-7fec4f46-301f-5555-8ef1-086ac76f5979",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Mỗi mối quan tâm nằm một lớp riêng, ghép được theo thứ tự tùy ý và class gốc không đổi một dòng nào."
+      ],
+      "details": [
+        "Khác kế thừa: kế thừa cố định tổ hợp lúc biên dịch, và mỗi tổ hợp cache/retry/metrics là một subclass mới. Decorator ghép lúc chạy, số tổ hợp không làm nổ số class.",
+        "Lưu ý thực tế:\n- Thứ tự bọc quyết định ngữ nghĩa: retry ngoài cache thì retry cả lần đọc cache; cache ngoài retry thì kết quả lỗi không bị cache.\n- Chồng nhiều lớp làm stack trace khó đọc — giữ số decorator ở mức tối thiểu và đặt tên class rõ ràng.\n- Trong JS còn cách nhẹ hơn là hàm bậc cao (withRetry(fn)) khi interface chỉ có một method."
+      ],
+      "points": [],
+      "sections": [
+        "Dùng Decorator: bọc object gốc trong một object cùng interface, thêm hành vi trước/sau rồi ủy quyền phần việc chính cho object bên trong."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "interface PriceApi { get(sku: string): Promise<number> }\n\nclass CachedPriceApi implements PriceApi {\n  constructor(private inner: PriceApi, private cache: Cache) {}\n  async get(sku: string) {\n    const hit = await this.cache.get(sku)\n    if (hit !== null) return hit\n    const value = await this.inner.get(sku)\n    await this.cache.set(sku, value, 60)\n    return value\n  }\n}\n\nconst api = new TimedPriceApi(new CachedPriceApi(new HttpPriceApi(), cache), metrics)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "98205-em-can-them-cache-retry-va-do-thoi-gian-cho-mot-service-dang-chay-nhung-khong-mu"
+  },
+  {
+    "id": "dd360b54-4173-536b-81cd-253a2b6ec44f",
+    "question": "Controller đăng ký người dùng của em đang gọi 6 service theo thứ tự (tạo user, tạo profile, gửi mail, ghi audit...). Có nên gom lại không, và gom bằng gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98207-controller-dang-ky-nguoi-dung-cua-em-dang-goi-6-service-theo-thu-tu-tao-user-tao",
+    "slug": "controller-dang-ky-nguoi-dung-cua-em-dang-goi-6-service-theo-thu-tu-tao-user-tao-profile-gui-mail-gh-dd360b54-4173-536b-81cd-253a2b6ec44f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Controller chỉ còn: validate request → gọi register → map response. Quy trình đăng ký nằm một chỗ, test được mà không cần dựng HTTP."
+      ],
+      "details": [
+        "Ranh giới cần giữ:\n- Facade điều phối, không chứa logic nghiệp vụ chi tiết. Nếu nó bắt đầu tính toán giá, kiểm tra quyền, dựng truy vấn thì nó đang biến thành god object.\n- Facade không được chặn truy cập trực tiếp vào service bên dưới; chỗ nào chỉ cần một service thì cứ gọi thẳng.\n- Bước nào không nhất thiết phải xong ngay (gửi mail, ghi audit) nên tách sang xử lý nền, để lỗi mail không làm hỏng việc đăng ký."
+      ],
+      "points": [],
+      "sections": [
+        "Có — nhưng gom bằng Facade (một điểm vào cho một quy trình), không phải một class \"Manager\" chứa tất cả."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "class RegistrationFacade {\n  constructor(\n    private users: UserService,\n    private profiles: ProfileService,\n    private mailer: Mailer,\n    private audit: AuditLog,\n  ) {}\n\n  async register(input: RegisterInput) {\n    const user = await this.users.create(input)\n    await this.profiles.createDefault(user.id)\n    await this.mailer.sendWelcome(user.email)\n    await this.audit.record('user.registered', user.id)\n    return user\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "98207-controller-dang-ky-nguoi-dung-cua-em-dang-goi-6-service-theo-thu-tu-tao-user-tao"
+  },
+  {
+    "id": "32122d1f-9a10-5a8f-a266-22235e77c157",
+    "question": "Repository pattern giải quyết vấn đề gì, và khi nào nó là lớp thừa?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98208-repository-pattern-giai-quyet-van-de-gi-va-khi-nao-no-la-lop-thua",
+    "slug": "repository-pattern-giai-quyet-van-de-gi-va-khi-nao-no-la-lop-thua-32122d1f-9a10-5a8f-a266-22235e77c157",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Nó giải quyết được:\n- Truy vấn nghiệp vụ có tên rõ ràng, dùng lại được, thay vì mỗi service tự nối điều kiện where riêng.\n- Service test được với repository giả, không cần DB thật.\n- Chi tiết lưu trữ (bảng, join, cache) đổi mà service không đổi."
+      ],
+      "details": [
+        "Khi nó là thừa:\n- Repository chỉ ủy quyền một-một cho ORM (findById gọi đúng db.order.findUnique). Lúc đó lớp này chỉ thêm file, không thêm giá trị — nhiều ORM đã là một dạng repository rồi.\n- Nhóm lý luận \"để đổi database sau này\": việc đổi DB hiếm khi xảy ra, và khi xảy ra thì repository ít khi đủ để che vì transaction, phân trang, kiểu dữ liệu vẫn rò ra.\n- Ứng dụng CRUD nhỏ, service chỉ gọi truy vấn tầm thường.",
+        "Cách dùng cân bằng: tạo repository cho aggregate có quy tắc nghiệp vụ và truy vấn lặp lại; các chỗ đọc đơn giản, đặc biệt truy vấn phục vụ hiển thị, cứ gọi thẳng query."
+      ],
+      "points": [],
+      "sections": [
+        "Repository đặt một lớp trung gian giữa domain và tầng lưu trữ: domain làm việc với một tập object trong bộ nhớ, còn chuyện SQL/ORM nằm sau interface."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "interface OrderRepository {\n  findById(id: string): Promise<Order | null>\n  findPendingOlderThan(d: Date): Promise<Order[]>\n  save(order: Order): Promise<void>\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "98208-repository-pattern-giai-quyet-van-de-gi-va-khi-nao-no-la-lop-thua"
+  },
+  {
+    "id": "184d037f-5e87-596c-bdcc-afe963ce1077",
+    "question": "Dependency Injection khác Service Locator ở đâu? Vì sao Service Locator thường bị đánh giá thấp hơn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98209-dependency-injection-khac-service-locator-o-dau-vi-sao-service-locator-thuong-bi",
+    "slug": "dependency-injection-khac-service-locator-o-dau-vi-sao-service-locator-thuong-bi-danh-gia-thap-hon-184d037f-5e87-596c-bdcc-afe963ce1077",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai đều tách việc tạo dependency ra khỏi việc dùng, nhưng khác nhau ở hướng luồng.",
+        "Vì sao DI được ưa hơn:\n- Phụ thuộc hiện rõ trong chữ ký. Nhìn constructor là biết class cần gì. Với locator, phải đọc hết thân class mới biết.\n- Lỗi phát hiện sớm. Thiếu dependency với DI là lỗi lúc dựng object (thường bắt được lúc biên dịch/khởi động); với locator là lỗi lúc chạy, có khi chỉ nổ ở một nhánh hiếm.\n- Test đơn giản. DI chỉ cần truyền bản giả vào constructor. Locator buộc test phải cấu hình registry toàn cục và dọn dẹp sau mỗi test.\n- Locator là phụ thuộc thêm. Mọi class giờ phụ thuộc vào chính cái locator, kể cả khi đem sang project khác."
+      ],
+      "details": [
+        "DI — dependency được đưa vào từ ngoài:",
+        "Thực tế: Service Locator vẫn xuất hiện hợp lý trong framework/plugin nơi tập dependency chỉ biết lúc chạy. Với code ứng dụng thường ngày, tiêm qua constructor là mặc định nên chọn."
+      ],
+      "points": [],
+      "sections": [
+        "Service Locator — class tự đi lấy từ một registry:"
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "class OrderService {\n  constructor(private repo: OrderRepository, private mailer: Mailer) {}\n}"
+        },
+        {
+          "language": "TS",
+          "code": "class OrderService {\n  private repo = Locator.get<OrderRepository>('OrderRepository')\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "98209-dependency-injection-khac-service-locator-o-dau-vi-sao-service-locator-thuong-bi"
+  },
+  {
+    "id": "36cb4fb2-ab27-5c62-afd2-5a64ee9dbe55",
+    "question": "Ba job import file (CSV, Excel, XML) có cùng khung xử lý nhưng khác phần parse. Nên dùng Template Method hay Strategy?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98210-ba-job-import-file-csv-excel-xml-co-cung-khung-xu-ly-nhung-khac-phan-parse-nen-d",
+    "slug": "ba-job-import-file-csv-excel-xml-co-cung-khung-xu-ly-nhung-khac-phan-parse-nen-dung-template-method-36cb4fb2-ab27-5c62-afd2-5a64ee9dbe55",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [
+        "Template Method khớp hơn khi khung xử lý cố định và chỉ vài bước thay đổi.",
+        "So sánh ngắn:\n- Template Method dùng kế thừa, ràng buộc lúc biên dịch, chỉ đổi được bằng cách tạo subclass mới.\n- Strategy dùng composition, đổi được lúc chạy, và parser có thể tái sử dụng ngoài job."
+      ],
+      "details": [
+        "Lớp cha giữ trình tự, lớp con điền phần khác nhau.",
+        "Chọn thế nào: khung nhiều bước, thứ tự là phần giá trị chính, biến thể ít và biết trước → Template Method. Điểm thay đổi chỉ một hai chỗ, cần cấu hình động, hoặc số biến thể còn tăng → Strategy. Trong TS/JS, Strategy thường gọn hơn vì có thể truyền thẳng function thay vì dựng cây kế thừa."
+      ],
+      "points": [],
+      "sections": [
+        "Strategy khớp hơn khi phần thay đổi là một hành vi độc lập cần chọn lúc chạy hoặc dùng lại ở nhiều ngữ cảnh:"
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "abstract class ImportJob {\n  async run(file: Buffer) {          // trình tự cố định\n    const rows = this.parse(file)\n    const valid = this.validate(rows)\n    await this.persist(valid)\n    await this.report(valid.length)\n  }\n  protected abstract parse(file: Buffer): Row[]\n  protected validate(rows: Row[]) { return rows.filter(isValid) }\n}\n\nclass CsvImportJob extends ImportJob {\n  protected parse(file: Buffer) { /* ... */ }\n}"
+        },
+        {
+          "language": "TS",
+          "code": "class ImportJob {\n  constructor(private parser: RowParser) {}\n  async run(file: Buffer) { const rows = this.parser.parse(file); /* ... */ }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "98210-ba-job-import-file-csv-excel-xml-co-cung-khung-xu-ly-nhung-khac-phan-parse-nen-d"
+  },
+  {
+    "id": "7d9fb13d-2c0f-5633-b54c-c91d7587b65f",
+    "question": "Mediator pattern là gì? Khác Observer và tại sao quan trọng trong microservices?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mediator-pattern-la-gi-khac-observer-va-tai-sao-quan-trong-trong-microservices-7d9fb13d-2c0f-5633-b54c-c91d7587b65f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": null
+  },
+  {
+    "id": "84e67a3f-3b62-5ad7-bf37-9aac52b0c099",
+    "question": "Visitor pattern là gì? Khi nào đây là lựa chọn đúng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "visitor-pattern-la-gi-khi-nao-day-la-lua-chon-dung-84e67a3f-3b62-5ad7-bf37-9aac52b0c099",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": null
+  },
+  {
+    "id": "b4e41b72-2bfa-5daa-be50-42c8bf8df3c1",
+    "question": "Anti-patterns cần tránh trong software development là gì? Ví dụ thực tế?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "anti-patterns-can-tranh-trong-software-development-la-gi-vi-du-thuc-te-b4e41b72-2bfa-5daa-be50-42c8bf8df3c1",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": null
+  },
+  {
+    "id": "0c715d74-cfa2-5826-8d12-80a80d28dac3",
+    "question": "Tính năng editor cần undo/redo, và một số thao tác phải chạy nền qua queue. Command pattern giúp gì ở đây và cần lưu ý gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "tinh-nang-editor-can-undo-redo-va-mot-so-thao-tac-phai-chay-nen-qua-queue-command-pattern-giup-gi-o-0c715d74-cfa2-5826-8d12-80a80d28dac3",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": null
+  },
+  {
+    "id": "08288927-82f0-5352-866b-42697a7aece6",
+    "question": "Vòng đời đơn hàng (pending → paid → shipped → completed / cancelled / refunded) đang được kiểm bằng if rải rác. Em mô hình hóa bằng state machine thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vong-doi-don-hang-pending-paid-shipped-completed-cancelled-refunded-dang-duoc-kiem-bang-if-rai-rac-e-08288927-82f0-5352-866b-42697a7aece6",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": null
+  },
+  {
+    "id": "dfdc88d2-7cfd-5e06-bb68-fd89ab2b2771",
+    "question": "Áp dụng Dependency Inversion trong dự án thật nghĩa là gì? Chỉ cần tách interface ra là xong phải không?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ap-dung-dependency-inversion-trong-du-an-that-nghia-la-gi-chi-can-tach-interface-ra-la-xong-phai-kho-dfdc88d2-7cfd-5e06-bb68-fd89ab2b2771",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": null
+  },
+  {
+    "id": "4043b98a-7c72-5cbf-8f47-8722481754ae",
+    "question": "Open/Closed Principle trong thực tế áp dụng ra sao mà không rơi vào tình trạng abstraction sớm?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "open-closed-principle-trong-thuc-te-ap-dung-ra-sao-ma-khong-roi-vao-tinh-trang-abstraction-som-4043b98a-7c72-5cbf-8f47-8722481754ae",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": null
+  },
+  {
+    "id": "7158cdc8-76eb-511e-8fe2-e9f727605b2e",
+    "question": "Làm sao nhận ra một codebase đang lạm dụng design pattern, và nên cải thiện dần thế nào thay vì viết lại?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-sao-nhan-ra-mot-codebase-dang-lam-dung-design-pattern-va-nen-cai-thien-dan-the-nao-thay-vi-viet-7158cdc8-76eb-511e-8fe2-e9f727605b2e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "architecture"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": null
+  }
+]

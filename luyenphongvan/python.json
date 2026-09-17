@@ -1,0 +1,2619 @@
+[
+  {
+    "id": "b3c17400-48f3-5106-8c61-6823d45ec51a",
+    "question": "Mutable vs Immutable types trong Python?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3102-mutable-vs-immutable-types-trong-python",
+    "slug": "mutable-vs-immutable-types-trong-python-b3c17400-48f3-5106-8c61-6823d45ec51a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Mutable types là kiểu dữ liệu có thể thay đổi giá trị tại chỗ sau khi tạo; immutable types là kiểu không thể thay đổi sau khi tạo, mọi thao tác \"sửa\" thực chất tạo ra object mới. Ví dụ: list, dict, set, bytearray là mutable; int, float, str, tuple, frozenset, bytes là immutable.",
+        "Edge case hay gặp: dùng mutable làm default argument. def func(lst=[]) tạo một list duy nhất lúc định nghĩa hàm, nên mọi lần gọi không truyền lst đều dùng chung list đó, gây lỗi khó phát hiện. Cách sửa là dùng None rồi tạo list mới trong thân hàm."
+      ],
+      "details": [
+        "Cơ chế nằm ở việc object có hỗ trợ thay đổi nội dung bộ nhớ mà không đổi id hay không. Với list, bạn gọi lst.append(1) thì id(lst) không đổi. Với str, bạn nối chuỗi s += 'a' thì Python tạo object str mới và gán lại biến; id có thể đổi, và object cũ được thu hồi.",
+        "Ví dụ:",
+        "Lưu ý: tuple chứa mutable object (ví dụ tuple chứa list) vẫn là immutable về cấu trúc, nhưng phần tử bên trong có thể đổi; điều này dễ gây nhầm khi kiểm tra hashability."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "lst = [1, 2]\nprint(id(lst))  # id ban đầu\nlst.append(3)\nprint(id(lst))  # id giữ nguyên\n\ns = \"ab\"\nprint(id(s))    # id ban đầu\ns += \"c\"\nprint(id(s))    # id thường đổi, vì tạo str mới"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "3102-mutable-vs-immutable-types-trong-python"
+  },
+  {
+    "id": "d487607c-3701-53f7-a56b-1d79f4265e54",
+    "question": "list, tuple, set, dict — khi nào dùng cái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3103-list-tuple-set-dict-khi-nao-dung-cai-nao",
+    "slug": "list-tuple-set-dict-khi-nao-dung-cai-nao-d487607c-3701-53f7-a56b-1d79f4265e54",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng list khi cần ordered collection có thể thay đổi."
+      ],
+      "details": [],
+      "points": [
+        "Dùng tuple cho dữ liệu bất biến, làm dict key, trả về nhiều giá trị từ function.",
+        "Dùng set để loại bỏ duplicate và kiểm tra membership O(1).",
+        "Dùng dict cho key-value lookup O(1).",
+        "Lưu ý: set và dict không ordered trước Python 3.7; dict từ Python 3.7+ giữ insertion order."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "3103-list-tuple-set-dict-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "551be9ef-983a-5c00-90be-c5a67c0bc4b8",
+    "question": "Exception handling — try/except/else/finally hoạt động thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3110-exception-handling-try-except-else-finally-hoat-dong-the-nao",
+    "slug": "exception-handling-try-except-else-finally-hoat-dong-the-nao-551be9ef-983a-5c00-90be-c5a67c0bc4b8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "try — khối code có thể raise exception",
+        "except — xử lý exception",
+        "else — chạy nếu KHÔNG có exception trong try",
+        "finally — LUÔN chạy, dù có exception hay không — dùng để cleanup"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "try:\n    result = 10 / divisor\nexcept ZeroDivisionError as e:\n    print(f\"Error: {e}\")\nexcept (TypeError, ValueError):\n    print(\"Type or value error\")\nelse:\n    print(f\"Success: {result}\")  # Chỉ khi không có exception\nfinally:\n    print(\"Cleanup\")  # Luôn chạy"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "3110-exception-handling-try-except-else-finally-hoat-dong-the-nao"
+  },
+  {
+    "id": "9ee88cda-2db9-5e7e-b00c-edd11e389bd1",
+    "question": "f-string, .format(), % formatting — nên dùng cái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3113-f-string-format-formatting-nen-dung-cai-nao",
+    "slug": "f-string-format-formatting-nen-dung-cai-nao-9ee88cda-2db9-5e7e-b00c-edd11e389bd1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng f-string (Python 3.6+) — nhanh nhất, dễ đọc nhất, hỗ trợ expression trực tiếp. f\"Name: {name!r}, Score: {score:.2f}\". .format() khi cần template string tái sử dụng. % formatting là cũ, không nên dùng trong code mới."
+      ],
+      "details": [
+        "Ví dụ: f\"2+2={2+2}\" in ra \"2+2=4\" — expression được evaluate ngay trong string. Python 3.12+ (PEP 701): f-string hỗ trợ nested quotes và multi-line expression — f\"result: {'pass' if ok else 'fail'}\" là hợp lệ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "3113-f-string-format-formatting-nen-dung-cai-nao"
+  },
+  {
+    "id": "df5aae2a-a8db-569d-bc51-183c68164691",
+    "question": "FastAPI là gì? Ưu điểm so với Flask và Django?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3128-fastapi-la-gi-uu-diem-so-voi-flask-va-django",
+    "slug": "fastapi-la-gi-uu-diem-so-voi-flask-va-django-df5aae2a-a8db-569d-bc51-183c68164691",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "FastAPI là modern Python web framework dựa trên Starlette (ASGI) + Pydantic."
+      ],
+      "details": [
+        "Ưu điểm:"
+      ],
+      "points": [
+        "Async native — ~20K RPS, Flask/Django ~4-5K RPS",
+        "Auto OpenAPI docs — Swagger UI + ReDoc tự động từ type hints",
+        "Type-based validation — Pydantic validate request/response",
+        "Dependency Injection built-in"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "3128-fastapi-la-gi-uu-diem-so-voi-flask-va-django"
+  },
+  {
+    "id": "b1827910-1d05-5fa7-80cd-b85728bf686e",
+    "question": "Type hints — tại sao quan trọng trong Python hiện đại?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3147-type-hints-tai-sao-quan-trong-trong-python-hien-dai",
+    "slug": "type-hints-tai-sao-quan-trong-trong-python-hien-dai-b1827910-1d05-5fa7-80cd-b85728bf686e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Type hints (PEP 484, Python 3.5+) không enforce lúc runtime nhưng mang lại:"
+      ],
+      "details": [
+        "Lưu ý: Type hints không prevent runtime errors — cần mypy --strict hoặc pyright trong CI pipeline."
+      ],
+      "points": [
+        "IDE autocompletion và refactoring tốt hơn",
+        "Static analysis với mypy/pyright bắt lỗi trước runtime",
+        "Documentation tự động — code tự giải thích",
+        "Pydantic/FastAPI dùng type hints để validation"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "3147-type-hints-tai-sao-quan-trong-trong-python-hien-dai"
+  },
+  {
+    "id": "e36b6811-d3e9-5596-959f-efef1f42957c",
+    "question": "enumerate, zip, map, filter — dùng khi nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3151-enumerate-zip-map-filter-dung-khi-nao",
+    "slug": "enumerate-zip-map-filter-dung-khi-nao-e36b6811-d3e9-5596-959f-efef1f42957c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: map và filter trả về lazy iterators — cần list() để materialize."
+      ],
+      "details": [
+        "Modern Python ưu tiên list comprehension hơn map/filter vì dễ đọc hơn."
+      ],
+      "points": [],
+      "sections": [
+        "Các built-ins quan trọng để xử lý collections hiệu quả:"
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# enumerate — loop có index\nfruits = [\"apple\", \"banana\", \"cherry\"]\nfor i, fruit in enumerate(fruits, start=1):\n    print(f\"{i}. {fruit}\")\n\n# zip — gộp nhiều iterables song song\nnames = [\"Alice\", \"Bob\"]\nscores = [95, 87]\nfor name, score in zip(names, scores):\n    print(f\"{name}: {score}\")\n\n# map — transform mỗi element (lazy)\ndoubled = list(map(lambda x: x * 2, [1, 2, 3]))  # [2, 4, 6]\n# Prefer list comprehension: [x*2 for x in [1,2,3]]\n\n# filter — lọc elements (lazy)\nevens = list(filter(lambda x: x % 2 == 0, range(10)))\n# Prefer: [x for x in range(10) if x % 2 == 0]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "3151-enumerate-zip-map-filter-dung-khi-nao"
+  },
+  {
+    "id": "e24c5d75-f807-5fb2-9a52-09bb64983492",
+    "question": "Python truyền tham số vào hàm theo cơ chế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93520-python-truyen-tham-so-vao-ham-theo-co-che-nao",
+    "slug": "python-truyen-tham-so-vao-ham-theo-co-che-nao-e24c5d75-f807-5fb2-9a52-09bb64983492",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Python dùng cơ chế thường gọi là pass-by-object-reference (hay \"call by assignment\"): mỗi tham số được gán vào đúng object mà caller truyền vào — không copy object, cũng không phải pass-by-reference kiểu C++."
+      ],
+      "details": [
+        "Hệ quả tùy object là mutable hay không:\n- Mutable (list, dict, set): sửa tại chỗ (.append, gán phần tử) → caller thấy thay đổi.\n- Rebind (gán lại tên tham số) → chỉ đổi tên local, caller không thấy.\n- Immutable (int, str, tuple): mọi phép \"đổi\" thực ra tạo object mới, bản gốc không đổi."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "def f(xs, n):\n    xs.append(1)   # mutate → caller thấy\n    n = n + 1      # rebind → caller không thấy"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "93520-python-truyen-tham-so-vao-ham-theo-co-che-nao"
+  },
+  {
+    "id": "ce384d29-9eaa-57f9-81c0-b4183c47296a",
+    "question": "List/dict/set comprehension là gì và khi nào nên dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93522-list-dict-set-comprehension-la-gi-va-khi-nao-nen-dung",
+    "slug": "list-dict-set-comprehension-la-gi-va-khi-nao-nen-dung-ce384d29-9eaa-57f9-81c0-b4183c47296a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng khi map/filter một iterable — ngắn và thường nhanh hơn vòng for + append. Không nên dùng khi logic nhiều nhánh, lồng sâu, hay có side-effect → vòng for dễ đọc hơn."
+      ],
+      "details": [
+        "Nếu chỉ cần duyệt một lần và muốn tiết kiệm bộ nhớ, chọn generator expression (...) thay vì tạo hẳn list."
+      ],
+      "points": [],
+      "sections": [
+        "Cú pháp gọn để dựng collection mới bằng transform + filter trong một biểu thức:"
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "[x*x for x in nums if x > 0]        # list\n{k: v for k, v in pairs}            # dict\n{x % 3 for x in nums}               # set\n(x*x for x in nums)                 # generator (lazy)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "93522-list-dict-set-comprehension-la-gi-va-khi-nao-nen-dung"
+  },
+  {
+    "id": "20190c8c-8567-543b-ae80-0bb180a24c93",
+    "question": "if __name__ == \"__main__\": dùng để làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93523-if-name-main-dung-de-lam-gi",
+    "slug": "if-name-main-dung-de-lam-gi-20190c8c-8567-543b-ae80-0bb180a24c93",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Mỗi module có biến __name__. Khi bạn chạy file trực tiếp (python foo.py), __name__ của file đó bằng \"__main__\". Khi file bị import từ nơi khác, __name__ bằng tên module (\"foo\")."
+      ],
+      "details": [
+        "Đặt code chạy-thử / entry-point CLI trong khối này để nó chỉ chạy khi gọi trực tiếp, không chạy lúc bị import:"
+      ],
+      "points": [],
+      "sections": [
+        "Nhờ vậy một file vừa là module tái sử dụng (import lấy hàm), vừa là script chạy được."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "def main():\n    ...\n\nif __name__ == \"__main__\":\n    main()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "93523-if-name-main-dung-de-lam-gi"
+  },
+  {
+    "id": "9a1a4c81-cfaa-52a9-b7db-071135155017",
+    "question": "list.sort() và sorted() khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93524-list-sort-va-sorted-khac-nhau-the-nao",
+    "slug": "list-sort-va-sorted-khac-nhau-the-nao-9a1a4c81-cfaa-52a9-b7db-071135155017",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai đều nhận key= (hàm rút khóa so sánh) và reverse=. Cả hai dùng Timsort và ổn định (stable) — các phần tử bằng khóa giữ nguyên thứ tự tương đối, cho phép sort nhiều tầng bằng cách sort lần lượt từ khóa phụ đến khóa chính."
+      ],
+      "details": [],
+      "points": [
+        "list.sort(): sắp xếp tại chỗ, trả về None, chỉ dùng cho list.",
+        "sorted(iterable): trả về list mới, nhận mọi iterable (kể cả tuple, dict keys...)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "users.sort(key=lambda u: u.age)     # in-place, None\ntop = sorted(users, key=lambda u: u.score, reverse=True)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "93524-list-sort-va-sorted-khac-nhau-the-nao"
+  },
+  {
+    "id": "a4eb5a52-2885-5c84-be6f-93b6e30f2d1a",
+    "question": "Vì sao hàm khai báo def add(item, bucket=[]) lại giữ nguyên dữ liệu của những lần gọi trước?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96300-vi-sao-ham-khai-bao-def-add-item-bucket-lai-giu-nguyen-du-lieu-cua-nhung-lan-goi",
+    "slug": "vi-sao-ham-khai-bao-def-add-item-bucket-lai-giu-nguyen-du-lieu-cua-nhung-lan-goi-truoc-a4eb5a52-2885-5c84-be6f-93b6e30f2d1a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Giá trị mặc định chỉ được tính đúng một lần, tại thời điểm câu lệnh def chạy — không phải mỗi lần gọi hàm.",
+        "Quy tắc: default là immutable (None, số, chuỗi, tuple) thì an toàn; default là mutable (list, dict, set, instance) thì bắt buộc dùng sentinel."
+      ],
+      "details": [
+        "List đó được gắn vào chính object hàm (add.__defaults__), nên mọi lần gọi không truyền bucket đều dùng chung một list.",
+        "Lỗi này hay lộ ra ở __init__ của class hoặc hàm cache tự viết, vì dữ liệu rò rỉ giữa các object."
+      ],
+      "points": [],
+      "sections": [
+        "Cách sửa chuẩn: dùng None làm sentinel rồi khởi tạo bên trong hàm."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "def add(item, bucket=[]):\n    bucket.append(item)\n    return bucket\n\nadd(1)   # [1]\nadd(2)   # [1, 2] — same list, not a fresh one"
+        },
+        {
+          "language": "PYTHON",
+          "code": "def add(item, bucket=None):\n    if bucket is None:\n        bucket = []\n    bucket.append(item)\n    return bucket"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "96300-vi-sao-ham-khai-bao-def-add-item-bucket-lai-giu-nguyen-du-lieu-cua-nhung-lan-goi"
+  },
+  {
+    "id": "98afef9e-45ed-52bf-8d89-bcb31a0dc2ca",
+    "question": "grid = [[0] * 3] * 2 rồi grid[0][0] = 1 cho kết quả gì? Vì sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96301-grid-0-3-2-roi-grid-0-0-1-cho-ket-qua-gi-vi-sao",
+    "slug": "grid-0-3-2-roi-grid-0-0-1-cho-ket-qua-gi-vi-sao-98afef9e-45ed-52bf-8d89-bcb31a0dc2ca",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Kết quả là [[1, 0, 0], [1, 0, 0]] — cả hai hàng cùng đổi.",
+        "Riêng [0] * 3 vẫn đúng như mong đợi vì 0 là immutable: gán row[0] = 1 là thay ô trong list chứ không sửa chính số 0."
+      ],
+      "details": [
+        "Toán tử * trên list không sao chép phần tử, nó chỉ nhân bản tham chiếu: hai \"hàng\" thực chất là một object.",
+        "Cách đúng — tạo list mới cho từng hàng bằng comprehension:"
+      ],
+      "points": [],
+      "sections": [
+        "Bản chất giống bẫy default argument: trong Python, gán và nhân bản container mặc định là chia sẻ tham chiếu, không phải copy."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "row = [0] * 3\ngrid = [row] * 2\ngrid[0] is grid[1]   # True — the same list object"
+        },
+        {
+          "language": "PYTHON",
+          "code": "grid = [[0] * 3 for _ in range(2)]\ngrid[0][0] = 1       # [[1, 0, 0], [0, 0, 0]]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "96301-grid-0-3-2-roi-grid-0-0-1-cho-ket-qua-gi-vi-sao"
+  },
+  {
+    "id": "ee91536b-0092-5288-8002-5c6616fec669",
+    "question": "[x * x for x in data] và (x * x for x in data) khác nhau thế nào? Khi nào nên chọn generator expression?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96302-x-x-for-x-in-data-va-x-x-for-x-in-data-khac-nhau-the-nao-khi-nao-nen-chon-genera",
+    "slug": "x-x-for-x-in-data-va-x-x-for-x-in-data-khac-nhau-the-nao-khi-nao-nen-chon-generator-expression-ee91536b-0092-5288-8002-5c6616fec669",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác biệt thực tế:\n- Bộ nhớ: genexp giữ một phần tử tại một thời điểm, hợp với file lớn, cursor DB, response stream.\n- Một lần dùng: genexp cạn sau khi duyệt xong; duyệt lần hai ra rỗng. List thì duyệt lại bao nhiêu lần cũng được.\n- API: genexp không có len(), không index, không slice.\n- Lazy nghĩa là lỗi xảy ra muộn — exception chỉ nổ khi thực sự duyệt tới phần tử đó."
+      ],
+      "details": [
+        "Chọn genexp khi dữ liệu lớn hoặc kết quả chỉ đi thẳng vào sum(), min(), any(), vòng for. Chọn list khi cần dùng lại, cần độ dài, hoặc cần truy cập ngẫu nhiên."
+      ],
+      "points": [],
+      "sections": [
+        "List comprehension dựng sẵn toàn bộ list trong RAM; generator expression trả về một iterator lười (lazy), chỉ tính từng phần tử khi được duyệt."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "squares = [x * x for x in range(10_000_000)]   # allocates ~400MB\ntotal = sum(x * x for x in range(10_000_000))  # constant memory"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "96302-x-x-for-x-in-data-va-x-x-for-x-in-data-khac-nhau-the-nao-khi-nao-nen-chon-genera"
+  },
+  {
+    "id": "9a99930e-043c-5773-8b64-bb05709cc38c",
+    "question": "Vì sao a = 256; b = 256; a is b cho True nhưng thay bằng 257 lại False?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96303-vi-sao-a-256-b-256-a-is-b-cho-true-nhung-thay-bang-257-lai-false",
+    "slug": "vi-sao-a-256-b-256-a-is-b-cho-true-nhung-thay-bang-257-lai-false-9a99930e-043c-5773-8b64-bb05709cc38c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì CPython cấp phát sẵn và dùng chung các object số nguyên nhỏ trong khoảng -5 đến 256.",
+        "Đây là chi tiết cài đặt của CPython, không phải quy tắc ngôn ngữ: chạy trong REPL và chạy trong cùng một file có thể ra kết quả khác nhau (compiler gộp hằng số trong cùng code object). PyPy hay phiên bản khác có quyền làm khác."
+      ],
+      "details": [
+        "Với giá trị nằm ngoài khoảng đó, mỗi lần tạo là một object mới nên is (so sánh identity) trả về False, dù == (so sánh giá trị) vẫn True.",
+        "Chốt cách dùng:\n- == cho mọi so sánh giá trị (số, chuỗi, list...).\n- is chỉ dùng với singleton: is None, is True/False, và sentinel tự định nghĩa.",
+        "Từ Python 3.8, viết if x is 257 sẽ bị cảnh báo SyntaxWarning: \"is\" with a literal."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "a, b = 256, 256\na is b        # True  — cached object\nx, y = 257, 257\nx is y        # False — two distinct objects\nx == y        # True"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "96303-vi-sao-a-256-b-256-a-is-b-cho-true-nhung-thay-bang-257-lai-false"
+  },
+  {
+    "id": "a8960fee-6f67-590c-b3e4-aa3c3d2b6db5",
+    "question": "Python quản lý bộ nhớ như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3101-python-quan-ly-bo-nho-nhu-the-nao",
+    "slug": "python-quan-ly-bo-nho-nhu-the-nao-a8960fee-6f67-590c-b3e4-aa3c3d2b6db5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Python dùng hai cơ chế:"
+      ],
+      "details": [
+        "Lưu ý: Circular reference giữa hai objects sẽ không bao giờ được reference counting giải phóng."
+      ],
+      "points": [
+        "Reference counting — mỗi object đếm số tham chiếu, về 0 thì giải phóng ngay",
+        "Garbage Collector (module gc) — phát hiện và thu hồi circular references mà reference counting không xử lý được",
+        "Memory Pool (PyMalloc) — tối ưu allocation cho objects nhỏ < 512 bytes"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "3101-python-quan-ly-bo-nho-nhu-the-nao"
+  },
+  {
+    "id": "2474d5b2-058e-5043-af3d-2b4e9058f542",
+    "question": "Generator và yield là gì? Tại sao dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3104-generator-va-yield-la-gi-tai-sao-dung",
+    "slug": "generator-va-yield-la-gi-tai-sao-dung-2474d5b2-058e-5043-af3d-2b4e9058f542",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Generator là function dùng yield trả về iterator — tính giá trị lazily, từng phần tử khi được yêu cầu."
+      ],
+      "details": [
+        "Tiết kiệm bộ nhớ so với list vì không nạp toàn bộ dữ liệu vào RAM."
+      ],
+      "points": [],
+      "sections": [
+        "Dùng khi: xử lý file lớn, streaming data, infinite sequences."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# List — toàn bộ vào RAM\nsquares_list = [x**2 for x in range(1_000_000)]\n\n# Generator — lazy, từng phần tử khi cần\ndef squares_gen(n):\n    for x in range(n):\n        yield x**2\n\ngen = squares_gen(1_000_000)\nprint(next(gen))  # 0 — chỉ tính khi gọi next()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "3104-generator-va-yield-la-gi-tai-sao-dung"
+  },
+  {
+    "id": "a4ee3aef-4ade-53f5-a868-973dfd756b63",
+    "question": "Decorator là gì? Viết decorator đơn giản.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3105-decorator-la-gi-viet-decorator-don-gian",
+    "slug": "decorator-la-gi-viet-decorator-don-gian-a4ee3aef-4ade-53f5-a868-973dfd756b63",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Decorator là higher-order function nhận một function và trả về function mới với hành vi bổ sung — cú pháp @decorator là syntactic sugar."
+      ],
+      "details": [
+        "Dùng @functools.wraps để giữ metadata của function gốc."
+      ],
+      "points": [],
+      "sections": [
+        "Lưu ý: Không dùng @functools.wraps → mất __name__, __doc__ của function gốc."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "import functools, time\n\ndef timer(func):\n    @functools.wraps(func)  # Giữ __name__, __doc__\n    def wrapper(*args, **kwargs):\n        start = time.perf_counter()\n        result = func(*args, **kwargs)\n        print(f\"{func.__name__}: {time.perf_counter()-start:.4f}s\")\n        return result\n    return wrapper\n\n@timer\ndef slow():\n    time.sleep(1)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "3105-decorator-la-gi-viet-decorator-don-gian"
+  },
+  {
+    "id": "e95855ca-0400-5717-a353-6568409314b1",
+    "question": "Context Manager và with statement hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3106-context-manager-va-with-statement-hoat-dong-the-nao",
+    "slug": "context-manager-va-with-statement-hoat-dong-the-nao-e95855ca-0400-5717-a353-6568409314b1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Context manager quản lý tài nguyên tự động qua __enter__ và __exit__. with đảm bảo cleanup chạy dù có exception hay không."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from contextlib import asynccontextmanager\n\n# Dùng @asynccontextmanager cho async code (không phải @contextmanager)\n@asynccontextmanager\nasync def db_transaction(session):\n    try:\n        yield session\n        await session.commit()\n    except Exception:\n        await session.rollback()\n        raise\n\n# Class-based (sync)\nclass Timer:\n    def __enter__(self):\n        import time; self.start = time.perf_counter(); return self\n    def __exit__(self, *args):\n        self.elapsed = time.perf_counter() - self.start"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "3106-context-manager-va-with-statement-hoat-dong-the-nao"
+  },
+  {
+    "id": "d6aecd32-2187-5591-9e68-31f432c7d30c",
+    "question": "Closure là gì? Khác với lambda thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3108-closure-la-gi-khac-voi-lambda-the-nao",
+    "slug": "closure-la-gi-khac-voi-lambda-the-nao-d6aecd32-2187-5591-9e68-31f432c7d30c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Closure là nested function \"ghi nhớ\" biến từ enclosing scope dù outer function đã kết thúc."
+      ],
+      "details": [
+        "Lambda là anonymous function một dòng — thường dùng cho logic đơn giản tức thời."
+      ],
+      "points": [],
+      "sections": [
+        "Lưu ý: Closure trong vòng lặp — mọi closure đều tham chiếu cùng biến vòng lặp, không phải giá trị tại thời điểm tạo."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# Closure — nhớ state\ndef make_counter(start=0):\n    count = [start]\n    def counter():\n        count[0] += 1\n        return count[0]\n    return counter\n\nc = make_counter()\nprint(c(), c(), c())  # 1, 2, 3\n\n# Lambda — function tức thời\ndouble = lambda x: x * 2"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "3108-closure-la-gi-khac-voi-lambda-the-nao"
+  },
+  {
+    "id": "02ecc8e1-55e7-527a-82e6-0b9c3b2cd1b2",
+    "question": "Shallow copy vs Deep copy — khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3109-shallow-copy-vs-deep-copy-khac-nhau-the-nao",
+    "slug": "shallow-copy-vs-deep-copy-khac-nhau-the-nao-02ecc8e1-55e7-527a-82e6-0b9c3b2cd1b2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Shallow copy tạo object mới nhưng elements bên trong vẫn tham chiếu cùng objects gốc — thay đổi mutable elements sẽ ảnh hưởng cả hai bản."
+      ],
+      "details": [],
+      "points": [
+        "Deep copy tạo hoàn toàn độc lập, copy đệ quy toàn bộ.",
+        "Dùng copy.copy() cho shallow và copy.deepcopy() cho deep.",
+        "Lưu ý: list.copy(), list[:], dict.copy() đều là shallow copy."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "3109-shallow-copy-vs-deep-copy-khac-nhau-the-nao"
+  },
+  {
+    "id": "c411d99f-8fd4-58d1-8bea-7e28397a469c",
+    "question": "is vs == — khác nhau gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3111-is-vs-khac-nhau-gi",
+    "slug": "is-vs-khac-nhau-gi-c411d99f-8fd4-58d1-8bea-7e28397a469c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "== so sánh giá trị (gọi __eq__). is so sánh identity — hai biến có trỏ đến cùng object trong memory không."
+      ],
+      "details": [],
+      "points": [
+        "Lưu ý: CPython cache integers nhỏ (-5 đến 256) và string interning — x = 256; y = 256; x is y có thể là True nhưng x = 257; y = 257; x is y có thể là False.",
+        "Chỉ dùng is để so sánh với None, True, False."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "3111-is-vs-khac-nhau-gi"
+  },
+  {
+    "id": "5709983d-c64b-5872-80f0-99a3c38ad6eb",
+    "question": "functools.lru_cache hoạt động thế nào? Khi nào dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3112-functools-lru-cache-hoat-dong-the-nao-khi-nao-dung",
+    "slug": "functools-lru-cache-hoat-dong-the-nao-khi-nao-dung-5709983d-c64b-5872-80f0-99a3c38ad6eb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "lru_cache (Least Recently Used cache) là decorator memoize kết quả của function — lần sau gọi cùng args sẽ trả về cache thay vì tính lại."
+      ],
+      "details": [
+        "Function phải có hashable arguments."
+      ],
+      "points": [],
+      "sections": [
+        "Dùng cho: pure functions với expensive computation, recursive algorithms."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from functools import lru_cache\n\n@lru_cache(maxsize=128)\ndef fibonacci(n: int) -> int:\n    if n < 2: return n\n    return fibonacci(n-1) + fibonacci(n-2)\n\n# Không cache (default: cached forever)\n@lru_cache(maxsize=None)  # Cache không giới hạn\ndef expensive_lookup(key): ...\n\nfibonacci.cache_info()   # hits, misses, maxsize, currsize\nfibonacci.cache_clear()  # Xóa cache"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "3112-functools-lru-cache-hoat-dong-the-nao-khi-nao-dung"
+  },
+  {
+    "id": "5980150d-57d3-5f69-9bc8-aa1b10fcc315",
+    "question": "4 nguyên lý OOP trong Python?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3115-4-nguyen-ly-oop-trong-python",
+    "slug": "4-nguyen-ly-oop-trong-python-5980150d-57d3-5f69-9bc8-aa1b10fcc315",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [
+        "Lưu ý: Python không có private thật sự — __attr chỉ là name mangling, vẫn access được qua _ClassName__attr."
+      ],
+      "points": [
+        "Encapsulation — đóng gói data + methods, dùng _ (protected) và __ (name mangling)",
+        "Inheritance — class Child(Parent), hỗ trợ multiple inheritance, dùng super()",
+        "Polymorphism — cùng method tên, hành vi khác nhau tùy class; duck typing",
+        "Abstraction — ẩn implementation qua ABC + @abstractmethod"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "3115-4-nguyen-ly-oop-trong-python"
+  },
+  {
+    "id": "d1ddc319-d272-5d8b-8561-83ee52c0cfe4",
+    "question": "@classmethod vs @staticmethod vs instance method?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3116-classmethod-vs-staticmethod-vs-instance-method",
+    "slug": "classmethod-vs-staticmethod-vs-instance-method-d1ddc319-d272-5d8b-8561-83ee52c0cfe4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Instance method nhận self — có access vào instance và class. @classmethod nhận cls — access class, thường dùng làm factory. @staticmethod không nhận self hay cls — utility function liên quan đến class."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class User:\n    _count = 0\n\n    def __init__(self, name):\n        self.name = name\n        User._count += 1\n\n    def greet(self):            # Instance method\n        return f\"Hi, {self.name}\"\n\n    @classmethod\n    def from_dict(cls, data):   # Factory — dùng cls thay vì User\n        return cls(data['name'])\n\n    @staticmethod\n    def validate_name(name):    # Utility — không cần self/cls\n        return len(name) >= 2"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "3116-classmethod-vs-staticmethod-vs-instance-method"
+  },
+  {
+    "id": "4d41a9b0-6439-5180-a580-ce52d5a0c3bc",
+    "question": "@property decorator dùng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3118-property-decorator-dung-the-nao",
+    "slug": "property-decorator-dung-the-nao-4d41a9b0-6439-5180-a580-ce52d5a0c3bc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "@property cho phép define getter/setter/deleter cho attribute, truy cập như attribute thường nhưng có validation logic."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class Temperature:\n    def __init__(self, celsius: float):\n        self._celsius = celsius\n\n    @property\n    def celsius(self) -> float:\n        return self._celsius\n\n    @celsius.setter\n    def celsius(self, value: float):\n        if value < -273.15:\n            raise ValueError(\"Below absolute zero!\")\n        self._celsius = value\n\n    @property\n    def fahrenheit(self) -> float:  # Read-only derived property\n        return self._celsius * 9/5 + 32\n\nt = Temperature(25)\nt.celsius = 30      # Gọi setter tự động\nprint(t.fahrenheit) # 86.0"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "3118-property-decorator-dung-the-nao"
+  },
+  {
+    "id": "b7b5717b-558b-5ed9-9430-41621c374610",
+    "question": "Abstract class trong Python — dùng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3119-abstract-class-trong-python-dung-the-nao",
+    "slug": "abstract-class-trong-python-dung-the-nao-b7b5717b-558b-5ed9-9430-41621c374610",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng ABC + @abstractmethod để tạo abstract class."
+      ],
+      "details": [
+        "Class con bắt buộc implement tất cả abstract methods, nếu không sẽ không instantiate được."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from abc import ABC, abstractmethod\n\nclass Repository(ABC):\n    @abstractmethod\n    async def get_by_id(self, id: int): ...\n\n    @abstractmethod\n    async def create(self, data: dict): ...\n\n    def find_all(self):          # Concrete method — có thể kế thừa\n        return self.get_all()\n\nclass UserRepository(Repository):\n    async def get_by_id(self, id): ...   # Bắt buộc implement\n    async def create(self, data): ...    # Bắt buộc implement\n\n# Repository()  # TypeError — cannot instantiate abstract class"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "3119-abstract-class-trong-python-dung-the-nao"
+  },
+  {
+    "id": "f9673fc3-e0f1-5464-a652-2b20d0abd6c0",
+    "question": "@dataclass là gì? Lợi ích so với class thường?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3120-dataclass-la-gi-loi-ich-so-voi-class-thuong",
+    "slug": "dataclass-la-gi-loi-ich-so-voi-class-thuong-f9673fc3-e0f1-5464-a652-2b20d0abd6c0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "@dataclass tự động generate __init__, __repr__, __eq__ — giảm boilerplate đáng kể."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from dataclasses import dataclass, field\nfrom typing import List\n\n@dataclass\nclass User:\n    name: str\n    email: str\n    age: int = 0\n    tags: List[str] = field(default_factory=list)\n    # __init__, __repr__, __eq__ tự động được generate!\n\n@dataclass(frozen=True)  # Immutable như tuple\nclass Point:\n    x: float\n    y: float\n\np = Point(1.0, 2.0)\n# p.x = 3.0  # FrozenInstanceError"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "3120-dataclass-la-gi-loi-ich-so-voi-class-thuong"
+  },
+  {
+    "id": "f6c140b6-6b37-5cbc-8983-0dbe73e85392",
+    "question": "Các dunder methods quan trọng nhất cần biết?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3122-cac-dunder-methods-quan-trong-nhat-can-biet",
+    "slug": "cac-dunder-methods-quan-trong-nhat-can-biet-f6c140b6-6b37-5cbc-8983-0dbe73e85392",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [
+        "Lưu ý: Khi override __eq__, Python tự động set __hash__ = None — phải define __hash__ thủ công nếu muốn dùng object trong set/dict."
+      ],
+      "points": [
+        "__repr__ — developer repr (eval-safe), __str__ — user-friendly string",
+        "__len__, __getitem__, __setitem__ — sequence protocol",
+        "__enter__/__exit__ — context manager",
+        "__eq__, __lt__, __hash__ — comparison và hashability",
+        "__call__ — cho phép gọi instance như function"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "3122-cac-dunder-methods-quan-trong-nhat-can-biet"
+  },
+  {
+    "id": "6a6bb6c3-4412-53fc-b331-10ca9d5b6e8b",
+    "question": "GIL là gì? Ảnh hưởng đến threading và multiprocessing thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3123-gil-la-gi-anh-huong-den-threading-va-multiprocessing-the-nao",
+    "slug": "gil-la-gi-anh-huong-den-threading-va-multiprocessing-the-nao-6a6bb6c3-4412-53fc-b331-10ca9d5b6e8b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "GIL (Global Interpreter Lock) là mutex trong CPython đảm bảo chỉ một thread thực thi Python bytecode tại một thời điểm. Ảnh hưởng:"
+      ],
+      "details": [
+        "Lưu ý: GIL không có trong Jython và IronPython.",
+        "Python 3.13 ra mắt free-threaded build chính thức (python3.13t, PEP 703) — GIL tắt per-interpreter; đây là opt-in feature ổn định, không còn là \"experimental\".",
+        "Dự kiến broader adoption trong 3.14+."
+      ],
+      "points": [
+        "I/O-bound tasks — threading vẫn hiệu quả vì GIL được release khi chờ I/O (network, file, DB)",
+        "CPU-bound tasks — threading KHÔNG cải thiện do GIL → phải dùng multiprocessing để bypass GIL và chạy song song thực sự"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "3123-gil-la-gi-anh-huong-den-threading-va-multiprocessing-the-nao"
+  },
+  {
+    "id": "98b0f0cc-9215-5f7f-a934-b065d8c9bbee",
+    "question": "Threading vs Multiprocessing vs Asyncio — khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3124-threading-vs-multiprocessing-vs-asyncio-khi-nao-dung-cai-nao",
+    "slug": "threading-vs-multiprocessing-vs-asyncio-khi-nao-dung-cai-nao-98b0f0cc-9215-5f7f-a934-b065d8c9bbee",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng asyncio cho I/O-bound với nhiều concurrent operations (web APIs, DB queries) — single thread, cooperative concurrency, overhead thấp nhất."
+      ],
+      "details": [],
+      "points": [
+        "Dùng threading cho I/O-bound với thư viện blocking không hỗ trợ async.",
+        "Dùng multiprocessing cho CPU-bound (ML training, image processing, data transformation) — bypass GIL, chạy trên nhiều CPU cores thực sự, nhưng overhead cao hơn (IPC, memory).",
+        "Lưu ý: asyncio không giúp gì cho CPU-bound — dùng ProcessPoolExecutor kết hợp với asyncio."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "3124-threading-vs-multiprocessing-vs-asyncio-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "7ad0bc48-7b50-5a58-9ee5-3c7ca68df691",
+    "question": "async/await và event loop hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3125-async-await-va-event-loop-hoat-dong-the-nao",
+    "slug": "async-await-va-event-loop-hoat-dong-the-nao-7ad0bc48-7b50-5a58-9ee5-3c7ca68df691",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "Event loop quản lý coroutines.",
+        "Khi coroutine gặp await, nó tạm dừng và nhường control để event loop chạy coroutine khác.",
+        "Đây là cooperative concurrency — không phải parallelism thực sự."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "import asyncio, httpx\n\nasync def fetch(url: str) -> dict:\n    async with httpx.AsyncClient() as client:\n        r = await client.get(url)  # Yield control tại đây\n        return r.json()\n\nasync def main():\n    # Chạy 3 requests đồng thời (concurrent), không phải song song\n    results = await asyncio.gather(\n        fetch(\"/users/1\"),\n        fetch(\"/users/2\"),\n        fetch(\"/users/3\"),\n    )\n\nasyncio.run(main())"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "3125-async-await-va-event-loop-hoat-dong-the-nao"
+  },
+  {
+    "id": "d934f8a2-7912-5b53-b53d-ee6a865c6986",
+    "question": "Pydantic validation trong FastAPI hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3130-pydantic-validation-trong-fastapi-hoat-dong-the-nao",
+    "slug": "pydantic-validation-trong-fastapi-hoat-dong-the-nao-d934f8a2-7912-5b53-b53d-ee6a865c6986",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "FastAPI dùng Pydantic model để tự động validate request body, query params, path params."
+      ],
+      "details": [
+        "Trả về 422 Unprocessable Entity nếu invalid."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from pydantic import BaseModel, EmailStr, Field, field_validator\n\nclass UserCreate(BaseModel):\n    name: str = Field(min_length=2, max_length=50)\n    email: EmailStr\n    age: int = Field(ge=0, le=150)\n\n    @field_validator('name')\n    @classmethod\n    def name_alpha(cls, v: str) -> str:\n        if not v.replace(' ', '').isalpha():\n            raise ValueError('Only letters allowed')\n        return v.strip().title()\n\n    model_config = {\"from_attributes\": True}  # Pydantic v2\n\n@app.post(\"/users\", status_code=201)\nasync def create_user(user: UserCreate):  # Auto-validated!\n    ..."
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "3130-pydantic-validation-trong-fastapi-hoat-dong-the-nao"
+  },
+  {
+    "id": "0f4c7f11-8da1-5d78-86f5-00551678154a",
+    "question": "Middleware trong FastAPI — viết custom middleware thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3131-middleware-trong-fastapi-viet-custom-middleware-the-nao",
+    "slug": "middleware-trong-fastapi-viet-custom-middleware-the-nao-0f4c7f11-8da1-5d78-86f5-00551678154a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Middleware chạy trước và sau mỗi request.",
+        "CORS, GZip, TrustedHost — dùng built-in middlewares."
+      ],
+      "details": [
+        "Dùng @app.middleware(\"http\") cho custom middleware.",
+        "Lưu ý: Middleware exception handler không bắt HTTP exceptions từ path operations — dùng exception_handler thay."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "import time, uuid\nfrom fastapi import Request\n\n@app.middleware(\"http\")\nasync def logging_middleware(request: Request, call_next):\n    request_id = str(uuid.uuid4())\n    start = time.perf_counter()\n\n    response = await call_next(request)\n\n    duration = time.perf_counter() - start\n    response.headers[\"X-Request-ID\"] = request_id\n    response.headers[\"X-Duration\"] = f\"{duration:.4f}\"\n    return response"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "3131-middleware-trong-fastapi-viet-custom-middleware-the-nao"
+  },
+  {
+    "id": "04a009e8-ec3e-5aab-b7c2-d67280e3d672",
+    "question": "JWT Authentication — implement đầy đủ trong FastAPI?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3132-jwt-authentication-implement-day-du-trong-fastapi",
+    "slug": "jwt-authentication-implement-day-du-trong-fastapi-04a009e8-ec3e-5aab-b7c2-d67280e3d672",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "JWT auth gồm bốn bước:"
+      ],
+      "details": [
+        "Dùng PyJWT (không phải python-jose — đã có CVEs và ít được maintain)."
+      ],
+      "points": [
+        "Hash password với bcrypt",
+        "Tạo JWT token khi login",
+        "Verify token trong dependency",
+        "Protect routes với Depends(get_current_user)"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from passlib.context import CryptContext\nimport jwt  # pip install PyJWT\nfrom datetime import datetime, timedelta, timezone\n\npwd = CryptContext(schemes=[\"bcrypt\"])\nSECRET = \"your-secret-key\"\nALGORITHM = \"HS256\"\nACCESS_TOKEN_EXPIRE_MINUTES = 30\n\ndef create_token(user_id: int) -> str:\n    expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)\n    return jwt.encode({\"sub\": str(user_id), \"exp\": expire}, SECRET, ALGORITHM)\n\nasync def get_current_user(token = Depends(oauth2_scheme)):\n    try:\n        payload = jwt.decode(token, SECRET, algorithms=[ALGORITHM])\n        uid = payload.get(\"sub\")\n        if not uid: raise credentials_exception\n    except jwt.PyJWTError:\n        raise HTTPException(401, \"Invalid token\")\n    return await get_user(int(uid))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "3132-jwt-authentication-implement-day-du-trong-fastapi"
+  },
+  {
+    "id": "c26f7209-c43f-53ed-a07e-e31785103d70",
+    "question": "Background Tasks vs Celery — khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3133-background-tasks-vs-celery-khi-nao-dung-cai-nao",
+    "slug": "background-tasks-vs-celery-khi-nao-dung-cai-nao-c26f7209-c43f-53ed-a07e-e31785103d70",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "Background Tasks: zero config, in-process, chạy sau khi response trả về client.",
+        "Dùng cho: email xác nhận đơn giản, logging, non-critical async work.",
+        "Celery: cần Redis/RabbitMQ broker, distributed workers, retry logic, monitoring với Flower.",
+        "Dùng cho: payment processing, report generation, critical tasks cần retry.",
+        "Lưu ý: Background Tasks bị mất nếu server restart — Celery persist tasks trong broker."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "3133-background-tasks-vs-celery-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "ba601d78-8ad1-52b8-8f89-0944d6dc3f3f",
+    "question": "N+1 Query Problem là gì? Cách giải quyết với SQLAlchemy?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3136-n-1-query-problem-la-gi-cach-giai-quyet-voi-sqlalchemy",
+    "slug": "n-1-query-problem-la-gi-cach-giai-quyet-voi-sqlalchemy-ba601d78-8ad1-52b8-8f89-0944d6dc3f3f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "N+1 problem: 1 query lấy N records, rồi N queries nữa để lấy related data."
+      ],
+      "details": [
+        "Giải quyết bằng eager loading."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# N+1 problem — 1 + N queries\nusers = await db.execute(select(User))\nfor user in users.scalars():\n    posts = await db.execute(  # 1 query mỗi user!\n        select(Post).where(Post.user_id == user.id)\n    )\n\n# Fix: selectinload — 2 queries total\nfrom sqlalchemy.orm import selectinload\n\nresult = await db.execute(\n    select(User).options(selectinload(User.posts))\n)\n# 1 query lấy tất cả users + 1 query lấy posts cho tất cả user_ids\n\n# joinedload — 1 query với JOIN (tốt khi result set nhỏ)\nfrom sqlalchemy.orm import joinedload"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "3136-n-1-query-problem-la-gi-cach-giai-quyet-voi-sqlalchemy"
+  },
+  {
+    "id": "efdf3c8b-5ee4-5613-ad4d-4eb0bc687061",
+    "question": "SQLAlchemy 2.0 async — setup cơ bản thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3137-sqlalchemy-2-0-async-setup-co-ban-the-nao",
+    "slug": "sqlalchemy-2-0-async-setup-co-ban-the-nao-efdf3c8b-5ee4-5613-ad4d-4eb0bc687061",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "SQLAlchemy 2.0 async dùng create_async_engine, async_sessionmaker, và ORM style mới với Mapped/mapped_column — fully type-safe."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from sqlalchemy.ext.asyncio import (\n    create_async_engine, AsyncSession, async_sessionmaker\n)\nfrom sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column\n\nengine = create_async_engine(\n    \"postgresql+asyncpg://user:pass@localhost/db\",\n    pool_size=10, max_overflow=20,\n)\nAsyncSessionLocal = async_sessionmaker(engine, expire_on_commit=False)\n\nclass Base(DeclarativeBase): pass\n\nclass User(Base):\n    __tablename__ = \"users\"\n    id: Mapped[int] = mapped_column(primary_key=True)\n    email: Mapped[str] = mapped_column(unique=True, index=True)\n    name: Mapped[str] = mapped_column(nullable=False)\n\nasync def get_db():\n    async with AsyncSessionLocal() as session:\n        yield session"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "3137-sqlalchemy-2-0-async-setup-co-ban-the-nao"
+  },
+  {
+    "id": "de23c133-5604-5dd3-be12-d5934ead0957",
+    "question": "Testing FastAPI với pytest và TestClient?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3139-testing-fastapi-voi-pytest-va-testclient",
+    "slug": "testing-fastapi-voi-pytest-va-testclient-de23c133-5604-5dd3-be12-d5934ead0957",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng TestClient cho synchronous-style test của async endpoints."
+      ],
+      "details": [
+        "Override dependencies để isolate tests."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from fastapi.testclient import TestClient\nimport pytest\n\ndef override_get_db():\n    yield TestingSessionLocal()\n\napp.dependency_overrides[get_db] = override_get_db\nclient = TestClient(app)\n\ndef test_create_user():\n    res = client.post(\"/users\", json={\n        \"name\": \"Alice\", \"email\": \"alice@test.com\"\n    })\n    assert res.status_code == 201\n    assert res.json()[\"email\"] == \"alice@test.com\"\n\n# Async test\n@pytest.mark.asyncio\nasync def test_async():\n    async with AsyncClient(app=app, base_url=\"http://test\") as ac:\n        res = await ac.get(\"/users/1\")\n    assert res.status_code == 200"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "3139-testing-fastapi-voi-pytest-va-testclient"
+  },
+  {
+    "id": "66b09744-1560-53a8-b1e5-92247ec0d5e4",
+    "question": "pytest fixtures — scope hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3140-pytest-fixtures-scope-hoat-dong-the-nao",
+    "slug": "pytest-fixtures-scope-hoat-dong-the-nao-66b09744-1560-53a8-b1e5-92247ec0d5e4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Fixture scope xác định fixture được tạo và destroy khi nào: function (default) — mỗi test; class — mỗi test class; module — mỗi module; session — toàn bộ test session."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "@pytest.fixture(scope=\"session\")\ndef db_engine():   # Tạo 1 lần cho toàn bộ session\n    engine = create_engine(TEST_URL)\n    Base.metadata.create_all(engine)\n    yield engine\n    Base.metadata.drop_all(engine)\n\n@pytest.fixture      # scope=\"function\" — mỗi test\ndef db(db_engine):\n    connection = db_engine.connect()\n    transaction = connection.begin()\n    session = Session(bind=connection)\n    yield session\n    session.close()\n    transaction.rollback()  # Rollback sau mỗi test — isolation"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "3140-pytest-fixtures-scope-hoat-dong-the-nao"
+  },
+  {
+    "id": "881c6345-be48-53dc-8997-7b225b065649",
+    "question": "Mocking với pytest-mock — cách dùng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3143-mocking-voi-pytest-mock-cach-dung-the-nao",
+    "slug": "mocking-voi-pytest-mock-cach-dung-the-nao-881c6345-be48-53dc-8997-7b225b065649",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Dùng mocker fixture từ pytest-mock để mock functions và verify calls."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "async def test_register_sends_email(mocker):\n    # Mock email service\n    mock_send = mocker.patch(\n        \"app.services.email_service.send\",\n        new_callable=AsyncMock\n    )\n    mock_send.return_value = True\n\n    await register_user(email=\"test@test.com\")\n\n    mock_send.assert_called_once_with(\n        \"test@test.com\", \"Welcome!\"\n    )\n\ndef test_with_side_effect(mocker):\n    mock_api = mocker.patch(\"app.services.external_api.call\")\n    mock_api.side_effect = [{\"status\": \"ok\"}, ConnectionError()]\n\n    assert call_api() == {\"status\": \"ok\"}\n    with pytest.raises(ConnectionError):\n        call_api()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "3143-mocking-voi-pytest-mock-cach-dung-the-nao"
+  },
+  {
+    "id": "44d4ffad-9c55-5e10-8295-c4371bc79f5c",
+    "question": "Pydantic Settings — cách quản lý config ứng dụng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3146-pydantic-settings-cach-quan-ly-config-ung-dung",
+    "slug": "pydantic-settings-cach-quan-ly-config-ung-dung-44d4ffad-9c55-5e10-8295-c4371bc79f5c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "pydantic-settings tự động đọc env vars và validate types."
+      ],
+      "details": [
+        "Hỗ trợ .env file."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from pydantic_settings import BaseSettings, SettingsConfigDict\nfrom functools import lru_cache\n\nclass Settings(BaseSettings):\n    model_config = SettingsConfigDict(\n        env_file=\".env\", env_file_encoding=\"utf-8\"\n    )\n    app_name: str = \"My API\"\n    debug: bool = False\n    database_url: str          # Required — không có default\n    secret_key: str\n    redis_url: str = \"redis://localhost:6379\"\n    access_token_expire_minutes: int = 30\n\n@lru_cache  # Singleton — đọc .env một lần\ndef get_settings() -> Settings:\n    return Settings()\n\nsettings = get_settings()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "3146-pydantic-settings-cach-quan-ly-config-ung-dung"
+  },
+  {
+    "id": "9679f496-aac8-5fb3-a19b-7a1616b7787c",
+    "question": "*args và **kwargs là gì? Khi nào dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3150-args-va-kwargs-la-gi-khi-nao-dung",
+    "slug": "args-va-kwargs-la-gi-khi-nao-dung-9679f496-aac8-5fb3-a19b-7a1616b7787c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Thứ tự params: def fn(pos, /, normal, *args, kw_only, **kwargs)."
+      ],
+      "details": [
+        "Lưu ý: *args và **kwargs không giữ type information — dùng overloads hoặc TypedDict cho strict typing."
+      ],
+      "points": [],
+      "sections": [
+        "*args cho phép nhận bất kỳ số positional arguments — nhóm thành tuple. **kwargs nhận bất kỳ số keyword arguments — nhóm thành dict."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "def log(level, *args, **kwargs):\n    print(f\"[{level}]\", *args)\n    for k, v in kwargs.items():\n        print(f\"  {k}: {v}\")\n\nlog(\"INFO\", \"Server started\", port=8080, debug=True)\n# [INFO] Server started\n#   port: 8080\n#   debug: True\n\n# Unpacking khi gọi function\ndef create_user(name, email, age):\n    ...\n\ndata = {\"name\": \"Alice\", \"email\": \"a@b.com\", \"age\": 25}\ncreate_user(**data)  # Unpack dict thành kwargs"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "3150-args-va-kwargs-la-gi-khi-nao-dung"
+  },
+  {
+    "id": "30b4954e-56e1-59c6-bdb6-33dd12c347dd",
+    "question": "Walrus operator := (Assignment Expression) là gì? Khi nào hữu ích?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3152-walrus-operator-assignment-expression-la-gi-khi-nao-huu-ich",
+    "slug": "walrus-operator-assignment-expression-la-gi-khi-nao-huu-ich-30b4954e-56e1-59c6-bdb6-33dd12c347dd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: không lạm dụng — walrus trong nested expression phức tạp làm code khó đọc hơn."
+      ],
+      "details": [
+        "Dùng khi thực sự tránh được duplicate computation."
+      ],
+      "points": [],
+      "sections": [
+        "Walrus operator (PEP 572, Python 3.8+) cho phép assign và return giá trị trong cùng một expression — giảm lặp code."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# Trước 3.8 — gọi hàm 2 lần hoặc dùng temp variable\ndata = get_data()\nif data:\n    process(data)\n\n# Với walrus — assign và kiểm tra cùng lúc\nif data := get_data():\n    process(data)\n\n# Đặc biệt hữu ích trong while loop\nwhile chunk := file.read(8192):\n    process(chunk)\n\n# List comprehension với filter + transform\nresults = [y for x in data if (y := transform(x)) > 0]\n# Tránh gọi transform() 2 lần (1 cho filter, 1 cho value)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "3152-walrus-operator-assignment-expression-la-gi-khi-nao-huu-ich"
+  },
+  {
+    "id": "aee5df85-9254-5482-a5f8-c43919b91a4e",
+    "question": "Type hints nâng cao: Optional, Union, TypeVar, Generic, Protocol?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3153-type-hints-nang-cao-optional-union-typevar-generic-protocol",
+    "slug": "type-hints-nang-cao-optional-union-typevar-generic-protocol-aee5df85-9254-5482-a5f8-c43919b91a4e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Python type hints làm được nhiều hơn chỉ int, str cơ bản:"
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from typing import Optional, Union, TypeVar, Generic, Protocol\nfrom collections.abc import Sequence\n\n# Optional[X] tương đương Union[X, None]\ndef find_user(user_id: int) -> Optional[User]:\n    return db.get(user_id)  # Có thể None\n\n# Union — nhiều types\ndef parse_id(value: Union[str, int]) -> int:\n    return int(value)\n\n# TypeVar — generic type variable\nT = TypeVar('T')\ndef first(lst: Sequence[T]) -> Optional[T]:\n    return lst[0] if lst else None\n\n# Generic class\nclass Stack(Generic[T]):\n    def __init__(self): self._items: list[T] = []\n    def push(self, item: T) -> None: self._items.append(item)\n    def pop(self) -> T: return self._items.pop()\n\n# Protocol — structural subtyping (duck typing + type safety)\nclass Drawable(Protocol):\n    def draw(self) -> None: ...\n\ndef render(obj: Drawable) -> None:\n    obj.draw()  # Bất kỳ class nào có .draw() đều hợp lệ"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "3153-type-hints-nang-cao-optional-union-typevar-generic-protocol"
+  },
+  {
+    "id": "a9729c6b-9138-53fe-939e-5448043d8413",
+    "question": "Generators vs Iterators — khác nhau như thế nào? __iter__ và __next__?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3155-generators-vs-iterators-khac-nhau-nhu-the-nao-iter-va-next",
+    "slug": "generators-vs-iterators-khac-nhau-nhu-the-nao-iter-va-next-a9729c6b-9138-53fe-939e-5448043d8413",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Iterator: bất kỳ object nào implement __iter__() và __next__(). Generator: function dùng yield — tự động implement iterator protocol, lazy, stateful."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# Class-based Iterator\nclass CountDown:\n    def __init__(self, start): self.current = start\n\n    def __iter__(self): return self  # Trả về chính nó\n\n    def __next__(self):\n        if self.current <= 0:\n            raise StopIteration\n        self.current -= 1\n        return self.current + 1\n\nlist(CountDown(3))  # [3, 2, 1]\n\n# Generator function — ngắn gọn hơn\ndef countdown(n):\n    while n > 0:\n        yield n\n        n -= 1\n\n# Generator expression — lazy (khác list comprehension)\ngen = (x**2 for x in range(1_000_000))  # Không chiếm RAM"
+        },
+        {
+          "language": "PYTHON",
+          "code": "def accumulator():\n    total = 0\n    while True:\n        value = yield total  # Nhận value từ .send()\n        if value is None: break\n        total += value\n\nacc = accumulator()\nnext(acc)          # Khởi động generator\nacc.send(10)       # 10\nacc.send(20)       # 30"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "3155-generators-vs-iterators-khac-nhau-nhu-the-nao-iter-va-next"
+  },
+  {
+    "id": "6ea30165-bd81-5ecf-85c2-291704f9610e",
+    "question": "Pydantic v2 — những thay đổi lớn so với v1?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3159-pydantic-v2-nhung-thay-doi-lon-so-voi-v1",
+    "slug": "pydantic-v2-nhung-thay-doi-lon-so-voi-v1-6ea30165-bd81-5ecf-85c2-291704f9610e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "FastAPI 0.100+ dùng Pydantic v2 mặc định — nhanh hơn 5-50x nhờ Rust core.\nThay đổi chính:"
+      ],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# v1 → v2 migration\n\n# 1. validator → field_validator\n# v1:\n@validator('email')\ndef validate_email(cls, v): ...\n\n# v2:\nfrom pydantic import field_validator\n@field_validator('email')\n@classmethod\ndef validate_email(cls, v: str) -> str: ...\n\n# 2. orm_mode → model_config\n# v1: class Config: orm_mode = True\n# v2:\nfrom pydantic import ConfigDict\nclass UserSchema(BaseModel):\n    model_config = ConfigDict(from_attributes=True)\n\n# 3. .dict() → .model_dump()\nuser.model_dump()\nuser.model_dump(exclude={'password'})\n\n# 4. .json() → .model_dump_json()\nuser.model_dump_json()\n\n# 5. parse_obj → model_validate\nUserSchema.model_validate({\"id\": 1, \"name\": \"Alice\"})\nUserSchema.model_validate(orm_object, from_attributes=True)\n\n# 6. BaseSettings bị tách ra pydantic-settings package\nfrom pydantic_settings import BaseSettings"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "3159-pydantic-v2-nhung-thay-doi-lon-so-voi-v1"
+  },
+  {
+    "id": "aa76b552-8093-597e-9693-1e1487f8cbd9",
+    "question": "Async vs sync endpoints trong FastAPI — khi nào dùng def hay async def?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3160-async-vs-sync-endpoints-trong-fastapi-khi-nao-dung-def-hay-async-def",
+    "slug": "async-vs-sync-endpoints-trong-fastapi-khi-nao-dung-def-hay-async-def-aa76b552-8093-597e-9693-1e1487f8cbd9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "FastAPI chạy trên Starlette (ASGI), hỗ trợ cả sync và async endpoints:",
+        "def (sync): khi dùng blocking operations không thể async."
+      ],
+      "details": [
+        "async def: dùng khi endpoint thực hiện I/O async (database queries async, HTTP calls async):",
+        "FastAPI tự động chạy sync endpoint trong ThreadPoolExecutor để không block event loop:"
+      ],
+      "points": [
+        "Rule: I/O async → async def.",
+        "CPU-bound hoặc blocking library → def.",
+        "Không bao giờ dùng blocking I/O trong async def."
+      ],
+      "sections": [
+        "Không được làm: gọi blocking I/O trong async def — block toàn bộ event loop:"
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "@app.get(\"/users/{id}\")\nasync def get_user(id: int, db: AsyncSession = Depends(get_db)):\n    user = await db.get(User, id)  # Async I/O\n    return user"
+        },
+        {
+          "language": "PYTHON",
+          "code": "@app.get(\"/compute\")\ndef cpu_task(data: list):\n    return [x**2 for x in data]  # CPU-bound — sync OK"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "3160-async-vs-sync-endpoints-trong-fastapi-khi-nao-dung-def-hay-async-def"
+  },
+  {
+    "id": "326464d3-886d-54c2-b99f-6f0924fb85f1",
+    "question": "pytest parametrize — viết parameterized tests thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3161-pytest-parametrize-viet-parameterized-tests-the-nao",
+    "slug": "pytest-parametrize-viet-parameterized-tests-the-nao-326464d3-886d-54c2-b99f-6f0924fb85f1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "@pytest.mark.parametrize cho phép chạy cùng test với nhiều input/output khác nhau:"
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "import pytest\n\n@pytest.mark.parametrize(\"email,is_valid\", [\n    (\"user@example.com\", True),\n    (\"invalid-email\", False),\n    (\"@nodomain.com\", False),\n    (\"user@.com\", False),\n    (\"\", False),\n])\ndef test_validate_email(email: str, is_valid: bool):\n    assert validate_email(email) == is_valid\n\n# Multiple params\n@pytest.mark.parametrize(\"a,b,expected\", [\n    (1, 2, 3),\n    (0, 0, 0),\n    (-1, 1, 0),\n    (100, 200, 300),\n])\ndef test_add(a, b, expected):\n    assert add(a, b) == expected\n\n# Nested parametrize — cartesian product\n@pytest.mark.parametrize(\"base\", [2, 10])\n@pytest.mark.parametrize(\"exponent\", [0, 1, 2])\ndef test_power(base, exponent):\n    assert power(base, exponent) == base ** exponent\n# 6 test cases: (2,0), (2,1), (2,2), (10,0), (10,1), (10,2)\n\n# Với pytest.param cho custom IDs hoặc marks\n@pytest.mark.parametrize(\"value\", [\n    pytest.param(None, id=\"null-value\"),\n    pytest.param([], marks=pytest.mark.xfail, id=\"empty-list\"),\n])\ndef test_process(value): ..."
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "3161-pytest-parametrize-viet-parameterized-tests-the-nao"
+  },
+  {
+    "id": "9bf3039d-55a0-5fea-b127-d72529de0d4e",
+    "question": "Mock vs MagicMock vs AsyncMock — khác nhau gì? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3162-mock-vs-magicmock-vs-asyncmock-khac-nhau-gi-khi-nao-dung-cai-nao",
+    "slug": "mock-vs-magicmock-vs-asyncmock-khac-nhau-gi-khi-nao-dung-cai-nao-9bf3039d-55a0-5fea-b127-d72529de0d4e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Mock là base class; MagicMock mở rộng với magic method support (__len__, __iter__, __enter__...); AsyncMock (Python 3.8+) bắt buộc cho coroutine — dùng sai type thì assert_awaited_once sẽ silently pass dù không được await."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from unittest.mock import Mock, MagicMock, AsyncMock, patch\n\n# Mock — basic mock object\nmock = Mock()\nmock.method()           # OK, trả về Mock\nmock.method.assert_called_once()\n\n# MagicMock — Mock + magic methods (__len__, __iter__, __enter__ etc.)\nmagic = MagicMock()\nlen(magic)              # OK, gọi __len__\nwith magic:             # OK, gọi __enter__/__exit__\n    pass\nlist(magic)             # OK, gọi __iter__\n\n# AsyncMock (Python 3.8+) — cho async functions\nasync_mock = AsyncMock(return_value={\"data\": []})\n# await async_mock()  # OK\n\n# Patch context manager\nwith patch('mymodule.requests.get') as mock_get:\n    mock_get.return_value.json.return_value = {'id': 1}\n    result = fetch_user(1)\n    mock_get.assert_called_once_with('https://api.com/users/1')\n\n# Patch cho async\nwith patch('mymodule.send_email', new_callable=AsyncMock) as mock_email:\n    mock_email.return_value = True\n    await register_user(\"test@test.com\")\n    mock_email.assert_awaited_once()\n\n# side_effect — simulate exceptions hay dynamic return values\nmock.method.side_effect = ValueError(\"DB connection failed\")\nmock.method.side_effect = [1, 2, 3]  # Trả về lần lượt"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "3162-mock-vs-magicmock-vs-asyncmock-khac-nhau-gi-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "66321f15-d439-53c1-98eb-42baa0a1ee01",
+    "question": "@dataclass(slots=True) — memory optimization trong Python 3.10+?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3163-dataclass-slots-true-memory-optimization-trong-python-3-10",
+    "slug": "dataclass-slots-true-memory-optimization-trong-python-3-10-66321f15-d439-53c1-98eb-42baa0a1ee01",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Kết hợp __slots__ với @dataclass để có cả type safety và memory efficiency:",
+        "@dataclass(slots=True)"
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from dataclasses import dataclass\nimport sys\n\n@dataclass\nclass UserNormal:\n    id: int; name: str; email: str\n\n@dataclass(slots=True)  # Python 3.10+\nclass UserSlots:\n    id: int; name: str; email: str\n\nprint(sys.getsizeof(UserNormal(1, 'Alice', 'a@b.com')))  # ~256 bytes (có __dict__)\nprint(sys.getsizeof(UserSlots(1, 'Alice', 'a@b.com')))   # ~56 bytes (không có __dict__)\n\n# frozen=True + slots=True — immutable và memory-efficient\n@dataclass(frozen=True, slots=True)\nclass Point:\n    x: float\n    y: float\n\np = Point(1.0, 2.0)\n# p.x = 3.0  # FrozenInstanceError"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "3163-dataclass-slots-true-memory-optimization-trong-python-3-10"
+  },
+  {
+    "id": "d765defa-de32-5f44-8a2b-ed99e0e4468b",
+    "question": "Quy tắc LEGB khi Python tra cứu tên là gì? global và nonlocal khác nhau ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93521-quy-tac-legb-khi-python-tra-cuu-ten-la-gi-global-va-nonlocal-khac-nhau-ra-sao",
+    "slug": "quy-tac-legb-khi-python-tra-cuu-ten-la-gi-global-va-nonlocal-khac-nhau-ra-sao-d765defa-de32-5f44-8a2b-ed99e0e4468b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "LEGB là thứ tự Python tra một tên: Local (trong hàm hiện tại) → Enclosing (hàm bao ngoài) → Global (module) → Built-in. Tìm thấy ở tầng nào thì dừng ở đó."
+      ],
+      "details": [
+        "Mặc định, gán một tên bên trong hàm sẽ tạo biến Local — che biến cùng tên ở ngoài. Muốn gán ra ngoài phải khai báo:\n- global x: gán vào biến ở scope module.\n- nonlocal x: gán vào biến ở scope hàm bao gần nhất (closure), không phải module."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "def outer():\n    x = 1\n    def inner():\n        nonlocal x\n        x = 2      # sửa x của outer\n    inner()\n    return x       # 2"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "93521-quy-tac-legb-khi-python-tra-cuu-ten-la-gi-global-va-nonlocal-khac-nhau-ra-sao"
+  },
+  {
+    "id": "02c19809-06ba-5f43-bea4-1e9a6acaa5d2",
+    "question": "Pickling/unpickling là gì? Vì sao unpickle dữ liệu không tin cậy lại nguy hiểm?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93525-pickling-unpickling-la-gi-vi-sao-unpickle-du-lieu-khong-tin-cay-lai-nguy-hiem",
+    "slug": "pickling-unpickling-la-gi-vi-sao-unpickle-du-lieu-khong-tin-cay-lai-nguy-hiem-02c19809-06ba-5f43-bea4-1e9a6acaa5d2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "pickle serialize một object Python thành byte stream và deserialize ngược lại (dựng lại object). Khác JSON: giữ được cấu trúc Python phức tạp (object tùy biến, tham chiếu vòng) nhưng chỉ Python đọc được và không cross-language."
+      ],
+      "details": [
+        "Nguy hiểm: quá trình unpickle có thể gọi constructor/hàm bất kỳ (qua hook như __reduce__), nên một payload độc hại khiến pickle.loads thực thi mã tùy ý (RCE) ngay lúc load — không cần gọi thêm gì.",
+        "Quy tắc: không bao giờ unpickle dữ liệu từ nguồn không tin cậy (request, file upload, cache dùng chung). Trao đổi qua mạng dùng JSON; nếu buộc phải pickle, ký HMAC và chỉ chấp nhận dữ liệu tự sinh."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "93525-pickling-unpickling-la-gi-vi-sao-unpickle-du-lieu-khong-tin-cay-lai-nguy-hiem"
+  },
+  {
+    "id": "10ed08e2-529f-5d7d-9976-df1d10a4ebee",
+    "question": "match-case (structural pattern matching, 3.10) khác switch truyền thống thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93527-match-case-structural-pattern-matching-3-10-khac-switch-truyen-thong-the-nao",
+    "slug": "match-case-structural-pattern-matching-3-10-khac-switch-truyen-thong-the-nao-10ed08e2-529f-5d7d-9976-df1d10a4ebee",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Không phải switch so-sánh-giá-trị đơn thuần. match so khớp cấu trúc: nó có thể destructure sequence/mapping/object, bắt biến từ bên trong, và thêm điều kiện if (guard).",
+        "Khác biệt cần nhớ:\n- Không fall-through như C — khớp một case là dừng.\n- case name (tên trần) là capture (gán), không so với biến cùng tên. Muốn so với hằng phải dùng tên có dấu chấm (Color.RED) hoặc literal."
+      ],
+      "details": [
+        "Trúng nhánh nào thì gán luôn các phần con vào biến."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "match point:\n    case (0, 0):        return \"origin\"\n    case (x, 0):        return f\"x-axis at {x}\"\n    case Point(x=x, y=y) if x == y:\n        return \"diagonal\"\n    case _:             return \"other\""
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "93527-match-case-structural-pattern-matching-3-10-khac-switch-truyen-thong-the-nao"
+  },
+  {
+    "id": "e12bd86a-35d5-51df-8f11-1530b7345e2b",
+    "question": "Single underscore và double underscore trong tên attribute khác nhau ra sao? Name mangling là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93529-single-underscore-va-double-underscore-trong-ten-attribute-khac-nhau-ra-sao-name",
+    "slug": "single-underscore-va-double-underscore-trong-ten-attribute-khac-nhau-ra-sao-name-mangling-la-gi-e12bd86a-35d5-51df-8f11-1530b7345e2b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Python không có access modifier thật (private/protected). Thay vào đó là quy ước và một cơ chế đổi tên:"
+      ],
+      "details": [],
+      "points": [
+        "_name (1 gạch đầu): quy ước \"nội bộ, đừng đụng từ ngoài\" — thuần convention, không ràng buộc, vẫn truy cập được.",
+        "__name (2 gạch đầu, tối đa 1 gạch cuối): trình biên dịch đổi tên thành _ClassName__name — gọi là name mangling. Mục đích không phải giấu mà tránh trùng tên khi subclass vô tình đặt cùng attribute.",
+        "__dunder__ (2 gạch đầu và đuôi): tên đặc biệt của Python (__init__, __len__), không bị mangle."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class A:\n    def __init__(self):\n        self.__x = 1    # thực chất là self._A__x"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": "93529-single-underscore-va-double-underscore-trong-ten-attribute-khac-nhau-ra-sao-name"
+  },
+  {
+    "id": "4201d8b9-d2b5-5e4a-acaa-115db27ea332",
+    "question": "Viết decorator có tham số (vd @retry(times=3)) thế nào? functools.wraps giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96304-viet-decorator-co-tham-so-vd-retry-times-3-the-nao-functools-wraps-giai-quyet-va",
+    "slug": "viet-decorator-co-tham-so-vd-retry-times-3-the-nao-functools-wraps-giai-quyet-van-de-gi-4201d8b9-d2b5-5e4a-acaa-115db27ea332",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "@retry(times=3) được đọc là: gọi retry(times=3) trước, lấy kết quả rồi mới áp lên hàm."
+      ],
+      "details": [
+        "functools.wraps để làm gì: không có nó, hàm sau khi decorate mang danh tính của wrapper — __name__ thành \"wrapper\", __doc__ mất, inspect.signature trả về (*args, **kwargs). Điều này phá logging, sinh docs, và các framework đọc metadata (FastAPI đọc type hint, pytest đọc tên test). wraps copy __name__, __doc__, __module__, __qualname__, __dict__ và gắn __wrapped__ trỏ về hàm gốc."
+      ],
+      "points": [],
+      "sections": [
+        "Decorator có tham số cần ba tầng hàm: hàm ngoài nhận tham số cấu hình và trả về decorator, decorator nhận function và trả về wrapper."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "import functools\nimport time\n\ndef retry(times=3, delay=0.5):\n    def decorator(func):\n        @functools.wraps(func)\n        def wrapper(*args, **kwargs):\n            for attempt in range(times):\n                try:\n                    return func(*args, **kwargs)\n                except ConnectionError:\n                    if attempt == times - 1:\n                        raise\n                    time.sleep(delay)\n        return wrapper\n    return decorator\n\n@retry(times=3)\ndef call_payment_api(order_id): ..."
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "96304-viet-decorator-co-tham-so-vd-retry-times-3-the-nao-functools-wraps-giai-quyet-va"
+  },
+  {
+    "id": "98b703ec-7c48-5e9e-b36f-3f7192f48dd9",
+    "question": "yield from khác gì so với viết for item in sub: yield item?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96305-yield-from-khac-gi-so-voi-viet-for-item-in-sub-yield-item",
+    "slug": "yield-from-khac-gi-so-voi-viet-for-item-in-sub-yield-item-98b703ec-7c48-5e9e-b36f-3f7192f48dd9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Về giá trị sinh ra thì giống nhau, nhưng yield from uỷ quyền hẳn cho sub-generator chứ không chỉ chuyển tiếp giá trị."
+      ],
+      "details": [
+        "Ba điểm khác biệt:\n1. Chuyển tiếp hai chiều: send(), throw(), close() từ caller đi thẳng xuống sub-generator. Vòng for thủ công thì nuốt mất.\n2. Lấy được giá trị return của sub-generator — thứ mà for không chạm tới được.\n3. Ngắn gọn hơn và nhanh hơn (bớt một lớp trung gian mỗi vòng lặp)."
+      ],
+      "points": [],
+      "sections": [
+        "Dùng nhiều nhất khi làm phẳng cấu trúc lồng nhau (đệ quy trên cây/nested list) và khi ghép pipeline generator. yield from xuất hiện ở Python 3.3 (PEP 380) và cũng là nền tảng cú pháp cho coroutine trước khi có async/await."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "def read_lines(paths):\n    for path in paths:\n        with open(path) as f:\n            yield from f          # delegate, no manual loop\n\ndef count_words(text):\n    yield len(text.split())\n    return \"done\"                 # returned value\n\ndef outer(text):\n    result = yield from count_words(text)\n    print(result)                 # \"done\""
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "96305-yield-from-khac-gi-so-voi-viet-for-item-in-sub-yield-item"
+  },
+  {
+    "id": "2e092d23-5d20-5e17-84ae-6319da6a41ae",
+    "question": "Tự viết một context manager thế nào? Nếu __exit__ trả về True thì điều gì xảy ra?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96306-tu-viet-mot-context-manager-the-nao-neu-exit-tra-ve-true-thi-dieu-gi-xay-ra",
+    "slug": "tu-viet-mot-context-manager-the-nao-neu-exit-tra-ve-true-thi-dieu-gi-xay-ra-2e092d23-5d20-5e17-84ae-6319da6a41ae",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Phần dọn dẹp phải nằm trong finally, nếu không thì block có exception sẽ không dọn.",
+        "Với @contextmanager, tương đương là bắt exception quanh yield mà không raise lại."
+      ],
+      "details": [
+        "__exit__ trả về True: exception bị nuốt hoàn toàn — chương trình chạy tiếp ngay sau khối with như chưa có gì xảy ra. Trả về None/False (mặc định) thì exception tiếp tục lan ra."
+      ],
+      "points": [
+        "Nếu chỉ muốn log rồi cho lỗi đi tiếp thì bắt buộc raise lại.",
+        "Chỉ nuốt exception khi thật sự có chủ đích — muốn bỏ qua có kiểm soát thì đã có sẵn contextlib.suppress."
+      ],
+      "sections": [
+        "Hai cách: viết class có __enter__/__exit__, hoặc dùng @contextlib.contextmanager với một generator yield đúng một lần."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "import contextlib\nimport time\n\n@contextlib.contextmanager\ndef timed(label):\n    start = time.perf_counter()\n    try:\n        yield                       # body of the with-block runs here\n    finally:\n        print(label, time.perf_counter() - start)\n\nwith timed(\"query\"):\n    run_query()"
+        },
+        {
+          "language": "PYTHON",
+          "code": "class Suppress:\n    def __enter__(self): return self\n    def __exit__(self, exc_type, exc, tb):\n        return exc_type is ValueError   # only ValueError is swallowed"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": "96306-tu-viet-mot-context-manager-the-nao-neu-exit-tra-ve-true-thi-dieu-gi-xay-ra"
+  },
+  {
+    "id": "fbde2dce-ae1d-5dc6-8625-2427349c0a2d",
+    "question": "Class định nghĩa __eq__ nhưng không định nghĩa __hash__ thì đưa instance vào set sẽ ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96307-class-dinh-nghia-eq-nhung-khong-dinh-nghia-hash-thi-dua-instance-vao-set-se-ra-s",
+    "slug": "class-dinh-nghia-eq-nhung-khong-dinh-nghia-hash-thi-dua-instance-vao-set-se-ra-sao-fbde2dce-ae1d-5dc6-8625-2427349c0a2d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ném TypeError: unhashable type.",
+        "Lý do là hợp đồng giữa hash và equality:\n- a == b thì bắt buộc hash(a) == hash(b).\n- Hash phải không đổi trong suốt vòng đời object; nếu hash đổi sau khi object đã nằm trong dict/set thì không tra cứu lại được nữa."
+      ],
+      "details": [
+        "Python 3 tự đặt __hash__ = None cho class nào override __eq__ mà không khai báo __hash__.",
+        "Nếu tự định nghĩa __eq__ mà vẫn giữ hash mặc định (theo địa chỉ id), hai object bằng nhau lại có hash khác nhau → dict/set hỏng ngầm. Nên Python chọn báo lỗi thay vì để sai âm thầm."
+      ],
+      "points": [],
+      "sections": [
+        "Tương tự với dataclass: @dataclass (mặc định eq=True) là unhashable; muốn hashable thì dùng @dataclass(frozen=True)."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class User:\n    def __init__(self, uid): self.uid = uid\n    def __eq__(self, other):\n        return isinstance(other, User) and self.uid == other.uid\n\n{User(1)}   # TypeError: unhashable type: 'User'"
+        },
+        {
+          "language": "PYTHON",
+          "code": "class User:\n    __slots__ = (\"uid\",)\n    def __init__(self, uid): self.uid = uid\n    def __eq__(self, other):\n        return isinstance(other, User) and self.uid == other.uid\n    def __hash__(self):\n        return hash(self.uid)      # hash only immutable identity fields"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": "96307-class-dinh-nghia-eq-nhung-khong-dinh-nghia-hash-thi-dua-instance-vao-set-se-ra-s"
+  },
+  {
+    "id": "dd3c819a-4a05-5603-a803-ee5801e3dd26",
+    "question": "@dataclass, NamedTuple và pydantic.BaseModel — dự án thật nên dùng cái nào cho trường hợp nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96308-dataclass-namedtuple-va-pydantic-basemodel-du-an-that-nen-dung-cai-nao-cho-truon",
+    "slug": "dataclass-namedtuple-va-pydantic-basemodel-du-an-that-nen-dung-cai-nao-cho-truong-hop-nao-dd3c819a-4a05-5603-a803-ee5801e3dd26",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba thứ giải quyết ba nhu cầu khác nhau, nhìn theo ranh giới dữ liệu:",
+        "@dataclass — domain object bên trong hệ thống: mutable được, có default, __post_init__, __eq__ sinh sẵn, không phụ thuộc thư viện ngoài. Không validate kiểu lúc chạy — khai báo age: int vẫn nhận \"abc\" bình thường."
+      ],
+      "details": [
+        "NamedTuple — bản ghi bất biến, nhẹ, có thể unpack và dùng làm key của dict. Hợp cho giá trị trả về nhiều thành phần, cấu hình chỉ đọc, toạ độ/khoảng thời gian.",
+        "pydantic.BaseModel — dùng ở rìa hệ thống, nơi dữ liệu đến từ nguồn không tin cậy: request body, JSON, biến môi trường, response của API bên thứ ba. Nó parse, ép kiểu theo quy tắc, validate và sinh lỗi có cấu trúc; FastAPI dùng chính nó để sinh OpenAPI. Đổi lại là thêm dependency và chi phí khởi tạo object cao hơn.",
+        "Cách chọn quen dùng: pydantic ở lớp API/config, dataclass ở lớp domain/service, NamedTuple cho giá trị nhỏ bất biến. Đừng đẩy pydantic model xuống vòng lặp nóng khi dữ liệu đã được validate."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from typing import NamedTuple\n\nclass Range(NamedTuple):\n    start: int\n    end: int\n\nlo, hi = Range(0, 10)     # tuple unpacking works"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": "96308-dataclass-namedtuple-va-pydantic-basemodel-du-an-that-nen-dung-cai-nao-cho-truon"
+  },
+  {
+    "id": "cf59b96e-61af-59b2-8341-202c367eb869",
+    "question": "Type hint có được Python kiểm tra lúc chạy không? Optional[str] nghĩa là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96309-type-hint-co-duoc-python-kiem-tra-luc-chay-khong-optional-str-nghia-la-gi",
+    "slug": "type-hint-co-duoc-python-kiem-tra-luc-chay-khong-optional-str-nghia-la-gi-cf59b96e-61af-59b2-8341-202c367eb869",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Không. Runtime của Python bỏ qua annotation: def f(n: int) vẫn nhận \"abc\" và chạy bình thường, không có lỗi nào được ném ra.",
+        "Optional[str] = str | None (từ 3.10 nên viết str | None)."
+      ],
+      "details": [
+        "Type hint phục vụ công cụ phân tích tĩnh (mypy, pyright, IDE) và thư viện đọc metadata (pydantic, FastAPI, dataclasses, SQLAlchemy 2.0) — muốn kiểm tra thì phải chạy checker trong CI.",
+        "Nó nói về giá trị có thể là None, hoàn toàn không liên quan tới \"tham số có thể bỏ qua\".",
+        "Annotation vẫn truy cập được lúc chạy qua typing.get_type_hints() — đó là cách FastAPI và pydantic dựng schema."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "def f(n: int) -> int:\n    return n * 2\n\nf(\"abc\")            # runs fine, returns \"abcabc\""
+        },
+        {
+          "language": "PYTHON",
+          "code": "def find(uid: int) -> str | None: ...          # may return None\ndef greet(name: str = \"guest\") -> str: ...     # optional arg, NOT Optional\ndef save(path: str | None = None) -> None: ... # both: optional and nullable"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": "96309-type-hint-co-duoc-python-kiem-tra-luc-chay-khong-optional-str-nghia-la-gi"
+  },
+  {
+    "id": "2b646b49-0caf-5372-a7ad-04038b7395e9",
+    "question": "Vì sao fns = [lambda: i for i in range(3)] gọi ra đều bằng 2?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96310-vi-sao-fns-lambda-i-for-i-in-range-3-goi-ra-deu-bang-2",
+    "slug": "vi-sao-fns-lambda-i-for-i-in-range-3-goi-ra-deu-bang-2-2b646b49-0caf-5372-a7ad-04038b7395e9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì closure trong Python giữ tham chiếu tới biến, không giữ giá trị tại thời điểm tạo (late binding).",
+        "Lỗi này ít khi hiện ra ở dạng lambda thuần; nó thường hiện ra khi đăng ký callback/handler trong vòng lặp (button handler, task scheduler, retry hook) rồi tất cả cùng thao tác trên phần tử cuối."
+      ],
+      "details": [
+        "Cả ba lambda cùng trỏ tới một biến i; đến lúc gọi thì vòng lặp đã kết thúc và i đang là 2.",
+        "Ngược lại, late binding cũng chính là thứ khiến closure \"thấy\" được giá trị mới nhất của biến ngoài — hữu ích với counter/accumulator dùng nonlocal."
+      ],
+      "points": [],
+      "sections": [
+        "Ba cách sửa:"
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "fns = [lambda: i for i in range(3)]\n[f() for f in fns]        # [2, 2, 2]"
+        },
+        {
+          "language": "PYTHON",
+          "code": "# 1. default argument — evaluated at definition time\nfns = [lambda i=i: i for i in range(3)]\n\n# 2. functools.partial — binds the value now\nfrom functools import partial\nfns = [partial(lambda i: i, i) for i in range(3)]\n\n# 3. factory function — new scope per iteration\ndef make(i):\n    return lambda: i\nfns = [make(i) for i in range(3)]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": "96310-vi-sao-fns-lambda-i-for-i-in-range-3-goi-ra-deu-bang-2"
+  },
+  {
+    "id": "0cbb1ade-6e01-525b-8803-209043472a00",
+    "question": "Một request cần gọi 200 API bên ngoài. Dùng asyncio.gather thẳng có vấn đề gì? Giới hạn đồng thời ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96409-mot-request-can-goi-200-api-ben-ngoai-dung-asyncio-gather-thang-co-van-de-gi-gio",
+    "slug": "mot-request-can-goi-200-api-ben-ngoai-dung-asyncio-gather-thang-co-van-de-gi-gioi-han-dong-thoi-ra-s-0cbb1ade-6e01-525b-8803-209043472a00",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "asyncio.gather khởi chạy tất cả coroutine cùng lúc.",
+        "Ba điểm cần nhớ:\n- Dùng chung một AsyncClient cho cả batch để tái sử dụng connection pool; tạo client mới cho từng request là lỗi phổ biến làm chậm gấp nhiều lần.\n- return_exceptions=True để một URL hỏng không huỷ cả batch; nếu để mặc định, gather ném exception đầu tiên và các task còn lại vẫn chạy nền.\n- Đặt timeout ở tầng client, nếu không một endpoint treo sẽ giữ slot semaphore vô hạn."
+      ],
+      "details": [
+        "Với Python 3.11+, asyncio.TaskGroup là lựa chọn tốt hơn khi muốn \"một task lỗi thì huỷ cả nhóm\", nhưng vẫn cần semaphore để chặn số lời gọi đồng thời."
+      ],
+      "points": [
+        "Với 200 lời gọi, phía bên kia dễ trả 429, kết nối bị nghẽn, và nếu vài request đồng thời cùng làm vậy thì tiến trình mở hàng nghìn socket.",
+        "Cách chuẩn là giới hạn bằng asyncio.Semaphore (bounded concurrency)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "import asyncio, httpx\n\nasync def fetch_all(urls: list[str], limit: int = 10) -> list[dict]:\n    sem = asyncio.Semaphore(limit)\n    async with httpx.AsyncClient(timeout=5) as client:\n        async def one(url: str) -> dict | None:\n            async with sem:                 # at most `limit` in flight\n                r = await client.get(url)\n                return r.json()\n\n        return await asyncio.gather(*(one(u) for u in urls), return_exceptions=True)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": "96409-mot-request-can-goi-200-api-ben-ngoai-dung-asyncio-gather-thang-co-van-de-gi-gio"
+  },
+  {
+    "id": "b704fb77-816c-5ba4-850b-4ae74609f9f7",
+    "question": "MRO (Method Resolution Order) là gì? Python giải quyết diamond problem thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mro-method-resolution-order-la-gi-python-giai-quyet-diamond-problem-the-nao-b704fb77-816c-5ba4-850b-4ae74609f9f7",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": null
+  },
+  {
+    "id": "6de83f6b-a796-50fa-8254-f8f9ad0610bf",
+    "question": "__slots__ là gì? Khi nào nên dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "slots-la-gi-khi-nao-nen-dung-6de83f6b-a796-50fa-8254-f8f9ad0610bf",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": null
+  },
+  {
+    "id": "daf383f1-1a7f-52cb-9199-63ee1a2dec7d",
+    "question": "asyncio.gather vs asyncio.TaskGroup — khác nhau gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "asyncio-gather-vs-asyncio-taskgroup-khac-nhau-gi-daf383f1-1a7f-52cb-9199-63ee1a2dec7d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": null
+  },
+  {
+    "id": "1957369e-9cfb-50df-a5cb-d29068ad4a77",
+    "question": "Race condition là gì? Cách phòng tránh trong asyncio?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "race-condition-la-gi-cach-phong-tranh-trong-asyncio-1957369e-9cfb-50df-a5cb-d29068ad4a77",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": null
+  },
+  {
+    "id": "441adb52-499b-56c4-b4c1-05d9f30fd087",
+    "question": "Lifespan events — startup/shutdown trong FastAPI 0.95+?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lifespan-events-startup-shutdown-trong-fastapi-0-95-441adb52-499b-56c4-b4c1-05d9f30fd087",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": null
+  },
+  {
+    "id": "92199066-8e49-528e-b5b9-81ce07b3fe6a",
+    "question": "Caching strategy trong Python API — Redis pattern?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "caching-strategy-trong-python-api-redis-pattern-92199066-8e49-528e-b5b9-81ce07b3fe6a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": null
+  },
+  {
+    "id": "59033702-f3d7-5630-a6c4-4c002fc90d9b",
+    "question": "WebSocket trong FastAPI — implement thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "websocket-trong-fastapi-implement-the-nao-59033702-f3d7-5630-a6c4-4c002fc90d9b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": null
+  },
+  {
+    "id": "6d5d4311-4780-57c7-a21e-d37ba5ead165",
+    "question": "Metaclasses trong Python là gì? Khi nào dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "metaclasses-trong-python-la-gi-khi-nao-dung-6d5d4311-4780-57c7-a21e-d37ba5ead165",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": null
+  },
+  {
+    "id": "b64e48d5-278f-5663-9fee-dbfed8218eab",
+    "question": "Descriptor Protocol trong Python — __get__, __set__, __delete__?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "descriptor-protocol-trong-python-get-set-delete-b64e48d5-278f-5663-9fee-dbfed8218eab",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": null
+  },
+  {
+    "id": "7e87faa3-0916-51d6-99a7-9e2a61a83f73",
+    "question": "Async context managers và async generators — viết thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "async-context-managers-va-async-generators-viet-the-nao-7e87faa3-0916-51d6-99a7-9e2a61a83f73",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": null
+  },
+  {
+    "id": "87e0ba5b-6d94-5a36-9fa9-7b066c0da773",
+    "question": "ThreadPoolExecutor và ProcessPoolExecutor với asyncio?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "threadpoolexecutor-va-processpoolexecutor-voi-asyncio-87e0ba5b-6d94-5a36-9fa9-7b066c0da773",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": null
+  },
+  {
+    "id": "44ae7f47-80b0-5581-98b8-de5f7061f16a",
+    "question": "Sự khác biệt giữa __new__ và __init__ trong Python là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "su-khac-biet-giua-new-va-init-trong-python-la-gi-44ae7f47-80b0-5581-98b8-de5f7061f16a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": null
+  },
+  {
+    "id": "6ed5e449-91e0-5991-85ea-3c52f88feccc",
+    "question": "Exception Groups và except* (Python 3.11) giải quyết vấn đề gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "exception-groups-va-except-python-3-11-giai-quyet-van-de-gi-6ed5e449-91e0-5991-85ea-3c52f88feccc",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 76,
+    "sourceSlug": null
+  },
+  {
+    "id": "ca56fb4f-1573-5fc1-85a2-2502181d55bb",
+    "question": "super() thực sự làm gì? Cooperative multiple inheritance là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "super-thuc-su-lam-gi-cooperative-multiple-inheritance-la-gi-ca56fb4f-1573-5fc1-85a2-2502181d55bb",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 77,
+    "sourceSlug": null
+  },
+  {
+    "id": "165a7078-5f7c-5933-9734-be1ea3aa2e6e",
+    "question": "GIL đã bị gỡ chưa? Build free-threaded (PEP 703) thay đổi điều gì với code đa luồng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "gil-da-bi-go-chua-build-free-threaded-pep-703-thay-doi-dieu-gi-voi-code-da-luong-165a7078-5f7c-5933-9734-be1ea3aa2e6e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 78,
+    "sourceSlug": null
+  },
+  {
+    "id": "f1a8da3f-e81a-5ee1-b341-4c87b8ed6efc",
+    "question": "Một endpoint async def gọi hàm đồng bộ nặng (vd requests.get, resize ảnh) thì ảnh hưởng thế nào tới cả service? Phát hiện và xử lý ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mot-endpoint-async-def-goi-ham-dong-bo-nang-vd-requests-get-resize-anh-thi-anh-huong-the-nao-toi-ca-f1a8da3f-e81a-5ee1-b341-4c87b8ed6efc",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 79,
+    "sourceSlug": null
+  },
+  {
+    "id": "7394a579-bdc2-585d-9e0e-cd1efeae869c",
+    "question": "Reference counting đã giải phóng object ngay khi count về 0, vậy vì sao Python vẫn cần module gc? weakref dùng lúc nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "reference-counting-da-giai-phong-object-ngay-khi-count-ve-0-vay-vi-sao-python-van-can-module-gc-weak-7394a579-bdc2-585d-9e0e-cd1efeae869c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 80,
+    "sourceSlug": null
+  },
+  {
+    "id": "02931763-ec7f-52b9-897c-9d6376ccbe24",
+    "question": "Khi nào Python ném TypeError: Cannot create a consistent method resolution order (MRO)?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-python-nem-typeerror-cannot-create-a-consistent-method-resolution-order-mro-02931763-ec7f-52b9-897c-9d6376ccbe24",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 81,
+    "sourceSlug": null
+  },
+  {
+    "id": "3583247b-e677-5d44-9929-5bc5608d3b55",
+    "question": "Cùng một script multiprocessing, chạy trên Linux thì ổn nhưng trên macOS/Windows lại lỗi hoặc chạy lặp vô hạn — nguyên nhân là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cung-mot-script-multiprocessing-chay-tren-linux-thi-on-nhung-tren-macos-windows-lai-loi-hoac-chay-la-3583247b-e677-5d44-9929-5bc5608d3b55",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 82,
+    "sourceSlug": null
+  },
+  {
+    "id": "95b6b336-8571-5b43-b3df-41ede1db3c01",
+    "question": "Đặt timeout cho lời gọi bên ngoài trong async Python: asyncio.timeout và wait_for khác gì? CancelledError xử lý ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dat-timeout-cho-loi-goi-ben-ngoai-trong-async-python-asyncio-timeout-va-wait-for-khac-gi-cancelleder-95b6b336-8571-5b43-b3df-41ede1db3c01",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 83,
+    "sourceSlug": null
+  }
+]

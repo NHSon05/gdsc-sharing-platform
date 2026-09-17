@@ -1,0 +1,129 @@
+{
+  "files": 57,
+  "sourceRecords": 4187,
+  "uniqueQuestions": 4070,
+  "duplicateGroups": 114,
+  "answerConflictGroups": 8,
+  "needsReview": [
+    {
+      "id": "4391b107-627f-58ac-bf43-ee1434d69807",
+      "question": "N+1 query problem là gì và khắc phục ra sao?",
+      "sources": [
+        {
+          "file": "backend.json",
+          "legacyId": 27
+        },
+        {
+          "file": "database.json",
+          "legacyId": 62
+        }
+      ]
+    },
+    {
+      "id": "2f92114b-cb04-5dcf-b3c0-1b0c1ff00e25",
+      "question": "Redis là gì? Có những kiểu dữ liệu nào và dùng cho việc gì?",
+      "sources": [
+        {
+          "file": "backend.json",
+          "legacyId": 28
+        },
+        {
+          "file": "database.json",
+          "legacyId": 79
+        }
+      ]
+    },
+    {
+      "id": "9520b7ed-54eb-58b0-a66a-4e2653987b50",
+      "question": "Làm thế nào để xử lý message bị lỗi và retry trong RabbitMQ?",
+      "sources": [
+        {
+          "file": "backend.json",
+          "legacyId": 74
+        },
+        {
+          "file": "rabbitMQ.json",
+          "legacyId": 32
+        }
+      ]
+    },
+    {
+      "id": "812a64ec-201e-5d3d-9177-93ba2f26dffc",
+      "question": "Merge vs Rebase: khi nào dùng cái nào? Giải thích golden rule of rebasing.",
+      "sources": [
+        {
+          "file": "backend.json",
+          "legacyId": 101
+        },
+        {
+          "file": "frontend.json",
+          "legacyId": 94
+        },
+        {
+          "file": "git.json",
+          "legacyId": 19
+        }
+      ]
+    },
+    {
+      "id": "4d3c7da1-22e4-5866-b517-dad350ceb3b7",
+      "question": "Đang merge feature branch vào main, gặp conflict trong file do cả 2 sides đều refactor. Quy trình resolve an toàn?",
+      "sources": [
+        {
+          "file": "backend.json",
+          "legacyId": 102
+        },
+        {
+          "file": "frontend.json",
+          "legacyId": 95
+        },
+        {
+          "file": "git.json",
+          "legacyId": 21
+        }
+      ]
+    },
+    {
+      "id": "b727487f-bbb8-5478-a428-d97fbbb4ab79",
+      "question": "HTML5 form validation có những attribute nào?",
+      "sources": [
+        {
+          "file": "frontend.json",
+          "legacyId": 5
+        },
+        {
+          "file": "html.json",
+          "legacyId": 37
+        }
+      ]
+    },
+    {
+      "id": "0445c12c-360f-5161-a05c-d6f634314bc9",
+      "question": "readonly và disabled khác nhau thế nào?",
+      "sources": [
+        {
+          "file": "frontend.json",
+          "legacyId": 6
+        },
+        {
+          "file": "html.json",
+          "legacyId": 38
+        }
+      ]
+    },
+    {
+      "id": "10347fcb-47b4-59cf-82d6-38b18f862403",
+      "question": "Vừa commit nhầm (message sai hoặc quên file), làm sao sửa mà không tạo commit mới?",
+      "sources": [
+        {
+          "file": "frontend.json",
+          "legacyId": 93
+        },
+        {
+          "file": "git.json",
+          "legacyId": 2
+        }
+      ]
+    }
+  ]
+}

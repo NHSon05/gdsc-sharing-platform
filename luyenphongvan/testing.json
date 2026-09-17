@@ -1,0 +1,2699 @@
+[
+  {
+    "id": "468e3a9d-2d68-5f74-ba6e-3b7bfe57dfbb",
+    "question": "Jest là gì? Các tính năng chính của Jest?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/766-jest-la-gi-cac-tinh-nang-chinh-cua-jest",
+    "slug": "jest-la-gi-cac-tinh-nang-chinh-cua-jest-468e3a9d-2d68-5f74-ba6e-3b7bfe57dfbb",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Jest là JavaScript testing framework từ Meta, phổ biến nhất trong hệ sinh thái JS — zero-config với Create React App và Next.js, hỗ trợ TypeScript qua ts-jest hoặc babel-jest."
+      ],
+      "details": [
+        "Tính năng chính:",
+        "Thường dùng kèm React Testing Library (render, screen, userEvent) để test hành vi người dùng thay vì implementation details."
+      ],
+      "points": [
+        "Test isolation — mỗi test file chạy trong environment riêng (jsdom hoặc node), state không rò rỉ giữa các file.",
+        "Mocking — jest.fn(), jest.mock(), jest.spyOn() để mock function, module, timer (jest.useFakeTimers).",
+        "Matchers — toBe (===), toEqual (so sánh sâu), toThrow, toHaveBeenCalledWith, resolves/rejects cho async.",
+        "Snapshot testing — serialize output và so sánh với file .snap để phát hiện thay đổi ngoài dự kiến.",
+        "Coverage — flag --coverage sinh báo cáo statements/branches/functions/lines.",
+        "Watch mode — --watch chỉ chạy lại test bị ảnh hưởng bởi file thay đổi; --watchAll chạy lại toàn bộ mỗi lần có thay đổi.",
+        "Setup — setupFilesAfterEnv trong jest.config.js để cấu hình Testing Library, mock global API."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "766-jest-la-gi-cac-tinh-nang-chinh-cua-jest"
+  },
+  {
+    "id": "d9a6c86e-0b1b-558f-9105-d8cb8c7c28e9",
+    "question": "describe, it/test, expect trong Jest được dùng như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/767-describe-it-test-expect-trong-jest-duoc-dung-nhu-the-nao",
+    "slug": "describe-it-test-expect-trong-jest-duoc-dung-nhu-the-nao-d9a6c86e-0b1b-558f-9105-d8cb8c7c28e9",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "describe nhóm các test liên quan thành suite, it/test định nghĩa từng test case, expect tạo assertion với matchers."
+      ],
+      "details": [],
+      "points": [
+        "describe — nhóm test, nest được nhiều cấp; tên test nên đọc như documentation: it('should return 404 when user not found').",
+        "Matchers thường dùng — toBe (=== cho primitives), toEqual (so sánh sâu cho object/array), toMatchObject (khớp một phần), toContain, toHaveLength, toBeNull/toBeTruthy/toBeFalsy, toThrow, toHaveBeenCalledWith (mock assertion).",
+        "Async — await expect(promise).resolves.toBe(value) hoặc await expect(promise).rejects.toThrow().",
+        "Hooks — beforeEach/afterEach chạy quanh mỗi test (tạo test data, reset mock, cleanup); beforeAll/afterAll chạy một lần cho cả block (setup tốn kém: test server, DB connection).",
+        "Biến thể — test.only/describe.only chỉ chạy test được chọn (tiện khi debug, không commit); test.skip bỏ qua tạm thời; test.each cho parameterized tests với nhiều bộ input/output."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "767-describe-it-test-expect-trong-jest-duoc-dung-nhu-the-nao"
+  },
+  {
+    "id": "de2914c4-53b1-5ee7-8a79-b26624190184",
+    "question": "Sau khi code xong bài, nên test những case nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/9015-sau-khi-code-xong-bai-nen-test-nhung-case-nao",
+    "slug": "sau-khi-code-xong-bai-nen-test-nhung-case-nao-de2914c4-53b1-5ee7-8a79-b26624190184",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nên test theo nhóm: input rỗng hoặc nhỏ nhất; case bình thường; duplicate; giá trị âm/zero nếu đề cho phép; boundary như target ở đầu/cuối; case không có đáp án; case tất cả phần tử giống nhau; case lớn để kiểm complexity."
+      ],
+      "details": [],
+      "points": [
+        "Với string, test empty string, một ký tự, unicode nếu relevant.",
+        "Với graph, test disconnected graph và cycle.",
+        "Quan trọng là test bằng tay qua từng dòng code với ít nhất một ví dụ, vì nhiều lỗi interview là off-by-one, update pointer sai, hoặc quên reset state."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "9015-sau-khi-code-xong-bai-nen-test-nhung-case-nao"
+  },
+  {
+    "id": "c9f6b5d8-be35-5902-8c05-df5e715ab44a",
+    "question": "Phân biệt Verification và Validation?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93300-phan-biet-verification-va-validation",
+    "slug": "phan-biet-verification-va-validation-c9f6b5d8-be35-5902-8c05-df5e715ab44a",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai đều kiểm chứng chất lượng nhưng trả lời hai câu hỏi khác nhau:"
+      ],
+      "details": [
+        "Hình dung: verification hỏi \"tôi có xây đúng theo bản vẽ không\", còn validation hỏi \"bản vẽ này có phải thứ khách hàng thực sự cần không\"."
+      ],
+      "points": [
+        "Verification — \"Có làm đúng cách không?\" Kiểm tra sản phẩm/tài liệu có bám đúng đặc tả, thiết kế, chuẩn hay không. Thường là static (review, inspection, phân tích tĩnh), không chạy phần mềm.",
+        "Validation — \"Có làm đúng thứ cần làm không?\" Kiểm tra hệ thống có đáp ứng nhu cầu thực tế của người dùng hay không. Thường là dynamic (chạy phần mềm và quan sát hành vi)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "93300-phan-biet-verification-va-validation"
+  },
+  {
+    "id": "53193652-8738-5d98-890e-de6f2f9153a3",
+    "question": "Phân biệt Error, Defect (Fault/Bug) và Failure?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93301-phan-biet-error-defect-fault-bug-va-failure",
+    "slug": "phan-biet-error-defect-fault-bug-va-failure-53193652-8738-5d98-890e-de6f2f9153a3",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đây là một chuỗi nhân quả, không phải từ đồng nghĩa:"
+      ],
+      "details": [
+        "Chuỗi: Error → Defect → Failure. Lưu ý một defect chưa chắc gây failure (nếu đoạn code đó không bao giờ chạy tới), và failure còn có thể đến từ điều kiện môi trường chứ không chỉ defect."
+      ],
+      "points": [
+        "Error (sai sót) — hành động sai của con người, ví dụ lập trình viên hiểu nhầm yêu cầu hoặc gõ nhầm.",
+        "Defect / Fault / Bug (khiếm khuyết) — chỗ sai nằm trong code hoặc tài liệu do error tạo ra. Ba từ này là đồng nghĩa trong ISTQB.",
+        "Failure (hỏng) — hành vi sai lệch quan sát được khi defect bị thực thi, tức hệ thống cho kết quả khác kỳ vọng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "93301-phan-biet-error-defect-fault-bug-va-failure"
+  },
+  {
+    "id": "dcad2936-bcec-580c-af95-e699829a4e17",
+    "question": "Phân biệt Functional testing và Non-functional testing?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93303-phan-biet-functional-testing-va-non-functional-testing",
+    "slug": "phan-biet-functional-testing-va-non-functional-testing-dcad2936-bcec-580c-af95-e699829a4e17",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ví dụ cùng một tính năng \"đăng nhập\": functional hỏi \"đúng mật khẩu thì vào được không\", còn non-functional hỏi \"1000 người đăng nhập cùng lúc thì mất bao lâu, có bị lộ dữ liệu không\"."
+      ],
+      "details": [],
+      "points": [
+        "Functional testing — kiểm tra hệ thống làm gì: các chức năng có chạy đúng theo yêu cầu không (đăng nhập, tính tiền, tìm kiếm...). Tập trung vào hành vi và kết quả.",
+        "Non-functional testing — kiểm tra hệ thống làm tốt tới đâu: các thuộc tính chất lượng như hiệu năng, tải, bảo mật, khả dụng (usability), độ tin cậy, tương thích. Tập trung vào \"nhanh/an toàn/dễ dùng thế nào\"."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "93303-phan-biet-functional-testing-va-non-functional-testing"
+  },
+  {
+    "id": "eac15448-6027-5bb8-bb51-dc3a444e6500",
+    "question": "Vòng đời một lỗi (Defect Life Cycle) đi qua những trạng thái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93305-vong-doi-mot-loi-defect-life-cycle-di-qua-nhung-trang-thai-nao",
+    "slug": "vong-doi-mot-loi-defect-life-cycle-di-qua-nhung-trang-thai-nao-eac15448-6027-5bb8-bb51-dc3a444e6500",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Luồng chuẩn từ lúc phát hiện tới lúc đóng:"
+      ],
+      "details": [
+        "1. New — tester vừa log lỗi.\n2. Assigned — lead/PM giao cho một dev.\n3. Open / In Progress — dev tiếp nhận và đang sửa.\n4. Fixed — dev báo đã sửa xong.\n5. Retest — tester kiểm lại trên build mới.\n6. Closed — retest pass, đóng lỗi. Nếu vẫn còn → Reopened, quay lại bước sửa.",
+        "Các nhánh phụ hay gặp: Rejected (không phải lỗi), Duplicate (trùng lỗi đã có), Deferred (hoãn sang release sau). Ngữ cảnh và tên trạng thái có thể khác nhau tùy công cụ (Jira, Bugzilla), nhưng bộ khung New → ... → Closed là bất biến."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "93305-vong-doi-mot-loi-defect-life-cycle-di-qua-nhung-trang-thai-nao"
+  },
+  {
+    "id": "a4a03db4-ffa0-5446-b398-feec88f32cb7",
+    "question": "Phân biệt Static testing và Dynamic testing?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93308-phan-biet-static-testing-va-dynamic-testing",
+    "slug": "phan-biet-static-testing-va-dynamic-testing-a4a03db4-ffa0-5446-b398-feec88f32cb7",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hai loại bổ sung nhau: static tìm defect ngay trong work product, dynamic quan sát failure khi hệ thống chạy. Lỗi phát hiện càng sớm bằng static thì chi phí sửa càng thấp."
+      ],
+      "details": [],
+      "points": [
+        "Static testing — kiểm tra sản phẩm không chạy code. Gồm review, walkthrough, inspection (tài liệu, yêu cầu, thiết kế, code) và static analysis (linter, phân tích tĩnh). Ưu điểm: bắt lỗi sớm và rẻ, ngay từ khâu yêu cầu — trước khi lỗi lọt vào code.",
+        "Dynamic testing — thực thi phần mềm với dữ liệu đầu vào rồi so kết quả thực tế với kỳ vọng. Đây là \"test\" theo nghĩa thông thường (unit, integration, system...)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "93308-phan-biet-static-testing-va-dynamic-testing"
+  },
+  {
+    "id": "59aa78ba-1f62-5e5e-9eaa-58aa7e602365",
+    "question": "Bốn mức test (unit, integration, system, acceptance) khác nhau ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93309-bon-muc-test-unit-integration-system-acceptance-khac-nhau-ra-sao",
+    "slug": "bon-muc-test-unit-integration-system-acceptance-khac-nhau-ra-sao-59aa78ba-1f62-5e5e-9eaa-58aa7e602365",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bốn mức đi từ nhỏ tới lớn, mỗi mức có mục tiêu và người thực hiện riêng:"
+      ],
+      "details": [
+        "1. Unit / Component — test từng module/hàm riêng lẻ, thường do dev viết. Nhanh, cô lập, bắt lỗi logic sớm nhất.\n2. Integration — test sự tương tác giữa các thành phần (module với module, service với DB/API). Bắt lỗi ở giao diện giữa các phần.\n3. System — test toàn bộ hệ thống đã tích hợp trong môi trường gần production, đối chiếu với yêu cầu (cả functional lẫn non-functional).\n4. Acceptance (UAT) — người dùng/khách hàng xác nhận hệ thống đáp ứng nhu cầu và sẵn sàng để dùng. Thiên về validation.",
+        "Càng lên cao, phạm vi càng rộng và càng gần góc nhìn người dùng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "93309-bon-muc-test-unit-integration-system-acceptance-khac-nhau-ra-sao"
+  },
+  {
+    "id": "b01023f3-4555-5d85-80dd-f745f317f596",
+    "question": "STLC (Software Testing Life Cycle) gồm những pha nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93311-stlc-software-testing-life-cycle-gom-nhung-pha-nao",
+    "slug": "stlc-software-testing-life-cycle-gom-nhung-pha-nao-b01023f3-4555-5d85-80dd-f745f317f596",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "STLC là chuỗi hoạt động test có cấu trúc, thường gồm sáu pha:"
+      ],
+      "details": [
+        "1. Requirement analysis — phân tích yêu cầu, xác định cái gì testable, làm rõ tiêu chí.\n2. Test planning — lập kế hoạch: phạm vi, chiến lược, nguồn lực, lịch, tiêu chí vào/ra.\n3. Test case design — viết test case, kịch bản, chuẩn bị dữ liệu test.\n4. Test environment setup — dựng môi trường, dữ liệu, công cụ cần thiết.\n5. Test execution — chạy test, ghi nhận kết quả, log defect và theo dõi.\n6. Test closure — tổng kết: báo cáo, đánh giá tiêu chí hoàn thành, rút kinh nghiệm.",
+        "Theo khung của ISTQB, các pha này ánh xạ vào test planning, monitoring & control, analysis, design, implementation, execution, completion. Mỗi pha có đầu vào, hoạt động và sản phẩm rõ ràng.",
+        "test planning, monitoring & control, analysis, design, implementation, execution, completion"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "93311-stlc-software-testing-life-cycle-gom-nhung-pha-nao"
+  },
+  {
+    "id": "20813968-4a43-5604-859e-4bd60c2986da",
+    "question": "Phân biệt Test case và Test scenario?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93313-phan-biet-test-case-va-test-scenario",
+    "slug": "phan-biet-test-case-va-test-scenario-20813968-4a43-5604-859e-4bd60c2986da",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khác nhau ở mức độ chi tiết:"
+      ],
+      "details": [
+        "Quan hệ một–nhiều: một scenario \"đăng nhập\" sinh ra nhiều test case (đúng cả hai, sai mật khẩu, tài khoản khóa, để trống...). Scenario giúp bao quát phạm vi, test case giúp thực thi cụ thể và tái lập được."
+      ],
+      "points": [
+        "Test scenario — mô tả cấp cao \"cần test cái gì\": một chức năng hoặc luồng cần kiểm chứng, ví dụ \"Kiểm tra chức năng đăng nhập\". Trả lời what.",
+        "Test case — các bước chi tiết \"test như thế nào\": gồm điều kiện tiên quyết, dữ liệu test, các bước thực hiện, kết quả mong đợi. Ví dụ \"Nhập đúng email + sai mật khẩu → hiện thông báo lỗi\". Trả lời how."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "93313-phan-biet-test-case-va-test-scenario"
+  },
+  {
+    "id": "3ac6e3f4-c4cb-58b2-8e75-63238d848901",
+    "question": "Dự án đang chạy production nhưng chưa có test nào. Bạn bắt đầu từ đâu?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98700-du-an-dang-chay-production-nhung-chua-co-test-nao-ban-bat-dau-tu-dau",
+    "slug": "du-an-dang-chay-production-nhung-chua-co-test-nao-ban-bat-dau-tu-dau-3ac6e3f4-c4cb-58b2-8e75-63238d848901",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không viết test cho toàn bộ codebase. Bắt đầu ở nơi lỗi gây thiệt hại lớn nhất và code dễ test nhất."
+      ],
+      "details": [
+        "Thứ tự thực tế:",
+        "1. Dựng hạ tầng test trước — cài runner (Vitest/Jest), 1 lệnh pnpm test chạy được, gắn vào CI. Nếu test không chạy trong CI thì sau vài tuần sẽ không ai chạy.\n2. Viết test cho bug vừa xảy ra. Mỗi lần fix bug production, thêm 1 test tái hiện bug đó. Bộ test lớn dần theo đúng những chỗ hay hỏng thật.\n3. Phủ luồng sinh tiền — thanh toán, tạo đơn, tính giá, phân quyền. Đây là chỗ lỗi tốn tiền thật.\n4. Phủ hàm thuần logic — tính toán, parse, validate, format. Không cần mock gì, viết nhanh, chạy nhanh.",
+        "tự kiểm tra được"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "98700-du-an-dang-chay-production-nhung-chua-co-test-nao-ban-bat-dau-tu-dau"
+  },
+  {
+    "id": "9061cc00-ee79-57d5-8ffd-4d6756fee952",
+    "question": "Có thời gian hạn chế thì nên test logic nghiệp vụ hay test UI trước? Test cái gì là lãng phí?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98701-co-thoi-gian-han-che-thi-nen-test-logic-nghiep-vu-hay-test-ui-truoc-test-cai-gi",
+    "slug": "co-thoi-gian-han-che-thi-nen-test-logic-nghiep-vu-hay-test-ui-truoc-test-cai-gi-la-lang-phi-9061cc00-ee79-57d5-8ffd-4d6756fee952",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ưu tiên logic nghiệp vụ trước, UI sau."
+      ],
+      "details": [
+        "Lý do: logic nghiệp vụ (tính tiền, áp mã giảm giá, kiểm tra quyền, chuyển trạng thái đơn) là chỗ sai thì hậu quả không thể hoàn tác được, lại thường là hàm thuần — viết test nhanh, chạy mili giây, gần như không bao giờ flaky. UI thì thay đổi liên tục về markup và class, test viết theo cấu trúc DOM sẽ hỏng mỗi lần đổi layout dù chức năng vẫn đúng.",
+        "Đáng test:\n- Hàm có nhiều nhánh điều kiện, nhiều case biên (ngày tháng, tiền tệ, làm tròn, chiết khấu).\n- Luồng người dùng quan trọng, test ở mức tương tác thật: điền form → submit → thấy kết quả.\n- Chỗ đã từng sinh bug.",
+        "Lãng phí:",
+        "\"nếu dòng code này sai, người dùng có mất gì không?\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "98701-co-thoi-gian-han-che-thi-nen-test-logic-nghiep-vu-hay-test-ui-truoc-test-cai-gi"
+  },
+  {
+    "id": "73d14e3a-df57-533f-9801-8e727c62fb02",
+    "question": "Khi sửa một bug production, bạn viết test trước hay sau khi sửa? Vì sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98702-khi-sua-mot-bug-production-ban-viet-test-truoc-hay-sau-khi-sua-vi-sao",
+    "slug": "khi-sua-mot-bug-production-ban-viet-test-truoc-hay-sau-khi-sua-vi-sao-73d14e3a-df57-533f-9801-8e727c62fb02",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Viết test trước — và phải thấy nó đỏ trước khi sửa code."
+      ],
+      "details": [
+        "Quy trình thực tế:",
+        "1. Tái hiện bug bằng một test nhỏ nhất có thể, dùng đúng dữ liệu gây lỗi (đơn hàng id X, chuỗi đầu vào Y).\n2. Chạy test → phải fail. Bước này quan trọng: nếu test pass ngay từ đầu thì bạn chưa tái hiện đúng bug, và test đó sẽ không bảo vệ được gì.\n3. Sửa code cho tới khi test xanh.\n4. Chạy toàn bộ suite để chắc không làm hỏng chỗ khác.",
+        "test hồi quy"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "98702-khi-sua-mot-bug-production-ban-viet-test-truoc-hay-sau-khi-sua-vi-sao"
+  },
+  {
+    "id": "f9bfaec1-5f3f-5a85-9e8c-59ab5e50467e",
+    "question": "Trong React Testing Library nên ưu tiên query nào? getByRole với getByTestId khác nhau ra sao, khi nào được phép dùng data-testid?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98750-trong-react-testing-library-nen-uu-tien-query-nao-getbyrole-voi-getbytestid-khac",
+    "slug": "trong-react-testing-library-nen-uu-tien-query-nao-getbyrole-voi-getbytestid-khac-nhau-ra-sao-khi-nao-f9bfaec1-5f3f-5a85-9e8c-59ab5e50467e",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Testing Library xếp query theo thứ tự càng gần cách người dùng tìm phần tử càng tốt:",
+        "getByRole",
+        "button",
+        "textbox",
+        "heading",
+        "accessible name"
+      ],
+      "details": [
+        "1. Accessible queries — getByRole, getByLabelText, getByPlaceholderText, getByText, getByDisplayValue.\n2. Semantic queries — getByAltText, getByTitle.\n3. Test ID — getByTestId, dùng khi không còn cách nào khác.",
+        "getByTestId bám vào một thuộc tính chỉ tồn tại cho test, người dùng không thấy. Nó không kiểm tra được element có accessible hay không, và dễ giữ test xanh dù UI hỏng.",
+        "Khi data-testid là hợp lý: phần tử không có role/text ổn định (wrapper layout, canvas, item trong danh sách ảo hoá), text thay đổi theo i18n, hoặc cần chọn đúng một dòng trong bảng lặp lại. Ngay cả khi đó, nên kết hợp within(row).getByRole(...) thay vì gắn testid cho mọi thứ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "// preferred: matches what the user sees and what a screen reader announces\nscreen.getByRole(\"button\", { name: /save/i })\nscreen.getByLabelText(\"Email\")\n\n// last resort\nscreen.getByTestId(\"save-button\")"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "98750-trong-react-testing-library-nen-uu-tien-query-nao-getbyrole-voi-getbytestid-khac"
+  },
+  {
+    "id": "86e60b28-3e69-596e-ac00-eae1f135e21e",
+    "question": "Test báo Unable to find an element with the text: ... dù mở app lên vẫn thấy chữ đó. Những nguyên nhân hay gặp là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98751-test-bao-unable-to-find-an-element-with-the-text-du-mo-app-len-van-thay-chu-do-n",
+    "slug": "test-bao-unable-to-find-an-element-with-the-text-du-mo-app-len-van-thay-chu-do-nhung-nguyen-nhan-hay-86e60b28-3e69-596e-ac00-eae1f135e21e",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bốn nguyên nhân chiếm phần lớn trường hợp:",
+        "toHaveTextContent"
+      ],
+      "details": [
+        "1. Text bị chia nhỏ qua nhiều element. getByText mặc định so khớp trên từng node text riêng lẻ, không phải chuỗi ghép lại của cả cây DOM.",
+        "2. So khớp mặc định là exact + normalize whitespace. getByText(\"Save\") không khớp \"Save \" viết hoa khác hoặc \"Save changes\". Dùng regex hoặc { exact: false }.",
+        "4. Element bị ẩn. getByRole mặc định bỏ qua node bị ẩn khỏi accessibility tree (display: none, aria-hidden, hidden). Với getByText thì ignore mặc định loại script/style.",
+        "3. Nội dung xuất hiện bất đồng bộ. Nếu chữ chỉ có sau khi fetch xong thì getBy* (đồng bộ) chạy quá sớm — phải dùng findByText (trả về Promise, tự retry).",
+        "screen.debug()",
+        "logRoles(container)"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "// <p>Xin chao, <strong>Dinh</strong></p>\nscreen.getByText(\"Xin chao, Dinh\")   // fails\nscreen.getByText(/xin chao/i)        // hoạt động: matches the text node only"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "98751-test-bao-unable-to-find-an-element-with-the-text-du-mo-app-len-van-thay-chu-do-n"
+  },
+  {
+    "id": "03583316-12b7-517b-ba05-0858fc93875c",
+    "question": "fireEvent và userEvent khác nhau thế nào? Vì sao khuyến nghị dùng user-event?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98752-fireevent-va-userevent-khac-nhau-the-nao-vi-sao-khuyen-nghi-dung-user-event",
+    "slug": "fireevent-va-userevent-khac-nhau-the-nao-vi-sao-khuyen-nghi-dung-user-event-03583316-12b7-517b-ba05-0858fc93875c",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khác biệt thấy rõ trong thực tế:\n- fireEvent.change(input, { target: { value: \"abc\" } }) gán thẳng giá trị, không phát keydown/keyup. Component nghe phím (autocomplete, mask số điện thoại, đếm ký tự) sẽ không chạy đúng.\n- userEvent.click tôn trọng disabled và pointer-events: none — click vào nút disabled thì không có gì xảy ra, giống thật. fireEvent vẫn bắn event.\n- userEvent tự lo focus/blur, nên test validate on blur mới đúng."
+      ],
+      "details": [
+        "Từ v14, mọi API của user-event là async và cần await; nó cũng tự bọc trong act nên hạn chế được warning về state update. fireEvent vẫn hữu ích cho event không có tương tác tương ứng (scroll, error của img, custom event)."
+      ],
+      "points": [],
+      "sections": [
+        "fireEvent.click(el) bắn đúng một DOM event vào element. userEvent.click(el) mô phỏng cả chuỗi tương tác mà trình duyệt sinh ra khi người dùng thật click: pointerdown, mousedown, focus, pointerup, mouseup, click."
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "const user = userEvent.setup()      // call once per test\nawait user.click(screen.getByRole(\"button\", { name: /submit/i }))\nawait user.type(screen.getByLabelText(\"Email\"), \"a@b.com\")"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "98752-fireevent-va-userevent-khac-nhau-the-nao-vi-sao-khuyen-nghi-dung-user-event"
+  },
+  {
+    "id": "2fee63fe-72fa-541c-bb13-bd73c0e210a9",
+    "question": "Viết test cho form đăng ký có validate (email sai, mật khẩu ngắn) như thế nào? Nên assert vào đâu?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98753-viet-test-cho-form-dang-ky-co-validate-email-sai-mat-khau-ngan-nhu-the-nao-nen-a",
+    "slug": "viet-test-cho-form-dang-ky-co-validate-email-sai-mat-khau-ngan-nhu-the-nao-nen-assert-vao-dau-2fee63fe-72fa-541c-bb13-bd73c0e210a9",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Test theo đúng thao tác người dùng: điền sai → submit → assert thông báo lỗi hiển thị và callback submit không được gọi.",
+        "getByLabelText",
+        "<label htmlFor>",
+        "onSubmit",
+        "role=\"alert\"",
+        "findBy cho lỗi đầu tiên",
+        "getByRole(\"alert\")"
+      ],
+      "details": [
+        "Không đụng vào state nội bộ hay method của thư viện form."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "it(\"shows validation errors and does not submit\", async () => {\n  const user = userEvent.setup()\n  const onSubmit = vi.fn()\n  render(<SignUpForm onSubmit={onSubmit} />)\n\n  await user.type(screen.getByLabelText(/email/i), \"not-an-email\")\n  await user.type(screen.getByLabelText(/password/i), \"123\")\n  await user.click(screen.getByRole(\"button\", { name: /sign up/i }))\n\n  expect(await screen.findByText(/email is invalid/i)).toBeInTheDocument()\n  expect(screen.getByText(/at least 8 characters/i)).toBeInTheDocument()\n  expect(onSubmit).not.toHaveBeenCalled()\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "98753-viet-test-cho-form-dang-ky-co-validate-email-sai-mat-khau-ngan-nhu-the-nao-nen-a"
+  },
+  {
+    "id": "96c08ccf-fdf0-5f0b-90ca-31f7f2453267",
+    "question": "Viết test cho một REST endpoint thì nên gọi thẳng hàm handler, gọi HTTP in-process, hay dựng server thật?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98800-viet-test-cho-mot-rest-endpoint-thi-nen-goi-thang-ham-handler-goi-http-in-proces",
+    "slug": "viet-test-cho-mot-rest-endpoint-thi-nen-goi-thang-ham-handler-goi-http-in-process-hay-dung-server-th-96c08ccf-fdf0-5f0b-90ca-31f7f2453267",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mặc định nên chọn HTTP in-process: khởi tạo app trong bộ nhớ rồi bắn request qua thư viện của framework (supertest với Express/Nest, WebApplicationFactory với ASP.NET, MockMvc với Spring).",
+        "Gọi thẳng handler"
+      ],
+      "details": [
+        "Không mở cổng, không cần server chạy nền, nhưng vẫn đi qua routing, middleware, validation, serialize JSON, error handler — đúng phần hay hỏng nhất.",
+        "Quy tắc thực dụng: logic nghiệp vụ test ở tầng service (nhanh, nhiều case), hợp đồng HTTP test ở tầng endpoint (ít case nhưng bao được status code, shape response, lỗi 401/403/422)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const res = await request(app)\n  .post('/api/orders')\n  .send({ productId: 10, quantity: 0 })\n\nexpect(res.status).toBe(400)\nexpect(res.body.error).toBe('quantity_must_be_positive')"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "98800-viet-test-cho-mot-rest-endpoint-thi-nen-goi-thang-ham-handler-goi-http-in-proces"
+  },
+  {
+    "id": "1a33ecb2-494c-558c-aff8-b4cb42c8f6eb",
+    "question": "Một bug report như thế nào để dev đọc xong là tái hiện được ngay, không phải hỏi lại?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98801-mot-bug-report-nhu-the-nao-de-dev-doc-xong-la-tai-hien-duoc-ngay-khong-phai-hoi",
+    "slug": "mot-bug-report-nhu-the-nao-de-dev-doc-xong-la-tai-hien-duoc-ngay-khong-phai-hoi-lai-1a33ecb2-494c-558c-aff8-b4cb42c8f6eb",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Một report dùng được phải trả lời đủ bốn câu: làm gì, mong đợi gì, thực tế ra sao, ở đâu."
+      ],
+      "details": [
+        "Hai lỗi hay gặp: gộp nhiều bug vào một ticket (không đóng riêng được, không ưu tiên riêng được), và viết suy đoán nguyên nhân thay vì hiện tượng (\"do cache sai\") khiến dev đi nhầm hướng. Mô tả cái quan sát được, phần chẩn đoán để riêng."
+      ],
+      "points": [
+        "Tiêu đề: một dòng nêu triệu chứng + ngữ cảnh. \"Đặt hàng lỗi\" thì vô dụng; \"Checkout trả 500 khi mã giảm giá đã hết hạn\" thì dev khoanh vùng được ngay.",
+        "Các bước tái hiện: đánh số, bắt đầu từ trạng thái xác định (tài khoản nào, dữ liệu nào), mỗi bước một hành động. Ghi rõ tần suất: luôn luôn, hay 1/10 lần.",
+        "Kỳ vọng vs thực tế: hai dòng tách bạch. Đây là chỗ phân biệt bug thật với hiểu nhầm yêu cầu.",
+        "Môi trường: dev/staging/prod, phiên bản build hoặc commit, trình duyệt/OS, thời điểm xảy ra.",
+        "Bằng chứng: ảnh chụp, đoạn log, traceId/requestId, payload request. traceId là thứ tiết kiệm thời gian nhất — dev tra thẳng log ra đúng lần gọi."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "98801-mot-bug-report-nhu-the-nao-de-dev-doc-xong-la-tai-hien-duoc-ngay-khong-phai-hoi"
+  },
+  {
+    "id": "a8bd907d-830d-5b2e-98c7-fad1c10b8e45",
+    "question": "Trong một sprint, QA nên vào cuộc từ lúc nào? Definition of Done của một ticket gồm những gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98802-trong-mot-sprint-qa-nen-vao-cuoc-tu-luc-nao-definition-of-done-cua-mot-ticket-go",
+    "slug": "trong-mot-sprint-qa-nen-vao-cuoc-tu-luc-nao-definition-of-done-cua-mot-ticket-gom-nhung-gi-a8bd907d-830d-5b2e-98c7-fad1c10b8e45",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "QA vào cuộc từ lúc refine ticket, không phải khi dev báo \"code xong\". Ở buổi refine, QA là người hỏi các câu làm lộ yêu cầu thiếu: dữ liệu rỗng thì hiển thị gì, user không có quyền thì thấy gì, gọi lại lần hai có bị trùng đơn không. Sửa yêu cầu ở giai đoạn này rẻ hơn nhiều so với sửa khi đã code."
+      ],
+      "details": [
+        "Dòng chảy thực tế trong sprint:\n1. Refine: QA đọc acceptance criteria, đề xuất test scenario, chốt case biên.\n2. Trong lúc dev code: QA chuẩn bị test case và dữ liệu test, dev viết unit/integration test theo criteria đó.\n3. Sau khi merge lên staging: QA test chức năng + regression vùng liên quan.\n4. Trước release: chạy bộ smoke, chốt danh sách bug còn treo.",
+        "Definition of Done là danh sách chung của cả nhóm, ticket không đạt thì không tính là xong. Nội dung thường thấy: đạt hết acceptance criteria · có test tự động cho luồng chính · code review đã duyệt · CI xanh · đã deploy được lên staging · QA đã kiểm và không còn bug blocker/critical · tài liệu hoặc changelog đã cập nhật nếu có thay đổi API.",
+        "Điểm mấu chốt khi trả lời phỏng vấn: DoD là cam kết của cả nhóm, không phải checklist riêng của QA — dev không được đẩy hết phần kiểm tra sang QA rồi coi như xong việc."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "98802-trong-mot-sprint-qa-nen-vao-cuoc-tu-luc-nao-definition-of-done-cua-mot-ticket-go"
+  },
+  {
+    "id": "0b5e4e44-c31f-5637-937e-1cdd56dd9fc2",
+    "question": "Staging chạy tốt nhưng lên production lại lỗi. Những khác biệt nào giữa hai môi trường thường gây ra việc đó?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98803-staging-chay-tot-nhung-len-production-lai-loi-nhung-khac-biet-nao-giua-hai-moi-t",
+    "slug": "staging-chay-tot-nhung-len-production-lai-loi-nhung-khac-biet-nao-giua-hai-moi-truong-thuong-gay-ra-0b5e4e44-c31f-5637-937e-1cdd56dd9fc2",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bug loại này gần như luôn đến từ chênh lệch môi trường chứ không phải code. Các nguồn hay gặp, xếp theo tần suất:"
+      ],
+      "details": [
+        "Giảm rủi ro: giữ dev/prod parity — cùng phiên bản dịch vụ (dùng container), cấu hình đưa hết ra biến môi trường thay vì hardcode theo môi trường, staging có bộ dữ liệu đủ lớn và đã che thông tin cá nhân, và bổ sung lớp kiểm tra sau khi deploy (smoke test trên production, canary release) vì không môi trường nào giống production tuyệt đối."
+      ],
+      "points": [
+        "Dữ liệu: staging vài trăm bản ghi, production vài triệu. Query thiếu index chạy 20ms ở staging và 8 giây ở production. Dữ liệu thật còn có ký tự lạ, email trùng, đơn hàng cũ ở trạng thái mà code mới không xử lý.",
+        "Cấu hình và biến môi trường: thiếu một biến, timeout khác nhau, connection pool nhỏ hơn, feature flag bật ở nơi này tắt ở nơi kia.",
+        "Hạ tầng: production có nhiều instance sau load balancer, staging chỉ một. Mọi thứ dựa vào state trong bộ nhớ (cache cục bộ, session in-memory, cron chạy trên mọi instance) đều lộ ra ở đây.",
+        "Phiên bản dịch vụ phụ trợ: Postgres 14 ở staging, 16 ở production; Redis khác cấu hình eviction.",
+        "Bên thứ ba: staging trỏ vào sandbox (luôn trả thành công, không rate limit), production gọi API thật có giới hạn và có lỗi tạm thời.",
+        "Múi giờ và locale: container staging chạy UTC, server cũ chạy giờ Việt Nam."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "98803-staging-chay-tot-nhung-len-production-lai-loi-nhung-khac-biet-nao-giua-hai-moi-t"
+  },
+  {
+    "id": "a4181965-8613-5706-b2c4-f3bfe491919e",
+    "question": "Mocking trong Jest: jest.fn(), jest.mock(), jest.spyOn() dùng như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/768-mocking-trong-jest-jest-fn-jest-mock-jest-spyon-dung-nhu-the-nao",
+    "slug": "mocking-trong-jest-jest-fn-jest-mock-jest-spyon-dung-nhu-the-nao-a4181965-8613-5706-b2c4-f3bfe491919e",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "jest.fn() tạo mock function độc lập, jest.mock() thay thế cả module, jest.spyOn() bọc method có sẵn và mặc định vẫn gọi implementation thật."
+      ],
+      "details": [],
+      "points": [
+        "jest.fn() — track calls/arguments/return values; mockReturnValue(val) cho sync, mockResolvedValue/mockRejectedValue cho Promise, mockImplementation(fn) cho logic tùy biến.",
+        "jest.mock('path') — auto-mock toàn bộ module (mọi export thành jest.fn()); truyền factory jest.mock('./api', () => ({ fetchUser: jest.fn() })) để kiểm soát đầy đủ; lời gọi được hoisted lên đầu file. Mock một phần: jest.requireActual('module') giữ implementation thật cho phần còn lại.",
+        "jest.spyOn(obj, 'method') — mặc định vẫn gọi method thật và ghi lại arguments; override bằng .mockImplementation(); phải restore sau test (mockRestore() hoặc jest.restoreAllMocks()).",
+        "Timer mocks — jest.useFakeTimers() thay setTimeout/setInterval/Date; jest.runAllTimers(), jest.advanceTimersByTime(ms).",
+        "clear vs reset vs restore — clear (xóa lịch sử gọi), reset (clear + xóa implementation), restore (reset + trả spy về method gốc)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "768-mocking-trong-jest-jest-fn-jest-mock-jest-spyon-dung-nhu-the-nao"
+  },
+  {
+    "id": "5a66f0b9-0d5b-5437-a7c3-73e66b3daf55",
+    "question": "Vitest là gì? Tại sao là lựa chọn tốt cho Vite projects?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/769-vitest-la-gi-tai-sao-la-lua-chon-tot-cho-vite-projects",
+    "slug": "vitest-la-gi-tai-sao-la-lua-chon-tot-cho-vite-projects-5a66f0b9-0d5b-5437-a7c3-73e66b3daf55",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vitest là test framework xây trên Vite với API tương thích Jest — reuse Vite config và transforms nên không cần cấu hình riêng cho test, nhanh hơn nhờ esbuild và native ESM."
+      ],
+      "details": [],
+      "points": [
+        "Migrate dễ — từ Jest thường chỉ cần đổi import và config (vitest.config.ts thay jest.config.js).",
+        "Watch mode thông minh — chỉ chạy lại test liên quan đến file thay đổi, dựa trên module graph của Vite.",
+        "In-source testing — viết test ngay trong source file trong block if (import.meta.vitest); test bị tree-shake khỏi production build, hữu ích cho utility functions.",
+        "Browser mode — chạy test trong browser thật (Chromium/Firefox) thay vì jsdom — hành vi DOM chính xác, phù hợp component tests.",
+        "Tính năng khác — test.concurrent() chạy test song song trong describe; snapshot tương thích Jest + inline snapshot; coverage bằng V8 (nhanh hơn) hoặc Istanbul; @vitest/ui để visualize và debug test trên browser.",
+        "Khác biệt với Jest — dùng ES modules natively (không transform), một số global như __dirname cần config thêm."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "769-vitest-la-gi-tai-sao-la-lua-chon-tot-cho-vite-projects"
+  },
+  {
+    "id": "580e259c-368e-50cf-baca-cfb1e607aee6",
+    "question": "Cypress là gì? Khác gì với Selenium?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/770-cypress-la-gi-khac-gi-voi-selenium",
+    "slug": "cypress-la-gi-khac-gi-voi-selenium-580e259c-368e-50cf-baca-cfb1e607aee6",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cypress là E2E testing framework chạy trong cùng event loop với app (không qua WebDriver protocol như Selenium) — điểm mạnh là time-travel debugging, auto-retry và cy.intercept()."
+      ],
+      "details": [
+        "Phù hợp: app tương tác phức tạp, khi cần time-travel debugging, test suite một browser."
+      ],
+      "points": [
+        "Kiến trúc — chạy trong browser cùng app nên truy cập được application state, intercept network request, control timer trực tiếp; Selenium điều khiển browser từ bên ngoài qua WebDriver.",
+        "Time-travel debugging — mỗi command được snapshot; hover command list để xem DOM state tại từng bước.",
+        "Automatic waiting — tự retry assertion đến khi pass hoặc timeout — không cần sleep/waitForElement thủ công như Selenium.",
+        "cy.intercept() — mock API response, giả lập lỗi network, chờ request cụ thể hoàn thành.",
+        "Tính năng khác — Component Testing mount từng component cô lập trong browser thật; cy.session() cache trạng thái đăng nhập giữa các test; Cypress Cloud cho parallel execution, phát hiện flaky test, ghi video.",
+        "Hạn chế — browser support: Chromium-based, Firefox, Electron (mặc định) và WebKit (experimental từ v10.8); không hỗ trợ nhiều tab trong cùng test; test code theo command queue riêng của Cypress, không dùng async/await thông thường."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "770-cypress-la-gi-khac-gi-voi-selenium"
+  },
+  {
+    "id": "ea70825e-f3e7-5460-adda-f0c894164977",
+    "question": "Playwright là gì? So sánh với Cypress?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/771-playwright-la-gi-so-sanh-voi-cypress",
+    "slug": "playwright-la-gi-so-sanh-voi-cypress-ea70825e-f3e7-5460-adda-f0c894164977",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Playwright (Microsoft) là lựa chọn hiện đại cho E2E testing — cross-browser thực sự (Chromium/Firefox/WebKit), async/await chuẩn, parallel execution built-in, Trace Viewer để debug lỗi trên CI."
+      ],
+      "details": [
+        "So với Cypress: Playwright mạnh hơn về multi-browser và parallel execution; Cypress có DX và debugging tốt hơn cho single-browser."
+      ],
+      "points": [
+        "Cross-browser + parallel — hỗ trợ cả WebKit (Safari); test file chạy song song mặc định, config được số workers; Cypress tính phí thêm cho parallelization qua Cypress Cloud.",
+        "Multi-tab/context — test flow nhiều tab như OAuth popup, cửa sổ mới; browser context là session cô lập.",
+        "API async/await — test code dùng async/await chuẩn — dễ đọc và debug hơn command queue của Cypress.",
+        "Network interception — page.route('**/api/**', route => route.fulfill({ json: mockData })); page.waitForResponse() chờ API call cụ thể.",
+        "Locators — page.getByRole('button', { name: 'Submit' }), getByText(), getByTestId() — semantic như Testing Library, auto-retry built-in.",
+        "Debug — trace.zip (screenshot, network log, DOM snapshot) mở trong Trace Viewer để debug CI failures; Playwright Inspector step-through và pick locator; expect(page).toHaveScreenshot() cho visual regression."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "771-playwright-la-gi-so-sanh-voi-cypress"
+  },
+  {
+    "id": "13235b01-4a1c-5cfb-8abb-037576cb8e4c",
+    "question": "TDD (Test-Driven Development) là gì? Quy trình Red-Green-Refactor?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/772-tdd-test-driven-development-la-gi-quy-trinh-red-green-refactor",
+    "slug": "tdd-test-driven-development-la-gi-quy-trinh-red-green-refactor-13235b01-4a1c-5cfb-8abb-037576cb8e4c",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "TDD viết test trước code, theo chu trình Red-Green-Refactor."
+      ],
+      "details": [
+        "Lợi ích: buộc suy nghĩ về API/interface trước implementation → code thiết kế tốt hơn, dễ test hơn; coverage cao tự nhiên vì code chỉ được viết khi có test; refactor an toàn vì test suite là lưới bảo vệ.",
+        "Khi TDD khó áp dụng: legacy code chưa testable (cần refactor trước), UI-heavy code, exploratory code khi chưa rõ design. Nhiều dev thực hành 'test alongside' (viết test song song với code) thay vì test-first cứng nhắc.",
+        "Thực tế: TDD giá trị nhất cho business logic, thuật toán, utilities; ít giá trị cho CRUD đơn giản và UI layout.",
+        "Hai trường phái: Detroit (classic, bottom-up, verify state, ít mock) vs London (mockist, top-down, mock collaborators, verify interactions)."
+      ],
+      "points": [
+        "Red — viết test cho behavior mong muốn; test fail vì code chưa tồn tại.",
+        "Green — viết lượng code tối thiểu để test pass — không over-engineer.",
+        "Refactor — cải thiện cấu trúc, loại bỏ trùng lặp trong khi test vẫn pass. Mỗi chu trình 2–10 phút, test một behavior nhỏ."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "772-tdd-test-driven-development-la-gi-quy-trinh-red-green-refactor"
+  },
+  {
+    "id": "dfc8038d-2f1e-56cf-87f0-5de968b5b63e",
+    "question": "BDD (Behavior-Driven Development) là gì? Cú pháp Given-When-Then?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/773-bdd-behavior-driven-development-la-gi-cu-phap-given-when-then",
+    "slug": "bdd-behavior-driven-development-la-gi-cu-phap-given-when-then-dfc8038d-2f1e-56cf-87f0-5de968b5b63e",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "BDD là extension của TDD, tập trung vào behavior từ góc nhìn user/business thay vì implementation kỹ thuật."
+      ],
+      "details": [],
+      "points": [
+        "Given-When-Then — Given (ngữ cảnh/tiền điều kiện: 'Given a user with $100 in account'), When (hành động: 'When they transfer $50'), Then (kết quả mong đợi: 'Then the balance should be $50').",
+        "Gherkin — scenario dạng human-readable trong file .feature (Given/When/Then/And/But); Cucumber parse và map tới step definitions trong code.",
+        "Lợi ích — ngôn ngữ chung giữa dev, QA và business stakeholders; scenario là living documentation; người không technical có thể review và viết scenario.",
+        "Trong Jest/Vitest — BDD style qua describe/it: it('should deduct amount from sender balance when transfer succeeds') đọc như specification; có thể dùng naming Given-When-Then trong unit test mà không cần Cucumber.",
+        "Lưu ý — Cucumber.js thường overkill trừ khi business stakeholders thực sự viết scenario; BDD không chỉ là syntax — phải thực sự đưa business vào việc định nghĩa behavior, không chỉ bọc test có sẵn bằng Given/When/Then."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "773-bdd-behavior-driven-development-la-gi-cu-phap-given-when-then"
+  },
+  {
+    "id": "1ee20325-84ef-5695-a527-17f8ff5e4020",
+    "question": "Unit test, integration test và e2e test khác nhau thế nào? Nên phân bổ tỉ lệ ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/774-unit-test-integration-test-va-e2e-test-khac-nhau-the-nao-nen-phan-bo-ti-le-ra-sa",
+    "slug": "unit-test-integration-test-va-e2e-test-khac-nhau-the-nao-nen-phan-bo-ti-le-ra-sao-1ee20325-84ef-5695-a527-17f8ff5e4020",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Phân bổ: nhiều unit → ít integration → rất ít e2e (nguyên tắc \"kim tự tháp\" test). Lý do: test nhanh/rẻ chạy thường xuyên bắt lỗi sớm; e2e chậm và mơ hồ nên chỉ phủ luồng cốt lõi. Quy tắc chung: viết test ở tầng thấp nhất có thể bắt được lỗi đó."
+      ],
+      "details": [],
+      "points": [
+        "Unit test: kiểm tra một đơn vị nhỏ (hàm, class) trong cô lập, mock/stub dependency. Chạy trong mili-giây, fail chỉ đúng chỗ hỏng → dễ tìm nguyên nhân, viết nhiều nhất.",
+        "Integration test: kiểm tra nhiều thành phần ghép với nhau — code với DB thật, gọi API service khác, đọc/ghi queue. Chậm hơn vì cần hạ tầng (DB test, container).",
+        "E2E test: chạy cả hệ thống theo góc nhìn người dùng (qua UI hoặc API), toàn bộ stack thật. Đắt nhất, chậm nhất, dễ flaky (fail chập chờn vì timing/network) → chỉ giữ vài luồng quan trọng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "774-unit-test-integration-test-va-e2e-test-khac-nhau-the-nao-nen-phan-bo-ti-le-ra-sa"
+  },
+  {
+    "id": "2474ea1d-2eae-5ef3-aee3-49da1044e1db",
+    "question": "Snapshot testing trong Jest là gì? Khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/775-snapshot-testing-trong-jest-la-gi-khi-nao-nen-dung",
+    "slug": "snapshot-testing-trong-jest-la-gi-khi-nao-nen-dung-2474ea1d-2eae-5ef3-aee3-49da1044e1db",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Snapshot testing serialize output (component render, JSON object, string) vào file .snap — lần chạy sau so sánh với snapshot đã lưu, fail nếu có thay đổi."
+      ],
+      "details": [],
+      "points": [
+        "Update — khi thay đổi là có chủ đích: jest -u (--updateSnapshot) cập nhật tất cả; kết hợp --testNamePattern để giới hạn.",
+        "Inline snapshot — toMatchInlineSnapshot() lưu ngay trong test file thay vì file .snap riêng — dễ review trong PR nhưng làm file test dài.",
+        "Nên dùng — UI component ổn định ít thay đổi (Button, Card, Input), cấu trúc dữ liệu serializable, shape của API response.",
+        "Không nên — component thay đổi thường xuyên (update snapshot mỗi PR không còn ý nghĩa), nội dung động (timestamp, random ID — phải mock), business logic phức tạp (assertion tường minh tốt hơn).",
+        "Rủi ro — dev chạy update mà không review diff → snapshot test thành 'rubber stamp'. Nên kết hợp snapshot với assertion tường minh cho thuộc tính quan trọng.",
+        "Custom serializer — jest.addSnapshotSerializer() format output cho object tùy biến."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "775-snapshot-testing-trong-jest-la-gi-khi-nao-nen-dung"
+  },
+  {
+    "id": "2b38f368-15c2-5b6c-bf1d-2f61a26cf544",
+    "question": "Code coverage là gì? Các loại coverage metrics?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/776-code-coverage-la-gi-cac-loai-coverage-metrics",
+    "slug": "code-coverage-la-gi-cac-loai-coverage-metrics-2b38f368-15c2-5b6c-bf1d-2f61a26cf544",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Code coverage đo phần trăm code được thực thi bởi tests — sinh bởi Istanbul (Jest) hoặc V8 (Vitest V8 provider)."
+      ],
+      "details": [
+        "Các metric:\n- Statement coverage — % statement được chạy.\n- Branch coverage — % nhánh được cover: mỗi if/else/ternary/&&/|| tạo 2 nhánh, phải test cả true lẫn false. Metric quan trọng nhất — 100% statement nhưng 70% branch nghĩa là nhiều edge case chưa test.\n- Function coverage — % function được gọi ít nhất một lần.\n- Line coverage — % dòng được chạy; thường cao nhất, ít ý nghĩa nhất.",
+        "Diễn giải:\n- 100% coverage không bảo đảm hết bug — test có thể chạy code nhưng assert sai.\n- Coverage thấp (<60–70%) là tín hiệu cảnh báo.\n- Mục tiêu thực tế: 80–90% cho business logic, 70%+ tổng thể; không cần 100% cho UI component và file config.",
+        "Cấu hình: coverageThreshold trong jest.config.js fail CI khi dưới ngưỡng; coveragePathIgnorePatterns loại vendor code, generated files, test utilities. Report: text (CI), html (xem trực quan), lcov (SonarQube, Codecov). Mutation testing (Stryker) sửa code rồi kiểm tra test có fail không — đo chất lượng test, không chỉ số lượng coverage."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "776-code-coverage-la-gi-cac-loai-coverage-metrics"
+  },
+  {
+    "id": "fc413182-ffff-5c36-96a6-022b59c8d855",
+    "question": "Integration testing khác unit testing như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/777-integration-testing-khac-unit-testing-nhu-the-nao",
+    "slug": "integration-testing-khac-unit-testing-nhu-the-nao-fc413182-ffff-5c36-96a6-022b59c8d855",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Unit test kiểm tra một function/class cô lập với mọi dependency được mock; integration test kiểm tra tương tác giữa nhiều thành phần với dependency thật hoặc mock tối thiểu."
+      ],
+      "details": [
+        "Trong microservices, contract tests thay integration tests khi services thuộc các team khác nhau. Triết lý Testing Library: 'The more your tests resemble the way your software is used, the more confidence they can give you' — integration test thường cho nhiều confidence trên mỗi test hơn unit test."
+      ],
+      "points": [
+        "Unit — nhanh (<1ms), ổn định, dễ xác định vị trí lỗi, không cần external service. Phù hợp: thuật toán, business logic, pure functions, utilities.",
+        "Integration — chậm hơn (100ms–1s) nhưng bắt lỗi ở boundary (schema mismatch, query sai, vi phạm API contract) mà unit test không thể. Ví dụ: test API handler với database thật.",
+        "Supertest (Node.js) — await request(app).get('/api/users').expect(200) — test Express route với middleware stack thật, chỉ mock external services.",
+        "Test containers — spin up PostgreSQL/Redis thật trong Docker cho test: deterministic, isolated, cleanup sau khi chạy.",
+        "Mock DB vs real DB — mock nhanh hơn nhưng có thể bỏ sót lỗi SQL syntax, constraint violation, vấn đề query performance; DB thật bắt nhiều bug thực tế hơn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "777-integration-testing-khac-unit-testing-nhu-the-nao"
+  },
+  {
+    "id": "6321549e-af25-5f42-8ac3-703766676242",
+    "question": "Testing React components thường dùng gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/812-testing-react-components-thuong-dung-gi",
+    "slug": "testing-react-components-thuong-dung-gi-6321549e-af25-5f42-8ac3-703766676242",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bộ công cụ phổ biến nhất để test React components là Jest kết hợp React Testing Library (RTL), trong đó RTL theo triết lý test hành vi người dùng thay vì chi tiết implementation bên trong."
+      ],
+      "details": [
+        "Cách viết test cơ bản là dùng render() để mount component, screen.getByRole() hoặc screen.getByText() để tìm element, rồi userEvent.click() để mô phỏng tương tác. Để mock API calls, nên dùng MSW (Mock Service Worker) vì nó chặn requests ở tầng network, giúp test giống thực tế hơn so với mock trực tiếp fetch/axios.",
+        "Nguyên tắc quan trọng là viết test theo luồng tương tác của user thực — ví dụ click nút submit rồi kiểm tra hiển thị thông báo thành công, thay vì kiểm tra state nội bộ có thay đổi hay không."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "812-testing-react-components-thuong-dung-gi"
+  },
+  {
+    "id": "4946a369-2d74-5f87-9bf2-3088a582c7ca",
+    "question": "AAA pattern (Arrange-Act-Assert) trong testing là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4075-aaa-pattern-arrange-act-assert-trong-testing-la-gi",
+    "slug": "aaa-pattern-arrange-act-assert-trong-testing-la-gi-4946a369-2d74-5f87-9bf2-3088a582c7ca",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "AAA là cấu trúc chuẩn cho mỗi unit test, giúp test dễ đọc và maintain. Arrange (chuẩn bị): khởi tạo data, mocks, objects cần thiết — đây là phần dài nhất. Act (thực hiện): gọi function/method đang test — chỉ một dòng, test một behavior duy nhất. Assert (kiểm tra kết quả): verify output hoặc side effect."
+      ],
+      "details": [
+        "// Arrange const cart = new Cart(); cart.addItem({ id: 1, price: 100 }); // Act const total = cart.getTotal(); // Assert expect(total).toBe(100)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "4075-aaa-pattern-arrange-act-assert-trong-testing-la-gi"
+  },
+  {
+    "id": "f6244774-d997-5ece-86bf-cadaf1223ba0",
+    "question": "Mock API trong test frontend như thế nào? MSW (Mock Service Worker) khác gì so với mock fetch trực tiếp?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4076-mock-api-trong-test-frontend-nhu-the-nao-msw-mock-service-worker-khac-gi-so-voi",
+    "slug": "mock-api-trong-test-frontend-nhu-the-nao-msw-mock-service-worker-khac-gi-so-voi-mock-fetch-truc-tiep-f6244774-d997-5ece-86bf-cadaf1223ba0",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "MSW intercept network request ở tầng service worker (browser) hoặc msw/node (Node.js), cho phép mock API response mà không thay đổi code của app. Khác với mock fetch trực tiếp (jest.spyOn(global, 'fetch')): MSW intercept ở network layer — app code không biết gì, không cần wrap hay inject mock vào component.",
+        "server.listen()",
+        "server.resetHandlers()",
+        "server.close()",
+        "rest.get",
+        "ctx.json"
+      ],
+      "details": [
+        "Setup (MSW v2):",
+        "Lợi ích:\n- Test component với API response thực tế — không cần mock React Query, SWR hay fetch.\n- Test error state bằng override handler cho một test:\nCopy\nserver.use(http.get('/api/users', () => new HttpResponse(null, { status: 500 })))\n.\n- Reuse handlers giữa tests và browser development.",
+        "Lưu ý: Jest phải dùng msw/node (Node.js không có service worker); MSW v2 dựa trên fetch API chuẩn — Node 18+ có fetch native, Node cũ hơn cần polyfill."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const server = setupServer(\n  http.get('/api/users', () => HttpResponse.json([{ id: 1, name: 'Alice' }]))\n)"
+        },
+        {
+          "language": "",
+          "code": "server.use(http.get('/api/users', () => new HttpResponse(null, { status: 500 })))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "4076-mock-api-trong-test-frontend-nhu-the-nao-msw-mock-service-worker-khac-gi-so-voi"
+  },
+  {
+    "id": "9fb7433f-e87e-5158-a6f1-3523f8221cdf",
+    "question": "Flaky tests là gì? Nguyên nhân và cách xử lý?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4077-flaky-tests-la-gi-nguyen-nhan-va-cach-xu-ly",
+    "slug": "flaky-tests-la-gi-nguyen-nhan-va-cach-xu-ly-9fb7433f-e87e-5158-a6f1-3523f8221cdf",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Flaky test là test khi pass khi fail dù code không đổi. Cái hại lớn nhất không phải bản thân lỗi, mà là team mất niềm tin vào test suite rồi bắt đầu bỏ qua cả những lần fail thật.",
+        "--repeat-each"
+      ],
+      "details": [
+        "Sáu nguyên nhân hay gặp:\n1. Timing/async — test không chờ đúng thao tác bất đồng bộ, dùng setTimeout ước chừng thay vì waitFor hoặc await tường minh.\n2. Phụ thuộc thứ tự — test A sống nhờ side effect của test B.\n3. Shared mutable state — global state không được reset giữa các test.\n4. Phụ thuộc bên ngoài — gọi API thật, database không cô lập.\n5. Thời gian — dùng new Date() thay vì mock.\n6. Dữ liệu ngẫu nhiên — không seed bộ sinh số ngẫu nhiên.",
+        "Cách chữa: dùng waitFor(() => expect(element).toBeInTheDocument()) của Testing Library thay setTimeout; reset state trong beforeEach; mock Date.now() bằng jest.useFakeTimers(); gọi server.resetHandlers() giữa các test.",
+        "Lưu ý: retry trong CI chỉ là cơ chế phát hiện, không phải cách chữa — test phải retry mới xanh thì vẫn là test hỏng, và giấu nó đi bằng --retries=5 chỉ dời nợ sang sau.",
+        "Cách phát hiện: chạy đi chạy lại một file test. Jest không có cờ lặp sẵn nên dùng shell loop:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "for i in {1..20}; do npx jest flaky.test.ts --runInBand || break; done"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "4077-flaky-tests-la-gi-nguyen-nhan-va-cach-xu-ly"
+  },
+  {
+    "id": "4a587419-7ba1-5558-8ae4-bfb83f9c23b1",
+    "question": "Coverage thresholds trong Jest: cách setup và best practices?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4078-coverage-thresholds-trong-jest-cach-setup-va-best-practices",
+    "slug": "coverage-thresholds-trong-jest-cach-setup-va-best-practices-4a587419-7ba1-5558-8ae4-bfb83f9c23b1",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Lưu ý: đặt ngưỡng quá cao ngay từ đầu chỉ tạo ma sát — bắt đầu 60-70% rồi nâng dần. Cũng đừng đuổi 100% cho cả codebase: component UI thuần layout có coverage thấp không đồng nghĩa với rủi ro."
+      ],
+      "details": [],
+      "points": [
+        "collectCoverageFrom rất quan trọng: không có nó thì file hoàn toàn chưa có test sẽ không bị tính vào coverage (Jest chỉ đếm file được test import), và con số đẹp một cách giả tạo.",
+        "Branch coverage là chỉ số đáng tin nhất — 80% branch nghĩa là phần lớn nhánh if/else đã được đi qua. Statement và line coverage rất dễ thổi phồng.",
+        "Collector: Istanbul là mặc định của Jest, còn coverageProvider: 'v8' dùng bộ đếm native, nhanh hơn."
+      ],
+      "sections": [
+        "Coverage threshold làm CI fail khi độ phủ tụt dưới mức tối thiểu, khai báo trong jest.config.js:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "coverageThreshold: {\n  global: { branches: 80, functions: 80, lines: 85, statements: 85 },\n  // business logic quan trọng thì đòi cao hơn\n  './src/services/payment.ts': { branches: 95, lines: 95 },\n},\ncoveragePathIgnorePatterns: ['/node_modules/', '/dist/', '.stories.'],\ncollectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.d.ts'],"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "4078-coverage-thresholds-trong-jest-cach-setup-va-best-practices"
+  },
+  {
+    "id": "59d88446-4aba-591d-a9b9-216144324a46",
+    "question": "Testing Library: getBy, queryBy, findBy khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4080-testing-library-getby-queryby-findby-khac-nhau-nhu-the-nao",
+    "slug": "testing-library-getby-queryby-findby-khac-nhau-nhu-the-nao-59d88446-4aba-591d-a9b9-216144324a46",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "@testing-library/react có ba nhóm query, khác nhau ở chỗ element không tồn tại thì chuyện gì xảy ra:"
+      ],
+      "details": [
+        "Ba nhóm này đều có bản số nhiều: getAllBy / queryAllBy / findAllBy.",
+        "Thứ tự ưu tiên Testing Library khuyến nghị: getByRole > getByLabelText > getByPlaceholderText > getByText > getByDisplayValue > getByAltText > getByTitle > getByTestId.",
+        "Với thứ xuất hiện muộn thì dùng waitFor, nó retry assertion tới khi pass hoặc hết giờ:",
+        "getByRole('button', { name: 'Submit' }) là lựa chọn tốt nhất vì nó test đúng thứ user nhìn thấy và tiện thể kiểm luôn accessibility. Đừng dùng getByTestId cho mọi thứ — data-testid là phương án cuối, và nó buộc test dính vào chi tiết cài đặt."
+      ],
+      "points": [
+        "getBy — throw error ngay. Dùng khi element bắt buộc phải có; fail nhanh và thông báo rõ nhất.",
+        "queryBy — trả về null. Dùng để khẳng định element KHÔNG có: expect(queryByRole('alert')).not.toBeInTheDocument().",
+        "findBy — trả về Promise và chờ element xuất hiện (mặc định 1000ms, đổi được). Dùng sau các thao tác async như gọi API."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "await waitFor(() => expect(screen.getByText('Loaded')).toBeInTheDocument())"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "4080-testing-library-getby-queryby-findby-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "1c1ae116-b51e-567c-a9a7-78bb9ee9fb82",
+    "question": "Sau khi viết xong, làm sao dry-run code để bắt bug trước khi chạy?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9107-sau-khi-viet-xong-lam-sao-dry-run-code-de-bat-bug-truoc-khi-chay",
+    "slug": "sau-khi-viet-xong-lam-sao-dry-run-code-de-bat-bug-truoc-khi-chay-1c1ae116-b51e-567c-a9a7-78bb9ee9fb82",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Dry-run là đọc code như máy tính: chọn một ví dụ nhỏ rồi lần theo từng dòng, ghi giá trị biến ra giấy hoặc comment."
+      ],
+      "details": [],
+      "points": [
+        "Tập trung vào những chỗ hay sai: điều kiện vòng lặp (< hay <=), cập nhật pointer/index, khởi tạo và reset biến tích lũy, nhánh edge case.",
+        "Hãy thử ít nhất một case thường và một case biên (rỗng, một phần tử, đáp án ở đầu/cuối).",
+        "Khi giá trị biến lệch với kỳ vọng, bạn đã tìm thấy bug mà không cần chạy.",
+        "Trong interview không phải lúc nào cũng có runtime, nên kỹ năng đọc code bằng mắt rất giá trị."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "9107-sau-khi-viet-xong-lam-sao-dry-run-code-de-bat-bug-truoc-khi-chay"
+  },
+  {
+    "id": "2f55f13a-eb05-5514-b016-3bc36d303e15",
+    "question": "Những loại bug nào hay gặp nhất trong coding interview?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9108-nhung-loai-bug-nao-hay-gap-nhat-trong-coding-interview",
+    "slug": "nhung-loai-bug-nao-hay-gap-nhat-trong-coding-interview-2f55f13a-eb05-5514-b016-3bc36d303e15",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Phần lớn bug interview rơi vào vài nhóm quen thuộc:"
+      ],
+      "details": [
+        "Biết trước danh sách này giúp bạn tự kiểm khi dry-run nhanh hơn."
+      ],
+      "points": [
+        "off-by-one — sai < vs <=, index n thay vì n-1, quên phần tử cuối;",
+        "null/empty — không xử lý mảng rỗng, list rỗng, hoặc node null;",
+        "quên cập nhật state — không tăng pointer, không reset biến trong vòng lặp dẫn tới infinite loop;",
+        "integer overflow trong Java/C++ (dùng left + (right-left)/2 thay vì (left+right)/2);",
+        "mutate input khi không được phép;",
+        "dùng lại cùng phần tử trong bài cần cặp phân biệt"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "9108-nhung-loai-bug-nao-hay-gap-nhat-trong-coding-interview"
+  },
+  {
+    "id": "a5ee1767-849d-53e2-85c2-213fb4be4d7e",
+    "question": "Làm sao tự nghĩ ra test case tốt khi đề không cho sẵn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9111-lam-sao-tu-nghi-ra-test-case-tot-khi-de-khong-cho-san",
+    "slug": "lam-sao-tu-nghi-ra-test-case-tot-khi-de-khong-cho-san-a5ee1767-849d-53e2-85c2-213fb4be4d7e",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Kỹ thuật hữu ích là \"phân vùng tương đương\" — chia input thành các nhóm mà code xử lý khác nhau, rồi lấy đại diện mỗi nhóm cộng với các điểm biên giữa chúng."
+      ],
+      "details": [
+        "nhóm \"có trong mảng\" (đầu, giữa, cuối), nhóm \"không có\" (nhỏ hơn min, lớn hơn max, ở giữa hai phần tử), và biên (mảng rỗng, một phần tử, duplicate)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "9111-lam-sao-tu-nghi-ra-test-case-tot-khi-de-khong-cho-san"
+  },
+  {
+    "id": "465a432a-43a7-59fd-8b39-d4f955c07fe4",
+    "question": "Phân biệt Black-box, White-box và Gray-box testing?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93302-phan-biet-black-box-white-box-va-gray-box-testing",
+    "slug": "phan-biet-black-box-white-box-va-gray-box-testing-465a432a-43a7-59fd-8b39-d4f955c07fe4",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khác nhau ở mức độ biết về cấu trúc bên trong khi thiết kế test:"
+      ],
+      "details": [],
+      "points": [
+        "Black-box — dựa trên đặc tả/hành vi, không cần biết code chạy ra sao. Kỹ thuật: equivalence partitioning, boundary value analysis, decision table. Trả lời \"đầu vào này thì đầu ra đúng chưa\".",
+        "White-box — dựa trên cấu trúc code bên trong. Đo bằng statement/branch coverage, kiểm luồng thực thi, nhánh, điều kiện. Trả lời \"mọi đường đi trong code đã được chạy chưa\".",
+        "Gray-box — kết hợp: biết một phần nội bộ (schema DB, kiến trúc, thuật toán) nhưng vẫn test qua giao diện như black-box. Hữu ích cho test tích hợp và bảo mật."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "93302-phan-biet-black-box-white-box-va-gray-box-testing"
+  },
+  {
+    "id": "efe118c0-8b9f-5336-82c8-9e7ec0c9ac87",
+    "question": "Phân biệt Severity và Priority khi báo lỗi?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93304-phan-biet-severity-va-priority-khi-bao-loi",
+    "slug": "phan-biet-severity-va-priority-khi-bao-loi-efe118c0-8b9f-5336-82c8-9e7ec0c9ac87",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hai trục độc lập, nên có đủ 4 tổ hợp:\n- Cao / Thấp: app crash ở một tính năng gần như không ai dùng.\n- Thấp / Cao: gõ sai tên thương hiệu trên trang chủ — nhẹ về kỹ thuật nhưng phải sửa ngay."
+      ],
+      "details": [
+        "Đừng gộp hai khái niệm này làm một khi báo lỗi."
+      ],
+      "points": [
+        "Severity (mức nghiêm trọng) — lỗi ảnh hưởng tới hệ thống nặng tới đâu về mặt kỹ thuật. Do tester đánh giá (crash, mất dữ liệu → cao; lệch giao diện nhỏ → thấp).",
+        "Priority (mức ưu tiên) — lỗi cần được sửa gấp tới đâu về mặt nghiệp vụ. Do PO/PM quyết theo giá trị kinh doanh, lịch release."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "93304-phan-biet-severity-va-priority-khi-bao-loi"
+  },
+  {
+    "id": "abfde102-7ccf-5e4f-aa9e-2b680d41f68a",
+    "question": "Equivalence Partitioning và Boundary Value Analysis là gì, dùng để thiết kế test case thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93306-equivalence-partitioning-va-boundary-value-analysis-la-gi-dung-de-thiet-ke-test",
+    "slug": "equivalence-partitioning-va-boundary-value-analysis-la-gi-dung-de-thiet-ke-test-case-the-nao-abfde102-7ccf-5e4f-aa9e-2b680d41f68a",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hai kỹ thuật black-box để giảm số test case mà vẫn phủ tốt:"
+      ],
+      "details": [
+        "Ví dụ ô nhập tuổi hợp lệ 1–100:\n- EP: một giá trị < 1 (vd 0), một giá trị trong 1–100 (vd 50), một giá trị > 100 (vd 150).\n- BVA: 0, 1, 2 và 99, 100, 101.",
+        "Dùng chung hai kỹ thuật cho hiệu quả cao nhất."
+      ],
+      "points": [
+        "Equivalence Partitioning (EP) — chia miền đầu vào thành các lớp tương đương, nơi mọi giá trị được xử lý giống nhau. Chỉ cần test một đại diện mỗi lớp (cả lớp hợp lệ lẫn không hợp lệ) là đủ.",
+        "Boundary Value Analysis (BVA) — lỗi hay nằm ở rìa các lớp, nên test thêm các giá trị ngay tại biên và sát biên."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "93306-equivalence-partitioning-va-boundary-value-analysis-la-gi-dung-de-thiet-ke-test"
+  },
+  {
+    "id": "530bb38e-9eef-5c12-8bd2-082fafbb968b",
+    "question": "Phân biệt Smoke testing và Sanity testing?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93307-phan-biet-smoke-testing-va-sanity-testing",
+    "slug": "phan-biet-smoke-testing-va-sanity-testing-530bb38e-9eef-5c12-8bd2-082fafbb968b",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai đều là kiểm nhanh trước khi test sâu, nhưng khác về phạm vi và độ sâu:"
+      ],
+      "details": [
+        "Câu chốt: smoke hỏi \"build này có đáng để test không?\", sanity hỏi \"chỗ vừa sửa đã đúng chưa?\"."
+      ],
+      "points": [
+        "Smoke testing — rộng và nông. Chạy nhanh qua các chức năng cốt lõi để xác nhận build đủ ổn định để test tiếp (app mở được, đăng nhập được, luồng chính không sập). Thường chạy trên mỗi build mới.",
+        "Sanity testing — hẹp và sâu. Sau một sửa lỗi hoặc thay đổi nhỏ, kiểm một vùng chức năng cụ thể hoạt động đúng như mong đợi. Là một tập con của regression."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "93307-phan-biet-smoke-testing-va-sanity-testing"
+  },
+  {
+    "id": "97d7cb98-9958-5db3-94cc-76bb709d58fe",
+    "question": "Phân biệt Regression testing và Re-testing?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93310-phan-biet-regression-testing-va-re-testing",
+    "slug": "phan-biet-regression-testing-va-re-testing-97d7cb98-9958-5db3-94cc-76bb709d58fe",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Thứ tự thực tế: fix xong → re-test để chắc lỗi đã hết → regression để chắc không phát sinh lỗi mới ở nơi khác. Một cái xác nhận \"đã đúng\", cái kia canh \"không vô tình làm sai chỗ khác\"."
+      ],
+      "details": [],
+      "points": [
+        "Re-testing (confirmation testing) — chạy lại đúng test case đã fail trên build đã sửa, để xác nhận defect thực sự hết. Phạm vi hẹp, bám đúng vào chỗ vừa fix.",
+        "Regression testing — chạy lại các test case của phần vốn đang chạy đúng, để đảm bảo thay đổi/bản fix không làm hỏng chức năng cũ. Phạm vi rộng hơn, thường được tự động hóa vì lặp lại nhiều."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "93310-phan-biet-regression-testing-va-re-testing"
+  },
+  {
+    "id": "b6e16184-c128-5aca-9e35-40aa6d990f41",
+    "question": "Test code bất đồng bộ trong Jest như thế nào? Phân biệt return promise, done callback và resolves/rejects?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/95000-test-code-bat-dong-bo-trong-jest-nhu-the-nao-phan-biet-return-promise-done-callb",
+    "slug": "test-code-bat-dong-bo-trong-jest-nhu-the-nao-phan-biet-return-promise-done-callback-va-resolves-reje-b6e16184-c128-5aca-9e35-40aa6d990f41",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Điểm mấu chốt: Jest phải biết khi nào async operation kết thúc — nếu không, test hoàn thành trước khi assertion chạy và pass một cách sai lệch."
+      ],
+      "details": [],
+      "points": [
+        "async/await hoặc return promise — cách chuẩn:\nCopy\ntest('fetch', async () => { const data = await fetchData(); expect(data).toBe('ok') })\n, hoặc return fetchData().then(...). Quên await/return → Jest không chờ promise.",
+        ".resolves / .rejects — matcher gọn cho promise: await expect(fetchData()).resolves.toBe('ok'); await expect(fetchData()).rejects.toThrow('error'). Với case reject, thêm expect.assertions(1) để bảo đảm assertion thực sự chạy.",
+        "done callback — cho API dạng callback: gọi done() khi xong, done(error) khi lỗi; phải bọc expect trong try/catch rồi done(e) — nếu không, assertion fail sẽ làm test timeout thay vì báo lỗi rõ ràng. Không kết hợp done với async function (Jest báo lỗi).",
+        "Fake timers + async — jest.useFakeTimers() chỉ điều khiển macro-task (setTimeout/setInterval), không tự flush promise; với code trộn timer và promise, dùng biến thể async: await jest.advanceTimersByTimeAsync(ms) hoặc await jest.runAllTimersAsync()."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "test('fetch', async () => { const data = await fetchData(); expect(data).toBe('ok') })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "95000-test-code-bat-dong-bo-trong-jest-nhu-the-nao-phan-biet-return-promise-done-callb"
+  },
+  {
+    "id": "5b4dac4d-eb45-5087-8162-1ec9727f9ed6",
+    "question": "Một test có gọi vào database thật thì tính là unit test hay integration test? Ranh giới đặt ở đâu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98704-mot-test-co-goi-vao-database-that-thi-tinh-la-unit-test-hay-integration-test-ran",
+    "slug": "mot-test-co-goi-vao-database-that-thi-tinh-la-unit-test-hay-integration-test-ranh-gioi-dat-o-dau-5b4dac4d-eb45-5087-8162-1ec9727f9ed6",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không có định nghĩa duy nhất, và đó là lý do câu này hay được hỏi để xem bạn hiểu mục đích hay chỉ thuộc nhãn."
+      ],
+      "details": [
+        "Cách phân biệt dùng được trong thực tế, dựa trên thứ test kiểm soát được:",
+        "Với câu hỏi ban đầu: test chạy repository trên Postgres thật (kể cả bằng Docker/Testcontainers) là integration test, dù nó chỉ kiểm tra một hàm.",
+        "Điều quan trọng hơn cái nhãn: quyết định gì theo nó. Test nhanh và độc lập thì chạy mỗi lần lưu file; test chạm DB thì gom vào một lệnh riêng chạy trong CI. Trả lời được điều này thì tranh cãi \"unit là gì\" trở nên không cần thiết."
+      ],
+      "points": [
+        "Unit test: chỉ chạy code trong process, không chạm mạng, không chạm file, không chạm DB. Chạy vài mili giây, chạy song song thoải mái, không cần dọn dẹp.",
+        "Integration test: có chạm ít nhất một thành phần ngoài process — DB, message queue, HTTP client. Chậm hơn (chục đến trăm mili giây), cần dữ liệu sạch giữa các lần chạy.",
+        "E2E: chạy qua giao diện/HTTP thật của hệ thống đã deploy, gồm nhiều service."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "98704-mot-test-co-goi-vao-database-that-thi-tinh-la-unit-test-hay-integration-test-ran"
+  },
+  {
+    "id": "45780991-de5d-56c1-900a-49fa39978e34",
+    "question": "Mock nhiều quá thì hại gì? Vì sao test xanh hết mà production vẫn lỗi?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98705-mock-nhieu-qua-thi-hai-gi-vi-sao-test-xanh-het-ma-production-van-loi",
+    "slug": "mock-nhieu-qua-thi-hai-gi-vi-sao-test-xanh-het-ma-production-van-loi-45780991-de5d-56c1-900a-49fa39978e34",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì test đã mock đúng cái phần có bug. Mock thay thành phần thật bằng thứ bạn tự định nghĩa — nên nó chỉ kiểm chứng được rằng code gọi đúng thứ bạn tưởng tượng, không kiểm chứng thứ đó có tồn tại và hoạt động như vậy hay không."
+      ],
+      "details": [
+        "Các kiểu hỏng cụ thể:",
+        "Cách dùng mock hợp lý:"
+      ],
+      "points": [
+        "Mock lệch với thật. API đổi tên trường total_price thành amount, mock vẫn trả total_price → test xanh, production undefined.",
+        "Test dính implementation. Assert kiểu expect(repo.save).toHaveBeenCalledWith(...) khiến mọi lần refactor nội bộ (dù hành vi không đổi) đều làm test đỏ. Test trở thành lực cản refactor thay vì lưới an toàn.",
+        "Mock chồng mock. Khi phải mock 6 thứ mới chạy được một hàm, đó là tín hiệu thiết kế: hàm đang ôm quá nhiều phụ thuộc, nên tách phần logic thuần ra.",
+        "Mock ranh giới ngoài hệ thống: HTTP bên thứ ba, gửi email, gửi SMS, thanh toán, đồng hồ.",
+        "Không mock module nội bộ của chính mình nếu chạy thật được.",
+        "Với API ngoài, ưu tiên chặn ở tầng mạng (vd MSW) thay vì mock hàm — như vậy vẫn chạy qua code gọi API thật.",
+        "Có contract test hoặc một test chạy thật định kỳ để phát hiện mock đã lệch."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "98705-mock-nhieu-qua-thi-hai-gi-vi-sao-test-xanh-het-ma-production-van-loi"
+  },
+  {
+    "id": "5cc0dcb0-a6d2-5033-8573-87078c9480a8",
+    "question": "Code phụ thuộc thời gian (Date.now, hết hạn token, setTimeout) thì test thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98706-code-phu-thuoc-thoi-gian-date-now-het-han-token-settimeout-thi-test-the-nao",
+    "slug": "code-phu-thuoc-thoi-gian-date-now-het-han-token-settimeout-thi-test-the-nao-5cc0dcb0-a6d2-5033-8573-87078c9480a8",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nguyên tắc: không để test phụ thuộc đồng hồ thật. Có hai cách, ưu tiên cách một."
+      ],
+      "details": [
+        "1. Tiêm thời gian vào như một phụ thuộc. Hàm nhận now (hoặc một clock) thay vì tự gọi Date.now(). Test truyền mốc thời gian cố định, không cần công cụ gì thêm.",
+        "Fake timers** khi không sửa được chữ ký hàm, hoặc khi cần tua setTimeout/setInterval."
+      ],
+      "points": [],
+      "sections": [
+        "Hai bẫy hay gặp ở dự án VN: timezone (máy dev Asia/Ho_Chi_Minh, CI chạy UTC → test đỏ trên CI) — cố định TZ trong config test; và sleep thật trong test — mỗi chỗ vài giây, cả suite thành vài phút, đổi hết sang fake timers."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "export function isExpired(token: Token, now: number) {\n  return token.expiresAt <= now\n}\n\nit('marks the token expired one second past its deadline', () => {\n  expect(isExpired({ expiresAt: 1_000 }, 1_001)).toBe(true)\n})"
+        },
+        {
+          "language": "TS",
+          "code": "beforeEach(() => vi.useFakeTimers({ now: new Date('2026-01-01T00:00:00Z') }))\nafterEach(() => vi.useRealTimers())\n\nit('retries after the backoff delay', async () => {\n  const promise = retryWithBackoff(fn)\n  await vi.advanceTimersByTimeAsync(5_000)  // tua 5s thay vì chờ thật\n  await promise\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "98706-code-phu-thuoc-thoi-gian-date-now-het-han-token-settimeout-thi-test-the-nao"
+  },
+  {
+    "id": "0d9b98a8-a56f-581d-8b31-9adcc520aa97",
+    "question": "Hàm sinh UUID / dùng Math.random / gọi network thì test ra sao mà kết quả vẫn ổn định?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98707-ham-sinh-uuid-dung-math-random-goi-network-thi-test-ra-sao-ma-ket-qua-van-on-din",
+    "slug": "ham-sinh-uuid-dung-math-random-goi-network-thi-test-ra-sao-ma-ket-qua-van-on-dinh-0d9b98a8-a56f-581d-8b31-9adcc520aa97",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mọi nguồn không xác định phải được đẩy ra biên rồi thay bằng giá trị cố định trong test."
+      ],
+      "details": [
+        "Ngẫu nhiên và UUID: đừng gọi trực tiếp trong hàm nghiệp vụ; nhận qua tham số hoặc mock module sinh id.",
+        "Mục tiêu: chạy test 100 lần trên 3 máy khác nhau phải ra cùng kết quả. Test không xác định sẽ nhanh chóng bị cả nhóm bỏ qua khi nó đỏ."
+      ],
+      "points": [
+        "Thứ tự phần tử: DB không đảm bảo thứ tự khi không có ORDER BY → assert theo tập hợp hoặc sort trước khi so sánh.",
+        "Số dấu phẩy động: dùng toBeCloseTo thay toBe.",
+        "Locale: toLocaleString khác nhau giữa máy dev và CI → cố định locale."
+      ],
+      "sections": [
+        "Network: chặn ở tầng HTTP thay vì mock hàm gọi API, để code parse/xử lý lỗi vẫn chạy thật."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "vi.mock('./id', () => ({ newId: () => 'order-0001' }))\n// hoặc: createOrder(input, { newId: () => 'order-0001' })"
+        },
+        {
+          "language": "TS",
+          "code": "server.use(http.get('/api/orders/:id', () => HttpResponse.json({ id: '1', amount: 500 })))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "98707-ham-sinh-uuid-dung-math-random-goi-network-thi-test-ra-sao-ma-ket-qua-van-on-din"
+  },
+  {
+    "id": "93ed4ead-a0c0-5763-ae08-4d9687bdaa26",
+    "question": "Chuẩn bị dữ liệu cho test có chạm DB như thế nào? Fixture cứng hay factory, và dọn dữ liệu giữa các test ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98708-chuan-bi-du-lieu-cho-test-co-cham-db-nhu-the-nao-fixture-cung-hay-factory-va-don",
+    "slug": "chuan-bi-du-lieu-cho-test-co-cham-db-nhu-the-nao-fixture-cung-hay-factory-va-don-du-lieu-giua-cac-te-93ed4ead-a0c0-5763-ae08-4d9687bdaa26",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Factory hơn fixture cứng trong hầu hết trường hợp.",
+        "Dọn dữ liệu"
+      ],
+      "details": [
+        "Fixture kiểu một file JSON dùng chung cho cả trăm test sẽ dần bị \"ai cũng thêm một trường\" và không test nào dám sửa vì sợ hỏng test khác. Factory là hàm tạo bản ghi hợp lệ với giá trị mặc định, cho phép ghi đè đúng trường mà test đó quan tâm:",
+        "1. Transaction rollback: mỗi test chạy trong một transaction rồi rollback ở afterEach. Nhanh nhất, sạch tuyệt đối. Không dùng được nếu code dưới test tự quản lý transaction.\n2. Truncate các bảng trong beforeEach. Đơn giản, chậm hơn, cần đúng thứ tự khoá ngoại (hoặc TRUNCATE ... CASCADE).\n3. Dữ liệu tách biệt theo test: mỗi test dùng tenant/user riêng, không xoá gì cả. Hợp khi chạy song song.",
+        "Hai điều cần tránh: dựa vào dữ liệu do test khác tạo (test chỉ pass khi chạy đúng thứ tự), và dùng chung DB với dev (ai đó chạy test là mất dữ liệu đang debug). Luôn dùng DB riêng cho test, tốt nhất là container dựng lên trong CI."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const order = makeOrder({ status: 'pending', total: 500_000 })\n// các trường khác lấy mặc định — người đọc biết ngay chỉ 2 trường này liên quan"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "98708-chuan-bi-du-lieu-cho-test-co-cham-db-nhu-the-nao-fixture-cung-hay-factory-va-don"
+  },
+  {
+    "id": "5c81dd62-d596-5746-bd91-314686c19796",
+    "question": "Bộ test chạy 20 phút mỗi lần push, cả nhóm bắt đầu bỏ qua. Bạn rút ngắn bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98709-bo-test-chay-20-phut-moi-lan-push-ca-nhom-bat-dau-bo-qua-ban-rut-ngan-bang-cach",
+    "slug": "bo-test-chay-20-phut-moi-lan-push-ca-nhom-bat-dau-bo-qua-ban-rut-ngan-bang-cach-nao-5c81dd62-d596-5746-bd91-314686c19796",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đo trước, tối ưu sau. Cả Jest lẫn Vitest đều in được thời gian từng file (--reporter=verbose, Jest có --detectOpenHandles để tìm handle treo). Thường 10% số test chiếm phần lớn thời gian."
+      ],
+      "details": [
+        "Các hướng cắt, theo thứ tự hiệu quả:",
+        "1. Bỏ chờ thật. Mọi sleep, waitForTimeout(3000), polling trong test → fake timers hoặc chờ theo điều kiện (waitFor) thay vì chờ theo giây.\n2. Đổi tầng test. Nhiều nhóm test qua E2E những thứ đáng lẽ test ở tầng logic. Một kịch bản E2E vài chục giây có thể thay bằng vài test hàm chạy mili giây; giữ E2E cho vài luồng quan trọng nhất.\n3. Chạy song song. Vitest/Jest mặc định chạy song song theo file — điều kiện là test phải độc lập dữ liệu. Nếu đang phải --runInBand vì dùng chung DB thì gốc vấn đề là cách ly dữ liệu, sửa chỗ đó.\n4. Tách pipeline. Test nhanh (unit) chạy mọi commit; test chậm (integration, E2E) chạy khi mở PR hoặc trước khi deploy. Lập trình viên nhận phản hồi trong 1-2 phút.\n5. Dựng môi trường một lần. DB container, migration, seed nên chạy một lần cho cả suite thay vì mỗi file.",
+        "Ngưỡng nên nhắm: bộ test nhanh dưới ~2 phút. Quá đó là người ta sẽ bắt đầu push mà không chạy."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "98709-bo-test-chay-20-phut-moi-lan-push-ca-nhom-bat-dau-bo-qua-ban-rut-ngan-bang-cach"
+  },
+  {
+    "id": "76f2c43b-1a76-5655-a9f8-854f2afbebb8",
+    "question": "Component gọi API khi mount rồi render danh sách. Bạn test luồng loading → dữ liệu → rỗng như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98754-component-goi-api-khi-mount-roi-render-danh-sach-ban-test-luong-loading-du-lieu",
+    "slug": "component-goi-api-khi-mount-roi-render-danh-sach-ban-test-luong-loading-du-lieu-rong-nhu-the-nao-76f2c43b-1a76-5655-a9f8-854f2afbebb8",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Quy tắc chọn query trong luồng async:\n- getBy cho thứ có ngay lập tức (skeleton, tiêu đề tĩnh).\n- findBy cho thứ xuất hiện sau khi request resolve — nó là waitFor + getBy gói sẵn, có await.\n- queryBy chỉ dùng khi assert không tồn tại, vì getBy sẽ ném lỗi ngay."
+      ],
+      "details": [
+        "Hai case nữa nên có: rỗng (API trả mảng trống → hiện empty state) và lỗi (API trả 500 → hiện thông báo lỗi + nút thử lại). Đa số bug production nằm ở hai nhánh này chứ không phải happy path.",
+        "Đừng assert vào việc fetch được gọi bao nhiêu lần trừ khi đó là hợp đồng thật (vd chống gọi trùng) — đó là chi tiết cài đặt, refactor sang React Query là gãy."
+      ],
+      "points": [],
+      "sections": [
+        "Chặn ở tầng network (MSW hoặc mock fetch), rồi assert theo những gì người dùng thấy ở từng giai đoạn."
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "it(\"renders the list after loading\", async () => {\n  render(<UserList />)\n\n  // 1. loading state is visible synchronously\n  expect(screen.getByRole(\"status\")).toBeInTheDocument()\n\n  // 2. data arrives: findBy retries until the element exists\n  expect(await screen.findByRole(\"listitem\", { name: /dinh/i })).toBeInTheDocument()\n\n  // 3. loading indicator is gone\n  expect(screen.queryByRole(\"status\")).not.toBeInTheDocument()\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "98754-component-goi-api-khi-mount-roi-render-danh-sach-ban-test-luong-loading-du-lieu"
+  },
+  {
+    "id": "6d39f8bb-02d2-569c-b355-a9c80a217196",
+    "question": "Thiết lập MSW cho test suite thế nào? Làm sao giả lập lỗi 500 hoặc mất mạng cho riêng một test?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98755-thiet-lap-msw-cho-test-suite-the-nao-lam-sao-gia-lap-loi-500-hoac-mat-mang-cho-r",
+    "slug": "thiet-lap-msw-cho-test-suite-the-nao-lam-sao-gia-lap-loi-500-hoac-mat-mang-cho-rieng-mot-test-6d39f8bb-02d2-569c-b355-a9c80a217196",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "MSW chặn request ở tầng network (Service Worker trên browser, interceptor trên Node), nên code ứng dụng không biết mình đang bị mock — không cần sửa fetch hay axios instance.",
+        "onUnhandledRequest: \"error\""
+      ],
+      "details": [
+        "Setup dùng chung cho cả suite:",
+        "Giả lập lỗi cho một test bằng server.use(...) — handler này bị resetHandlers() dọn sau mỗi test nên không rò rỉ:"
+      ],
+      "points": [],
+      "sections": [
+        "Dùng chung một bộ handler cho unit test, Storybook và dev server giúp dữ liệu giả không bị lệch giữa các môi trường."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "// src/test/server.ts\nimport { setupServer } from \"msw/node\"\nimport { http, HttpResponse } from \"msw\"\n\nexport const handlers = [\n  http.get(\"/api/users\", () => HttpResponse.json([{ id: 1, name: \"Dinh\" }])),\n]\nexport const server = setupServer(...handlers)\n\n// setup file\nbeforeAll(() => server.listen({ onUnhandledRequest: \"error\" }))\nafterEach(() => server.resetHandlers())   // undo per-test overrides\nafterAll(() => server.close())"
+        },
+        {
+          "language": "TS",
+          "code": "it(\"shows an error message when the API fails\", async () => {\n  server.use(http.get(\"/api/users\", () => new HttpResponse(null, { status: 500 })))\n  render(<UserList />)\n  expect(await screen.findByText(/something went wrong/i)).toBeInTheDocument()\n})\n\n// network failure instead of an HTTP error\nserver.use(http.get(\"/api/users\", () => HttpResponse.error()))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": "98755-thiet-lap-msw-cho-test-suite-the-nao-lam-sao-gia-lap-loi-500-hoac-mat-mang-cho-r"
+  },
+  {
+    "id": "b6906464-5640-56ad-a0ff-57634fc7d873",
+    "question": "waitFor dùng sai ở những chỗ nào? Khi nào dùng findBy, khi nào waitForElementToBeRemoved?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98756-waitfor-dung-sai-o-nhung-cho-nao-khi-nao-dung-findby-khi-nao-waitforelementtober",
+    "slug": "waitfor-dung-sai-o-nhung-cho-nao-khi-nao-dung-findby-khi-nao-waitforelementtoberemoved-b6906464-5640-56ad-a0ff-57634fc7d873",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "waitFor chạy lại callback theo chu kỳ (mặc định 50ms) cho tới khi không ném lỗi, hoặc hết timeout (mặc định 1000ms). Ba lỗi hay gặp:",
+        "await user.click(...)",
+        "fireEvent",
+        "2. Đặt side effect trong callback."
+      ],
+      "details": [
+        "1. Nhồi nhiều assertion vào một waitFor. Assertion đầu fail thì các assertion sau không chạy; khi test fail bạn chỉ thấy lỗi đầu tiên và mất tới 1s mỗi lần retry.",
+        "3. Dùng waitFor với assertion phủ định. await waitFor(() => expect(screen.queryByText(\"x\")).toBeNull()) pass ngay lập tức nếu element chưa kịp xuất hiện. Muốn chờ nó biến mất thì dùng waitForElementToBeRemoved(element) — hàm này bắt buộc element phải tồn tại lúc đầu, nếu không nó ném lỗi.",
+        "Chọn API:\n- Chờ element xuất hiện → findBy* (đã là waitFor + getBy).\n- Chờ element biến mất → waitForElementToBeRemoved.\n- Chờ thứ không phải DOM (mock được gọi, URL đổi) → waitFor với đúng một assertion."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "// avoid\nawait waitFor(() => {\n  expect(screen.getByText(\"Saved\")).toBeInTheDocument()\n  expect(onSave).toHaveBeenCalledTimes(1)\n})\n\n// prefer: wait for one thing, then assert the rest synchronously\nexpect(await screen.findByText(\"Saved\")).toBeInTheDocument()\nexpect(onSave).toHaveBeenCalledTimes(1)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "98756-waitfor-dung-sai-o-nhung-cho-nao-khi-nao-dung-findby-khi-nao-waitforelementtober"
+  },
+  {
+    "id": "ab2df123-66cd-596a-8918-b49aca8a7578",
+    "question": "Test một custom hook (vd useDebouncedValue, useCart) như thế nào khi hook không render UI?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98757-test-mot-custom-hook-vd-usedebouncedvalue-usecart-nhu-the-nao-khi-hook-khong-ren",
+    "slug": "test-mot-custom-hook-vd-usedebouncedvalue-usecart-nhu-the-nao-khi-hook-khong-render-ui-ab2df123-66cd-596a-8918-b49aca8a7578",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ba điểm hay sai:\n- result.current là snapshot. Không destructure ra biến (const { count } = result.current) rồi assert sau khi update — biến đó vẫn giữ giá trị cũ. Luôn đọc lại qua result.current.\n- Mọi thứ làm state đổi phải bọc act, nếu không React cảnh báo và DOM chưa kịp cập nhật. Với update async thì await waitFor(() => expect(result.current.data).toBeDefined()).\n- Hook cần provider thì truyền wrapper: renderHook(() => useCart(), { wrapper: CartProvider }). Đổi input thì dùng rerender(newProps) từ giá trị trả về."
+      ],
+      "details": [
+        "Nếu hook chỉ được dùng bởi một component và không phải API công khai, test qua chính component đó thường có giá trị hơn: nó kiểm tra luôn phần nối dây. renderHook hợp lý cho hook dùng lại nhiều nơi hoặc logic phức tạp (debounce, pagination, form state)."
+      ],
+      "points": [],
+      "sections": [
+        "Dùng renderHook của React Testing Library — nó render một component rỗng chỉ để gọi hook, trả về result.current là giá trị hook trả ra."
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "it(\"increments the counter\", () => {\n  const { result } = renderHook(() => useCounter(0))\n\n  expect(result.current.count).toBe(0)\n\n  act(() => result.current.increment())   // state updates must be wrapped\n\n  expect(result.current.count).toBe(1)\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "98757-test-mot-custom-hook-vd-usedebouncedvalue-usecart-nhu-the-nao-khi-hook-khong-ren"
+  },
+  {
+    "id": "6fb6f6ca-35a6-53d5-836b-ca8a79619735",
+    "question": "Component phụ thuộc Context, Router và React Query. Test nó thế nào cho gọn, không phải wrap tay ở từng test?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98758-component-phu-thuoc-context-router-va-react-query-test-no-the-nao-cho-gon-khong",
+    "slug": "component-phu-thuoc-context-router-va-react-query-test-no-the-nao-cho-gon-khong-phai-wrap-tay-o-tung-6fb6f6ca-35a6-53d5-836b-ca8a79619735",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ba chi tiết quyết định test có ổn định hay không:\n- retry: false cho React Query. Mặc định client retry 3 lần với backoff, nên test case lỗi sẽ chờ rất lâu rồi timeout.\n- QueryClient mới cho mỗi test. Dùng chung một instance làm cache rò rỉ giữa các test, test chạy riêng thì pass mà chạy cả suite thì fail.\n- MemoryRouter + initialEntries để set URL đầu vào; muốn assert điều hướng thì render một route đích rồi kiểm tra nội dung của nó."
+      ],
+      "details": [
+        "Khi cần cấu hình khác (user đã đăng nhập, locale en), cho renderWithProviders nhận thêm option thay vì tạo bản sao wrapper mới cho từng file."
+      ],
+      "points": [],
+      "sections": [
+        "Tạo một custom render bọc sẵn mọi provider rồi re-export thay cho render của RTL."
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "// src/test/render.tsx\nfunction AllProviders({ children }: { children: ReactNode }) {\n  const queryClient = new QueryClient({\n    defaultOptions: { queries: { retry: false, gcTime: 0 } },\n  })\n  return (\n    <MemoryRouter initialEntries={[\"/\"]}>\n      <QueryClientProvider client={queryClient}>\n        <ThemeProvider>{children}</ThemeProvider>\n      </QueryClientProvider>\n    </MemoryRouter>\n  )\n}\n\nexport function renderWithProviders(ui: ReactElement, options?: RenderOptions) {\n  return render(ui, { wrapper: AllProviders, ...options })\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": "98758-component-phu-thuoc-context-router-va-react-query-test-no-the-nao-cho-gon-khong"
+  },
+  {
+    "id": "afe6fc74-f692-538e-b15b-7f9e514bdf94",
+    "question": "vi.mock/jest.mock bị hoisting như thế nào? Vì sao dùng biến khai báo bên ngoài trong factory lại lỗi Cannot access ... before initialization?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98759-vi-mock-jest-mock-bi-hoisting-nhu-the-nao-vi-sao-dung-bien-khai-bao-ben-ngoai-tr",
+    "slug": "vi-mock-jest-mock-bi-hoisting-nhu-the-nao-vi-sao-dung-bien-khai-bao-ben-ngoai-trong-factory-lai-loi-afe6fc74-f692-538e-b15b-7f9e514bdf94",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "vi.mock (và jest.mock) được hoist lên đầu file, chạy trước mọi import và mọi khai báo biến.",
+        "Với Jest, quy ước là đặt tên biến bắt đầu bằng mock (mockFetchUser) — Babel plugin cho phép biến theo tiền tố đó lọt qua kiểm tra hoisting; hoặc dùng jest.mock với factory tự tạo jest.fn() bên trong."
+      ],
+      "details": [
+        "Đó là điều kiện bắt buộc để module thật không kịp được nạp.",
+        "Lưu ý thêm: vi.mock chỉ áp cho module path đúng như lúc import, và mock được đăng ký theo file test. Nhớ vi.resetAllMocks() (hoặc restoreMocks: true trong config) giữa các test để implementation không rò rỉ."
+      ],
+      "points": [],
+      "sections": [
+        "Hai cách sửa:"
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const mockFetchUser = vi.fn()          // runs AFTER the vi.mock below\n\nvi.mock(\"@/api/user\", () => ({\n  fetchUser: mockFetchUser,            // ReferenceError: Cannot access before initialization\n}))"
+        },
+        {
+          "language": "TS",
+          "code": "// 1. vi.hoisted: declare the variable in the hoisted scope\nconst { mockFetchUser } = vi.hoisted(() => ({ mockFetchUser: vi.fn() }))\nvi.mock(\"@/api/user\", () => ({ fetchUser: mockFetchUser }))\n\n// 2. create the mock inside the factory, grab it later\nvi.mock(\"@/api/user\", () => ({ fetchUser: vi.fn() }))\nimport { fetchUser } from \"@/api/user\"\nvi.mocked(fetchUser).mockResolvedValue({ id: 1 })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": "98759-vi-mock-jest-mock-bi-hoisting-nhu-the-nao-vi-sao-dung-bien-khai-bao-ben-ngoai-tr"
+  },
+  {
+    "id": "140a8cc8-29fd-58fe-825a-7bc482097daf",
+    "question": "Test ô search có debounce 300ms thế nào? Vì sao dùng fake timer chung với user-event hay bị treo?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98760-test-o-search-co-debounce-300ms-the-nao-vi-sao-dung-fake-timer-chung-voi-user-ev",
+    "slug": "test-o-search-co-debounce-300ms-the-nao-vi-sao-dung-fake-timer-chung-voi-user-event-hay-bi-treo-140a8cc8-29fd-58fe-825a-7bc482097daf",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì sao hay treo: user-event v14 tự chèn delay giữa các phím bằng setTimeout. Khi fake timer đang bật mà không ai đẩy đồng hồ, timer đó không bao giờ chạy → await user.type(...) treo tới khi test timeout. Truyền advanceTimers cho setup() để nó tự đẩy."
+      ],
+      "details": [
+        "Các điểm khác cần nhớ:\n- Bọc advanceTimersByTime trong act khi việc đẩy thời gian gây setState, nếu không React cảnh báo và DOM chưa cập nhật.\n- Luôn useRealTimers() ở afterEach, nếu không fake clock rò sang test sau.\n- Jest tương đương: jest.useFakeTimers() + jest.advanceTimersByTime(300); muốn chạy hết mọi timer đang chờ thì runAllTimers, nhưng với code có setInterval thì runAllTimers sẽ lặp vô hạn — dùng advanceTimersByTime cho an toàn."
+      ],
+      "points": [],
+      "sections": [
+        "Không dùng setTimeout thật để chờ — dùng fake timer và tự đẩy đồng hồ."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "beforeEach(() => vi.useFakeTimers())\nafterEach(() => vi.useRealTimers())\n\nit(\"calls the API once after the user stops typing\", async () => {\n  // user-event must share the fake clock, otherwise it hangs\n  const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime })\n  render(<SearchBox onSearch={onSearch} />)\n\n  await user.type(screen.getByRole(\"searchbox\"), \"react\")\n  expect(onSearch).not.toHaveBeenCalled()\n\n  await act(async () => { vi.advanceTimersByTime(300) })\n  expect(onSearch).toHaveBeenCalledTimes(1)\n  expect(onSearch).toHaveBeenCalledWith(\"react\")\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": "98760-test-o-search-co-debounce-300ms-the-nao-vi-sao-dung-fake-timer-chung-voi-user-ev"
+  },
+  {
+    "id": "d56f2a7e-c1b9-5cc0-957a-ffbb61dd082e",
+    "question": "Integration test cần một database. Bạn dùng SQLite in-memory, một DB staging dùng chung, hay Testcontainers?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98804-integration-test-can-mot-database-ban-dung-sqlite-in-memory-mot-db-staging-dung",
+    "slug": "integration-test-can-mot-database-ban-dung-sqlite-in-memory-mot-db-staging-dung-chung-hay-testcontai-d56f2a7e-c1b9-5cc0-957a-ffbb61dd082e",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì sao không chọn hai phương án kia:\n- SQLite in-memory nhanh nhưng khác dialect: không có jsonb, kiểu ràng buộc khác, hành vi transaction và index khác. Test xanh nhưng câu SQL thật vẫn có thể sai cú pháp hoặc sai ngữ nghĩa ở Postgres. Đây là dạng \"test đúng thứ không phải cái chạy ở production\".\n- DB staging dùng chung gây xung đột: hai người chạy test cùng lúc là dữ liệu đè nhau, CI không chạy song song được, và không ai dám truncate bảng."
+      ],
+      "details": [
+        "Điểm cần lưu ý khi trả lời: yêu cầu Docker phải có ở máy dev và trên CI runner (GitHub Actions runner Linux có sẵn); chi phí là thời gian khởi động container — giảm bằng cách tái sử dụng một container cho cả suite thay vì mỗi file test một container, và chỉ chạy nhóm integration test này ở job riêng trong pipeline."
+      ],
+      "points": [],
+      "sections": [
+        "Chọn Testcontainers: mỗi lần chạy test, thư viện khởi động một container Postgres/MySQL/Redis thật qua Docker, cấp cổng ngẫu nhiên, chạy migration rồi dọn container khi xong."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const container = await new PostgreSqlContainer('postgres:16').start()\nprocess.env.DATABASE_URL = container.getConnectionUri()\nawait runMigrations()\n// ... tests ...\nawait container.stop()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": "98804-integration-test-can-mot-database-ban-dung-sqlite-in-memory-mot-db-staging-dung"
+  },
+  {
+    "id": "96173360-4c86-560a-a074-54c94d2eac5e",
+    "question": "Cho test chạy song song để nhanh hơn thì chúng đụng dữ liệu của nhau. Cô lập bằng transaction rollback, truncate, hay schema riêng mỗi worker?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98805-cho-test-chay-song-song-de-nhanh-hon-thi-chung-dung-du-lieu-cua-nhau-co-lap-bang",
+    "slug": "cho-test-chay-song-song-de-nhanh-hon-thi-chung-dung-du-lieu-cua-nhau-co-lap-bang-transaction-rollbac-96173360-4c86-560a-a074-54c94d2eac5e",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ba cách, đánh đổi khác nhau:",
+        "Giới hạn: code dưới test phải dùng đúng connection đó, nên hỏng ngay khi app tự mở transaction riêng, dùng connection pool, hoặc test đi qua HTTP tới một process khác. Không kiểm chứng được commit thật (trigger, deferred constraint).",
+        "rollback"
+      ],
+      "details": [
+        "1. Transaction rollback mỗi test — mở transaction trước test, ROLLBACK sau test. Nhanh nhất, không cần dọn tay.",
+        "2. Truncate giữa các test — TRUNCATE ... RESTART IDENTITY CASCADE các bảng nghiệp vụ, giữ lại bảng tham chiếu. Đúng với mọi kiến trúc vì dữ liệu được commit thật, nhưng chậm hơn và không cô lập được khi chạy song song trên cùng một database.",
+        "Điều phải tránh là dựa vào thứ tự test hay vào dữ liệu do test trước để lại — đó là nguồn của test flaky khó tìm nhất.",
+        "3. Schema (hoặc database) riêng mỗi worker — cách duy nhất thực sự chạy song song an toàn. Test runner cấp WORKER_ID, mỗi worker trỏ vào schema riêng đã migrate sẵn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "beforeEach(() => db.query('BEGIN'))\nafterEach(() => db.query('ROLLBACK'))"
+        },
+        {
+          "language": "JS",
+          "code": "const schema = `test_${process.env.VITEST_WORKER_ID}`"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": "98805-cho-test-chay-song-song-de-nhanh-hon-thi-chung-dung-du-lieu-cua-nhau-co-lap-bang"
+  },
+  {
+    "id": "6208a144-3ae8-5af2-b0e1-1909befde617",
+    "question": "Có nên lấy bản sao dữ liệu production về làm dữ liệu test không? Nếu không thì seed dữ liệu thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98806-co-nen-lay-ban-sao-du-lieu-production-ve-lam-du-lieu-test-khong-neu-khong-thi-se",
+    "slug": "co-nen-lay-ban-sao-du-lieu-production-ve-lam-du-lieu-test-khong-neu-khong-thi-seed-du-lieu-the-nao-6208a144-3ae8-5af2-b0e1-1909befde617",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không copy nguyên bản. Dữ liệu production chứa thông tin cá nhân (email, số điện thoại, địa chỉ, lịch sử thanh toán); đưa nó xuống môi trường có quyền truy cập rộng hơn là rủi ro lộ dữ liệu và vi phạm cam kết với người dùng. Ngoài ra bản dump lớn làm test chậm và không tái lập được — hôm nay chạy khác hôm qua.",
+        "Điều nên tránh: một file seed khổng lồ dùng chung cho toàn bộ suite. Nó tạo ràng buộc ngầm giữa các test, sửa một dòng seed làm đỏ chục test không liên quan, và khi đọc test không ai biết dữ liệu đầu vào thực sự là gì."
+      ],
+      "details": [
+        "Cách làm thay thế, dùng kết hợp:"
+      ],
+      "points": [
+        "Builder/factory sinh dữ liệu tối thiểu cho từng test. Mỗi test tự tạo đúng thứ nó cần, phần còn lại lấy giá trị mặc định. Test đọc được là hiểu ngay điều kiện đầu vào.",
+        "Seed cố định chỉ cho dữ liệu tham chiếu: danh mục tỉnh thành, loại sản phẩm, cấu hình thuế. Loại này ít thay đổi và mọi test đều cần.",
+        "Khi cần dữ liệu giống thật về quy mô (đo hiệu năng, kiểm tra index): sinh khối lượng lớn bằng script, hoặc dùng bản dump đã ẩn danh — thay email/tên/số điện thoại bằng giá trị giả, giữ nguyên phân bố và quan hệ khoá ngoại."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const order = await makeOrder({ status: 'pending', total: 250_000 })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": "98806-co-nen-lay-ban-sao-du-lieu-production-ve-lam-du-lieu-test-khong-neu-khong-thi-se"
+  },
+  {
+    "id": "7258e929-fb8d-590d-b5c8-fb288edb3cc9",
+    "question": "Code của bạn gọi API bên thứ ba (cổng thanh toán, gửi SMS). Test thế nào — mock, sandbox, hay ghi lại phản hồi thật?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98807-code-cua-ban-goi-api-ben-thu-ba-cong-thanh-toan-gui-sms-test-the-nao-mock-sandbo",
+    "slug": "code-cua-ban-goi-api-ben-thu-ba-cong-thanh-toan-gui-sms-test-the-nao-mock-sandbox-hay-ghi-lai-phan-h-7258e929-fb8d-590d-b5c8-fb288edb3cc9",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ba mức, dùng cả ba ở các tầng khác nhau chứ không chọn một:",
+        "2. HTTP-level stub cho tầng adapter. Chặn ở lớp HTTP (msw, WireMock) và trả về payload thật đã lưu lại. Cách này kiểm được phần hay sai nhất: parse JSON, đọc header chữ ký, ánh xạ mã lỗi của họ sang mã lỗi của mình."
+      ],
+      "details": [
+        "1. Test double ở tầng service (đa số case). Đưa client bên thứ ba ra sau một interface của mình, test tiêm bản giả. Ở đây kiểm những thứ thuộc về mình: gọi có đúng tham số không, gặp lỗi 500 thì retry hay đánh dấu thất bại, timeout thì đơn hàng ở trạng thái gì.",
+        "3. Sandbox của nhà cung cấp — chạy riêng, không nằm trong CI mỗi commit. Đây là nơi duy nhất phát hiện việc họ đổi API. Chạy theo lịch (hằng đêm) và cho phép đỏ mà không chặn merge, vì sandbox có thể sập vì lý do ngoài tầm kiểm soát.",
+        "Điều then chốt: webhook cũng phải test. Nhiều cổng thanh toán trả kết quả qua webhook chứ không qua response — cần test riêng cho handler đó: chữ ký sai thì từ chối, cùng một webhook gửi hai lần không được cộng tiền hai lần.",
+        "Record/replay (ghi lần đầu bằng dịch vụ thật, các lần sau phát lại từ file) là điểm trung gian tiện lợi, nhưng phải nhớ hai điều: xoá thông tin nhạy cảm (token, số thẻ) trước khi commit file ghi, và định kỳ ghi lại vì bản ghi cũ sẽ lệch dần so với API thật."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const gateway = { charge: vi.fn().mockRejectedValue(new TimeoutError()) }\nawait expect(checkout(order, gateway)).resolves.toMatchObject({ status: 'pending_verify' })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": "98807-code-cua-ban-goi-api-ben-thu-ba-cong-thanh-toan-gui-sms-test-the-nao-mock-sandbo"
+  },
+  {
+    "id": "fc6c2379-6a60-5861-ae71-6dcce061d0dd",
+    "question": "Một consumer đọc message từ queue (Kafka/RabbitMQ/SQS) thì test những gì và test ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98808-mot-consumer-doc-message-tu-queue-kafka-rabbitmq-sqs-thi-test-nhung-gi-va-test-r",
+    "slug": "mot-consumer-doc-message-tu-queue-kafka-rabbitmq-sqs-thi-test-nhung-gi-va-test-ra-sao-fc6c2379-6a60-5861-ae71-6dcce061d0dd",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tách làm hai tầng.",
+        "Tầng tích hợp (ít test, chạy chậm hơn): dựng broker thật bằng Testcontainers, publish một message, chờ tới khi hệ quả xuất hiện. Ở đây kiểm những thứ chỉ broker thật mới lộ: serialize/deserialize, cấu hình consumer group, ack/nack, định tuyến sang DLQ."
+      ],
+      "details": [
+        "Tầng thuần logic (phần lớn test): hàm xử lý nhận vào một message đã parse và trả về kết quả, không tự kết nối broker. Test ở đây nhanh và bao được các case quan trọng:\n- Message hợp lệ → tạo đúng bản ghi, phát đúng sự kiện tiếp theo.\n- Idempotency: cùng một message xử lý hai lần chỉ có tác dụng một lần. Đây là case bắt buộc vì broker đảm bảo at-least-once, message lặp là chuyện bình thường chứ không phải bất thường.\n- Message hỏng: thiếu field, sai kiểu, phiên bản schema cũ → không được ném lỗi vô hạn khiến consumer kẹt; phải đẩy sang dead-letter queue.\n- Lỗi tạm thời (DB mất kết nối) → không ack, để message quay lại và retry.",
+        "Lưu ý về flaky: xử lý là bất đồng bộ, nên đừng dùng sleep cố định. Dùng vòng lặp chờ có timeout (\"poll cho tới khi bản ghi xuất hiện, tối đa 5 giây\") — vừa nhanh hơn khi máy khoẻ, vừa không đỏ ngẫu nhiên khi CI chậm."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "await handleOrderPaid(msg)\nawait handleOrderPaid(msg)   // duplicate delivery\nexpect(await countPayments(msg.orderId)).toBe(1)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": "98808-mot-consumer-doc-message-tu-queue-kafka-rabbitmq-sqs-thi-test-nhung-gi-va-test-r"
+  },
+  {
+    "id": "a6e0bed8-bd9d-52c0-aa4b-e289c7ed1e51",
+    "question": "Được giao \"load test cái API này\" bằng k6. Bạn đo những chỉ số nào và kết luận thế nào là đạt?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98809-duoc-giao-load-test-cai-api-nay-bang-k6-ban-do-nhung-chi-so-nao-va-ket-luan-the",
+    "slug": "duoc-giao-load-test-cai-api-nay-bang-k6-ban-do-nhung-chi-so-nao-va-ket-luan-the-nao-la-dat-a6e0bed8-bd9d-52c0-aa4b-e289c7ed1e51",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Trước khi chạy phải có tiêu chí đạt bằng số, nếu không thì kết quả chỉ là một đống biểu đồ. Tiêu chí gồm ba phần: mức tải (bao nhiêu người dùng đồng thời hoặc bao nhiêu request/giây), ngưỡng độ trễ, ngưỡng tỉ lệ lỗi.",
+        "Mấy điểm hay bị hỏi thêm:\n- Đo cả phía server, không chỉ phía client: CPU, số connection DB đang dùng, thời gian query chậm. Kết quả cần chỉ ra nút thắt ở đâu, chứ không chỉ nói \"chậm\".\n- Warm-up: bỏ qua giai đoạn đầu (JIT, cache lạnh, pool chưa mở đủ) khỏi phần đánh giá.\n- Đừng load test trên môi trường khác cấu hình production rồi suy ra kết luận; và tuyệt đối không bắn tải vào API bên thứ ba."
+      ],
+      "details": [
+        "Chỉ số cần đọc trong k6:\n- http_req_duration theo percentile p95/p99, không phải trung bình. Trung bình che mất phần đuôi: p95 3 giây vẫn có thể cho ra trung bình 300ms.\n- http_req_failed — tỉ lệ request lỗi. Độ trễ đẹp mà 20% request lỗi thì kết quả vô nghĩa.\n- Throughput thực tế đạt được (số request hoàn tất mỗi giây) so với mức mình định bắn — nếu thấp hơn nhiều thì hệ thống đã bão hoà.",
+        "k6 diễn đạt tiêu chí bằng thresholds, và test tự fail khi vượt ngưỡng:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "export const options = {\n  vus: 50,\n  duration: '2m',\n  thresholds: {\n    http_req_duration: ['p(95)<400'],\n    http_req_failed: ['rate<0.01'],\n  },\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": "98809-duoc-giao-load-test-cai-api-nay-bang-k6-ban-do-nhung-chi-so-nao-va-ket-luan-the"
+  },
+  {
+    "id": "90c332d4-1bcc-56b1-b61b-8b120df66445",
+    "question": "Sắp release, không đủ thời gian chạy lại toàn bộ test. Bạn chọn chạy lại những gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98810-sap-release-khong-du-thoi-gian-chay-lai-toan-bo-test-ban-chon-chay-lai-nhung-gi",
+    "slug": "sap-release-khong-du-thoi-gian-chay-lai-toan-bo-test-ban-chon-chay-lai-nhung-gi-90c332d4-1bcc-56b1-b61b-8b120df66445",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Chọn theo rủi ro, không chọn theo cảm tính hay theo thứ tự bảng test case."
+      ],
+      "details": [
+        "Thứ tự ưu tiên:\n1. Luồng sinh tiền và luồng chặn người dùng: đăng nhập, thanh toán, đặt hàng, gửi thông báo giao dịch. Hỏng ở đây là dừng kinh doanh, bất kể release có động vào hay không.\n2. Vùng bị thay đổi trong release này: đọc diff, liệt kê module bị chạm và module gọi vào nó. Phần này gồm cả các endpoint dùng chung một service vừa sửa.\n3. Vùng từng hỏng nhiều lần: tra lịch sử bug, chỗ nào tái phát nhiều thì test lại chỗ đó.\n4. Nơi giao nhau với thay đổi hạ tầng: đổi phiên bản thư viện, đổi cấu hình, có migration DB.",
+        "Cách làm cho lần sau đỡ căng: gắn nhãn cho test (@smoke, @critical) để chạy được từng nhóm; giữ một bộ smoke ngắn (5-10 phút) luôn chạy trước mỗi release; đẩy phần regression đầy đủ vào job chạy hằng đêm thay vì cố nhét vào cửa sổ release.",
+        "Cần nói thêm hai điều khi trả lời: kiểm tra sau khi deploy cũng là một phần của regression — chạy smoke trên production ngay sau khi lên, theo dõi tỉ lệ lỗi và độ trễ vài chục phút đầu. Và phải có đường lùi: biết cách rollback nhanh thì việc cắt bớt phạm vi test trước release mới là quyết định chấp nhận được."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": "98810-sap-release-khong-du-thoi-gian-chay-lai-toan-bo-test-ban-chon-chay-lai-nhung-gi"
+  },
+  {
+    "id": "30b765ed-d9da-50a6-99ee-7f938df1b44a",
+    "question": "Cách xử lý authentication trong Playwright E2E tests?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cach-xu-ly-authentication-trong-playwright-e2e-tests-30b765ed-d9da-50a6-99ee-7f938df1b44a",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": null
+  },
+  {
+    "id": "41913d80-19fb-5dad-a436-807a96ff308f",
+    "question": "Contract testing là gì? Tại sao quan trọng trong microservices?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "contract-testing-la-gi-tai-sao-quan-trong-trong-microservices-41913d80-19fb-5dad-a436-807a96ff308f",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": null
+  },
+  {
+    "id": "95ee1ca7-6d10-564b-aed6-5a3c7119419e",
+    "question": "Test doubles: mock, stub, spy, fake khác nhau như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "test-doubles-mock-stub-spy-fake-khac-nhau-nhu-the-nao-95ee1ca7-6d10-564b-aed6-5a3c7119419e",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": null
+  },
+  {
+    "id": "ca23a42e-0ce0-523c-9b3c-3bb5e5ddc09c",
+    "question": "Test isolation: tại sao quan trọng và cách đảm bảo?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "test-isolation-tai-sao-quan-trong-va-cach-dam-bao-ca23a42e-0ce0-523c-9b3c-3bb5e5ddc09c",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": null
+  },
+  {
+    "id": "d5fb6b97-6dab-531e-8afe-f85392cec56a",
+    "question": "Playwright: cách viết tests bền vững (maintainable E2E tests)?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "playwright-cach-viet-tests-ben-vung-maintainable-e2e-tests-d5fb6b97-6dab-531e-8afe-f85392cec56a",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": null
+  },
+  {
+    "id": "db067a0a-7784-5f71-8fae-a30c1d71f799",
+    "question": "CI thỉnh thoảng đỏ, chạy lại là xanh. Có nên bật auto-retry không? Xử lý thế nào cho đúng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ci-thinh-thoang-do-chay-lai-la-xanh-co-nen-bat-auto-retry-khong-xu-ly-the-nao-cho-dung-db067a0a-7784-5f71-8fae-a30c1d71f799",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": null
+  },
+  {
+    "id": "8e2bd520-9781-5b33-a0c9-d649fd441d62",
+    "question": "Thực tế đi làm bạn có viết TDD không? Khi nào TDD hợp và khi nào không?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "thuc-te-di-lam-ban-co-viet-tdd-khong-khi-nao-tdd-hop-va-khi-nao-khong-8e2bd520-9781-5b33-a0c9-d649fd441d62",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": null
+  },
+  {
+    "id": "d1a961cb-8c4f-5049-b5a8-3cb01f6632c6",
+    "question": "Cần refactor một module cũ không có test nào. Làm sao có lưới an toàn trước khi động vào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "can-refactor-mot-module-cu-khong-co-test-nao-lam-sao-co-luoi-an-toan-truoc-khi-dong-vao-d1a961cb-8c4f-5049-b5a8-3cb01f6632c6",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": null
+  },
+  {
+    "id": "97763f53-aae0-5472-bb1a-ad73967b4b5d",
+    "question": "getByRole(\"button\", { name: \"Luu\" }) không tìm thấy nút dù nút hiển thị rõ trên màn hình. Bạn debug theo hướng nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "getbyrole-button-name-luu-khong-tim-thay-nut-du-nut-hien-thi-ro-tren-man-hinh-ban-debug-theo-huong-n-97763f53-aae0-5472-bb1a-ad73967b4b5d",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 76,
+    "sourceSlug": null
+  },
+  {
+    "id": "c19e411e-6d99-541e-879d-d5f2b360f1e1",
+    "question": "Dự án có 200 file snapshot, mỗi PR đều chạy -u rồi commit đè. Vấn đề nằm ở đâu và thay bằng gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "du-an-co-200-file-snapshot-moi-pr-deu-chay-u-roi-commit-de-van-de-nam-o-dau-va-thay-bang-gi-c19e411e-6d99-541e-879d-d5f2b360f1e1",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 77,
+    "sourceSlug": null
+  },
+  {
+    "id": "ad0815a1-e515-54d1-919a-fac8bf0cbd2e",
+    "question": "Team đang dùng Cypress, có nên chuyển sang Playwright không? Bạn đánh giá theo tiêu chí nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "team-dang-dung-cypress-co-nen-chuyen-sang-playwright-khong-ban-danh-gia-theo-tieu-chi-nao-ad0815a1-e515-54d1-919a-fac8bf0cbd2e",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 78,
+    "sourceSlug": null
+  },
+  {
+    "id": "88016e34-cffb-55ee-bef7-e74a8b730d6e",
+    "question": "E2E hay fail ngẫu nhiên ở bước điền form rồi chờ API. Vì sao waitForTimeout/sleep là cách sai, và selector nên chọn thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "e2e-hay-fail-ngau-nhien-o-buoc-dien-form-roi-cho-api-vi-sao-waitfortimeout-sleep-la-cach-sai-va-sele-88016e34-cffb-55ee-bef7-e74a8b730d6e",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 79,
+    "sourceSlug": null
+  },
+  {
+    "id": "e0015f2d-c039-50b6-bbd3-181102674e77",
+    "question": "Suite e2e chạy 25 phút trên CI và thỉnh thoảng đỏ không rõ lý do. Bạn cấu hình chạy song song, retry và thu thập bằng chứng ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "suite-e2e-chay-25-phut-tren-ci-va-thinh-thoang-do-khong-ro-ly-do-ban-cau-hinh-chay-song-song-retry-v-e0015f2d-c039-50b6-bbd3-181102674e77",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 80,
+    "sourceSlug": null
+  },
+  {
+    "id": "45a455e5-65ed-5039-9038-4ad4d7802f35",
+    "question": "Hai service gọi nhau qua HTTP. Không muốn dựng cả hệ thống để test tích hợp thì contract test (Pact) giải quyết thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "hai-service-goi-nhau-qua-http-khong-muon-dung-ca-he-thong-de-test-tich-hop-thi-contract-test-pact-gi-45a455e5-65ed-5039-9038-4ad4d7802f35",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 81,
+    "sourceSlug": null
+  },
+  {
+    "id": "2d25e090-34f0-56e9-aa48-acfd863c4ea0",
+    "question": "Migration database có cần test không? Test kiểu gì cho một migration đổi cột đang được dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "migration-database-co-can-test-khong-test-kieu-gi-cho-mot-migration-doi-cot-dang-duoc-dung-2d25e090-34f0-56e9-aa48-acfd863c4ea0",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 82,
+    "sourceSlug": null
+  },
+  {
+    "id": "bd74eb4c-604a-5f3d-9400-9cc2c1f9777c",
+    "question": "Một job chạy theo lịch (cron) tính doanh thu cuối ngày. Test nó thế nào cho đúng, kể cả chuyện múi giờ?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mot-job-chay-theo-lich-cron-tinh-doanh-thu-cuoi-ngay-test-no-the-nao-cho-dung-ke-ca-chuyen-mui-gio-bd74eb4c-604a-5f3d-9400-9cc2c1f9777c",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 83,
+    "sourceSlug": null
+  },
+  {
+    "id": "cfef6941-4cbc-59f3-ad01-fa9a1cbd670e",
+    "question": "Ở mức dev, bạn tự kiểm tra bảo mật cho API của mình bằng những test nào trước khi giao cho đội security?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "o-muc-dev-ban-tu-kiem-tra-bao-mat-cho-api-cua-minh-bang-nhung-test-nao-truoc-khi-giao-cho-doi-securi-cfef6941-4cbc-59f3-ad01-fa9a1cbd670e",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 84,
+    "sourceSlug": null
+  },
+  {
+    "id": "9622e789-6f02-5912-b3ca-0d21782cf22c",
+    "question": "Trước ngày release còn 12 bug chưa fix. Bạn quyết định lùi release hay ship kèm known issue dựa trên gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "truoc-ngay-release-con-12-bug-chua-fix-ban-quyet-dinh-lui-release-hay-ship-kem-known-issue-dua-tren-9622e789-6f02-5912-b3ca-0d21782cf22c",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 85,
+    "sourceSlug": null
+  }
+]

@@ -1,0 +1,3103 @@
+[
+  {
+    "id": "4b9b3fdd-7b2c-5a17-8c56-d340a3c63e6a",
+    "question": "Go (Golang) là gì? Tại sao nên học Go?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1001-go-golang-la-gi-tai-sao-nen-hoc-go",
+    "slug": "go-golang-la-gi-tai-sao-nen-hoc-go-4b9b3fdd-7b2c-5a17-8c56-d340a3c63e6a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Go là ngôn ngữ lập trình do Google tạo ra (2009), biên dịch (compiled), statically typed, cú pháp đơn giản."
+      ],
+      "details": [
+        "Ưu điểm: tốc độ gần C/C++, concurrency mạnh (goroutines), binary đơn (không cần runtime), stdlib phong phú, phù hợp cho microservices, cloud tools, APIs."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "1001-go-golang-la-gi-tai-sao-nen-hoc-go"
+  },
+  {
+    "id": "11c90cd7-9889-58ba-97e5-8106af0c3dca",
+    "question": "Khai báo biến trong Go có mấy cách?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1002-khai-bao-bien-trong-go-co-may-cach",
+    "slug": "khai-bao-bien-trong-go-co-may-cach-11c90cd7-9889-58ba-97e5-8106af0c3dca",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "3 cách:"
+      ],
+      "details": [
+        "Go không có let/const như JS."
+      ],
+      "points": [
+        "var name string = \"Go\" (đầy đủ).",
+        "var name = \"Go\" (type inference).",
+        "name := \"Go\" (short declaration, chỉ trong function). := phổ biến nhất. var dùng ở package level hoặc khi cần zero value"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "1002-khai-bao-bien-trong-go-co-may-cach"
+  },
+  {
+    "id": "e3bb3857-97fb-52fa-b326-73087ee5e929",
+    "question": "Go có những kiểu dữ liệu cơ bản nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1003-go-co-nhung-kieu-du-lieu-co-ban-nao",
+    "slug": "go-co-nhung-kieu-du-lieu-co-ban-nao-e3bb3857-97fb-52fa-b326-73087ee5e929",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Go có các nhóm kiểu dữ liệu cơ bản: nhóm số gồm int, int8/16/32/64, float32/64, complex64/128; nhóm văn bản là string (immutable, mã hóa UTF-8); và bool cho giá trị logic true/false. Ngoài ra còn có byte (alias của uint8) dùng cho dữ liệu nhị phân, và rune (alias của int32) đại diện cho một ký tự Unicode."
+      ],
+      "details": [
+        "Mỗi kiểu đều có zero value mặc định khi khai báo mà không gán giá trị: int là 0, string là chuỗi rỗng, bool là false, pointer là nil."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "1003-go-co-nhung-kieu-du-lieu-co-ban-nao"
+  },
+  {
+    "id": "4463b90b-8061-5664-944b-c510029392fb",
+    "question": "Zero value trong Go là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1004-zero-value-trong-go-la-gi",
+    "slug": "zero-value-trong-go-la-gi-4463b90b-8061-5664-944b-c510029392fb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Giá trị mặc định khi khai báo biến không khởi tạo — Go đảm bảo mọi biến đều có giá trị hợp lệ (khác JS/undefined, Python/None). Cụ thể:"
+      ],
+      "details": [
+        "Ý nghĩa: code an toàn hơn, không cần check null/undefined, zero value thường là trạng thái hợp lý (ví dụ: counter bắt đầu từ 0)."
+      ],
+      "points": [
+        "int/float → 0",
+        "string → \"\" (rỗng)",
+        "bool → false"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "1004-zero-value-trong-go-la-gi"
+  },
+  {
+    "id": "b07844d9-6951-5171-972d-aebdbc3e8901",
+    "question": "Hàm (function) trong Go khai báo thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1005-ham-function-trong-go-khai-bao-the-nao",
+    "slug": "ham-function-trong-go-khai-bao-the-nao-b07844d9-6951-5171-972d-aebdbc3e8901",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khai báo hàm cơ bản dùng từ khóa func."
+      ],
+      "details": [
+        "Go hỗ trợ multiple return values và named returns."
+      ],
+      "points": [],
+      "sections": [
+        "Functions là first-class citizens, có thể gán cho biến hoặc truyền như tham số."
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "// Hàm cơ bản\nfunc add(a int, b int) int {\n    return a + b\n}\n\n// Multiple return values\nfunc divide(a, b float64) (float64, error) {\n    if b == 0 {\n        return 0, fmt.Errorf(\"division by zero\")\n    }\n    return a / b, nil\n}\n\n// Named return values\nfunc swap(a, b int) (x, y int) {\n    x, y = b, a\n    return\n}\n\n// Functions là first-class citizens\nadd := func(a, b int) int { return a + b }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "1005-ham-function-trong-go-khai-bao-the-nao"
+  },
+  {
+    "id": "fd94bd8d-923c-54b7-bf56-f0c55e952a95",
+    "question": "Multiple return values trong Go dùng khi nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1006-multiple-return-values-trong-go-dung-khi-nao",
+    "slug": "multiple-return-values-trong-go-dung-khi-nao-fd94bd8d-923c-54b7-bf56-f0c55e952a95",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Pattern phổ biến nhất: trả (result, error)."
+      ],
+      "details": [],
+      "points": [
+        "Nếu không cần 1 giá trị, dùng _ (blank identifier).",
+        "Khác biệt lớn với JS/TS: Go không dùng try/catch mà handle error ngay tại chỗ."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "// Pattern (result, error)\nval, err := strconv.Atoi(\"123\")\nif err != nil {\n    log.Fatal(err)\n}\n\n// Bỏ qua giá trị không cần dùng blank identifier\n_, err := doSomething()\n\n// Trả nhiều giá trị tùy ý\nfunc minMax(nums []int) (min, max int) { ... }\nmin, max := minMax([]int{3, 1, 4, 1, 5})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "1006-multiple-return-values-trong-go-dung-khi-nao"
+  },
+  {
+    "id": "05f4e624-7703-5700-8368-381faada8157",
+    "question": "Package và import trong Go hoạt động thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1007-package-va-import-trong-go-hoat-dong-the-nao",
+    "slug": "package-va-import-trong-go-hoat-dong-the-nao-05f4e624-7703-5700-8368-381faada8157",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Mỗi file Go thuộc 1 package (package main). main package + func main() = entry point."
+      ],
+      "details": [],
+      "points": [
+        "Import: import \"fmt\" hoặc grouped import.",
+        "Exported names (public) viết hoa chữ cái đầu: fmt.Println.",
+        "Lowercase = unexported (private trong package)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "1007-package-va-import-trong-go-hoat-dong-the-nao"
+  },
+  {
+    "id": "c0174f08-5225-5c59-99da-c61f0b939933",
+    "question": "Go có class không? Struct là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1008-go-co-class-khong-struct-la-gi",
+    "slug": "go-co-class-khong-struct-la-gi-c0174f08-5225-5c59-99da-c61f0b939933",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "Go KHÔNG có class.",
+        "Struct là kiểu dữ liệu composite, methods gắn vào struct qua receiver.",
+        "Composition thay vì inheritance: embed struct trong struct khác."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "// Định nghĩa struct\ntype User struct {\n    Name string\n    Age  int\n}\n\n// Method gắn vào struct qua value receiver\nfunc (u User) Hello() string {\n    return \"Hello, \" + u.Name\n}\n\n// Pointer receiver để modify struct\nfunc (u *User) SetName(name string) {\n    u.Name = name\n}\n\n// Khởi tạo struct\nu := User{Name: \"Alice\", Age: 30}\nfmt.Println(u.Hello()) // \"Hello, Alice\"\n\n// Composition thay inheritance\ntype Admin struct {\n    User        // embed User\n    Level int\n}\nadmin := Admin{User: User{Name: \"Bob\"}, Level: 1}\nfmt.Println(admin.Hello()) // kế thừa method của User"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "1008-go-co-class-khong-struct-la-gi"
+  },
+  {
+    "id": "f7a640b4-960e-5ffc-a559-bc8507b8c5c7",
+    "question": "Pointer trong Go là gì? Khi nào dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1009-pointer-trong-go-la-gi-khi-nao-dung",
+    "slug": "pointer-trong-go-la-gi-khi-nao-dung-f7a640b4-960e-5ffc-a559-bc8507b8c5c7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "*int là pointer type, &x lấy address, *p dereference."
+      ],
+      "details": [
+        "Go không có pointer arithmetic như C. nil pointer gây panic."
+      ],
+      "points": [
+        "muốn modify giá trị gốc.",
+        "struct lớn (tránh copy).",
+        "method cần modify receiver"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "x := 42\np := &x      // p là *int, trỏ đến x\nfmt.Println(*p) // 42 — dereference\n\n*p = 100\nfmt.Println(x)  // 100 — modify qua pointer\n\n// Dùng pointer để modify tham số\nfunc increment(n *int) {\n    *n++\n}\nincrement(&x)\n\n// Pointer receiver — modify struct gốc\nfunc (u *User) SetAge(age int) {\n    u.Age = age\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "1009-pointer-trong-go-la-gi-khi-nao-dung"
+  },
+  {
+    "id": "991fe0c7-c985-5c52-8ff0-bb554c061f0c",
+    "question": "Array và Slice trong Go khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1010-array-va-slice-trong-go-khac-nhau-the-nao",
+    "slug": "array-va-slice-trong-go-khac-nhau-the-nao-991fe0c7-c985-5c52-8ff0-bb554c061f0c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Array: size cố định, value type [5]int."
+      ],
+      "details": [],
+      "points": [
+        "Slice: dynamic, reference type []int.",
+        "Slice dùng phổ biến hơn. make([]int, 0, 10) tạo slice capacity 10. append(slice, item) thêm phần tử.",
+        "Slice là view lên underlying array."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "1010-array-va-slice-trong-go-khac-nhau-the-nao"
+  },
+  {
+    "id": "7aafa5b9-4eef-5fa9-9674-d5369e7127d1",
+    "question": "HTTP server cơ bản trong Go viết thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1031-http-server-co-ban-trong-go-viet-the-nao",
+    "slug": "http-server-co-ban-trong-go-viet-the-nao-7aafa5b9-4eef-5fa9-9674-d5369e7127d1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Stdlib đủ mạnh cho production."
+      ],
+      "details": [
+        "Không bắt buộc framework. http.ServeMux là default router."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "package main\n\nimport (\n    \"fmt\"\n    \"net/http\"\n)\n\nfunc helloHandler(w http.ResponseWriter, r *http.Request) {\n    fmt.Fprintf(w, \"Hello, %s!\", r.URL.Path[1:])\n}\n\nfunc main() {\n    mux := http.NewServeMux()\n    mux.HandleFunc(\"/hello\", helloHandler)\n    mux.HandleFunc(\"/health\", func(w http.ResponseWriter, r *http.Request) {\n        w.WriteHeader(http.StatusOK)\n        fmt.Fprint(w, \"ok\")\n    })\n\n    srv := &http.Server{\n        Addr:         \":8080\",\n        Handler:      mux,\n        ReadTimeout:  5 * time.Second,\n        WriteTimeout: 10 * time.Second,\n    }\n    log.Fatal(srv.ListenAndServe())\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "1031-http-server-co-ban-trong-go-viet-the-nao"
+  },
+  {
+    "id": "310ec828-476c-521f-9a14-70a9a8843630",
+    "question": "Go toolchain có những công cụ nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1045-go-toolchain-co-nhung-cong-cu-nao",
+    "slug": "go-toolchain-co-nhung-cong-cu-nao-310ec828-476c-521f-9a14-70a9a8843630",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Go đi kèm bộ toolchain rất mạnh ngay từ khi cài đặt: go build để compile thành binary, go run để compile và chạy luôn, go test để chạy unit test và benchmark, và go fmt để format code theo chuẩn thống nhất (bắt buộc trong hầu hết project)."
+      ],
+      "details": [],
+      "points": [
+        "Về chất lượng code, go vet phát hiện các lỗi tiềm ẩn mà compiler không bắt được, còn golangci-lint là công cụ linting tổng hợp chạy hàng chục linter cùng lúc.",
+        "Ngoài ra còn có go mod cho quản lý dependency, go generate cho code generation, go doc để xem documentation, và go tool pprof để profiling hiệu năng ứng dụng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "1045-go-toolchain-co-nhung-cong-cu-nao"
+  },
+  {
+    "id": "222da311-0c07-51b2-847d-167341df0909",
+    "question": "Trong Go, byte và rune khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94000-trong-go-byte-va-rune-khac-nhau-the-nao",
+    "slug": "trong-go-byte-va-rune-khac-nhau-the-nao-222da311-0c07-51b2-847d-167341df0909",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "byte là alias của uint8 (1 byte thô); rune là alias của int32, đại diện cho một code point Unicode. String trong Go là chuỗi byte UTF-8 bất biến, không phải mảng ký tự."
+      ],
+      "details": [
+        "Hệ quả:\n- s[i] trả về byte, và len(s) đếm byte — không phải số ký tự.\n- for i, r := range s lặp theo rune: giải mã UTF-8, i là offset byte, r là rune.\n- []byte(s) copy byte thô; []rune(s) giải mã ra các code point."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "s := \"héllo\"\nlen(s)                     // 6 — é chiếm 2 byte UTF-8\nutf8.RuneCountInString(s)  // 5 — số rune\nfor i, r := range s {      // r là rune, i là offset byte\n    _ = i; _ = r\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "94000-trong-go-byte-va-rune-khac-nhau-the-nao"
+  },
+  {
+    "id": "642f1887-f19a-550c-af88-79b2aebe3210",
+    "question": "Variadic function trong Go là gì, và toán tử ... hoạt động ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94001-variadic-function-trong-go-la-gi-va-toan-tu-hoat-dong-ra-sao",
+    "slug": "variadic-function-trong-go-la-gi-va-toan-tu-hoat-dong-ra-sao-642f1887-f19a-550c-af88-79b2aebe3210",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Tham số cuối cùng của hàm có thể khai báo ...T để nhận số lượng đối số biến thiên. Bên trong hàm, tham số đó là một []T thường."
+      ],
+      "details": [
+        "Hai chiều dùng ...:\n- Gọi với nhiều đối số rời: sum(1, 2, 3).\n- Spread một slice có sẵn: sum(xs...) — truyền thẳng slice, không copy.",
+        "fmt.Println(...any)"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "func sum(nums ...int) int {\n    total := 0\n    for _, n := range nums {\n        total += n\n    }\n    return total\n}\n\nsum(1, 2, 3)          // 6\nxs := []int{1, 2, 3}\nsum(xs...)            // spread slice có sẵn"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "94001-variadic-function-trong-go-la-gi-va-toan-tu-hoat-dong-ra-sao"
+  },
+  {
+    "id": "9ae5954a-f5c7-5cc2-9f7a-fce2bcefc1d2",
+    "question": "Làm sao sắp xếp một slice struct bằng sort.Slice?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94008-lam-sao-sap-xep-mot-slice-struct-bang-sort-slice",
+    "slug": "lam-sao-sap-xep-mot-slice-struct-bang-sort-slice-9ae5954a-f5c7-5cc2-9f7a-fce2bcefc1d2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "sort.Slice(s, less) sắp xếp slice tại chỗ dựa trên hàm so sánh less(i, j) bool — trả về true nếu phần tử i phải đứng trước j. Không cần implement interface sort.Interface."
+      ],
+      "details": [
+        "Lưu ý:\n- sort.Slice không ổn định (thứ tự phần tử bằng nhau có thể đổi); cần ổn định thì dùng sort.SliceStable.\n- So sánh nhiều field bằng cách xâu chuỗi điều kiện: field chính trước, hòa mới xét field phụ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "type Person struct {\n    Name string\n    Age  int\n}\npeople := []Person{{\"Bob\", 30}, {\"Ann\", 25}}\n\nsort.Slice(people, func(i, j int) bool {\n    return people[i].Age < people[j].Age // tăng dần theo Age\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "94008-lam-sao-sap-xep-mot-slice-struct-bang-sort-slice"
+  },
+  {
+    "id": "5b80b3b3-9ff2-5056-847d-328a8b215168",
+    "question": "Channel có buffer và không buffer khác nhau thế nào? Khi nào chương trình báo all goroutines are asleep - deadlock?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96450-channel-co-buffer-va-khong-buffer-khac-nhau-the-nao-khi-nao-chuong-trinh-bao-all",
+    "slug": "channel-co-buffer-va-khong-buffer-khac-nhau-the-nao-khi-nao-chuong-trinh-bao-all-goroutines-are-asle-5b80b3b3-9ff2-5056-847d-328a8b215168",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Runtime phát hiện mọi goroutine đều đang chặn và không ai còn khả năng đánh thức ai, nên dừng chương trình với fatal error: all goroutines are asleep - deadlock!. Đây là lỗi runtime, recover không bắt được."
+      ],
+      "details": [
+        "Cách sửa: đưa phần nhận sang goroutine khác, hoặc cấp buffer đủ chỗ."
+      ],
+      "points": [],
+      "sections": [
+        "Unbuffered (make(chan int)): mỗi lần gửi phải có một bên nhận sẵn sàng ngay tại thời điểm đó — gửi và nhận là một điểm đồng bộ. Buffered (make(chan int, 3)): gửi chỉ chặn khi buffer đầy, nhận chỉ chặn khi buffer rỗng."
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "func main() {\n    ch := make(chan int)\n    ch <- 1 // blocks forever: no receiver is ready\n    fmt.Println(<-ch)\n}\n// fatal error: all goroutines are asleep - deadlock!"
+        },
+        {
+          "language": "GO",
+          "code": "ch := make(chan int, 1)\nch <- 1            // fits in the buffer, does not block\nfmt.Println(<-ch)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "96450-channel-co-buffer-va-khong-buffer-khac-nhau-the-nao-khi-nao-chuong-trinh-bao-all"
+  },
+  {
+    "id": "2f88571e-b27e-5032-9112-71d42f0eb787",
+    "question": "close(ch) có tác dụng gì? Gửi và nhận trên channel đã đóng thì xảy ra chuyện gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96451-close-ch-co-tac-dung-gi-gui-va-nhan-tren-channel-da-dong-thi-xay-ra-chuyen-gi",
+    "slug": "close-ch-co-tac-dung-gi-gui-va-nhan-tren-channel-da-dong-thi-xay-ra-chuyen-gi-2f88571e-b27e-5032-9112-71d42f0eb787",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "close là tín hiệu \"không còn dữ liệu nào nữa\", không phải thao tác giải phóng bộ nhớ (channel do GC thu hồi).",
+        "sync.WaitGroup"
+      ],
+      "details": [
+        "Sau khi đóng:\n- Nhận: trả về ngay lập tức, không chặn. Dữ liệu còn trong buffer được trả ra trước, hết buffer thì trả zero value vô hạn lần.\n- Comma-ok phân biệt được hai trường hợp: v, ok := <-ch — ok == false nghĩa là channel đã đóng và cạn dữ liệu.\n- for range ch tự kết thúc khi channel đóng. Nếu không ai đóng, vòng lặp treo mãi.\n- Gửi vào channel đã đóng: panic: send on closed channel.\n- Đóng lại lần nữa hoặc đóng channel nil: cũng panic.",
+        "Bên nhận không bao giờ đóng, vì nó không biết bên gửi còn định gửi nữa hay không."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "ch := make(chan int, 2)\nch <- 1\nclose(ch)\n\nv, ok := <-ch   // 1, true\nv, ok = <-ch    // 0, false  (drained + closed)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "96451-close-ch-co-tac-dung-gi-gui-va-nhan-tren-channel-da-dong-thi-xay-ra-chuyen-gi"
+  },
+  {
+    "id": "7ce39588-6f3d-5c81-a32e-ea443f0a6e61",
+    "question": "Nhánh default trong select dùng để làm gì? Lỗi hay gặp khi dùng nó là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96452-nhanh-default-trong-select-dung-de-lam-gi-loi-hay-gap-khi-dung-no-la-gi",
+    "slug": "nhanh-default-trong-select-dung-de-lam-gi-loi-hay-gap-khi-dung-no-la-gi-7ce39588-6f3d-5c81-a32e-ea443f0a6e61",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "select không có default sẽ chặn cho tới khi một nhánh sẵn sàng. Thêm default biến nó thành thao tác không chặn: nếu không có nhánh nào sẵn sàng ngay, default chạy luôn.",
+        "select { case ...; default: }",
+        "Muốn chờ mà vẫn có lối thoát thì bỏ default và thêm một nhánh thoát (<-ctx.Done(), <-time.After(...))."
+      ],
+      "details": [
+        "Ứng dụng chính là try-send / try-receive — bỏ bớt việc khi hệ thống quá tải thay vì để người gọi phải chờ:",
+        "ngẫu nhiên đều",
+        "Lúc đó goroutine quay vòng liên tục, ăn hết một nhân CPU trong khi chẳng làm gì."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "select {\ncase metrics <- sample:\n    // enqueued\ndefault:\n    dropped.Add(1) // buffer full: drop instead of blocking the caller\n}"
+        },
+        {
+          "language": "GO",
+          "code": "for {\n    select {\n    case v := <-ch:\n        handle(v)\n    default:\n        // busy loop: burns a CPU core\n    }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "96452-nhanh-default-trong-select-dung-de-lam-gi-loi-hay-gap-khi-dung-no-la-gi"
+  },
+  {
+    "id": "c6586723-07ef-573a-bd51-f690fe8249eb",
+    "question": "Vì sao sau context.WithTimeout / WithCancel luôn phải gọi defer cancel()?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96453-vi-sao-sau-context-withtimeout-withcancel-luon-phai-goi-defer-cancel",
+    "slug": "vi-sao-sau-context-withtimeout-withcancel-luon-phai-goi-defer-cancel-c6586723-07ef-573a-bd51-f690fe8249eb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì cancel là thứ giải phóng tài nguyên gắn với context đó, kể cả khi công việc đã hoàn tất bình thường.",
+        "go vet có analyzer lostcancel bắt lỗi này: \"the cancel function is not used on all paths (possible context leak)\"."
+      ],
+      "details": [
+        "Mỗi context con được đăng ký vào danh sách con của context cha. Với WithTimeout / WithDeadline còn có thêm một time.Timer đang chạy. Nếu không gọi cancel:\n- Context con nằm lại trong cha cho tới khi cha bị hủy — với cha là context.Background() thì nghĩa là suốt vòng đời tiến trình.\n- Timer sống tới lúc hết hạn mới được thu hồi.",
+        "Gọi nhiều lần vô hại: cancel là idempotent. Nên defer cancel() ngay sau khi tạo là đúng trong mọi trường hợp.",
+        "Đây là một trong những cảnh báo go vet không nên bỏ qua — chạy go vet ./... trong CI."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "ctx, cancel := context.WithTimeout(r.Context(), 3*time.Second)\ndefer cancel()\n\nrows, err := db.QueryContext(ctx, query, id)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "96453-vi-sao-sau-context-withtimeout-withcancel-luon-phai-goi-defer-cancel"
+  },
+  {
+    "id": "71baa4ae-3017-597a-927e-4bde14c2d7b1",
+    "question": "http.Handler và http.HandlerFunc khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96500-http-handler-va-http-handlerfunc-khac-nhau-the-nao",
+    "slug": "http-handler-va-http-handlerfunc-khac-nhau-the-nao-71baa4ae-3017-597a-927e-4bde14c2d7b1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ý nghĩa khi phỏng vấn: mọi thứ trong net/http (router, middleware, http.FileServer, http.StripPrefix) đều nói chuyện qua một interface duy nhất này, nên middleware chỉ là hàm func(http.Handler) http.Handler."
+      ],
+      "details": [
+        "Khi cần handler mang state (DB pool, logger, config) thì dùng struct có method ServeHTTP, hoặc closure bắt biến."
+      ],
+      "points": [],
+      "sections": [
+        "http.Handler là interface chỉ có một method:",
+        "http.HandlerFunc",
+        "Thực tế:"
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "type Handler interface {\n    ServeHTTP(w http.ResponseWriter, r *http.Request)\n}"
+        },
+        {
+          "language": "GO",
+          "code": "type HandlerFunc func(ResponseWriter, *Request)\n\nfunc (f HandlerFunc) ServeHTTP(w ResponseWriter, r *Request) { f(w, r) }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "96500-http-handler-va-http-handlerfunc-khac-nhau-the-nao"
+  },
+  {
+    "id": "9d96cf99-fb92-5c2b-9d2c-ea8f5d4e4152",
+    "question": "Trong fmt.Errorf, %w khác %v ra sao? Khi nào nên bọc lỗi?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96501-trong-fmt-errorf-w-khac-v-ra-sao-khi-nao-nen-boc-loi",
+    "slug": "trong-fmt-errorf-w-khac-v-ra-sao-khi-nao-nen-boc-loi-9d96cf99-fb92-5c2b-9d2c-ea8f5d4e4152",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Nguyên tắc dùng:\n- Bọc bằng %w khi tầng trên cần phân biệt loại lỗi để quyết định (trả 404 hay 500, có retry không).\n- Mỗi lần bọc chỉ thêm ngữ cảnh của tầng đó (tên thao tác, id), không lặp lại thông tin tầng dưới đã có.\n- Dùng %v (hoặc lỗi mới hoàn toàn) khi muốn che chi tiết nội bộ khỏi caller — vd không để lỗi driver DB rò ra ngoài API."
+      ],
+      "details": [
+        "Từ Go 1.20, fmt.Errorf chấp nhận nhiều %w trong một chuỗi định dạng, và errors.Join gộp nhiều lỗi độc lập thành một."
+      ],
+      "points": [],
+      "sections": [
+        "Cả hai đều in ra chuỗi giống nhau, nhưng %w giữ lại lỗi gốc trong chuỗi unwrap, còn %v chỉ ghép chuỗi và cắt đứt liên kết."
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "var ErrNotFound = errors.New(\"not found\")\n\ne1 := fmt.Errorf(\"load user %d: %w\", id, ErrNotFound)\ne2 := fmt.Errorf(\"load user %d: %v\", id, ErrNotFound)\n\nerrors.Is(e1, ErrNotFound) // true\nerrors.Is(e2, ErrNotFound) // false — chỉ còn text"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "96501-trong-fmt-errorf-w-khac-v-ra-sao-khi-nao-nen-boc-loi"
+  },
+  {
+    "id": "480616b2-90e0-56db-949c-91a3da6d4f1a",
+    "question": "Struct embedding trong Go là gì? Nó có phải kế thừa không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96502-struct-embedding-trong-go-la-gi-no-co-phai-ke-thua-khong",
+    "slug": "struct-embedding-trong-go-la-gi-no-co-phai-ke-thua-khong-480616b2-90e0-56db-949c-91a3da6d4f1a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Embedding là khai báo một field không có tên, chỉ có kiểu.",
+        "Không phải kế thừa. Đây là composition cộng đường tắt cú pháp:\n- Không có đa hình theo kiểu cha: Base.Describe gọi trên u vẫn chỉ thấy phần Base, không biết gì về User.\n- Không có override thật; nếu User khai báo Describe riêng thì method ngoài che (shadow) method trong, muốn dùng bản cũ phải gọi u.Base.Describe().\n- Có thể embed interface để mượn phần cài đặt, ví dụ nhúng http.ResponseWriter để chỉ override đúng method cần."
+      ],
+      "details": [
+        "Field và method của kiểu được nhúng được thăng cấp (promote) lên struct ngoài, gọi trực tiếp như của chính nó.",
+        "Nếu hai kiểu nhúng cùng có method trùng tên ở cùng độ sâu, lời gọi sẽ lỗi biên dịch do nhập nhằng — phải chỉ rõ đường dẫn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "type Base struct{ ID int }\n\nfunc (b Base) Describe() string { return fmt.Sprintf(\"id=%d\", b.ID) }\n\ntype User struct {\n    Base          // embedded, không có tên field\n    Name string\n}\n\nu := User{Base: Base{ID: 7}, Name: \"an\"}\nfmt.Println(u.ID)         // 7 — thăng cấp từ Base\nfmt.Println(u.Describe()) // id=7\nfmt.Println(u.Base.ID)    // vẫn truy cập tường minh được"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "96502-struct-embedding-trong-go-la-gi-no-co-phai-ke-thua-khong"
+  },
+  {
+    "id": "1d7f091a-aaec-5290-a94f-7984b0a57a8f",
+    "question": "Đặt defer trong vòng lặp có vấn đề gì? Sửa thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96503-dat-defer-trong-vong-lap-co-van-de-gi-sua-the-nao",
+    "slug": "dat-defer-trong-vong-lap-co-van-de-gi-sua-the-nao-1d7f091a-aaec-5290-a94f-7984b0a57a8f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "defer chạy khi hàm kết thúc, không phải khi hết một vòng lặp.",
+        "Cách 2 — closure ngay trong loop (func() error { ... }()) nếu ngại tách hàm."
+      ],
+      "details": [
+        "Đặt trong loop nghĩa là mọi tài nguyên bị giữ đến tận cuối hàm — vòng lặp vài nghìn file sẽ chạm giới hạn file descriptor.",
+        "Lưu ý thêm: tham số của defer được tính ngay tại lúc khai báo, chỉ lời gọi mới bị hoãn — nên defer fmt.Println(i) in giá trị i ở thời điểm gặp defer, không phải giá trị cuối."
+      ],
+      "points": [],
+      "sections": [
+        "Cách sửa 1 — tách thân loop thành hàm riêng để defer có phạm vi đúng:"
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "// sai: mọi file mở suốt vòng đời hàm\nfor _, name := range names {\n    f, err := os.Open(name)\n    if err != nil {\n        return err\n    }\n    defer f.Close() // dồn lại, chỉ chạy khi return\n    process(f)\n}"
+        },
+        {
+          "language": "GO",
+          "code": "for _, name := range names {\n    if err := handle(name); err != nil {\n        return err\n    }\n}\n\nfunc handle(name string) error {\n    f, err := os.Open(name)\n    if err != nil {\n        return err\n    }\n    defer f.Close() // đóng ngay khi handle trả về\n    return process(f)\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "96503-dat-defer-trong-vong-lap-co-van-de-gi-sua-the-nao"
+  },
+  {
+    "id": "91c335ea-9942-50ca-84d6-3ece596a9e97",
+    "question": "Map trong Go hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1011-map-trong-go-hoat-dong-the-nao",
+    "slug": "map-trong-go-hoat-dong-the-nao-91c335ea-9942-50ca-84d6-3ece596a9e97",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Map là kiểu dữ liệu key-value tích hợp sẵn trong Go, khai báo bằng m := map[string]int{\"a\": 1} hoặc make(map[string]int)."
+      ],
+      "details": [],
+      "points": [
+        "Check key tồn tại: val, ok := m[\"key\"] — ok là false nếu key không tồn tại (zero value của value type).",
+        "Xoá: delete(m, \"key\") — không panic nếu key không tồn tại.",
+        "Không thread-safe: truy cập concurrent phải dùng sync.Map hoặc bọc bằng mutex.",
+        "Zero value là nil: map nil chỉ đọc được, ghi sẽ panic — phải make hoặc dùng literal trước khi gán.",
+        "Iteration order không xác định: mỗi lần range cho thứ tự khác nhau, là design có chủ ý của Go."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "1011-map-trong-go-hoat-dong-the-nao"
+  },
+  {
+    "id": "c4795fa1-190d-5a1f-8322-7e65c0e799d9",
+    "question": "Range loop trong Go dùng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1012-range-loop-trong-go-dung-the-nao",
+    "slug": "range-loop-trong-go-dung-the-nao-c4795fa1-190d-5a1f-8322-7e65c0e799d9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "range là cú pháp duy nhất để iterate qua collection trong Go, hoạt động khác nhau theo từng kiểu dữ liệu:"
+      ],
+      "details": [
+        "Lưu ý: range copy value sang biến loop, không phải reference. Nếu cần mutate phần tử, dùng slice[i] thay vì v."
+      ],
+      "points": [
+        "Slice / array: for i, v := range slice { } — trả về index và value.",
+        "Map: for k, v := range m { } — trả về key và value, thứ tự không xác định.",
+        "String: for i, r := range \"hello\" { } — trả về byte index và rune (Unicode code point).",
+        "Channel: for v := range ch { } — đọc đến khi channel close.",
+        "Integer (Go 1.22+): for i := range 10 { } — range over integer, tương đương for i := 0; i < 10; i++.",
+        "Bỏ qua giá trị:"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "1012-range-loop-trong-go-dung-the-nao"
+  },
+  {
+    "id": "cef23ebf-2b3c-594e-a4a5-1d42c5b64ba6",
+    "question": "Error handling trong Go khác gì JS/Python?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1013-error-handling-trong-go-khac-gi-js-python",
+    "slug": "error-handling-trong-go-khac-gi-js-python-cef23ebf-2b3c-594e-a4a5-1d42c5b64ba6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "Go không có try/catch/throw.",
+        "Errors là values, check lỗi ngay sau khi gọi.",
+        "Explicit > implicit."
+      ],
+      "sections": [
+        "errors.Is(), errors.As() để check error chain."
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "// Hàm trả (result, error)\nfunc readFile(path string) ([]byte, error) {\n    data, err := os.ReadFile(path)\n    if err != nil {\n        return nil, fmt.Errorf(\"readFile %s: %w\", path, err)\n    }\n    return data, nil\n}\n\n// Xử lý lỗi tại nơi gọi\ndata, err := readFile(\"config.json\")\nif err != nil {\n    log.Fatal(err)\n}\n\n// Custom error\nvar ErrNotFound = errors.New(\"not found\")\n\n// Wrap và unwrap error\nerr := fmt.Errorf(\"service layer: %w\", ErrNotFound)\nerrors.Is(err, ErrNotFound) // true"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "1013-error-handling-trong-go-khac-gi-js-python"
+  },
+  {
+    "id": "b6bd33ba-b340-50da-88b3-57e3a8a15c92",
+    "question": "defer, panic, recover trong Go dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1014-defer-panic-recover-trong-go-dung-khi-nao",
+    "slug": "defer-panic-recover-trong-go-dung-khi-nao-b6bd33ba-b340-50da-88b3-57e3a8a15c92",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "defer đảm bảo một function sẽ được gọi khi function chứa nó return (LIFO). panic dừng chương trình khi gặp lỗi không thể khôi phục. recover bắt panic bên trong deferred function.",
+        "Trong thực tế, hạn chế dùng panic/recover và ưu tiên trả error thông thường."
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "// defer — cleanup đảm bảo luôn chạy\nfunc processFile(path string) error {\n    f, err := os.Open(path)\n    if err != nil {\n        return err\n    }\n    defer f.Close() // luôn đóng file khi function return\n\n    // xử lý file...\n    return nil\n}\n\n// panic + recover — bắt lỗi nghiêm trọng\nfunc safeDiv(a, b int) (result int, err error) {\n    defer func() {\n        if r := recover(); r != nil {\n            err = fmt.Errorf(\"recovered: %v\", r)\n        }\n    }()\n    return a / b, nil // panic nếu b == 0\n}\n\n// defer chạy LIFO\ndefer fmt.Println(\"1\") // chạy thứ 3\ndefer fmt.Println(\"2\") // chạy thứ 2\ndefer fmt.Println(\"3\") // chạy thứ 1"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "1014-defer-panic-recover-trong-go-dung-khi-nao"
+  },
+  {
+    "id": "a384cee7-5a11-56ac-8508-f7cd98a26797",
+    "question": "Interface trong Go hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1015-interface-trong-go-hoat-dong-the-nao",
+    "slug": "interface-trong-go-hoat-dong-the-nao-a384cee7-5a11-56ac-8508-f7cd98a26797",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Interface = tập hợp method signatures."
+      ],
+      "details": [
+        "Implicit implementation: struct tự động satisfy interface nếu có đủ methods (không cần implements keyword)."
+      ],
+      "points": [],
+      "sections": [
+        "interface{} (hoặc any) là empty interface chấp nhận mọi type."
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "// Định nghĩa interface\ntype Writer interface {\n    Write([]byte) (int, error)\n}\n\ntype Stringer interface {\n    String() string\n}\n\n// Struct tự động satisfy interface\ntype MyWriter struct{}\n\nfunc (w MyWriter) Write(p []byte) (int, error) {\n    fmt.Print(string(p))\n    return len(p), nil\n}\n\n// Dùng interface làm tham số — polymorphism\nfunc save(w Writer, data []byte) error {\n    _, err := w.Write(data)\n    return err\n}\n\n// Empty interface chấp nhận mọi type\nfunc printAny(v any) {\n    fmt.Println(v)\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "1015-interface-trong-go-hoat-dong-the-nao"
+  },
+  {
+    "id": "1921c6ee-5a0d-507b-b92f-6e42b8805535",
+    "question": "Empty interface (any) dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1016-empty-interface-any-dung-khi-nao",
+    "slug": "empty-interface-any-dung-khi-nao-1921c6ee-5a0d-507b-b92f-6e42b8805535",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "any (alias interface{}) chấp nhận mọi type, nhưng cần type assertion để dùng value cụ thể."
+      ],
+      "details": [
+        "Go 1.18+ có generics thay thế nhiều use cases."
+      ],
+      "points": [],
+      "sections": [
+        "Dùng cho: generic containers, JSON parsing, function nhận nhiều types."
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "// JSON parsing trả map[string]any\nvar result map[string]any\njson.Unmarshal(data, &result)\n\n// Type assertion để lấy giá trị\nfunc printValue(i any) {\n    // safe assertion\n    if s, ok := i.(string); ok {\n        fmt.Println(\"string:\", s)\n        return\n    }\n    // type switch cho nhiều types\n    switch v := i.(type) {\n    case int:\n        fmt.Println(\"int:\", v)\n    case []any:\n        fmt.Println(\"slice length:\", len(v))\n    default:\n        fmt.Printf(\"unknown: %T\\n\", v)\n    }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "1016-empty-interface-any-dung-khi-nao"
+  },
+  {
+    "id": "b5a4164a-3652-5d08-82a5-30664c5af96d",
+    "question": "Type assertion và type switch là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1017-type-assertion-va-type-switch-la-gi",
+    "slug": "type-assertion-va-type-switch-la-gi-b5a4164a-3652-5d08-82a5-30664c5af96d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Type assertion lấy giá trị cụ thể từ interface."
+      ],
+      "details": [],
+      "points": [
+        "Type switch xử lý nhiều types một cách gọn gàng.",
+        "Tương tự instanceof trong JS."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "var i any = \"hello\"\n\n// Type assertion — panic nếu sai type\ns := i.(string)\n\n// Safe type assertion — không panic\ns, ok := i.(string)\nif ok {\n    fmt.Println(s)\n}\n\n// Type switch — idiomatic Go\nfunc describe(i any) {\n    switch v := i.(type) {\n    case string:\n        fmt.Printf(\"string of length %d\\n\", len(v))\n    case int:\n        fmt.Printf(\"int: %d\\n\", v)\n    case bool:\n        fmt.Printf(\"bool: %v\\n\", v)\n    default:\n        fmt.Printf(\"unknown type: %T\\n\", v)\n    }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "1017-type-assertion-va-type-switch-la-gi"
+  },
+  {
+    "id": "6c92b3bb-c605-5e1d-8e8d-aac15f6e4bec",
+    "question": "Pointer receiver vs value receiver khác nhau?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1019-pointer-receiver-vs-value-receiver-khac-nhau",
+    "slug": "pointer-receiver-vs-value-receiver-khac-nhau-6c92b3bb-c605-5e1d-8e8d-aac15f6e4bec",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai dạng receiver có ngữ nghĩa khác nhau về copy và mutation:"
+      ],
+      "details": [
+        "Dùng pointer receiver khi: cần mutate state, struct lớn (tránh copy), hoặc để giữ consistency — nếu một method dùng pointer thì tất cả method của type đó nên dùng pointer."
+      ],
+      "points": [
+        "Value receiver func (u User) Name() — nhận một copy của struct, không thể modify giá trị gốc.",
+        "Pointer receiver func (u *User) SetName(n string) — modify trực tiếp struct gốc, không tốn chi phí copy."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "1019-pointer-receiver-vs-value-receiver-khac-nhau"
+  },
+  {
+    "id": "f1ce698f-f841-55e6-8818-053998c83584",
+    "question": "Generics trong Go (1.18+) hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1020-generics-trong-go-1-18-hoat-dong-the-nao",
+    "slug": "generics-trong-go-1-18-hoat-dong-the-nao-f1ce698f-f841-55e6-8818-053998c83584",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Generics cho phép viết function và type hoạt động với nhiều kiểu dữ liệu mà không cần lặp code, ví dụ func Map[T any, U any](s []T, f func(T) U) []U nhận slice bất kỳ và trả về slice đã transform."
+      ],
+      "details": [],
+      "points": [
+        "Type parameters được khai báo trong dấu ngoặc vuông [], kèm constraints để giới hạn kiểu được chấp nhận như any, comparable, hoặc custom interface constraints kiểu type Number interface { int | float64 }.",
+        "Trước Go 1.18, muốn viết hàm generic phải dùng interface{} rồi type assertion, vừa mất type safety vừa verbose; generics giải quyết triệt để vấn đề này."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "1020-generics-trong-go-1-18-hoat-dong-the-nao"
+  },
+  {
+    "id": "feb2a3e6-44ee-5680-8b28-becb81374365",
+    "question": "Goroutine là gì? Khác thread thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1021-goroutine-la-gi-khac-thread-the-nao",
+    "slug": "goroutine-la-gi-khac-thread-the-nao-feb2a3e6-44ee-5680-8b28-becb81374365",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Goroutine là lightweight thread do Go runtime quản lý."
+      ],
+      "details": [],
+      "points": [
+        "Khác OS thread: goroutine stack default ~8KB, tự grow/shrink; Go scheduler multiplex goroutines lên OS threads (M:N scheduling).",
+        "Có thể chạy hàng triệu goroutines cùng lúc."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "func fetchData(url string) {\n    resp, err := http.Get(url)\n    if err != nil {\n        log.Println(err)\n        return\n    }\n    defer resp.Body.Close()\n    // xử lý response...\n}\n\nfunc main() {\n    urls := []string{\"https://a.com\", \"https://b.com\", \"https://c.com\"}\n    for _, url := range urls {\n        go fetchData(url) // mỗi request chạy goroutine riêng\n    }\n    time.Sleep(2 * time.Second) // đợi goroutines (dùng WaitGroup tốt hơn)\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "1021-goroutine-la-gi-khac-thread-the-nao"
+  },
+  {
+    "id": "0bcb330f-25be-58a3-ac1b-bb5ed6828f28",
+    "question": "Channel trong Go là gì? Dùng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1022-channel-trong-go-la-gi-dung-the-nao",
+    "slug": "channel-trong-go-la-gi-dung-the-nao-0bcb330f-25be-58a3-ac1b-bb5ed6828f28",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "Kênh giao tiếp giữa goroutines.",
+        "Unbuffered channel: block đến khi cả sender và receiver sẵn sàng.",
+        "Buffered: không block nếu buffer chưa đầy."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "// Tạo channel\nch := make(chan int)        // unbuffered\nbch := make(chan int, 10)  // buffered capacity 10\n\n// Gửi và nhận\ngo func() {\n    ch <- 42 // send — block đến khi có receiver\n}()\nval := <-ch // receive — block đến khi có data\nfmt.Println(val) // 42\n\n// Directional channels (best practice)\nfunc producer(out chan<- int) { // chỉ gửi\n    out <- 1\n}\nfunc consumer(in <-chan int) { // chỉ nhận\n    fmt.Println(<-in)\n}\n\n// Close và range\nclose(ch)\nfor v := range ch { // tự dừng khi channel đóng\n    fmt.Println(v)\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "1022-channel-trong-go-la-gi-dung-the-nao"
+  },
+  {
+    "id": "d5537bb4-246c-50b6-940c-ecf47a6403b7",
+    "question": "Select statement dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1024-select-statement-dung-de-lam-gi",
+    "slug": "select-statement-dung-de-lam-gi-d5537bb4-246c-50b6-940c-ecf47a6403b7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "select { case v := <-ch1: ... case ch2 <- x: ... default: ... } chờ multiple channel operations, chạy case sẵn sàng đầu tiên."
+      ],
+      "details": [],
+      "points": [
+        "Nếu nhiều case sẵn sàng → chọn random. default chạy nếu không case nào sẵn sàng (non-blocking).",
+        "Dùng cho timeout: case <-time.After(5*time.Second)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "1024-select-statement-dung-de-lam-gi"
+  },
+  {
+    "id": "c41f8bd1-76b2-5dbc-b5a8-9d9b278f1419",
+    "question": "WaitGroup dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1025-waitgroup-dung-khi-nao",
+    "slug": "waitgroup-dung-khi-nao-c41f8bd1-76b2-5dbc-b5a8-9d9b278f1419",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng khi cần đợi nhiều goroutines hoàn thành trước khi tiếp tục."
+      ],
+      "details": [
+        "Đơn giản hơn channel cho fan-out/fan-in."
+      ],
+      "points": [],
+      "sections": [
+        "wg.Add(n) đăng ký n goroutines. wg.Done() thường dùng kết hợp defer."
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "var wg sync.WaitGroup\n\nurls := []string{\"https://a.com\", \"https://b.com\", \"https://c.com\"}\n\nfor _, url := range urls {\n    wg.Add(1) // đăng ký 1 goroutine\n    go func(u string) {\n        defer wg.Done() // báo hoàn thành khi return\n        fetch(u)\n    }(url)\n}\n\nwg.Wait() // block đến khi tất cả goroutines Done\nfmt.Println(\"all done\")"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "1025-waitgroup-dung-khi-nao"
+  },
+  {
+    "id": "fcf310d6-c78c-5ddf-a7f1-568a8274616d",
+    "question": "Gin framework là gì? Khác net/http thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1032-gin-framework-la-gi-khac-net-http-the-nao",
+    "slug": "gin-framework-la-gi-khac-net-http-the-nao-fcf310d6-c78c-5ddf-a7f1-568a8274616d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Gin là HTTP web framework phổ biến nhất trong hệ sinh thái Go, được thiết kế tập trung vào hiệu năng với routing dựa trên radix tree, nhanh hơn đáng kể so với http.ServeMux mặc định."
+      ],
+      "details": [
+        "So với stdlib net/http, Gin cung cấp sẵn: middleware chain, JSON binding và validation tự động, error handling tập trung, và group routes để tổ chức API gọn gàng. Cách dùng cơ bản: r := gin.Default(); r.GET(\"/users/:id\", getUser); r.Run(), trong đó gin.Default() đã bao gồm sẵn middleware logger và recovery.",
+        "Các framework thay thế: Echo, Fiber (dựa trên fasthttp), và Chi (tương thích net/http)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "1032-gin-framework-la-gi-khac-net-http-the-nao"
+  },
+  {
+    "id": "81d31351-412b-507a-a967-719efb0759a8",
+    "question": "Middleware trong Go HTTP server viết thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1033-middleware-trong-go-http-server-viet-the-nao",
+    "slug": "middleware-trong-go-http-server-viet-the-nao-81d31351-412b-507a-a967-719efb0759a8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Middleware trong Go là một wrapper function nhận handler và trả về handler mới, cho phép chèn logic trước hoặc sau khi xử lý request."
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "// Middleware cơ bản — stdlib net/http\nfunc authMiddleware(next http.Handler) http.Handler {\n    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {\n        token := r.Header.Get(\"Authorization\")\n        if !isValidToken(token) {\n            http.Error(w, \"Unauthorized\", http.StatusUnauthorized)\n            return\n        }\n        next.ServeHTTP(w, r) // gọi handler tiếp theo\n    })\n}\n\nfunc loggingMiddleware(next http.Handler) http.Handler {\n    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {\n        start := time.Now()\n        next.ServeHTTP(w, r)\n        log.Printf(\"%s %s %v\", r.Method, r.URL.Path, time.Since(start))\n    })\n}\n\n// Chain middlewares — request đi từ ngoài vào trong\nhttp.Handle(\"/api\", loggingMiddleware(authMiddleware(apiHandler)))\n\n// Gin middleware — đơn giản hơn\nr := gin.Default()\nr.Use(authMiddleware()) // áp dụng cho tất cả routes\napi := r.Group(\"/api\")\napi.Use(rateLimitMiddleware()) // áp dụng cho group"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "1033-middleware-trong-go-http-server-viet-the-nao"
+  },
+  {
+    "id": "ffeb60b8-b38a-5918-a80c-8179d3c46e07",
+    "question": "JSON encode/decode trong Go thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1034-json-encode-decode-trong-go-the-nao",
+    "slug": "json-encode-decode-trong-go-the-nao-ffeb60b8-b38a-5918-a80c-8179d3c46e07",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Go sử dụng package encoding/json."
+      ],
+      "details": [
+        "Struct tags quyết định cách ánh xạ field sang JSON key."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "// Định nghĩa struct với JSON tags\ntype User struct {\n    Name  string `json:\"name\"`\n    Age   int    `json:\"age,omitempty\"` // bỏ qua nếu zero value\n    Email string `json:\"-\"`             // luôn bỏ qua khi encode\n}\n\n// Marshal — struct → JSON bytes\nu := User{Name: \"Alice\", Age: 30}\ndata, err := json.Marshal(u)\n// {\"name\":\"Alice\",\"age\":30}\n\n// Unmarshal — JSON bytes → struct\nvar u2 User\nerr = json.Unmarshal(data, &u2)\n\n// HTTP response — dùng Encoder để stream\nfunc handler(w http.ResponseWriter, r *http.Request) {\n    w.Header().Set(\"Content-Type\", \"application/json\")\n    json.NewEncoder(w).Encode(User{Name: \"Bob\", Age: 25})\n}\n\n// HTTP request body — dùng Decoder\nfunc createUser(w http.ResponseWriter, r *http.Request) {\n    var u User\n    if err := json.NewDecoder(r.Body).Decode(&u); err != nil {\n        http.Error(w, err.Error(), http.StatusBadRequest)\n        return\n    }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "1034-json-encode-decode-trong-go-the-nao"
+  },
+  {
+    "id": "25f99682-bfe9-5e29-83f2-80436db22ead",
+    "question": "GORM ORM trong Go dùng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1035-gorm-orm-trong-go-dung-the-nao",
+    "slug": "gorm-orm-trong-go-dung-the-nao-25f99682-bfe9-5e29-83f2-80436db22ead",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "GORM là ORM phổ biến nhất trong Go, cung cấp API trực quan để thao tác database: db.Create(&user) để insert, db.First(&user, 1) để query theo primary key, và db.Where(\"age > ?\", 18).Find(&users) cho query có điều kiện."
+      ],
+      "details": [
+        "GORM hỗ trợ auto migration (db.AutoMigrate(&User{})) để tự tạo/cập nhật bảng theo struct definition, cùng với các associations như BelongsTo, HasMany, ManyToMany và hooks như BeforeCreate, AfterUpdate để chạy logic trước/sau thao tác.",
+        "Với các query phức tạp hoặc cần kiểm soát performance chặt, nhiều team chọn dùng sqlx (raw SQL kết hợp auto scanning) hoặc ent (Facebook, code generation) thay thế."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "1035-gorm-orm-trong-go-dung-the-nao"
+  },
+  {
+    "id": "17eb63b2-269a-528e-98ff-88f970737a16",
+    "question": "Database connection trong Go best practices?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1036-database-connection-trong-go-best-practices",
+    "slug": "database-connection-trong-go-best-practices-17eb63b2-269a-528e-98ff-88f970737a16",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "sql.Open() trả connection pool (không phải single connection)."
+      ],
+      "details": [],
+      "points": [
+        "Set: db.SetMaxOpenConns(25), db.SetMaxIdleConns(5), db.SetConnMaxLifetime(5*time.Minute).",
+        "KHÔNG defer db.Close() mỗi request vì sql.DB là long-lived pool — chỉ close khi app shutdown.",
+        "Prepared statements cho queries lặp lại.",
+        "Context timeout cho queries: db.QueryContext(ctx, query)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "1036-database-connection-trong-go-best-practices"
+  },
+  {
+    "id": "6a8d9f6f-0d15-5ba1-b2b7-d9a6dc8a75f1",
+    "question": "Go modules là gì? go.mod hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1037-go-modules-la-gi-go-mod-hoat-dong-the-nao",
+    "slug": "go-modules-la-gi-go-mod-hoat-dong-the-nao-6a8d9f6f-0d15-5ba1-b2b7-d9a6dc8a75f1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Go modules là hệ thống quản lý dependency chính thức của Go, khởi tạo bằng go mod init module-name để tạo file go.mod chứa tên module và danh sách dependencies. Khi cần thêm thư viện, dùng go get package@version, và go mod tidy để tự động dọn dẹp các dependency không còn sử dụng cũng như thêm các dependency bị thiếu."
+      ],
+      "details": [
+        "File go.sum đóng vai trò lock file (tương tự package-lock.json trong Node.js), lưu checksum chính xác của từng dependency để đảm bảo build reproducible.",
+        "Go modules còn hỗ trợ replace directive để trỏ sang local module khi phát triển, và sử dụng GOPROXY để tải dependency qua proxy server nhằm tăng tốc và đảm bảo tính sẵn có."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "1037-go-modules-la-gi-go-mod-hoat-dong-the-nao"
+  },
+  {
+    "id": "7280c601-77b4-59bc-a560-02b08d544741",
+    "question": "Testing trong Go viết thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1041-testing-trong-go-viet-the-nao",
+    "slug": "testing-trong-go-viet-the-nao-7280c601-77b4-59bc-a560-02b08d544741",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "File _test.go, function TestXxx(t *testing.T)."
+      ],
+      "details": [],
+      "points": [
+        "Run: go test ./....",
+        "Go không có built-in assert — dùng if/t.Errorf.",
+        "Table-driven tests là pattern phổ biến."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "// math_test.go\npackage math\n\nimport \"testing\"\n\nfunc TestAdd(t *testing.T) {\n    got := Add(2, 3)\n    want := 5\n    if got != want {\n        t.Errorf(\"Add(2, 3) = %d; want %d\", got, want)\n    }\n}\n\n// Table-driven test\nfunc TestMultiply(t *testing.T) {\n    tests := []struct {\n        name string\n        a, b int\n        want int\n    }{\n        {\"positive\", 3, 4, 12},\n        {\"zero\", 0, 5, 0},\n        {\"negative\", -2, 3, -6},\n    }\n    for _, tt := range tests {\n        t.Run(tt.name, func(t *testing.T) {\n            got := Multiply(tt.a, tt.b)\n            if got != tt.want {\n                t.Errorf(\"Multiply(%d, %d) = %d; want %d\", tt.a, tt.b, got, tt.want)\n            }\n        })\n    }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "1041-testing-trong-go-viet-the-nao"
+  },
+  {
+    "id": "d3d1e86c-3245-5b1a-adb9-25df4664fc09",
+    "question": "Table-driven tests trong Go là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1042-table-driven-tests-trong-go-la-gi",
+    "slug": "table-driven-tests-trong-go-la-gi-d3d1e86c-3245-5b1a-adb9-25df4664fc09",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Pattern test nhiều cases bằng slice of structs — DRY, dễ thêm cases, idiomatic Go.",
+        "Mỗi sub-test chạy độc lập với t.Run, có thể filter: go test -run TestSquare/positive."
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "func TestSquare(t *testing.T) {\n    cases := []struct {\n        name  string\n        input int\n        want  int\n    }{\n        {\"positive\", 5, 25},\n        {\"zero\", 0, 0},\n        {\"negative\", -3, 9},\n    }\n    for _, tc := range cases {\n        t.Run(tc.name, func(t *testing.T) {\n            got := Square(tc.input)\n            if got != tc.want {\n                t.Errorf(\"Square(%d) = %d; want %d\", tc.input, got, tc.want)\n            }\n        })\n    }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "1042-table-driven-tests-trong-go-la-gi"
+  },
+  {
+    "id": "58ed4d91-3be6-5996-9e45-8452f466d804",
+    "question": "Benchmark testing trong Go?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1043-benchmark-testing-trong-go",
+    "slug": "benchmark-testing-trong-go-58ed4d91-3be6-5996-9e45-8452f466d804",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "func BenchmarkXxx(b *testing.B) — Go đo lường performance tự động điều chỉnh số lần chạy."
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "func BenchmarkAdd(b *testing.B) {\n    for i := 0; i < b.N; i++ {\n        Add(100, 200)\n    }\n}\n\n// Benchmark với setup\nfunc BenchmarkSort(b *testing.B) {\n    data := generateLargeSlice(10000)\n    b.ResetTimer() // bỏ qua thời gian setup\n    for i := 0; i < b.N; i++ {\n        sort.Ints(data)\n    }\n}"
+        },
+        {
+          "language": "BASH",
+          "code": "go test -bench=.                # chạy tất cả benchmarks\ngo test -bench=BenchmarkAdd     # chạy benchmark cụ thể\ngo test -bench=. -benchmem      # hiển thị thêm B/op, allocs/op\nbenchstat old.txt new.txt       # so sánh 2 kết quả"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "1043-benchmark-testing-trong-go"
+  },
+  {
+    "id": "7b598e81-0fcc-563c-a315-ec504b24787c",
+    "question": "Mock/stub trong Go thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1044-mock-stub-trong-go-the-nao",
+    "slug": "mock-stub-trong-go-the-nao-7b598e81-0fcc-563c-a315-ec504b24787c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Go khuyến khích mocking dựa trên interface: define một interface nhỏ cho dependency cần mock, sau đó tạo mock struct implement interface đó với behavior tùy chỉnh, ví dụ type MockDB struct { GetFunc func(id int) (*User, error) } rồi gọi m.GetFunc(id) trong method Get."
+      ],
+      "details": [
+        "Cách này tận dụng implicit interface của Go nên không cần sửa code production, chỉ cần đảm bảo mock struct có đủ methods. Các thư viện phổ biến như testify/mock, gomock, hay mockery (tự động generate mock từ interface) giúp giảm boilerplate khi có nhiều methods cần mock.",
+        "Nguyên tắc quan trọng: chỉ mock ở boundary (database, external API) và tránh mock quá nhiều layer vì sẽ làm test mất ý nghĩa."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "1044-mock-stub-trong-go-the-nao"
+  },
+  {
+    "id": "f95ff33d-790b-549a-9db6-285ee1dde1b4",
+    "question": "Profiling Go application thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1046-profiling-go-application-the-nao",
+    "slug": "profiling-go-application-the-nao-f95ff33d-790b-549a-9db6-285ee1dde1b4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Go có hỗ trợ profiling tích hợp sẵn thông qua package net/http/pprof: chỉ cần import _ \"net/http/pprof\" là server tự expose các endpoint profiling tại /debug/pprof/."
+      ],
+      "details": [],
+      "points": [
+        "Để phân tích CPU, dùng go test -cpuprofile=cpu.prof rồi mở bằng go tool pprof cpu.prof; tương tự với memory profiling dùng flag -memprofile=mem.prof để tìm các hàm allocate nhiều bộ nhớ.",
+        "Công cụ pprof hỗ trợ xem flame graph trực quan qua pprof -http=:8080, giúp nhanh chóng nhận diện hot functions, excessive allocations, và goroutine leaks.",
+        "Ngoài ra go tool trace cho phép xem chi tiết execution trace theo timeline, hữu ích khi debug vấn đề concurrency và latency."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "1046-profiling-go-application-the-nao"
+  },
+  {
+    "id": "9324307c-f39b-5262-a703-ff50f2f2e607",
+    "question": "Structured logging trong Go dùng gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1054-structured-logging-trong-go-dung-gi",
+    "slug": "structured-logging-trong-go-dung-gi-9324307c-f39b-5262-a703-ff50f2f2e607",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Từ Go 1.21, stdlib cung cấp package log/slog cho structured logging với cú pháp slog.Info(\"user created\", \"id\", user.ID, \"email\", user.Email), output ra JSON có cấu trúc rõ ràng thay vì chuỗi text khó parse."
+      ],
+      "details": [],
+      "points": [
+        "Slog hỗ trợ các mức log chuẩn (Debug, Info, Warn, Error) và cho phép tùy chỉnh handler để thay đổi format hoặc destination output.",
+        "Trước khi có slog, cộng đồng Go dùng zap (Uber, tối ưu hiệu năng cao nhất) hoặc zerolog (zero allocation) cho structured logging; cả hai vẫn phổ biến trong production vì có thêm nhiều tính năng nâng cao.",
+        "Ưu điểm lớn nhất của structured logging là log dạng key-value pairs dễ dàng được index và query bởi các log aggregator như ELK Stack, Datadog, hay Grafana Loki."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "1054-structured-logging-trong-go-dung-gi"
+  },
+  {
+    "id": "b4984bc6-a3f3-5ec2-bdd4-fbdd45de03e8",
+    "question": "Go vs Node.js khi nào nên chọn Go?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1055-go-vs-node-js-khi-nao-nen-chon-go",
+    "slug": "go-vs-node-js-khi-nao-nen-chon-go-b4984bc6-a3f3-5ec2-bdd4-fbdd45de03e8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Chọn Go khi: CPU-intensive tasks, high concurrency (100K+ connections), microservices, CLI tools, system programming, cần type safety mạnh."
+      ],
+      "details": [],
+      "points": [
+        "Chọn Node.js khi: full-stack JS, rapid prototyping, npm ecosystem, real-time (Socket.io), team quen JS.",
+        "Go nhanh hơn ~10-50x cho compute, Node.js ecosystem lớn hơn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "1055-go-vs-node-js-khi-nao-nen-chon-go"
+  },
+  {
+    "id": "18f983a5-ab5c-5324-a559-b713ba80ccbe",
+    "question": "Struct tags trong Go là gì và dùng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1056-struct-tags-trong-go-la-gi-va-dung-the-nao",
+    "slug": "struct-tags-trong-go-la-gi-va-dung-the-nao-18f983a5-ab5c-5324-a559-b713ba80ccbe",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Struct tags là metadata gắn vào field của struct dưới dạng string literal sau tên field, được đọc tại runtime thông qua reflection.",
+        "Các tags phổ biến:\n- json:\"name,omitempty\" — encoding/json\n- db:\"column_name\" — sqlx, GORM\n- validate:\"required,min=3\" — go-playground/validator\n- yaml:\"field_name\" — gopkg.in/yaml.v3\n- env:\"ENV_VAR\" — envconfig"
+      ],
+      "details": [
+        "Phổ biến nhất là JSON tags và validation tags.",
+        "Tags không ảnh hưởng đến type safety tại compile time, chỉ có ý nghĩa khi package đọc chúng qua reflection."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "type User struct {\n    ID        int       `json:\"id\" db:\"user_id\"`\n    Name      string    `json:\"name\" validate:\"required,min=2\"`\n    Email     string    `json:\"email\" validate:\"required,email\"`\n    Password  string    `json:\"-\"`                      // bỏ qua khi encode JSON\n    CreatedAt time.Time `json:\"created_at,omitempty\"`  // bỏ qua nếu zero value\n}\n\n// Đọc tag lúc runtime\nt := reflect.TypeOf(User{})\nfield, _ := t.FieldByName(\"Email\")\nfmt.Println(field.Tag.Get(\"json\"))     // \"email\"\nfmt.Println(field.Tag.Get(\"validate\")) // \"required,email\""
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "1056-struct-tags-trong-go-la-gi-va-dung-the-nao"
+  },
+  {
+    "id": "49a2d28a-8c4a-5072-bc47-970612040aa1",
+    "question": "errors.Is vs errors.As khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1058-errors-is-vs-errors-as-khac-nhau-the-nao",
+    "slug": "errors-is-vs-errors-as-khac-nhau-the-nao-49a2d28a-8c4a-5072-bc47-970612040aa1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai dùng để kiểm tra error chain (chuỗi lỗi được wrap), nhưng mục đích khác nhau.",
+        "Tóm tắt: errors.Is so sánh giá trị, errors.As so sánh kiểu."
+      ],
+      "details": [
+        "errors.Is(err, target) — kiểm tra identity: err có phải (hoặc wrap) target không? Dùng cho sentinel errors (lỗi được định nghĩa sẵn).",
+        "Luôn dùng %w khi wrap để giữ chain."
+      ],
+      "points": [],
+      "sections": [
+        "errors.As(err, &target) — kiểm tra type: err có phải (hoặc wrap) một lỗi thuộc kiểu cụ thể không? Dùng cho custom error types để truy xuất thêm thông tin."
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "var ErrNotFound = errors.New(\"not found\")\n\n// Wrap lỗi qua nhiều layers\nerr := fmt.Errorf(\"service: %w\", fmt.Errorf(\"repo: %w\", ErrNotFound))\n\nerrors.Is(err, ErrNotFound) // true — dù wrap 2 lần\nerrors.Is(err, ErrNotFound) // false nếu dùng %v thay vì %w"
+        },
+        {
+          "language": "GO",
+          "code": "type ValidationError struct {\n    Field   string\n    Message string\n}\nfunc (e *ValidationError) Error() string {\n    return fmt.Sprintf(\"validation: %s — %s\", e.Field, e.Message)\n}\n\nerr := fmt.Errorf(\"handler: %w\", &ValidationError{Field: \"email\", Message: \"invalid\"})\n\nvar ve *ValidationError\nif errors.As(err, &ve) {\n    fmt.Println(ve.Field)   // \"email\"\n    fmt.Println(ve.Message) // \"invalid\"\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "1058-errors-is-vs-errors-as-khac-nhau-the-nao"
+  },
+  {
+    "id": "f2f5a20c-4494-5d10-8414-22362f19d81d",
+    "question": "t.Helper() trong Go testing dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1060-t-helper-trong-go-testing-dung-de-lam-gi",
+    "slug": "t-helper-trong-go-testing-dung-de-lam-gi-f2f5a20c-4494-5d10-8414-22362f19d81d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "t.Helper() đánh dấu function hiện tại là helper function.",
+        "Khi nào dùng: bất kỳ helper function nào nhận *testing.T hoặc *testing.B đều nên gọi t.Helper() ở dòng đầu tiên."
+      ],
+      "details": [
+        "Khi test fail, Go runtime báo lỗi tại caller của helper (không phải bên trong helper), giúp dễ đọc output test hơn.",
+        "Đây là best practice idiomatic Go."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "// Không có t.Helper() — lỗi báo tại dòng trong assertEq\nfunc assertEq(t *testing.T, got, want int) {\n    if got != want {\n        t.Errorf(\"got %d, want %d\", got, want) // line X in assertEq\n    }\n}\n\n// Có t.Helper() — lỗi báo tại nơi gọi assertEq\nfunc assertEq(t *testing.T, got, want int) {\n    t.Helper() // <-- thêm dòng này\n    if got != want {\n        t.Errorf(\"got %d, want %d\", got, want) // báo tại TestXxx line Y\n    }\n}\n\n// Pattern dùng trong test suite\nfunc TestCalc(t *testing.T) {\n    assertEq(t, Add(2, 3), 5)   // khi fail → báo dòng này\n    assertEq(t, Add(-1, 1), 0)  // khi fail → báo dòng này\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "1060-t-helper-trong-go-testing-dung-de-lam-gi"
+  },
+  {
+    "id": "3a28eb0f-6cbf-5552-a7ea-a94afca17442",
+    "question": "go test -race là gì? Khi nào nên chạy?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1061-go-test-race-la-gi-khi-nao-nen-chay",
+    "slug": "go-test-race-la-gi-khi-nao-nen-chay-3a28eb0f-6cbf-5552-a7ea-a94afca17442",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Race detector (-race flag) là công cụ tích hợp trong Go runtime, phát hiện data race — khi hai goroutines truy cập cùng vùng nhớ đồng thời mà không sync, ít nhất một thao tác là write.",
+        "Overhead: ~5-10x chậm hơn và dùng nhiều memory hơn — không dùng trong production binary."
+      ],
+      "details": [
+        "Race detector hoạt động bằng cách instrument binary tại compile time, theo dõi mọi memory access.",
+        "Best practice: luôn chạy -race trong CI pipeline. Với service high-load, có thể enable race detector trên 1 instance staging riêng để phát hiện race conditions khó reproduce."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# Chạy tests với race detector\ngo test -race ./...\n\n# Chạy binary với race detector\ngo run -race main.go\ngo build -race -o app && ./app\n\n# Output khi phát hiện race\nWARNING: DATA RACE\nWrite at 0x00c0000b4010 by goroutine 7:\n  main.increment()\n      /app/main.go:12\nRead at 0x00c0000b4010 by goroutine 8:\n  main.readValue()\n      /app/main.go:18"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "1061-go-test-race-la-gi-khi-nao-nen-chay"
+  },
+  {
+    "id": "71c12b5b-4e9e-5fd0-bc2e-73713cca09c9",
+    "question": "new và make trong Go khác nhau ở đâu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94002-new-va-make-trong-go-khac-nhau-o-dau",
+    "slug": "new-va-make-trong-go-khac-nhau-o-dau-71c12b5b-4e9e-5fd0-bc2e-73713cca09c9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai đều cấp phát, nhưng cho mục đích khác nhau:"
+      ],
+      "details": [
+        "Hình dung: new([]int) cho *[]int trỏ tới một slice nil — gần như vô dụng. Muốn slice thật thì dùng make."
+      ],
+      "points": [
+        "new(T) — dùng cho mọi kiểu. Cấp phát một T đã zeroed và trả về con trỏ *T. Nó không khởi tạo gì thêm.",
+        "make(T, ...) — chỉ cho slice, map, channel. Khởi tạo cấu trúc bên trong (backing array, hash table, buffer) và trả về giá trị T đã sẵn sàng dùng, không phải con trỏ."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "p := new(int)              // *int, *p == 0\nm := make(map[string]int)  // map dùng được ngay\ns := make([]int, 0, 8)     // len 0, cap 8"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "94002-new-va-make-trong-go-khac-nhau-o-dau"
+  },
+  {
+    "id": "292fd927-f3a7-5c86-8c31-614943eaefe9",
+    "question": "Hàm init là gì, và thứ tự khởi tạo package trong Go diễn ra thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94003-ham-init-la-gi-va-thu-tu-khoi-tao-package-trong-go-dien-ra-the-nao",
+    "slug": "ham-init-la-gi-va-thu-tu-khoi-tao-package-trong-go-dien-ra-the-nao-292fd927-f3a7-5c86-8c31-614943eaefe9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khi một package được nạp, Go khởi tạo theo thứ tự:"
+      ],
+      "details": [
+        "1. Các package được import khởi tạo trước (đệ quy) — mỗi package chỉ một lần.\n2. Biến cấp package được gán, theo thứ tự phụ thuộc (không phải thứ tự viết): biến nào cần biến khác thì biến kia xong trước.\n3. Tất cả hàm init() chạy, theo thứ tự file (được compiler đưa vào).",
+        "init() không tham số, không giá trị trả về, không gọi bằng tay được, và một package/file có thể có nhiều init. Với package main, toàn bộ init chạy xong rồi mới tới main()."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "var cfg = loadConfig() // (2) chạy trước init\n\nfunc init() {          // (3) sau khi biến package sẵn sàng\n    validate(cfg)\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": "94003-ham-init-la-gi-va-thu-tu-khoi-tao-package-trong-go-dien-ra-the-nao"
+  },
+  {
+    "id": "fc639824-cfe7-5234-a10c-62a4939765ad",
+    "question": "iota là gì, và dùng nó cùng typed constant để tạo enum ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94004-iota-la-gi-va-dung-no-cung-typed-constant-de-tao-enum-ra-sao",
+    "slug": "iota-la-gi-va-dung-no-cung-typed-constant-de-tao-enum-ra-sao-fc639824-cfe7-5234-a10c-62a4939765ad",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "iota là bộ đếm compile-time: nó reset về 0 ở đầu mỗi block const và tăng 1 sau mỗi dòng ConstSpec. Kết hợp với một kiểu riêng, đây là cách Go dựng enum."
+      ],
+      "details": [],
+      "points": [
+        "Gán một kiểu (Weekday int) để tạo enum có type an toàn thay vì int trần.",
+        "Một dòng trống-biểu-thức lặp lại biểu thức phía trên (không cần viết lại iota).",
+        "Bỏ qua giá trị đầu bằng _; dịch bit để tạo cờ hoặc bội số."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "type Weekday int\nconst (\n    Sunday Weekday = iota // 0\n    Monday                // 1\n    Tuesday               // 2\n)\n\nconst (\n    _  = iota             // bỏ 0\n    KB = 1 << (10 * iota) // 1<<10\n    MB                    // 1<<20\n)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "94004-iota-la-gi-va-dung-no-cung-typed-constant-de-tao-enum-ra-sao"
+  },
+  {
+    "id": "d94bc6d7-b077-5a15-bfbb-8dc361d7ba4f",
+    "question": "Empty struct struct{} là gì, và khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94005-empty-struct-struct-la-gi-va-khi-nao-nen-dung",
+    "slug": "empty-struct-struct-la-gi-va-khi-nao-nen-dung-d94bc6d7-b077-5a15-bfbb-8dc361d7ba4f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "struct{} là struct không có field nào → chiếm 0 byte. Mọi giá trị struct{}{} share cùng một địa chỉ, nên dùng nó ở đâu chỉ cần \"sự hiện diện\" chứ không cần dữ liệu."
+      ],
+      "details": [
+        "Ba chỗ thường gặp:\n- Set: map[string]struct{} — tiết kiệm hơn map[string]bool vì value không tốn byte.\n- Signal channel: chan struct{} — báo hiệu bằng close/gửi, không mang payload.\n- Method-only type / marker — receiver không cần state."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "set := map[string]struct{}{}\nset[\"a\"] = struct{}{}\n_, ok := set[\"a\"]        // ok == true\n\ndone := make(chan struct{})\nclose(done)              // báo hiệu, không kèm dữ liệu"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "94005-empty-struct-struct-la-gi-va-khi-nao-nen-dung"
+  },
+  {
+    "id": "0c7c7c0e-28ba-5238-80a8-4b261d22caad",
+    "question": "Slice aliasing là gì, và append/copy gây bẫy thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94007-slice-aliasing-la-gi-va-append-copy-gay-bay-the-nao",
+    "slug": "slice-aliasing-la-gi-va-append-copy-gay-bay-the-nao-0c7c7c0e-28ba-5238-80a8-4b261d22caad",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Một slice là view gồm (con trỏ, len, cap) trỏ vào một backing array. Nhiều slice có thể share cùng array → sửa qua slice này, slice kia thấy theo."
+      ],
+      "details": [
+        "Điểm bẫy nằm ở append:\n- Còn cap dư → append ghi in-place lên array chung, có thể đè phần tử của slice khác.\n- Vượt cap → cấp array mới, copy sang, và cắt liên kết với array cũ.",
+        "Vì kết quả phụ thuộc cap, bug rất khó lường. Muốn cô lập, dùng copy sang slice mới, hoặc full-slice expression s[a:b:b] để ép cap = len."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "a := []int{1, 2, 3, 4}\nb := a[:2]           // share array với a, cap = 4\nb = append(b, 99)    // còn cap → ghi đè a[2]!\n// a == [1 2 99 4]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": "94007-slice-aliasing-la-gi-va-append-copy-gay-bay-the-nao"
+  },
+  {
+    "id": "05fc717a-cf06-5197-847f-e9ef9964bd65",
+    "question": "Goroutine leak là gì? Những nguyên nhân hay gặp nhất?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96454-goroutine-leak-la-gi-nhung-nguyen-nhan-hay-gap-nhat",
+    "slug": "goroutine-leak-la-gi-nhung-nguyen-nhan-hay-gap-nhat-05fc717a-cf06-5197-847f-e9ef9964bd65",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Goroutine leak là goroutine được tạo ra nhưng không bao giờ kết thúc — nó chặn vĩnh viễn trên một thao tác không bao giờ hoàn tất. Goroutine đó giữ luôn stack, biến nó tham chiếu và cả connection nó đang cầm, nên GC không thu hồi được gì.",
+        "Sửa dạng này chỉ cần make(chan string, 1) — bên gửi luôn đặt được giá trị rồi thoát, dù không ai đọc."
+      ],
+      "details": [
+        "1. Gửi mà không còn ai nhận — dạng hay gặp nhất. Hàm cha return sớm (timeout, lỗi validate) nên không đọc kết quả, goroutine con chặn mãi ở lệnh gửi.\n2. Nhận từ channel không ai đóng — worker range trên channel mà producer thoát sớm và quên close.\n3. Không nghe tín hiệu hủy — vòng lặp không có nhánh <-ctx.Done(), nên hủy request cũng không dừng được nó.\n4. Chặn trên lock / WaitGroup — wg.Wait() không bao giờ về vì thiếu một lần Done.",
+        "Bốn dạng phổ biến:",
+        "Nguyên tắc chung: không tạo goroutine nếu chưa biết nó sẽ dừng bằng cách nào."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "func fetch(ctx context.Context, url string) (string, error) {\n    ch := make(chan string) // unbuffered: the sender needs a receiver\n    go func() { ch <- httpGet(url) }()\n\n    select {\n    case v := <-ch:\n        return v, nil\n    case <-ctx.Done():\n        return \"\", ctx.Err() // nobody will ever read ch: the goroutine leaks\n    }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": "96454-goroutine-leak-la-gi-nhung-nguyen-nhan-hay-gap-nhat"
+  },
+  {
+    "id": "9cda188f-152a-52d4-a73c-5317ad7c719e",
+    "question": "Đọc/ghi lên channel nil xảy ra chuyện gì? Vì sao có người cố tình gán channel về nil?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96455-doc-ghi-len-channel-nil-xay-ra-chuyen-gi-vi-sao-co-nguoi-co-tinh-gan-channel-ve",
+    "slug": "doc-ghi-len-channel-nil-xay-ra-chuyen-gi-vi-sao-co-nguoi-co-tinh-gan-channel-ve-nil-9cda188f-152a-52d4-a73c-5317ad7c719e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Mọi thao tác gửi hoặc nhận trên channel nil đều chặn vĩnh viễn — không panic, không lỗi, chỉ đứng im. Đây là hành vi được định nghĩa trong spec chứ không phải bug."
+      ],
+      "details": [
+        "Hệ quả trong select: nhánh có channel nil không bao giờ được chọn. Người ta dùng đúng tính chất đó để tắt một nhánh khi nó đã hết việc.",
+        "Tình huống điển hình: gộp hai channel, một cái đóng trước. Channel đã đóng luôn sẵn sàng trả zero value, nên nếu cứ để nguyên thì select sẽ quay vòng liên tục ăn CPU. Gán nó về nil là loại nó khỏi vòng chọn."
+      ],
+      "points": [],
+      "sections": [
+        "Mặt trái: một channel nil do quên khởi tạo (var ch chan int mà không make) sẽ làm goroutine treo im lặng — đây là nguồn goroutine leak khó tìm, vì không có thông báo lỗi nào."
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "func merge(a, b <-chan int) <-chan int {\n    out := make(chan int)\n    go func() {\n        defer close(out)\n        for a != nil || b != nil {\n            select {\n            case v, ok := <-a:\n                if !ok {\n                    a = nil // disable this case, stop spinning on a closed channel\n                    continue\n                }\n                out <- v\n            case v, ok := <-b:\n                if !ok {\n                    b = nil\n                    continue\n                }\n                out <- v\n            }\n        }\n    }()\n    return out\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": "96455-doc-ghi-len-channel-nil-xay-ra-chuyen-gi-vi-sao-co-nguoi-co-tinh-gan-channel-ve"
+  },
+  {
+    "id": "2a367248-cc2d-53fb-8d62-67853b165906",
+    "question": "Làm sao dừng một pipeline goroutine đang chạy dở? done channel và ctx.Done() khác nhau ở đâu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96456-lam-sao-dung-mot-pipeline-goroutine-dang-chay-do-done-channel-va-ctx-done-khac-n",
+    "slug": "lam-sao-dung-mot-pipeline-goroutine-dang-chay-do-done-channel-va-ctx-done-khac-nhau-o-dau-2a367248-cc2d-53fb-8d62-67853b165906",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Vấn đề của pipeline là hạ nguồn có thể dừng sớm (đủ dữ liệu, người dùng hủy request, lỗi), còn thượng nguồn thì vẫn đang chặn ở lệnh gửi.",
+        "done channel là cơ chế thô: một chan struct{}, ai cũng chỉ đọc, và close(done) phát tín hiệu broadcast tới mọi bên đang đọc cùng lúc. Đơn giản, không phụ thuộc package nào."
+      ],
+      "details": [
+        "Muốn dừng sạch, mọi thao tác gửi phải đi kèm một nhánh thoát.",
+        "context.Context là done channel cộng thêm ba thứ: deadline (tự hủy khi hết giờ), Err() cho biết lý do (context.Canceled hay DeadlineExceeded), và khả năng lan truyền qua biên API — net/http, database/sql, gRPC đều nhận ctx nên hủy được lan xuống tận query đang chạy.",
+        "Thực tế trong service: dùng context ở mọi hàm có I/O (quy ước ctx là tham số đầu tiên); done channel chỉ còn hợp lý cho helper nội bộ nhỏ, không đi qua biên package nào."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "func gen(ctx context.Context, nums ...int) <-chan int {\n    out := make(chan int)\n    go func() {\n        defer close(out)\n        for _, n := range nums {\n            select {\n            case out <- n:\n            case <-ctx.Done(): // downstream gave up: exit instead of blocking\n                return\n            }\n        }\n    }()\n    return out\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": "96456-lam-sao-dung-mot-pipeline-goroutine-dang-chay-do-done-channel-va-ctx-done-khac-n"
+  },
+  {
+    "id": "13cea94a-e5df-518d-8e32-5707b79c9512",
+    "question": "Có 10.000 URL cần gọi, làm sao giới hạn chỉ 20 request chạy song song?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96457-co-10-000-url-can-goi-lam-sao-gioi-han-chi-20-request-chay-song-song",
+    "slug": "co-10-000-url-can-goi-lam-sao-gioi-han-chi-20-request-chay-song-song-13cea94a-e5df-518d-8e32-5707b79c9512",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Tạo 10.000 goroutine cùng lúc là chạy được về mặt kỹ thuật nhưng sẽ mở 10.000 kết nối, làm đối tác trả 429 hoặc chính service bị hết file descriptor. Cần chặn trần số việc chạy đồng thời.",
+        "errgroup.WithContext hủy ctx ngay khi có lỗi đầu tiên, nên các request còn lại tự dừng thay vì chạy nốt vô ích."
+      ],
+      "details": [
+        "Cách 1 — semaphore bằng buffered channel. Buffer chính là số slot; lấy token trước khi chạy, trả lại khi xong:",
+        "Cách 3 — worker pool cố định: chạy sẵn 20 goroutine cùng đọc từ một job channel. Phù hợp khi việc chạy dài và muốn tái dùng tài nguyên đã cấp (connection, buffer) thay vì tạo mới mỗi lần."
+      ],
+      "points": [],
+      "sections": [
+        "Cách 2 — errgroup với SetLimit. Gọn hơn và gom được lỗi:"
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "sem := make(chan struct{}, 20)\nvar wg sync.WaitGroup\nfor _, u := range urls {\n    wg.Add(1)\n    sem <- struct{}{} // blocks when 20 are in flight\n    go func(u string) {\n        defer wg.Done()\n        defer func() { <-sem }()\n        fetch(u)\n    }(u)\n}\nwg.Wait()"
+        },
+        {
+          "language": "GO",
+          "code": "g, ctx := errgroup.WithContext(ctx)\ng.SetLimit(20)\nfor _, u := range urls {\n    g.Go(func() error { return fetch(ctx, u) })\n}\nif err := g.Wait(); err != nil { // first non-nil error; ctx is cancelled\n    return err\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": "96457-co-10-000-url-can-goi-lam-sao-gioi-han-chi-20-request-chay-song-song"
+  },
+  {
+    "id": "7de5aff9-8f95-5d6d-b255-65e58e7520a0",
+    "question": "sync.Once giải quyết vấn đề gì? Nếu hàm bên trong once.Do panic thì sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96458-sync-once-giai-quyet-van-de-gi-neu-ham-ben-trong-once-do-panic-thi-sao",
+    "slug": "sync-once-giai-quyet-van-de-gi-neu-ham-ben-trong-once-do-panic-thi-sao-7de5aff9-8f95-5d6d-b255-65e58e7520a0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "sync.Once bảo đảm một đoạn khởi tạo chạy đúng một lần dù có bao nhiêu goroutine gọi tới. Kiểm tra bằng biến bool thường là sai: hai goroutine có thể cùng thấy false và cùng khởi tạo.",
+        "Nếu hàm panic: tài liệu sync nói rõ — Do coi như hàm đã chạy xong, các lần gọi sau sẽ không chạy lại. Panic được truyền lên cho người gọi đầu tiên, nhưng nếu người đó recover, mọi lời gọi tiếp theo sẽ nhận về một object khởi tạo dở mà không có cảnh báo nào."
+      ],
+      "details": [
+        "Điểm quan trọng thứ hai: Do chặn cho tới khi lần gọi đầu tiên trả về. Nên mọi goroutine tới sau đều thấy trạng thái đã khởi tạo xong, không có chuyện dùng phải object đang xây dở.",
+        "Vì vậy: chỉ đặt trong Once những việc không thể fail (dựng struct, compile regexp hằng). Việc có thể lỗi và cần thử lại (mở kết nối DB, đọc file config) thì dùng mutex cộng cờ trạng thái để còn retry được. Go 1.21 bổ sung sync.OnceValue / OnceValues cho trường hợp khởi tạo có trả về giá trị."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "var (\n    once   sync.Once\n    client *redis.Client\n)\n\nfunc Client() *redis.Client {\n    once.Do(func() { client = redis.NewClient(opts) })\n    return client\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": "96458-sync-once-giai-quyet-van-de-gi-neu-ham-ben-trong-once-do-panic-thi-sao"
+  },
+  {
+    "id": "3d0ad949-610b-54dc-ac78-01ad157b7cac",
+    "question": "context.WithValue nên dùng cho loại dữ liệu nào? Vì sao key không được để kiểu string?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96459-context-withvalue-nen-dung-cho-loai-du-lieu-nao-vi-sao-key-khong-duoc-de-kieu-st",
+    "slug": "context-withvalue-nen-dung-cho-loai-du-lieu-nao-vi-sao-key-khong-duoc-de-kieu-string-3d0ad949-610b-54dc-ac78-01ad157b7cac",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Tài liệu context giới hạn rõ: WithValue chỉ dành cho dữ liệu theo phạm vi một request đi xuyên qua biên process/API — request ID, trace ID, danh tính người dùng đã xác thực, locale. Không dùng nó để truyền tham số của hàm, và không dùng thay dependency injection: tham số nằm trong context thì compiler không kiểm tra được, thiếu là panic hoặc chạy sai lúc runtime.",
+        "Luôn bọc bằng cặp hàm setter/getter như trên để nơi gọi không phải tự ép kiểu."
+      ],
+      "details": [
+        "Về key: WithValue so key bằng == trên any. Nếu dùng \"user_id\" kiểu string thì bất kỳ package nào khác cũng có thể ghi đè đúng key đó — hai thư viện độc lập vô tình giẫm lên nhau. Cách chuẩn là kiểu riêng, không export, nên bên ngoài package không thể tạo ra key trùng:",
+        "Hai lưu ý nữa: giá trị lưu vào phải bất biến và an toàn khi nhiều goroutine đọc; và ctx.Value duyệt ngược chuỗi context cha nên chi phí tăng theo số tầng — không nhét hàng chục giá trị vào một chain."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "type ctxKey struct{}\n\nvar userKey ctxKey\n\nfunc WithUser(ctx context.Context, u *User) context.Context {\n    return context.WithValue(ctx, userKey, u)\n}\n\nfunc UserFrom(ctx context.Context) (*User, bool) {\n    u, ok := ctx.Value(userKey).(*User)\n    return u, ok\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": "96459-context-withvalue-nen-dung-cho-loai-du-lieu-nao-vi-sao-key-khong-duoc-de-kieu-st"
+  },
+  {
+    "id": "c0402179-da85-505e-a936-68edc8307a31",
+    "question": "Những lỗi hay gặp khi dùng sync.WaitGroup là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96460-nhung-loi-hay-gap-khi-dung-sync-waitgroup-la-gi",
+    "slug": "nhung-loi-hay-gap-khi-dung-sync-waitgroup-la-gi-c0402179-da85-505e-a936-68edc8307a31",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "2. Truyền WaitGroup theo giá trị. func worker(wg sync.WaitGroup) nhận một bản sao; Done giảm bộ đếm của bản sao, bản gốc không bao giờ về 0 → Wait treo mãi. Phải truyền *sync.WaitGroup. go vet bắt lỗi này qua analyzer copylock."
+      ],
+      "details": [
+        "3. Thiếu Done trên nhánh lỗi. Có return sớm mà không giảm bộ đếm → treo. Luôn đặt defer wg.Done() ở dòng đầu của goroutine.",
+        "4. Done nhiều hơn Add → panic: sync: negative WaitGroup counter.",
+        "5. Tái dùng khi Wait chưa xong → panic: WaitGroup is reused before previous Wait has returned.",
+        "defer Done()"
+      ],
+      "points": [
+        "Gọi Add bên trong goroutine. Tài liệu yêu cầu Add phải xảy ra trước** Wait.",
+        "Đặt Add(1) trong goroutine thì Wait có thể chạy khi bộ đếm vẫn là 0 và trả về ngay, bỏ qua toàn bộ công việc."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "for _, j := range jobs {\n    go func(j Job) {\n        wg.Add(1) // wrong: Wait may already have returned\n        defer wg.Done()\n        run(j)\n    }(j)\n}\nwg.Wait()"
+        },
+        {
+          "language": "GO",
+          "code": "for _, j := range jobs {\n    wg.Go(func() { run(j) })\n}\nwg.Wait()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": "96460-nhung-loi-hay-gap-khi-dung-sync-waitgroup-la-gi"
+  },
+  {
+    "id": "1a468d92-496e-5efc-8085-b860ae8f8dc8",
+    "question": "Vì sao không nên chạy production với http.ListenAndServe mặc định? Cấu hình timeout thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96504-vi-sao-khong-nen-chay-production-voi-http-listenandserve-mac-dinh-cau-hinh-timeo",
+    "slug": "vi-sao-khong-nen-chay-production-voi-http-listenandserve-mac-dinh-cau-hinh-timeout-the-nao-1a468d92-496e-5efc-8085-b860ae8f8dc8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì http.Server mặc định có mọi timeout bằng 0, nghĩa là không giới hạn.",
+        "Điểm hay bị hỏi thêm:\n- WriteTimeout bao trùm cả thời gian handler xử lý, nên endpoint tải file lớn / streaming cần server riêng hoặc http.ResponseController để nới hạn cho từng request.\n- Timeout ở tầng server là hard deadline trên connection, khác context của request — muốn dừng sớm công việc bên trong vẫn phải tôn trọng r.Context().\n- Với client, http.DefaultClient cũng không có timeout; luôn tự tạo &http.Client{Timeout: ...} khi gọi service ngoài."
+      ],
+      "details": [
+        "Một client chậm (hoặc cố tình giữ kết nối) có thể chiếm goroutine và file descriptor vô hạn định — dạng tấn công Slowloris."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "srv := &http.Server{\n    Addr:              \":8080\",\n    Handler:           mux,\n    ReadHeaderTimeout: 5 * time.Second,  // chặn Slowloris\n    ReadTimeout:       15 * time.Second, // toàn bộ request kể cả body\n    WriteTimeout:      30 * time.Second, // tính từ khi đọc xong header\n    IdleTimeout:       60 * time.Second, // keep-alive rảnh\n    MaxHeaderBytes:    1 << 20,\n}\nlog.Fatal(srv.ListenAndServe())"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": "96504-vi-sao-khong-nen-chay-production-voi-http-listenandserve-mac-dinh-cau-hinh-timeo"
+  },
+  {
+    "id": "84210d8e-ca49-59c6-973c-c95d3b095885",
+    "question": "Khi chain nhiều middleware func(http.Handler) http.Handler, thứ tự chạy ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96505-khi-chain-nhieu-middleware-func-http-handler-http-handler-thu-tu-chay-ra-sao",
+    "slug": "khi-chain-nhieu-middleware-func-http-handler-http-handler-thu-tu-chay-ra-sao-84210d8e-ca49-59c6-973c-c95d3b095885",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Hệ quả thực tế:\n- Middleware đo thời gian / recover panic phải ở ngoài cùng mới bao được toàn bộ.\n- Middleware xác thực đặt trước middleware chỉ dành cho user đã đăng nhập; nếu đặt sau thì handler đã chạy rồi.\n- Muốn truyền dữ liệu xuống dưới (user id, request id) thì gắn vào r = r.WithContext(context.WithValue(...)) rồi chuyển r mới cho next, vì *http.Request là bất biến theo quy ước.\n- Muốn ghi log status code phải bọc http.ResponseWriter bằng struct riêng để bắt WriteHeader; cách chuẩn là nhúng interface gốc rồi override đúng method cần."
+      ],
+      "details": [
+        "Hàm helper chain(h, mws...) duyệt slice ngược để thứ tự khai báo đọc từ trái sang phải đúng như thứ tự chạy."
+      ],
+      "points": [],
+      "sections": [
+        "Middleware bọc từ trong ra ngoài, nhưng khi request tới thì chạy từ ngoài vào trong, rồi phần sau lời gọi next chạy ngược lại — giống ngăn xếp."
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "func logging(next http.Handler) http.Handler {\n    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {\n        start := time.Now()\n        next.ServeHTTP(w, r)              // đi sâu vào trong\n        log.Printf(\"%s %s %v\", r.Method, r.URL.Path, time.Since(start))\n    })\n}\n\nh := logging(auth(rateLimit(handler)))\n// vào:  logging -> auth -> rateLimit -> handler\n// ra:   handler -> rateLimit -> auth -> logging"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": "96505-khi-chain-nhieu-middleware-func-http-handler-http-handler-thu-tu-chay-ra-sao"
+  },
+  {
+    "id": "227c4696-8558-5ba3-a9b1-85403450f451",
+    "question": "Vì sao gán giá trị struct vào interface báo lỗi \"method has pointer receiver\"?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96506-vi-sao-gan-gia-tri-struct-vao-interface-bao-loi-method-has-pointer-receiver",
+    "slug": "vi-sao-gan-gia-tri-struct-vao-interface-bao-loi-method-has-pointer-receiver-227c4696-8558-5ba3-a9b1-85403450f451",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì method set của T chỉ gồm method có value receiver, còn method set của *T gồm cả hai.",
+        "Lý do sâu hơn: gọi r.Save() trên biến addressable, compiler tự thêm &r. Nhưng giá trị nằm trong interface là bản sao không addressable, không lấy địa chỉ được, nên Go từ chối ngay lúc biên dịch thay vì cho sửa một bản sao rồi mất thay đổi."
+      ],
+      "details": [
+        "Nếu interface đòi một method khai báo trên *T thì chỉ con trỏ mới thỏa mãn.",
+        "Cách chọn receiver:\n- Dùng pointer receiver khi method sửa state, hoặc struct lớn, hoặc chứa sync.Mutex (copy mutex là lỗi, go vet báo).\n- Dùng value receiver cho kiểu nhỏ, bất biến (time.Time).\n- Nhất quán trong cùng một kiểu — trộn hai loại làm method set khó suy luận và dễ dính đúng lỗi trên.",
+        "Mẹo kiểm tra tại thời điểm biên dịch: var _ Store = (*Repo)(nil)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "type Store interface{ Save() error }\n\ntype Repo struct{ n int }\n\nfunc (r *Repo) Save() error { r.n++; return nil }\n\nvar s Store = Repo{}   // lỗi biên dịch: Save has pointer receiver\nvar ok Store = &Repo{} // đúng"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": "96506-vi-sao-gan-gia-tri-struct-vao-interface-bao-loi-method-has-pointer-receiver"
+  },
+  {
+    "id": "a7572fe5-76f8-50c1-9648-2074055b1715",
+    "question": "Duyệt map trong Go có giữ thứ tự không? Muốn kết quả ổn định thì làm sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96507-duyet-map-trong-go-co-giu-thu-tu-khong-muon-ket-qua-on-dinh-thi-lam-sao",
+    "slug": "duyet-map-trong-go-co-giu-thu-tu-khong-muon-ket-qua-on-dinh-thi-lam-sao-a7572fe5-76f8-50c1-9648-2074055b1715",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý:\n- Test so sánh chuỗi output sinh từ map sẽ lúc pass lúc fail.\n- Sinh câu SQL hay chữ ký request (HMAC) từ map mà không sắp khóa sẽ cho kết quả khác nhau mỗi lần.\n- encoding/json là ngoại lệ: Marshal tự sắp xếp khóa map, nên JSON output vẫn ổn định."
+      ],
+      "details": [
+        "Sửa map trong lúc range: khóa mới thêm có thể xuất hiện hoặc không; khóa vừa delete chắc chắn không được duyệt tới nữa. Xóa trong lúc duyệt là hợp lệ, còn thêm thì nên tránh."
+      ],
+      "points": [],
+      "sections": [
+        "Không. Spec quy định thứ tự lặp trên map là không xác định, và runtime còn cố tình ngẫu nhiên hóa điểm bắt đầu mỗi lần chạy để lập trình viên không lỡ phụ thuộc vào nó.",
+        "Muốn ổn định thì sắp xếp khóa rồi duyệt:"
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "m := map[string]int{\"a\": 1, \"b\": 2, \"c\": 3}\nfor k, v := range m {\n    fmt.Println(k, v) // thứ tự khác nhau giữa các lần chạy\n}"
+        },
+        {
+          "language": "GO",
+          "code": "keys := make([]string, 0, len(m))\nfor k := range m {\n    keys = append(keys, k)\n}\nsort.Strings(keys)\nfor _, k := range keys {\n    fmt.Println(k, m[k])\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": "96507-duyet-map-trong-go-co-giu-thu-tu-khong-muon-ket-qua-on-dinh-thi-lam-sao"
+  },
+  {
+    "id": "5e2ffdfd-c90a-5a5d-960d-93388202cb56",
+    "question": "Table-driven test dùng t.Run subtest có lợi gì? t.Parallel trong subtest có bẫy gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96508-table-driven-test-dung-t-run-subtest-co-loi-gi-t-parallel-trong-subtest-co-bay-g",
+    "slug": "table-driven-test-dung-t-run-subtest-co-loi-gi-t-parallel-trong-subtest-co-bay-gi-5e2ffdfd-c90a-5a5d-960d-93388202cb56",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý:\n- Trước Go 1.22, biến loop tc dùng chung một ô nhớ; kết hợp t.Parallel thì subtest chỉ thấy phần tử cuối cùng — nên phải viết tc := tc. Từ Go 1.22 mỗi vòng lặp có biến mới nên bẫy này biến mất, nhưng vẫn hay bị hỏi vì code cũ đầy dòng tc := tc.\n- Subtest gọi t.Parallel sẽ tạm dừng và chỉ chạy sau khi hàm test cha trả về. Vì vậy defer cleanup() đặt ở hàm cha sẽ chạy trước khi subtest xong — dùng t.Cleanup thay thế.\n- Đừng dùng t.Fatal bên trong goroutine phụ; chỉ hợp lệ trên goroutine của chính test đó."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "t.Run biến mỗi case thành một subtest độc lập: có tên riêng trong output, chạy lẻ được bằng go test -run TestX/case_name, và một case fail không dừng các case còn lại."
+      ],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "func TestSlugify(t *testing.T) {\n    tests := []struct {\n        name, in, want string\n    }{\n        {\"space\", \"hello world\", \"hello-world\"},\n        {\"upper\", \"Go Lang\", \"go-lang\"},\n    }\n    for _, tc := range tests {\n        t.Run(tc.name, func(t *testing.T) {\n            t.Parallel()\n            if got := Slugify(tc.in); got != tc.want {\n                t.Errorf(\"Slugify(%q) = %q, want %q\", tc.in, got, tc.want)\n            }\n        })\n    }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": "96508-table-driven-test-dung-t-run-subtest-co-loi-gi-t-parallel-trong-subtest-co-bay-g"
+  },
+  {
+    "id": "4ba2035c-e568-5dc5-a36e-44243cf84405",
+    "question": "omitempty trong struct tag hoạt động thế nào? Vì sao nó không bỏ được struct rỗng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96509-omitempty-trong-struct-tag-hoat-dong-the-nao-vi-sao-no-khong-bo-duoc-struct-rong",
+    "slug": "omitempty-trong-struct-tag-hoat-dong-the-nao-vi-sao-no-khong-bo-duoc-struct-rong-4ba2035c-e568-5dc5-a36e-44243cf84405",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "omitempty bỏ field khỏi JSON khi giá trị là empty value theo định nghĩa của encoding/json: false, 0, con trỏ/interface nil, và string/array/slice/map có độ dài 0.",
+        "Hệ quả hay gặp khi làm API:\n- Page: 0 và \"không truyền page\" ra JSON giống hệt nhau. Muốn phân biệt \"0\" với \"không có\" thì dùng con trỏ (*int) hoặc json.RawMessage, hoặc kiểu wrapper sql.NullInt64.\n- Muốn bỏ struct rỗng thì đổi sang *TimeRange, hoặc tự cài MarshalJSON.\n- Slice nil cho ra null, slice rỗng []T{} cho ra [] — frontend hay lỗi ở chỗ này, nên khởi tạo make([]T, 0) trước khi trả về.\n- Tag json:\"-\" bỏ hẳn field (dùng cho password hash); json:\"-,\" mới là field tên đúng dấu gạch ngang.\n- Field không export (chữ thường) luôn bị bỏ qua cả khi encode lẫn decode, không cần tag."
+      ],
+      "details": [
+        "Danh sách này không bao gồm struct.",
+        "Go 1.24 thêm tùy chọn omitzero để bỏ field khi bằng zero value của kiểu, xử lý đúng cả struct và time.Time."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "type Filter struct {\n    Page  int       `json:\"page,omitempty\"`\n    Query string    `json:\"query,omitempty\"`\n    Range TimeRange `json:\"range,omitempty\"` // KHÔNG bao giờ bị bỏ\n    Meta  *Meta     `json:\"meta,omitempty\"`  // bị bỏ khi nil\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": "96509-omitempty-trong-struct-tag-hoat-dong-the-nao-vi-sao-no-khong-bo-duoc-struct-rong"
+  },
+  {
+    "id": "73ad9c0a-4ed2-539f-8a79-691356dac18b",
+    "question": "Chuyển đổi string và []byte có tốn kém không? Khi nào cần tránh?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96510-chuyen-doi-string-va-byte-co-ton-kem-khong-khi-nao-can-tranh",
+    "slug": "chuyen-doi-string-va-byte-co-ton-kem-khong-khi-nao-can-tranh-73ad9c0a-4ed2-539f-8a79-691356dac18b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "string trong Go là bất biến, []byte thì không — nên []byte(s) và string(b) thường phải cấp phát bộ nhớ mới và copy toàn bộ dữ liệu.",
+        "Các trường hợp compiler tối ưu, không cấp phát:\n- m[string(b)] — tra map bằng byte slice.\n- for i, r := range string(b) — duyệt rune.\n- So sánh string(b) == \"literal\"."
+      ],
+      "details": [
+        "Trên đường xử lý request nóng, việc này tạo áp lực GC rõ rệt.",
+        "Cách giảm chuyển đổi trong service:\n- Nối chuỗi trong vòng lặp bằng strings.Builder (hoặc bytes.Buffer) thay vì s += part, vì mỗi phép += tạo chuỗi mới.\n- Dùng API nhận []byte xuyên suốt khi dữ liệu vốn là byte (đọc body, encode JSON) thay vì đổi qua lại.\n- Cấp phát trước dung lượng: b := make([]byte, 0, n), hoặc sb.Grow(n).",
+        "Lưu ý về ngữ nghĩa, không chỉ hiệu năng: len(s) trả số byte, không phải số ký tự; s[i] trả một byte. Với chuỗi tiếng Việt hay emoji, phải duyệt bằng range (ra rune) hoặc dùng utf8.RuneCountInString."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "GO",
+          "code": "b := []byte(s)   // cấp phát + copy\ns2 := string(b)  // cấp phát + copy lần nữa"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": "96510-chuyen-doi-string-va-byte-co-ton-kem-khong-khi-nao-can-tranh"
+  },
+  {
+    "id": "6258b242-954a-5be8-ac20-a9e87df82ad8",
+    "question": "Mutex và RWMutex dùng khi nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mutex-va-rwmutex-dung-khi-nao-6258b242-954a-5be8-ac20-a9e87df82ad8",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": null
+  },
+  {
+    "id": "d6803e31-06fe-53bb-a507-dd478b5180b9",
+    "question": "Context package dùng để làm gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "context-package-dung-de-lam-gi-d6803e31-06fe-53bb-a507-dd478b5180b9",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": null
+  },
+  {
+    "id": "48e74265-c51f-5a76-8502-01acaf64122f",
+    "question": "Worker pool pattern trong Go?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "worker-pool-pattern-trong-go-48e74265-c51f-5a76-8502-01acaf64122f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": null
+  },
+  {
+    "id": "0987afb9-c800-5453-92a1-8d39e47e792c",
+    "question": "Errgroup dùng khi nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "errgroup-dung-khi-nao-0987afb9-c800-5453-92a1-8d39e47e792c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 76,
+    "sourceSlug": null
+  },
+  {
+    "id": "18874573-f8ee-5280-be26-57d3bda2fecd",
+    "question": "gRPC trong Go dùng khi nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "grpc-trong-go-dung-khi-nao-18874573-f8ee-5280-be26-57d3bda2fecd",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 77,
+    "sourceSlug": null
+  },
+  {
+    "id": "b2a37483-8df1-5889-9386-01efce8a5864",
+    "question": "Graceful shutdown trong Go server thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "graceful-shutdown-trong-go-server-the-nao-b2a37483-8df1-5889-9386-01efce8a5864",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 78,
+    "sourceSlug": null
+  },
+  {
+    "id": "bfbde68e-8f8f-548b-88d4-6602f5482f6d",
+    "question": "Rate limiter implement trong Go?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "rate-limiter-implement-trong-go-bfbde68e-8f8f-548b-88d4-6602f5482f6d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 79,
+    "sourceSlug": null
+  },
+  {
+    "id": "8b8e6d8c-8464-541e-a17f-d6857170fad8",
+    "question": "Functional options pattern trong Go?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "functional-options-pattern-trong-go-8b8e6d8c-8464-541e-a17f-d6857170fad8",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 80,
+    "sourceSlug": null
+  },
+  {
+    "id": "6ffd9f41-05a7-53d5-acbf-0e16d58dc631",
+    "question": "Dependency injection trong Go thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dependency-injection-trong-go-the-nao-6ffd9f41-05a7-53d5-acbf-0e16d58dc631",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 81,
+    "sourceSlug": null
+  },
+  {
+    "id": "528859ef-8a01-5794-a0e1-e868a48d87f4",
+    "question": "Pipeline pattern với channels?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "pipeline-pattern-voi-channels-528859ef-8a01-5794-a0e1-e868a48d87f4",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 82,
+    "sourceSlug": null
+  },
+  {
+    "id": "235b91f0-e782-5c6c-a5bb-c4780294f358",
+    "question": "Go production best practices?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "go-production-best-practices-235b91f0-e782-5c6c-a5bb-c4780294f358",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 83,
+    "sourceSlug": null
+  },
+  {
+    "id": "21d87d34-4d53-508e-98f9-7c008400376a",
+    "question": "Docker image cho Go app tối ưu thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "docker-image-cho-go-app-toi-uu-the-nao-21d87d34-4d53-508e-98f9-7c008400376a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 84,
+    "sourceSlug": null
+  },
+  {
+    "id": "66670f5b-c235-54e5-8ad5-7995390775b8",
+    "question": "Comparable constraint và type sets trong generics Go là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "comparable-constraint-va-type-sets-trong-generics-go-la-gi-66670f5b-c235-54e5-8ad5-7995390775b8",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 85,
+    "sourceSlug": null
+  },
+  {
+    "id": "fd6f20e9-a381-5bb1-94bb-19f544d89d62",
+    "question": "Sentinel errors và custom error types — khi nào dùng cái nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "sentinel-errors-va-custom-error-types-khi-nao-dung-cai-nao-fd6f20e9-a381-5bb1-94bb-19f544d89d62",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 86,
+    "sourceSlug": null
+  },
+  {
+    "id": "1f075f4a-4b30-5b21-b45e-2a8ef85b959d",
+    "question": "Observability trong Go service: metrics với Prometheus thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "observability-trong-go-service-metrics-voi-prometheus-the-nao-1f075f4a-4b30-5b21-b45e-2a8ef85b959d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 87,
+    "sourceSlug": null
+  },
+  {
+    "id": "92c1398c-a157-5b33-94e7-e232817ced03",
+    "question": "gofmt vs goimports vs golangci-lint — khác nhau thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "gofmt-vs-goimports-vs-golangci-lint-khac-nhau-the-nao-92c1398c-a157-5b33-94e7-e232817ced03",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 88,
+    "sourceSlug": null
+  },
+  {
+    "id": "4dd98a33-a56f-56bf-b7c0-3a4f151e360d",
+    "question": "Vì sao một error chứa con trỏ nil lại không bằng nil trong Go?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vi-sao-mot-error-chua-con-tro-nil-lai-khong-bang-nil-trong-go-4dd98a33-a56f-56bf-b7c0-3a4f151e360d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 89,
+    "sourceSlug": null
+  },
+  {
+    "id": "38da4f12-0e61-5043-b0ed-38f82581d1d8",
+    "question": "Vì sao không được copy sync.Mutex? go vet phát hiện lỗi này bằng cách nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vi-sao-khong-duoc-copy-sync-mutex-go-vet-phat-hien-loi-nay-bang-cach-nao-38da4f12-0e61-5043-b0ed-38f82581d1d8",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 90,
+    "sourceSlug": null
+  },
+  {
+    "id": "1e5eaf34-15f7-5193-ad16-99fa5f19317a",
+    "question": "Khi nào RWMutex không nhanh hơn Mutex? Vì sao gọi RLock lồng nhau có thể deadlock?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-rwmutex-khong-nhanh-hon-mutex-vi-sao-goi-rlock-long-nhau-co-the-deadlock-1e5eaf34-15f7-5193-ad16-99fa5f19317a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 91,
+    "sourceSlug": null
+  },
+  {
+    "id": "d1138f02-6102-53e3-b951-d535e7018bd8",
+    "question": "Data race khác race condition thế nào? Go memory model nói gì, có tồn tại \"benign race\" không?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "data-race-khac-race-condition-the-nao-go-memory-model-noi-gi-co-ton-tai-benign-race-khong-d1138f02-6102-53e3-b951-d535e7018bd8",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 92,
+    "sourceSlug": null
+  },
+  {
+    "id": "906f1da2-ec2a-57fa-b5e0-991406c931ac",
+    "question": "Scheduler G-M-P của Go hoạt động thế nào? Trong container nên đặt GOMAXPROCS bao nhiêu?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "scheduler-g-m-p-cua-go-hoat-dong-the-nao-trong-container-nen-dat-gomaxprocs-bao-nhieu-906f1da2-ec2a-57fa-b5e0-991406c931ac",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 93,
+    "sourceSlug": null
+  },
+  {
+    "id": "17c12183-8854-5ce0-982e-426c9815ca57",
+    "question": "Nghi ngờ service Go bị goroutine leak trên production, bạn điều tra thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "nghi-ngo-service-go-bi-goroutine-leak-tren-production-ban-dieu-tra-the-nao-17c12183-8854-5ce0-982e-426c9815ca57",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 94,
+    "sourceSlug": null
+  },
+  {
+    "id": "b7a922c1-8c26-515e-9e38-c63c43d178ac",
+    "question": "Khi nào **không** nên dùng generics trong Go? Nêu tiêu chí quyết định.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-khong-nen-dung-generics-trong-go-neu-tieu-chi-quyet-dinh-b7a922c1-8c26-515e-9e38-c63c43d178ac",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 95,
+    "sourceSlug": null
+  },
+  {
+    "id": "d791bf8c-f2e5-51ac-ad44-ae94db295eeb",
+    "question": "Escape analysis là gì? Làm sao biết một biến được cấp phát trên stack hay heap?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "escape-analysis-la-gi-lam-sao-biet-mot-bien-duoc-cap-phat-tren-stack-hay-heap-d791bf8c-f2e5-51ac-ad44-ae94db295eeb",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 96,
+    "sourceSlug": null
+  },
+  {
+    "id": "f5d26df8-1537-558a-99f6-ca36f5d88cd5",
+    "question": "sync.Pool giải quyết vấn đề gì? Khi nào dùng và khi nào không?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "sync-pool-giai-quyet-van-de-gi-khi-nao-dung-va-khi-nao-khong-f5d26df8-1537-558a-99f6-ca36f5d88cd5",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 97,
+    "sourceSlug": null
+  },
+  {
+    "id": "64cfbc23-f24a-51d2-8717-269d8613270e",
+    "question": "Viết benchmark trong Go sai ở đâu thì ra số vô nghĩa? b.ResetTimer dùng khi nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "viet-benchmark-trong-go-sai-o-dau-thi-ra-so-vo-nghia-b-resettimer-dung-khi-nao-64cfbc23-f24a-51d2-8717-269d8613270e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 98,
+    "sourceSlug": null
+  },
+  {
+    "id": "3a222e6f-eb91-5ad4-9fe8-7880b18022d3",
+    "question": "Service Go ăn CPU/RAM bất thường trên production, bạn dùng pprof điều tra thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "service-go-an-cpu-ram-bat-thuong-tren-production-ban-dung-pprof-dieu-tra-the-nao-3a222e6f-eb91-5ad4-9fe8-7880b18022d3",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 99,
+    "sourceSlug": null
+  }
+]

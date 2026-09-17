@@ -1,0 +1,2277 @@
+[
+  {
+    "id": "280d34dd-b2a1-5915-9480-c4aa45107051",
+    "question": "Phân biệt image và container trong Docker?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92101-phan-biet-image-va-container-trong-docker",
+    "slug": "phan-biet-image-va-container-trong-docker-280d34dd-b2a1-5915-9480-c4aa45107051",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hình dung: image giống class, container giống object khởi tạo từ class đó. Image nằm trong registry (Docker Hub, ECR); container sống trên host qua Docker Engine."
+      ],
+      "details": [],
+      "points": [
+        "Image: gói chỉ đọc (read-only) chứa mã, runtime, thư viện và cấu hình — bản thiết kế để chạy ứng dụng. Image gồm nhiều layer xếp chồng.",
+        "Container: một instance đang chạy của image, thêm một lớp ghi (writable layer) ở trên cùng. Nhiều container có thể tạo từ cùng một image."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "92101-phan-biet-image-va-container-trong-docker",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "1daccc96-86a4-5e13-8a64-83e9913401cc",
+    "question": "Dockerfile là gì? Các instruction hay dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92102-dockerfile-la-gi-cac-instruction-hay-dung",
+    "slug": "dockerfile-la-gi-cac-instruction-hay-dung-1daccc96-86a4-5e13-8a64-83e9913401cc",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Dockerfile là file văn bản mô tả từng bước build một image. Docker đọc tuần tự các instruction để tạo layer."
+      ],
+      "details": [
+        "RUN chạy lúc build, CMD/ENTRYPOINT chạy lúc run — đây là điểm hay bị hỏi."
+      ],
+      "points": [
+        "FROM: image nền (base image).",
+        "COPY / ADD",
+        "WORKDIR: thư mục làm việc trong image.",
+        "ADD",
+        "RUN: chạy lệnh lúc build (cài package, biên dịch).",
+        "ENV: đặt biến môi trường.",
+        "EXPOSE: khai báo port (mang tính tài liệu).",
+        "CMD vs ENTRYPOINT: lệnh chạy khi container start — ENTRYPOINT là lệnh cố định, CMD là tham số mặc định có thể ghi đè."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "92102-dockerfile-la-gi-cac-instruction-hay-dung",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "0d4085b4-29d5-508c-8e19-1f23a7483469",
+    "question": "Docker Compose dùng để làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92107-docker-compose-dung-de-lam-gi",
+    "slug": "docker-compose-dung-de-lam-gi-0d4085b4-29d5-508c-8e19-1f23a7483469",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Compose định nghĩa và chạy ứng dụng nhiều container bằng một file YAML (compose.yaml). Thay vì gõ nhiều lệnh docker run, khai báo toàn bộ stack rồi docker compose up."
+      ],
+      "details": [
+        "Hợp cho môi trường dev/local và test. Với production đa host thường chuyển sang orchestrator như Kubernetes."
+      ],
+      "points": [
+        "Mỗi service = một container (web, api, db, redis...), khai báo image, port, env, volume, depends_on.",
+        "Compose tự tạo một network chung để các service gọi nhau bằng tên service.",
+        "Lệnh: up (khởi động), down (dừng + dọn), logs, ps."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "92107-docker-compose-dung-de-lam-gi",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "cd6693d0-1d91-57c9-a5d9-ef365a9c8a9e",
+    "question": "Container và máy ảo (VM) khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92152-container-va-may-ao-vm-khac-nhau-the-nao",
+    "slug": "container-va-may-ao-vm-khac-nhau-the-nao-cd6693d0-1d91-57c9-a5d9-ef365a9c8a9e",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khác nhau ở mức ảo hóa:"
+      ],
+      "details": [
+        "Hệ quả: container hợp cho microservice, CI/CD, scale nhanh; VM hợp khi cần cách ly mạnh hoặc chạy OS/kernel khác. Không loại trừ nhau — thực tế thường chạy container bên trong VM (như node của cloud)."
+      ],
+      "points": [
+        "VM: ảo hóa phần cứng qua hypervisor. Mỗi VM chạy một OS đầy đủ (guest kernel riêng) → nặng vài GB, khởi động chậm (tính bằng phút), nhưng cách ly mạnh.",
+        "Container: ảo hóa hệ điều hành. Các container dùng chung kernel của host, chỉ đóng gói app + thư viện phụ thuộc → nhẹ (tính bằng MB), khởi động nhanh (tính bằng giây), mật độ cao. Cách ly ở mức tiến trình (namespace + cgroups), yếu hơn VM."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "92152-container-va-may-ao-vm-khac-nhau-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "56a51727-6f0f-51e7-91f4-d6a2e24410be",
+    "question": "Pod trong Kubernetes là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92110-pod-trong-kubernetes-la-gi",
+    "slug": "pod-trong-kubernetes-la-gi-56a51727-6f0f-51e7-91f4-d6a2e24410be",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Pod là đơn vị triển khai nhỏ nhất của Kubernetes — không phải container đơn lẻ. Một pod bọc một hoặc nhiều container dùng chung:"
+      ],
+      "details": [
+        "Các container trong pod luôn được schedule cùng nhau trên một node. Đa số pod chỉ có 1 container chính; nhiều container thường theo mẫu sidecar (log shipper, proxy)."
+      ],
+      "points": [
+        "Network: chung một IP và cổng, các container trong pod gọi nhau qua localhost.",
+        "Storage: chung volume."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "92110-pod-trong-kubernetes-la-gi",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "63c04acc-922a-5e2f-8b4b-7da47c26ad41",
+    "question": "Namespace trong Kubernetes dùng để làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92115-namespace-trong-kubernetes-dung-de-lam-gi",
+    "slug": "namespace-trong-kubernetes-dung-de-lam-gi-63c04acc-922a-5e2f-8b4b-7da47c26ad41",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Namespace phân vùng logic một cluster thành nhiều không gian tách biệt — như nhiều \"thư mục\" chia sẻ cùng một cluster vật lý."
+      ],
+      "details": [
+        "Namespace mặc định: default, kube-system (thành phần hệ thống), kube-public. Lưu ý: một số resource là cluster-scoped (Node, PersistentVolume) nên không thuộc namespace nào."
+      ],
+      "points": [
+        "Tách môi trường/team: dev, staging, prod, hoặc theo nhóm.",
+        "Tránh trùng tên: cùng một tên resource (vd Service api) tồn tại song song ở các namespace khác nhau.",
+        "Gắn giới hạn: ResourceQuota và LimitRange áp theo namespace; RBAC phân quyền theo namespace."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "92115-namespace-trong-kubernetes-dung-de-lam-gi",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "fd7c918b-b5c5-56e4-8fbd-965d09b25200",
+    "question": "Kiến trúc một cluster Kubernetes gồm những thành phần nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94085-kien-truc-mot-cluster-kubernetes-gom-nhung-thanh-phan-nao",
+    "slug": "kien-truc-mot-cluster-kubernetes-gom-nhung-thanh-phan-nao-fd7c918b-b5c5-56e4-8fbd-965d09b25200",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Một cluster có hai lớp: control plane (bộ não ra quyết định) và các worker node (nơi chạy workload)."
+      ],
+      "details": [
+        "Control plane:\n- kube-apiserver — cửa ngõ duy nhất của cluster; mọi thao tác (kubectl, controller, kubelet) đều đi qua REST API này.\n- etcd — kho key-value nhất quán, lưu toàn bộ state mong muốn của cluster. Đây là nguồn sự thật.\n- kube-scheduler — chọn node phù hợp cho từng Pod chưa được gán.\n- kube-controller-manager — chạy các control loop (Deployment, ReplicaSet, Node...) để đưa state thực tế về state mong muốn.",
+        "Trên mỗi worker node:\n- kubelet — agent nhận PodSpec từ API server và bảo container runtime chạy container, báo cáo tình trạng ngược lại.\n- kube-proxy — cấu hình network rule trên node để Service định tuyến tới đúng Pod.\n- container runtime (containerd, CRI-O) — thực sự chạy container.",
+        "Hình dung: control plane là trung tâm điều phối, worker node là các nhà máy; kubelet là quản đốc nhận lệnh và điều hành nhà máy đó."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "94085-kien-truc-mot-cluster-kubernetes-gom-nhung-thanh-phan-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "be4c6ddb-7513-5155-aa9b-e9752034f0f6",
+    "question": "Layer và build cache trong Docker hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92103-layer-va-build-cache-trong-docker-hoat-dong-the-nao",
+    "slug": "layer-va-build-cache-trong-docker-hoat-dong-the-nao-be4c6ddb-7513-5155-aa9b-e9752034f0f6",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mỗi instruction trong Dockerfile tạo một layer bất biến. Khi build lại, Docker tái dùng cache cho một layer nếu instruction và input của nó không đổi."
+      ],
+      "details": [
+        "Mẹo thường dùng với Node: COPY package*.json rồi RUN npm install trước khi COPY . .. Nhờ đó sửa mã nguồn không làm mất cache của bước cài dependency. Dùng .dockerignore để loại file thừa khỏi context."
+      ],
+      "points": [
+        "Cache hỏng từ layer đầu tiên có thay đổi trở đi — mọi layer phía sau phải build lại.",
+        "Vì vậy đặt phần ít đổi lên trên, phần hay đổi xuống dưới."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "92103-layer-va-build-cache-trong-docker-hoat-dong-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "4ebf83b8-d5af-5624-ae6e-42132b75177c",
+    "question": "Multi-stage build là gì? Giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92104-multi-stage-build-la-gi-giai-quyet-van-de-gi",
+    "slug": "multi-stage-build-la-gi-giai-quyet-van-de-gi-4ebf83b8-d5af-5624-ae6e-42132b75177c",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Multi-stage build dùng nhiều FROM trong một Dockerfile: stage đầu để build (có compiler, dev dependency), stage cuối chỉ COPY --from phần artifact cần thiết sang một base image gọn."
+      ],
+      "details": [
+        "Đây là cách chuẩn để có image production gọn mà vẫn giữ bước build đầy đủ."
+      ],
+      "points": [
+        "Kết quả: image cuối không chứa toolchain, source hay dev dependency → nhỏ hơn và bề mặt tấn công ít hơn.",
+        "Ví dụ Go: stage 1 go build ra binary; stage 2 FROM alpine chỉ chép binary. Với Node/Java tương tự (build ở stage 1, copy dist/jar sang stage runtime)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "DOCKERFILE",
+          "code": "FROM golang:1.22 AS builder\nWORKDIR /src\nCOPY . .\nRUN go build -o /app\n\nFROM alpine:3.20\nCOPY --from=builder /app /app\nENTRYPOINT [\"/app\"]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "92104-multi-stage-build-la-gi-giai-quyet-van-de-gi",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "dd59e772-ff92-5a34-acf3-985438a0789d",
+    "question": "Volume và bind mount khác nhau thế nào? Vì sao cần chúng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92105-volume-va-bind-mount-khac-nhau-the-nao-vi-sao-can-chung",
+    "slug": "volume-va-bind-mount-khac-nhau-the-nao-vi-sao-can-chung-dd59e772-ff92-5a34-acf3-985438a0789d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Container có filesystem tạm — xóa container là mất dữ liệu ghi bên trong. Để giữ dữ liệu (persistent) và chia sẻ giữa các container, dùng mount."
+      ],
+      "details": [
+        "Ghi vào volume/bind mount không tạo layer image và tách vòng đời khỏi container."
+      ],
+      "points": [
+        "Volume: do Docker quản lý (lưu trong vùng riêng của Docker). Là cách khuyến nghị cho dữ liệu app (DB, upload). Portable, dễ backup, không phụ thuộc cấu trúc thư mục host.",
+        "Bind mount: gắn một đường dẫn cụ thể trên host vào container. Hợp cho dev (sync mã nguồn để hot-reload) nhưng gắn chặt với layout của host.",
+        "tmpfs: chỉ nằm trên RAM, mất khi container dừng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "92105-volume-va-bind-mount-khac-nhau-the-nao-vi-sao-can-chung",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "ff3c8a21-5099-51fa-9a22-8fd5f88249ac",
+    "question": "Các loại network driver trong Docker?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92106-cac-loai-network-driver-trong-docker",
+    "slug": "cac-loai-network-driver-trong-docker-ff3c8a21-5099-51fa-9a22-8fd5f88249ac",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Thực tế hay dùng user-defined bridge để container trong một docker-compose gọi nhau bằng tên service."
+      ],
+      "details": [],
+      "points": [
+        "bridge (mặc định): mạng riêng ảo trên một host. Container trong cùng bridge (user-defined) gọi nhau qua tên container (DNS nội bộ). Ra ngoài qua NAT.",
+        "host: bỏ cách ly mạng, container dùng thẳng network stack của host (nhanh hơn, nhưng đụng port với host).",
+        "none: không có mạng — cô lập hoàn toàn.",
+        "overlay: nối container qua nhiều host (dùng với Swarm/orchestration).",
+        "macvlan: gán MAC/IP riêng cho container như một thiết bị vật lý trên LAN."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "92106-cac-loai-network-driver-trong-docker",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "51a54a50-eab4-5470-92eb-b519fd522852",
+    "question": "Làm sao để giảm kích thước Docker image?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92108-lam-sao-de-giam-kich-thuoc-docker-image",
+    "slug": "lam-sao-de-giam-kich-thuoc-docker-image-51a54a50-eab4-5470-92eb-b519fd522852",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ít layer + base gọn + không file thừa = image nhỏ, pull/deploy nhanh, bề mặt tấn công thấp."
+      ],
+      "details": [],
+      "points": [
+        "Base image nhỏ: dùng alpine, -slim, hoặc distroless thay cho image full OS.",
+        "Multi-stage build: chỉ copy artifact runtime, bỏ toolchain/dev dependency.",
+        "Gộp lệnh RUN và dọn cache trong cùng layer (apt-get ... && rm -rf /var/lib/apt/lists/*) — vì mỗi RUN là một layer, xóa ở layer sau không giảm kích thước.",
+        ".dockerignore: loại node_modules, .git, file build khỏi context.",
+        "Cài chỉ production dependency (npm ci --omit=dev).",
+        "Ghim version cụ thể, tránh cài package thừa."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "92108-lam-sao-de-giam-kich-thuoc-docker-image",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "ac11164b-039c-5fc0-a4a3-ed0145ffeeae",
+    "question": "Container Docker thoát ngay sau khi start hoặc bị kill với exit code 137 — bạn debug thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92176-container-docker-thoat-ngay-sau-khi-start-hoac-bi-kill-voi-exit-code-137-ban-deb",
+    "slug": "container-docker-thoat-ngay-sau-khi-start-hoac-bi-kill-voi-exit-code-137-ban-debug-the-nao-ac11164b-039c-5fc0-a4a3-ed0145ffeeae",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bộ lệnh chẩn đoán:\n- docker ps -a: xem status và exit code của container đã dừng.\n- docker logs <container> (-f để follow, --tail 100): stdout/stderr của tiến trình chính — nơi đầu tiên tìm nguyên nhân crash.\n- docker inspect <container>: xem State (có OOMKilled: true không), env, mount, lệnh start.\n- docker exec -it <container> sh: vào shell kiểm tra khi container còn chạy (file config, kết nối mạng)."
+      ],
+      "details": [
+        "Exit code 137 = 128 + 9 → tiến trình bị SIGKILL. Hai nguyên nhân chính:\n- OOMKilled: vượt memory limit (--memory, hoặc limit của K8s). Xác nhận: docker inspect → State.OOMKilled: true. Fix: tăng limit hoặc giảm memory app dùng.\n- docker stop hết 10 giây chờ SIGTERM mà app không thoát → Docker gửi SIGKILL. Fix: app phải handle SIGTERM để shutdown kịp (đóng kết nối, flush).",
+        "Container thoát ngay sau start: container chỉ sống theo tiến trình PID 1 (lệnh CMD/ENTRYPOINT). Nếu lệnh chạy xong việc rồi kết thúc, hoặc daemon tự fork về background (thói quen của nginx/apache khi cấu hình mặc định), PID 1 kết thúc → container dừng dù không có lỗi. App trong container phải chạy foreground (vd nginx -g \"daemon off;\", node server.js trực tiếp). Exit 0 ngay = lệnh kết thúc bình thường (thường do chạy nhầm lệnh one-shot); exit khác 0 → đọc docker logs."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "92176-container-docker-thoat-ngay-sau-khi-start-hoac-bi-kill-voi-exit-code-137-ban-deb",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "377eff19-2e66-5ec5-bb89-4400e3bd3a58",
+    "question": "Deployment và ReplicaSet khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92111-deployment-va-replicaset-khac-nhau-the-nao",
+    "slug": "deployment-va-replicaset-khac-nhau-the-nao-377eff19-2e66-5ec5-bb89-4400e3bd3a58",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Thực tế bạn khai báo Deployment, còn ReplicaSet do nó tự tạo/quản lý — hiếm khi tạo ReplicaSet tay. Deployment = ReplicaSet + quản lý vòng đời phiên bản."
+      ],
+      "details": [],
+      "points": [
+        "ReplicaSet: đảm bảo luôn có đúng số bản sao (replicas) của một pod đang chạy. Pod chết → tạo lại. Nhưng ReplicaSet không xử lý cập nhật phiên bản.",
+        "Deployment: lớp quản lý cao hơn, sở hữu ReplicaSet và thêm khả năng rollout/rollback. Khi đổi image, Deployment tạo ReplicaSet mới và chuyển dần pod (rolling update), giữ lịch sử để rollback."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "92111-deployment-va-replicaset-khac-nhau-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "6ed4e5e8-96af-5d6a-aebc-488d6666f99d",
+    "question": "Service trong Kubernetes là gì? Có những loại nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92112-service-trong-kubernetes-la-gi-co-nhung-loai-nao",
+    "slug": "service-trong-kubernetes-la-gi-co-nhung-loai-nao-6ed4e5e8-96af-5d6a-aebc-488d6666f99d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Pod có IP thay đổi khi bị tạo lại. Service cung cấp một địa chỉ ổn định (virtual IP + DNS) và load-balance tới nhóm pod khớp label selector."
+      ],
+      "details": [
+        "Các loại:\n- ClusterIP (mặc định): IP nội bộ, chỉ truy cập trong cluster.\n- NodePort: mở một port cố định trên mọi node để truy cập từ ngoài — đơn giản, hợp test.\n- LoadBalancer: xin một load balancer của cloud (AWS/GCP) trỏ vào Service — cách chuẩn expose ra internet.\n- ExternalName: ánh xạ Service tới một tên DNS bên ngoài.",
+        "Service route theo label selector, không phụ thuộc IP pod cụ thể → pod scale/replace vẫn gọi được."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "92112-service-trong-kubernetes-la-gi-co-nhung-loai-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "e4cc4bac-93ca-56e4-98a8-45299b319688",
+    "question": "Ingress khác Service (LoadBalancer) thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92113-ingress-khac-service-loadbalancer-the-nao",
+    "slug": "ingress-khac-service-loadbalancer-the-nao-e4cc4bac-93ca-56e4-98a8-45299b319688",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ingress quản lý truy cập HTTP/HTTPS từ ngoài vào cluster ở tầng 7 (L7), định tuyến theo host và path."
+      ],
+      "details": [
+        "So sánh: Service LoadBalancer expose một service ở L4; Ingress là router L7 gom nhiều service sau một LB. Thường dùng cùng nhau."
+      ],
+      "points": [
+        "Một Ingress có thể route nhiều tên miền/đường dẫn tới nhiều Service khác nhau qua một điểm vào duy nhất — thay vì mỗi Service một LoadBalancer riêng (tốn IP/chi phí).",
+        "Hỗ trợ TLS termination, virtual host, rewrite.",
+        "Cần một Ingress Controller (nginx, Traefik...) thực sự chạy để rule Ingress có hiệu lực.",
+        "Kubernetes đang chuẩn hóa Gateway API làm thế hệ kế nhiệm của Ingress (Ingress đã đóng băng tính năng mới)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "92113-ingress-khac-service-loadbalancer-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "49641d34-1dc9-5d4b-9cd9-57ebc65fde35",
+    "question": "ConfigMap và Secret khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92114-configmap-va-secret-khac-nhau-the-nao",
+    "slug": "configmap-va-secret-khac-nhau-the-nao-49641d34-1dc9-5d4b-9cd9-57ebc65fde35",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai tách cấu hình khỏi image để cùng một image chạy ở nhiều môi trường. Đưa vào pod qua biến môi trường hoặc mount thành file."
+      ],
+      "details": [
+        "Lưu ý quan trọng: base64 không phải mã hóa — mặc định Secret chỉ được encode. Muốn an toàn thật phải bật encryption at rest cho etcd và siết RBAC, hoặc dùng external secret store (Vault, cloud KMS)."
+      ],
+      "points": [
+        "ConfigMap: dữ liệu cấu hình không nhạy cảm dạng plaintext (URL, feature flag, tên host).",
+        "Secret: dữ liệu nhạy cảm (mật khẩu, API key, token, chứng chỉ). Lưu base64 và được xử lý riêng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "92114-configmap-va-secret-khac-nhau-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "f0693495-dcdf-5e2c-a932-b0c98353acc6",
+    "question": "HPA (Horizontal Pod Autoscaler) hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92116-hpa-horizontal-pod-autoscaler-hoat-dong-the-nao",
+    "slug": "hpa-horizontal-pod-autoscaler-hoat-dong-the-nao-f0693495-dcdf-5e2c-a932-b0c98353acc6",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "HPA tự động tăng/giảm số replica của một Deployment/StatefulSet dựa trên tải quan sát được."
+      ],
+      "details": [
+        "Điều kiện cần: pod phải khai báo resource requests để HPA tính % sử dụng. Có cơ chế ổn định (stabilization) để tránh giật (flapping)."
+      ],
+      "points": [
+        "Đọc metric (mặc định CPU/memory qua metrics-server; hoặc custom/external metric như request/giây).",
+        "So với ngưỡng mục tiêu đã đặt (vd giữ CPU ~60%). Vượt → thêm pod; dưới → bớt pod, trong khoảng min–max replica.",
+        "Là horizontal scaling (thêm pod), khác VPA (vertical — chỉnh CPU/RAM cho từng pod)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "92116-hpa-horizontal-pod-autoscaler-hoat-dong-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "79297da1-307c-59f1-b81d-76ad64c3020b",
+    "question": "Liveness probe và readiness probe khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92117-liveness-probe-va-readiness-probe-khac-nhau-the-nao",
+    "slug": "liveness-probe-va-readiness-probe-khac-nhau-the-nao-79297da1-307c-59f1-b81d-76ad64c3020b",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai là health check kubelet chạy định kỳ trên container, nhưng phản ứng khác nhau khi fail:"
+      ],
+      "details": [
+        "Kiểu kiểm tra: httpGet, tcpSocket, hoặc exec. Sai probe (liveness quá gắt) dễ gây restart loop."
+      ],
+      "points": [
+        "Liveness probe: \"container còn sống không?\" Fail → kubelet restart container (dùng khi app treo/deadlock).",
+        "Readiness probe: \"container sẵn sàng nhận traffic chưa?\" Fail → gỡ pod khỏi endpoint của Service (ngừng gửi request) nhưng không restart. Dùng khi app đang warm-up hoặc mất kết nối dependency tạm thời.",
+        "Startup probe: dành cho app khởi động chậm — hoãn liveness/readiness cho tới khi app boot xong."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "92117-liveness-probe-va-readiness-probe-khac-nhau-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "cc73791d-91cf-5673-a3a1-ee293c93af94",
+    "question": "Rolling update và rollback trong Deployment hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92118-rolling-update-va-rollback-trong-deployment-hoat-dong-the-nao",
+    "slug": "rolling-update-va-rollback-trong-deployment-hoat-dong-the-nao-cc73791d-91cf-5673-a3a1-ee293c93af94",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Rolling update (chiến lược mặc định): Deployment thay pod cũ bằng pod mới từng phần, không downtime."
+      ],
+      "details": [
+        "Rollback: Deployment giữ lịch sử ReplicaSet → kubectl rollout undo quay về phiên bản trước khi bản mới lỗi. kubectl rollout status/history để theo dõi.",
+        "Chiến lược thay thế: Recreate (tắt hết pod cũ rồi mới bật mới — có downtime, dùng khi không chạy song song 2 version được)."
+      ],
+      "points": [
+        "Điều khiển bằng maxUnavailable (tối đa bao nhiêu pod được thiếu) và maxSurge (tối đa bao nhiêu pod dư tạm thời).",
+        "Deployment tạo ReplicaSet mới, tăng dần pod mới trong khi giảm pod cũ; nếu pod mới không ready (readiness probe) thì dừng lại."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "92118-rolling-update-va-rollback-trong-deployment-hoat-dong-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "c765cd07-6a94-57a6-a3d2-5801fd7b1e18",
+    "question": "Vì sao cần orchestration (Kubernetes)? Nó giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92153-vi-sao-can-orchestration-kubernetes-no-giai-quyet-van-de-gi",
+    "slug": "vi-sao-can-orchestration-kubernetes-no-giai-quyet-van-de-gi-c765cd07-6a94-57a6-a3d2-5801fd7b1e18",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Chạy vài container trên một máy thì Docker là đủ. Nhưng khi có nhiều container trải qua nhiều host trong production, xuất hiện hàng loạt việc phải làm tự động — đó là lý do cần một orchestrator."
+      ],
+      "details": [
+        "Kubernetes lo giúp:\n- Scheduling: xếp container lên node phù hợp (đủ CPU/RAM).\n- Self-healing: container/pod chết thì tự tạo lại; node hỏng thì reschedule.\n- Scaling: tăng/giảm số bản sao theo tải (thủ công hoặc HPA).\n- Service discovery + load balancing: địa chỉ ổn định và chia tải tới nhóm pod.\n- Rolling update / rollback: phát hành không downtime, quay lui khi lỗi.\n- Config/secret: tách cấu hình khỏi image.",
+        "Cốt lõi là mô hình desired state: bạn khai báo \"muốn gì\", K8s liên tục điều chỉnh thực tế cho khớp. Không có orchestrator, các việc trên phải làm tay và dễ sai."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "92153-vi-sao-can-orchestration-kubernetes-no-giai-quyet-van-de-gi",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "bc407b7b-4fb3-5c9f-87d7-d09805e2fd06",
+    "question": "Resource requests và limits trong Kubernetes khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92154-resource-requests-va-limits-trong-kubernetes-khac-nhau-the-nao",
+    "slug": "resource-requests-va-limits-trong-kubernetes-khac-nhau-the-nao-bc407b7b-4fb3-5c9f-87d7-d09805e2fd06",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai khai báo tài nguyên (CPU/memory) cho container nhưng có vai trò khác nhau:"
+      ],
+      "details": [
+        "Kết hợp requests/limits quyết định QoS class của pod:\n- Guaranteed (requests = limits cho mọi container),\n- Burstable (có requests < limits),\n- BestEffort (không đặt gì) — bị evict trước khi node thiếu tài nguyên.",
+        "Đặt requests quá thấp → node bị xếp quá nhiều pod và quá tải; quá cao → lãng phí. Đây là cân chỉnh quan trọng cho ổn định và chi phí."
+      ],
+      "points": [
+        "requests: lượng tài nguyên tối thiểu được đảm bảo. Scheduler dùng con số này để chọn node đủ chỗ đặt pod. Đây cũng là cơ sở HPA tính % sử dụng.",
+        "limits: trần tối đa container được phép dùng. Vượt limit CPU → bị throttle (giảm tốc); vượt limit memory → container bị OOMKilled (kill vì hết bộ nhớ)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "92154-resource-requests-va-limits-trong-kubernetes-khac-nhau-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "29e61cbb-4ee9-5977-aa1c-e53184360f78",
+    "question": "Helm là gì? Giải quyết vấn đề gì trong Kubernetes?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92155-helm-la-gi-giai-quyet-van-de-gi-trong-kubernetes",
+    "slug": "helm-la-gi-giai-quyet-van-de-gi-trong-kubernetes-29e61cbb-4ee9-5977-aa1c-e53184360f78",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Helm là package manager cho Kubernetes — ví như apt/npm nhưng cho các resource K8s. Đơn vị đóng gói là chart: một bộ manifest được template hóa kèm file values.yaml."
+      ],
+      "details": [
+        "Helm giải quyết:\n- Lặp lại YAML: một ứng dụng thực tế cần nhiều manifest (Deployment, Service, Ingress, ConfigMap...). Chart gom chúng lại và tham số hóa để cùng một chart deploy được cho dev/staging/prod chỉ bằng values khác nhau.\n- Versioning + rollback: mỗi lần cài/cập nhật tạo một release có lịch sử → helm rollback quay lại phiên bản trước.\n- Chia sẻ + dependency: kéo chart công khai (Bitnami...) và khai báo chart phụ thuộc.",
+        "Lệnh chính: helm install, helm upgrade, helm rollback, helm uninstall. Tóm lại Helm quản lý cài đặt và vòng đời của một ứng dụng nhiều manifest như một gói duy nhất."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "92155-helm-la-gi-giai-quyet-van-de-gi-trong-kubernetes",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "5676cfbc-235c-58ab-bcc2-46305b1d0e9f",
+    "question": "Job, CronJob và DaemonSet trong Kubernetes dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92156-job-cronjob-va-daemonset-trong-kubernetes-dung-khi-nao",
+    "slug": "job-cronjob-va-daemonset-trong-kubernetes-dung-khi-nao-5676cfbc-235c-58ab-bcc2-46305b1d0e9f",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đây là các workload controller ngoài Deployment, cho những mẫu chạy khác nhau:"
+      ],
+      "details": [
+        "Khác Deployment (số replica tùy ý, chạy lâu dài, stateless): Job/CronJob kết thúc, còn DaemonSet gắn số bản theo số node thay vì một con số cố định."
+      ],
+      "points": [
+        "Job: chạy tới khi hoàn thành (run-to-completion) rồi dừng — hợp tác vụ một lần: migration DB, xử lý batch. Job retry cho tới khi đủ số pod thành công; hỗ trợ completions/parallelism.",
+        "CronJob: tạo Job theo lịch cron — hợp tác vụ định kỳ: backup hằng đêm, gửi báo cáo, dọn dữ liệu.",
+        "DaemonSet: đảm bảo mỗi node (hoặc một tập node) chạy đúng một bản pod — hợp agent nền toàn cluster: thu thập log (Fluentd), giám sát (node-exporter), CNI/network plugin."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "92156-job-cronjob-va-daemonset-trong-kubernetes-dung-khi-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "8e30dbe5-a4e1-52ef-969e-863ccd65e21f",
+    "question": "Pod bị CrashLoopBackOff hoặc ImagePullBackOff — bạn chẩn đoán thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92175-pod-bi-crashloopbackoff-hoac-imagepullbackoff-ban-chan-doan-the-nao",
+    "slug": "pod-bi-crashloopbackoff-hoac-imagepullbackoff-ban-chan-doan-the-nao-8e30dbe5-a4e1-52ef-969e-863ccd65e21f",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Quy trình chẩn đoán chuẩn:\n1. kubectl get pods: xem status và số lần restart.\n2. kubectl describe pod <name>: đọc mục Events ở cuối và Last State / Exit Code — đa số nguyên nhân lộ ra ở đây.\n3. kubectl logs <pod>: log lần chạy hiện tại; thêm --previous để xem log của container vừa crash — bước quan trọng nhất với CrashLoopBackOff vì container hiện tại có thể chưa kịp ghi gì.\n4. Container còn chạy mà app lỗi: kubectl exec -it <pod> -- sh vào kiểm tra."
+      ],
+      "details": [
+        "CrashLoopBackOff = container start rồi chết lặp lại; kubelet restart với thời gian chờ (backoff) tăng dần. Nguyên nhân hay gặp:\n- App crash ngay khi boot: thiếu env/ConfigMap/Secret, không kết nối được DB.\n- Lệnh sai trong image (command/args sai đường dẫn).\n- OOMKilled — exit code 137, vượt memory limit (xem Last State: Terminated, Reason: OOMKilled).\n- Liveness probe quá gắt: app khởi động chậm hơn probe → bị giết dù bình thường; cần startup probe hoặc nới initialDelaySeconds.",
+        "ImagePullBackOff = kéo image thất bại:\n- Sai tên/tag image hoặc tag không tồn tại trên registry.\n- Registry private nhưng thiếu imagePullSecrets.\n- Node không có mạng ra registry.\ndescribe ghi rõ thông báo lỗi pull (manifest not found, unauthorized...) — sửa đúng nguyên nhân đó."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "92175-pod-bi-crashloopbackoff-hoac-imagepullbackoff-ban-chan-doan-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "2218ae2f-4400-59f3-ace4-a4409732aa12",
+    "question": "StatefulSet khác Deployment ở điểm nào? Khi nào dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "statefulset-khac-deployment-o-diem-nao-khi-nao-dung-2218ae2f-4400-59f3-ace4-a4409732aa12",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": null,
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "d98b70b0-ac1e-553f-81ac-1a08982429ea",
+    "question": "RBAC trong Kubernetes hoạt động thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "rbac-trong-kubernetes-hoat-dong-the-nao-d98b70b0-ac1e-553f-81ac-1a08982429ea",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": null,
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "9b51a434-9e64-5e67-bc44-8ecd3c8d0aef",
+    "question": "Mô hình mạng của Kubernetes hoạt động thế nào? Pod giao tiếp ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mo-hinh-mang-cua-kubernetes-hoat-dong-the-nao-pod-giao-tiep-ra-sao-9b51a434-9e64-5e67-bc44-8ecd3c8d0aef",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": null,
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "81d431b2-77a4-5b71-bbc2-083923e78cc1",
+    "question": "Làm sao deploy không downtime và rollback nhanh khi có sự cố?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-sao-deploy-khong-downtime-va-rollback-nhanh-khi-co-su-co-81d431b2-77a4-5b71-bbc2-083923e78cc1",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": null,
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "e70b87e6-c1a5-579d-8e1f-9ebf1aa641dd",
+    "question": "Process trong Linux là gì? Xem/quản lý bằng lệnh nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92135-process-trong-linux-la-gi-xem-quan-ly-bang-lenh-nao",
+    "slug": "process-trong-linux-la-gi-xem-quan-ly-bang-lenh-nao-e70b87e6-c1a5-579d-8e1f-9ebf1aa641dd",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Process là một chương trình đang chạy, có PID riêng, không gian bộ nhớ riêng, và một tiến trình cha (PPID). Process đầu tiên là init/systemd (PID 1), mọi process khác là con cháu của nó."
+      ],
+      "details": [
+        "Process khác thread: thread là luồng thực thi trong một process, dùng chung bộ nhớ; process cô lập bộ nhớ với nhau."
+      ],
+      "points": [
+        "Trạng thái: running, sleeping, stopped, zombie (đã kết thúc nhưng cha chưa thu nhận exit code).",
+        "Xem: ps aux, top/htop (thời gian thực), pgrep.",
+        "Foreground vs background: thêm & để chạy nền; jobs, fg, bg quản lý; nohup/disown cho chạy tiếp sau khi thoát shell.",
+        "Kết thúc: kill <PID> (gửi signal)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "92135-process-trong-linux-la-gi-xem-quan-ly-bang-lenh-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "9c228ec4-f54c-58b5-b329-c469c5e5691a",
+    "question": "File permission trong Linux đọc thế nào? chmod 755 nghĩa là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92137-file-permission-trong-linux-doc-the-nao-chmod-755-nghia-la-gi",
+    "slug": "file-permission-trong-linux-doc-the-nao-chmod-755-nghia-la-gi-9c228ec4-f54c-58b5-b329-c469c5e5691a",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mỗi file có quyền cho 3 nhóm: owner (u), group (g), others (o); mỗi nhóm có 3 bit r (read=4), w (write=2), x (execute=1)."
+      ],
+      "details": [
+        "Lệnh: chmod 755 file (đặt octal), chmod u+x file (thêm quyền chạy cho owner), chown user:group file (đổi chủ sở hữu). Ngoài ra còn special bit: setuid, setgid, sticky bit."
+      ],
+      "points": [
+        "Chuỗi ls -l: -rwxr-xr-x → owner rwx, group r-x, others r-x.",
+        "Octal: cộng giá trị mỗi nhóm. 755 = owner 7 (rwx=4+2+1), group 5 (r-x=4+1), others 5 (r-x). 644 = owner rw-, group/others r--.",
+        "x trên thư mục = quyền đi vào (cd), không phải chạy."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "92137-file-permission-trong-linux-doc-the-nao-chmod-755-nghia-la-gi",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "74a0e2f0-abc2-58d8-acc0-faf45753f4d4",
+    "question": "Cron dùng để làm gì? Cú pháp lịch cron đọc thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92139-cron-dung-de-lam-gi-cu-phap-lich-cron-doc-the-nao",
+    "slug": "cron-dung-de-lam-gi-cu-phap-lich-cron-doc-the-nao-74a0e2f0-abc2-58d8-acc0-faf45753f4d4",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cron là trình lập lịch chạy tác vụ định kỳ trong Unix/Linux (dọn log, backup, gửi báo cáo, gọi script theo giờ). Daemon crond đọc bảng lịch crontab và chạy lệnh đúng thời điểm.",
+        "0 2 * * *",
+        "*/15 * * * *",
+        "0 0 * * 0"
+      ],
+      "details": [
+        "Cú pháp 5 trường + lệnh:",
+        "Quản lý bằng crontab -e (sửa), crontab -l (liệt kê). Lưu ý cron chạy với môi trường tối giản — nên dùng đường dẫn tuyệt đối và ghi log output."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "┌ phút (0-59)\n│ ┌ giờ (0-23)\n│ │ ┌ ngày trong tháng (1-31)\n│ │ │ ┌ tháng (1-12)\n│ │ │ │ ┌ thứ trong tuần (0-6, 0=CN)\n* * * * *  <lệnh>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "92139-cron-dung-de-lam-gi-cu-phap-lich-cron-doc-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "c24f1425-e5d1-5030-b07b-05fefb1f7a03",
+    "question": "Signal trong Linux là gì? SIGTERM và SIGKILL khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92136-signal-trong-linux-la-gi-sigterm-va-sigkill-khac-nhau-the-nao",
+    "slug": "signal-trong-linux-la-gi-sigterm-va-sigkill-khac-nhau-the-nao-c24f1425-e5d1-5030-b07b-05fefb1f7a03",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Signal là thông báo bất đồng bộ gửi tới process để yêu cầu nó phản ứng — cơ chế IPC đơn giản của OS. Gửi bằng kill -SIGNAL <PID>."
+      ],
+      "details": [
+        "Hay gặp:\n- SIGTERM (15) — mặc định của kill: yêu cầu kết thúc lịch sự. Process có thể bắt để dọn dẹp (đóng kết nối, flush, lưu state) rồi thoát. Đây là \"graceful shutdown\".\n- SIGKILL (9): buộc chết ngay, không thể bắt hay bỏ qua, không kịp dọn dẹp. Chỉ dùng khi process treo, không phản hồi SIGTERM.\n- SIGINT (2): Ctrl+C.\n- SIGHUP (1): mất terminal; nhiều daemon dùng để reload config.\n- SIGSTOP/SIGCONT: tạm dừng/tiếp tục.",
+        "Thực hành đúng: gửi SIGTERM trước, chờ; chỉ SIGKILL khi bắt buộc. Container: docker stop gửi SIGTERM rồi mới SIGKILL sau timeout."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "92136-signal-trong-linux-la-gi-sigterm-va-sigkill-khac-nhau-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "c8318307-df13-582b-8826-2e3743971ca6",
+    "question": "systemd là gì? Dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92138-systemd-la-gi-dung-de-lam-gi",
+    "slug": "systemd-la-gi-dung-de-lam-gi-c8318307-df13-582b-8826-2e3743971ca6",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "systemd là init system và service manager của đa số Linux hiện đại — process PID 1 khởi động khi boot và quản lý các dịch vụ nền (daemon) suốt vòng đời hệ thống."
+      ],
+      "details": [
+        "Hình dung: systemd là \"nhạc trưởng\" quyết định cái gì chạy, theo thứ tự nào, và giữ cho dịch vụ luôn sống."
+      ],
+      "points": [
+        "Unit: đơn vị quản lý; loại phổ biến là .service (một dịch vụ), ngoài ra .socket, .timer, .mount, .target.",
+        "systemctl: điều khiển — start, stop, restart, enable (bật khi boot), status.",
+        "journalctl: xem log tập trung của các service.",
+        "Tính năng: khởi động song song (nhanh hơn init cũ), tự restart service khi chết, quản lý dependency giữa unit.",
+        ".timer: thay thế hiện đại cho cron, tích hợp logging + dependency."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "92138-systemd-la-gi-dung-de-lam-gi",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "ce849f34-b286-5a67-a99e-341cb5c4f83f",
+    "question": "TCP và UDP khác nhau thế nào? Khi nào dùng cái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92140-tcp-va-udp-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "slug": "tcp-va-udp-khac-nhau-the-nao-khi-nao-dung-cai-nao-ce849f34-b286-5a67-a99e-341cb5c4f83f",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai là giao thức tầng transport, nhưng đánh đổi khác nhau giữa độ tin cậy và tốc độ."
+      ],
+      "details": [
+        "QUIC (nền của HTTP/3) là giao thức transport chạy ở user space trên nền UDP, tự cài đặt độ tin cậy, thứ tự và kiểm soát tắc nghẽn."
+      ],
+      "points": [
+        "TCP — hướng kết nối, tin cậy: bắt tay 3 bước, đảm bảo đến nơi, đúng thứ tự, có kiểm soát lỗi, retransmit, flow control và congestion control. Chi phí cao hơn, độ trễ lớn hơn. Dùng khi không được mất dữ liệu: HTTP/HTTPS, email, SSH, truyền file.",
+        "UDP — không kết nối, không đảm bảo: gửi datagram \"bắn và quên\", không retransmit, không đảm bảo thứ tự → nhanh, độ trễ thấp, overhead nhỏ. Dùng khi tốc độ quan trọng hơn việc mất gói lẻ tẻ: video/voice call, game realtime, DNS, streaming."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "92140-tcp-va-udp-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "59cd8fbe-348f-557c-84e3-2b4769566bee",
+    "question": "DNS là gì? Quá trình phân giải tên miền diễn ra thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92142-dns-la-gi-qua-trinh-phan-giai-ten-mien-dien-ra-the-nao",
+    "slug": "dns-la-gi-qua-trinh-phan-giai-ten-mien-dien-ra-the-nao-59cd8fbe-348f-557c-84e3-2b4769566bee",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "DNS (Domain Name System) là \"danh bạ\" của internet — dịch tên miền dễ nhớ (example.com) sang địa chỉ IP mà máy dùng để kết nối."
+      ],
+      "details": [
+        "Quá trình phân giải (đệ quy) khi truy cập một tên chưa cache:\n1. Resolver (thường của ISP) nhận truy vấn.\n2. Hỏi root server → chỉ tới TLD server của .com.\n3. Hỏi TLD server → chỉ tới authoritative server của example.com.\n4. Authoritative server trả về IP.\n5. Resolver cache theo TTL và trả cho client.",
+        "Các record hay gặp: A (IPv4), AAAA (IPv6), CNAME (bí danh), MX (mail), TXT (xác minh/SPF), NS (name server). Cache ở nhiều tầng (trình duyệt, OS, resolver) giúp phân giải sau đó gần như tức thì."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "92142-dns-la-gi-qua-trinh-phan-giai-ten-mien-dien-ra-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "2dddd9e2-d8df-5448-9237-62aa6b522f84",
+    "question": "HTTP và HTTPS khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92141-http-va-https-khac-nhau-the-nao",
+    "slug": "http-va-https-khac-nhau-the-nao-2dddd9e2-d8df-5448-9237-62aa6b522f84",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "HTTPS là HTTP chạy trên TLS — thêm lớp mã hóa cho kết nối, còn ngữ nghĩa HTTP (method, status, header) giữ nguyên."
+      ],
+      "details": [
+        "HTTPS đảm bảo 3 điều mà HTTP thuần không có:\n- Bảo mật (confidentiality): dữ liệu được mã hóa, bên nghe lén không đọc được (chống eavesdropping).\n- Toàn vẹn (integrity): phát hiện nếu dữ liệu bị sửa trên đường truyền.\n- Xác thực (authentication): chứng chỉ TLS (do CA cấp) chứng minh bạn đúng đang nói chuyện với server thật, chống giả mạo/man-in-the-middle.",
+        "Ngày nay HTTPS là chuẩn bắt buộc; trình duyệt cảnh báo trang HTTP và nhiều tính năng (HTTP/2, service worker) yêu cầu HTTPS."
+      ],
+      "points": [
+        "Cổng mặc định: HTTP 80, HTTPS 443.",
+        "Handshake TLS: dùng bất đối xứng để trao khóa, rồi mã hóa đối xứng cho dữ liệu (nhanh)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "92141-http-va-https-khac-nhau-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "a4bcf5c2-20c1-5feb-b62c-45f1d4900651",
+    "question": "Từ lúc gõ URL đến khi trang hiển thị, chuyện gì xảy ra?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92177-tu-luc-go-url-den-khi-trang-hien-thi-chuyen-gi-xay-ra",
+    "slug": "tu-luc-go-url-den-khi-trang-hien-thi-chuyen-gi-xay-ra-a4bcf5c2-20c1-5feb-b62c-45f1d4900651",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Câu hỏi kinh điển kiểm tra hiểu biết xuyên tầng. Chuỗi các bước:"
+      ],
+      "details": [
+        "1. DNS: browser kiểm tra cache (browser → OS → resolver). Chưa có thì resolver hỏi đệ quy: root → TLD (.com) → authoritative nameserver → nhận về IP, cache theo TTL.\n2. TCP: bắt tay 3 bước SYN → SYN-ACK → ACK tới IP:443 để mở kết nối.\n3. TLS handshake: thỏa thuận version/cipher, server gửi chứng chỉ, browser xác thực chuỗi tới root CA, hai bên trao đổi khóa phiên → kênh mã hóa.\n4. HTTP: browser gửi GET /; request thường đi qua CDN / load balancer / reverse proxy trước khi tới app server. Server trả response (status, header, HTML) — có thể trúng cache ở CDN mà không chạm origin.\n5. Render: browser parse HTML → DOM, CSS → CSSOM, chạy JS; gặp tài nguyên phụ (CSS, JS, ảnh) thì lặp lại chu trình tải cho từng cái (có HTTP cache); rồi layout → paint ra màn hình.",
+        "Góc DevOps: mỗi chặng là một lớp có thể lỗi hoặc chậm — DNS trỏ sai, chứng chỉ hết hạn, LB trả 502, app chậm, thiếu cache. Thuộc chuỗi này là nền để chẩn đoán \"web không vào được / chậm\" theo từng lớp: dig (DNS), curl -v (TCP/TLS/HTTP), log của LB và app."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "92177-tu-luc-go-url-den-khi-trang-hien-thi-chuyen-gi-xay-ra",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "bdd5ed98-39ad-54d4-9dd6-0ea7972d6f03",
+    "question": "CIDR notation là gì? 10.0.0.0/16 nghĩa là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92162-cidr-notation-la-gi-10-0-0-0-16-nghia-la-gi",
+    "slug": "cidr-notation-la-gi-10-0-0-0-16-nghia-la-gi-bdd5ed98-39ad-54d4-9dd6-0ea7972d6f03",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "CIDR (Classless Inter-Domain Routing) là cách ký hiệu một dải địa chỉ mạng dạng IP/prefix, trong đó prefix là số bit đầu dành cho phần mạng, phần còn lại là host."
+      ],
+      "details": [
+        "Ứng dụng DevOps: chia subnet trong VPC, viết security group / route table, giới hạn dải IP được phép truy cập. Lưu ý một vài địa chỉ trong dải bị dành riêng (network, broadcast, gateway)."
+      ],
+      "points": [
+        "10.0.0.0/16 → 16 bit đầu là mạng, còn 16 bit cho host → khoảng 65.536 địa chỉ (10.0.0.0–10.0.255.255).",
+        "10.0.1.0/24 → 24 bit mạng, 8 bit host → 256 địa chỉ.",
+        "Công thức số địa chỉ: 2^(32 − prefix) (với IPv4). Prefix càng lớn → mạng càng nhỏ.",
+        "0.0.0.0/0 = mọi địa chỉ (default route, hay dùng trong bảng route/firewall rule)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "92162-cidr-notation-la-gi-10-0-0-0-16-nghia-la-gi",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "ab5306de-382c-58ab-abe5-babfef08ab18",
+    "question": "Reverse proxy và forward proxy khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92144-reverse-proxy-va-forward-proxy-khac-nhau-the-nao",
+    "slug": "reverse-proxy-va-forward-proxy-khac-nhau-the-nao-ab5306de-382c-58ab-abe5-babfef08ab18",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai là trung gian, nhưng đứng ở hai phía khác nhau và phục vụ đối tượng khác nhau."
+      ],
+      "details": [
+        "Mẹo nhớ: forward = đại diện cho client; reverse = đại diện cho server. Ai bị \"giấu mặt\" nói lên đó là loại proxy nào."
+      ],
+      "points": [
+        "Forward proxy: đứng trước client, thay mặt client gửi request ra ngoài. Server đích chỉ thấy proxy, không thấy client. Dùng để: ẩn danh client, lọc/kiểm soát truy cập trong công ty, vượt chặn địa lý, cache phía client.",
+        "Reverse proxy: đứng trước server, thay mặt server nhận request từ internet rồi chuyển vào backend. Client tưởng đang nói với một server duy nhất. Dùng để: load balancing, TLS termination, caching, nén, che giấu/bảo vệ backend, định tuyến (nginx, HAProxy, Cloudflare)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "92144-reverse-proxy-va-forward-proxy-khac-nhau-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "26bdd888-30da-5a8f-9f4e-e9e840100a22",
+    "question": "Cấu hình nginx làm reverse proxy cho ứng dụng Node/PHP thế nào? Virtual host hoạt động ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92174-cau-hinh-nginx-lam-reverse-proxy-cho-ung-dung-node-php-the-nao-virtual-host-hoat",
+    "slug": "cau-hinh-nginx-lam-reverse-proxy-cho-ung-dung-node-php-the-nao-virtual-host-hoat-dong-ra-sao-26bdd888-30da-5a8f-9f4e-e9e840100a22",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Follow-up hay gặp: vì sao đặt nginx trước app server — TLS termination, serve static file nhanh, buffer client chậm, load balance, và che app server khỏi truy cập trực tiếp."
+      ],
+      "details": [],
+      "points": [
+        "server block = virtual host: nginx chọn block theo cặp listen + server_name khớp header Host của request — nhờ đó một máy chạy nhiều domain trên cùng port 80/443, mỗi domain một block.",
+        "proxy_pass: chuyển request tới upstream. Node/Go nói HTTP nên proxy thẳng; PHP-FPM nói FastCGI nên dùng fastcgi_pass tới socket của PHP-FPM thay vì proxy_pass.",
+        "proxy_set_header: mặc định app phía sau chỉ thấy IP của nginx — cần truyền Host, X-Real-IP, X-Forwarded-For, X-Forwarded-Proto để app biết client thật và scheme gốc (quan trọng cho log, rate limit, redirect HTTPS).",
+        "Nhiều instance thì khai báo upstream block để load balance."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "NGINX",
+          "code": "server {\n    listen 80;\n    server_name api.example.com;\n\n    location / {\n        proxy_pass http://127.0.0.1:3000;\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n    }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "92174-cau-hinh-nginx-lam-reverse-proxy-cho-ung-dung-node-php-the-nao-virtual-host-hoat",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "fb8e8ecb-d954-56bf-99e6-cb91450c2eff",
+    "question": "Load balancing là gì? L4 và L7 khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92143-load-balancing-la-gi-l4-va-l7-khac-nhau-the-nao",
+    "slug": "load-balancing-la-gi-l4-va-l7-khac-nhau-the-nao-fb8e8ecb-d954-56bf-99e6-cb91450c2eff",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Load balancer phân phối request tới nhiều server backend để không máy nào quá tải — tăng throughput, độ sẵn sàng và khả năng scale. Nó cũng làm health check, ngừng gửi tới server hỏng."
+      ],
+      "details": [
+        "Hai tầng:\n- L4 (transport): định tuyến theo IP + port, không nhìn nội dung request. Rất nhanh, throughput cao. (AWS NLB.)\n- L7 (application): hiểu HTTP — route theo path, host, header, cookie; làm TLS termination, sticky session, rewrite. Linh hoạt hơn nhưng nặng hơn. (AWS ALB, nginx.)",
+        "Thuật toán phân phối: round robin, least connections, IP hash (giữ client về cùng server), weighted.",
+        "So sánh nhanh: cần định tuyến theo nội dung HTTP → L7; cần hiệu năng thô, non-HTTP → L4."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "92143-load-balancing-la-gi-l4-va-l7-khac-nhau-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "ab17151d-d942-5eb0-afa9-a2422d360b10",
+    "question": "Firewall là gì? Security group khác Network ACL thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92145-firewall-la-gi-security-group-khac-network-acl-the-nao",
+    "slug": "firewall-la-gi-security-group-khac-network-acl-the-nao-ab17151d-d942-5eb0-afa9-a2422d360b10",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Firewall kiểm soát traffic mạng theo tập luật (cho phép/chặn dựa trên IP, port, protocol, hướng) — ranh giới giữa vùng tin cậy và không tin cậy."
+      ],
+      "details": [
+        "Trên AWS có hai lớp firewall ảo, hay bị hỏi so sánh:\n- Security Group (mức instance): stateful — nếu cho một kết nối vào thì chiều trả về tự động được phép. Chỉ có luật allow (không có deny tường minh). Đánh giá tất cả luật cùng lúc.\n- Network ACL (mức subnet): stateless — phải mở luật cho cả hai chiều vào và ra. Có cả allow lẫn deny, xét luật theo số thứ tự cho tới khi khớp.",
+        "Mẹo nhớ: SG stateful, quanh instance; NACL stateless, quanh subnet. Thực tế dùng SG là chính, NACL cho lớp chặn thô ở biên subnet. Nguyên tắc: default deny, chỉ mở port cần thiết."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "92145-firewall-la-gi-security-group-khac-network-acl-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "3aea560e-cea0-53a3-ab2c-06c364e87c33",
+    "question": "Cài SSL/TLS bằng Let's Encrypt và certbot thế nào? Luồng cấp phát và tự động gia hạn ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92178-cai-ssl-tls-bang-let-s-encrypt-va-certbot-the-nao-luong-cap-phat-va-tu-dong-gia",
+    "slug": "cai-ssl-tls-bang-let-s-encrypt-va-certbot-the-nao-luong-cap-phat-va-tu-dong-gia-han-ra-sao-3aea560e-cea0-53a3-ab2c-06c364e87c33",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Let's Encrypt là CA miễn phí, tự động, cấp chứng chỉ loại DV (domain validation) qua giao thức ACME. Nguyên tắc: chứng minh quyền kiểm soát domain bằng máy, không cần giấy tờ.",
+        "certbot renew"
+      ],
+      "details": [
+        "Luồng cấp phát\n1. certbot (ACME client) tạo cặp khóa và gửi yêu cầu cấp chứng chỉ cho domain tới Let's Encrypt.\n2. CA trả về challenge để chứng minh quyền kiểm soát:\n- HTTP-01: đặt file token tại http://<domain>/.well-known/acme-challenge/ — CA truy cập kiểm tra (cần port 80 mở).\n- DNS-01: tạo bản ghi TXT _acme-challenge.<domain> — bắt buộc khi xin chứng chỉ wildcard (*.example.com).\n3. Challenge hợp lệ → CA ký và cấp chứng chỉ, hiệu lực 90 ngày.\n4. certbot cài chứng chỉ vào web server — plugin --nginx tự sửa server block (trỏ ssl_certificate tới fullchain.pem) và reload.",
+        "Follow-up hay gặp: vì sao cấu hình phải trỏ fullchain.pem (chứng chỉ + intermediate) thay vì mỗi cert.pem — client xác thực cần đủ chuỗi tới root CA; thiếu intermediate thì một số trình duyệt/thiết bị báo chứng chỉ không tin cậy."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "sudo certbot --nginx -d example.com -d www.example.com\nsudo certbot renew --dry-run   # test the auto-renewal path"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "92178-cai-ssl-tls-bang-let-s-encrypt-va-certbot-the-nao-luong-cap-phat-va-tu-dong-gia",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "a0b1fc96-04a5-56e3-9e20-0dc93c58030c",
+    "question": "Amazon EC2 là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92124-amazon-ec2-la-gi",
+    "slug": "amazon-ec2-la-gi-a0b1fc96-04a5-56e3-9e20-0dc93c58030c",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "EC2 (Elastic Compute Cloud) cung cấp máy chủ ảo (instance) theo yêu cầu — dạng IaaS: bạn quản lý OS và phần mềm, AWS lo phần cứng."
+      ],
+      "details": [
+        "Hay so với Lambda (serverless, không quản server) và ECS/EKS (container). EC2 cho toàn quyền kiểm soát máy."
+      ],
+      "points": [
+        "Instance type: chọn theo CPU/RAM/GPU cho workload (t/m general, c compute, r memory...).",
+        "AMI: image mẫu để khởi tạo instance (OS + cấu hình sẵn).",
+        "EBS: ổ đĩa block gắn vào instance (persistent).",
+        "Security group: firewall ảo kiểm soát traffic vào/ra.",
+        "Pricing: On-Demand (linh hoạt), Reserved/Savings Plan (cam kết, rẻ hơn), Spot (rất rẻ nhưng có thể bị thu hồi)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "92124-amazon-ec2-la-gi",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "fcd19c0e-045e-5a27-8400-fba0c4ce8094",
+    "question": "Amazon S3 là gì? Đặc điểm chính?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92125-amazon-s3-la-gi-dac-diem-chinh",
+    "slug": "amazon-s3-la-gi-dac-diem-chinh-fcd19c0e-045e-5a27-8400-fba0c4ce8094",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "S3 (Simple Storage Service) là object storage — lưu file dạng object trong bucket, truy cập qua HTTP API/URL, không phải filesystem hay block storage."
+      ],
+      "details": [
+        "Khác EBS (block, gắn vào 1 EC2) và EFS (file share). S3 hợp lưu lượng lớn object bất biến, truy cập qua API."
+      ],
+      "points": [
+        "Object = data + metadata + key (tên duy nhất trong bucket). Không có thư mục thật, chỉ là tiền tố (prefix) trong key.",
+        "Độ bền cao (thiết kế 11 số 9 — 99.999999999%), scale gần như vô hạn.",
+        "Storage class theo tần suất truy cập: Standard, Infrequent Access, Glacier (lưu trữ lạnh, rẻ).",
+        "Dùng cho: static asset/website, backup, data lake, lưu media, log."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "92125-amazon-s3-la-gi-dac-diem-chinh",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "aced48c1-b12a-53ed-8b6f-96f68405f76f",
+    "question": "Amazon RDS là gì? Lợi ích so với tự cài DB trên EC2?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92130-amazon-rds-la-gi-loi-ich-so-voi-tu-cai-db-tren-ec2",
+    "slug": "amazon-rds-la-gi-loi-ich-so-voi-tu-cai-db-tren-ec2-aced48c1-b12a-53ed-8b6f-96f68405f76f",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "RDS (Relational Database Service) là CSDL quan hệ được quản lý (managed) — hỗ trợ PostgreSQL, MySQL, MariaDB, Oracle, SQL Server (và Aurora)."
+      ],
+      "details": [
+        "AWS lo phần vận hành nặng: backup tự động, patch, cập nhật, giám sát. Bạn tập trung vào schema và query.",
+        "Lợi ích so với tự cài trên EC2:\n- Multi-AZ: standby đồng bộ ở AZ khác, tự failover khi primary hỏng → độ sẵn sàng cao.\n- Read replica: bản sao chỉ đọc để scale đọc và giảm tải primary.\n- Automated backup + point-in-time recovery.",
+        "Đánh đổi: ít quyền kiểm soát OS/DB sâu, chi phí cao hơn tự quản. Muốn serverless/scale mạnh hơn → cân nhắc Aurora hoặc DynamoDB (NoSQL)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "92130-amazon-rds-la-gi-loi-ich-so-voi-tu-cai-db-tren-ec2",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "c38e4cab-4dd1-5aeb-a69d-7e36251c70ca",
+    "question": "CloudFront (CDN) là gì và giải quyết vấn đề gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92132-cloudfront-cdn-la-gi-va-giai-quyet-van-de-gi",
+    "slug": "cloudfront-cdn-la-gi-va-giai-quyet-van-de-gi-c38e4cab-4dd1-5aeb-a69d-7e36251c70ca",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "CloudFront là CDN của AWS — mạng edge location phân bố toàn cầu, cache nội dung gần người dùng để giảm độ trễ và tải cho origin."
+      ],
+      "details": [
+        "Hợp phục vụ static asset, ảnh, video, file tải, cả nội dung động. Cốt lõi: đưa dữ liệu về gần biên (edge) thay vì mọi request về một origin duy nhất."
+      ],
+      "points": [
+        "Request đi tới edge gần nhất; nếu đã cache thì trả ngay (cache hit), chưa có thì lấy từ origin (S3, ALB, server) rồi cache lại.",
+        "Lợi ích: latency thấp (rút ngắn quãng đường mạng), giảm tải origin, tiết kiệm băng thông, chống chịu tải/DDoS tốt hơn (kết hợp AWS Shield/WAF).",
+        "Cấu hình: TTL (thời gian cache), cache key, invalidation khi cần xóa cache; hỗ trợ TLS."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "92132-cloudfront-cdn-la-gi-va-giai-quyet-van-de-gi",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "712a1f99-6b0c-53ff-8df6-d3d5e4aded34",
+    "question": "Region và Availability Zone (AZ) khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92133-region-va-availability-zone-az-khac-nhau-the-nao",
+    "slug": "region-va-availability-zone-az-khac-nhau-the-nao-712a1f99-6b0c-53ff-8df6-d3d5e4aded34",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ý nghĩa thiết kế: trải tài nguyên qua nhiều AZ để chịu lỗi khi một AZ sập (Multi-AZ) mà vẫn giữ độ trễ thấp. Trải qua nhiều region để chống thảm họa vùng và phục vụ người dùng toàn cầu."
+      ],
+      "details": [
+        "Đừng nhầm với edge location (điểm CDN, nhiều hơn và nhỏ hơn AZ)."
+      ],
+      "points": [
+        "Region: một khu vực địa lý (vd us-east-1, ap-southeast-1 Singapore). Các region tách biệt hoàn toàn với nhau; chọn theo độ trễ tới người dùng, giá, và tuân thủ dữ liệu (data residency).",
+        "Availability Zone (AZ): một hoặc nhiều data center rời nhau trong cùng một region, có nguồn điện/mạng riêng nhưng nối với nhau bằng liên kết độ trễ thấp. Mỗi region có nhiều AZ (thường ≥3)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "92133-region-va-availability-zone-az-khac-nhau-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "e83a3bfb-28a0-56a8-b41c-40ceb82d0c76",
+    "question": "Auto Scaling trong AWS hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92129-auto-scaling-trong-aws-hoat-dong-the-nao",
+    "slug": "auto-scaling-trong-aws-hoat-dong-the-nao-e83a3bfb-28a0-56a8-b41c-40ceb82d0c76",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Auto Scaling tự thêm/bớt EC2 instance theo tải, giữ hiệu năng mà không trả tiền cho tài nguyên nhàn rỗi."
+      ],
+      "details": [
+        "Đây là horizontal scaling (thêm máy), khác vertical (đổi sang instance to hơn). Trải instance qua nhiều AZ để vừa scale vừa tăng độ sẵn sàng."
+      ],
+      "points": [
+        "Auto Scaling Group (ASG): nhóm instance được quản lý, đặt min / desired / max.",
+        "Launch template: khuôn để tạo instance mới (AMI, type, security group).",
+        "Scaling policy: trigger scale — theo target tracking (giữ CPU ~50%), step/simple (theo ngưỡng CloudWatch), hoặc scheduled (theo giờ dự đoán được).",
+        "Health check: instance hỏng bị thay tự động; kết hợp ELB để phân phối traffic tới instance khỏe."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "92129-auto-scaling-trong-aws-hoat-dong-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "17b1456d-089c-575c-b90f-fbaeb7517238",
+    "question": "IAM role và IAM policy khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92126-iam-role-va-iam-policy-khac-nhau-the-nao",
+    "slug": "iam-role-va-iam-policy-khac-nhau-the-nao-17b1456d-089c-575c-b90f-fbaeb7517238",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "IAM quản lý ai được làm gì trên AWS."
+      ],
+      "details": [
+        "Vì sao role tốt hơn access key: gắn role cho EC2/Lambda/service để chúng gọi AWS không cần nhúng key cứng → an toàn hơn, credential tự xoay vòng. Role cũng dùng cho cross-account access và federation.",
+        "Nguyên tắc vàng: least privilege — chỉ cấp quyền tối thiểu cần thiết."
+      ],
+      "points": [
+        "Policy: tài liệu JSON khai báo quyền (Effect allow/deny, Action, Resource, Condition). Chỉ là \"danh sách quyền\", tự nó không thuộc về ai — được gắn vào user/group/role.",
+        "Role: một danh tính không gắn credential cố định, có policy đính kèm, được assume tạm thời (nhận credential ngắn hạn qua STS)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "92126-iam-role-va-iam-policy-khac-nhau-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "5862a3d9-c9c3-5f6e-b56a-ab9f769e0948",
+    "question": "AWS Lambda và serverless là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92131-aws-lambda-va-serverless-la-gi",
+    "slug": "aws-lambda-va-serverless-la-gi-5862a3d9-c9c3-5f6e-b56a-ab9f769e0948",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Lambda là Function as a Service (FaaS): bạn upload code hàm, AWS tự chạy khi có sự kiện và tự lo server/scale."
+      ],
+      "details": [
+        "Hạn chế cần biết: timeout (tối đa 15 phút), cold start (độ trễ lần khởi động đầu), state ngoài phải để ở dịch vụ khác (S3/DynamoDB). \"Serverless\" không phải không có server — mà là bạn không quản server. Hợp việc ngắn, rời rạc, tải biến động."
+      ],
+      "points": [
+        "Event-driven: trigger từ API Gateway (HTTP), S3 (file mới), SQS/SNS, EventBridge (cron), DynamoDB stream...",
+        "Scale tự động: mỗi request/sự kiện có thể chạy một instance hàm song song, từ 0 tới hàng nghìn.",
+        "Trả tiền theo lượng dùng: tính theo số lần gọi và thời gian chạy (ms) — không tốn tiền khi rảnh."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "92131-aws-lambda-va-serverless-la-gi",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "1a74e0b8-5120-506a-ac5f-d9c50475beb2",
+    "question": "VPC là gì? Gồm những thành phần nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92127-vpc-la-gi-gom-nhung-thanh-phan-nao",
+    "slug": "vpc-la-gi-gom-nhung-thanh-phan-nao-1a74e0b8-5120-506a-ac5f-d9c50475beb2",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "VPC (Virtual Private Cloud) là mạng ảo riêng của bạn trong AWS, cô lập về mặt logic, nơi bạn đặt các tài nguyên (EC2, RDS...) và tự kiểm soát mạng."
+      ],
+      "details": [
+        "Thành phần chính:\n- Subnet: chia dải IP của VPC theo AZ. Public subnet (có route ra internet) vs private subnet (không trực tiếp ra ngoài).\n- Route table: quyết định traffic đi đâu.\n- Internet Gateway (IGW): cho public subnet ra/vào internet.\n- NAT Gateway: cho private subnet ra internet (update, gọi API) mà không nhận kết nối vào.\n- Security group (stateful, mức instance) và NACL (stateless, mức subnet): lớp kiểm soát traffic.",
+        "Mẫu phổ biến: web ở public subnet, DB ở private subnet — DB không lộ ra internet."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "92127-vpc-la-gi-gom-nhung-thanh-phan-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "51dba7d9-7e52-5a7f-b159-1e3673698b94",
+    "question": "ALB và NLB khác nhau thế nào? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92128-alb-va-nlb-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "slug": "alb-va-nlb-khac-nhau-the-nao-khi-nao-dung-cai-nao-51dba7d9-7e52-5a7f-b159-1e3673698b94",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai là load balancer của AWS ELB nhưng làm việc ở tầng khác nhau:"
+      ],
+      "details": [
+        "Chọn: cần định tuyến L7 theo nội dung HTTP → ALB; cần L4 hiệu năng cao / IP tĩnh / non-HTTP → NLB. (Còn CLB là loại cũ, ít dùng.)"
+      ],
+      "points": [
+        "ALB (Application Load Balancer) — tầng 7 (HTTP/HTTPS). Định tuyến theo path, host, header; hỗ trợ TLS termination, WebSocket, gRPC (HTTP/2 end-to-end), redirect, target là instance/IP/Lambda. Hợp cho web app, microservice, API.",
+        "NLB (Network Load Balancer) — tầng 4 (TCP/UDP). Throughput rất cao, độ trễ cực thấp, giữ static/Elastic IP, chịu hàng triệu kết nối. Hợp cho traffic không phải HTTP, cần hiệu năng cao hoặc IP cố định (game, IoT, giao thức TCP/UDP thuần)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "92128-alb-va-nlb-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "481a2a7e-7290-581e-b81d-1ec089869ad3",
+    "question": "High availability và fault tolerance khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92134-high-availability-va-fault-tolerance-khac-nhau-the-nao",
+    "slug": "high-availability-va-fault-tolerance-khac-nhau-the-nao-481a2a7e-7290-581e-b81d-1ec089869ad3",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hai khái niệm liên quan hay hỏi:\n- RTO (Recovery Time Objective): bao lâu để khôi phục.\n- RPO (Recovery Point Objective): chấp nhận mất tối đa bao nhiêu dữ liệu."
+      ],
+      "details": [
+        "Nguyên tắc chung: bỏ SPOF, dư thừa qua nhiều AZ/region, tự động phát hiện + thay thế, sao lưu và diễn tập khôi phục."
+      ],
+      "points": [
+        "High Availability (HA): hệ thống giảm tối đa downtime, phục hồi nhanh sau lỗi — nhưng có thể có gián đoạn ngắn khi failover. Đo bằng \"số 9\" (99.9%, 99.99%). Cách làm: loại bỏ single point of failure, chạy đa AZ, health check + auto failover, load balancing.",
+        "Fault Tolerance (FT): mạnh hơn — không gián đoạn dù thành phần hỏng, nhờ dư thừa (redundancy) đủ để không ai nhận ra lỗi. Tốn kém hơn nhiều."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": "92134-high-availability-va-fault-tolerance-khac-nhau-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "c789d1a0-2978-541d-b131-dcfe280de7cb",
+    "question": "DevOps là gì? Có phải chỉ là một chức danh hay bộ công cụ?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92151-devops-la-gi-co-phai-chi-la-mot-chuc-danh-hay-bo-cong-cu",
+    "slug": "devops-la-gi-co-phai-chi-la-mot-chuc-danh-hay-bo-cong-cu-c789d1a0-2978-541d-b131-dcfe280de7cb",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "DevOps là tập hợp văn hóa, thực hành và công cụ giúp tổ chức phát hành phần mềm nhanh và ổn định hơn, bằng cách xóa rào cản giữa Development và Operations thay vì để hai bên tách biệt."
+      ],
+      "details": [
+        "Mục tiêu cuối: rút ngắn thời gian từ commit tới production mà vẫn giữ chất lượng và độ tin cậy."
+      ],
+      "points": [
+        "Không phải một chức danh hay một công cụ riêng lẻ — CI/CD, IaC, container, monitoring chỉ là phương tiện.",
+        "Trọng tâm: tự động hóa (build/test/deploy), feedback nhanh, trách nhiệm chung cho cả vòng đời (bạn build thì bạn vận hành).",
+        "Khung hay nhắc: CALMS — Culture, Automation, Lean, Measurement, Sharing."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "92151-devops-la-gi-co-phai-chi-la-mot-chuc-danh-hay-bo-cong-cu",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "3b35740a-8eec-5de3-8333-b2868d0b40b3",
+    "question": "CI/CD pipeline là gì? Gồm những giai đoạn nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92120-ci-cd-pipeline-la-gi-gom-nhung-giai-doan-nao",
+    "slug": "ci-cd-pipeline-la-gi-gom-nhung-giai-doan-nao-3b35740a-8eec-5de3-8333-b2868d0b40b3",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Pipeline là chuỗi bước tự động đưa mã từ commit tới môi trường chạy — thay cho quy trình thủ công."
+      ],
+      "details": [
+        "Các giai đoạn (stage) điển hình:\n1. Source: trigger khi push/merge (webhook từ Git).\n2. Build: biên dịch, đóng gói (vd build Docker image).\n3. Test: unit → integration → lint/security scan; fail thì dừng.\n4. Artifact: lưu output (image, binary) vào registry.\n5. Deploy: đẩy lên staging/prod, có thể kèm approval.",
+        "Nguyên tắc: fail fast (lỗi lộ sớm, dừng ngay), mỗi commit đi qua cùng một pipeline nhất quán. Công cụ: GitHub Actions, GitLab CI, Jenkins, CircleCI."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "92120-ci-cd-pipeline-la-gi-gom-nhung-giai-doan-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "5e656389-4361-5203-8394-6f9b5eaa506c",
+    "question": "Artifact trong CI/CD là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92122-artifact-trong-ci-cd-la-gi",
+    "slug": "artifact-trong-ci-cd-la-gi-5e656389-4361-5203-8394-6f9b5eaa506c",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Artifact là sản phẩm đầu ra bất biến của bước build, sẵn sàng để deploy hoặc test tiếp — vd Docker image, file .jar/.war, binary, gói npm, hay thư mục dist."
+      ],
+      "details": [
+        "Nguyên tắc: đừng build lại cho mỗi môi trường — chỉ promote cùng một artifact."
+      ],
+      "points": [
+        "Build once, deploy many: build một lần ra artifact rồi dùng chính artifact đó cho mọi môi trường (staging → prod) → đảm bảo thứ chạy ở prod đúng thứ đã test.",
+        "Lưu ở artifact registry (Docker Hub/ECR cho image, Nexus/Artifactory cho package) và gắn version/tag để truy vết + rollback.",
+        "Khác với build cache (dữ liệu tạm tăng tốc build); artifact là kết quả cuối cần lưu."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": "92122-artifact-trong-ci-cd-la-gi",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "31446b48-cb38-5d73-a396-da12792fd4fe",
+    "question": "Blue-green và canary deployment khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91213-blue-green-va-canary-deployment-khac-nhau-the-nao",
+    "slug": "blue-green-va-canary-deployment-khac-nhau-the-nao-31446b48-cb38-5d73-a396-da12792fd4fe",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai giảm rủi ro khi release và tránh downtime:"
+      ],
+      "details": [
+        "Liên quan: rolling update (thay dần từng instance) và feature flag (bật/tắt tính năng độc lập với deploy). Chọn theo mức chịu rủi ro và khả năng quan sát của hệ thống."
+      ],
+      "points": [
+        "Blue-green: chạy hai môi trường song song — \"blue\" (đang live) và \"green\" (bản mới). Test xong thì chuyển toàn bộ traffic sang green một lần; nếu lỗi thì switch ngược tức thì. Rollback rất nhanh, nhưng tốn gấp đôi hạ tầng và vẫn đổi 100% người dùng cùng lúc.",
+        "Canary: đưa bản mới ra một phần nhỏ người dùng (vd 5%), theo dõi metric (tỉ lệ lỗi, latency), rồi tăng dần tới 100%. Phát hiện sự cố sớm trên phạm vi nhỏ, nhưng release lâu hơn và cần giám sát/tự động hóa tốt."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": "91213-blue-green-va-canary-deployment-khac-nhau-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "1d9b47d2-26ee-53fd-bdab-e6bf957f5942",
+    "question": "12-factor app là gì? Nêu vài nguyên tắc quan trọng.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92146-12-factor-app-la-gi-neu-vai-nguyen-tac-quan-trong",
+    "slug": "12-factor-app-la-gi-neu-vai-nguyen-tac-quan-trong-1d9b47d2-26ee-53fd-bdab-e6bf957f5942",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "12-factor là bộ 12 nguyên tắc thiết kế ứng dụng SaaS để dễ triển khai, scale ngang và portable giữa các môi trường (nhất là trên cloud/container)."
+      ],
+      "details": [
+        "Vài nguyên tắc hay được hỏi:\n- Codebase: một codebase trong version control, deploy nhiều môi trường.\n- Dependencies: khai báo tường minh, cô lập (không dựa vào package cài sẵn trên máy).\n- Config: cấu hình để ở biến môi trường, tách khỏi code (không hardcode secret).\n- Backing services: coi DB, cache, queue là resource gắn kèm, thay được qua config.\n- Processes: chạy stateless — không giữ state trong bộ nhớ process; state để ở backing service.\n- Port binding: app tự expose qua một port.\n- Disposability: khởi động nhanh, tắt lịch sự (graceful shutdown).\n- Dev/prod parity: giữ các môi trường giống nhau nhất có thể.",
+        "Cốt lõi: stateless + config qua env + tách backing service → dễ scale và tự động hóa."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": "92146-12-factor-app-la-gi-neu-vai-nguyen-tac-quan-trong",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "70f930b7-8feb-510e-8742-a9fdba7266c3",
+    "question": "Ứng dụng stateless và stateful khác nhau thế nào? Vì sao nên thiết kế stateless?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92158-ung-dung-stateless-va-stateful-khac-nhau-the-nao-vi-sao-nen-thiet-ke-stateless",
+    "slug": "ung-dung-stateless-va-stateful-khac-nhau-the-nao-vi-sao-nen-thiet-ke-stateless-70f930b7-8feb-510e-8742-a9fdba7266c3",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì sao ưu tiên stateless (theo 12-factor): scale, self-healing và deploy trở nên đơn giản khi mọi instance có thể lên/xuống bất kỳ lúc nào. Cách làm: đẩy state ra ngoài. State vốn có (database) thì cô lập vào tầng stateful chuyên biệt — trên K8s là StatefulSet + volume."
+      ],
+      "details": [],
+      "points": [
+        "Stateless: mỗi request tự chứa đủ thông tin để xử lý; app không giữ state trong bộ nhớ tiến trình giữa các request. Cần dữ liệu thì đọc từ backing service (DB, Redis, object storage). Vì mọi bản (instance) như nhau nên dễ scale ngang, thay thế và load balance tùy ý.",
+        "Stateful: giữ state cục bộ (session lưu trong RAM, dữ liệu trên đĩa local). Request thường phải quay về đúng instance đã giữ state (sticky session) → khó scale, khó thay thế, mất instance là mất state."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": "92158-ung-dung-stateless-va-stateful-khac-nhau-the-nao-vi-sao-nen-thiet-ke-stateless",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "71a8ab03-702c-5beb-bdfd-2923ee1a0e5d",
+    "question": "Infrastructure as Code (IaC) là gì? Terraform giải quyết gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92147-infrastructure-as-code-iac-la-gi-terraform-giai-quyet-gi",
+    "slug": "infrastructure-as-code-iac-la-gi-terraform-giai-quyet-gi-71a8ab03-702c-5beb-bdfd-2923ee1a0e5d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "IaC là quản lý hạ tầng bằng file cấu hình có version thay vì thao tác thủ công trên console — hạ tầng được mô tả bằng code, review qua Git, tái tạo nhất quán."
+      ],
+      "details": [
+        "Lợi ích: lặp lại được (tạo lại y hệt môi trường), version + review, giảm lỗi thủ công (config drift), tự động hóa, tài liệu sống.",
+        "Terraform (HashiCorp) là công cụ IaC phổ biến:\n- Declarative: bạn mô tả trạng thái mong muốn (HCL), Terraform tự tính các bước để đạt được.\n- Provider: hỗ trợ đa cloud (AWS, GCP, Azure...) qua cùng một cú pháp.\n- State file: ghi lại trạng thái thực đang quản lý để so sánh và cập nhật.\n- Quy trình: plan (xem trước thay đổi) → apply (thực thi) → destroy.",
+        "Phân biệt: Terraform lo provisioning hạ tầng (tạo VPC, EC2...); Ansible/Chef nghiêng về config management (cài đặt bên trong máy). Terraform declarative, khác kiểu imperative script."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": "92147-infrastructure-as-code-iac-la-gi-terraform-giai-quyet-gi",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "be67161f-b99f-5ed4-b0ac-9a96c92c7c89",
+    "question": "Ansible là gì? Khác Terraform thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92161-ansible-la-gi-khac-terraform-the-nao",
+    "slug": "ansible-la-gi-khac-terraform-the-nao-be67161f-b99f-5ed4-b0ac-9a96c92c7c89",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ansible là công cụ automation / configuration management — cấu hình máy, cài phần mềm, deploy ứng dụng bằng cách khai báo."
+      ],
+      "details": [
+        "Đặc điểm chính:\n- Agentless: không cần cài agent trên máy đích, chỉ cần SSH + Python — kết nối, đẩy module, thực thi rồi ngắt.\n- Playbook YAML: mô tả trạng thái mong muốn dạng dễ đọc; inventory liệt kê host.\n- Idempotent: chạy lại nhiều lần cho cùng kết quả, không làm hỏng nếu đã ở trạng thái đúng.",
+        "Khác Terraform:\n- Terraform mạnh về provisioning hạ tầng (tạo VPC, EC2, load balancer...) theo mô hình declarative + state file.\n- Ansible mạnh về cấu hình bên trong máy (cài package, sửa file config, khởi động service), thiên hướng theo bước (task tuần tự).",
+        "Thực tế hay dùng chung: Terraform dựng hạ tầng, rồi Ansible cấu hình phần mềm bên trong."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": "92161-ansible-la-gi-khac-terraform-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "1e8e268b-d837-5298-b6b0-8a7175e3e639",
+    "question": "Monitoring, logging và observability khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92148-monitoring-logging-va-observability-khac-nhau-the-nao",
+    "slug": "monitoring-logging-va-observability-khac-nhau-the-nao-1e8e268b-d837-5298-b6b0-8a7175e3e639",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ba khái niệm liên quan nhưng không đồng nghĩa:"
+      ],
+      "details": [
+        "Ba trụ cột của observability:\n1. Metrics — số liệu tổng hợp (đếm, đo).\n2. Logs — sự kiện chi tiết.\n3. Traces — theo dấu một request đi qua nhiều service (distributed tracing).",
+        "Monitoring cho biết có gì đó sai; observability giúp hiểu tại sao. Công cụ: Prometheus/Grafana, ELK, OpenTelemetry, Jaeger."
+      ],
+      "points": [
+        "Logging: ghi lại sự kiện rời rạc (dòng log có timestamp) — hữu ích để tra cứu \"chuyện gì đã xảy ra\" khi debug.",
+        "Monitoring: thu thập metric đã biết theo thời gian và cảnh báo (alert) khi vượt ngưỡng — trả lời câu hỏi đã biết trước (\"CPU có cao không?\", \"error rate ra sao?\").",
+        "Observability: khả năng suy ra trạng thái bên trong hệ thống từ dữ liệu nó phát ra, kể cả với câu hỏi chưa lường trước (\"vì sao 1% request p99 chậm?\"). Là thuộc tính của hệ thống, không phải một công cụ."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": "92148-monitoring-logging-va-observability-khac-nhau-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "ed44b72e-7175-57c3-aa6d-a298a2e71217",
+    "question": "Prometheus hoạt động thế nào? Mô hình pull và các loại metric?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92159-prometheus-hoat-dong-the-nao-mo-hinh-pull-va-cac-loai-metric",
+    "slug": "prometheus-hoat-dong-the-nao-mo-hinh-pull-va-cac-loai-metric-ed44b72e-7175-57c3-aa6d-a298a2e71217",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Prometheus là hệ monitoring kèm time-series database, thu thập số liệu theo mô hình pull: server tự đi scrape endpoint /metrics của các target theo chu kỳ (khác mô hình push, nơi ứng dụng tự đẩy đi). Target được tìm qua service discovery (K8s, file, DNS)."
+      ],
+      "details": [
+        "Bốn loại metric:\n1. Counter — chỉ tăng đơn điệu (tổng request, lỗi); reset khi restart.\n2. Gauge — giá trị lên xuống (nhiệt độ, số kết nối, mức bộ nhớ).\n3. Histogram — đếm quan sát vào các bucket (phân phối độ trễ) → tính phân vị phía server.\n4. Summary — tự tính quantile phía client.",
+        "Prometheus mạnh cho metric số; log/trace cần công cụ khác (ELK, Jaeger)."
+      ],
+      "points": [
+        "PromQL: ngôn ngữ truy vấn để tổng hợp, tính rate, phân vị từ dữ liệu chuỗi thời gian.",
+        "Alertmanager: nhận alert từ rule và định tuyến/gom/khử trùng thông báo.",
+        "Grafana: thường ghép để trực quan hóa dashboard."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": "92159-prometheus-hoat-dong-the-nao-mo-hinh-pull-va-cac-loai-metric",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "65071d1d-a885-5eb4-9b04-0141db6b9ba0",
+    "question": "Horizontal scaling và vertical scaling khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92157-horizontal-scaling-va-vertical-scaling-khac-nhau-the-nao",
+    "slug": "horizontal-scaling-va-vertical-scaling-khac-nhau-the-nao-65071d1d-a885-5eb4-9b04-0141db6b9ba0",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hai cách tăng năng lực xử lý khi tải lớn lên:"
+      ],
+      "details": [
+        "Cloud và Kubernetes ưu tiên scale out (Auto Scaling Group, HPA). Câu hỏi hay kèm: vì sao ứng dụng stateless dễ scale ngang — vì mọi request đi vào bản nào cũng như nhau."
+      ],
+      "points": [
+        "Vertical scaling (scale up): tăng tài nguyên cho một máy — thêm CPU, RAM, đổi sang instance mạnh hơn. Đơn giản, không đổi kiến trúc, nhưng có trần phần cứng, thường cần downtime khi nâng cấp, và máy đó vẫn là single point of failure.",
+        "Horizontal scaling (scale out): thêm nhiều máy/instance rồi chia tải qua load balancer. Gần như không có trần, đồng thời tăng độ sẵn sàng (một máy chết còn máy khác). Đổi lại cần app stateless, có LB và đẩy state ra ngoài (DB, cache dùng chung)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": "92157-horizontal-scaling-va-vertical-scaling-khac-nhau-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "50c787a5-2b00-5cda-9813-246f8ba646b6",
+    "question": "Secrets management là gì? Vì sao không nên hardcode secret?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92149-secrets-management-la-gi-vi-sao-khong-nen-hardcode-secret",
+    "slug": "secrets-management-la-gi-vi-sao-khong-nen-hardcode-secret-50c787a5-2b00-5cda-9813-246f8ba646b6",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Secret là dữ liệu nhạy cảm để truy cập tài nguyên: mật khẩu, API key, DB credential, token, khóa mã hóa, chứng chỉ. Secrets management là cách lưu, phân phối, xoay vòng và kiểm soát truy cập chúng an toàn."
+      ],
+      "details": [
+        "Vì sao không hardcode vào code/repo:\n- Commit vào Git là lộ vĩnh viễn trong lịch sử, kể cả khi xóa sau đó; repo bị leak là mất sạch.\n- Không xoay vòng được, ai đọc code cũng thấy, vi phạm least privilege.",
+        "Thực hành đúng:\n- Để secret ngoài code — biến môi trường hoặc secret store chuyên dụng (HashiCorp Vault, AWS Secrets Manager, GCP/Azure equivalent, K8s Secret + encryption at rest).\n- Mã hóa khi lưu (at rest) và khi truyền (in transit).\n- Least privilege + audit ai truy cập.\n- Rotation định kỳ và thu hồi nhanh khi nghi lộ; ưu tiên credential ngắn hạn (IAM role) hơn key tĩnh.\n- Quét secret trong CI (git-secrets, trufflehog) để chặn commit nhầm."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": "92149-secrets-management-la-gi-vi-sao-khong-nen-hardcode-secret",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "c8fa5565-772f-54d2-bb2b-2277b1033a31",
+    "question": "Phân biệt Continuous Integration, Delivery và Deployment?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92121-phan-biet-continuous-integration-delivery-va-deployment",
+    "slug": "phan-biet-continuous-integration-delivery-va-deployment-c8fa5565-772f-54d2-bb2b-2277b1033a31",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khác biệt cốt lõi giữa hai \"CD\": Delivery = deploy thủ công có kiểm soát; Deployment = deploy hoàn toàn tự động. CI là nền tảng cho cả hai."
+      ],
+      "details": [],
+      "points": [
+        "Continuous Integration (CI): mỗi lập trình viên merge thường xuyên vào nhánh chung; mỗi lần merge tự động build + test để phát hiện xung đột/lỗi sớm. Trọng tâm là chất lượng code khi tích hợp.",
+        "Continuous Delivery (CD): mở rộng CI để mọi bản build đã pass luôn sẵn sàng release, nhưng bước đẩy lên production vẫn cần phê duyệt thủ công (approval).",
+        "Continuous Deployment (CD): đi xa hơn — mọi thay đổi qua được test tự động lên production, không cần can thiệp tay."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": "92121-phan-biet-continuous-integration-delivery-va-deployment",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "cf6888b4-b956-54de-a90e-58dbd8adb861",
+    "question": "Trunk-based development và GitFlow khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92160-trunk-based-development-va-gitflow-khac-nhau-the-nao",
+    "slug": "trunk-based-development-va-gitflow-khac-nhau-the-nao-cf6888b4-b956-54de-a90e-58dbd8adb861",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hai chiến lược nhánh (branching model) trái ngược về cách tích hợp:"
+      ],
+      "details": [
+        "So sánh: trunk-based tối ưu tốc độ tích hợp và CI/CD, đổi lại cần kỷ luật (test tự động, feature flag). GitFlow hợp chu kỳ release có phiên bản rõ ràng nhưng ngược với tinh thần \"integrate liên tục\". DevOps hiện đại nghiêng về trunk-based."
+      ],
+      "points": [
+        "Trunk-based development: mọi người commit vào một nhánh chính (trunk/main), merge nhỏ và thường xuyên; nhánh feature sống rất ngắn (dưới một ngày) rồi merge ngay. Tính năng chưa xong được giấu sau feature flag thay vì để trong nhánh lâu. Hỗ trợ CI thật sự (integrate liên tục), giảm merge lớn.",
+        "GitFlow: nhiều nhánh sống lâu — develop, feature/*, release/*, hotfix/*. Cấu trúc rõ ràng nhưng tích hợp chậm, merge phức tạp và dễ conflict lớn vì nhánh lệch nhau lâu."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": "92160-trunk-based-development-va-gitflow-khac-nhau-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "1891dea4-8a73-5f32-84f4-35562b5433a8",
+    "question": "Bạn sẽ thiết kế pipeline CI/CD cho một ứng dụng như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92171-ban-se-thiet-ke-pipeline-ci-cd-cho-mot-ung-dung-nhu-the-nao",
+    "slug": "ban-se-thiet-ke-pipeline-ci-cd-cho-mot-ung-dung-nhu-the-nao-1891dea4-8a73-5f32-84f4-35562b5433a8",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mục tiêu: mỗi commit đi qua một chuỗi stage tự động, chỉ artifact đã qua kiểm tra mới lên được production."
+      ],
+      "details": [
+        "Các stage theo thứ tự\n1. Lint / format: chặn sớm lỗi style, chạy nhanh nhất trước.\n2. Test: unit test + integration test; fail thì dừng luôn (fail fast).\n3. Build: build một artifact bất biến duy nhất (Docker image, jar) và gắn tag theo commit SHA. Build một lần, tái dùng cho mọi môi trường — không build lại ở prod.\n4. Scan: quét bảo mật dependency (SCA) và image (Trivy/Snyk); có thể quét bí mật bị lộ.\n5. Deploy staging: tự động deploy artifact lên môi trường giống prod, chạy smoke test.\n6. Deploy prod: qua gate/approval thủ công cho môi trường prod.",
+        "Nguyên tắc\n- Artifact bất biến: chính image đã test ở staging là image lên prod — khác biệt duy nhất là config qua biến môi trường.\n- Secrets: không hardcode trong repo. Inject qua secret store của CI (GitHub Actions Secrets, Vault); phân quyền theo environment.\n- Gate: dùng environment protection rule (required reviewers) cho prod; staging thì tự động.",
+        "Lỗi hay gặp: build lại ở mỗi stage (mất tính tái lập); test chậm dồn hết vào một job; đẩy secret vào image; không có smoke test sau deploy."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": "92171-ban-se-thiet-ke-pipeline-ci-cd-cho-mot-ung-dung-nhu-the-nao",
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "a6b165ec-f92b-53d6-af19-ec9dddc1bc0c",
+    "question": "Immutable infrastructure là gì? Khác mutable thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "immutable-infrastructure-la-gi-khac-mutable-the-nao-a6b165ec-f92b-53d6-af19-ec9dddc1bc0c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": null,
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "6a0ead8e-e00e-5bc6-adff-ca1b05969697",
+    "question": "Terraform state là gì? Vì sao cần remote state và state locking?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "terraform-state-la-gi-vi-sao-can-remote-state-va-state-locking-6a0ead8e-e00e-5bc6-adff-ca1b05969697",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": null,
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "e0a727e1-a79c-5da4-bff6-0d9637b2e6a3",
+    "question": "Distributed tracing là gì? Span và trace khác nhau thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "distributed-tracing-la-gi-span-va-trace-khac-nhau-the-nao-e0a727e1-a79c-5da4-bff6-0d9637b2e6a3",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": null,
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "add482d1-eaaa-59b1-9c4e-14be464c6963",
+    "question": "Bạn sẽ thiết lập monitoring và alerting cho một service như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-se-thiet-lap-monitoring-va-alerting-cho-mot-service-nhu-the-nao-add482d1-eaaa-59b1-9c4e-14be464c6963",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": null,
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "48f37bc1-906e-5505-a7e3-65857da7a9d3",
+    "question": "SLI, SLO, SLA và error budget khác nhau thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "sli-slo-sla-va-error-budget-khac-nhau-the-nao-48f37bc1-906e-5505-a7e3-65857da7a9d3",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": null,
+    "departments": [
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "9da6dcf0-8e4d-587d-a705-83982ec9ebfd",
+    "question": "GitOps là gì? Khác cách deploy CI/CD truyền thống thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "gitops-la-gi-khac-cach-deploy-ci-cd-truyen-thong-the-nao-9da6dcf0-8e4d-587d-a705-83982ec9ebfd",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 76,
+    "sourceSlug": null,
+    "departments": [
+      "infrastructure"
+    ]
+  }
+]

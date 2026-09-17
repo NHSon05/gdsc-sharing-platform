@@ -1,0 +1,2336 @@
+[
+  {
+    "id": "48cece20-762f-5fb6-bd81-d51e794ffac2",
+    "question": "Sự khác nhau giữa var, dynamic, và final trong Dart là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2801-su-khac-nhau-giua-var-dynamic-va-final-trong-dart-la-gi",
+    "slug": "su-khac-nhau-giua-var-dynamic-va-final-trong-dart-la-gi-48cece20-762f-5fb6-bd81-d51e794ffac2",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "var cho phép Dart tự suy luận kiểu dữ liệu một lần lúc khai báo và không thể thay đổi kiểu sau đó. dynamic cho phép kiểu thay đổi trong runtime, bỏ qua kiểm tra kiểu tĩnh. final tạo biến không thể gán lại sau khi khởi tạo."
+      ],
+      "details": [
+        "Dùng var cho biến cục bộ rõ ràng, hạn chế dynamic vì phá vỡ type safety, dùng final cho giá trị không đổi."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "2801-su-khac-nhau-giua-var-dynamic-va-final-trong-dart-la-gi"
+  },
+  {
+    "id": "80c2a4bd-d1c5-55e2-a886-750d8a4a8a54",
+    "question": "Null safety trong Dart là gì và tại sao nó quan trọng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2802-null-safety-trong-dart-la-gi-va-tai-sao-no-quan-trong",
+    "slug": "null-safety-trong-dart-la-gi-va-tai-sao-no-quan-trong-80c2a4bd-d1c5-55e2-a886-750d8a4a8a54",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Null safety nghĩa là các biến không thể chứa null trừ khi được đánh dấu nullable bằng ?."
+      ],
+      "details": [],
+      "points": [
+        "Điều này giúp phòng ngừa lỗi NullPointerException ở runtime bằng cách phát hiện lỗi ngay lúc compile.",
+        "Với null safety, lập trình viên phải có chủ đích rõ ràng về biến nào có thể null, giúp code an toàn hơn và trình biên dịch tối ưu hiệu quả hơn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "2802-null-safety-trong-dart-la-gi-va-tai-sao-no-quan-trong"
+  },
+  {
+    "id": "c86f645e-bf13-5864-930c-8c4f0024bfc6",
+    "question": "Toán tử null assertion (!) là gì và khi nào nên dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2804-toan-tu-null-assertion-la-gi-va-khi-nao-nen-dung",
+    "slug": "toan-tu-null-assertion-la-gi-va-khi-nao-nen-dung-c86f645e-bf13-5864-930c-8c4f0024bfc6",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Toán tử ! yêu cầu Dart xử lý biến nullable như non-nullable mà không kiểm tra."
+      ],
+      "details": [
+        "Ví dụ: String name = nullableName! — điều này khẳng định nullableName không phải null. Chỉ dùng khi bạn chắc chắn 100% biến không null; nếu sai sẽ ném lỗi runtime. Lạm dụng ! thường cho thấy thiết kế chưa tốt."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "2804-toan-tu-null-assertion-la-gi-va-khi-nao-nen-dung"
+  },
+  {
+    "id": "e700bf3e-8fd9-5977-94c4-55de43660eaa",
+    "question": "Các toán tử null-aware trong Dart là gì? Nêu ba ví dụ.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2805-cac-toan-tu-null-aware-trong-dart-la-gi-neu-ba-vi-du",
+    "slug": "cac-toan-tu-null-aware-trong-dart-la-gi-neu-ba-vi-du-e700bf3e-8fd9-5977-94c4-55de43660eaa",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Toán tử null-aware giúp xử lý giá trị nullable an toàn. ?. truy cập thuộc tính chỉ khi đối tượng khác null: person?.name. ?? cung cấp giá trị mặc định nếu bên trái là null: name ?? \"Unknown\". ??= chỉ gán nếu biến đang là null: count ??= 0."
+      ],
+      "details": [
+        "Các toán tử này giúp code ngắn gọn và tránh lỗi null."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "2805-cac-toan-tu-null-aware-trong-dart-la-gi-neu-ba-vi-du"
+  },
+  {
+    "id": "87884c05-ea8f-5cb2-8d8e-655fc52648f1",
+    "question": "Giải thích sự khác nhau giữa List, Set và Map trong Dart.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2806-giai-thich-su-khac-nhau-giua-list-set-va-map-trong-dart",
+    "slug": "giai-thich-su-khac-nhau-giua-list-set-va-map-trong-dart-87884c05-ea8f-5cb2-8d8e-655fc52648f1",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "List là collection có thứ tự và cho phép trùng lặp: [1, 2, 2, 3]. Set là collection không có thứ tự với các phần tử duy nhất: {1, 2, 3}. Map lưu trữ cặp key-value: {\"name\": \"John\", \"age\": 30}."
+      ],
+      "details": [
+        "Chọn List khi thứ tự quan trọng, Set cho giá trị duy nhất và tra cứu O(1), Map cho truy xuất theo key."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "2806-giai-thich-su-khac-nhau-giua-list-set-va-map-trong-dart"
+  },
+  {
+    "id": "32a1008a-b112-5e72-b98b-16f43737a365",
+    "question": "Future trong Dart là gì và khác Stream như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2807-future-trong-dart-la-gi-va-khac-stream-nhu-the-nao",
+    "slug": "future-trong-dart-la-gi-va-khac-stream-nhu-the-nao-32a1008a-b112-5e72-b98b-16f43737a365",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Future đại diện cho một giá trị bất đồng bộ duy nhất sẽ có trong tương lai — giống như một lời hứa cho một kết quả. Stream đại diện cho nhiều sự kiện bất đồng bộ theo thời gian — như một chuỗi các giá trị liên tục."
+      ],
+      "details": [
+        "Dùng Future cho tác vụ một lần (gọi API), dùng Stream cho dữ liệu liên tục (cảm biến, WebSocket)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "2807-future-trong-dart-la-gi-va-khac-stream-nhu-the-nao"
+  },
+  {
+    "id": "4cd13e03-027d-539a-a5ce-daf548e9f30d",
+    "question": "Cú pháp async/await trong Dart hoạt động như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2808-cu-phap-async-await-trong-dart-hoat-dong-nhu-the-nao",
+    "slug": "cu-phap-async-await-trong-dart-hoat-dong-nhu-the-nao-4cd13e03-027d-539a-a5ce-daf548e9f30d",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "async đánh dấu hàm là bất đồng bộ; await tạm dừng thực thi cho đến khi Future hoàn thành."
+      ],
+      "details": [
+        "Điều này giúp code bất đồng bộ đọc dễ như code đồng bộ. await chỉ hoạt động trong hàm async."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "DART",
+          "code": "Future<String> fetchData() async {\n  String data = await api.get();\n  return data;\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "2808-cu-phap-async-await-trong-dart-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "8f730740-5c76-5ace-8989-a6d7b218a675",
+    "question": "Type promotion trong Dart là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2809-type-promotion-trong-dart-la-gi",
+    "slug": "type-promotion-trong-dart-la-gi-8f730740-5c76-5ace-8989-a6d7b218a675",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Type promotion là khi Dart tự động thu hẹp kiểu của biến dựa trên luồng điều khiển."
+      ],
+      "details": [],
+      "points": [
+        "Nếu bạn có String? và kiểm tra if (name != null), trong khối đó Dart coi name là String non-nullable mà không cần !.",
+        "Điều này xảy ra tự động với kiểm tra null, is checks, và toán tử logic, giúp giảm boilerplate."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "2809-type-promotion-trong-dart-la-gi"
+  },
+  {
+    "id": "63b09c12-ed82-5203-9143-9b23bd8e095a",
+    "question": "Named parameters và positional parameters trong hàm Dart khác nhau như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2810-named-parameters-va-positional-parameters-trong-ham-dart-khac-nhau-nhu-the-nao",
+    "slug": "named-parameters-va-positional-parameters-trong-ham-dart-khac-nhau-nhu-the-nao-63b09c12-ed82-5203-9143-9b23bd8e095a",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Positional parameters được truyền theo thứ tự: void greet(String name, int age) gọi là greet(\"John\", 30)."
+      ],
+      "details": [],
+      "points": [
+        "Named parameters dùng dấu ngoặc nhọn: void greet({String? name, int? age}) gọi là greet(name: \"John\", age: 30).",
+        "Named parameters có thể tùy chọn; kết hợp từ khóa required để bắt buộc chúng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "2810-named-parameters-va-positional-parameters-trong-ham-dart-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "f84bde96-33f7-5c86-af1e-fd73a4504efd",
+    "question": "Closure trong Dart là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2811-closure-trong-dart-la-gi",
+    "slug": "closure-trong-dart-la-gi-f84bde96-33f7-5c86-af1e-fd73a4504efd",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Closure là một hàm \"đóng gói\" (capture) các biến từ phạm vi bao quanh và có thể truy cập chúng ngay cả sau khi hàm ngoài đã kết thúc."
+      ],
+      "details": [
+        "Ví dụ: int makeAdder(int x) { return (int y) => x + y; } — hàm bên trong \"giữ lại\" biến x. Closure rất hữu ích cho callbacks và lập trình hàm trong Dart."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "2811-closure-trong-dart-la-gi"
+  },
+  {
+    "id": "2637edc5-96a5-5a56-824f-1a28ee4be034",
+    "question": "Sự khác nhau giữa extends, implements, và with (mixin) trong Dart là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2812-su-khac-nhau-giua-extends-implements-va-with-mixin-trong-dart-la-gi",
+    "slug": "su-khac-nhau-giua-extends-implements-va-with-mixin-trong-dart-la-gi-2637edc5-96a5-5a56-824f-1a28ee4be034",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "extends kế thừa từ lớp cha, tái sử dụng code: class Dog extends Animal. implements coi lớp như một interface và buộc override tất cả method (không tái sử dụng code): class Dog implements Animal. with thêm hành vi mixin mà không cần kế thừa: class Dog with Sound."
+      ],
+      "details": [
+        "Dùng extends cho \"là một\", implements cho \"hành động như\", with để chia sẻ code."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "2812-su-khac-nhau-giua-extends-implements-va-with-mixin-trong-dart-la-gi"
+  },
+  {
+    "id": "908e5ab4-a577-5262-a485-275e3deb425b",
+    "question": "Sự khác nhau giữa StatelessWidget và StatefulWidget là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2813-su-khac-nhau-giua-statelesswidget-va-statefulwidget-la-gi",
+    "slug": "su-khac-nhau-giua-statelesswidget-va-statefulwidget-la-gi-908e5ab4-a577-5262-a485-275e3deb425b",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "StatelessWidget là immutable — sau khi build xong, nó không thể thay đổi."
+      ],
+      "details": [],
+      "points": [
+        "Hàm build() chỉ được gọi một lần trừ khi parent rebuild. StatefulWidget duy trì state có thể thay đổi qua setState(), kích hoạt rebuild.",
+        "Dùng StatelessWidget cho UI tĩnh (nhãn văn bản, icon), StatefulWidget cho component tương tác (form, toggle)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "2813-su-khac-nhau-giua-statelesswidget-va-statefulwidget-la-gi"
+  },
+  {
+    "id": "02ffda4b-74b2-569a-b8a1-6c5ed1e99bef",
+    "question": "BuildContext là gì và tại sao nó quan trọng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2814-buildcontext-la-gi-va-tai-sao-no-quan-trong",
+    "slug": "buildcontext-la-gi-va-tai-sao-no-quan-trong-02ffda4b-74b2-569a-b8a1-6c5ed1e99bef",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "BuildContext là tham chiếu đến vị trí của widget trong cây widget, cung cấp quyền truy cập vào các dịch vụ như Theme, MediaQuery, Navigator và ScaffoldState."
+      ],
+      "details": [],
+      "points": [
+        "Mọi widget đều có BuildContext được truyền vào hàm build().",
+        "Nó cần thiết để điều hướng, hiển thị dialog, truy cập dữ liệu theme và đọc thuộc tính thiết bị."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "2814-buildcontext-la-gi-va-tai-sao-no-quan-trong"
+  },
+  {
+    "id": "c305cdb7-5885-558c-9d7c-e5edc3fff1ef",
+    "question": "Tree-shaking trong Flutter release build là gì và tại sao nó giảm kích thước app?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2868-tree-shaking-trong-flutter-release-build-la-gi-va-tai-sao-no-giam-kich-thuoc-app",
+    "slug": "tree-shaking-trong-flutter-release-build-la-gi-va-tai-sao-no-giam-kich-thuoc-app-c305cdb7-5885-558c-9d7c-e5edc3fff1ef",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tree-shaking là quá trình tự động loại bỏ code, class, method không được dùng trong quá trình build. Flutter chỉ giữ lại code reachable từ main()."
+      ],
+      "details": [
+        "Ví dụ: nếu bạn import một package lớn nhưng chỉ dùng một hàm, chỉ hàm đó được đưa vào app. Tree-shaking chỉ chạy ở release mode (flutter build apk --release). Mức độ giảm phụ thuộc vào số package lớn có nhiều code không dùng — app dùng ít package nhỏ có thể không thấy nhiều khác biệt. Để phân tích xem code nào còn lại, dùng --analyze-size hoặc DevTools Size Analyzer."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "2868-tree-shaking-trong-flutter-release-build-la-gi-va-tai-sao-no-giam-kich-thuoc-app"
+  },
+  {
+    "id": "5b005caa-a2dd-587c-b859-0916e3f530df",
+    "question": "Giải thích widget tree, element tree và render tree trong Flutter.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2815-giai-thich-widget-tree-element-tree-va-render-tree-trong-flutter",
+    "slug": "giai-thich-widget-tree-element-tree-va-render-tree-trong-flutter-5b005caa-a2dd-587c-b859-0916e3f530df",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Widget tree mô tả cấu trúc UI (blueprint bất biến)."
+      ],
+      "details": [],
+      "points": [
+        "Element tree theo dõi các widget tồn tại và vòng đời của chúng (có thể thay đổi).",
+        "setState()",
+        "Render tree xử lý layout và vẽ lên màn hình."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "2815-giai-thich-widget-tree-element-tree-va-render-tree-trong-flutter"
+  },
+  {
+    "id": "2b4dabfa-b06b-5963-962f-296bcbc1e6e3",
+    "question": "Mục đích của widget Key là gì và khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2816-muc-dich-cua-widget-key-la-gi-va-khi-nao-nen-dung",
+    "slug": "muc-dich-cua-widget-key-la-gi-va-khi-nao-nen-dung-2b4dabfa-b06b-5963-962f-296bcbc1e6e3",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Key giúp bảo tồn state của widget khi thứ tự danh sách con thay đổi."
+      ],
+      "details": [],
+      "points": [
+        "Không có key, Flutter khớp widget theo kiểu và vị trí, dẫn đến lẫn lộn state.",
+        "Dùng ValueKey cho giá trị đơn giản, ObjectKey cho đối tượng phức tạp.",
+        "ListView.builder",
+        "Không có key khi reorder danh sách StatefulWidget sẽ hoán đổi state của chúng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "2816-muc-dich-cua-widget-key-la-gi-va-khi-nao-nen-dung"
+  },
+  {
+    "id": "1e9aa265-24d9-5a47-930b-08aed9d7a664",
+    "question": "Sự khác nhau giữa ValueKey, ObjectKey và UniqueKey là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2817-su-khac-nhau-giua-valuekey-objectkey-va-uniquekey-la-gi",
+    "slug": "su-khac-nhau-giua-valuekey-objectkey-va-uniquekey-la-gi-1e9aa265-24d9-5a47-930b-08aed9d7a664",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "ValueKey xác định widget bằng một giá trị cụ thể; hai widget cùng giá trị được coi là giống nhau. ObjectKey dùng tham chiếu danh tính của đối tượng; mỗi đối tượng duy nhất có key riêng. UniqueKey luôn tạo danh tính duy nhất, hữu ích khi muốn mỗi instance khác biệt."
+      ],
+      "details": [
+        "Tránh tạo UniqueKey trong build() — điều đó phá vỡ mục đích bảo tồn state."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "2817-su-khac-nhau-giua-valuekey-objectkey-va-uniquekey-la-gi"
+  },
+  {
+    "id": "9eaabe0b-21eb-5085-9c62-786af005c990",
+    "question": "const constructor là gì và tại sao quan trọng cho hiệu năng Flutter?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2818-const-constructor-la-gi-va-tai-sao-quan-trong-cho-hieu-nang-flutter",
+    "slug": "const-constructor-la-gi-va-tai-sao-quan-trong-cho-hieu-nang-flutter-9eaabe0b-21eb-5085-9c62-786af005c990",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "const constructor tạo hằng số compile-time, bất biến và có thể tái sử dụng."
+      ],
+      "details": [],
+      "points": [
+        "Widget const bỏ qua rebuild nếu tham số không đổi, cải thiện hiệu năng đáng kể.",
+        "Flutter có thể gộp các đối tượng const giống nhau thành một instance, giảm bộ nhớ.",
+        "Luôn dùng const cho widget với tham số cố định: const Text(\"Hello\").",
+        "UniqueKey"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "2818-const-constructor-la-gi-va-tai-sao-quan-trong-cho-hieu-nang-flutter"
+  },
+  {
+    "id": "ec8b011c-79b9-55b8-a36c-9112cee70a2d",
+    "question": "Hệ thống layout của Flutter hoạt động thế nào: Column, Row, Expanded và Flexible dùng ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2819-he-thong-layout-cua-flutter-hoat-dong-the-nao-column-row-expanded-va-flexible-du",
+    "slug": "he-thong-layout-cua-flutter-hoat-dong-the-nao-column-row-expanded-va-flexible-dung-ra-sao-ec8b011c-79b9-55b8-a36c-9112cee70a2d",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Row xếp widget theo chiều ngang; Column xếp theo chiều dọc."
+      ],
+      "details": [],
+      "points": [
+        "Mặc định chúng chiếm không gian tối thiểu. Expanded buộc con lấp đầy không gian còn lại đều nhau. Flexible cho phép con chiếm thêm không gian nhưng có thể nhỏ hơn nếu cần.",
+        "Dùng MainAxisAlignment và CrossAxisAlignment để kiểm soát khoảng cách và căn chỉnh."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "2819-he-thong-layout-cua-flutter-hoat-dong-the-nao-column-row-expanded-va-flexible-du"
+  },
+  {
+    "id": "543021b0-9704-52a2-a38a-f3d39a5fce2e",
+    "question": "setState() là gì và tại sao gọi nó lại kích hoạt rebuild?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2820-setstate-la-gi-va-tai-sao-goi-no-lai-kich-hoat-rebuild",
+    "slug": "setstate-la-gi-va-tai-sao-goi-no-lai-kich-hoat-rebuild-543021b0-9704-52a2-a38a-f3d39a5fce2e",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "setState() lên lịch rebuild subtree cho frame tiếp theo — chỉ dùng cho state UI cục bộ đơn giản, không dùng cho animation hay stream."
+      ],
+      "details": [],
+      "points": [
+        "Nó đánh dấu widget cần rebuild và thông báo cho Flutter framework; thay đổi state bên trong callback được phản ánh trong lần build tiếp theo.",
+        "Không dùng setState() cho cập nhật liên tục (animation, stream); dùng AnimatedBuilder hoặc state management thay thế."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "2820-setstate-la-gi-va-tai-sao-goi-no-lai-kich-hoat-rebuild"
+  },
+  {
+    "id": "5d1cd04f-5625-5360-b30d-1a500b81eaba",
+    "question": "Vòng đời của StatefulWidget là gì? Liệt kê các method quan trọng.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2821-vong-doi-cua-statefulwidget-la-gi-liet-ke-cac-method-quan-trong",
+    "slug": "vong-doi-cua-statefulwidget-la-gi-liet-ke-cac-method-quan-trong-5d1cd04f-5625-5360-b30d-1a500b81eaba",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "initState() — gọi một lần khi widget được thêm vào (khởi tạo controller, listener). didChangeDependencies() — gọi sau initState và khi dependency thay đổi. build() — gọi thường xuyên, trả về widget tree. didUpdateWidget() — gọi khi parent rebuild với thuộc tính khác. dispose() — gọi một lần khi xóa (dọn dẹp tài nguyên, đóng stream)."
+      ],
+      "details": [
+        "Nắm rõ vòng đời này để tránh memory leak."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "2821-vong-doi-cua-statefulwidget-la-gi-liet-ke-cac-method-quan-trong"
+  },
+  {
+    "id": "7d71c40e-06d2-529b-a4df-571860043173",
+    "question": "Tại sao dispose() quan trọng và nên dọn dẹp gì trong đó?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2822-tai-sao-dispose-quan-trong-va-nen-don-dep-gi-trong-do",
+    "slug": "tai-sao-dispose-quan-trong-va-nen-don-dep-gi-trong-do-7d71c40e-06d2-529b-a4df-571860043173",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "dispose() được gọi khi widget bị xóa vĩnh viễn khỏi cây."
+      ],
+      "details": [],
+      "points": [
+        "Cần dọn dẹp tài nguyên để tránh memory leak: đóng stream, dispose animation controller, hủy đăng ký change notifier, hủy timer.",
+        "Không dispose đúng cách khiến app giữ tham chiếu đến object đã chết, dần dần tiêu tốn bộ nhớ cho đến khi app crash."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "2822-tai-sao-dispose-quan-trong-va-nen-don-dep-gi-trong-do"
+  },
+  {
+    "id": "2bdbba8a-dac3-522c-b918-91b14ba69865",
+    "question": "Mục đích của RepaintBoundary là gì và khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2824-muc-dich-cua-repaintboundary-la-gi-va-khi-nao-nen-dung",
+    "slug": "muc-dich-cua-repaintboundary-la-gi-va-khi-nao-nen-dung-2bdbba8a-dac3-522c-b918-91b14ba69865",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "RepaintBoundary cô lập một subtree để nó vẽ lại độc lập mà không ảnh hưởng toàn bộ cây."
+      ],
+      "details": [],
+      "points": [
+        "Dùng nó xung quanh widget vẽ lại thường xuyên (animation, progress indicator).",
+        "Khi con của RepaintBoundary thay đổi, chỉ subtree đó mới vẽ lại.",
+        "Lạm dụng tạo quá nhiều boundary và giảm hiệu năng; chỉ dùng tiết kiệm cho các điểm hot đã được xác định."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "2824-muc-dich-cua-repaintboundary-la-gi-va-khi-nao-nen-dung"
+  },
+  {
+    "id": "0c6fd266-91e6-5715-9a7e-9334fc064dd7",
+    "question": "State management là gì và tại sao quan trọng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2825-state-management-la-gi-va-tai-sao-quan-trong",
+    "slug": "state-management-la-gi-va-tai-sao-quan-trong-0c6fd266-91e6-5715-9a7e-9334fc064dd7",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "State management là cách xử lý dữ liệu thay đổi trong app (input người dùng, kết quả API)."
+      ],
+      "details": [],
+      "points": [
+        "Quản lý state kém gây ra bug, memory leak và code khó bảo trì.",
+        "Quản lý state tốt tách UI khỏi logic, giúp test dễ dàng và tái sử dụng code.",
+        "Khi app lớn, chọn đúng chiến lược (setState, Provider, Riverpod, BLoC) trở nên thiết yếu."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "2825-state-management-la-gi-va-tai-sao-quan-trong"
+  },
+  {
+    "id": "9531ec97-493e-535f-bd4f-f9fdfccd2a0f",
+    "question": "Những vấn đề gì khi dùng setState() cho app phức tạp?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2826-nhung-van-de-gi-khi-dung-setstate-cho-app-phuc-tap",
+    "slug": "nhung-van-de-gi-khi-dung-setstate-cho-app-phuc-tap-9531ec97-493e-535f-bd4f-f9fdfccd2a0f",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "setState() rebuild toàn bộ cây con của widget đó, gây vấn đề hiệu năng với cây widget lớn."
+      ],
+      "details": [],
+      "points": [
+        "Logic nghiệp vụ trộn lẫn với UI làm code khó test.",
+        "Không scale được — nhiều cập nhật state làm code khó theo dõi và khó debug.",
+        "State bị giới hạn trong một widget — chia sẻ state giữa các widget ở xa trở nên cực kỳ phức tạp."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "2826-nhung-van-de-gi-khi-dung-setstate-cho-app-phuc-tap"
+  },
+  {
+    "id": "b1c12875-58f1-5711-9b20-186578cc822c",
+    "question": "Provider pattern là gì và hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2827-provider-pattern-la-gi-va-hoat-dong-nhu-the-nao",
+    "slug": "provider-pattern-la-gi-va-hoat-dong-nhu-the-nao-b1c12875-58f1-5711-9b20-186578cc822c",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Provider là thư viện state management dùng ChangeNotifier để thông báo listener khi state thay đổi."
+      ],
+      "details": [],
+      "points": [
+        "Widget lắng nghe qua Consumer hoặc context.watch<T>() và chỉ rebuild khi dữ liệu chúng phụ thuộc thay đổi.",
+        "Provider nhẹ và phù hợp cho app nhỏ đến vừa, nhưng Flutter team hiện nay khuyến nghị Riverpod cho dự án mới vì type-safe hơn và không phụ thuộc BuildContext.",
+        "Bọc app với MultiProvider, định nghĩa provider cho data, và consume trong widget."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "2827-provider-pattern-la-gi-va-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "7b5fba7a-227b-5d68-9b0a-9d1947b78ec3",
+    "question": "Riverpod là gì và khác Provider như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2828-riverpod-la-gi-va-khac-provider-nhu-the-nao",
+    "slug": "riverpod-la-gi-va-khac-provider-nhu-the-nao-7b5fba7a-227b-5d68-9b0a-9d1947b78ec3",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Riverpod (kế thừa tinh thần của Provider, cùng tác giả) hoàn toàn type-safe, không phụ thuộc BuildContext, và dùng functional provider."
+      ],
+      "details": [],
+      "points": [
+        "Riverpod sinh code lúc compile-time giúp phòng ngừa nhiều bug.",
+        "Riverpod hỗ trợ parameterized provider, test tốt hơn và auto-dispose.",
+        "Dùng Riverpod cho project mới; hiện đại hơn Provider nhưng learning curve hơi cao hơn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "2828-riverpod-la-gi-va-khac-provider-nhu-the-nao"
+  },
+  {
+    "id": "f1285883-e74f-53cf-be6e-47cfcbe33acf",
+    "question": "Giải thích pattern BLoC và tại sao interviewer hay hỏi về nó.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2829-giai-thich-pattern-bloc-va-tai-sao-interviewer-hay-hoi-ve-no",
+    "slug": "giai-thich-pattern-bloc-va-tai-sao-interviewer-hay-hoi-ve-no-f1285883-e74f-53cf-be6e-47cfcbe33acf",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "BLoC (Business Logic Component) tách logic nghiệp vụ khỏi UI thông qua kiến trúc event-in/state-out."
+      ],
+      "details": [],
+      "points": [
+        "Bạn dispatch Event vào BLoC, BLoC xử lý và emit ra State mới.",
+        "BLoC có thể test được, đảm bảo kiến trúc nhất quán, và scale tốt trong team lớn.",
+        "BLoC cần boilerplate nhiều hơn Provider nhưng cung cấp cấu trúc và khả năng truy vết tốt hơn cho app phức tạp."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "2829-giai-thich-pattern-bloc-va-tai-sao-interviewer-hay-hoi-ve-no"
+  },
+  {
+    "id": "b853503c-6c58-59b0-a076-52ddb22a781c",
+    "question": "So sánh Provider, Riverpod và BLoC: khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2830-so-sanh-provider-riverpod-va-bloc-khi-nao-dung-cai-nao",
+    "slug": "so-sanh-provider-riverpod-va-bloc-khi-nao-dung-cai-nao-b853503c-6c58-59b0-a076-52ddb22a781c",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Provider: app đơn giản, setup nhanh, hỗ trợ chính thức."
+      ],
+      "details": [],
+      "points": [
+        "Riverpod: type-safe, hiện đại, test tốt hơn, parameterized provider, xu hướng ngày càng phổ biến.",
+        "BLoC: team lớn, app phức tạp, cần truy vết event, các ngành có quy định chặt (ngân hàng).",
+        "Không có lựa chọn \"tốt nhất\" — phải phù hợp giải pháp với vấn đề."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "2830-so-sanh-provider-riverpod-va-bloc-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "8aa5eca4-0e81-5da2-b080-12d9866e1a6b",
+    "question": "ChangeNotifier là gì và khi nào dùng nó?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2831-changenotifier-la-gi-va-khi-nao-dung-no",
+    "slug": "changenotifier-la-gi-va-khi-nao-dung-no-8aa5eca4-0e81-5da2-b080-12d9866e1a6b",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "ChangeNotifier là class đơn giản thông báo listener khi state thay đổi thông qua notifyListeners(). extend ChangeNotifier để tạo đối tượng observable."
+      ],
+      "details": [],
+      "points": [
+        "Provider theo dõi ChangeNotifier và rebuild khi notifyListeners() được gọi.",
+        "Nó nhẹ nhưng cần quản lý thông báo thủ công.",
+        "Cho state đơn giản (theme, auth, user data), ChangeNotifier thường đủ dùng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "2831-changenotifier-la-gi-va-khi-nao-dung-no"
+  },
+  {
+    "id": "dd8cffcf-7b09-5de2-9c60-a7593ebe7d1b",
+    "question": "Selector trong Provider là gì và tại sao dùng nó thay vì Consumer?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2832-selector-trong-provider-la-gi-va-tai-sao-dung-no-thay-vi-consumer",
+    "slug": "selector-trong-provider-la-gi-va-tai-sao-dung-no-thay-vi-consumer-dd8cffcf-7b09-5de2-9c60-a7593ebe7d1b",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Consumer theo dõi toàn bộ provider và rebuild bất cứ khi nào nó thay đổi. Selector cho phép chỉ theo dõi một phần cụ thể của state: Selector<UserProvider, String>(selector: (_, user) => user.name, ...) chỉ rebuild khi name thay đổi, không phải khi age thay đổi."
+      ],
+      "details": [
+        "Kiểm soát chi tiết này ngăn rebuild không cần thiết và cải thiện hiệu năng trong provider phức tạp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "2832-selector-trong-provider-la-gi-va-tai-sao-dung-no-thay-vi-consumer"
+  },
+  {
+    "id": "4f98ae1b-83dd-5f09-9d99-6bd0b5df9962",
+    "question": "GetIt là gì và liên quan đến state management như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2833-getit-la-gi-va-lien-quan-den-state-management-nhu-the-nao",
+    "slug": "getit-la-gi-va-lien-quan-den-state-management-nhu-the-nao-4f98ae1b-83dd-5f09-9d99-6bd0b5df9962",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "GetIt là service locator cho dependency injection."
+      ],
+      "details": [],
+      "points": [
+        "Bạn đăng ký singleton hoặc factory: getIt.registerSingleton<Repository>(Repository()), rồi truy cập ở bất kỳ đâu: getIt<Repository>().",
+        "Bản thân nó không phải state management mà giúp clean architecture bằng cách quản lý dependency.",
+        "Thường dùng kết hợp BLoC hoặc Riverpod để inject repository và service vào business logic."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "2833-getit-la-gi-va-lien-quan-den-state-management-nhu-the-nao"
+  },
+  {
+    "id": "9de73143-0bd5-5c16-996c-4d01462a6161",
+    "question": "Làm thế nào để test code state management (Provider/Riverpod/BLoC)?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2834-lam-the-nao-de-test-code-state-management-provider-riverpod-bloc",
+    "slug": "lam-the-nao-de-test-code-state-management-provider-riverpod-bloc-9de73143-0bd5-5c16-996c-4d01462a6161",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Provider: Mock ChangeNotifier, dùng ProviderContainer để test."
+      ],
+      "details": [],
+      "points": [
+        "Riverpod: Dùng ProviderContainer, override provider bằng mock.",
+        "BLoC: Test trực tiếp với bloc_test, xác minh event → state transition.",
+        "Không bao giờ phụ thuộc BuildContext trong code cần test; tách logic nghiệp vụ vào service class."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "2834-lam-the-nao-de-test-code-state-management-provider-riverpod-bloc"
+  },
+  {
+    "id": "0735f84b-ce56-5154-af02-9f03d04e36cc",
+    "question": "Sự khác nhau giữa Navigator cũ (v1) và các cách tiếp cận routing hiện đại là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2835-su-khac-nhau-giua-navigator-cu-v1-va-cac-cach-tiep-can-routing-hien-dai-la-gi",
+    "slug": "su-khac-nhau-giua-navigator-cu-v1-va-cac-cach-tiep-can-routing-hien-dai-la-gi-0735f84b-ce56-5154-af02-9f03d04e36cc",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Navigator v1 dùng lệnh imperative Navigator.push() và Navigator.pop() — bạn quản lý navigation stack thủ công."
+      ],
+      "details": [],
+      "points": [
+        "Navigator 2.0 giới thiệu declarative routing qua Router API.",
+        "GoRouter (được khuyến nghị hiện nay) xây trên đó, cung cấp URL-based, type-safe declarative routing.",
+        "GoRouter đơn giản hơn và tự động xử lý deep linking, trở thành lựa chọn hiện đại cho project mới."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "2835-su-khac-nhau-giua-navigator-cu-v1-va-cac-cach-tiep-can-routing-hien-dai-la-gi"
+  },
+  {
+    "id": "3379f8dd-8890-5e92-8351-6229d4c2672a",
+    "question": "GoRouter là gì và giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2836-gorouter-la-gi-va-giai-quyet-van-de-gi",
+    "slug": "gorouter-la-gi-va-giai-quyet-van-de-gi-3379f8dd-8890-5e92-8351-6229d4c2672a",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "GoRouter là routing package được Flutter chính thức khuyến nghị."
+      ],
+      "details": [],
+      "points": [
+        "Cung cấp URL-based declarative routing với path/query parameter.",
+        "Tự động xử lý deep linking, hỗ trợ nested navigation với ShellRoute, thêm redirect logic cho auth guard, và cho phép type-safe route với code generation.",
+        "Thay vì quản lý Navigator stack thủ công, bạn khai báo tất cả route trước và để GoRouter xử lý navigation."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "2836-gorouter-la-gi-va-giai-quyet-van-de-gi"
+  },
+  {
+    "id": "29ada125-9404-5772-b077-9d28ff02e5fc",
+    "question": "Làm thế nào để truyền dữ liệu giữa các màn hình trong Flutter?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2837-lam-the-nao-de-truyen-du-lieu-giua-cac-man-hinh-trong-flutter",
+    "slug": "lam-the-nao-de-truyen-du-lieu-giua-cac-man-hinh-trong-flutter-29ada125-9404-5772-b077-9d28ff02e5fc",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cách 1 (Navigator cũ): Truyền qua constructor:"
+      ],
+      "details": [],
+      "points": [
+        "Cách 2 (GoRouter): Dùng path parameter: route: \"/detail/:id\" và truy cập qua GoRouterState.",
+        "Cách 3 (State Management): Lưu data trong provider/BLoC, truy cập từ bất kỳ màn hình nào.",
+        "GoRouter với path parameter là sạch nhất và hỗ trợ deep linking."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "Navigator.push(context, MaterialPageRoute(builder: (_) => DetailPage(item: item)))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "2837-lam-the-nao-de-truyen-du-lieu-giua-cac-man-hinh-trong-flutter"
+  },
+  {
+    "id": "b1d3e28d-3185-5d5e-bfff-120b48a2c71a",
+    "question": "Deep linking là gì và GoRouter hỗ trợ nó như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2838-deep-linking-la-gi-va-gorouter-ho-tro-no-nhu-the-nao",
+    "slug": "deep-linking-la-gi-va-gorouter-ho-tro-no-nhu-the-nao-b1d3e28d-3185-5d5e-bfff-120b48a2c71a",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Deep linking là mở app tại màn hình cụ thể thông qua URL (như myapp://detail/123)."
+      ],
+      "details": [],
+      "points": [
+        "Deep link đến từ push notification, web link hoặc system intent.",
+        "GoRouter hỗ trợ deep linking tự động — định nghĩa route như path: GoRoute(path: '/detail/:id', ...) và GoRouter khớp URL với màn hình đúng.",
+        "Điều này cho phép universal links (iOS) và app links (Android) mà không cần setup thêm."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "2838-deep-linking-la-gi-va-gorouter-ho-tro-no-nhu-the-nao"
+  },
+  {
+    "id": "644717aa-3d95-50e6-b0a1-c0311d23e897",
+    "question": "Làm thế nào để xử lý navigation state với GoRouter?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2839-lam-the-nao-de-xu-ly-navigation-state-voi-gorouter",
+    "slug": "lam-the-nao-de-xu-ly-navigation-state-voi-gorouter-644717aa-3d95-50e6-b0a1-c0311d23e897",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "GoRouter cung cấp GoRouterState với location, parameter, extra data: String id = state.pathParameters['id']!."
+      ],
+      "details": [],
+      "points": [
+        "Với nested navigation (bottom tab có stack độc lập), dùng ShellRoute.",
+        "Với navigation dựa trên auth, dùng redirect() để kiểm tra state auth trước khi build page: if (!isLoggedIn) return '/login'.",
+        "Điều này tập trung hóa logic navigation."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "2839-lam-the-nao-de-xu-ly-navigation-state-voi-gorouter"
+  },
+  {
+    "id": "e27b9684-bca0-5d47-bb27-da3566a6e719",
+    "question": "ShellRoute trong GoRouter là gì và khi nào dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2840-shellroute-trong-gorouter-la-gi-va-khi-nao-dung",
+    "slug": "shellroute-trong-gorouter-la-gi-va-khi-nao-dung-e27b9684-bca0-5d47-bb27-da3566a6e719",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "ShellRoute bọc nhiều route với một parent chia sẻ (như bottom navigation bar)."
+      ],
+      "details": [],
+      "points": [
+        "Route bên trong ShellRoute build trong context của parent đó, duy trì navigation stack độc lập cho mỗi tab.",
+        "Đây là cách đúng để triển khai bottom tab navigation: mỗi tab có lịch sử điều hướng riêng, nhấn tab hiển thị lịch sử của nó thay vì bắt đầu mới.",
+        "Không có ShellRoute, chuyển tab sẽ làm nút back hoạt động sai."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "2840-shellroute-trong-gorouter-la-gi-va-khi-nao-dung"
+  },
+  {
+    "id": "b16b0a7e-63db-56a9-acd9-b77b18ede290",
+    "question": "Làm thế nào để triển khai authentication guard với GoRouter?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2841-lam-the-nao-de-trien-khai-authentication-guard-voi-gorouter",
+    "slug": "lam-the-nao-de-trien-khai-authentication-guard-voi-gorouter-b16b0a7e-63db-56a9-acd9-b77b18ede290",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Dùng callback redirect để kiểm tra state auth trước khi build route."
+      ],
+      "details": [
+        "Ví dụ: nếu user chưa đăng nhập và cố truy cập route được bảo vệ, redirect về /login. Kết hợp với Riverpod để redirect tự động phản ứng khi auth state thay đổi. Cách này xử lý tất cả route tập trung, không cần kiểm tra auth trong từng widget."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "2841-lam-the-nao-de-trien-khai-authentication-guard-voi-gorouter"
+  },
+  {
+    "id": "8e99147b-ff01-528f-b3e6-4fa78b63cc9d",
+    "question": "Những vấn đề gì xảy ra với Navigator 1.0 named routes khi app lớn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2842-nhung-van-de-gi-xay-ra-voi-navigator-1-0-named-routes-khi-app-lon",
+    "slug": "nhung-van-de-gi-xay-ra-voi-navigator-1-0-named-routes-khi-app-lon-8e99147b-ff01-528f-b3e6-4fa78b63cc9d",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Navigator 1.0 yêu cầu quản lý navigation state và back stack thủ công."
+      ],
+      "details": [],
+      "points": [
+        "Named route hoạt động nhưng xử lý deep linking kém — phải thêm nhiều boilerplate.",
+        "Navigation phức tạp (nested stack, conditional routing) trở nên rối.",
+        "Toàn bộ navigation tree là global, khó để lý luận."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "2842-nhung-van-de-gi-xay-ra-voi-navigator-1-0-named-routes-khi-app-lon"
+  },
+  {
+    "id": "81b9a045-1f2a-574a-be45-97554391c03d",
+    "question": "Clean architecture là gì và tại sao quan trọng cho app lớn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2843-clean-architecture-la-gi-va-tai-sao-quan-trong-cho-app-lon",
+    "slug": "clean-architecture-la-gi-va-tai-sao-quan-trong-cho-app-lon-81b9a045-1f2a-574a-be45-97554391c03d",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Clean architecture tách code thành các layer: Presentation (UI, widget), Domain (logic nghiệp vụ, entity, use case), Data (repository, data source)."
+      ],
+      "details": [],
+      "points": [
+        "Mỗi layer độc lập và có thể test.",
+        "Sự tách biệt này cho phép thay đổi UI framework, hoán đổi data source, và test logic nghiệp vụ mà không động vào UI.",
+        "App lớn không có clean architecture sẽ trở thành spaghetti code khó bảo trì khi phát triển."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "2843-clean-architecture-la-gi-va-tai-sao-quan-trong-cho-app-lon"
+  },
+  {
+    "id": "e1b3ca57-349f-5c0f-ab28-7c219c0d8604",
+    "question": "Repository pattern là gì và hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2844-repository-pattern-la-gi-va-hoat-dong-nhu-the-nao",
+    "slug": "repository-pattern-la-gi-va-hoat-dong-nhu-the-nao-e1b3ca57-349f-5c0f-ab28-7c219c0d8604",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Repository là lớp abstraction giữa domain logic và data source."
+      ],
+      "details": [],
+      "points": [
+        "Thay vì UI gọi trực tiếp API, bạn gọi Repository.getUser(id) — method này ẩn đi việc data đến từ network, cache hay database.",
+        "Interface repository được định nghĩa trong domain layer; implementation trong data layer.",
+        "Điều này giúp dễ dàng hoán đổi data source, hỗ trợ offline-first, và test bằng cách mock repository."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "2844-repository-pattern-la-gi-va-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "eac14b78-2414-5f15-96c6-84d8554e3eaf",
+    "question": "Dependency injection là gì và cách triển khai trong Flutter?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2845-dependency-injection-la-gi-va-cach-trien-khai-trong-flutter",
+    "slug": "dependency-injection-la-gi-va-cach-trien-khai-trong-flutter-eac14b78-2414-5f15-96c6-84d8554e3eaf",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Dependency injection là truyền dependency (service, repository) vào class thay vì tạo chúng bên trong."
+      ],
+      "details": [
+        "Thay vì class UserBloc { final repo = UserRepository(); }, hãy inject:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "class UserBloc { UserBloc(this.repo); final UserRepository repo; }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "2845-dependency-injection-la-gi-va-cach-trien-khai-trong-flutter"
+  },
+  {
+    "id": "3ab0f15e-0987-5f5d-bb43-7741e063270a",
+    "question": "Giải thích sự khác nhau giữa singleton và factory pattern trong Flutter.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2846-giai-thich-su-khac-nhau-giua-singleton-va-factory-pattern-trong-flutter",
+    "slug": "giai-thich-su-khac-nhau-giua-singleton-va-factory-pattern-trong-flutter-3ab0f15e-0987-5f5d-bb43-7741e063270a",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Singleton tạo một instance cho toàn bộ app: getIt.registerSingleton<Repository>(Repository())."
+      ],
+      "details": [
+        "Factory tạo instance mới mỗi lần:"
+      ],
+      "points": [
+        "Dùng cho tài nguyên chia sẻ (database, API client, repository)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "getIt.registerFactory<UserBloc>(() => UserBloc(repo))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "2846-giai-thich-su-khac-nhau-giua-singleton-va-factory-pattern-trong-flutter"
+  },
+  {
+    "id": "5f318517-ae98-524f-b6bd-026225d6c197",
+    "question": "MVVM architecture trong Flutter là gì và khác MVC như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2847-mvvm-architecture-trong-flutter-la-gi-va-khac-mvc-nhu-the-nao",
+    "slug": "mvvm-architecture-trong-flutter-la-gi-va-khac-mvc-nhu-the-nao-5f318517-ae98-524f-b6bd-026225d6c197",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "MVC (Model-View-Controller): Controller xử lý input và cập nhật Model, View hiển thị Model."
+      ],
+      "details": [],
+      "points": [
+        "MVVM (Model-View-ViewModel): ViewModel expose data và logic UI cần.",
+        "UI bind vào ViewModel.",
+        "ViewModel không biết về UI."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "2847-mvvm-architecture-trong-flutter-la-gi-va-khac-mvc-nhu-the-nao"
+  },
+  {
+    "id": "37ec5d49-b3ba-58f6-88ad-9a50d35b1dc6",
+    "question": "Use-case layer trong clean architecture là gì và tại sao cần nó?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2848-use-case-layer-trong-clean-architecture-la-gi-va-tai-sao-can-no",
+    "slug": "use-case-layer-trong-clean-architecture-la-gi-va-tai-sao-can-no-37ec5d49-b3ba-58f6-88ad-9a50d35b1dc6",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Use case đóng gói logic nghiệp vụ cho một tính năng: GetUserUseCase, LoginUseCase."
+      ],
+      "details": [],
+      "points": [
+        "Mỗi use case là một class với method call() nhận tham số và trả về kết quả.",
+        "Use case nằm ở domain layer, không phụ thuộc framework, và dễ test cao.",
+        "Chúng nối cầu giữa UI (trigger use case) và repository (lấy data)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "2848-use-case-layer-trong-clean-architecture-la-gi-va-tai-sao-can-no"
+  },
+  {
+    "id": "93f595ee-42be-504c-a967-2721634053d3",
+    "question": "Cách tổ chức folder/package trong app Flutter clean architecture như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2849-cach-to-chuc-folder-package-trong-app-flutter-clean-architecture-nhu-the-nao",
+    "slug": "cach-to-chuc-folder-package-trong-app-flutter-clean-architecture-nhu-the-nao-93f595ee-42be-504c-a967-2721634053d3",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cấu trúc phổ biến: lib/presentation/ (UI, widget, BLoC/ViewModel), lib/domain/ (entity, repository interface, use case), lib/data/ (API client, local DB, repository implementation), lib/config/ (cấu hình app, constant)."
+      ],
+      "details": [],
+      "points": [
+        "Mỗi feature có thể có domain/data/presentation riêng.",
+        "Điều này giữ code có tổ chức, dễ điều hướng và test."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "2849-cach-to-chuc-folder-package-trong-app-flutter-clean-architecture-nhu-the-nao"
+  },
+  {
+    "id": "f7b97e08-0e3c-5a7c-a050-ff1329c43cc4",
+    "question": "Sự khác nhau giữa entity và model trong Flutter architecture là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2850-su-khac-nhau-giua-entity-va-model-trong-flutter-architecture-la-gi",
+    "slug": "su-khac-nhau-giua-entity-va-model-trong-flutter-architecture-la-gi-f7b97e08-0e3c-5a7c-a050-ff1329c43cc4",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Entity đại diện cho khái niệm domain (đối tượng nghiệp vụ cốt lõi): User(id, name, email)."
+      ],
+      "details": [],
+      "points": [
+        "Entity là class Dart thuần, không phụ thuộc framework và dễ test, nằm ở domain layer.",
+        "Model là biểu diễn API/database với serialization: UserModel.toJson().",
+        "Model nằm ở data layer."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "2850-su-khac-nhau-giua-entity-va-model-trong-flutter-architecture-la-gi"
+  },
+  {
+    "id": "d4a77103-de3a-56f1-8f94-a8d2d216a1c0",
+    "question": "Records trong Dart là gì và chúng giúp ích thế nào khi cần trả về nhiều giá trị từ một hàm?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2861-records-trong-dart-la-gi-va-chung-giup-ich-the-nao-khi-can-tra-ve-nhieu-gia-tri",
+    "slug": "records-trong-dart-la-gi-va-chung-giup-ich-the-nao-khi-can-tra-ve-nhieu-gia-tri-tu-mot-ham-d4a77103-de3a-56f1-8f94-a8d2d216a1c0",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Records là kiểu dữ liệu nhẹ, bất biến, cho phép nhóm nhiều giá trị lại mà không cần tạo class."
+      ],
+      "details": [],
+      "points": [
+        "Bạn có thể dùng cú pháp vị trí (String, int) hoặc tên trường ({String name, int age}).",
+        "Để trả về từ hàm: (String, int) fetchUser() => ('Alice', 30); và destructure bằng var (name, age) = fetchUser();.",
+        "Records thay thế các workaround dùng Map hay List khi cần trả nhiều giá trị, code ngắn hơn và type-safe hơn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "2861-records-trong-dart-la-gi-va-chung-giup-ich-the-nao-khi-can-tra-ve-nhieu-gia-tri"
+  },
+  {
+    "id": "26debde0-ec38-52f2-94b2-f5f676372ce3",
+    "question": "Pattern matching trong Dart 3 hoạt động như thế nào? Cho ví dụ thực tế.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2862-pattern-matching-trong-dart-3-hoat-dong-nhu-the-nao-cho-vi-du-thuc-te",
+    "slug": "pattern-matching-trong-dart-3-hoat-dong-nhu-the-nao-cho-vi-du-thuc-te-26debde0-ec38-52f2-94b2-f5f676372ce3",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "DART",
+          "code": "switch (shape) {\n  case Circle(radius: var r) => print('Circle r=$r');\n  case Rectangle(width: var w, height: var h) => print('Rect ${w}x${h}');\n}\n\n// guard clause thêm điều kiện\ncase (int a, int b) when a > b => print('$a lớn hơn $b');\n\n// pattern dùng được cả trong khai báo biến\nvar (x, y) = getPoint();"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "2862-pattern-matching-trong-dart-3-hoat-dong-nhu-the-nao-cho-vi-du-thuc-te"
+  },
+  {
+    "id": "3ae61f4e-c30a-5956-a776-a0dc33c20789",
+    "question": "Switch expression trong Dart khác switch statement như thế nào và khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2863-switch-expression-trong-dart-khac-switch-statement-nhu-the-nao-va-khi-nao-nen-du",
+    "slug": "switch-expression-trong-dart-khac-switch-statement-nhu-the-nao-va-khi-nao-nen-dung-3ae61f4e-c30a-5956-a776-a0dc33c20789",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Switch expression trả về giá trị trực tiếp và bắt buộc phải exhaustive (phủ hết mọi trường hợp)."
+      ],
+      "details": [
+        "Cú pháp dùng =>:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "String grade = score switch { > 90 => 'A', > 80 => 'B', _ => 'F' };"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "2863-switch-expression-trong-dart-khac-switch-statement-nhu-the-nao-va-khi-nao-nen-du"
+  },
+  {
+    "id": "a6aa1eb7-2b77-5f5b-a270-d7a34cb2ca05",
+    "question": "Impeller là gì và tại sao Flutter chuyển sang dùng nó làm rendering engine mặc định?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2866-impeller-la-gi-va-tai-sao-flutter-chuyen-sang-dung-no-lam-rendering-engine-mac-d",
+    "slug": "impeller-la-gi-va-tai-sao-flutter-chuyen-sang-dung-no-lam-rendering-engine-mac-dinh-a6aa1eb7-2b77-5f5b-a270-d7a34cb2ca05",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Impeller là rendering engine mới của Flutter, thay thế Skia."
+      ],
+      "details": [],
+      "points": [
+        "Mặc định trên iOS từ Flutter 3.10, và trên Android (API 29+) từ Flutter 3.27.",
+        "Điểm khác biệt chính: Impeller pre-compile toàn bộ shader lúc build, trong khi Skia compile shader lần đầu tiên khi chạy (JIT), gây ra \"shader jank\"—giật hình khi người dùng lần đầu chạm vào UI.",
+        "Impeller dùng Metal trên iOS và Vulkan trên Android, tận dụng GPU API hiện đại."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "2866-impeller-la-gi-va-tai-sao-flutter-chuyen-sang-dung-no-lam-rendering-engine-mac-d"
+  },
+  {
+    "id": "8bc504fe-690a-54aa-858c-8994dc70e417",
+    "question": "WebAssembly (WASM) cải thiện hiệu năng Flutter Web như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2867-webassembly-wasm-cai-thien-hieu-nang-flutter-web-nhu-the-nao",
+    "slug": "webassembly-wasm-cai-thien-hieu-nang-flutter-web-nhu-the-nao-8bc504fe-690a-54aa-858c-8994dc70e417",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mặc định Flutter Web compile Dart sang JavaScript, phải qua parser và interpreter của trình duyệt."
+      ],
+      "details": [],
+      "points": [
+        "Với WASM, Dart compile ra native bytecode chạy trực tiếp trên VM của browser, bỏ qua parsing overhead.",
+        "Build bằng flutter build web --wasm.",
+        "Kết quả: tác vụ CPU-intensive chạy nhanh hơn ~1.5–3x tùy workload."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "2867-webassembly-wasm-cai-thien-hieu-nang-flutter-web-nhu-the-nao"
+  },
+  {
+    "id": "87daa0c8-ed20-5d8b-a640-5fd9a968580b",
+    "question": "Signals trong Flutter là gì và khi nào nên dùng thay vì Riverpod?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2869-signals-trong-flutter-la-gi-va-khi-nao-nen-dung-thay-vi-riverpod",
+    "slug": "signals-trong-flutter-la-gi-va-khi-nao-nen-dung-thay-vi-riverpod-87daa0c8-ed20-5d8b-a640-5fd9a968580b",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Signals là hệ thống reactive nguyên bản lấy cảm hứng từ SolidJS, cho phép cập nhật UI theo kiểu fine-grained—chỉ widget nào phụ thuộc vào signal đó mới rebuild, không phải cả cây widget."
+      ],
+      "details": [],
+      "points": [
+        "Khai báo: final count = signal(0);, dùng trong widget: Watch((context) => Text('${count.value}')).",
+        "Package signals_flutter đã có từ 2023 và đạt 1.0; awareness rộng rãi hơn vào 2023-2024.",
+        "Riverpod phù hợp hơn cho global/shared state phức tạp, cần dependency injection."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": "2869-signals-trong-flutter-la-gi-va-khi-nao-nen-dung-thay-vi-riverpod"
+  },
+  {
+    "id": "fb516d3a-85c1-54d7-bbf0-c05882875609",
+    "question": "Những điểm khác biệt chính khi build Flutter Web so với các framework web truyền thống là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2873-nhung-diem-khac-biet-chinh-khi-build-flutter-web-so-voi-cac-framework-web-truyen",
+    "slug": "nhung-diem-khac-biet-chinh-khi-build-flutter-web-so-voi-cac-framework-web-truyen-thong-la-gi-fb516d3a-85c1-54d7-bbf0-c05882875609",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Flutter Web compile Dart ra JS (hoặc WASM) và render vào Canvas/HTML, không phải DOM thực. Lợi thế: tái sử dụng code với mobile, không cần học JS ecosystem."
+      ],
+      "details": [
+        "Nhược điểm: bundle size ~3MB+ (nặng hơn SPA thông thường), SEO khó vì nội dung trong Canvas, tích hợp với thư viện DOM JS phức tạp hơn. Không dùng Flutter Web cho trang marketing cần SEO tốt. Phù hợp nhất cho app nội bộ, dashboard, hoặc tool cần chia sẻ code với mobile—nơi code reuse quan trọng hơn SEO."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "2873-nhung-diem-khac-biet-chinh-khi-build-flutter-web-so-voi-cac-framework-web-truyen"
+  },
+  {
+    "id": "12faea74-79ed-52e6-be7c-435421bb9af0",
+    "question": "Những điểm cần chú ý khi xây dựng Flutter Desktop (Windows, macOS)?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2874-nhung-diem-can-chu-y-khi-xay-dung-flutter-desktop-windows-macos",
+    "slug": "nhung-diem-can-chu-y-khi-xay-dung-flutter-desktop-windows-macos-12faea74-79ed-52e6-be7c-435421bb9af0",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Desktop yêu cầu xử lý keyboard, mouse, window management—không có trên mobile."
+      ],
+      "details": [],
+      "points": [
+        "Responsive layout quan trọng hơn vì màn hình lớn và DPI khác nhau.",
+        "Truy cập native API phải qua platform channel (file system, menu bar, notifications).",
+        "Packaging khác nhau theo platform: MSIX (Windows), DMG (macOS), tar.gz (Linux)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "2874-nhung-diem-can-chu-y-khi-xay-dung-flutter-desktop-windows-macos"
+  },
+  {
+    "id": "4f34d354-f26a-55e0-80c0-e529dd6e6f39",
+    "question": "Dio khác gì với package http mặc định và khi nào nên dùng Dio?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2876-dio-khac-gi-voi-package-http-mac-dinh-va-khi-nao-nen-dung-dio",
+    "slug": "dio-khac-gi-voi-package-http-mac-dinh-va-khi-nao-nen-dung-dio-4f34d354-f26a-55e0-80c0-e529dd6e6f39",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Package http là HTTP client đơn giản, đủ dùng cho request cơ bản."
+      ],
+      "details": [],
+      "points": [
+        "Dio là HTTP client mạnh hơn với: interceptor (middleware để log, thêm token tự động, retry), request/response transformer, quản lý timeout chi tiết, upload file multipart, download file với progress tracking, và cancel token.",
+        "Kết hợp với Retrofit để tạo type-safe API client từ annotation.",
+        "Dùng http khi app nhỏ, đơn giản."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": "2876-dio-khac-gi-voi-package-http-mac-dinh-va-khi-nao-nen-dung-dio"
+  },
+  {
+    "id": "28906635-285d-5d4c-a1e5-3eb11d2ebe2d",
+    "question": "Làm thế nào để tích hợp Firebase Authentication vào Flutter và những lỗi phổ biến là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2877-lam-the-nao-de-tich-hop-firebase-authentication-vao-flutter-va-nhung-loi-pho-bie",
+    "slug": "lam-the-nao-de-tich-hop-firebase-authentication-vao-flutter-va-nhung-loi-pho-bien-la-gi-28906635-285d-5d4c-a1e5-3eb11d2ebe2d",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Dùng package firebase_auth:"
+      ],
+      "details": [
+        "Lắng nghe trạng thái auth bằng authStateChanges() stream—đây là cách đúng để biết user đã đăng nhập chưa.",
+        "Luôn test cả trường hợp offline."
+      ],
+      "points": [
+        "không lắng nghe authStateChanges() mà kiểm tra currentUser ngay lập tức—có thể null khi app mới mở;",
+        "quên bật Email/Password provider trong Firebase Console;",
+        "quên thêm entitlement trên iOS;"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": "2877-lam-the-nao-de-tich-hop-firebase-authentication-vao-flutter-va-nhung-loi-pho-bie"
+  },
+  {
+    "id": "e57ef6f7-a269-5d10-b3e3-acba472cf735",
+    "question": "InheritedWidget là gì và nó truyền state xuống cây widget như thế nào? (nền tảng của Provider)",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94120-inheritedwidget-la-gi-va-no-truyen-state-xuong-cay-widget-nhu-the-nao-nen-tang-c",
+    "slug": "inheritedwidget-la-gi-va-no-truyen-state-xuong-cay-widget-nhu-the-nao-nen-tang-cua-provider-e57ef6f7-a269-5d10-b3e3-acba472cf735",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "InheritedWidget là widget đặc biệt cho phép các widget con đọc dữ liệu từ tổ tiên mà không phải truyền tay qua từng cấp constructor. Nó là cơ chế nền tảng mà Provider, Theme, MediaQuery đều dựng trên đó.",
+        "of(context)",
+        "đăng ký phụ thuộc"
+      ],
+      "details": [
+        "Hình dung nó như một \"trạm phát\" đặt cao trên cây: bất kỳ widget con nào cũng lấy được dữ liệu bằng context.dependOnInheritedWidgetOfExactType<T>() — thường bọc lại thành một static of(context)."
+      ],
+      "points": [
+        "Lúc InheritedWidget dựng lại, Flutter dùng updateShouldNotify để quyết định có báo cho các widget phụ thuộc rebuild hay không — chỉ những widget thực sự đọc dữ liệu mới rebuild, không phải cả cây.",
+        "Đó là lý do việc \"truyền state xuống\" ở đây rẻ hơn nhiều so với truyền prop thủ công."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "DART",
+          "code": "class ThemeScope extends InheritedWidget {\n  const ThemeScope({required this.color, required super.child, super.key});\n  final Color color;\n\n  static ThemeScope of(BuildContext context) =>\n      context.dependOnInheritedWidgetOfExactType<ThemeScope>()!;\n\n  @override\n  bool updateShouldNotify(ThemeScope old) => color != old.color;\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": "94120-inheritedwidget-la-gi-va-no-truyen-state-xuong-cay-widget-nhu-the-nao-nen-tang-c"
+  },
+  {
+    "id": "8203a9a2-0737-5a88-aaea-3fc413f65e92",
+    "question": "Phân biệt StreamBuilder và FutureBuilder. Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94121-phan-biet-streambuilder-va-futurebuilder-khi-nao-dung-cai-nao",
+    "slug": "phan-biet-streambuilder-va-futurebuilder-khi-nao-dung-cai-nao-8203a9a2-0737-5a88-aaea-3fc413f65e92",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai là widget \"tự rebuild theo dữ liệu bất đồng bộ\", khác nhau ở nguồn dữ liệu phát ra bao nhiêu giá trị:",
+        "Future",
+        "Stream",
+        "build()"
+      ],
+      "details": [
+        "Cả hai đều đưa cho builder một AsyncSnapshot để bạn xử lý từng trạng thái:",
+        "Hãy khởi tạo nguồn ở initState() (hoặc lấy từ tầng state management) rồi truyền vào."
+      ],
+      "points": [
+        "FutureBuilder lắng nghe một Future — nguồn phát đúng một kết quả rồi kết thúc. Hợp với thao tác một-lần: gọi API lấy chi tiết sản phẩm, đọc file, truy vấn một câu.",
+        "StreamBuilder lắng nghe một Stream — nguồn phát nhiều giá trị theo thời gian. Hợp với dữ liệu liên tục: cập nhật Firestore realtime, vị trí GPS, trạng thái kết nối, tick đồng hồ."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "DART",
+          "code": "StreamBuilder<int>(\n  stream: counterStream,\n  builder: (context, snapshot) {\n    if (snapshot.connectionState == ConnectionState.waiting) {\n      return const CircularProgressIndicator();\n    }\n    if (snapshot.hasError) return Text('Lỗi: ${snapshot.error}');\n    return Text('Giá trị: ${snapshot.data}');\n  },\n)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": "94121-phan-biet-streambuilder-va-futurebuilder-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "0ec8709f-7ae0-5afb-94c0-8ea290601efe",
+    "question": "Hero widget là gì và shared-element animation hoạt động thế nào khi chuyển màn hình?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94122-hero-widget-la-gi-va-shared-element-animation-hoat-dong-the-nao-khi-chuyen-man-h",
+    "slug": "hero-widget-la-gi-va-shared-element-animation-hoat-dong-the-nao-khi-chuyen-man-hinh-0ec8709f-7ae0-5afb-94c0-8ea290601efe",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hero tạo hiệu ứng một phần tử chung \"bay\" liền mạch giữa hai màn hình khi điều hướng — ví dụ ảnh thumbnail nhỏ ở danh sách phóng to thành ảnh lớn ở trang chi tiết. Người dùng cảm nhận đó là cùng một đối tượng di chuyển, chứ không phải hai widget khác nhau.",
+        "Navigator",
+        "tag"
+      ],
+      "details": [
+        "Cách dùng: bọc widget nguồn và widget đích trong Hero với cùng một tag:",
+        "Lưu ý: tag phải duy nhất trong mỗi màn; trùng tag trên cùng một màn sẽ gây lỗi. Trong danh sách nên gắn tag theo id của item để tránh đụng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "DART",
+          "code": "// Màn danh sách\nHero(tag: 'avatar-42', child: Image.network(thumbUrl))\n\n// Màn chi tiết (sau khi Navigator.push)\nHero(tag: 'avatar-42', child: Image.network(fullUrl))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": "94122-hero-widget-la-gi-va-shared-element-animation-hoat-dong-the-nao-khi-chuyen-man-h"
+  },
+  {
+    "id": "6dc7599c-27f1-5304-8a7d-15c6dde62ddd",
+    "question": "MediaQuery là gì và dùng nó để làm layout responsive/adaptive ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94123-mediaquery-la-gi-va-dung-no-de-lam-layout-responsive-adaptive-ra-sao",
+    "slug": "mediaquery-la-gi-va-dung-no-de-lam-layout-responsive-adaptive-ra-sao-6dc7599c-27f1-5304-8a7d-15c6dde62ddd",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "MediaQuery cung cấp thông tin về môi trường hiển thị hiện tại: kích thước màn hình (size), hướng xoay (orientation), tỉ lệ pixel (devicePixelRatio), padding an toàn (notch, thanh trạng thái qua padding/viewPadding), độ phóng chữ (textScaler)."
+      ],
+      "details": [
+        "Đây là nguồn dữ liệu để layout tự thích ứng theo thiết bị.",
+        "Vài lưu ý thực hành:\n- Dùng MediaQuery.sizeOf(context) (thay vì MediaQuery.of(context).size) để chỉ phụ thuộc đúng thuộc tính cần, tránh rebuild thừa.\n- Khi chỉ cần biết không gian cha cấp cho (không phải cả màn hình), cân nhắc LayoutBuilder với constraints — thường đúng hơn cho widget lồng nhau.\n- Tôn trọng padding/safe area để nội dung không bị notch che."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "DART",
+          "code": "final width = MediaQuery.sizeOf(context).width;\nreturn width >= 600\n    ? const TwoColumnLayout()   // tablet\n    : const SingleColumnLayout(); // phone"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": "94123-mediaquery-la-gi-va-dung-no-de-lam-layout-responsive-adaptive-ra-sao"
+  },
+  {
+    "id": "dc774754-3006-519d-a394-48751139b6c0",
+    "question": "Isolate trong Dart là gì và khi nào dùng chúng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "isolate-trong-dart-la-gi-va-khi-nao-dung-chung-dc774754-3006-519d-a394-48751139b6c0",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": null
+  },
+  {
+    "id": "31b1a324-78b0-5d23-8acf-b72f663842b4",
+    "question": "Platform channel là gì và khi nào dùng chúng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "platform-channel-la-gi-va-khi-nao-dung-chung-31b1a324-78b0-5d23-8acf-b72f663842b4",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": null
+  },
+  {
+    "id": "a2f0276c-1c89-55ab-9cb5-d79a01bb9925",
+    "question": "Làm thế nào để xử lý lỗi và exception trong code Dart bất đồng bộ?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-the-nao-de-xu-ly-loi-va-exception-trong-code-dart-bat-dong-bo-a2f0276c-1c89-55ab-9cb5-d79a01bb9925",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": null
+  },
+  {
+    "id": "34155304-4679-561f-bb7f-6da194eb290b",
+    "question": "Future.wait() là gì và khi nào dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "future-wait-la-gi-va-khi-nao-dung-34155304-4679-561f-bb7f-6da194eb290b",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": null
+  },
+  {
+    "id": "7f6ddba4-a560-52f8-a560-146969a5a7dc",
+    "question": "Làm thế nào để profile và tối ưu hiệu năng app Flutter?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-the-nao-de-profile-va-toi-uu-hieu-nang-app-flutter-7f6ddba4-a560-52f8-a560-146969a5a7dc",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": null
+  },
+  {
+    "id": "4c6b5e98-25bb-50b3-b729-c192a6c274e3",
+    "question": "Sự khác nhau giữa ListView.builder và ListView cho danh sách dài là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "su-khac-nhau-giua-listview-builder-va-listview-cho-danh-sach-dai-la-gi-4c6b5e98-25bb-50b3-b729-c192a6c274e3",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": null
+  },
+  {
+    "id": "5a7a0832-e8df-5e69-ac06-455b3f5f9c83",
+    "question": "Làm thế nào để triển khai CI/CD cho app Flutter?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-the-nao-de-trien-khai-ci-cd-cho-app-flutter-5a7a0832-e8df-5e69-ac06-455b3f5f9c83",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": null
+  },
+  {
+    "id": "d5f3a522-61fe-5da7-bc22-f782f737bd9f",
+    "question": "Sự khác nhau giữa debug, profile và release build là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "su-khac-nhau-giua-debug-profile-va-release-build-la-gi-d5f3a522-61fe-5da7-bc22-f782f737bd9f",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": null
+  },
+  {
+    "id": "c04546f1-1600-5752-b661-e20e08f53904",
+    "question": "Làm thế nào để test app Flutter? Sự khác nhau giữa unit, widget và integration test là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-the-nao-de-test-app-flutter-su-khac-nhau-giua-unit-widget-va-integration-test-la-gi-c04546f1-1600-5752-b661-e20e08f53904",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": null
+  },
+  {
+    "id": "037a9f4e-b36b-5501-a827-402e052767ee",
+    "question": "WidgetsFlutterBinding là gì và khi nào dùng nó?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "widgetsflutterbinding-la-gi-va-khi-nao-dung-no-037a9f4e-b36b-5501-a827-402e052767ee",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": null
+  },
+  {
+    "id": "d8921934-b957-5512-a814-76b8c4601917",
+    "question": "Class modifier trong Dart 3 (base, interface, final) dùng để làm gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "class-modifier-trong-dart-3-base-interface-final-dung-de-lam-gi-d8921934-b957-5512-a814-76b8c4601917",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": null
+  },
+  {
+    "id": "6f002bdd-d549-59cd-833e-ef4a077a358d",
+    "question": "Sealed class trong Dart là gì và tại sao nó hữu ích hơn abstract class trong một số trường hợp?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "sealed-class-trong-dart-la-gi-va-tai-sao-no-huu-ich-hon-abstract-class-trong-mot-so-truong-hop-6f002bdd-d549-59cd-833e-ef4a077a358d",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": null
+  },
+  {
+    "id": "ce111e23-8077-59e2-ab44-f1a125f90396",
+    "question": "Riverpod (2.x trở lên) khác Provider như thế nào về bộ nhớ và an toàn kiểu?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "riverpod-2-x-tro-len-khac-provider-nhu-the-nao-ve-bo-nho-va-an-toan-kieu-ce111e23-8077-59e2-ab44-f1a125f90396",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 76,
+    "sourceSlug": null
+  },
+  {
+    "id": "005f96de-5ffc-5e7d-9b38-3cab92411d72",
+    "question": "Khi nào nên chọn BLoC thay vì Riverpod để quản lý state?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-nen-chon-bloc-thay-vi-riverpod-de-quan-ly-state-005f96de-5ffc-5e7d-9b38-3cab92411d72",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 77,
+    "sourceSlug": null
+  },
+  {
+    "id": "c8f1e6ed-6071-5599-be3c-f963386a9457",
+    "question": "Làm thế nào để implement offline persistence với Riverpod?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-the-nao-de-implement-offline-persistence-voi-riverpod-c8f1e6ed-6071-5599-be3c-f963386a9457",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 78,
+    "sourceSlug": null
+  },
+  {
+    "id": "a377ddef-a4be-53b7-bc47-b5d4ab14b72c",
+    "question": "Shorebird code push là gì và khi nào nên dùng thay vì update thông qua App Store?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "shorebird-code-push-la-gi-va-khi-nao-nen-dung-thay-vi-update-thong-qua-app-store-a377ddef-a4be-53b7-bc47-b5d4ab14b72c",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 79,
+    "sourceSlug": null
+  },
+  {
+    "id": "58362ae4-32eb-52fa-9ede-16270da9765a",
+    "question": "Phân biệt implicit và explicit animation trong Flutter (AnimationController + Tween).",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "phan-biet-implicit-va-explicit-animation-trong-flutter-animationcontroller-tween-58362ae4-32eb-52fa-9ede-16270da9765a",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 80,
+    "sourceSlug": null
+  },
+  {
+    "id": "b267058b-a226-503a-8b83-97eb7d6833f1",
+    "question": "GestureDetector là gì và \"gesture arena\" giải quyết xung đột cử chỉ như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "gesturedetector-la-gi-va-gesture-arena-giai-quyet-xung-dot-cu-chi-nhu-the-nao-b267058b-a226-503a-8b83-97eb7d6833f1",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 81,
+    "sourceSlug": null
+  }
+]

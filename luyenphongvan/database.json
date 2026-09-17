@@ -1,0 +1,3351 @@
+[
+  {
+    "id": "1e74c4b6-64c3-57d8-b1b2-e02bb117ed16",
+    "question": "DBMS và RDBMS khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93015-dbms-va-rdbms-khac-nhau-the-nao",
+    "slug": "dbms-va-rdbms-khac-nhau-the-nao-1e74c4b6-64c3-57d8-b1b2-e02bb117ed16",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nói cách khác RDBMS là tập con của DBMS. Điểm phân biệt của RDBMS: cấu trúc bảng có schema rõ, ràng buộc toàn vẹn (primary/foreign key), và ngôn ngữ SQL chuẩn. Nhiều NoSQL (MongoDB, Redis) là DBMS nhưng không phải RDBMS vì không theo mô hình quan hệ."
+      ],
+      "details": [],
+      "points": [
+        "DBMS (Database Management System): phần mềm quản lý dữ liệu nói chung — lưu, truy vấn, quản trị. Bao hàm mọi mô hình: file phẳng, phân cấp, mạng, quan hệ, tài liệu...",
+        "RDBMS (Relational DBMS): một loại DBMS theo mô hình quan hệ — dữ liệu ở các bảng có cột, có khóa và quan hệ giữa các bảng, truy vấn bằng SQL, và thường đảm bảo ACID. PostgreSQL, MySQL, SQL Server, Oracle là RDBMS."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "93015-dbms-va-rdbms-khac-nhau-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "4709f39b-78eb-59f0-ab23-46e476157013",
+    "question": "Mô hình quan hệ (relational model) là gì? Table, row, column, quan hệ ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92001-mo-hinh-quan-he-relational-model-la-gi-table-row-column-quan-he-ra-sao",
+    "slug": "mo-hinh-quan-he-relational-model-la-gi-table-row-column-quan-he-ra-sao-4709f39b-78eb-59f0-ab23-46e476157013",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mô hình quan hệ tổ chức dữ liệu thành các bảng (relation):"
+      ],
+      "details": [
+        "Quan hệ giữa bảng biểu diễn bằng khóa: mỗi hàng có primary key định danh duy nhất; bảng khác tham chiếu tới nó bằng foreign key. Nhờ đó tránh lặp dữ liệu và dùng JOIN để ghép lại khi truy vấn.",
+        "Mọi thao tác dựa trên đại số quan hệ (select, project, join) và diễn đạt bằng SQL khai báo — mô tả cần gì, không phải lấy thế nào."
+      ],
+      "points": [
+        "Column (attribute): một trường có kiểu dữ liệu xác định (int, text, timestamp...).",
+        "Row (tuple): một bản ghi — một thực thể cụ thể.",
+        "Table"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "92001-mo-hinh-quan-he-relational-model-la-gi-table-row-column-quan-he-ra-sao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "766b3c15-f870-5824-bbcb-0ec0db478ef0",
+    "question": "Câu lệnh SELECT cơ bản trong SQL như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/702-cau-lenh-select-co-ban-trong-sql-nhu-the-nao",
+    "slug": "cau-lenh-select-co-ban-trong-sql-nhu-the-nao-766b3c15-f870-5824-bbcb-0ec0db478ef0",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mẹo hiểu SELECT: SQL không chạy theo thứ tự bạn viết, mà theo thứ tự thực thi:",
+        "LIMIT"
+      ],
+      "details": [
+        "Hệ quả quan trọng: alias đặt trong SELECT (vd price * 0.9 AS discounted) không dùng được trong WHERE vì lúc WHERE chạy thì SELECT chưa tính — nhưng dùng được trong ORDER BY (chạy sau SELECT).",
+        "Một query đầy đủ:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "FROM → JOIN → WHERE → GROUP BY → HAVING → SELECT → DISTINCT → ORDER BY → LIMIT"
+        },
+        {
+          "language": null,
+          "code": "SELECT u.name, COUNT(o.id) AS order_count\nFROM users u LEFT JOIN orders o ON u.id = o.user_id\nWHERE u.created_at > '2024-01-01'\nGROUP BY u.id, u.name\nHAVING COUNT(o.id) > 5\nORDER BY order_count DESC LIMIT 20;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "702-cau-lenh-select-co-ban-trong-sql-nhu-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "759ffd7f-6c1c-508a-bfba-81ee00b104f0",
+    "question": "INSERT, UPDATE, DELETE trong SQL hoạt động như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/703-insert-update-delete-trong-sql-hoat-dong-nhu-the-nao",
+    "slug": "insert-update-delete-trong-sql-hoat-dong-nhu-the-nao-759ffd7f-6c1c-508a-bfba-81ee00b104f0",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ba lệnh cốt lõi để thay đổi dữ liệu. Vài kỹ thuật hữu ích:",
+        "luôn chạy SELECT với cùng WHERE trước khi UPDATE/DELETE"
+      ],
+      "details": [],
+      "points": [
+        "Bulk INSERT (một round-trip thay vì N, nhanh hơn nhiều với lượng lớn):",
+        "RETURNING (PostgreSQL): lấy giá trị vừa sinh ra ngay, khỏi query lại — INSERT INTO users (name) VALUES ('Dinh') RETURNING id, created_at.",
+        "ON CONFLICT (upsert atomic, tránh race condition):",
+        "Một lệnh UPDATE users SET active = false quên WHERE sẽ cập nhật TOÀN BỘ bảng và không undo được nếu không có backup.",
+        "Có thể dry run trong transaction: BEGIN; DELETE ...; SELECT count(*); ROLLBACK;."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "INSERT INTO settings (user_id, key, value) VALUES (1, 'theme', 'dark')\nON CONFLICT (user_id, key) DO UPDATE SET value = EXCLUDED.value;"
+        },
+        {
+          "language": "SQL",
+          "code": "INSERT INTO users (name, email) VALUES ('A', 'a@x.com'), ('B', 'b@x.com');"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "703-insert-update-delete-trong-sql-hoat-dong-nhu-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "df4012e8-89ae-5b12-97ae-c5906b8bd4f5",
+    "question": "DELETE, TRUNCATE và DROP khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92047-delete-truncate-va-drop-khac-nhau-the-nao",
+    "slug": "delete-truncate-va-drop-khac-nhau-the-nao-df4012e8-89ae-5b12-97ae-c5906b8bd4f5",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tóm tắt: DELETE = xóa có chọn lọc; TRUNCATE = làm rỗng nhanh cả bảng; DROP = xóa hẳn bảng."
+      ],
+      "details": [],
+      "points": [
+        "DELETE: xóa hàng theo điều kiện (DELETE FROM t WHERE ...), có thể xóa một phần. Là DML, ghi log từng hàng, chạy trong transaction (rollback được), kích hoạt trigger, tôn trọng FK. Xóa nhiều hàng thì chậm và để lại dead tuple (cần VACUUM ở Postgres). Không reset bộ đếm sequence.",
+        "TRUNCATE: xóa toàn bộ hàng của bảng cực nhanh bằng cách bỏ luôn vùng lưu trữ, không quét từng hàng. Là DDL; trong PostgreSQL vẫn transaction-safe (rollback được) nhưng lấy khóa mạnh; không kích hoạt trigger hàng; có thể RESTART IDENTITY để reset sequence. Không dùng được WHERE.",
+        "DROP: xóa cả bảng — dữ liệu + cấu trúc (cột, index, ràng buộc) khỏi schema. Bảng không còn tồn tại."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "92047-delete-truncate-va-drop-khac-nhau-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "1e03e8c1-1a25-5564-b5a7-04549a25f73b",
+    "question": "GROUP BY, hàm tổng hợp và HAVING vs WHERE khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92048-group-by-ham-tong-hop-va-having-vs-where-khac-nhau-the-nao",
+    "slug": "group-by-ham-tong-hop-va-having-vs-where-khac-nhau-the-nao-1e03e8c1-1a25-5564-b5a7-04549a25f73b",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hàm tổng hợp (aggregate) gộp nhiều hàng thành một giá trị: COUNT, SUM, AVG, MIN, MAX.",
+        "Quy tắc: mọi cột trong SELECT không nằm trong hàm tổng hợp phải có mặt trong GROUP BY.",
+        "Thứ tự xử lý logic: FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY. Lưu ý COUNT(*) đếm mọi hàng (kể cả hàng chỉ có NULL), còn COUNT(col) bỏ qua hàng có col là NULL."
+      ],
+      "details": [
+        "GROUP BY chia hàng thành các nhóm theo cột, rồi hàm tổng hợp tính trên từng nhóm. Vd doanh thu theo từng khách:",
+        "WHERE vs HAVING — khác ở thời điểm lọc:\n- WHERE lọc hàng trước khi gộp (không dùng được hàm tổng hợp).\n- HAVING lọc nhóm sau khi gộp (dùng được hàm tổng hợp).",
+        "Mẹo hiệu năng: đẩy mọi điều kiện không cần hàm tổng hợp vào WHERE (gom ít hàng hơn, tận dụng được index). Nâng cao: ROLLUP/CUBE/GROUPING SETS thêm dòng tổng phụ cho báo cáo; FILTER (WHERE ...) gom có điều kiện trong một truy vấn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "SELECT customer_id, SUM(amount)\nFROM orders\nGROUP BY customer_id;"
+        },
+        {
+          "language": "SQL",
+          "code": "SELECT customer_id, SUM(amount) AS total\nFROM orders\nWHERE status = 'paid'        -- lọc hàng trước\nGROUP BY customer_id\nHAVING SUM(amount) > 1000;    -- lọc nhóm sau"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "92048-group-by-ham-tong-hop-va-having-vs-where-khac-nhau-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "6632cc42-8b86-55c4-b5fc-7d95f88d7232",
+    "question": "SQL gồm những nhóm lệnh nào (DDL, DML, DCL, TCL)?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92051-sql-gom-nhung-nhom-lenh-nao-ddl-dml-dcl-tcl",
+    "slug": "sql-gom-nhung-nhom-lenh-nao-ddl-dml-dcl-tcl-6632cc42-8b86-55c4-b5fc-7d95f88d7232",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "SQL được chia thành các nhóm lệnh theo mục đích:"
+      ],
+      "details": [
+        "Hay bị hỏi kèm: TRUNCATE là DDL (không phải DML) dù nghe như xóa dữ liệu, vì nó bỏ luôn vùng lưu trữ thay vì xóa từng hàng. Một số DDL (như trong Oracle) tự động commit, còn PostgreSQL cho DDL chạy trong transaction. Thực tế dev dùng DML phần lớn thời gian, DDL khi migration; DCL/TCL thường do DBA/DevOps đảm nhận."
+      ],
+      "points": [
+        "DDL (Data Definition Language) — định nghĩa cấu trúc: CREATE, ALTER, DROP, TRUNCATE. Tác động lên schema (bảng, index, ràng buộc).",
+        "DML (Data Manipulation Language) — thao tác dữ liệu bên trong bảng: INSERT, UPDATE, DELETE. (SELECT được xếp là DML hoặc tách riêng thành DQL — Data Query Language tùy tài liệu.)",
+        "DCL (Data Control Language) — phân quyền: GRANT, REVOKE.",
+        "TCL (Transaction Control Language) — điều khiển giao dịch: COMMIT, ROLLBACK, SAVEPOINT."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "92051-sql-gom-nhung-nhom-lenh-nao-ddl-dml-dcl-tcl",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "18b46fb7-a126-5d77-b5b3-841c4e3da44b",
+    "question": "NULL trong SQL nghĩa là gì? Logic ba giá trị (three-valued logic) là sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92052-null-trong-sql-nghia-la-gi-logic-ba-gia-tri-three-valued-logic-la-sao",
+    "slug": "null-trong-sql-nghia-la-gi-logic-ba-gia-tri-three-valued-logic-la-sao-18b46fb7-a126-5d77-b5b3-841c4e3da44b",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "NULL biểu thị giá trị chưa biết / không tồn tại, khác hẳn số 0 hay chuỗi rỗng ''. Vì \"chưa biết\", SQL dùng logic ba giá trị: mọi so sánh cho ra TRUE, FALSE, hoặc UNKNOWN."
+      ],
+      "details": [
+        "Hệ quả thực tế:\n- NULL = NULL không ra TRUE mà ra UNKNOWN → phải dùng IS NULL / IS NOT NULL, không dùng = NULL.\n- WHERE chỉ giữ hàng cho kết quả TRUE → điều kiện UNKNOWN bị loại. WHERE x <> 5 sẽ bỏ sót hàng có x IS NULL.\n- Hàm tổng hợp bỏ qua NULL: COUNT(col) không đếm NULL (nhưng COUNT(*) đếm cả hàng), AVG tính trên giá trị non-NULL.\n- NULL trong phép nối chuỗi/số học lan ra NULL (dùng COALESCE(x, default) để thay).\n- UNIQUE thường cho nhiều NULL (vì mỗi NULL \"khác nhau\")."
+      ],
+      "points": [],
+      "sections": [
+        "Đây là nguồn bug thường gặp: quên xử lý NULL khi lọc/join làm kết quả sai lặng lẽ."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- Hàng có price IS NULL bị loại khỏi CẢ HAI truy vấn dưới đây:\nSELECT * FROM products WHERE price = 100;   -- NULL không khớp\nSELECT * FROM products WHERE price <> 100;  -- NULL cũng không khớp (UNKNOWN)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "92052-null-trong-sql-nghia-la-gi-logic-ba-gia-tri-three-valued-logic-la-sao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "c4650b34-40d8-5b4d-b437-d733759b6208",
+    "question": "UNION và UNION ALL khác nhau thế nào? Còn INTERSECT/EXCEPT?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92053-union-va-union-all-khac-nhau-the-nao-con-intersect-except",
+    "slug": "union-va-union-all-khac-nhau-the-nao-con-intersect-except-c4650b34-40d8-5b4d-b437-d733759b6208",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Các phép hợp tập hợp gộp kết quả của hai SELECT (phải cùng số cột và kiểu tương thích) theo chiều dọc:",
+        "Khác với JOIN: JOIN ghép theo cột (chiều ngang), còn UNION xếp theo hàng (chiều dọc)."
+      ],
+      "details": [],
+      "points": [
+        "UNION: gộp rồi loại bỏ hàng trùng → phải sắp xếp/băm để khử trùng nên tốn thêm chi phí.",
+        "UNION ALL: gộp và giữ nguyên mọi hàng (kể cả trùng) → nhanh hơn vì không khử trùng. Mặc định nên dùng UNION ALL khi biết chắc không có trùng (hoặc trùng không sao).",
+        "INTERSECT: giữ hàng xuất hiện ở cả hai truy vấn.",
+        "EXCEPT (Oracle gọi là MINUS): giữ hàng có ở truy vấn đầu mà không có ở truy vấn sau.",
+        "Mẹo phỏng vấn: chọn UNION ALL nếu không cần khử trùng — tránh chi phí sort ẩn.",
+        "Lưu ý: ORDER BY chỉ đặt ở cuối toàn bộ phép hợp (không đặt vào từng SELECT con); tên cột kết quả lấy theo SELECT đầu tiên."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- Gộp email khách VIP và khách mới, giữ mọi hàng (kể cả trùng)\nSELECT email FROM vip_customers\nUNION ALL\nSELECT email FROM new_customers;\n-- Đổi UNION ALL → UNION nếu cần loại email trùng (thêm bước khử trùng)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "92053-union-va-union-all-khac-nhau-the-nao-con-intersect-except",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "a4282cc3-b8fd-595b-881f-8906ea3d9a34",
+    "question": "Chọn kiểu dữ liệu chuỗi thế nào: CHAR, VARCHAR, TEXT?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92054-chon-kieu-du-lieu-chuoi-the-nao-char-varchar-text",
+    "slug": "chon-kieu-du-lieu-chuoi-the-nao-char-varchar-text-a4282cc3-b8fd-595b-881f-8906ea3d9a34",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ba kiểu chuỗi thường gặp:"
+      ],
+      "details": [
+        "Lưu ý theo hệ:\n- PostgreSQL: varchar(n), text lưu như nhau về hiệu năng — không có lợi ích tốc độ khi giới hạn n; chọn varchar(n) chỉ khi cần chặn độ dài, còn lại dùng text.\n- MySQL: TEXT khác VARCHAR (lưu ngoài dòng, không index full nếu không chỉ định prefix) nên phân biệt rõ hơn.",
+        "Nguyên tắc chung: dùng VARCHAR/TEXT cho hầu hết; CHAR chỉ khi độ dài thực sự cố định."
+      ],
+      "points": [
+        "CHAR(n) — độ dài cố định, luôn chiếm n ký tự (đệm khoảng trắng nếu ngắn hơn). Phần đệm là một phần của giá trị và theo nó ra tới ứng dụng — riêng MySQL cắt khoảng trắng cuối lúc đọc, nên cùng dữ liệu lại cho hai kết quả khác nhau khi chuyển hệ. Hợp mã có độ dài đúng bằng nhau (mã quốc gia CHAR(2), mã hash cố định).",
+        "VARCHAR(n) — độ dài thay đổi, tối đa n ký tự, chỉ chiếm đúng phần dùng. Kiểu phổ biến nhất cho tên, email, tiêu đề. n là ràng buộc độ dài, không phải để tối ưu lưu trữ.",
+        "TEXT — chuỗi độ dài không giới hạn (theo giới hạn thực tế của hệ). Hợp nội dung dài: mô tả, bài viết, JSON dạng text."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "92054-chon-kieu-du-lieu-chuoi-the-nao-char-varchar-text",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "3f550092-6b3e-577c-ac69-222fb2aeec04",
+    "question": "Các loại JOIN (INNER, LEFT, RIGHT, FULL, CROSS) khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92015-cac-loai-join-inner-left-right-full-cross-khac-nhau-the-nao",
+    "slug": "cac-loai-join-inner-left-right-full-cross-khac-nhau-the-nao-3f550092-6b3e-577c-ac69-222fb2aeec04",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "JOIN ghép hàng của hai bảng theo điều kiện (thường qua khóa):"
+      ],
+      "details": [
+        "Hay bị hỏi: LEFT JOIN ... WHERE right.id IS NULL để tìm hàng bên trái không có cặp bên phải (anti-join). Lưu ý: lọc cột bảng phải trong WHERE sẽ biến LEFT JOIN thành INNER JOIN (hàng NULL bị loại) — muốn giữ hàng không khớp, đặt điều kiện vào ON."
+      ],
+      "points": [
+        "INNER JOIN: chỉ giữ hàng khớp cả hai bên. Hàng không có cặp bị loại.",
+        "LEFT (OUTER) JOIN: giữ mọi hàng bảng trái, bên phải không khớp thì điền NULL.",
+        "RIGHT (OUTER) JOIN: ngược lại — giữ mọi hàng bảng phải.",
+        "FULL (OUTER) JOIN: giữ mọi hàng cả hai bên, thiếu bên nào điền NULL.",
+        "CROSS JOIN: tích Descartes — mỗi hàng trái ghép với mọi hàng phải (M×N hàng), ít dùng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "92015-cac-loai-join-inner-left-right-full-cross-khac-nhau-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "570a0e78-9f22-564a-9489-e6115299ee85",
+    "question": "Self join là gì và khi nào dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92056-self-join-la-gi-va-khi-nao-dung",
+    "slug": "self-join-la-gi-va-khi-nao-dung-570a0e78-9f22-564a-9489-e6115299ee85",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Self join là ghép một bảng với chính nó — dùng hai bí danh (alias) khác nhau cho cùng bảng như thể là hai bảng riêng. Dùng khi các hàng trong cùng một bảng có quan hệ với nhau.",
+        "(Dùng LEFT JOIN để giữ cả người không có quản lý — vd CEO.)"
+      ],
+      "details": [
+        "Ví dụ kinh điển — quan hệ nhân viên–quản lý (cả hai đều là hàng của employees, quản lý được trỏ bằng manager_id):",
+        "Các tình huống hay dùng:\n- Cấu trúc phân cấp trong một bảng: nhân viên–sếp, danh mục cha–con.\n- Tìm cặp hàng liên quan: hai sản phẩm cùng giá, hai người cùng thành phố (a.id < b.id để tránh trùng cặp và tự-ghép).",
+        "Bản chất chỉ là JOIN bình thường; điểm khác duy nhất là bắt buộc dùng alias để phân biệt hai \"bản sao\" của bảng. Quan hệ phân cấp sâu/không giới hạn cấp thì cần recursive CTE thay vì self join một tầng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "SELECT e.name AS employee, m.name AS manager\nFROM employees e\nLEFT JOIN employees m ON e.manager_id = m.id;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "92056-self-join-la-gi-va-khi-nao-dung",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "75114c16-90ae-5cdf-ae16-2bee3c36d780",
+    "question": "Phân biệt primary key, foreign key, unique key và composite key?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92002-phan-biet-primary-key-foreign-key-unique-key-va-composite-key",
+    "slug": "phan-biet-primary-key-foreign-key-unique-key-va-composite-key-75114c16-90ae-5cdf-ae16-2bee3c36d780",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hay bị hỏi: PK vs unique (PK = unique + not-null + 1 cái/bảng) và ý nghĩa của FK trong việc chống dữ liệu mồ côi."
+      ],
+      "details": [],
+      "points": [
+        "Primary key (PK): định danh duy nhất mỗi hàng; không NULL, mỗi bảng chỉ một PK. Thường có index tự động.",
+        "Unique key: đảm bảo giá trị không trùng, nhưng cho phép NULL và một bảng có nhiều unique constraint.",
+        "Foreign key (FK): cột tham chiếu tới PK của bảng khác → giữ toàn vẹn tham chiếu (không cho trỏ tới bản ghi không tồn tại); kèm hành vi ON DELETE/ON UPDATE (CASCADE, RESTRICT, SET NULL).",
+        "Composite key: khóa gồm nhiều cột kết hợp mới là duy nhất (vd (order_id, product_id) trong bảng nối)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "92002-phan-biet-primary-key-foreign-key-unique-key-va-composite-key",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "babb125b-52f1-5ec1-aff6-1ea30304ca82",
+    "question": "Các loại quan hệ (1–1, 1–nhiều, nhiều–nhiều) mô hình ra sao? Bảng nối là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92055-cac-loai-quan-he-1-1-1-nhieu-nhieu-nhieu-mo-hinh-ra-sao-bang-noi-la-gi",
+    "slug": "cac-loai-quan-he-1-1-1-nhieu-nhieu-nhieu-mo-hinh-ra-sao-bang-noi-la-gi-babb125b-52f1-5ec1-aff6-1ea30304ca82",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ba loại quan hệ (cardinality) giữa hai thực thể và cách hiện thực bằng khóa:",
+        "Bảng nối biến một M:N thành hai quan hệ 1:N. Đây là câu hỏi thiết kế nền tảng — thiếu bảng nối là lỗi mô hình hóa hay gặp."
+      ],
+      "details": [
+        "Hai trường hợp hay gặp thêm: quan hệ tự tham chiếu (employees.manager_id REFERENCES employees(id) — cây tổ chức, danh mục cha–con), và anti-pattern polymorphic association (comments(commentable_type, commentable_id) trỏ tới nhiều bảng — không gắn được FK, khó bảo trì; thay bằng nhiều cột FK + CHECK hoặc bảng nối riêng cho mỗi loại)."
+      ],
+      "points": [
+        "Một–một (1:1): mỗi hàng bên A ứng với tối đa một hàng bên B (user ↔ hồ sơ chi tiết). Hiện thực: đặt FK có ràng buộc UNIQUE ở một bên, hoặc gộp chung một bảng.",
+        "Một–nhiều (1:N): một hàng A liên kết nhiều hàng B, mỗi B thuộc một A (khách hàng ↔ đơn hàng). Hiện thực: đặt FK ở phía \"nhiều\" (bảng orders có cột customer_id). Đây là quan hệ phổ biến nhất.",
+        "Nhiều–nhiều (M:N): nhiều A liên kết nhiều B (sinh viên ↔ môn học). Quan hệ quan hệ không thể biểu diễn trực tiếp → cần bảng nối (junction / associative table) trung gian, chứa FK tới cả hai bảng, thường composite PK (student_id, course_id). Có thể thêm cột cho chính quan hệ (ngày đăng ký, điểm)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- Bảng nối cho quan hệ nhiều-nhiều sinh viên ↔ môn học\nCREATE TABLE enrollments (\n  student_id INT REFERENCES students(id),\n  course_id  INT REFERENCES courses(id),\n  enrolled_at DATE,\n  PRIMARY KEY (student_id, course_id)\n);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "92055-cac-loai-quan-he-1-1-1-nhieu-nhieu-nhieu-mo-hinh-ra-sao-bang-noi-la-gi",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "9fad25bc-96d0-5ed9-88f4-c11ee06979e1",
+    "question": "Super key, candidate key, primary key và composite key khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93014-super-key-candidate-key-primary-key-va-composite-key-khac-nhau-the-nao",
+    "slug": "super-key-candidate-key-primary-key-va-composite-key-khac-nhau-the-nao-9fad25bc-96d0-5ed9-88f4-c11ee06979e1",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Các khái niệm khóa đều xoay quanh việc định danh duy nhất một dòng:"
+      ],
+      "details": [
+        "Các candidate key còn lại (không được chọn làm PK) gọi là alternate key, thường được đặt ràng buộc UNIQUE."
+      ],
+      "points": [
+        "Super key: bất kỳ tập cột nào xác định duy nhất một dòng — có thể thừa (kèm thêm cột không cần thiết).",
+        "Candidate key: super key tối giản — bỏ bất kỳ cột nào là mất tính duy nhất. Một bảng có thể có nhiều candidate key (vd id và email).",
+        "Primary key: candidate key được chọn làm khóa chính; không NULL, một bảng chỉ một cái.",
+        "Composite key: khóa gồm từ hai cột trở lên (vd (order_id, product_id) trong bảng chi tiết đơn)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "93014-super-key-candidate-key-primary-key-va-composite-key-khac-nhau-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "ccd6c591-9e11-597d-9470-32a360c0473e",
+    "question": "Một câu UPDATE bình thường khoá cái gì? Row lock và table lock khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97853-mot-cau-update-binh-thuong-khoa-cai-gi-row-lock-va-table-lock-khac-nhau-the-nao",
+    "slug": "mot-cau-update-binh-thuong-khoa-cai-gi-row-lock-va-table-lock-khac-nhau-the-nao-ccd6c591-9e11-597d-9470-32a360c0473e",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Một câu UPDATE/DELETE chỉ lấy row-level lock trên đúng những hàng nó thay đổi, giữ tới khi transaction kết thúc. Transaction khác vẫn SELECT được các hàng đó (đọc bản cũ qua MVCC), chỉ khi muốn sửa cùng hàng mới phải chờ."
+      ],
+      "details": [
+        "Row lock\n- Phạm vi hẹp, cho phép nhiều transaction ghi song song ở các hàng khác nhau.\n- Người đọc không chặn người ghi và ngược lại.",
+        "Table lock\n- Phạm vi cả bảng. Xuất hiện khi chạy DDL: ALTER TABLE lấy ACCESS EXCLUSIVE, chặn cả đọc lẫn ghi trong lúc chạy.\n- Cũng có thể lấy tường minh bằng LOCK TABLE, hiếm khi cần trong code ứng dụng.",
+        "Lưu ý:\n- Migration chạy giờ cao điểm: một ALTER TABLE chờ khoá sẽ xếp hàng phía sau nó toàn bộ request đọc — nhìn như database treo. Luôn đặt lock_timeout khi chạy DDL trên production.\n- Nếu điều kiện WHERE không dùng được index, engine phải quét nhiều hàng và khoá rộng hơn mức cần. Trên MySQL/InnoDB, UPDATE theo cột không index có thể khoá gần như toàn bộ hàng đã quét."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "97853-mot-cau-update-binh-thuong-khoa-cai-gi-row-lock-va-table-lock-khac-nhau-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "47a3a561-fdcc-56a1-bbbc-53d7e5a3a897",
+    "question": "MongoDB lưu dữ liệu thế nào? Document, collection, BSON là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92031-mongodb-luu-du-lieu-the-nao-document-collection-bson-la-gi",
+    "slug": "mongodb-luu-du-lieu-the-nao-document-collection-bson-la-gi-47a3a561-fdcc-56a1-bbbc-53d7e5a3a897",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "MongoDB là document database:"
+      ],
+      "details": [
+        "Triết lý chính: \"data accessed together is stored together\" — dữ liệu hay đọc cùng nhau nên nhúng (embed) vào một document để đọc trong một lần thay vì JOIN nhiều bảng. Khi cần ép cấu trúc, MongoDB có schema validation ($jsonSchema) ở mức collection. So với quan hệ: collection ~ table, document ~ row, field ~ column, nhưng linh hoạt và có cấu trúc lồng."
+      ],
+      "points": [
+        "Document: đơn vị dữ liệu dạng JSON (cặp field–value), có thể lồng nhau (object, array). Mỗi document có _id làm khóa chính (mặc định là ObjectId).",
+        "Collection: nhóm các document — tương đương \"bảng\" nhưng không bắt schema cố định; các document trong cùng collection có thể khác cấu trúc field (schema linh hoạt).",
+        "BSON: định dạng nhị phân MongoDB dùng để lưu/truyền document — như JSON nhưng thêm kiểu (Date, ObjectId, Decimal128, binary) và tối ưu duyệt."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "92031-mongodb-luu-du-lieu-the-nao-document-collection-bson-la-gi",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "2b6f7e2a-29ab-5e01-9e00-7bc4b2526fab",
+    "question": "Vì sao không dùng được alias của cột trong WHERE nhưng lại dùng được trong ORDER BY?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97701-vi-sao-khong-dung-duoc-alias-cua-cot-trong-where-nhung-lai-dung-duoc-trong-order",
+    "slug": "vi-sao-khong-dung-duoc-alias-cua-cot-trong-where-nhung-lai-dung-duoc-trong-order-by-2b6f7e2a-29ab-5e01-9e00-7bc4b2526fab",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì WHERE được đánh giá trước SELECT, còn ORDER BY được đánh giá sau."
+      ],
+      "details": [
+        "Khi WHERE chạy, alias chưa được tạo ra."
+      ],
+      "points": [],
+      "sections": [
+        "Ba cách sửa cho WHERE:",
+        "Lặp lại biểu thức không làm chậm truy vấn: optimizer chỉ tính một lần. GROUP BY nằm giữa nên tuỳ hệ: MySQL và PostgreSQL cho phép alias trong GROUP BY, nhưng đó là phần mở rộng ngoài chuẩn."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- error: column \"total\" does not exist\nSELECT price * qty AS total\nFROM order_items\nWHERE total > 100;\n\n-- ok: ORDER BY chạy sau SELECT\nSELECT price * qty AS total\nFROM order_items\nORDER BY total DESC;"
+        },
+        {
+          "language": "SQL",
+          "code": "-- 1. lặp lại biểu thức\nSELECT price * qty AS total FROM order_items WHERE price * qty > 100;\n\n-- 2. bọc bằng subquery / CTE\nSELECT * FROM (\n  SELECT price * qty AS total FROM order_items\n) t WHERE t.total > 100;\n\n-- 3. LATERAL (PostgreSQL) để tính một lần\nSELECT c.total FROM order_items i\nCROSS JOIN LATERAL (SELECT i.price * i.qty AS total) c\nWHERE c.total > 100;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "97701-vi-sao-khong-dung-duoc-alias-cua-cot-trong-where-nhung-lai-dung-duoc-trong-order",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "b403bbc5-ed8c-5941-8520-259bd8520d3d",
+    "question": "COUNT(*), COUNT(col) và COUNT(DISTINCT col) khác nhau thế nào? SUM/AVG xử lý NULL ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97702-count-count-col-va-count-distinct-col-khac-nhau-the-nao-sum-avg-xu-ly-null-ra-sa",
+    "slug": "count-count-col-va-count-distinct-col-khac-nhau-the-nao-sum-avg-xu-ly-null-ra-sao-b403bbc5-ed8c-5941-8520-259bd8520d3d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khác nhau ở chỗ NULL có được đếm hay không:",
+        "Mọi hàm tổng hợp (trừ COUNT(*)) đều bỏ qua NULL. Vì vậy AVG(rating) chia cho số dòng có giá trị, không phải tổng số dòng — nếu muốn coi NULL là 0 thì phải viết AVG(COALESCE(rating, 0))."
+      ],
+      "details": [
+        "Lưu ý đi kèm: COUNT trên tập rỗng trả về 0, nhưng SUM trên tập rỗng trả về NULL. Đoạn code cộng dồn hay lỗi ở đây, nên bọc COALESCE(SUM(amount), 0)."
+      ],
+      "points": [
+        "COUNT(*) — đếm số dòng, kể cả dòng toàn NULL.",
+        "COUNT(col) — đếm số dòng có col IS NOT NULL.",
+        "COUNT(DISTINCT col) — đếm số giá trị khác nhau, bỏ NULL."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- ratings: 5, NULL, 5, 3\nSELECT COUNT(*),            -- 4\n       COUNT(rating),       -- 3\n       COUNT(DISTINCT rating), -- 2\n       AVG(rating)          -- (5+5+3)/3 = 4.33, KHONG phai /4\nFROM reviews;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "97702-count-count-col-va-count-distinct-col-khac-nhau-the-nao-sum-avg-xu-ly-null-ra-sa",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "d42355ef-b0ff-5f94-9053-e462ec0b6ebc",
+    "question": "COALESCE và NULLIF dùng để làm gì? Cho ví dụ thực tế.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97703-coalesce-va-nullif-dung-de-lam-gi-cho-vi-du-thuc-te",
+    "slug": "coalesce-va-nullif-dung-de-lam-gi-cho-vi-du-thuc-te-d42355ef-b0ff-5f94-9053-e462ec0b6ebc",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "COALESCE(a, b, c, ...) trả về đối số không NULL đầu tiên — dùng để đặt giá trị mặc định. NULLIF(a, b) trả về NULL nếu a = b, ngược lại trả về a — dùng để biến một giá trị \"xấu\" thành NULL.",
+        "Nếu chỉ viết revenue / visits thì PostgreSQL ném division by zero và cả truy vấn hỏng; đổi mẫu số thành NULL khiến kết quả là NULL — một dòng báo cáo trống thay vì cả báo cáo lỗi."
+      ],
+      "details": [
+        "Cặp này hay đi chung để chặn lỗi chia cho 0:",
+        "Một dụng khác của NULLIF: chuẩn hoá chuỗi rỗng thành NULL khi nhập liệu từ form: NULLIF(trim(phone), '').",
+        "Lưu ý COALESCE đánh giá lười — dừng ở đối số không NULL đầu tiên, nên đặt biểu thức đắt tiền ở sau cùng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "SELECT\n  order_id,\n  COALESCE(discount, 0) AS discount,          -- NULL -> 0\n  revenue / NULLIF(visits, 0) AS revenue_per_visit  -- visits = 0 -> NULL, khong loi\nFROM daily_stats;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "97703-coalesce-va-nullif-dung-de-lam-gi-cho-vi-du-thuc-te",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "1e3e2260-5519-54c5-8e5f-5d4637abf720",
+    "question": "Vì sao phân trang bằng ORDER BY created_at LIMIT/OFFSET lại bị lặp hoặc mất dòng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97707-vi-sao-phan-trang-bang-order-by-created-at-limit-offset-lai-bi-lap-hoac-mat-dong",
+    "slug": "vi-sao-phan-trang-bang-order-by-created-at-limit-offset-lai-bi-lap-hoac-mat-dong-1e3e2260-5519-54c5-8e5f-5d4637abf720",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì ORDER BY không xác định (non-deterministic) khi nhiều dòng có cùng giá trị sắp xếp.",
+        "Quy tắc: mọi truy vấn có LIMIT phải ORDER BY trên một tổ hợp cột duy nhất — thường là thêm khoá chính vào cuối."
+      ],
+      "details": [
+        "SQL không hứa giữ nguyên thứ tự giữa các dòng bằng nhau, nên hai lần chạy có thể xếp chúng khác nhau — dòng ở cuối trang 1 có thể xuất hiện lại ở đầu trang 2, hoặc bị bỏ qua.",
+        "Hai vấn đề còn lại mà tie-breaker không giải quyết:\n- Dữ liệu thay đổi giữa hai lần gọi trang (có bài mới chèn vào) vẫn gây lệch. Cách xử lý là cursor pagination (WHERE (created_at, id) < (:last_at, :last_id)).\n- OFFSET lớn vẫn chậm vì database phải đọc rồi bỏ đi OFFSET dòng đầu tiên."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- nhieu bai cung created_at -> thu tu khong on dinh\nSELECT * FROM posts ORDER BY created_at DESC LIMIT 20 OFFSET 20;\n\n-- sua: them tie-breaker duy nhat\nSELECT * FROM posts ORDER BY created_at DESC, id DESC LIMIT 20 OFFSET 20;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "97707-vi-sao-phan-trang-bang-order-by-created-at-limit-offset-lai-bi-lap-hoac-mat-dong",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "1544d63e-d30e-521f-a974-9f676f7412aa",
+    "question": "Index làm truy vấn đọc nhanh hơn nhưng vì sao lại làm chậm ghi? Bao nhiêu index là quá nhiều?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97750-index-lam-truy-van-doc-nhanh-hon-nhung-vi-sao-lai-lam-cham-ghi-bao-nhieu-index-l",
+    "slug": "index-lam-truy-van-doc-nhanh-hon-nhung-vi-sao-lai-lam-cham-ghi-bao-nhieu-index-la-qua-nhieu-1544d63e-d30e-521f-a974-9f676f7412aa",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Index là một cấu trúc dữ liệu song song với bảng. Đọc nhanh vì tra cứu chỉ đi qua vài tầng B-tree thay vì quét toàn bộ bảng, nhưng mỗi thao tác ghi phải cập nhật cả bảng lẫn từng index."
+      ],
+      "details": [
+        "Chi phí ghi cụ thể:\n- INSERT: một dòng mới phải được chèn vào mọi index của bảng. Bảng có 6 index thì một INSERT sinh 7 lần ghi (1 heap + 6 B-tree), kèm 7 phần ghi vào WAL.\n- UPDATE: chỉ index nào chứa cột bị đổi mới phải sửa — nhưng nếu dòng mới không nằm vừa cùng trang thì mọi index đều phải trỏ lại.\n- DELETE: entry trong index không biến mất ngay, phải chờ dọn dẹp nền (autovacuum ở PostgreSQL).",
+        "Ngoài ra index chiếm dung lượng đĩa và cạnh tranh cache với dữ liệu thật — index ít dùng vẫn đẩy trang dữ liệu nóng ra khỏi cache.",
+        "Bao nhiêu là quá nhiều: không có con số cứng. Nguyên tắc thực dụng là mỗi index phải phục vụ ít nhất một truy vấn thật có tần suất đáng kể. Bảng ghi rất nhiều (log, event) nên giữ tối thiểu; bảng đọc nhiều (danh mục sản phẩm) có thể chấp nhận nhiều hơn. Cách kiểm chứng là đo idx_scan để loại index không ai dùng, thay vì đoán."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "97750-index-lam-truy-van-doc-nhanh-hon-nhung-vi-sao-lai-lam-cham-ghi-bao-nhieu-index-l",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "39ba8d90-5431-5a2b-b6ed-e14715e16922",
+    "question": "Vì sao WHERE DATE(created_at) = '2026-01-01' không dùng được index trên created_at? Viết lại thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97751-vi-sao-where-date-created-at-2026-01-01-khong-dung-duoc-index-tren-created-at-vi",
+    "slug": "vi-sao-where-date-created-at-2026-01-01-khong-dung-duoc-index-tren-created-at-viet-lai-the-nao-39ba8d90-5431-5a2b-b6ed-e14715e16922",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì index lưu giá trị gốc của cột, không lưu kết quả của hàm.",
+        "Cùng lỗi này còn xuất hiện ở nhiều dạng khác:\n- WHERE YEAR(created_at) = 2026 → đổi thành khoảng >= '2026-01-01' AND < '2027-01-01'.\n- WHERE amount * 100 > 5000 → chuyển phép tính sang vế hằng số: amount > 50.\n- WHERE UPPER(email) = 'A@B.COM' → chuẩn hoá dữ liệu khi ghi, hoặc dùng expression index."
+      ],
+      "details": [
+        "Dùng khoảng nửa mở (>= và <) thay vì BETWEEN khi cột là timestamp: BETWEEN '2026-01-01' AND '2026-01-02' sẽ lấy lẫn đúng thời điểm nửa đêm ngày hôm sau."
+      ],
+      "points": [
+        "Khi cột bị bọc trong một hàm, database phải tính hàm đó cho từng dòng rồi mới so sánh — nghĩa là phải đọc hết bảng.",
+        "Điều kiện như vậy gọi là non-sargable (không dùng được làm access predicate)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- non-sargable: forces a full scan\nSELECT * FROM orders WHERE DATE(created_at) = '2026-01-01';\n\n-- sargable: half-open range, index on created_at is usable\nSELECT * FROM orders\nWHERE created_at >= '2026-01-01'\n  AND created_at <  '2026-01-02';"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "97751-vi-sao-where-date-created-at-2026-01-01-khong-dung-duoc-index-tren-created-at-vi",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "689bb0ce-5682-5144-9218-69d016b56f1a",
+    "question": "Đánh index lên cột is_active hay status (chỉ vài giá trị) có tác dụng không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97752-danh-index-len-cot-is-active-hay-status-chi-vai-gia-tri-co-tac-dung-khong",
+    "slug": "danh-index-len-cot-is-active-hay-status-chi-vai-gia-tri-co-tac-dung-khong-689bb0ce-5682-5144-9218-69d016b56f1a",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Thường là không, vì cột đó có cardinality thấp — số giá trị phân biệt quá ít nên selectivity kém. Nếu 90% dòng có is_active = true, đi qua index rồi nhảy về bảng đọc 90% số dòng còn chậm hơn quét tuần tự, do quét tuần tự đọc tuần tự theo trang còn index scan sinh truy cập ngẫu nhiên. Planner biết điều này qua thống kê và sẽ tự bỏ qua index — index vẫn tồn tại, vẫn tốn chi phí ghi, nhưng không ai dùng."
+      ],
+      "details": [
+        "Khi cột cardinality thấp vẫn đáng đánh index:\n- Giá trị hiếm. status = 'failed' chỉ chiếm 0.1% dòng thì lọc theo nó rất chọn lọc, dù cột chỉ có 4 giá trị. Phân bố lệch quan trọng hơn số giá trị phân biệt.\n- Làm cột phụ trong composite index. (user_id, status) hữu ích vì user_id đã lọc mạnh sẵn.\n- Partial index. Chỉ đánh index phần dòng thật sự được truy vấn:"
+      ],
+      "points": [],
+      "sections": [
+        "Index này nhỏ, rẻ khi ghi, và phục vụ đúng truy vấn hàng đợi xử lý đơn."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "CREATE INDEX idx_orders_pending ON orders (created_at)\nWHERE status = 'pending';"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "97752-danh-index-len-cot-is-active-hay-status-chi-vai-gia-tri-co-tac-dung-khong",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "e79c70d2-6e73-5b44-8153-a061d9f1c750",
+    "question": "Vì sao LIKE 'abc%' dùng được index còn LIKE '%abc%' thì không? Muốn tìm chuỗi con nhanh thì làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97753-vi-sao-like-abc-dung-duoc-index-con-like-abc-thi-khong-muon-tim-chuoi-con-nhanh",
+    "slug": "vi-sao-like-abc-dung-duoc-index-con-like-abc-thi-khong-muon-tim-chuoi-con-nhanh-thi-lam-gi-e79c70d2-6e73-5b44-8153-a061d9f1c750",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì B-tree sắp xếp theo thứ tự từ trái sang phải của giá trị.",
+        "Cách xử lý tìm chuỗi con:\n- Trigram index (PostgreSQL, extension pg_trgm): cắt chuỗi thành các nhóm 3 ký tự và đánh index GIN lên đó, dùng được cho cả LIKE '%abc%' và ILIKE."
+      ],
+      "details": [],
+      "points": [
+        "Với LIKE 'abc%' database biết mọi kết quả nằm liền nhau trong khoảng ['abc', 'abd') nên nhảy thẳng tới đó — đây là prefix search.",
+        "Với '%abc%' thì phần đầu chuỗi không xác định, kết quả rải rác khắp cây, không có khoảng liên tục nào để nhảy vào → phải quét toàn bộ.",
+        "Full-text search nếu thứ cần tìm là từ chứ không phải chuỗi con bất kỳ.",
+        "Đảo chuỗi khi chỉ cần khớp đuôi: lưu thêm cột reverse(domain) rồi tìm prefix trên cột đó.",
+        "Với nhu cầu tìm kiếm gõ-tới-đâu-gợi-ý-tới-đó ở quy mô lớn thì công cụ chuyên dụng (Elasticsearch, Meilisearch) hợp lý hơn."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "SELECT * FROM users WHERE email LIKE 'nguyen%';  -- index range scan\nSELECT * FROM users WHERE email LIKE '%gmail%';  -- full scan"
+        },
+        {
+          "language": "SQL",
+          "code": "CREATE EXTENSION IF NOT EXISTS pg_trgm;\nCREATE INDEX idx_users_email_trgm ON users USING gin (email gin_trgm_ops);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "97753-vi-sao-like-abc-dung-duoc-index-con-like-abc-thi-khong-muon-tim-chuoi-con-nhanh",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "ef9ff868-eafc-59df-951b-eab110798e81",
+    "question": "Không dùng transaction thì luồng chuyển tiền hỏng ở đâu? ACID nghĩa thực tế là gì với từng chữ?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97850-khong-dung-transaction-thi-luong-chuyen-tien-hong-o-dau-acid-nghia-thuc-te-la-gi",
+    "slug": "khong-dung-transaction-thi-luong-chuyen-tien-hong-o-dau-acid-nghia-thuc-te-la-gi-voi-tung-chu-ef9ff868-eafc-59df-951b-eab110798e81",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Transaction gom nhiều câu lệnh thành một đơn vị: hoặc tất cả có hiệu lực, hoặc không câu nào.",
+        "ACID theo nghĩa vận hành:\n- Atomicity — lỗi giữa chừng thì ROLLBACK gỡ sạch phần đã ghi, không để lại trạng thái nửa vời.\n- Consistency — sau COMMIT, mọi ràng buộc còn đúng (CHECK balance >= 0, khoá ngoại, unique). Database giữ phần ràng buộc khai báo; quy tắc nghiệp vụ vẫn là việc của code.\n- Isolation — các transaction chạy song song không thấy trạng thái dở dang của nhau; thấy được đến đâu do isolation level quyết định.\n- Durability — đã COMMIT thì mất điện vẫn còn, nhờ ghi WAL xuống đĩa trước khi báo thành công."
+      ],
+      "details": [
+        "Thiếu nó, luồng chuyển tiền có thể trừ tiền tài khoản A xong thì tiến trình dừng trước khi cộng cho B — số tiền đó mất hẳn.",
+        "Điểm hay bị hiểu nhầm: mở transaction không tự chống race condition. Hai transaction cùng đọc số dư cũ rồi cùng ghi đè vẫn cho kết quả sai — muốn chặn phải dùng khoá, câu lệnh cập nhật atomic, hoặc isolation level cao hơn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "BEGIN;\nUPDATE accounts SET balance = balance - 100 WHERE id = 1;\nUPDATE accounts SET balance = balance + 100 WHERE id = 2;\nCOMMIT;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "97850-khong-dung-transaction-thi-luong-chuyen-tien-hong-o-dau-acid-nghia-thuc-te-la-gi",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "e1a51ec5-51b4-5439-92db-172b9a39ef0e",
+    "question": "Bốn isolation level chặn được anomaly nào? Mặc định của PostgreSQL và MySQL khác nhau chỗ nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97851-bon-isolation-level-chan-duoc-anomaly-nao-mac-dinh-cua-postgresql-va-mysql-khac",
+    "slug": "bon-isolation-level-chan-duoc-anomaly-nao-mac-dinh-cua-postgresql-va-mysql-khac-nhau-cho-nao-e1a51ec5-51b4-5439-92db-172b9a39ef0e",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bốn mức chuẩn SQL, xếp từ lỏng đến chặt, mỗi mức chặn thêm một loại anomaly:"
+      ],
+      "details": [
+        "Khác biệt mặc định:\n- PostgreSQL mặc định READ COMMITTED, và không hề có dirty read — READ UNCOMMITTED được xử lý y hệt READ COMMITTED. Mỗi câu lệnh nhìn một snapshot mới, nên hai SELECT trong cùng transaction có thể ra khác nhau.\n- MySQL/InnoDB mặc định REPEATABLE READ: các SELECT thường trong transaction đọc từ một snapshot cố định lấy ở lần đọc đầu tiên, nên lặp lại cho kết quả ổn định nhưng có thể đã lỗi thời.",
+        "Hệ quả thực tế khi port code giữa hai hệ: một báo cáo tổng hợp nhiều câu SELECT chạy đúng trên MySQL có thể lệch số trên PostgreSQL. Muốn ổn định thì nâng lên REPEATABLE READ một cách tường minh, đừng dựa vào mặc định."
+      ],
+      "points": [
+        "Dirty read: đọc được dữ liệu của transaction khác chưa commit.",
+        "Non-repeatable read: đọc cùng một hàng hai lần trong một transaction ra hai giá trị khác nhau.",
+        "Phantom read: chạy lại cùng một điều kiện WHERE thì xuất hiện thêm hàng mới."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "97851-bon-isolation-level-chan-duoc-anomaly-nao-mac-dinh-cua-postgresql-va-mysql-khac",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "407db56f-23a0-5d65-a3d0-9fdbf9d6ba9d",
+    "question": "Lost update xảy ra thế nào? Kể 3 cách chống.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97852-lost-update-xay-ra-the-nao-ke-3-cach-chong",
+    "slug": "lost-update-xay-ra-the-nao-ke-3-cach-chong-407db56f-23a0-5d65-a3d0-9fdbf9d6ba9d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ba cách chống:\n1. Cập nhật atomic trong một câu lệnh — để database tự đọc giá trị mới nhất, không đưa qua application:",
+        "2. Pessimistic lock — SELECT ... FOR UPDATE để giữ hàng trước khi tính toán, transaction thứ hai phải chờ.\n3. Optimistic lock — thêm cột version, khi ghi thì kèm điều kiện version cũ; nếu không khớp thì báo xung đột cho tầng trên xử lý."
+      ],
+      "details": [
+        "Cách 1 luôn nên thử trước vì rẻ nhất và không cần giữ khoá lâu. Lưu ý PostgreSQL ở mức REPEATABLE READ trở lên tự phát hiện lost update và ném lỗi serialization, nhưng ở mức mặc định READ COMMITTED thì không — code phải tự lo."
+      ],
+      "points": [],
+      "sections": [
+        "Lost update xảy ra với luồng đọc — sửa — ghi: hai transaction cùng đọc giá trị cũ, cùng tính toán rồi cùng ghi lại, bản ghi sau đè lên bản ghi trước nên một lần cập nhật biến mất."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- T1 và T2 chạy đồng thời, cùng đọc stock = 10\nSELECT stock FROM products WHERE id = 7;   -- cả hai đọc 10\nUPDATE products SET stock = 9 WHERE id = 7; -- cả hai ghi 9 → bán 2 nhưng chỉ trừ 1"
+        },
+        {
+          "language": "SQL",
+          "code": "UPDATE products SET stock = stock - 1\nWHERE id = 7 AND stock > 0;   -- kiểm tra rowCount để biết có trừ được không"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "97852-lost-update-xay-ra-the-nao-ke-3-cach-chong",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "859fd83b-15a6-502c-9d2f-722a166f0314",
+    "question": "Bảng chi tiết đơn hàng đã có product_id rồi, vì sao vẫn phải lưu lại tên và giá sản phẩm tại thời điểm mua?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97950-bang-chi-tiet-don-hang-da-co-product-id-roi-vi-sao-van-phai-luu-lai-ten-va-gia-s",
+    "slug": "bang-chi-tiet-don-hang-da-co-product-id-roi-vi-sao-van-phai-luu-lai-ten-va-gia-san-pham-tai-thoi-die-859fd83b-15a6-502c-9d2f-722a166f0314",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì đơn hàng là bản ghi lịch sử, còn bảng products là dữ liệu đang sống.",
+        "Những cột nên snapshot: tên, SKU, đơn giá, thuế suất, mức giảm giá, và cả địa chỉ giao hàng ở bảng orders."
+      ],
+      "details": [
+        "Nếu chỉ giữ product_id rồi join sang products để lấy giá, thì hôm sau shop đổi giá hoặc đổi tên sản phẩm, hoá đơn cũ sẽ hiển thị sai — tổng tiền in ra không khớp số tiền khách đã trả.",
+        "Đây là ngoại lệ có chủ ý với chuẩn hoá: dữ liệu trùng lặp ở đây không phải lỗi thiết kế, vì nó mô tả một sự kiện đã xảy ra, không phải trạng thái hiện tại. Cũng vì vậy product_id nên để on delete set null chứ không cascade — xoá sản phẩm không được phép xoá lịch sử bán hàng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "create table order_items (\n  id            bigserial primary key,\n  order_id      bigint not null references orders(id),\n  product_id    bigint references products(id),  -- traceability only\n  product_name  text           not null,          -- snapshot\n  unit_price    numeric(12,2)  not null,          -- snapshot\n  quantity      int            not null check (quantity > 0),\n  line_total    numeric(12,2)  not null\n);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "97950-bang-chi-tiet-don-hang-da-co-product-id-roi-vi-sao-van-phai-luu-lai-ten-va-gia-s",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "867891b1-547d-52e7-96cb-c3da9f8e55bd",
+    "question": "Sản phẩm có nhiều biến thể (size, màu) thì mô hình bảng thế nào? Giỏ hàng trỏ vào đâu?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97951-san-pham-co-nhieu-bien-the-size-mau-thi-mo-hinh-bang-the-nao-gio-hang-tro-vao-da",
+    "slug": "san-pham-co-nhieu-bien-the-size-mau-thi-mo-hinh-bang-the-nao-gio-hang-tro-vao-dau-867891b1-547d-52e7-96cb-c3da9f8e55bd",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tách sản phẩm (thông tin marketing) khỏi biến thể (thứ thực sự bán được).",
+        "Điểm mấu chốt: giỏ hàng và chi tiết đơn hàng luôn trỏ tới variant_id, không phải product_id — vì chỉ variant mới trả lời được \"còn hàng không\" và \"giá bao nhiêu\"."
+      ],
+      "details": [
+        "Áo thun là product; \"áo thun đen size M\" là variant, và variant mới là đơn vị có SKU, giá, tồn kho.",
+        "Với thuộc tính biến thể, hai cách phổ biến: jsonb (nhanh, linh hoạt, khó ràng buộc) hoặc bảng attributes + variant_attributes chuẩn hoá (query lọc theo màu/size gọn hơn). Shop nhỏ hoặc bộ thuộc tính hay thay đổi thì chọn jsonb; sàn cần bộ lọc mặt hàng thì chọn bảng chuẩn hoá."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "create table products (\n  id bigserial primary key,\n  name text not null,\n  description text\n);\n\ncreate table variants (\n  id         bigserial primary key,\n  product_id bigint not null references products(id),\n  sku        text   not null unique,\n  price      numeric(12,2) not null,\n  attributes jsonb not null default '{}'  -- {\"size\":\"M\",\"color\":\"black\"}\n);\n\ncreate table cart_items (\n  cart_id    bigint not null references carts(id),\n  variant_id bigint not null references variants(id),\n  quantity   int not null check (quantity > 0),\n  primary key (cart_id, variant_id)\n);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "97951-san-pham-co-nhieu-bien-the-size-mau-thi-mo-hinh-bang-the-nao-gio-hang-tro-vao-da",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "a95d54a8-02bc-5220-bd53-7691b23f995d",
+    "question": "Quan hệ nhiều-nhiều mà bản thân mối quan hệ cũng có dữ liệu (vd sinh viên đăng ký môn có điểm, ngày đăng ký) thì làm sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97955-quan-he-nhieu-nhieu-ma-ban-than-moi-quan-he-cung-co-du-lieu-vd-sinh-vien-dang-ky",
+    "slug": "quan-he-nhieu-nhieu-ma-ban-than-moi-quan-he-cung-co-du-lieu-vd-sinh-vien-dang-ky-mon-co-diem-ngay-da-a95d54a8-02bc-5220-bd53-7691b23f995d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bảng trung gian không còn là \"bảng nối kỹ thuật\" nữa mà trở thành một thực thể có tên riêng.",
+        "Khoá chính composite hay surrogate id?\n- primary key (student_id, course_id) diễn đạt đúng ràng buộc \"một sinh viên chỉ đăng ký một môn một lần\" và không tốn index thừa.\n- Thêm id bigserial khi bảng này lại được bảng khác tham chiếu (vd assignments trỏ về một lần đăng ký), hoặc khi ORM/framework yêu cầu khoá chính đơn cột. Lúc đó vẫn phải giữ unique (student_id, course_id) — bỏ nó là mở đường cho bản ghi trùng."
+      ],
+      "details": [
+        "Đặt tên theo nghiệp vụ (enrollments, memberships, subscriptions) rồi cho nó cột dữ liệu như bảng bình thường.",
+        "Một dấu hiệu để nhận ra tình huống này: nếu có lúc cùng một cặp được phép xuất hiện nhiều lần (đăng ký lại ở học kỳ sau) thì khoá chính phải bao gồm cột phân biệt, ví dụ primary key (student_id, course_id, term_id)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "create table enrollments (\n  student_id  bigint not null references students(id),\n  course_id   bigint not null references courses(id),\n  enrolled_at timestamptz not null default now(),\n  grade       numeric(4,2),\n  status      text not null default 'active',\n  primary key (student_id, course_id)\n);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "97955-quan-he-nhieu-nhieu-ma-ban-than-moi-quan-he-cung-co-du-lieu-vd-sinh-vien-dang-ky",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "f0c049e4-2ffd-5e9c-a78e-ec959ea86e6f",
+    "question": "Trạng thái đơn hàng (pending, paid, shipped, cancelled) nên lưu bằng gì: số nguyên, chuỗi có CHECK, kiểu ENUM hay bảng tra cứu?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97963-trang-thai-don-hang-pending-paid-shipped-cancelled-nen-luu-bang-gi-so-nguyen-chu",
+    "slug": "trang-thai-don-hang-pending-paid-shipped-cancelled-nen-luu-bang-gi-so-nguyen-chuoi-co-check-kieu-enu-f0c049e4-2ffd-5e9c-a78e-ec959ea86e6f",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bốn lựa chọn, khác nhau ở chỗ ai giữ danh sách giá trị hợp lệ.",
+        "Dữ liệu tự giải thích, thêm giá trị mới chỉ là sửa constraint, và bảng nén chuỗi lặp lại rất hiệu quả nên chi phí lưu trữ không đáng kể."
+      ],
+      "details": [
+        "Số nguyên (0, 1, 2...) — tốn ít chỗ nhất nhưng đọc dữ liệu thô không hiểu gì, và ý nghĩa của số nằm trong code ứng dụng. Ai đó chèn nhầm thứ tự trong enum của code là hỏng toàn bộ dữ liệu cũ. Thường không đáng đánh đổi.",
+        "Chuỗi + CHECK constraint — lựa chọn mặc định tốt trong hầu hết trường hợp:",
+        "Bảng tra cứu (order_statuses + khoá ngoại)",
+        "Kiểu ENUM của PostgreSQL — ràng buộc chặt, lưu gọn (4 byte), có thứ tự sắp xếp theo thứ tự khai báo. Điểm bất tiện: ENUM là một kiểu dữ liệu, nên thêm giá trị phải ALTER TYPE, còn xoá hay đổi tên giá trị thì phức tạp — bất lợi khi danh sách trạng thái còn hay thay đổi.",
+        "dữ liệu đi kèm"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "status text not null\n  check (status in ('pending', 'paid', 'shipped', 'cancelled'))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "97963-trang-thai-don-hang-pending-paid-shipped-cancelled-nen-luu-bang-gi-so-nguyen-chu",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "7186a99d-988b-547d-a26d-453fad6d3538",
+    "question": "TTL của cache nên đặt bao nhiêu? Vì sao cần thêm jitter vào TTL?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98000-ttl-cua-cache-nen-dat-bao-nhieu-vi-sao-can-them-jitter-vao-ttl",
+    "slug": "ttl-cua-cache-nen-dat-bao-nhieu-vi-sao-can-them-jitter-vao-ttl-7186a99d-988b-547d-a26d-453fad6d3538",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "TTL là thời gian sống của một entry trước khi bị xoá tự động. Không có con số đúng cho mọi trường hợp — chọn theo mức cũ mà nghiệp vụ chịu được:",
+        "Jitter phân tán thời điểm hết hạn nên tải xuống DB trở nên phẳng thay vì dạng gai."
+      ],
+      "details": [
+        "Jitter là cộng thêm một lượng ngẫu nhiên vào TTL. Nếu 10.000 key được ghi cùng lúc (sau một lần warm-up hoặc deploy) và cùng TTL 300s, chúng sẽ hết hạn đồng loạt ở giây thứ 300 và toàn bộ traffic dồn xuống DB trong một nhịp.",
+        "Cùng nguyên tắc với backoff có jitter khi retry."
+      ],
+      "points": [
+        "Dữ liệu gần như tĩnh (danh mục, cấu hình): vài giờ tới 1 ngày.",
+        "Dữ liệu đọc nhiều, đổi vừa (danh sách bài viết, hồ sơ): 1-10 phút.",
+        "Dữ liệu nhạy cảm về độ chính xác (số dư, tồn kho): rất ngắn hoặc không cache."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const base = 300\nconst ttl = base + Math.floor(Math.random() * 60) // spread expiry over a 60s window\nawait redis.set(key, JSON.stringify(value), 'EX', ttl)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "98000-ttl-cua-cache-nen-dat-bao-nhieu-vi-sao-can-them-jitter-vao-ttl",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "703ca08e-0bc1-5d06-ba5d-ff9a383bfa45",
+    "question": "Bạn thiết kế cache key thế nào? Làm sao xoá sạch cache cũ khi đổi định dạng dữ liệu?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98001-ban-thiet-ke-cache-key-the-nao-lam-sao-xoa-sach-cache-cu-khi-doi-dinh-dang-du-li",
+    "slug": "ban-thiet-ke-cache-key-the-nao-lam-sao-xoa-sach-cache-cu-khi-doi-dinh-dang-du-lieu-703ca08e-0bc1-5d06-ba5d-ff9a383bfa45",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Key phải tự mô tả và chứa đủ mọi tham số ảnh hưởng tới kết quả.",
+        "Nguyên tắc:\n- Thiếu tham số là bug: nếu response đổi theo locale, currency hay user role mà key không có, hai người dùng sẽ nhận nhầm dữ liệu của nhau.\n- Đừng nhét dữ liệu cá nhân (email, token) vào key — key hiển thị trong log, SCAN, dashboard.\n- Key dài thì hash phần tham số (sha1 của query string) nhưng giữ tiền tố đọc được để còn debug."
+      ],
+      "details": [
+        "Quy ước phổ biến: <app>:<entity>:<id>:<biến-thể>.",
+        "Đổi định dạng dữ liệu: đừng đi xoá từng key. Thêm số phiên bản vào tiền tố (:v2) rồi deploy — toàn bộ key v1 trở thành mồ côi và tự hết hạn theo TTL. Cách này không cần KEYS/FLUSHDB (nguy hiểm trên production) và cho phép rollback về v1 ngay lập tức."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "shop:product:1234:v2\nshop:product-list:cat=5:page=2:sort=price_asc:v2\nauth:session:8f2c..."
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "98001-ban-thiet-ke-cache-key-the-nao-lam-sao-xoa-sach-cache-cu-khi-doi-dinh-dang-du-li",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "ee830a01-8a8a-50fc-a3ec-b5300ea4d5b6",
+    "question": "Dữ liệu nào không nên cache? Kể một trường hợp cache gây sai nghiệp vụ.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98003-du-lieu-nao-khong-nen-cache-ke-mot-truong-hop-cache-gay-sai-nghiep-vu",
+    "slug": "du-lieu-nao-khong-nen-cache-ke-mot-truong-hop-cache-gay-sai-nghiep-vu-ee830a01-8a8a-50fc-a3ec-b5300ea4d5b6",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không cache khi cái giá của một lần đọc sai lớn hơn cái lợi về tốc độ:"
+      ],
+      "details": [
+        "Ví dụ nghiệp vụ hay gặp ở web bán hàng: trang chi tiết sản phẩm cache 5 phút gồm cả giá. Marketing đổi giá lúc chạy khuyến mãi, khách vẫn thấy giá cũ và bấm mua → giá hiển thị và giá tính tiền lệch nhau, phát sinh khiếu nại.",
+        "Cách xử lý: tách phần tĩnh (mô tả, ảnh) khỏi phần biến động (giá, tồn kho, quyền). Phần tĩnh cache dài, phần biến động đọc thẳng DB hoặc TTL rất ngắn, và luôn kiểm tra lại ở bước ghi (validate giá lúc tạo đơn) thay vì tin dữ liệu đã đọc."
+      ],
+      "points": [
+        "Quyền và trạng thái tài khoản: role, permission, trạng thái khoá/ban. Admin thu quyền của một người, cache còn 10 phút → người đó vẫn thao tác được trong 10 phút đó.",
+        "Số dư, tồn kho, hạn mức: đọc số cũ rồi ghi đè dẫn tới bán quá tồn kho hoặc chi vượt số dư.",
+        "Dữ liệu một lần dùng: OTP, mã giảm giá dùng một lần — cache khiến kiểm tra \"đã dùng chưa\" trả về sai.",
+        "Kết quả riêng của từng người mà key không phân biệt user — cache toàn cục cho response cá nhân hoá là lỗi rò rỉ dữ liệu, không chỉ là dữ liệu cũ."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "98003-du-lieu-nao-khong-nen-cache-ke-mot-truong-hop-cache-gay-sai-nghiep-vu",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "c68e2fc7-621f-5961-998f-8a585cbff061",
+    "question": "Một request đi qua những tầng cache nào? Nên đặt cache ở đâu?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98103-mot-request-di-qua-nhung-tang-cache-nao-nen-dat-cache-o-dau",
+    "slug": "mot-request-di-qua-nhung-tang-cache-nao-nen-dat-cache-o-dau-c68e2fc7-621f-5961-998f-8a585cbff061",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đi từ gần người dùng ra xa, mỗi tầng chặn bớt một phần lưu lượng cho tầng sau:"
+      ],
+      "details": [
+        "1. Trình duyệt — Cache-Control: max-age, cache HTTP local. Rẻ nhất: không có request nào rời máy client.\n2. CDN / edge — tài nguyên tĩnh và cả response API công khai. Chặn lưu lượng ngay tại nước người dùng, giảm cả latency lẫn băng thông về origin.\n3. Reverse proxy trước app (nginx, Varnish) — cache trang/fragment cho toàn bộ cụm.\n4. Cache dùng chung (Redis/Memcached) — kết quả tính toán, session, kết quả query. Mọi instance nhìn thấy cùng dữ liệu.\n5. In-process cache trong RAM app — nhanh nhất nhưng mỗi instance một bản, dễ lệch nhau và tốn RAM.\n6. Database buffer pool — DB tự cache trang dữ liệu, mình không điều khiển trực tiếp.",
+        "Nguyên tắc chọn chỗ: cache càng gần người dùng càng tiết kiệm, nhưng càng khó làm mới. Dữ liệu tĩnh và dùng chung (ảnh, bundle JS, danh mục sản phẩm) đẩy ra CDN với URL có vân tay nội dung. Dữ liệu riêng từng người hoặc đổi nhanh (giỏ hàng, số dư) giữ ở cache dùng chung với TTL ngắn để còn xoá được. Đừng cache dữ liệu cá nhân ở tầng dùng chung mà quên khoá theo user — đó là lỗi lộ dữ liệu chéo tài khoản."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "98103-mot-request-di-qua-nhung-tang-cache-nao-nen-dat-cache-o-dau",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "221a87a6-6be3-5873-b5b3-2a422e801a55",
+    "question": "MySQL và PostgreSQL khác nhau ở đâu? Khi nào chọn cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92072-mysql-va-postgresql-khac-nhau-o-dau-khi-nao-chon-cai-nao",
+    "slug": "mysql-va-postgresql-khac-nhau-o-dau-khi-nao-chon-cai-nao-221a87a6-6be3-5873-b5b3-2a422e801a55",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai là RDBMS mã nguồn mở phổ biến nhất, nhưng khác về kiến trúc và trọng tâm:"
+      ],
+      "details": [
+        "Chọn PostgreSQL khi: truy vấn phức tạp, cần JSONB/kiểu dữ liệu phong phú, ràng buộc toàn vẹn chặt, GIS, hoặc dự tính nhu cầu analytics. Chọn MySQL khi: workload đọc/ghi đơn giản theo khóa, team đã quen hệ sinh thái LAMP, hoặc hạ tầng sẵn có (replication đơn giản, nhiều hosting hỗ trợ). Cả hai đều đủ tốt cho web app thông thường — yếu tố quyết định thường là tính năng cần dùng và kinh nghiệm của team."
+      ],
+      "points": [
+        "Kiến trúc kết nối: MySQL dùng thread cho mỗi kết nối (nhẹ RAM); PostgreSQL dùng process riêng cho mỗi kết nối (tốn RAM hơn khi kết nối nhiều → cần connection pooler sớm hơn).",
+        "Chuẩn SQL & tính năng: PostgreSQL bám chuẩn SQL chặt hơn và giàu tính năng — JSONB + GIN index, kiểu dữ liệu tùy biến, partial/expression index, window function và CTE đầy đủ từ lâu, extension (PostGIS...). MySQL đơn giản hơn, hệ sinh thái LAMP trưởng thành.",
+        "Query planner: PostgreSQL thường tối ưu tốt hơn với JOIN phức tạp và subquery lồng nhau — hợp báo cáo/analytics nhẹ. MySQL đọc theo khóa chính rất nhanh (InnoDB clustered index theo PK).",
+        "MVCC: cả hai đều có; PostgreSQL để lại dead tuple cần VACUUM, MySQL InnoDB dùng undo log — khác cách vận hành bảo trì.",
+        "Isolation mặc định: PostgreSQL = Read Committed; MySQL InnoDB = Repeatable Read."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "92072-mysql-va-postgresql-khac-nhau-o-dau-khi-nao-chon-cai-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "7c1e16fe-ecd5-5a53-9e24-0b84ead462db",
+    "question": "CTE (WITH) là gì và khác subquery thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92049-cte-with-la-gi-va-khac-subquery-the-nao",
+    "slug": "cte-with-la-gi-va-khac-subquery-the-nao-7c1e16fe-ecd5-5a53-9e24-0b84ead462db",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "So với subquery lồng trong FROM/WHERE:\n- CTE giúp truy vấn phức tạp dễ đọc, chia thành các bước có tên, tránh lặp lại cùng một subquery.\n- Có thể tham chiếu nhiều lần trong câu chính.\n- Hỗ trợ recursive CTE (WITH RECURSIVE) để duyệt cây/đồ thị (danh mục cha–con, chuỗi tổ chức) — điều subquery thường không làm được.\n- Dùng được trong DML — xóa + lưu trữ atomic:\nCopy\nWITH deleted AS (DELETE ... RETURNING *) INSERT INTO archive SELECT * FROM deleted"
+      ],
+      "details": [
+        "Lưu ý hiệu năng: bản chất kết quả giống nhau, nhưng ở PostgreSQL cũ (trước 12) CTE là optimization fence (materialize, không đẩy điều kiện vào trong). Từ Postgres 12 planner có thể inline CTE không recursive; muốn giữ hàng rào thì dùng WITH ... AS MATERIALIZED."
+      ],
+      "points": [],
+      "sections": [
+        "CTE (Common Table Expression) là truy vấn phụ đặt tên khai báo bằng WITH, dùng lại như một bảng tạm trong câu lệnh chính:"
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "WITH recent_orders AS (\n  SELECT * FROM orders WHERE created_at > now() - interval '7 days'\n)\nSELECT customer_id, count(*) FROM recent_orders GROUP BY customer_id;"
+        },
+        {
+          "language": null,
+          "code": "WITH deleted AS (DELETE ... RETURNING *) INSERT INTO archive SELECT * FROM deleted"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "92049-cte-with-la-gi-va-khac-subquery-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "7439e981-9d93-53f0-8312-b19b7832471b",
+    "question": "Subquery và correlated subquery khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92057-subquery-va-correlated-subquery-khac-nhau-the-nao",
+    "slug": "subquery-va-correlated-subquery-khac-nhau-the-nao-7439e981-9d93-53f0-8312-b19b7832471b",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Subquery là truy vấn lồng bên trong truy vấn khác (ở SELECT, FROM, hoặc WHERE).",
+        "Khác biệt cốt lõi:\n- Sự phụ thuộc: correlated cần giá trị từ ngoài; non-correlated thì không.\n- Hiệu năng: correlated có thể tốn hơn (đánh giá theo từng hàng), dù planner hiện đại thường viết lại thành join. Nhiều correlated subquery với EXISTS có thể chuyển thành JOIN/GROUP BY để nhanh hơn."
+      ],
+      "details": [
+        "EXISTS/NOT EXISTS thường đi cùng correlated subquery để kiểm tra tồn tại theo từng hàng. PostgreSQL còn có LATERAL — subquery trong FROM được tham chiếu hàng của bảng đứng trước, hợp bài \"top-N mỗi nhóm\" (vd 3 đơn mới nhất của mỗi user)."
+      ],
+      "points": [
+        "Subquery độc lập (non-correlated): chạy được một mình, không tham chiếu truy vấn ngoài. DB thường chạy một lần, lấy kết quả rồi dùng cho truy vấn ngoài."
+      ],
+      "sections": [
+        "- Correlated subquery: tham chiếu cột của truy vấn ngoài → không chạy độc lập được; về mặt logic nó chạy lặp lại cho từng hàng của truy vấn ngoài."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "SELECT * FROM products\n  WHERE price > (SELECT AVG(price) FROM products);  -- chạy 1 lần"
+        },
+        {
+          "language": "SQL",
+          "code": "SELECT e.* FROM employees e\n  WHERE e.salary > (\n    SELECT AVG(salary) FROM employees\n    WHERE dept_id = e.dept_id   -- e.dept_id từ truy vấn ngoài\n  );"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "92057-subquery-va-correlated-subquery-khac-nhau-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "1e2f5fbb-5d59-57f4-9eec-689af95bc28c",
+    "question": "Window function là gì? Khác GROUP BY thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92058-window-function-la-gi-khac-group-by-the-nao",
+    "slug": "window-function-la-gi-khac-group-by-the-nao-1e2f5fbb-5d59-57f4-9eec-689af95bc28c",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Window function tính toán trên một tập hàng liên quan tới hàng hiện tại nhưng không gộp các hàng lại — mỗi hàng gốc vẫn được giữ, kèm thêm giá trị tính được. Nhận biết qua mệnh đề OVER (...)."
+      ],
+      "details": [
+        "Khác GROUP BY:\n- GROUP BY gộp nhiều hàng thành một hàng/nhóm → mất chi tiết từng hàng.\n- Window function giữ nguyên số hàng, thêm cột tính theo \"cửa sổ\".",
+        "Thành phần trong OVER:\n- PARTITION BY: chia hàng thành nhóm (như GROUP BY nhưng không thu gọn).\n- ORDER BY: sắp thứ tự trong cửa sổ (cần cho hàm xếp hạng và tổng lũy kế).",
+        "Hàm hay dùng:\n- Xếp hạng: ROW_NUMBER(), RANK(), DENSE_RANK().\n- Tổng hợp theo cửa sổ: SUM() OVER(...), AVG() OVER(...) — vd tổng lũy kế.\n- Truy cập hàng lân cận: LAG(), LEAD() — so với hàng trước/sau.\n- Khung (frame): ROWS BETWEEN 2 PRECEDING AND CURRENT ROW — trung bình trượt."
+      ],
+      "points": [],
+      "sections": [
+        "Dùng khi cần \"top N mỗi nhóm\", tổng lũy kế, so với hàng trước — những thứ GROUP BY một mình khó làm."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- Xếp hạng lương trong từng phòng, giữ mọi hàng\nSELECT name, dept_id, salary,\n       RANK() OVER (PARTITION BY dept_id ORDER BY salary DESC) AS rank_in_dept\nFROM employees;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "92058-window-function-la-gi-khac-group-by-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "8955b1d0-47cf-5d60-b2b6-407557134f36",
+    "question": "UPSERT (INSERT ... ON CONFLICT) là gì và giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92063-upsert-insert-on-conflict-la-gi-va-giai-quyet-van-de-gi",
+    "slug": "upsert-insert-on-conflict-la-gi-va-giai-quyet-van-de-gi-8955b1d0-47cf-5d60-b2b6-407557134f36",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "UPSERT = \"insert nếu chưa có, update nếu đã có\" trong một câu lệnh atomic. Tránh mẫu sai thường gặp \"kiểm tra trước rồi ghi\" (SELECT → nếu không có thì INSERT), vốn dính race condition: hai request cùng thấy \"chưa có\" rồi cùng INSERT → lỗi trùng khóa hoặc dữ liệu nhân đôi.",
+        "Lợi ích:\n- Atomic, tránh race condition mà không cần khóa/transaction thủ công.\n- Làm thao tác idempotent: chạy lại cùng dữ liệu không gây trùng — quan trọng cho retry, đồng bộ, webhook."
+      ],
+      "details": [
+        "PostgreSQL dùng INSERT ... ON CONFLICT:",
+        "Chuẩn SQL và các hệ khác dùng MERGE; MySQL có INSERT ... ON DUPLICATE KEY UPDATE. Cần có ràng buộc unique/PK thì UPSERT mới biết thế nào là \"trùng\"."
+      ],
+      "points": [
+        "ON CONFLICT (cột) — chỉ ra ràng buộc unique/PK để phát hiện trùng.",
+        "DO UPDATE SET ... — hành động khi trùng (truy cập giá trị mới qua EXCLUDED).",
+        "DO NOTHING — bỏ qua nếu trùng, không lỗi."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "INSERT INTO counters (key, count)\nVALUES ('page_view', 1)\nON CONFLICT (key)\nDO UPDATE SET count = counters.count + 1;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "92063-upsert-insert-on-conflict-la-gi-va-giai-quyet-van-de-gi",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "de97fe37-6a4f-5078-b2f8-4f43486e77cb",
+    "question": "Bài tập SQL thường gặp: tìm lương cao thứ 2 / top-N mỗi nhóm viết thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92074-bai-tap-sql-thuong-gap-tim-luong-cao-thu-2-top-n-moi-nhom-viet-the-nao",
+    "slug": "bai-tap-sql-thuong-gap-tim-luong-cao-thu-2-top-n-moi-nhom-viet-the-nao-de97fe37-6a4f-5078-b2f8-4f43486e77cb",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hai bài \"vào tay\" xuất hiện trong hầu hết vòng SQL:",
+        "Dùng DENSE_RANK (không phải ROW_NUMBER/RANK) vì lương trùng phải tính cùng một hạng, không nhảy số. Biến thể LIMIT 1 OFFSET 1 cần SELECT DISTINCT salary, và trả 0 hàng thay vì NULL khi không có — điểm hay bị bắt bẻ.",
+        "PARTITION BY chia cửa sổ theo nhóm, xếp hạng trong từng nhóm rồi lọc ở ngoài (không lọc trực tiếp được vì window function không dùng được trong WHERE cùng mức)."
+      ],
+      "details": [
+        "Lương cao thứ 2 (phải xử lý trùng lương và trường hợp không tồn tại):",
+        "Top-N mỗi nhóm (3 người lương cao nhất mỗi phòng):",
+        "Nắm chắc bộ ba ROW_NUMBER/RANK/DENSE_RANK + PARTITION BY là giải được cả họ bài này (mới nhất mỗi nhóm, khử trùng lặp, xếp hạng)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- Cách 1: subquery — trả NULL nếu không có (đúng yêu cầu đề)\nSELECT MAX(salary) AS second_highest\nFROM employees\nWHERE salary < (SELECT MAX(salary) FROM employees);\n\n-- Cách 2: DENSE_RANK — tổng quát hóa cho \"cao thứ N\"\nSELECT salary FROM (\n  SELECT salary, DENSE_RANK() OVER (ORDER BY salary DESC) AS rnk\n  FROM employees\n) t WHERE rnk = 2;"
+        },
+        {
+          "language": "SQL",
+          "code": "SELECT * FROM (\n  SELECT e.*, DENSE_RANK() OVER (\n    PARTITION BY dept_id ORDER BY salary DESC\n  ) AS rnk\n  FROM employees e\n) t WHERE rnk <= 3;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "92074-bai-tap-sql-thuong-gap-tim-luong-cao-thu-2-top-n-moi-nhom-viet-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "ac71d12b-d3a3-5972-8e65-d430731f135e",
+    "question": "EXISTS, IN và NOT EXISTS khác nhau thế nào? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93006-exists-in-va-not-exists-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "slug": "exists-in-va-not-exists-khac-nhau-the-nao-khi-nao-dung-cai-nao-ac71d12b-d3a3-5972-8e65-d430731f135e",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Lưu ý về NULL: NOT IN với một subquery có chứa NULL sẽ trả về rỗng/sai ngoài ý muốn, vì phép so sánh với NULL cho kết quả UNKNOWN (logic ba giá trị). NOT EXISTS không dính bẫy này, nên thường an toàn hơn khi loại trừ."
+      ],
+      "details": [],
+      "points": [
+        "IN so giá trị với một danh sách hoặc kết quả subquery: x IN (SELECT ...). Hợp khi danh sách nhỏ, giá trị cụ thể.",
+        "EXISTS kiểm tra \"có tồn tại ít nhất một dòng khớp không\" và dừng ngay khi tìm thấy (short-circuit). Hợp với subquery tương quan (correlated), nối theo điều kiện với truy vấn ngoài.",
+        "NOT EXISTS kiểm tra \"không có dòng nào khớp\"."
+      ],
+      "sections": [
+        "Trình tối ưu hiện đại thường tạo cùng một plan cho EXISTS và IN khi không có NULL — nhưng để loại trừ có khả năng gặp NULL, ưu tiên NOT EXISTS."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "SELECT c.id FROM customers c\nWHERE NOT EXISTS (\n  SELECT 1 FROM orders o WHERE o.customer_id = c.id\n);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "93006-exists-in-va-not-exists-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "f8b691af-1335-5651-97c4-148bfca90981",
+    "question": "RANK(), DENSE_RANK() và ROW_NUMBER() khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93007-rank-dense-rank-va-row-number-khac-nhau-the-nao",
+    "slug": "rank-dense-rank-va-row-number-khac-nhau-the-nao-f8b691af-1335-5651-97c4-148bfca90981",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả ba là window function đánh số theo ORDER BY trong mỗi partition. Khác nhau khi gặp giá trị bằng nhau (ties):"
+      ],
+      "details": [],
+      "points": [
+        "ROW_NUMBER(): đánh số liên tục duy nhất 1, 2, 3, 4... kể cả khi bằng nhau (thứ tự giữa các dòng bằng nhau là tùy ý).",
+        "RANK(): dòng bằng nhau cùng hạng, nhưng bỏ số kế tiếp — ví dụ 1, 1, 3 (nhảy qua 2).",
+        "DENSE_RANK(): dòng bằng nhau cùng hạng nhưng không bỏ số — 1, 1, 2."
+      ],
+      "sections": [
+        "Dùng ROW_NUMBER để lấy \"một dòng mỗi nhóm\" (top-N) — bọc trong subquery rồi lọc WHERE rn = 1; dùng RANK/DENSE_RANK khi cần xếp hạng có xử lý đồng hạng."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "SELECT name, score,\n  ROW_NUMBER() OVER (ORDER BY score DESC) AS rn,\n  RANK()       OVER (ORDER BY score DESC) AS rnk,\n  DENSE_RANK() OVER (ORDER BY score DESC) AS drnk\nFROM players;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "93007-rank-dense-rank-va-row-number-khac-nhau-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "fb8f6a14-c60f-5149-932a-09979c933e92",
+    "question": "Vì sao LEFT JOIN của tôi lại hành xử như INNER JOIN? Điều kiện nên đặt ở ON hay WHERE?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97705-vi-sao-left-join-cua-toi-lai-hanh-xu-nhu-inner-join-dieu-kien-nen-dat-o-on-hay-w",
+    "slug": "vi-sao-left-join-cua-toi-lai-hanh-xu-nhu-inner-join-dieu-kien-nen-dat-o-on-hay-where-fb8f6a14-c60f-5149-932a-09979c933e92",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Quy tắc ghi nhớ:\n- Điều kiện về bảng bên phải của LEFT JOIN → đặt trong ON (lọc trước khi ghép, vẫn giữ dòng bên trái).\n- Điều kiện về bảng bên trái → đặt ở WHERE (kết quả như nhau, nhưng rõ ý hơn).\n- Muốn thật sự loại các khách không có đơn nào → dùng INNER JOIN cho tường minh, đừng dựa vào tác dụng phụ."
+      ],
+      "details": [
+        "MySQL gọi quá trình optimizer nhận ra và hạ cấp này là outer join simplification; với INNER JOIN thì ON và WHERE tương đương nhau nên nhầm lẫn chỉ lộ ra ở outer join."
+      ],
+      "points": [],
+      "sections": [
+        "Vì điều kiện lọc bảng bên phải bị đặt nhầm vào WHERE thay vì ON. LEFT JOIN sinh ra các dòng có cột bên phải toàn NULL; sau đó WHERE chạy và loại chính những dòng NULL đó → còn lại đúng bằng INNER JOIN."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- SAI: bien thanh inner join\nSELECT c.id, o.total\nFROM customers c\nLEFT JOIN orders o ON o.customer_id = c.id\nWHERE o.status = 'paid';   -- NULL <> 'paid' -> UNKNOWN -> bi loai\n\n-- DUNG: dieu kien ve bang phai nam trong ON\nSELECT c.id, o.total\nFROM customers c\nLEFT JOIN orders o ON o.customer_id = c.id AND o.status = 'paid';"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "97705-vi-sao-left-join-cua-toi-lai-hanh-xu-nhu-inner-join-dieu-kien-nen-dat-o-on-hay-w",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "ac6ec170-39ec-51c4-a87e-6f44fe186fc0",
+    "question": "Vì sao JOIN nhiều bảng rồi SUM lại ra số lớn gấp đôi? Xử lý fan-out thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97706-vi-sao-join-nhieu-bang-roi-sum-lai-ra-so-lon-gap-doi-xu-ly-fan-out-the-nao",
+    "slug": "vi-sao-join-nhieu-bang-roi-sum-lai-ra-so-lon-gap-doi-xu-ly-fan-out-the-nao-ac6ec170-39ec-51c4-a87e-6f44fe186fc0",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì JOIN quan hệ một–nhiều làm nhân bản dòng ở bảng cha.",
+        "Cách 3 chỉ cứu được COUNT, không cứu được SUM — vì hai dòng khác nhau có thể cùng số tiền và DISTINCT sẽ nuốt mất một dòng hợp lệ."
+      ],
+      "details": [
+        "Mỗi lần bảng cha xuất hiện thêm một dòng thì giá trị của nó bị cộng thêm một lần.",
+        "Dấu hiệu nhận biết sớm: bỏ GROUP BY, SELECT * và đếm dòng — nếu nhiều hơn số dòng bảng cha thì đã fan-out."
+      ],
+      "points": [],
+      "sections": [
+        "Ba cách chữa:"
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- orders(1) -> order_items(n) va orders(1) -> payments(m)\n-- moi order bi nhan len n*m dong\nSELECT o.id, SUM(i.qty), SUM(p.amount)\nFROM orders o\nJOIN order_items i ON i.order_id = o.id\nJOIN payments   p ON p.order_id = o.id\nGROUP BY o.id;   -- SUM(p.amount) bi thoi len n lan"
+        },
+        {
+          "language": "SQL",
+          "code": "-- 1. tong hop TRUOC khi join (tot nhat, ro rang)\nSELECT o.id, i.qty_total, p.paid_total\nFROM orders o\nLEFT JOIN (SELECT order_id, SUM(qty) qty_total FROM order_items GROUP BY order_id) i\n  ON i.order_id = o.id\nLEFT JOIN (SELECT order_id, SUM(amount) paid_total FROM payments GROUP BY order_id) p\n  ON p.order_id = o.id;\n\n-- 2. subquery vo huong khi chi can 1 gia tri\nSELECT o.id, (SELECT SUM(amount) FROM payments WHERE order_id = o.id) AS paid_total\nFROM orders o;\n\n-- 3. COUNT(DISTINCT ...) khi chi dem, khong cong\nSELECT o.id, COUNT(DISTINCT i.id) FROM orders o JOIN order_items i ON ...;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "97706-vi-sao-join-nhieu-bang-roi-sum-lai-ra-so-lon-gap-doi-xu-ly-fan-out-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "d0325921-7527-51b3-a996-06fc6a9b05b9",
+    "question": "Surrogate key và natural key — nên chọn cái nào làm primary key?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92046-surrogate-key-va-natural-key-nen-chon-cai-nao-lam-primary-key",
+    "slug": "surrogate-key-va-natural-key-nen-chon-cai-nao-lam-primary-key-d0325921-7527-51b3-a996-06fc6a9b05b9",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đánh đổi:\n- Natural key: không tốn cột thừa, tự nhiên với người dùng; nhưng giá trị nghiệp vụ có thể đổi (email đổi) hoặc không thực sự duy nhất → phá vỡ mọi FK trỏ tới nó; thường dài, khó dùng làm khóa join.\n- Surrogate key: ổn định, không bao giờ đổi, ngắn gọn, tách khóa khỏi logic nghiệp vụ → join/FK bền. Nhược: một lớp gián tiếp thêm; nếu để lộ số tuần tự có thể rò rỉ thông tin (dùng UUID nếu ngại)."
+      ],
+      "details": [
+        "Thực tế phổ biến: dùng surrogate key làm PK cho ổn định, đồng thời đặt unique constraint trên natural key để vẫn đảm bảo tính duy nhất nghiệp vụ. SERIAL vs UUID: UUID hợp hệ phân tán/tránh đoán id, nhưng ngẫu nhiên gây phân mảnh index (cân nhắc UUIDv7/ULID có thứ tự thời gian)."
+      ],
+      "points": [
+        "Natural key: khóa lấy từ dữ liệu nghiệp vụ thật có sẵn ý nghĩa (email, số CMND, mã sản phẩm, country_code).",
+        "Surrogate key: khóa nhân tạo, không mang nghĩa nghiệp vụ, sinh riêng để định danh — SERIAL/IDENTITY (số tăng), UUID, hoặc ObjectId của Mongo."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "92046-surrogate-key-va-natural-key-nen-chon-cai-nao-lam-primary-key",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "04f26954-406a-5455-883e-86296a6d5741",
+    "question": "Trong MongoDB, khi nào nên embed và khi nào nên reference?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92036-trong-mongodb-khi-nao-nen-embed-va-khi-nao-nen-reference",
+    "slug": "trong-mongodb-khi-nao-nen-embed-va-khi-nao-nen-reference-04f26954-406a-5455-883e-86296a6d5741",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "MongoDB có hai cách mô hình quan hệ giữa dữ liệu:"
+      ],
+      "details": [
+        "Embedding (nhúng): đặt dữ liệu con bên trong document cha (mảng/object lồng).\n- Ưu: đọc tất cả trong một lần truy vấn, không cần join; ghi atomic ở cấp một document.\n- Hợp: quan hệ 1–1 hoặc 1–ít, dữ liệu con luôn được đọc kèm cha, ít đổi (địa chỉ, dòng đơn hàng).\n- Nhược: document tăng kích thước dần (chạm giới hạn 16MB), dữ liệu con lặp lại khó cập nhật đồng bộ.",
+        "Referencing (tham chiếu): lưu _id của document khác rồi truy vấn/$lookup khi cần (giống FK).\n- Hợp: quan hệ 1–nhiều lớn hoặc nhiều–nhiều, dữ liệu con lớn/độc lập/đổi thường xuyên, được chia sẻ giữa nhiều cha.\n- Nhược: cần nhiều truy vấn hoặc $lookup.",
+        "Nguyên tắc: \"dữ liệu đọc cùng nhau thì lưu cùng nhau\". Mặc định ưu tiên embed cho quan hệ nhỏ/đọc-kèm; reference khi dữ liệu lớn, dùng lại, hoặc quan hệ nhiều-nhiều. Hai pattern bổ trợ: bucket (gom time-series theo khoảng thời gian thay vì mỗi lần đo một document) và outlier (tách riêng trường hợp ngoại lệ cực lớn, vd bài viết triệu like)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "92036-trong-mongodb-khi-nao-nen-embed-va-khi-nao-nen-reference",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "8af2ee57-ce1e-5284-babc-0e4db43464e9",
+    "question": "Soft delete và hard delete khác nhau thế nào? Khi nào dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92064-soft-delete-va-hard-delete-khac-nhau-the-nao-khi-nao-dung",
+    "slug": "soft-delete-va-hard-delete-khac-nhau-the-nao-khi-nao-dung-8af2ee57-ce1e-5284-babc-0e4db43464e9",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Soft delete được gì:\n- Khôi phục được (undo), giữ lịch sử/audit.\n- Không phá vỡ FK từ dữ liệu liên quan còn tham chiếu (đơn hàng cũ trỏ tới user đã \"xóa\")."
+      ],
+      "details": [
+        "Cái giá của soft delete:\n- Mọi truy vấn phải nhớ lọc hàng đã xóa — quên một chỗ là lộ dữ liệu đã \"xóa\" (dùng global query filter của ORM hoặc view để lọc tự động; vd EF Core query filter).\n- Ràng buộc UNIQUE vướng: email của user đã soft-delete vẫn chiếm chỗ → cần unique index có điều kiện (partial index WHERE deleted_at IS NULL).\n- Bảng tăng kích thước theo thời gian; index kém hiệu quả nếu nhiều dữ liệu đã đánh dấu xóa.",
+        "Khi nào dùng gì:\n- Soft delete: dữ liệu quan trọng cần audit/khôi phục, hay bị tham chiếu (user, đơn hàng, bài viết).\n- Hard delete: dữ liệu tạm/khối lượng lớn, hoặc yêu cầu pháp lý phải xóa thật (GDPR \"quyền được lãng quên\") — khi đó soft delete là chưa đủ."
+      ],
+      "points": [
+        "Hard delete: DELETE thật, xóa hẳn hàng khỏi bảng. Dữ liệu biến mất.",
+        "Soft delete: không xóa mà đánh dấu đã xóa — thêm cột deleted_at TIMESTAMP (tốt hơn is_deleted BOOLEAN vì ghi lại cả thời điểm xóa); mọi truy vấn \"còn sống\" phải thêm điều kiện WHERE deleted_at IS NULL."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "92064-soft-delete-va-hard-delete-khac-nhau-the-nao-khi-nao-dung",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "e0b4e28e-ff36-50a6-a904-7653834a7c03",
+    "question": "Vì sao không nên lưu tiền tệ bằng float? Dùng kiểu gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92065-vi-sao-khong-nen-luu-tien-te-bang-float-dung-kieu-gi",
+    "slug": "vi-sao-khong-nen-luu-tien-te-bang-float-dung-kieu-gi-e0b4e28e-ff36-50a6-a904-7653834a7c03",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Số dấu phẩy động (float, double, real) lưu theo chuẩn nhị phân IEEE 754 → nhiều giá trị thập phân không biểu diễn chính xác được (kinh điển 0.1 + 0.2 !== 0.3). Với tiền tệ, sai số nhỏ tích lũy qua nhiều phép cộng/nhân sẽ gây lệch số dư, lệch báo cáo — không chấp nhận được."
+      ],
+      "details": [
+        "Cách đúng:\n- Kiểu NUMERIC / DECIMAL(precision, scale): số thập phân chính xác tuyệt đối, phép cộng/trừ/nhân cho kết quả đúng. PostgreSQL docs khuyến nghị numeric cho \"monetary amounts and other quantities where exactness is required\". Vd DECIMAL(12, 2) cho tới 12 chữ số, 2 số lẻ.\n- Hoặc lưu số nguyên đơn vị nhỏ nhất: lưu cents/xu dưới dạng BIGINT (10.00đ → 1000) rồi chia khi hiển thị — tránh hẳn phân số, hợp hệ tính toán nhiều.",
+        "Tránh: MONEY của một số hệ (Postgres có kiểu money nhưng phụ thuộc locale, ít linh hoạt — thường khuyên dùng numeric hơn).",
+        "Chốt: DECIMAL/NUMERIC hoặc số nguyên đơn vị nhỏ nhất cho tiền; không bao giờ float. Đây là câu bẫy rất hay gặp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "92065-vi-sao-khong-nen-luu-tien-te-bang-float-dung-kieu-gi",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "a4408515-1623-564f-8c75-85ab5229e2f7",
+    "question": "Thiết kế schema đơn hàng e-commerce (orders / order_items) thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92076-thiet-ke-schema-don-hang-e-commerce-orders-order-items-the-nao",
+    "slug": "thiet-ke-schema-don-hang-e-commerce-orders-order-items-the-nao-a4408515-1623-564f-8c75-85ab5229e2f7",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Các quyết định phải giải thích được:\n- unit_price snapshot: giá lưu ngay trong order_items, KHÔNG join sang products.price — giá sản phẩm đổi sau này không được làm sai lịch sử đơn. Tương tự nên snapshot địa chỉ giao hàng.\n- Tiền dùng NUMERIC, không float (sai số tích lũy).\n- status là state machine: chỉ cho chuyển trạng thái hợp lệ (pending → paid → shipped...; cancelled từ pending/paid) — enforce ở tầng app hoặc CHECK/trigger. Đơn đã hủy giữ nguyên hàng, không xóa.\n- order_items là bảng nối có thuộc tính (quantity, unit_price); PK ghép (order_id, product_id) chặn trùng sản phẩm trong một đơn.\n- Index: FK orders.user_id (lịch sử mua của user), orders.status hoặc partial index cho đơn đang xử lý.\n- total_amount là giá trị denormalize từ items — tính khi tạo đơn trong cùng transaction, chấp nhận để đọc nhanh."
+      ],
+      "details": [
+        "Mở rộng hay được hỏi tiếp: thanh toán tách bảng payments (một đơn nhiều lần thanh toán/refund), trừ tồn kho chống race condition, và mã giảm giá."
+      ],
+      "points": [],
+      "sections": [
+        "Bài thiết kế kinh điển — lõi là cặp bảng orders + order_items (quan hệ user–product là nhiều–nhiều qua đơn hàng):"
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "CREATE TABLE orders (\n  id          BIGSERIAL PRIMARY KEY,\n  user_id     BIGINT NOT NULL REFERENCES users(id),\n  status      TEXT NOT NULL DEFAULT 'pending',  -- pending → paid → shipped → completed / cancelled\n  total_amount NUMERIC(12, 2) NOT NULL,\n  created_at  TIMESTAMPTZ NOT NULL DEFAULT now()\n);\n\nCREATE TABLE order_items (\n  order_id   BIGINT NOT NULL REFERENCES orders(id),\n  product_id BIGINT NOT NULL REFERENCES products(id),\n  quantity   INT NOT NULL CHECK (quantity > 0),\n  unit_price NUMERIC(12, 2) NOT NULL,  -- snapshot giá tại thời điểm mua\n  PRIMARY KEY (order_id, product_id)\n);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "92076-thiet-ke-schema-don-hang-e-commerce-orders-order-items-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "c9facade-335c-52d4-9256-e88ec8f62c77",
+    "question": "ER Diagram (Entity-Relationship Diagram) là gì? Các thành phần chính?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/719-er-diagram-entity-relationship-diagram-la-gi-cac-thanh-phan-chinh",
+    "slug": "er-diagram-entity-relationship-diagram-la-gi-cac-thanh-phan-chinh-c9facade-335c-52d4-9256-e88ec8f62c77",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "ER Diagram là bản vẽ schema trước khi code — như bản vẽ nhà trước khi xây, giúp tránh phải đập đi sửa lại tốn kém."
+      ],
+      "details": [
+        "Ba thành phần chính:\n- Entity (thực thể = bảng): vẽ hình chữ nhật.\n- Attribute (thuộc tính = cột): khóa thì gạch chân.\n- Relationship (mối quan hệ) kèm cardinality (một/nhiều).",
+        "Ký hiệu Crow's Foot (chân quạ) được dùng nhiều hơn Chen: | = một, O = không, </> = nhiều. Đọc ví dụ: users ||--o{ orders nghĩa là một user có 0 hoặc nhiều order.",
+        "Công cụ: dbdiagram.io (viết bằng code, hợp version control), draw.io, Lucidchart; Prisma còn auto-sinh ERD."
+      ],
+      "points": [
+        "tìm các entity từ yêu cầu nghiệp vụ →",
+        "gán thuộc tính + PK cho mỗi entity →",
+        "xác định quan hệ và cardinality →",
+        "tách N-N thành bảng nối →",
+        "review với team trước khi viết DDL"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "719-er-diagram-entity-relationship-diagram-la-gi-cac-thanh-phan-chinh",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "4032efdc-2e65-56e8-b190-0aba39bf8cb9",
+    "question": "Cascade trong foreign key constraint là gì? ON DELETE CASCADE hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/720-cascade-trong-foreign-key-constraint-la-gi-on-delete-cascade-hoat-dong-the-nao",
+    "slug": "cascade-trong-foreign-key-constraint-la-gi-on-delete-cascade-hoat-dong-the-nao-4032efdc-2e65-56e8-b190-0aba39bf8cb9",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "CASCADE quy định \"khi xóa/sửa dòng cha thì làm gì với dòng con\". Các lựa chọn ON DELETE:"
+      ],
+      "details": [
+        "Lưu ý chuỗi lan: A → B → C cùng CASCADE thì xóa A kéo theo B rồi C — dễ không lường hết.",
+        "Khi nào dùng CASCADE: quan hệ \"sở hữu\" rõ ràng, con vô nghĩa nếu thiếu cha (order → order_items, user → sessions). Khi không nên: tài nguyên dùng chung (xóa tác giả không nên xóa sách nếu sách còn giá trị riêng). Lưu ý: nếu dùng soft delete thì CASCADE không kích hoạt — phải tự code logic xóa lan ở tầng app."
+      ],
+      "points": [
+        "CASCADE: xóa cha → tự xóa luôn con (xóa user → mất hết order, comment, session). Tiện nhưng nguy hiểm nếu đặt nhầm.",
+        "SET NULL: xóa cha → đặt FK con về NULL, con vẫn còn (xóa category → products.category_id = NULL). Dùng khi con tồn tại độc lập được.",
+        "RESTRICT (mặc định): chặn xóa cha nếu còn con — an toàn nhất, app phải tự xử lý.",
+        "SET DEFAULT: đặt FK về giá trị mặc định."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "720-cascade-trong-foreign-key-constraint-la-gi-on-delete-cascade-hoat-dong-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "de9825d2-9558-558c-9474-4e3bec8708f5",
+    "question": "UUID vs Auto-increment ID: khi nào nên dùng loại nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/724-uuid-vs-auto-increment-id-khi-nao-nen-dung-loai-nao",
+    "slug": "uuid-vs-auto-increment-id-khi-nao-nen-dung-loai-nao-de9825d2-9558-558c-9474-4e3bec8708f5",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hai cách sinh khóa chính:"
+      ],
+      "details": [
+        "Quy tắc chọn:\n- UUID khi: id công khai (URL/API — tránh dò tuần tự), hệ phân tán, hoặc cần sinh id ở client trước khi ghi DB.\n- BIGINT auto-increment khi: bảng nội bộ không lộ ra ngoài, bảng nặng JOIN cần hiệu năng cao.",
+        "(PostgreSQL 17+ có sẵn gen_random_uuid() cho v4; v7 dùng extension pg_uuidv7 hoặc sinh ở app.)"
+      ],
+      "points": [
+        "Auto-increment (SERIAL/BIGSERIAL): số tăng dần, nhỏ gọn (4/8 byte), index B-tree gọn, dễ debug. Nhược: lộ thông tin (đối thủ đoán được số bản ghi qua id), và không an toàn cho hệ phân tán vì cần bộ đếm trung tâm.",
+        "UUID v4: 128-bit ngẫu nhiên, duy nhất toàn cục không cần phối hợp — hợp microservices. Nhược: ngẫu nhiên nên chèn vào vị trí rải rác → phân mảnh index B-tree (page split, phình), to gấp ~4 lần int, khó đọc.",
+        "UUID v7 (RFC 9562): có tiền tố timestamp + phần ngẫu nhiên → vừa tăng dần như auto-increment (thân thiện B-tree, không phân mảnh), vừa duy nhất toàn cục, lại sắp được theo thời gian tạo. Là lựa chọn tốt nhất khi cần UUID."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "724-uuid-vs-auto-increment-id-khi-nao-nen-dung-loai-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "ea5ae50a-32d3-5c71-bf18-16b30b3efc27",
+    "question": "Làm sao ánh xạ mô hình ER (thực thể - quan hệ) sang lược đồ quan hệ (bảng)?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93018-lam-sao-anh-xa-mo-hinh-er-thuc-the-quan-he-sang-luoc-do-quan-he-bang",
+    "slug": "lam-sao-anh-xa-mo-hinh-er-thuc-the-quan-he-sang-luoc-do-quan-he-bang-ea5ae50a-32d3-5c71-bf18-16b30b3efc27",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Các quy tắc ánh xạ cơ bản:"
+      ],
+      "details": [
+        "Hình dung: thực thể thành bảng, còn quan hệ được biểu diễn bằng khóa ngoại — trừ nhiều–nhiều phải cần một bảng riêng. Sau khi ánh xạ, thường kiểm tra lại bằng chuẩn hóa để loại trùng lặp."
+      ],
+      "points": [
+        "Thực thể (entity) → một bảng; thuộc tính → cột; khóa của thực thể → primary key.",
+        "Thuộc tính đa trị (multi-valued) → tách ra một bảng riêng nối bằng foreign key.",
+        "Quan hệ 1–1: nhúng foreign key (kèm UNIQUE) vào một trong hai bảng.",
+        "Quan hệ 1–nhiều: đặt foreign key ở phía \"nhiều\" trỏ về phía \"một\" (order.customer_id).",
+        "Quan hệ nhiều–nhiều: tạo bảng trung gian (junction) chứa foreign key tới cả hai bảng; khóa chính thường là cặp hai FK đó.",
+        "Thực thể yếu (weak entity): khóa gồm khóa của thực thể chủ cộng thêm khóa phân biệt cục bộ."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": "93018-lam-sao-anh-xa-mo-hinh-er-thuc-the-quan-he-sang-luoc-do-quan-he-bang",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "da31281f-779e-597f-93a8-3535299138a7",
+    "question": "Chuẩn hóa (normalization) là gì? Giải thích 1NF, 2NF, 3NF.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92003-chuan-hoa-normalization-la-gi-giai-thich-1nf-2nf-3nf",
+    "slug": "chuan-hoa-normalization-la-gi-giai-thich-1nf-2nf-3nf-da31281f-779e-597f-93a8-3535299138a7",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Chuẩn hóa là việc tổ chức bảng để giảm dư thừa và tránh bất thường khi thêm/sửa/xóa (update anomaly)."
+      ],
+      "details": [
+        "Hình dung 3NF: \"mỗi thuộc tính phụ thuộc vào khóa, toàn bộ khóa, và chỉ khóa\". Cao hơn có BCNF — bản chặt hơn 3NF: với mọi phụ thuộc hàm X → Y thì X phải là super key; phỏng vấn thường dừng ở 3NF."
+      ],
+      "points": [
+        "1NF: mỗi ô chứa một giá trị atomic, không có nhóm lặp hay mảng trong cột; mỗi hàng là duy nhất.",
+        "2NF: đạt 1NF và mọi cột non-key phụ thuộc vào toàn bộ khóa chính (loại phụ thuộc riêng vào một phần của composite key).",
+        "3NF: đạt 2NF và không có phụ thuộc bắc cầu (cột non-key phụ thuộc vào cột non-key khác) → mọi cột chỉ phụ thuộc trực tiếp vào khóa."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "92003-chuan-hoa-normalization-la-gi-giai-thich-1nf-2nf-3nf",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "718eab88-340c-52a7-b10d-ed5b675455c3",
+    "question": "Denormalization là gì và khi nào nên chấp nhận dữ liệu dư thừa?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92004-denormalization-la-gi-va-khi-nao-nen-chap-nhan-du-lieu-du-thua",
+    "slug": "denormalization-la-gi-va-khi-nao-nen-chap-nhan-du-lieu-du-thua-718eab88-340c-52a7-b10d-ed5b675455c3",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Denormalization là việc cố ý thêm dữ liệu dư thừa (nhân bản cột, lưu giá trị đã tính sẵn) để giảm số JOIN và tăng tốc đọc."
+      ],
+      "details": [
+        "Đánh đổi:\n- Lợi: đọc nhanh hơn (ít JOIN/aggregate lúc query), hợp báo cáo/analytics đọc nhiều.\n- Hại: ghi phức tạp hơn — phải cập nhật nhiều nơi để tránh dữ liệu lệch; tốn dung lượng; rủi ro bất nhất.",
+        "Khi nào dùng: hệ đọc nhiều hơn ghi, có điểm nghẽn hiệu năng đã đo được, hoặc cần precompute (đếm like, tổng tiền đơn). Nguyên tắc: chuẩn hóa trước, denormalize sau khi có số liệu chứng minh cần — đừng tối ưu sớm. Materialized view là một dạng denormalization có kiểm soát. Một dạng khác là snapshot: nhúng dữ liệu tại thời điểm giao dịch (địa chỉ giao hàng lưu ngay trong đơn) — lịch sử cần ảnh chụp lúc đó, không phải giá trị hiện tại."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "92004-denormalization-la-gi-va-khi-nao-nen-chap-nhan-du-lieu-du-thua",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "991d5639-6182-58a5-ac48-0376e0e431ff",
+    "question": "B-tree index hoạt động thế nào? Vì sao tra cứu nhanh?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92009-b-tree-index-hoat-dong-the-nao-vi-sao-tra-cuu-nhanh",
+    "slug": "b-tree-index-hoat-dong-the-nao-vi-sao-tra-cuu-nhanh-991d5639-6182-58a5-ac48-0376e0e431ff",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Index là cấu trúc dữ liệu có thứ tự giữ giá trị cột đã sắp xếp + con trỏ tới hàng thật. Loại phổ biến nhất là B-tree (cây cân bằng):"
+      ],
+      "details": [
+        "Nhờ có thứ tự, DB \"đi cây\" để tới đúng vùng dữ liệu thay vì đọc hết bảng. Đánh đổi: tốn dung lượng và làm chậm ghi (mỗi INSERT/UPDATE/DELETE phải cập nhật index)."
+      ],
+      "points": [
+        "Root → branch → leaf: cây cân bằng nên mọi leaf ở cùng độ sâu; đi từ gốc xuống leaf chỉ vài bước dù bảng lớn.",
+        "Tra cứu là O(log n) thay vì O(n) của quét toàn bảng (full table scan).",
+        "Leaf nối thành danh sách liên kết đôi có thứ tự → hỗ trợ tốt truy vấn khoảng (BETWEEN, >, <) và ORDER BY mà không cần sort lại."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": "92009-b-tree-index-hoat-dong-the-nao-vi-sao-tra-cuu-nhanh",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "076dd722-e2d4-5278-963f-256782582493",
+    "question": "Khi nào nên thêm index và khi nào không nên?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92010-khi-nao-nen-them-index-va-khi-nao-khong-nen",
+    "slug": "khi-nao-nen-them-index-va-khi-nao-khong-nen-076dd722-e2d4-5278-963f-256782582493",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nên index khi cột:\n- Xuất hiện trong WHERE, JOIN, ORDER BY, GROUP BY của truy vấn chạy thường xuyên.\n- Có độ chọn lọc (selectivity) cao — nhiều giá trị phân biệt (email, user_id) nên index lọc bỏ được nhiều hàng.\n- Là foreign key (tăng tốc join và kiểm ràng buộc)."
+      ],
+      "details": [
+        "Không nên (hoặc cẩn trọng) khi:\n- Bảng ghi rất nhiều — mỗi index làm chậm INSERT/UPDATE/DELETE và tốn dung lượng.\n- Cột độ chọn lọc thấp (vd boolean, giới tính) — index gần như vô dụng, DB vẫn chọn quét bảng.\n- Bảng nhỏ — quét toàn bảng còn nhanh hơn đi index.\n- Index trùng lặp/không bao giờ được query dùng.",
+        "Nguyên tắc: index dựa trên mẫu truy vấn thực tế (đo bằng EXPLAIN), không phải \"cứ cột nào cũng index\"."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": "92010-khi-nao-nen-them-index-va-khi-nao-khong-nen",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "24f9d246-1b9c-5ea3-a9d5-f8904a4479c1",
+    "question": "Index trong MongoDB có những loại nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92033-index-trong-mongodb-co-nhung-loai-nao",
+    "slug": "index-trong-mongodb-co-nhung-loai-nao-24f9d246-1b9c-5ea3-a9d5-f8904a4479c1",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cũng như DB quan hệ, MongoDB dùng B-tree index để tránh quét toàn collection (COLLSCAN). Mọi collection có sẵn index trên _id. Các loại chính:"
+      ],
+      "details": [
+        "Còn có partial (chỉ index document khớp điều kiện) và unique. Dùng explain() xem truy vấn dùng IXSCAN (tốt) hay COLLSCAN (xấu). Nguyên tắc index/đánh đổi ghi giống DB quan hệ."
+      ],
+      "points": [
+        "Single field: index một field.",
+        "Compound: nhiều field theo thứ tự — áp dụng leftmost prefix như SQL; thứ tự field quan trọng.",
+        "Multikey: tự động khi index một field là mảng — index từng phần tử.",
+        "Text: hỗ trợ tìm kiếm văn bản đơn giản.",
+        "Geospatial (2dsphere): truy vấn theo vị trí.",
+        "Hashed: dùng cho sharding theo hash."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": "92033-index-trong-mongodb-co-nhung-loai-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "6d4160b3-8bf4-54b1-b089-c5cf60d3460d",
+    "question": "EXPLAIN dùng để làm gì? Đọc query plan như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92013-explain-dung-de-lam-gi-doc-query-plan-nhu-the-nao",
+    "slug": "explain-dung-de-lam-gi-doc-query-plan-nhu-the-nao-6d4160b3-8bf4-54b1-b089-c5cf60d3460d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "EXPLAIN cho xem kế hoạch thực thi mà planner chọn cho một truy vấn; EXPLAIN ANALYZE còn chạy thật và báo thời gian + số hàng thực tế (cẩn thận với UPDATE/DELETE trên production — nó thực sự ghi). cost chỉ là ước lượng tương đối, không phải mili-giây; actual time mới là thời gian thật."
+      ],
+      "details": [
+        "Đọc plan (từ trong ra ngoài, node lá chạy trước):\n- Loại truy cập: Seq Scan (quét toàn bảng), Index Scan, Index Only Scan, Bitmap Heap Scan.\n- Kiểu join: Nested Loop, Hash Join, Merge Join.\n- Chi phí: cost=start..total (ước lượng), rows (ước lượng số hàng), và với ANALYZE là actual time + rows.",
+        "Dấu hiệu cần tối ưu:\n- Seq Scan trên bảng lớn khi đáng lẽ nên dùng index.\n- Lệch lớn giữa rows ước lượng và thực tế → thống kê cũ, cần ANALYZE.\n- Sort/hash tràn ra đĩa (external merge Disk).",
+        "Dùng EXPLAIN là bước đầu tiên khi chẩn đoán truy vấn chậm."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": "92013-explain-dung-de-lam-gi-doc-query-plan-nhu-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "4391b107-627f-58ac-bf43-ee1434d69807",
+    "question": "N+1 query problem là gì và khắc phục ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92014-n-1-query-problem-la-gi-va-khac-phuc-ra-sao",
+    "slug": "n-1-query-problem-la-gi-va-khac-phuc-ra-sao-4391b107-627f-58ac-bf43-ee1434d69807",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "N+1 xảy ra khi lấy một danh sách rồi lặp gọi thêm một truy vấn con cho từng phần tử: 1 query lấy N bản ghi cha + N query lấy dữ liệu con → N+1 lần vào DB. Thường gặp với ORM khi truy cập quan hệ trong vòng lặp (lazy loading)."
+      ],
+      "details": [
+        "Ví dụ: lấy 100 bài viết (1 query) rồi với mỗi bài lại query tác giả (100 query) = 101 lần round-trip.",
+        "Khắc phục:\n- JOIN: gộp cha + con trong một truy vấn.\n- Eager loading: ORM nạp sẵn quan hệ (Prisma include, ActiveRecord includes, Hibernate JOIN FETCH).\n- Batch / WHERE IN (...): gom N id con thành một truy vấn (DataLoader dùng cách này).",
+        "Cái giá không nằm ở tính toán mà ở số lần round-trip mạng tới DB — giảm số query là chính. Phát hiện bằng log query hoặc APM."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- N+1: 1 + 100 round-trips\nSELECT * FROM posts LIMIT 100;\nSELECT * FROM users WHERE id = ?; -- repeated for each post\n-- Fix: batch into one query\nSELECT * FROM users WHERE id IN (1, 2, ...);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": "92014-n-1-query-problem-la-gi-va-khac-phuc-ra-sao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "89cbecef-4a5c-50a8-a755-7a9fe1afd959",
+    "question": "Vì sao phân trang bằng OFFSET chậm? Keyset pagination là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92045-vi-sao-phan-trang-bang-offset-cham-keyset-pagination-la-gi",
+    "slug": "vi-sao-phan-trang-bang-offset-cham-keyset-pagination-la-gi-89cbecef-4a5c-50a8-a755-7a9fe1afd959",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "OFFSET/LIMIT (LIMIT 20 OFFSET 100000) buộc DB quét và bỏ đi toàn bộ hàng trước offset rồi mới trả 20 hàng → càng lật sâu càng chậm (chi phí tăng tuyến tính theo offset). Thêm rủi ro: nếu dữ liệu chèn/xóa giữa các lần lật, hàng có thể bị trùng hoặc bỏ sót.",
+        "Cần một khóa sắp xếp duy nhất và có thứ tự (thường thêm id để phá hòa)."
+      ],
+      "details": [
+        "Keyset pagination (seek method): thay vì đếm offset, dùng giá trị của hàng cuối trang trước làm mốc trong WHERE:"
+      ],
+      "points": [
+        "DB nhảy thẳng tới vị trí nhờ index trên (created_at, id) → nhanh và ổn định dù offset lớn.",
+        "Ổn định trước thay đổi dữ liệu (không lệch trang).",
+        "Đánh đổi: khó \"nhảy tới trang N\" tùy ý; hợp cuộn vô hạn / \"tải thêm\" hơn là dãy số trang."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "SELECT * FROM posts\nWHERE (created_at, id) < (:last_created_at, :last_id)\nORDER BY created_at DESC, id DESC\nLIMIT 20;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": "92045-vi-sao-phan-trang-bang-offset-cham-keyset-pagination-la-gi",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "dd7b1150-1722-522c-a5df-dfdb07cad2b3",
+    "question": "Vì sao nên tránh SELECT * trong code production?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92062-vi-sao-nen-tranh-select-trong-code-production",
+    "slug": "vi-sao-nen-tranh-select-trong-code-production-dd7b1150-1722-522c-a5df-dfdb07cad2b3",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "SELECT * lấy mọi cột của bảng. Tiện lúc khám phá dữ liệu, nhưng trong code chạy thật gây nhiều vấn đề:",
+        "Cách đúng: liệt kê đúng cột cần (SELECT id, name, email)."
+      ],
+      "details": [],
+      "points": [
+        "Truyền dữ liệu thừa: kéo cả cột không cần (blob, text lớn) → tốn băng thông, RAM, và I/O.",
+        "Chặn index-only scan: nếu chỉ cần vài cột đã nằm trong index, SELECT * buộc DB quay lại bảng lấy các cột khác thay vì đọc gọn từ index → mất tối ưu covering index.",
+        "Giòn trước thay đổi schema: thêm/đổi thứ tự cột làm kết quả đổi hình dạng bất ngờ, dễ vỡ code dựa theo vị trí cột hoặc gây trùng tên cột khi JOIN.",
+        "Che ý định: người đọc không biết truy vấn thực sự cần cột nào.",
+        "Vừa nhanh hơn (ít dữ liệu, mở đường index-only scan), vừa rõ ràng và ổn định trước thay đổi schema.",
+        "Ngoại lệ chấp nhận được: truy vấn khám phá thủ công, hoặc SELECT COUNT(*) (không thực sự đọc cột)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- Thay vì:\nSELECT * FROM orders WHERE user_id = 42;\n-- Chỉ lấy cột cần (mở đường index-only scan, ổn định trước đổi schema):\nSELECT id, total, created_at FROM orders WHERE user_id = 42;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": "92062-vi-sao-nen-tranh-select-trong-code-production",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "9adc2281-17f3-59b7-af2a-813f25360008",
+    "question": "ACID là gì? Giải thích từng thuộc tính.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92005-acid-la-gi-giai-thich-tung-thuoc-tinh",
+    "slug": "acid-la-gi-giai-thich-tung-thuoc-tinh-9adc2281-17f3-59b7-af2a-813f25360008",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "ACID là bốn đảm bảo cho transaction — nhóm thao tác chạy như một đơn vị:"
+      ],
+      "details": [
+        "Kinh điển: chuyển tiền A→B phải trừ A và cộng B cùng lúc hoặc không cái nào (atomicity)."
+      ],
+      "points": [
+        "Atomicity: toàn bộ thành công hoặc rollback hết, không có nửa vời.",
+        "Consistency (nhất quán): transaction đưa DB từ trạng thái hợp lệ này sang trạng thái hợp lệ khác, giữ mọi ràng buộc (PK, FK, check).",
+        "Isolation (cô lập): transaction chạy đồng thời cho kết quả như thể chạy tuần tự; mức độ do isolation level quyết định.",
+        "Durability (bền vững): đã commit thì dữ liệu tồn tại kể cả mất điện — nhờ ghi WAL/redo log xuống đĩa."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": "92005-acid-la-gi-giai-thich-tung-thuoc-tinh",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "a2d7b8d4-6791-5b20-9631-ebe4ef378a76",
+    "question": "Transaction hoạt động thế nào (BEGIN/COMMIT/ROLLBACK) và savepoint dùng làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92006-transaction-hoat-dong-the-nao-begin-commit-rollback-va-savepoint-dung-lam-gi",
+    "slug": "transaction-hoat-dong-the-nao-begin-commit-rollback-va-savepoint-dung-lam-gi-a2d7b8d4-6791-5b20-9631-ebe4ef378a76",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Một transaction bọc nhiều câu lệnh thành một đơn vị atomic:"
+      ],
+      "details": [
+        "Savepoint là mốc lồng bên trong transaction:\n- SAVEPOINT sp1 → đặt mốc.\n- ROLLBACK TO sp1 → hủy phần thay đổi sau mốc, giữ phần trước, transaction vẫn tiếp tục.\n- RELEASE SAVEPOINT sp1 → bỏ mốc.",
+        "Dùng savepoint khi muốn thử một phần thao tác có thể lỗi mà không phải bỏ cả transaction (vd xử lý từng dòng trong batch, dòng lỗi rollback riêng).",
+        "Thực dụng: giữ transaction càng ngắn càng tốt và không làm I/O bên ngoài (gọi HTTP, đọc file) bên trong — transaction dài giữ lock lâu, chặn giao dịch khác và cản vacuum."
+      ],
+      "points": [
+        "BEGIN (hoặc START TRANSACTION): mở transaction.",
+        "COMMIT: xác nhận, làm mọi thay đổi bền vững và hiển thị cho transaction khác.",
+        "ROLLBACK: hủy toàn bộ thay đổi từ khi BEGIN, DB trở về như cũ."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": "92006-transaction-hoat-dong-the-nao-begin-commit-rollback-va-savepoint-dung-lam-gi",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "99eed972-39c2-5fb2-a0b7-cafc55b2c232",
+    "question": "ORM (Object-Relational Mapper) là gì? Lợi ích và nhược điểm?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/729-orm-object-relational-mapper-la-gi-loi-ich-va-nhuoc-diem",
+    "slug": "orm-object-relational-mapper-la-gi-loi-ich-va-nhuoc-diem-99eed972-39c2-5fb2-a0b7-cafc55b2c232",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "ORM là lớp trung gian ánh xạ bảng DB thành object trong code, để bạn thao tác bằng ngôn ngữ lập trình thay vì viết SQL tay. Hai phong cách: Active Record (model tự chứa logic DB — Rails, Sequelize) và Data Mapper (tách object nghiệp vụ khỏi logic DB — Prisma)."
+      ],
+      "details": [
+        "Lợi ích: type-safety, quản lý migration có version, trừu tượng hóa DB (đổi DB dễ hơn), bớt code lặp.",
+        "Nhược điểm:\n- Trừu tượng \"rò rỉ\": SQL sinh ra không tối ưu (vd đôi khi tạo subquery thay vì JOIN hiệu quả hơn).\n- Dễ dính N+1 query nếu không cẩn thận.\n- Khó debug khi cần hiểu SQL thực sự chạy, có overhead runtime.",
+        "Điểm chốt: ORM nào cũng có \"cửa thoát\" raw query (Prisma $queryRaw, Sequelize sequelize.query()) — dùng cho query phức tạp cần kiểm soát chặt. Đừng để ORM che hết SQL: vẫn nên biết nó sinh ra gì."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": "729-orm-object-relational-mapper-la-gi-loi-ich-va-nhuoc-diem",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "9c945da8-e789-52d7-bb64-60383ced2306",
+    "question": "Prisma ORM là gì? Tại sao phổ biến trong Node.js/TypeScript ecosystem?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/730-prisma-orm-la-gi-tai-sao-pho-bien-trong-node-js-typescript-ecosystem",
+    "slug": "prisma-orm-la-gi-tai-sao-pho-bien-trong-node-js-typescript-ecosystem-9c945da8-e789-52d7-bb64-60383ced2306",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Prisma là ORM thế hệ mới cho Node.js/TypeScript, theo hướng schema-first: bạn mô tả model trong schema.prisma, Prisma sinh ra mọi thứ từ đó."
+      ],
+      "details": [
+        "Điểm mạnh:\n- Client tự sinh, type-safe: mỗi lần chạy prisma generate tạo ra TypeScript types khớp chính xác với schema → autocomplete và bắt lỗi ngay khi gõ.\n- Prisma Migrate: sinh file SQL migration có thể review.\n- Prisma Studio: GUI để xem dữ liệu.\n- Bên trong dùng query engine viết bằng Rust → hiệu năng tốt.",
+        "So với Sequelize/TypeORM: DX tốt hơn, type safety mạnh hơn (không cần decorator), nhưng xử lý các kiểu kế thừa phức tạp chưa tốt.",
+        "Điểm chốt phải nhớ: mỗi lần đổi schema phải chạy prisma generate để đồng bộ types — bước bắt buộc, hay quên trong CI/CD."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": "730-prisma-orm-la-gi-tai-sao-pho-bien-trong-node-js-typescript-ecosystem",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "277b6fbf-ed18-5fc9-9bf7-dada2e634ae4",
+    "question": "Prisma schema file hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/731-prisma-schema-file-hoat-dong-nhu-the-nao",
+    "slug": "prisma-schema-file-hoat-dong-nhu-the-nao-277b6fbf-ed18-5fc9-9bf7-dada2e634ae4",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "schema.prisma là nguồn sự thật duy nhất của Prisma, gồm ba phần:\n- datasource: kết nối DB.\n- generator: cấu hình Prisma Client.\n- models: định nghĩa bảng và quan hệ."
+      ],
+      "details": [
+        "Vài cú pháp hay dùng:\n- Quan hệ: @relation(fields: [authorId], references: [id]) cho khóa ngoại; quan hệ N-N ngầm sẽ tự tạo bảng nối.\n- @map / @db: @map('user_name') giữ tên camelCase trong code nhưng đổi tên cột trong DB; @db.VarChar(255) chỉ định kiểu riêng của DB.\n- prisma format tự canh chỉnh và sắp xếp field.",
+        "Điểm chốt: prisma migrate dev sinh ra file SQL migration có thể review và sửa trước khi áp — quan trọng khi cần migration phức tạp như chuyển đổi dữ liệu, đừng để nó tự chạy mù."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": "731-prisma-schema-file-hoat-dong-nhu-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "6f21a4b2-c45a-544c-a90b-38df756e6fe9",
+    "question": "Sequelize là gì? So sánh với Prisma?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/733-sequelize-la-gi-so-sanh-voi-prisma",
+    "slug": "sequelize-la-gi-so-sanh-voi-prisma-6f21a4b2-c45a-544c-a90b-38df756e6fe9",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Sequelize là ORM \"đời trước\" của Node.js, lâu đời và hỗ trợ nhiều DB (MySQL, PostgreSQL, SQLite, MSSQL, MariaDB). Vài tính năng đáng biết:"
+      ],
+      "details": [
+        "So với Prisma: type TypeScript của Sequelize không chính xác bằng (phải kèm sequelize-typescript), định nghĩa model rườm rà với decorator, lỗi runtime khó debug — nói chung DX kém hơn.",
+        "Điểm chốt: với dự án mới hãy chọn Prisma; chỉ dùng Sequelize khi đang bảo trì codebase cũ hoặc cần tính năng Prisma chưa có (vd polymorphic association)."
+      ],
+      "points": [
+        "Migration: sequelize-cli sinh file có up/down — mạnh nhưng dài dòng.",
+        "Hooks (sự kiện vòng đời): beforeCreate, afterCreate, beforeUpdate... — dùng cho audit log, hash password.",
+        "Scopes: gom điều kiện query tái dùng — User.scope('active').",
+        "Transaction: sequelize.transaction(async (t) => { ... })."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": "733-sequelize-la-gi-so-sanh-voi-prisma",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "e429df4c-040e-50fe-95f9-e591e75dd730",
+    "question": "Mongoose là gì? Schema trong Mongoose hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/734-mongoose-la-gi-schema-trong-mongoose-hoat-dong-nhu-the-nao",
+    "slug": "mongoose-la-gi-schema-trong-mongoose-hoat-dong-nhu-the-nao-e429df4c-040e-50fe-95f9-e591e75dd730",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mongoose là ODM (Object Document Mapper) cho MongoDB — thêm schema, validation và middleware lên trên MongoDB vốn không ràng buộc cấu trúc."
+      ],
+      "details": [
+        "Vài khái niệm cốt lõi:\n- Middleware (hooks): chạy quanh thao tác — pre/post save, pre/post find... Dùng cho audit log, hash password.\n- Virtuals: thuộc tính tính sẵn không lưu trong DB — vd fullName ghép từ firstName + lastName. Bật ra JSON bằng toJSON({ virtuals: true }).\n- populate(): thay reference ObjectId bằng document thật — populate('author') lấy nguyên User. Cẩn thận N+1; kèm select để giới hạn field.\n- lean(): trả về object JS thuần thay vì document Mongoose — nhanh hơn 2-3x; dùng khi chỉ cần đọc.",
+        "Lưu ý: Mongoose buffer các lệnh trước khi kết nối xong — phải xử lý lỗi kết nối cho đàng hoàng, kẻo lệnh treo lặng lẽ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": "734-mongoose-la-gi-schema-trong-mongoose-hoat-dong-nhu-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "29c10746-56ba-5518-8ce4-102558845d36",
+    "question": "Drizzle ORM là gì? So sánh với Prisma?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/739-drizzle-orm-la-gi-so-sanh-voi-prisma",
+    "slug": "drizzle-orm-la-gi-so-sanh-voi-prisma-29c10746-56ba-5518-8ce4-102558845d36",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Schema khai báo bằng TypeScript, tự suy ra type:\nCopy\npgTable('users', { id: serial('id').primaryKey(), name: text('name').notNull() })\n. Migration qua drizzle-kit generate / push."
+      ],
+      "details": [
+        "Khác biệt lớn nhất với Prisma là không có native binary như Prisma engine:\n- Bundle nhỏ hơn nhiều (~100KB vs Prisma ~40MB) → chạy tốt trên edge (Cloudflare Workers, Vercel Edge).\n- Nhanh hơn 2-5x cho query đơn giản vì ít lớp trừu tượng.",
+        "Đánh đổi: DX kém Prisma hơn (viết dài dòng hơn), cộng đồng nhỏ hơn, thiếu một số tính năng nâng cao. Chọn Drizzle khi cần edge/bundle nhỏ và muốn sát SQL; chọn Prisma khi ưu tiên DX và type-safety tối đa."
+      ],
+      "points": [],
+      "sections": [
+        "Drizzle là ORM TypeScript nhẹ, query builder viết gần giống SQL nhưng vẫn type-safe — hợp người đã quen SQL:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "db.select().from(users).where(eq(users.age, 25)).orderBy(desc(users.createdAt));"
+        },
+        {
+          "language": null,
+          "code": "pgTable('users', { id: serial('id').primaryKey(), name: text('name').notNull() })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": "739-drizzle-orm-la-gi-so-sanh-voi-prisma",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "e22a5713-ee29-53e3-b5e3-4a4cc18e6b64",
+    "question": "SQL và NoSQL khác nhau ở đâu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92017-sql-va-nosql-khac-nhau-o-dau",
+    "slug": "sql-va-nosql-khac-nhau-o-dau-e22a5713-ee29-53e3-b5e3-4a4cc18e6b64",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "SQL (quan hệ): dữ liệu ở bảng, schema cố định, quan hệ qua PK/FK, ngôn ngữ SQL chuẩn hóa, đảm bảo ACID mạnh, thường scale dọc (máy mạnh hơn). Hợp dữ liệu có cấu trúc rõ và ràng buộc chặt (tài chính, đơn hàng)."
+      ],
+      "details": [
+        "NoSQL: schema linh hoạt, không bắt buộc quan hệ, thiết kế để scale ngang qua cluster, throughput cao; nhiều hệ ưu tiên eventual consistency thay vì ACID đầy đủ. Gồm nhiều họ: document, key-value, wide-column, graph.",
+        "Khác biệt cốt lõi:\n- Schema: cố định (SQL) vs linh hoạt (NoSQL).\n- Nhất quán: mạnh (SQL) vs thường nới lỏng (NoSQL).\n- Scale: dọc (SQL) vs ngang (NoSQL).\n- Join & giao dịch: mạnh ở SQL; NoSQL thường đẩy về phía ứng dụng hoặc dùng mô hình nhúng.",
+        "Không có cái \"tốt hơn\" tuyệt đối — chọn theo bài toán."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": "92017-sql-va-nosql-khac-nhau-o-dau",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "b8dca4bd-d82e-5ebb-a845-929d8237f0e0",
+    "question": "Các loại NoSQL (document, key-value, wide-column, graph) và ví dụ?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92018-cac-loai-nosql-document-key-value-wide-column-graph-va-vi-du",
+    "slug": "cac-loai-nosql-document-key-value-wide-column-graph-va-vi-du-b8dca4bd-d82e-5ebb-a845-929d8237f0e0",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bốn họ NoSQL chính, khác nhau ở mô hình dữ liệu:"
+      ],
+      "details": [
+        "Chọn theo mẫu truy cập: tra theo khóa → key-value; tài liệu lồng nhau → document; quan hệ nhiều bước → graph; ghi khổng lồ theo khóa → wide-column."
+      ],
+      "points": [
+        "Document: lưu tài liệu tự mô tả (JSON/BSON), schema linh hoạt; hợp catalog, profile, nội dung. Vd MongoDB, Couchbase.",
+        "Key-value: bản đồ khóa → giá trị, đọc/ghi cực nhanh theo khóa; hợp cache, session, đếm. Vd Redis, DynamoDB (dạng đơn giản).",
+        "Wide-column: bảng có hàng với tập cột động, tối ưu ghi lớn và truy vấn theo khóa phân vùng; hợp time-series, log quy mô lớn. Vd Cassandra, HBase, Bigtable.",
+        "Graph: node + cạnh mang quan hệ, tối ưu duyệt quan hệ nhiều bậc; hợp mạng xã hội, gợi ý, phát hiện gian lận. Vd Neo4j, Neptune."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": "92018-cac-loai-nosql-document-key-value-wide-column-graph-va-vi-du",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "160875fb-18d9-5f8c-a0eb-1a34fce40a7c",
+    "question": "Khi nào chọn SQL, khi nào chọn NoSQL?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92019-khi-nao-chon-sql-khi-nao-chon-nosql",
+    "slug": "khi-nao-chon-sql-khi-nao-chon-nosql-160875fb-18d9-5f8c-a0eb-1a34fce40a7c",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Chọn theo mô hình truy vấn + yêu cầu nhất quán + cách scale, không theo trào lưu."
+      ],
+      "details": [
+        "Chọn SQL khi:\n- Dữ liệu có cấu trúc rõ, quan hệ nhiều, cần JOIN linh hoạt.\n- Cần giao dịch ACID và nhất quán mạnh (thanh toán, kho, đặt chỗ).\n- Truy vấn ad-hoc đa dạng, chưa biết trước hết cách hỏi.",
+        "Chọn NoSQL khi:\n- Dữ liệu bán cấu trúc / schema hay đổi, cần lặp nhanh.\n- Cần scale ngang và throughput rất cao, chấp nhận eventual consistency.\n- Mẫu truy cập biết trước và đơn giản (tra theo khóa, đọc tài liệu nguyên khối).\n- Loại dữ liệu chuyên biệt (đồ thị quan hệ, time-series, key-value cache).",
+        "Thực tế nhiều hệ dùng cả hai (polyglot persistence): Postgres cho dữ liệu giao dịch, Redis cache, Elasticsearch cho tìm kiếm... Mặc định nên bắt đầu bằng SQL trừ khi có lý do rõ ràng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": "92019-khi-nao-chon-sql-khi-nao-chon-nosql",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "02869865-be1f-5404-b7e2-00b4f107f8fc",
+    "question": "So sánh MongoDB và PostgreSQL: khi nào chọn cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/728-so-sanh-mongodb-va-postgresql-khi-nao-chon-cai-nao",
+    "slug": "so-sanh-mongodb-va-postgresql-khi-nao-chon-cai-nao-02869865-be1f-5404-b7e2-00b4f107f8fc",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không phải \"cái nào tốt hơn\" mà là \"hợp với dữ liệu nào\"."
+      ],
+      "details": [
+        "Chọn PostgreSQL khi: dữ liệu có quan hệ rõ, cần transaction ACID, schema ổn định, query phức tạp nhiều JOIN. PostgreSQL còn có kiểu JSONB (+ GIN index) cho phép lưu/truy vấn JSON nhanh — là điểm trung gian khi cần vừa quan hệ vừa linh hoạt.",
+        "Chọn MongoDB khi: dữ liệu cấu trúc thay đổi/lồng sâu, cần scale ngang đơn giản, hướng document (nội dung, catalog, hồ sơ).",
+        "Vài điểm so sánh:\n- Hiệu năng: MongoDB nhanh khi lấy nguyên document không cần JOIN; PostgreSQL mạnh khi tổng hợp phức tạp nhiều bảng.\n- Hệ sinh thái: Mongoose (ODM) cho MongoDB vs Prisma/TypeORM cho PostgreSQL."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 76,
+    "sourceSlug": "728-so-sanh-mongodb-va-postgresql-khi-nao-chon-cai-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "ddb4284b-633e-5776-8c96-3f535a00d749",
+    "question": "Khi nào nên dùng Redis làm cache?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/736-khi-nao-nen-dung-redis-lam-cache",
+    "slug": "khi-nao-nen-dung-redis-lam-cache-ddb4284b-633e-5776-8c96-3f535a00d749",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Dùng Redis làm cache khi: dữ liệu đọc nhiều hơn ghi, tính toán đắt (query DB phức tạp, gọi API), cần giảm tải DB, và chấp nhận dữ liệu cũ trong chốc lát."
+      ],
+      "details": [
+        "Vài chiến lược cache:\n- Cache-aside (phổ biến nhất): xem cache → trượt thì lấy DB → ghi vào cache.\n- Write-through: ghi cache + DB cùng lúc — nhất quán nhưng ghi chậm hơn.\n- Write-behind: ghi cache rồi ghi DB bất đồng bộ — nhanh nhưng rủi ro mất dữ liệu khi crash.",
+        "Cache stampede (hay bị hỏi): khi một key hết hạn, rất nhiều request cùng dồn xuống DB một lúc. Khắc phục bằng mutex lock (SET key val NX EX 30) hoặc hết hạn sớm ngẫu nhiên trước TTL thật.",
+        "Quản lý bộ nhớ qua maxmemory-policy: allkeys-lru (đẩy key ít dùng nhất — hợp cache thuần), volatile-lru (chỉ đẩy key có TTL), noeviction (full thì báo lỗi — hợp lưu session). Theo dõi INFO stats; tỉ lệ hit > 80% là khỏe."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 77,
+    "sourceSlug": "736-khi-nao-nen-dung-redis-lam-cache",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "d6d1b493-3461-54d9-b74f-f1d3040bde77",
+    "question": "Aggregation pipeline trong MongoDB hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92032-aggregation-pipeline-trong-mongodb-hoat-dong-the-nao",
+    "slug": "aggregation-pipeline-trong-mongodb-hoat-dong-the-nao-d6d1b493-3461-54d9-b74f-f1d3040bde77",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Aggregation pipeline xử lý document qua một chuỗi stage, mỗi stage biến đổi luồng document rồi truyền sang stage kế — như pipeline, giống GROUP BY/JOIN/biến đổi trong SQL nhưng theo từng bước."
+      ],
+      "details": [
+        "Các stage hay dùng:\n- $match: lọc (như WHERE) — đặt sớm để giảm dữ liệu và tận dụng index.\n- $group: gộp theo khóa và tính tổng hợp ($sum, $avg, $max).\n- $project / $addFields: chọn/định hình lại field, tính field mới.\n- $sort, $limit, $skip: sắp xếp/phân trang.\n- $lookup: \"join\" sang collection khác.\n- $unwind: tách mỗi phần tử mảng thành một document.\n- $facet: chạy nhiều nhánh song song trên cùng input (faceted search); $graphLookup: lookup đệ quy cho dữ liệu cây/đồ thị.",
+        "Mẹo hiệu năng: đặt $match/$sort sớm nhất có thể để dùng index và cắt bớt luồng trước các stage nặng. Dùng explain() để xem index có được tận dụng không."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 78,
+    "sourceSlug": "92032-aggregation-pipeline-trong-mongodb-hoat-dong-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "2f92114b-cb04-5dcf-b3c0-1b0c1ff00e25",
+    "question": "Redis là gì? Có những kiểu dữ liệu nào và dùng cho việc gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92059-redis-la-gi-co-nhung-kieu-du-lieu-nao-va-dung-cho-viec-gi",
+    "slug": "redis-la-gi-co-nhung-kieu-du-lieu-nao-va-dung-cho-viec-gi-2f92114b-cb04-5dcf-b3c0-1b0c1ff00e25",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Redis là kho dữ liệu key–value in-memory (lưu chủ yếu trong RAM) → đọc/ghi cực nhanh (thường dưới 1ms). Điểm mạnh là nó không chỉ lưu chuỗi mà là \"data structure server\" với nhiều kiểu dữ liệu gốc:"
+      ],
+      "details": [
+        "Ứng dụng phổ biến:\n- Cache giảm tải DB (kèm TTL để tự hết hạn).\n- Session store, rate limiting (INCR + EXPIRE).\n- Hàng đợi / pub-sub nhẹ, leaderboard (ZSet).",
+        "Lưu ý: dữ liệu ở RAM (đắt, giới hạn dung lượng); Redis có persistence (RDB snapshot, AOF log) để không mất hết khi khởi động lại, nhưng vẫn dùng chủ yếu cho dữ liệu tạm/nóng, không thay DB bền vững làm nguồn sự thật. Khả dụng cao: Sentinel tự failover cho setup một master; Redis Cluster shard ngang tự động (16384 hash slot)."
+      ],
+      "points": [
+        "String: giá trị đơn (cache trang, token, đếm với INCR).",
+        "Hash: tập field–value trong một key (lưu object, vd thông tin session).",
+        "List: danh sách theo thứ tự chèn (hàng đợi đơn giản, feed gần đây).",
+        "Set: tập phần tử duy nhất, không thứ tự (tag, kiểm tồn tại nhanh, phép giao/hợp).",
+        "Sorted set (ZSet): set có điểm số để sắp xếp (bảng xếp hạng, hàng đợi ưu tiên, dữ liệu theo thời gian).",
+        "Thêm: Streams (log append-only cho event), bitmap/HyperLogLog (thống kê xấp xỉ), geospatial."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 79,
+    "sourceSlug": "92059-redis-la-gi-co-nhung-kieu-du-lieu-nao-va-dung-cho-viec-gi",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "78f2efc0-adb4-5465-9e12-3f1272e0651e",
+    "question": "Vì sao cần tầng cache và có những chiến lược nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92039-vi-sao-can-tang-cache-va-co-nhung-chien-luoc-nao",
+    "slug": "vi-sao-can-tang-cache-va-co-nhung-chien-luoc-nao-78f2efc0-adb4-5465-9e12-3f1272e0651e",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cache giữ dữ liệu hay dùng ở tầng nhanh (RAM, vd Redis) → giảm tải DB, giảm độ trễ đọc, chịu tải cao hơn. Hợp dữ liệu đọc nhiều-ghi ít, tốn công tính, hoặc chấp nhận hơi cũ."
+      ],
+      "details": [
+        "Chiến lược đọc/ghi:\n- Cache-aside (lazy loading): app đọc cache trước; miss thì đọc DB rồi ghi vào cache. Phổ biến nhất; cache chỉ chứa dữ liệu thật được dùng.\n- Write-through: ghi đồng thời cache + DB → cache luôn mới, ghi chậm hơn.\n- Write-behind: ghi cache trước, đẩy DB sau (nhanh, rủi ro mất dữ liệu nếu sập).",
+        "Vô hiệu cache (phần khó nhất):\n- TTL: cho hết hạn tự động — đơn giản, chấp nhận cũ trong khoảng TTL.\n- Xóa/ghi đè khi dữ liệu nguồn đổi.\n- Eviction khi đầy (vd LRU).",
+        "Lưu ý bẫy: cache stampede (nhiều request cùng miss một lúc) → dùng khóa/single-flight; và stale data khi vô hiệu sai. \"Cache invalidation\" là một trong hai bài toán khó kinh điển của khoa học máy tính."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 80,
+    "sourceSlug": "92039-vi-sao-can-tang-cache-va-co-nhung-chien-luoc-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "be556d74-ab82-5da3-929f-10d6af50c69d",
+    "question": "Connection pooling là gì và vì sao cần?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92020-connection-pooling-la-gi-va-vi-sao-can",
+    "slug": "connection-pooling-la-gi-va-vi-sao-can-be556d74-ab82-5da3-929f-10d6af50c69d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mở một kết nối DB tốn kém: bắt tay TCP, xác thực, cấp phát tài nguyên server. Nếu mỗi request lại mở rồi đóng kết nối thì độ trễ cao và DB dễ cạn kết nối."
+      ],
+      "details": [
+        "Connection pool giữ sẵn một tập kết nối mở, tái sử dụng: request \"mượn\" một kết nối, dùng xong \"trả lại\" pool thay vì đóng. Lợi:\n- Bỏ chi phí thiết lập kết nối lặp đi lặp lại → nhanh hơn nhiều.\n- Giới hạn số kết nối đồng thời tới DB (mỗi kết nối Postgres tốn RAM/process) → chống quá tải.",
+        "Tham số quan trọng: kích thước pool tối đa/tối thiểu, thời gian chờ lấy kết nối, idle timeout. Cỡ pool tham khảo: (số core × 2) + số đĩa — to hơn chưa chắc nhanh hơn vì tốn chi phí chuyển ngữ cảnh. Với serverless/nhiều instance thường thêm proxy pooler (PgBouncer, hoặc pooled endpoint của Neon) vì mỗi instance tự giữ pool sẽ nhân số kết nối vượt giới hạn DB."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 81,
+    "sourceSlug": "92020-connection-pooling-la-gi-va-vi-sao-can",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "04c2e602-b39a-55fb-ad75-3f037612e6a7",
+    "question": "Replication (leader/follower) là gì và giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92021-replication-leader-follower-la-gi-va-giai-quyet-van-de-gi",
+    "slug": "replication-leader-follower-la-gi-va-giai-quyet-van-de-gi-04c2e602-b39a-55fb-ad75-3f037612e6a7",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Replication là nhân bản dữ liệu ra nhiều node. Mô hình phổ biến là leader–follower (primary–replica):"
+      ],
+      "details": [
+        "Giải quyết:\n- Khả dụng cao (HA): leader chết thì failover promote một follower lên làm leader.\n- Mở rộng đọc: phân tải read sang nhiều replica.\n- Sao lưu / phục hồi và đặt dữ liệu gần người dùng theo vùng.",
+        "PostgreSQL còn có logical replication — chỉ nhân bản một số bảng/thay đổi cụ thể, hợp nâng cấp version không downtime hoặc chép sang schema khác.",
+        "Đánh đổi — replication lag: follower chậm hơn leader một chút. Nếu bất đồng bộ (async), đọc từ replica có thể ra dữ liệu cũ (eventual consistency). Đồng bộ (sync) thì nhất quán hơn nhưng ghi chậm hơn. Đọc ngay sau khi ghi cần chú ý read-your-writes."
+      ],
+      "points": [
+        "Leader nhận mọi ghi (write), ghi vào WAL rồi stream thay đổi tới các follower.",
+        "Follower áp lại thay đổi, phục vụ đọc (read)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 82,
+    "sourceSlug": "92021-replication-leader-follower-la-gi-va-giai-quyet-van-de-gi",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "02c373bd-8480-5798-b268-250e6e41c866",
+    "question": "Read replica là gì? Replication lag ảnh hưởng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92022-read-replica-la-gi-replication-lag-anh-huong-the-nao",
+    "slug": "read-replica-la-gi-replication-lag-anh-huong-the-nao-02c373bd-8480-5798-b268-250e6e41c866",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Read replica là bản sao chỉ-đọc của DB chính, dùng để chia tải đọc khỏi node ghi. Ứng dụng gửi INSERT/UPDATE/DELETE tới primary, còn các SELECT chịu được dữ liệu hơi cũ thì định tuyến sang replica → primary rảnh hơn, hệ chịu tải đọc cao hơn."
+      ],
+      "details": [
+        "Replication lag là độ trễ giữa lúc primary commit và lúc replica áp xong thay đổi:\n- Với replication bất đồng bộ, replica có thể trả dữ liệu cũ trong khoảng lag.\n- Hệ quả điển hình — read-your-writes: user vừa cập nhật hồ sơ rồi tải lại, nếu đọc từ replica chưa kịp sync sẽ thấy dữ liệu cũ.",
+        "Xử lý: đọc dữ liệu vừa ghi thì route về primary (hoặc dùng session sticky), chấp nhận eventual consistency cho phần còn lại, theo dõi lag và cảnh báo khi vượt ngưỡng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 83,
+    "sourceSlug": "92022-read-replica-la-gi-replication-lag-anh-huong-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "385880a4-7019-56bc-bb96-43c186d68814",
+    "question": "Replica set trong MongoDB là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92034-replica-set-trong-mongodb-la-gi",
+    "slug": "replica-set-trong-mongodb-la-gi-385880a4-7019-56bc-bb96-43c186d68814",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Replica set là nhóm các node MongoDB giữ cùng dữ liệu để đảm bảo khả dụng cao:"
+      ],
+      "details": [
+        "Cơ chế:\n- Automatic failover: primary chết → các node bầu (election) một secondary lên làm primary → hệ tự phục hồi.\n- Read preference: primary (mặc định, nhất quán mạnh hơn) hoặc secondary/nearest để chia tải đọc, đổi lại có thể đọc dữ liệu hơi cũ (replication lag).\n- Write concern: quy định ghi cần được xác nhận bởi bao nhiêu node (w: majority) → cân giữa an toàn và độ trễ.",
+        "Về bản chất giống leader–follower của DB quan hệ, có thêm bầu chọn tự động."
+      ],
+      "points": [
+        "Primary: node duy nhất nhận ghi; ghi được ghi vào oplog (operation log).",
+        "Secondary: sao chép oplog của primary và áp lại → giữ bản sao, có thể phục vụ đọc (tùy read preference).",
+        "Arbiter (tùy chọn): không giữ dữ liệu, chỉ bỏ phiếu để phá thế hòa khi bầu chọn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 84,
+    "sourceSlug": "92034-replica-set-trong-mongodb-la-gi",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "c7b58403-e04b-51d3-9c77-335be9d40df7",
+    "question": "BASE là gì và khác ACID thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92060-base-la-gi-va-khac-acid-the-nao",
+    "slug": "base-la-gi-va-khac-acid-the-nao-c7b58403-e04b-51d3-9c77-335be9d40df7",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "BASE là triết lý nhất quán của nhiều hệ NoSQL/phân tán, đặt cạnh ACID của DB quan hệ như một sự đánh đổi. BASE viết tắt:"
+      ],
+      "details": [
+        "So với ACID (Atomicity, Consistency, Isolation, Durability — ưu tiên đúng đắn và nhất quán mạnh):\n- ACID chọn nhất quán hơn khả dụng khi có sự cố; BASE chọn khả dụng và scale hơn nhất quán tức thời.\n- Đây chính là hai đầu của đánh đổi trong CAP theorem (CP vs AP).",
+        "Khi nào hợp BASE: hệ cần scale ngang và luôn phục vụ (mạng xã hội, catalog, đếm view) và chịu được dữ liệu trễ. Khi nào cần ACID: tiền bạc, tồn kho, đặt chỗ. Thực tế nhiều hệ pha trộn — một số DB NoSQL nay hỗ trợ giao dịch ACID ở phạm vi hẹp."
+      ],
+      "points": [
+        "Basically Available: hệ luôn phản hồi cho request (ưu tiên khả dụng), dù có thể là dữ liệu cũ.",
+        "Soft state: trạng thái hệ có thể thay đổi theo thời gian ngay cả khi không có input mới (do đồng bộ nền giữa các node).",
+        "Eventually consistent: các bản sao cuối cùng sẽ hội tụ, không nhất quán tức thời."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 85,
+    "sourceSlug": "92060-base-la-gi-va-khac-acid-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "a6198519-0801-526c-9459-8abba6cc7aba",
+    "question": "JSONB trong PostgreSQL là gì? Khác JSON thường thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92029-jsonb-trong-postgresql-la-gi-khac-json-thuong-the-nao",
+    "slug": "jsonb-trong-postgresql-la-gi-khac-json-thuong-the-nao-a6198519-0801-526c-9459-8abba6cc7aba",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Postgres có hai kiểu lưu JSON:"
+      ],
+      "details": [
+        "Sức mạnh của jsonb:\n- Toán tử phong phú: ->, ->>, @> (chứa), ? (có khóa), path #>.\n- Index GIN trên jsonb → truy vấn theo khóa/chứa rất nhanh, hợp dữ liệu bán cấu trúc.",
+        "Khi nào dùng: cần lưu linh hoạt và truy vấn vào bên trong document → chọn jsonb. Nhưng đừng lạm dụng thay cho cột quan hệ khi dữ liệu có cấu trúc rõ và cần ràng buộc/JOIN. json chỉ hợp khi cần giữ y nguyên văn bản gốc."
+      ],
+      "points": [
+        "json: lưu nguyên văn text, giữ nguyên khoảng trắng/thứ tự khóa/khóa trùng; mỗi lần truy vấn phải parse lại → ghi nhanh, đọc/thao tác chậm.",
+        "jsonb: lưu dạng nhị phân đã parse, bỏ khoảng trắng, không giữ thứ tự khóa, loại khóa trùng; truy vấn/index nhanh hơn, ghi tốn thêm chút chi phí parse."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 86,
+    "sourceSlug": "92029-jsonb-trong-postgresql-la-gi-khac-json-thuong-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "a41f7166-e506-597c-8e0a-f0422c8f06c7",
+    "question": "View và materialized view khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92016-view-va-materialized-view-khac-nhau-the-nao",
+    "slug": "view-va-materialized-view-khac-nhau-the-nao-a41f7166-e506-597c-8e0a-f0422c8f06c7",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khi nào dùng gì:\n- View: cần dữ liệu luôn mới, đơn giản hóa/đóng gói truy vấn, phân quyền.\n- Materialized view: truy vấn/aggregate tốn kém, đọc nhiều, chấp nhận dữ liệu trễ (dashboard, báo cáo). Đây là dạng denormalization có kiểm soát."
+      ],
+      "details": [],
+      "points": [
+        "View: một truy vấn lưu sẵn dưới dạng tên gọi — không lưu dữ liệu. Mỗi lần query view, DB chạy lại câu SQL bên dưới trên dữ liệu hiện tại → luôn mới, không tốn storage, nhưng nặng nếu truy vấn phức tạp và gọi nhiều.",
+        "Materialized view: lưu kết quả truy vấn thành bảng vật lý. Đọc nhanh như đọc bảng thường, nhưng dữ liệu là ảnh chụp tại lúc refresh → có thể cũ; phải REFRESH MATERIALIZED VIEW (PostgreSQL có CONCURRENTLY để không khóa đọc) để cập nhật."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "CREATE MATERIALIZED VIEW daily_sales AS\nSELECT date, SUM(amount) FROM orders GROUP BY date;\n\nREFRESH MATERIALIZED VIEW daily_sales;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 87,
+    "sourceSlug": "92016-view-va-materialized-view-khac-nhau-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "3d8ee8b6-a312-5308-b03a-57502f9d7d6d",
+    "question": "Tìm kiếm văn bản: LIKE và full-text search khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92050-tim-kiem-van-ban-like-va-full-text-search-khac-nhau-the-nao",
+    "slug": "tim-kiem-van-ban-like-va-full-text-search-khac-nhau-the-nao-3d8ee8b6-a312-5308-b03a-57502f9d7d6d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ưu điểm FTS:\n- Index GIN trên tsvector → tìm nhanh trên khối văn bản lớn.\n- Khớp theo gốc từ (running ~ run), toán tử logic (AND/OR/NOT), và xếp hạng độ liên quan (ts_rank)."
+      ],
+      "details": [
+        "Khi nào dùng gì: mẫu ngắn/tiền tố (abc%) hoặc so khớp chính xác → LIKE (kèm text_pattern_ops index cho tiền tố). Tìm kiếm ngôn ngữ tự nhiên trên đoạn văn → FTS. Cần fuzzy/typo hay tiếng Việt có dấu phức tạp → cân nhắc pg_trgm hoặc công cụ chuyên (Elasticsearch, Meilisearch)."
+      ],
+      "points": [
+        "LIKE / ILIKE: khớp mẫu chuỗi đơn giản. col LIKE '%from%' với % ở đầu không dùng được B-tree index → quét toàn bảng, chậm trên dữ liệu lớn. Không hiểu ngôn ngữ: không phân biệt gốc từ, thứ hạng, dấu câu.",
+        "Full-text search (FTS): hiểu văn bản theo từ (token). PostgreSQL chuyển văn bản thành tsvector (tách từ, chuẩn hóa gốc từ/stemming, bỏ stop word) và truy vấn bằng tsquery:"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "SELECT * FROM articles\nWHERE to_tsvector('english', body) @@ to_tsquery('english', 'index & btree');"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 88,
+    "sourceSlug": "92050-tim-kiem-van-ban-like-va-full-text-search-khac-nhau-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "380dcb47-985f-5ffe-a13c-603cf6971b66",
+    "question": "Stored procedure và trigger là gì? Ưu nhược điểm?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92061-stored-procedure-va-trigger-la-gi-uu-nhuoc-diem",
+    "slug": "stored-procedure-va-trigger-la-gi-uu-nhuoc-diem-380dcb47-985f-5ffe-a13c-603cf6971b66",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Phân biệt procedure với function: function trả về giá trị và gọi được bên trong câu SQL (SELECT my_func(x)); procedure gọi bằng CALL, và trong PostgreSQL có thể tự COMMIT/ROLLBACK giữa chừng — điều function không làm được.",
+        "Ưu:\n- Chạy sát dữ liệu → giảm số round-trip mạng cho thao tác nhiều bước.\n- Gom logic dùng chung, đảm bảo quy tắc áp dụng bất kể ứng dụng nào gọi.\n- Trigger đảm bảo hành vi (vd ghi lịch sử) luôn xảy ra, không thể \"quên\"."
+      ],
+      "details": [
+        "Nhược:\n- Logic nghiệp vụ nằm trong DB → khó test, khó version, khó debug hơn code ứng dụng; dễ thành \"logic ẩn\".\n- Trigger chạy ngầm → hành vi khó lần theo, dễ gây tác dụng phụ bất ngờ và ảnh hưởng hiệu năng ghi.\n- Khó scale ngang phần tính toán (DB thường là điểm nghẽn) và ràng buộc vào một loại DB.",
+        "Xu hướng hiện đại: giữ logic nghiệp vụ ở tầng ứng dụng cho dễ test/version; dùng procedure/trigger cho việc thật sự thuộc về dữ liệu (audit, toàn vẹn, thao tác lô nặng gần dữ liệu)."
+      ],
+      "points": [
+        "Stored procedure: một khối code (SQL + logic thủ tục như PL/pgSQL) lưu và chạy bên trong DB, gọi theo tên (CALL proc(...)). Gói nhiều câu lệnh thành một đơn vị chạy sát dữ liệu.",
+        "Trigger: code tự động chạy khi có sự kiện trên bảng (BEFORE/AFTER INSERT/UPDATE/DELETE). Dùng cho audit log, cập nhật cột phái sinh, ép ràng buộc phức tạp."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- Trigger tự ghi audit mỗi khi lương thay đổi\nCREATE TRIGGER log_salary_change\nAFTER UPDATE OF salary ON employees\nFOR EACH ROW\nEXECUTE FUNCTION record_salary_history();"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 89,
+    "sourceSlug": "92061-stored-procedure-va-trigger-la-gi-uu-nhuoc-diem",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "8655fe5e-8852-52c9-a3f5-263536ffc2b2",
+    "question": "OLTP và OLAP khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92043-oltp-va-olap-khac-nhau-the-nao",
+    "slug": "oltp-va-olap-khac-nhau-the-nao-8655fe5e-8852-52c9-a3f5-263536ffc2b2",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hai loại workload dữ liệu, tối ưu cho mục đích khác nhau:"
+      ],
+      "details": [
+        "OLTP (Online Transaction Processing) — hệ giao dịch chạy ứng dụng:\n- Nhiều giao dịch nhỏ, nhanh: đọc/ghi vài hàng (đặt đơn, cập nhật hồ sơ).\n- Cần ACID, độ trễ thấp, đồng thời cao.\n- Dữ liệu chuẩn hóa, index cho tra cứu điểm. Vd Postgres/MySQL sau một web app.",
+        "OLAP (Online Analytical Processing) — hệ phân tích/báo cáo:\n- Truy vấn lớn, phức tạp: quét/gộp hàng triệu hàng (tổng doanh thu theo quý).\n- Ghi theo lô (ETL), đọc là chính; chấp nhận dữ liệu trễ.\n- Thường denormalized (star schema), lưu theo cột (columnar) để quét/aggregate nhanh. Vd data warehouse: BigQuery, Redshift, Snowflake, ClickHouse.",
+        "Hay bị hỏi kèm: vì sao không chạy analytics nặng trực tiếp trên DB OLTP production (làm chậm giao dịch) → tách sang replica/warehouse qua ETL/CDC. Lưu trữ row-based hợp OLTP, column-based hợp OLAP."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 90,
+    "sourceSlug": "92043-oltp-va-olap-khac-nhau-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "9f58e3b9-ee0c-576c-b431-5e8098c9e401",
+    "question": "SQL injection là gì? Vì sao parameterized query chặn được?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92075-sql-injection-la-gi-vi-sao-parameterized-query-chan-duoc",
+    "slug": "sql-injection-la-gi-vi-sao-parameterized-query-chan-duoc-9f58e3b9-ee0c-576c-b431-5e8098c9e401",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hậu quả: lộ dữ liệu (bypass đăng nhập, đọc bảng khác qua UNION SELECT), sửa/xóa dữ liệu, có khi chiếm cả server.",
+        "Lưu ý thêm:\n- Escape thủ công không đủ tin cậy — dễ sót case (encoding, kiểu số); OWASP xếp parameterized query là phòng thủ số 1.\n- ORM/query builder (Prisma, TypeORM...) mặc định parameterize — nhưng raw query nối chuỗi vẫn dính ($queryRawUnsafe với template tự ghép).\n- Tên bảng/cột không parameterize được — nếu phải động, dùng allowlist.\n- Phòng thủ bổ sung: least privilege cho DB user, validate input, không lộ lỗi SQL ra response."
+      ],
+      "details": [
+        "Parameterized query (prepared statement) chặn được vì tách cấu trúc SQL khỏi dữ liệu: câu lệnh với placeholder được gửi và parse trước, giá trị được gửi riêng như dữ liệu thuần — DB không bao giờ parse lại giá trị thành SQL. Chuỗi ' OR '1'='1 chỉ là một chuỗi tên kỳ lạ, không phải điều kiện:"
+      ],
+      "points": [],
+      "sections": [
+        "SQL injection là lỗ hổng khi input của user được nối chuỗi thẳng vào câu SQL, khiến dữ liệu bị thực thi như code:"
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- Code ghép chuỗi: query = \"SELECT * FROM users WHERE name = '\" + input + \"'\"\n-- Input: ' OR '1'='1\nSELECT * FROM users WHERE name = '' OR '1'='1';  -- trả về mọi user\n-- Input: '; DROP TABLE users; --  → chạy lệnh phá hoại"
+        },
+        {
+          "language": "SQL",
+          "code": "SELECT * FROM users WHERE name = $1;  -- $1 truyền riêng, luôn là dữ liệu"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 91,
+    "sourceSlug": "92075-sql-injection-la-gi-vi-sao-parameterized-query-chan-duoc",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "28abf17c-7a70-56de-b1c9-d9ffa7fb36bd",
+    "question": "Thứ tự thực thi logic của một câu SELECT là gì? Vì sao nó khác thứ tự bạn viết?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97700-thu-tu-thuc-thi-logic-cua-mot-cau-select-la-gi-vi-sao-no-khac-thu-tu-ban-viet",
+    "slug": "thu-tu-thuc-thi-logic-cua-mot-cau-select-la-gi-vi-sao-no-khac-thu-tu-ban-viet-28abf17c-7a70-56de-b1c9-d9ffa7fb36bd",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Câu SELECT được viết theo thứ tự SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY, nhưng được hiểu theo logic gần như ngược lại:"
+      ],
+      "details": [
+        "1. FROM + JOIN — dựng tập dòng nguồn.\n2. WHERE — lọc từng dòng thô.\n3. GROUP BY — gom dòng thành nhóm.\n4. HAVING — lọc trên nhóm (được dùng hàm tổng hợp).\n5. SELECT — tính biểu thức, đặt alias.\n6. DISTINCT.\n7. ORDER BY — sắp xếp kết quả.\n8. LIMIT / OFFSET — cắt lấy phần cần.",
+        "Đây là mô hình ngữ nghĩa, không phải kế hoạch thực thi vật lý: optimizer được phép đảo thứ tự, đẩy filter xuống dưới join, miễn kết quả không đổi.",
+        "Hai hệ quả hay bị hỏi tiếp:\n- Alias đặt ở SELECT chưa tồn tại khi WHERE chạy, nhưng đã có khi ORDER BY chạy.\n- WHERE không dùng được SUM()/COUNT() vì lúc đó nhóm chưa hình thành — phải dùng HAVING."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 92,
+    "sourceSlug": "97700-thu-tu-thuc-thi-logic-cua-mot-cau-select-la-gi-vi-sao-no-khac-thu-tu-ban-viet",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "81ab77e5-cb5d-503e-98e9-e52abbbb85b7",
+    "question": "Vì sao NOT IN với subquery chứa NULL luôn trả về rỗng? Sửa thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97704-vi-sao-not-in-voi-subquery-chua-null-luon-tra-ve-rong-sua-the-nao",
+    "slug": "vi-sao-not-in-voi-subquery-chua-null-luon-tra-ve-rong-sua-the-nao-81ab77e5-cb5d-503e-98e9-e52abbbb85b7",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì NOT IN được khai triển thành chuỗi AND các phép khác (<>), mà so sánh với NULL cho ra UNKNOWN chứ không phải TRUE/FALSE."
+      ],
+      "details": [
+        "Chỉ cần một NULL trong danh sách là toàn bộ điều kiện không bao giờ TRUE → không dòng nào lọt."
+      ],
+      "points": [],
+      "sections": [
+        "Ba cách sửa, theo thứ tự nên dùng:",
+        "Điểm khác biệt cốt lõi: NOT EXISTS dùng ngữ nghĩa \"có tồn tại dòng nào khớp không\" nên NULL không gây UNKNOWN. IN (dương) thì không bị lỗi này — chỉ NOT IN mới nguy hiểm."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- customers_without_orders: tra ve 0 dong neu orders.customer_id co NULL\nSELECT * FROM customers\nWHERE id NOT IN (SELECT customer_id FROM orders);\n\n-- id NOT IN (1, 2, NULL)\n--   <=> id <> 1 AND id <> 2 AND id <> NULL\n--   <=> TRUE AND TRUE AND UNKNOWN = UNKNOWN"
+        },
+        {
+          "language": "SQL",
+          "code": "-- 1. NOT EXISTS: an toan voi NULL, thuong toi uu tot nhat\nSELECT * FROM customers c\nWHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.customer_id = c.id);\n\n-- 2. LEFT JOIN ... IS NULL (anti-join thu cong)\nSELECT c.* FROM customers c\nLEFT JOIN orders o ON o.customer_id = c.id\nWHERE o.customer_id IS NULL;\n\n-- 3. loc NULL truoc khi dua vao NOT IN\nWHERE id NOT IN (SELECT customer_id FROM orders WHERE customer_id IS NOT NULL);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 93,
+    "sourceSlug": "97704-vi-sao-not-in-voi-subquery-chua-null-luon-tra-ve-rong-sua-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "444a2bdb-25a4-5166-8bb7-87c99c0824c6",
+    "question": "Dùng LAG/LEAD để tính tăng trưởng doanh thu so với tháng trước như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97708-dung-lag-lead-de-tinh-tang-truong-doanh-thu-so-voi-thang-truoc-nhu-the-nao",
+    "slug": "dung-lag-lead-de-tinh-tang-truong-doanh-thu-so-voi-thang-truoc-nhu-the-nao-444a2bdb-25a4-5166-8bb7-87c99c0824c6",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "LAG(col, n) lấy giá trị của dòng trước trong cùng partition, LEAD(col, n) lấy dòng sau.",
+        "Ba điểm hay bị hỏi thêm:\n- Dòng đầu tiên không có dòng trước → LAG trả về NULL, nên growth_pct là NULL. Muốn hiện 0 thì LAG(revenue, 1, 0) (tham số thứ ba là giá trị mặc định).\n- Chia cho tháng trước bằng 0 sẽ lỗi → bọc NULLIF(..., 0).\n- Tính theo từng nhóm (mỗi cửa hàng) thì thêm PARTITION BY store_id vào OVER."
+      ],
+      "details": [
+        "Nhờ đó so sánh kỳ này với kỳ trước mà không cần self join.",
+        "So với cách self join m1.month = m2.month + interval '1 month', window function chỉ quét bảng một lần và tự xử lý biên."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "WITH monthly AS (\n  SELECT date_trunc('month', created_at) AS month,\n         SUM(total) AS revenue\n  FROM orders\n  WHERE status = 'paid'\n  GROUP BY 1\n)\nSELECT\n  month,\n  revenue,\n  LAG(revenue) OVER (ORDER BY month) AS prev_revenue,\n  ROUND(\n    100.0 * (revenue - LAG(revenue) OVER (ORDER BY month))\n    / NULLIF(LAG(revenue) OVER (ORDER BY month), 0), 2\n  ) AS growth_pct\nFROM monthly\nORDER BY month;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 94,
+    "sourceSlug": "97708-dung-lag-lead-de-tinh-tang-truong-doanh-thu-so-voi-thang-truoc-nhu-the-nao",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "cc4e86de-1ca8-5f65-8251-b2a6b5a8b6d2",
+    "question": "GROUPING SETS, ROLLUP, CUBE là gì? Khi nào dùng thay vì UNION ALL nhiều truy vấn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97709-grouping-sets-rollup-cube-la-gi-khi-nao-dung-thay-vi-union-all-nhieu-truy-van",
+    "slug": "grouping-sets-rollup-cube-la-gi-khi-nao-dung-thay-vi-union-all-nhieu-truy-van-cc4e86de-1ca8-5f65-8251-b2a6b5a8b6d2",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Chúng cho phép tính nhiều mức tổng hợp trong một lần quét bảng, thay vì viết nhiều GROUP BY rồi UNION ALL.",
+        "Vấn đề thực tế: dòng tổng có NULL ở cột đã gộp, lẫn với NULL của dữ liệu thật.",
+        "Lợi ích so với UNION ALL: chỉ quét bảng một lần thay vì N lần, và kế hoạch thực thi gọn hơn."
+      ],
+      "details": [
+        "Dùng hàm GROUPING() để phân biệt:",
+        "PostgreSQL hỗ trợ từ 9.5; MySQL 8.0 có WITH ROLLUP (chỉ ROLLUP, không có CUBE) và hàm GROUPING()."
+      ],
+      "points": [
+        "GROUPING SETS ((a,b), (a), ()) — liệt kê tường minh các tổ hợp cần gom.",
+        "ROLLUP(a, b) — tổng theo cấp bậc: (a,b), (a), (). Hợp với phân cấp năm → tháng, vùng → tỉnh.",
+        "CUBE(a, b) — mọi tổ hợp: (a,b), (a), (b), ()."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "SELECT region, product, SUM(amount) AS total\nFROM sales\nGROUP BY ROLLUP (region, product);\n-- cho ra: tong moi (region, product)\n--         tong theo region (product = NULL)\n--         tong toan bo (ca hai NULL)"
+        },
+        {
+          "language": "SQL",
+          "code": "SELECT\n  CASE WHEN GROUPING(region) = 1 THEN 'ALL REGIONS' ELSE region END AS region,\n  SUM(amount)\nFROM sales\nGROUP BY ROLLUP (region);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 95,
+    "sourceSlug": "97709-grouping-sets-rollup-cube-la-gi-khi-nao-dung-thay-vi-union-all-nhieu-truy-van",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "075846a7-be25-5090-9fad-e81bec7f56bd",
+    "question": "Truy vấn có index trên cột nhưng vẫn chậm vì ép kiểu ngầm (implicit cast). Chuyện gì xảy ra?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97755-truy-van-co-index-tren-cot-nhung-van-cham-vi-ep-kieu-ngam-implicit-cast-chuyen-g",
+    "slug": "truy-van-co-index-tren-cot-nhung-van-cham-vi-ep-kieu-ngam-implicit-cast-chuyen-gi-xay-ra-075846a7-be25-5090-9fad-e81bec7f56bd",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khi hai vế của phép so sánh khác kiểu, database phải ép một vế về kiểu kia. Nếu vế bị ép là cột, index trên cột đó trở nên vô dụng — hoàn toàn giống trường hợp bọc cột trong hàm, chỉ khác là lần này database tự thêm hàm giúp bạn.",
+        "Quy tắc của MySQL là khi so sánh chuỗi với số thì chuỗi bị ép sang số, nên cột luôn là bên chịu thiệt. Kết quả còn có thể sai chứ không chỉ chậm: '0901234567' và '901234567' ép sang số đều bằng nhau."
+      ],
+      "details": [
+        "Tình huống thường gặp ở MySQL: cột phone VARCHAR(20), truy vấn truyền vào số.",
+        "PostgreSQL chặt về kiểu hơn nên thường báo lỗi thay vì âm thầm ép, nhưng vẫn dính khi trộn int với bigint/numeric trong join, hoặc khi driver gửi tham số dưới dạng text.",
+        "Cách phát hiện: đọc EXPLAIN — nếu điều kiện hiện ra dạng (phone)::numeric = ... hoặc MySQL báo type: ALL dù có index, gần như chắc chắn là ép kiểu. Cách sửa: để kiểu tham số khớp kiểu cột (dùng prepared statement với đúng kiểu), hoặc sửa kiểu cột nếu schema sai từ đầu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- phone is VARCHAR, 0901234567 is a number\n-- MySQL converts every phone value to a number: index unusable\nSELECT * FROM users WHERE phone = 0901234567;\n\n-- correct: compare string to string\nSELECT * FROM users WHERE phone = '0901234567';"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 96,
+    "sourceSlug": "97755-truy-van-co-index-tren-cot-nhung-van-cham-vi-ep-kieu-ngam-implicit-cast-chuyen-g",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "2c704145-e0b5-58cb-8a5c-eb8bedbefa97",
+    "question": "Truy vấn ORDER BY created_at DESC LIMIT 20 vẫn chậm dù bảng có index. Đánh index thế nào cho đúng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97758-truy-van-order-by-created-at-desc-limit-20-van-cham-du-bang-co-index-danh-index",
+    "slug": "truy-van-order-by-created-at-desc-limit-20-van-cham-du-bang-co-index-danh-index-the-nao-cho-dung-2c704145-e0b5-58cb-8a5c-eb8bedbefa97",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vấn đề nằm ở chỗ index có khớp được cả điều kiện lọc lẫn thứ tự sắp xếp hay không.",
+        "Với composite index (user_id, created_at DESC), các dòng của một user_id đã nằm liền nhau và đã đúng thứ tự — database chỉ đọc 20 entry đầu rồi dừng. Trong EXPLAIN bạn sẽ thấy node Sort biến mất, thay bằng Index Scan ... Limit."
+      ],
+      "details": [
+        "Nếu chỉ khớp phần lọc, database phải gom hết dòng khớp rồi sort toàn bộ mới lấy được 20 dòng đầu — LIMIT không giúp gì.",
+        "Vài lưu ý:\n- Cột lọc bằng = đứng trước, cột sắp xếp đứng sau. Đảo lại là mất tác dụng.\n- Hướng sắp xếp: B-tree đọc được cả hai chiều nên (user_id, created_at) vẫn phục vụ được DESC. Chiều khai báo chỉ quan trọng khi sắp xếp nhiều cột ngược chiều nhau, ví dụ ORDER BY score DESC, created_at ASC cần đúng (score DESC, created_at ASC).\n- NULLS FIRST/LAST cũng phải khớp; PostgreSQL mặc định NULLS LAST cho ASC và NULLS FIRST cho DESC.\n- Nếu phân trang sâu, đổi từ OFFSET sang keyset pagination để cùng index này vẫn hiệu quả ở trang thứ 500."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- feed for one user\nSELECT * FROM posts\nWHERE user_id = $1\nORDER BY created_at DESC\nLIMIT 20;\n\n-- index on (user_id) alone: index scan then Sort node over all the user's posts\nCREATE INDEX idx_posts_user_created ON posts (user_id, created_at DESC);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 97,
+    "sourceSlug": "97758-truy-van-order-by-created-at-desc-limit-20-van-cham-du-bang-co-index-danh-index",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "ccf81853-fdfd-5ec3-a9b9-918e4606cfbe",
+    "question": "Giá trị NULL có được lưu trong index không? WHERE col IS NULL có dùng được index không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97759-gia-tri-null-co-duoc-luu-trong-index-khong-where-col-is-null-co-dung-duoc-index",
+    "slug": "gia-tri-null-co-duoc-luu-trong-index-khong-where-col-is-null-co-dung-duoc-index-khong-ccf81853-fdfd-5ec3-a9b9-918e4606cfbe",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tuỳ database, và đây là chỗ hay nhầm khi chuyển giữa các hệ."
+      ],
+      "details": [
+        "PostgreSQL: B-tree có lưu NULL, nên WHERE col IS NULL dùng được index bình thường. Điều đó cũng có nghĩa index bao phủ mọi dòng của bảng, kể cả dòng NULL.",
+        "Oracle: B-tree không lưu dòng mà mọi cột trong index đều NULL. Vì vậy IS NULL không dùng được index đơn cột, và SELECT count(*) cũng không dùng được index đó. Mẹo cũ là thêm một hằng số làm cột thứ hai (CREATE INDEX ... ON t (col, 1)) để buộc entry NULL được lưu.",
+        "Unique index và NULL: theo chuẩn SQL, NULL không bằng NULL, nên unique index cho phép nhiều dòng cùng NULL — đúng với PostgreSQL, MySQL, Oracle và SQLite, riêng SQL Server chỉ nhận đúng một dòng NULL. Đây là hành vi thường gây bất ngờ với soft delete:"
+      ],
+      "points": [],
+      "sections": [
+        "PostgreSQL 15 trở lên có UNIQUE NULLS NOT DISTINCT để coi các NULL là trùng nhau, nhưng partial unique index vẫn là cách rõ ràng và tương thích rộng hơn."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- does not enforce what you expect: NULL never conflicts with NULL,\n-- so many soft-deleted rows can share the same email\nCREATE UNIQUE INDEX uq_users_email ON users (email, deleted_at);\n\n-- reliable alternative: unique only among live rows\nCREATE UNIQUE INDEX uq_users_email_live ON users (email)\nWHERE deleted_at IS NULL;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 98,
+    "sourceSlug": "97759-gia-tri-null-co-duoc-luu-trong-index-khong-where-col-is-null-co-dung-duoc-index",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "5b7f1258-2737-5fc7-aa1e-99af91bddfac",
+    "question": "Optimistic locking bằng cột version triển khai thế nào? Khi nào chọn nó thay vì pessimistic lock?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97854-optimistic-locking-bang-cot-version-trien-khai-the-nao-khi-nao-chon-no-thay-vi-p",
+    "slug": "optimistic-locking-bang-cot-version-trien-khai-the-nao-khi-nao-chon-no-thay-vi-pessimistic-lock-5b7f1258-2737-5fc7-aa1e-99af91bddfac",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Optimistic locking không giữ khoá nào cả.",
+        "Tầng ứng dụng bắt buộc phải kiểm tra số hàng bị ảnh hưởng. Bỏ qua bước này thì cơ chế mất tác dụng hoàn toàn — đây là lỗi hay gặp nhất. ORM như Hibernate/JPA (@Version) hay EF Core (IsConcurrencyToken) làm sẵn phần kiểm tra và ném OptimisticLockException."
+      ],
+      "details": [
+        "Bạn đọc dữ liệu kèm số version, khi ghi thì đưa version cũ vào WHERE; nếu ai đó đã sửa trước, câu lệnh cập nhật 0 hàng và bạn biết là có xung đột.",
+        "Chọn optimistic khi: xung đột hiếm, người dùng chỉnh sửa form dài (không thể giữ khoá suốt thời gian đó), hoặc muốn tránh mọi rủi ro khoá kéo dài.",
+        "Chọn pessimistic khi: tranh chấp cao trên cùng vài hàng (trừ tồn kho flash sale, ví tiền). Lúc đó optimistic sẽ khiến phần lớn request thất bại rồi retry liên tục, tổng chi phí cao hơn là xếp hàng chờ khoá."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- read\nSELECT id, price, version FROM products WHERE id = 7;   -- version = 3\n\n-- write\nUPDATE products\nSET price = 120, version = version + 1\nWHERE id = 7 AND version = 3;\n-- rowCount = 0 → có người sửa trước, phải đọc lại và xử lý xung đột"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 99,
+    "sourceSlug": "97854-optimistic-locking-bang-cot-version-trien-khai-the-nao-khi-nao-chon-no-thay-vi-p",
+    "departments": [
+      "data-and-messaging"
+    ]
+  },
+  {
+    "id": "de686eda-2deb-552c-a9b4-d11fc8a551ab",
+    "question": "Vì sao không nên để lệnh gọi API bên ngoài nằm trong transaction? Thiết kế lại thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97858-vi-sao-khong-nen-de-lenh-goi-api-ben-ngoai-nam-trong-transaction-thiet-ke-lai-th",
+    "slug": "vi-sao-khong-nen-de-lenh-goi-api-ben-ngoai-nam-trong-transaction-thiet-ke-lai-the-nao-de686eda-2deb-552c-a9b4-d11fc8a551ab",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vấn đề 1 — giữ khoá theo thời gian mạng. Khoá hàng orders chỉ nhả khi COMMIT. Cổng thanh toán chậm 5 giây thì hàng đó bị giữ 5 giây, kết nối trong pool cũng bị giữ theo. Vài chục request như vậy là cạn pool và toàn hệ thống chờ."
+      ],
+      "details": [
+        "Vấn đề 2 — rollback không gỡ được tác dụng phụ. Nếu mailer.send lỗi, database rollback nhưng thẻ đã bị trừ và mail có thể đã gửi. Transaction chỉ atomic trong phạm vi database.",
+        "Cách làm đúng:\n- Đưa lệnh gọi ngoài ra khỏi transaction. Transaction chỉ ghi trạng thái, ngắn nhất có thể.\n- Cần bảo đảm \"ghi DB thành công thì việc phụ chắc chắn chạy\" thì dùng transactional outbox: trong cùng transaction, ghi thêm một hàng vào bảng outbox; một worker riêng đọc bảng đó và gọi API, retry cho tới khi thành công.\n- Lệnh gọi ngoài phải idempotent (kèm khoá idempotency) vì worker có thể chạy lại."
+      ],
+      "points": [],
+      "sections": [
+        "Đoạn code dưới đây trông gọn nhưng sai ở hai điểm:"
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "await db.transaction(async (tx) => {\n  await tx.update(orders).set({ status: 'paid' }).where(eq(orders.id, id))\n  await paymentGateway.charge(card, amount)   // network call inside the transaction\n  await mailer.send(receipt)\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 100,
+    "sourceSlug": "97858-vi-sao-khong-nen-de-lenh-goi-api-ben-ngoai-nam-trong-transaction-thiet-ke-lai-th",
+    "departments": [
+      "data-and-messaging"
+    ]
+  }
+]

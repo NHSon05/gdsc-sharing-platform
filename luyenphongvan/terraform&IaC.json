@@ -1,0 +1,1342 @@
+[
+  {
+    "id": "cc01785d-c196-56ae-8119-b4e13b6420f2",
+    "question": "IaC hơn gì so với click tay trên console của cloud?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100201-iac-hon-gi-so-voi-click-tay-tren-console-cua-cloud",
+    "slug": "iac-hon-gi-so-voi-click-tay-tren-console-cua-cloud-cc01785d-c196-56ae-8119-b4e13b6420f2",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hạ tầng thành code có review, có version, dựng lại được. Cùng một repo dựng ra staging và production giống nhau, và git log trả lời được câu \"vì sao security group này mở port 6379\"."
+      ],
+      "details": [
+        "Click tay không trả lời được câu đó. Sau 6 tháng không ai nhớ ai sửa gì, và staging lệch production ở những chỗ chỉ lộ ra lúc deploy hỏng.",
+        "Đánh đổi phải nói thẳng trong phỏng vấn:\n- Mọi thay đổi phải qua pipeline, kể cả hotfix lúc 2 giờ sáng.\n- Team phải học thêm một tool và một mental model (desired state, không phải script).\n- Lúc mới adopt, terraform plan hay ra diff lạ vì code chưa khớp thực tế.",
+        "Failure mode phổ biến nhất khi adopt: có người vẫn sửa tay trên console cho nhanh rồi không cập nhật code, drift tích tụ, plan lúc nào cũng bẩn, không ai dám apply, cuối cùng quay lại làm tay."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "100201-iac-hon-gi-so-voi-click-tay-tren-console-cua-cloud"
+  },
+  {
+    "id": "03708d6e-af80-52e9-a7e4-913a598181ee",
+    "question": "State của Terraform chứa gì và vì sao không được commit nó vào Git?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100202-state-cua-terraform-chua-gi-va-vi-sao-khong-duoc-commit-no-vao-git",
+    "slug": "state-cua-terraform-chua-gi-va-vi-sao-khong-duoc-commit-no-vao-git-03708d6e-af80-52e9-a7e4-913a598181ee",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không có state, Terraform không biết aws_db_instance.main ứng với DB nào nên apply sẽ tạo mới thay vì update."
+      ],
+      "details": [
+        "Lý do không commit vào Git:\n- State chứa plaintext secret — password RDS sinh tự động, private key, token. Commit là leak.\n- Git không có locking, hai người apply song song sẽ hỏng state chứ không phải conflict text.\n- State đổi mỗi lần apply, làm diff repo vô nghĩa.",
+        "Chỗ đúng để cất là remote backend có encryption + versioning + locking (S3 + DynamoDB, GCS, Terraform Cloud). Local state chỉ hợp cho demo hoặc bootstrap."
+      ],
+      "points": [],
+      "sections": [
+        "State là bản đồ giữa địa chỉ resource trong code và ID thật ở provider, cộng với snapshot attribute của lần apply gần nhất."
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "100202-state-cua-terraform-chua-gi-va-vi-sao-khong-duoc-commit-no-vao-git"
+  },
+  {
+    "id": "b8832088-914d-5afb-bc8b-2a3a6295fa6e",
+    "question": "Đọc output của terraform plan thì phải soi kỹ nhất dòng nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100203-doc-output-cua-terraform-plan-thi-phai-soi-ky-nhat-dong-nao",
+    "slug": "doc-output-cua-terraform-plan-thi-phai-soi-ky-nhat-dong-nao-b8832088-914d-5afb-bc8b-2a3a6295fa6e",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Dòng # ... must be replaced và ký hiệu -/+.",
+        "Đọc theo thứ tự:\n1. Dòng tổng cuối: Plan: 2 to add, 1 to change, 3 to destroy. — số destroy khác 0 là phải dừng lại đọc kỹ.\n2. Mọi # forces replacement — attribute nào gây replace.\n3. Diff của resource stateful (DB, bucket, volume).",
+        "Một chi tiết hay bị bỏ qua: plan có refresh state bằng cách gọi API provider nên nó phát hiện luôn drift."
+      ],
+      "details": [
+        "Đó là destroy rồi create lại, và với RDS hay EBS thì bằng mất dữ liệu.",
+        "Thực hành nên có: apply đúng plan đã review, đừng plan lại lúc apply.",
+        "Code không đổi mà plan vẫn ra diff nghĩa là có người sửa tay."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TEXT",
+          "code": "# aws_db_instance.main must be replaced\n-/+ resource \"aws_db_instance\" \"main\" {\n      ~ identifier = \"db-prod\" -> \"db-production\" # forces replacement"
+        },
+        {
+          "language": "BASH",
+          "code": "terraform plan -out=tfplan\nterraform apply tfplan"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "100203-doc-output-cua-terraform-plan-thi-phai-soi-ky-nhat-dong-nao"
+  },
+  {
+    "id": "b6d6db98-b1fc-57b3-856f-ae5ed5b00bab",
+    "question": "Provider là gì? Dùng Terraform có làm hạ tầng portable giữa AWS và GCP không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100204-provider-la-gi-dung-terraform-co-lam-ha-tang-portable-giua-aws-va-gcp-khong",
+    "slug": "provider-la-gi-dung-terraform-co-lam-ha-tang-portable-giua-aws-va-gcp-khong-b6d6db98-b1fc-57b3-856f-ae5ed5b00bab",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không. Provider là plugin dịch resource block thành API call của một dịch vụ cụ thể, mà resource của mỗi cloud khác nhau hoàn toàn. aws_instance không chạy trên GCP, đổi cloud vẫn phải viết lại gần hết code.",
+        "Provider không chỉ có cloud: Kubernetes, Datadog, Cloudflare, GitHub, PostgreSQL đều có provider, quản lý được cả team GitHub lẫn alert Datadog bằng cùng một workflow."
+      ],
+      "details": [
+        "Cái dùng chung được là tool, workflow và team skill, không phải config.",
+        "Bắt buộc trong dự án thật: pin version. Không pin thì AWS provider 5.x lên 6.x có thể đổi default, và một sáng đẹp trời plan đề xuất sửa 200 resource mà không ai hiểu vì sao."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HCL",
+          "code": "terraform {\n  required_providers {\n    aws = { source = \"hashicorp/aws\", version = \"~> 5.40\" }\n  }\n}\n\nprovider \"aws\" { region = \"ap-southeast-1\" }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "100204-provider-la-gi-dung-terraform-co-lam-ha-tang-portable-giua-aws-va-gcp-khong"
+  },
+  {
+    "id": "e853d87d-b906-5440-892e-6e7a49aa4a67",
+    "question": "Variable nhận giá trị theo thứ tự ưu tiên nào, và secret nên truyền kiểu gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100205-variable-nhan-gia-tri-theo-thu-tu-uu-tien-nao-va-secret-nen-truyen-kieu-gi",
+    "slug": "variable-nhan-gia-tri-theo-thu-tu-uu-tien-nao-va-secret-nen-truyen-kieu-gi-e853d87d-b906-5440-892e-6e7a49aa4a67",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cấu trúc thường dùng: mỗi env một file prod.tfvars / staging.tfvars, commit vào repo, trừ secret. Khác biệt giữa hai env nằm rõ trong diff file đó."
+      ],
+      "details": [
+        "Secret thì không đặt trong tfvars đã commit. Ba cách phổ biến:\n- TF_VAR_* inject từ CI secret store.\n- data \"aws_secretsmanager_secret_version\" đọc động lúc apply.\n- Cho AWS tự sinh (manage_master_user_password = true) rồi chỉ tham chiếu ARN.",
+        "Đánh sensitive = true chỉ che output, không mã hoá, giá trị vẫn nằm nguyên trong state."
+      ],
+      "points": [],
+      "sections": [
+        "Từ thấp lên cao: default trong block variable, rồi TF_VAR_*, rồi terraform.tfvars / *.auto.tfvars, rồi -var-file, cao nhất là -var trên CLI."
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "export TF_VAR_db_password=...                  # env, thấp\nterraform apply -var-file=prod.tfvars          # cao hơn\nterraform apply -var=\"instance_type=t3.large\"  # thắng tất cả"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "100205-variable-nhan-gia-tri-theo-thu-tu-uu-tien-nao-va-secret-nen-truyen-kieu-gi"
+  },
+  {
+    "id": "b916d5cc-fbd1-511e-9ee1-e309f5ab2daa",
+    "question": "Khác nhau giữa resource và data block? Dùng data khi nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100206-khac-nhau-giua-resource-va-data-block-dung-data-khi-nao",
+    "slug": "khac-nhau-giua-resource-va-data-block-dung-data-khi-nao-b916d5cc-fbd1-511e-9ee1-e309f5ab2daa",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đây là cách nối các state độc lập mà không gộp chúng: team platform sở hữu VPC, team application chỉ đọc và không có quyền sửa."
+      ],
+      "details": [
+        "Hai cái bẫy:\n- data được đọc lúc plan. Nếu nó phụ thuộc resource tạo trong cùng lần apply, plan sẽ ra (known after apply) và có khi phải tách hai lần apply.\n- data \"aws_ami\" { most_recent = true } rất tiện nhưng làm plan đổi theo thời gian dù code không đổi, AMI mới ra là EC2 bị replace ngoài ý muốn. Pin AMI ID cho production."
+      ],
+      "points": [],
+      "sections": [
+        "resource tạo và quản lý vòng đời; data chỉ đọc thứ đã tồn tại, không tạo, không sửa, không xoá."
+      ],
+      "codeExamples": [
+        {
+          "language": "HCL",
+          "code": "data \"aws_vpc\" \"shared\" {\n  tags = { Name = \"platform-vpc\" }   # do team infra quản lý\n}\n\nresource \"aws_security_group\" \"api\" {\n  vpc_id = data.aws_vpc.shared.id    # chỉ tham chiếu\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "100206-khac-nhau-giua-resource-va-data-block-dung-data-khi-nao"
+  },
+  {
+    "id": "da9ae77e-46a2-5627-a814-cee098f82102",
+    "question": "terraform init làm gì, và .terraform.lock.hcl có phải commit không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100207-terraform-init-lam-gi-va-terraform-lock-hcl-co-phai-commit-khong",
+    "slug": "terraform-init-lam-gi-va-terraform-lock-hcl-co-phai-commit-khong-da9ae77e-46a2-5627-a814-cee098f82102",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Lock file ghi version chính xác + checksum của từng provider.",
+        "Chỗ cần cẩn thận là -migrate-state: khi đổi backend, Terraform hỏi có copy state sang chỗ mới không."
+      ],
+      "details": [
+        "Không commit thì mỗi máy resolve ra một version khác, plan khác nhau giữa laptop và CI, rồi cãi nhau ai đúng.",
+        "Trả lời sai là mất dấu toàn bộ hạ tầng đang chạy, nên backup state trước khi đổi backend."
+      ],
+      "points": [],
+      "sections": [
+        "init tải provider + module về .terraform/, cấu hình backend, và sinh hoặc cập nhật .terraform.lock.hcl. Lock file phải commit."
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "terraform init                 # lần đầu, hoặc khi thêm provider/module\nterraform init -upgrade        # cho phép nâng provider trong ràng buộc version\nterraform init -migrate-state  # khi đổi backend"
+        },
+        {
+          "language": "HCL",
+          "code": "provider \"registry.terraform.io/hashicorp/aws\" {\n  version     = \"5.42.0\"\n  constraints = \"~> 5.40\"\n  hashes      = [\"h1:...\"]\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "100207-terraform-init-lam-gi-va-terraform-lock-hcl-co-phai-commit-khong"
+  },
+  {
+    "id": "71371b85-bb73-5d60-853b-1b9ccacd0ce7",
+    "question": "Terraform quyết định thứ tự tạo resource dựa vào đâu? Khi nào cần depends_on?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100208-terraform-quyet-dinh-thu-tu-tao-resource-dua-vao-dau-khi-nao-can-depends-on",
+    "slug": "terraform-quyet-dinh-thu-tu-tao-resource-dua-vao-dau-khi-nao-can-depends-on-71371b85-bb73-5d60-853b-1b9ccacd0ce7",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Dựa vào dependency graph suy ra từ tham chiếu giữa các resource, không phải thứ tự viết trong file.",
+        "Lạm dụng depends_on làm graph tuần tự hoá không cần thiết nên apply chậm hẳn. Ưu tiên tham chiếu attribute thật, chỉ dùng depends_on khi đã xác định được đúng một phụ thuộc ẩn."
+      ],
+      "details": [
+        "Resource không phụ thuộc nhau được tạo song song.",
+        "Hệ quả của mô hình declarative: thao tác kiểu quy trình (chạy migration, gọi lệnh trong máy) không hợp, chúng thuộc về pipeline hoặc image dựng sẵn."
+      ],
+      "points": [],
+      "sections": [
+        "depends_on chỉ cần khi có phụ thuộc ẩn mà Terraform không thấy qua tham chiếu:"
+      ],
+      "codeExamples": [
+        {
+          "language": "HCL",
+          "code": "resource \"aws_subnet\" \"app\" {\n  vpc_id = aws_vpc.main.id      # implicit dependency, đủ rồi\n}"
+        },
+        {
+          "language": "HCL",
+          "code": "resource \"aws_instance\" \"app\" {\n  depends_on = [aws_iam_role_policy.s3_access]  # app đọc S3 lúc boot\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "100208-terraform-quyet-dinh-thu-tu-tao-resource-dua-vao-dau-khi-nao-can-depends-on"
+  },
+  {
+    "id": "8b5d1aa0-637b-5a05-85b8-34a981acba1e",
+    "question": "Remote backend cần những gì cho production, và state locking giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100209-remote-backend-can-nhung-gi-cho-production-va-state-locking-giai-quyet-van-de-gi",
+    "slug": "remote-backend-can-nhung-gi-cho-production-va-state-locking-giai-quyet-van-de-gi-8b5d1aa0-637b-5a05-85b8-34a981acba1e",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Locking chặn hai apply chạy song song trên cùng state.",
+        "Checklist backend production:\n- Encryption at rest — state chứa secret.\n- Versioning trên bucket — restore được khi state hỏng.\n- Locking — DynamoDB table, hoặc native lock của GCS / Terraform Cloud.\n- IAM chặt — quyền đọc state gần bằng quyền đọc secret."
+      ],
+      "details": [
+        "Không có nó, hai người apply cùng lúc ghi đè state của nhau, hậu quả là resource mồ côi không nằm trong state nào.",
+        "Bài toán bootstrap: bucket state cũng là hạ tầng. Cách làm phổ biến là tạo bucket + DynamoDB bằng một config nhỏ với local state, rồi thêm block backend và chạy terraform init -migrate-state để đẩy state lên chính bucket vừa tạo."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HCL",
+          "code": "terraform {\n  backend \"s3\" {\n    bucket         = \"acme-tfstate\"\n    key            = \"prod/network/terraform.tfstate\"\n    region         = \"ap-southeast-1\"\n    encrypt        = true\n    dynamodb_table = \"tf-locks\"   # locking\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "100209-remote-backend-can-nhung-gi-cho-production-va-state-locking-giai-quyet-van-de-gi"
+  },
+  {
+    "id": "9a5a9eaa-a892-5676-b91d-e655228d3812",
+    "question": "Có người sửa tay trên console. Terraform xử lý sao và phòng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100210-co-nguoi-sua-tay-tren-console-terraform-xu-ly-sao-va-phong-the-nao",
+    "slug": "co-nguoi-sua-tay-tren-console-terraform-xu-ly-sao-va-phong-the-nao-9a5a9eaa-a892-5676-b91d-e655228d3812",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đây vừa là feature vừa là bẫy: hotfix mở port lúc sự cố sẽ bị xoá âm thầm khi ai đó apply một thay đổi không liên quan."
+      ],
+      "details": [
+        "Phòng theo thứ tự hiệu quả:\n1. Siết IAM — production để read-only cho người, quyền write chỉ cho CI role. Không sửa tay được thì code mới thật sự là source of truth.\n2. Scheduled plan hằng ngày, alert khi plan không rỗng.\n3. Quy trình hậu sự cố: mọi hotfix làm tay phải backport vào code, có người chịu trách nhiệm và có deadline.",
+        "Một loại drift không phải do người: provider bump đổi default, hoặc ASG tự scale làm desired_capacity lệch. Loại này xử lý bằng lifecycle { ignore_changes = [desired_capacity] }."
+      ],
+      "points": [],
+      "sections": [
+        "Plan phát hiện drift lúc refresh và đề xuất kéo resource về đúng code, nên thay đổi làm tay bị revert ở lần apply kế tiếp."
+      ],
+      "codeExamples": [
+        {
+          "language": "TEXT",
+          "code": "~ resource \"aws_security_group\" \"api\" {\n      ~ ingress { ~ cidr_blocks = [\"0.0.0.0/0\"] -> [\"10.0.0.0/8\"] }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "100210-co-nguoi-sua-tay-tren-console-terraform-xu-ly-sao-va-phong-the-nao"
+  },
+  {
+    "id": "dfe7c0db-0241-52a4-9317-f8a9eb3ac56e",
+    "question": "Tách code ra module có giảm blast radius không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100211-tach-code-ra-module-co-giam-blast-radius-khong",
+    "slug": "tach-code-ra-module-co-giam-blast-radius-khong-dfe7c0db-0241-52a4-9317-f8a9eb3ac56e",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không. Module tách về mặt code để reuse, nhưng mọi module trong cùng một config vẫn dùng chung một state. Gõ nhầm terraform destroy vẫn xoá hết.",
+        "Nguyên tắc thiết kế module: giao diện nhỏ và có ý kiến rõ ràng. Module phơi ra 30 variable để cấu hình mọi thứ thì không khác gì viết resource trực tiếp mà lại thêm một tầng gián tiếp."
+      ],
+      "details": [
+        "Hai mức tách khác nhau hoàn toàn:\n- Module = reuse code, giao diện variable / output.\n- State riêng = config độc lập, thư mục riêng, backend key riêng. Đây mới là thứ giới hạn blast radius.",
+        "Bắt buộc với module dùng chung: pin ref. Trỏ vào main nghĩa là hạ tầng đổi vì ai đó vừa merge một PR."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HCL",
+          "code": "module \"vpc\" {\n  source  = \"git::ssh://git@github.com/acme/tf-modules.git//vpc?ref=v2.3.0\"\n  cidr    = \"10.0.0.0/16\"\n  azs     = [\"ap-southeast-1a\", \"ap-southeast-1b\"]\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "100211-tach-code-ra-module-co-giam-blast-radius-khong"
+  },
+  {
+    "id": "413fb24d-9f35-5ba3-8b73-3216e89e69bd",
+    "question": "Vì sao nên dùng for_each thay vì count khi tạo nhiều resource?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100212-vi-sao-nen-dung-for-each-thay-vi-count-khi-tao-nhieu-resource",
+    "slug": "vi-sao-nen-dung-for-each-thay-vi-count-khi-tao-nhieu-resource-413fb24d-9f35-5ba3-8b73-3216e89e69bd",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đây là cái bẫy tốn kém nhất với người mới: chèn một subnet vào giữa list và plan báo recreate 10 EC2."
+      ],
+      "details": [
+        "Quy tắc thực dụng: count chỉ dùng cho bật/tắt một resource (count = var.enabled ? 1 : 0); mọi trường hợp tạo nhiều bản dùng for_each với key có ý nghĩa.",
+        "Đổi từ count sang for_each trên code đang chạy thì phải khai báo moved, không thì Terraform xoá sạch rồi tạo lại."
+      ],
+      "points": [],
+      "sections": [
+        "count đánh địa chỉ theo index, nên xoá phần tử ở giữa list làm mọi phần tử sau bị shift index và Terraform destroy/recreate hàng loạt."
+      ],
+      "codeExamples": [
+        {
+          "language": "HCL",
+          "code": "# count: xoá \"staging\" khỏi list -> aws_s3_bucket.b[1] doi tu staging sang prod\nresource \"aws_s3_bucket\" \"b\" {\n  count  = length(var.envs)          # [\"dev\", \"staging\", \"prod\"]\n  bucket = \"acme-${var.envs[count.index]}\"\n}\n\n# for_each: dia chi la aws_s3_bucket.b[\"prod\"], on dinh\nresource \"aws_s3_bucket\" \"b\" {\n  for_each = toset(var.envs)\n  bucket   = \"acme-${each.key}\"\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "100212-vi-sao-nen-dung-for-each-thay-vi-count-khi-tao-nhieu-resource"
+  },
+  {
+    "id": "760d3c40-8934-54e1-836a-058fe7549294",
+    "question": "Đưa một EC2 tạo tay vào Terraform quản lý thì làm những bước nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100213-dua-mot-ec2-tao-tay-vao-terraform-quan-ly-thi-lam-nhung-buoc-nao",
+    "slug": "dua-mot-ec2-tao-tay-vao-terraform-quan-ly-thi-lam-nhung-buoc-nao-760d3c40-8934-54e1-836a-058fe7549294",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Viết resource block tương ứng, import vào state theo ID thật, rồi sửa code tới khi terraform plan ra \"No changes\".",
+        "Bước tốn thời gian nhất là bước cuối: resource block phải khớp cấu hình thật tới từng attribute, không thì lần apply đầu tiên sẽ sửa máy đang chạy theo cách không ai muốn."
+      ],
+      "details": [
+        "Cách mới (khai báo trong code, review được trong PR):",
+        "Khi tiếp quản hạ tầng tạo tay quy mô lớn, đừng import tất cả cùng lúc. Bắt đầu từ nhóm ít rủi ro (VPC, IAM, security group), kiểm chứng quy trình rồi mới tới RDS và EBS."
+      ],
+      "points": [],
+      "sections": [
+        "Cách cũ chạy lệnh trực tiếp:"
+      ],
+      "codeExamples": [
+        {
+          "language": "HCL",
+          "code": "import {\n  to = aws_instance.legacy_api\n  id = \"i-0abc123def456\"\n}\n\nresource \"aws_instance\" \"legacy_api\" {\n  # terraform plan -generate-config-out=generated.tf sinh khung san\n}"
+        },
+        {
+          "language": "BASH",
+          "code": "terraform import aws_instance.legacy_api i-0abc123def456\nterraform plan   # lap lai toi khi khong con diff"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "100213-dua-mot-ec2-tao-tay-vao-terraform-quan-ly-thi-lam-nhung-buoc-nao"
+  },
+  {
+    "id": "d72da185-0612-5011-9c93-f91895687369",
+    "question": "Đổi tên resource hoặc bọc nó vào module mà không muốn bị recreate thì làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100214-doi-ten-resource-hoac-boc-no-vao-module-ma-khong-muon-bi-recreate-thi-lam-gi",
+    "slug": "doi-ten-resource-hoac-boc-no-vao-module-ma-khong-muon-bi-recreate-thi-lam-gi-d72da185-0612-5011-9c93-f91895687369",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khai báo moved block.",
+        "moved block tốt hơn vì nó được review trong PR, chạy tự động trong CI, và ai đọc lịch sử cũng thấy việc di chuyển đã xảy ra. state mv chạy trên laptop một người thì không ai biết."
+      ],
+      "details": [
+        "Terraform nhận diện resource theo địa chỉ trong config, nên đổi tên mà không khai báo bị hiểu là destroy cái cũ + create cái mới.",
+        "Quy trình refactor an toàn: viết cấu trúc mới, thêm moved, chạy plan và kiểm tra output không có create/destroy nào, rồi mới apply.",
+        "Refactor từng phần nhỏ và apply ngay, đừng gom một đợt lớn tạo ra plan dài mấy trăm dòng mà không ai đọc hết."
+      ],
+      "points": [],
+      "sections": [
+        "Cách cũ là chạy lệnh trên state:"
+      ],
+      "codeExamples": [
+        {
+          "language": "HCL",
+          "code": "moved {\n  from = aws_instance.api\n  to   = module.api_service.aws_instance.this\n}"
+        },
+        {
+          "language": "BASH",
+          "code": "terraform state mv aws_instance.api module.api_service.aws_instance.this"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "100214-doi-ten-resource-hoac-boc-no-vao-module-ma-khong-muon-bi-recreate-thi-lam-gi"
+  },
+  {
+    "id": "c6d27628-071e-5eab-b470-816a2541ecf4",
+    "question": "Tách staging và production: dùng workspace hay tách thư mục?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100215-tach-staging-va-production-dung-workspace-hay-tach-thu-muc",
+    "slug": "tach-staging-va-production-dung-workspace-hay-tach-thu-muc-c6d27628-071e-5eab-b470-816a2541ecf4",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Dự án lớn thường tách thư mục, mỗi env một state riêng, cùng gọi chung module.",
+        "Vì sao thư mục thắng ở production:\n- Khác biệt giữa hai env hiện ra trong code, review được.\n- Backend, IAM role và quyền apply tách hẳn nhau.\n- Không có rủi ro terraform workspace select nhầm rồi apply vào production.",
+        "Điểm phải giữ dù chọn cách nào: khác biệt giữa hai env là giá trị được khai báo rõ (instance type, replica count), không phải khác về cấu trúc."
+      ],
+      "details": [
+        "Workspace hợp cho env tạm và ngắn hạn.",
+        "Cấu trúc đã khác thì staging không còn kiểm chứng được gì."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TEXT",
+          "code": "envs/\n  prod/     main.tf  prod.tfvars     backend key = prod/terraform.tfstate\n  staging/  main.tf  staging.tfvars  backend key = staging/terraform.tfstate\nmodules/\n  network/  service/"
+        },
+        {
+          "language": "BASH",
+          "code": "terraform workspace new pr-1234   # hop cho env tam theo branch"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "100215-tach-staging-va-production-dung-workspace-hay-tach-thu-muc"
+  },
+  {
+    "id": "2877cf80-26b7-5efc-9c74-9722b7c5ba5f",
+    "question": "sensitive = true có bảo vệ được secret không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100216-sensitive-true-co-bao-ve-duoc-secret-khong",
+    "slug": "sensitive-true-co-bao-ve-duoc-secret-khong-2877cf80-26b7-5efc-9c74-9722b7c5ba5f",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không.",
+        "Đây là hiểu nhầm rất phổ biến và là nguyên nhân nhiều vụ leak: team tưởng đánh dấu là đủ rồi để state bucket cho cả công ty đọc."
+      ],
+      "details": [
+        "Nó chỉ che giá trị trong output và log, hiện ra (sensitive value). State vẫn lưu plaintext.",
+        "Cách xử lý secret tốt hơn, theo thứ tự ưu tiên:\n1. Cho dịch vụ tự sinh — manage_master_user_password = true để AWS giữ trong Secrets Manager, Terraform chỉ giữ ARN.\n2. Đọc động lúc apply bằng data \"aws_secretsmanager_secret_version\".\n3. Tạo resource bằng Terraform nhưng set giá trị secret bằng tool khác.",
+        "Chỗ leak hay gặp nhất là log CI: bật TF_LOG=DEBUG để debug sẽ in ra thứ mà output bình thường đã che, và log CI thường được giữ rất lâu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HCL",
+          "code": "variable \"db_password\" { type = string, sensitive = true }\noutput \"endpoint\" { value = aws_db_instance.main.address }\n# terraform output -json van in ra duoc gia tri that"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "100216-sensitive-true-co-bao-ve-duoc-secret-khong"
+  },
+  {
+    "id": "6504e6d5-e3e6-5ca8-b791-866db3265ae2",
+    "question": "Pipeline chạy Terraform nên gồm những bước nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100217-pipeline-chay-terraform-nen-gom-nhung-buoc-nao",
+    "slug": "pipeline-chay-terraform-nen-gom-nhung-buoc-nao-6504e6d5-e3e6-5ca8-b791-866db3265ae2",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "plan tự động khi mở PR và post output vào comment, apply sau khi merge.",
+        "Điểm quan trọng về tính đúng đắn: apply đúng file plan đã review, đừng plan lại lúc apply. Giữa hai thời điểm, code hoặc hạ tầng có thể đã đổi."
+      ],
+      "details": [
+        "Thay đổi hạ tầng đi qua đúng quy trình như thay đổi code.",
+        "Về quyền: CI dùng OIDC role ngắn hạn thay vì access key cố định lưu trong secret. Key cố định bị lộ là kẻ tấn công có toàn quyền trên hạ tầng.",
+        "Hai kiểm tra rẻ mà đáng thêm: chặn merge nếu plan có destroy trên resource stateful, và ước tính chi phí (Infracost) cho thay đổi lớn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "100217-pipeline-chay-terraform-nen-gom-nhung-buoc-nao"
+  },
+  {
+    "id": "8e99875a-6809-5ab5-ade1-6b85f792bba0",
+    "question": "Ngăn RDS production bị xoá nhầm qua Terraform bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100218-ngan-rds-production-bi-xoa-nham-qua-terraform-bang-cach-nao",
+    "slug": "ngan-rds-production-bi-xoa-nham-qua-terraform-bang-cach-nao-8e99875a-6809-5ab5-ade1-6b85f792bba0",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "prevent_destroy làm mọi plan chứa thao tác destroy resource đó fail thay vì chạy. Giới hạn của nó: chỉ chặn ở tầng Terraform, xoá thẳng trên console thì không đỡ được — nên phải có deletion_protection ở tầng AWS."
+      ],
+      "details": [
+        "Hệ quả cần lường trước: khi thật sự cần xoá, phải sửa code gỡ prevent_destroy rồi mới apply. Đó là một bước phiền có chủ đích.",
+        "Thêm ở tầng pipeline: parse terraform show -json tfplan và chặn merge nếu có delete trên resource stateful. Kiểm tra đơn giản nhưng ngăn đúng loại sự cố tốn kém nhất."
+      ],
+      "points": [],
+      "sections": [
+        "Xếp nhiều lớp, vì một lớp không đủ:"
+      ],
+      "codeExamples": [
+        {
+          "language": "HCL",
+          "code": "resource \"aws_db_instance\" \"main\" {\n  deletion_protection       = true      # chan o tang AWS\n  skip_final_snapshot       = false     # giu snapshot cuoi\n  backup_retention_period   = 30\n\n  lifecycle {\n    prevent_destroy = true              # plan co destroy la fail luon\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "100218-ngan-rds-production-bi-xoa-nham-qua-terraform-bang-cach-nao"
+  },
+  {
+    "id": "827ece46-b9c8-54a2-b159-e9b893a9e0cf",
+    "question": "Vì sao remote-exec provisioner bị coi là giải pháp cuối cùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100219-vi-sao-remote-exec-provisioner-bi-coi-la-giai-phap-cuoi-cung",
+    "slug": "vi-sao-remote-exec-provisioner-bi-coi-la-giai-phap-cuoi-cung-827ece46-b9c8-54a2-b159-e9b893a9e0cf",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Kết quả của lệnh không được ghi vào state, nên Terraform chỉ biết provisioner đã chạy hay chưa, không biết máy đang ở cấu hình nào.",
+        "Thay bằng, theo thứ tự ưu tiên:\n1. AMI dựng sẵn bằng Packer — Terraform chỉ launch máy từ image. Máy chủ thành thứ thay thế được: đổi cấu hình thì build AMI mới và replace instance.\n2. user_data / cloud-init — chạy lúc boot, được provider quản lý.\n3. Ansible/Chef chạy sau khi máy đã tạo, tách hẳn khỏi Terraform."
+      ],
+      "details": [
+        "Lệnh fail giữa chừng để lại resource tainted.",
+        "Ngoại lệ chấp nhận được: local-exec gọi một webhook báo deploy xong. Nhưng nhớ rằng nó không idempotent, nên đừng đặt logic quan trọng vào đấy."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HCL",
+          "code": "# tranh\nprovisioner \"remote-exec\" {\n  inline = [\"apt-get install -y nginx\"]\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "100219-vi-sao-remote-exec-provisioner-bi-coi-la-giai-phap-cuoi-cung"
+  },
+  {
+    "id": "2d458367-300c-5da7-92e3-71408e1a8c99",
+    "question": "Tạo resource ở hai region hoặc hai account trong cùng một config thì làm sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100220-tao-resource-o-hai-region-hoac-hai-account-trong-cung-mot-config-thi-lam-sao",
+    "slug": "tao-resource-o-hai-region-hoac-hai-account-trong-cung-mot-config-thi-lam-sao-2d458367-300c-5da7-92e3-71408e1a8c99",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Các trường hợp thường cần: cert cho CloudFront, DR ở region thứ hai, và kiến trúc multi-account (mỗi env một account, dùng assume_role).",
+        "Để module tự khai báo provider bên trong sẽ gây rắc rối khi cần gỡ module."
+      ],
+      "details": [
+        "Khi truyền vào module, module phải khai báo rõ nó cần provider nào:",
+        "Và gom nhiều account vào một state làm blast radius rất rộng — hạ tầng lớn thì tách state theo account rồi nối bằng data source an toàn hơn."
+      ],
+      "points": [],
+      "sections": [
+        "Khai báo nhiều provider block với alias, rồi chỉ định provider cho từng resource."
+      ],
+      "codeExamples": [
+        {
+          "language": "HCL",
+          "code": "provider \"aws\" { region = \"ap-southeast-1\" }\n\nprovider \"aws\" {\n  alias  = \"us_east\"\n  region = \"us-east-1\"\n}\n\nresource \"aws_acm_certificate\" \"cdn\" {\n  provider = aws.us_east      # CloudFront bat buoc cert o us-east-1\n  domain_name = \"acme.vn\"\n}"
+        },
+        {
+          "language": "HCL",
+          "code": "module \"dr\" {\n  source    = \"./modules/service\"\n  providers = { aws = aws.us_east }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "100220-tao-resource-o-hai-region-hoac-hai-account-trong-cung-mot-config-thi-lam-sao"
+  },
+  {
+    "id": "1c42965d-410e-5c94-9ee1-615535b78aa3",
+    "question": "Test cho Terraform code nên bắt đầu từ đâu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100221-test-cho-terraform-code-nen-bat-dau-tu-dau",
+    "slug": "test-cho-terraform-code-nen-bat-dau-tu-dau-1c42965d-410e-5c94-9ee1-615535b78aa3",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Từ fmt + validate + plan tự động trong CI. Ba bước này rẻ, chạy vài giây, và bắt được phần lớn lỗi trước khi hạ tầng bị đụng tới.",
+        "Dòng cuối là kiểm tra đáng có nhất mà nhiều team bỏ qua: chặn merge nếu plan có destroy trên resource stateful."
+      ],
+      "details": [
+        "Các tầng theo mức đầu tư tăng dần:",
+        "Tầng nặng hơn là dựng thật rồi xoá — terraform test (native, từ 1.6) hoặc Terratest. Với module dùng chung toàn công ty thì đáng, vì một bug trong module lan ra mọi team dùng nó."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "terraform fmt -check -recursive     # format\nterraform validate                  # cu phap + kieu du lieu\ntfsec . && checkov -d .             # scan cau hinh bao mat\nterraform plan -out=tfplan          # doi chieu voi thuc te\nterraform show -json tfplan | jq '.resource_changes[] | select(.change.actions[] == \"delete\")'"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "100221-test-cho-terraform-code-nen-bat-dau-tu-dau"
+  },
+  {
+    "id": "ce24754c-10ef-5d50-aaa0-d7281654c976",
+    "question": "Ai nên có quyền terraform apply lên production?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100222-ai-nen-co-quyen-terraform-apply-len-production",
+    "slug": "ai-nen-co-quyen-terraform-apply-len-production-ce24754c-10ef-5d50-aaa0-d7281654c976",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Chỉ CI role. Người chỉ có read-only ở production. Nhờ vậy mọi thay đổi đều qua review, để lại audit trail, và không ai apply từ laptop.",
+        "Phải chuẩn bị sẵn break-glass: một quy trình cấp quyền tạm có ghi log và có người duyệt. Không có đường này thì lúc sự cố mọi người tự tìm cách vượt rào, và kiểm soát mất tác dụng hoàn toàn."
+      ],
+      "details": [
+        "Dùng OIDC để CI mượn role ngắn hạn, không giữ access key:",
+        "Với thay đổi rủi ro cao, thêm manual approval giữa plan và apply để người duyệt xem đúng plan đó rồi mới bấm chạy."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "YAML",
+          "code": "permissions: { id-token: write, contents: read }\nsteps:\n  - uses: aws-actions/configure-aws-credentials@v4\n    with:\n      role-to-assume: arn:aws:iam::111122223333:role/terraform-apply"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "100222-ai-nen-co-quyen-terraform-apply-len-production"
+  },
+  {
+    "id": "0a83cef0-3ece-5158-9b51-9d3c72b2d00b",
+    "question": "Thay một resource đang phục vụ mà không downtime thì cấu hình thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100223-thay-mot-resource-dang-phuc-vu-ma-khong-downtime-thi-cau-hinh-the-nao",
+    "slug": "thay-mot-resource-dang-phuc-vu-ma-khong-downtime-thi-cau-hinh-the-nao-0a83cef0-3ece-5158-9b51-9d3c72b2d00b",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "create_before_destroy.",
+        "Điều kiện để chạy được: hai bản phải tồn tại đồng thời. Nhiều resource ràng buộc tên unique nên phải dùng name_prefix thay vì name, không thì create cái mới fail vì trùng tên."
+      ],
+      "details": [
+        "Mặc định Terraform destroy trước rồi create sau, nên có một khoảng không có resource nào phục vụ.",
+        "Với resource stateful như RDS, cách này thường không dùng được vì dữ liệu không tự chuyển sang bản mới — cần một quy trình migration riêng.",
+        "Với app server, cách chuẩn hơn là để ASG + instance_refresh lo rolling update: nền tảng tự drain instance cũ khỏi target group và chờ health check của instance mới."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HCL",
+          "code": "resource \"aws_launch_template\" \"app\" {\n  name_prefix = \"app-\"        # bat buoc: ten phai unique\n\n  lifecycle {\n    create_before_destroy = true\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "100223-thay-mot-resource-dang-phuc-vu-ma-khong-downtime-thi-cau-hinh-the-nao"
+  },
+  {
+    "id": "7d732bc8-5ea3-51f8-89f2-74745ca5847d",
+    "question": "Policy as code (Sentinel, OPA/Conftest) dùng để làm gì trong pipeline Terraform?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100224-policy-as-code-sentinel-opa-conftest-dung-de-lam-gi-trong-pipeline-terraform",
+    "slug": "policy-as-code-sentinel-opa-conftest-dung-de-lam-gi-trong-pipeline-terraform-7d732bc8-5ea3-51f8-89f2-74745ca5847d",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Điểm mạnh là quy định trở thành thứ chạy được thay vì một trang wiki. Wiki thì người mới không đọc, còn rule trong pipeline thì không bỏ qua được."
+      ],
+      "details": [
+        "Ba nhóm rule thường dùng: security (encryption at rest, không mở port quản trị), cost (chặn instance type vượt ngưỡng), và operations (bắt buộc tag để phân bổ chi phí và xác định owner).",
+        "Khi triển khai nên bắt đầu ở chế độ warn thay vì deny, để đo xem rule có chặn nhầm công việc bình thường không."
+      ],
+      "points": [],
+      "sections": [
+        "Chặn config vi phạm quy định ngay trong pipeline: S3 bucket public, security group mở port 22 ra 0.0.0.0/0, resource thiếu tag bắt buộc."
+      ],
+      "codeExamples": [
+        {
+          "language": "REGO",
+          "code": "deny[msg] {\n  r := input.resource_changes[_]\n  r.type == \"aws_security_group_rule\"\n  r.change.after.cidr_blocks[_] == \"0.0.0.0/0\"\n  r.change.after.to_port == 22\n  msg := sprintf(\"SSH mo ra internet: %s\", [r.address])\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "100224-policy-as-code-sentinel-opa-conftest-dung-de-lam-gi-trong-pipeline-terraform"
+  },
+  {
+    "id": "d6911872-326b-5ebc-8246-67f7c5417e67",
+    "question": "Vì sao không nên để toàn bộ hạ tầng công ty trong một state?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100225-vi-sao-khong-nen-de-toan-bo-ha-tang-cong-ty-trong-mot-state",
+    "slug": "vi-sao-khong-nen-de-toan-bo-ha-tang-cong-ty-trong-mot-state-d6911872-326b-5ebc-8246-67f7c5417e67",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Blast radius quá rộng và apply quá chậm: một sai sót chạm tới mọi thứ, mỗi lần chạy phải refresh hàng nghìn resource, và state lock làm các team chờ nhau.",
+        "Cân bằng cần giữ: chia quá nhỏ cũng có giá."
+      ],
+      "details": [
+        "Ba tiêu chí chia thường dùng: theo environment, theo domain nghiệp vụ, và theo nhịp thay đổi.",
+        "Hàng trăm state tí hon làm thay đổi xuyên nhiều phần rất phiền và không ai còn nhìn được bức tranh tổng thể."
+      ],
+      "points": [],
+      "sections": [
+        "Nối các state độc lập bằng terraform_remote_state:"
+      ],
+      "codeExamples": [
+        {
+          "language": "TEXT",
+          "code": "prod/network/      # doi vai lan mot nam\nprod/data/         # RDS, ElastiCache - doi hiem, blast radius cao\nprod/services/api/ # doi hang ngay"
+        },
+        {
+          "language": "HCL",
+          "code": "data \"terraform_remote_state\" \"network\" {\n  backend = \"s3\"\n  config  = { bucket = \"acme-tfstate\", key = \"prod/network/terraform.tfstate\" }\n}\n\nresource \"aws_instance\" \"api\" {\n  subnet_id = data.terraform_remote_state.network.outputs.private_subnet_ids[0]\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "100225-vi-sao-khong-nen-de-toan-bo-ha-tang-cong-ty-trong-mot-state"
+  },
+  {
+    "id": "6ad59275-d811-551f-ab68-d7d79598a42a",
+    "question": "IaC giúp kiểm soát chi phí cloud thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100226-iac-giup-kiem-soat-chi-phi-cloud-the-nao",
+    "slug": "iac-giup-kiem-soat-chi-phi-cloud-the-nao-6ad59275-d811-551f-ab68-d7d79598a42a",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ba lợi ích cụ thể:\n1. Ước tính trước khi merge — reviewer thấy ngay một PR làm hoá đơn tăng 800 đô/tháng.\n2. Dọn dẹp khả thi — mọi resource đều có trong code và có tag, nên tìm ra thứ không ai dùng là làm được. Hạ tầng tạo tay thì không ai dám xoá vì không biết nó phục vụ gì.\n3. Ephemeral environment — dựng env đầy đủ cho một branch rồi terraform destroy sạch khi merge, chỉ khả thi khi mọi thứ nằm trong code."
+      ],
+      "details": [
+        "Thực hành đáng có: đặt ngưỡng trong pipeline, ví dụ thay đổi làm tăng hơn 500 đô/tháng thì cần thêm một người duyệt."
+      ],
+      "points": [],
+      "sections": [
+        "Chi phí thành thứ nhìn thấy được lúc review PR thay vì phát hiện vào cuối tháng."
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "infracost breakdown --path .\n# Monthly cost change: +$847  (aws_db_instance.analytics: db.r6g.4xlarge)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "100226-iac-giup-kiem-soat-chi-phi-cloud-the-nao"
+  },
+  {
+    "id": "6d078b4a-2993-5255-b986-0cf8ae7a97e9",
+    "question": "Vì sao tag mọi resource lại quan trọng, và áp tag nhất quán bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100227-vi-sao-tag-moi-resource-lai-quan-trong-va-ap-tag-nhat-quan-bang-cach-nao",
+    "slug": "vi-sao-tag-moi-resource-lai-quan-trong-va-ap-tag-nhat-quan-bang-cach-nao-6d078b4a-2993-5255-b986-0cf8ae7a97e9",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tag cho phép phân bổ chi phí theo team/dự án và trả lời được resource lạ này của ai. Không có tag thì hoá đơn chỉ là một con số tổng.",
+        "Tag ManagedBy là cái hữu ích nhất lúc dọn dẹp: nó tách ngay resource do Terraform quản lý khỏi thứ ai đó tạo tay từ 2 năm trước."
+      ],
+      "details": [
+        "Áp một lần ở provider level:",
+        "Một số resource không nhận default_tags (ASG cần tag block riêng, EBS volume của EC2 cần volume_tags) — đây là chỗ hay sót.",
+        "Đi kèm rất hiệu quả: đưa tag bắt buộc vào policy check, để dữ liệu chi phí và ownership luôn đầy đủ mà không cần nhắc nhau."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HCL",
+          "code": "provider \"aws\" {\n  default_tags {\n    tags = {\n      Environment = var.env\n      Owner       = \"team-payment\"\n      Service     = \"checkout-api\"\n      ManagedBy   = \"terraform\"    # phan biet voi resource tao tay\n    }\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "100227-vi-sao-tag-moi-resource-lai-quan-trong-va-ap-tag-nhat-quan-bang-cach-nao"
+  },
+  {
+    "id": "0f968fca-3e57-553f-86d4-6c7c5bc90cd6",
+    "question": "terraform apply fail giữa chừng vì API provider lỗi. Lúc đó state ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100228-terraform-apply-fail-giua-chung-vi-api-provider-loi-luc-do-state-ra-sao",
+    "slug": "terraform-apply-fail-giua-chung-vi-api-provider-loi-luc-do-state-ra-sao-0f968fca-3e57-553f-86d4-6c7c5bc90cd6",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Resource đã tạo vẫn được ghi vào state, nên chạy lại sẽ làm tiếp phần còn thiếu chứ không làm lại từ đầu. Terraform không có transaction trên nhiều resource nên không có rollback toàn bộ.",
+        "Thói quen vận hành: fail thì đọc kỹ message trước khi retry."
+      ],
+      "details": [
+        "Trường hợp khó chịu hơn: resource đã tạo ở phía AWS nhưng response mất nên state chưa ghi. Lần sau apply sẽ cố tạo lại và fail vì trùng tên — xử lý bằng terraform import rồi chạy tiếp.",
+        "Các cấu hình giảm loại lỗi này:",
+        "Lỗi cấu hình mà cứ chạy lại có thể để lại resource rác sau mỗi lần thử."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HCL",
+          "code": "provider \"aws\" { max_retries = 10 }\n\nresource \"aws_db_instance\" \"main\" {\n  timeouts { create = \"60m\" }   # RDS tao lau hon default\n}"
+        },
+        {
+          "language": "BASH",
+          "code": "terraform apply -parallelism=5   # giam khi bi API rate limit"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "100228-terraform-apply-fail-giua-chung-vi-api-provider-loi-luc-do-state-ra-sao"
+  },
+  {
+    "id": "0435a8f9-0d65-51c9-b449-39b918be0537",
+    "question": "Module dùng chung trong công ty nên được reference và release thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100229-module-dung-chung-trong-cong-ty-nen-duoc-reference-va-release-the-nao",
+    "slug": "module-dung-chung-trong-cong-ty-nen-duoc-reference-va-release-the-nao-0435a8f9-0d65-51c9-b449-39b918be0537",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Trỏ vào main nghĩa là hạ tầng đổi chỉ vì ai đó merge một PR, và lúc sự cố không ai lần ra nguyên nhân."
+      ],
+      "details": [
+        "Quy trình release nên có: semver rõ ràng, changelog cho mỗi bản (nhất là breaking change), và test dựng thật trong một account riêng trước khi tag.",
+        "Với breaking change: giữ bản cũ chạy được một thời gian và báo trước cho các team đang dùng. Ép nâng cấp đột ngột là cách nhanh nhất khiến các team copy module về repo riêng, và thế là hết dùng chung.",
+        "Dấu hiệu module thiết kế tốt: team khác dùng được mà không cần đọc code bên trong, chỉ đọc mô tả variable và output."
+      ],
+      "points": [],
+      "sections": [
+        "Reference theo version đã pin, không bao giờ trỏ vào main."
+      ],
+      "codeExamples": [
+        {
+          "language": "HCL",
+          "code": "module \"rds\" {\n  source  = \"app.terraform.io/acme/rds/aws\"\n  version = \"~> 3.2\"        # registry\n}\n\nmodule \"vpc\" {\n  source = \"git::ssh://git@github.com/acme/tf-modules.git//vpc?ref=v2.3.0\"\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "100229-module-dung-chung-trong-cong-ty-nen-duoc-reference-va-release-the-nao"
+  },
+  {
+    "id": "4d51c92c-2975-5bc0-814d-959817acae49",
+    "question": "Dựng environment tạm cho mỗi PR cần những điều kiện gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100230-dung-environment-tam-cho-moi-pr-can-nhung-dieu-kien-gi",
+    "slug": "dung-environment-tam-cho-moi-pr-can-nhung-dieu-kien-gi-4d51c92c-2975-5bc0-814d-959817acae49",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Các chỗ thường vướng:\n- Tên unique toàn cầu (S3 bucket, domain, ECR repo).\n- Resource có prevent_destroy hoặc deletion_protection copy từ production sang.\n- Thứ sinh ra gián tiếp mà destroy không dọn: CloudWatch log group, snapshot, ENI còn attach."
+      ],
+      "details": [
+        "Bắt buộc phải có cleanup theo TTL, không phụ thuộc vào việc ai đó nhớ xoá — PR bỏ dở là chuyện bình thường."
+      ],
+      "points": [],
+      "sections": [
+        "Mọi resource phải đặt tên theo branch/PR để không trùng, và destroy sạch được khi PR đóng."
+      ],
+      "codeExamples": [
+        {
+          "language": "HCL",
+          "code": "locals { prefix = \"pr-${var.pr_number}\" }\n\nresource \"aws_s3_bucket\" \"assets\" {\n  bucket = \"${local.prefix}-acme-assets\"   # ten global unique\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "100230-dung-environment-tam-cho-moi-pr-can-nhung-dieu-kien-gi"
+  },
+  {
+    "id": "a8927d7a-1ea2-548d-aab1-e7acf2c60098",
+    "question": "State bị xoá mất hoàn toàn. Hậu quả và cách khôi phục?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "state-bi-xoa-mat-hoan-toan-hau-qua-va-cach-khoi-phuc-a8927d7a-1ea2-548d-aab1-e7acf2c60098",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": null
+  },
+  {
+    "id": "2485c088-4c4e-506c-97d9-28e6a0d8dff6",
+    "question": "terraform plan đã mất 15 phút. Hướng xử lý gốc rễ là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "terraform-plan-da-mat-15-phut-huong-xu-ly-goc-re-la-gi-2485c088-4c4e-506c-97d9-28e6a0d8dff6",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": null
+  },
+  {
+    "id": "42b6f4d9-fa2e-5bba-9dbb-830f6b91ec1c",
+    "question": "Drift detection ở quy mô lớn nên làm thế nào, và phân loại drift ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "drift-detection-o-quy-mo-lon-nen-lam-the-nao-va-phan-loai-drift-ra-sao-42b6f4d9-fa2e-5bba-9dbb-830f6b91ec1c",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": null
+  },
+  {
+    "id": "d884e21b-5d2b-549e-b7c5-37bdee91dc08",
+    "question": "Nâng Terraform lên major version mới trên hàng chục state thì làm thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "nang-terraform-len-major-version-moi-tren-hang-chuc-state-thi-lam-the-nao-d884e21b-5d2b-549e-b7c5-37bdee91dc08",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": null
+  },
+  {
+    "id": "1eb43766-d290-5158-a0b4-bc7f9102f04e",
+    "question": "IaC đóng vai trò gì trong kế hoạch disaster recovery?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "iac-dong-vai-tro-gi-trong-ke-hoach-disaster-recovery-1eb43766-d290-5158-a0b4-bc7f9102f04e",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": null
+  },
+  {
+    "id": "1f3f4a87-bef7-57f0-9d3e-444fa0b7ca71",
+    "question": "Vì sao RDS và S3 cần cách quản lý khác với EC2 và ASG?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vi-sao-rds-va-s3-can-cach-quan-ly-khac-voi-ec2-va-asg-1f3f4a87-bef7-57f0-9d3e-444fa0b7ca71",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": null
+  },
+  {
+    "id": "5b938bda-e367-50df-a6ea-823b36e54f11",
+    "question": "Tiếp quản một hệ thống production tạo tay hoàn toàn thì bắt đầu từ đâu?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "tiep-quan-mot-he-thong-production-tao-tay-hoan-toan-thi-bat-dau-tu-dau-5b938bda-e367-50df-a6ea-823b36e54f11",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": null
+  },
+  {
+    "id": "757c56f9-a976-5666-b815-38462e6f72d2",
+    "question": "Việc gì không nên giao cho Terraform quản lý?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "viec-gi-khong-nen-giao-cho-terraform-quan-ly-757c56f9-a976-5666-b815-38462e6f72d2",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": null
+  },
+  {
+    "id": "4ba3ad15-72aa-5341-9e39-f76d2b530412",
+    "question": "Đánh giá một dự án IaC có khoẻ mạnh hay không thì nhìn vào đâu?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "danh-gia-mot-du-an-iac-co-khoe-manh-hay-khong-thi-nhin-vao-dau-4ba3ad15-72aa-5341-9e39-f76d2b530412",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": null
+  },
+  {
+    "id": "67fbd298-556d-5ffa-8e2a-64b7bed50b73",
+    "question": "Nguyên nhân phổ biến nhất khiến việc adopt IaC thất bại là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "nguyen-nhan-pho-bien-nhat-khien-viec-adopt-iac-that-bai-la-gi-67fbd298-556d-5ffa-8e2a-64b7bed50b73",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": null
+  }
+]

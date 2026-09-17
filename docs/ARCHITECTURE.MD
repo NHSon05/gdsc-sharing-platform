@@ -447,6 +447,13 @@ RAG and vector databases are outside the initial MVP.
 
 ## 8. Identity architecture
 
+Interview question read integration is documented in `docs/features/interview-questions/API.md`.
+It uses a Domain entity, Application query contracts, an Infrastructure EF service,
+and authenticated member/admin controllers. The existing JSONB dataset table is
+adopted by an EF migration; generated scalar columns retain its original format.
+Member reads hide drafts and review conflicts. Dataset departments remain content
+classification codes and are not member department foreign keys.
+
 The system uses ASP.NET Core Identity with `Guid` keys.
 
 ```csharp

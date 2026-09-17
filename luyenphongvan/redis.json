@@ -1,0 +1,956 @@
+[
+  {
+    "id": "931183d8-806e-598a-a7b2-b08bd4db3a73",
+    "question": "Redis là gì và tại sao nó có tốc độ cực nhanh?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2219-redis-la-gi-va-tai-sao-no-co-toc-do-cuc-nhanh",
+    "slug": "redis-la-gi-va-tai-sao-no-co-toc-do-cuc-nhanh-931183d8-806e-598a-a7b2-b08bd4db3a73",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Redis (Remote Dictionary Server) là in-memory data structure store, thường được dùng làm cache, message broker, và session store."
+      ],
+      "details": [],
+      "points": [
+        "Redis nhanh vì toàn bộ data được lưu trong RAM — tốc độ đọc/ghi RAM nhanh hơn disk hàng nghìn lần.",
+        "Ngoài ra, Redis dùng I/O multiplexing (epoll/kqueue) với event loop tương tự Node.js, tránh được overhead của context switching và lock contention.",
+        "Command execution vẫn single-threaded để đảm bảo atomicity.",
+        "Redis 7.x dùng multi-threaded I/O theo mặc định cho network (đọc/ghi socket), vẫn single-threaded cho command execution để tránh race condition.",
+        "Benchmark thông thường: Redis đạt 100,000-1,000,000 ops/giây tùy loại operation và hardware."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "2219-redis-la-gi-va-tai-sao-no-co-toc-do-cuc-nhanh"
+  },
+  {
+    "id": "c53a99e1-1098-5f50-87de-897e15cbcfd4",
+    "question": "Các kiểu dữ liệu trong Redis: String, Hash, List, Set, Sorted Set dùng khi nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2220-cac-kieu-du-lieu-trong-redis-string-hash-list-set-sorted-set-dung-khi-nao",
+    "slug": "cac-kieu-du-lieu-trong-redis-string-hash-list-set-sorted-set-dung-khi-nao-c53a99e1-1098-5f50-87de-897e15cbcfd4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Redis có 5 kiểu dữ liệu cơ bản (String, Hash, List, Set, Sorted Set), mỗi loại tối ưu cho một use case khác nhau."
+      ],
+      "details": [
+        "Các kiểu dữ liệu Redis và khi nào dùng:"
+      ],
+      "points": [
+        "String: kiểu cơ bản nhất, dùng cho cache HTML/JSON, counter (INCR pageview), session token. Lệnh: SET key value EX 3600, GET key, INCR counter.",
+        "Hash: lưu object có nhiều field (như row trong database), hiệu quả hơn lưu từng field dưới dạng String riêng. Dùng cho: user profile, product info. Lệnh: HSET user:1 name 'Alice' age 30, HGETALL user:1.",
+        "List: linked list có thể push/pop từ cả hai đầu — dùng cho message queue, activity feed, recent items. Lệnh: LPUSH queue task1, RPOP queue.",
+        "Set: tập hợp unique member — dùng cho tags, unique visitors, friend list. Lệnh: SADD tags:post:1 redis database, SISMEMBER, SUNION.",
+        "Sorted Set: như Set nhưng mỗi member có score — dùng cho leaderboard, rate limiting, priority queue. Lệnh: ZADD leaderboard 1000 'Alice', ZRANGE leaderboard 0 9 REV WITHSCORES."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "2220-cac-kieu-du-lieu-trong-redis-string-hash-list-set-sorted-set-dung-khi-nao"
+  },
+  {
+    "id": "32758bcb-1100-5484-b2e7-f80f2f27283e",
+    "question": "So sánh Redis và Memcached: khi nào nên dùng cái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2226-so-sanh-redis-va-memcached-khi-nao-nen-dung-cai-nao",
+    "slug": "so-sanh-redis-va-memcached-khi-nao-nen-dung-cai-nao-32758bcb-1100-5484-b2e7-f80f2f27283e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Memcached là cache thuần: đúng một kiểu dữ liệu (string), đa luồng, vận hành đơn giản."
+      ],
+      "details": [
+        "Redis có cả một bộ kiểu dữ liệu (String, Hash, List, Set, Sorted Set, Stream, HyperLogLog, Geospatial) kèm persistence, pub/sub, transaction, Lua scripting và clustering native.",
+        "Chọn Memcached khi: chỉ cần cache key-value đơn giản, muốn tận dụng đa luồng cho workload CPU-bound (hiếm gặp trong thực tế), hoặc team đã quen sẵn.",
+        "Chọn Redis khi: cần cấu trúc dữ liệu phong phú, persistence, pub/sub, session store, rate limiting, leaderboard, distributed lock — tức là gần như mọi trường hợp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "2226-so-sanh-redis-va-memcached-khi-nao-nen-dung-cai-nao"
+  },
+  {
+    "id": "525a0403-3cb1-5281-a3c1-63cab975201f",
+    "question": "Các use case phổ biến nhất của Redis trong production là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2227-cac-use-case-pho-bien-nhat-cua-redis-trong-production-la-gi",
+    "slug": "cac-use-case-pho-bien-nhat-cua-redis-trong-production-la-gi-525a0403-3cb1-5281-a3c1-63cab975201f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Redis là multi-purpose in-memory store được dùng rộng rãi cho caching, session, rate limiting, leaderboard và distributed lock trong hầu hết production stack hiện đại."
+      ],
+      "details": [
+        "Các use case phổ biến của Redis trong production:"
+      ],
+      "points": [
+        "Caching: lưu kết quả database query, API response, rendered HTML để giảm latency và tải cho database — đây là use case phổ biến nhất.",
+        "Session store: lưu session người dùng với TTL, dễ share giữa nhiều server instance.",
+        "Rate limiting: dùng INCR + EXPIRE hoặc Sorted Set để giới hạn API request theo IP/user.",
+        "Leaderboard: dùng Sorted Set để rank user theo điểm, cực kỳ efficient với ZADD, ZRANGE, ZRANK.",
+        "Queue: dùng List với LPUSH/BRPOP để implement simple task queue (hoặc Redis Streams cho production).",
+        "Distributed lock: implement lock bằng SET key value NX EX timeout để tránh race condition trong distributed system.",
+        "GEOSEARCH FROMMEMBER/FROMLONLAT BYRADIUS",
+        "Full-text search: RedisSearch module (Redis Stack) cho phép search index trực tiếp trên Redis data."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "2227-cac-use-case-pho-bien-nhat-cua-redis-trong-production-la-gi"
+  },
+  {
+    "id": "e494ab47-b466-50be-b6dc-0ec48c5797af",
+    "question": "Redis HyperLogLog là gì? Khi nào nên dùng thay vì Set?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2261-redis-hyperloglog-la-gi-khi-nao-nen-dung-thay-vi-set",
+    "slug": "redis-hyperloglog-la-gi-khi-nao-nen-dung-thay-vi-set-e494ab47-b466-50be-b6dc-0ec48c5797af",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "HyperLogLog là probabilistic data structure để đếm unique elements (cardinality estimation) với sai số chuẩn ~0.81% nhưng dùng chỉ 12KB bộ nhớ cố định bất kể có 1 hay 1 tỷ unique element. Set chính xác 100% nhưng tốn memory tỷ lệ với số element. Lệnh: PFADD pageviews user123 user456, PFCOUNT pageviews (trả về ước lượng số unique users), PFMERGE daily_total hour1 hour2 (merge nhiều HLL). Khi dùng HyperLogLog: đếm unique visitors/day, unique queries/hour, unique IPs — khi cần approximate count với memory cực nhỏ và không cần biết chính xác element nào đã add. Khi dùng Set: khi cần biết element cụ thể có trong tập không (SISMEMBER), khi cần list members, khi số element < vài triệu và memory là vừa đủ."
+      ],
+      "details": [
+        "Ví dụ: Google Analytics đếm unique page views dùng HyperLogLog — 1 tỷ visitors chỉ tốn 12KB thay vì hàng GB."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "2261-redis-hyperloglog-la-gi-khi-nao-nen-dung-thay-vi-set"
+  },
+  {
+    "id": "60313097-0c34-544d-b7f5-4eccca0a5909",
+    "question": "Redis lưu trên RAM — mất điện có mất dữ liệu không? Có nên dùng Redis làm database chính?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98002-redis-luu-tren-ram-mat-dien-co-mat-du-lieu-khong-co-nen-dung-redis-lam-database",
+    "slug": "redis-luu-tren-ram-mat-dien-co-mat-du-lieu-khong-co-nen-dung-redis-lam-database-chinh-60313097-0c34-544d-b7f5-4eccca0a5909",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Redis có cơ chế lưu xuống đĩa, nhưng độ bền vẫn thấp hơn một RDBMS và phải hiểu rõ trước khi tin tưởng."
+      ],
+      "details": [
+        "Hai cơ chế:\n- RDB: chụp snapshot toàn bộ dataset theo chu kỳ. File nhỏ, khởi động lại nhanh, nhưng mất phần dữ liệu ghi sau snapshot cuối (thường vài phút).\n- AOF: ghi tiếp mọi lệnh thay đổi vào một file log. Bền hơn; với appendfsync everysec thì tối đa mất khoảng 1 giây dữ liệu. File lớn hơn, cần rewrite định kỳ.",
+        "Có thể bật cả hai: AOF để phục hồi bền, RDB để backup và khởi động nhanh.",
+        "Dùng làm DB chính? Chỉ khi dữ liệu chấp nhận mất một phần, hoặc có thể dựng lại từ nguồn khác (cache, session, rate-limit counter, leaderboard). Với dữ liệu bắt buộc không được mất (đơn hàng, giao dịch), Redis không thay được Postgres: không transaction đa bảng theo kiểu ACID với rollback tuỳ ý, không JOIN, không constraint, và dataset bị chặn bởi dung lượng RAM."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "98002-redis-luu-tren-ram-mat-dien-co-mat-du-lieu-khong-co-nen-dung-redis-lam-database"
+  },
+  {
+    "id": "aa0dc0f7-6ddd-5e88-a7b3-49e8c241754a",
+    "question": "Redis persistence: phân biệt RDB và AOF, khi nào nên dùng loại nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2221-redis-persistence-phan-biet-rdb-va-aof-khi-nao-nen-dung-loai-nao",
+    "slug": "redis-persistence-phan-biet-rdb-va-aof-khi-nao-nen-dung-loai-nao-aa0dc0f7-6ddd-5e88-a7b3-49e8c241754a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "RDB (Redis Database Snapshot) chụp toàn bộ data ra file .rdb theo định kỳ — ví dụ save 900 1 nghĩa là snapshot nếu có ít nhất 1 key đổi trong 900 giây. File gọn, restart nhanh vì chỉ nạp một file, đổi lại có thể mất phần data phát sinh kể từ snapshot cuối."
+      ],
+      "details": [
+        "AOF (Append-Only File) ghi log mọi thao tác write vào file .aof, restart thì replay lại toàn bộ command để dựng lại state. Bền hơn hẳn — appendfsync always là không mất gì, everysec mất tối đa 1 giây — nhưng file lớn hơn và restart chậm hơn.",
+        "Production nên bật cả hai: RDB lo backup định kỳ, AOF lo durability. Redis 7.0 còn có định dạng lai RDB-AOF, trong đó AOF rewrite dùng một snapshot RDB cộng phần delta AOF, gộp được ưu điểm của cả hai.",
+        "Lưu ý: nếu Redis chỉ thuần làm cache thì tắt cả hai để đổi lấy hiệu năng tối đa — mất data lúc đó không quan trọng vì nguồn thật vẫn nằm ở database."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "2221-redis-persistence-phan-biet-rdb-va-aof-khi-nao-nen-dung-loai-nao"
+  },
+  {
+    "id": "588cb86d-a826-58aa-8526-d7355eca23f3",
+    "question": "Redis Pub/Sub là gì? Cách hoạt động và hạn chế so với Kafka?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2222-redis-pub-sub-la-gi-cach-hoat-dong-va-han-che-so-voi-kafka",
+    "slug": "redis-pub-sub-la-gi-cach-hoat-dong-va-han-che-so-voi-kafka-588cb86d-a826-58aa-8526-d7355eca23f3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Bản chất là fire-and-forget: message không được lưu lại. Không có subscriber nào online lúc publish là message mất luôn, và subscriber mới vào cũng không đọc được message cũ."
+      ],
+      "details": [
+        "So với Kafka thì thiếu: không persistence, không replay, không consumer group kèm quản lý offset, không đảm bảo delivery.",
+        "Hợp với: thông báo real-time, tin nhắn chat, cập nhật dashboard trực tiếp, tín hiệu invalidate cache.",
+        "Cần messaging tin cậy có durability và replay thì dùng Redis Streams (có từ Redis 5.0) hoặc Kafka. Ngoài ra Redis Keyspace Notifications là một biến thể của Pub/Sub để nghe chính các sự kiện nội bộ của Redis (key hết hạn, key được set...)."
+      ],
+      "points": [],
+      "sections": [
+        "Redis Pub/Sub cho phép publisher gửi message vào một channel, và mọi subscriber đang lắng nghe channel đó nhận được ngay:"
+      ],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "SUBSCRIBE news\nPUBLISH news \"Hello World\""
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "2222-redis-pub-sub-la-gi-cach-hoat-dong-va-han-che-so-voi-kafka"
+  },
+  {
+    "id": "c678798a-4a3e-5580-a36b-4041cb0e0337",
+    "question": "Transactions trong Redis: MULTI/EXEC và pipeline khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2223-transactions-trong-redis-multi-exec-va-pipeline-khac-nhau-nhu-the-nao",
+    "slug": "transactions-trong-redis-multi-exec-va-pipeline-khac-nhau-nhu-the-nao-c678798a-4a3e-5580-a36b-4041cb0e0337",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Redis Transaction dùng MULTI/EXEC: các command giữa MULTI và EXEC được queue lại và execute atomically — không có command nào khác được xen vào giữa."
+      ],
+      "details": [
+        "đọc balance, kiểm tra đủ tiền, WATCH balance, MULTI, deduct, EXEC — nếu có race condition thì EXEC fail và retry."
+      ],
+      "points": [
+        "Tuy nhiên, Redis transaction không có rollback — nếu một command fail (runtime error như sai kiểu data), các command khác vẫn execute.",
+        "Lỗi cú pháp (syntax error) khi queue command sẽ khiến toàn bộ transaction bị discard; chỉ runtime error mới bị bỏ qua. DISCARD hủy transaction. WATCH key cho phép optimistic locking: nếu key thay đổi trước khi EXEC, transaction bị abort (EXEC trả về nil) — dùng để implement compare-and-swap.",
+        "Pipeline khác với transaction: pipeline đơn giản là gom nhiều command gửi một lần để giảm network round-trip, không đảm bảo atomicity."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "2223-transactions-trong-redis-multi-exec-va-pipeline-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "2fa1e186-677c-504c-a8a8-2f95d7967557",
+    "question": "Key expiration và eviction policy trong Redis: các policy là gì và khi nào dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2225-key-expiration-va-eviction-policy-trong-redis-cac-policy-la-gi-va-khi-nao-dung",
+    "slug": "key-expiration-va-eviction-policy-trong-redis-cac-policy-la-gi-va-khi-nao-dung-2fa1e186-677c-504c-a8a8-2f95d7967557",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Key expiration: dùng EXPIRE key seconds, PEXPIRE key milliseconds, hoặc SET key value EX seconds để tự động xóa key sau khoảng thời gian."
+      ],
+      "details": [],
+      "points": [
+        "Redis kiểm tra expiry theo hai cách: lazy expiration (kiểm tra khi access key) và active expiration (background job mỗi 100ms xóa random sample 20 key trong set expired keys).",
+        "Eviction policy được áp dụng khi Redis đạt maxmemory: noeviction (reject write khi full), allkeys-lru (xóa key ít dùng nhất gần đây trong toàn bộ keyspace), volatile-lru (chỉ xóa key có TTL ít dùng nhất), allkeys-lfu (xóa key ít dùng nhất theo frequency — Redis 4.0+), volatile-ttl (xóa key có TTL ngắn nhất), allkeys-random.",
+        "Cache dùng allkeys-lru hoặc allkeys-lfu; session store dùng volatile-lru; data không thể mất dùng noeviction.",
+        "Nên set maxmemory-policy phù hợp và monitor evicted_keys metric."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "2225-key-expiration-va-eviction-policy-trong-redis-cac-policy-la-gi-va-khi-nao-dung"
+  },
+  {
+    "id": "b112cc4d-019f-5747-9d5c-2f9bf27b6180",
+    "question": "Key naming conventions trong Redis: best practices để tổ chức namespace?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2228-key-naming-conventions-trong-redis-best-practices-de-to-chuc-namespace",
+    "slug": "key-naming-conventions-trong-redis-best-practices-de-to-chuc-namespace-b112cc4d-019f-5747-9d5c-2f9bf27b6180",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Best practice là dùng dấu hai chấm : làm separator để tạo namespace hierarchy, ví dụ: user:1001:profile, user:1001:session, product:sku:ABC123:stock."
+      ],
+      "details": [],
+      "points": [
+        "Các rule quan trọng: dùng tên có ý nghĩa và mô tả rõ object type + identifier + attribute (ví dụ: order:order_id:status); tránh key quá dài (mỗi key đều tốn memory cho metadata overhead); tránh key quá ngắn khó đọc; thống nhất format trong toàn team và document lại.",
+        "Dùng SCAN thay vì KEYS * khi cần tìm key theo pattern vì KEYS block Redis; SCAN iteration không block.",
+        "Đối với hot key (một key được access cực nhiều), có thể dùng local cache hoặc key sharding (user:1001:profile:shard:3).",
+        "Một pattern hay là thêm version vào key namespace để dễ cache invalidation hàng loạt: v2:user:1001:profile — khi cần invalidate tất cả, chỉ cần tăng version prefix."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "2228-key-naming-conventions-trong-redis-best-practices-de-to-chuc-namespace"
+  },
+  {
+    "id": "616d0a99-23ff-544a-aa3c-f39b9abd9106",
+    "question": "Redis Bitmaps là gì? Ứng dụng thực tế nào phù hợp nhất?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2262-redis-bitmaps-la-gi-ung-dung-thuc-te-nao-phu-hop-nhat",
+    "slug": "redis-bitmaps-la-gi-ung-dung-thuc-te-nao-phu-hop-nhat-616d0a99-23ff-544a-aa3c-f39b9abd9106",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Redis Bitmap không phải data type riêng — đó là String với các bit operation. Mỗi String key có thể chứa đến 512MB = ~4 tỷ bits. Lệnh: SETBIT key offset 1, GETBIT key offset, BITCOUNT key (đếm số bit=1), BITOP AND/OR/XOR dest key1 key2. Use case điển hình: Daily Active Users (DAU) — dùng user_id làm offset, mỗi ngày một key active:2024-01-15; SETBIT active:2024-01-15 user_id 1 khi user login; BITCOUNT active:2024-01-15 = số user active hôm nay. Memory: 1 triệu users = 1 triệu bits = 125KB — cực kỳ efficient. Feature flags per user: SETBIT feature:dark-mode user_id 1 để enable tính năng cho user cụ thể. Streak tracking: check consecutive days login. BITPOS: tìm vị trí bit đầu tiên = 0 hoặc 1 — dùng để assign ID."
+      ],
+      "details": [
+        "Lưu ý: nếu user_id lớn (> 100 triệu), bitmap vẫn chỉ tốn 12MB cho 100M users — vẫn hiệu quả."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "2262-redis-bitmaps-la-gi-ung-dung-thuc-te-nao-phu-hop-nhat"
+  },
+  {
+    "id": "35829904-d9b6-505c-80f9-3975a734ea45",
+    "question": "Redis Sorted Set: cách implement leaderboard real-time và sliding window rate limiter?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2263-redis-sorted-set-cach-implement-leaderboard-real-time-va-sliding-window-rate-lim",
+    "slug": "redis-sorted-set-cach-implement-leaderboard-real-time-va-sliding-window-rate-limiter-35829904-d9b6-505c-80f9-3975a734ea45",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Tất cả thao tác này cần wrap trong Lua script để atomic."
+      ],
+      "details": [],
+      "points": [
+        "So với Fixed Window: Sliding Window chính xác hơn, không có boundary spike.",
+        "Nhược điểm: tốn memory hơn (lưu timestamp từng request) — dùng ZSET với member là timestamp+uuid."
+      ],
+      "sections": [
+        "O(log N) cho mỗi update. Sliding Window Rate Limiter dùng Sorted Set:"
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "ZADD leaderboard 9500 'alice'   # alice: 9500 điểm\nZADD leaderboard 8200 'bob'\nZRANGE leaderboard 0 9 REV WITHSCORES  # top 10 giảm dần\nZRANK leaderboard 'alice'               # rank của alice\nZINCRBY leaderboard 100 'alice'         # tăng 100 điểm"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "2263-redis-sorted-set-cach-implement-leaderboard-real-time-va-sliding-window-rate-lim"
+  },
+  {
+    "id": "80d7205f-6008-5c1e-b403-b62631c106bd",
+    "question": "Khi nào dùng Redis Hash vs String để lưu object? Trade-off về memory và performance?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2264-khi-nao-dung-redis-hash-vs-string-de-luu-object-trade-off-ve-memory-va-performan",
+    "slug": "khi-nao-dung-redis-hash-vs-string-de-luu-object-trade-off-ve-memory-va-performance-80d7205f-6008-5c1e-b403-b62631c106bd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "String approach: serialize toàn bộ object thành JSON và lưu vào một key — đơn giản, một GET là lấy toàn bộ."
+      ],
+      "details": [],
+      "points": [
+        "Nhược điểm: muốn update một field phải GET toàn bộ object, deserialize, update, serialize lại, SET — tốn băng thông và CPU; race condition nếu concurrent write. Hash approach: mỗi field là một Hash field — HSET user:1 name 'Alice' age 30 email 'a@b.com'; HGET user:1 name lấy một field; HINCRBY user:1 age 1 tăng atomic không cần GET. Memory trade-off: Redis tự dùng listpack encoding (compact array, đổi tên từ ziplist trong Redis 7.0) khi Hash nhỏ (< hash-max-listpack-entries=128 field và hash-max-listpack-value=64 bytes) — hash nhỏ tốn ít memory hơn nhiều String key riêng lẻ.",
+        "Khi vượt ngưỡng, Redis chuyển sang hashtable encoding. Quyết định: nhiều field thay đổi độc lập → Hash; object luôn đọc/ghi toàn bộ → String (JSON); object rất lớn (> 1KB serialized) → String với compression."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "2264-khi-nao-dung-redis-hash-vs-string-de-luu-object-trade-off-ve-memory-va-performan"
+  },
+  {
+    "id": "7c1f083f-5ad4-513f-bf33-801715e37f87",
+    "question": "Các caching strategies: Cache-Aside, Write-Through, Write-Behind — khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2265-cac-caching-strategies-cache-aside-write-through-write-behind-khi-nao-dung-cai-n",
+    "slug": "cac-caching-strategies-cache-aside-write-through-write-behind-khi-nao-dung-cai-nao-7c1f083f-5ad4-513f-bf33-801715e37f87",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Cache-Aside (lazy loading) — ứng dụng tự quản lý cache. Đọc: xem cache → miss → query DB → set cache → trả về. Ghi: update DB rồi invalidate hoặc update cache.\n- Được: chỉ cache thứ thực sự có người hỏi tới, và rất linh hoạt.\n- Mất: mỗi lần miss là thêm latency, dính cold start, và có nguy cơ stampede.\n- Đây là lựa chọn phổ biến nhất cho workload đọc nhiều."
+      ],
+      "details": [
+        "Write-Through — mỗi lần ghi thì cập nhật đồng thời cả DB lẫn cache.\n- Được: cache luôn tươi.\n- Mất: latency ghi cao hơn, và cache đầy những data chẳng ai đọc, phí bộ nhớ.\n- Hợp với workload ghi xong đọc lại ngay.",
+        "Write-Behind (write-back) — ghi vào cache trước, gom lô rồi flush xuống DB bất đồng bộ.\n- Được: latency ghi cực thấp và giảm hẳn tải ghi cho DB.\n- Mất: cache chết trước khi flush là mất data, và chấp nhận eventual consistency.\n- Dùng cho ghi tần suất cao (điểm game, bộ đếm lượt xem, giỏ hàng) hoặc khi DB write chính là nút thắt."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "2265-cac-caching-strategies-cache-aside-write-through-write-behind-khi-nao-dung-cai-n"
+  },
+  {
+    "id": "b87e8e95-f55d-599b-ba66-348dc003b6da",
+    "question": "Session storage với Redis: tại sao Redis là lựa chọn tốt hơn database cho session?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2267-session-storage-voi-redis-tai-sao-redis-la-lua-chon-tot-hon-database-cho-session",
+    "slug": "session-storage-voi-redis-tai-sao-redis-la-lua-chon-tot-hon-database-cho-session-b87e8e95-f55d-599b-ba66-348dc003b6da",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Với Sentinel/Cluster: session available ngay cả khi một node fail. Lưu ý: không lưu sensitive data trong session JSON — chỉ lưu user_id, roles; sensitive data lấy từ DB."
+      ],
+      "details": [
+        "Express.js connect-redis, Next.js iron-session đều support Redis backend."
+      ],
+      "points": [
+        "Session cần đặc tính: đọc/ghi nhanh (mỗi request authenticated cần verify session), TTL-based expiration (logout tự động sau idle time), và không cần persist lâu dài.",
+        "Redis rất phù hợp: O(1) GET/SET, native TTL support (SETEX session:abc123 3600 '{userId:1,...}'), in-memory nên sub-millisecond latency.",
+        "So với database: query DB mỗi request tốn 1-10ms thêm; DB không có native TTL; cần background job cleanup expired sessions. Implementation pattern:"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# Login: tạo session\nSET session:{token} {json_data} EX 86400\n# Verify: đọc session\nGET session:{token}\n# Logout: xóa session ngay\nDEL session:{token}\n# Extend: renew TTL khi user active\nEXPIRE session:{token} 86400"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "2267-session-storage-voi-redis-tai-sao-redis-la-lua-chon-tot-hon-database-cho-session"
+  },
+  {
+    "id": "63db59aa-30ad-5f2e-982a-324c55ee7cd6",
+    "question": "Redis Sentinel là gì? Cách nó cung cấp High Availability?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2269-redis-sentinel-la-gi-cach-no-cung-cap-high-availability",
+    "slug": "redis-sentinel-la-gi-cach-no-cung-cap-high-availability-63db59aa-30ad-5f2e-982a-324c55ee7cd6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Redis Sentinel là hệ thống HA cho Redis single-master/replica setup — tự động monitor, notify và failover khi master fail."
+      ],
+      "details": [],
+      "points": [
+        "Sentinel chạy như separate process (thường 3+ Sentinel nodes để quorum). Chức năng: Monitoring — Sentinel liên tục ping master và replicas; Notification — alert qua pub/sub khi có vấn đề; Automatic failover — khi master down, Sentinel bầu (quorum majority) và promote replica thành master mới, cập nhật cấu hình các replica còn lại để follow master mới; Service discovery — client query Sentinel để lấy địa chỉ master hiện tại. Quorum: số Sentinel tối thiểu phải đồng ý master down để bắt đầu failover — tránh split-brain khi network partition.",
+        "Setup tối thiểu: 3 Sentinel + 1 master + 1 replica. Khác với Cluster: Sentinel không sharding, không scale write horizontally — chỉ HA.",
+        "Dùng Sentinel khi: cần HA nhưng data fit trong 1 server; dùng Cluster khi: cần scale beyond single server."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "2269-redis-sentinel-la-gi-cach-no-cung-cap-high-availability"
+  },
+  {
+    "id": "fcffb9d8-10fd-50e8-9550-05be00da8312",
+    "question": "Redis eviction policies: LRU, LFU, allkeys vs volatile — khi nào dùng policy nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2271-redis-eviction-policies-lru-lfu-allkeys-vs-volatile-khi-nao-dung-policy-nao",
+    "slug": "redis-eviction-policies-lru-lfu-allkeys-vs-volatile-khi-nao-dung-policy-nao-fcffb9d8-10fd-50e8-9550-05be00da8312",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Redis có 8 eviction policy; allkeys-lru là lựa chọn tốt nhất cho pure cache, volatile-lru khi mix cache và persistent keys, noeviction khi data không được phép mất."
+      ],
+      "details": [
+        "Khi Redis đạt maxmemory, eviction policy quyết định key nào bị xóa để nhường chỗ. Có 8 policy chính:",
+        "Thực tế: cache-only Redis → allkeys-lru; Redis vừa cache vừa persistent → volatile-lru (chỉ evict keys có TTL, không đụng đến persistent keys). Monitor evicted_keys metric để biết eviction đang xảy ra."
+      ],
+      "points": [
+        "noeviction (default): trả lỗi khi full — dùng cho DB không chấp nhận mất data",
+        "allkeys-lru: evict key ít dùng gần đây nhất trong toàn bộ keyspace — tốt nhất cho cache thuần túy",
+        "allkeys-lfu (Redis 4.0+): evict key ít được access nhất về tần suất — tốt hơn LRU khi access pattern có hot/cold keys rõ ràng",
+        "allkeys-random: evict random — hiếm dùng",
+        "volatile-lru: evict key có TTL, ưu tiên LRU — dùng khi mix cache + persistent keys",
+        "volatile-lfu: evict key có TTL, ưu tiên LFU",
+        "volatile-ttl",
+        "volatile-random: evict random trong keys có TTL"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "2271-redis-eviction-policies-lru-lfu-allkeys-vs-volatile-khi-nao-dung-policy-nao"
+  },
+  {
+    "id": "c3de8f40-1d78-578e-afe7-81389daeff87",
+    "question": "Khi nào KHÔNG nên dùng Redis?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94143-khi-nao-khong-nen-dung-redis",
+    "slug": "khi-nao-khong-nen-dung-redis-c3de8f40-1d78-578e-afe7-81389daeff87",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Redis mạnh nhờ chạy in-memory và đơn luồng cho việc thực thi lệnh — chính hai đặc điểm đó cũng là giới hạn:"
+      ],
+      "details": [
+        "Tóm lại: Redis lý tưởng làm cache, counter, session, hàng đợi nhẹ, leaderboard — không phải primary DB cho dữ liệu lớn hay truy vấn phức tạp."
+      ],
+      "points": [
+        "Bị chặn bởi RAM (memory-bound): toàn bộ dataset (nóng) phải nằm gọn trong RAM, mà RAM đắt hơn đĩa nhiều. Không hợp làm kho lưu trữ chính cho dữ liệu lớn hơn bộ nhớ.",
+        "Key/value quá lớn: value nhiều MB gây spike latency, phân mảnh bộ nhớ, và một lệnh nặng làm nghẽn cả server đơn luồng.",
+        "Lệnh trên collection lớn tốn kém: nhiều lệnh là O(N) (LRANGE cả list, SMEMBERS, HGETALL, KEYS). Vì server xử lý lệnh tuần tự, một lệnh O(N) trên collection triệu phần tử block mọi client khác.",
+        "Truy vấn phức tạp / phân tích ad-hoc: không có join, không SQL phong phú — cần query đa chiều thì dùng RDBMS/search engine.",
+        "Yêu cầu ACID/độ bền mạnh: Redis nghiêng về tốc độ; nếu bắt buộc bền vững tuyệt đối theo từng bản ghi thì database truyền thống phù hợp hơn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "94143-khi-nao-khong-nen-dung-redis"
+  },
+  {
+    "id": "d207ef38-b143-521b-a447-fe313957e07f",
+    "question": "Redis có những tính năng bảo mật nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94144-redis-co-nhung-tinh-nang-bao-mat-nao",
+    "slug": "redis-co-nhung-tinh-nang-bao-mat-nao-d207ef38-b143-521b-a447-fe313957e07f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Redis mặc định thiết kế để chạy trong mạng nội bộ tin cậy, nhưng có nhiều lớp bảo vệ:"
+      ],
+      "details": [
+        "Lưu ý: Redis không có mã hóa at-rest tích hợp — dữ liệu trên đĩa (RDB/AOF) cần được bảo vệ ở tầng hệ điều hành/hạ tầng."
+      ],
+      "points": [
+        "AUTH (requirepass): đặt mật khẩu; client phải AUTH <password> trước khi ra lệnh. Cơ chế cơ bản, một mật khẩu cho toàn server.",
+        "ACL (Redis 6+): hệ thống nhiều user, cấp quyền chi tiết theo từng lệnh và từng pattern key (vd user chỉ được GET/SET trên cache:*). Thay thế mô hình một-mật-khẩu cũ.",
+        "Protected mode (bật mặc định): nếu không đặt mật khẩu và không bind interface cụ thể, Redis từ chối kết nối từ bên ngoài — chống lộ instance ra Internet do cấu hình lỏng.",
+        "TLS (Redis 6+): mã hóa dữ liệu trên đường truyền giữa client và server, và giữa các node replication.",
+        "Đổi tên/vô hiệu lệnh nguy hiểm (rename-command): ẩn hoặc đổi tên các lệnh rủi ro như FLUSHALL, CONFIG, KEYS để hạn chế lạm dụng.",
+        "bind: giới hạn Redis chỉ lắng nghe trên interface tin cậy (vd 127.0.0.1)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "94144-redis-co-nhung-tinh-nang-bao-mat-nao"
+  },
+  {
+    "id": "253a57a4-810e-5fef-a9cc-9682bf397f1d",
+    "question": "Hot key trong Redis Cluster là gì? Phát hiện và xử lý ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98009-hot-key-trong-redis-cluster-la-gi-phat-hien-va-xu-ly-ra-sao",
+    "slug": "hot-key-trong-redis-cluster-la-gi-phat-hien-va-xu-ly-ra-sao-253a57a4-810e-5fef-a9cc-9682bf397f1d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Hot key là một key nhận lượng truy cập lớn bất thường — ví dụ cấu hình toàn hệ thống, sản phẩm flash sale, counter của một bài viral. Trong Redis Cluster, key được ánh xạ vào hash slot và mỗi slot thuộc đúng một node, nên toàn bộ traffic của key đó dồn vào một node duy nhất. Thêm node không giúp gì: cluster chia theo key, không chia theo lượt truy cập."
+      ],
+      "details": [
+        "Phát hiện:\n- redis-cli --hotkeys (dựa trên counter LFU) hoặc lấy mẫu bằng MONITOR trong thời gian ngắn (lệnh này tốn tài nguyên, không chạy lâu trên production).\n- So sánh chỉ số per-node: một node có ops/sec và CPU cao hẳn so với phần còn lại là dấu hiệu rõ.",
+        "Xử lý:\n- Cache tại chỗ (local cache) trong process ứng dụng với TTL vài giây cho đúng nhóm key nóng — cắt phần lớn round-trip tới Redis, đổi lại có độ trễ nhất quán ngắn.\n- Chia key thành nhiều bản sao (config:v2:0..config:v2:9), client chọn ngẫu nhiên khi đọc; ghi thì cập nhật tất cả bản. Traffic trải ra nhiều slot, nhiều node.\n- Đọc từ replica cho dữ liệu chịu được lệch nhẹ.\n- Nếu là counter tăng liên tục, gộp cục bộ rồi flush theo lô thay vì INCR từng request.",
+        "Lưu ý phân biệt với big key (một key chứa hàng triệu phần tử): triệu chứng cũng là một node quá tải nhưng nguyên nhân là kích thước, và cách xử lý là chẻ nhỏ cấu trúc dữ liệu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "98009-hot-key-trong-redis-cluster-la-gi-phat-hien-va-xu-ly-ra-sao"
+  },
+  {
+    "id": "c89b3488-5b72-571b-aece-6e4903422468",
+    "question": "Lua scripting trong Redis: tại sao cần dùng và các use case điển hình?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lua-scripting-trong-redis-tai-sao-can-dung-va-cac-use-case-dien-hinh-c89b3488-5b72-571b-aece-6e4903422468",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": null
+  },
+  {
+    "id": "b8ccab1f-7ae3-528d-9b03-74e4b29074b8",
+    "question": "Redis Cluster hoạt động như thế nào? Sharding, slot allocation, và resharding?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "redis-cluster-hoat-dong-nhu-the-nao-sharding-slot-allocation-va-resharding-b8ccab1f-7ae3-528d-9b03-74e4b29074b8",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": null
+  },
+  {
+    "id": "81e69acc-8ddd-5888-af27-66c190d253d5",
+    "question": "Redis Streams là gì? So sánh với Pub/Sub và Kafka, khi nào dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "redis-streams-la-gi-so-sanh-voi-pub-sub-va-kafka-khi-nao-dung-81e69acc-8ddd-5888-af27-66c190d253d5",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": null
+  },
+  {
+    "id": "54afd780-148f-5e87-8a5d-9580fdbbfb29",
+    "question": "Memory optimization trong Redis: các kỹ thuật giảm memory footprint?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "memory-optimization-trong-redis-cac-ky-thuat-giam-memory-footprint-54afd780-148f-5e87-8a5d-9580fdbbfb29",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": null
+  },
+  {
+    "id": "23731160-8f20-5f5c-b421-8a579f8652dc",
+    "question": "Cache stampede (thundering herd) là gì? Các cách phòng tránh trong Redis?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cache-stampede-thundering-herd-la-gi-cac-cach-phong-tranh-trong-redis-23731160-8f20-5f5c-b421-8a579f8652dc",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": null
+  },
+  {
+    "id": "c2012b87-8748-500b-b0b5-8955be61b635",
+    "question": "Redis trong production: các best practices quan trọng nhất cần tuân thủ?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "redis-trong-production-cac-best-practices-quan-trong-nhat-can-tuan-thu-c2012b87-8748-500b-b0b5-8955be61b635",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": null
+  },
+  {
+    "id": "b63ab028-5155-5f61-89ab-018b9550b9ef",
+    "question": "Distributed lock với Redis: implement như thế nào? Redlock algorithm giải quyết vấn đề gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "distributed-lock-voi-redis-implement-nhu-the-nao-redlock-algorithm-giai-quyet-van-de-gi-b63ab028-5155-5f61-89ab-018b9550b9ef",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": null
+  },
+  {
+    "id": "19b7a666-e568-50b8-9264-a35085a43ee9",
+    "question": "Cache invalidation strategies: cách xử lý data freshness trong Redis?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cache-invalidation-strategies-cach-xu-ly-data-freshness-trong-redis-19b7a666-e568-50b8-9264-a35085a43ee9",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": null
+  },
+  {
+    "id": "1ece5c66-aab0-5611-9424-4bf1dd7881e9",
+    "question": "Redis Cluster: hash slots, MOVED/ASK redirects và cách sharding hoạt động?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "redis-cluster-hash-slots-moved-ask-redirects-va-cach-sharding-hoat-dong-1ece5c66-aab0-5611-9424-4bf1dd7881e9",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": null
+  },
+  {
+    "id": "2edfa480-3604-5533-9d9c-85ed182377ea",
+    "question": "Redis Pipelining là gì? Khi nào nó cải thiện performance đáng kể?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "redis-pipelining-la-gi-khi-nao-no-cai-thien-performance-dang-ke-2edfa480-3604-5533-9d9c-85ed182377ea",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": null
+  },
+  {
+    "id": "f0c5c6f1-4f64-56c6-9f78-da0c0d007b5b",
+    "question": "Cache stampede (thundering herd) là gì và cách xử lý?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cache-stampede-thundering-herd-la-gi-va-cach-xu-ly-f0c5c6f1-4f64-56c6-9f78-da0c0d007b5b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": null
+  }
+]

@@ -1,0 +1,2454 @@
+[
+  {
+    "id": "ae86514e-edc8-528a-ae3f-c356faebdaed",
+    "question": "TypeScript là gì và tại sao nên dùng TypeScript thay JavaScript?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/321-typescript-la-gi-va-tai-sao-nen-dung-typescript-thay-javascript",
+    "slug": "typescript-la-gi-va-tai-sao-nen-dung-typescript-thay-javascript-ae86514e-edc8-528a-ae3f-c356faebdaed",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Cùng đoạn đó trong JavaScript chạy bình thường và trả về '0102' — một bug âm thầm chỉ lộ ra khi người dùng gặp.",
+        "Dữ liệu từ API, localStorage, hay JSON.parse vẫn phải kiểm tra khi chạy — bằng Zod, Valibot hoặc type guard tự viết."
+      ],
+      "details": [
+        "Bốn lợi ích, xếp theo mức tác động thực tế:\n1. Bắt lỗi lúc biên dịch — nhất là lỗi undefined/null và sai kiểu dữ liệu trả về từ API.\n2. Hỗ trợ IDE — gợi ý chính xác, đổi tên an toàn xuyên codebase, nhảy tới định nghĩa.\n3. Tự làm tài liệu — chữ ký hàm nói rõ nó nhận gì, trả gì, không cần đọc thân hàm.\n4. Refactor tự tin — đổi một kiểu, trình biên dịch chỉ ra mọi chỗ cần sửa.",
+        "Điểm quan trọng cần nói rõ khi phỏng vấn: kiểu trong TypeScript bị xoá hoàn toàn lúc biên dịch. Nó không kiểm tra gì khi chạy.",
+        "Khi nào chưa cần: script nhỏ, prototype dùng một lần. TypeScript trả công rõ nhất ở dự án nhiều người và codebase sống lâu."
+      ],
+      "points": [],
+      "sections": [
+        "TypeScript là superset của JavaScript có kiểu tĩnh, biên dịch ra JavaScript thuần."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "function total(items: { price: number; qty: number }[]): number {\n  return items.reduce((sum, i) => sum + i.price * i.qty, 0)\n}\n\ntotal([{ price: 10, qty: '2' }])\n//                       ~~~ Type 'string' is not assignable to type 'number'"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "const data: User = await res.json()   // KHÔNG có gì đảm bảo — chỉ là lời hứa"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "321-typescript-la-gi-va-tai-sao-nen-dung-typescript-thay-javascript"
+  },
+  {
+    "id": "a373d4ae-53ed-5c74-95a1-1e2de98811bb",
+    "question": "Type annotation trong TypeScript là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/322-type-annotation-trong-typescript-la-gi",
+    "slug": "type-annotation-trong-typescript-la-gi-a373d4ae-53ed-5c74-95a1-1e2de98811bb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Type annotation là khai báo kiểu tường minh cho biến, parameter, return value: let name: string = 'John'."
+      ],
+      "details": [],
+      "points": [
+        "TypeScript cũng có type inference tự suy luận kiểu từ giá trị gán.",
+        "Annotation thường chỉ cần cho function parameters, return types, và khi inference không đủ thông tin."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "function greet(name: string): string {\n  return 'Hi ' + name;\n}\nlet count: number = 0; // annotation thường dư (inference đủ)\nlet data: unknown;    // cần annotation vì chưa gán"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "322-type-annotation-trong-typescript-la-gi"
+  },
+  {
+    "id": "86d0472f-2669-5570-835c-371b655f56a4",
+    "question": "any, unknown và never khác nhau như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/323-any-unknown-va-never-khac-nhau-nhu-the-nao",
+    "slug": "any-unknown-va-never-khac-nhau-nhu-the-nao-86d0472f-2669-5570-835c-371b655f56a4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Công dụng thực tế của never — kiểm tra vét cạn, để thêm một nhánh mới mà quên xử lý là compiler báo ngay:"
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Ba kiểu ở ba vị trí đối lập nhau trong hệ thống kiểu.",
+        "Chốt:",
+        "JSON.parse",
+        "localStorage",
+        "unknown",
+        "any"
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "// any — TẮT kiểm tra kiểu. Gán đi đâu cũng được, gọi gì cũng được.\nlet a: any = 'text'\na.toFixed(2)        // không báo lỗi lúc biên dịch, NỔ lúc chạy\n\n// unknown — nhận mọi giá trị, nhưng PHẢI thu hẹp trước khi dùng\nlet u: unknown = JSON.parse(raw)\nu.toFixed(2)        // Lỗi: 'u' is of type 'unknown'\nif (typeof u === 'number') u.toFixed(2)   // ok sau khi thu hẹp\n\n// never — kiểu KHÔNG BAO GIỜ có giá trị\nfunction fail(msg: string): never { throw new Error(msg) }"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "type Status = 'draft' | 'published' | 'archived'\n\nfunction label(s: Status): string {\n  switch (s) {\n    case 'draft': return 'Nháp'\n    case 'published': return 'Đã đăng'\n    case 'archived': return 'Lưu trữ'\n    default: {\n      const _exhaustive: never = s   // thêm status mới → lỗi biên dịch tại đây\n      return _exhaustive\n    }\n  }\n}"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "any",
+            "mọi thứ",
+            "không",
+            "unknown",
+            "mọi thứ",
+            "chỉ sau khi thu hẹp",
+            "có",
+            "never",
+            "không gì",
+            "mọi thứ",
+            "—"
+          ]
+        }
+      ]
+    },
+    "legacyId": 3,
+    "sourceSlug": "323-any-unknown-va-never-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "9acb078b-6ec7-5dbd-89b6-dce55088b3dd",
+    "question": "Union types và intersection types là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/324-union-types-va-intersection-types-la-gi",
+    "slug": "union-types-va-intersection-types-la-gi-9acb078b-6ec7-5dbd-89b6-dce55088b3dd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Muốn dùng thuộc tính riêng của union thì phải thu hẹp kiểu trước (typeof, in, discriminated union).",
+        "Lưu ý: intersection nhiều interface lớn khiến thông báo lỗi của TypeScript rất dài và khó đọc."
+      ],
+      "details": [
+        "Hai đặc điểm của intersection hay bị hỏi:",
+        "Khi mô tả \"đối tượng có thêm thuộc tính\", interface X extends Y cho thông báo lỗi rõ hơn type X = Y & {...}."
+      ],
+      "points": [],
+      "sections": [
+        "A | B là hoặc, A & B là và."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "type Id = string | number            // union: một trong hai\ntype Admin = User & { role: 'admin' } // intersection: có đủ cả hai"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "type A = { a: string; shared: string }\ntype B = { b: number; shared: string }\n\nconst u: A | B = getSomething()\nu.shared    // OK — thuộc tính CHUNG mới truy cập được\nu.a         // Lỗi: không chắc là A hay B\n\nconst i: A & B = { a: 'x', b: 1, shared: 's' }\ni.a; i.b    // OK — có tất cả"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "type Never = string & number      // never — không giá trị nào vừa là string vừa là number\n\ntype C = { x: string } & { x: number }\n// x có kiểu never — không thể tạo được object hợp lệ"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "324-union-types-va-intersection-types-la-gi"
+  },
+  {
+    "id": "416d4513-107c-5faa-be4e-0d1a86ddeb9b",
+    "question": "as keyword (type assertion) là gì? Khi nào dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/328-as-keyword-type-assertion-la-gi-khi-nao-dung",
+    "slug": "as-keyword-type-assertion-la-gi-khi-nao-dung-416d4513-107c-5faa-be4e-0d1a86ddeb9b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai trường hợp dùng hợp lý:\n1. DOM — TypeScript chỉ biết HTMLElement, bạn biết cụ thể hơn.\n2. as const — giữ literal type, đây là dạng assertion an toàn nhất.",
+        "Chốt: as nói \"tôi biết rõ hơn trình biên dịch\"."
+      ],
+      "details": [
+        "Hai trường hợp không nên:"
+      ],
+      "points": [
+        "Đúng với DOM; sai với dữ liệu mạng.",
+        "Số lượng as trong một codebase thường tỉ lệ thuận với số bug undefined lúc chạy."
+      ],
+      "sections": [
+        "as ghi đè suy luận kiểu của TypeScript lúc biên dịch, và không kiểm tra gì lúc chạy."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "const canvas = document.getElementById('c') as HTMLCanvasElement\ncanvas.getContext('2d')     // TS cho phép; nếu #c không tồn tại → lỗi lúc chạy"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "const user = JSON.parse(raw) as User    // lời hứa suông, không ai kiểm tra\nconst x = something as unknown as Foo   // double assertion — dấu hiệu mô hình kiểu đang sai"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "import { z } from 'zod'\nconst UserSchema = z.object({ id: z.number(), name: z.string() })\nconst user = UserSchema.parse(JSON.parse(raw))   // sai kiểu là ném lỗi ngay"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "function isUser(v: unknown): v is User {\n  return typeof v === 'object' && v !== null && 'id' in v\n}\nif (isUser(data)) data.id    // TS thu hẹp kiểu, và có kiểm tra thật"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "328-as-keyword-type-assertion-la-gi-khi-nao-dung"
+  },
+  {
+    "id": "a25686e6-2c43-595d-9677-f45e0b0104ad",
+    "question": "Tuple type trong TypeScript là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/330-tuple-type-trong-typescript-la-gi",
+    "slug": "tuple-type-trong-typescript-la-gi-a25686e6-2c43-595d-9677-f45e0b0104ad",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Tuple là array với số lượng và kiểu phần tử cố định."
+      ],
+      "details": [],
+      "points": [
+        "Phần tử có thể có tên.",
+        "Hỗ trợ optional (?) và rest elements."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "type Point = [number, number];\ntype Entry = [key: string, value: number]; // named elements\n\nconst [count, setCount]: [number, React.Dispatch<React.SetStateAction<number>>]\n  = useState(0);\n\n// Hoặc đơn giản hơn:\nconst pair: [string, number] = ['age', 25];"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "330-tuple-type-trong-typescript-la-gi"
+  },
+  {
+    "id": "a8aa806e-0e31-5bd3-8832-7263d3b848fa",
+    "question": "TypeScript strict mode bao gồm những gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/335-typescript-strict-mode-bao-gom-nhung-gi",
+    "slug": "typescript-strict-mode-bao-gom-nhung-gi-a8aa806e-0e31-5bd3-8832-7263d3b848fa",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Chốt: dự án mới luôn bật strict: true ngay từ đầu."
+      ],
+      "details": [
+        "Bật sau khi đã có hàng nghìn dòng code sẽ sinh ra hàng trăm lỗi cùng lúc, và phần lớn dự án chọn cách tắt đi thay vì sửa — đó là lúc TypeScript mất phần lớn giá trị của nó."
+      ],
+      "points": [],
+      "sections": [
+        "\"strict\": true bật một nhóm cờ kiểm tra chặt cùng lúc:",
+        "useUnknownInCatchVariables"
+      ],
+      "codeExamples": [
+        {
+          "language": "JSON",
+          "code": "// strictNullChecks — cờ giá trị nhất trong cả nhóm\nfunction len(s: string | null) {\n  return s.length      // Lỗi: 's' is possibly 'null'\n}\n\n// noImplicitAny — không cho tham số lọt qua mà không có kiểu\nfunction f(x) { }      // Lỗi: Parameter 'x' implicitly has an 'any' type"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "try { risky() }\ncatch (e) {\n  e.message            // Lỗi: 'e' is of type 'unknown'\n  if (e instanceof Error) e.message   // đúng\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "335-typescript-strict-mode-bao-gom-nhung-gi"
+  },
+  {
+    "id": "4224a9a6-a74d-520b-8206-72efa79b84e0",
+    "question": "interface và type alias khác nhau như thế nào? Khi nào dùng cái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/336-interface-va-type-alias-khac-nhau-nhu-the-nao-khi-nao-dung-cai-nao",
+    "slug": "interface-va-type-alias-khac-nhau-nhu-the-nao-khi-nao-dung-cai-nao-4224a9a6-a74d-520b-8206-72efa79b84e0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Quy tắc thực dụng:\n- interface cho object công khai của thư viện hoặc props của component — vì người dùng có thể mở rộng, và lỗi dễ đọc hơn.\n- type cho union, tuple, hàm, và mọi kiểu suy dẫn."
+      ],
+      "details": [
+        "Lưu ý — cả hai chiều: declaration merging là ưu điểm khi cần mở rộng type của thư viện, nhưng là nhược điểm trong code ứng dụng — một interface cùng tên ở file khác có thể âm thầm thêm thuộc tính mà không ai để ý."
+      ],
+      "points": [],
+      "sections": [
+        "Cả hai đều mô tả hình dạng object; khác nhau ở những gì làm được ngoài object và khả năng gộp khai báo."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "// chỉ type làm được\ntype Id = string | number                    // union\ntype Pair = [number, number]                 // tuple\ntype Keys = keyof User                       // mapped / conditional\ntype Fn = (a: number) => void\n\n// chỉ interface làm được — declaration merging\ninterface Window { myApp: App }              // gộp vào Window có sẵn\ninterface Window { analytics: Tracker }       // gộp tiếp — không lỗi"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "// type khai báo trùng tên là LỖI\ntype A = { x: number }\ntype A = { y: number }    // Error: Duplicate identifier 'A'"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "extends",
+            "Mô tả object",
+            "không",
+            "có",
+            "&",
+            "có",
+            "Union / tuple / conditional",
+            "interface",
+            "có",
+            "Gộp khai báo (merging)",
+            "không"
+          ]
+        }
+      ]
+    },
+    "legacyId": 8,
+    "sourceSlug": "336-interface-va-type-alias-khac-nhau-nhu-the-nao-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "38cfac32-cefa-5f26-87b6-86f4f210173e",
+    "question": "Cách extend interface và type trong TypeScript?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/337-cach-extend-interface-va-type-trong-typescript",
+    "slug": "cach-extend-interface-va-type-trong-typescript-38cfac32-cefa-5f26-87b6-86f4f210173e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Interface: interface Child extends Parent { ... } và extends nhiều: extends A, B."
+      ],
+      "details": [],
+      "points": [
+        "Type: type Combined = A & B (intersection).",
+        "Interface có thể extend type và ngược lại."
+      ],
+      "sections": [
+        "extends kiểm tra compatibility (không thể re-declare incompatible property), còn & intersection merge tất cả."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "interface Animal { name: string }\ninterface Pet extends Animal { owner: string }\ninterface Named { label: string }\n\ninterface RegisteredPet extends Pet, Named { id: number } // đa extends\n\n// Type intersection tương đương:\ntype Combined = Pet & Named & { id: number };"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "337-cach-extend-interface-va-type-trong-typescript"
+  },
+  {
+    "id": "b340ff1a-609f-549b-8816-f6ae3c6bddb8",
+    "question": "Optional properties (?) và readonly properties là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/339-optional-properties-va-readonly-properties-la-gi",
+    "slug": "optional-properties-va-readonly-properties-la-gi-b340ff1a-609f-549b-8816-f6ae3c6bddb8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Optional property (prop?: Type) có thể có hoặc không, type là Type | undefined khi access."
+      ],
+      "details": [
+        "Khác với prop: Type | undefined — cái sau vẫn yêu cầu key có mặt khi tạo object. readonly property không thể reassign sau khởi tạo (chỉ compile time). Readonly<T> làm tất cả properties readonly."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "interface User {\n  id: number;\n  nickname?: string;          // caller có thể bỏ qua\n  bio: string | undefined;    // caller phải cung cấp key, nhưng value có thể undefined\n  readonly createdAt: Date;   // không thể reassign\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "339-optional-properties-va-readonly-properties-la-gi"
+  },
+  {
+    "id": "de214323-8233-54bd-960b-853cb529fe99",
+    "question": "Partial<T> và Required<T> là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/361-partial-t-va-required-t-la-gi",
+    "slug": "partial-t-va-required-t-la-gi-de214323-8233-54bd-960b-853cb529fe99",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Partial<T> làm tất cả properties của T thành optional. Required<T> làm tất cả optional thành required."
+      ],
+      "details": [
+        "Cả hai chỉ shallow."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "interface User { id: number; name: string; bio?: string }\n\n// Partial: dùng cho PATCH requests\nfunction updateUser(id: string, data: Partial<User>) { /* ... */ }\nupdateUser('1', { name: 'New Name' }); // OK, không cần gửi toàn bộ\n\n// Required: enforce tất cả fields sau validation\nconst validated: Required<User> = { id: 1, name: 'An', bio: 'Dev' };"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "361-partial-t-va-required-t-la-gi"
+  },
+  {
+    "id": "e3bd6609-17a4-5881-8c90-b2d67fb05915",
+    "question": "Record<K, V> là gì? Khác index signature như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/362-record-k-v-la-gi-khac-index-signature-nhu-the-nao",
+    "slug": "record-k-v-la-gi-khac-index-signature-nhu-the-nao-e3bd6609-17a4-5881-8c90-b2d67fb05915",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Record<Keys, Value> tạo object type với specific keys và value type."
+      ],
+      "details": [],
+      "points": [
+        "Khác index signature: Keys có thể là specific union (yêu cầu tất cả keys có mặt, không optional).",
+        "Rõ ràng hơn và type-safe hơn index signature."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "const routes: Record<'home' | 'about' | 'contact', string> = {\n  home: '/',\n  about: '/about',\n  contact: '/contact', // thiếu key này → Error\n};\n\n// Dùng với string key rộng hơn:\nconst cache: Record<string, unknown> = {};"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "362-record-k-v-la-gi-khac-index-signature-nhu-the-nao"
+  },
+  {
+    "id": "1d4890a0-7abf-5977-bbef-62d6ac3f0f07",
+    "question": "Pick<T, K> và Omit<T, K> là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/363-pick-t-k-va-omit-t-k-la-gi",
+    "slug": "pick-t-k-va-omit-t-k-la-gi-1d4890a0-7abf-5977-bbef-62d6ac3f0f07",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Pick<T, K> tạo type chỉ với subset of properties K từ T: Pick<User, 'id' | 'name'> chỉ giữ lại id và name. Omit<T, K> là ngược lại: tạo type với tất cả properties trừ K, ví dụ Omit<User, 'password'> để không lộ mật khẩu trong response."
+      ],
+      "details": [],
+      "points": [
+        "Hữu ích cho DTOs, API response shaping, và form state management khi chỉ cần một phần của type.",
+        "Mẹo: dùng Omit khi cần loại ít field, Pick khi cần giữ ít field — chọn cái nào viết ngắn hơn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "363-pick-t-k-va-omit-t-k-la-gi"
+  },
+  {
+    "id": "03e036e1-dc42-5e7b-aced-ebe854b23578",
+    "question": "Trong dự án đang lẫn lộn type và interface, bạn chốt quy ước dùng cái nào cho trường hợp nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97050-trong-du-an-dang-lan-lon-type-va-interface-ban-chot-quy-uoc-dung-cai-nao-cho-tru",
+    "slug": "trong-du-an-dang-lan-lon-type-va-interface-ban-chot-quy-uoc-dung-cai-nao-cho-truong-hop-nao-03e036e1-dc42-5e7b-aced-ebe854b23578",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai mô tả được hình dạng object và gần như thay thế nhau được, nên chọn theo khả năng riêng của từng loại chứ không theo sở thích.",
+        "Quy ước thực dụng hay dùng: mặc định interface cho object shape (props, entity, service contract), chuyển sang type ngay khi cần union hoặc phép biến đổi type."
+      ],
+      "details": [
+        "Dùng interface khi:\n- Mô tả object/class contract mà người khác có thể mở rộng — interface hỗ trợ declaration merging và extends.\n- Public API của thư viện: consumer có thể augment thêm field mà không phải fork type.",
+        "Dùng type khi:\n- Cần union, tuple, mapped type, conditional type, hoặc alias cho primitive — interface không làm được.",
+        "Điểm khác biệt cần biết khi phỏng vấn: khai báo interface trùng tên hai lần sẽ gộp lại, còn type trùng tên là lỗi biên dịch — nên type an toàn hơn khi bạn muốn cấm mở rộng ngoài ý muốn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "interface User { id: string; name: string }\ntype Status = 'idle' | 'loading' | 'error'   // union: interface không viết được\ntype Pair = [number, number]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "97050-trong-du-an-dang-lan-lon-type-va-interface-ban-chot-quy-uoc-dung-cai-nao-cho-tru"
+  },
+  {
+    "id": "02981572-20a7-5253-aaed-1c5bd9a490d2",
+    "question": "Bật strictNullChecks trên một codebase cũ thì hay nổ ra những lỗi nào? Sửa theo hướng nào cho đúng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97051-bat-strictnullchecks-tren-mot-codebase-cu-thi-hay-no-ra-nhung-loi-nao-sua-theo-h",
+    "slug": "bat-strictnullchecks-tren-mot-codebase-cu-thi-hay-no-ra-nhung-loi-nao-sua-theo-huong-nao-cho-dung-02981572-20a7-5253-aaed-1c5bd9a490d2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Khi tắt strictNullChecks, null và undefined được coi là gán được vào mọi kiểu. Bật lên, chúng tách thành kiểu riêng, nên compiler bắt đầu báo những chỗ vốn đã có rủi ro runtime.",
+        "2. Type 'undefined' is not assignable to... — property optional được đưa vào chỗ yêu cầu bắt buộc.\n3. Biến khai báo chưa gán (let x: string;) rồi dùng trước khi gán."
+      ],
+      "details": [
+        "1. Object is possibly 'null' — truy cập DOM hoặc kết quả find():",
+        "Ba nhóm lỗi hay gặp:",
+        "Hướng sửa đúng, theo thứ tự ưu tiên:\n- Narrow bằng if (!el) return hoặc optional chaining el?.textContent — xử lý trường hợp thiếu giá trị một cách tường minh.\n- Đặt giá trị mặc định: const name = user.name ?? 'Khách'.\n- Chỉ dùng ! (non-null assertion) khi bạn có bằng chứng ngoài hệ thống kiểu rằng giá trị luôn tồn tại — dùng bừa sẽ đưa lỗi trở lại runtime.",
+        "Với dự án lớn, cách di chuyển thường dùng là bật cờ cho toàn repo rồi sửa dần theo module, thay vì rải any để dập lỗi."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const el = document.getElementById('root')   // HTMLElement | null\nel.textContent = 'hi'                        // error"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "97051-bat-strictnullchecks-tren-mot-codebase-cu-thi-hay-no-ra-nhung-loi-nao-sua-theo-h"
+  },
+  {
+    "id": "6fb7980c-50f1-51e3-aeb5-152913d18d13",
+    "question": "Với một tập giá trị cố định (trạng thái đơn hàng, role), nên dùng enum hay union of string literal?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97052-voi-mot-tap-gia-tri-co-dinh-trang-thai-don-hang-role-nen-dung-enum-hay-union-of",
+    "slug": "voi-mot-tap-gia-tri-co-dinh-trang-thai-don-hang-role-nen-dung-enum-hay-union-of-string-literal-6fb7980c-50f1-51e3-aeb5-152913d18d13",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì sao ưu tiên union:\n- Không sinh code runtime. enum (không phải const enum) biên dịch ra một object JavaScript, cộng thêm vào bundle.\n- Giá trị chính là chuỗi, nên so sánh với dữ liệu từ API hay localStorage không cần map qua lại.\n- Ghép thẳng với as const để vừa có union type vừa có mảng lặp được."
+      ],
+      "details": [
+        "Khi nào enum vẫn hợp lý: cần lặp qua tất cả thành viên ở runtime, hoặc codebase backend/.NET/Java đã dùng enum và muốn thống nhất.",
+        "Lưu ý: const enum bị cấm dưới isolatedModules (Babel, esbuild, SWC biên dịch từng file nên không nội tuyến được giá trị). Numeric enum còn cho phép gán số bất kỳ trong một số phiên bản cũ, làm mất tính an toàn — nếu buộc dùng enum thì chọn string enum."
+      ],
+      "points": [],
+      "sections": [
+        "Trong code frontend hiện đại, union of string literal thường là lựa chọn mặc định; enum chỉ giữ khi cần một namespace giá trị thật ở runtime."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "type OrderStatus = 'pending' | 'paid' | 'shipped'\n\nconst ORDER_STATUSES = ['pending', 'paid', 'shipped'] as const\ntype Status = (typeof ORDER_STATUSES)[number]   // suy ra union từ mảng"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "97052-voi-mot-tap-gia-tri-co-dinh-trang-thai-don-hang-role-nen-dung-enum-hay-union-of"
+  },
+  {
+    "id": "dd3da387-807d-592f-a8bb-e4fa0fe4d6a9",
+    "question": "await res.json() trả về kiểu gì? Viết const user = await res.json() as User có an toàn không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97053-await-res-json-tra-ve-kieu-gi-viet-const-user-await-res-json-as-user-co-an-toan",
+    "slug": "await-res-json-tra-ve-kieu-gi-viet-const-user-await-res-json-as-user-co-an-toan-khong-dd3da387-807d-592f-a8bb-e4fa0fe4d6a9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "res.json() trả về Promise<any>, và as User không kiểm tra gì ở runtime — nó chỉ nói với compiler \"cứ tin tôi\".",
+        "3. Dùng schema validation (Zod, Valibot) khi payload phức tạp — parse một lần ở ranh giới mạng, phần còn lại của ứng dụng nhận kiểu đã được bảo đảm."
+      ],
+      "details": [
+        "Nếu backend đổi field hoặc trả về lỗi, code vẫn biên dịch sạch rồi hỏng ở nơi khác, xa điểm gây lỗi.",
+        "1. Nhận về unknown thay vì any để compiler bắt buộc bạn kiểm tra trước khi dùng.\n2. Viết type guard cho các field thực sự đọc tới:",
+        "Điểm chốt cần nói khi phỏng vấn: TypeScript chỉ tồn tại lúc biên dịch. Dữ liệu đi qua ranh giới hệ thống (HTTP, localStorage, postMessage) phải được kiểm tra ở runtime, as không thay thế được việc đó."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const user = await res.json() as User\nconsole.log(user.profile.name)   // biên dịch OK, runtime có thể TypeError"
+        },
+        {
+          "language": "TS",
+          "code": "function isUser(v: unknown): v is User {\n  return typeof v === 'object' && v !== null && 'id' in v\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "97053-await-res-json-tra-ve-kieu-gi-viet-const-user-await-res-json-as-user-co-an-toan"
+  },
+  {
+    "id": "33ae267e-3130-5ae9-8666-8597b17eb5c8",
+    "question": "Literal types trong TypeScript là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/325-literal-types-trong-typescript-la-gi",
+    "slug": "literal-types-trong-typescript-la-gi-33ae267e-3130-5ae9-8666-8597b17eb5c8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Literal type là kiểu chỉ nhận đúng một giá trị cụ thể.",
+        "không sinh code lúc chạy",
+        "enum",
+        "as const",
+        "let",
+        "Chốt: literal type là nền tảng của discriminated union và thu hẹp kiểu — hai công cụ quan trọng nhất khi mô hình hoá trạng thái trong TypeScript."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "type Direction = 'left' | 'right' | 'up' | 'down'\ntype Port = 80 | 443\ntype Flag = true\n\nlet d: Direction = 'left'\nd = 'top'    // Lỗi: không nằm trong 4 giá trị cho phép"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "// enum: sinh ra một object trong bundle\nenum Status { Loading, Success, Error }\n\n// literal union: bị xoá hoàn toàn khi biên dịch\ntype Status = 'loading' | 'success' | 'error'"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "const a = 'left'     // kiểu: 'left'   — literal\nlet b = 'left'       // kiểu: string   — bị mở rộng!\n\nfunction go(d: Direction) {}\ngo(b)                // Lỗi: string không gán được cho Direction"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "let b = 'left' as const                    // 'left'\n\nconst config = { dir: 'left' } as const     // { readonly dir: 'left' }\nconst dirs = ['left', 'right'] as const     // readonly ['left', 'right']\ntype D = (typeof dirs)[number]              // 'left' | 'right' — suy ra union từ mảng"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "325-literal-types-trong-typescript-la-gi"
+  },
+  {
+    "id": "a21579ef-0154-5ee5-883b-72d9be9ef7c8",
+    "question": "Type narrowing là gì? Các cách narrow type trong TypeScript?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/327-type-narrowing-la-gi-cac-cach-narrow-type-trong-typescript",
+    "slug": "type-narrowing-la-gi-cac-cach-narrow-type-trong-typescript-a21579ef-0154-5ee5-883b-72d9be9ef7c8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Type narrowing là thu hẹp type trong code branch dựa trên kiểm tra."
+      ],
+      "details": [
+        "TypeScript tự động narrow trong if/else, switch, ternary."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "function process(val: string | number | Date) {\n  if (typeof val === 'string') return val.toUpperCase(); // typeof\n  if (val instanceof Date) return val.toISOString();    // instanceof\n  return val.toFixed(2);                                 // number\n}\n\n// User-defined type guard\nfunction isUser(obj: unknown): obj is User {\n  return typeof obj === 'object' && obj !== null && 'id' in obj;\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "327-type-narrowing-la-gi-cac-cach-narrow-type-trong-typescript"
+  },
+  {
+    "id": "4ce19dad-6e04-520a-bd24-f984f12c906e",
+    "question": "Non-null assertion operator (!) là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/329-non-null-assertion-operator-la-gi",
+    "slug": "non-null-assertion-operator-la-gi-4ce19dad-6e04-520a-bd24-f984f12c906e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Dạng này hay dùng với dependency injection, nhưng cũng chính là chỗ tắt mất strictPropertyInitialization."
+      ],
+      "details": [
+        "Chốt: ! chỉ nên xuất hiện khi ngữ cảnh thật sự đảm bảo — ví dụ ngay sau một lần kiểm tra mà TypeScript không theo dõi được. Rải ! để làm im lỗi biên dịch là cách chuyển lỗi từ lúc build sang lúc người dùng gặp."
+      ],
+      "points": [],
+      "sections": [
+        "! nói với TypeScript rằng giá trị chắc chắn không phải null/undefined — và cũng không kiểm tra gì lúc chạy.",
+        "Các cách thay thế, xếp theo mức an toàn giảm dần:",
+        "definite assignment assertion"
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "const el = document.getElementById('app')!    // kiểu: HTMLElement (bỏ null)\nel.classList.add('ready')                     // nếu không có #app → TypeError lúc chạy"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "// 1. optional chaining — an toàn nhất, không làm gì nếu null\nel?.classList.add('ready')\n\n// 2. kiểm tra tường minh — rõ ràng nhất, xử lý được trường hợp thiếu\nif (!el) throw new Error('#app không tồn tại')\nel.classList.add('ready')\n\n// 3. non-null assertion — chỉ khi thật sự chắc chắn\nel!.classList.add('ready')"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "class Service {\n  private client!: Client       // TS đừng lo, tôi gán trong init()\n  init() { this.client = new Client() }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "329-non-null-assertion-operator-la-gi"
+  },
+  {
+    "id": "840684e6-1059-5416-a1de-1edd134854dc",
+    "question": "Enum trong TypeScript là gì? Numeric vs string enum khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/331-enum-trong-typescript-la-gi-numeric-vs-string-enum-khac-nhau-the-nao",
+    "slug": "enum-trong-typescript-la-gi-numeric-vs-string-enum-khac-nhau-the-nao-840684e6-1059-5416-a1de-1edd134854dc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "Enum khai báo tập hợp named constants.",
+        "Numeric enum tự động assign 0,1,2... có reverse lookup nhưng gây footgun (Direction[0] = 'Up')."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "enum Direction { Up, Down } // numeric: Up=0, Down=1\nDirection[0] // \"Up\" — reverse lookup\n\nenum Status { Active = 'ACTIVE', Inactive = 'INACTIVE' } // string\n\n// Lưu ý 2024+: TS community khuyến nghị dùng const object thay enum\n// vì tree-shaking tốt hơn và không sinh runtime code thừa\nconst Direction = { Up: 'up', Down: 'down' } as const;\ntype Direction = typeof Direction[keyof typeof Direction];"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "331-enum-trong-typescript-la-gi-numeric-vs-string-enum-khac-nhau-the-nao"
+  },
+  {
+    "id": "d314bc3c-4b28-5c3c-ac5f-f23428d66eb7",
+    "question": "satisfies operator trong TypeScript là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/332-satisfies-operator-trong-typescript-la-gi",
+    "slug": "satisfies-operator-trong-typescript-la-gi-d314bc3c-4b28-5c3c-ac5f-f23428d66eb7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "satisfies (TS 4.9) kiểm tra type mà không mở rộng type declaration. Khác as: satisfies vẫn infer type cụ thể nhất có thể và báo lỗi nếu không match."
+      ],
+      "details": [
+        "Ví dụ: const config = {...} satisfies Config - TS check config đúng Config nhưng giữ literal types của values."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "332-satisfies-operator-trong-typescript-la-gi"
+  },
+  {
+    "id": "96458449-a9ef-5e7e-ab13-589ebd33d646",
+    "question": "const assertion (as const) là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/334-const-assertion-as-const-la-gi",
+    "slug": "const-assertion-as-const-la-gi-96458449-a9ef-5e7e-ab13-589ebd33d646",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "as const biến values thành readonly literal types cụ thể nhất. Array thành readonly tuple, object properties thành readonly literal types."
+      ],
+      "details": [
+        "Ví dụ: const dirs = ['left', 'right'] as const tạo type readonly ['left', 'right'] thay string[]. Hữu ích để tạo strongly-typed constants."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "334-const-assertion-as-const-la-gi"
+  },
+  {
+    "id": "ccb19a24-1a3f-50af-9b1e-681418682894",
+    "question": "Index signature trong TypeScript là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/338-index-signature-trong-typescript-la-gi",
+    "slug": "index-signature-trong-typescript-la-gi-ccb19a24-1a3f-50af-9b1e-681418682894",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Index signature cho phép object có keys không biết trước."
+      ],
+      "details": [
+        "Tất cả explicit properties phải compatible với index signature type."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "interface StringMap { [key: string]: string }\nconst headers: StringMap = { 'Content-Type': 'application/json' };\n\n// Lưu ý: explicit properties cũng phải match\ninterface WithLength {\n  [key: string]: string;\n  length: number; // Error! length phải là string\n}\n\n// Record<K,V> thường rõ ràng hơn:\nconst routes: Record<string, string> = { home: '/', about: '/about' };"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "338-index-signature-trong-typescript-la-gi"
+  },
+  {
+    "id": "20a56f0f-370e-5886-84f6-c911dd009328",
+    "question": "Discriminated unions là gì? Tại sao hữu ích?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/340-discriminated-unions-la-gi-tai-sao-huu-ich",
+    "slug": "discriminated-unions-la-gi-tai-sao-huu-ich-20a56f0f-370e-5886-84f6-c911dd009328",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Discriminated union là union trong đó mỗi member có common literal property (discriminant)."
+      ],
+      "details": [
+        "TypeScript narrow type tự động khi check discriminant."
+      ],
+      "points": [],
+      "sections": [
+        "Giúp type-safe handling cases khác nhau, TypeScript sẽ báo lỗi nếu thiếu case."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "type Shape =\n  | { kind: 'circle'; radius: number }\n  | { kind: 'square'; side: number }\n  | { kind: 'triangle'; base: number; height: number };\n\nfunction area(shape: Shape): number {\n  switch (shape.kind) {\n    case 'circle':\n      return Math.PI * shape.radius ** 2;\n    case 'square':\n      return shape.side ** 2;\n    case 'triangle':\n      return (shape.base * shape.height) / 2;\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "340-discriminated-unions-la-gi-tai-sao-huu-ich"
+  },
+  {
+    "id": "8ff86e25-5389-567d-87e0-4ab5be7dc831",
+    "question": "Recursive types trong TypeScript là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/343-recursive-types-trong-typescript-la-gi",
+    "slug": "recursive-types-trong-typescript-la-gi-8ff86e25-5389-567d-87e0-4ab5be7dc831",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "TypeScript hỗ trợ recursive type aliases."
+      ],
+      "details": [
+        "Hữu ích cho tree structures, nested JSON, linked lists."
+      ],
+      "points": [],
+      "sections": [
+        "Interface luôn hỗ trợ recursive (vì là named type), type alias cũng hỗ trợ từ TS 3.7."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "type TreeNode<T> = {\n  value: T;\n  children: TreeNode<T>[]; // tự tham chiếu\n};\n\n// JSON có thể dùng JSON type chuẩn:\ntype Json = string | number | boolean | null\n  | Json[] | { [key: string]: Json };"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "343-recursive-types-trong-typescript-la-gi"
+  },
+  {
+    "id": "4799e306-cdaf-5b1e-8dd1-3751aa479faf",
+    "question": "Excess property checking trong TypeScript là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/345-excess-property-checking-trong-typescript-la-gi",
+    "slug": "excess-property-checking-trong-typescript-la-gi-4799e306-cdaf-5b1e-8dd1-3751aa479faf",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "TypeScript kiểm tra extra properties khi assign object literal trực tiếp vào typed variable."
+      ],
+      "details": [
+        "Nhưng assign qua biến trung gian không bị check — đây là behavior khá bất ngờ."
+      ],
+      "points": [],
+      "sections": [
+        "Behavior này giúp phát hiện typos trong config objects."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "interface Config { host: string; port: number }\n\n// Object literal — excess property check:\nconst cfg: Config = { host: 'localhost', port: 3000, debug: true }; // Error!\n\n// Qua biến trung gian — không bị check:\nconst raw = { host: 'localhost', port: 3000, debug: true };\nconst cfg2: Config = raw; // OK (chỉ check structural compatibility)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "345-excess-property-checking-trong-typescript-la-gi"
+  },
+  {
+    "id": "69ddbfd4-8e13-50bb-9ac8-e0ea10c95950",
+    "question": "Generics trong TypeScript là gì? Tại sao cần thiết?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/346-generics-trong-typescript-la-gi-tai-sao-can-thiet",
+    "slug": "generics-trong-typescript-la-gi-tai-sao-can-thiet-69ddbfd4-8e13-50bb-9ac8-e0ea10c95950",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Generics cho phép tạo components (functions, classes, interfaces) hoạt động với nhiều kiểu dữ liệu mà vẫn type-safe."
+      ],
+      "details": [
+        "Thay dùng any, dùng type parameter <T>."
+      ],
+      "points": [],
+      "sections": [
+        "Tái sử dụng code mà không mất type information."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "// Không generic — mất type info\nfunction identity(arg: any): any { return arg; }\n\n// Generic — type-safe\nfunction identity<T>(arg: T): T { return arg; }\n\nconst n = identity(42);    // n: number\nconst s = identity('hi');  // s: string\n\n// Generic interface\ninterface ApiResponse<T> {\n  data: T;\n  status: number;\n  message: string;\n}\n\nconst res: ApiResponse<User[]> = await fetchUsers();"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "346-generics-trong-typescript-la-gi-tai-sao-can-thiet"
+  },
+  {
+    "id": "93c70800-1d08-5ac3-9db8-75bf3ca908e9",
+    "question": "Generic constraints (extends) trong TypeScript là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/347-generic-constraints-extends-trong-typescript-la-gi",
+    "slug": "generic-constraints-extends-trong-typescript-la-gi-93c70800-1d08-5ac3-9db8-75bf3ca908e9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Constraints giới hạn type parameter phải extend một type cụ thể, ngăn dùng với types không compatible."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "// Không có constraint — không access được .length\nfunction getLength<T>(arg: T): number {\n  return arg.length; // Error!\n}\n\n// Có constraint\nfunction getLength<T extends { length: number }>(arg: T): number {\n  return arg.length; // OK\n}\n\n// keyof constraint — type-safe property access\nfunction getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {\n  return obj[key];\n}\nconst name = getProperty({ name: 'An', age: 25 }, 'name'); // string\n\n// Multiple constraints\nfunction merge<T extends object, U extends object>(a: T, b: U): T & U {\n  return { ...a, ...b };\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "347-generic-constraints-extends-trong-typescript-la-gi"
+  },
+  {
+    "id": "5b204446-dc59-5840-aa29-048bc1b1a31f",
+    "question": "keyof operator là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/348-keyof-operator-la-gi",
+    "slug": "keyof-operator-la-gi-5b204446-dc59-5840-aa29-048bc1b1a31f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "keyof T trả về union type của tất cả keys của T: keyof {a: number, b: string} cho ra 'a' | 'b'."
+      ],
+      "details": [],
+      "points": [
+        "Dùng với generics để type-safe property access: function get<T, K extends keyof T>(obj: T, key: K): T[K] đảm bảo key tồn tại và return đúng kiểu. keyof typeof obj lấy keys của object value (không phải type).",
+        "Hay gặp trong utility types như Pick, Record, và khi build form hay table components cần truy cập dynamic property một cách an toàn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "348-keyof-operator-la-gi"
+  },
+  {
+    "id": "4e39f274-95ce-5059-98b7-40709d6a6bf7",
+    "question": "Utility type Parameters<T> và ConstructorParameters<T> là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/357-utility-type-parameters-t-va-constructorparameters-t-la-gi",
+    "slug": "utility-type-parameters-t-va-constructorparameters-t-la-gi-4e39f274-95ce-5059-98b7-40709d6a6bf7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Hai utility type trích ra danh sách tham số dưới dạng tuple.",
+        "bọc một hàm mà không phải khai lại chữ ký",
+        "Parameters<T>",
+        "Bên trong cả hai đều dùng infer:",
+        "Lưu ý:",
+        "nạp chồng (overload)",
+        "chữ ký cuối cùng"
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "function createUser(name: string, age: number, active?: boolean) { }\n\ntype Args = Parameters<typeof createUser>\n// [name: string, age: number, active?: boolean]\n\nclass Service { constructor(url: string, timeout: number) { } }\n\ntype CtorArgs = ConstructorParameters<typeof Service>\n// [url: string, timeout: number]"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "type Parameters<T> = T extends (...args: infer P) => any ? P : never\ntype ConstructorParameters<T> = T extends abstract new (...args: infer P) => any ? P : never"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "function withRetry<F extends (...args: any[]) => Promise<any>>(fn: F) {\n  return async (...args: Parameters<F>): Promise<ReturnType<F>> => {\n    try { return await fn(...args) }\n    catch { return await fn(...args) }\n  }\n}\n\nconst safeCreate = withRetry(createUser)\n// safeCreate giữ nguyên kiểu tham số của createUser"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "type FirstArg = Parameters<typeof createUser>[0]   // string"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "357-utility-type-parameters-t-va-constructorparameters-t-la-gi"
+  },
+  {
+    "id": "ee6bea78-4b35-5bee-ab92-f98600b7d0ed",
+    "question": "Generic functions với multiple type parameters như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/359-generic-functions-voi-multiple-type-parameters-nhu-the-nao",
+    "slug": "generic-functions-voi-multiple-type-parameters-nhu-the-nao-ee6bea78-4b35-5bee-ab92-f98600b7d0ed",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "Hàm có thể có nhiều type params.",
+        "Inference hoạt động independently cho mỗi param."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "function zip<T, U>(a: T[], b: U[]): [T, U][] {\n  return a.map((item, i) => [item, b[i]]);\n}\nconst pairs = zip([1, 2], ['a', 'b']); // [number, string][]\n\nfunction getEntry<TObj, TKey extends keyof TObj>(obj: TObj, key: TKey): TObj[TKey] {\n  return obj[key];\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "359-generic-functions-voi-multiple-type-parameters-nhu-the-nao"
+  },
+  {
+    "id": "96074e9e-d6c2-50d2-b517-e6b374f3e46a",
+    "question": "Exclude<T, U> và Extract<T, U> là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/364-exclude-t-u-va-extract-t-u-la-gi",
+    "slug": "exclude-t-u-va-extract-t-u-la-gi-96074e9e-d6c2-50d2-b517-e6b374f3e46a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Exclude<T, U> loại bỏ khỏi union T những types có thể assign cho U: Exclude<'a'|'b'|'c', 'a'> cho ra 'b'|'c'. Extract<T, U> ngược lại — giữ lại những types assign được cho U: Extract<string|number|boolean, string|number> cho ra string|number."
+      ],
+      "details": [
+        "type NonString<T> = Exclude<T, string> để lọc string ra khỏi union."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "364-exclude-t-u-va-extract-t-u-la-gi"
+  },
+  {
+    "id": "38799622-a7af-59c4-8414-d46cf069f1e7",
+    "question": "ReturnType<T> và Awaited<T> là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/365-returntype-t-va-awaited-t-la-gi",
+    "slug": "returntype-t-va-awaited-t-la-gi-38799622-a7af-59c4-8414-d46cf069f1e7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "ReturnType<T> lấy return type của function T mà không cần khai báo lại: type Result = ReturnType<typeof fetchUser> tự động theo dõi khi hàm thay đổi. Awaited<T> unwrap Promise đệ quy: Awaited<Promise<string>> cho ra string, Awaited<Promise<Promise<number>>> cho ra number."
+      ],
+      "details": [
+        "Kết hợp cả hai cho async functions:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "type Data = Awaited<ReturnType<typeof fetchData>>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "365-returntype-t-va-awaited-t-la-gi"
+  },
+  {
+    "id": "b945286c-a3cc-5297-a523-986ea2277f1c",
+    "question": "NonNullable<T> là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/366-nonnullable-t-la-gi",
+    "slug": "nonnullable-t-la-gi-b945286c-a3cc-5297-a523-986ea2277f1c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "NonNullable<T> loại bỏ null và undefined khỏi type T: NonNullable<string | null | undefined> cho ra string."
+      ],
+      "details": [],
+      "points": [
+        "Tương đương với Exclude<T, null | undefined>.",
+        "Hay dùng sau khi đã kiểm tra null ở runtime nhưng TypeScript vẫn chưa tự narrow được — ví dụ kết quả từ Array.find() có type T | undefined, sau khi guard check có thể cast về NonNullable.",
+        "Với strictNullChecks bật, đây là utility cần thiết để làm việc với optional values an toàn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "366-nonnullable-t-la-gi"
+  },
+  {
+    "id": "1b02dd31-d24a-56dc-a0f0-c014571033be",
+    "question": "Readonly<T> và ReadonlyArray<T> là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/367-readonly-t-va-readonlyarray-t-la-gi",
+    "slug": "readonly-t-va-readonlyarray-t-la-gi-1b02dd31-d24a-56dc-a0f0-c014571033be",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Readonly<T> làm tất cả properties của T thành readonly (shallow). ReadonlyArray<T> là array không thể modify (push, pop, sort không available)."
+      ],
+      "details": [
+        "Dùng với as const, Redux state, functional programming."
+      ],
+      "points": [],
+      "sections": [
+        "Deep readonly cần custom type: DeepReadonly<T> với recursive mapped type."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "const nums: ReadonlyArray<number> = [1, 2, 3];\nnums.push(4);    // Error! Property 'push' does not exist\nnums[0] = 99;   // Error! Index signature is readonly\n\nconst state: Readonly<{ count: number }> = { count: 0 };\nstate.count = 1; // Error!"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "367-readonly-t-va-readonlyarray-t-la-gi"
+  },
+  {
+    "id": "c9bcf560-97c4-536f-aa00-385b343b32ca",
+    "question": "Hãy implement Partial<T> từ đầu để hiểu cách hoạt động.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/369-hay-implement-partial-t-tu-dau-de-hieu-cach-hoat-dong",
+    "slug": "hay-implement-partial-t-tu-dau-de-hieu-cach-hoat-dong-c9bcf560-97c4-536f-aa00-385b343b32ca",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Dùng mapped type iterate qua tất cả keys của T, thêm ? để optional.",
+        "Hiểu cách này giúp tạo custom utility types bất kỳ."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "// Partial<T>: tất cả optional\ntype MyPartial<T> = {\n  [K in keyof T]?: T[K];\n};\n\n// Required<T>: dấu - xóa optional modifier\ntype MyRequired<T> = {\n  [K in keyof T]-?: T[K];\n};\n\n// Readonly<T>\ntype MyReadonly<T> = {\n  readonly [K in keyof T]: T[K];\n};\n\n// Pick<T, K>\ntype MyPick<T, K extends keyof T> = {\n  [P in K]: T[P];\n};\n\n// Record<K, V>\ntype MyRecord<K extends keyof any, V> = {\n  [P in K]: V;\n};\n\n// Kiểm tra\ntype User = { id: number; name: string; email?: string };\ntype PartialUser = MyPartial<User>;\n// { id?: number; name?: string; email?: string }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "369-hay-implement-partial-t-tu-dau-de-hieu-cach-hoat-dong"
+  },
+  {
+    "id": "469bd90d-3915-5627-b84c-e9364ba3bbda",
+    "question": "Type guards là gì? Các loại type guards trong TypeScript?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/376-type-guards-la-gi-cac-loai-type-guards-trong-typescript",
+    "slug": "type-guards-la-gi-cac-loai-type-guards-trong-typescript-469bd90d-3915-5627-b84c-e9364ba3bbda",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Type guards thu hẹp type trong code branch."
+      ],
+      "details": [
+        "Loại: 1) typeof, 2) instanceof, 3) in operator, 4) equality, 5) user-defined (function với return type is Type), 6) assertion functions."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "function process(val: string | number | null) {\n  if (typeof val === 'string') return val.toUpperCase();\n  if (typeof val === 'number') return val.toFixed(2);\n  return 'null';\n}\n\n// User-defined guard (most powerful)\nfunction isUser(obj: unknown): obj is { id: string; name: string } {\n  return typeof obj === 'object' && obj !== null && 'id' in obj;\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "376-type-guards-la-gi-cac-loai-type-guards-trong-typescript"
+  },
+  {
+    "id": "3b6c6109-5b56-5baa-b5eb-742d06c11af0",
+    "question": "User-defined type guards (type predicates) là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/377-user-defined-type-guards-type-predicates-la-gi",
+    "slug": "user-defined-type-guards-type-predicates-la-gi-3b6c6109-5b56-5baa-b5eb-742d06c11af0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Function type với return type param is Type."
+      ],
+      "details": [
+        "Khi function return true, TS narrow type của param."
+      ],
+      "points": [],
+      "sections": [
+        "Nguy hiểm: TS tin type predicate hoàn toàn, implementation sai sẽ gây runtime bug mà không có compile error."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "// Type predicate\nfunction isString(val: unknown): val is string {\n  return typeof val === 'string';\n}\n\n// Sử dụng\nfunction process(val: string | number) {\n  if (isString(val)) {\n    val.toUpperCase(); // val: string\n  } else {\n    val.toFixed(2);   // val: number\n  }\n}\n\n// Thực tế: kiểm tra object shape\ninterface Cat { meow(): void }\ninterface Dog { bark(): void }\n\nfunction isCat(animal: Cat | Dog): animal is Cat {\n  return 'meow' in animal;\n}\n\n// Array filter với type guard\nconst items: (string | null)[] = ['a', null, 'b'];\nconst strings = items.filter((x): x is string => x !== null);\n// strings: string[]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "377-user-defined-type-guards-type-predicates-la-gi"
+  },
+  {
+    "id": "d6a23b10-461f-5868-b5d7-1c343e875d3c",
+    "question": "Declaration files (.d.ts) là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/381-declaration-files-d-ts-la-gi",
+    "slug": "declaration-files-d-ts-la-gi-d6a23b10-461f-5868-b5d7-1c343e875d3c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Declaration files chứa type declarations không có implementation (ambient declarations)."
+      ],
+      "details": [],
+      "points": [
+        "Dùng để type third-party libraries không viết bằng TS. @types/ packages trên npm.",
+        "Tự viết .d.ts khi cần declare types cho JS code hoặc global variables."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "// Khai báo SVG imports (pattern phổ biến với Vite/Webpack)\ndeclare module '*.svg' {\n  const content: string;\n  export default content;\n}\n\n// Mở rộng global:\ndeclare global {\n  interface Window { analytics: Analytics; }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "381-declaration-files-d-ts-la-gi"
+  },
+  {
+    "id": "0cbbeda8-9334-5943-ad10-5c9467721d57",
+    "question": "tsconfig.json các options quan trọng nhất là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/382-tsconfig-json-cac-options-quan-trong-nhat-la-gi",
+    "slug": "tsconfig-json-cac-options-quan-trong-nhat-la-gi-0cbbeda8-9334-5943-ad10-5c9467721d57",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Trong tsconfig.json, strict: true là option quan trọng nhất vì nó bật toàn bộ strict type-checking bao gồm strictNullChecks, noImplicitAny và strictFunctionTypes. target xác định phiên bản ES output (ví dụ ES2020), module chọn hệ thống module (ESNext, CommonJS), và moduleResolution quyết định cách TypeScript tìm kiếm file khi import (node, bundler)."
+      ],
+      "details": [
+        "Ngoài ra, paths cho phép cấu hình path aliases (ví dụ @/components), isolatedModules bắt buộc khi dùng bundlers như Vite hoặc esbuild vì chúng compile từng file riêng lẻ, và sourceMap: true giúp debug bằng cách map code đã compile về source TypeScript gốc."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "382-tsconfig-json-cac-options-quan-trong-nhat-la-gi"
+  },
+  {
+    "id": "c31ecbf5-cab8-5020-b723-13343887eb15",
+    "question": "TypeScript với React: typing hooks như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/385-typescript-voi-react-typing-hooks-nhu-the-nao",
+    "slug": "typescript-voi-react-typing-hooks-nhu-the-nao-c31ecbf5-cab8-5020-b723-13343887eb15",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "useState: useState<Type>(init) khi init không đủ thông tin. useRef: useRef<HTMLInputElement>(null) cho DOM refs, useRef<number>(0) cho mutable values (không trigger re-render). useReducer: type actions với discriminated unions."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "const [user, setUser] = useState<User | null>(null);\n\nconst inputRef = useRef<HTMLInputElement>(null);  // DOM ref\nconst timerRef = useRef<number>(0);              // mutable value\n\n// Custom hook với explicit return type:\nfunction useCounter(init = 0): [number, () => void] {\n  const [count, setCount] = useState(init);\n  return [count, () => setCount(c => c + 1)];\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "385-typescript-voi-react-typing-hooks-nhu-the-nao"
+  },
+  {
+    "id": "bf1f0fbd-9e0c-5145-bec7-b10a947576bd",
+    "question": "TypeScript với React: typing events là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/386-typescript-voi-react-typing-events-la-gi",
+    "slug": "typescript-voi-react-typing-events-la-gi-bf1f0fbd-9e0c-5145-bec7-b10a947576bd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "React.ChangeEvent<HTMLInputElement> cho onChange, React.MouseEvent<HTMLButtonElement> cho onClick, React.FormEvent<HTMLFormElement> cho onSubmit."
+      ],
+      "details": [
+        "Nếu không nhớ chính xác: hover lên event trong IDE, hoặc dùng React.SyntheticEvent rộng hơn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "function handleChange(e: React.ChangeEvent<HTMLInputElement>) {\n  setValue(e.target.value);\n}\n\nfunction handleSubmit(e: React.FormEvent<HTMLFormElement>) {\n  e.preventDefault();\n  // ...\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "386-typescript-voi-react-typing-events-la-gi"
+  },
+  {
+    "id": "fdb11707-2c41-505b-8102-0962592e6080",
+    "question": "Path aliases trong TypeScript (paths config) là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/395-path-aliases-trong-typescript-paths-config-la-gi",
+    "slug": "path-aliases-trong-typescript-paths-config-la-gi-fdb11707-2c41-505b-8102-0962592e6080",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "paths trong tsconfig.json map import paths để tránh relative paths dài."
+      ],
+      "details": [
+        "Cần configure cả bundler vì TS compiler chỉ handle types, không transform imports."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JSON",
+          "code": "// vite.config.ts\nimport { defineConfig } from 'vite';\nexport default defineConfig({\n  resolve: { alias: { '@': '/src' } }\n});\n// Dùng: import { Button } from '@/components/Button'"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "395-path-aliases-trong-typescript-paths-config-la-gi"
+  },
+  {
+    "id": "7a9dafeb-3808-5733-bd06-ae0be3837cb3",
+    "question": "Bạn mô hình hoá state của một màn hình (loading / success / error) bằng type như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97054-ban-mo-hinh-hoa-state-cua-mot-man-hinh-loading-success-error-bang-type-nhu-the-n",
+    "slug": "ban-mo-hinh-hoa-state-cua-mot-man-hinh-loading-success-error-bang-type-nhu-the-nao-7a9dafeb-3808-5733-bd06-ae0be3837cb3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng discriminated union thay vì một object với nhiều field optional.",
+        "Vì sao hơn cách { isLoading, data?, error? }: cách kia cho phép các tổ hợp vô nghĩa như isLoading: true mà vẫn có error, và mọi lần đọc data đều phải kiểm tra undefined. Union loại bỏ các trạng thái không hợp lệ ngay ở tầng type."
+      ],
+      "details": [
+        "Union có một field chung làm discriminant (thường là status), giúp compiler biết chính xác field nào tồn tại ở mỗi nhánh.",
+        "Thêm exhaustiveness check để khi thêm nhánh mới mà quên xử lý thì compiler báo ngay:"
+      ],
+      "points": [],
+      "sections": [
+        "Gọi assertNever(s) ở default — thêm 'refetching' vào union mà chưa xử lý sẽ lỗi biên dịch."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "type ScreenState =\n  | { status: 'loading' }\n  | { status: 'success'; data: User[] }\n  | { status: 'error'; message: string }\n\nfunction render(s: ScreenState) {\n  switch (s.status) {\n    case 'loading': return '...'\n    case 'success': return s.data.length          // data chắc chắn có\n    case 'error': return s.message                // message chắc chắn có\n  }\n}"
+        },
+        {
+          "language": "TS",
+          "code": "function assertNever(x: never): never {\n  throw new Error('Unhandled state: ' + JSON.stringify(x))\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "97054-ban-mo-hinh-hoa-state-cua-mot-man-hinh-loading-success-error-bang-type-nhu-the-n"
+  },
+  {
+    "id": "b31900c0-669c-5b84-be2b-e86c64e70cfa",
+    "question": "Vì sao narrowing bị \"mất\" sau khi gọi một hàm khác hoặc bên trong callback? Khắc phục thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97055-vi-sao-narrowing-bi-mat-sau-khi-goi-mot-ham-khac-hoac-ben-trong-callback-khac-ph",
+    "slug": "vi-sao-narrowing-bi-mat-sau-khi-goi-mot-ham-khac-hoac-ben-trong-callback-khac-phuc-the-nao-b31900c0-669c-5b84-be2b-e86c64e70cfa",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "TypeScript narrow theo control flow analysis.",
+        "Nguyên nhân: callback có thể chạy ở thời điểm bất kỳ sau đó, trong khoảng đó user.name có thể bị gán lại, nên compiler không giữ narrowing xuyên qua ranh giới hàm."
+      ],
+      "details": [
+        "Cách xử lý:\n- Gán vào biến const cục bộ — cách gọn và đúng nhất, vì const không thể đổi:"
+      ],
+      "points": [
+        "Với property có thể thay đổi (mutable), compiler chỉ giữ kết quả narrow chừng nào nó còn chắc chắn không ai ghi đè.",
+        "Gọi hàm khác hoặc vào một callback chạy sau là hai điểm nó buộc phải bỏ giả định.",
+        "Khai báo property là readonly khi nó thực sự bất biến."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "function handle(user: { name?: string }) {\n  if (user.name) {\n    doSomething()\n    user.name.trim()          // vẫn OK: property của object không bị reset bởi lời gọi hàm\n  }\n\n  if (user.name) {\n    setTimeout(() => user.name.trim(), 0)   // error: name có thể là undefined\n  }\n}"
+        },
+        {
+          "language": "TS",
+          "code": "const name = user.name\nif (name) setTimeout(() => name.trim(), 0)   // OK"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "97055-vi-sao-narrowing-bi-mat-sau-khi-goi-mot-ham-khac-hoac-ben-trong-callback-khac-ph"
+  },
+  {
+    "id": "deeb8655-ab39-5119-a640-1e7e0f25b097",
+    "question": "Khai báo một object config: dùng satisfies T, as T và annotation : T khác nhau ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97056-khai-bao-mot-object-config-dung-satisfies-t-as-t-va-annotation-t-khac-nhau-ra-sa",
+    "slug": "khai-bao-mot-object-config-dung-satisfies-t-as-t-va-annotation-t-khac-nhau-ra-sao-deeb8655-ab39-5119-a640-1e7e0f25b097",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Nói ngắn: satisfies cho bạn kiểm tra mà không đánh mất độ chi tiết. Nó là lựa chọn mặc định cho object config, bảng route, map i18n — nơi bạn vừa muốn ràng buộc hình dạng, vừa muốn autocomplete theo đúng key đã viết. as chỉ nên dùng khi bạn thật sự biết nhiều hơn compiler."
+      ],
+      "details": [],
+      "points": [
+        ": Palette (annotation) — kiểm tra đúng, nhưng biến bị mở rộng về đúng kiểu khai báo. a.green.toUpperCase() lỗi vì compiler chỉ còn biết string | [number, number, number].",
+        "as Palette (assertion) — chỉ ép compiler chấp nhận, không kiểm tra đầy đủ; sai kiểu trong một số trường hợp vẫn lọt, và cũng làm mất kiểu cụ thể.",
+        "satisfies Palette — kiểm tra object có khớp Palette không, nhưng giữ nguyên kiểu suy luận cụ thể. c.green.toUpperCase() hợp lệ vì compiler vẫn nhớ green là string, và c.red[0] cũng dùng được."
+      ],
+      "sections": [
+        "Ba cách kiểm tra ở ba mức khác nhau, và quan trọng nhất là chúng giữ lại lượng thông tin kiểu khác nhau."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "type Palette = Record<string, string | [number, number, number]>\n\nconst a: Palette = { red: [255, 0, 0], green: '#0f0' }\nconst b = { red: [255, 0, 0], green: '#0f0' } as Palette\nconst c = { red: [255, 0, 0], green: '#0f0' } satisfies Palette"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "97056-khai-bao-mot-object-config-dung-satisfies-t-as-t-va-annotation-t-khac-nhau-ra-sa"
+  },
+  {
+    "id": "b1b23875-6f87-561b-b00b-4a4106022b99",
+    "question": "Vì sao truyền một biến chuỗi vào tham số kiểu union lại lỗi, thêm as const thì hết?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97057-vi-sao-truyen-mot-bien-chuoi-vao-tham-so-kieu-union-lai-loi-them-as-const-thi-he",
+    "slug": "vi-sao-truyen-mot-bien-chuoi-vao-tham-so-kieu-union-lai-loi-them-as-const-thi-het-b1b23875-6f87-561b-b00b-4a4106022b99",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì literal widening.",
+        "Cách sửa:\n- as const cho object hoặc riêng property: const opts = { method: 'GET' } as const — mọi property thành readonly và giữ kiểu literal.\n- Hoặc annotate ngay chỗ khai báo: const opts: { method: Method } = { method: 'GET' }."
+      ],
+      "details": [
+        "Khi khai báo bằng let hoặc đặt trong object literal, TypeScript mở rộng kiểu literal 'GET' thành string — do giá trị đó có thể bị gán lại. string không gán được vào union hẹp.",
+        "Lý do TypeScript làm vậy: const không thể gán lại nên giữ literal là an toàn; còn let và property của object thì có thể đổi, giữ literal sẽ gây lỗi giả ở chỗ khác. Hệ quả hay gặp nữa: mảng ['a', 'b'] suy ra string[]; thêm as const mới thành readonly ['a', 'b'] để rút ra union bằng (typeof arr)[number]."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "type Method = 'GET' | 'POST'\nfunction request(m: Method) {}\n\nconst a = 'GET'        // kiểu 'GET' — const không đổi được nên giữ literal\nrequest(a)             // OK\n\nlet b = 'GET'          // kiểu string — bị widening\nrequest(b)             // error\n\nconst opts = { method: 'GET' }\nrequest(opts.method)   // error: property của object literal cũng bị widening"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "97057-vi-sao-truyen-mot-bien-chuoi-vao-tham-so-kieu-union-lai-loi-them-as-const-thi-he"
+  },
+  {
+    "id": "9c81563b-af5e-5f10-a5d5-adc62ec49f4a",
+    "question": "Viết hàm pick(obj, keys) type-safe: vì sao cần K extends keyof T?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97058-viet-ham-pick-obj-keys-type-safe-vi-sao-can-k-extends-keyof-t",
+    "slug": "viet-ham-pick-obj-keys-type-safe-vi-sao-can-k-extends-keyof-t-9c81563b-af5e-5f10-a5d5-adc62ec49f4a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Nếu bỏ constraint:\n- K là string thì obj[k] lỗi vì không index được vào T.\n- Kiểu trả về đành để Partial<T> hoặc any — nơi gọi mất autocomplete và mất luôn thông tin field nào chắc chắn tồn tại."
+      ],
+      "details": [
+        "Ba điểm cần nói khi phỏng vấn:\n- Constraint là \"yêu cầu tối thiểu\" của tham số kiểu, không phải ép về đúng kiểu đó.\n- TypeScript suy luận K từ mảng truyền vào (['id', 'name'] → 'id' | 'name'), nên không phải viết type argument bằng tay.\n- keys: K[] giữ liên kết giữa đầu vào và đầu ra; nếu khai báo keys: string[] thì liên kết đó biến mất."
+      ],
+      "points": [],
+      "sections": [
+        "K extends keyof T là generic constraint — nó ràng buộc tham số kiểu K chỉ được là key thật của T, nhờ đó vừa chặn key sai lúc biên dịch, vừa để kiểu trả về mô tả đúng object con."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "function pick<T extends object, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> {\n  const out = {} as Pick<T, K>\n  for (const k of keys) out[k] = obj[k]\n  return out\n}\n\nconst user = { id: 1, name: 'An', email: 'a@b.c' }\nconst small = pick(user, ['id', 'name'])   // { id: number; name: string }\npick(user, ['phone'])                      // error: 'phone' không phải keyof"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "97058-viet-ham-pick-obj-keys-type-safe-vi-sao-can-k-extends-keyof-t"
+  },
+  {
+    "id": "198aa837-ad42-54c7-a90f-98774880dff5",
+    "question": "Khi nào TypeScript suy luận generic thành string thay vì literal? Ép nó suy luận hẹp bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97059-khi-nao-typescript-suy-luan-generic-thanh-string-thay-vi-literal-ep-no-suy-luan",
+    "slug": "khi-nao-typescript-suy-luan-generic-thanh-string-thay-vi-literal-ep-no-suy-luan-hep-bang-cach-nao-198aa837-ad42-54c7-a90f-98774880dff5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Mặc định TypeScript suy luận generic ở mức rộng nhất còn hợp lệ, nên T thường thành string chứ không phải 'a'.",
+        "Ba công cụ hay dùng:\n- T extends string (hoặc extends number, extends PropertyKey) — thủ thuật cổ điển để suy luận literal.\n- const type parameter (TS 5.0) — hoạt động như thể nơi gọi có as const, tiện cho hàm nhận mảng/object config.\n- NoInfer<T> (TS 5.4) — chặn một vị trí tham gia suy luận, để T chỉ được suy từ vị trí bạn muốn:"
+      ],
+      "details": [
+        "Muốn giữ literal thì phải cho constraint hoặc dùng const type parameter.",
+        "Chỉ ép hẹp khi nơi gọi thực sự cần literal (key lookup, template literal type, exhaustiveness)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "function tag<T>(v: T) { return v }\ntag('a')                       // T = string\n\nfunction tag2<T extends string>(v: T) { return v }\ntag2('a')                      // T = 'a'  (constraint kéo suy luận về literal)\n\nfunction list<const T extends readonly unknown[]>(v: T) { return v }\nlist(['a', 'b'])               // T = readonly ['a', 'b']  (TS 5.0+)"
+        },
+        {
+          "language": "TS",
+          "code": "function createState<T>(initial: T, values: NoInfer<T>[]) {}\ncreateState('a', ['a', 'b'])   // T suy từ initial, values không kéo T rộng ra"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "97059-khi-nao-typescript-suy-luan-generic-thanh-string-thay-vi-literal-ep-no-suy-luan"
+  },
+  {
+    "id": "d00cf076-e87c-5d48-9abc-86a17ba636d9",
+    "question": "Mapped type với key remapping (as) dùng làm gì? Ví dụ sinh type getter và đổi tên key.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97060-mapped-type-voi-key-remapping-as-dung-lam-gi-vi-du-sinh-type-getter-va-doi-ten-k",
+    "slug": "mapped-type-voi-key-remapping-as-dung-lam-gi-vi-du-sinh-type-getter-va-doi-ten-key-d00cf076-e87c-5d48-9abc-86a17ba636d9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Modifier đi kèm: readonly [K in keyof T] thêm readonly, -readonly bỏ; [K in keyof T]?: thêm optional, -?: bỏ — đây chính là cách Required<T> được viết."
+      ],
+      "details": [
+        "Dùng thực tế: sinh type cho object event handler (on${Capitalize<K>}), map DTO snake_case sang camelCase, hoặc tách nhóm field theo kiểu giá trị. Lưu ý hai key remap ra cùng tên sẽ gộp thành union kiểu giá trị, dễ tạo kết quả ngoài ý muốn."
+      ],
+      "points": [],
+      "sections": [
+        "Mapped type duyệt qua các key của một type để sinh type mới; mệnh đề as (TS 4.1) cho phép đổi tên key trong lúc duyệt — nhờ đó biến đổi được cả tên, không chỉ giá trị.",
+        "Lọc key bằng cách remap về never — key nào map thành never sẽ bị loại khỏi kết quả:"
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "type Getters<T> = {\n  [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K]\n}\n\ntype User = { id: number; name: string }\ntype UserGetters = Getters<User>\n// { getId: () => number; getName: () => string }"
+        },
+        {
+          "language": "TS",
+          "code": "type OmitByType<T, U> = {\n  [K in keyof T as T[K] extends U ? never : K]: T[K]\n}\ntype WithoutFns = OmitByType<{ id: number; save: () => void }, Function>\n// { id: number }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "97060-mapped-type-voi-key-remapping-as-dung-lam-gi-vi-du-sinh-type-getter-va-doi-ten-k"
+  },
+  {
+    "id": "cf64ea22-43ee-5543-8f96-f168a0bf0aa4",
+    "question": "Module augmentation là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "module-augmentation-la-gi-cf64ea22-43ee-5543-8f96-f168a0bf0aa4",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": null
+  },
+  {
+    "id": "065822fd-7ac7-54a5-94c0-a4b6fc02eaf5",
+    "question": "Branded types (nominal types) trong TypeScript là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "branded-types-nominal-types-trong-typescript-la-gi-065822fd-7ac7-54a5-94c0-a4b6fc02eaf5",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": null
+  },
+  {
+    "id": "33ec9a53-292c-5d5b-a939-5060464a654f",
+    "question": "Mapped types trong TypeScript là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mapped-types-trong-typescript-la-gi-33ec9a53-292c-5d5b-a939-5060464a654f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": null
+  },
+  {
+    "id": "da223449-0fba-58c5-ba9b-3bf72eaef8f4",
+    "question": "Conditional types trong TypeScript là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "conditional-types-trong-typescript-la-gi-da223449-0fba-58c5-ba9b-3bf72eaef8f4",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": null
+  },
+  {
+    "id": "e6e1bbf6-feab-5a0a-9425-67d74ec26f5c",
+    "question": "infer keyword trong conditional types là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "infer-keyword-trong-conditional-types-la-gi-e6e1bbf6-feab-5a0a-9425-67d74ec26f5c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": null
+  },
+  {
+    "id": "607f6737-2ec1-5561-86b0-db35168fc110",
+    "question": "Template literal types trong TypeScript là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "template-literal-types-trong-typescript-la-gi-607f6737-2ec1-5561-86b0-db35168fc110",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": null
+  },
+  {
+    "id": "63dda5e8-a1d0-5af8-9200-f8852e0c9fa5",
+    "question": "Recursive conditional types là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "recursive-conditional-types-la-gi-63dda5e8-a1d0-5af8-9200-f8852e0c9fa5",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": null
+  },
+  {
+    "id": "30bfed53-2174-5abf-a958-df0a22b57728",
+    "question": "Deep partial và deep readonly type tạo như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "deep-partial-va-deep-readonly-type-tao-nhu-the-nao-30bfed53-2174-5abf-a958-df0a22b57728",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": null
+  },
+  {
+    "id": "79628015-a3ed-5628-8641-e45231aa103c",
+    "question": "Decorators trong TypeScript là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "decorators-trong-typescript-la-gi-79628015-a3ed-5628-8641-e45231aa103c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": null
+  },
+  {
+    "id": "68f1eb6a-ead7-5d83-9fb4-6c7d60627274",
+    "question": "Decorator metadata và reflect-metadata là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "decorator-metadata-va-reflect-metadata-la-gi-68f1eb6a-ead7-5d83-9fb4-6c7d60627274",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": null
+  },
+  {
+    "id": "c8919fb8-b8f4-57fd-9fa9-e38461664479",
+    "question": "Function overloads trong TypeScript là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "function-overloads-trong-typescript-la-gi-c8919fb8-b8f4-57fd-9fa9-e38461664479",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": null
+  },
+  {
+    "id": "f6c74ff6-53be-53c5-9a0f-20c4114e0ed2",
+    "question": "Conditional types với distributive behavior là gì? Cách disable?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "conditional-types-voi-distributive-behavior-la-gi-cach-disable-f6c74ff6-53be-53c5-9a0f-20c4114e0ed2",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": null
+  },
+  {
+    "id": "1caa9c4f-a537-5ca2-8865-20cd25014b77",
+    "question": "TypeScript với React: generics trong components là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "typescript-voi-react-generics-trong-components-la-gi-1caa9c4f-a537-5ca2-8865-20cd25014b77",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": null
+  },
+  {
+    "id": "0c05b4b9-4aee-5748-9f90-1017e0a45569",
+    "question": "Assertion functions trong TypeScript là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "assertion-functions-trong-typescript-la-gi-0c05b4b9-4aee-5748-9f90-1017e0a45569",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": null
+  },
+  {
+    "id": "888b3564-6ff7-53dc-969b-fd3cc254a36c",
+    "question": "Tại sao TypeScript dùng structural typing thay nominal typing?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "tai-sao-typescript-dung-structural-typing-thay-nominal-typing-888b3564-6ff7-53dc-969b-fd3cc254a36c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": null
+  },
+  {
+    "id": "89418da2-2708-54d4-8e60-2b503a140879",
+    "question": "Discriminated unions vs class hierarchy khi nào dùng cái nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "discriminated-unions-vs-class-hierarchy-khi-nao-dung-cai-nao-89418da2-2708-54d4-8e60-2b503a140879",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": null
+  },
+  {
+    "id": "d5e78e6a-5a09-5cc2-bb03-5bd51431019e",
+    "question": "Exhaustiveness checking trong TypeScript là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "exhaustiveness-checking-trong-typescript-la-gi-d5e78e6a-5a09-5cc2-bb03-5bd51431019e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": null
+  },
+  {
+    "id": "4b432b80-8d22-5f4e-bbd1-ff512c9bbcc8",
+    "question": "Type-only imports và exports là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "type-only-imports-va-exports-la-gi-4b432b80-8d22-5f4e-bbd1-ff512c9bbcc8",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": null
+  },
+  {
+    "id": "371c7724-5a10-51eb-806c-dd907a817c5f",
+    "question": "TypeScript performance: tại sao type checking có thể chậm và cách cải thiện?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "typescript-performance-tai-sao-type-checking-co-the-cham-va-cach-cai-thien-371c7724-5a10-51eb-806c-dd907a817c5f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": null
+  },
+  {
+    "id": "f1c0cf98-c1c7-5e54-bdd2-69193fd60c9e",
+    "question": "Dùng conditional type + infer để bóc kiểu bên trong (phần tử mảng, giá trị Promise) như thế nào? Distributive gây bẫy gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dung-conditional-type-infer-de-boc-kieu-ben-trong-phan-tu-mang-gia-tri-promise-nhu-the-nao-distribut-f1c0cf98-c1c7-5e54-bdd2-69193fd60c9e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": null
+  },
+  {
+    "id": "0551bb9e-00a7-5c60-84ce-7b2554ce33ed",
+    "question": "Tự viết DeepPartial<T> và RequireAtLeastOne<T> như thế nào? Cần lưu ý gì khi đệ quy qua array, Date, function?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "tu-viet-deeppartial-t-va-requireatleastone-t-nhu-the-nao-can-luu-y-gi-khi-de-quy-qua-array-date-func-0551bb9e-00a7-5c60-84ce-7b2554ce33ed",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": null
+  },
+  {
+    "id": "d0d8daa4-ebd9-5491-ae1b-2498b27445b4",
+    "question": "Template literal type dùng để làm gì trong thực tế (route, event name)? Giới hạn của nó?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "template-literal-type-dung-de-lam-gi-trong-thuc-te-route-event-name-gioi-han-cua-no-d0d8daa4-ebd9-5491-ae1b-2498b27445b4",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": null
+  },
+  {
+    "id": "63d25729-8a90-5e7e-8db2-8e5bc80b5585",
+    "question": "Cần thêm field user vào Request của Express hoặc mở rộng session của thư viện auth — bạn khai báo ở đâu và bằng cú pháp gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "can-them-field-user-vao-request-cua-express-hoac-mo-rong-session-cua-thu-vien-auth-ban-khai-bao-o-da-63d25729-8a90-5e7e-8db2-8e5bc80b5585",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": null
+  },
+  {
+    "id": "c31f5353-7175-5abd-94bc-8e12b449a9a1",
+    "question": "Vì sao gán thẳng object literal có field thừa thì lỗi, nhưng gán qua biến trung gian lại không?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vi-sao-gan-thang-object-literal-co-field-thua-thi-loi-nhung-gan-qua-bien-trung-gian-lai-khong-c31f5353-7175-5abd-94bc-8e12b449a9a1",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": null
+  }
+]

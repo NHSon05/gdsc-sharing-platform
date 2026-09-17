@@ -1,0 +1,2464 @@
+[
+  {
+    "id": "cd58e560-fbdd-5d2b-96c1-66bea38bba3d",
+    "question": "Docker giải quyết vấn đề gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8300-docker-giai-quyet-van-de-gi",
+    "slug": "docker-giai-quyet-van-de-gi-cd58e560-fbdd-5d2b-96c1-66bea38bba3d",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Docker giải quyết vấn đề môi trường chạy không nhất quán giữa local, CI và production bằng cách đóng gói ứng dụng cùng runtime, dependencies và cấu hình vào container image. Nhờ đó, một image chạy đúng trên máy bạn thì cũng chạy đúng trên server, giảm lỗi kiểu “chạy được trên máy tôi”."
+      ],
+      "details": [
+        "Cơ chế hoạt động: Docker dùng container, không phải VM. Container chia sẻ kernel với host, chỉ cách ly ở tầng process, filesystem, network và resource. Vì không cần khởi động OS riêng, container khởi động nhanh hơn VM và nhẹ hơn về tài nguyên. Image được xây dựng từ nhiều layer, mỗi layer là một thay đổi trong filesystem; Docker cache các layer này để build nhanh hơn khi chỉ thay đổi phần cuối.",
+        "Ví dụ: bạn viết Dockerfile cho app Node.js, build thành image, rồi dùng image đó chạy ở local, CI và production. Nếu dependencies và runtime đã nằm trong image, máy chạy không cần cài Node.js riêng.",
+        "Edge case: container không cách ly kernel, nên nếu host bị lỗi kernel thì mọi container trên host đều ảnh hưởng. Image cũng có thể chứa secret nếu bạn copy file .env vào image; nên dùng secret management khi chạy production. Ngoài ra, container không phải “VM nhẹ” — nó không có OS riêng, nên không thể chạy kernel khác với host.",
+        "Lưu ý: Docker giúp chuẩn hóa môi trường, nhưng bạn vẫn phải quản lý image size, security, network, storage và lifecycle. Container chia sẻ kernel host, nên không thay thế hoàn toàn VM khi cần cách ly mạnh về bảo mật."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "8300-docker-giai-quyet-van-de-gi"
+  },
+  {
+    "id": "f01df94f-1e52-5770-a1c6-2ee01824ca79",
+    "question": "Docker image và container khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8301-docker-image-va-container-khac-nhau-the-nao",
+    "slug": "docker-image-va-container-khac-nhau-the-nao-f01df94f-1e52-5770-a1c6-2ee01824ca79",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Image là template bất biến gồm filesystem layers, metadata và command mặc định. Container là runtime instance được tạo từ image, có process, network namespace và writable layer riêng."
+      ],
+      "details": [
+        "Một image có thể chạy thành nhiều container. Khi container bị xóa, thay đổi trong writable layer mất nếu không dùng volume hoặc lưu dữ liệu ra hệ thống bền vững."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "8301-docker-image-va-container-khac-nhau-the-nao"
+  },
+  {
+    "id": "ede49c40-9442-591d-86f7-0ca5478f6dc5",
+    "question": "Dockerfile layer cache hoạt động thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8302-dockerfile-layer-cache-hoat-dong-the-nao",
+    "slug": "dockerfile-layer-cache-hoat-dong-the-nao-ede49c40-9442-591d-86f7-0ca5478f6dc5",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mỗi instruction trong Dockerfile tạo layer hoặc metadata step. Docker có thể reuse cache nếu instruction và context liên quan không đổi. Vì vậy thứ tự Dockerfile ảnh hưởng tốc độ build rất nhiều."
+      ],
+      "details": [
+        "Pattern phổ biến: copy lockfile/package metadata trước, install dependencies, sau đó mới copy source. Nếu copy toàn bộ source trước khi install, mỗi thay đổi code nhỏ có thể phá cache dependency."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "8302-dockerfile-layer-cache-hoat-dong-the-nao"
+  },
+  {
+    "id": "1934b996-c405-52d4-8081-01f51f7ce9d5",
+    "question": "COPY và ADD khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8304-copy-va-add-khac-nhau-the-nao",
+    "slug": "copy-va-add-khac-nhau-the-nao-1934b996-c405-52d4-8081-01f51f7ce9d5",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "COPY copy file/folder từ build context vào image. ADD cũng copy nhưng có thêm behavior như tự giải nén local tar archives và hỗ trợ URL trong một số trường hợp."
+      ],
+      "details": [
+        "Trong production Dockerfile, ưu tiên COPY vì rõ ràng và ít bất ngờ hơn. Chỉ dùng ADD khi thật sự cần tính năng đặc biệt của nó, ví dụ giải nén tar local có chủ đích."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "8304-copy-va-add-khac-nhau-the-nao"
+  },
+  {
+    "id": "94a1a5f0-9163-5754-bd1f-5159ac055b8d",
+    "question": "Container khác Virtual Machine ở điểm nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94080-container-khac-virtual-machine-o-diem-nao",
+    "slug": "container-khac-virtual-machine-o-diem-nao-94a1a5f0-9163-5754-bd1f-5159ac055b8d",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "VM ảo hóa cả phần cứng: mỗi VM chạy một guest OS đầy đủ trên hypervisor. Container ảo hóa ở tầng OS: nhiều container chia sẻ chung kernel của host, mỗi container chỉ đóng gói app cùng dependencies và một userspace riêng."
+      ],
+      "details": [
+        "Hệ quả:\n- Kích thước / khởi động: image container tính bằng MB, start trong mili-giây; VM tính bằng GB, boot mất giây tới phút.\n- Cô lập: VM cô lập mạnh hơn (ranh giới kernel riêng); container nhẹ hơn nhưng ranh giới yếu hơn vì dùng chung kernel.\n- Mật độ: một host chạy được nhiều container hơn VM nhờ không lặp lại guest OS.",
+        "Hình dung: VM là một căn nhà riêng có móng riêng; container là các phòng trong cùng một tòa nhà, dùng chung hạ tầng nhưng có cửa khóa riêng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "94080-container-khac-virtual-machine-o-diem-nao"
+  },
+  {
+    "id": "ef6a52f4-68f2-5d46-80b4-4e55aed01120",
+    "question": "Một container đi qua những trạng thái nào trong vòng đời?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94082-mot-container-di-qua-nhung-trang-thai-nao-trong-vong-doi",
+    "slug": "mot-container-di-qua-nhung-trang-thai-nao-trong-vong-doi-ef6a52f4-68f2-5d46-80b4-4e55aed01120",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Các trạng thái chính (docker ps -a hiển thị ở cột STATUS):"
+      ],
+      "details": [
+        "Luồng thường gặp:"
+      ],
+      "points": [
+        "created — container đã được tạo từ image nhưng chưa start, chưa có process chạy.",
+        "running — process chính (PID 1) đang chạy sau docker start/docker run.",
+        "paused — toàn bộ process bị đóng băng bằng cgroup freezer; vẫn giữ nguyên trong bộ nhớ, không tiêu CPU.",
+        "exited (stopped) — process chính đã kết thúc; container còn tồn tại cùng filesystem, có thể docker start lại.",
+        "dead — trạng thái lỗi khi không dọn dẹp được, hiếm gặp."
+      ],
+      "sections": [
+        "Điểm cần nhớ: container exited vẫn chiếm chỗ tới khi docker rm; dữ liệu ghi trong writable layer sẽ mất khi xóa nếu không dùng volume."
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "docker run ...   # created -> running\ndocker pause     # running -> paused\ndocker unpause   # paused  -> running\ndocker stop      # running -> exited\ndocker rm        # xóa hẳn container"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "94082-mot-container-di-qua-nhung-trang-thai-nao-trong-vong-doi"
+  },
+  {
+    "id": "cb82dd00-5d02-5781-956a-aa6d419599d1",
+    "question": "Các restart policy của Docker khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94083-cac-restart-policy-cua-docker-khac-nhau-the-nao",
+    "slug": "cac-restart-policy-cua-docker-khac-nhau-the-nao-cb82dd00-5d02-5781-956a-aa6d419599d1",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Restart policy quyết định Docker có tự khởi động lại container khi nó thoát hay khi daemon khởi động lại. Đặt bằng --restart:",
+        "on-failure",
+        "unless-stopped"
+      ],
+      "details": [
+        "Lưu ý restart policy không áp dụng cho container chạy bằng docker run --rm."
+      ],
+      "points": [
+        "no (mặc định) — không bao giờ tự restart.",
+        "on-failure[:N] — chỉ restart khi container thoát với exit code khác 0 (lỗi); có thể giới hạn số lần thử :N.",
+        "always — luôn restart khi thoát; và tự start lại khi Docker daemon khởi động lại. Nếu bị docker stop thủ công thì đứng yên, nhưng daemon restart sẽ start lại.",
+        "unless-stopped — giống always nhưng nếu bạn chủ động stop container thì nó không tự start lại sau khi daemon khởi động lại."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "docker run --restart on-failure:3 myapp\ndocker run --restart unless-stopped myapp"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "94083-cac-restart-policy-cua-docker-khac-nhau-the-nao"
+  },
+  {
+    "id": "7f6c9fc2-1189-5c95-8266-b67a8a3c0dfd",
+    "question": "Vì sao trong Dockerfile phải COPY package.json và cài dependency trước khi COPY toàn bộ source?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98300-vi-sao-trong-dockerfile-phai-copy-package-json-va-cai-dependency-truoc-khi-copy",
+    "slug": "vi-sao-trong-dockerfile-phai-copy-package-json-va-cai-dependency-truoc-khi-copy-toan-bo-source-7f6c9fc2-1189-5c95-8266-b67a8a3c0dfd",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì build cache của Docker vô hiệu theo thứ tự: khi một instruction bị coi là thay đổi, mọi layer phía sau nó đều build lại."
+      ],
+      "details": [
+        "Nếu copy toàn bộ source trước rồi mới npm install, chỉ cần sửa một dòng code là checksum thư mục đổi → layer COPY miss cache → npm install chạy lại từ đầu.",
+        "Cùng logic đó áp cho requirements.txt (Python), go.mod/go.sum (Go), pom.xml (Maven)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "DOCKERFILE",
+          "code": "# slow: every source edit reinstalls dependencies\nCOPY . .\nRUN npm ci\n\n# fast: install layer only reruns when the lockfile changes\nCOPY package.json package-lock.json ./\nRUN npm ci\nCOPY . ."
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "98300-vi-sao-trong-dockerfile-phai-copy-package-json-va-cai-dependency-truoc-khi-copy"
+  },
+  {
+    "id": "4de6058d-d54c-5c6b-9204-e40659210c00",
+    "question": "Chọn base image alpine, slim hay distroless dựa trên gì? Alpine hay gây lỗi gì với Node/Python?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98301-chon-base-image-alpine-slim-hay-distroless-dua-tren-gi-alpine-hay-gay-loi-gi-voi",
+    "slug": "chon-base-image-alpine-slim-hay-distroless-dua-tren-gi-alpine-hay-gay-loi-gi-voi-node-python-4de6058d-d54c-5c6b-9204-e40659210c00",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Alpine nhỏ (~5 MB) nhưng dùng musl libc thay vì glibc, và đó là nguồn gốc phần lớn sự cố:"
+      ],
+      "details": [
+        "Ưu tiên chọn theo rủi ro vận hành, không chỉ theo số MB.",
+        "Lựa chọn thực tế:"
+      ],
+      "points": [
+        "Native module không có prebuilt binary cho musl — Node phải biên dịch lại từ source (cần thêm python3, make, g++), build lâu và dễ lỗi.",
+        "Python: wheel nhị phân trên PyPI build theo chuẩn manylinux/glibc, không dùng được trên musl → pip biên dịch lại từ source, image build chậm hơn nhiều và cuối cùng có khi còn lớn hơn bản slim.",
+        "Một số khác biệt runtime khác: DNS resolver, getaddrinfo, stack size mặc định của thread nhỏ hơn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Base",
+            "Khi dùng",
+            "-slim (Debian)",
+            "Mặc định an toàn cho Node/Python — glibc, wheel/prebuilt chạy được",
+            "alpine",
+            "Go, Rust hoặc binary tĩnh; app đơn giản không có native dep",
+            "distroless",
+            "Chỉ có runtime, không shell/package manager — bề mặt tấn công nhỏ nhất, nhưng khó debug"
+          ]
+        }
+      ]
+    },
+    "legacyId": 9,
+    "sourceSlug": "98301-chon-base-image-alpine-slim-hay-distroless-dua-tren-gi-alpine-hay-gay-loi-gi-voi"
+  },
+  {
+    "id": "91bf64d7-624b-5f9e-801c-dd9f289fc35b",
+    "question": "Máy build hết dung lượng đĩa vì Docker. Dọn thế nào cho an toàn? docker system prune xoá những gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98302-may-build-het-dung-luong-dia-vi-docker-don-the-nao-cho-an-toan-docker-system-pru",
+    "slug": "may-build-het-dung-luong-dia-vi-docker-don-the-nao-cho-an-toan-docker-system-prune-xoa-nhung-gi-91bf64d7-624b-5f9e-801c-dd9f289fc35b",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đĩa thường bị chiếm bởi 4 nhóm: image không dùng, container đã dừng, volume mồ côi, và build cache.",
+        "Lưu ý khi chạy trên máy CI/staging dùng chung: -a xoá cả image đang được pull sẵn cho job khác → lần build sau phải kéo lại. --volumes có thể xoá dữ liệu database local."
+      ],
+      "details": [
+        "Kiểm tra trước khi xoá:",
+        "Trên server nên đặt lịch docker builder prune --filter until=... thay vì prune -a --volumes thủ công."
+      ],
+      "points": [],
+      "sections": [
+        "docker system prune mặc định xoá: container đã dừng, network không container nào dùng, dangling image (image <none> bị tag mới thay thế), và build cache treo. Không xoá volume trừ khi thêm --volumes."
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "docker system df           # breakdown by images / containers / volumes / build cache\ndocker system df -v        # per-item detail"
+        },
+        {
+          "language": "BASH",
+          "code": "docker system prune                       # safe default\ndocker system prune -a                    # also removes ALL images no container uses\ndocker builder prune --filter until=168h  # only build cache older than 7 days"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "98302-may-build-het-dung-luong-dia-vi-docker-don-the-nao-cho-an-toan-docker-system-pru"
+  },
+  {
+    "id": "73dfdb2f-088e-56ae-90b3-0931351dcc0f",
+    "question": "Trong Docker Compose, service api kết nối tới db bằng host nào? Vì sao localhost không chạy?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98303-trong-docker-compose-service-api-ket-noi-toi-db-bang-host-nao-vi-sao-localhost-k",
+    "slug": "trong-docker-compose-service-api-ket-noi-toi-db-bang-host-nao-vi-sao-localhost-khong-chay-73dfdb2f-088e-56ae-90b3-0931351dcc0f",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Dùng tên service làm hostname: db:5432. localhost bên trong container trỏ về chính container đó, không phải máy host hay container khác — mỗi container có network namespace riêng.",
+        "Hai điểm hay nhầm:\n- Port mapping (ports) không cần thiết để hai service gọi nhau; container nói chuyện qua cổng nội bộ (5432), không phải cổng đã publish (5433).\n- Muốn container gọi ngược về service chạy trên máy host thì dùng host.docker.internal (Docker Desktop) thay vì localhost."
+      ],
+      "details": [
+        "Compose tự tạo một user-defined bridge network cho project và bật DNS nội bộ, nên mọi service trong cùng network phân giải được nhau bằng tên service (và cả alias nếu khai báo)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "YAML",
+          "code": "services:\n  api:\n    environment:\n      DATABASE_URL: postgres://app@db:5432/app   # service name, not localhost\n    depends_on: [db]\n  db:\n    image: postgres:16\n    ports:\n      - \"5433:5432\"   # only needed for access from the host machine"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "98303-trong-docker-compose-service-api-ket-noi-toi-db-bang-host-nao-vi-sao-localhost-k"
+  },
+  {
+    "id": "0879699a-aee4-54b5-9dcb-750f97cf17e1",
+    "question": "kubectl get pod báo STATUS Running nhưng cột READY là 0/1 — nghĩa là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98350-kubectl-get-pod-bao-status-running-nhung-cot-ready-la-0-1-nghia-la-gi",
+    "slug": "kubectl-get-pod-bao-status-running-nhung-cot-ready-la-0-1-nghia-la-gi-0879699a-aee4-54b5-9dcb-750f97cf17e1",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Container đã chạy nhưng readiness probe chưa pass, nên Pod chưa được coi là sẵn sàng nhận traffic.",
+        "Nguyên nhân hay gặp: probe trỏ sai path/port, app cần thời gian khởi động lâu hơn initialDelaySeconds, hoặc endpoint health phụ thuộc một dependency đang lỗi."
+      ],
+      "details": [
+        "Hai cột nói hai chuyện khác nhau:\n- STATUS = trạng thái vòng đời của Pod (Pending, Running, Succeeded...). Running chỉ có nghĩa container đã được start.\n- READY x/y = số container đã pass readiness trên tổng số container. 0/1 nghĩa là Service sẽ không route request vào Pod này — nó bị loại khỏi danh sách Endpoints.",
+        "Kiểm tra theo thứ tự:",
+        "Nếu READY mãi 0/1 mà không restart thì gần như chắc chắn là readiness (liveness fail sẽ làm container restart và cột RESTARTS tăng)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "kubectl describe pod <name>   # xem Events: \"Readiness probe failed: ...\"\nkubectl logs <name>           # app đã listen đúng port chưa"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "98350-kubectl-get-pod-bao-status-running-nhung-cot-ready-la-0-1-nghia-la-gi"
+  },
+  {
+    "id": "a6751890-a578-54e1-a2a0-7081c529ee24",
+    "question": "Đã kubectl apply một Ingress nhưng truy cập domain không ra gì. Vì sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98351-da-kubectl-apply-mot-ingress-nhung-truy-cap-domain-khong-ra-gi-vi-sao",
+    "slug": "da-kubectl-apply-mot-ingress-nhung-truy-cap-domain-khong-ra-gi-vi-sao-a6751890-a578-54e1-a2a0-7081c529ee24",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ingress chỉ là bản mô tả luật routing, nó không tự xử lý request. Muốn nó có tác dụng phải có Ingress controller đang chạy trong cluster (ingress-nginx, Traefik, HAProxy, hoặc controller của cloud provider)."
+      ],
+      "details": [
+        "Checklist khi Ingress \"không làm gì\":\n1. Có controller chưa — kubectl get pods -A | grep ingress. Cluster trống thì tạo Ingress bao nhiêu cũng vô nghĩa.\n2. ingressClassName có khớp không — Ingress không chỉ đúng class thì controller bỏ qua nó.\n3. ADDRESS đã được gán chưa — kubectl get ingress; cột ADDRESS rỗng nghĩa là chưa controller nào nhận.\n4. DNS đã trỏ về IP của controller Service chưa (thường là một Service LoadBalancer).\n5. Backend Service có Endpoints không — kubectl get endpoints <svc>; rỗng thì Ingress trả 503.",
+        "Tóm lại: Ingress = luật, controller = thứ thực thi luật. Thiếu vế thứ hai thì không có gì chạy."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "98351-da-kubectl-apply-mot-ingress-nhung-truy-cap-domain-khong-ra-gi-vi-sao"
+  },
+  {
+    "id": "512ae373-53fb-5765-9118-8f8cbd79eedc",
+    "question": "Vì sao không nên tạo Pod trực tiếp mà phải qua Deployment?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98352-vi-sao-khong-nen-tao-pod-truc-tiep-ma-phai-qua-deployment",
+    "slug": "vi-sao-khong-nen-tao-pod-truc-tiep-ma-phai-qua-deployment-512ae373-53fb-5765-9118-8f8cbd79eedc",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Pod là đơn vị chạy không có khả năng tự phục hồi. Tạo Pod trần (bare Pod) thì khi node chết hoặc Pod bị xóa, không ai tạo lại — ứng dụng biến mất."
+      ],
+      "details": [
+        "Deployment thêm vào bốn thứ mà Pod trần không có:\n- Self-healing: qua ReplicaSet, luôn giữ đủ số replica mong muốn.\n- Scale: kubectl scale deployment/app --replicas=5.\n- Rolling update + rollback: đổi image thì Deployment thay Pod theo lô, hỏng thì kubectl rollout undo.\n- Lịch sử revision để biết đang chạy version nào."
+      ],
+      "points": [],
+      "sections": [
+        "Pod trần chỉ hợp lý cho việc debug tạm (kubectl run -it --rm) hoặc pod one-shot; workload thật luôn dùng controller (Deployment, StatefulSet, DaemonSet, Job)."
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "kubectl set image deployment/api api=myrepo/api:v2\nkubectl rollout status deployment/api\nkubectl rollout undo deployment/api      # ve revision truoc"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "98352-vi-sao-khong-nen-tao-pod-truc-tiep-ma-phai-qua-deployment"
+  },
+  {
+    "id": "d3830013-5cb9-5611-9fce-516dfca6d85d",
+    "question": "Muốn gọi thử một Service đang chạy trong cluster từ máy local thì làm thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98353-muon-goi-thu-mot-service-dang-chay-trong-cluster-tu-may-local-thi-lam-the-nao",
+    "slug": "muon-goi-thu-mot-service-dang-chay-trong-cluster-tu-may-local-thi-lam-the-nao-d3830013-5cb9-5611-9fce-516dfca6d85d",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đặc điểm cần nhớ:\n- Chỉ tồn tại trong lúc lệnh còn chạy, dành cho debug/dev — không phải cách expose production.\n- Forward tới Service thì kubectl chọn một Pod phía sau, không load-balance nhiều Pod.\n- Chỉ hoạt động với TCP."
+      ],
+      "details": [
+        "So sánh nhanh với các cách khác: NodePort mở port trên mọi node (dùng cho cluster nội bộ), LoadBalancer xin IP public từ cloud, Ingress gom nhiều service dưới một entrypoint HTTP. port-forward là lựa chọn nhẹ nhất khi chỉ cần kiểm tra tạm."
+      ],
+      "points": [],
+      "sections": [
+        "Dùng kubectl port-forward — nó mở một tunnel từ port trên máy bạn tới Pod/Service trong cluster, đi qua API server nên không cần mở firewall hay tạo Service public."
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "kubectl port-forward svc/api 8080:80        # localhost:8080 -> Service port 80\nkubectl port-forward pod/api-7c9d 5005:5005 # forward thang vao mot Pod"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "98353-muon-goi-thu-mot-service-dang-chay-trong-cluster-tu-may-local-thi-lam-the-nao"
+  },
+  {
+    "id": "d0191eb4-f122-5f27-ab70-2f35908f31ce",
+    "question": "Docker là gì? Tại sao hữu ích trong development và deployment?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/760-docker-la-gi-tai-sao-huu-ich-trong-development-va-deployment",
+    "slug": "docker-la-gi-tai-sao-huu-ich-trong-development-va-deployment-d0191eb4-f122-5f27-ab70-2f35908f31ce",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Docker đóng gói app cùng dependency vào container để chạy giống nhau ở mọi môi trường."
+      ],
+      "details": [
+        "Container khác VM: VM ảo hoá phần cứng nên nặng, có OS riêng và boot tính bằng phút; container dùng chung kernel của host nên nhẹ, khởi động tính bằng mili giây, dung lượng MB thay vì GB.",
+        "docker-compose khai báo app nhiều container bằng YAML (services, networks, volumes) và docker-compose up dựng cả stack — gần như bắt buộc khi dev local có app + database + cache.",
+        "Lên production thì ghép Docker với Kubernetes để orchestration, auto-scaling, self-healing; hoặc dùng dịch vụ container có quản lý như ECS/Cloud Run."
+      ],
+      "points": [
+        "Layered filesystem (Union FS): image là một chồng layer chỉ đọc, container thêm một layer ghi được lên trên. Layer được cache và dùng chung giữa các image nên pull rất nhanh khi layer đã có sẵn.",
+        "Copy-on-write: container sửa file thuộc layer của image thì Docker copy file đó lên layer ghi được trước rồi mới sửa.",
+        "Networking: bridge là mặc định, container nói chuyện qua mạng ảo; host cho container dùng thẳng network stack của máy chủ, hiệu năng tốt hơn; overlay dùng cho nhiều host, trong Docker Swarm hay K8s.",
+        "Volume: bind mount gắn thư mục host vào container, tiện lúc dev; named volume do Docker quản lý, dùng để giữ dữ liệu database; tmpfs nằm trong RAM và không lưu lại."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "760-docker-la-gi-tai-sao-huu-ich-trong-development-va-deployment"
+  },
+  {
+    "id": "d889cd05-9603-5fa6-9b73-13fd3d3f9e2f",
+    "question": "Dockerfile là gì? Các instructions cơ bản?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/761-dockerfile-la-gi-cac-instructions-co-ban",
+    "slug": "dockerfile-la-gi-cac-instructions-co-ban-d889cd05-9603-5fa6-9b73-13fd3d3f9e2f",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Dockerfile là script mô tả cách build image, và mỗi instruction sinh ra một layer được cache."
+      ],
+      "details": [
+        "Nguyên tắc quan trọng nhất: đặt thứ ít thay đổi lên trước."
+      ],
+      "points": [
+        "Layer caching: source đổi mà package.json không đổi thì Docker dùng lại layer npm ci đã cache — tiết kiệm 1-2 phút mỗi lần build.",
+        ".dockerignore: loại node_modules, .git, .env, build artifact ra khỏi build context, vừa nhanh vừa đỡ lọt file nhạy cảm.",
+        "Non-root user: mặc định container chạy bằng root, có lỗ hổng là mất luôn — thêm USER appuser trước CMD theo nguyên tắc đặc quyền tối thiểu.",
+        "HEALTHCHECK: để Docker/K8s biết container đã khoẻ chưa mà route traffic vào.",
+        "CMD vs ENTRYPOINT: ENTRYPOINT là executable không override được (tham số của docker run image args sẽ được truyền vào nó), còn CMD chỉ là tham số mặc định và override được. Ghép như trên thì đổi được file chạy nhưng không đổi được runtime.",
+        "RUN"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "DOCKERFILE",
+          "code": "FROM node:20-alpine\nWORKDIR /app\n\n# copy manifest trước để layer npm install được tái dùng\nCOPY package*.json ./\nRUN npm ci\n\n# source đổi thường xuyên nên để sau cùng\nCOPY . .\n\nRUN addgroup -S appgroup && adduser -S appuser -G appgroup\nUSER appuser\n\nHEALTHCHECK --interval=30s --timeout=3s \\\n  CMD wget -q -O /dev/null http://localhost:3000/health || exit 1\n\nENTRYPOINT [\"node\"]\nCMD [\"server.js\"]"
+        },
+        {
+          "language": "",
+          "code": "RUN apt-get update && apt-get install -y ... && rm -rf /var/lib/apt/lists/*"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "761-dockerfile-la-gi-cac-instructions-co-ban"
+  },
+  {
+    "id": "0afac79c-960c-5883-a4be-a7bd94105045",
+    "question": "Docker là gì? Frontend developer cần biết gì về Docker?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/883-docker-la-gi-frontend-developer-can-biet-gi-ve-docker",
+    "slug": "docker-la-gi-frontend-developer-can-biet-gi-ve-docker-0afac79c-960c-5883-a4be-a7bd94105045",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Docker đóng gói ứng dụng và dependencies vào container, đảm bảo chạy giống nhau trên mọi máy (dev, staging, production)."
+      ],
+      "details": [
+        "Frontend dev cần biết:",
+        "Lưu ý quan trọng: environment variables phải inject lúc runtime (docker run -e), không hardcode vào image vì image dùng chung cho nhiều môi trường."
+      ],
+      "points": [
+        "Dockerfile multi-stage — stage 1 build app, stage 2 chỉ copy file build sang nginx/node, giảm image từ 1GB xuống ~100MB.",
+        "docker-compose.yml để chạy frontend + backend + database cùng lúc bằng docker-compose up.",
+        ".dockerignore loại node_modules và .next tránh copy file thừa"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "883-docker-la-gi-frontend-developer-can-biet-gi-ve-docker"
+  },
+  {
+    "id": "fb588339-cdf2-5720-b260-471ce093e4ec",
+    "question": "CMD và ENTRYPOINT khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8303-cmd-va-entrypoint-khac-nhau-the-nao",
+    "slug": "cmd-va-entrypoint-khac-nhau-the-nao-fb588339-cdf2-5720-b260-471ce093e4ec",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "ENTRYPOINT định nghĩa executable chính của container. CMD cung cấp default arguments hoặc command mặc định có thể override khi chạy container. Dùng cùng nhau khi image có một binary chính và cần default args.",
+        "Nếu image là tool CLI, ENTRYPOINT giúp người dùng truyền args ngắn gọn."
+      ],
+      "details": [
+        "Ví dụ:",
+        "Nếu image cần linh hoạt command, chỉ dùng CMD có thể dễ override hơn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "ENTRYPOINT [\"python\", \"-m\", \"app\"]\nCMD [\"--host\", \"0.0.0.0\", \"--port\", \"8000\"]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "8303-cmd-va-entrypoint-khac-nhau-the-nao"
+  },
+  {
+    "id": "80a05a31-b27d-5b07-bdca-f6b54c1f468c",
+    "question": "Multi-stage build trong Docker dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8305-multi-stage-build-trong-docker-dung-khi-nao",
+    "slug": "multi-stage-build-trong-docker-dung-khi-nao-80a05a31-b27d-5b07-bdca-f6b54c1f468c",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Multi-stage build tách stage build và stage runtime. Stage build chứa compiler, dev dependencies và artifacts tạm; stage runtime chỉ copy output cần chạy. Kết quả là image nhỏ hơn, ít surface security hơn và deploy nhanh hơn."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Không nên ship cả compiler, source test và cache build nếu runtime không cần."
+      ],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "FROM node:22-alpine AS build\nWORKDIR /app\nCOPY package.json pnpm-lock.yaml ./\nRUN corepack enable && pnpm install --frozen-lockfile\nCOPY . .\nRUN pnpm build\n\nFROM node:22-alpine AS runtime\nWORKDIR /app\nCOPY --from=build /app/.next ./.next\nCOPY --from=build /app/package.json ./package.json\nCMD [\"node\", \"server.js\"]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "8305-multi-stage-build-trong-docker-dung-khi-nao"
+  },
+  {
+    "id": "8d426359-f0e2-55fc-ae99-20a6933fd7f1",
+    "question": ".dockerignore quan trọng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8306-dockerignore-quan-trong-the-nao",
+    "slug": "dockerignore-quan-trong-the-nao-8d426359-f0e2-55fc-ae99-20a6933fd7f1",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        ".dockerignore loại file khỏi build context trước khi gửi cho Docker builder. Nó giúp build nhanh hơn, cache ổn định hơn và tránh đưa secrets, logs, node_modules local hoặc artifacts lớn vào context."
+      ],
+      "details": [
+        "Nên ignore .git, local env files, test output, coverage, build artifacts không cần, dependency folder local và file backup. Nếu build context quá lớn, Dockerfile tốt vẫn có thể build chậm vì builder phải nhận quá nhiều dữ liệu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "8306-dockerignore-quan-trong-the-nao"
+  },
+  {
+    "id": "138aca06-9e6e-5fb0-8a34-019d853a3346",
+    "question": "Docker port publishing và container network cần hiểu gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8308-docker-port-publishing-va-container-network-can-hieu-gi",
+    "slug": "docker-port-publishing-va-container-network-can-hieu-gi-138aca06-9e6e-5fb0-8a34-019d853a3346",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Container có network namespace riêng. Service bên trong có thể listen trên port 8000, nhưng host chỉ truy cập được nếu publish port hoặc cùng network có service khác gọi bằng container/service name.",
+        "8080:8000 nghĩa là host port 8080 trỏ vào container port 8000."
+      ],
+      "details": [
+        "Ví dụ:",
+        "Trong Docker Compose, services cùng network thường gọi nhau bằng tên service, không gọi localhost."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "docker run --rm -p 8080:8000 my-api"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "8308-docker-port-publishing-va-container-network-can-hieu-gi"
+  },
+  {
+    "id": "8c8f34dd-28ff-5094-ad2c-34f02bc7ab01",
+    "question": "Environment variables và secrets trong Docker/Compose nên xử lý thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8310-environment-variables-va-secrets-trong-docker-compose-nen-xu-ly-the-nao",
+    "slug": "environment-variables-va-secrets-trong-docker-compose-nen-xu-ly-the-nao-8c8f34dd-28ff-5094-ad2c-34f02bc7ab01",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Env vars phù hợp cấu hình không nhạy cảm hoặc secret đã được inject từ secret manager. Không nên commit .env chứa production secrets. Với Compose, có thể dùng env_file cho local và secrets/file mount cho dữ liệu nhạy cảm.",
+        "Production nên dùng secret manager của platform, rotation policy và least privilege."
+      ],
+      "details": [
+        "Ví dụ Compose local:",
+        "Image không được chứa secret baked-in ở build time."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "8310-environment-variables-va-secrets-trong-docker-compose-nen-xu-ly-the-nao"
+  },
+  {
+    "id": "719c42e0-9763-5080-b159-b46b8aca32c6",
+    "question": "Docker HEALTHCHECK dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8311-docker-healthcheck-dung-khi-nao",
+    "slug": "docker-healthcheck-dung-khi-nao-719c42e0-9763-5080-b159-b46b8aca32c6",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "HEALTHCHECK cho Docker biết container process còn sống chưa đủ, app có thật sự healthy hay không. Nó có thể gọi endpoint nội bộ, kiểm tra port hoặc chạy command nhẹ.",
+        "Healthcheck không nên nặng hoặc phụ thuộc hệ thống ngoài quá xa."
+      ],
+      "details": [
+        "Ví dụ:",
+        "Với Kubernetes, thường dùng probes thay vì chỉ dựa vào Docker healthcheck."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "HEALTHCHECK --interval=30s --timeout=3s --retries=3 \\\n  CMD wget -qO- http://localhost:8000/health || exit 1"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "8311-docker-healthcheck-dung-khi-nao"
+  },
+  {
+    "id": "6cc5d959-7c16-5fca-ada8-c3abe9e3a420",
+    "question": "Docker tag và digest khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8313-docker-tag-va-digest-khac-nhau-the-nao",
+    "slug": "docker-tag-va-digest-khac-nhau-the-nao-6cc5d959-7c16-5fca-ada8-c3abe9e3a420",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tag là tên tham chiếu dễ đọc như app:1.2.0 hoặc app:latest, có thể bị trỏ lại image khác. Digest là content-addressed reference theo hash, bất biến theo nội dung image."
+      ],
+      "details": [
+        "Production nên tránh phụ thuộc latest. Dùng version tag rõ ràng và trong môi trường yêu cầu reproducibility cao có thể pin digest để đảm bảo đúng artifact được deploy."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "8313-docker-tag-va-digest-khac-nhau-the-nao"
+  },
+  {
+    "id": "cd8684d3-88e5-515f-87a1-6619a276c668",
+    "question": "Container nên log và lưu state thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8314-container-nen-log-va-luu-state-the-nao",
+    "slug": "container-nen-log-va-luu-state-the-nao-cd8684d3-88e5-515f-87a1-6619a276c668",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Container app nên log ra stdout/stderr để platform thu thập, thay vì ghi file log local khó gom. State quan trọng nên lưu ở database, object storage, queue hoặc volume được backup, không phụ thuộc writable layer của container."
+      ],
+      "details": [
+        "Container nên được thiết kế stateless càng nhiều càng tốt để scale, restart và rolling update dễ hơn. Nếu container cần state, phải có strategy rõ cho persistence, backup, migration và recovery."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "8314-container-nen-log-va-luu-state-the-nao"
+  },
+  {
+    "id": "fc7701a2-61e5-53cd-a72c-ef5a44b270cd",
+    "question": "Deployment, ReplicaSet, StatefulSet và DaemonSet khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8317-deployment-replicaset-statefulset-va-daemonset-khac-nhau-the-nao",
+    "slug": "deployment-replicaset-statefulset-va-daemonset-khac-nhau-the-nao-fc7701a2-61e5-53cd-a72c-ef5a44b270cd",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Deployment quản lý stateless replicas và rolling updates, tạo ReplicaSet phía dưới. ReplicaSet đảm bảo số Pod replicas nhưng hiếm khi tạo trực tiếp. StatefulSet dùng cho workloads cần identity ổn định, persistent storage và thứ tự rollout. DaemonSet chạy một Pod trên mỗi node phù hợp, ví dụ log agent hoặc node exporter."
+      ],
+      "details": [
+        "Chọn workload theo lifecycle và state. API stateless dùng Deployment, database/queue stateful cân nhắc StatefulSet hoặc managed service, node-level agent dùng DaemonSet."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "8317-deployment-replicaset-statefulset-va-daemonset-khac-nhau-the-nao"
+  },
+  {
+    "id": "efa377af-6d57-5c1b-97af-f3f0bf7d3a14",
+    "question": "Kubernetes Service types khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8318-kubernetes-service-types-khac-nhau-the-nao",
+    "slug": "kubernetes-service-types-khac-nhau-the-nao-efa377af-6d57-5c1b-97af-f3f0bf7d3a14",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "ClusterIP expose service nội bộ trong cluster. NodePort mở port trên nodes. LoadBalancer yêu cầu cloud/load balancer provider tạo load balancer bên ngoài. ExternalName map service sang DNS name ngoài cluster."
+      ],
+      "details": [
+        "Ví dụ ClusterIP:"
+      ],
+      "points": [],
+      "sections": [
+        "Phần quan trọng là selector phải match labels của Pods, nếu không Service sẽ không có endpoints."
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "8318-kubernetes-service-types-khac-nhau-the-nao"
+  },
+  {
+    "id": "2db75bf1-13c8-50c8-82de-c52483632d8d",
+    "question": "Ingress trong Kubernetes dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8319-ingress-trong-kubernetes-dung-de-lam-gi",
+    "slug": "ingress-trong-kubernetes-dung-de-lam-gi-2db75bf1-13c8-50c8-82de-c52483632d8d",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ingress định nghĩa rule HTTP/HTTPS để traffic từ ngoài cluster đi vào Services bên trong, thường dựa trên host/path. Ingress chỉ là Kubernetes resource; cần Ingress Controller như nginx, Traefik hoặc cloud controller để thực thi rule."
+      ],
+      "details": [
+        "Khác với Service LoadBalancer expose một Service trực tiếp, Ingress thường gom nhiều route/domain qua một entrypoint và xử lý TLS, path routing, host routing. Cần cấu hình DNS, certificate và controller đúng thì traffic mới vào được app."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "8319-ingress-trong-kubernetes-dung-de-lam-gi"
+  },
+  {
+    "id": "93a3763c-d09b-5b50-bdfd-2e2f7b2dec33",
+    "question": "Readiness, liveness và startup probes khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8321-readiness-liveness-va-startup-probes-khac-nhau-the-nao",
+    "slug": "readiness-liveness-va-startup-probes-khac-nhau-the-nao-93a3763c-d09b-5b50-bdfd-2e2f7b2dec33",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Readiness probe quyết định Pod đã sẵn sàng nhận traffic chưa. Liveness probe quyết định container có cần restart không. Startup probe bảo vệ app khởi động chậm để liveness không giết quá sớm."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Không dùng liveness để check dependency xa như database nếu lỗi tạm thời sẽ khiến app restart liên tục."
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "8321-readiness-liveness-va-startup-probes-khac-nhau-the-nao"
+  },
+  {
+    "id": "ce8f420b-f6bb-5163-a64a-8494a5934559",
+    "question": "CPU/memory requests và limits trong Kubernetes dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8322-cpu-memory-requests-va-limits-trong-kubernetes-dung-de-lam-gi",
+    "slug": "cpu-memory-requests-va-limits-trong-kubernetes-dung-de-lam-gi-ce8f420b-f6bb-5163-a64a-8494a5934559",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Requests là lượng tài nguyên scheduler dùng để đặt Pod lên node. Limits là trần runtime container được phép dùng. CPU limit có thể gây throttling; memory vượt limit thường bị OOMKilled.",
+        "Không đặt requests quá thấp để nhồi node nếu app latency-sensitive."
+      ],
+      "details": [
+        "Ví dụ:",
+        "Cần đo thực tế bằng metrics rồi điều chỉnh."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "8322-cpu-memory-requests-va-limits-trong-kubernetes-dung-de-lam-gi"
+  },
+  {
+    "id": "2a78b197-85f4-5804-810e-385c9ac3b1d3",
+    "question": "Rolling update trong Kubernetes cần cấu hình gì để ít downtime?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8324-rolling-update-trong-kubernetes-can-cau-hinh-gi-de-it-downtime",
+    "slug": "rolling-update-trong-kubernetes-can-cau-hinh-gi-de-it-downtime-2a78b197-85f4-5804-810e-385c9ac3b1d3",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Deployment rolling update thay Pods cũ bằng Pods mới dần dần. Để ít downtime cần readiness probe đúng, maxUnavailable thấp, maxSurge phù hợp, graceful shutdown và app xử lý SIGTERM."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Nếu readiness probe báo ready quá sớm hoặc shutdown không drain request, rolling update vẫn có thể gây lỗi dù Kubernetes strategy nhìn đúng."
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "8324-rolling-update-trong-kubernetes-can-cau-hinh-gi-de-it-downtime"
+  },
+  {
+    "id": "b9bf4e01-ecdc-5f71-97e4-7d4e49e861cf",
+    "question": "Labels và selectors trong Kubernetes quan trọng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8326-labels-va-selectors-trong-kubernetes-quan-trong-the-nao",
+    "slug": "labels-va-selectors-trong-kubernetes-quan-trong-the-nao-b9bf4e01-ecdc-5f71-97e4-7d4e49e861cf",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Labels là key-value metadata gắn lên objects. Selectors cho Service, Deployment, NetworkPolicy hoặc kubectl chọn đúng objects. Nếu labels/selectors sai, Service không route traffic hoặc Deployment không quản lý Pods đúng.",
+        "Label taxonomy nên nhất quán từ đầu: app, component, version, environment, team."
+      ],
+      "details": [
+        "Ví dụ:",
+        "Đừng dùng label tùy hứng cho routing/automation quan trọng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "8326-labels-va-selectors-trong-kubernetes-quan-trong-the-nao"
+  },
+  {
+    "id": "251e1ac1-57b1-5d54-8212-d82bd6efabb6",
+    "question": "PersistentVolume, PersistentVolumeClaim và StorageClass khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8327-persistentvolume-persistentvolumeclaim-va-storageclass-khac-nhau-the-nao",
+    "slug": "persistentvolume-persistentvolumeclaim-va-storageclass-khac-nhau-the-nao-251e1ac1-57b1-5d54-8212-d82bd6efabb6",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "PersistentVolume là storage resource trong cluster. PersistentVolumeClaim là yêu cầu storage từ workload. StorageClass định nghĩa cách provision storage động như disk type, reclaim policy hoặc provisioner.",
+        "Stateful app cần backup, restore, resize và migration strategy."
+      ],
+      "details": [
+        "Ví dụ PVC:",
+        "PVC chỉ cấp storage, không tự giải quyết durability của dữ liệu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "YAML",
+          "code": "apiVersion: v1\nkind: PersistentVolumeClaim\nmetadata:\n  name: data\nspec:\n  accessModes: [\"ReadWriteOnce\"]\n  resources:\n    requests:\n      storage: 10Gi"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "8327-persistentvolume-persistentvolumeclaim-va-storageclass-khac-nhau-the-nao"
+  },
+  {
+    "id": "1fec8127-0a92-5955-abb7-068d5ec5b9c2",
+    "question": "Init container dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8330-init-container-dung-khi-nao",
+    "slug": "init-container-dung-khi-nao-1fec8127-0a92-5955-abb7-068d5ec5b9c2",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Init container chạy xong trước app containers. Nó phù hợp chuẩn bị file/config, chờ dependency nội bộ, chạy migration nhẹ có kiểm soát hoặc setup permission cho volume.",
+        "Không nên dùng init container để che lỗi kiến trúc như app không retry được dependency."
+      ],
+      "details": [
+        "Ví dụ:",
+        "App production vẫn nên tự retry/backoff hợp lý."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "YAML",
+          "code": "initContainers:\n  - name: wait-db\n    image: busybox:1.36\n    command: [\"sh\", \"-c\", \"until nc -z db 5432; do sleep 2; done\"]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "8330-init-container-dung-khi-nao"
+  },
+  {
+    "id": "d28a165f-0f33-5c22-9c66-879fd8600492",
+    "question": "imagePullPolicy và registry strategy cần hiểu gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8334-imagepullpolicy-va-registry-strategy-can-hieu-gi",
+    "slug": "imagepullpolicy-va-registry-strategy-can-hieu-gi-d28a165f-0f33-5c22-9c66-879fd8600492",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "imagePullPolicy quyết định kubelet kéo image khi nào: Always, IfNotPresent, hoặc Never. Nếu dùng tag mutable như latest, behavior dễ khó đoán và rollback khó hơn."
+      ],
+      "details": [
+        "Production nên dùng immutable version tags hoặc digest, private registry có auth rõ ràng, image scanning trong CI và retention policy. Khi rollout, đổi tag/digest trong manifest để Kubernetes tạo ReplicaSet mới."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "8334-imagepullpolicy-va-registry-strategy-can-hieu-gi"
+  },
+  {
+    "id": "fd73c5f8-dcb0-5505-9e8d-c88ac6f1091f",
+    "question": "Helm và Kustomize khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8335-helm-va-kustomize-khac-nhau-the-nao",
+    "slug": "helm-va-kustomize-khac-nhau-the-nao-fd73c5f8-dcb0-5505-9e8d-c88ac6f1091f",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Helm là package manager/template engine cho Kubernetes, phù hợp chart tái sử dụng, values theo môi trường và dependency packaging. Kustomize patch YAML gốc bằng overlays, không dùng template language, tích hợp sẵn với kubectl apply -k."
+      ],
+      "details": [
+        "Helm mạnh khi phân phối app/platform package. Kustomize đơn giản khi team muốn giữ manifest gần Kubernetes YAML chuẩn. Nhiều tổ chức dùng cả hai: Helm cho vendor charts, Kustomize hoặc GitOps overlay cho cấu hình môi trường."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "8335-helm-va-kustomize-khac-nhau-the-nao"
+  },
+  {
+    "id": "dc4bcf55-f017-5af9-913a-3418c42587c8",
+    "question": "Debug Pod lỗi thường dùng lệnh nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8336-debug-pod-loi-thuong-dung-lenh-nao",
+    "slug": "debug-pod-loi-thuong-dung-lenh-nao-dc4bcf55-f017-5af9-913a-3418c42587c8",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Các lệnh cơ bản: xem Pod, describe events, logs container, exec vào container nếu có shell, xem rollout và endpoints Service. Thứ tự tốt là kiểm status, events, logs, config, network, resource.",
+        "--previous hữu ích khi container restart."
+      ],
+      "details": [
+        "Ví dụ:",
+        "Nếu image tối giản không có shell, dùng ephemeral debug container khi policy cho phép."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "kubectl get pods -n app\nkubectl describe pod api-123 -n app\nkubectl logs api-123 -n app --previous\nkubectl get endpoints api -n app"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "8336-debug-pod-loi-thuong-dung-lenh-nao"
+  },
+  {
+    "id": "559605ce-37a8-56a0-aeea-6946e6228ae8",
+    "question": "Docker Compose và Kubernetes nên dùng ở đâu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8339-docker-compose-va-kubernetes-nen-dung-o-dau",
+    "slug": "docker-compose-va-kubernetes-nen-dung-o-dau-559605ce-37a8-56a0-aeea-6946e6228ae8",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Docker Compose phù hợp local development, integration tests và môi trường nhỏ cần chạy nhiều services nhanh. Kubernetes phù hợp production hoặc platform cần orchestration, scaling, self-healing, rollout, service discovery và policy mạnh."
+      ],
+      "details": [
+        "Không cần đưa mọi dự án nhỏ lên Kubernetes nếu team chưa cần complexity đó. Nhưng app đã container hóa tốt bằng Docker thường dễ đưa vào Kubernetes hơn nếu image stateless, config qua env/secret, health endpoints và logs chuẩn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "8339-docker-compose-va-kubernetes-nen-dung-o-dau"
+  },
+  {
+    "id": "ff6920d9-a909-5df8-9110-27bfedeee63e",
+    "question": "Cơ chế nào của Linux giúp container cô lập với nhau?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94081-co-che-nao-cua-linux-giup-container-co-lap-voi-nhau",
+    "slug": "co-che-nao-cua-linux-giup-container-co-lap-voi-nhau-ff6920d9-a909-5df8-9110-27bfedeee63e",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Docker không chạy một hypervisor. Nó dựa trên hai nhóm tính năng của Linux kernel:"
+      ],
+      "details": [
+        "Gói lại: namespaces quyết định container thấy gì, cgroups quyết định container dùng được bao nhiêu. Kết hợp thêm capabilities và seccomp để giảm quyền. Vì tất cả dùng chung kernel host, một lỗ hổng kernel có thể phá vỡ ranh giới này, nên container cô lập yếu hơn VM."
+      ],
+      "points": [
+        "Namespaces — cô lập góc nhìn của process. Mỗi container có namespace riêng cho pid (danh sách process), net (interface, IP, port), mnt (filesystem), uts (hostname), ipc và user. Nhờ đó process trong container thấy như đang chạy một mình, không thấy process hay mạng của container khác.",
+        "cgroups (control groups) — giới hạn và tính toán tài nguyên mỗi container được dùng: CPU, memory, block I/O, số process. Đây là cơ chế đứng sau --memory, --cpus."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "94081-co-che-nao-cua-linux-giup-container-co-lap-voi-nhau"
+  },
+  {
+    "id": "90381692-3160-5dbe-8208-27e90e347beb",
+    "question": "Làm sao giới hạn CPU và memory cho một container?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94084-lam-sao-gioi-han-cpu-va-memory-cho-mot-container",
+    "slug": "lam-sao-gioi-han-cpu-va-memory-cho-mot-container-90381692-3160-5dbe-8208-27e90e347beb",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Docker dựa vào cgroups để đặt trần tài nguyên ngay khi chạy. Mặc định container dùng tài nguyên gần như không giới hạn, nên trên host nhiều container cần đặt limit rõ ràng.",
+        "Lưu ý interview: hard memory limit là ranh giới cứng — app JVM/Node cần biết limit để đặt heap, nếu không process có thể bị OOM-kill dù bên trong tưởng còn RAM."
+      ],
+      "details": [
+        "Memory:\n- --memory (hard limit): vượt trần thì kernel OOM-kill process trong container.\n- --memory-reservation (soft limit): mức cam kết, kernel cố ép về khi host thiếu RAM.",
+        "CPU:\n- --cpus=\"1.5\": giới hạn tối đa 1.5 core (cách trực quan nhất).\n- --cpu-shares: trọng số tương đối khi các container tranh CPU, chỉ có tác dụng khi CPU bão hòa.",
+        "Đây cũng là cơ sở cho resources.limits/requests trong Kubernetes."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "docker run --memory=512m --cpus=\"1.5\" myapp"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "94084-lam-sao-gioi-han-cpu-va-memory-cho-mot-container"
+  },
+  {
+    "id": "8e369dcd-ab6a-51b1-8ff6-9bd61619f6c6",
+    "question": "Taint và toleration hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94086-taint-va-toleration-hoat-dong-nhu-the-nao",
+    "slug": "taint-va-toleration-hoat-dong-nhu-the-nao-8e369dcd-ab6a-51b1-8ff6-9bd61619f6c6",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Taint đặt trên node để đẩy Pod ra: theo mặc định Pod sẽ không được schedule lên node đó. Toleration đặt trên Pod để nói rằng nó chấp nhận một taint cụ thể, nhờ đó vẫn có thể lên node bị taint.",
+        "Điểm dễ nhầm: taint/toleration là cơ chế loại trừ (giữ Pod thường tránh xa node đặc biệt, ví dụ node GPU hoặc control plane)."
+      ],
+      "details": [
+        "Taint có dạng key=value:effect với ba effect:\n- NoSchedule — không schedule Pod mới không có toleration.\n- PreferNoSchedule — cố tránh, nhưng vẫn xếp lên nếu không còn chỗ khác.\n- NoExecute — vừa chặn Pod mới, vừa đuổi Pod đang chạy nếu chúng không tolerate.",
+        "Nó chỉ cho phép Pod lên node, không hút Pod về node — muốn hút cần node affinity."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "kubectl taint nodes node1 gpu=true:NoSchedule"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "94086-taint-va-toleration-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "28d1015d-189e-5acd-8ec9-52fead2c9e88",
+    "question": "Node affinity và pod affinity/anti-affinity dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94087-node-affinity-va-pod-affinity-anti-affinity-dung-de-lam-gi",
+    "slug": "node-affinity-va-pod-affinity-anti-affinity-dung-de-lam-gi-28d1015d-189e-5acd-8ec9-52fead2c9e88",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đây là các luật hút Pod về đúng chỗ, bổ sung cho taint (vốn để đẩy ra)."
+      ],
+      "details": [
+        "Mỗi luật có hai mức:\n- requiredDuringSchedulingIgnoredDuringExecution — bắt buộc, không thỏa thì không schedule.\n- preferredDuringSchedulingIgnoredDuringExecution — ưu tiên, có trọng số, không thỏa vẫn xếp.",
+        "topologyKey (ví dụ kubernetes.io/hostname, topology.kubernetes.io/zone) xác định phạm vi \"gần/xa\" là theo node hay theo zone. Anti-affinity theo hostname là cách phổ biến để đảm bảo high availability."
+      ],
+      "points": [
+        "Node affinity — chọn node theo label của node. Thay cho nodeSelector cứng, nó hỗ trợ điều kiện mềm/cứng. Ví dụ: chỉ chạy trên node disktype=ssd, hoặc ưu tiên vùng zone=a.",
+        "Pod affinity — đặt Pod gần Pod khác theo label. Ví dụ: xếp web Pod cùng node/zone với cache để giảm độ trễ.",
+        "Pod anti-affinity — đặt Pod tránh xa Pod khác. Ví dụ: trải các replica của cùng một app ra nhiều node/zone để một node chết không hạ cả service."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "94087-node-affinity-va-pod-affinity-anti-affinity-dung-de-lam-gi"
+  },
+  {
+    "id": "9ecba288-cdb5-5f61-bfa5-516a63717337",
+    "question": "kube-scheduler quyết định đặt một Pod lên node nào bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94088-kube-scheduler-quyet-dinh-dat-mot-pod-len-node-nao-bang-cach-nao",
+    "slug": "kube-scheduler-quyet-dinh-dat-mot-pod-len-node-nao-bang-cach-nao-9ecba288-cdb5-5f61-bfa5-516a63717337",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Scheduler theo dõi các Pod chưa có node (nodeName rỗng) và với mỗi Pod chạy hai giai đoạn:"
+      ],
+      "details": [
+        "1. Filtering (Predicates) — loại bỏ node không thể chạy Pod. Kiểm tra: node có đủ CPU/memory theo requests không, có thỏa nodeSelector/node affinity không, taint có bị tolerate không, port yêu cầu còn trống không, volume có gắn được không. Kết quả là danh sách node khả thi.\n2. Scoring (Priorities) — chấm điểm từng node khả thi rồi chọn điểm cao nhất. Các yếu tố: mức cân bằng tài nguyên sau khi đặt, mức độ trải Pod (spread), độ ưu tiên affinity mềm, image đã có sẵn trên node...",
+        "Sau khi chọn được node, scheduler thực hiện binding: ghi nodeName vào Pod qua API server; kubelet trên node đó mới thực sự tạo container.",
+        "Điểm cần nhớ:\n- Nếu không node nào qua được filtering, Pod ở trạng thái Pending.\n- Scheduler chỉ chọn chỗ, không tự chạy container — việc chạy là của kubelet.\n- requests (không phải limits) là con số scheduler dùng để tính chỗ trống, nên đặt requests hợp lý rất quan trọng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "94088-kube-scheduler-quyet-dinh-dat-mot-pod-len-node-nao-bang-cach-nao"
+  },
+  {
+    "id": "6a5e4455-b2c4-5a72-9486-b76f0c26808e",
+    "question": "Infrastructure as Code là gì, và Terraform khác Ansible thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94091-infrastructure-as-code-la-gi-va-terraform-khac-ansible-the-nao",
+    "slug": "infrastructure-as-code-la-gi-va-terraform-khac-ansible-the-nao-6a5e4455-b2c4-5a72-9486-b76f0c26808e",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Infrastructure as Code (IaC) là quản lý hạ tầng (máy chủ, mạng, DNS, cluster...) bằng file cấu hình được version-control, thay vì bấm tay trên console. Lợi ích: tái lập được, review qua pull request, có lịch sử thay đổi, dựng lại môi trường giống hệt."
+      ],
+      "details": [
+        "Terraform và Ansible thường được so sánh nhưng nhắm hai việc hơi khác nhau:",
+        "Gộp lại: Terraform dựng ra hạ tầng, Ansible cấu hình những gì chạy trên đó. Nhiều team dùng cả hai — Terraform provision, rồi Ansible cấu hình — và cả hai đều là IaC."
+      ],
+      "points": [
+        "Terraform — provisioning, declarative. Bạn khai báo state mong muốn của tài nguyên (5 VM, 1 load balancer, 1 database). Terraform giữ một state file, tính ra khác biệt giữa hiện tại và mong muốn rồi tạo/sửa/xóa cho khớp. Idempotent tự nhiên: apply lại khi đã đúng thì không làm gì. Mạnh nhất ở việc tạo và quản lý vòng đời hạ tầng cloud.",
+        "Ansible — configuration management, thiên procedural. Bạn viết playbook mô tả các bước để cấu hình một máy đã tồn tại: cài package, sửa file config, chạy service. Chạy qua SSH, không cần agent, không giữ state file. Mạnh nhất ở cấu hình bên trong máy và deploy ứng dụng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "94091-infrastructure-as-code-la-gi-va-terraform-khac-ansible-the-nao"
+  },
+  {
+    "id": "77b36c02-b07a-5fa6-b7ef-5f16f6a91eef",
+    "question": "Viết CMD npm start khác CMD [\"npm\", \"start\"] thế nào? Exec form và shell form ảnh hưởng gì tới ENTRYPOINT?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98304-viet-cmd-npm-start-khac-cmd-npm-start-the-nao-exec-form-va-shell-form-anh-huong",
+    "slug": "viet-cmd-npm-start-khac-cmd-npm-start-the-nao-exec-form-va-shell-form-anh-huong-gi-toi-entrypoint-77b36c02-b07a-5fa6-b7ef-5f16f6a91eef",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Shell form (CMD npm start) được bọc thành /bin/sh -c \"npm start\" → shell là PID 1, app là process con. Exec form (CMD [\"npm\", \"start\"]) chạy binary trực tiếp → app là PID 1.",
+        "Quy tắc: luôn dùng exec form cho CMD/ENTRYPOINT."
+      ],
+      "details": [
+        "Khác biệt quan trọng:",
+        "Cần shell expansion thì gọi shell tường minh và exec để giữ PID 1: ENTRYPOINT [\"sh\", \"-c\", \"exec node server.js --port=$PORT\"]."
+      ],
+      "points": [
+        "Tín hiệu: sh -c không forward SIGTERM cho process con → docker stop không tới được app, container bị kill cứng sau timeout. Exec form nhận tín hiệu trực tiếp.",
+        "Biến môi trường: shell form có shell expansion ($PORT, &&, pipe); exec form thì không — [\"echo\", \"$HOME\"] in ra chuỗi $HOME.",
+        "Kết hợp với ENTRYPOINT: chỉ khi cả hai đều ở exec form, CMD mới trở thành tham số mặc định nối vào sau ENTRYPOINT. Nếu ENTRYPOINT ở shell form, CMD bị bỏ qua hoàn toàn."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "DOCKERFILE",
+          "code": "ENTRYPOINT [\"node\", \"server.js\"]\nCMD [\"--port=3000\"]        # docker run img --port=8080 overrides just the argument"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "98304-viet-cmd-npm-start-khac-cmd-npm-start-the-nao-exec-form-va-shell-form-anh-huong"
+  },
+  {
+    "id": "15b144f6-d40b-5a03-8f72-b2f2f4958f9f",
+    "question": "docker stop treo đúng 10 giây rồi container mới tắt, và request đang chạy bị cắt giữa chừng. Nguyên nhân và cách sửa?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98305-docker-stop-treo-dung-10-giay-roi-container-moi-tat-va-request-dang-chay-bi-cat",
+    "slug": "docker-stop-treo-dung-10-giay-roi-container-moi-tat-va-request-dang-chay-bi-cat-giua-chung-nguyen-nh-15b144f6-d40b-5a03-8f72-b2f2f4958f9f",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "docker stop gửi SIGTERM, chờ 10 giây (mặc định) rồi gửi SIGKILL. Treo đủ 10 giây nghĩa là không ai xử lý SIGTERM. Ba nguyên nhân thường gặp:",
+        "Nếu buộc phải có process cha (chạy nhiều tiến trình, cần reap zombie), dùng init nhỏ: docker run --init hoặc nhúng tini làm ENTRYPOINT."
+      ],
+      "details": [
+        "1. PID 1 là shell — dùng shell form hoặc script start.sh không exec, nên sh giữ PID 1 và không forward tín hiệu.\n2. PID 1 là npm / yarn / gunicorn wrapper — process cha nhận tín hiệu nhưng không truyền cho con đúng cách.\n3. App không đăng ký handler — không có graceful shutdown, cứ chạy tới khi bị kill.",
+        "Cách sửa:",
+        "Cần thời gian drain dài hơn thì docker stop -t 30 (Kubernetes: terminationGracePeriodSeconds)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "DOCKERFILE",
+          "code": "CMD [\"node\", \"server.js\"]   # app is PID 1, not npm/sh"
+        },
+        {
+          "language": "JS",
+          "code": "process.on('SIGTERM', () => {\n  server.close(() => process.exit(0))   // stop accepting, drain in-flight requests\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "98305-docker-stop-treo-dung-10-giay-roi-container-moi-tat-va-request-dang-chay-bi-cat"
+  },
+  {
+    "id": "b0f30b1a-9a7e-5090-97f5-448de6d7e2e6",
+    "question": "Image Node của em đang 1.2 GB. Em dùng multi-stage build để giảm xuống thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98306-image-node-cua-em-dang-1-2-gb-em-dung-multi-stage-build-de-giam-xuong-the-nao",
+    "slug": "image-node-cua-em-dang-1-2-gb-em-dung-multi-stage-build-de-giam-xuong-the-nao-b0f30b1a-9a7e-5090-97f5-448de6d7e2e6",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ý tưởng: stage build chứa toolchain, stage runtime chỉ chứa artifact.",
+        "Các nguồn dung lượng bị cắt: devDependency (thường là phần lớn node_modules), cache npm, source code gốc, git history nếu lỡ COPY . .."
+      ],
+      "details": [
+        "Chỉ layer của stage cuối đi vào image xuất ra — mọi thứ ở stage trước (devDependency, compiler, source TS) bị bỏ lại.",
+        "Với Go/Rust còn triệt để hơn — build ra binary tĩnh rồi copy vào scratch hoặc distroless, image xuống vài chục MB. Kèm theo phải có .dockerignore loại node_modules, .git, .env; nếu không, build context vẫn bị đẩy nguyên sang daemon."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "DOCKERFILE",
+          "code": "FROM node:22-slim AS build\nWORKDIR /app\nCOPY package.json package-lock.json ./\nRUN npm ci\nCOPY . .\nRUN npm run build\n\nFROM node:22-slim AS runtime\nWORKDIR /app\nENV NODE_ENV=production\nCOPY package.json package-lock.json ./\nRUN npm ci --omit=dev && npm cache clean --force\nCOPY --from=build /app/dist ./dist\nUSER node\nCMD [\"node\", \"dist/server.js\"]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "98306-image-node-cua-em-dang-1-2-gb-em-dung-multi-stage-build-de-giam-xuong-the-nao"
+  },
+  {
+    "id": "c3023ef6-3014-5007-878a-8c0dbe68eee3",
+    "question": "Em truyền token private registry qua ARG lúc build. Vì sao cách này lộ secret, và thay bằng gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98307-em-truyen-token-private-registry-qua-arg-luc-build-vi-sao-cach-nay-lo-secret-va",
+    "slug": "em-truyen-token-private-registry-qua-arg-luc-build-vi-sao-cach-nay-lo-secret-va-thay-bang-gi-c3023ef6-3014-5007-878a-8c0dbe68eee3",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì ARG và mọi lệnh RUN đều được ghi vào metadata của image.",
+        "docker run",
+        "Xoá ở layer sau cũng vô ích: layer là bất biến và cộng dồn, file đã nằm ở layer trước thì vẫn tồn tại trong image.",
+        "runtime"
+      ],
+      "details": [
+        "Ai có image cũng đọc lại được:",
+        "Cách đúng là BuildKit secret mount — secret chỉ tồn tại trong lúc chạy RUN, không ghi vào layer nào:",
+        "Image phải chạy được ở mọi môi trường mà không chứa cấu hình của môi trường nào."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "docker history --no-trunc my-image     # shows the full RUN command with the token\ndocker inspect my-image                # build args appear in the config"
+        },
+        {
+          "language": "DOCKERFILE",
+          "code": "# syntax=docker/dockerfile:1\nRUN --mount=type=secret,id=npmtoken \\\n    NPM_TOKEN=$(cat /run/secrets/npmtoken) npm ci"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "98307-em-truyen-token-private-registry-qua-arg-luc-build-vi-sao-cach-nay-lo-secret-va"
+  },
+  {
+    "id": "7ccfdce0-50d5-5cf9-90e1-497fb164b25b",
+    "question": "Vì sao không nên để container chạy bằng root? Đổi sang non-root xong app báo lỗi ghi file thì xử lý thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98308-vi-sao-khong-nen-de-container-chay-bang-root-doi-sang-non-root-xong-app-bao-loi",
+    "slug": "vi-sao-khong-nen-de-container-chay-bang-root-doi-sang-non-root-xong-app-bao-loi-ghi-file-thi-xu-ly-t-7ccfdce0-50d5-5cf9-90e1-497fb164b25b",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mặc định process trong container chạy bằng root (uid 0), và uid đó trùng với root của host — namespace chỉ tách tiến trình/mạng, không tách user (trừ khi bật user namespace remapping).",
+        "Lỗi permission sau khi đổi thường do:\n- File copy vào image vẫn thuộc root → dùng COPY --chown.\n- Volume mount vào thư mục uid khác → chown trong entrypoint trước khi hạ quyền, hoặc chỉ định uid khớp giữa host và container.\n- App ghi vào /app hoặc /tmp không có quyền → tạo sẵn thư mục và chown ở stage build.\n- Bind port < 1024 (vd 80) cần root → cho app nghe cổng 3000/8080 rồi map ra ngoài."
+      ],
+      "details": [
+        "Nếu kẻ tấn công thoát được container hoặc bind mount trúng thư mục host, họ thao tác với quyền root trên host.",
+        "Bổ sung thêm --read-only, --cap-drop=ALL, --security-opt=no-new-privileges để siết bề mặt tấn công."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "DOCKERFILE",
+          "code": "RUN groupadd -r app && useradd -r -g app app\nWORKDIR /app\nCOPY --chown=app:app --from=build /app/dist ./dist\nUSER app\nCMD [\"node\", \"dist/server.js\"]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "98308-vi-sao-khong-nen-de-container-chay-bang-root-doi-sang-non-root-xong-app-bao-loi"
+  },
+  {
+    "id": "3bf6aa20-94a1-57c9-913f-0dd25205066f",
+    "question": "Container hiện unhealthy nhưng Docker không tự restart nó dù đã đặt restart: always. Vì sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98309-container-hien-unhealthy-nhung-docker-khong-tu-restart-no-du-da-dat-restart-alwa",
+    "slug": "container-hien-unhealthy-nhung-docker-khong-tu-restart-no-du-da-dat-restart-always-vi-sao-3bf6aa20-94a1-57c9-913f-0dd25205066f",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì HEALTHCHECK và restart policy là hai cơ chế độc lập.",
+        "Giá trị thật của healthcheck nằm ở việc hạ tầng bên ngoài đọc trạng thái đó:\n- Compose: depends_on: { db: { condition: service_healthy } } để service chờ đúng lúc DB sẵn sàng.\n- Load balancer / orchestrator loại container unhealthy khỏi vòng định tuyến.\n- Kubernetes: livenessProbe có restart container, readinessProbe gỡ Pod khỏi Service — đây là thứ Docker standalone không làm thay."
+      ],
+      "details": [
+        "Tham số quan trọng hay bị bỏ: --start-period (thời gian khởi động, fail trong giai đoạn này không tính vào retries) — thiếu nó thì app khởi động chậm sẽ bị đánh dấu unhealthy oan."
+      ],
+      "points": [
+        "Restart policy chỉ phản ứng khi process chính thoát (exit code khác 0, hoặc bất kỳ exit code nào với always).",
+        "Container unhealthy mà process vẫn sống thì Docker Engine chỉ đổi trạng thái, không kill, không restart."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "DOCKERFILE",
+          "code": "HEALTHCHECK --interval=30s --timeout=3s --start-period=20s --retries=3 \\\n  CMD curl -fsS http://localhost:3000/healthz || exit 1"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "98309-container-hien-unhealthy-nhung-docker-khong-tu-restart-no-du-da-dat-restart-alwa"
+  },
+  {
+    "id": "297a3f81-33ec-561f-9a2f-a5d3ae3ae93a",
+    "question": "Mount source code vào container để hot reload thì node_modules biến mất. Vì sao, và bind mount khác named volume chỗ nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98310-mount-source-code-vao-container-de-hot-reload-thi-node-modules-bien-mat-vi-sao-v",
+    "slug": "mount-source-code-vao-container-de-hot-reload-thi-node-modules-bien-mat-vi-sao-va-bind-mount-khac-na-297a3f81-33ec-561f-9a2f-a5d3ae3ae93a",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì bind mount .:/app che toàn bộ thư mục /app trong image bằng thư mục host — kể cả node_modules đã cài lúc build. Host không có node_modules (hoặc có bản build cho OS khác) → app không tìm thấy module.",
+        "Khác biệt hai loại mount:"
+      ],
+      "details": [
+        "Cách xử lý: mount đè một anonymous/named volume lên đúng thư mục đó để giữ nội dung từ image.",
+        "Quy tắc: bind mount cho dev, named volume cho dữ liệu production."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Bind mount",
+            "Named volume",
+            "Nguồn",
+            "Đường dẫn cụ thể trên host",
+            "docker volume",
+            "Docker quản lý trong /var/lib/docker/volumes",
+            "docker run --volumes-from",
+            "Mục đích chính"
+          ]
+        }
+      ]
+    },
+    "legacyId": 52,
+    "sourceSlug": "98310-mount-source-code-vao-container-de-hot-reload-thi-node-modules-bien-mat-vi-sao-v"
+  },
+  {
+    "id": "8c60b9c2-b43c-543e-800a-9e909bd38dcb",
+    "question": "Đặt liveness probe sai có thể gây restart loop như thế nào? Thiết kế probe đúng ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98354-dat-liveness-probe-sai-co-the-gay-restart-loop-nhu-the-nao-thiet-ke-probe-dung-r",
+    "slug": "dat-liveness-probe-sai-co-the-gay-restart-loop-nhu-the-nao-thiet-ke-probe-dung-ra-sao-8c60b9c2-b43c-543e-800a-9e909bd38dcb",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Liveness probe fail thì kubelet giết container và khởi động lại. Nên nếu probe kiểm tra nhầm thứ, hệ thống tự phá chính nó."
+      ],
+      "details": [
+        "Hai lỗi phổ biến:",
+        "1. Health endpoint kiểm tra cả dependency. Nếu /health gọi DB và DB chậm 5 giây, liveness fail → mọi Pod restart cùng lúc → mất luôn service dù app hoàn toàn bình thường. Sự cố ở DB bị khuếch đại thành sự cố toàn hệ thống.",
+        "2. Timeout quá ngắn cho app khởi động chậm. App JVM cần 40 giây warm-up nhưng initialDelaySeconds: 10 → probe fail trước khi app kịp sẵn sàng → restart mãi, Pod không bao giờ lên được.",
+        "Nguyên tắc tách vai trò:\n- Liveness = \"process này có kẹt vĩnh viễn không?\" → chỉ check nội tại (deadlock, event loop chết). Endpoint phải rẻ và không gọi dependency ngoài.\n- Readiness = \"có nên nhận traffic lúc này không?\" → được phép check dependency; fail chỉ khiến Pod rời Endpoints, không restart.\n- Startup probe = chỗ đúng để khoan dung với app khởi động lâu; liveness bị hoãn cho tới khi startup pass."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "YAML",
+          "code": "startupProbe:\n  httpGet: { path: /health/live, port: 8080 }\n  failureThreshold: 30\n  periodSeconds: 5          # cho phep toi da 150s de khoi dong\nlivenessProbe:\n  httpGet: { path: /health/live, port: 8080 }\n  periodSeconds: 10\nreadinessProbe:\n  httpGet: { path: /health/ready, port: 8080 }\n  periodSeconds: 5"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "98354-dat-liveness-probe-sai-co-the-gay-restart-loop-nhu-the-nao-thiet-ke-probe-dung-r"
+  },
+  {
+    "id": "61d45f18-70e7-57c5-bc8b-347e3127c802",
+    "question": "QoS class của Pod được xác định thế nào? Khi node hết memory thì Pod nào bị evict trước?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98355-qos-class-cua-pod-duoc-xac-dinh-the-nao-khi-node-het-memory-thi-pod-nao-bi-evict",
+    "slug": "qos-class-cua-pod-duoc-xac-dinh-the-nao-khi-node-het-memory-thi-pod-nao-bi-evict-truoc-61d45f18-70e7-57c5-bc8b-347e3127c802",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Kubernetes gán QoS class tự động dựa trên cách bạn khai requests và limits:",
+        "Thực chiến: workload quan trọng (payment, auth) nên để Guaranteed cho memory để không bị chọn evict; batch job hoặc dev workload để Burstable/BestEffort."
+      ],
+      "details": [
+        "Khi node bị memory pressure, kubelet evict theo thứ tự: BestEffort trước → Burstable đang dùng vượt request → Guaranteed sau cùng. Trong cùng nhóm, Pod vượt request nhiều hơn bị chọn trước.",
+        "Lưu ý QoS chi phối eviction do node pressure, khác với OOMKill — OOMKill xảy ra khi một container vượt memory limit của chính nó, không phụ thuộc node còn RAM hay không."
+      ],
+      "points": [
+        "Guaranteed — mọi container có đủ cả request và limit cho CPU + memory, và request bằng limit.",
+        "Burstable — có ít nhất một request/limit được đặt, nhưng không thỏa điều kiện Guaranteed.",
+        "BestEffort — không đặt request lẫn limit nào."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "YAML",
+          "code": "resources:\n  requests: { cpu: \"500m\", memory: \"512Mi\" }\n  limits:   { cpu: \"500m\", memory: \"512Mi\" }   # request == limit -> Guaranteed"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "98355-qos-class-cua-pod-duoc-xac-dinh-the-nao-khi-node-het-memory-thi-pod-nao-bi-evict"
+  },
+  {
+    "id": "fec9bbfa-6c6c-5df8-ba3b-d1a3e39d0b6e",
+    "question": "Pod bị OOMKilled — bạn chẩn đoán và xử lý thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98356-pod-bi-oomkilled-ban-chan-doan-va-xu-ly-the-nao",
+    "slug": "pod-bi-oomkilled-ban-chan-doan-va-xu-ly-the-nao-fec9bbfa-6c6c-5df8-ba3b-d1a3e39d0b6e",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "OOMKilled nghĩa là container vượt resources.limits.memory và bị OOM killer của kernel giết. Dấu hiệu: RESTARTS tăng, describe cho thấy Last State: Terminated, Reason: OOMKilled, Exit Code: 137.",
+        "Log --previous rất quan trọng — log của container hiện tại là của lần restart mới, không chứa manh mối."
+      ],
+      "details": [
+        "Ba nhóm nguyên nhân:\n1. Limit đặt quá thấp so với nhu cầu thật. Đo bằng kubectl top pod hoặc metric container memory working set rồi đặt limit theo p99 cộng biên.\n2. Runtime không biết limit của container. JVM cũ không tự đọc cgroup limit và đặt heap theo RAM của node → heap lớn hơn limit → OOMKilled. Đặt -XX:MaxRAMPercentage (hoặc --max-old-space-size cho Node.js) cho khớp limit.\n3. Rò rỉ bộ nhớ thật — memory tăng đơn điệu theo thời gian rồi chết. Không limit nào cứu được, phải profile heap.",
+        "Phân biệt với eviction: OOMKilled là container vượt limit của chính nó; Evicted là node hết tài nguyên và kubelet chọn Pod để loại.",
+        "Xác nhận:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "kubectl describe pod <name> | grep -A5 \"Last State\"\nkubectl logs <name> --previous     # log cua lan chay truoc khi bi giet"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": "98356-pod-bi-oomkilled-ban-chan-doan-va-xu-ly-the-nao"
+  },
+  {
+    "id": "50408f5d-acae-5f35-8aed-d637e7cfa469",
+    "question": "Sửa ConfigMap/Secret thì Pod có tự nhận cấu hình mới không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98357-sua-configmap-secret-thi-pod-co-tu-nhan-cau-hinh-moi-khong",
+    "slug": "sua-configmap-secret-thi-pod-co-tu-nhan-cau-hinh-moi-khong-50408f5d-acae-5f35-8aed-d637e7cfa469",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tùy cách gắn vào Pod, và đây là chỗ hay hiểu nhầm.",
+        "Hoặc gắn hash của ConfigMap vào annotation của pod template — nội dung đổi thì hash đổi, Deployment coi đó là thay đổi spec và tự rolling update."
+      ],
+      "details": [
+        "Gắn qua env / envFrom: KHÔNG. Biến môi trường được đưa vào lúc container start; sửa ConfigMap sau đó không ảnh hưởng process đang chạy. Phải tạo Pod mới.",
+        "Mount thành volume: CÓ, nhưng có độ trễ. kubelet đồng bộ file theo chu kỳ (mặc định cỡ một phút, cộng thêm TTL cache), nên nội dung file sẽ đổi mà container không restart. Đổi lại, ứng dụng phải tự đọc lại file — nếu app chỉ đọc config lúc boot thì file mới cũng vô nghĩa.",
+        "Lưu ý: volume mount với subPath không được cập nhật, và ConfigMap đánh dấu immutable: true cũng vậy.",
+        "Cách làm thực tế nhất là ép rollout để Pod mới nạp cấu hình mới:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "kubectl rollout restart deployment/api"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "98357-sua-configmap-secret-thi-pod-co-tu-nhan-cau-hinh-moi-khong"
+  },
+  {
+    "id": "e374536a-f331-5d56-9e05-f1d76a69a952",
+    "question": "Gọi Service trong cluster bị 503 / connection refused, Pod vẫn Running — debug theo trình tự nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98358-goi-service-trong-cluster-bi-503-connection-refused-pod-van-running-debug-theo-t",
+    "slug": "goi-service-trong-cluster-bi-503-connection-refused-pod-van-running-debug-theo-trinh-tu-nao-e374536a-f331-5d56-9e05-f1d76a69a952",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đi từ Service về phía Pod, mỗi bước loại trừ một tầng.",
+        "Rỗng là manh mối rõ nhất: hoặc selector không khớp label của Pod, hoặc Pod chưa READY (readiness fail thì bị loại khỏi Endpoints). Đối chiếu spec.selector của Service với kubectl get pods --show-labels.",
+        "Pod IP"
+      ],
+      "details": [
+        "2. targetPort có đúng port app đang listen không? Service port là port bên ngoài, targetPort mới là port trong container. Đặt nhầm thì Endpoints vẫn có nhưng connection refused.",
+        "3. App có bind 0.0.0.0 không? Bind vào 127.0.0.1 thì chỉ chính container gọi được, ngoài vào là refused. Lỗi này rất hay gặp.",
+        "Cả hai đều không được → vấn đề ở app hoặc NetworkPolicy đang chặn.",
+        "1. Service có Endpoints không?",
+        "4. Thử từ trong cluster để loại trừ DNS/NetworkPolicy:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "kubectl get endpoints api"
+        },
+        {
+          "language": "BASH",
+          "code": "kubectl run tmp --rm -it --image=busybox --restart=Never -- sh\n# wget -qO- http://api.default.svc.cluster.local:80/health"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "98358-goi-service-trong-cluster-bi-503-connection-refused-pod-van-running-debug-theo-t"
+  },
+  {
+    "id": "75f52f61-1467-5773-b2c4-b994a6579f45",
+    "question": "DNS trong cluster hoạt động thế nào? Vì sao Pod gọi domain ngoài lại chậm?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98359-dns-trong-cluster-hoat-dong-the-nao-vi-sao-pod-goi-domain-ngoai-lai-cham",
+    "slug": "dns-trong-cluster-hoat-dong-the-nao-vi-sao-pod-goi-domain-ngoai-lai-cham-75f52f61-1467-5773-b2c4-b994a6579f45",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mỗi Service có bản ghi DNS dạng <service>.<namespace>.svc.cluster.local do CoreDNS phục vụ. Trong cùng namespace gọi ngắn gọn api là đủ; khác namespace phải api.payment.",
+        "ndots:5 nghĩa là: tên nào có ít hơn 5 dấu chấm sẽ được thử ghép lần lượt với từng search domain trước khi hỏi như tên tuyệt đối. Nên api.github.com (2 dấu chấm) phải qua 3 truy vấn hỏng rồi mới tới truy vấn đúng — nhân đôi vì hỏi cả A và AAAA. Với service gọi domain ngoài dày đặc, đây là nguồn latency và tải CoreDNS đáng kể."
+      ],
+      "details": [
+        "Điều làm nhiều người bất ngờ nằm ở /etc/resolv.conf mà kubelet inject vào Pod:",
+        "Cách xử lý: thêm dấu chấm cuối để dùng FQDN tuyệt đối (api.github.com.), hoặc hạ ndots trong dnsConfig của Pod, hoặc bật NodeLocal DNSCache.",
+        "Một điểm nữa: headless Service (clusterIP: None) không trả về một VIP mà trả danh sách IP của từng Pod — đây là cách StatefulSet cho phép định danh từng instance qua DNS."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "search default.svc.cluster.local svc.cluster.local cluster.local\noptions ndots:5"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": "98359-dns-trong-cluster-hoat-dong-the-nao-vi-sao-pod-goi-domain-ngoai-lai-cham"
+  },
+  {
+    "id": "ca82b1b2-219f-54f6-99e2-9238a3d86057",
+    "question": "ResourceQuota và LimitRange khác nhau thế nào? Dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98360-resourcequota-va-limitrange-khac-nhau-the-nao-dung-de-lam-gi",
+    "slug": "resourcequota-va-limitrange-khac-nhau-the-nao-dung-de-lam-gi-ca82b1b2-219f-54f6-99e2-9238a3d86057",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai đều là hàng rào tài nguyên ở mức namespace, nhưng ở hai tầng khác nhau.",
+        "Điểm bẫy hay hỏi: khi namespace đã có ResourceQuota ràng buộc requests.cpu, Pod không khai request sẽ bị từ chối tạo — trừ khi có LimitRange điền giá trị mặc định."
+      ],
+      "details": [
+        "ResourceQuota — trần cho cả namespace. Giới hạn tổng lượng tài nguyên và cả số lượng object mà namespace được dùng.",
+        "Vì vậy hai thứ này thường đi cặp: LimitRange lo giá trị mặc định hợp lý, ResourceQuota lo trần chung để một team không chiếm hết cluster."
+      ],
+      "points": [],
+      "sections": [
+        "LimitRange — luật cho từng container/Pod. Đặt min, max và giá trị mặc định khi manifest không khai báo."
+      ],
+      "codeExamples": [
+        {
+          "language": "YAML",
+          "code": "kind: LimitRange\nspec:\n  limits:\n    - type: Container\n      default: { cpu: 500m, memory: 512Mi }        # limit mac dinh\n      defaultRequest: { cpu: 100m, memory: 128Mi } # request mac dinh\n      max: { cpu: \"2\", memory: 4Gi }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": "98360-resourcequota-va-limitrange-khac-nhau-the-nao-dung-de-lam-gi"
+  },
+  {
+    "id": "aaf282eb-45c3-50ab-8305-4b897ebd2ce3",
+    "question": "Multi-stage builds trong Docker là gì? Lợi ích?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "multi-stage-builds-trong-docker-la-gi-loi-ich-aaf282eb-45c3-50ab-8305-4b897ebd2ce3",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": null
+  },
+  {
+    "id": "1e480a68-c5d0-55ae-8baf-df74b7e899af",
+    "question": "Docker image production nên tối ưu security thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "docker-image-production-nen-toi-uu-security-the-nao-1e480a68-c5d0-55ae-8baf-df74b7e899af",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": null
+  },
+  {
+    "id": "b5fa75c7-60c7-52ca-a02f-6f730d0b9adc",
+    "question": "StatefulSet nên dùng cho workload nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "statefulset-nen-dung-cho-workload-nao-b5fa75c7-60c7-52ca-a02f-6f730d0b9adc",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": null
+  },
+  {
+    "id": "810b960d-8f15-5c32-9471-3ff132adc38f",
+    "question": "Sidecar container trong Kubernetes dùng khi nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "sidecar-container-trong-kubernetes-dung-khi-nao-810b960d-8f15-5c32-9471-3ff132adc38f",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": null
+  },
+  {
+    "id": "81d70a9c-b6ad-53fa-acfd-523915568556",
+    "question": "SecurityContext nên cấu hình gì cho Pod/container?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "securitycontext-nen-cau-hinh-gi-cho-pod-container-81d70a9c-b6ad-53fa-acfd-523915568556",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": null
+  },
+  {
+    "id": "877b0eb3-cd30-5b3c-86b2-ec61f7d377fe",
+    "question": "NetworkPolicy trong Kubernetes dùng để làm gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "networkpolicy-trong-kubernetes-dung-de-lam-gi-877b0eb3-cd30-5b3c-86b2-ec61f7d377fe",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": null
+  },
+  {
+    "id": "57dc4f28-7259-539c-8666-f4bc56a487bc",
+    "question": "CrashLoopBackOff, ImagePullBackOff và Pending thường debug thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "crashloopbackoff-imagepullbackoff-va-pending-thuong-debug-the-nao-57dc4f28-7259-539c-8666-f4bc56a487bc",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": null
+  },
+  {
+    "id": "8074d8b6-fe3b-5bf8-842f-cf3904af7394",
+    "question": "Service mesh là gì? Giải quyết vấn đề gì trong microservice?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "service-mesh-la-gi-giai-quyet-van-de-gi-trong-microservice-8074d8b6-fe3b-5bf8-842f-cf3904af7394",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": null
+  },
+  {
+    "id": "22e91b37-eb70-59db-aa55-524754bb1daa",
+    "question": "Custom Resource (CRD) và Operator pattern là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "custom-resource-crd-va-operator-pattern-la-gi-22e91b37-eb70-59db-aa55-524754bb1daa",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": null
+  },
+  {
+    "id": "2bacac69-5d54-5cca-8484-d47ef5367e77",
+    "question": "Pod nằm trên các node khác nhau giao tiếp với nhau bằng cách nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "pod-nam-tren-cac-node-khac-nhau-giao-tiep-voi-nhau-bang-cach-nao-2bacac69-5d54-5cca-8484-d47ef5367e77",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": null
+  },
+  {
+    "id": "e0732827-b856-5859-a29b-a2a21400220f",
+    "question": "Build trên CI luôn miss cache dù Dockerfile không đổi. Nguyên nhân và cách tận dụng cache của BuildKit?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "build-tren-ci-luon-miss-cache-du-dockerfile-khong-doi-nguyen-nhan-va-cach-tan-dung-cache-cua-buildki-e0732827-b856-5859-a29b-a2a21400220f",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": null
+  },
+  {
+    "id": "ee1dbad6-b689-5c3a-86f6-fa50857738e2",
+    "question": "Image build trên MacBook M1 đẩy lên server báo exec format error. Chuyện gì xảy ra và xử lý ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "image-build-tren-macbook-m1-day-len-server-bao-exec-format-error-chuyen-gi-xay-ra-va-xu-ly-ra-sao-ee1dbad6-b689-5c3a-86f6-fa50857738e2",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": null
+  },
+  {
+    "id": "ca885354-e2c5-51ed-ba3f-ed7839359629",
+    "question": "Container chết đột ngột với exit code 137. Em chẩn đoán và khắc phục thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "container-chet-dot-ngot-voi-exit-code-137-em-chan-doan-va-khac-phuc-the-nao-ca885354-e2c5-51ed-ba3f-ed7839359629",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": null
+  },
+  {
+    "id": "7ffb43f2-0c0a-5e38-b501-947624078d3a",
+    "question": "Em RUN rm -rf file lớn ở dòng sau nhưng image không giảm dung lượng. Vì sao? Layer hoạt động thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "em-run-rm-rf-file-lon-o-dong-sau-nhung-image-khong-giam-dung-luong-vi-sao-layer-hoat-dong-the-nao-7ffb43f2-0c0a-5e38-b501-947624078d3a",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": null
+  },
+  {
+    "id": "b500d119-ffc8-5633-b312-9e581f79b8d9",
+    "question": "Service có latency p99 cao nhưng biểu đồ CPU chỉ ~30%. CPU limit liên quan gì ở đây?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "service-co-latency-p99-cao-nhung-bieu-do-cpu-chi-30-cpu-limit-lien-quan-gi-o-day-b500d119-ffc8-5633-b312-9e581f79b8d9",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": null
+  },
+  {
+    "id": "e8efce6e-04bc-558e-a83e-119babc1beba",
+    "question": "Rolling update đã bật readiness probe mà vẫn có request lỗi 502 lúc deploy. Nguyên nhân và cách khắc phục?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "rolling-update-da-bat-readiness-probe-ma-van-co-request-loi-502-luc-deploy-nguyen-nhan-va-cach-khac-e8efce6e-04bc-558e-a83e-119babc1beba",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": null
+  },
+  {
+    "id": "6bea3171-9433-5e1f-a506-352563a7ab39",
+    "question": "PodDisruptionBudget dùng để làm gì? Nó bảo vệ được và không bảo vệ được trường hợp nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "poddisruptionbudget-dung-de-lam-gi-no-bao-ve-duoc-va-khong-bao-ve-duoc-truong-hop-nao-6bea3171-9433-5e1f-a506-352563a7ab39",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 76,
+    "sourceSlug": null
+  },
+  {
+    "id": "0a41afd2-7f6a-5625-867f-3cab9040673a",
+    "question": "HPA phản ứng chậm khi traffic tăng đột ngột, hoặc scale lên xuống liên tục. Vì sao và chỉnh thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "hpa-phan-ung-cham-khi-traffic-tang-dot-ngot-hoac-scale-len-xuong-lien-tuc-vi-sao-va-chinh-the-nao-0a41afd2-7f6a-5625-867f-3cab9040673a",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 77,
+    "sourceSlug": null
+  },
+  {
+    "id": "d53c426a-4e92-5038-a9dd-726f053b4134",
+    "question": "Vận hành StatefulSet khác Deployment ở những điểm nào? Scale down thì dữ liệu có mất không?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "van-hanh-statefulset-khac-deployment-o-nhung-diem-nao-scale-down-thi-du-lieu-co-mat-khong-d53c426a-4e92-5038-a9dd-726f053b4134",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 78,
+    "sourceSlug": null
+  }
+]

@@ -1,0 +1,1460 @@
+[
+  {
+    "id": "1de65c09-5479-5e53-8094-3ecabe8532ba",
+    "question": "RabbitMQ là gì và khi nào nên dùng nó?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2901-rabbitmq-la-gi-va-khi-nao-nen-dung-no",
+    "slug": "rabbitmq-la-gi-va-khi-nao-nen-dung-no-1de65c09-5479-5e53-8094-3ecabe8532ba",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "RabbitMQ là message broker mã nguồn mở, cho phép các ứng dụng giao tiếp bất đồng bộ thông qua một broker trung gian thay vì gọi trực tiếp lẫn nhau."
+      ],
+      "details": [],
+      "points": [
+        "Dùng khi cần tách ghép (decouple) các service, xử lý tác vụ nền như gửi email, resize ảnh, và tăng độ tin cậy của hệ thống khi có lỗi xảy ra.",
+        "Điểm khác biệt so với gọi API trực tiếp: nếu một service bị down, messages sẽ nằm đợi trong RabbitMQ cho đến khi service đó khôi phục."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "2901-rabbitmq-la-gi-va-khi-nao-nen-dung-no"
+  },
+  {
+    "id": "2f337f4b-916b-5ec5-8748-19b9be5cec89",
+    "question": "AMQP là gì và nó giải quyết vấn đề gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2902-amqp-la-gi-va-no-giai-quyet-van-de-gi",
+    "slug": "amqp-la-gi-va-no-giai-quyet-van-de-gi-2f337f4b-916b-5ec5-8748-19b9be5cec89",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "AMQP (Advanced Message Queuing Protocol) là giao thức nhị phân tiêu chuẩn hóa cho message-oriented middleware, giúp các ứng dụng và ngôn ngữ lập trình khác nhau có thể giao tiếp đáng tin cậy. Nó giải quyết vấn đề vendor lock-in và không tương thích: ứng dụng Python có thể gửi message mà ứng dụng Java consume được mà không cần tầng chuyển đổi riêng. AMQP đảm bảo tính interoperability giữa các client bất kể ngôn ngữ hay hệ điều hành."
+      ],
+      "details": [
+        "RabbitMQ sử dụng AMQP 0-9-1 là protocol chính. AMQP 1.0 là tiêu chuẩn ISO hoàn toàn khác — được hỗ trợ trong RabbitMQ 4.0 (built-in, không cần plugin riêng)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "2902-amqp-la-gi-va-no-giai-quyet-van-de-gi"
+  },
+  {
+    "id": "b5828392-f7d2-58d7-a917-5aa421f8ca14",
+    "question": "Message broker khác gì so với gọi API trực tiếp giữa các service?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2903-message-broker-khac-gi-so-voi-goi-api-truc-tiep-giua-cac-service",
+    "slug": "message-broker-khac-gi-so-voi-goi-api-truc-tiep-giua-cac-service-b5828392-f7d2-58d7-a917-5aa421f8ca14",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Gọi API trực tiếp (REST, gRPC) yêu cầu cả hai service phải đang chạy đồng thời và biết nhau, tạo ra tight coupling — nếu service B chết thì service A cũng lỗi theo."
+      ],
+      "details": [],
+      "points": [
+        "Message broker đứng ở giữa: service A gửi message vào broker mà không cần biết ai sẽ nhận, broker giữ message và giao khi consumer sẵn sàng.",
+        "Điều này tạo loose coupling, service hoạt động độc lập, và tự nhiên xử lý được lỗi.",
+        "Đánh đổi là độ phức tạp tăng thêm và latency cao hơn một chút, nhưng đổi lại được độ tin cậy và linh hoạt hơn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "2903-message-broker-khac-gi-so-voi-goi-api-truc-tiep-giua-cac-service"
+  },
+  {
+    "id": "34902aa7-5e57-5a76-9c19-7e3256aee7ea",
+    "question": "Kiến trúc của RabbitMQ gồm những thành phần nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2904-kien-truc-cua-rabbitmq-gom-nhung-thanh-phan-nao",
+    "slug": "kien-truc-cua-rabbitmq-gom-nhung-thanh-phan-nao-34902aa7-5e57-5a76-9c19-7e3256aee7ea",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Kiến trúc RabbitMQ gồm: Producer (ứng dụng gửi message), Exchange (nhận message từ producer và định tuyến chúng), Queue (lưu trữ message chờ được consume), Consumer (ứng dụng nhận và xử lý message), và Binding (quy tắc kết nối exchange với queue)."
+      ],
+      "details": [
+        "Hình dung như bưu cục: producer bỏ thư (message) vào bưu cục (exchange), nhân viên phân loại (binding) gửi vào hộp thư (queue), và bưu tá (consumer) giao thư đến tay người nhận."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "2904-kien-truc-cua-rabbitmq-gom-nhung-thanh-phan-nao"
+  },
+  {
+    "id": "5a2e1137-c1f6-5546-8479-4d8c8440960a",
+    "question": "Queue trong RabbitMQ là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2905-queue-trong-rabbitmq-la-gi",
+    "slug": "queue-trong-rabbitmq-la-gi-5a2e1137-c1f6-5546-8479-4d8c8440960a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Queue là buffer lưu trữ message do producer gửi, chờ consumer lấy và xử lý."
+      ],
+      "details": [],
+      "points": [
+        "Message được giao theo thứ tự FIFO (vào trước ra trước), dù RabbitMQ cũng hỗ trợ priority queue.",
+        "Một queue có thể có nhiều consumer, RabbitMQ phân phối message theo round-robin mặc định để cân bằng tải.",
+        "Message tồn tại trong queue cho đến khi được consumer acknowledge hoặc hết hạn TTL."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "2905-queue-trong-rabbitmq-la-gi"
+  },
+  {
+    "id": "819b81f0-4263-5b4b-8398-853b2867dfcf",
+    "question": "Producer và consumer khác nhau như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2906-producer-va-consumer-khac-nhau-nhu-the-nao",
+    "slug": "producer-va-consumer-khac-nhau-nhu-the-nao-819b81f0-4263-5b4b-8398-853b2867dfcf",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Producer là ứng dụng tạo và gửi message vào RabbitMQ, thường được kích hoạt bởi một sự kiện nào đó (user đăng ký, đặt hàng, v.v.)."
+      ],
+      "details": [],
+      "points": [
+        "Consumer là ứng dụng nhận và xử lý message từ queue.",
+        "Một ứng dụng hoàn toàn có thể đóng cả hai vai — ví dụ payment service consume message \"order\" và produce message \"payment_processed\" cho các service khác tiếp tục xử lý."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "2906-producer-va-consumer-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "55b7e735-06d4-5116-8c70-2287abd8da0e",
+    "question": "Binding trong RabbitMQ là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2907-binding-trong-rabbitmq-la-gi",
+    "slug": "binding-trong-rabbitmq-la-gi-55b7e735-06d4-5116-8c70-2287abd8da0e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Binding là quy tắc kết nối exchange với queue, xác định khi nào message được định tuyến từ exchange đến queue đó."
+      ],
+      "details": [],
+      "points": [
+        "Binding dùng một routing_key (chuỗi string) làm tiêu chí so khớp — ví dụ: bind queue \"orders\" vào exchange \"direct\" với routing_key \"new_order\", thì chỉ message có routing_key đó mới vào queue này.",
+        "Không có binding, exchange không biết gửi message đi đâu."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "2907-binding-trong-rabbitmq-la-gi"
+  },
+  {
+    "id": "64236d07-229b-5430-a994-59b005200a32",
+    "question": "Routing key là gì và được dùng như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2908-routing-key-la-gi-va-duoc-dung-nhu-the-nao",
+    "slug": "routing-key-la-gi-va-duoc-dung-nhu-the-nao-64236d07-229b-5430-a994-59b005200a32",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "routing_key là nhãn string gắn vào message, exchange dùng nó để quyết định queue nào nhận message."
+      ],
+      "details": [],
+      "points": [
+        "Producer chỉ định routing_key khi publish (ví dụ \"user.created.vn\"), exchange so khớp với các binding rule và chỉ giao đến queue nào có rule phù hợp.",
+        "Các loại exchange khác nhau diễn giải routing_key theo cách khác: direct exchange cần khớp chính xác, topic exchange hỗ trợ wildcard."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "2908-routing-key-la-gi-va-duoc-dung-nhu-the-nao"
+  },
+  {
+    "id": "87d281e1-221e-5dbf-96ef-f96f97059ae2",
+    "question": "Vai trò của exchange trong RabbitMQ là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2909-vai-tro-cua-exchange-trong-rabbitmq-la-gi",
+    "slug": "vai-tro-cua-exchange-trong-rabbitmq-la-gi-87d281e1-221e-5dbf-96ef-f96f97059ae2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Exchange là \"bộ não\" phân phối message: nhận message từ producer và định tuyến đến các queue phù hợp dựa trên binding và routing_key."
+      ],
+      "details": [],
+      "points": [
+        "Producer không bao giờ gửi trực tiếp vào queue — luôn publish lên exchange, sau đó exchange quyết định message đi đâu.",
+        "Các loại exchange khác nhau (direct, topic, fanout, headers) thực hiện logic định tuyến khác nhau để hỗ trợ các pattern giao tiếp đa dạng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "2909-vai-tro-cua-exchange-trong-rabbitmq-la-gi"
+  },
+  {
+    "id": "f4b314c3-8cea-5149-b560-b712eaaeba1a",
+    "question": "Connection và channel trong RabbitMQ khác nhau như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2910-connection-va-channel-trong-rabbitmq-khac-nhau-nhu-the-nao",
+    "slug": "connection-va-channel-trong-rabbitmq-khac-nhau-nhu-the-nao-f4b314c3-8cea-5149-b560-b712eaaeba1a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Connection là một TCP socket giữa ứng dụng và RabbitMQ broker."
+      ],
+      "details": [],
+      "points": [
+        "Channel là \"kết nối ảo\" nhẹ, chạy multiplexed trên một TCP connection — bạn mở một connection duy nhất nhưng tạo nhiều channel trên đó để tránh overhead của nhiều TCP connection.",
+        "Mỗi channel hoạt động độc lập, gửi/nhận trên các queue khác nhau, rất hiệu quả cho ứng dụng multi-threaded.",
+        "Best practice: dùng lại một connection với nhiều channel thay vì liên tục tạo connection mới."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "2910-connection-va-channel-trong-rabbitmq-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "7d5022f0-ea8e-5a1e-b784-89746c935b19",
+    "question": "\"Persistence\" (tính bền lâu) của message nghĩa là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2912-persistence-tinh-ben-lau-cua-message-nghia-la-gi",
+    "slug": "persistence-tinh-ben-lau-cua-message-nghia-la-gi-7d5022f0-ea8e-5a1e-b784-89746c935b19",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Message persistence nghĩa là RabbitMQ ghi message xuống disk thay vì chỉ giữ trong RAM."
+      ],
+      "details": [],
+      "points": [
+        "Khi publish với \"delivery mode: persistent\", message được ghi ngay lập tức, đảm bảo không mất dù broker crash trước khi consumer xử lý.",
+        "Message không persistent (mặc định) chỉ sống trong RAM — nhanh hơn nhưng sẽ mất khi crash.",
+        "Dùng persistent cho dữ liệu quan trọng như thanh toán, đơn hàng; non-persistent cho notification không quan trọng lắm."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "2912-persistence-tinh-ben-lau-cua-message-nghia-la-gi"
+  },
+  {
+    "id": "1fa187db-7c12-5670-a20e-7bef12b6b7d5",
+    "question": "Acknowledgment (ack) trong RabbitMQ là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2913-acknowledgment-ack-trong-rabbitmq-la-gi",
+    "slug": "acknowledgment-ack-trong-rabbitmq-la-gi-1fa187db-7c12-5670-a20e-7bef12b6b7d5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Acknowledgment là cách consumer báo cho RabbitMQ biết \"tôi đã nhận và xử lý xong message này, bạn có thể xóa nó đi\"."
+      ],
+      "details": [],
+      "points": [
+        "Mặc định là auto-ack — RabbitMQ gửi xong là coi như done.",
+        "Best practice là manual ack: consumer xử lý xong mới gửi ack; nếu crash trước khi ack, RabbitMQ tự động giao lại message cho consumer khác.",
+        "Đây là cơ chế cốt lõi đảm bảo không mất message khi consumer gặp sự cố."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "2913-acknowledgment-ack-trong-rabbitmq-la-gi"
+  },
+  {
+    "id": "a98eb13c-2dcb-55b5-b083-45554b38fa25",
+    "question": "Virtual host (vhost) trong RabbitMQ là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2915-virtual-host-vhost-trong-rabbitmq-la-gi",
+    "slug": "virtual-host-vhost-trong-rabbitmq-la-gi-a98eb13c-2dcb-55b5-b083-45554b38fa25",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Virtual host là một nhóm logic bên trong một RabbitMQ broker, cung cấp sự cách ly hoàn toàn — mỗi vhost có users, permissions, exchanges, queues, và policies riêng."
+      ],
+      "details": [],
+      "points": [
+        "Giống như có nhiều RabbitMQ broker độc lập trên cùng một máy chủ, rất hữu ích cho ứng dụng multi-tenant.",
+        "Một user chỉ có quyền truy cập vào các vhost được cấp phép, ngăn chặn các team can thiệp vào nhau."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "2915-virtual-host-vhost-trong-rabbitmq-la-gi"
+  },
+  {
+    "id": "f434b743-8300-540e-9e6a-5b27971b3e9f",
+    "question": "Điều gì xảy ra khi queue không có consumer nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2916-dieu-gi-xay-ra-khi-queue-khong-co-consumer-nao",
+    "slug": "dieu-gi-xay-ra-khi-queue-khong-co-consumer-nao-f434b743-8300-540e-9e6a-5b27971b3e9f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Khi queue không có consumer, message vẫn tiếp tục đến và tích lũy trong queue vô thời hạn (hoặc đến khi hết TTL)."
+      ],
+      "details": [],
+      "points": [
+        "Đây là thiết kế bình thường — queue sinh ra để buffer message khi consumer tạm thời không available.",
+        "Tuy nhiên trong production cần monitor vì \"zero consumer\" thường báo hiệu worker pod bị crash hoặc bug trong startup logic.",
+        "Đó là lý do cần alert khi \"consumer count == 0\" kéo dài."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "2916-dieu-gi-xay-ra-khi-queue-khong-co-consumer-nao"
+  },
+  {
+    "id": "0ac4916d-f6c9-5bfe-83ca-99629dffa00d",
+    "question": "Message trong RabbitMQ bao gồm những gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2917-message-trong-rabbitmq-bao-gom-nhung-gi",
+    "slug": "message-trong-rabbitmq-bao-gom-nhung-gi-0ac4916d-f6c9-5bfe-83ca-99629dffa00d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Message là đơn vị dữ liệu được truyền qua RabbitMQ, gồm hai phần: payload (dữ liệu thực — JSON, binary, text, v.v.) và metadata (headers, properties như delivery mode, correlation ID, timestamp, v.v.)."
+      ],
+      "details": [],
+      "points": [
+        "RabbitMQ coi payload là mảng byte không rõ nghĩa — không inspect hay sửa nội dung, ứng dụng tự chịu trách nhiệm serialize/deserialize.",
+        "Message có thể rất nhỏ (vài byte) hoặc lớn (megabytes), nhưng message quá lớn sẽ ảnh hưởng performance."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "2917-message-trong-rabbitmq-bao-gom-nhung-gi"
+  },
+  {
+    "id": "f2bba206-367e-58f3-a321-8d50b78a5e4a",
+    "question": "Khi nào dùng message queue, khi nào dùng API call trực tiếp?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2918-khi-nao-dung-message-queue-khi-nao-dung-api-call-truc-tiep",
+    "slug": "khi-nao-dung-message-queue-khi-nao-dung-api-call-truc-tiep-f2bba206-367e-58f3-a321-8d50b78a5e4a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng message queue cho các tác vụ bất đồng bộ không cần response ngay (gửi email, xử lý ảnh, ghi log analytics) hoặc khi cần buffer để hấp thụ traffic spike."
+      ],
+      "details": [],
+      "points": [
+        "Dùng API call trực tiếp cho các thao tác đồng bộ cần phản hồi ngay lập tức (đăng nhập, validate thanh toán, truy vấn dữ liệu).",
+        "Thực tế hầu hết hệ thống dùng cả hai: REST cho critical path đồng bộ, RabbitMQ cho background task và event giữa các service.",
+        "Message queue đánh đổi latency để lấy reliability và decoupling."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "2918-khi-nao-dung-message-queue-khi-nao-dung-api-call-truc-tiep"
+  },
+  {
+    "id": "682a51e5-6c0c-50a3-830e-26251dcffa1c",
+    "question": "Cần gửi email nhắc sau 30 phút kể từ khi user đặt hàng — làm thế nào với message queue?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96853-can-gui-email-nhac-sau-30-phut-ke-tu-khi-user-dat-hang-lam-the-nao-voi-message-q",
+    "slug": "can-gui-email-nhac-sau-30-phut-ke-tu-khi-user-dat-hang-lam-the-nao-voi-message-queue-682a51e5-6c0c-50a3-830e-26251dcffa1c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Có ba cách, chọn theo độ phức tạp bạn chấp nhận."
+      ],
+      "details": [
+        "1. TTL + dead-letter exchange (không cần plugin). Đẩy message vào một queue \"chờ\" không có consumer, đặt x-message-ttl = 30 phút và trỏ x-dead-letter-exchange sang exchange xử lý thật. Hết TTL, message tự dead-letter sang queue làm việc.",
+        "2. Delayed message exchange plugin. Publish kèm header x-delay tính bằng ms, broker giữ message đến đúng giờ. Tiện nhưng là plugin cộng đồng, cần cân nhắc khi vận hành cụm lớn.",
+        "3. Bảng lịch trong DB + job quét. Lưu send_at vào bảng, một cron mỗi phút quét các bản ghi đến hạn rồi publish. Kém \"thời gian thực\" nhất nhưng dễ quan sát, dễ huỷ lịch, dễ đổi thời điểm — thường là lựa chọn an toàn nhất cho nghiệp vụ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "96853-can-gui-email-nhac-sau-30-phut-ke-tu-khi-user-dat-hang-lam-the-nao-voi-message-q"
+  },
+  {
+    "id": "447b18c5-d338-5831-a081-c6e8f47ce989",
+    "question": "Có mấy loại exchange trong RabbitMQ và mỗi loại dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2919-co-may-loai-exchange-trong-rabbitmq-va-moi-loai-dung-khi-nao",
+    "slug": "co-may-loai-exchange-trong-rabbitmq-va-moi-loai-dung-khi-nao-447b18c5-d338-5831-a081-c6e8f47ce989",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Có 4 loại exchange chính:"
+      ],
+      "details": [
+        "Thực tế hay dùng Direct và Topic nhất."
+      ],
+      "points": [
+        "Direct — định tuyến dựa trên exact match routing_key, dùng phân phối task đến worker cụ thể;",
+        "Fanout — broadcast mọi message đến tất cả queue đã bind bất kể routing_key, dùng cho notification;",
+        "Topic — định tuyến theo pattern wildcard (* khớp một từ, # khớp không hoặc nhiều từ), dùng cho hệ thống event phân cấp;",
+        "Headers — định tuyến theo header attribute thay vì routing_key, dùng khi logic phức tạp"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "2919-co-may-loai-exchange-trong-rabbitmq-va-moi-loai-dung-khi-nao"
+  },
+  {
+    "id": "9553e46b-7d08-57eb-a038-753f7e5d9bc0",
+    "question": "Direct exchange hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2920-direct-exchange-hoat-dong-nhu-the-nao",
+    "slug": "direct-exchange-hoat-dong-nhu-the-nao-9553e46b-7d08-57eb-a038-753f7e5d9bc0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Direct exchange định tuyến message dựa trên khớp chính xác routing_key — so sánh routing_key của message với routing_key của binding, chỉ queue nào có binding khớp chính xác mới nhận được."
+      ],
+      "details": [
+        "Ví dụ: gửi message với routing_key \"user.created\" thì chỉ queue bind với routing_key \"user.created\" mới nhận, không phải \"user.updated\". Direct exchange phù hợp cho one-to-one communication hoặc phân phối các loại task khác nhau đến worker tương ứng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "2920-direct-exchange-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "2ecbc883-954e-5d79-a663-39223fde63bd",
+    "question": "Fanout exchange hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2921-fanout-exchange-hoat-dong-nhu-the-nao",
+    "slug": "fanout-exchange-hoat-dong-nhu-the-nao-2ecbc883-954e-5d79-a663-39223fde63bd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Fanout exchange bỏ qua hoàn toàn routing_key và broadcast mọi message đến tất cả queue đã bind, tạo giao tiếp one-to-many."
+      ],
+      "details": [],
+      "points": [
+        "Nếu có 3 queue bind vào fanout exchange, mỗi queue nhận một bản sao y hệt của mọi message.",
+        "Fanout lý tưởng cho notification: sự kiện \"user signup\" gửi đến cả email service, SMS service, và logging service cùng lúc.",
+        "Đây là exchange đơn giản nhất vì logic định tuyến trivial — tất cả hoặc không có gì."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "2921-fanout-exchange-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "f653e78b-b73d-516c-a4c0-4346a15c6cba",
+    "question": "Topic exchange hoạt động như thế nào và khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2922-topic-exchange-hoat-dong-nhu-the-nao-va-khi-nao-nen-dung",
+    "slug": "topic-exchange-hoat-dong-nhu-the-nao-va-khi-nao-nen-dung-f653e78b-b73d-516c-a4c0-4346a15c6cba",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Topic exchange định tuyến message dùng wildcard pattern: * khớp đúng một từ, # khớp không hoặc nhiều từ."
+      ],
+      "details": [
+        "Ví dụ: pattern \"user.\" khớp \"user.created\" và \"user.deleted\" nhưng không khớp \"user.profile.updated\"; trong khi \"user.#\" khớp cả ba. Topic exchange hợp với hệ thống event phân cấp — subscribe \"orders.#\" để nhận mọi order event, hoặc \"orders.payment.\" chỉ cho payment events. Tính linh hoạt này cho phép consumer subscribe có chọn lọc mà không cần tạo queue riêng cho từng loại."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "2922-topic-exchange-hoat-dong-nhu-the-nao-va-khi-nao-nen-dung"
+  },
+  {
+    "id": "7f5a6f3a-5630-5bb7-b56e-2038184c79cd",
+    "question": "Headers exchange hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2923-headers-exchange-hoat-dong-nhu-the-nao",
+    "slug": "headers-exchange-hoat-dong-nhu-the-nao-7f5a6f3a-5630-5bb7-b56e-2038184c79cd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Headers exchange bỏ qua routing_key và định tuyến dựa trên header attributes của message."
+      ],
+      "details": [],
+      "points": [
+        "Khi bind, bạn chỉ định các header matching rule như \"department: sales\" và \"urgent: true\", message chỉ được route nếu header của nó match với criteria đó.",
+        "Linh hoạt hơn routing_key cho logic phức tạp, nhưng cũng đắt hơn — headers matching chậm hơn so khớp string.",
+        "Trong thực tế headers exchange hiếm dùng; chỉ dùng khi logic routing thực sự không thể diễn đạt bằng routing_key pattern."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "2923-headers-exchange-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "5041e21a-1914-54b0-bf2f-990bd9002964",
+    "question": "Nhiều queue có thể bind vào cùng một exchange không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2925-nhieu-queue-co-the-bind-vao-cung-mot-exchange-khong",
+    "slug": "nhieu-queue-co-the-bind-vao-cung-mot-exchange-khong-5041e21a-1914-54b0-bf2f-990bd9002964",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Hoàn toàn có thể. Nhiều queue có thể bind vào cùng một exchange với các routing_key hoặc pattern khác nhau, tạo ra fan-out behavior — một message đến nhiều queue."
+      ],
+      "details": [
+        "Ví dụ: event \"user.created\" có thể gửi đến cả queue \"email_notifications\" lẫn queue \"analytics\", mỗi bên xử lý độc lập. Đây chính là cách implement publish-subscribe pattern — một exchange phân phối đến nhiều processing pipeline độc lập."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "2925-nhieu-queue-co-the-bind-vao-cung-mot-exchange-khong"
+  },
+  {
+    "id": "900eac23-b65a-5b53-93c9-c95e82aaa07c",
+    "question": "Điều gì xảy ra khi publish message lên exchange không có binding nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2927-dieu-gi-xay-ra-khi-publish-message-len-exchange-khong-co-binding-nao",
+    "slug": "dieu-gi-xay-ra-khi-publish-message-len-exchange-khong-co-binding-nao-900eac23-b65a-5b53-93c9-c95e82aaa07c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Message bị âm thầm discard — RabbitMQ không có chỗ nào để route nó vì không có queue nào bound để nhận."
+      ],
+      "details": [],
+      "points": [
+        "Đây không hẳn là lỗi (có thể là chủ ý), nhưng thường là dấu hiệu misconfiguration hoặc consumer chưa start và chưa tạo binding.",
+        "Mặc định bạn không nhận được error gì — message biến mất.",
+        "Để phát hiện: dùng publisher confirms (nhận ack khi message được route thành công) hoặc monitor \"messages dropped due to no routes\"."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "2927-dieu-gi-xay-ra-khi-publish-message-len-exchange-khong-co-binding-nao"
+  },
+  {
+    "id": "90a692a7-5e5b-5ef8-9075-7eafaa0aae66",
+    "question": "Pattern \"user.*\" và \"user.#\" trong topic exchange khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2928-pattern-user-va-user-trong-topic-exchange-khac-nhau-nhu-the-nao",
+    "slug": "pattern-user-va-user-trong-topic-exchange-khac-nhau-nhu-the-nao-90a692a7-5e5b-5ef8-9075-7eafaa0aae66",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "\"user.*\" khớp đúng một từ sau \"user\" — match \"user.created\", \"user.deleted\" nhưng KHÔNG match \"user.profile.updated\". \"user.#\" khớp không hoặc nhiều từ sau \"user\" — match \"user.created\", \"user.profile.updated\", và thậm chí chỉ \"user\" không."
+      ],
+      "details": [
+        "Dùng * khi muốn segment chính xác (event type cụ thể); dùng # cho subscription rộng (toàn bộ category)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "2928-pattern-user-va-user-trong-topic-exchange-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "d8ddf50e-4f4d-566b-8d9f-a9612f6d2d1b",
+    "question": "Nên đặt tên routing_key và exchange như thế nào cho dễ maintainable?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2929-nen-dat-ten-routing-key-va-exchange-nhu-the-nao-cho-de-maintainable",
+    "slug": "nen-dat-ten-routing-key-va-exchange-nhu-the-nao-cho-de-maintainable-d8ddf50e-4f4d-566b-8d9f-a9612f6d2d1b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng quy ước đặt tên rõ ràng và phân cấp: exchange nên phản ánh type hoặc domain (ví dụ: \"events\", \"tasks\", \"notifications\"), routing_key nên phản ánh resource hierarchy (ví dụ: \"user.created\", \"order.payment.failed\", \"inventory.stock-low\")."
+      ],
+      "details": [],
+      "points": [
+        "Tránh tên chung chung như \"message\" hay \"data\".",
+        "Dùng lowercase và dấu chấm làm separator.",
+        "Document rõ routing_key schema trong code comment hoặc file riêng để team hiểu architecture.",
+        "Đặt tên nhất quán giúp hệ thống tự document và dễ mở rộng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "2929-nen-dat-ten-routing-key-va-exchange-nhu-the-nao-cho-de-maintainable"
+  },
+  {
+    "id": "c456c693-b7e3-5c4d-ae2d-5da62e67bb73",
+    "question": "Exchange và queue khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2930-exchange-va-queue-khac-nhau-nhu-the-nao",
+    "slug": "exchange-va-queue-khac-nhau-nhu-the-nao-c456c693-b7e3-5c4d-ae2d-5da62e67bb73",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Exchange là router message — nhận từ producer và quyết định message đi đâu dựa trên routing logic."
+      ],
+      "details": [],
+      "points": [
+        "Queue là buffer message — lưu trữ và chờ consumer lấy.",
+        "Exchange không lưu trữ gì cả; queue mới lưu.",
+        "Luồng message: Producer → Exchange → Queue → Consumer.",
+        "Bạn bind queue vào exchange để tạo routing rule."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "2930-exchange-va-queue-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "6d9c8781-0a11-5dce-83d6-ec77a4816b68",
+    "question": "Dead-letter exchange là gì và dùng như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2932-dead-letter-exchange-la-gi-va-dung-nhu-the-nao",
+    "slug": "dead-letter-exchange-la-gi-va-dung-nhu-the-nao-6d9c8781-0a11-5dce-83d6-ec77a4816b68",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Dead-letter exchange (DLX) là exchange đặc biệt nhận các message không thể xử lý được. RabbitMQ route message đến DLX khi:"
+      ],
+      "details": [
+        "Ví dụ: consumer chính fail → message vào dead-letter queue → service phân tích riêng inspect và route đến human review queue."
+      ],
+      "points": [
+        "basic.reject / basic.nack với requeue=false",
+        "message hết TTL",
+        "queue vượt max-length. RabbitMQ không tự track retry count — đó là logic phía consumer, thường qua header x-death. Bạn bind một queue khác vào DLX để inspect lỗi, log, gửi alert, hoặc retry với logic khác"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "2932-dead-letter-exchange-la-gi-va-dung-nhu-the-nao"
+  },
+  {
+    "id": "201e5fd9-edc7-5bcd-8f8c-0e62fe26160b",
+    "question": "Prefetch count là gì và ảnh hưởng như thế nào đến performance?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2933-prefetch-count-la-gi-va-anh-huong-nhu-the-nao-den-performance",
+    "slug": "prefetch-count-la-gi-va-anh-huong-nhu-the-nao-den-performance-201e5fd9-edc7-5bcd-8f8c-0e62fe26160b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Prefetch count (QoS setting) giới hạn số message chưa ack mà RabbitMQ gửi cho consumer cùng lúc — nếu prefetch là 1, broker chờ ack trước khi gửi message tiếp."
+      ],
+      "details": [],
+      "points": [
+        "Prefetch cao (ví dụ 1000) cho throughput nhanh hơn nhưng tốn bộ nhớ và rủi ro mất nhiều message nếu consumer crash.",
+        "Prefetch thấp (1) an toàn hơn, phân phối đều hơn nhưng latency cao hơn.",
+        "Best practice: prefetch = số thread worker trong consumer (ví dụ prefetch 10 cho 10 thread), cân bằng giữa throughput và safety."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "2933-prefetch-count-la-gi-va-anh-huong-nhu-the-nao-den-performance"
+  },
+  {
+    "id": "5272da63-0351-5e17-9f09-ea3ac3e66568",
+    "question": "Message TTL là gì và dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2934-message-ttl-la-gi-va-dung-khi-nao",
+    "slug": "message-ttl-la-gi-va-dung-khi-nao-5272da63-0351-5e17-9f09-ea3ac3e66568",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "TTL (Time To Live) là thuộc tính message chỉ định thời gian message tồn tại trong queue trước khi hết hạn và bị discard (hoặc gửi đến dead-letter exchange)."
+      ],
+      "details": [],
+      "points": [
+        "Dùng khi message trở nên stale — ví dụ: token \"password reset\" chỉ hợp lệ 1 giờ, notification \"giờ cao điểm\" chỉ relevant 30 phút.",
+        "Khi TTL hết, message bị xóa, tiết kiệm storage và ngăn consumer xử lý dữ liệu lỗi thời.",
+        "Cấu hình TTL per-message (linh hoạt hơn) hoặc per-queue (đơn giản hơn)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "2934-message-ttl-la-gi-va-dung-khi-nao"
+  },
+  {
+    "id": "0a49a84e-87d2-5fb6-9084-ccaee3a4d4d0",
+    "question": "Priority queue trong RabbitMQ là gì và khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2935-priority-queue-trong-rabbitmq-la-gi-va-khi-nao-nen-dung",
+    "slug": "priority-queue-trong-rabbitmq-la-gi-va-khi-nao-nen-dung-0a49a84e-87d2-5fb6-9084-ccaee3a4d4d0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Priority queue cho phép gán mức ưu tiên cho message, message priority cao được consume trước."
+      ],
+      "details": [],
+      "points": [
+        "Khai báo queue với x-max-priority (khuyến nghị ≤ 10 để tránh overhead).",
+        "Priority hợp lệ của message là từ 0 đến giá trị x-max-priority khai báo — không phải luôn luôn 0-255.",
+        "Dùng cho: request hỗ trợ của VIP user ưu tiên hơn user thường, critical system alert trước routine logging, tính năng paid tier trước free tier.",
+        "Giữ x-max-priority thấp để tránh overhead lưu trữ và memory."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "2935-priority-queue-trong-rabbitmq-la-gi-va-khi-nao-nen-dung"
+  },
+  {
+    "id": "9520b7ed-54eb-58b0-a66a-4e2653987b50",
+    "question": "Làm thế nào để xử lý message bị lỗi và retry trong RabbitMQ?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2936-lam-the-nao-de-xu-ly-message-bi-loi-va-retry-trong-rabbitmq",
+    "slug": "lam-the-nao-de-xu-ly-message-bi-loi-va-retry-trong-rabbitmq-9520b7ed-54eb-58b0-a66a-4e2653987b50",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "RabbitMQ không tự retry message bị lỗi — đó là nhiệm vụ của consumer."
+      ],
+      "details": [
+        "Các pattern phổ biến:",
+        "Để cap số lần retry, consumer đọc header x-death — RabbitMQ populate header này mỗi khi message đi qua DLX.",
+        "Kết hợp manual ack, DLX, và monitoring tạo nên retry handling robust."
+      ],
+      "points": [
+        "Nack + requeue: consumer bắt exception, gửi nack với requeue=true, message quay lại queue (cần cẩn thận để tránh loop vô hạn).",
+        "Dead-letter + retry: message fail → dead-letter queue → retry consumer đợi N giây rồi republish lên queue gốc.",
+        "Circuit breaker: phát hiện liên tục fail, tạm dừng consume, kiểm tra sau"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "2936-lam-the-nao-de-xu-ly-message-bi-loi-va-retry-trong-rabbitmq"
+  },
+  {
+    "id": "c33a77f0-bc66-5810-a505-83ebb2c3a97c",
+    "question": "Persistent message và transient message khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2937-persistent-message-va-transient-message-khac-nhau-nhu-the-nao",
+    "slug": "persistent-message-va-transient-message-khac-nhau-nhu-the-nao-c33a77f0-bc66-5810-a505-83ebb2c3a97c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Persistent message có delivery mode 2, được ghi xuống disk, survive broker crash/restart — an toàn nhưng chậm hơn do disk I/O. Transient message có delivery mode 1, chỉ sống trong RAM, mất khi broker crash — nhanh nhưng rủi ro. Dùng persistent cho dữ liệu critical (thanh toán, đơn hàng, user account), transient cho dữ liệu có thể thay thế (notification, analytics, cache invalidation)."
+      ],
+      "details": [
+        "Lưu ý: queue durable KHÔNG đủ — cần cả queue durable VÀ message persistent mới đảm bảo survive hoàn toàn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "2937-persistent-message-va-transient-message-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "25c5e832-67a4-5aef-9092-08d4121b453a",
+    "question": "Publisher confirms là gì và tại sao nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2938-publisher-confirms-la-gi-va-tai-sao-nen-dung",
+    "slug": "publisher-confirms-la-gi-va-tai-sao-nen-dung-25c5e832-67a4-5aef-9092-08d4121b453a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Publisher confirms là tương đương consumer ack nhưng ở phía producer: khi bật, RabbitMQ gửi ack cho producer sau khi message được route vào queue (hoặc persist nếu durable)."
+      ],
+      "details": [],
+      "points": [
+        "Không có confirms, producer không có guarantee message đến được broker.",
+        "Với confirms, producer chờ (hoặc handle async) ack trước khi coi publish thành công — nếu timeout, retry.",
+        "Đánh đổi: confirms tăng latency nhưng ngăn mất message ở phía producer.",
+        "Dùng cho message critical (order, payment), bỏ qua cho non-critical (analytics)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "2938-publisher-confirms-la-gi-va-tai-sao-nen-dung"
+  },
+  {
+    "id": "6642bd60-9820-5af9-adca-355e2f11830a",
+    "question": "RabbitMQ xử lý backpressure như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2939-rabbitmq-xu-ly-backpressure-nhu-the-nao",
+    "slug": "rabbitmq-xu-ly-backpressure-nhu-the-nao-6642bd60-9820-5af9-adca-355e2f11830a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "RabbitMQ có hai cơ chế backpressure độc lập:"
+      ],
+      "details": [
+        "Cả hai đều có thể block producer đồng thời.",
+        "Producer bị block sẽ gặp timeout, nên cần monitor queue depth và consumer lag để phòng ngừa.",
+        "Giải pháp: thêm consumer, tối ưu throughput consumer, hoặc tăng memory/disk broker."
+      ],
+      "points": [
+        "Memory watermark (mặc định 40% RAM): khi đạt ngưỡng, broker dừng nhận publish mới và block connection.",
+        "Disk free space alarm (mặc định 50MB free): khi disk sắp đầy, broker cũng block publishing — độc lập với memory"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "2939-rabbitmq-xu-ly-backpressure-nhu-the-nao"
+  },
+  {
+    "id": "470cdf20-e998-5a6d-bb49-43c73577379f",
+    "question": "Khi nào nên tách riêng connection của producer và consumer?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2940-khi-nao-nen-tach-rieng-connection-cua-producer-va-consumer",
+    "slug": "khi-nao-nen-tach-rieng-connection-cua-producer-va-consumer-470cdf20-e998-5a6d-bb49-43c73577379f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Trong môi trường high-throughput, nên dùng TCP connection riêng: một cho producer, một cho consumer."
+      ],
+      "details": [],
+      "points": [
+        "Khi dùng chung connection, backpressure từ phía producer (quá nhiều message) có thể block consumer gửi ack về broker, gây deadlock.",
+        "Với connection riêng, consumer ack độc lập không bị ảnh hưởng bởi producer flow.",
+        "Với ứng dụng traffic thấp, một connection với nhiều channel là ổn.",
+        "Best practice production: connection riêng cho publisher và consumer, mỗi bên có thread pool và connection pool phù hợp."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "2940-khi-nao-nen-tach-rieng-connection-cua-producer-va-consumer"
+  },
+  {
+    "id": "7b18e041-061e-5d59-92aa-5b45d09aac36",
+    "question": "Work queue (task queue) pattern là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2941-work-queue-task-queue-pattern-la-gi",
+    "slug": "work-queue-task-queue-pattern-la-gi-7b18e041-061e-5d59-92aa-5b45d09aac36",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Work queue pattern phân phối các tác vụ dài hạn cho nhiều worker: producer gửi task vào một queue duy nhất, nhiều consumer cùng lắng nghe, RabbitMQ round-robin message giữa chúng."
+      ],
+      "details": [],
+      "points": [
+        "Nếu worker crash giữa chừng, message requeue sang worker khác.",
+        "Dùng cho: resize ảnh, gửi email, tạo report, xuất PDF.",
+        "Implementation: producer → direct exchange → một queue; consumer dùng prefetch=1 để phân phối công bằng, manual ack để đảm bảo xử lý thành công, DLX cho message fail.",
+        "Scale bằng cách thêm worker instance."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "2941-work-queue-task-queue-pattern-la-gi"
+  },
+  {
+    "id": "85485ba8-72e1-59f4-a396-006a83a26ad8",
+    "question": "Publish-subscribe (pub/sub) pattern là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2942-publish-subscribe-pub-sub-pattern-la-gi",
+    "slug": "publish-subscribe-pub-sub-pattern-la-gi-85485ba8-72e1-59f4-a396-006a83a26ad8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Pub/sub pattern broadcast cùng một message đến nhiều consumer độc lập: producer gửi lên fanout hoặc topic exchange, nhiều queue bind vào đó, mỗi queue gửi bản sao của mình đến consumer riêng."
+      ],
+      "details": [],
+      "points": [
+        "Khác work queue — pub/sub nhân bản message, không chia.",
+        "Dùng cho: hệ thống notification (gửi email, SMS, push notification độc lập nhau), phân phối event, đồng bộ dữ liệu.",
+        "Scale bằng cách thêm queue và consumer mới mà không cần sửa producer."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "2942-publish-subscribe-pub-sub-pattern-la-gi"
+  },
+  {
+    "id": "b7b5019a-2d10-59a4-b715-9070c308e316",
+    "question": "RPC pattern với RabbitMQ hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2943-rpc-pattern-voi-rabbitmq-hoat-dong-nhu-the-nao",
+    "slug": "rpc-pattern-voi-rabbitmq-hoat-dong-nhu-the-nao-b7b5019a-2d10-59a4-b715-9070c308e316",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "RPC pattern thực hiện request-response qua RabbitMQ thay vì REST đồng bộ: client gửi message vào server queue kèm reply_to (tên temporary queue) và correlation_id (định danh duy nhất), server xử lý và publish kết quả vào reply_to queue, client nhận response từ đó."
+      ],
+      "details": [],
+      "points": [
+        "Tối ưu hiện đại: dùng \"direct reply-to\" (amq.rabbitmq.reply-to) để tránh overhead tạo queue.",
+        "Phù hợp cho cross-service query khi RPC an toàn hơn REST (không timeout mạng), tích hợp async system với sync requirement."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "2943-rpc-pattern-voi-rabbitmq-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "4fb2c26b-0653-58ea-895b-2b23e393dcd9",
+    "question": "Poison message là gì? Phát hiện và chặn nó bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96856-poison-message-la-gi-phat-hien-va-chan-no-bang-cach-nao",
+    "slug": "poison-message-la-gi-phat-hien-va-chan-no-bang-cach-nao-4fb2c26b-0653-58ea-895b-2b23e393dcd9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Poison message là message luôn làm consumer lỗi. Vì consumer không ack, broker giao lại, consumer lại lỗi — tạo vòng lặp vô hạn chiếm trọn công suất consumer và các message hợp lệ phía sau bị đói."
+      ],
+      "details": [
+        "Nguyên nhân thường gặp: payload sai schema, tham chiếu tới bản ghi đã bị xoá, giá trị vượt ngưỡng gây lỗi ép kiểu, hoặc bug logic chỉ xảy ra với một trường hợp dữ liệu cụ thể.",
+        "Cách chặn:",
+        "Dấu hiệu nhận ra khi vận hành: throughput tụt nhưng CPU consumer vẫn cao, log lặp cùng một lỗi với cùng một message id, queue depth tăng dù consumer vẫn \"đang chạy\"."
+      ],
+      "points": [
+        "Đếm số lần giao lại và chặn cứng. RabbitMQ quorum queue có x-delivery-limit: quá ngưỡng thì message bị dead-letter tự động thay vì requeue mãi. Kafka không requeue nên biểu hiện khác: consumer kẹt tại một offset, phải tự đếm số lần thử rồi chủ động đẩy sang DLQ và commit offset để đi tiếp.",
+        "basic.reject với requeue=false cho lỗi vĩnh viễn thay vì requeue=true — requeue đưa message về đúng vị trí cũ và lặp lại ngay.",
+        "Validate ở biên: parse và kiểm tra schema trước khi chạm vào logic nghiệp vụ; parse lỗi → DLQ ngay, không retry.",
+        "Cảnh báo theo redelivery: metric số message có cờ redelivered tăng bất thường là dấu hiệu sớm."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "96856-poison-message-la-gi-phat-hien-va-chan-no-bang-cach-nao"
+  },
+  {
+    "id": "cb621517-4580-50dd-8c1d-cb8b745f885e",
+    "question": "Saga pattern là gì và hoạt động với RabbitMQ như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "saga-pattern-la-gi-va-hoat-dong-voi-rabbitmq-nhu-the-nao-cb621517-4580-50dd-8c1d-cb8b745f885e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": null
+  },
+  {
+    "id": "cd09dfde-0f7f-5991-acb9-eae1a6eeea6d",
+    "question": "Outbox pattern là gì và tại sao cần dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "outbox-pattern-la-gi-va-tai-sao-can-dung-cd09dfde-0f7f-5991-acb9-eae1a6eeea6d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": null
+  },
+  {
+    "id": "39c2ec03-db35-5ba8-9ff6-87b2799d068c",
+    "question": "Circuit breaker pattern áp dụng với RabbitMQ như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "circuit-breaker-pattern-ap-dung-voi-rabbitmq-nhu-the-nao-39c2ec03-db35-5ba8-9ff6-87b2799d068c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": null
+  },
+  {
+    "id": "ddcc6c72-628e-5d73-bafb-fb0d2ef1d6ea",
+    "question": "RabbitMQ liên quan đến event sourcing như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "rabbitmq-lien-quan-den-event-sourcing-nhu-the-nao-ddcc6c72-628e-5d73-bafb-fb0d2ef1d6ea",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": null
+  },
+  {
+    "id": "670db075-a230-56b6-b990-054bb6cdad72",
+    "question": "RabbitMQ clustering hoạt động như thế nào và đảm bảo high availability ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "rabbitmq-clustering-hoat-dong-nhu-the-nao-va-dam-bao-high-availability-ra-sao-670db075-a230-56b6-b990-054bb6cdad72",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": null
+  },
+  {
+    "id": "4fa3cb4b-2bec-5063-a5f7-3146dfe9de55",
+    "question": "Quorum queue là gì và tại sao tốt hơn mirrored queue?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "quorum-queue-la-gi-va-tai-sao-tot-hon-mirrored-queue-4fa3cb4b-2bec-5063-a5f7-3146dfe9de55",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": null
+  },
+  {
+    "id": "add6f6ba-5497-5f8c-97df-afc644aaf6be",
+    "question": "Làm thế nào để monitor RabbitMQ và những metric nào quan trọng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-the-nao-de-monitor-rabbitmq-va-nhung-metric-nao-quan-trong-add6f6ba-5497-5f8c-97df-afc644aaf6be",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": null
+  },
+  {
+    "id": "02abfcaf-6635-5820-9fca-de32bfcb09e0",
+    "question": "Queue depth là gì và xử lý như thế nào khi nó tăng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "queue-depth-la-gi-va-xu-ly-nhu-the-nao-khi-no-tang-02abfcaf-6635-5820-9fca-de32bfcb09e0",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": null
+  },
+  {
+    "id": "4691bbc1-7f7a-544e-a616-0fc1c27e1448",
+    "question": "Làm thế nào để phát hiện và xử lý connection/channel leak?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-the-nao-de-phat-hien-va-xu-ly-connection-channel-leak-4691bbc1-7f7a-544e-a616-0fc1c27e1448",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": null
+  },
+  {
+    "id": "332d4a91-b000-57a0-aa45-803d4db7402d",
+    "question": "Làm thế nào để cấu hình resource limits trong RabbitMQ?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-the-nao-de-cau-hinh-resource-limits-trong-rabbitmq-332d4a91-b000-57a0-aa45-803d4db7402d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": null
+  },
+  {
+    "id": "0ed722dd-fd1b-5de8-a4f0-7e9751dd3621",
+    "question": "RabbitMQ và Kafka khác nhau như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "rabbitmq-va-kafka-khac-nhau-nhu-the-nao-0ed722dd-fd1b-5de8-a4f0-7e9751dd3621",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": null
+  }
+]

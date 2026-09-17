@@ -1,0 +1,2512 @@
+[
+  {
+    "id": "8ec0f13b-d581-54c0-9c96-4fec3cb5965b",
+    "question": "Overfitting là gì và làm sao để tránh?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94201-overfitting-la-gi-va-lam-sao-de-tranh",
+    "slug": "overfitting-la-gi-va-lam-sao-de-tranh-8ec0f13b-d581-54c0-9c96-4fec3cb5965b",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Overfitting là khi mô hình học thuộc cả nhiễu và chi tiết riêng của tập huấn luyện thay vì quy luật tổng quát — kết quả là điểm số trên tập train rất cao nhưng kém trên dữ liệu mới. Dấu hiệu nhận biết: khoảng cách lớn giữa train error và validation/test error. (Ngược lại, underfit là kém cả trên train lẫn test.)"
+      ],
+      "details": [
+        "Cách hạn chế:\n- Cross-validation để ước lượng khả năng tổng quát hoá trung thực khi chọn mô hình/siêu tham số.\n- Regularization (L1/L2) để phạt độ phức tạp.\n- Đơn giản hoá mô hình — giảm số tham số, giảm độ sâu cây, giảm bậc đa thức.\n- Thêm dữ liệu hoặc data augmentation.\n- Early stopping — dừng khi validation error bắt đầu tăng.\n- Feature selection để bỏ đặc trưng nhiễu; với mạng nơ-ron còn có dropout."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "94201-overfitting-la-gi-va-lam-sao-de-tranh"
+  },
+  {
+    "id": "23723232-a26a-5be9-9f6b-84153e997ffb",
+    "question": "Confusion matrix là gì? Phân biệt precision, recall và F1-score.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94202-confusion-matrix-la-gi-phan-biet-precision-recall-va-f1-score",
+    "slug": "confusion-matrix-la-gi-phan-biet-precision-recall-va-f1-score-23723232-a26a-5be9-9f6b-84153e997ffb",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Với bài toán phân loại nhị phân, confusion matrix là bảng 2×2 so khớp nhãn thật với nhãn dự đoán, gồm 4 ô: TP (dự đoán dương đúng), TN (dự đoán âm đúng), FP (dương giả — báo dương nhưng thật ra âm), FN (âm giả — bỏ sót ca dương)."
+      ],
+      "details": [
+        "Precision và recall thường đánh đổi nhau; F1 tóm tắt bằng một con số, còn accuracy dễ gây hiểu nhầm khi lớp mất cân bằng."
+      ],
+      "points": [
+        "Precision = TP / (TP + FP) — trong những ca dự đoán dương, bao nhiêu thật sự dương. Quan trọng khi FP tốn kém (ví dụ lọc email: đừng chặn nhầm email thật).",
+        "Recall (Sensitivity) = TP / (TP + FN) — trong những ca thật sự dương, bắt được bao nhiêu. Quan trọng khi FN tốn kém (ví dụ tầm soát ung thư: đừng bỏ sót bệnh nhân).",
+        "F1 = 2·P·R / (P + R) — trung bình điều hoà của precision và recall, cân bằng khi cần cả hai và dữ liệu lệch lớp."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "94202-confusion-matrix-la-gi-phan-biet-precision-recall-va-f1-score"
+  },
+  {
+    "id": "645984f5-791f-585f-b834-e7db977d92c8",
+    "question": "Các chỉ số đánh giá hồi quy: MSE, RMSE, MAE và R²?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94212-cac-chi-so-danh-gia-hoi-quy-mse-rmse-mae-va-r",
+    "slug": "cac-chi-so-danh-gia-hoi-quy-mse-rmse-mae-va-r-645984f5-791f-585f-b834-e7db977d92c8",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bốn chỉ số phổ biến để đánh giá mô hình hồi quy (với y là giá trị thật, ŷ là dự đoán):"
+      ],
+      "details": [
+        "Chọn theo bài toán: dùng MAE khi có ngoại lai và muốn bền vững; dùng RMSE/MSE khi lỗi lớn đặc biệt tốn kém; R² để so sánh nhanh chất lượng khớp (nhưng nó tăng khi thêm biến, cân nhắc Adjusted R²)."
+      ],
+      "points": [
+        "MSE (Mean Squared Error) = trung bình của (y − ŷ)². Phạt nặng lỗi lớn (bình phương), nhạy với ngoại lai. Đơn vị là bình phương của biến mục tiêu nên khó diễn giải trực tiếp.",
+        "RMSE = √MSE. Cùng đơn vị với biến mục tiêu nên dễ diễn giải hơn; vẫn phạt nặng lỗi lớn.",
+        "MAE (Mean Absolute Error) = trung bình của |y − ŷ|. Bền với ngoại lai hơn MSE/RMSE vì không bình phương; mỗi lỗi đóng góp tuyến tính.",
+        "R² (hệ số xác định) = 1 − SS_res / SS_tot — tỷ lệ phương sai của biến mục tiêu được mô hình giải thích. R² = 1 là hoàn hảo, 0 là bằng mô hình dự đoán trung bình, và có thể âm khi mô hình tệ hơn cả việc luôn đoán giá trị trung bình."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "94212-cac-chi-so-danh-gia-hoi-quy-mse-rmse-mae-va-r"
+  },
+  {
+    "id": "1a69db42-c308-5c8e-b10c-4c0666065fe3",
+    "question": "K-Nearest Neighbors hoạt động thế nào và vì sao KNN được gọi là thuật toán \"lazy\"?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94226-k-nearest-neighbors-hoat-dong-the-nao-va-vi-sao-knn-duoc-goi-la-thuat-toan-lazy",
+    "slug": "k-nearest-neighbors-hoat-dong-the-nao-va-vi-sao-knn-duoc-goi-la-thuat-toan-lazy-1a69db42-c308-5c8e-b10c-4c0666065fe3",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "KNN dự đoán bằng cách tìm k điểm huấn luyện gần nhất với mẫu cần dự đoán (theo một metric khoảng cách, thường Euclid), rồi bỏ phiếu đa số (phân loại) hoặc lấy trung bình (hồi quy) từ chúng."
+      ],
+      "details": [
+        "\"Lazy\" (lazy learner) vì nó không xây mô hình trong lúc train — chỉ lưu lại toàn bộ dữ liệu. Mọi tính toán bị hoãn tới lúc dự đoán: khi có một truy vấn mới, nó mới đo khoảng cách tới các điểm và tìm hàng xóm. Ngược lại, \"eager learner\" (linear/logistic regression, cây quyết định) học tham số/luật ngay khi train rồi có thể vứt dữ liệu.",
+        "Hệ quả:"
+      ],
+      "points": [
+        "Train gần như tức thời, nhưng dự đoán chậm và tốn bộ nhớ (phải giữ hết dữ liệu và quét để tìm hàng xóm).",
+        "Nhạy với thang đo đặc trưng → cần chuẩn hóa; và với \"curse of dimensionality\" khi số chiều lớn.",
+        "Chọn k: nhỏ quá → nhiễu/overfit; lớn quá → mượt/underfit."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "94226-k-nearest-neighbors-hoat-dong-the-nao-va-vi-sao-knn-duoc-goi-la-thuat-toan-lazy"
+  },
+  {
+    "id": "a99b112d-52a0-532d-9371-ad9b730fb34e",
+    "question": "Phân biệt học có giám sát, không giám sát và học tăng cường?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94229-phan-biet-hoc-co-giam-sat-khong-giam-sat-va-hoc-tang-cuong",
+    "slug": "phan-biet-hoc-co-giam-sat-khong-giam-sat-va-hoc-tang-cuong-a99b112d-52a0-532d-9371-ad9b730fb34e",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hình dung: supervised như học với đáp án có sẵn, unsupervised như tự nhóm đồ vật khi không ai dán nhãn, reinforcement như học qua thử–sai và phần thưởng."
+      ],
+      "details": [],
+      "points": [
+        "Supervised (có giám sát): học từ dữ liệu có nhãn (mỗi input đi kèm output đúng). Mục tiêu là học ánh xạ để dự đoán nhãn cho dữ liệu mới. Gồm phân loại (classification — nhãn rời rạc) và hồi quy (regression — giá trị liên tục). Ví dụ: linear/logistic regression, SVM, cây quyết định.",
+        "Unsupervised (không giám sát): dữ liệu không nhãn; mục tiêu là tìm cấu trúc ẩn. Gồm phân cụm (K-Means), giảm chiều (PCA), phát hiện bất thường. Không có \"đáp án đúng\" cho sẵn để so.",
+        "Reinforcement learning (tăng cường): một agent tương tác với môi trường, chọn hành động và nhận phần thưởng/phạt; nó học một chính sách (policy) để tối đa hóa phần thưởng tích lũy dài hạn. Không có tập nhãn cố định — tín hiệu học là reward, thường đến trễ. Ví dụ: chơi game, điều khiển robot."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "94229-phan-biet-hoc-co-giam-sat-khong-giam-sat-va-hoc-tang-cuong"
+  },
+  {
+    "id": "e39ffd40-2708-561d-aea3-29273e8fb74f",
+    "question": "Tương quan có phải nhân quả không? Phân biệt hiệp phương sai và hệ số tương quan.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94242-tuong-quan-co-phai-nhan-qua-khong-phan-biet-hiep-phuong-sai-va-he-so-tuong-quan",
+    "slug": "tuong-quan-co-phai-nhan-qua-khong-phan-biet-hiep-phuong-sai-va-he-so-tuong-quan-e39ffd40-2708-561d-aea3-29273e8fb74f",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tương quan (correlation) đo độ mạnh và chiều của quan hệ tuyến tính giữa hai biến. Tương quan không kéo theo nhân quả: một liên hệ có thể đến từ biến gây nhiễu (confounder), nhân quả ngược, hoặc trùng hợp ngẫu nhiên. Chỉ thí nghiệm có kiểm soát / ngẫu nhiên hoá mới khẳng định được nhân quả."
+      ],
+      "details": [
+        "Hiệp phương sai vs hệ số tương quan:\n- Covariance đo chiều biến thiên chung của hai biến, nhưng độ lớn phụ thuộc đơn vị (không chặn, khó diễn giải và không so sánh được giữa các bộ dữ liệu).\n- Correlation (Pearson r) = covariance đã chuẩn hoá bằng tích hai độ lệch chuẩn: r = cov(X,Y) / (σx·σy). Kết quả không thứ nguyên, nằm trong [−1, 1]."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "94242-tuong-quan-co-phai-nhan-qua-khong-phan-biet-hiep-phuong-sai-va-he-so-tuong-quan"
+  },
+  {
+    "id": "d40955aa-b40e-561f-8cc3-5d1cabf68157",
+    "question": "Kiểm định giả thuyết hoạt động thế nào (H0/H1, mức ý nghĩa α)?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94243-kiem-dinh-gia-thuyet-hoat-dong-the-nao-h0-h1-muc-y-nghia",
+    "slug": "kiem-dinh-gia-thuyet-hoat-dong-the-nao-h0-h1-muc-y-nghia-d40955aa-b40e-561f-8cc3-5d1cabf68157",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Kiểm định giả thuyết là quy trình dùng dữ liệu mẫu để quyết định giữa hai giả thuyết đối lập:"
+      ],
+      "details": [
+        "1. Đặt giả thuyết. H0 (giả thuyết không) mô tả trạng thái mặc định / không có hiệu ứng; H1 (giả thuyết đối) là điều ta muốn chứng minh (một phía hoặc hai phía).\n2. Chọn mức ý nghĩa α (thường 0.05) — mức lỗi loại I mà ta chấp nhận.\n3. Tính thống kê kiểm định (z, t, χ²...) và p-value dưới giả định H0 đúng.\n4. Ra quyết định: nếu p < α → bác bỏ H0, nghiêng về H1; ngược lại → chưa đủ bằng chứng bác bỏ H0.",
+        "không \"chứng minh\" hay \"chấp nhận\" H0",
+        "ý nghĩa thống kê ≠ ý nghĩa thực tiễn",
+        "effect size"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "94243-kiem-dinh-gia-thuyet-hoat-dong-the-nao-h0-h1-muc-y-nghia"
+  },
+  {
+    "id": "a2344c31-68d8-5257-b329-d695037cb858",
+    "question": "Phân phối chuẩn là gì và z-score dùng để làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94244-phan-phoi-chuan-la-gi-va-z-score-dung-de-lam-gi",
+    "slug": "phan-phoi-chuan-la-gi-va-z-score-dung-de-lam-gi-a2344c31-68d8-5257-b329-d695037cb858",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Phân phối chuẩn (Gaussian) là phân phối đối xứng hình chuông, xác định hoàn toàn bởi trung bình μ và độ lệch chuẩn σ, ký hiệu N(μ, σ²)."
+      ],
+      "details": [
+        "Quy tắc 68–95–99.7 (empirical rule):\n- ~68% dữ liệu nằm trong μ ± 1σ\n- ~95% nằm trong μ ± 2σ\n- ~99.7% nằm trong μ ± 3σ",
+        "z-score",
+        "bao nhiêu độ lệch chuẩn",
+        "|z| > 3"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "94244-phan-phoi-chuan-la-gi-va-z-score-dung-de-lam-gi"
+  },
+  {
+    "id": "661e96e6-799f-5945-8f4a-1072e8b9eaff",
+    "question": "Có những phương pháp lấy mẫu nào và sai lệch chọn mẫu (sampling bias) là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94247-co-nhung-phuong-phap-lay-mau-nao-va-sai-lech-chon-mau-sampling-bias-la-gi",
+    "slug": "co-nhung-phuong-phap-lay-mau-nao-va-sai-lech-chon-mau-sampling-bias-la-gi-661e96e6-799f-5945-8f4a-1072e8b9eaff",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Các phương pháp lấy mẫu xác suất (mỗi đơn vị có xác suất được chọn xác định):\n- Ngẫu nhiên đơn giản — mỗi cá thể có cơ hội như nhau.\n- Phân tầng (stratified) — chia tổng thể thành các nhóm con (tầng) rồi lấy mẫu trong mỗi tầng; giúp đại diện tốt các nhóm.\n- Cụm (cluster) — chia thành cụm, chọn ngẫu nhiên một số cụm rồi khảo sát toàn bộ.\n- Hệ thống (systematic) — chọn mỗi phần tử thứ k."
+      ],
+      "details": [
+        "Sampling bias xảy ra khi mẫu lệch có hệ thống so với tổng thể, khiến ước lượng bị chệch. Các dạng phổ biến:\n- Selection / undercoverage — bỏ sót một phần tổng thể.\n- Self-selection / voluntary response — chỉ người tự nguyện tham gia.\n- Non-response — nhóm không trả lời khác biệt có hệ thống.\n- Survivorship — chỉ nhìn vào những cái \"sống sót\".",
+        "mẫu to không sửa được bias"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "94247-co-nhung-phuong-phap-lay-mau-nao-va-sai-lech-chon-mau-sampling-bias-la-gi"
+  },
+  {
+    "id": "632d31ec-ac6c-5055-b593-15cd592dda9b",
+    "question": "Thống kê mô tả: phân biệt mean/median/mode và variance/std.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94248-thong-ke-mo-ta-phan-biet-mean-median-mode-va-variance-std",
+    "slug": "thong-ke-mo-ta-phan-biet-mean-median-mode-va-variance-std-632d31ec-ac6c-5055-b593-15cd592dda9b",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đo xu hướng trung tâm:\n- Mean (trung bình) — tổng chia số phần tử; nhạy với ngoại lai.\n- Median (trung vị) — giá trị ở giữa khi sắp xếp; bền vững với ngoại lai và phân phối lệch.\n- Mode (mode/yếu vị) — giá trị xuất hiện nhiều nhất; dùng được cho dữ liệu phân loại."
+      ],
+      "details": [
+        "Với dữ liệu lệch (như thu nhập), median thường đại diện tốt hơn mean.",
+        "Đo độ phân tán:",
+        "Variance (phương sai)",
+        "Standard deviation (độ lệch chuẩn)",
+        "cùng đơn vị với dữ liệu",
+        "s² = Σ(xᵢ − x̄)² / (n − 1)",
+        "Ngoài ra còn range và IQR (khoảng tứ phân vị) — thước đo phân tán bền vững với ngoại lai."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "94248-thong-ke-mo-ta-phan-biet-mean-median-mode-va-variance-std"
+  },
+  {
+    "id": "93a37304-2698-5b4f-9cb4-b8f2d987f924",
+    "question": "ReLU, sigmoid, tanh và softmax: đặc điểm và khi nào dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94268-relu-sigmoid-tanh-va-softmax-dac-diem-va-khi-nao-dung",
+    "slug": "relu-sigmoid-tanh-va-softmax-dac-diem-va-khi-nao-dung-93a37304-2698-5b4f-9cb4-b8f2d987f924",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Activation đưa phi tuyến vào mạng — thiếu nó, nhiều lớp tuyến tính chồng lên nhau vẫn chỉ tương đương một phép tuyến tính."
+      ],
+      "details": [
+        "Quy tắc nhanh: ReLU (hoặc biến thể) cho lớp ẩn; sigmoid cho đầu ra nhị phân; softmax cho đầu ra đa lớp."
+      ],
+      "points": [
+        "Sigmoid 1/(1+e^(-x)): đầu ra (0, 1). Dùng cho xác suất nhị phân ở lớp ra. Nhược điểm ở lớp ẩn: bão hòa → vanishing gradient, đầu ra không quanh 0.",
+        "Tanh (e^x − e^(-x))/(e^x + e^(-x)): đầu ra (−1, 1), đối xứng quanh 0 (tốt hơn sigmoid cho lớp ẩn) nhưng vẫn bão hòa.",
+        "ReLU max(0, x): mặc định cho lớp ẩn — rẻ, không bão hòa ở phần dương → giảm vanishing gradient, activation thưa. Rủi ro: \"dying ReLU\" (kẹt ở 0); các biến thể Leaky/ELU/GELU khắc phục.",
+        "Softmax: chuẩn hóa một vector thành phân phối xác suất tổng bằng 1; dùng ở lớp ra cho phân loại đa lớp."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "94268-relu-sigmoid-tanh-va-softmax-dac-diem-va-khi-nao-dung"
+  },
+  {
+    "id": "426c4a81-2409-5b0d-9804-e055ad419ec8",
+    "question": "Phân biệt epoch, batch và iteration; learning rate và scheduling là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94272-phan-biet-epoch-batch-va-iteration-learning-rate-va-scheduling-la-gi",
+    "slug": "phan-biet-epoch-batch-va-iteration-learning-rate-va-scheduling-la-gi-426c4a81-2409-5b0d-9804-e055ad419ec8",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ví dụ: 10.000 mẫu, batch 100 → 100 iteration = 1 epoch."
+      ],
+      "details": [],
+      "points": [
+        "Epoch: một lượt đi qua toàn bộ tập huấn luyện.",
+        "Batch (mini-batch): nhóm mẫu được xử lý trước một lần cập nhật trọng số; batch_size quyết định độ lớn.",
+        "Iteration: một lần cập nhật trọng số = xử lý xong một batch. số iteration mỗi epoch = ceil(N / batch_size).",
+        "Learning rate (LR): độ lớn mỗi bước cập nhật — siêu tham số quan trọng nhất. Quá cao → phân kỳ/dao động; quá thấp → chậm, dễ kẹt ở cực tiểu kém.",
+        "LR scheduling",
+        "thay đổi LR theo tiến trình"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "94272-phan-biet-epoch-batch-va-iteration-learning-rate-va-scheduling-la-gi"
+  },
+  {
+    "id": "5310ea76-8c26-50f2-9b09-e1505ac6c7ec",
+    "question": "Nhìn đường learning curve, làm sao biết mô hình đang thiên lệch (bias) cao hay phương sai (variance) cao, và mỗi trường hợp nên làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/99050-nhin-duong-learning-curve-lam-sao-biet-mo-hinh-dang-thien-lech-bias-cao-hay-phuo",
+    "slug": "nhin-duong-learning-curve-lam-sao-biet-mo-hinh-dang-thien-lech-bias-cao-hay-phuong-sai-variance-cao-5310ea76-8c26-50f2-9b09-e1505ac6c7ec",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Learning curve vẽ lỗi trên tập train và lỗi trên tập validation theo số mẫu huấn luyện. Hình dạng của hai đường cho biết vấn đề nằm ở đâu."
+      ],
+      "details": [
+        "Bias cao (underfit): cả hai đường đều dừng ở mức lỗi cao và gần nhau. Thêm dữ liệu gần như không giúp gì — đường đã phẳng.\n- Dùng mô hình có sức biểu diễn lớn hơn (thêm bậc đa thức, đổi sang mô hình phi tuyến, tăng độ sâu cây).\n- Thêm/biến đổi feature có thông tin.\n- Giảm cường độ regularization.",
+        "mức lỗi con người / mức chấp nhận được của bài toán",
+        "Variance cao (overfit): lỗi train rất thấp, lỗi validation cao, khoảng cách giữa hai đường lớn và chưa khép lại.\n- Thêm dữ liệu (đây là trường hợp thêm dữ liệu thực sự có tác dụng).\n- Tăng regularization, giảm độ phức tạp mô hình, early stopping.\n- Giảm số feature nhiễu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "99050-nhin-duong-learning-curve-lam-sao-biet-mo-hinh-dang-thien-lech-bias-cao-hay-phuo"
+  },
+  {
+    "id": "f97f14c1-9fa4-5151-983b-b1585094f055",
+    "question": "Vì sao nên xây baseline đơn giản trước khi dùng mô hình phức tạp? Baseline gồm những gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/99051-vi-sao-nen-xay-baseline-don-gian-truoc-khi-dung-mo-hinh-phuc-tap-baseline-gom-nh",
+    "slug": "vi-sao-nen-xay-baseline-don-gian-truoc-khi-dung-mo-hinh-phuc-tap-baseline-gom-nhung-gi-f97f14c1-9fa4-5151-983b-b1585094f055",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Baseline là mốc so sánh để biết mô hình phức tạp có thực sự tạo ra giá trị hay không. Không có baseline thì con số AUC 0.85 không nói lên điều gì."
+      ],
+      "details": [
+        "Các baseline nên chạy trước:\n- Hằng số / đa số: luôn đoán lớp phổ biến nhất (phân loại) hoặc trung bình (hồi quy). Trong scikit-learn là DummyClassifier / DummyRegressor.\n- Quy tắc nghiệp vụ hiện có: rule mà bộ phận vận hành đang dùng bằng tay. Nếu mô hình không vượt được rule này thì không nên triển khai.\n- Mô hình tuyến tính đơn giản trên vài feature rõ ràng (logistic regression, gradient boosting mặc định).",
+        "mô hình đơn giản với feature tốt thường thắng mô hình phức tạp với feature kém.",
+        "Lợi ích:\n- Baseline chạy nhanh nên hoàn thiện pipeline dữ liệu trước: đọc dữ liệu, tách tập, tính metric, log kết quả. Pipeline chạy được rồi mới đổi mô hình.\n- Lộ sớm lỗi dữ liệu: nếu baseline hằng số đạt độ chính xác 0.99 thì dữ liệu đang mất cân bằng nặng hoặc có rò rỉ.\n- Cho quyết định chi phí: mô hình phức tạp hơn 2 điểm phần trăm nhưng tốn hạ tầng và thời gian bảo trì có thể không đáng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "99051-vi-sao-nen-xay-baseline-don-gian-truoc-khi-dung-mo-hinh-phuc-tap-baseline-gom-nh"
+  },
+  {
+    "id": "caa0fa85-eb0a-549d-87b6-6fb560d5dd7e",
+    "question": "Mô hình nào bắt buộc phải chuẩn hoá dữ liệu đầu vào, mô hình nào không cần? Vì sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/99052-mo-hinh-nao-bat-buoc-phai-chuan-hoa-du-lieu-dau-vao-mo-hinh-nao-khong-can-vi-sao",
+    "slug": "mo-hinh-nao-bat-buoc-phai-chuan-hoa-du-lieu-dau-vao-mo-hinh-nao-khong-can-vi-sao-caa0fa85-eb0a-549d-87b6-6fb560d5dd7e",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Chuẩn hoá quan trọng với mọi mô hình mà thang đo của feature ảnh hưởng trực tiếp tới hàm mục tiêu hoặc tới khoảng cách."
+      ],
+      "details": [
+        "Cần chuẩn hoá:\n- Mô hình dựa trên khoảng cách: KNN, K-Means, SVM với kernel RBF. Feature income đơn vị triệu đồng sẽ áp đảo feature age khi tính khoảng cách Euclid.\n- Mô hình tối ưu bằng gradient descent: hồi quy tuyến tính/logistic, mạng nơ-ron. Feature lệch thang làm mặt lỗi kéo dài, gradient descent hội tụ chậm.\n- Mô hình có regularization L1/L2: phạt được áp lên hệ số, mà hệ số phụ thuộc thang đo → không chuẩn hoá thì phạt không công bằng giữa các feature.\n- PCA: tối đa hoá phương sai, nên feature có phương sai lớn do đơn vị đo sẽ chiếm hết thành phần chính.",
+        "Chọn kiểu nào:",
+        "Không cần chuẩn hoá:\n- Mô hình dựa trên cây: decision tree, random forest, gradient boosting (XGBoost, LightGBM). Cây chỉ so sánh x < ngưỡng, kết quả không đổi khi nhân/chia thang đo.\n- Naive Bayes dạng đếm (multinomial) trên dữ liệu văn bản.",
+        "StandardScaler",
+        "MinMaxScaler",
+        "RobustScaler",
+        "fit",
+        "transform"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "99052-mo-hinh-nao-bat-buoc-phai-chuan-hoa-du-lieu-dau-vao-mo-hinh-nao-khong-can-vi-sao"
+  },
+  {
+    "id": "fa4875ba-080a-5969-b1cb-4ffbbf1a04d0",
+    "question": "Bài toán phát hiện gian lận có 0.5% mẫu dương. Vì sao accuracy 99.5% không nói lên điều gì, và nên báo cáo chỉ số nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/99053-bai-toan-phat-hien-gian-lan-co-0-5-mau-duong-vi-sao-accuracy-99-5-khong-noi-len",
+    "slug": "bai-toan-phat-hien-gian-lan-co-0-5-mau-duong-vi-sao-accuracy-99-5-khong-noi-len-dieu-gi-va-nen-bao-c-fa4875ba-080a-5969-b1cb-4ffbbf1a04d0",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì mô hình đoán tất cả là âm đã đạt 99.5% accuracy mà không phát hiện được giao dịch gian lận nào. Với dữ liệu mất cân bằng, accuracy bị chi phối bởi lớp đa số nên không phản ánh năng lực trên lớp cần quan tâm."
+      ],
+      "details": [
+        "Chỉ số nên dùng:\n- Recall (độ nhạy): trong số ca gian lận thật, bắt được bao nhiêu. Quan trọng khi bỏ sót tốn kém.\n- Precision: trong số ca bị gắn cờ, bao nhiêu là gian lận thật. Quan trọng khi cảnh báo nhầm gây phiền cho khách và tốn nhân lực xử lý.\n- F1 hoặc F-beta khi cần một con số duy nhất; beta > 1 ưu tiên recall.\n- PR-AUC (average precision) để đánh giá toàn dải ngưỡng trên bài toán hiếm.\n- Confusion matrix để nhìn số tuyệt đối, tránh bị phần trăm che lấp.",
+        "Cách trình bày với người ra quyết định: quy về đơn vị nghiệp vụ. \"Ở ngưỡng hiện tại, mỗi ngày mô hình gắn cờ 120 giao dịch, trong đó 30 là gian lận thật, bỏ sót 8 ca\" dễ đối chiếu chi phí hơn con số F1.",
+        "DummyClassifier(strategy='most_frequent')"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "99053-bai-toan-phat-hien-gian-lan-co-0-5-mau-duong-vi-sao-accuracy-99-5-khong-noi-len"
+  },
+  {
+    "id": "974942f7-019c-556f-94b7-83cb83e8bbfc",
+    "question": "Bias-Variance tradeoff là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94200-bias-variance-tradeoff-la-gi",
+    "slug": "bias-variance-tradeoff-la-gi-974942f7-019c-556f-94b7-83cb83e8bbfc",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Test error kỳ vọng của một mô hình phân rã thành ba phần: Bias², Variance và irreducible error (nhiễu σ² không thể loại bỏ):"
+      ],
+      "details": [
+        "Đánh đổi: khi tăng độ linh hoạt (flexibility) của mô hình, bias giảm nhưng variance tăng. Test error tổng thường có dạng chữ U — cần chọn độ phức tạp cân bằng hai đại lượng này. Irreducible error đặt ra giới hạn dưới không mô hình nào vượt qua được."
+      ],
+      "points": [
+        "Bias — sai số do giả định của mô hình quá đơn giản so với quan hệ thật. Bias cao → underfit (ví dụ hồi quy tuyến tính cho dữ liệu phi tuyến).",
+        "Variance — mức độ mô hình thay đổi khi đổi tập huấn luyện. Variance cao → overfit (mô hình bám cả nhiễu; ví dụ cây quyết định rất sâu)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "E[(y − f̂(x))²] = Bias(f̂(x))² + Var(f̂(x)) + σ²"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "94200-bias-variance-tradeoff-la-gi"
+  },
+  {
+    "id": "f1058f0b-ee8e-5bfc-b763-455b81f2012c",
+    "question": "Đường cong ROC và chỉ số AUC là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94203-duong-cong-roc-va-chi-so-auc-la-gi",
+    "slug": "duong-cong-roc-va-chi-so-auc-la-gi-f1058f0b-ee8e-5bfc-b763-455b81f2012c",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bộ phân loại xác suất cần một ngưỡng để biến xác suất thành nhãn 0/1. ROC curve vẽ quan hệ giữa hai đại lượng khi quét ngưỡng từ 0 đến 1:"
+      ],
+      "details": [
+        "AUC là diện tích dưới đường ROC. Diễn giải trực quan: AUC là xác suất mô hình chấm điểm một mẫu dương ngẫu nhiên cao hơn một mẫu âm ngẫu nhiên. Thang giá trị: AUC = 1 là hoàn hảo, 0.5 là đoán mò (đường chéo), dưới 0.5 là tệ hơn ngẫu nhiên (có thể do đảo nhãn).",
+        "xác suất mô hình chấm điểm một mẫu dương ngẫu nhiên cao hơn một mẫu âm ngẫu nhiên",
+        "Ưu điểm: độc lập với ngưỡng và không phụ thuộc tỷ lệ lớp cụ thể. Lưu ý: khi dữ liệu lệch lớp nặng, ROC-AUC có thể lạc quan quá mức — nên xem thêm Precision-Recall AUC vì nó nhạy hơn với hiệu năng ở lớp thiểu số."
+      ],
+      "points": [
+        "Trục tung: TPR = Recall = TP / (TP + FN).",
+        "Trục hoành: FPR = FP / (FP + TN)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "94203-duong-cong-roc-va-chi-so-auc-la-gi"
+  },
+  {
+    "id": "2da1af9b-df44-5ce4-9a61-ac84a792db1a",
+    "question": "Cross-validation là gì? So sánh k-Fold, Leave-One-Out và Hold-Out.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94204-cross-validation-la-gi-so-sanh-k-fold-leave-one-out-va-hold-out",
+    "slug": "cross-validation-la-gi-so-sanh-k-fold-leave-one-out-va-hold-out-2da1af9b-df44-5ce4-9a61-ac84a792db1a",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cross-validation ước lượng khả năng tổng quát hoá bằng cách chia dữ liệu, huấn luyện và kiểm tra trên các phần khác nhau, giúp ước lượng ít may rủi hơn một lần chia duy nhất."
+      ],
+      "details": [
+        "Với dữ liệu thời gian phải dùng chia theo thời gian (TimeSeriesSplit), không xáo trộn ngẫu nhiên."
+      ],
+      "points": [
+        "Hold-out — chia một lần thành train/test (ví dụ 80/20). Nhanh, nhưng ước lượng có variance cao: kết quả phụ thuộc mạnh vào cách chia rơi vào đâu.",
+        "k-Fold — chia thành k phần bằng nhau; lần lượt lấy 1 fold làm test và k−1 fold làm train, lặp k lần rồi lấy trung bình điểm số. k = 5 hoặc 10 là lựa chọn phổ biến, cân bằng giữa bias và chi phí. Với phân loại nên dùng stratified k-fold để giữ tỷ lệ lớp trong mỗi fold.",
+        "Leave-One-Out (LOO) — trường hợp k = n, mỗi lần test đúng 1 mẫu. Bias thấp nhưng variance cao và rất tốn kém (train n lần); thường chỉ hợp với tập dữ liệu nhỏ."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "94204-cross-validation-la-gi-so-sanh-k-fold-leave-one-out-va-hold-out"
+  },
+  {
+    "id": "43144012-5b5a-5b02-8e33-e91d45305ce8",
+    "question": "Phân biệt feature engineering và feature selection.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94206-phan-biet-feature-engineering-va-feature-selection",
+    "slug": "phan-biet-feature-engineering-va-feature-selection-43144012-5b5a-5b02-8e33-e91d45305ce8",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Feature engineering là tạo và biến đổi đặc trưng để mô hình dễ học hơn: mã hoá biến hạng mục (one-hot, target encoding), chuẩn hoá/scale số, tạo đặc trưng tương tác hay đa thức, trích xuất phần từ ngày giờ, biến đổi log cho phân phối lệch, hoặc đặc trưng theo kiến thức miền. Đây thường là bước tác động lớn nhất tới chất lượng mô hình cổ điển."
+      ],
+      "details": [
+        "Feature selection là chọn tập con đặc trưng hữu ích nhất, để giảm overfit, chi phí tính toán và tăng khả năng diễn giải. Ba nhóm phương pháp:",
+        "Lưu ý chống rò rỉ dữ liệu: bước chọn đặc trưng phải nằm trong cross-validation, không được nhìn tập test trước."
+      ],
+      "points": [
+        "Filter — chấm điểm từng đặc trưng độc lập với mô hình: variance threshold, tương quan, chi-square, mutual information.",
+        "Wrapper — thử các tập con bằng chính mô hình: RFE (recursive feature elimination), forward/backward selection. Chính xác hơn nhưng tốn kém.",
+        "Embedded — việc chọn nằm trong quá trình train: Lasso (L1), độ quan trọng đặc trưng của mô hình cây (tree importance)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "94206-phan-biet-feature-engineering-va-feature-selection"
+  },
+  {
+    "id": "62f1669f-2cb4-509c-872c-7f8451307667",
+    "question": "Xử lý imbalanced dataset thế nào? SMOTE hoạt động ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94208-xu-ly-imbalanced-dataset-the-nao-smote-hoat-dong-ra-sao",
+    "slug": "xu-ly-imbalanced-dataset-the-nao-smote-hoat-dong-ra-sao-62f1669f-2cb4-509c-872c-7f8451307667",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Dữ liệu lệch lớp (ví dụ 99% âm, 1% dương như phát hiện gian lận) khiến accuracy đánh lừa — một mô hình luôn đoán lớp đa số vẫn đạt 99%. Cần xử lý cả metric lẫn dữ liệu:"
+      ],
+      "details": [
+        "SMOTE (Synthetic Minority Over-sampling Technique) thay vì nhân bản trùng lặp, nó tạo mẫu tổng hợp mới: chọn một điểm thuộc lớp thiểu số, tìm các láng giềng gần nhất (kNN) cùng lớp, rồi sinh điểm mới nằm nội suy trên đoạn thẳng giữa điểm gốc và một láng giềng.",
+        "Lưu ý quan trọng: chỉ SMOTE trên tập train, sau khi đã chia — làm trước khi chia sẽ rò rỉ dữ liệu. SMOTE cũng có thể tạo nhiễu ở vùng ranh giới lớp (biến thể Borderline-SMOTE, ADASYN cải thiện điểm này)."
+      ],
+      "points": [
+        "Chọn metric phù hợp — precision, recall, F1, PR-AUC thay vì accuracy.",
+        "Điều chỉnh trọng số lớp (class_weight) — phạt nặng hơn khi đoán sai lớp thiểu số.",
+        "Điều chỉnh ngưỡng quyết định thay vì mặc định 0.5.",
+        "Resampling — oversample lớp thiểu số hoặc undersample lớp đa số."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "94208-xu-ly-imbalanced-dataset-the-nao-smote-hoat-dong-ra-sao"
+  },
+  {
+    "id": "60c668eb-1e19-5ae3-b1a0-b775ef7faf51",
+    "question": "Vai trò của tập train/validation/test và data leakage là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94209-vai-tro-cua-tap-train-validation-test-va-data-leakage-la-gi",
+    "slug": "vai-tro-cua-tap-train-validation-test-va-data-leakage-la-gi-60c668eb-1e19-5ae3-b1a0-b775ef7faf51",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Chia dữ liệu thành ba phần để mỗi phần giữ một vai trò riêng:"
+      ],
+      "details": [
+        "Data leakage là khi thông tin lẽ ra không có lúc dự đoán lại lọt vào lúc huấn luyện, khiến điểm số cao ảo rồi sụp khi lên production. Các dạng thường gặp:\n- Rò rỉ tiền xử lý — fit scaler/encoder/imputer trên toàn bộ dữ liệu trước khi chia. Cách đúng: fit chỉ trên train, gói mọi bước bằng Pipeline đặt trong cross-validation.\n- Target leakage — một đặc trưng thực chất chứa thông tin của nhãn (hoặc chỉ xuất hiện sau thời điểm dự đoán).\n- Temporal leakage — dùng dữ liệu tương lai để đoán quá khứ; với chuỗi thời gian phải chia theo thời gian."
+      ],
+      "points": [
+        "Train — dùng để khớp tham số mô hình.",
+        "Validation — dùng để chọn mô hình và tinh chỉnh siêu tham số. Vì ta đưa ra quyết định dựa trên nó nên điểm số validation đã bị \"lây\" thông tin.",
+        "Test — chỉ chạm một lần cuối cùng để có ước lượng khách quan về khả năng tổng quát hoá. Nhìn tập test nhiều lần sẽ khiến ước lượng lạc quan giả."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "94209-vai-tro-cua-tap-train-validation-test-va-data-leakage-la-gi"
+  },
+  {
+    "id": "c47a0c80-a6a7-5864-a843-c2ae550c7d6f",
+    "question": "Gradient descent: phân biệt batch, stochastic (SGD) và mini-batch.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94210-gradient-descent-phan-biet-batch-stochastic-sgd-va-mini-batch",
+    "slug": "gradient-descent-phan-biet-batch-stochastic-sgd-va-mini-batch-c47a0c80-a6a7-5864-a843-c2ae550c7d6f",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Gradient descent cập nhật tham số theo hướng ngược gradient của hàm mất mát. Ba biến thể khác nhau ở lượng dữ liệu dùng cho mỗi bước cập nhật:"
+      ],
+      "details": [
+        "Trong scikit-learn, SGDClassifier/SGDRegressor cài SGD cho mô hình tuyến tính, hữu ích khi dữ liệu lớn không vừa bộ nhớ (hỗ trợ học từng phần partial_fit). Nhớ scale đặc trưng vì SGD nhạy với thang đo."
+      ],
+      "points": [
+        "Batch GD — tính gradient trên toàn bộ tập dữ liệu rồi mới cập nhật một lần. Hướng đi chính xác, hội tụ mượt, nhưng mỗi bước rất tốn bộ nhớ và chậm khi dữ liệu lớn.",
+        "Stochastic GD (SGD) — cập nhật sau mỗi một mẫu. Rất nhanh và ít tốn bộ nhớ, cập nhật nhiễu (đường đi zic-zac) — nhiễu này đôi khi giúp thoát cực tiểu địa phương, nhưng cần learning rate schedule giảm dần để hội tụ ổn định.",
+        "Mini-batch GD — cập nhật trên một lô nhỏ (thường 32–256 mẫu). Dung hoà giữa hai cực: đủ ổn định lại tận dụng được tính toán vector hoá trên GPU. Đây là mặc định thực tế cho deep learning."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "94210-gradient-descent-phan-biet-batch-stochastic-sgd-va-mini-batch"
+  },
+  {
+    "id": "16d5ded7-d6df-5d39-9c94-48f6d849c415",
+    "question": "Precision-recall tradeoff và threshold tuning là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94211-precision-recall-tradeoff-va-threshold-tuning-la-gi",
+    "slug": "precision-recall-tradeoff-va-threshold-tuning-la-gi-16d5ded7-d6df-5d39-9c94-48f6d849c415",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bộ phân loại thường sinh ra một xác suất, rồi so với ngưỡng để ra nhãn dương/âm. Ngưỡng mặc định 0.5 hiếm khi tối ưu."
+      ],
+      "details": [
+        "Đánh đổi:\n- Hạ ngưỡng → gắn nhãn dương dễ hơn → recall tăng (bắt được nhiều ca dương) nhưng precision giảm (nhiều báo động giả).\n- Nâng ngưỡng → chỉ dự đoán dương khi rất chắc → precision tăng nhưng recall giảm (bỏ sót nhiều).",
+        "precision-recall curve",
+        "F-beta",
+        "Threshold tuning là chọn ngưỡng theo chi phí nghiệp vụ thay vì mặc định:\n- Nếu FN đắt (tầm soát bệnh) → ưu tiên recall → hạ ngưỡng.\n- Nếu FP đắt (chặn giao dịch hợp lệ) → ưu tiên precision → nâng ngưỡng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "94211-precision-recall-tradeoff-va-threshold-tuning-la-gi"
+  },
+  {
+    "id": "863edbef-427e-5772-91ee-19a6fd3d1615",
+    "question": "Linear Regression hoạt động thế nào và dựa trên những giả định nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94220-linear-regression-hoat-dong-the-nao-va-dua-tren-nhung-gia-dinh-nao",
+    "slug": "linear-regression-hoat-dong-the-nao-va-dua-tren-nhung-gia-dinh-nao-863edbef-427e-5772-91ee-19a6fd3d1615",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Linear regression mô hình hóa quan hệ giữa biến mục tiêu liên tục y và các đặc trưng X bằng một hàm tuyến tính: y = β₀ + β₁x₁ + … + βₚxₚ + ε. Hệ số β thường được ước lượng bằng bình phương tối thiểu (OLS) — cực tiểu tổng bình phương phần dư (khoảng cách dọc giữa điểm thực và đường khớp)."
+      ],
+      "details": [
+        "Các giả định chính (để suy diễn thống kê hợp lệ):",
+        "Vi phạm giả định không phải lúc nào cũng làm hỏng dự báo, nhưng làm sai lệch p-value và khoảng tin cậy."
+      ],
+      "points": [
+        "Tuyến tính: kỳ vọng của y là hàm tuyến tính theo các đặc trưng.",
+        "Độc lập: các phần dư không tự tương quan.",
+        "Phương sai đồng nhất (homoscedasticity): phần dư có phương sai không đổi trên mọi mức dự đoán.",
+        "Ít đa cộng tuyến",
+        "Phần dư phân phối chuẩn: cần cho khoảng tin cậy và kiểm định giả thuyết, không bắt buộc cho dự báo điểm."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "94220-linear-regression-hoat-dong-the-nao-va-dua-tren-nhung-gia-dinh-nao"
+  },
+  {
+    "id": "ebf0e066-b9e8-5b38-a55e-f2dffed5788e",
+    "question": "Vì sao Logistic Regression là thuật toán phân loại dù tên có chữ \"regression\"?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94221-vi-sao-logistic-regression-la-thuat-toan-phan-loai-du-ten-co-chu-regression",
+    "slug": "vi-sao-logistic-regression-la-thuat-toan-phan-loai-du-ten-co-chu-regression-ebf0e066-b9e8-5b38-a55e-f2dffed5788e",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì nó ước lượng xác suất một mẫu thuộc lớp dương rồi so với ngưỡng để ra nhãn. Bên trong, nó vẫn tính một tổ hợp tuyến tính z = β₀ + βᵀx như linear regression, nhưng đưa qua hàm sigmoid/logistic σ(z) = 1 / (1 + e^(-z)) để nén về khoảng (0, 1) — một xác suất."
+      ],
+      "details": [
+        "Chữ \"regression\" trong tên nói tới việc nó hồi quy log-odds (logit) theo các đặc trưng: log(p / (1 − p)) = βᵀx là tuyến tính.",
+        "Khác biệt chính so với linear regression:"
+      ],
+      "points": [
+        "Đầu ra bị chặn trong (0, 1), không phải một số thực bất kỳ.",
+        "Hàm mất mát là log-loss (cross-entropy / hợp lý cực đại), không phải bình phương tối thiểu.",
+        "Ranh giới quyết định tuyến tính (mặc định); phân loại bằng cách so xác suất với ngưỡng (thường 0.5, có thể điều chỉnh theo bài toán)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "94221-vi-sao-logistic-regression-la-thuat-toan-phan-loai-du-ten-co-chu-regression"
+  },
+  {
+    "id": "8825ab90-b91e-5d3d-9480-8fba7509a7bb",
+    "question": "K-Means hoạt động thế nào và làm sao chọn số cluster k tối ưu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94224-k-means-hoat-dong-the-nao-va-lam-sao-chon-so-cluster-k-toi-uu",
+    "slug": "k-means-hoat-dong-the-nao-va-lam-sao-chon-so-cluster-k-toi-uu-8825ab90-b91e-5d3d-9480-8fba7509a7bb",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "K-Means chia dữ liệu thành k cụm bằng cách lặp hai bước:"
+      ],
+      "details": [
+        "1. Gán: mỗi điểm về tâm cụm (centroid) gần nhất theo khoảng cách Euclid.\n2. Cập nhật: centroid mới = trung bình các điểm trong cụm.",
+        "Chọn k:",
+        "dạng cầu, kích thước tương đương",
+        "k-means++",
+        "Lặp đến khi phân cụm ổn định. Mục tiêu là cực tiểu inertia (tổng bình phương khoảng cách trong cụm, WCSS)."
+      ],
+      "points": [
+        "Elbow method: vẽ inertia theo k, chọn điểm \"khuỷu tay\" nơi việc tăng k không còn giảm inertia đáng kể.",
+        "Silhouette score: đo mức một điểm gần cụm của nó so với cụm gần nhất khác (khoảng −1..1, càng cao càng tốt).",
+        "Kiến thức lĩnh vực / ràng buộc nghiệp vụ — nhiều khi k do bài toán quy định."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "94224-k-means-hoat-dong-the-nao-va-lam-sao-chon-so-cluster-k-toi-uu"
+  },
+  {
+    "id": "f7ed066d-5c93-5cd6-a406-dc1e675cd36f",
+    "question": "Cây quyết định chọn điểm tách thế nào (entropy/gini) và vì sao cần pruning?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94228-cay-quyet-dinh-chon-diem-tach-the-nao-entropy-gini-va-vi-sao-can-pruning",
+    "slug": "cay-quyet-dinh-chon-diem-tach-the-nao-entropy-gini-va-vi-sao-can-pruning-f7ed066d-5c93-5cd6-a406-dc1e675cd36f",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cây quyết định chia dữ liệu đệ quy theo các đặc trưng. Ở mỗi nút, nó chọn phép tách làm các nhánh con thuần nhất về nhãn nhất có thể, đo bằng một chỉ số impurity:"
+      ],
+      "details": [
+        "Cả hai đều đạt tối thiểu khi nút thuần một lớp và trong thực tế thường cho kết quả tương tự.",
+        "Vì sao cần pruning: để tối đa mọc, cây sẽ chia tới khi mỗi lá gần như thuần → khớp cả nhiễu (overfit), tổng quát kém trên dữ liệu mới. Pruning cắt bớt nhánh ít giá trị:"
+      ],
+      "points": [
+        "Gini impurity: 1 − Σ pᵢ² — xác suất phân loại sai nếu gán nhãn ngẫu nhiên theo phân phối trong nút. Bằng 0 khi nút chỉ một lớp.",
+        "Entropy: −Σ pᵢ·log₂(pᵢ) — độ bất định của nút; phép tách được chọn để tối đa information gain (mức giảm entropy sau khi tách).",
+        "Pre-pruning (early stopping): giới hạn độ sâu, số mẫu tối thiểu mỗi lá/mỗi lần tách.",
+        "Post-pruning: mọc cây đầy rồi cắt lại (vd cost-complexity pruning), dùng tập validation để chỉ giữ những nhánh thực sự cải thiện."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "94228-cay-quyet-dinh-chon-diem-tach-the-nao-entropy-gini-va-vi-sao-can-pruning"
+  },
+  {
+    "id": "bc7d3f75-9c02-5f44-b7b1-10f3e1161c87",
+    "question": "Naive Bayes hoạt động thế nào và giả định độc lập \"ngây thơ\" là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94230-naive-bayes-hoat-dong-the-nao-va-gia-dinh-doc-lap-ngay-tho-la-gi",
+    "slug": "naive-bayes-hoat-dong-the-nao-va-gia-dinh-doc-lap-ngay-tho-la-gi-bc7d3f75-9c02-5f44-b7b1-10f3e1161c87",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Naive Bayes là bộ phân loại xác suất dựa trên định lý Bayes: nó chọn lớp y có xác suất hậu nghiệm cao nhất, P(y | x) ∝ P(y) · Π P(xⱼ | y)."
+      ],
+      "details": [
+        "Giả định \"naive\" chính là độc lập có điều kiện: các đặc trưng độc lập với nhau khi đã biết lớp. Nhờ giả định này, xác suất đồng thời P(x₁,…,xₚ | y) tách được thành tích các xác suất từng đặc trưng Π P(xⱼ | y) — dễ ước lượng và tính rất nhanh, thay vì phải mô hình hóa mọi tương tác giữa các đặc trưng.",
+        "Gaussian NB",
+        "Multinomial NB",
+        "Bernoulli NB",
+        "Laplace smoothing",
+        "Trong thực tế đặc trưng hiếm khi độc lập thật, nhưng mô hình vẫn hoạt động tốt đáng ngạc nhiên (nhất là phân loại văn bản / lọc spam), huấn luyện nhanh và cần ít dữ liệu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "94230-naive-bayes-hoat-dong-the-nao-va-gia-dinh-doc-lap-ngay-tho-la-gi"
+  },
+  {
+    "id": "f9138048-696b-5fd5-a350-5a4f1453a409",
+    "question": "Trong ensemble learning, voting và stacking khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94231-trong-ensemble-learning-voting-va-stacking-khac-nhau-the-nao",
+    "slug": "trong-ensemble-learning-voting-va-stacking-khac-nhau-the-nao-f9138048-696b-5fd5-a350-5a4f1453a409",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai đều kết hợp nhiều mô hình cơ sở (base models) để dự đoán tốt hơn từng mô hình riêng, nhưng khác ở cách tổng hợp:"
+      ],
+      "details": [
+        "Stacking mạnh hơn voting khi các mô hình cơ sở đa dạng và bổ khuyết lẫn nhau, nhưng phức tạp hơn và dễ overfit hơn nếu không cẩn thận."
+      ],
+      "points": [
+        "Voting: gộp dự đoán bằng một quy tắc cố định, không học.",
+        "Hard voting: lấy nhãn theo đa số phiếu.",
+        "Soft voting: trung bình xác suất dự đoán rồi chọn lớp cao nhất (thường tốt hơn nếu các mô hình cho xác suất hiệu chỉnh tốt).",
+        "Stacking (stacked generalization)",
+        "Đơn giản, nhanh, ít rủi ro overfit.",
+        "meta-model",
+        "học cách kết hợp",
+        "đặc trưng đầu vào",
+        "cross-validation out-of-fold"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "94231-trong-ensemble-learning-voting-va-stacking-khac-nhau-the-nao"
+  },
+  {
+    "id": "401f7205-34aa-5b65-a8e3-50d332c475be",
+    "question": "So sánh K-Means, DBSCAN và phân cụm phân cấp (hierarchical)?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94232-so-sanh-k-means-dbscan-va-phan-cum-phan-cap-hierarchical",
+    "slug": "so-sanh-k-means-dbscan-va-phan-cum-phan-cap-hierarchical-401f7205-34aa-5b65-a8e3-50d332c475be",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Chốt: K-Means khi cụm gọn/tròn và cần nhanh; DBSCAN khi cụm hình dạng bất thường và có outlier; hierarchical khi cần cái nhìn phân cấp hoặc chưa biết số cụm."
+      ],
+      "details": [],
+      "points": [
+        "K-Means: chia dữ liệu thành k cụm định trước quanh các centroid; nhanh và mở rộng tốt. Nhưng giả định cụm dạng cầu, kích thước tương đương, nhạy với outlier, và phải chọn k trước.",
+        "DBSCAN (density-based): nhóm các điểm mật độ cao (đủ minPts điểm trong bán kính ε), coi điểm ở vùng thưa là nhiễu/outlier. Ưu điểm: không cần định trước số cụm, tìm được cụm hình dạng bất kỳ, xử lý outlier tốt. Nhược điểm: nhạy với cách chọn ε/minPts và kém khi các cụm có mật độ chênh lệch lớn.",
+        "Hierarchical (agglomerative): xây một cây lồng cụm (dendrogram), gộp dần các cụm gần nhau theo một tiêu chí liên kết (single/complete/average/ward). Không cần chọn số cụm trước — cắt dendrogram ở mức mong muốn; cho cấu trúc phân cấp trực quan, nhưng tốn tính toán (khoảng O(n²) trở lên) nên khó mở rộng cho dữ liệu lớn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "94232-so-sanh-k-means-dbscan-va-phan-cum-phan-cap-hierarchical"
+  },
+  {
+    "id": "bc619c1a-4b23-503c-a214-0ef0f334805b",
+    "question": "Định lý giới hạn trung tâm (Central Limit Theorem) là gì và có ý nghĩa ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94240-dinh-ly-gioi-han-trung-tam-central-limit-theorem-la-gi-va-co-y-nghia-ra-sao",
+    "slug": "dinh-ly-gioi-han-trung-tam-central-limit-theorem-la-gi-va-co-y-nghia-ra-sao-bc619c1a-4b23-503c-a214-0ef0f334805b",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "CLT phát biểu rằng khi cỡ mẫu n đủ lớn, phân phối của trung bình mẫu (x̄) xấp xỉ phân phối chuẩn, bất kể phân phối gốc của tổng thể có hình dạng gì — miễn là các quan sát độc lập, cùng phân phối và tổng thể có phương sai hữu hạn."
+      ],
+      "details": [
+        "Ý nghĩa: đây là lý do ta dùng được suy diễn dựa trên phân phối chuẩn (kiểm định z/t, khoảng tin cậy) cho trung bình ngay cả khi dữ liệu gốc không chuẩn. Lưu ý: CLT nói về phân phối của trung bình (hoặc tổng), không phải nói từng điểm dữ liệu riêng lẻ trở nên chuẩn."
+      ],
+      "points": [
+        "Trung bình của phân phối mẫu bằng trung bình tổng thể μ.",
+        "Độ lệch chuẩn của nó là sai số chuẩn SE = σ/√n (giảm khi n tăng).",
+        "Quy tắc kinh nghiệm: n ≥ 30 thường đủ; cần ít hơn nếu tổng thể khá đối xứng, cần nhiều hơn nếu lệch mạnh."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "94240-dinh-ly-gioi-han-trung-tam-central-limit-theorem-la-gi-va-co-y-nghia-ra-sao"
+  },
+  {
+    "id": "7234820e-5dc2-5754-ae62-a652564294e6",
+    "question": "p-value là gì? Phân biệt lỗi loại I và lỗi loại II.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94241-p-value-la-gi-phan-biet-loi-loai-i-va-loi-loai-ii",
+    "slug": "p-value-la-gi-phan-biet-loi-loai-i-va-loi-loai-ii-7234820e-5dc2-5754-ae62-a652564294e6",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "p-value là xác suất quan sát được dữ liệu ít nhất cực đoan như dữ liệu thực tế, với giả định giả thuyết không (H0) đúng. p-value nhỏ nghĩa là dữ liệu khó xảy ra dưới H0 → bằng chứng chống lại H0. So với mức ý nghĩa α: nếu p < α thì bác bỏ H0."
+      ],
+      "details": [
+        "p-value không phải là xác suất H0 đúng, cũng không phải xác suất kết quả \"do ngẫu nhiên\".",
+        "Đánh đổi:",
+        "tăng cỡ mẫu",
+        "Hai loại lỗi trong kiểm định:\n- Lỗi loại I (dương tính giả) — bác bỏ H0 khi H0 thực ra đúng. Tỷ lệ mắc chính là α.\n- Lỗi loại II (âm tính giả) — không bác bỏ H0 khi H0 thực ra sai. Tỷ lệ là β; power = 1 − β là khả năng phát hiện đúng hiệu ứng thật."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "94241-p-value-la-gi-phan-biet-loi-loai-i-va-loi-loai-ii"
+  },
+  {
+    "id": "5a9ee4ca-aef6-56a6-98ec-9e968cd2aed5",
+    "question": "Khoảng tin cậy (confidence interval) là gì và diễn giải thế nào cho đúng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94245-khoang-tin-cay-confidence-interval-la-gi-va-dien-giai-the-nao-cho-dung",
+    "slug": "khoang-tin-cay-confidence-interval-la-gi-va-dien-giai-the-nao-cho-dung-5a9ee4ca-aef6-56a6-98ec-9e968cd2aed5",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khoảng tin cậy (CI) là một khoảng ước lượng cho tham số tổng thể, tính từ dữ liệu mẫu. Với trung bình:"
+      ],
+      "details": [
+        "(dùng t* với độ lệch chuẩn mẫu s khi chưa biết σ). z* là giá trị tới hạn ứng với mức tin cậy (95% → z* ≈ 1.96).",
+        "Diễn giải SAI thường gặp:",
+        "x̄ ± z* · (σ/√n)",
+        "Diễn giải đúng của CI 95%: nếu lặp lại việc lấy mẫu rất nhiều lần và mỗi lần dựng một khoảng, thì ~95% số khoảng đó sẽ chứa tham số thật."
+      ],
+      "points": [
+        "Mức tin cậy liên hệ với α qua 1 − α.",
+        "Khoảng hẹp hơn khi cỡ mẫu n lớn hơn; rộng hơn khi đòi mức tin cậy cao hơn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "94245-khoang-tin-cay-confidence-interval-la-gi-va-dien-giai-the-nao-cho-dung"
+  },
+  {
+    "id": "629696c3-a5df-5851-8143-b3cc9cc6c94b",
+    "question": "Định lý Bayes và xác suất có điều kiện là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94246-dinh-ly-bayes-va-xac-suat-co-dieu-kien-la-gi",
+    "slug": "dinh-ly-bayes-va-xac-suat-co-dieu-kien-la-gi-629696c3-a5df-5851-8143-b3cc9cc6c94b",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Xác suất có điều kiện P(A|B) là xác suất của A khi biết B đã xảy ra: P(A|B) = P(A∩B) / P(B)."
+      ],
+      "details": [
+        "Định lý Bayes cho phép \"đảo\" điều kiện, cập nhật niềm tin sau khi thấy bằng chứng:",
+        "P(A|B) = P(B|A) · P(A) / P(B)",
+        "Lưu ý — bỏ quên tỷ lệ nền (base rate): với một bệnh hiếm, ngay cả xét nghiệm rất chính xác vẫn cho nhiều dương tính giả, vì prior (tỷ lệ mắc) quá thấp. Ví dụ prevalence 1%, độ nhạy 99%, dương-tính-giả 5% → khi test dương, P(bệnh|dương) ≈ 0.99·0.01 / (0.99·0.01 + 0.05·0.99) ≈ 17%, thấp hơn nhiều so với trực giác."
+      ],
+      "points": [
+        "P(A): prior (niềm tin trước).",
+        "P(B|A): likelihood (khả năng thấy bằng chứng nếu A đúng).",
+        "P(A|B): posterior (niềm tin sau khi cập nhật)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "94246-dinh-ly-bayes-va-xac-suat-co-dieu-kien-la-gi"
+  },
+  {
+    "id": "81529e67-1e78-5068-80a8-ee57b569c1cf",
+    "question": "Độ xiên (skewness) và độ nhọn (kurtosis) là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94249-do-xien-skewness-va-do-nhon-kurtosis-la-gi",
+    "slug": "do-xien-skewness-va-do-nhon-kurtosis-la-gi-81529e67-1e78-5068-80a8-ee57b569c1cf",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai mô tả hình dạng phân phối vượt ngoài mean và variance."
+      ],
+      "details": [
+        "Skewness (độ xiên) đo mức bất đối xứng:\n- Xiên phải / dương — đuôi dài về phải, mean > median (ví dụ thu nhập, thời gian phản hồi).\n- Xiên trái / âm — đuôi dài về trái, mean < median.\n- Xiên ≈ 0 — gần đối xứng.",
+        "Kurtosis (độ nhọn) đo độ nặng của đuôi / khả năng có ngoại lai:\n- Phân phối chuẩn có kurtosis = 3; ta hay dùng excess kurtosis = kurtosis − 3 nên chuẩn = 0.\n- Leptokurtic (excess > 0) — đuôi nặng, nhiều ngoại lai hơn.\n- Platykurtic (excess < 0) — đuôi nhẹ, ít ngoại lai.",
+        "Ứng dụng: kiểm tra giả định về tính chuẩn trước khi áp dụng phương pháp tham số, và cảnh báo dữ liệu dễ có giá trị cực đoan (quan trọng trong tài chính, quản trị rủi ro)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "94249-do-xien-skewness-va-do-nhon-kurtosis-la-gi"
+  },
+  {
+    "id": "5f708611-0b41-565d-9c10-34675d416117",
+    "question": "So sánh SGD + momentum, Adagrad, RMSProp và Adam; khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94261-so-sanh-sgd-momentum-adagrad-rmsprop-va-adam-khi-nao-dung-cai-nao",
+    "slug": "so-sanh-sgd-momentum-adagrad-rmsprop-va-adam-khi-nao-dung-cai-nao-5f708611-0b41-565d-9c10-34675d416117",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tất cả đều là biến thể của gradient descent, khác nhau ở cách dùng lịch sử gradient để định bước cập nhật."
+      ],
+      "details": [
+        "Chọn: Adam làm mặc định/prototype nhanh; SGD + momentum kèm scheduling khi cần tổng quát hóa cao nhất (CNN/thị giác SOTA); RMSProp cho mạng hồi tiếp."
+      ],
+      "points": [
+        "SGD + momentum: cộng dồn trung bình trượt (giảm dần) của gradient thành \"vận tốc\" → làm mượt cập nhật, tăng tốc theo hướng nhất quán, giảm dao động. Learning rate cố định toàn cục (cần tinh chỉnh/scheduling). Thường cho khả năng tổng quát hóa tốt nhất ở thị giác máy tính.",
+        "Adagrad: learning rate riêng cho từng tham số, chia cho căn của tổng tích lũy bình phương gradient → cập nhật mạnh cho đặc trưng hiếm. Nhược điểm: mẫu số tăng đơn điệu → learning rate tụt dần về 0, việc học đình trệ.",
+        "RMSProp: sửa Adagrad bằng cách dùng trung bình trượt bình phương gradient thay cho tổng tích lũy → learning rate không tụt về 0. Hợp với dữ liệu không dừng và RNN.",
+        "Adam: kết hợp momentum (moment bậc 1) + RMSProp (moment bậc 2) kèm hiệu chỉnh độ chệch. Mặc định vững, hội tụ nhanh, ít phải tinh chỉnh."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "94261-so-sanh-sgd-momentum-adagrad-rmsprop-va-adam-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "577df1c1-421e-5a85-9f35-7d34a364428b",
+    "question": "Dropout và Early Stopping chống overfitting như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94263-dropout-va-early-stopping-chong-overfitting-nhu-the-nao",
+    "slug": "dropout-va-early-stopping-chong-overfitting-nhu-the-nao-577df1c1-421e-5a85-9f35-7d34a364428b",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai đều là kỹ thuật regularization — giảm overfitting mà không cần thêm dữ liệu."
+      ],
+      "details": [],
+      "points": [
+        "Dropout: trong lúc train, mỗi lượt forward loại bỏ ngẫu nhiên (đưa về 0) mỗi nơ-ron với xác suất p. Mạng không thể dựa vào vài nơ-ron cùng thích nghi (co-adaptation) → tương đương huấn luyện một ensemble các mạng con dùng chung trọng số. Lúc suy luận không loại bỏ nữa; activation được co giãn (hoặc co giãn ngược ngay khi train) để khớp kỳ vọng độ lớn. Kết quả: giảm co-adaptation, tổng quát hóa tốt hơn.",
+        "Early stopping: theo dõi loss trên tập validation trong lúc train, dừng khi nó ngừng cải thiện (sau một số epoch \"kiên nhẫn\"), giữ lại checkpoint tốt nhất. Ngăn mô hình khớp quá mức dữ liệu train ở các epoch muộn — về bản chất là giới hạn dung lượng mô hình theo thời gian."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "94263-dropout-va-early-stopping-chong-overfitting-nhu-the-nao"
+  },
+  {
+    "id": "55034537-9d8f-503a-8a94-652b090fb9aa",
+    "question": "Giải thích convolution, kernel, stride, padding và pooling trong CNN.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94264-giai-thich-convolution-kernel-stride-padding-va-pooling-trong-cnn",
+    "slug": "giai-thich-convolution-kernel-stride-padding-va-pooling-trong-cnn-55034537-9d8f-503a-8a94-652b090fb9aa",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "CNN xử lý dữ liệu dạng lưới (ảnh) nhờ kết nối cục bộ và chia sẻ trọng số."
+      ],
+      "details": [
+        "Xếp chồng nhiều lớp conv → học đặc trưng phân cấp: cạnh → bộ phận → đối tượng."
+      ],
+      "points": [
+        "Kernel / filter: ma trận trọng số nhỏ, trượt trên đầu vào; ở mỗi vị trí tính tích vô hướng → phát hiện một mẫu cục bộ (cạnh, kết cấu). Trọng số được học.",
+        "Convolution: trượt kernel khắp đầu vào tạo ra một feature map. Hai ý cốt lõi: trường tiếp nhận cục bộ + chia sẻ trọng số → ít tham số hơn hẳn lớp dày đặc, và bất biến-tương-đương với dịch chuyển.",
+        "Stride: bước trượt; stride 2 làm giảm mẫu (output nhỏ hơn).",
+        "Padding: thêm viền (thường bằng 0) để output giữ kích thước (same) hoặc thu nhỏ (valid).",
+        "Pooling"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "94264-giai-thich-convolution-kernel-stride-padding-va-pooling-trong-cnn"
+  },
+  {
+    "id": "3ed898c9-b61e-51fa-8d49-98fa2e5cf54e",
+    "question": "Backpropagation hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94269-backpropagation-hoat-dong-nhu-the-nao",
+    "slug": "backpropagation-hoat-dong-nhu-the-nao-3ed898c9-b61e-51fa-8d49-98fa2e5cf54e",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Backpropagation là thuật toán tính gradient của hàm mất mát theo mọi trọng số một cách hiệu quả, để gradient descent cập nhật chúng."
+      ],
+      "details": [
+        "Hai lượt:",
+        "1. Forward pass: đưa đầu vào qua mạng, tính đầu ra từng lớp và loss cuối cùng.\n2. Backward pass: áp dụng quy tắc dây chuyền từ đầu ra ngược về — tính gradient của loss ở lớp ra, rồi lan ngược qua từng lớp, tái sử dụng các activation đã lưu, để ra ∂L/∂w cho mọi trọng số.",
+        "Điểm mấu chốt: nó tái sử dụng kết quả trung gian (giống quy hoạch động trên đồ thị tính toán) nên chi phí chỉ khoảng một lượt forward, không bùng nổ. Sau đó một optimizer (SGD/Adam) dùng các gradient này để cập nhật trọng số."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "94269-backpropagation-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "009be4de-75d7-58c9-89da-5ee60c76b699",
+    "question": "Cross-entropy và MSE khác nhau thế nào, khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94271-cross-entropy-va-mse-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "slug": "cross-entropy-va-mse-khac-nhau-the-nao-khi-nao-dung-cai-nao-009be4de-75d7-58c9-89da-5ee60c76b699",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hàm mất mát định nghĩa thế nào là \"sai\" và tạo ra gradient để học."
+      ],
+      "details": [
+        "Vì sao không dùng MSE cho phân loại: với sigmoid/softmax, MSE cho gradient nhỏ (có khi gần triệt tiêu) ngay khi mô hình dự đoán sai một cách tự tin, và bề mặt loss ở đó không lồi → học chậm. Cross-entropy ghép sạch với softmax/sigmoid (gradient rút gọn về ŷ − y) → gradient mạnh khi sai, hội tụ nhanh hơn, và chính là hàm hợp lý cực đại (maximum likelihood) cho đầu ra phân loại."
+      ],
+      "points": [
+        "MSE (sai số bình phương trung bình) mean((y − ŷ)²): cho hồi quy (mục tiêu liên tục). Phạt sai số lớn theo bình phương; nhạy với outlier. Đi cùng đầu ra tuyến tính.",
+        "Cross-entropy (log loss): cho phân loại. Đo độ lệch giữa phân phối xác suất dự đoán và phân phối nhãn thật. Binary CE với đầu ra sigmoid; categorical CE với đầu ra softmax."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "94271-cross-entropy-va-mse-khac-nhau-the-nao-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "a976c10b-f6ca-550f-b66d-31eb05879b66",
+    "question": "Đánh đổi exploration vs exploitation là gì? ε-greedy hoạt động ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94283-danh-doi-exploration-vs-exploitation-la-gi-greedy-hoat-dong-ra-sao",
+    "slug": "danh-doi-exploration-vs-exploitation-la-gi-greedy-hoat-dong-ra-sao-a976c10b-f6ca-550f-b66d-31eb05879b66",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Trong RL, agent phải cân bằng:\n- Exploitation (khai thác) — chọn hành động tốt nhất đã biết để tối đa phần thưởng ngay.\n- Exploration (khám phá) — thử hành động chưa chắc chắn để thu thêm thông tin, có thể tìm ra lựa chọn tốt hơn về sau."
+      ],
+      "details": [
+        "Chỉ khai thác → dễ kẹt ở tối ưu cục bộ (chưa từng thử phương án thật sự tốt). Chỉ khám phá → không tận dụng được điều đã học.",
+        "ε-greedy là chiến lược đơn giản, phổ biến:\n- Với xác suất 1 − ε: chọn hành động có Q cao nhất (khai thác).\n- Với xác suất ε: chọn ngẫu nhiên một hành động (khám phá).",
+        "Thường dùng ε-decay: bắt đầu ε lớn (khám phá nhiều lúc đầu) rồi giảm dần về giá trị nhỏ khi agent đã học đủ. Các phương án khác: softmax/Boltzmann (chọn theo xác suất tỉ lệ giá trị), UCB (ưu tiên hành động ít được thử), optimistic initialization."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "94283-danh-doi-exploration-vs-exploitation-la-gi-greedy-hoat-dong-ra-sao"
+  },
+  {
+    "id": "d2ffbdd7-d4d3-5320-a8ca-02a802f53487",
+    "question": "Giải thích các khái niệm cốt lõi của RL: reward, policy, value function, discount factor γ.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94284-giai-thich-cac-khai-niem-cot-loi-cua-rl-reward-policy-value-function-discount-fa",
+    "slug": "giai-thich-cac-khai-niem-cot-loi-cua-rl-reward-policy-value-function-discount-factor-d2ffbdd7-d4d3-5320-a8ca-02a802f53487",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hình dung: reward là điểm ghi được ở mỗi nước đi, value là ước lượng tổng điểm sẽ đạt từ đây đến hết ván, còn γ cho biết ta \"quy đổi\" điểm ở tương lai xa về hiện tại nhẹ đi bao nhiêu."
+      ],
+      "details": [],
+      "points": [
+        "Reward r — tín hiệu số vô hướng môi trường trả về sau mỗi bước, đo mức \"tốt\" tức thời của một hành động. Mục tiêu của agent là tối đa tổng phần thưởng tích luỹ (return), không phải reward từng bước.",
+        "Policy π — chiến lược của agent, ánh xạ trạng thái → hành động. Có thể tất định a = π(s) hoặc ngẫu nhiên π(a|s).",
+        "Value function — kỳ vọng return khi bắt đầu từ một trạng thái (V^π(s)) hoặc từ một cặp trạng thái–hành động (Q^π(s,a)), rồi đi theo policy π. Nó đo giá trị dài hạn, khác với reward tức thời.",
+        "Discount factor γ ∈ [0,1) — trọng số cho phần thưởng tương lai: G_t = r_{t+1} + γ·r_{t+2} + γ²·r_{t+3} + …. γ gần 0 → agent \"thiển cận\", chỉ quan tâm phần thưởng gần; γ gần 1 → coi trọng phần thưởng xa. γ < 1 cũng bảo đảm tổng hội tụ với chuỗi vô hạn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "94284-giai-thich-cac-khai-niem-cot-loi-cua-rl-reward-policy-value-function-discount-fa"
+  },
+  {
+    "id": "d4bf9d72-683f-59fe-9cbd-05716139cd80",
+    "question": "Phân biệt lọc cộng tác (collaborative filtering) và lọc theo nội dung (content-based) trong hệ gợi ý.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94288-phan-biet-loc-cong-tac-collaborative-filtering-va-loc-theo-noi-dung-content-base",
+    "slug": "phan-biet-loc-cong-tac-collaborative-filtering-va-loc-theo-noi-dung-content-based-trong-he-goi-y-d4bf9d72-683f-59fe-9cbd-05716139cd80",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Content-based filtering — gợi ý dựa trên đặc trưng của item và hồ sơ sở thích của chính người dùng. Nếu bạn thích phim khoa học viễn tưởng, hệ gợi phim sci-fi khác.\n- Ưu: không cần dữ liệu người dùng khác; xử lý được item mới (miễn có đặc trưng); dễ giải thích.\n- Nhược: cần đặc trưng item chất lượng; khó khám phá ngoài vùng sở thích cũ (over-specialization)."
+      ],
+      "details": [
+        "Collaborative filtering — gợi ý dựa trên hành vi/đánh giá của nhiều người dùng, tìm mẫu tương đồng: \"người giống bạn cũng thích X\". Có dạng user-based, item-based, hoặc ma trận phân rã (matrix factorization) học embedding tiềm ẩn.\n- Ưu: không cần đặc trưng item; khám phá được sở thích bất ngờ.\n- Nhược: cold-start (người/mục mới chưa có tương tác); ma trận tương tác thưa (sparse); thiên vị mục phổ biến.",
+        "Thực tế hệ lớn thường lai (hybrid) — kết hợp cả hai để bù nhược điểm của nhau."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "94288-phan-biet-loc-cong-tac-collaborative-filtering-va-loc-theo-noi-dung-content-base"
+  },
+  {
+    "id": "4d52b623-bfb8-5beb-9536-df6159ede1fb",
+    "question": "Có những chiến lược nào để xử lý dữ liệu khuyết (missing data)?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94289-co-nhung-chien-luoc-nao-de-xu-ly-du-lieu-khuyet-missing-data",
+    "slug": "co-nhung-chien-luoc-nao-de-xu-ly-du-lieu-khuyet-missing-data-4d52b623-bfb8-5beb-9536-df6159ede1fb",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Trước tiên nên hiểu cơ chế khuyết: MCAR (khuyết ngẫu nhiên hoàn toàn), MAR (khuyết phụ thuộc biến quan sát khác), MNAR (khuyết phụ thuộc chính giá trị bị thiếu) — nó quyết định cách xử lý có gây thiên lệch hay không."
+      ],
+      "details": [
+        "Các chiến lược chính:\n- Xoá (deletion) — bỏ hàng (listwise) hoặc cột. Đơn giản nhưng mất dữ liệu; chỉ ổn khi tỷ lệ khuyết nhỏ và MCAR.\n- Imputation đơn giản — điền mean/median (số) hoặc mode (phân loại). Nhanh nhưng giảm phương sai và bỏ qua quan hệ giữa các biến. Median bền với ngoại lai hơn mean.\n- Imputation theo mô hình — KNN (lấy từ láng giềng gần), hồi quy, hoặc MICE / IterativeImputer (điền lặp dựa trên các biến khác). Chính xác hơn nhưng tốn tính toán.\n- Đánh dấu (indicator) — thêm cột chỉ báo \"đã khuyết\" để mô hình học tín hiệu từ việc thiếu, nhất là khi MNAR.",
+        "Lưu ý rò rỉ dữ liệu: tính tham số điền (vd median) chỉ trên tập train rồi áp cho validation/test — không dùng thống kê toàn bộ dữ liệu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "94289-co-nhung-chien-luoc-nao-de-xu-ly-du-lieu-khuyet-missing-data"
+  },
+  {
+    "id": "b8767000-a5e9-5584-ab09-69c5199fb66c",
+    "question": "So sánh one-hot, label và target encoding cho biến phân loại.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94290-so-sanh-one-hot-label-va-target-encoding-cho-bien-phan-loai",
+    "slug": "so-sanh-one-hot-label-va-target-encoding-cho-bien-phan-loai-b8767000-a5e9-5584-ab09-69c5199fb66c",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhiều mô hình chỉ nhận đầu vào số nên biến phân loại (categorical) cần mã hoá."
+      ],
+      "details": [
+        "Chọn nhanh: cardinality thấp + nominal → one-hot; ordinal thật → ordinal; cardinality rất cao → target encoding (cẩn thận rò rỉ) hoặc embedding."
+      ],
+      "points": [
+        "One-hot encoding — mỗi giá trị thành một cột nhị phân riêng. Không áp đặt thứ tự giả, phù hợp biến danh nghĩa (nominal) và mô hình tuyến tính. Nhược: bùng nổ chiều khi cardinality cao (nhiều giá trị khác nhau).",
+        "Label (ordinal) encoding — gán mỗi giá trị một số nguyên. Gọn, nhưng ngầm áp đặt thứ tự và khoảng cách giữa các số → chỉ đúng cho biến có thứ tự (ordinal) thật, hoặc cho mô hình cây (cây chia theo ngưỡng nên ít nhạy). Dùng cho mô hình tuyến tính với biến nominal sẽ sai lệch.",
+        "Target (mean) encoding — thay mỗi giá trị bằng trung bình của biến mục tiêu cho nhóm đó. Xử lý tốt cardinality cao, giữ được tín hiệu dự báo. Nhưng rủi ro rò rỉ mục tiêu và overfitting → phải mã hoá trong cross-validation / thêm smoothing, và fit chỉ trên tập train."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "94290-so-sanh-one-hot-label-va-target-encoding-cho-bien-phan-loai"
+  },
+  {
+    "id": "e884b77f-763a-5578-a7b8-c678c6cbd288",
+    "question": "Feature scaling: phân biệt normalization và standardization, khi nào cần?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94291-feature-scaling-phan-biet-normalization-va-standardization-khi-nao-can",
+    "slug": "feature-scaling-phan-biet-normalization-va-standardization-khi-nao-can-e884b77f-763a-5578-a7b8-c678c6cbd288",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Scaling đưa các đặc trưng số về thang tương đương để không đặc trưng nào lấn át chỉ vì đơn vị lớn."
+      ],
+      "details": [
+        "Giữ nguyên hình dạng phân phối; nhạy với ngoại lai (min/max bị kéo lệch). Hợp khi cần miền chặn (vd ảnh, một số mạng nơ-ron).\n- Standardization (Z-score) — đưa về trung bình 0, độ lệch chuẩn 1:",
+        "Lưu ý:",
+        "x′ = (x − min) / (max − min)",
+        "Không chặn trong khoảng cố định nhưng bền với ngoại lai hơn min-max; là lựa chọn mặc định phổ biến.",
+        "x′ = (x − μ) / σ",
+        "Khi nào cần scaling:\n- Cần cho mô hình dựa trên khoảng cách hoặc gradient: KNN, K-Means, SVM, hồi quy có regularization (Ridge/Lasso), PCA, mạng nơ-ron.\n- Không cần cho mô hình cây (Decision Tree, Random Forest, gradient boosting) — chúng chia theo ngưỡng từng đặc trưng nên bất biến với scale đơn điệu."
+      ],
+      "points": [
+        "Normalization (Min-Max) — co giá trị về khoảng cố định, thường [0, 1]:"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "94291-feature-scaling-phan-biet-normalization-va-standardization-khi-nao-can"
+  },
+  {
+    "id": "68d3cfd8-8885-52b6-846c-97bd2c53da8b",
+    "question": "Phân biệt mô hình parametric và non-parametric.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94292-phan-biet-mo-hinh-parametric-va-non-parametric",
+    "slug": "phan-biet-mo-hinh-parametric-va-non-parametric-68d3cfd8-8885-52b6-846c-97bd2c53da8b",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khác biệt ở việc mô hình có giả định trước một dạng hàm cố định (với số tham số hữu hạn, không đổi theo lượng dữ liệu) hay không."
+      ],
+      "details": [
+        "Parametric — giả định một dạng hàm, học một số tham số cố định. Ví dụ: hồi quy tuyến tính/logistic, Naive Bayes, mạng nơ-ron kích thước cố định.\n- Ưu: cần ít dữ liệu hơn, huấn luyện/suy diễn nhanh, dễ diễn giải.\n- Nhược: nếu dạng hàm giả định sai → bias cao (underfit); kém linh hoạt.",
+        "Non-parametric — không cố định dạng hàm; độ phức tạp tăng theo dữ liệu. Ví dụ: KNN, cây quyết định, Random Forest, SVM nhân RBF.\n- Ưu: linh hoạt, khớp được quan hệ phi tuyến phức tạp mà không cần giả định trước.\n- Nhược: cần nhiều dữ liệu, dễ overfit, tốn tính toán/bộ nhớ, khó diễn giải hơn.",
+        "Lưu ý: \"non-parametric\" không có nghĩa là không có tham số — nghĩa là số tham số không cố định trước mà lớn dần theo dữ liệu (vd KNN \"nhớ\" toàn bộ tập huấn luyện). Đánh đổi: đây là một biểu hiện của bias–variance — parametric thiên về bias, non-parametric thiên về variance."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "94292-phan-biet-mo-hinh-parametric-va-non-parametric"
+  },
+  {
+    "id": "161a5879-8f72-58e6-b846-27a724e48b04",
+    "question": "Khi nào dùng PR-AUC thay cho ROC-AUC? Vì sao ROC-AUC có thể \"đẹp\" trên dữ liệu rất mất cân bằng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/99054-khi-nao-dung-pr-auc-thay-cho-roc-auc-vi-sao-roc-auc-co-the-dep-tren-du-lieu-rat",
+    "slug": "khi-nao-dung-pr-auc-thay-cho-roc-auc-vi-sao-roc-auc-co-the-dep-tren-du-lieu-rat-mat-can-bang-161a5879-8f72-58e6-b846-27a724e48b04",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khác biệt nằm ở mẫu số của trục hoành."
+      ],
+      "details": [
+        "Chọn thế nào:\n- Lớp dương hiếm và bạn quan tâm chất lượng của những ca được gắn cờ (gian lận, phát hiện bệnh, spam) → PR-AUC / average precision.\n- Hai lớp cân bằng, hoặc cần so sánh khả năng phân tách chung không phụ thuộc tỷ lệ lớp → ROC-AUC.",
+        "Lưu ý khi báo cáo PR-AUC: đường cơ sở của ROC luôn là 0.5, nhưng đường cơ sở của PR chính là tỷ lệ lớp dương. Với dữ liệu 0.5% dương thì PR-AUC 0.30 đã là cải thiện lớn — phải nói kèm tỷ lệ nền, nếu không người đọc tưởng mô hình kém.",
+        "Dùng average_precision_score thay vì tính diện tích bằng nội suy hình thang trên đường PR (nội suy trên đường PR không chính xác)."
+      ],
+      "points": [
+        "ROC vẽ TPR theo FPR, mà FPR = FP / (FP + TN). Khi lớp âm cực đông, TN rất lớn nên FPR gần như không nhúc nhích dù FP tăng hàng nghìn. Đường ROC vẫn dựng đứng và AUC vẫn cao, trong khi thực tế đội vận hành phải xử lý rất nhiều cảnh báo sai.",
+        "Precision-Recall vẽ precision theo recall, mà precision = TP / (TP + FP) — không có TN trong công thức. Mỗi false positive đều làm precision giảm ngay, nên PR phản ánh đúng trải nghiệm thực tế của bài toán hiếm."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "99054-khi-nao-dung-pr-auc-thay-cho-roc-auc-vi-sao-roc-auc-co-the-dep-tren-du-lieu-rat"
+  },
+  {
+    "id": "d7024bd0-0bf9-505f-91d9-409d58ac148f",
+    "question": "Data leakage có những dạng nào hay gặp trong thực tế và phòng bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/99055-data-leakage-co-nhung-dang-nao-hay-gap-trong-thuc-te-va-phong-bang-cach-nao",
+    "slug": "data-leakage-co-nhung-dang-nao-hay-gap-trong-thuc-te-va-phong-bang-cach-nao-d7024bd0-0bf9-505f-91d9-409d58ac148f",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Leakage là khi thông tin không có ở thời điểm dự đoán thật lọt vào lúc huấn luyện. Triệu chứng điển hình: điểm offline cao bất thường nhưng lên production sụp."
+      ],
+      "details": [
+        "1. Tiền xử lý trước khi tách tập. Gọi scaler.fit() hoặc điền giá trị thiếu trên toàn bộ dữ liệu rồi mới train_test_split → thống kê của tập test đã tham gia huấn luyện.\n2. Feature thuộc tương lai. Ví dụ dự đoán khách rời bỏ nhưng dùng cột ngay_huy_hop_dong, hoặc dự đoán nợ xấu bằng cột so_lan_nhac_no chỉ tồn tại sau khi đã quá hạn.\n3. Target leakage gián tiếp. Cột là hệ quả của nhãn: dự đoán bệnh nhân mắc bệnh X nhưng feature có loai_thuoc_da_ke.\n4. Rò rỉ theo nhóm. Cùng một khách hàng/bệnh nhân/thiết bị xuất hiện ở cả train và test → mô hình nhớ cá thể chứ không học quy luật. Phải dùng GroupKFold.\n5. Rò rỉ theo thời gian. Xáo trộn ngẫu nhiên dữ liệu chuỗi thời gian khiến mô hình học từ tương lai để đoán quá khứ.\n6. Rò rỉ do chọn feature/tinh chỉnh trên toàn bộ dữ liệu rồi mới cross-validate.",
+        "Các dạng hay gặp:",
+        "Cách phòng:\n- Bọc mọi bước biến đổi vào Pipeline và đặt cả pipeline vào cross-validation — fit chỉ chạy trên phần train của từng fold."
+      ],
+      "points": [
+        "Với mỗi feature, hỏi: \"tại thời điểm dự đoán, giá trị này đã tồn tại chưa?\"",
+        "Giữ một tập giữ lại (holdout) theo thời gian, không đụng tới cho đến khi chốt mô hình."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "pipe = Pipeline([\n    ('impute', SimpleImputer()),\n    ('scale', StandardScaler()),\n    ('model', LogisticRegression()),\n])\ncross_val_score(pipe, X, y, cv=5)  # scaler fits inside each fold only"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "99055-data-leakage-co-nhung-dang-nao-hay-gap-trong-thuc-te-va-phong-bang-cach-nao"
+  },
+  {
+    "id": "e729dd9d-669e-540d-896e-fa710d3b9cf0",
+    "question": "Mô hình phân loại trả xác suất. Vì sao 0.5 không phải ngưỡng mặc định đúng, và chọn ngưỡng dựa trên gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/99056-mo-hinh-phan-loai-tra-xac-suat-vi-sao-0-5-khong-phai-nguong-mac-dinh-dung-va-cho",
+    "slug": "mo-hinh-phan-loai-tra-xac-suat-vi-sao-0-5-khong-phai-nguong-mac-dinh-dung-va-chon-nguong-dua-tren-gi-e729dd9d-669e-540d-896e-fa710d3b9cf0",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "0.5 chỉ là quy ước của hàm predict(), không phải kết quả tối ưu hoá. Ngưỡng đúng phụ thuộc chi phí của hai loại lỗi và tỷ lệ lớp, hai thứ mà mô hình không biết."
+      ],
+      "details": [
+        "1. Lập bảng chi phí. Gán chi phí cho FP và FN theo đơn vị nghiệp vụ. Ví dụ duyệt vay: FN (cho vay khách xấu) mất 20 triệu, FP (từ chối khách tốt) mất 2 triệu lợi nhuận → chọn ngưỡng tối thiểu hoá tổng chi phí kỳ vọng, thường thấp hơn 0.5 nhiều.\n2. Ràng buộc vận hành. Đội xử lý chỉ review được 200 hồ sơ/ngày → chọn ngưỡng sao cho số ca gắn cờ khớp năng lực, tức là chốt theo top-K chứ không theo xác suất.\n3. Ràng buộc chỉ số. \"Precision phải ≥ 0.8\" → dò trên đường PR của tập validation lấy ngưỡng nhỏ nhất thoả điều kiện, rồi mới đo lại trên tập test.",
+        "Cách chọn ngưỡng có căn cứ:",
+        "Hai lưu ý quan trọng:\n- Chọn ngưỡng trên tập validation, không phải tập test, nếu không con số báo cáo bị lạc quan.\n- Nếu cần diễn giải xác suất như xác suất thật (tính tổn thất kỳ vọng, xếp hạng rủi ro) thì phải hiệu chuẩn (calibration). Random forest và SVM cho điểm số lệch; dùng CalibratedClassifierCV (Platt scaling hoặc isotonic) và kiểm bằng đường calibration.",
+        "Khi phân phối lớp trong production khác dữ liệu huấn luyện (do đã lấy mẫu lại lúc train), ngưỡng cũng phải điều chỉnh lại theo tỷ lệ thật."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "99056-mo-hinh-phan-loai-tra-xac-suat-vi-sao-0-5-khong-phai-nguong-mac-dinh-dung-va-cho"
+  },
+  {
+    "id": "a4f1b4b4-6ee1-5123-b39b-da0349d2c5f3",
+    "question": "Dữ liệu mất cân bằng: chọn giữa oversampling, undersampling và class weight thế nào? Khi nào không cần xử lý gì cả?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/99057-du-lieu-mat-can-bang-chon-giua-oversampling-undersampling-va-class-weight-the-na",
+    "slug": "du-lieu-mat-can-bang-chon-giua-oversampling-undersampling-va-class-weight-the-nao-khi-nao-khong-can-a4f1b4b4-6ee1-5123-b39b-da0349d2c5f3",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khi nào không cần làm gì: mất cân bằng tự nó không phải lỗi. Nếu bạn dùng chỉ số phù hợp (PR-AUC, recall ở precision cho trước) và tự chọn ngưỡng, mô hình xác suất huấn luyện trên dữ liệu gốc thường đã đủ. Rất nhiều trường hợp chỉ cần hạ ngưỡng là giải quyết xong, không cần đụng tới phân phối dữ liệu. Tỷ lệ 1:10 hiếm khi cần can thiệp; vấn đề thật sự bắt đầu khi lớp dương chỉ còn vài trăm mẫu tuyệt đối."
+      ],
+      "details": [
+        "Ba lỗi hay mắc:\n1. Lấy mẫu lại trên toàn bộ dữ liệu trước khi tách/cross-validate. Bản sao của một mẫu lọt sang tập validation → điểm ảo. Phải resample bên trong từng fold, chỉ trên phần train.\n2. Đánh giá trên tập test đã cân bằng. Tập test phải giữ phân phối thật của production.\n3. Quên rằng lấy mẫu lại làm lệch xác suất đầu ra. Sau khi oversample, xác suất mô hình trả về không còn là xác suất thật → cần hiệu chuẩn lại hoặc điều chỉnh ngưỡng.",
+        "Các lựa chọn khi cần can thiệp:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Cách",
+            "Phù hợp khi",
+            "Muốn thử trước tiên, không đổi dữ liệu",
+            "Chỉ là nhân trọng số vào hàm mất mát",
+            "Undersampling lớp âm",
+            "Dữ liệu rất lớn, cần train nhanh",
+            "Vứt bỏ thông tin",
+            "Oversampling lớp dương",
+            "Lớp dương ít mẫu tuyệt đối",
+            "Dễ overfit vì lặp lại mẫu",
+            "SMOTE (sinh mẫu tổng hợp)",
+            "Feature liên tục, không gian đặc",
+            "Sinh mẫu vô nghĩa khi có biến phân loại hoặc dữ liệu nhiễu",
+            "Thu thập thêm dữ liệu lớp hiếm"
+          ]
+        }
+      ]
+    },
+    "legacyId": 52,
+    "sourceSlug": "99057-du-lieu-mat-can-bang-chon-giua-oversampling-undersampling-va-class-weight-the-na"
+  },
+  {
+    "id": "30fb3115-5070-5c43-92fa-5e3b46afbb27",
+    "question": "Vì sao không được dùng k-fold ngẫu nhiên cho dữ liệu chuỗi thời gian? Đánh giá đúng thì làm thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/99058-vi-sao-khong-duoc-dung-k-fold-ngau-nhien-cho-du-lieu-chuoi-thoi-gian-danh-gia-du",
+    "slug": "vi-sao-khong-duoc-dung-k-fold-ngau-nhien-cho-du-lieu-chuoi-thoi-gian-danh-gia-dung-thi-lam-the-nao-30fb3115-5070-5c43-92fa-5e3b46afbb27",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì k-fold ngẫu nhiên xáo trộn thứ tự thời gian: mô hình được huấn luyện trên dữ liệu tháng 6 rồi đem dự đoán tháng 3. Đó là rò rỉ thời gian, và điểm cross-validation sẽ cao hơn hẳn kết quả thực tế khi mô hình dự báo tương lai chưa biết.",
+        "Expanding window:",
+        "Rolling window:"
+      ],
+      "details": [
+        "Những điểm dễ sai kèm theo:\n- Gap giữa train và test. Nếu nhãn chỉ biết sau 30 ngày (ví dụ khách có trả nợ không), phải chừa khoảng trống bằng độ trễ nhãn, nếu không lúc train đã dùng thông tin chưa thể có.\n- Feature dạng cửa sổ trượt (trung bình 7 ngày, tổng luỹ kế) phải tính chỉ từ quá khứ, không được dùng mean() toàn chuỗi.\n- Chuẩn hoá và điền thiếu cũng phải fit trên phần quá khứ.\n- Với dữ liệu bảng có cột thời gian nhưng không phải chuỗi thời gian thuần (ví dụ hồ sơ vay), vẫn nên tách tập test theo mốc thời gian để bản đánh giá giống production nhất.",
+        "Cách đúng — validation theo cửa sổ trượt tiến về phía trước:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from sklearn.model_selection import TimeSeriesSplit\n\ntscv = TimeSeriesSplit(n_splits=5)\nfor train_idx, test_idx in tscv.split(X):\n    # train always precedes test in time\n    ..."
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "99058-vi-sao-khong-duoc-dung-k-fold-ngau-nhien-cho-du-lieu-chuoi-thoi-gian-danh-gia-du"
+  },
+  {
+    "id": "56902ae5-04cd-5ff9-a909-feb4b980f82b",
+    "question": "Mô hình chạy tốt trên tập test nhưng hiệu quả giảm dần sau vài tháng chạy production. Nguyên nhân có thể là gì và điều tra thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/99059-mo-hinh-chay-tot-tren-tap-test-nhung-hieu-qua-giam-dan-sau-vai-thang-chay-produc",
+    "slug": "mo-hinh-chay-tot-tren-tap-test-nhung-hieu-qua-giam-dan-sau-vai-thang-chay-production-nguyen-nhan-co-56902ae5-04cd-5ff9-a909-feb4b980f82b",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ba nhóm nguyên nhân, phân biệt bằng cái gì đã thay đổi:"
+      ],
+      "details": [
+        "1. Data drift (covariate shift) — phân phối đầu vào P(X) đổi, quan hệ P(y|X) giữ nguyên. Ví dụ tệp khách hàng mở rộng sang tỉnh khác, app đổi luồng đăng ký khiến một feature luôn rỗng.",
+        "Quy trình điều tra:",
+        "phân phối từng feature",
+        "cùng một bản ghi",
+        "mô hình huấn luyện lại trên dữ liệu mới",
+        "2. Concept drift — quan hệ P(y|X) đổi. Hành vi gian lận thay đổi để né mô hình, chính sách khuyến mãi mới làm định nghĩa \"khách sắp rời bỏ\" khác đi. Đây là loại nguy hiểm nhất vì đầu vào trông vẫn bình thường.",
+        "3. Lỗi kỹ thuật, không phải drift — thường gặp hơn cả hai loại trên:\n- Training-serving skew: code tính feature lúc train (batch, pandas) khác code lúc serve (realtime).\n- Upstream đổi đơn vị/định dạng, cột thành null sau một lần deploy.\n- Vòng phản hồi: mô hình chặn giao dịch nghi ngờ → không còn nhãn cho nhóm bị chặn → dữ liệu huấn luyện kỳ sau bị thiên lệch."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "99059-mo-hinh-chay-tot-tren-tap-test-nhung-hieu-qua-giam-dan-sau-vai-thang-chay-produc"
+  },
+  {
+    "id": "9094cdf7-ffe0-58f6-aca2-e3608e0d540f",
+    "question": "Xử lý giá trị ngoại lai (outlier) thế nào cho đúng? Có phải lúc nào cũng nên loại bỏ?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/99060-xu-ly-gia-tri-ngoai-lai-outlier-the-nao-cho-dung-co-phai-luc-nao-cung-nen-loai-b",
+    "slug": "xu-ly-gia-tri-ngoai-lai-outlier-the-nao-cho-dung-co-phai-luc-nao-cung-nen-loai-bo-9094cdf7-ffe0-58f6-aca2-e3608e0d540f",
+    "access": "free",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không. Câu hỏi đầu tiên phải là: ngoại lai này là lỗi dữ liệu hay là hiện tượng thật hiếm gặp."
+      ],
+      "details": [
+        "Phát hiện:\n- Một chiều: IQR (ngoài Q1 - 1.5·IQR đến Q3 + 1.5·IQR), z-score (chỉ đúng khi dữ liệu gần chuẩn), phân vị 1%/99%.\n- Nhiều chiều: IsolationForest, LocalOutlierFactor — bắt được điểm mà từng chiều đều bình thường nhưng tổ hợp thì bất thường.\n- Trực quan: boxplot, scatter, biểu đồ phần dư sau khi fit mô hình.",
+        "Xử lý:",
+        "Độ nhạy khác nhau theo mô hình: hồi quy tuyến tính với MSE rất nhạy vì bình phương sai số; cây quyết định gần như không quan tâm. Nếu buộc phải giữ ngoại lai trong bài toán hồi quy, dùng hàm mất mát bền vững (Huber) hoặc MAE thay cho MSE, và RobustScaler thay StandardScaler.",
+        "Quan trọng nhất: ngưỡng loại ngoại lai phải xác định trên tập train và áp lại cho tập test, không được nhìn toàn bộ dữ liệu để đặt ngưỡng."
+      ],
+      "points": [
+        "age = 200, price = -1: lỗi nhập liệu hoặc lỗi đơn vị → sửa hoặc loại.",
+        "Giao dịch 5 tỷ trong tập phát hiện gian lận: đây chính là thứ cần dự đoán, loại đi là xoá mất tín hiệu."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Cách",
+            "Khi nào",
+            "Sửa lại giá trị",
+            "Xác định được là lỗi nhập, có nguồn đối chiếu",
+            "Loại bản ghi",
+            "Chắc chắn là lỗi và số lượng nhỏ",
+            "Winsorize (chặn ở phân vị)",
+            "Muốn giữ bản ghi, chỉ hạn chế ảnh hưởng của đuôi",
+            "Biến đổi log / căn bậc hai",
+            "Phân phối lệch phải mạnh (thu nhập, doanh số)",
+            "Rời rạc hoá thành khoảng",
+            "Muốn mô hình chỉ dùng thứ bậc, bỏ độ lớn",
+            "Giữ nguyên",
+            "Mô hình dựa trên cây, hoặc ngoại lai chính là nhãn cần bắt"
+          ]
+        }
+      ]
+    },
+    "legacyId": 55,
+    "sourceSlug": "99060-xu-ly-gia-tri-ngoai-lai-outlier-the-nao-cho-dung-co-phai-luc-nao-cung-nen-loai-b"
+  },
+  {
+    "id": "0c562ba3-4130-53f0-99a7-cfd5bf8f08f7",
+    "question": "Mixture of Experts (MoE) là gì? Khác gì dense model?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mixture-of-experts-moe-la-gi-khac-gi-dense-model-0c562ba3-4130-53f0-99a7-cfd5bf8f08f7",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": null
+  },
+  {
+    "id": "55cca5d0-2c97-5af9-ab65-b3eba9d4ee4c",
+    "question": "Flash Attention là gì? Tại sao tăng tốc training/inference mà không đổi kết quả?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "flash-attention-la-gi-tai-sao-tang-toc-training-inference-ma-khong-doi-ket-qua-55cca5d0-2c97-5af9-ab65-b3eba9d4ee4c",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": null
+  },
+  {
+    "id": "c26d2dc5-3a01-5757-8f44-6abc656deb64",
+    "question": "RoPE (Rotary Position Embedding) là gì? Tại sao ưu thế hơn positional embedding học được?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "rope-rotary-position-embedding-la-gi-tai-sao-uu-the-hon-positional-embedding-hoc-duoc-c26d2dc5-3a01-5757-8f44-6abc656deb64",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": null
+  },
+  {
+    "id": "f95c3d92-d1e4-5fbb-a456-fb71acb4096f",
+    "question": "Scaling laws và emergent abilities: tại sao LLM lớn hơn có khả năng mới?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "scaling-laws-va-emergent-abilities-tai-sao-llm-lon-hon-co-kha-nang-moi-f95c3d92-d1e4-5fbb-a456-fb71acb4096f",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": null
+  },
+  {
+    "id": "93129b8e-137d-52df-a268-3b3d7ec32f78",
+    "question": "Regularization là gì? Phân biệt L1 (Lasso), L2 (Ridge) và Elastic Net.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "regularization-la-gi-phan-biet-l1-lasso-l2-ridge-va-elastic-net-93129b8e-137d-52df-a268-3b3d7ec32f78",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": null
+  },
+  {
+    "id": "c35419c5-3681-5bc3-a093-2f13ad04fefb",
+    "question": "Curse of dimensionality là gì và cách khắc phục?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "curse-of-dimensionality-la-gi-va-cach-khac-phuc-c35419c5-3681-5bc3-a093-2f13ad04fefb",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": null
+  },
+  {
+    "id": "96d57bff-ff30-5efa-bd9f-ac2633bb5740",
+    "question": "Phân biệt Bagging và Boosting; Random Forest và bootstrapping liên quan thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "phan-biet-bagging-va-boosting-random-forest-va-bootstrapping-lien-quan-the-nao-96d57bff-ff30-5efa-bd9f-ac2633bb5740",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": null
+  },
+  {
+    "id": "f06c378d-79c7-5b8b-8a96-141ac4c9d7ef",
+    "question": "AdaBoost, Gradient Boosting và XGBoost khác nhau ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "adaboost-gradient-boosting-va-xgboost-khac-nhau-ra-sao-f06c378d-79c7-5b8b-8a96-141ac4c9d7ef",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": null
+  },
+  {
+    "id": "05340f0f-3b18-5eec-9b8a-dd44800ce9ec",
+    "question": "PCA làm gì và vì sao nó tối đa hóa phương sai?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "pca-lam-gi-va-vi-sao-no-toi-da-hoa-phuong-sai-05340f0f-3b18-5eec-9b8a-dd44800ce9ec",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": null
+  },
+  {
+    "id": "c07caad8-e562-5903-97e9-6db5461e61a5",
+    "question": "SVM hoạt động thế nào và kernel trick là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "svm-hoat-dong-the-nao-va-kernel-trick-la-gi-c07caad8-e562-5903-97e9-6db5461e61a5",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": null
+  },
+  {
+    "id": "d71aba4e-a801-56e4-af34-61e57d02bdda",
+    "question": "A/B testing: thiết kế thí nghiệm và đọc kết quả thế nào cho đúng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "a-b-testing-thiet-ke-thi-nghiem-va-doc-ket-qua-the-nao-cho-dung-d71aba4e-a801-56e4-af34-61e57d02bdda",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": null
+  },
+  {
+    "id": "212606b6-20f7-5e4c-9463-20025f07e1ab",
+    "question": "Vanishing gradient và exploding gradient là gì, vì sao xảy ra và cách khắc phục?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vanishing-gradient-va-exploding-gradient-la-gi-vi-sao-xay-ra-va-cach-khac-phuc-212606b6-20f7-5e4c-9463-20025f07e1ab",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": null
+  },
+  {
+    "id": "900a535b-6d5c-5152-94b5-51d4a517fa58",
+    "question": "Batch Normalization là gì, hoạt động thế nào và mang lại lợi ích gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "batch-normalization-la-gi-hoat-dong-the-nao-va-mang-lai-loi-ich-gi-900a535b-6d5c-5152-94b5-51d4a517fa58",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": null
+  },
+  {
+    "id": "c01f2630-ac11-58b5-aee8-530861f214f6",
+    "question": "RNN, LSTM và GRU khác nhau thế nào; LSTM giải quyết vấn đề gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "rnn-lstm-va-gru-khac-nhau-the-nao-lstm-giai-quyet-van-de-gi-c01f2630-ac11-58b5-aee8-530861f214f6",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": null
+  },
+  {
+    "id": "1012388d-7681-5449-ba8a-7924abef6383",
+    "question": "GAN hoạt động thế nào; vai trò của generator và discriminator là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "gan-hoat-dong-the-nao-vai-tro-cua-generator-va-discriminator-la-gi-1012388d-7681-5449-ba8a-7924abef6383",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": null
+  },
+  {
+    "id": "1609c756-6289-5fef-8017-468c3ccb6724",
+    "question": "Autoencoder và Variational Autoencoder (VAE) khác nhau ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "autoencoder-va-variational-autoencoder-vae-khac-nhau-ra-sao-1609c756-6289-5fef-8017-468c3ccb6724",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": null
+  },
+  {
+    "id": "23f0f55c-edfc-536b-a6bb-64601aa598c8",
+    "question": "Vì sao khởi tạo trọng số quan trọng; Xavier/Glorot khác He initialization thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vi-sao-khoi-tao-trong-so-quan-trong-xavier-glorot-khac-he-initialization-the-nao-23f0f55c-edfc-536b-a6bb-64601aa598c8",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": null
+  },
+  {
+    "id": "6067d999-f45b-5703-bf54-048e62c89e3d",
+    "question": "Markov Decision Process (MDP) là gì và phương trình Bellman phát biểu điều gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "markov-decision-process-mdp-la-gi-va-phuong-trinh-bellman-phat-bieu-dieu-gi-6067d999-f45b-5703-bf54-048e62c89e3d",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": null
+  },
+  {
+    "id": "e3c8d556-b355-50d7-aa16-d5d324aa928a",
+    "question": "Phân biệt Q-Learning và SARSA (off-policy vs on-policy).",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "phan-biet-q-learning-va-sarsa-off-policy-vs-on-policy-e3c8d556-b355-50d7-aa16-d5d324aa928a",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": null
+  },
+  {
+    "id": "4dfe9e6d-4c38-546d-9e17-b0647aeb653b",
+    "question": "So sánh phương pháp value-based và policy-based trong RL.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "so-sanh-phuong-phap-value-based-va-policy-based-trong-rl-4dfe9e6d-4c38-546d-9e17-b0647aeb653b",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": null
+  },
+  {
+    "id": "0b0e333b-aeba-50bd-a325-d63200417365",
+    "question": "Phân biệt RL model-free và model-based.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "phan-biet-rl-model-free-va-model-based-0b0e333b-aeba-50bd-a325-d63200417365",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 76,
+    "sourceSlug": null
+  },
+  {
+    "id": "839054e6-0a26-5258-ba23-de31f2a64d08",
+    "question": "Deep Q-Network (DQN) là gì? Ý tưởng cơ bản và các kỹ thuật ổn định.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "deep-q-network-dqn-la-gi-y-tuong-co-ban-va-cac-ky-thuat-on-dinh-839054e6-0a26-5258-ba23-de31f2a64d08",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 77,
+    "sourceSlug": null
+  },
+  {
+    "id": "c741e0ed-7529-5e61-bbd4-e0efc879385b",
+    "question": "ARIMA là gì và tính dừng (stationarity) quan trọng thế nào trong chuỗi thời gian?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "arima-la-gi-va-tinh-dung-stationarity-quan-trong-the-nao-trong-chuoi-thoi-gian-c741e0ed-7529-5e61-bbd4-e0efc879385b",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 78,
+    "sourceSlug": null
+  },
+  {
+    "id": "63460fb7-b43a-52bc-9d36-0f6df4669ceb",
+    "question": "Giải thích mô hình cho người không kỹ thuật thế nào? Feature importance mặc định của random forest có gì sai?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "giai-thich-mo-hinh-cho-nguoi-khong-ky-thuat-the-nao-feature-importance-mac-dinh-cua-random-forest-co-63460fb7-b43a-52bc-9d36-0f6df4669ceb",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 79,
+    "sourceSlug": null
+  },
+  {
+    "id": "80c4b1b5-d17e-5383-9258-3d3f725f43a3",
+    "question": "Biến phân loại có hàng chục nghìn giá trị (mã sản phẩm, quận huyện, user id) thì encode thế nào? Target encoding gây rò rỉ ra sao và khắc phục bằng cách nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "bien-phan-loai-co-hang-chuc-nghin-gia-tri-ma-san-pham-quan-huyen-user-id-thi-encode-the-nao-target-e-80c4b1b5-d17e-5383-9258-3d3f725f43a3",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 80,
+    "sourceSlug": null
+  },
+  {
+    "id": "7d3eafec-35c5-5b6f-822c-5f80abc46101",
+    "question": "Khi nào nên bỏ công feature engineering thủ công, khi nào để mô hình tự học đặc trưng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-nen-bo-cong-feature-engineering-thu-cong-khi-nao-de-mo-hinh-tu-hoc-dac-trung-7d3eafec-35c5-5b6f-822c-5f80abc46101",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 81,
+    "sourceSlug": null
+  },
+  {
+    "id": "96c751c6-bec0-5c4b-8058-4237d5ffea8a",
+    "question": "Đồng nghiệp chạy lại code huấn luyện của bạn nhưng ra kết quả khác. Những nguồn không tái lập nào cần kiểm và xử lý thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dong-nghiep-chay-lai-code-huan-luyen-cua-ban-nhung-ra-ket-qua-khac-nhung-nguon-khong-tai-lap-nao-can-96c751c6-bec0-5c4b-8058-4237d5ffea8a",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 82,
+    "sourceSlug": null
+  },
+  {
+    "id": "4848965d-8a40-522e-b7e6-f08d47e3838f",
+    "question": "Đưa một mô hình đã huấn luyện lên production cần chuẩn bị những gì (serving, giám sát, huấn luyện lại)?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dua-mot-mo-hinh-da-huan-luyen-len-production-can-chuan-bi-nhung-gi-serving-giam-sat-huan-luyen-lai-4848965d-8a40-522e-b7e6-f08d47e3838f",
+    "access": "pro",
+    "departments": [
+      "ai-ml"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 83,
+    "sourceSlug": null
+  }
+]
