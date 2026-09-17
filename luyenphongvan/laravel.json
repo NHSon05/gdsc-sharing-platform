@@ -1,0 +1,1723 @@
+[
+  {
+    "id": "1e193cae-2250-5b5f-9726-bc7f8fa72058",
+    "question": "Laravel là gì và nó giải quyết những vấn đề gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2631-laravel-la-gi-va-no-giai-quyet-nhung-van-de-gi",
+    "slug": "laravel-la-gi-va-no-giai-quyet-nhung-van-de-gi-1e193cae-2250-5b5f-9726-bc7f8fa72058",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Laravel là framework PHP hiện đại với cú pháp thanh lịch và bộ công cụ phong phú cho phép phát triển ứng dụng nhanh."
+      ],
+      "details": [],
+      "points": [
+        "Nó giải quyết các vấn đề phổ biến: routing (ánh xạ URL), templating (engine Blade), truy cập database (Eloquent ORM), xác thực, validation, quản lý session và testing.",
+        "Tuân theo mô hình MVC để tách biệt các mối quan tâm.",
+        "Tính năng tích hợp sẵn tiết kiệm thời gian phát triển so với tự viết từ đầu.",
+        "Laravel 11 (2024) đơn giản hóa đáng kể cấu trúc: bỏ app/Http/Kernel.php, dùng bootstrap/app.php để cấu hình middleware; bỏ EventServiceProvider, AuthServiceProvider — đăng ký tập trung trong AppServiceProvider."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "2631-laravel-la-gi-va-no-giai-quyet-nhung-van-de-gi"
+  },
+  {
+    "id": "106a69c6-567a-56c2-ba78-74949cd52f39",
+    "question": "Routing trong Laravel là gì và cách định nghĩa route?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2632-routing-trong-laravel-la-gi-va-cach-dinh-nghia-route",
+    "slug": "routing-trong-laravel-la-gi-va-cach-dinh-nghia-route-106a69c6-567a-56c2-ba78-74949cd52f39",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Routing ánh xạ URL đến controller action."
+      ],
+      "details": [],
+      "points": [
+        "Định nghĩa trong routes/web.php: Route::get(\"/users\", [UserController::class, \"index\"]) ánh xạ GET request đến /users vào method index của UserController.",
+        "Các method khác: Route::post(), Route::put(), Route::delete().",
+        "Route parameter: Route::get(\"/users/{id}\", ...) bắt segment URL.",
+        "Route name: Route::get(...)->name(\"users.show\") cho phép tạo link bằng route(\"users.show\", [\"id\" => 1]).",
+        "Route::get(...)->middleware(\"auth\")",
+        "$routeMiddleware",
+        "->middleware(\"alias\")"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "2632-routing-trong-laravel-la-gi-va-cach-dinh-nghia-route"
+  },
+  {
+    "id": "0f86ab89-eafd-5b8f-91db-d05090162384",
+    "question": "Blade templating engine trong Laravel là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2633-blade-templating-engine-trong-laravel-la-gi",
+    "slug": "blade-templating-engine-trong-laravel-la-gi-0f86ab89-eafd-5b8f-91db-d05090162384",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Blade là engine template đơn giản nhưng đủ dùng của Laravel. Biên dịch cú pháp mustache {{ }} thành code PHP, được cache để tăng hiệu suất. Các directive quan trọng: {{ $variable }} in biến (đã escape), {!! $html !!} in HTML thô, @if, @foreach, @for cho cấu trúc điều khiển, @include(\"template\") nhúng view khác, @yield(\"content\") trong layouts."
+      ],
+      "details": [
+        "Ví dụ: @foreach($users as $user) <p>{{ $user->name }}</p> @endforeach. Blade tách biệt trình bày khỏi logic, cải thiện khả năng bảo trì và dễ đọc."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "2633-blade-templating-engine-trong-laravel-la-gi"
+  },
+  {
+    "id": "4e7cac6d-15d7-5608-b2b5-309b15a8ce5c",
+    "question": "Migration trong Laravel là gì và cách sử dụng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2634-migration-trong-laravel-la-gi-va-cach-su-dung",
+    "slug": "migration-trong-laravel-la-gi-va-cach-su-dung-4e7cac6d-15d7-5608-b2b5-309b15a8ce5c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Migration là định nghĩa schema database được quản lý bằng version control.",
+        "php artisan migrate"
+      ],
+      "details": [
+        "Tạo bằng php artisan make:migration create_users_table, định nghĩa bảng trong up() và rollback trong down():",
+        "Ưu điểm: theo dõi thay đổi schema trong git, rollback dễ, đồng nhất giữa các môi trường và tài liệu hoá luôn cấu trúc bảng — giải quyết chuyện đồng bộ database trong team lẫn khi deploy.",
+        "Lưu ý:",
+        "$table->id()",
+        "bigIncrements",
+        "$table->increments(\"id\")"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "public function up(): void\n{\n    Schema::create(\"users\", function (Blueprint $table) {\n        $table->id();\n        $table->string(\"name\");\n        $table->timestamps();\n    });\n}\n\npublic function down(): void\n{\n    Schema::dropIfExists(\"users\");\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "2634-migration-trong-laravel-la-gi-va-cach-su-dung"
+  },
+  {
+    "id": "00415b03-9d49-5abb-8b0d-72410997a1d3",
+    "question": "Mô hình MVC là gì và Laravel áp dụng như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2635-mo-hinh-mvc-la-gi-va-laravel-ap-dung-nhu-the-nao",
+    "slug": "mo-hinh-mvc-la-gi-va-laravel-ap-dung-nhu-the-nao-00415b03-9d49-5abb-8b0d-72410997a1d3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "MVC tách biệt các mối quan tâm: Model (logic dữ liệu/database), View (giao diện/UI), Controller (xử lý request/logic nghiệp vụ). Request của người dùng đi đến Router, gọi Controller thích hợp. Controller truy vấn Model lấy dữ liệu, rồi render View với dữ liệu đó."
+      ],
+      "details": [
+        "Ví dụ: GET /users → UsersController@index → User::all() → view(\"users.index\", [\"users\" => $users]). Việc tách biệt cho phép developer làm việc độc lập, cải thiện khả năng test, và bảo trì code. Cấu trúc thư mục của Laravel (app/Models, resources/views, app/Http/Controllers) thực thi MVC."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "2635-mo-hinh-mvc-la-gi-va-laravel-ap-dung-nhu-the-nao"
+  },
+  {
+    "id": "ebeb3c1c-d4ee-5a51-8744-b47ac6982a13",
+    "question": "Artisan là gì và có những lệnh phổ biến nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2636-artisan-la-gi-va-co-nhung-lenh-pho-bien-nao",
+    "slug": "artisan-la-gi-va-co-nhung-lenh-pho-bien-nao-ebeb3c1c-d4ee-5a51-8744-b47ac6982a13",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Artisan là giao diện dòng lệnh của Laravel để tự động hóa các tác vụ phổ biến."
+      ],
+      "details": [],
+      "points": [
+        "Các lệnh thiết yếu: php artisan migrate (chạy migration), php artisan make:controller UserController (tạo controller), php artisan make:model User (tạo model), php artisan serve (khởi động server dev), php artisan tinker (shell tương tác để test), php artisan route:list (xem tất cả route), php artisan cache:clear (xóa cache).",
+        "Artisan tiết kiệm thời gian bằng cách tự động hóa các tác vụ lặp đi lặp lại và đảm bảo tính nhất quán trong việc tạo code."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "2636-artisan-la-gi-va-co-nhung-lenh-pho-bien-nao"
+  },
+  {
+    "id": "a26326b5-8e0e-5078-b42a-f99ac4ca9ffe",
+    "question": "Controller trong Laravel là gì và có những method nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2637-controller-trong-laravel-la-gi-va-co-nhung-method-nao",
+    "slug": "controller-trong-laravel-la-gi-va-co-nhung-method-nao-a26326b5-8e0e-5078-b42a-f99ac4ca9ffe",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Controller xử lý logic của request, thường ứng với một resource (User, Product): nhận request, làm việc với Model, rồi trả về View hay JSON. php artisan make:controller ProductController --resource sinh sẵn bộ method CRUD — index() (danh sách), show($id) (một bản ghi), create() (form tạo), store() (lưu form), edit() (form sửa), update() (lưu sửa đổi), destroy() (xoá).",
+        "Lưu ý: luôn dùng $request->validated() chứ đừng dùng $request->all() — all() mở đường cho lỗ hổng mass assignment."
+      ],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "public function store(Request $request)\n{\n    $product = Product::create($request->validated());\n\n    return redirect()->route('products.show', $product);\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "2637-controller-trong-laravel-la-gi-va-co-nhung-method-nao"
+  },
+  {
+    "id": "2a2bec5b-f256-52ff-95e0-6a792bc9b744",
+    "question": "Dependency injection trong Laravel hoạt động như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2638-dependency-injection-trong-laravel-hoat-dong-nhu-the-nao",
+    "slug": "dependency-injection-trong-laravel-hoat-dong-nhu-the-nao-2a2bec5b-f256-52ff-95e0-6a792bc9b744",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dependency injection tự động cung cấp các dependency cần thiết cho class. Thay vì new UserRepository() bên trong controller, type-hint trong method: public function index(UserRepository $repo) { return $repo->all(); }. Service container của Laravel tự động khởi tạo và inject class."
+      ],
+      "details": [
+        "Lợi ích: dễ test hơn (inject mock repository), coupling lỏng lẻo (đổi implementation mà không sửa controller), code gọn hơn. Laravel xử lý injection tự động cho route controller, middleware, commands. Giúp code linh hoạt và dễ test mà không cần khởi tạo thủ công."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "2638-dependency-injection-trong-laravel-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "2a049c54-04db-5c83-9d4c-e930a065de47",
+    "question": "register() và boot() trong service provider khác nhau thế nào? Đặt sai chỗ thì lỗi gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96650-register-va-boot-trong-service-provider-khac-nhau-the-nao-dat-sai-cho-thi-loi-gi",
+    "slug": "register-va-boot-trong-service-provider-khac-nhau-the-nao-dat-sai-cho-thi-loi-gi-2a049c54-04db-5c83-9d4c-e930a065de47",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai method chạy ở hai pha khác nhau của vòng khởi động ứng dụng.",
+        "Route::",
+        "Event::listen"
+      ],
+      "details": [],
+      "points": [
+        "register() chạy trước, cho mọi provider. Ở đây chỉ được bind vào container (bind, singleton, scoped). Không được đụng tới service của provider khác vì lúc này chưa chắc chúng đã được đăng ký.",
+        "boot() chạy sau khi tất cả provider đã register xong. Đây là chỗ đăng ký event listener, route, view composer, Blade directive, macro, gate, validator rule — những thứ cần đến service khác.",
+        "Lúc chạy có thể vẫn qua, nhưng khi thứ tự nạp provider đổi (hoặc thêm package mới) sẽ ném lỗi \"target class does not exist\" hoặc nhận về instance chưa cấu hình.",
+        "Quy tắc ngắn: register = khai báo, boot = sử dụng."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "public function register(): void\n{\n    $this->app->singleton(PaymentGateway::class, fn () => new SepayGateway(config('services.sepay.key')));\n}\n\npublic function boot(): void\n{\n    Blade::directive('money', fn ($expr) => \"<?= number_format($expr) ?>\");\n    Event::listen(OrderPaid::class, SendInvoice::class);\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "96650-register-va-boot-trong-service-provider-khac-nhau-the-nao-dat-sai-cho-thi-loi-gi"
+  },
+  {
+    "id": "d4984266-09b5-57b2-9287-db855ad5c3c5",
+    "question": "Form Request là gì? Vì sao nên dùng thay cho $request->validate() ngay trong controller?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96651-form-request-la-gi-vi-sao-nen-dung-thay-cho-request-validate-ngay-trong-controll",
+    "slug": "form-request-la-gi-vi-sao-nen-dung-thay-cho-request-validate-ngay-trong-controller-d4984266-09b5-57b2-9287-db855ad5c3c5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Form Request là một class kế thừa FormRequest, gom rule validate + quyền truy cập ra khỏi controller."
+      ],
+      "details": [
+        "Laravel tự resolve nó qua type-hint, tự chạy validate trước khi vào body controller; sai thì tự redirect kèm lỗi (web) hoặc trả 422 JSON (API).",
+        "Với payload phức tạp còn có prepareForValidation() để chuẩn hoá input trước khi chạy rule."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "class StoreOrderRequest extends FormRequest\n{\n    public function authorize(): bool\n    {\n        return $this->user()->can('create', Order::class);\n    }\n\n    public function rules(): array\n    {\n        return [\n            'product_id' => ['required', 'exists:products,id'],\n            'quantity'   => ['required', 'integer', 'min:1', 'max:10'],\n        ];\n    }\n\n    public function messages(): array\n    {\n        return ['quantity.max' => 'Mỗi đơn tối đa 10 sản phẩm.'];\n    }\n}\n\npublic function store(StoreOrderRequest $request)\n{\n    $order = Order::create($request->validated());   // dữ liệu đã sạch\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "96651-form-request-la-gi-vi-sao-nen-dung-thay-cho-request-validate-ngay-trong-controll"
+  },
+  {
+    "id": "229c4021-4254-5232-93fa-c85e99a19d4b",
+    "question": "Service Provider trong Laravel là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2639-service-provider-trong-laravel-la-gi",
+    "slug": "service-provider-trong-laravel-la-gi-229c4021-4254-5232-93fa-c85e99a19d4b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Service Provider bootstrap các dịch vụ của ứng dụng. Có hai method chính: register() (bind vào container) và boot() (truy cập các service đã bind)."
+      ],
+      "details": [
+        "Ví dụ: AppServiceProvider đăng ký custom service, MailServiceProvider cài đặt mail. Định nghĩa binding: $this->app->bind(PaymentInterface::class, StripePayment::class). Dùng cho: đăng ký event listener, publish config file, mở rộng tính năng. Provider chạy sớm trong lifecycle của Laravel, lý tưởng cho các tác vụ thiết lập. Tạo custom provider bằng php artisan make:provider CustomServiceProvider. Laravel 11+: mảng providers trong config/app.php đã bị xóa — package discovery tự động, custom provider đăng ký qua AppServiceProvider hoặc bootstrap/providers.php."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "2639-service-provider-trong-laravel-la-gi"
+  },
+  {
+    "id": "9f2bc682-573a-54a2-b992-c3f6286716f1",
+    "question": "Validation rules trong Laravel là gì và cách validate dữ liệu form?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2640-validation-rules-trong-laravel-la-gi-va-cach-validate-du-lieu-form",
+    "slug": "validation-rules-trong-laravel-la-gi-va-cach-validate-du-lieu-form-9f2bc682-573a-54a2-b992-c3f6286716f1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Validate dữ liệu đầu vào với rules trong controller:"
+      ],
+      "details": [
+        "Hiển thị lỗi trong view:"
+      ],
+      "points": [
+        "Các rule phổ biến: required (bắt buộc), email (email hợp lệ), unique:table (chưa có trong DB), min:5|max:20 (độ dài), confirmed (khớp với field_confirmation), regex:/pattern/ (khớp regex)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "$request->validate([\"email\" => \"required|email\", \"name\" => \"required|string|max:100\"])"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "2640-validation-rules-trong-laravel-la-gi-va-cach-validate-du-lieu-form"
+  },
+  {
+    "id": "c6618ecc-2b44-537a-ad39-9dff473b79a7",
+    "question": "Eloquent ORM là gì và tại sao tốt hơn SQL thuần?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2641-eloquent-orm-la-gi-va-tai-sao-tot-hon-sql-thuan",
+    "slug": "eloquent-orm-la-gi-va-tai-sao-tot-hon-sql-thuan-c6618ecc-2b44-537a-ad39-9dff473b79a7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Eloquent là lớp trừu tượng database của Laravel cung cấp giao diện hướng đối tượng để thao tác database. Thay vì SQL thuần SELECT * FROM users WHERE id=1, dùng User::find(1)."
+      ],
+      "details": [
+        "Lợi ích: không phụ thuộc vào database cụ thể (dễ chuyển đổi), tự động phòng chống SQL injection, code dễ đọc và bảo trì, relationships được tích hợp sẵn, tính năng tối ưu hóa query. Mỗi bảng có class Model tương ứng với các property khớp cột. Các method như where(), orWhere(), orderBy() có thể chain: User::where(\"age\", \">\", 18)->orderBy(\"name\")->get(). Giảm code, tăng bảo mật, dễ test."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "2641-eloquent-orm-la-gi-va-tai-sao-tot-hon-sql-thuan"
+  },
+  {
+    "id": "f97410c2-b34e-5419-87d0-dc3a0d547b94",
+    "question": "Model trong Laravel là gì và cách tạo chúng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2642-model-trong-laravel-la-gi-va-cach-tao-chung",
+    "slug": "model-trong-laravel-la-gi-va-cach-tao-chung-f97410c2-b34e-5419-87d0-dc3a0d547b94",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Model đại diện cho bảng database theo cách hướng đối tượng. Tạo bằng php artisan make:model User. Các property: protected $table (override tên bảng), protected $fillable (cột được mass-assign như name, email), protected $hidden (loại khỏi output như password), protected $casts (ép kiểu như created_at thành date)."
+      ],
+      "details": [
+        "Ví dụ:\nCopy\n$user = User::create([\"name\" => \"John\", \"email\" => \"john@example.com\"]);\ntạo bản ghi. Mass assignment yêu cầu mảng $fillable để bảo mật—ngăn gán các trường nhạy cảm. Model kết nối cấu trúc database với code PHP."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "$user = User::create([\"name\" => \"John\", \"email\" => \"john@example.com\"]);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "2642-model-trong-laravel-la-gi-va-cach-tao-chung"
+  },
+  {
+    "id": "3d4c6234-3ca0-507a-a9f2-405d8f3dcd6f",
+    "question": "Eloquent relationships là gì và có những loại nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2643-eloquent-relationships-la-gi-va-co-nhung-loai-nao",
+    "slug": "eloquent-relationships-la-gi-va-co-nhung-loai-nao-3d4c6234-3ca0-507a-a9f2-405d8f3dcd6f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Relationships định nghĩa mối liên kết giữa các model. One-to-Many: User có nhiều Post. Định nghĩa trong User model: public function posts() { return $this->hasMany(Post::class); }. Truy cập: $user->posts. Many-to-One (nghịch đảo): Post belongs to User. One-to-One: User có một Profile. Many-to-Many: Post có nhiều Tag."
+      ],
+      "details": [
+        "Ví dụ: $post->tags()->attach($tagId) tạo liên kết. Polymorphic: nhiều model cùng liên kết đến một model (như Comment trên cả Post và Video). Relationships cho phép query dữ liệu trực quan: $user->posts()->where(\"published\", true)->get() thay vì SQL join phức tạp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "2643-eloquent-relationships-la-gi-va-co-nhung-loai-nao"
+  },
+  {
+    "id": "fcf3ddd5-64da-55cd-964c-d3ce7161311a",
+    "question": "Vấn đề N+1 query là gì và cách khắc phục trong Laravel?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2644-van-de-n-1-query-la-gi-va-cach-khac-phuc-trong-laravel",
+    "slug": "van-de-n-1-query-la-gi-va-cach-khac-phuc-trong-laravel-fcf3ddd5-64da-55cd-964c-d3ce7161311a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Vấn đề N+1 xảy ra khi lấy records cha rồi truy cập relationship trên từng cái."
+      ],
+      "details": [
+        "Ví dụ: $users = User::all(); (1 query), sau đó foreach($users as $user) { echo $user->posts; } (N query thêm). Kết quả: 1+N query tổng cộng rất kém hiệu quả. Khắc phục bằng eager loading: User::with(\"posts\")->get() tải tất cả user và post chỉ trong 2 query. Chain: User::with(\"posts.comments\")->get(). Dùng load() để lazy eager loading: $users->load(\"posts\"). Kiểm tra bằng debugbar để xác nhận số lượng query. Eager loading rất quan trọng cho hiệu suất."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "2644-van-de-n-1-query-la-gi-va-cach-khac-phuc-trong-laravel"
+  },
+  {
+    "id": "6679bb20-edca-5ba5-823f-d8adf371b11a",
+    "question": "Query scope trong Laravel là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2645-query-scope-trong-laravel-la-gi",
+    "slug": "query-scope-trong-laravel-la-gi-6679bb20-edca-5ba5-823f-d8adf371b11a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Scope là các ràng buộc query có thể tái sử dụng."
+      ],
+      "details": [
+        "Local scope khai báo ngay trong model:",
+        "Ví dụ: thay vì viết User::where(\"active\", true)->where(\"age\", \">\", 18)->get() ở nhiều nơi, tạo scopeActive() và scopeAdults() rồi chain User::active()->adults()->get(). Scope giữ query DRY và gói business logic lại trong model."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "public function scopeActive($query) {\n    return $query->where(\"active\", true);\n}\n\n// dùng: User::active()->get()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "2645-query-scope-trong-laravel-la-gi"
+  },
+  {
+    "id": "10511796-96aa-5d91-8ff2-61b87cba9bd1",
+    "question": "Accessor và Mutator trong Eloquent là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2646-accessor-va-mutator-trong-eloquent-la-gi",
+    "slug": "accessor-va-mutator-trong-eloquent-la-gi-10511796-96aa-5d91-8ff2-61b87cba9bd1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Accessor biến đổi dữ liệu lúc đọc, mutator biến đổi lúc ghi.",
+        "$user->email = \"JOHN@EXAMPLE.COM\"",
+        "echo $user->name"
+      ],
+      "details": [
+        "Cả hai khai báo bằng Attribute::make():",
+        "Accessor/mutator gom logic định dạng về một chỗ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "// accessor — viết hoa chữ cái đầu khi truy cập\nprotected function name(): Attribute {\n    return Attribute::make(get: fn($value) => ucfirst($value));\n}\n\n// mutator — chuyển chữ thường khi lưu\nprotected function email(): Attribute {\n    return Attribute::make(set: fn($value) => strtolower($value));\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "2646-accessor-va-mutator-trong-eloquent-la-gi"
+  },
+  {
+    "id": "affc574e-0e90-52d3-a187-d96838847d61",
+    "question": "Soft delete trong Laravel là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2647-soft-delete-trong-laravel-la-gi",
+    "slug": "soft-delete-trong-laravel-la-gi-affc574e-0e90-52d3-a187-d96838847d61",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Soft delete đánh dấu record là đã xóa mà không thực sự xóa khỏi database. Thêm vào model: use SoftDeletes; và migration thêm $table->softDeletes(); tạo cột deleted_at. Query tự động loại trừ record đã soft-delete: User::all() không bao gồm đã xóa. Truy cập bằng: User::withTrashed()->get() (bao gồm đã xóa), User::onlyTrashed()->get() (chỉ đã xóa), $user->restore() (khôi phục), $user->forceDelete() (xóa vĩnh viễn)."
+      ],
+      "details": [
+        "Lợi ích: giữ dữ liệu để audit/phục hồi, hoàn tác xóa nhầm, tuân thủ quy định giữ bản ghi. Soft delete tăng độ an toàn dữ liệu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "2647-soft-delete-trong-laravel-la-gi"
+  },
+  {
+    "id": "a62564d2-b081-55f2-a03c-a1eac44e9d0c",
+    "question": "Factory và Seeder trong Laravel là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2649-factory-va-seeder-trong-laravel-la-gi",
+    "slug": "factory-va-seeder-trong-laravel-la-gi-a62564d2-b081-55f2-a03c-a1eac44e9d0c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Seeder dùng để populate database: php artisan make:seeder UserSeeder, bên trong gọi User::factory(100)->create() rồi chạy php artisan db:seed."
+      ],
+      "details": [
+        "Đây là bộ đôi thiết yếu cho development (dữ liệu giả) lẫn testing (dữ liệu nhất quán). Factory dựa trên thư viện Faker nên dữ liệu ngẫu nhiên vẫn trông thật."
+      ],
+      "points": [],
+      "sections": [
+        "Factory sinh dữ liệu giả để test, tạo bằng php artisan make:factory UserFactory:"
+      ],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "public function definition() {\n    return [\n        \"name\" => $this->faker->name,\n        \"email\" => $this->faker->unique()->safeEmail,\n    ];\n}\n\n// dùng\nUser::factory()->create();      // 1 bản ghi\nUser::factory(10)->create();    // 10 bản ghi"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "2649-factory-va-seeder-trong-laravel-la-gi"
+  },
+  {
+    "id": "9075f9ac-26ba-57ea-87b2-caca9e99bae5",
+    "question": "Query builder trong Laravel là gì và có những ưu điểm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2650-query-builder-trong-laravel-la-gi-va-co-nhung-uu-diem-gi",
+    "slug": "query-builder-trong-laravel-la-gi-va-co-nhung-uu-diem-gi-9075f9ac-26ba-57ea-87b2-caca9e99bae5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Query builder là giao diện fluent để xây dựng query mà không cần SQL thuần."
+      ],
+      "details": [
+        "Ưu điểm: không phụ thuộc database (dễ chuyển đổi), tự động phòng SQL injection (tham số được escape), cú pháp chain dễ đọc, hỗ trợ IDE autocomplete. Các method: select(), where(), orWhere(), join(), groupBy(), having(), orderBy(), limit(), insert(), update(), delete(). So với SQL thuần DB::raw(...), query builder an toàn và dễ bảo trì hơn. Query builder là nền tảng của Eloquent."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "DB::table(\"users\")->where(\"age\", \">\", 18)->orderBy(\"name\")->get();"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "2650-query-builder-trong-laravel-la-gi-va-co-nhung-uu-diem-gi"
+  },
+  {
+    "id": "6ed97cf8-274d-5f62-bfda-971dadb16bad",
+    "question": "Laravel Reverb là gì và khác Pusher như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2667-laravel-reverb-la-gi-va-khac-pusher-nhu-the-nao",
+    "slug": "laravel-reverb-la-gi-va-khac-pusher-nhu-the-nao-6ed97cf8-274d-5f62-bfda-971dadb16bad",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Reverb là WebSocket server first-party của Laravel, ra mắt cùng Laravel 11 (2024) và hỗ trợ từ Laravel 10+ để broadcasting sự kiện real-time. Khác với Pusher (dịch vụ bên thứ ba tính phí): Reverb tự host (self-hosted), mã nguồn mở, miễn phí, và dùng cùng Broadcasting facade API nên có thể chuyển đổi mà không cần sửa code. Cấu hình trong config/reverb.php. Frontend vẫn dùng Laravel Echo như bình thường."
+      ],
+      "details": [
+        "Ưu điểm: không phụ thuộc external service, giảm chi phí, scale linh hoạt. Phù hợp cho: thông báo real-time, live dashboard, tính năng cộng tác, chat."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "2667-laravel-reverb-la-gi-va-khac-pusher-nhu-the-nao"
+  },
+  {
+    "id": "7255e41c-04e9-5a3a-87dc-d1ea0191bac4",
+    "question": "Laravel Pennant là gì và cách dùng để quản lý feature flags?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2668-laravel-pennant-la-gi-va-cach-dung-de-quan-ly-feature-flags",
+    "slug": "laravel-pennant-la-gi-va-cach-dung-de-quan-ly-feature-flags-7255e41c-04e9-5a3a-87dc-d1ea0191bac4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Pennant là package feature flag chính thức của Laravel (cài riêng: composer require laravel/pennant, có official support từ Laravel 10+) để kiểm soát khả năng hiển thị tính năng. Hỗ trợ flag đơn giản và logic phức tạp theo class."
+      ],
+      "details": [
+        "Ví dụ: Feature::define('new-checkout', fn() => rand(1,100) <= 50) cho A/B testing, hoặc\nCopy\nFeature::define(PurchaseButton::class, fn($user) => $user->isPremium())\ncho feature theo user. Dùng trong Blade: @feature('flag-name'), trong controller: Feature::active('flag-name'). Cho phép: deploy không downtime, rollout từng bước, thử nghiệm A/B, tắt/bật tính năng mà không cần deploy lại."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "Feature::define(PurchaseButton::class, fn($user) => $user->isPremium())"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "2668-laravel-pennant-la-gi-va-cach-dung-de-quan-ly-feature-flags"
+  },
+  {
+    "id": "e79b51af-e859-52b5-996d-1855c7044c35",
+    "question": "Pest là gì và tại sao các project Laravel mới nên dùng thay PHPUnit?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2669-pest-la-gi-va-tai-sao-cac-project-laravel-moi-nen-dung-thay-phpunit",
+    "slug": "pest-la-gi-va-tai-sao-cac-project-laravel-moi-nen-dung-thay-phpunit-e79b51af-e859-52b5-996d-1855c7044c35",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Lợi ích: code test gọn hơn, parallel testing mặc định, watch mode và profiling tích hợp sẵn, hỗ trợ architecture testing lẫn snapshot testing, docs đẹp."
+      ],
+      "details": [
+        "Laravel docs chính thức khuyến nghị Pest làm mặc định. Nó không thay thế PHPUnit — Pest chạy trên PHPUnit, chỉ là lớp API dễ chịu hơn, nên vẫn tương thích 100% với test PHPUnit cũ."
+      ],
+      "points": [],
+      "sections": [
+        "Pest là testing framework hiện đại dựng trên PHPUnit, dùng cú pháp fluent và assertion expect() thay cho $this->assert* cồng kềnh:"
+      ],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "test('user có thể đăng nhập', function () {\n    expect(true)->toBeTrue();\n});"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "2669-pest-la-gi-va-tai-sao-cac-project-laravel-moi-nen-dung-thay-phpunit"
+  },
+  {
+    "id": "f505f999-937f-5dde-bc66-c8e8e514fdff",
+    "question": "Sự khác biệt giữa Sanctum và Passport cho API authentication là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2670-su-khac-biet-giua-sanctum-va-passport-cho-api-authentication-la-gi",
+    "slug": "su-khac-biet-giua-sanctum-va-passport-cho-api-authentication-la-gi-f505f999-937f-5dde-bc66-c8e8e514fdff",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai đều xác thực Laravel API nhưng phục vụ nhu cầu khác nhau."
+      ],
+      "details": [],
+      "points": [
+        "Sanctum: nhẹ, phù hợp cho SPA cùng domain và personal access token, dùng session cho SPA và token DB-less cho mobile/external app.",
+        "Passport: triển khai đầy đủ OAuth 2.0, phù hợp cho ứng dụng bên thứ ba cần tích hợp (như OAuth của GitHub), nặng hơn nhưng linh hoạt cho B2B.",
+        "Quy tắc đơn giản: Sanctum cho frontend của chính bạn (SPA, mobile app công ty), Passport khi bên khác cần tích hợp vào hệ thống.",
+        "Từ Laravel 11+, Sanctum là default được khuyến nghị cho hầu hết trường hợp."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "2670-su-khac-biet-giua-sanctum-va-passport-cho-api-authentication-la-gi"
+  },
+  {
+    "id": "4cd7a2c4-08f1-5451-80cb-9eefd92f25b9",
+    "question": "API Resources trong Laravel là gì và tại sao không trả về raw model data?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2671-api-resources-trong-laravel-la-gi-va-tai-sao-khong-tra-ve-raw-model-data",
+    "slug": "api-resources-trong-laravel-la-gi-va-tai-sao-khong-tra-ve-raw-model-data-4cd7a2c4-08f1-5451-80cb-9eefd92f25b9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "API Resources chuyển đổi Eloquent model thành JSON response nhất quán mà không lộ schema DB."
+      ],
+      "details": [
+        "Ví dụ: return UserResource::collection($users) thay vì return $users->toJson().",
+        "Lợi ích: tự ẩn các field nhạy cảm (password, internal ID), transform format dữ liệu (snake_case sang camelCase), include relationship có điều kiện với ->when(), tạo API contract ổn định cho frontend, version response độc lập với DB schema. Ngăn vô tình expose password hash, soft-deleted data. Tạo bằng: php artisan make:resource UserResource. Là best practice bắt buộc với bất kỳ API public nào."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "2671-api-resources-trong-laravel-la-gi-va-tai-sao-khong-tra-ve-raw-model-data"
+  },
+  {
+    "id": "7616fe83-e42e-53bc-b1b8-b8d802340088",
+    "question": "Sự khác biệt giữa Feature tests và Unit tests trong Laravel là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2675-su-khac-biet-giua-feature-tests-va-unit-tests-trong-laravel-la-gi",
+    "slug": "su-khac-biet-giua-feature-tests-va-unit-tests-trong-laravel-la-gi-7616fe83-e42e-53bc-b1b8-b8d802340088",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Feature tests kiểm tra toàn bộ chu trình request/response bao gồm route, middleware, authentication, validation và database—bắt bug thực tế người dùng gặp."
+      ],
+      "details": [
+        "kiểm tra flow đăng nhập end-to-end với DB thực.",
+        "kiểm tra logic hash password trong isolation."
+      ],
+      "points": [
+        "Unit tests cô lập từng component (Service, Model method) mà không có HTTP layer."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "2675-su-khac-biet-giua-feature-tests-va-unit-tests-trong-laravel-la-gi"
+  },
+  {
+    "id": "acc598c7-718b-50ce-84d6-52f45bf7af53",
+    "question": "CSRF là gì và chống thế nào (kể cả @csrf của Laravel)?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94041-csrf-la-gi-va-chong-the-nao-ke-ca-csrf-cua-laravel",
+    "slug": "csrf-la-gi-va-chong-the-nao-ke-ca-csrf-cua-laravel-acc598c7-718b-50ce-84d6-52f45bf7af53",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "CSRF (Cross-Site Request Forgery) = kẻ tấn công lừa trình duyệt của nạn nhân — đang đăng nhập ở site của bạn — tự gửi một request thay đổi trạng thái (chuyển tiền, đổi email). Trình duyệt tự đính kèm cookie phiên, nên server tưởng đó là hành động thật của người dùng."
+      ],
+      "details": [
+        "Cách chống theo OWASP:\n- Synchronizer token: server phát một token bí mật gắn với phiên, form phải gửi kèm; server so khớp mới chấp nhận. Site khác không đọc được token → không giả mạo được.\n- SameSite cookie (Lax/Strict) chặn cookie đi kèm request cross-site.",
+        "Trong Laravel: middleware VerifyCsrfToken tự kiểm token cho mọi POST/PUT/PATCH/DELETE. Directive @csrf render một hidden input _token:"
+      ],
+      "points": [],
+      "sections": [
+        "API stateless (token/JWT trong header, không dùng cookie phiên) thì không dính CSRF nên được exempt khỏi middleware này."
+      ],
+      "codeExamples": [
+        {
+          "language": "BLADE",
+          "code": "<form method=\"POST\" action=\"/profile\">\n  @csrf\n  <!-- => <input type=\"hidden\" name=\"_token\" value=\"...\"> -->\n</form>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "94041-csrf-la-gi-va-chong-the-nao-ke-ca-csrf-cua-laravel"
+  },
+  {
+    "id": "180fa7a1-d98c-5c70-8ccc-173383dbc7f0",
+    "question": "Repository pattern trong Laravel/PHP là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94046-repository-pattern-trong-laravel-php-la-gi",
+    "slug": "repository-pattern-trong-laravel-php-la-gi-180fa7a1-d98c-5c70-8ccc-173383dbc7f0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Theo Fowler (PoEAA), Repository là lớp trung gian giữa domain và tầng truy vấn dữ liệu, cung cấp API kiểu collection (find, save, findByEmail) và giấu chi tiết Eloquent/SQL bên dưới."
+      ],
+      "details": [
+        "Business logic chỉ nói chuyện với repository, không viết query trực tiếp."
+      ],
+      "points": [
+        "Lợi: tách logic khỏi ORM, dễ đổi nguồn dữ liệu, dễ mock interface khi test.",
+        "YAGNI: Eloquent model đã là active-record sẵn; phủ một lớp repository lên nó thường là abstraction thừa trừ khi bạn thực sự cần đổi nguồn hoặc test không đụng DB. Đừng thêm chỉ vì \"cho đúng pattern\"."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "interface UserRepository {\n  public function findByEmail(string $email): ?User;\n}\n\nclass EloquentUserRepository implements UserRepository {\n  public function findByEmail(string $email): ?User {\n    return User::where('email', $email)->first();\n  }\n}\n// bind interface -> implementation trong service container"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "94046-repository-pattern-trong-laravel-php-la-gi"
+  },
+  {
+    "id": "3c811691-e7d7-5f6a-b256-5a8da70712e9",
+    "question": "Caching trong Laravel hoạt động thế nào (stores, tags)?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94048-caching-trong-laravel-hoat-dong-the-nao-stores-tags",
+    "slug": "caching-trong-laravel-hoat-dong-the-nao-stores-tags-3c811691-e7d7-5f6a-b256-5a8da70712e9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Laravel cung cấp một API Cache thống nhất trên nhiều driver (store): file, database, redis, memcached, array (cho test), null."
+      ],
+      "details": [
+        "Cấu hình trong config/cache.php — đổi backend không phải sửa code."
+      ],
+      "points": [
+        "Cache tags gom nhiều key thành nhóm để xoá cùng lúc: Cache::tags(['posts'])->put(...) rồi Cache::tags(['posts'])->flush(). Chỉ redis/memcached hỗ trợ tags — driver file/database thì không.",
+        "Cache::remember chỉ là get-hoặc-tính-rồi-lưu, không chống thundering herd: khi key hết hạn, nhiều request cùng miss vẫn cùng chạy callback.",
+        "Atomic lock (Cache::lock) mới là thứ chống được stampede/race — chỉ cho một tiến trình tính lại giá trị, các request khác chờ hoặc dùng bản cũ."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "Cache::put('key', $value, now()->addMinutes(10));\n$value = Cache::get('key', $default);\n\n// get-hoặc-tính-rồi-lưu trong một lệnh\n$users = Cache::remember('users', 600, fn () => User::all());\n\nCache::store('redis')->put(...); // chọn store cụ thể"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "94048-caching-trong-laravel-hoat-dong-the-nao-stores-tags"
+  },
+  {
+    "id": "0eadb5b1-9aaa-5e4b-a277-8a2600acd18e",
+    "question": "Task scheduling trong Laravel là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94049-task-scheduling-trong-laravel-la-gi",
+    "slug": "task-scheduling-trong-laravel-la-gi-0eadb5b1-9aaa-5e4b-a277-8a2600acd18e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Thay vì rải nhiều dòng cron rời rạc trên server, Laravel cho định nghĩa lịch chạy bằng code trong routes/console.php (hoặc schedule() của Kernel ở bản cũ).",
+        "withoutOverlapping()",
+        "onOneServer()",
+        "runInBackground()"
+      ],
+      "details": [
+        "Điểm mấu chốt: chỉ cần một entry cron duy nhất trên server chạy mỗi phút, còn lại Laravel tự quyết task nào đến hạn:",
+        "Dev local dùng php artisan schedule:work để mô phỏng cron mà không cần cấu hình crontab."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CRON",
+          "code": "* * * * * cd /path && php artisan schedule:run >> /dev/null 2>&1"
+        },
+        {
+          "language": "PHP",
+          "code": "Schedule::command('report:generate')\n  ->dailyAt('01:00')\n  ->withoutOverlapping();  // không cho lần chạy mới chồng lên lần trước\n\nSchedule::command('emails:send')->everyFiveMinutes();"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "94049-task-scheduling-trong-laravel-la-gi"
+  },
+  {
+    "id": "039c4475-e5c6-5f72-b042-8e1e08f1b78d",
+    "question": "File upload và lưu trữ trong Laravel làm thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94050-file-upload-va-luu-tru-trong-laravel-lam-the-nao",
+    "slug": "file-upload-va-luu-tru-trong-laravel-lam-the-nao-039c4475-e5c6-5f72-b042-8e1e08f1b78d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Laravel Filesystem (dựa trên Flysystem) trừu tượng nhiều \"disk\" — local, public, s3... — cấu hình trong config/filesystems.php, và cùng một API Storage cho mọi disk."
+      ],
+      "details": [
+        "Đổi từ local sang S3 không phải sửa code nghiệp vụ."
+      ],
+      "points": [
+        "Validate trước khi lưu: rule file, image, mimes:jpg,png, max:2048 (đơn vị KB).",
+        "File cần truy cập qua URL: dùng disk public rồi chạy php artisan storage:link (tạo symlink storage/app/public → public/storage).",
+        "Đọc/ghi tuỳ ý qua Storage::disk('s3')->put(...), Storage::url(), Storage::delete().",
+        "Không nhồi nội dung file vào cột DB — chỉ lưu đường dẫn."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "// $request->file('avatar') trả về UploadedFile\n$path = $request->file('avatar')->store('avatars', 'public');\n// => 'avatars/abc123.jpg' (tên random), URL: Storage::url($path)\n\n$request->file('doc')->storeAs('docs', $customName, 's3'); // đặt tên + chọn disk"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "94050-file-upload-va-luu-tru-trong-laravel-lam-the-nao"
+  },
+  {
+    "id": "f7a208ef-501d-5c1e-89cb-c5f062cbc703",
+    "question": "bind, singleton, scoped, instance trong service container khác nhau ra sao? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96654-bind-singleton-scoped-instance-trong-service-container-khac-nhau-ra-sao-khi-nao",
+    "slug": "bind-singleton-scoped-instance-trong-service-container-khac-nhau-ra-sao-khi-nao-dung-cai-nao-f7a208ef-501d-5c1e-89cb-c5f062cbc703",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác nhau ở vòng đời của object mà container trả về."
+      ],
+      "details": [
+        "Còn có contextual binding khi hai class cần hai implementation khác nhau của cùng interface:"
+      ],
+      "points": [
+        "bind — resolve mỗi lần một instance mới. Dùng cho object có state riêng theo lần dùng.",
+        "singleton — resolve một lần, các lần sau trả lại đúng object đó trong suốt vòng đời process. Hợp với service không state nhưng tốn chi phí khởi tạo: HTTP client, SDK, serializer.",
+        "scoped — như singleton nhưng bị xoá khi bắt đầu vòng đời mới (request mới trong Octane, job mới trong queue worker). Dùng cho service giữ dữ liệu theo request.",
+        "instance — đăng ký sẵn một object đã tạo, container trả về nguyên object đó."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "$this->app->bind(ReportBuilder::class);                      // mới mỗi lần\n$this->app->singleton(SepayClient::class, fn ($app) => new SepayClient(config('services.sepay')));\n$this->app->scoped(RequestContext::class);                   // reset theo request/job"
+        },
+        {
+          "language": "PHP",
+          "code": "$this->app->when(PhotoController::class)\n    ->needs(Filesystem::class)\n    ->give(fn () => Storage::disk('s3'));"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "96654-bind-singleton-scoped-instance-trong-service-container-khac-nhau-ra-sao-khi-nao"
+  },
+  {
+    "id": "678a3eec-1571-5711-b72f-e9c5ad4be3d9",
+    "question": "Route model binding hoạt động thế nào? Làm sao bind theo slug và tránh lộ dữ liệu của user khác?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96655-route-model-binding-hoat-dong-the-nao-lam-sao-bind-theo-slug-va-tranh-lo-du-lieu",
+    "slug": "route-model-binding-hoat-dong-the-nao-lam-sao-bind-theo-slug-va-tranh-lo-du-lieu-cua-user-khac-678a3eec-1571-5711-b72f-e9c5ad4be3d9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Đây là điểm quan trọng về bảo mật: không có scope, /users/1/posts/abc vẫn trả về post abc của user khác."
+      ],
+      "details": [
+        "Ngoài ra: Route::model() / Route::bind() cho explicit binding khi cần logic tra cứu riêng, và có thể thêm withTrashed() nếu muốn bind cả bản ghi đã soft-delete. Việc phân quyền vẫn phải làm riêng bằng Policy — binding chỉ lo tìm bản ghi."
+      ],
+      "points": [],
+      "sections": [
+        "Route model binding để Laravel tự truy vấn model từ tham số route và inject vào controller; không tìm thấy thì trả 404 luôn.",
+        "scopeBindings()",
+        "Bind theo cột khác — khai báo ngay trên route hoặc override getRouteKeyName() trên model:"
+      ],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "Route::get('/orders/{order}', fn (Order $order) => $order);   // implicit binding theo primary key"
+        },
+        {
+          "language": "PHP",
+          "code": "Route::get('/posts/{post:slug}', ...);\n\n// hoặc áp dụng cho mọi route của model\npublic function getRouteKeyName(): string { return 'slug'; }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "96655-route-model-binding-hoat-dong-the-nao-lam-sao-bind-theo-slug-va-tranh-lo-du-lieu"
+  },
+  {
+    "id": "f94e33fd-890e-5cda-a073-21eb249fbaa8",
+    "question": "Polymorphic relationship trong Eloquent là gì? Khi nào dùng và có nhược điểm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96656-polymorphic-relationship-trong-eloquent-la-gi-khi-nao-dung-va-co-nhuoc-diem-gi",
+    "slug": "polymorphic-relationship-trong-eloquent-la-gi-khi-nao-dung-va-co-nhuoc-diem-gi-f94e33fd-890e-5cda-a073-21eb249fbaa8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Polymorphic relationship cho một model thuộc về nhiều loại model cha qua một quan hệ duy nhất. Bảng con giữ hai cột: *_id (khoá cha) và *_type (tên class cha).",
+        "Relation::enforceMorphMap(['post' => Post::class, ...])",
+        "(commentable_type, commentable_id)",
+        "tên class đầy đủ"
+      ],
+      "details": [
+        "Tình huống thường gặp: comments gắn được vào cả Post lẫn Video; images, likes, activity_logs cũng vậy."
+      ],
+      "points": [],
+      "sections": [
+        "Eager load một-nhiều-kiểu dùng morphWith để không sinh N+1 theo từng loại cha:"
+      ],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "// comments: id, body, commentable_id, commentable_type\nclass Comment extends Model\n{\n    public function commentable(): MorphTo { return $this->morphTo(); }\n}\n\nclass Post extends Model\n{\n    public function comments(): MorphMany { return $this->morphMany(Comment::class, 'commentable'); }\n}"
+        },
+        {
+          "language": "PHP",
+          "code": "Comment::with(['commentable' => fn (MorphTo $m) => $m->morphWith([Post::class => ['author'], Video::class => []])])->get();"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "96656-polymorphic-relationship-trong-eloquent-la-gi-khi-nao-dung-va-co-nhuoc-diem-gi"
+  },
+  {
+    "id": "e627aca5-bb2a-5b4b-ba69-32cea715d6b7",
+    "question": "hasManyThrough khác belongsToMany như thế nào? Cho ví dụ thực tế.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96657-hasmanythrough-khac-belongstomany-nhu-the-nao-cho-vi-du-thuc-te",
+    "slug": "hasmanythrough-khac-belongstomany-nhu-the-nao-cho-vi-du-thuc-te-e627aca5-bb2a-5b4b-ba69-32cea715d6b7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai đều đi qua một bảng trung gian nhưng bản chất khác nhau.",
+        "$country->users",
+        "$user->posts",
+        "hasOneThrough"
+      ],
+      "details": [
+        "Đi sâu hơn 2 cấp thì hasManyThrough không đủ — lúc đó viết relation tuỳ biến bằng query builder hoặc thêm cột denormalize khoá cấp cao vào bảng đích."
+      ],
+      "points": [
+        "belongsToMany — quan hệ nhiều-nhiều, bảng trung gian là pivot không có model riêng (role_user). Truy cập được dữ liệu pivot qua withPivot().",
+        "hasManyThrough — quan hệ một-nhiều đi xuyên qua một model trung gian có thật. Không có pivot; chỉ là đường tắt cho hai lần hasMany liên tiếp."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "// Country -> User -> Post: lấy toàn bộ post của một quốc gia\nclass Country extends Model\n{\n    public function posts(): HasManyThrough\n    {\n        return $this->hasManyThrough(\n            Post::class,      // model đích\n            User::class,      // model trung gian\n            'country_id',     // FK trên users trỏ về countries\n            'user_id',        // FK trên posts trỏ về users\n            'id',             // local key trên countries\n            'id',             // local key trên users\n        );\n    }\n}\n\n$country->posts;   // 1 query JOIN thay vì lặp qua từng user"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "96657-hasmanythrough-khac-belongstomany-nhu-the-nao-cho-vi-du-thuc-te"
+  },
+  {
+    "id": "315b5be4-b95f-5432-ac3b-d2a81c5078bd",
+    "question": "Cast, accessor Attribute và custom cast trong Eloquent dùng khi nào? Chúng khác nhau ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96658-cast-accessor-attribute-va-custom-cast-trong-eloquent-dung-khi-nao-chung-khac-nh",
+    "slug": "cast-accessor-attribute-va-custom-cast-trong-eloquent-dung-khi-nao-chung-khac-nhau-ra-sao-315b5be4-b95f-5432-ac3b-d2a81c5078bd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba mức độ, chọn theo độ phức tạp của phép biến đổi.",
+        "CastsAttributes",
+        "3. Custom cast"
+      ],
+      "details": [
+        "1. Cast dựng sẵn — khai báo trong casts(), xử lý kiểu phổ thông. Đây là chỗ nên đặt datetime, boolean, array, encrypted, và cả backed enum của PHP 8.1:",
+        "Điểm dễ sai: giá trị cast sang object được cache trong bộ nhớ của model, nên sửa property của object trả về không tự đánh dấu model là dirty; phải gán lại cả object (hoặc khai báo withoutObjectCaching trên class cast)."
+      ],
+      "points": [
+        "Accessor / mutator bằng Attribute — biến đổi một cột** theo logic riêng.",
+        "Từ Laravel 9 dùng một method duy nhất trả về Attribute:"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "protected function casts(): array\n{\n    return [\n        'is_active'  => 'boolean',\n        'meta'       => 'array',\n        'status'     => OrderStatus::class,   // backed enum\n        'paid_at'    => 'datetime',\n    ];\n}"
+        },
+        {
+          "language": "PHP",
+          "code": "protected function fullName(): Attribute\n{\n    return Attribute::make(\n        get: fn (mixed $value, array $attrs) => $attrs['first_name'].' '.$attrs['last_name'],\n        set: fn (string $value) => ['first_name' => explode(' ', $value)[0]],\n    );\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "96658-cast-accessor-attribute-va-custom-cast-trong-eloquent-dung-khi-nao-chung-khac-nh"
+  },
+  {
+    "id": "623e50ce-fca9-5f1b-835b-c4442ae887a9",
+    "question": "Một queue job thất bại thì Laravel xử lý ra sao? tries, backoff, retryUntil, failed() dùng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96659-mot-queue-job-that-bai-thi-laravel-xu-ly-ra-sao-tries-backoff-retryuntil-failed",
+    "slug": "mot-queue-job-that-bai-thi-laravel-xu-ly-ra-sao-tries-backoff-retryuntil-failed-dung-the-nao-623e50ce-fca9-5f1b-835b-c4442ae887a9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Job thất bại khi ném exception chưa bắt và đã dùng hết số lần thử. Khi đó Laravel ghi một dòng vào bảng failed_jobs và ngừng chạy lại job đó.",
+        "queue:restart"
+      ],
+      "details": [
+        "Các tham số điều khiển:"
+      ],
+      "points": [
+        "$tries đặt trên job được ưu tiên hơn cờ --tries của worker.",
+        "$backoff là mảng thì mỗi lần thử dùng một giá trị; hết mảng thì lặp giá trị cuối — cách làm exponential backoff.",
+        "retryUntil() đặt hạn chót theo thời gian, thử lại bao nhiêu lần cũng được cho tới mốc đó; khi đã có nó thì không cần $tries.",
+        "Xem lại và chạy lại bằng php artisan queue:failed, queue:retry <id> / queue:retry all."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "class SyncInvoice implements ShouldQueue\n{\n    public int $tries = 3;                    // tổng số lần thử\n    public int $timeout = 60;                 // giây, quá thì worker giết job\n    public array $backoff = [10, 60, 300];    // chờ giữa các lần thử\n\n    public function retryUntil(): \\DateTime    // ưu tiên hơn $tries\n    {\n        return now()->addMinutes(30);\n    }\n\n    public function handle(): void { /* ... */ }\n\n    public function failed(\\Throwable $e): void\n    {\n        // chạy đúng MỘT lần khi job chính thức thất bại\n        Log::error('invoice sync failed', ['id' => $this->invoiceId, 'e' => $e->getMessage()]);\n    }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "96659-mot-queue-job-that-bai-thi-laravel-xu-ly-ra-sao-tries-backoff-retryuntil-failed"
+  },
+  {
+    "id": "0546ed47-51f7-5458-a0cf-34a3a30c023d",
+    "question": "Observer khác Event/Listener thế nào? Khi nào chọn cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96660-observer-khac-event-listener-the-nao-khi-nao-chon-cai-nao",
+    "slug": "observer-khac-event-listener-the-nao-khi-nao-chon-cai-nao-0546ed47-51f7-5458-a0cf-34a3a30c023d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Observer gắn vào vòng đời của một Eloquent model."
+      ],
+      "details": [
+        "Laravel tự gọi các hook creating, created, updating, updated, deleting, deleted, restored mỗi khi model đó được thao tác — không cần dispatch gì cả.",
+        "Lưu ý: observer không chạy với các thao tác đi qua query builder hàng loạt: Order::where(...)->update([...]) hay ->delete() không nạp model nên không bắn hook nào. Muốn chắc chắn thì lặp và save() từng model, hoặc đặt logic ở tầng service thay vì phụ thuộc hook."
+      ],
+      "points": [],
+      "sections": [
+        "Event/Listener là cơ chế tổng quát: bạn tự định nghĩa event, tự dispatch, nhiều listener cùng lắng nghe, listener có thể ShouldQueue để chạy nền, và event có thể broadcast ra WebSocket."
+      ],
+      "codeExamples": [
+        {
+          "language": "PHP",
+          "code": "class OrderObserver\n{\n    public function created(Order $order): void { $order->user->notify(new OrderPlaced($order)); }\n}\n// đăng ký: #[ObservedBy(OrderObserver::class)] trên model, hoặc Order::observe(...) trong boot()"
+        },
+        {
+          "language": "PHP",
+          "code": "OrderPaid::dispatch($order);   // nhiều listener: gửi mail, cộng điểm, ghi log"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "96660-observer-khac-event-listener-the-nao-khi-nao-chon-cai-nao"
+  },
+  {
+    "id": "c0b7eea9-c6f0-5fcf-b2ac-be0e8dffb175",
+    "question": "Service Container trong Laravel là gì và hoạt động như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "service-container-trong-laravel-la-gi-va-hoat-dong-nhu-the-nao-c0b7eea9-c6f0-5fcf-b2ac-be0e8dffb175",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": null
+  },
+  {
+    "id": "793303ef-2caa-56d5-a25a-12e7b04e5d90",
+    "question": "Event trong Laravel là gì và cách sử dụng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "event-trong-laravel-la-gi-va-cach-su-dung-793303ef-2caa-56d5-a25a-12e7b04e5d90",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": null
+  },
+  {
+    "id": "90cb72d9-38a2-5fad-9d6f-a56209a4985b",
+    "question": "Queue trong Laravel là gì và tại sao nên dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "queue-trong-laravel-la-gi-va-tai-sao-nen-dung-90cb72d9-38a2-5fad-9d6f-a56209a4985b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": null
+  },
+  {
+    "id": "1756c08c-a328-5965-9037-ba49333f4043",
+    "question": "Middleware trong Laravel là gì và cách tạo custom middleware?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "middleware-trong-laravel-la-gi-va-cach-tao-custom-middleware-1756c08c-a328-5965-9037-ba49333f4043",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": null
+  },
+  {
+    "id": "bde6c3bd-6e7f-590d-bf6f-24ba3d80677e",
+    "question": "Broadcasting trong Laravel là gì và khi nào nên dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "broadcasting-trong-laravel-la-gi-va-khi-nao-nen-dung-bde6c3bd-6e7f-590d-bf6f-24ba3d80677e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": null
+  },
+  {
+    "id": "598f6708-f07b-58e2-bb29-9dc9e33572c7",
+    "question": "Policy trong Laravel là gì và cách authorize action?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "policy-trong-laravel-la-gi-va-cach-authorize-action-598f6708-f07b-58e2-bb29-9dc9e33572c7",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": null
+  },
+  {
+    "id": "f9a2b36f-7ad6-556e-812d-a5e4819780d3",
+    "question": "Testing trong Laravel là gì và có những loại test nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "testing-trong-laravel-la-gi-va-co-nhung-loai-test-nao-f9a2b36f-7ad6-556e-812d-a5e4819780d3",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": null
+  },
+  {
+    "id": "254096ac-35a1-5bc0-8ff7-077aa03d7e9f",
+    "question": "Facade pattern trong Laravel là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "facade-pattern-trong-laravel-la-gi-254096ac-35a1-5bc0-8ff7-077aa03d7e9f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": null
+  },
+  {
+    "id": "9caf4f26-c52e-5cee-bbab-c9426c8105e5",
+    "question": "Collection trong Laravel là gì và cách sử dụng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "collection-trong-laravel-la-gi-va-cach-su-dung-9caf4f26-c52e-5cee-bbab-c9426c8105e5",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": null
+  },
+  {
+    "id": "9369012c-a75f-5db7-b6e0-fa843b493555",
+    "question": "DTOs (Data Transfer Objects) là gì và cách cải thiện kiến trúc code?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dtos-data-transfer-objects-la-gi-va-cach-cai-thien-kien-truc-code-9369012c-a75f-5db7-b6e0-fa843b493555",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": null
+  },
+  {
+    "id": "47d1188c-1b71-5074-bbc8-8d2df015cadd",
+    "question": "Architecture testing trong Laravel với Pest là gì và tại sao quan trọng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "architecture-testing-trong-laravel-voi-pest-la-gi-va-tai-sao-quan-trong-47d1188c-1b71-5074-bbc8-8d2df015cadd",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": null
+  },
+  {
+    "id": "3cc3320d-f66e-5014-876f-2ec3d9adb23f",
+    "question": "Livewire 3 là gì và cách thay đổi cách phát triển full-stack với Laravel?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "livewire-3-la-gi-va-cach-thay-doi-cach-phat-trien-full-stack-voi-laravel-3cc3320d-f66e-5014-876f-2ec3d9adb23f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": null
+  },
+  {
+    "id": "83469dcd-40bf-5919-acaa-fcffbefa0a38",
+    "question": "Thiết kế luồng trừ tồn kho khi nhiều user cùng đặt hàng: dùng transaction và lock ra sao để không bán quá số lượng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "thiet-ke-luong-tru-ton-kho-khi-nhieu-user-cung-dat-hang-dung-transaction-va-lock-ra-sao-de-khong-ban-83469dcd-40bf-5919-acaa-fcffbefa0a38",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": null
+  },
+  {
+    "id": "27261089-9fcc-5142-8c37-0194b23507cb",
+    "question": "Làm sao phát hiện N+1 query trước khi lên production? preventLazyLoading hoạt động ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-sao-phat-hien-n-1-query-truoc-khi-len-production-preventlazyloading-hoat-dong-ra-sao-27261089-9fcc-5142-8c37-0194b23507cb",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": null
+  },
+  {
+    "id": "64a1e302-0aff-5bfd-93c9-e5f3282fff93",
+    "question": "Job bị dispatch trùng (user bấm 2 lần, cron chồng lần chạy) thì xử lý thế nào? ShouldBeUnique khác WithoutOverlapping ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "job-bi-dispatch-trung-user-bam-2-lan-cron-chong-lan-chay-thi-xu-ly-the-nao-shouldbeunique-khac-witho-64a1e302-0aff-5bfd-93c9-e5f3282fff93",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": null
+  },
+  {
+    "id": "e239d2b0-d8ee-587d-b8d0-b21a8ed42d12",
+    "question": "Vì sao code chạy tốt ở local nhưng lên production env('API_KEY') trả về null?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vi-sao-code-chay-tot-o-local-nhung-len-production-env-api-key-tra-ve-null-e239d2b0-d8ee-587d-b8d0-b21a8ed42d12",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": null
+  }
+]

@@ -1,0 +1,2861 @@
+[
+  {
+    "id": "79681ae9-caaf-58f2-a639-9d6accefff06",
+    "question": "Metadata trong Next.js App Router được định nghĩa như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/559-metadata-trong-next-js-app-router-duoc-dinh-nghia-nhu-the-nao",
+    "slug": "metadata-trong-next-js-app-router-duoc-dinh-nghia-nhu-the-nao-79681ae9-caaf-58f2-a639-9d6accefff06",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Metadata trong App Router là API khai báo để Next.js tự sinh các thẻ trong <head> như title, description, openGraph, robots. Bạn định nghĩa nó bằng cách export const metadata cho giá trị tĩnh hoặc export async function generateMetadata() cho giá trị động, đặt trong layout.tsx hoặc page.tsx.",
+        "Lưu ý: Dùng metadata tĩnh khi tiêu đề và mô tả cố định, dùng generateMetadata khi cần fetch dữ liệu theo params hoặc cá nhân hoá theo request; đừng chèn thẻ <title> thủ công trong JSX khi đã dùng API này."
+      ],
+      "details": [
+        "Next.js thực thi metadata và generateMetadata chỉ trên server, lúc build với route tĩnh hoặc mỗi request với route động. Với mỗi URL, Next.js thu thập metadata từ layout.tsx gốc qua các layout lồng nhau đến page.tsx rồi merge từ ngoài vào trong, giá trị ở segment con ghi đè cha. Nhờ vậy bạn có thể đặt title.template chung ở root layout và chỉ override phần riêng ở từng page. generateMetadata nhận { params, searchParams } và tham số thứ hai parent chứa metadata đã merge của cha, cho phép kế thừa và mở rộng. Kết quả được render thẳng vào HTML trên server nên thay thế next/head của Pages Router và đảm bảo crawler nhận đủ thẻ SEO ngay từ phản hồi đầu."
+      ],
+      "points": [
+        "Đặt export const metadata trong file có 'use client' sẽ bị bỏ qua vì metadata chỉ hoạt động trong Server Component.",
+        "Từ Next.js 15, params và searchParams trong generateMetadata là Promise nên cần await params trước khi đọc thuộc tính.",
+        "Nếu cùng tồn tại metadata và generateMetadata trong một file, generateMetadata được ưu tiên."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "// app/blog/[slug]/page.tsx\nimport type { Metadata } from 'next';\n\n// metadata tĩnh cho segment này\n\nexport const metadata: Metadata = {\n  title: { default: 'Blog', template: '%s | Acme' },\n  description: 'Bài viết về Next.js',\n};\n\n// metadata động cho route có tham số\nexport async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {\n  const post = await fetchPost(params.slug); // fetch dữ liệu trên server\n  return {\n    title: post.title,\n    description: post.excerpt,\n    openGraph: { images: [post.coverImage] },\n  };\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "559-metadata-trong-next-js-app-router-duoc-dinh-nghia-nhu-the-nao"
+  },
+  {
+    "id": "8da26d3a-19f0-5dec-8aa0-8fd85eca603e",
+    "question": "'use client' directive trong Next.js dùng khi nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/562-use-client-directive-trong-next-js-dung-khi-nao",
+    "slug": "use-client-directive-trong-next-js-dung-khi-nao-8da26d3a-19f0-5dec-8aa0-8fd85eca603e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "'use client' đặt ở đầu file để đánh dấu component là Client Component."
+      ],
+      "details": [],
+      "points": [
+        "Cần thiết khi component dùng: useState, useEffect, event handlers, browser APIs.",
+        "Đặt boundary tại component cần interactivity, không cần wrap toàn app."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "// components/like-button.tsx\n'use client'  // ← bắt buộc vì dùng useState và onClick\n\nimport { useState } from 'react'\n\nexport function LikeButton({ initialCount }: { initialCount: number }) {\n  const [count, setCount] = useState(initialCount)\n  return (\n    <button onClick={() => setCount(c => c + 1)}>\n      ❤{count}\n    </button>\n  )\n}\n\n// app/post/page.tsx — Server Component, không cần 'use client'\nimport { LikeButton } from '@/components/like-button'\n\nexport default async function PostPage() {\n  const post = await fetchPost()\n  return (\n    <article>\n      <h1>{post.title}</h1>\n      {/* Server Component chứa Client Component — OK */}\n      <LikeButton initialCount={post.likes} />\n    </article>\n  )\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "562-use-client-directive-trong-next-js-dung-khi-nao"
+  },
+  {
+    "id": "03d164f5-e00f-5a79-b16a-46f69c48cb3d",
+    "question": "Server-only và client-only packages trong Next.js là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/569-server-only-va-client-only-packages-trong-next-js-la-gi",
+    "slug": "server-only-va-client-only-packages-trong-next-js-la-gi-03d164f5-e00f-5a79-b16a-46f69c48cb3d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "server-only và client-only là hai package nhỏ của Next.js dùng để đánh dấu rõ ràng một module chỉ được chạy ở một môi trường, giúp trình biên dịch báo lỗi ngay khi bạn import nhầm. server-only chặn việc import module vào client bundle; client-only chặn việc import module trên server.",
+        "Edge case: server-only không bảo vệ dữ liệu nhạy cảm nếu bạn vẫn import trực tiếp biến môi trường vào component client. Nó chỉ chặn việc import module, không chặn việc lộ giá trị qua props hoặc qua API. Ngoài ra, nếu bạn dùng dynamic import hoặc điều kiện runtime, lỗi có thể trở thành runtime error thay vì build error."
+      ],
+      "details": [
+        "Cơ chế hoạt động: khi bạn thêm import 'server-only' ở đầu file, package này dùng conditional exports trong package.json (điều kiện react-server): với Server Component nó resolve tới module rỗng, còn lại (client graph) nó resolve tới module chỉ chứa throw new Error(...) vô điều kiện nên bundler báo lỗi ngay khi phát hiện import sai. client-only làm ngược lại (rỗng ở client, throw ở server), không dựa trên typeof window."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "// lib/db.ts\nimport 'server-only';\n\nexport const db = createDb(process.env.DATABASE_URL);"
+        },
+        {
+          "language": "TS",
+          "code": "// components/Chart.tsx\nimport 'client-only';\n\nexport function Chart() {\n  // dùng window, localStorage, v.v.\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "569-server-only-va-client-only-packages-trong-next-js-la-gi"
+  },
+  {
+    "id": "c1294aea-34f8-5386-8d07-6a2075844ee8",
+    "question": "SSR (Server-Side Rendering) trong Next.js là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/571-ssr-server-side-rendering-trong-next-js-la-gi",
+    "slug": "ssr-server-side-rendering-trong-next-js-la-gi-c1294aea-34f8-5386-8d07-6a2075844ee8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "SSR (Server-Side Rendering) là phương thức render HTML trên server tại thời điểm request, rồi gửi HTML đã hoàn thiện về cho browser. Browser nhận được nội dung có thể hiển thị ngay mà không cần chờ JavaScript chạy xong trên client.",
+        "SSR phù hợp khi: nội dung phụ thuộc vào request (dựa trên cookie, auth state, query param), hoặc dữ liệu thay đổi thường xuyên theo từng user. SEO cũng được hưởng lợi vì crawler nhận HTML đầy đủ."
+      ],
+      "details": [
+        "Bạn có thể hình dung như nhà hàng — SSG nấu sẵn món trước khi khách tới, còn SSR nấu món ngay khi khách gọi. Mỗi yêu cầu có thể nhận kết quả khác nhau vì server truy cập dữ liệu mới nhất mỗi lần.",
+        "cookies()",
+        "headers()",
+        "searchParams",
+        "\"use client\"",
+        "getServerSideProps",
+        "Pages Router",
+        "Edge case hay gặp: SSR tăng TTFB (time to first byte) so với SSG vì server phải render trước khi trả lời. Nếu logic render phức tạp hoặc API chậm, thời gian phản hồi sẽ bị ảnh hưởng trực tiếp. Cần cân nhắc kết hợp caching (ví dụ revalidate trong App Router) để giảm tải server.",
+        "Lưu ý: SSR ≠ CSR (Client-Side Rendering). CSR gửi JavaScript bundle lên browser rồi render ở client — SEO kém hơn vì crawler có thể không chờ JS chạy. SSR và SSG đều tạo HTML trên server, nhưng SSG làm lúc build time còn SSR làm lúc request time."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "// pages/profile.tsx\nexport async function getServerSideProps(context) {\n  const res = await fetch(`https://api.example.com/user/${context.params.id}`);\n  const user = await res.json();\n  return { props: { user } };\n}\n\nexport default function Profile({ user }) {\n  return <h1>{user.name}</h1>;\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "571-ssr-server-side-rendering-trong-next-js-la-gi"
+  },
+  {
+    "id": "cfcaad32-ab67-5561-9022-728009744af6",
+    "question": "SSG (Static Site Generation) trong Next.js là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/572-ssg-static-site-generation-trong-next-js-la-gi",
+    "slug": "ssg-static-site-generation-trong-next-js-la-gi-cfcaad32-ab67-5561-9022-728009744af6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "SSG tạo HTML tại build time, serve static files từ CDN. Cực kỳ nhanh, không cần server processing mỗi request. Phù hợp cho: blog, documentation, marketing pages, data ít thay đổi. Pages Router: không có getServerSideProps. App Router: dùng export const dynamic = 'force-static'."
+      ],
+      "details": [
+        "Nhược điểm: phải rebuild để cập nhật content."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "572-ssg-static-site-generation-trong-next-js-la-gi"
+  },
+  {
+    "id": "82142807-9103-52ef-9315-3c846b66fea4",
+    "question": "getStaticProps và getServerSideProps khác nhau như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/578-getstaticprops-va-getserversideprops-khac-nhau-nhu-the-nao",
+    "slug": "getstaticprops-va-getserversideprops-khac-nhau-nhu-the-nao-82142807-9103-52ef-9315-3c846b66fea4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "getStaticProps chạy tại build time, data embed vào static HTML, tốc độ cực nhanh, tốt cho data ít thay đổi. getServerSideProps chạy mỗi request, data luôn fresh, nhưng chậm hơn vì phải đợi server."
+      ],
+      "details": [],
+      "points": [
+        "Cả hai chỉ có trong Pages Router.",
+        "App Router thay thế bằng Server Components với fetch cache options."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "578-getstaticprops-va-getserversideprops-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "b7f2f4f5-3d36-52fe-9fd6-5e1f6bbf1dc5",
+    "question": "Route Handlers (API Routes) trong Next.js App Router là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/581-route-handlers-api-routes-trong-next-js-app-router-la-gi",
+    "slug": "route-handlers-api-routes-trong-next-js-app-router-la-gi-b7f2f4f5-3d36-52fe-9fd6-5e1f6bbf1dc5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Route Handlers là cách tạo API endpoints trong App Router bằng cách đặt file route.ts trong thư mục app/."
+      ],
+      "details": [],
+      "points": [
+        "Mỗi HTTP method được export dưới dạng named function riêng biệt.",
+        "Sử dụng Web APIs chuẩn (Request/Response) thay vì req/res của Node.js."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "// app/api/users/route.ts → endpoint: /api/users\n\nimport { NextRequest, NextResponse } from 'next/server'\n\nexport async function GET(request: NextRequest) {\n  const { searchParams } = new URL(request.url)\n  const page = Number(searchParams.get('page') ?? 1)\n  const users = await db.users.findMany({ skip: (page - 1) * 10, take: 10 })\n  return NextResponse.json(users)\n}\n\nexport async function POST(request: NextRequest) {\n  const body = await request.json()\n  const user = await db.users.create({ data: body })\n  return NextResponse.json(user, { status: 201 })\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "581-route-handlers-api-routes-trong-next-js-app-router-la-gi"
+  },
+  {
+    "id": "e6ef823c-0597-54e6-92ff-adf9abefab3e",
+    "question": "Deploy Next.js lên Vercel hoạt động ra sao, và những tính năng nào Vercel xử lý tự động mà nếu self-host bạn phải tự lo?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/20038-deploy-next-js-len-vercel-hoat-dong-ra-sao-va-nhung-tinh-nang-nao-vercel-xu-ly-t",
+    "slug": "deploy-next-js-len-vercel-hoat-dong-ra-sao-va-nhung-tinh-nang-nao-vercel-xu-ly-tu-dong-ma-neu-self-h-e6ef823c-0597-54e6-92ff-adf9abefab3e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vercel là hãng tạo ra Next.js nên là nền tảng chạy Next.js ít phải cấu hình nhất: push code lên Git → Vercel build và deploy tự động."
+      ],
+      "details": [
+        "Vercel làm sẵn cho bạn:\n- Server Components / SSR / Route Handlers chạy trên Serverless/Edge Functions — tự scale theo request.\n- Static assets + ISR phục vụ qua CDN toàn cầu, tự đặt cache header.\n- next/image optimize ảnh on-the-fly.\n- Preview deployment cho mỗi PR, rollback 1 click.",
+        "Nếu self-host bạn phải tự dựng: một Node server (next start), CDN/reverse proxy đứng trước, cơ chế lưu cache cho ISR (revalidate), tối ưu ảnh (cần sharp), và auto-scale.",
+        "Lưu ý: Vercel functions có giới hạn thời gian chạy và payload — tác vụ dài (vd export PDF nặng) nên tách ra background job, đừng chạy trong request handler."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "20038-deploy-next-js-len-vercel-hoat-dong-ra-sao-va-nhung-tinh-nang-nao-vercel-xu-ly-t"
+  },
+  {
+    "id": "5b59cd4d-cc9a-59ad-84c9-eaa4abc3857e",
+    "question": "Trong App Router, tại sao CSS-in-JS runtime (styled-components, Emotion) gặp khó với Server Components, còn CSS Modules và Tailwind thì không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/20042-trong-app-router-tai-sao-css-in-js-runtime-styled-components-emotion-gap-kho-voi",
+    "slug": "trong-app-router-tai-sao-css-in-js-runtime-styled-components-emotion-gap-kho-voi-server-components-c-5b59cd4d-cc9a-59ad-84c9-eaa4abc3857e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "CSS Modules và Tailwind xử lý style lúc build (compile ra file CSS tĩnh) → hoạt động tự nhiên với Server Components, không cần JS runtime ở client.",
+        "CSS-in-JS runtime (styled-components, Emotion) sinh CSS lúc render bằng JS, dựa vào React context và useState/hooks ở client. Mà Server Components không chạy hooks và không gửi JS xuống client → thư viện không thể inject style đúng, dễ lỗi style nhấp nháy (FOUC) khi SSR."
+      ],
+      "details": [
+        "Đây là lựa chọn khuyến nghị cho App Router.",
+        "Giải pháp nếu vẫn muốn dùng: chỉ dùng trong Client Component ('use client') và cấu hình một style registry với useServerInsertedHTML để inject CSS lúc SSR. Phức tạp hơn hẳn — nên với App Router, ưu tiên Tailwind / CSS Modules."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "// CSS Module — chạy thẳng trong Server Component\nimport styles from './card.module.css'\nexport default function Card() {\n  return <div className={styles.card}>...</div>\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "20042-trong-app-router-tai-sao-css-in-js-runtime-styled-components-emotion-gap-kho-voi"
+  },
+  {
+    "id": "0e9247b3-e02c-5649-a21c-ec347dca499f",
+    "question": "Đặt 'use client' ở đâu cho đúng? Nếu để ở layout gốc thì chuyện gì xảy ra?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97250-dat-use-client-o-dau-cho-dung-neu-de-o-layout-goc-thi-chuyen-gi-xay-ra",
+    "slug": "dat-use-client-o-dau-cho-dung-neu-de-o-layout-goc-thi-chuyen-gi-xay-ra-0e9247b3-e02c-5649-a21c-ec347dca499f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "'use client' không phải nhãn cho một file, nó đánh dấu ranh giới giữa hai đồ thị module. Mọi thứ được import từ file đó trở xuống đều bị coi là client và đi vào bundle gửi cho trình duyệt."
+      ],
+      "details": [
+        "Đặt ở layout gốc thì cả ứng dụng thành client: mất khả năng truy cập DB/secret trực tiếp trong component, bundle JS tăng, và lợi thế của Server Component biến mất.",
+        "Nguyên tắc: đẩy ranh giới xuống lá. Giữ page/layout là server, tách phần cần tương tác ra component riêng."
+      ],
+      "points": [],
+      "sections": [
+        "Một client component vẫn có thể nhận server component qua children/props — phần đó vẫn render trên server, không lọt vào client bundle."
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "// app/products/page.tsx  — server, không có 'use client'\nimport { AddToCart } from './add-to-cart'\n\nexport default async function Page() {\n  const products = await db.product.findMany()\n  return products.map(p => <AddToCart key={p.id} id={p.id} />)\n}\n\n// app/products/add-to-cart.tsx\n'use client'\nexport function AddToCart({ id }: { id: string }) {\n  const [busy, setBusy] = useState(false)\n  // ...\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "97250-dat-use-client-o-dau-cho-dung-neu-de-o-layout-goc-thi-chuyen-gi-xay-ra"
+  },
+  {
+    "id": "249bda1c-8642-5e8e-8505-72cae57fff08",
+    "question": "Truyền hàm hoặc instance của class từ Server Component xuống Client Component thì lỗi gì? Cách xử lý?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97251-truyen-ham-hoac-instance-cua-class-tu-server-component-xuong-client-component-th",
+    "slug": "truyen-ham-hoac-instance-cua-class-tu-server-component-xuong-client-component-thi-loi-gi-cach-xu-ly-249bda1c-8642-5e8e-8505-72cae57fff08",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Sẽ gặp lỗi kiểu Functions cannot be passed directly to Client Components unless you explicitly expose it by marking it with \"use server\"."
+      ],
+      "details": [
+        "Lý do: props qua ranh giới server → client phải serialize được để nhúng vào payload RSC. React hỗ trợ primitive, plain object/array, Date, Map, Set, Promise, JSX, và Server Function ('use server'). Không hỗ trợ: hàm thường, class instance (bao gồm object ORM có prototype/method), Symbol không đăng ký.",
+        "Cách xử lý:\n- Cần callback chạy trên server → khai báo Server Function bằng 'use server' rồi truyền xuống.\n- Cần handler chạy trên client → định nghĩa ngay trong client component, đừng truyền từ server.\n- Với dữ liệu ORM → map sang plain object trước khi truyền."
+      ],
+      "points": [],
+      "sections": [
+        "Lỗi hay gặp trong thực tế: Decimal của Prisma và ObjectId của Mongoose đều là class instance, phải chuyển sang chuỗi/số."
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "const rows = await prisma.order.findMany()\nconst plain = rows.map(r => ({ id: r.id, total: r.total.toString() }))\nreturn <OrderTable rows={plain} />"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "97251-truyen-ham-hoac-instance-cua-class-tu-server-component-xuong-client-component-th"
+  },
+  {
+    "id": "a84ec658-29f7-5eb6-8f01-064b9e14a547",
+    "question": "layout.tsx và template.tsx khác nhau ra sao? Khi nào bắt buộc dùng template.tsx?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97252-layout-tsx-va-template-tsx-khac-nhau-ra-sao-khi-nao-bat-buoc-dung-template-tsx",
+    "slug": "layout-tsx-va-template-tsx-khac-nhau-ra-sao-khi-nao-bat-buoc-dung-template-tsx-a84ec658-29f7-5eb6-8f01-064b9e14a547",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai đều bọc route con, khác nhau ở vòng đời khi điều hướng:",
+        "Dùng template.tsx khi:\n- Cần animation vào/ra mỗi lần đổi trang.\n- Có useEffect phải chạy lại mỗi lần xem trang (ghi log pageview, focus input).\n- Muốn state trong wrapper bị reset (ví dụ form bộ lọc không mang sang trang khác)."
+      ],
+      "details": [
+        "Mặc định nên dùng layout.tsx vì giữ được state là điểm mạnh của App Router. Nếu có cả hai trong cùng thư mục, thứ tự bọc là layout bên ngoài, template bên trong."
+      ],
+      "points": [
+        "layout.tsx: giữ nguyên instance khi chuyển giữa các route con. State bên trong không mất, effect không chạy lại, DOM không remount.",
+        "template.tsx: tạo instance mới mỗi lần điều hướng. State reset, useEffect chạy lại, animation mount phát lại."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "app/\n  layout.tsx      // sidebar, header — không muốn reset\n  (dash)/\n    template.tsx  // wrapper animation fade-in mỗi trang\n    page.tsx"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "97252-layout-tsx-va-template-tsx-khac-nhau-ra-sao-khi-nao-bat-buoc-dung-template-tsx"
+  },
+  {
+    "id": "ff492cce-5143-53d6-ae1a-b33e9e94a23a",
+    "question": "Tiền tố NEXT_PUBLIC_ trong biến môi trường có nghĩa gì? Vì sao đặt sai tiền tố lại làm lộ secret?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97301-tien-to-next-public-trong-bien-moi-truong-co-nghia-gi-vi-sao-dat-sai-tien-to-lai",
+    "slug": "tien-to-next-public-trong-bien-moi-truong-co-nghia-gi-vi-sao-dat-sai-tien-to-lai-lam-lo-secret-ff492cce-5143-53d6-ae1a-b33e9e94a23a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Next.js chia biến môi trường làm hai nhóm rất rõ:",
+        "Rủi ro: ai đó thấy client đọc undefined rồi \"sửa\" bằng cách đổi tên thành NEXT_PUBLIC_STRIPE_SECRET_KEY. Lúc đó khoá bí mật nằm nguyên trong file JS công khai, mở DevTools là đọc được."
+      ],
+      "details": [
+        "Hai điểm hay bị hỏi thêm: giá trị NEXT_PUBLIC_ bị đóng băng lúc build, đổi biến trên dashboard mà không build lại thì không có tác dụng; và vì nó nằm trong bundle nên đây là nơi chỉ để những giá trị vốn đã công khai (ID analytics, publishable key, base URL)."
+      ],
+      "points": [
+        "Không có tiền tố (DATABASE_URL, STRIPE_SECRET_KEY): chỉ tồn tại ở phía server — Server Component, Route Handler, Server Action. Đọc ở client sẽ ra undefined.",
+        "Có NEXT_PUBLIC_ (NEXT_PUBLIC_GA_ID): được thay thế thẳng vào mã nguồn lúc build và đi vào bundle JavaScript gửi cho trình duyệt."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "// Server Component - fine\nconst db = process.env.DATABASE_URL\n\n// Client Component - inlined into the JS bundle at build time\nconst gaId = process.env.NEXT_PUBLIC_GA_ID"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "97301-tien-to-next-public-trong-bien-moi-truong-co-nghia-gi-vi-sao-dat-sai-tien-to-lai"
+  },
+  {
+    "id": "6689dfd9-9dde-54ed-8e92-5b7873906fe2",
+    "question": "redirects và rewrites trong next.config khác nhau ra sao? Khi nào dùng cái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97303-redirects-va-rewrites-trong-next-config-khac-nhau-ra-sao-khi-nao-dung-cai-nao",
+    "slug": "redirects-va-rewrites-trong-next-config-khac-nhau-ra-sao-khi-nao-dung-cai-nao-6689dfd9-9dde-54ed-8e92-5b7873906fe2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác biệt nằm ở chỗ URL trên thanh địa chỉ có đổi hay không.",
+        "Chọn thế nào:\n- Đổi cấu trúc URL, gộp trang trùng, bỏ trang cũ → redirects với permanent: true (308) để Google chuyển giá trị xếp hạng sang URL mới.\n- Khuyến mãi tạm thời, A/B test, đổi tạm đích → permanent: false (307).\n- Che một backend/CMS phía sau cùng domain, hoặc migrate dần từng route sang app mới → rewrites."
+      ],
+      "details": [
+        "Lưu ý rewrites không đổi URL nên không truyền tín hiệu SEO — đừng dùng nó để \"gộp\" hai URL trùng nội dung; việc đó cần redirect hoặc canonical."
+      ],
+      "points": [
+        "redirects: server trả về mã 3xx, trình duyệt đi tới URL mới, thanh địa chỉ đổi. Người dùng và Google đều biết trang đã chuyển.",
+        "rewrites: server âm thầm phục vụ nội dung của đường dẫn khác, thanh địa chỉ giữ nguyên. Giống một proxy nội bộ."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// next.config.js\nmodule.exports = {\n  async redirects() {\n    return [{ source: '/blog/:slug', destination: '/posts/:slug', permanent: true }]\n  },\n  async rewrites() {\n    return [{ source: '/api/legacy/:path*', destination: 'https://old.example.com/:path*' }]\n  },\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "97303-redirects-va-rewrites-trong-next-config-khac-nhau-ra-sao-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "3048e261-2034-5c2b-9a42-fdf946457404",
+    "question": "App Router khác Pages Router trong Next.js như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/551-app-router-khac-pages-router-trong-next-js-nhu-the-nao",
+    "slug": "app-router-khac-pages-router-trong-next-js-nhu-the-nao-3048e261-2034-5c2b-9a42-fdf946457404",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Sự khác biệt chính bao gồm:"
+      ],
+      "details": [
+        "App Router là kiến trúc hiện đại và được khuyên dùng cho các dự án Next.js mới."
+      ],
+      "points": [
+        "Kiến trúc (Architecture): App Router (Next.js 13+) dùng thư mục app/ và hỗ trợ React Server Components mặc định. Pages Router dùng thư mục pages/ nơi mọi component được xử lý như Client Component.",
+        "Data Fetching: App Router fetch trực tiếp trong Server Components (async/await). Pages Router dùng getStaticProps hoặc getServerSideProps.",
+        "Layouts: App Router có nested layouts (layout.tsx) giữ state khi chuyển trang. Pages Router layout phức tạp hơn (_app.tsx)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "551-app-router-khac-pages-router-trong-next-js-nhu-the-nao"
+  },
+  {
+    "id": "eb36f301-8e3b-5427-a57b-e4f5e0b3e971",
+    "question": "File-based routing trong Next.js App Router hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/552-file-based-routing-trong-next-js-app-router-hoat-dong-nhu-the-nao",
+    "slug": "file-based-routing-trong-next-js-app-router-hoat-dong-nhu-the-nao-eb36f301-8e3b-5427-a57b-e4f5e0b3e971",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "File-based routing trong Next.js App Router là cơ chế biến cấu trúc thư mục và file bên trong app/ thành URL của ứng dụng mà không cần khai báo route thủ công. Mỗi thư mục con là một route segment, và một segment chỉ trở thành route truy cập được khi chứa file page.tsx (hoặc page.js).",
+        "Lưu ý: Chỉ page.tsx và route.ts mới tạo endpoint truy cập được; layout.tsx, loading.tsx, error.tsx và not-found.tsx chỉ là file quy ước bổ trợ và không tự tạo URL nếu thiếu page.tsx."
+      ],
+      "details": [
+        "App Router xây dựng cây route lồng nhau dựa trên file system và cho phép colocation: component, style hay test đặt cạnh route. layout.tsx định nghĩa UI chung cho segment và tất cả segment con, được giữ lại khi điều hướng client-side nên không mất state và không fetch lại không cần thiết. Việc lồng layout giúp chia sẻ header, sidebar hay provider mà không lặp lại code ở mỗi page. loading.tsx tự động bọc page.tsx cùng cấp trong Suspense để hiển thị fallback trong khi Server Component đang fetch dữ liệu. error.tsx phải là Client Component ('use client') và hoạt động như Error Boundary cho segment đó, còn not-found.tsx được render khi bạn gọi notFound() trong Server Component."
+      ],
+      "points": [
+        "[param] tạo dynamic segment, giá trị lấy từ params của page.tsx hoặc layout.tsx. Từ Next.js 15, params là Promise nên bạn cần await params.",
+        "[...slug] là catch-all, khớp /blog/a/b thành ['a','b']; [[...slug]] là optional catch-all, khớp cả /blog.",
+        "(group) là route group, cho phép gom nhiều route dưới cùng một layout mà không thêm tiền tố vào URL.",
+        "route.ts thay vì page.tsx sẽ tạo Route Handler cho API endpoint, không tạo trang.",
+        "Đặt page.tsx mà thiếu layout.tsx gốc sẽ thiếu <html> và <body> nên build báo lỗi."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TXT",
+          "code": "app/\n├── layout.tsx          // layout gốc cho toàn app\n├── page.tsx            // → /\n├── (marketing)/\n│   ├── layout.tsx      // layout riêng, không ảnh hưởng URL\n│   └── about/page.tsx  // → /about\n└── blog/[id]/page.tsx  // → /blog/:id"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "552-file-based-routing-trong-next-js-app-router-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "ab7fb6bb-fef7-5b4a-90b8-bb18a7dc6db4",
+    "question": "Layouts trong Next.js App Router là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/553-layouts-trong-next-js-app-router-la-gi",
+    "slug": "layouts-trong-next-js-app-router-la-gi-ab7fb6bb-fef7-5b4a-90b8-bb18a7dc6db4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Layout là UI chia sẻ giữa nhiều pages, preserve state khi navigate (không remount). layout.tsx nhận children prop."
+      ],
+      "details": [],
+      "points": [
+        "Nested layouts: layout lồng trong layout tạo hierarchy.",
+        "Root layout (app/layout.tsx) bắt buộc phải có, wrap toàn app.",
+        "Khác với template.tsx: template remount mỗi navigate."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "553-layouts-trong-next-js-app-router-la-gi"
+  },
+  {
+    "id": "4f2dbef3-f113-520c-ab9c-c8d7460ca49a",
+    "question": "loading.tsx và Suspense trong Next.js App Router?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/554-loading-tsx-va-suspense-trong-next-js-app-router",
+    "slug": "loading-tsx-va-suspense-trong-next-js-app-router-4f2dbef3-f113-520c-ab9c-c8d7460ca49a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "loading.tsx tự động tạo Suspense boundary bọc page hoặc layout, hiển thị loading UI ngay lập tức khi navigate."
+      ],
+      "details": [],
+      "points": [
+        "Streaming: Next.js stream HTML từng phần, user thấy nội dung nhanh hơn thay vì đợi toàn trang.",
+        "Instant loading states không cần manually thêm Suspense và fallback UI."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "554-loading-tsx-va-suspense-trong-next-js-app-router"
+  },
+  {
+    "id": "d2da1130-47c5-5189-93ab-b4ac117764cf",
+    "question": "error.tsx và not-found.tsx trong Next.js hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/555-error-tsx-va-not-found-tsx-trong-next-js-hoat-dong-nhu-the-nao",
+    "slug": "error-tsx-va-not-found-tsx-trong-next-js-hoat-dong-nhu-the-nao-d2da1130-47c5-5189-93ab-b4ac117764cf",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "error.tsx phải là Client Component, nhận error và reset props, hiển thị khi có lỗi trong segment. not-found.tsx hiển thị khi gọi notFound() từ server component hoặc khi URL không match route nào."
+      ],
+      "details": [
+        "Global error.tsx ở root app/ bắt lỗi kể cả trong root layout."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "555-error-tsx-va-not-found-tsx-trong-next-js-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "97c9a2bd-8cde-511a-8415-07e0f6e6eebb",
+    "question": "Route Groups trong Next.js là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/556-route-groups-trong-next-js-la-gi",
+    "slug": "route-groups-trong-next-js-la-gi-97c9a2bd-8cde-511a-8415-07e0f6e6eebb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Route Groups dùng ngoặc đơn (groupName) để tổ chức routes mà không ảnh hưởng URL."
+      ],
+      "details": [
+        "Ví dụ: (auth)/login và (auth)/register share cùng layout auth nhưng URL vẫn là /login và /register. Useful để: apply layout cho subset of routes, organize large codebases theo features."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "556-route-groups-trong-next-js-la-gi"
+  },
+  {
+    "id": "5ebe191c-5b17-5934-9271-4f7b14a444dc",
+    "question": "Dynamic routes và catch-all routes trong Next.js App Router?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/557-dynamic-routes-va-catch-all-routes-trong-next-js-app-router",
+    "slug": "dynamic-routes-va-catch-all-routes-trong-next-js-app-router-5ebe191c-5b17-5934-9271-4f7b14a444dc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Dynamic routes trong App Router sử dụng cú pháp folder name trong ngoặc vuông, ví dụ app/blog/[slug]/page.tsx sẽ match URL /blog/anything. Next.js 15: params là Promise — cần const { slug } = await params trong async Server Component, hoặc React.use(params) trong Client Component."
+      ],
+      "details": [],
+      "points": [
+        "Catch-all routes dùng app/[...slug]/page.tsx để match nhiều segments như /a/b/c (params.slug là mảng).",
+        "Optional catch-all app/[[...slug]]/page.tsx còn match root route.",
+        "TypeScript: { params: Promise<{ slug: string }> } cho dynamic route."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "557-dynamic-routes-va-catch-all-routes-trong-next-js-app-router"
+  },
+  {
+    "id": "100a1ab2-fd8d-50c4-b1de-320ac03b7c20",
+    "question": "generateStaticParams trong Next.js App Router dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/560-generatestaticparams-trong-next-js-app-router-dung-de-lam-gi",
+    "slug": "generatestaticparams-trong-next-js-app-router-dung-de-lam-gi-100a1ab2-fd8d-50c4-b1de-320ac03b7c20",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "generateStaticParams export từ trang dynamic route để pre-generate static path lúc build, tương đương getStaticPaths bên Pages Router.",
+        "Kết hợp với Static Generation để dựng sẵn trang tĩnh cho mọi giá trị tham số có thể có."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "export async function generateStaticParams() {\n  return posts.map((p) => ({ slug: p.slug }))\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "560-generatestaticparams-trong-next-js-app-router-dung-de-lam-gi"
+  },
+  {
+    "id": "f0fd00eb-a753-566f-a2b6-2c1667756087",
+    "question": "React Server Components là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/561-react-server-components-la-gi",
+    "slug": "react-server-components-la-gi-f0fd00eb-a753-566f-a2b6-2c1667756087",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "React Server Components (RSC) là các component chỉ chạy và render trên server."
+      ],
+      "details": [
+        "Đặc điểm chính:\n- Zero Bundle Size: Không gửi JavaScript code của chúng xuống client.\n- Truy cập trực tiếp Backend: Có thể gọi database, file system trực tiếp.\n- Bất đồng bộ (Async): Thường được viết dưới dạng async function để await dữ liệu.\n- Hạn chế: Không hỗ trợ state (useState), side-effects (useEffect), event handlers (onClick), hay Browser APIs.",
+        "Mặc định, mọi component trong Next.js App Router (app/) đều là Server Component."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "// app/products/page.tsx — Server Component (mặc định)\n// Có thể dùng async/await trực tiếp, access DB, không cần useEffect\nasync function ProductsPage() {\n  // Chạy trên server, không ship JS xuống client\n  const products = await db.products.findMany()\n\n  return (\n    <ul>\n      {products.map(p => (\n        <li key={p.id}>{p.name} — {p.price} VND</li>\n      ))}\n    </ul>\n  )\n}\n\nexport default ProductsPage"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "561-react-server-components-la-gi"
+  },
+  {
+    "id": "d5ec3332-8278-5f26-8461-10f56dbf9c0d",
+    "question": "Server Component có thể import Client Component không và ngược lại?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/563-server-component-co-the-import-client-component-khong-va-nguoc-lai",
+    "slug": "server-component-co-the-import-client-component-khong-va-nguoc-lai-d5ec3332-8278-5f26-8461-10f56dbf9c0d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Server Component có thể import và render Client Component - đây là hướng dependency bình thường."
+      ],
+      "details": [],
+      "points": [
+        "Ngược lại: Client Component KHÔNG thể import Server Component vì server component sẽ bị client-ize.",
+        "Nhưng Server Component có thể truyền Server Component làm children/props cho Client Component (pattern được phép)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "563-server-component-co-the-import-client-component-khong-va-nguoc-lai"
+  },
+  {
+    "id": "f4b9908f-3f0d-5917-9e3d-fcb5d52e4669",
+    "question": "Khi nào nên dùng Server Component, khi nào dùng Client Component?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/564-khi-nao-nen-dung-server-component-khi-nao-dung-client-component",
+    "slug": "khi-nao-nen-dung-server-component-khi-nao-dung-client-component-f4b9908f-3f0d-5917-9e3d-fcb5d52e4669",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Server Component khi cần: data fetching, access backend resources, keep sensitive info (API keys), reduce client bundle."
+      ],
+      "details": [],
+      "points": [
+        "Client Component khi cần: onClick, onChange event handlers, useState/useEffect, browser APIs, real-time updates, custom hooks.",
+        "Default là Server, chỉ dùng 'use client' khi thực sự cần interactivity."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "564-khi-nao-nen-dung-server-component-khi-nao-dung-client-component"
+  },
+  {
+    "id": "0c14e9ea-c934-5d79-86b3-78a576509ea1",
+    "question": "Context API có hoạt động với Server Components không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/566-context-api-co-hoat-dong-voi-server-components-khong",
+    "slug": "context-api-co-hoat-dong-voi-server-components-khong-0c14e9ea-c934-5d79-86b3-78a576509ea1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Context API không hoạt động trong Server Components vì context phụ thuộc React runtime trên client."
+      ],
+      "details": [],
+      "points": [
+        "Chỉ Client Components mới có thể dùng Context.",
+        "Để share data trong Server Components, truyền qua props hoặc dùng Next.js built-ins.",
+        "Tạo Context Provider là Client Component và wrap children."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "// providers/theme-provider.tsx — phải là Client Component\n'use client'\nimport { createContext, useContext, useState } from 'react'\n\nconst ThemeContext = createContext<'light' | 'dark'>('light')\n\nexport function ThemeProvider({ children }: { children: React.ReactNode }) {\n  const [theme, setTheme] = useState<'light' | 'dark'>('light')\n  return (\n    <ThemeContext.Provider value={theme}>\n      {children}\n    </ThemeContext.Provider>\n  )\n}\n\nexport const useTheme = () => useContext(ThemeContext)\n\n// app/layout.tsx — Server Component bọc Provider\nimport { ThemeProvider } from '@/providers/theme-provider'\n\nexport default function RootLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <html>\n      <body>\n        <ThemeProvider>{children}</ThemeProvider>\n      </body>\n    </html>\n  )\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "566-context-api-co-hoat-dong-voi-server-components-khong"
+  },
+  {
+    "id": "d7a52bb2-83a5-5ad2-8893-98b3782bc6e4",
+    "question": "Third-party libraries và Server Components có vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/568-third-party-libraries-va-server-components-co-van-de-gi",
+    "slug": "third-party-libraries-va-server-components-co-van-de-gi-d7a52bb2-83a5-5ad2-8893-98b3782bc6e4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Nhiều npm packages cũ dùng browser APIs hay React client features mà không có 'use client'."
+      ],
+      "details": [],
+      "points": [
+        "Giải pháp: tạo wrapper Client Component import library đó, thêm 'use client' ở wrapper.",
+        "Next.js có boundary tự động cho packages với 'use client' trong package.json exports.",
+        "Kiểm tra compatibility trước khi dùng library mới."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "568-third-party-libraries-va-server-components-co-van-de-gi"
+  },
+  {
+    "id": "f548d1d2-0325-5e0b-ae51-c8d1d7f32c8b",
+    "question": "ISR (Incremental Static Regeneration) là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/573-isr-incremental-static-regeneration-la-gi",
+    "slug": "isr-incremental-static-regeneration-la-gi-f548d1d2-0325-5e0b-ae51-c8d1d7f32c8b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "ISR kết hợp SSG và SSR: trang được generate tĩnh, nhưng sau revalidate seconds có thể regenerate lại. User đầu tiên sau revalidate nhận stale content, trigger background regeneration; user sau nhận fresh content."
+      ],
+      "details": [],
+      "points": [
+        "Pages Router: return { revalidate: 60 } trong getStaticProps.",
+        "App Router: export const revalidate = 60 hoặc fetch(url, { next: { revalidate: 60 } })."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "573-isr-incremental-static-regeneration-la-gi"
+  },
+  {
+    "id": "f8f0c7f1-a5a0-5473-8db1-1aff5dc0bf01",
+    "question": "On-demand revalidation trong Next.js là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/574-on-demand-revalidation-trong-next-js-la-gi",
+    "slug": "on-demand-revalidation-trong-next-js-la-gi-f8f0c7f1-a5a0-5473-8db1-1aff5dc0bf01",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "On-demand revalidation cho phép invalidate cache và regenerate pages ngay lập tức thay vì đợi timeout."
+      ],
+      "details": [
+        "Phù hợp khi CMS webhook trigger cần update content ngay."
+      ],
+      "points": [
+        "Pages Router: res.revalidate('/path') trong API route.",
+        "App Router: revalidatePath('/path') hoặc revalidateTag('posts') trong Server Action hoặc Route Handler."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "574-on-demand-revalidation-trong-next-js-la-gi"
+  },
+  {
+    "id": "3bf1b235-a148-5bbe-8506-8d0d207d20b6",
+    "question": "fetch cache trong Next.js App Router hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/575-fetch-cache-trong-next-js-app-router-hoat-dong-nhu-the-nao",
+    "slug": "fetch-cache-trong-next-js-app-router-hoat-dong-nhu-the-nao-3bf1b235-a148-5bbe-8506-8d0d207d20b6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Next.js extend native fetch với caching:"
+      ],
+      "details": [
+        "Data cache tách biệt với Full Route Cache."
+      ],
+      "points": [
+        "fetch(url) mặc định no-store từ Next.js 15+ (trước đó cache).",
+        "{ cache: 'force-cache' } để opt-in cache.",
+        "{ next: { revalidate: 60 } } revalidate sau 60 giây.",
+        "{ next: { tags: ['posts'] } } tag để invalidate theo tag."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "575-fetch-cache-trong-next-js-app-router-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "030473e6-4e91-597c-8273-43867a19edff",
+    "question": "Sự khác biệt giữa dynamic và static rendering trong App Router?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/577-su-khac-biet-giua-dynamic-va-static-rendering-trong-app-router",
+    "slug": "su-khac-biet-giua-dynamic-va-static-rendering-trong-app-router-030473e6-4e91-597c-8273-43867a19edff",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Tự động dynamic khi dùng: await cookies(), await headers(), searchParams, hay fetch với cache: 'no-store'. Explicit: export const dynamic = 'force-dynamic' hoặc 'force-static'. Opt-in static càng nhiều càng tốt cho performance."
+      ],
+      "details": [],
+      "points": [
+        "Static rendering: render lúc build time, cache và serve từ CDN.",
+        "Dynamic rendering: render mỗi request, không cache."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "577-su-khac-biet-giua-dynamic-va-static-rendering-trong-app-router"
+  },
+  {
+    "id": "d379b58a-e4a6-590e-89ad-5ef5598ff3c0",
+    "question": "Streaming SSR trong Next.js hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/579-streaming-ssr-trong-next-js-hoat-dong-nhu-the-nao",
+    "slug": "streaming-ssr-trong-next-js-hoat-dong-nhu-the-nao-d379b58a-e4a6-590e-89ad-5ef5598ff3c0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Streaming SSR gửi HTML từng phần xuống browser ngay khi ready thay vì đợi toàn trang."
+      ],
+      "details": [],
+      "points": [
+        "Dùng HTTP chunked transfer encoding.",
+        "Kết hợp với Suspense: phần ngoài Suspense stream trước, phần trong stream khi data ready.",
+        "Giảm Time to First Byte và First Contentful Paint.",
+        "Enabled mặc định trong App Router."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "579-streaming-ssr-trong-next-js-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "5caf9f87-0359-5aa7-87ac-e722b3b77fd8",
+    "question": "Server Actions trong Next.js là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/582-server-actions-trong-next-js-la-gi",
+    "slug": "server-actions-trong-next-js-la-gi-5caf9f87-0359-5aa7-87ac-e722b3b77fd8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Server Actions là async functions chạy trên server, được gọi từ Client Components hoặc forms."
+      ],
+      "details": [],
+      "points": [
+        "Khai báo với 'use server' directive.",
+        "Cho phép mutate data trực tiếp mà không cần tạo API endpoint riêng."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "// actions/post-actions.ts\n'use server'\nimport { revalidatePath } from 'next/cache'\n\nexport async function createPost(formData: FormData) {\n  const title = formData.get('title') as string\n  await db.posts.create({ title })\n  revalidatePath('/posts') // làm mới cache trang sau khi mutate\n}\n\n// components/new-post-form.tsx\n'use client'\nimport { createPost } from '@/actions/post-actions'\n\nexport function NewPostForm() {\n  return (\n    <form action={createPost}>\n      <input name=\"title\" placeholder=\"Post title\" />\n      <button type=\"submit\">Create</button>\n    </form>\n  )\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "582-server-actions-trong-next-js-la-gi"
+  },
+  {
+    "id": "a0a2579b-9dc6-53fc-bd9e-b152e65a1853",
+    "question": "Cách sử dụng Server Actions với HTML forms?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/583-cach-su-dung-server-actions-voi-html-forms",
+    "slug": "cach-su-dung-server-actions-voi-html-forms-a0a2579b-9dc6-53fc-bd9e-b152e65a1853",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Gán Server Action vào form action attribute: <form action={createPost}>."
+      ],
+      "details": [],
+      "points": [
+        "Form submit tự động gọi Server Action với FormData.",
+        "Không cần JavaScript client-side (progressive enhancement).",
+        "Trong action: const title = formData.get('title').",
+        "Kết hợp với useFormState (React 18) hoặc useActionState (React 19) để track state."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "583-cach-su-dung-server-actions-voi-html-forms"
+  },
+  {
+    "id": "746492b7-d887-587a-8ef9-abaa1f917a4b",
+    "question": "Revalidation sau mutation trong Server Actions?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/584-revalidation-sau-mutation-trong-server-actions",
+    "slug": "revalidation-sau-mutation-trong-server-actions-746492b7-d887-587a-8ef9-abaa1f917a4b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Sau khi mutate data trong Server Action, cần revalidate cache để UI cập nhật: revalidatePath('/posts') invalidate cached route, revalidateTag('posts') invalidate theo tag. redirect('/path') để điều hướng sau action thành công."
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "584-revalidation-sau-mutation-trong-server-actions"
+  },
+  {
+    "id": "07b8c77a-b9bb-5899-9e88-884b4e7e5622",
+    "question": "Error handling trong Server Actions như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/585-error-handling-trong-server-actions-nhu-the-nao",
+    "slug": "error-handling-trong-server-actions-nhu-the-nao-07b8c77a-b9bb-5899-9e88-884b4e7e5622",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Server Actions có thể throw errors sẽ được catch bởi nearest error.tsx."
+      ],
+      "details": [],
+      "points": [
+        "Với useFormState/useActionState, return error object thay vì throw: return { error: 'Invalid input' }.",
+        "Dùng try/catch trong action để handle expected errors (validation, not found) và return user-friendly error states."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "585-error-handling-trong-server-actions-nhu-the-nao"
+  },
+  {
+    "id": "9b287897-ef8d-5b9f-be48-b9245d2647df",
+    "question": "Middleware trong Next.js App Router là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/587-middleware-trong-next-js-app-router-la-gi",
+    "slug": "middleware-trong-next-js-app-router-la-gi-9b287897-ef8d-5b9f-be48-b9245d2647df",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Middleware là middleware.ts ở root, chạy trên Edge runtime trước mọi request."
+      ],
+      "details": [],
+      "points": [
+        "Dùng để: authentication/authorization, redirect, rewrite URL, add/modify headers, A/B testing.",
+        "Return NextResponse để điều khiển response.",
+        "Dùng matcher config để chỉ định routes áp dụng.",
+        "Nhẹ và nhanh vì Edge runtime."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "587-middleware-trong-next-js-app-router-la-gi"
+  },
+  {
+    "id": "b9d6ebfe-e39c-5ad6-b83d-52113bcc20be",
+    "question": "Cookies và Headers trong Next.js Server Components và Actions?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/588-cookies-va-headers-trong-next-js-server-components-va-actions",
+    "slug": "cookies-va-headers-trong-next-js-server-components-va-actions-b9d6ebfe-e39c-5ad6-b83d-52113bcc20be",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Import từ next/headers, cả hai đều là async kể từ Next.js 15+: const cookieStore = await cookies() và const headersList = await headers()."
+      ],
+      "details": [],
+      "points": [
+        "Đọc cookie: cookieStore.get('session'), cookieStore.set('session', value).",
+        "Đọc header: headersList.get('user-agent').",
+        "Trong Server Components: read-only.",
+        "Trong Server Actions và Route Handlers: có thể read và write."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "588-cookies-va-headers-trong-next-js-server-components-va-actions"
+  },
+  {
+    "id": "c97ba6aa-b3dd-55c7-8a84-9b7dca40022c",
+    "question": "Optimistic updates với Server Actions và useOptimistic?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/589-optimistic-updates-voi-server-actions-va-useoptimistic",
+    "slug": "optimistic-updates-voi-server-actions-va-useoptimistic-c97ba6aa-b3dd-55c7-8a84-9b7dca40022c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "useOptimistic (React 19) kết hợp với Server Actions: cập nhật UI ngay trước khi action hoàn thành, rollback nếu fail. const [optimistic, addOptimistic] = useOptimistic(data, updateFn)."
+      ],
+      "details": [],
+      "points": [
+        "Trong action handler: addOptimistic(newItem) trước await serverAction().",
+        "Tạo snappy UX dù có network latency."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "589-optimistic-updates-voi-server-actions-va-useoptimistic"
+  },
+  {
+    "id": "00913098-ba1d-50d6-805a-74dc9b884c56",
+    "question": "next/image component mang lại lợi ích gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/591-next-image-component-mang-lai-loi-ich-gi",
+    "slug": "next-image-component-mang-lai-loi-ich-gi-00913098-ba1d-50d6-805a-74dc9b884c56",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "next/image tự động: resize và optimize images theo viewport, serve WebP/AVIF modern formats, lazy load mặc định, prevent Cumulative Layout Shift (CLS) với width/height hoặc fill."
+      ],
+      "details": [],
+      "points": [
+        "Cần cung cấp width và height hoặc fill prop.",
+        "Cấu hình allowed domains trong next.config.",
+        "Tích hợp CDN support sẵn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "591-next-image-component-mang-lai-loi-ich-gi"
+  },
+  {
+    "id": "97143a73-ddfc-5198-8275-18e67f0daad0",
+    "question": "next/font trong Next.js hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/592-next-font-trong-next-js-hoat-dong-nhu-the-nao",
+    "slug": "next-font-trong-next-js-hoat-dong-nhu-the-nao-97143a73-ddfc-5198-8275-18e67f0daad0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "next/font tự động: download Google Fonts tại build time (không request runtime đến Google), host fonts trên cùng server, zero layout shift với automatic size adjustment, privacy tốt hơn."
+      ],
+      "details": [
+        "Dùng:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "import { Inter } from 'next/font/google'; const inter = Inter({ subsets: ['latin'] })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "592-next-font-trong-next-js-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "2c7847b6-72aa-528c-83d3-d65f7cd9c310",
+    "question": "Link prefetching trong Next.js là gì và cách control?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/593-link-prefetching-trong-next-js-la-gi-va-cach-control",
+    "slug": "link-prefetching-trong-next-js-la-gi-va-cach-control-2c7847b6-72aa-528c-83d3-d65f7cd9c310",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Next.js tự động prefetch routes khi Link component vào viewport (production)."
+      ],
+      "details": [],
+      "points": [
+        "Tải JS chunk và data cho route đó trước khi user click, tạo instant navigation.",
+        "Disable: <Link prefetch={false}>.",
+        "App Router prefetch RSC payload.",
+        "Control cụ thể: prefetch attribute hoặc router.prefetch().",
+        "Giúp navigation cảm giác instantaneous."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "593-link-prefetching-trong-next-js-la-gi-va-cach-control"
+  },
+  {
+    "id": "19d6d082-6fc8-5f9d-9fd3-0e553af9649d",
+    "question": "next/script component và loading strategies là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/594-next-script-component-va-loading-strategies-la-gi",
+    "slug": "next-script-component-va-loading-strategies-la-gi-19d6d082-6fc8-5f9d-9fd3-0e553af9649d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "next/script tối ưu loading third-party scripts."
+      ],
+      "details": [],
+      "points": [
+        "Strategies: beforeInteractive (trước hydration, cho critical scripts), afterInteractive (sau hydration, default), lazyOnload (idle time), worker (web worker với Partytown).",
+        "Tránh dùng thẻ script thông thường trong App Router, dùng next/script thay thế."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "594-next-script-component-va-loading-strategies-la-gi"
+  },
+  {
+    "id": "cb2f0189-8422-512b-986c-5e0c016e438f",
+    "question": "Middleware proxy pattern trong Next.js như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/596-middleware-proxy-pattern-trong-next-js-nhu-the-nao",
+    "slug": "middleware-proxy-pattern-trong-next-js-nhu-the-nao-cb2f0189-8422-512b-986c-5e0c016e438f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Middleware có thể rewrite requests đến API khác: NextResponse.rewrite(new URL('/api/proxy', request.url))."
+      ],
+      "details": [
+        "Hoặc trong next.config.js dùng rewrites array để proxy:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "{ source: '/api/:path*', destination: 'https://backend.com/:path*' }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "596-middleware-proxy-pattern-trong-next-js-nhu-the-nao"
+  },
+  {
+    "id": "7f2d8471-c542-5c74-aa54-d1c4d98b18d8",
+    "question": "Core Web Vitals và Next.js tối ưu chúng như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/597-core-web-vitals-va-next-js-toi-uu-chung-nhu-the-nao",
+    "slug": "core-web-vitals-va-next-js-toi-uu-chung-nhu-the-nao-7f2d8471-c542-5c74-aa54-d1c4d98b18d8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Next.js tối ưu: LCP (Largest Contentful Paint) qua image optimization, priority images; CLS (Cumulative Layout Shift) qua next/image với dimensions, next/font với size-adjust; INP (Interaction to Next Paint, thay FID từ 3/2024) qua code splitting, lazy loading, Concurrent Mode."
+      ],
+      "details": [
+        "Dùng @vercel/analytics (không phải next/analytics) để báo cáo Core Web Vitals production."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "597-core-web-vitals-va-next-js-toi-uu-chung-nhu-the-nao"
+  },
+  {
+    "id": "6601bc66-f9ee-5015-b9e4-30cb7ee5adbb",
+    "question": "Environment variables trong Next.js được xử lý như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/599-environment-variables-trong-next-js-duoc-xu-ly-nhu-the-nao",
+    "slug": "environment-variables-trong-next-js-duoc-xu-ly-nhu-the-nao-6601bc66-f9ee-5015-b9e4-30cb7ee5adbb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        ".env.local cho local development (git-ignored). .env.production, .env.development cho môi trường cụ thể. NEXT_PUBLIC_ prefix expose biến xuống client bundle - KHÔNG đặt secrets với prefix này."
+      ],
+      "details": [],
+      "points": [
+        "Không có prefix: chỉ server-side.",
+        "Trong App Router: server components đọc trực tiếp process.env.VAR.",
+        "Client: chỉ NEXT_PUBLIC_ vars."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "599-environment-variables-trong-next-js-duoc-xu-ly-nhu-the-nao"
+  },
+  {
+    "id": "12d5c9e0-55c9-59b6-b897-14520a5a8913",
+    "question": "Self-host Next.js bằng Node server như thế nào, và output: 'standalone' giải quyết vấn đề gì khi đóng gói deploy?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/20039-self-host-next-js-bang-node-server-nhu-the-nao-va-output-standalone-giai-quyet-v",
+    "slug": "self-host-next-js-bang-node-server-nhu-the-nao-va-output-standalone-giai-quyet-van-de-gi-khi-dong-go-12d5c9e0-55c9-59b6-b897-14520a5a8913",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Cách mặc định: next build rồi next start chạy một Node server phục vụ cả static assets lẫn SSR/Route Handlers. Bạn đặt nó sau reverse proxy (Nginx) và cần cả thư mục .next lẫn toàn bộ node_modules.",
+        "Lúc deploy chỉ cần .next/standalone, .next/static và public, rồi node server.js — không cần npm install ở runtime."
+      ],
+      "details": [
+        "Vấn đề: copy nguyên node_modules (hàng trăm MB) vào image thì nặng và chậm.",
+        "output: 'standalone' giải quyết: Next.js trace đồ thị dependency và chỉ đóng gói những file thực sự được dùng vào .next/standalone/ kèm một server.js chạy độc lập.",
+        "Lưu ý: standalone không tự copy public/ và .next/static — phải copy thủ công (Docker thường thêm 2 thư mục này). Image optimization cần cài sharp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// next.config.js\nmodule.exports = { output: 'standalone' }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "20039-self-host-next-js-bang-node-server-nhu-the-nao-va-output-standalone-giai-quyet-v"
+  },
+  {
+    "id": "cfd954bf-d659-5899-bfb3-b15f2115c641",
+    "question": "Viết Dockerfile cho Next.js production tối ưu ra sao? Tại sao nên dùng multi-stage build với output: 'standalone'?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/20040-viet-dockerfile-cho-next-js-production-toi-uu-ra-sao-tai-sao-nen-dung-multi-stag",
+    "slug": "viet-dockerfile-cho-next-js-production-toi-uu-ra-sao-tai-sao-nen-dung-multi-stage-build-voi-output-s-cfd954bf-d659-5899-bfb3-b15f2115c641",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Mục tiêu: image nhỏ, build cache tốt, không kéo theo devDependencies vào runtime.",
+        "Tại sao multi-stage: stage cuối chỉ lấy standalone (đã trace dependency) → image chỉ vài chục MB, không có source code hay devDeps."
+      ],
+      "details": [
+        "Cách chuẩn là multi-stage build kết hợp output: 'standalone'.",
+        "Lưu ý: ENV NEXT_PUBLIC_* được inline lúc build, không phải runtime — nếu cần đổi theo môi trường, phải build lại hoặc dùng runtime config riêng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "DOCKERFILE",
+          "code": "# 1. deps\nFROM node:20-alpine AS deps\nWORKDIR /app\nCOPY package.json pnpm-lock.yaml ./\nRUN corepack enable && pnpm i --frozen-lockfile\n\n# 2. build\nFROM node:20-alpine AS builder\nWORKDIR /app\nCOPY --from=deps /app/node_modules ./node_modules\nCOPY . .\nRUN corepack enable && pnpm build\n\n# 3. runner — chỉ chứa output standalone\nFROM node:20-alpine AS runner\nWORKDIR /app\nENV NODE_ENV=production\nCOPY --from=builder /app/.next/standalone ./\nCOPY --from=builder /app/.next/static ./.next/static\nCOPY --from=builder /app/public ./public\nEXPOSE 3000\nCMD [\"node\", \"server.js\"]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "20040-viet-dockerfile-cho-next-js-production-toi-uu-ra-sao-tai-sao-nen-dung-multi-stag"
+  },
+  {
+    "id": "ef2f80f8-f5ce-5fbb-944f-1a8b7ceac479",
+    "question": "output: 'export' trong Next.js làm gì, và những tính năng nào KHÔNG dùng được khi static export?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/20041-output-export-trong-next-js-lam-gi-va-nhung-tinh-nang-nao-khong-dung-duoc-khi-st",
+    "slug": "output-export-trong-next-js-lam-gi-va-nhung-tinh-nang-nao-khong-dung-duoc-khi-static-export-ef2f80f8-f5ce-5fbb-944f-1a8b7ceac479",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Hình dung: giống xuất một website ra file rồi bê đặt lên ổ đĩa — không còn server chạy logic."
+      ],
+      "details": [
+        "Vì không có server runtime, những thứ sau KHÔNG dùng được:\n- Server-side rendering động / cookies(), headers(), dynamic = 'force-dynamic'.\n- Route Handlers chạy server (API routes) và Server Actions.\n- ISR / on-demand revalidation — không có server để re-generate.\n- Middleware, rewrites/redirects động, next/image với loader mặc định (phải dùng unoptimized hoặc loader ngoài).\n- Dynamic routes phải khai báo trước qua generateStaticParams.",
+        "Khi nào dùng: site nội dung tĩnh, docs, landing — mọi data biết trước lúc build."
+      ],
+      "points": [],
+      "sections": [
+        "output: 'export' build app thành HTML/CSS/JS tĩnh thuần trong thư mục out/, deploy được lên bất kỳ static host nào (S3, GitHub Pages, Nginx) — không cần Node server."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// next.config.js\nmodule.exports = { output: 'export' }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "20041-output-export-trong-next-js-lam-gi-va-nhung-tinh-nang-nao-khong-dung-duoc-khi-st"
+  },
+  {
+    "id": "6fac580e-9be1-500c-bad8-2533b308c4bb",
+    "question": "Set up Jest + React Testing Library cho Next.js như thế nào, và tại sao Jest không test trực tiếp được async Server Components?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/20043-set-up-jest-react-testing-library-cho-next-js-nhu-the-nao-va-tai-sao-jest-khong",
+    "slug": "set-up-jest-react-testing-library-cho-next-js-nhu-the-nao-va-tai-sao-jest-khong-test-truc-tiep-duoc-6fac580e-9be1-500c-bad8-2533b308c4bb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng cho unit / component test: render Client Component bằng RTL, query theo role, fire event."
+      ],
+      "details": [
+        "Tại sao async Server Components là vấn đề: chúng là async function trả Promise và có thể await data/fetch thật trên server. Jest (jsdom) không có môi trường server đầy đủ để resolve các luồng RSC này. Khuyến nghị chính thức:\n- Server Components async → test bằng E2E (Playwright) vì chúng cần môi trường server thật.\n- Logic thuần (helpers, sync components) → unit test với Jest.",
+        "Lưu ý: RTL không chạy được trên Vitest/Jest cho async RSC — đừng cố mock cả pipeline, đẩy phần đó sang E2E."
+      ],
+      "points": [],
+      "sections": [
+        "Next.js cung cấp helper next/jest để tự lo cấu hình (transform SWC, mock CSS/ảnh, env)."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// jest.config.js\nconst nextJest = require('next/jest')\nconst createJestConfig = nextJest({ dir: './' })\nmodule.exports = createJestConfig({\n  testEnvironment: 'jsdom',\n  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "20043-set-up-jest-react-testing-library-cho-next-js-nhu-the-nao-va-tai-sao-jest-khong"
+  },
+  {
+    "id": "dd9db06e-8dd2-5b05-ab46-c0de9e9081b3",
+    "question": "Vì sao Playwright là lựa chọn E2E phù hợp cho Next.js App Router, và set up cơ bản trông như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/20044-vi-sao-playwright-la-lua-chon-e2e-phu-hop-cho-next-js-app-router-va-set-up-co-ba",
+    "slug": "vi-sao-playwright-la-lua-chon-e2e-phu-hop-cho-next-js-app-router-va-set-up-co-ban-trong-nhu-the-nao-dd9db06e-8dd2-5b05-ab46-c0de9e9081b3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Playwright chạy app trong trình duyệt thật (Chromium/Firefox/WebKit), nên nó test đúng những gì người dùng thấy — kể cả Server Components, streaming, Server Actions mà unit test không chạm tới được.",
+        "Trong playwright.config.ts thường có webServer để Playwright tự chạy next start trước khi test."
+      ],
+      "details": [
+        "Hình dung: Playwright là một con bot mở browser, click và đọc DOM như người dùng; còn Jest chỉ render component trong bộ nhớ.",
+        "Lưu ý quan trọng: test E2E nên chạy trên production build (next build && next start), không phải dev — dev có Fast Refresh, log thừa và hành vi cache khác, dễ flaky."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "// e2e/home.spec.ts\nimport { test, expect } from '@playwright/test'\n\ntest('trang chủ hiển thị tiêu đề', async ({ page }) => {\n  await page.goto('http://localhost:3000')\n  await expect(page.getByRole('heading', { name: /Luyện phỏng vấn/ })).toBeVisible()\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "20044-vi-sao-playwright-la-lua-chon-e2e-phu-hop-cho-next-js-app-router-va-set-up-co-ba"
+  },
+  {
+    "id": "f405a7e8-cbdc-5a47-aea3-eb5c4ba14f66",
+    "question": "_app.tsx và _document.tsx trong Pages Router làm gì, và App Router thay thế chúng bằng gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/20048-app-tsx-va-document-tsx-trong-pages-router-lam-gi-va-app-router-thay-the-chung-b",
+    "slug": "app-tsx-va-document-tsx-trong-pages-router-lam-gi-va-app-router-thay-the-chung-bang-gi-f405a7e8-cbdc-5a47-aea3-eb5c4ba14f66",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Trong Pages Router đây là 2 file đặc biệt:",
+        "App Router thay bằng:\n- _app → app/layout.tsx (root layout, nested layouts), provider bọc trong Client Component.\n- _document → cũng là root layout (<html>/<body> viết thẳng trong đó) + API metadata cho <head>."
+      ],
+      "details": [
+        "Lưu ý: không trộn hai cơ chế — nếu page đã sang app/, đừng còn _app/_document chi phối nó; chúng chỉ áp dụng cho route trong pages/."
+      ],
+      "points": [
+        "_app.tsx — wrap mọi page, là nơi đặt layout chung, global CSS, provider (theme, store) và giữ state qua các lần điều hướng. Chạy cả server lẫn client.",
+        "_document.tsx — tùy biến cấu trúc HTML ngoài cùng (<html>, <body>, thẻ <lang>, preconnect). Chỉ render một lần trên server, không có event/window → đừng đặt logic client ở đây."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "export default function App({ Component, pageProps }) {\n  return <Provider><Component {...pageProps} /></Provider>\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "20048-app-tsx-va-document-tsx-trong-pages-router-lam-gi-va-app-router-thay-the-chung-b"
+  },
+  {
+    "id": "3426b74a-8d81-5ef1-b807-b822e4b6fa24",
+    "question": "revalidatePath và revalidateTag khác nhau thế nào, và khi nào chọn cái nào sau một mutation?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/20050-revalidatepath-va-revalidatetag-khac-nhau-the-nao-va-khi-nao-chon-cai-nao-sau-mo",
+    "slug": "revalidatepath-va-revalidatetag-khac-nhau-the-nao-va-khi-nao-chon-cai-nao-sau-mot-mutation-3426b74a-8d81-5ef1-b807-b822e4b6fa24",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai làm mới Data Cache trên server sau khi data đổi (thường gọi trong Server Action / Route Handler). Khác nhau ở đơn vị nhắm tới.",
+        "Dùng khi bạn biết rõ trang nào bị ảnh hưởng và nó tập trung ở một (vài) route.",
+        "nhiều route rải rác"
+      ],
+      "details": [
+        "revalidatePath(path) — làm mới cache theo đường dẫn route.",
+        "revalidateTag(tag) — làm mới mọi fetch đã gắn tag đó, bất kể nằm ở route nào.",
+        "Quy tắc chọn: ảnh hưởng theo trang → revalidatePath; ảnh hưởng theo loại data dùng chung khắp nơi → revalidateTag. Lưu ý: cả hai vô hiệu cache nhưng không re-render ngay; trang sẽ regenerate ở request kế tiếp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "revalidatePath('/blog')          // làm mới đúng trang /blog\nrevalidatePath('/blog/[slug]', 'page')  // mọi trang khớp dynamic segment"
+        },
+        {
+          "language": "TS",
+          "code": "await fetch(url, { next: { tags: ['products'] } })\n// sau khi sửa sản phẩm:\nrevalidateTag('products')   // mọi nơi fetch 'products' đều mới"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "20050-revalidatepath-va-revalidatetag-khac-nhau-the-nao-va-khi-nao-chon-cai-nao-sau-mo"
+  },
+  {
+    "id": "ae115cb5-dd72-5ba3-8362-b1ba9538ae17",
+    "question": "i18n routing trong App Router hoạt động ra sao, và next-intl thêm giá trị gì so với tự dựng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/20051-i18n-routing-trong-app-router-hoat-dong-ra-sao-va-next-intl-them-gia-tri-gi-so-v",
+    "slug": "i18n-routing-trong-app-router-hoat-dong-ra-sao-va-next-intl-them-gia-tri-gi-so-voi-tu-dung-ae115cb5-dd72-5ba3-8362-b1ba9538ae17",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Middleware đọc Accept-Language hoặc cookie, redirect / → /vi. generateStaticParams liệt kê các locale để build tĩnh."
+      ],
+      "details": [
+        "next-intl xây sẵn lớp này và bổ sung:\n- Middleware locale-detection + routing cấu hình sẵn (prefix /vi, /en).\n- API dịch dùng được trong Server Components: getTranslations() (async, server) và useTranslations() (client) — quan trọng vì hầu hết i18n lib cũ chỉ chạy client.\n- Format số/ngày/plural theo Intl chuẩn, type-safe message keys."
+      ],
+      "points": [],
+      "sections": [
+        "App Router không có i18n config sẵn như Pages Router; bạn dựng routing bằng dynamic segment [locale] + middleware để phát hiện/redirect ngôn ngữ.",
+        "Lưu ý: giữ message ở Server Component khi có thể để không gửi toàn bộ từ điển xuống client — chỉ Client Component nào cần mới nhận phần của nó."
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "app/[locale]/layout.tsx\napp/[locale]/page.tsx"
+        },
+        {
+          "language": null,
+          "code": "import { useTranslations } from 'next-intl'\nfunction Title() {\n  const t = useTranslations('Home')\n  return <h1>{t('title')}</h1>\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "20051-i18n-routing-trong-app-router-hoat-dong-ra-sao-va-next-intl-them-gia-tri-gi-so-v"
+  },
+  {
+    "id": "2f5ec660-5d50-5761-860f-6602a1d0d681",
+    "question": "useFormStatus và useActionState dùng để làm gì với Server Actions, và tại sao useFormStatus phải nằm trong component con của form?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/20052-useformstatus-va-useactionstate-dung-de-lam-gi-voi-server-actions-va-tai-sao-use",
+    "slug": "useformstatus-va-useactionstate-dung-de-lam-gi-voi-server-actions-va-tai-sao-useformstatus-phai-nam-2f5ec660-5d50-5761-860f-6602a1d0d681",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai hook bù trừ cho nhau khi làm form bằng Server Actions:",
+        "Tại sao useFormStatus phải ở component con: nó đọc trạng thái của <form> cha gần nhất qua context. Nếu gọi ngay trong cùng component chứa <form>, nó không nằm bên trong form đó nên luôn trả pending: false. Vì vậy phải tách nút submit thành component con đặt trong <form>."
+      ],
+      "details": [
+        "useActionState (React, dùng ở Client Component) — bọc một action, giữ state trả về của nó (lỗi validation, kết quả) qua các lần submit.",
+        "Lưu ý: useFormState là tên cũ; React 19 đổi sang useActionState."
+      ],
+      "points": [],
+      "sections": [
+        "useFormStatus (react-dom) — cho biết form cha đang pending hay không, để vô hiệu nút / hiện spinner."
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "const [state, formAction] = useActionState(createUser, { error: null })\nreturn <form action={formAction}>...{state.error && <p>{state.error}</p>}</form>"
+        },
+        {
+          "language": "TSX",
+          "code": "function SubmitButton() {\n  const { pending } = useFormStatus()\n  return <button disabled={pending}>{pending ? 'Đang gửi…' : 'Gửi'}</button>\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": "20052-useformstatus-va-useactionstate-dung-de-lam-gi-voi-server-actions-va-tai-sao-use"
+  },
+  {
+    "id": "163e9236-b877-57a6-9e2b-22b39556a23f",
+    "question": "Draft Mode trong Next.js dùng để làm gì, và nó bật/tắt static rendering ra sao cho preview nội dung CMS?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/20053-draft-mode-trong-next-js-dung-de-lam-gi-va-no-bat-tat-static-rendering-ra-sao-ch",
+    "slug": "draft-mode-trong-next-js-dung-de-lam-gi-va-no-bat-tat-static-rendering-ra-sao-cho-preview-noi-dung-c-163e9236-b877-57a6-9e2b-22b39556a23f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Draft Mode cho phép biên tập viên xem trước bản nháp từ CMS trên trang vốn được render tĩnh (SSG/ISR) — tức là bỏ qua cache, fetch nội dung chưa publish.",
+        "Trong page, đọc (await draftMode()).isEnabled để quyết định fetch bản draft hay published."
+      ],
+      "details": [
+        "Cơ chế: một Route Handler gọi draftMode().enable(), Next.js đặt một cookie ký; khi cookie có mặt, các trang chuyển từ static sang dynamic rendering để luôn lấy data mới.",
+        "Lưu ý quan trọng: luôn xác thực một secret token trước khi enable() — nếu không, ai cũng bật được draft mode và buộc trang chạy dynamic (mất lợi ích cache, lộ nội dung chưa publish). Tắt bằng draftMode().disable()."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "// app/api/draft/route.ts\nimport { draftMode } from 'next/headers'\nimport { redirect } from 'next/navigation'\n\nexport async function GET(request: Request) {\n  const slug = new URL(request.url).searchParams.get('slug')\n  // ... verify secret token từ CMS\n  (await draftMode()).enable()\n  redirect(`/posts/${slug}`)\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "20053-draft-mode-trong-next-js-dung-de-lam-gi-va-no-bat-tat-static-rendering-ra-sao-ch"
+  },
+  {
+    "id": "26a99152-dfb4-5f3a-95ce-1fc297c9451f",
+    "question": "Layout và page cùng gọi getUser() với fetch giống hệt nhau. Backend có nhận hai request không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97254-layout-va-page-cung-goi-getuser-voi-fetch-giong-het-nhau-backend-co-nhan-hai-req",
+    "slug": "layout-va-page-cung-goi-getuser-voi-fetch-giong-het-nhau-backend-co-nhan-hai-request-khong-26a99152-dfb4-5f3a-95ce-1fc297c9451f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Không, trong cùng một lượt render server chỉ có một request thực sự đi ra.",
+        "Nhờ vậy không cần nâng dữ liệu lên component cha rồi khoan props xuống — cứ gọi ở nơi cần dùng."
+      ],
+      "details": [
+        "Đây là request memoization: React ghi nhớ kết quả fetch theo (URL + options) trong suốt vòng đời của một request, các lời gọi sau lấy lại kết quả đã có.",
+        "Giới hạn cần nhớ:\n- Chỉ áp dụng cho fetch với method GET, và chỉ trong một lượt render; request tiếp theo bắt đầu lại từ đầu.\n- Không áp dụng cho ORM/driver DB hay axios. Muốn có hành vi tương tự, bọc bằng cache() của React.\n- Options khác nhau (header khác) tính là key khác → vẫn gọi hai lần.",
+        "Đây là tầng khác với Data Cache (tồn tại xuyên request, có revalidate) — memoization chỉ sống trong một lượt render."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "async function getUser(id: string) {\n  const res = await fetch(`https://api.example.com/users/${id}`)\n  return res.json()\n}\n\n// layout.tsx và page.tsx cùng gọi getUser('1') → backend chỉ nhận 1 request"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "97254-layout-va-page-cung-goi-getuser-voi-fetch-giong-het-nhau-backend-co-nhan-hai-req"
+  },
+  {
+    "id": "76b14a89-0944-5c56-9ff7-2938c2d9f5d9",
+    "question": "Lỗi ném từ layout.tsx không được error.tsx cùng thư mục bắt. Vì sao và xử lý ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97256-loi-nem-tu-layout-tsx-khong-duoc-error-tsx-cung-thu-muc-bat-vi-sao-va-xu-ly-ra-s",
+    "slug": "loi-nem-tu-layout-tsx-khong-duoc-error-tsx-cung-thu-muc-bat-vi-sao-va-xu-ly-ra-sao-76b14a89-0944-5c56-9ff7-2938c2d9f5d9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì error.tsx được render bên trong layout cùng cấp. Layout đã hỏng thì không thể bọc được UI lỗi của chính nó.",
+        "Các điểm hay bị hỏi thêm:\n- error.tsx bắt buộc là Client Component (cần state để reset).\n- reset() render lại segment; nếu nguyên nhân chưa hết thì lỗi lặp lại.\n- notFound() không đi vào error.tsx mà vào not-found.tsx.\n- Ở production, message của lỗi server bị lược bỏ, chỉ còn error.digest để đối chiếu log."
+      ],
+      "details": [
+        "Cách xử lý:\n- Lỗi ở app/dashboard/layout.tsx → cần app/error.tsx ở cấp cha bắt.\n- Lỗi ở layout gốc (app/layout.tsx) hoặc template gốc → chỉ app/global-error.tsx bắt được. File này thay thế cả layout gốc nên phải tự render <html> và <body>."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "// app/global-error.tsx\n'use client'\nexport default function GlobalError({ error, reset }: { error: Error; reset: () => void }) {\n  return (\n    <html>\n      <body>\n        <h2>Something went wrong</h2>\n        <button onClick={reset}>Try again</button>\n      </body>\n    </html>\n  )\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": "97256-loi-nem-tu-layout-tsx-khong-duoc-error-tsx-cung-thu-muc-bat-vi-sao-va-xu-ly-ra-s"
+  },
+  {
+    "id": "333ede0b-7668-5eba-8b63-c5ad67933eb7",
+    "question": "Phân biệt export const dynamic, revalidate, dynamicParams và fetchCache ở segment config. Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97257-phan-biet-export-const-dynamic-revalidate-dynamicparams-va-fetchcache-o-segment",
+    "slug": "phan-biet-export-const-dynamic-revalidate-dynamicparams-va-fetchcache-o-segment-config-khi-nao-dung-333ede0b-7668-5eba-8b63-c5ad67933eb7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Đây là các hằng export ở đầu page.tsx/layout.tsx/route.ts để ép hành vi render và cache của cả segment.",
+        "Thực tế: ưu tiên khai báo ở mức fetch (next: { revalidate, tags }) cho từng nguồn dữ liệu."
+      ],
+      "details": [
+        "Chỉ dùng segment config khi cần chính sách cho cả trang, ví dụ dashboard theo user thì force-dynamic."
+      ],
+      "points": [
+        "dynamic: 'auto' (mặc định) · 'force-dynamic' render lại mỗi request, tương đương opt-out toàn bộ cache · 'force-static' ép static, các dynamic API như cookies() trả về giá trị rỗng · 'error' build fail nếu có gì làm route thành dynamic (hữu ích để bảo vệ trang phải static).",
+        "revalidate: số giây ISR cho segment. 0 nghĩa là luôn dynamic. Giá trị ở segment con thấp hơn sẽ được áp dụng.",
+        "dynamicParams: dùng với generateStaticParams. true (mặc định) — param chưa render sẽ được render on-demand rồi cache; false — param ngoài danh sách trả về 404.",
+        "fetchCache: ghi đè hành vi cache mặc định của mọi fetch trong segment. Hiếm khi cần, chỉ dùng khi phải áp một chính sách chung."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "export const revalidate = 3600      // trang tin tức: làm mới mỗi giờ\nexport const dynamicParams = false  // chỉ phục vụ slug đã biết"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": "97257-phan-biet-export-const-dynamic-revalidate-dynamicparams-va-fetchcache-o-segment"
+  },
+  {
+    "id": "bd77c047-8aed-55e2-ac9c-c1bbf61f2fd1",
+    "question": "Khi nào dùng Server Action, khi nào viết Route Handler (route.ts)?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97258-khi-nao-dung-server-action-khi-nao-viet-route-handler-route-ts",
+    "slug": "khi-nao-dung-server-action-khi-nao-viet-route-handler-route-ts-bd77c047-8aed-55e2-ac9c-c1bbf61f2fd1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai thứ giải quyết hai bài toán khác nhau.",
+        "Chốt: form và nút bấm trong app dùng Server Action; hệ thống bên ngoài gọi vào thì dùng Route Handler."
+      ],
+      "details": [
+        "Server Action — mutation phát sinh từ chính UI của app:\n- Gắn thẳng vào <form action={...}> hoặc gọi từ client component, không phải tự viết fetch và endpoint.\n- Chạy được cả khi JS chưa tải (progressive enhancement với form).\n- Sau khi ghi xong, gọi revalidatePath/revalidateTag để đồng bộ lại UI trong cùng một vòng.\n- Luôn là POST và chạy tuần tự — không hợp cho đường đọc dữ liệu hay gọi song song nhiều lần.",
+        "Route Handler — cần một HTTP endpoint thật:\n- Bên thứ ba gọi vào: webhook thanh toán, callback OAuth, cron.\n- Mobile app hoặc domain khác tiêu thụ (cần CORS, versioning).\n- Cần kiểm soát chi tiết method/status/header, trả file, stream, hoặc SSE.\n- Cần GET có cache/CDN.",
+        "Đọc dữ liệu cho trang thì không cần cả hai — fetch thẳng trong Server Component."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "// app/api/webhooks/sepay/route.ts — bắt buộc là route handler\nexport async function POST(req: Request) {\n  const sig = req.headers.get('x-signature')\n  // verify signature, ghi DB\n  return Response.json({ ok: true })\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": "97258-khi-nao-dung-server-action-khi-nao-viet-route-handler-route-ts"
+  },
+  {
+    "id": "cf50511d-3428-5dea-a898-69bfb14fb579",
+    "question": "Trang chi tiết sản phẩm có 50.000 slug. generateStaticParams có phải build hết 50.000 trang không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97259-trang-chi-tiet-san-pham-co-50-000-slug-generatestaticparams-co-phai-build-het-50",
+    "slug": "trang-chi-tiet-san-pham-co-50-000-slug-generatestaticparams-co-phai-build-het-50-000-trang-khong-cf50511d-3428-5dea-a898-69bfb14fb579",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Không bắt buộc. generateStaticParams chỉ quyết định tập được prerender lúc build; phần còn lại có thể render lần đầu khi có người truy cập rồi được cache lại.",
+        "Với dynamicParams = true (mặc định), slug thứ 1001 khi được truy cập lần đầu sẽ render trên server, lưu vào cache rồi phục vụ như static cho các request sau. Đặt dynamicParams = false nếu muốn slug ngoài danh sách trả 404 — hợp với tập dữ liệu đóng."
+      ],
+      "details": [
+        "Chiến lược thường dùng: build sẵn nhóm quan trọng, phần đuôi dài để on-demand.",
+        "Lưu ý thực tế:\n- Hàm này chạy lúc build, tránh gọi API bị rate limit; nên đọc thẳng DB hoặc dùng bản dump.\n- Route lồng nhau nhiều tầng dynamic thì mỗi tầng có generateStaticParams riêng và tổ hợp nhân lên — dễ làm build phình thời gian.\n- Sau khi sửa dữ liệu, dùng revalidatePath('/products/' + slug) thay vì chờ hết revalidate."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "export async function generateStaticParams() {\n  const top = await getTopProducts(1000)   // chỉ prerender 1000 sản phẩm bán chạy\n  return top.map(p => ({ slug: p.slug }))\n}\n\nexport const revalidate = 3600"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": "97259-trang-chi-tiet-san-pham-co-50-000-slug-generatestaticparams-co-phai-build-het-50"
+  },
+  {
+    "id": "a0780abe-1c4d-52a9-9288-6d7bd67b5574",
+    "question": "Migrate một dự án Pages Router sang App Router thế nào để không phải dừng phát triển tính năng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97260-migrate-mot-du-an-pages-router-sang-app-router-the-nao-de-khong-phai-dung-phat-t",
+    "slug": "migrate-mot-du-an-pages-router-sang-app-router-the-nao-de-khong-phai-dung-phat-trien-tinh-nang-a0780abe-1c4d-52a9-9288-6d7bd67b5574",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Next.js cho phép pages/ và app/ cùng tồn tại trong một dự án, nên nên đi từng phần thay vì viết lại một lượt. Khi trùng đường dẫn, app/ được ưu tiên."
+      ],
+      "details": [
+        "1. Nâng Next lên bản hỗ trợ, tạo app/layout.tsx — layout gốc thay cho _app.tsx + _document.tsx (phải tự render <html> và <body>).\n2. Chuyển các trang rời rạc, ít phụ thuộc trước (landing, docs, trang tĩnh) để làm quen quy ước.\n3. Ánh xạ data fetching: getServerSideProps → await thẳng trong Server Component; getStaticProps → fetch có revalidate; getStaticPaths → generateStaticParams.\n4. Đổi import: next/router (useRouter, query) → next/navigation (useRouter, useParams, useSearchParams, usePathname). API khác nhau nên không đổi tên là xong.\n5. next/head → metadata hoặc generateMetadata.\n6. Chuyển pages/api/* sang app/api/*/route.ts sau cùng, hoặc giữ nguyên vì vẫn chạy được.",
+        "Thứ tự thường làm:",
+        "Các điểm hay vấp:\n- Component dùng hook hay event handler cần 'use client'; ban đầu cứ đánh dấu để chạy được, sau đó tối ưu dần.\n- Provider toàn cục (theme, store) phải bọc trong một client component rồi đặt vào layout gốc.\n- useSearchParams trong client component làm route thành dynamic — bọc <Suspense> nếu muốn giữ phần còn lại static."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": "97260-migrate-mot-du-an-pages-router-sang-app-router-the-nao-de-khong-phai-dung-phat-t"
+  },
+  {
+    "id": "cd2c8e16-17a5-5374-af13-9e39cc6e4d68",
+    "question": "Dùng next/image với ảnh từ CDN bên ngoài báo lỗi \"hostname is not configured\". Xử lý thế nào, và fill với sizes dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97304-dung-next-image-voi-anh-tu-cdn-ben-ngoai-bao-loi-hostname-is-not-configured-xu-l",
+    "slug": "dung-next-image-voi-anh-tu-cdn-ben-ngoai-bao-loi-hostname-is-not-configured-xu-ly-the-nao-va-fill-vo-cd2c8e16-17a5-5374-af13-9e39cc6e4d68",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lỗi đó là cơ chế bảo vệ: nếu cho phép tối ưu ảnh từ mọi domain, ai cũng có thể ép server của bạn xử lý ảnh của họ.",
+        "srcset",
+        "100vw",
+        "next/image",
+        "Khai báo càng hẹp càng tốt (pathname, port). Tránh hostname: '**'.",
+        "Thiếu sizes khi dùng fill là lỗi hay gặp nhất"
+      ],
+      "details": [
+        "Phải khai báo domain được phép:",
+        "fill và sizes: khi không biết trước kích thước ảnh (ảnh do người dùng tải lên, ảnh phủ kín card), dùng fill để ảnh trải theo phần tử cha — cha phải có position: relative và chiều cao xác định.",
+        "Về chi phí: mỗi tổ hợp (ảnh gốc, bề rộng, định dạng) là một lần transform có tính phí trên nền tảng hosting. Giảm bằng cách khai báo deviceSizes/imageSizes gọn lại, hoặc dùng unoptimized cho ảnh CDN đã tối ưu sẵn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// next.config.js\nmodule.exports = {\n  images: {\n    remotePatterns: [\n      { protocol: 'https', hostname: 'cdn.example.com', pathname: '/uploads/**' },\n    ],\n  },\n}"
+        },
+        {
+          "language": "TSX",
+          "code": "<div className=\"relative h-64 w-full\">\n  <Image src={url} alt=\"\" fill sizes=\"(max-width: 768px) 100vw, 33vw\" style={{ objectFit: 'cover' }} />\n</div>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": "97304-dung-next-image-voi-anh-tu-cdn-ben-ngoai-bao-loi-hostname-is-not-configured-xu-l"
+  },
+  {
+    "id": "79201942-8251-57e3-9f2b-70e71483f6a1",
+    "question": "Component dùng thư viện chart bị lỗi window is not defined khi build. dynamic(..., { ssr: false }) giải quyết thế nào, và có mặt trái gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97305-component-dung-thu-vien-chart-bi-loi-window-is-not-defined-khi-build-dynamic-ssr",
+    "slug": "component-dung-thu-vien-chart-bi-loi-window-is-not-defined-khi-build-dynamic-ssr-false-giai-quyet-th-79201942-8251-57e3-9f2b-70e71483f6a1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lỗi xảy ra vì Next.js render component đó trên server (Node), nơi không có window/document.",
+        "ssr: false bảo Next.js bỏ qua component này trong lần render server, chỉ mount ở client. Kèm theo đó, code của nó bị tách thành chunk riêng và chỉ tải khi cần."
+      ],
+      "details": [
+        "Thư viện chart, editor, map thường chạm vào DOM ngay khi import.",
+        "Mặt trái:\n- Nội dung không có trong HTML ban đầu → bot không đọc được. Không dùng cho nội dung cần index.\n- Người dùng thấy một khoảng trống rồi mới thấy component → nếu nó nằm trên màn hình đầu, LCP xấu đi. Luôn đặt loading với đúng chiều cao của component thật để không gây layout shift.\n- Trong App Router, ssr: false chỉ dùng được trong Client Component; đặt trong Server Component sẽ báo lỗi.",
+        "Trước khi dùng, kiểm tra xem có cách nhẹ hơn không: nhiều thư viện chỉ chạm window bên trong useEffect — khi đó chỉ cần chuyển lời gọi vào useEffect là đủ, không cần tắt SSR."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "'use client'\nimport dynamic from 'next/dynamic'\n\nconst Chart = dynamic(() => import('./revenue-chart'), {\n  ssr: false,\n  loading: () => <div className=\"h-64 animate-pulse\" />,\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": "97305-component-dung-thu-vien-chart-bi-loi-window-is-not-defined-khi-build-dynamic-ssr"
+  },
+  {
+    "id": "eeee21b0-f5b0-5e7f-9a74-ef5529b80515",
+    "question": "Share link lên Facebook/Zalo không hiện ảnh preview dù đã khai báo openGraph.images. Nguyên nhân hay gặp là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97306-share-link-len-facebook-zalo-khong-hien-anh-preview-du-da-khai-bao-opengraph-ima",
+    "slug": "share-link-len-facebook-zalo-khong-hien-anh-preview-du-da-khai-bao-opengraph-images-nguyen-nhan-hay-eeee21b0-f5b0-5e7f-9a74-ef5529b80515",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba nguyên nhân chiếm phần lớn trường hợp:",
+        "Thiếu metadataBase, thẻ sinh ra là /og.png — crawler không phân giải được."
+      ],
+      "details": [
+        "1. URL ảnh là đường dẫn tương đối. Crawler mạng xã hội cần URL tuyệt đối. Khai báo metadataBase một lần ở root layout, Next.js sẽ tự nối tiền tố:",
+        "opengraph-image.tsx",
+        "2. Trang render động, metadata sinh sau. Metadata phải nằm trong HTML server trả về. Đặt trong Client Component hay set bằng JavaScript sau khi mount thì crawler mạng xã hội không thấy — chúng không chạy JS. Dùng export const metadata hoặc generateMetadata trong Server Component.",
+        "3. Crawler đã cache bản cũ. Facebook/Zalo lưu lại kết quả lần đầu. Sau khi sửa phải dùng công cụ debug của nền tảng để bắt nó quét lại."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "// app/layout.tsx\nexport const metadata: Metadata = {\n  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),\n  openGraph: { images: ['/og.png'] },\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": "97306-share-link-len-facebook-zalo-khong-hien-anh-preview-du-da-khai-bao-opengraph-ima"
+  },
+  {
+    "id": "75e188f6-e59e-52fc-ab7d-204082b32c3b",
+    "question": "Site có 200.000 URL sản phẩm. Viết sitemap.ts trả toàn bộ trong một mảng có được không? Làm đúng thì làm thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97307-site-co-200-000-url-san-pham-viet-sitemap-ts-tra-toan-bo-trong-mot-mang-co-duoc",
+    "slug": "site-co-200-000-url-san-pham-viet-sitemap-ts-tra-toan-bo-trong-mot-mang-co-duoc-khong-lam-dung-thi-l-75e188f6-e59e-52fc-ab7d-204082b32c3b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Không. Chuẩn sitemap giới hạn 50.000 URL hoặc 50MB (chưa nén) mỗi file. Vượt ngưỡng thì Google bỏ qua phần dư. Ngoài ra, dựng một mảng 200.000 phần tử trong một hàm còn dễ hết bộ nhớ lúc build hoặc timeout lúc request.",
+        "Next.js sinh ra /products/sitemap/0.xml, /products/sitemap/1.xml... Bạn khai báo chúng trong một sitemap index và trỏ robots.txt tới index đó."
+      ],
+      "details": [
+        "Cách đúng là chia nhỏ bằng generateSitemaps:",
+        "Hai lưu ý thực chiến:\n- lastModified phải là thời điểm nội dung thực sự đổi. Nếu cứ trả new Date() mỗi lần build, tín hiệu này mất giá trị và crawler bỏ qua.\n- Sitemap chỉ nên chứa URL 200, có thể index, dạng canonical. Nhét URL bị redirect, noindex hay chặn bởi robots vào sẽ làm hao ngân sách thu thập."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "// app/products/sitemap.ts\nexport async function generateSitemaps() {\n  const total = await countProducts()\n  return Array.from({ length: Math.ceil(total / 50000) }, (_, id) => ({ id }))\n}\n\nexport default async function sitemap({ id }: { id: number }): Promise<MetadataRoute.Sitemap> {\n  const rows = await getProducts({ offset: id * 50000, limit: 50000 })\n  return rows.map((p) => ({\n    url: `https://example.com/products/${p.slug}`,\n    lastModified: p.updatedAt,\n  }))\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": "97307-site-co-200-000-url-san-pham-viet-sitemap-ts-tra-toan-bo-trong-mot-mang-co-duoc"
+  },
+  {
+    "id": "f77da593-865f-500f-91ad-6843abfc4625",
+    "question": "App Router không còn cấu hình i18n sẵn trong next.config như Pages Router. Vậy làm site đa ngôn ngữ thế nào cho đúng SEO?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97308-app-router-khong-con-cau-hinh-i18n-san-trong-next-config-nhu-pages-router-vay-la",
+    "slug": "app-router-khong-con-cau-hinh-i18n-san-trong-next-config-nhu-pages-router-vay-lam-site-da-ngon-ngu-t-f77da593-865f-500f-91ad-6843abfc4625",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba mảnh cần ghép:"
+      ],
+      "details": [
+        "1. Middleware chọn ngôn ngữ. Khi vào / không có locale, đọc Accept-Language hoặc cookie đã lưu rồi redirect sang /vi hoặc /en. Ghi lựa chọn vào cookie để lần sau không đoán lại.\n2. generateStaticParams trả về danh sách locale để mỗi ngôn ngữ được build tĩnh:"
+      ],
+      "points": [],
+      "sections": [
+        "App Router bỏ cấu hình i18n tự động và yêu cầu bạn tự dựng routing bằng một dynamic segment:",
+        "3. Tín hiệu SEO trong generateMetadata: đặt alternates.languages để sinh thẻ hreflang, và alternates.canonical trỏ về chính URL của ngôn ngữ đó.",
+        "cùng một URL trả nội dung khác nhau tuỳ Accept-Language"
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "app/[locale]/layout.tsx\napp/[locale]/page.tsx\napp/[locale]/products/[slug]/page.tsx"
+        },
+        {
+          "language": "TS",
+          "code": "export function generateStaticParams() {\n  return [{ locale: 'vi' }, { locale: 'en' }]\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": "97308-app-router-khong-con-cau-hinh-i18n-san-trong-next-config-nhu-pages-router-vay-la"
+  },
+  {
+    "id": "0c8b0434-2848-5954-90ca-42dc99971a38",
+    "question": "Parallel Routes và Intercepting Routes trong Next.js là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "parallel-routes-va-intercepting-routes-trong-next-js-la-gi-0c8b0434-2848-5954-90ca-42dc99971a38",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": null
+  },
+  {
+    "id": "10482a19-a202-5ecb-b9d4-3782ce82fa77",
+    "question": "Server Component props phải tuân theo quy tắc gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "server-component-props-phai-tuan-theo-quy-tac-gi-10482a19-a202-5ecb-b9d4-3782ce82fa77",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": null
+  },
+  {
+    "id": "21a6889a-b1bc-52f8-804a-484fb3670d85",
+    "question": "React Server Components streaming và progressive rendering là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "react-server-components-streaming-va-progressive-rendering-la-gi-21a6889a-b1bc-52f8-804a-484fb3670d85",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": null
+  },
+  {
+    "id": "ba7f3ff1-0b93-5078-9cd2-0126193b02b2",
+    "question": "Next.js có những loại cache nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "next-js-co-nhung-loai-cache-nao-ba7f3ff1-0b93-5078-9cd2-0126193b02b2",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": null
+  },
+  {
+    "id": "e8f25523-51a3-54b7-8de3-5dec37110a05",
+    "question": "Partial Prerendering (PPR) trong Next.js là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "partial-prerendering-ppr-trong-next-js-la-gi-e8f25523-51a3-54b7-8de3-5dec37110a05",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": null
+  },
+  {
+    "id": "ee549ca1-9668-518d-8f59-e1c54b0a2123",
+    "question": "Security considerations khi dùng Server Actions?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "security-considerations-khi-dung-server-actions-ee549ca1-9668-518d-8f59-e1c54b0a2123",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": null
+  },
+  {
+    "id": "bd6b03bd-54ce-5260-a108-118ac4d69237",
+    "question": "Edge Runtime vs Node.js Runtime trong Next.js là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "edge-runtime-vs-node-js-runtime-trong-next-js-la-gi-bd6b03bd-54ce-5260-a108-118ac4d69237",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": null
+  },
+  {
+    "id": "4aa23e5b-9003-5f20-9ad4-85b98963d27c",
+    "question": "Bundle analyzer trong Next.js được dùng như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "bundle-analyzer-trong-next-js-duoc-dung-nhu-the-nao-4aa23e5b-9003-5f20-9ad4-85b98963d27c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": null
+  },
+  {
+    "id": "b03034e1-76d2-57a2-b19e-760b9dcfe8c2",
+    "question": "Turbopack là gì và lợi ích của nó trong Next.js?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "turbopack-la-gi-va-loi-ich-cua-no-trong-next-js-b03034e1-76d2-57a2-b19e-760b9dcfe8c2",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 76,
+    "sourceSlug": null
+  },
+  {
+    "id": "64fd22e3-8eba-504c-8078-95531318dc8d",
+    "question": "Internationalization (i18n) trong Next.js được implement như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "internationalization-i18n-trong-next-js-duoc-implement-nhu-the-nao-64fd22e3-8eba-504c-8078-95531318dc8d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 77,
+    "sourceSlug": null
+  },
+  {
+    "id": "19935e20-7d4a-590e-b035-a480225fa03f",
+    "question": "Cách implement Content-Security-Policy với nonce trong Next.js là gì, và tại sao phải tạo nonce mới mỗi request thay vì hardcode?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cach-implement-content-security-policy-voi-nonce-trong-next-js-la-gi-va-tai-sao-phai-tao-nonce-moi-m-19935e20-7d4a-590e-b035-a480225fa03f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 78,
+    "sourceSlug": null
+  },
+  {
+    "id": "dab58d63-3ce6-5461-bbb3-71096947971f",
+    "question": "Server Actions có bảo vệ CSRF tích hợp không, và bạn vẫn phải tự lo những lớp bảo mật nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "server-actions-co-bao-ve-csrf-tich-hop-khong-va-ban-van-phai-tu-lo-nhung-lop-bao-mat-nao-dab58d63-3ce6-5461-bbb3-71096947971f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 79,
+    "sourceSlug": null
+  },
+  {
+    "id": "5d38ec60-d907-5ec7-96e3-a78ef197f0f0",
+    "question": "Tại sao kết nối database từ Next.js serverless cần xử lý connection pooling đặc biệt, và Prisma/Drizzle giải quyết ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "tai-sao-ket-noi-database-tu-next-js-serverless-can-xu-ly-connection-pooling-dac-biet-va-prisma-drizz-5d38ec60-d907-5ec7-96e3-a78ef197f0f0",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 80,
+    "sourceSlug": null
+  },
+  {
+    "id": "9891c869-8bdc-56e1-9783-75ede0288997",
+    "question": "Chiến lược migrate từ Pages Router sang App Router là gì? Hai router có chạy song song được không?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "chien-luoc-migrate-tu-pages-router-sang-app-router-la-gi-hai-router-co-chay-song-song-duoc-khong-9891c869-8bdc-56e1-9783-75ede0288997",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 81,
+    "sourceSlug": null
+  },
+  {
+    "id": "5011a6e5-656d-5635-88a7-38a65d432d2c",
+    "question": "Parallel và sequential data fetching khác nhau ra sao trong App Router, và preload pattern giải quyết vấn đề gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "parallel-va-sequential-data-fetching-khac-nhau-ra-sao-trong-app-router-va-preload-pattern-giai-quyet-5011a6e5-656d-5635-88a7-38a65d432d2c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 82,
+    "sourceSlug": null
+  },
+  {
+    "id": "17f1608f-53db-51c8-a03d-9a54f06be061",
+    "question": "Đã revalidateTag sau khi cập nhật dữ liệu, server trả bản mới, nhưng người dùng bấm Back vẫn thấy dữ liệu cũ. Vì sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "da-revalidatetag-sau-khi-cap-nhat-du-lieu-server-tra-ban-moi-nhung-nguoi-dung-bam-back-van-thay-du-l-17f1608f-53db-51c8-a03d-9a54f06be061",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 83,
+    "sourceSlug": null
+  },
+  {
+    "id": "50298dd7-02a4-564f-81b7-ea966caf9c7e",
+    "question": "Dữ liệu lấy bằng Prisma (không qua fetch) thì Data Cache và revalidateTag có tác dụng không?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "du-lieu-lay-bang-prisma-khong-qua-fetch-thi-data-cache-va-revalidatetag-co-tac-dung-khong-50298dd7-02a4-564f-81b7-ea966caf9c7e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 84,
+    "sourceSlug": null
+  },
+  {
+    "id": "b13289f2-c22a-5174-ac0c-f25d9e27bb63",
+    "question": "Middleware trong Next.js chạy ở đâu, bị giới hạn gì? Có nên coi nó là lớp phân quyền duy nhất không?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "middleware-trong-next-js-chay-o-dau-bi-gioi-han-gi-co-nen-coi-no-la-lop-phan-quyen-duy-nhat-khong-b13289f2-c22a-5174-ac0c-f25d9e27bb63",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 85,
+    "sourceSlug": null
+  },
+  {
+    "id": "ff4fbe3b-74ac-5bd5-8341-052277f86d9e",
+    "question": "Gọi cookies().set() trong Server Component bị lỗi. Vì sao, và đặt cookie phiên ở đâu cho đúng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "goi-cookies-set-trong-server-component-bi-loi-vi-sao-va-dat-cookie-phien-o-dau-cho-dung-ff4fbe3b-74ac-5bd5-8341-052277f86d9e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 86,
+    "sourceSlug": null
+  },
+  {
+    "id": "690ba8a0-23c6-5afd-a17b-8d00cc2759eb",
+    "question": "Thiết kế luồng xem ảnh dạng modal (bấm trong feed mở modal, gửi link thì ra trang đầy đủ) bằng App Router như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "thiet-ke-luong-xem-anh-dang-modal-bam-trong-feed-mo-modal-gui-link-thi-ra-trang-day-du-bang-app-rout-690ba8a0-23c6-5afd-a17b-8d00cc2759eb",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 87,
+    "sourceSlug": null
+  },
+  {
+    "id": "bf363dc8-64ee-5762-ae86-98293f402921",
+    "question": "Self-host Next.js bằng Docker: output: 'standalone' để làm gì, và những gì hay hỏng khi rời khỏi Vercel?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "self-host-next-js-bang-docker-output-standalone-de-lam-gi-va-nhung-gi-hay-hong-khi-roi-khoi-vercel-bf363dc8-64ee-5762-ae86-98293f402921",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 88,
+    "sourceSlug": null
+  },
+  {
+    "id": "d1823c48-47ba-528d-9cc6-bd6f91db9d1a",
+    "question": "Một route nên chạy Edge runtime hay Node runtime? Bạn quyết định dựa trên tiêu chí nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mot-route-nen-chay-edge-runtime-hay-node-runtime-ban-quyet-dinh-dua-tren-tieu-chi-nao-d1823c48-47ba-528d-9cc6-bd6f91db9d1a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 89,
+    "sourceSlug": null
+  },
+  {
+    "id": "f26f9187-04a9-5dcf-ad45-4fd345c8902d",
+    "question": "Hydration mismatch chạy next dev không thấy nhưng lên production mới xuất hiện. Vì sao, và bạn truy vết thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "hydration-mismatch-chay-next-dev-khong-thay-nhung-len-production-moi-xuat-hien-vi-sao-va-ban-truy-ve-f26f9187-04a9-5dcf-ad45-4fd345c8902d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 90,
+    "sourceSlug": null
+  },
+  {
+    "id": "bca2c6ea-532f-5aa7-b547-260a044ee3e0",
+    "question": "Trang dùng Server Component nhưng payload gửi xuống client vẫn rất lớn. Nguyên nhân thường là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "trang-dung-server-component-nhung-payload-gui-xuong-client-van-rat-lon-nguyen-nhan-thuong-la-gi-bca2c6ea-532f-5aa7-b547-260a044ee3e0",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 91,
+    "sourceSlug": null
+  },
+  {
+    "id": "224a10c0-663e-59c1-8082-b82d504ce7ea",
+    "question": "next build trên CI mất 15 phút. Bạn tìm nguyên nhân và rút ngắn bằng cách nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "next-build-tren-ci-mat-15-phut-ban-tim-nguyen-nhan-va-rut-ngan-bang-cach-nao-224a10c0-663e-59c1-8082-b82d504ce7ea",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 92,
+    "sourceSlug": null
+  }
+]

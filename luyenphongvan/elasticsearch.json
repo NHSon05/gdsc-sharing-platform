@@ -1,0 +1,1281 @@
+[
+  {
+    "id": "e8467f4c-71e2-56b4-a0a4-24ff358e00fe",
+    "question": "Inverted index là gì và vì sao nó làm full-text search nhanh?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100101-inverted-index-la-gi-va-vi-sao-no-lam-full-text-search-nhanh",
+    "slug": "inverted-index-la-gi-va-vi-sao-no-lam-full-text-search-nhanh-e8467f4c-71e2-56b4-a0a4-24ff358e00fe",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Inverted index map term sang danh sách document chứa term đó.",
+        "Đây là lý do full-text search nhanh hơn hẳn LIKE %...%, nơi B-tree index không giúp được vì từ nằm giữa chuỗi."
+      ],
+      "details": [
+        "Tìm một từ chỉ là một lần lookup rồi lấy posting list, thay vì scan toàn bộ document như LIKE %keyword% trong SQL.",
+        "Dữ liệu đi vào index phải qua analysis: tokenize, lowercase, bỏ dấu hoặc stemming tuỳ config. Vì thế thứ nằm trong index thường khác chuỗi gốc, và điều này giải thích rất nhiều hành vi search gây bất ngờ."
+      ],
+      "points": [],
+      "sections": [
+        "Hệ quả quan trọng: cùng một analyzer phải áp cho cả index time lẫn query time, không thì từ user gõ sẽ không khớp thứ đã lưu."
+      ],
+      "codeExamples": [
+        {
+          "language": "TEXT",
+          "code": "\"laptop\" -> [doc1, doc7, doc9]\n\"gaming\" -> [doc7, doc12]"
+        },
+        {
+          "language": "BASH",
+          "code": "GET /_analyze\n{ \"analyzer\": \"standard\", \"text\": \"Laptop Gaming\" }\n# -> [\"laptop\", \"gaming\"]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "100101-inverted-index-la-gi-va-vi-sao-no-lam-full-text-search-nhanh"
+  },
+  {
+    "id": "549db3c0-d7c6-53e4-a6fe-e095b3f26684",
+    "question": "Shard và replica khác nhau thế nào? Chọn số shard bao nhiêu?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100102-shard-va-replica-khac-nhau-the-nao-chon-so-shard-bao-nhieu",
+    "slug": "shard-va-replica-khac-nhau-the-nao-chon-so-shard-bao-nhieu-549db3c0-d7c6-53e4-a6fe-e095b3f26684",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "number_of_shards không đổi được sau khi tạo index — muốn đổi phải reindex. number_of_replicas thì đổi nóng được."
+      ],
+      "details": [
+        "Guideline của Elastic: mỗi shard 10–50 GB, và giữ dưới ~20 shard trên mỗi GB heap của node.",
+        "Lỗi phổ biến nhất là over-sharding: index 2 GB mà để 20 shard. Mỗi shard là một Lucene index tốn heap và file handle riêng, nên chia nhỏ quá làm cluster chậm hẳn chứ không nhanh hơn."
+      ],
+      "points": [],
+      "sections": [
+        "Primary shard chia dữ liệu để scale ngang; replica là bản sao của primary, phục vụ HA và tăng throughput đọc."
+      ],
+      "codeExamples": [
+        {
+          "language": "JSON",
+          "code": "PUT /products\n{ \"settings\": { \"number_of_shards\": 3, \"number_of_replicas\": 1 } }\n// 3 primary + 3 replica = 6 shard, chiu duoc mat 1 node"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "100102-shard-va-replica-khac-nhau-the-nao-chon-so-shard-bao-nhieu"
+  },
+  {
+    "id": "1763b4eb-36b0-5226-9517-88648bd439a1",
+    "question": "text và keyword khác nhau ra sao? Khi nào dùng cái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100103-text-va-keyword-khac-nhau-ra-sao-khi-nao-dung-cai-nao",
+    "slug": "text-va-keyword-khac-nhau-ra-sao-khi-nao-dung-cai-nao-1763b4eb-36b0-5226-9517-88648bd439a1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Đây là multi-field, pattern chuẩn: name để search, name.raw để sort và group."
+      ],
+      "details": [
+        "Hệ quả cụ thể:\n- term query trên field text với giá trị \"Laptop Gaming\" trả về rỗng, vì trong index chỉ có laptop và gaming.\n- Sort trên field text bị từ chối, phải sort trên name.raw.\n- Aggregation trên text cũng bị chặn (cần bật fielddata, và không nên bật).",
+        "Chọn theo mục đích: user gõ tự do để tìm thì text; status, SKU, tag, email, ID thì keyword — chúng không cần tách từ và luôn được dùng để lọc chính xác."
+      ],
+      "points": [],
+      "sections": [
+        "text được analyze (tách token, lowercase) để full-text search; keyword lưu nguyên chuỗi, dùng cho filter, sort và aggregation."
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "100103-text-va-keyword-khac-nhau-ra-sao-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "fa11452a-ffd7-5ef6-ad1a-046cc4b17d79",
+    "question": "Analyzer gồm những thành phần nào và vì sao phải hiểu nó?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100104-analyzer-gom-nhung-thanh-phan-nao-va-vi-sao-phai-hieu-no",
+    "slug": "analyzer-gom-nhung-thanh-phan-nao-va-vi-sao-phai-hieu-no-fa11452a-ffd7-5ef6-ad1a-046cc4b17d79",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Phải hiểu vì hầu hết bug \"tìm mãi không ra\" đều nằm ở đây.",
+        "Quy tắc quan trọng: analyzer lúc index và lúc search phải tương thích. Đổi analyzer trong mapping không tự động áp lại cho document cũ — chúng vẫn giữ token cũ cho tới khi reindex."
+      ],
+      "details": [
+        "Cách debug nhanh nhất là gọi _analyze để xem thực tế index lưu token gì:",
+        "Một cấu hình hay gặp là search_analyzer khác analyzer — thường dùng cho autocomplete với edge n-gram lúc index nhưng không n-gram lúc search."
+      ],
+      "points": [],
+      "sections": [
+        "Ba tầng chạy tuần tự: character filter (sửa chuỗi thô, ví dụ bỏ HTML tag), tokenizer (cắt thành token), token filter (lowercase, bỏ stopword, stemming, asciifolding)."
+      ],
+      "codeExamples": [
+        {
+          "language": "JSON",
+          "code": "GET /products/_analyze\n{ \"field\": \"name\", \"text\": \"Áo Thun Nam\" }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "100104-analyzer-gom-nhung-thanh-phan-nao-va-vi-sao-phai-hieu-no"
+  },
+  {
+    "id": "a0631cc7-30b3-5d81-93df-80873d9eab72",
+    "question": "match và term khác nhau thế nào? Vì sao term hay trả về rỗng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100105-match-va-term-khac-nhau-the-nao-vi-sao-term-hay-tra-ve-rong",
+    "slug": "match-va-term-khac-nhau-the-nao-vi-sao-term-hay-tra-ve-rong-a0631cc7-30b3-5d81-93df-80873d9eab72",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "match analyze giá trị tìm kiếm trước khi so khớp; term so khớp nguyên văn với token trong index.",
+        "Cách chọn: user gõ tự do thì match; lọc chính xác theo status, ID, SKU thì term trên field keyword."
+      ],
+      "details": [
+        "Đó là lý do term trên field text thường trả rỗng.",
+        "Các biến thể hay dùng: match_phrase khi cần đúng thứ tự từ, multi_match khi tìm trên nhiều field, và terms khi lọc theo một danh sách giá trị."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "100105-match-va-term-khac-nhau-the-nao-vi-sao-term-hay-tra-ve-rong"
+  },
+  {
+    "id": "ccef8316-381b-56c2-b19e-8845f5f1b70f",
+    "question": "Index xong một document nhưng search ngay không thấy. Vì sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100106-index-xong-mot-document-nhung-search-ngay-khong-thay-vi-sao",
+    "slug": "index-xong-mot-document-nhung-search-ngay-khong-thay-vi-sao-ccef8316-381b-56c2-b19e-8845f5f1b70f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Elasticsearch là near real-time, không phải real-time. Document chỉ search được sau khi refresh, mặc định 1 giây một lần.",
+        "refresh=true sau mỗi lần ghi là sai lầm thường gặp: nó tạo ra vô số segment nhỏ, ép merge liên tục và giết throughput."
+      ],
+      "details": [
+        "Cơ chế: document ghi vào in-memory buffer + translog trước, refresh mới đẩy buffer thành một Lucene segment và segment đó mới search được.",
+        "Ba cách xử lý, theo mức độ nên dùng:",
+        "tăng refresh_interval lên 30s hoặc -1"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# 1. Doi refresh cua doc vua ghi (tot nhat cho luong \"ghi xong xem ngay\")\nPUT /products/_doc/1?refresh=wait_for\n\n# 2. Ep refresh ngay - CHI dung trong test\nPOST /products/_refresh\n\n# 3. Doc bang GET theo _id - luon thay ngay, khong can refresh\nGET /products/_doc/1"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "100106-index-xong-mot-document-nhung-search-ngay-khong-thay-vi-sao"
+  },
+  {
+    "id": "18df05df-4d92-5625-9c83-d4e454ae2d93",
+    "question": "Vì sao Elasticsearch thường không được dùng làm database chính?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100107-vi-sao-elasticsearch-thuong-khong-duoc-dung-lam-database-chinh",
+    "slug": "vi-sao-elasticsearch-thuong-khong-duoc-dung-lam-database-chinh-18df05df-4d92-5625-9c83-d4e454ae2d93",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Vì nó không có transaction đa document, không có join, và ưu tiên availability hơn consistency. Mất dữ liệu trong tình huống network partition là chuyện đã được ghi nhận."
+      ],
+      "details": [
+        "Các điểm cụ thể thiếu so với một RDBMS:\n- Không có ACID transaction trên nhiều document. Update là delete + reindex cả document.\n- Không có foreign key, không có join thật (nested và join field đều có chi phí cao).\n- Không có unique constraint ngoài _id.\n- Near real-time, nên đọc ngay sau khi ghi có thể chưa thấy.",
+        "Mô hình chuẩn trong hệ thống thật: PostgreSQL/MySQL là source of truth, Elasticsearch là read model được đồng bộ sang, phục vụ search và aggregation."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "100107-vi-sao-elasticsearch-thuong-khong-duoc-dung-lam-database-chinh"
+  },
+  {
+    "id": "6feae1b5-3477-50af-88c7-3f6772c2beee",
+    "question": "Dynamic mapping là gì và vì sao nguy hiểm ở production?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100108-dynamic-mapping-la-gi-va-vi-sao-nguy-hiem-o-production",
+    "slug": "dynamic-mapping-la-gi-va-vi-sao-nguy-hiem-o-production-6feae1b5-3477-50af-88c7-3f6772c2beee",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Elasticsearch tự đoán kiểu field khi gặp field mới. Tiện lúc thử nghiệm nhưng ở production sinh ra ba vấn đề.",
+        "\"dynamic\": \"strict\" trả lỗi khi gặp field lạ; \"dynamic\": false thì nhận nhưng không index (không search được, vẫn nằm trong _source)."
+      ],
+      "details": [
+        "1. Đoán sai kiểu và không sửa được — \"1234\" thành text thay vì long, \"2026-01-15\" thành date trong khi đó là mã đơn hàng. Kiểu field không đổi được sau khi đã có dữ liệu.\n2. Mapping explosion — log ghi field động (user_123_score) làm mapping phình tới hàng nghìn field, cluster state nặng và node chậm hẳn.\n3. Lỗi chỉ lộ ra lúc query, không phải lúc ghi.",
+        "Cách chặn ở production:",
+        "Giới hạn phòng thủ nên đặt kèm: index.mapping.total_fields.limit."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JSON",
+          "code": "PUT /orders\n{\n  \"mappings\": {\n    \"dynamic\": \"strict\",          // field la -> reject luon\n    \"properties\": { \"order_no\": { \"type\": \"keyword\" } }\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "100108-dynamic-mapping-la-gi-va-vi-sao-nguy-hiem-o-production"
+  },
+  {
+    "id": "b9147bf4-a5d6-53b5-9fdf-951a97fd563d",
+    "question": "Query context và filter context khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100109-query-context-va-filter-context-khac-nhau-the-nao",
+    "slug": "query-context-va-filter-context-khac-nhau-the-nao-b9147bf4-a5d6-53b5-9fdf-951a97fd563d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Query context tính điểm liên quan, filter context chỉ trả lời có/không và được cache.",
+        "Quy tắc: mọi điều kiện lọc cứng đều để trong filter — status, khoảng giá, khoảng ngày, category ID. Chỉ phần user gõ mới cần tính điểm."
+      ],
+      "details": [
+        "Điều kiện không cần tính điểm mà để trong must là lãng phí rõ rệt.",
+        "must_not cũng chạy trong filter context nên cũng được cache; should thì tính điểm trừ khi nằm trong filter context.",
+        "Filter cache (node query cache) chỉ dùng lại được khi filter giống hệt nhau. Vì thế range theo now bị viết là now chính xác tới mili giây sẽ không bao giờ hit cache — dùng now/d để làm tròn xuống ngày."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "100109-query-context-va-filter-context-khac-nhau-the-nao"
+  },
+  {
+    "id": "e59ca164-8a55-5a65-b339-1a35a9353704",
+    "question": "Điểm relevance mặc định (BM25) dựa trên những yếu tố nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100110-diem-relevance-mac-dinh-bm25-dua-tren-nhung-yeu-to-nao",
+    "slug": "diem-relevance-mac-dinh-bm25-dua-tren-nhung-yeu-to-nao-e59ca164-8a55-5a65-b339-1a35a9353704",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Ba yếu tố: term frequency (từ xuất hiện nhiều trong document thì điểm cao), inverse document frequency (từ hiếm trong toàn index thì có trọng số lớn), và field length (field ngắn mà chứa từ đó thì điểm cao hơn).",
+        "Một hệ quả hay gây bất ngờ: điểm được tính trên từng shard, nên với index nhiều shard và dữ liệu ít, cùng một document có thể xếp hạng khác nhau tuỳ shard vì IDF khác nhau. Test trên index nhỏ thấy thứ tự lạ thường là do việc này (dùng ?search_type=dfs_query_then_fetch để kiểm chứng)."
+      ],
+      "details": [
+        "So với TF-IDF cũ, BM25 có saturation: lặp từ 100 lần không cho điểm gấp 100 lần.",
+        "Debug điểm bằng explain:",
+        "Điểm BM25 không so sánh được giữa các query khác nhau — không có thang tuyệt đối, nên đừng đặt ngưỡng kiểu \"score > 5 mới hiển thị\"."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "GET /products/_search\n{ \"explain\": true, \"query\": { \"match\": { \"name\": \"laptop\" } } }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "100110-diem-relevance-mac-dinh-bm25-dua-tren-nhung-yeu-to-nao"
+  },
+  {
+    "id": "c032f6e0-c541-5057-8084-b28d47dca34c",
+    "question": "Vì sao from/size bị giới hạn ở 10.000 và thay bằng gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100111-vi-sao-from-size-bi-gioi-han-o-10-000-va-thay-bang-gi",
+    "slug": "vi-sao-from-size-bi-gioi-han-o-10-000-va-thay-bang-gi-c032f6e0-c541-5057-8084-b28d47dca34c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Vì deep pagination bắt mỗi shard phải trả về from + size hit rồi coordinating node sort lại toàn bộ. from=100000 nghĩa là mỗi shard gom 100.010 document — tốn heap tuyến tính theo độ sâu, dễ làm OOM cả cluster. Ngưỡng index.max_result_window mặc định 10.000 là để chặn việc đó.",
+        "Tiêu chí sort phải unique (thêm _id để phá hoà) thì mới không lặp hoặc sót."
+      ],
+      "details": [
+        "Thay bằng search_after cho phân trang sâu:",
+        "Kèm point_in_time nếu cần kết quả ổn định trong lúc dữ liệu vẫn đang thay đổi.",
+        "Đừng nâng max_result_window để \"chữa\" — đó là bỏ đi cái phanh chứ không phải sửa lỗi. Và với UI thật, gần như không ai bấm tới trang 500; giới hạn số trang rồi đẩy user sang lọc thêm là giải pháp sản phẩm tốt hơn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "100111-vi-sao-from-size-bi-gioi-han-o-10-000-va-thay-bang-gi"
+  },
+  {
+    "id": "2ebf05a7-77df-5414-a4c9-347b4f129b9a",
+    "question": "Kết quả terms aggregation có chính xác tuyệt đối không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100112-ket-qua-terms-aggregation-co-chinh-xac-tuyet-doi-khong",
+    "slug": "ket-qua-terms-aggregation-co-chinh-xac-tuyet-doi-khong-2ebf05a7-77df-5414-a4c9-347b4f129b9a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Không. Trên index nhiều shard, terms agg là kết quả xấp xỉ: mỗi shard trả về top N cục bộ rồi coordinating node gộp lại, nên một term xếp thứ 15 ở mọi shard có thể tổng lớn hơn term đang đứng top nhưng vẫn bị bỏ sót.",
+        "Khi cần con số chính xác tuyệt đối (báo cáo tài chính, đối soát), đừng dùng Elasticsearch — chạy trên database gốc. Elasticsearch mạnh ở phân tích tương tác, không phải ở tính chính xác kế toán."
+      ],
+      "details": [
+        "Response nói thẳng điều đó:",
+        "cardinality agg cũng xấp xỉ (HyperLogLog++), sai số vài phần trăm ở tập lớn."
+      ],
+      "points": [],
+      "sections": [
+        "Cách giảm sai số: tăng shard_size (mặc định size * 1.5 + 10) để mỗi shard trả nhiều hơn trước khi gộp."
+      ],
+      "codeExamples": [
+        {
+          "language": "JSON",
+          "code": "\"aggregations\": {\n  \"by_brand\": {\n    \"doc_count_error_upper_bound\": 42,   // sai so toi da\n    \"sum_other_doc_count\": 1503,         // so doc khong nam trong bucket tra ve\n    \"buckets\": [...]\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "100112-ket-qua-terms-aggregation-co-chinh-xac-tuyet-doi-khong"
+  },
+  {
+    "id": "547c0706-aa02-5c52-9d20-fb5b63de6a6a",
+    "question": "Mảng object lưu bằng kiểu mặc định gây vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100113-mang-object-luu-bang-kieu-mac-dinh-gay-van-de-gi",
+    "slug": "mang-object-luu-bang-kieu-mac-dinh-gay-van-de-gi-547c0706-aa02-5c52-9d20-fb5b63de6a6a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Hậu quả: query tìm color=red AND size=L vẫn khớp document này dù không có variant nào như vậy. Đây là bug rất khó phát hiện vì kết quả trông hợp lý.",
+        "Cái giá của nested: mỗi phần tử được lưu thành một Lucene document riêng ẩn, nên index phình, update một phần tử phải reindex cả document cha, và query đắt hơn."
+      ],
+      "details": [
+        "Cách sửa là khai báo nested:",
+        "Chỉ dùng khi thật sự cần giữ quan hệ trong phần tử."
+      ],
+      "points": [],
+      "sections": [
+        "Kiểu object mặc định làm phẳng mảng, nên quan hệ giữa các field trong cùng một phần tử bị mất."
+      ],
+      "codeExamples": [
+        {
+          "language": "JSON",
+          "code": "\"variants\": { \"type\": \"nested\", \"properties\": { ... } }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "100113-mang-object-luu-bang-kieu-mac-dinh-gay-van-de-gi"
+  },
+  {
+    "id": "f50f57d4-0ac7-5255-b865-759f33062888",
+    "question": "Search tiếng Việt cần xử lý thêm gì so với tiếng Anh?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100114-search-tieng-viet-can-xu-ly-them-gi-so-voi-tieng-anh",
+    "slug": "search-tieng-viet-can-xu-ly-them-gi-so-voi-tieng-anh-f50f57d4-0ac7-5255-b865-759f33062888",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Hai việc: xử lý dấu và ghép từ ghép. standard tokenizer cắt theo khoảng trắng nên \"điện thoại\" thành hai token rời, và \"dien thoai\" không gõ dấu sẽ không khớp \"điện thoại\".",
+        "Rồi multi_match trên cả name và name.folded, đánh boost cao hơn cho bản có dấu để kết quả gõ đúng dấu vẫn xếp trên."
+      ],
+      "details": [
+        "Cách xử lý dấu — index cả hai dạng bằng multi-field:",
+        "Về từ ghép: standard không hiểu ranh giới từ tiếng Việt, nên \"hoa quả\" và \"quả hoa\" cho token giống nhau. Có hai hướng: dùng match_phrase để giữ thứ tự, hoặc cài plugin tách từ tiếng Việt (analysis-vietnamese) — plugin phải cài trên mọi node và cản trở việc dùng managed service.",
+        "Thực tế nhiều team dừng ở mức asciifolding + phrase matching + synonym là đủ tốt cho e-commerce."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "100114-search-tieng-viet-can-xu-ly-them-gi-so-voi-tieng-anh"
+  },
+  {
+    "id": "1e67c9e8-6992-55a4-bdef-0e89d77f1b13",
+    "question": "Cần đổi kiểu của một field trong index đang chạy production. Làm thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100115-can-doi-kieu-cua-mot-field-trong-index-dang-chay-production-lam-the-nao",
+    "slug": "can-doi-kieu-cua-mot-field-trong-index-dang-chay-production-lam-the-nao-1e67c9e8-6992-55a4-bdef-0e89d77f1b13",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Không đổi tại chỗ được — phải tạo index mới với mapping đúng, _reindex sang, rồi chuyển alias.",
+        "Bước chuyển alias là atomic, không có khoảnh khắc nào không có index nào phục vụ."
+      ],
+      "details": [
+        "Alias là thứ khiến việc này không downtime, nên luôn cho ứng dụng trỏ vào alias chứ không phải index name.",
+        "Với index lớn, reindex chạy hàng giờ nên dùng wait_for_completion=false rồi theo dõi bằng GET _tasks. Dữ liệu ghi mới trong lúc reindex sẽ bị sót — xử lý bằng cách ghi song song vào cả hai index, hoặc chạy một lần reindex bù theo range trên updated_at trước khi switch.",
+        "Giữ products_v1 vài ngày sau khi switch để rollback được bằng đúng một lệnh alias."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "PUT /products_v2   { \"mappings\": { ... } }\n\nPOST /_reindex?wait_for_completion=false\n{ \"source\": { \"index\": \"products_v1\" }, \"dest\": { \"index\": \"products_v2\" } }\n\nPOST /_aliases\n{ \"actions\": [\n  { \"remove\": { \"index\": \"products_v1\", \"alias\": \"products\" } },\n  { \"add\":    { \"index\": \"products_v2\", \"alias\": \"products\" } }\n]}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "100115-can-doi-kieu-cua-mot-field-trong-index-dang-chay-production-lam-the-nao"
+  },
+  {
+    "id": "f3235bdf-0e0c-54ab-8eda-d75f8222be85",
+    "question": "Nạp vài triệu record vào Elasticsearch nên tối ưu thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100116-nap-vai-trieu-record-vao-elasticsearch-nen-toi-uu-the-nao",
+    "slug": "nap-vai-trieu-record-vao-elasticsearch-nen-toi-uu-the-nao-f3235bdf-0e0c-54ab-8eda-d75f8222be85",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Vì sao có tác dụng: mỗi lần refresh tạo segment mới rồi phải merge, còn replica bắt mỗi document ghi hai lần. Tắt cả hai rồi bật lại sau khi nạp xong thường nhanh gấp nhiều lần."
+      ],
+      "details": [
+        "Các điểm khác:\n- Đo để tìm batch size, đừng đoán. Batch quá lớn gây circuit_breaking_exception.\n- Chạy nhiều thread bulk song song, tăng dần tới khi thấy es_rejected_execution_exception (bulk queue đầy) rồi lùi lại.\n- Để Elasticsearch tự sinh _id nếu không cần ID riêng — chỉ định _id bắt nó kiểm tra tồn tại trước mỗi lần ghi.\n- Luôn kiểm tra errors trong response bulk: HTTP 200 vẫn có thể chứa document lỗi từng phần."
+      ],
+      "points": [],
+      "sections": [
+        "Dùng _bulk với batch 5–15 MB, và tắt refresh + replica trong lúc nạp."
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "PUT /products/_settings\n{ \"index\": { \"refresh_interval\": \"-1\", \"number_of_replicas\": 0 } }\n\n# ... chay bulk ...\n\nPUT /products/_settings\n{ \"index\": { \"refresh_interval\": \"1s\", \"number_of_replicas\": 1 } }\nPOST /products/_forcemerge?max_num_segments=1"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "100116-nap-vai-trieu-record-vao-elasticsearch-nen-toi-uu-the-nao"
+  },
+  {
+    "id": "92af56f3-c150-5771-8c34-c4f2ba55ad5c",
+    "question": "Lucene segment có đặc điểm gì và ảnh hưởng thế nào tới vận hành?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100117-lucene-segment-co-dac-diem-gi-va-anh-huong-the-nao-toi-van-hanh",
+    "slug": "lucene-segment-co-dac-diem-gi-va-anh-huong-the-nao-toi-van-hanh-92af56f3-c150-5771-8c34-c4f2ba55ad5c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Segment immutable — ghi xong không sửa được. Mỗi refresh tạo segment mới, và Lucene chạy merge nền để gộp segment nhỏ lại."
+      ],
+      "details": [
+        "Ba hệ quả vận hành:",
+        "1. Update = delete + reindex cả document. Không có update tại chỗ. Document cũ chỉ bị đánh dấu deleted, dung lượng chỉ được trả lại sau khi merge. Index update nhiều sẽ phình hơn dữ liệu thật khá nhiều.\n2. Nhiều segment nhỏ làm search chậm, vì mỗi query phải quét qua mọi segment. Đây là lý do refresh=true sau mỗi lần ghi rất hại.\n3. Merge tốn I/O và CPU, và nó chạy đúng lúc đang ghi nhiều nhất."
+      ],
+      "points": [],
+      "sections": [
+        "_forcemerge trên index đang ghi là sai lầm tốn kém: nó tạo ra segment khổng lồ mà merge nền sau đó không đụng tới được, và giữ document deleted rất lâu."
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "GET /products/_segments        # xem so segment, so doc deleted\nPOST /products/_forcemerge?max_num_segments=1   # CHI cho index read-only"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "100117-lucene-segment-co-dac-diem-gi-va-anh-huong-the-nao-toi-van-hanh"
+  },
+  {
+    "id": "58d58a49-394e-5b7d-be8f-76363f2c6711",
+    "question": "Index template và ILM giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100118-index-template-va-ilm-giai-quyet-van-de-gi",
+    "slug": "index-template-va-ilm-giai-quyet-van-de-gi-58d58a49-394e-5b7d-be8f-76363f2c6711",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Đây là cách chuẩn cho log và metric: không có ILM thì xoá dữ liệu cũ phải làm tay, và delete_by_query trên hàng trăm triệu document rất đắt trong khi xoá nguyên một index thì gần như tức thì."
+      ],
+      "details": [
+        "Với dữ liệu time-series, dùng data stream thay vì tự quản index — nó gói sẵn rollover và alias write."
+      ],
+      "points": [],
+      "sections": [
+        "Index template áp mapping và settings tự động cho index khớp pattern, nên index sinh theo ngày không bị rơi vào dynamic mapping."
+      ],
+      "codeExamples": [
+        {
+          "language": "JSON",
+          "code": "PUT /_index_template/logs\n{\n  \"index_patterns\": [\"logs-*\"],\n  \"template\": {\n    \"settings\": { \"number_of_shards\": 2, \"index.lifecycle.name\": \"logs-policy\" },\n    \"mappings\": { \"dynamic\": \"strict\", \"properties\": { ... } }\n  }\n}"
+        },
+        {
+          "language": "TEXT",
+          "code": "hot   -> rollover khi 50GB hoac 7 ngay\nwarm  -> sau 30 ngay, giam replica, forcemerge\ncold  -> sau 90 ngay, chuyen sang node HDD\ndelete-> sau 365 ngay"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "100118-index-template-va-ilm-giai-quyet-van-de-gi"
+  },
+  {
+    "id": "7b91ccbf-89d5-59b4-9f0e-6bcf0951d234",
+    "question": "Muốn sản phẩm bán chạy xuất hiện cao hơn trong kết quả thì làm thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100119-muon-san-pham-ban-chay-xuat-hien-cao-hon-trong-ket-qua-thi-lam-the-nao",
+    "slug": "muon-san-pham-ban-chay-xuat-hien-cao-hon-trong-ket-qua-thi-lam-the-nao-7b91ccbf-89d5-59b4-9f0e-6bcf0951d234",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "log1p rất quan trọng: không có nó, sản phẩm bán 10.000 cái sẽ đè bẹp mọi tín hiệu liên quan và kết quả tìm kiếm biến thành bảng xếp hạng bán chạy."
+      ],
+      "details": [
+        "Các tín hiệu thường dùng: doanh số gần đây, rating, còn hàng, và độ mới (gauss decay trên created_at).",
+        "Lưu ý về vận hành: field dùng để boost phải được cập nhật thường xuyên, mà mỗi lần update là reindex cả document. Với chỉ số đổi liên tục, cân nhắc cập nhật theo lô hằng giờ thay vì realtime.",
+        "Chỉnh xong phải đo bằng dữ liệu, không phải bằng cảm nhận — xem câu tiếp theo về rank evaluation."
+      ],
+      "points": [],
+      "sections": [
+        "Kết hợp điểm text với tín hiệu nghiệp vụ bằng function_score, đừng thay thế hẳn điểm text."
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "100119-muon-san-pham-ban-chay-xuat-hien-cao-hon-trong-ket-qua-thi-lam-the-nao"
+  },
+  {
+    "id": "ec0cf204-9e04-5965-96c3-9211047bb2ad",
+    "question": "Làm autocomplete (gợi ý khi gõ) nên dùng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100120-lam-autocomplete-goi-y-khi-go-nen-dung-cach-nao",
+    "slug": "lam-autocomplete-goi-y-khi-go-nen-dung-cach-nao-ec0cf204-9e04-5965-96c3-9211047bb2ad",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Ba lựa chọn, chọn theo yêu cầu:",
+        "search_analyzer phải KHÁC analyzer",
+        "2. search_as_you_type — field type dựng sẵn n-gram, khớp cả cụm ở giữa, dễ dùng hơn completion và vẫn nhanh."
+      ],
+      "details": [
+        "1. completion suggester — nhanh nhất, dựng FST trong memory, phù hợp khi chỉ cần gợi ý tiền tố từ một danh sách.",
+        "3. Edge n-gram analyzer tự cấu hình — linh hoạt nhất, kết hợp được với filter và boost nghiệp vụ.",
+        "Đánh đổi: completion tốn heap và không filter được linh hoạt; n-gram làm index phình đáng kể. Với e-commerce cần lọc theo category và còn hàng, n-gram thường là lựa chọn thực tế."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "100120-lam-autocomplete-goi-y-khi-go-nen-dung-cach-nao"
+  },
+  {
+    "id": "c18448a7-0210-5901-9298-4b8d51492628",
+    "question": "Highlight từ khoá trong kết quả nên làm ở server hay client?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100121-highlight-tu-khoa-trong-ket-qua-nen-lam-o-server-hay-client",
+    "slug": "highlight-tu-khoa-trong-ket-qua-nen-lam-o-server-hay-client-c18448a7-0210-5901-9298-4b8d51492628",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Ở server, bằng highlight của Elasticsearch.",
+        "Elasticsearch biết chính xác token nào khớp nên tô đúng cả trường hợp user gõ \"chạy\" mà document viết \"chạy bộ\", hoặc gõ không dấu mà document có dấu."
+      ],
+      "details": [
+        "Client tự tô bằng cách so chuỗi sẽ sai với mọi thứ đã qua analyzer: stemming, synonym, bỏ dấu, phrase — nó chỉ khớp đúng chuỗi user gõ.",
+        "Ba highlighter: unified (mặc định, cân bằng), plain (chính xác nhất, chậm), fvh (nhanh cho field lớn nhưng phải bật term_vector: with_positions_offsets lúc index, làm index phình).",
+        "Lưu ý bảo mật: kết quả highlight chứa HTML tag, nên phải escape nội dung trước khi render, không thì mở đường cho XSS từ dữ liệu người dùng nhập."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "100121-highlight-tu-khoa-trong-ket-qua-nen-lam-o-server-hay-client"
+  },
+  {
+    "id": "143931e9-a6c0-5bbc-8baa-986177f19148",
+    "question": "Vì sao sort trên field text bị từ chối?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100122-vi-sao-sort-tren-field-text-bi-tu-choi",
+    "slug": "vi-sao-sort-tren-field-text-bi-tu-choi-143931e9-a6c0-5bbc-8baa-986177f19148",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Vì field text đã bị analyze thành nhiều token, nên không có một giá trị duy nhất để so sánh. Sort cần đọc giá trị theo từng document (doc values), mà text không sinh doc values.",
+        "Đừng bật fielddata: true để \"chữa\" lỗi. Fielddata nạp toàn bộ giá trị của field lên heap và là nguyên nhân thường gặp làm sập cluster khi index lớn."
+      ],
+      "details": [
+        "Lỗi nhận được là Fielddata is disabled on text fields by default.",
+        "Cách đúng là sort trên sub-field keyword:",
+        "không được index",
+        "ignore_above: 256",
+        "Cùng lý do đó, aggregation trên text cũng bị chặn — group theo tên sản phẩm phải dùng name.raw."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "100122-vi-sao-sort-tren-field-text-bi-tu-choi"
+  },
+  {
+    "id": "874b5e62-ef5f-5b99-806d-941ef7b26a12",
+    "question": "Ingest pipeline dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100123-ingest-pipeline-dung-de-lam-gi",
+    "slug": "ingest-pipeline-dung-de-lam-gi-874b5e62-ef5f-5b99-806d-941ef7b26a12",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Giá trị lớn nhất là không phải sửa producer: nhiều service ghi vào cùng một index, chuẩn hoá tập trung ở pipeline rẻ hơn nhiều so với đi sửa từng service.",
+        "Đánh đổi: pipeline chạy trên ingest node và tốn CPU, grok phức tạp có thể thành bottleneck."
+      ],
+      "details": [
+        "Bắt buộc phải test trước khi áp:",
+        "Với khối lượng lớn, tách ingest node riêng hoặc xử lý ở tầng trước (Logstash, ứng dụng)."
+      ],
+      "points": [],
+      "sections": [
+        "Biến đổi document trước khi index, ngay trong cluster: parse chuỗi, đổi kiểu, thêm field, bỏ field nhạy cảm, làm giàu dữ liệu."
+      ],
+      "codeExamples": [
+        {
+          "language": "JSON",
+          "code": "PUT /_ingest/pipeline/order_pipeline\n{\n  \"processors\": [\n    { \"grok\": { \"field\": \"message\", \"patterns\": [\"%{IP:client_ip}\"] } },\n    { \"date\": { \"field\": \"ts\", \"formats\": [\"ISO8601\"], \"target_field\": \"@timestamp\" } },\n    { \"remove\": { \"field\": [\"card_number\", \"cvv\"] } },\n    { \"set\": { \"field\": \"env\", \"value\": \"prod\" } }\n  ]\n}"
+        },
+        {
+          "language": "BASH",
+          "code": "PUT /orders/_doc/1?pipeline=order_pipeline"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "100123-ingest-pipeline-dung-de-lam-gi"
+  },
+  {
+    "id": "a3efec25-d45f-5b69-8025-86c743eb57a9",
+    "question": "Có replica rồi thì còn cần snapshot không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100124-co-replica-roi-thi-con-can-snapshot-khong",
+    "slug": "co-replica-roi-thi-con-can-snapshot-khong-a3efec25-d45f-5b69-8025-86c743eb57a9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Snapshot là incremental: chỉ copy segment mới so với lần trước, nên chạy hằng ngày không tốn như tưởng."
+      ],
+      "details": [
+        "Một lý do nữa để có snapshot dù dữ liệu gốc nằm ở PostgreSQL: reindex từ đầu có thể mất hàng giờ hoặc hàng ngày, còn restore snapshot nhanh hơn nhiều. Với hệ thống mà search là đường dẫn chính, khoảng thời gian đó là downtime thật.",
+        "Và như mọi backup khác: phải thử restore định kỳ. Snapshot chưa bao giờ restore thử thì chưa tính là có backup."
+      ],
+      "points": [],
+      "sections": [
+        "Có. Replica chống mất node, snapshot chống mất dữ liệu. Xoá nhầm index thì replica bị xoá theo ngay lập tức — nó là bản sao đồng bộ, không phải bản lưu theo thời điểm."
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "PUT /_snapshot/s3_repo\n{ \"type\": \"s3\", \"settings\": { \"bucket\": \"es-backups\" } }\n\nPUT /_slm/policy/daily\n{\n  \"schedule\": \"0 30 1 * * ?\",\n  \"name\": \"<daily-{now/d}>\",\n  \"repository\": \"s3_repo\",\n  \"retention\": { \"expire_after\": \"30d\" }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "100124-co-replica-roi-thi-con-can-snapshot-khong"
+  },
+  {
+    "id": "3af20351-2b8e-54d9-bc5b-3f93863f1308",
+    "question": "Vì sao không được để trình duyệt gọi thẳng vào Elasticsearch?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100125-vi-sao-khong-duoc-de-trinh-duyet-goi-thang-vao-elasticsearch",
+    "slug": "vi-sao-khong-duoc-de-trinh-duyet-goi-thang-vao-elasticsearch-3af20351-2b8e-54d9-bc5b-3f93863f1308",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Vì credential nằm trong JavaScript là lộ cho mọi người, và query DSL đủ mạnh để một người tò mò đọc hết dữ liệu hoặc làm sập cluster.",
+        "Ở tầng cluster nên có thêm: bật security và TLS, tạo role read-only theo từng index, và không bao giờ để cluster nghe trên IP public."
+      ],
+      "details": [
+        "Các việc kẻ tấn công làm được khi endpoint mở:\n- Query sang index khác (GET /_all/_search), đọc dữ liệu nhạy cảm.\n- Gửi aggregation nặng hoặc size: 100000 để làm cluster OOM.\n- DELETE /products nếu credential có quyền ghi.",
+        "Kiến trúc đúng: backend làm proxy, nhận tham số đã ràng buộc từ client rồi tự dựng query DSL, kèm giới hạn size, timeout và rate limit.",
+        "Số vụ lộ dữ liệu do Elasticsearch mở public rất nhiều và gần như đều cùng một nguyên nhân: cluster demo được bật lên nhanh rồi trở thành production mà không ai bật lại security."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TEXT",
+          "code": "browser -> API cua ban (auth + validate + build DSL) -> Elasticsearch (private network)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "100125-vi-sao-khong-duoc-de-trinh-duyet-goi-thang-vao-elasticsearch"
+  },
+  {
+    "id": "2010326a-258e-5ebc-b084-c56b0592b0d8",
+    "question": "Query chậm nhưng không biết chậm ở đâu. Dùng công cụ nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100126-query-cham-nhung-khong-biet-cham-o-dau-dung-cong-cu-nao",
+    "slug": "query-cham-nhung-khong-biet-cham-o-dau-dung-cong-cu-nao-2010326a-258e-5ebc-b084-c56b0592b0d8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Các nguyên nhân chậm hay gặp, theo thứ tự tần suất:\n1. Điều kiện lọc nằm trong must thay vì filter — mất cache và tốn công tính điểm.\n2. Deep pagination — from lớn.\n3. wildcard mở đầu bằng * — phải quét toàn bộ term dictionary.\n4. script trong query hoặc sort — chạy trên từng document.\n5. Aggregation cardinality cao trên field nhiều giá trị khác nhau.\n6. Shard quá lớn hoặc quá nhiều — xem GET /_cat/shards?v."
+      ],
+      "details": [
+        "Với cluster, GET /_nodes/hot_threads cho biết node đang bận vì việc gì — thường lộ ra ngay là merge, GC hay search."
+      ],
+      "points": [],
+      "sections": [
+        "profile: true để bóc thời gian từng phần của query, và slow log để bắt query chậm ở production."
+      ],
+      "codeExamples": [
+        {
+          "language": "JSON",
+          "code": "{ \"profile\": true, \"query\": { ... } }\n// tra ve thoi gian tung Lucene query: build_scorer, next_doc, score..."
+        },
+        {
+          "language": "JSON",
+          "code": "PUT /products/_settings\n{ \"index.search.slowlog.threshold.query.warn\": \"1s\",\n  \"index.search.slowlog.threshold.fetch.warn\": \"500ms\" }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "100126-query-cham-nhung-khong-biet-cham-o-dau-dung-cong-cu-nao"
+  },
+  {
+    "id": "1a2a3692-8f98-57d9-9f93-6ffd3ed3742d",
+    "question": "Runtime field dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100127-runtime-field-dung-khi-nao",
+    "slug": "runtime-field-dung-khi-nao-1a2a3692-8f98-57d9-9f93-6ffd3ed3742d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng được ngay trong query, sort và aggregation như field thường, và không tốn dung lượng index."
+      ],
+      "details": [
+        "Đánh đổi rất rõ: script chạy trên từng document khớp, nên query đụng nhiều document sẽ chậm hẳn. Runtime field hợp cho khám phá dữ liệu và cho field ít được query, không hợp cho đường dẫn nóng.",
+        "Một cách dùng thực dụng: khai báo runtime field để xử lý tạm ngay, đo xem nó có được dùng nhiều không, rồi mới quyết định reindex thành field thật.",
+        "Runtime field khai báo được ở hai chỗ: trong mapping (dùng chung) hoặc ngay trong một search request (chỉ cho lần query đó)."
+      ],
+      "points": [],
+      "sections": [
+        "Khi cần một field tính lúc query mà không muốn reindex: thêm field mới cho dữ liệu cũ, sửa gấp một mapping sai, hoặc thử nghiệm trước khi quyết định index thật."
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "100127-runtime-field-dung-khi-nao"
+  },
+  {
+    "id": "df7d1d65-79c1-5a1d-bdd3-aeb7e527f527",
+    "question": "Setting nào của index không đổi được sau khi tạo?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100128-setting-nao-cua-index-khong-doi-duoc-sau-khi-tao",
+    "slug": "setting-nao-cua-index-khong-doi-duoc-sau-khi-tao-df7d1d65-79c1-5a1d-bdd3-aeb7e527f527",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Nhóm static setting — quan trọng nhất là number_of_shards, và toàn bộ phần analysis (analyzer, tokenizer, filter).",
+        "Mapping cũng gần như vậy: thêm field mới thì được, đổi kiểu field đã có thì không."
+      ],
+      "details": [
+        "Muốn đổi phải tạo index mới rồi reindex.",
+        "Hệ quả thực tế là quyết định lúc tạo index rất quan trọng, và cách phòng thủ chuẩn là luôn dùng alias: ứng dụng trỏ vào products, còn index thật là products_v1. Khi phải đổi static setting, tạo products_v2, reindex, chuyển alias — ứng dụng không phải sửa dòng code nào.",
+        "Một ngoại lệ hữu ích: _split và _shrink API đổi được số shard, nhưng có ràng buộc (index phải read-only, số shard mới phải là bội hoặc ước) nên thường vẫn kém linh hoạt hơn reindex."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# doi duoc (dynamic)\nPUT /products/_settings\n{ \"index\": { \"number_of_replicas\": 2, \"refresh_interval\": \"30s\" } }\n\n# KHONG doi duoc (static): number_of_shards, analysis.*"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "100128-setting-nao-cua-index-khong-doi-duoc-sau-khi-tao"
+  },
+  {
+    "id": "3b3e7966-788a-5049-86d8-7242451f6c2e",
+    "question": "Đồng bộ dữ liệu từ PostgreSQL sang Elasticsearch nên làm thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100129-dong-bo-du-lieu-tu-postgresql-sang-elasticsearch-nen-lam-the-nao",
+    "slug": "dong-bo-du-lieu-tu-postgresql-sang-elasticsearch-nen-lam-the-nao-3b3e7966-788a-5049-86d8-7242451f6c2e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Ba cách, theo mức độ tin cậy tăng dần:"
+      ],
+      "details": [
+        "1. Dual write — service ghi DB xong ghi luôn sang Elasticsearch. Đơn giản nhưng không có bảo đảm: ghi DB xong mà service chết thì Elasticsearch thiếu document vĩnh viễn.\n2. Polling theo updated_at — job chạy định kỳ quét record mới. Dễ làm, nhưng bỏ sót record bị xoá (cần soft delete) và có độ trễ.\n3. CDC qua WAL (Debezium + Kafka) — bắt thay đổi từ replication log của Postgres. Đáng tin cậy nhất, không sót, không phải sửa ứng dụng, nhưng thêm hạ tầng phải vận hành.",
+        "Một lựa chọn trung gian hay dùng: ghi DB trong transaction cùng với một bảng outbox, rồi một worker đọc outbox đẩy sang Elasticsearch. Được tính atomic của DB mà không cần Kafka.",
+        "Dù chọn cách nào cũng phải có job đối soát định kỳ: đếm và so updated_at giữa hai bên, và có sẵn đường reindex lại toàn bộ từ DB — coi Elasticsearch là read model dựng lại được, không phải nơi giữ dữ liệu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "100129-dong-bo-du-lieu-tu-postgresql-sang-elasticsearch-nen-lam-the-nao"
+  },
+  {
+    "id": "d3459a6a-8f06-53a6-afb9-981306499b58",
+    "question": "Cấp heap cho node Elasticsearch theo nguyên tắc nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100130-cap-heap-cho-node-elasticsearch-theo-nguyen-tac-nao",
+    "slug": "cap-heap-cho-node-elasticsearch-theo-nguyen-tac-nao-d3459a6a-8f06-53a6-afb9-981306499b58",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Hai quy tắc: không quá 50% RAM của máy và không quá ~31 GB.",
+        "Máy 128 GB RAM thì không cấp 64 GB heap cho một node — cách làm phổ biến là chạy nhiều node trên một máy, mỗi node ~30 GB heap."
+      ],
+      "details": [
+        "Vượt 50% RAM là lấy mất phần OS page cache — mà Lucene đọc segment từ file, nên page cache đóng vai trò quyết định với tốc độ search. Cluster nhiều heap mà ít page cache thường chậm hơn cấu hình ngược lại.",
+        "Ngưỡng 31 GB là do JVM: quá mốc đó, compressed oops bị tắt và con trỏ chuyển sang 64-bit, nên 32 GB heap thực tế chứa được ít object hơn 31 GB.",
+        "Dấu hiệu heap thiếu: GC chạy liên tục, GET /_nodes/stats/jvm cho thấy heap sau full GC vẫn cao, và bắt đầu thấy circuit_breaking_exception. Nguyên nhân gốc thường là quá nhiều shard, fielddata bật nhầm, hoặc aggregation quá nặng chứ không phải máy thiếu RAM."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# jvm.options\n-Xms30g\n-Xmx30g   # min = max, tranh resize luc chay"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "100130-cap-heap-cho-node-elasticsearch-theo-nguyen-tac-nao"
+  },
+  {
+    "id": "2cab22e8-ccb9-5252-98de-308a06d6de8f",
+    "question": "Custom routing khi index đem lại lợi ích gì và rủi ro gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "custom-routing-khi-index-dem-lai-loi-ich-gi-va-rui-ro-gi-2cab22e8-ccb9-5252-98de-308a06d6de8f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": null
+  },
+  {
+    "id": "fdea5498-5aa9-5bb1-922a-09389d82e12c",
+    "question": "Hệ phục vụ hàng nghìn khách hàng nên tổ chức index thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "he-phuc-vu-hang-nghin-khach-hang-nen-to-chuc-index-the-nao-fdea5498-5aa9-5bb1-922a-09389d82e12c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": null
+  },
+  {
+    "id": "85928373-7cbb-52df-a8d5-3d5047ea52cb",
+    "question": "Vector search (kNN) khác keyword search thế nào và nên dùng ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vector-search-knn-khac-keyword-search-the-nao-va-nen-dung-ra-sao-85928373-7cbb-52df-a8d5-3d5047ea52cb",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": null
+  },
+  {
+    "id": "74ca09fd-c625-5975-abd2-541fa7236f05",
+    "question": "Gặp circuit_breaking_exception thì phản ứng đúng là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "gap-circuit-breaking-exception-thi-phan-ung-dung-la-gi-74ca09fd-c625-5975-abd2-541fa7236f05",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": null
+  },
+  {
+    "id": "b2664439-f1d0-5910-ac7a-17b72864bf08",
+    "question": "Nâng version một cluster đang chạy production nên làm thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "nang-version-mot-cluster-dang-chay-production-nen-lam-the-nao-b2664439-f1d0-5910-ac7a-17b72864bf08",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": null
+  },
+  {
+    "id": "d73bb0b4-41bb-5411-9014-911809fadf32",
+    "question": "Một node có tải cao hơn hẳn các node khác. Nguyên nhân và cách xử lý?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mot-node-co-tai-cao-hon-han-cac-node-khac-nguyen-nhan-va-cach-xu-ly-d73bb0b4-41bb-5411-9014-911809fadf32",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": null
+  },
+  {
+    "id": "336318c7-80b2-5c7b-a2d3-7f996a4c2c03",
+    "question": "Elasticsearch bảo đảm gì khi một request ghi trả về thành công?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "elasticsearch-bao-dam-gi-khi-mot-request-ghi-tra-ve-thanh-cong-336318c7-80b2-5c7b-a2d3-7f996a4c2c03",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": null
+  },
+  {
+    "id": "5e9d58bd-167f-5e1a-881d-a4dadb8ee47f",
+    "question": "Export vài triệu document ra ngoài nên dùng cách nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "export-vai-trieu-document-ra-ngoai-nen-dung-cach-nao-5e9d58bd-167f-5e1a-881d-a4dadb8ee47f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": null
+  },
+  {
+    "id": "4a0afe9e-de3a-5050-84bd-6153f926e53b",
+    "question": "Đánh giá chất lượng search sau khi chỉnh ranking nên dựa vào đâu?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "danh-gia-chat-luong-search-sau-khi-chinh-ranking-nen-dua-vao-dau-4a0afe9e-de3a-5050-84bd-6153f926e53b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": null
+  },
+  {
+    "id": "580752dc-8347-5ca1-a320-f7680aed12a0",
+    "question": "Khi nào chưa nên đưa Elasticsearch vào hệ thống?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-chua-nen-dua-elasticsearch-vao-he-thong-580752dc-8347-5ca1-a320-f7680aed12a0",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": null
+  }
+]

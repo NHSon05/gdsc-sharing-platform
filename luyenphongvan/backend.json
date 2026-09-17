@@ -1,0 +1,3139 @@
+[
+  {
+    "id": "0ff56111-9c9d-5661-a0e5-e6a133a5ab72",
+    "question": "Các nhóm HTTP status code và ý nghĩa?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/91003-cac-nhom-http-status-code-va-y-nghia",
+    "slug": "cac-nhom-http-status-code-va-y-nghia-0ff56111-9c9d-5661-a0e5-e6a133a5ab72",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Năm nhóm theo chữ số đầu:"
+      ],
+      "details": [
+        "Hay bị hỏi: phân biệt 401 (chưa auth) vs 403 (đã auth nhưng thiếu quyền), và 400 vs 422."
+      ],
+      "points": [
+        "1xx Informational — request đã nhận, đang xử lý.",
+        "2xx Success — thành công: 200 OK, 201 Created, 204 No Content.",
+        "3xx Redirection — cần bước tiếp: 301 (chuyển vĩnh viễn), 304 Not Modified (cache).",
+        "4xx Client error — lỗi phía client: 400 (sai request), 401 (chưa xác thực), 403 (không đủ quyền), 404 (không tồn tại), 409 (xung đột), 429 (quá nhiều request).",
+        "5xx Server error: 500 (lỗi server), 502/503 (gateway/quá tải)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "91003-cac-nhom-http-status-code-va-y-nghia",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "e2991e4c-0a9a-50b7-9eab-2259b857a7c0",
+    "question": "PUT và PATCH khác nhau thế nào? Tính idempotent của từng method ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/91423-put-va-patch-khac-nhau-the-nao-tinh-idempotent-cua-tung-method-ra-sao",
+    "slug": "put-va-patch-khac-nhau-the-nao-tinh-idempotent-cua-tung-method-ra-sao-e2991e4c-0a9a-50b7-9eab-2259b857a7c0",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tính idempotent (gọi lại nhiều lần, trạng thái cuối không đổi):\n- PUT idempotent theo spec → client/proxy retry an toàn khi timeout.\n- PATCH thì tùy payload: \"set field = giá trị\" lặp lại vô hại, nhưng phép cộng dồn (\"tăng số dư thêm 10\", \"chèn phần tử vào mảng\") lặp lại là sai số → muốn retry an toàn phải kèm If-Match/ETag hoặc idempotency key."
+      ],
+      "details": [
+        "Thực tế: API \"update\" đa số chỉ sửa vài field → PATCH đúng nghĩa hơn. Đặt tên endpoint là PUT nhưng xử lý kiểu partial là sai spec."
+      ],
+      "points": [
+        "PUT = thay cả bản ghi: client phải gửi payload đầy đủ, field không gửi coi như bị xóa/reset (RFC 9110).",
+        "PATCH = sửa một phần: chỉ gửi field cần đổi (RFC 5789)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTTP",
+          "code": "PUT   /users/1   { \"name\": \"An\", \"email\": \"an@x.vn\", \"phone\": null }\nPATCH /users/1   { \"phone\": \"0901234567\" }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "91423-put-va-patch-khac-nhau-the-nao-tinh-idempotent-cua-tung-method-ra-sao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "a84ca5a6-2dd6-529f-b256-ac44db8f4f29",
+    "question": "Middleware trong web framework là gì? Vì sao thứ tự middleware quan trọng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/91221-middleware-trong-web-framework-la-gi-vi-sao-thu-tu-middleware-quan-trong",
+    "slug": "middleware-trong-web-framework-la-gi-vi-sao-thu-tu-middleware-quan-trong-a84ca5a6-2dd6-529f-b256-ac44db8f4f29",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Middleware là các hàm xếp thành pipeline giữa request và response: request đi qua từng middleware theo thứ tự, mỗi cái có thể đọc/sửa request-response, kết thúc sớm (trả response luôn), hoặc chuyển tiếp cho middleware kế (trong Express là gọi next()). Cùng ý tưởng ở mọi framework: Express/Koa middleware, Django middleware, Laravel middleware, ASP.NET Core pipeline."
+      ],
+      "details": [
+        "Việc hay đặt vào middleware là các phần dùng chung cho mọi route (cross-cutting): logging, authentication, CORS, body parsing, rate limiting, nén response, error handler.",
+        "OPTIONS",
+        "Auth đứng trước",
+        "CORS đặt sớm",
+        "Error handler đặt cuối",
+        "Lỗi hay gặp: req.body undefined, endpoint quên bảo vệ, CORS chặn preflight — đều do đặt sai thứ tự."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "91221-middleware-trong-web-framework-la-gi-vi-sao-thu-tu-middleware-quan-trong",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "10583d98-48ea-5470-9db7-ab54cdbc63bb",
+    "question": "REST là gì? Một API RESTful cần những nguyên tắc nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91001-rest-la-gi-mot-api-restful-can-nhung-nguyen-tac-nao",
+    "slug": "rest-la-gi-mot-api-restful-can-nhung-nguyen-tac-nao-10583d98-48ea-5470-9db7-ab54cdbc63bb",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "REST (Representational State Transfer) là kiểu kiến trúc cho API trên HTTP. Nguyên tắc chính:"
+      ],
+      "details": [
+        "Stateless + method/URI nhất quán là điểm hay bị hỏi nhất."
+      ],
+      "points": [
+        "Stateless: mỗi request tự chứa đủ thông tin; server không giữ trạng thái phiên giữa các request → dễ scale ngang.",
+        "Tài nguyên (resource) + URI: mỗi thực thể là một resource định danh bằng URI (/users/123); dùng danh từ, không động từ.",
+        "HTTP method chuẩn: GET (đọc), POST (tạo), PUT/PATCH (cập nhật), DELETE (xóa).",
+        "Biểu diễn (representation): trả JSON/XML; client thao tác qua representation đó.",
+        "Dùng đúng status code và HATEOAS (tùy chọn: gắn link điều hướng)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "91001-rest-la-gi-mot-api-restful-can-nhung-nguyen-tac-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "a2955a54-2487-5725-bbfd-4564c7f841e1",
+    "question": "Idempotency là gì? HTTP method nào idempotent?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91002-idempotency-la-gi-http-method-nao-idempotent",
+    "slug": "idempotency-la-gi-http-method-nao-idempotent-a2955a54-2487-5725-bbfd-4564c7f841e1",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Một method idempotent khi gửi request đó một lần hay nhiều lần đều cho cùng một tác động lên server."
+      ],
+      "details": [
+        "Ý nghĩa thực tế: client retry an toàn với method idempotent khi mạng lỗi/timeout. Lưu ý: status code có thể khác giữa các lần (vd DELETE lần đầu 200, lần sau 404) nhưng tác động cuối vẫn như nhau. Với POST, muốn an toàn khi retry cần idempotency key."
+      ],
+      "points": [
+        "Idempotent: GET, HEAD, PUT, DELETE, OPTIONS.",
+        "KHÔNG idempotent: POST (mỗi lần thường tạo bản ghi mới), PATCH (tùy cách implement)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "91002-idempotency-la-gi-http-method-nao-idempotent",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "22fec711-2ba8-5c03-9509-6f68489deaee",
+    "question": "Có những cách nào để version một API? Ưu nhược điểm?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91004-co-nhung-cach-nao-de-version-mot-api-uu-nhuoc-diem",
+    "slug": "co-nhung-cach-nao-de-version-mot-api-uu-nhuoc-diem-22fec711-2ba8-5c03-9509-6f68489deaee",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mục tiêu: thay đổi API mà không phá client cũ. Các cách:"
+      ],
+      "details": [
+        "Nguyên tắc: chỉ tăng version khi có breaking change; thay đổi tương thích ngược (thêm field) thì không cần. Kèm chính sách deprecation rõ ràng."
+      ],
+      "points": [
+        "URI versioning (/v1/users): rõ ràng, dễ cache/định tuyến — phổ biến nhất, nhưng lẫn version vào URL tài nguyên.",
+        "Query param (/users?version=1): đơn giản, nhưng dễ bị bỏ sót.",
+        "Header (Accept: application/vnd.app.v1+json hoặc custom header): URL sạch, đúng tinh thần REST, nhưng khó test/khám phá hơn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "91004-co-nhung-cach-nao-de-version-mot-api-uu-nhuoc-diem",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "07e95ad2-9811-5642-87d4-83196ba2e222",
+    "question": "Thiết kế một API list có filter + sort + phân trang cho bảng hàng triệu dòng, bạn dùng offset hay cursor? Tránh những cạm bẫy gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91416-thiet-ke-mot-api-list-co-filter-sort-phan-trang-cho-bang-hang-trieu-dong-ban-dun",
+    "slug": "thiet-ke-mot-api-list-co-filter-sort-phan-trang-cho-bang-hang-trieu-dong-ban-dung-offset-hay-cursor-07e95ad2-9811-5642-87d4-83196ba2e222",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Với bảng hàng triệu dòng, chốt cursor (keyset) cho API chính; offset chỉ giữ cho màn admin cần nhảy tới trang số N trên dữ liệu vừa phải.",
+        "Index phải khớp cả filter lẫn sort:",
+        "(status, created_at DESC, id DESC)",
+        "Giới hạn tổ hợp filter + sort: mỗi tổ hợp cần một index tương ứng, nên whitelist cột được phép sort — mở sort tự do vừa sinh full scan vừa là đường vào SQL injection nếu ghép chuỗi."
+      ],
+      "details": [
+        "Truy vấn: mốc là giá trị dòng cuối trang trước, so sánh theo bộ (created_at, id). Thiếu tie-breaker id, các dòng trùng created_at sẽ lặp hoặc sót giữa hai trang. Lấy dư một dòng để biết còn trang sau mà không cần COUNT(*).",
+        "Lỗi hay gặp:",
+        "Cursor là token opaque: encode (created_at, id) của dòng cuối thành base64, trả trong next_cursor. Client không tự ghép điều kiện nên sau này đổi cột sort không phá API; decode xong vẫn phải validate, cursor hỏng/giả mạo thì trả 400.",
+        "N+1 query",
+        "total",
+        "JOIN"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "SELECT * FROM posts\nWHERE status = :status\n  AND (created_at, id) < (:cursor_created_at, :cursor_id)\nORDER BY created_at DESC, id DESC\nLIMIT 21;  -- 20 + 1: row thừa chỉ dùng để set has_next"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "91416-thiet-ke-mot-api-list-co-filter-sort-phan-trang-cho-bang-hang-trieu-dong-ban-dun",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "dae37764-1b30-52a3-8616-f95a95b48df7",
+    "question": "User bấm nút \"Đặt hàng\" hai lần (double-submit) hoặc client retry khi timeout, làm sao đảm bảo chỉ tạo đúng một đơn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91417-user-bam-nut-dat-hang-hai-lan-double-submit-hoac-client-retry-khi-timeout-lam-sa",
+    "slug": "user-bam-nut-dat-hang-hai-lan-double-submit-hoac-client-retry-khi-timeout-lam-sao-dam-bao-chi-tao-du-dae37764-1b30-52a3-8616-f95a95b48df7",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Chốt cơ chế trước: client gửi kèm một idempotency key duy nhất cho mỗi ý định đặt hàng; lần đầu server tạo đơn rồi lưu kết quả theo key, gặp lại đúng key thì trả lại kết quả cũ thay vì tạo đơn mới. Cách cài cho nút \"Đặt hàng\":",
+        "Lỗi hay gặp: chỉ chặn ở frontend; check \"đã tồn tại chưa?\" rồi mới insert theo hai bước tách rời (race condition) — hãy để unique constraint quyết định."
+      ],
+      "details": [],
+      "points": [
+        "Key sinh lúc nào: một key cho mỗi phiên checkout (sinh khi render trang thanh toán, gửi qua header Idempotency-Key) — nhờ đó double-click và retry timeout mang cùng một key. Sinh key mới mỗi lần bấm là vô hiệu hóa toàn bộ cơ chế.",
+        "Chốt chặn là unique constraint trong DB, không phải logic ứng dụng: hai request đồng thời cùng key thì DB chỉ cho một dòng thắng.",
+        "Lưu response cùng transaction với việc tạo đơn: lưu tách rời thì crash giữa chừng để lại key \"mồ côi\" không có kết quả, retry sau kẹt vĩnh viễn. Key cần TTL dọn dẹp (vd 24h).",
+        "Request thứ hai đến khi request đầu còn đang chạy: chưa có response để trả → trả 409/425 cho client chờ rồi retry, đừng xử lý song song.",
+        "Hàng rào cuối theo nghiệp vụ: partial unique index (cart_id) WHERE status = 'pending' — chặn cả khi client sinh key sai. Disable nút sau click đầu chỉ là UX, không phải bảo vệ."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- unique constraint on idempotency_key arbitrates concurrent retries\nINSERT INTO orders (idempotency_key, cart_id, status)\nVALUES ($1, $2, 'pending')\nON CONFLICT (idempotency_key) DO NOTHING\nRETURNING id;\n-- 0 rows returned → key already used → fetch and return the existing order"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "91417-user-bam-nut-dat-hang-hai-lan-double-submit-hoac-client-retry-khi-timeout-lam-sa",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "5d35bd71-d207-516a-9c7f-0fe427534606",
+    "question": "Một API công khai bị gọi quá nhiều, bạn thêm rate limiting thế nào — thuật toán gì, key theo gì, trả về ra sao và đặt ở đâu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91420-mot-api-cong-khai-bi-goi-qua-nhieu-ban-them-rate-limiting-the-nao-thuat-toan-gi",
+    "slug": "mot-api-cong-khai-bi-goi-qua-nhieu-ban-them-rate-limiting-the-nao-thuat-toan-gi-key-theo-gi-tra-ve-r-5d35bd71-d207-516a-9c7f-0fe427534606",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bốn thuật toán thường gặp: fixed window (đếm theo mốc thời gian cố định — rẻ nhất nhưng cho lọt gấp đôi trần ở ranh giới hai cửa sổ), sliding window (mượt hơn, tốn bộ nhớ hơn), token bucket (nạp token đều, cho tiêu dồn tới trần), leaky bucket (san phẳng tốc độ đầu ra). Các quyết định khi triển khai cho một API công khai đang bị gọi quá nhiều:",
+        "Edge case: INCR + EXPIRE là hai lệnh — chết giữa chừng để lại key không TTL → gói vào Lua script cho atomic. Đừng cho health check và webhook của đối tác chung bucket với user thường — kẻo tự chặn chính mình."
+      ],
+      "details": [
+        "Lỗi hay gặp: giới hạn theo IP khi user sau NAT; đếm cục bộ từng instance; quên Retry-After."
+      ],
+      "points": [
+        "Chọn token bucket cho traffic chung: client hợp lệ thường có burst ngắn (mở trang gọi 5–7 request) — bucket cho tiêu dồn tới trần nhưng vẫn ghìm tốc độ trung bình. Endpoint nhạy cảm (login, OTP, gửi mail) thì siết bằng cửa sổ đếm chặt, trần thấp riêng.",
+        "Key theo gì: đã auth → per-API-key/per-user (công bằng, không phạt oan văn phòng/4G chung IP); chưa auth → per-IP nhưng nới trần vì NAT; login → key kép account + IP để chống cả đổi IP lẫn spray nhiều account.",
+        "Đặt ở đâu: tại API gateway / reverse proxy / edge — chặn trước khi request tốn tài nguyên app. Counter bắt buộc ở store chia sẻ (Redis): đếm cục bộ từng instance thì trần thực tế = limit × số instance.",
+        "Response khi bị chặn: 429 Too Many Requests + Retry-After (số giây chờ) + RateLimit-* báo quota còn lại — thiếu Retry-After thì client retry dồn dập đúng lúc hệ đang quá tải."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// fixed-window counter in Redis: INCR + EXPIRE per key + window\nconst k = \"rl:\" + apiKey + \":\" + Math.floor(Date.now() / 60000) // 1-min bucket\nconst n = await redis.incr(k)\nif (n === 1) await redis.expire(k, 60)\nif (n > 100) {\n  res.setHeader(\"Retry-After\", \"60\")\n  return res.sendStatus(429)\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "91420-mot-api-cong-khai-bi-goi-qua-nhieu-ban-them-rate-limiting-the-nao-thuat-toan-gi",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "610e8603-ccc7-5342-8683-0d240cfa70da",
+    "question": "Thiết kế error response cho API thế nào cho tốt?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91219-thiet-ke-error-response-cho-api-the-nao-cho-tot",
+    "slug": "thiet-ke-error-response-cho-api-the-nao-cho-tot-610e8603-ccc7-5342-8683-0d240cfa70da",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bốn nguyên tắc chính:"
+      ],
+      "details": [
+        "Thêm: message lỗi nên actionable — nói rõ sai ở đâu và cách sửa (\"field email sai định dạng\") thay vì \"Bad Request\" trống."
+      ],
+      "points": [
+        "Format nhất quán toàn API: mọi endpoint trả lỗi cùng một cấu trúc để client viết một handler dùng chung — không chỗ trả { error }, chỗ trả { message }.",
+        "Status code đúng ngữ nghĩa: 400 request sai, 401 chưa xác thực, 403 không đủ quyền, 404 không tồn tại, 409 xung đột trạng thái, 422 dữ liệu không hợp lệ, 429 quá rate limit, 5xx lỗi phía server. Đừng trả 200 kèm { \"success\": false } — phá cache, retry, monitoring dựa trên status code.",
+        "Chuẩn có sẵn — RFC 9457 Problem Details: media type application/problem+json với các field type (URI định danh loại lỗi), title, status, detail, instance, cộng field mở rộng tùy ý (vd mảng errors cho lỗi validation từng field). Dùng chuẩn này thay vì tự thiết kế format riêng.",
+        "Không lộ chi tiết nội bộ: stack trace, câu SQL, đường dẫn file, version thư viện trong response là tài liệu trinh sát cho kẻ tấn công. Trả message chung chung cho client + correlation/request id để đối chiếu log chi tiết phía server."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "91219-thiet-ke-error-response-cho-api-the-nao-cho-tot",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "3444e40a-0a8c-5436-8106-34946d7e9848",
+    "question": "So sánh REST, GraphQL và gRPC — khi nào chọn cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91101-so-sanh-rest-graphql-va-grpc-khi-nao-chon-cai-nao",
+    "slug": "so-sanh-rest-graphql-va-grpc-khi-nao-chon-cai-nao-3444e40a-0a8c-5436-8106-34946d7e9848",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "REST: nhiều endpoint theo tài nguyên, thường trả JSON trên HTTP (không phụ thuộc phiên bản HTTP cụ thể). Đơn giản, cache HTTP tốt, phổ biến rộng rãi. Điểm yếu: hay over-fetch/under-fetch (trả dư hoặc thiếu field, phải gọi nhiều lần).",
+        "GraphQL: một endpoint, client tự khai báo cần đúng field nào → loại bỏ over/under-fetch, hợp UI phức tạp/nhiều nguồn. Đổi lại: khó cache HTTP, dễ query nặng, cần chống N+1 phía server.",
+        "gRPC: RPC nhị phân trên HTTP/2 + Protocol Buffers, có contract chặt và streaming hai chiều. Nhanh, nhẹ, hợp giao tiếp service-to-service nội bộ; nhưng browser gọi trực tiếp khó, payload nhị phân khó kiểm tra trực tiếp."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "91101-so-sanh-rest-graphql-va-grpc-khi-nao-chon-cai-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "2ab1cffa-df11-5b19-8eb4-a9897f98a58c",
+    "question": "HTTP/1.1, HTTP/2 và HTTP/3 khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91311-http-1-1-http-2-va-http-3-khac-nhau-the-nao",
+    "slug": "http-1-1-http-2-va-http-3-khac-nhau-the-nao-2ab1cffa-df11-5b19-8eb4-a9897f98a58c",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Xu hướng: nâng cấp thường trong suốt với ứng dụng (do server/CDN lo), lợi ích lớn nhất ở mạng độ trễ cao/hay mất gói (mobile)."
+      ],
+      "details": [],
+      "points": [
+        "HTTP/1.1: giao thức văn bản, mỗi kết nối TCP xử lý một request tại một thời điểm → head-of-line (HOL) blocking: request chậm chặn các request sau. Có keep-alive, nhưng trình duyệt phải mở nhiều kết nối song song (và dùng mẹo như domain sharding) để tải nhanh.",
+        "HTTP/2: giao thức nhị phân, cho multiplexing — nhiều \"stream\" chạy song song trên một kết nối TCP, cùng nén header (HPACK). Giảm mạnh số kết nối và độ trễ. Nhưng vẫn dính HOL blocking ở tầng TCP: một gói TCP mất làm nghẽn mọi stream. (Server push từng có nhưng đã bị loại bỏ.)",
+        "HTTP/3: chạy trên QUIC (trên UDP) thay cho TCP. Mỗi stream độc lập về mất gói → mất gói của stream này không chặn stream khác (hết HOL blocking tầng transport). Thiết lập kết nối nhanh hơn vì tích hợp sẵn TLS 1.3 (bắt tay 1-RTT, có 0-RTT), và hỗ trợ connection migration (đổi mạng Wi-Fi↔4G không đứt kết nối)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "91311-http-1-1-http-2-va-http-3-khac-nhau-the-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "f3c62fd4-6314-5621-b513-ce2ef05f204a",
+    "question": "HTTP caching hoạt động thế nào? Cache-Control, ETag và 304 dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91307-http-caching-hoat-dong-the-nao-cache-control-etag-va-304-dung-de-lam-gi",
+    "slug": "http-caching-hoat-dong-the-nao-cache-control-etag-va-304-dung-de-lam-gi-f3c62fd4-6314-5621-b513-ce2ef05f204a",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "HTTP có sẵn cơ chế cache để trình duyệt/CDN/proxy tái dùng response cũ, giảm round-trip và tải origin. Hai lớp:"
+      ],
+      "details": [
+        "Mẫu thường dùng: asset có hash trong tên → max-age rất dài + immutable; HTML/API dễ đổi → no-cache rồi dựa vào ETag để revalidate rẻ."
+      ],
+      "points": [
+        "Freshness (còn tươi) — Cache-Control:",
+        "max-age=<giây>: thời gian được coi là còn tươi, dùng thẳng từ cache không hỏi server.",
+        "no-cache: được lưu nhưng phải revalidate với server trước khi dùng.",
+        "no-store: không lưu (nội dung nhạy cảm).",
+        "Validation (kiểm lại khi hết tươi)",
+        "If-None-Match",
+        "Last-Modified",
+        "If-Modified-Since",
+        "200",
+        "private (chỉ cache trình duyệt) vs public (cả CDN/proxy được cache).",
+        "không đổi",
+        "304 Not Modified",
+        "không kèm body"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "91307-http-caching-hoat-dong-the-nao-cache-control-etag-va-304-dung-de-lam-gi",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "162a1247-a175-59ce-a57f-1b457e56704c",
+    "question": "WebSocket, SSE và long-polling khác nhau thế nào? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91102-websocket-sse-va-long-polling-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "slug": "websocket-sse-va-long-polling-khac-nhau-the-nao-khi-nao-dung-cai-nao-162a1247-a175-59ce-a57f-1b457e56704c",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả ba giải bài toán server đẩy dữ liệu về client mà không đợi client hỏi liên tục."
+      ],
+      "details": [],
+      "points": [
+        "Long-polling: client gửi request, server giữ mở tới khi có dữ liệu rồi trả về; client lập tức gọi lại. Chạy trên HTTP thường, tương thích rộng, nhưng tốn kết nối và có độ trễ.",
+        "SSE (Server-Sent Events): kênh một chiều server → client trên một kết nối HTTP giữ mở; text-only, tự reconnect, nhẹ. Hợp feed/thông báo/log realtime.",
+        "WebSocket: kênh song công (hai chiều) trên một kết nối TCP nâng cấp từ HTTP. Độ trễ thấp, hợp chat, game, collaboration. Đổi lại: cần hạ tầng riêng, không dùng cache/HTTP semantics."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "91102-websocket-sse-va-long-polling-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "ad31e980-324a-58db-bcaf-9be64d1a7cc9",
+    "question": "Webhook là gì? Cần lưu ý gì khi nhận webhook?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91103-webhook-la-gi-can-luu-y-gi-khi-nhan-webhook",
+    "slug": "webhook-la-gi-can-luu-y-gi-khi-nhan-webhook-ad31e980-324a-58db-bcaf-9be64d1a7cc9",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Webhook là cách hệ ngoài chủ động gọi tới URL của bạn khi có sự kiện, thay vì bạn phải liên tục hỏi (polling). Còn gọi là \"reverse API\" / \"push callback\" — vd SePay báo thanh toán thành công, GitHub báo có push."
+      ],
+      "details": [
+        "Khi nhận webhook cần:\n- Verify chữ ký: kiểm HMAC/secret trong header để chắc request đến từ nguồn thật, không phải kẻ giả mạo.\n- Idempotent: nhà cung cấp có thể gửi lặp cùng một event → xử lý theo event_id để không tính hai lần.\n- Trả 2xx nhanh: nhận rồi đẩy việc nặng vào queue xử lý sau; chậm quá bên gửi sẽ coi là lỗi và retry.\n- Chịu được retry & sai thứ tự: event có thể đến trùng hoặc lệch thứ tự."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "91103-webhook-la-gi-can-luu-y-gi-khi-nhan-webhook",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "6e4eb1e5-cadb-587f-b987-a7d4e768b336",
+    "question": "Race condition ở backend là gì? Có những cách nào để phòng tránh?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91214-race-condition-o-backend-la-gi-co-nhung-cach-nao-de-phong-tranh",
+    "slug": "race-condition-o-backend-la-gi-co-nhung-cach-nao-de-phong-tranh-6e4eb1e5-cadb-587f-b987-a7d4e768b336",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Race condition xảy ra khi nhiều request/process truy cập cùng một tài nguyên đồng thời và kết quả phụ thuộc vào thứ tự thực thi. Ví dụ kinh điển: hai request cùng đọc số dư 100, cùng trừ 30 rồi ghi lại → cả hai ghi 70 thay vì 40 (lost update). Dạng khác: check-then-act — kiểm tra \"email chưa tồn tại\" rồi insert, nhưng request khác chen vào giữa hai bước."
+      ],
+      "details": [
+        "Các lớp phòng chống:\n- Pessimistic lock: khóa hàng trước khi sửa (SELECT ... FOR UPDATE) — chắc chắn nhưng giảm mức song song.\n- Optimistic lock: cột version; update kèm điều kiện WHERE version = ?, nếu 0 hàng bị ảnh hưởng thì retry.\n- Atomic operation: dồn đọc-sửa-ghi vào một lệnh (UPDATE ... SET balance = balance - 30, Redis INCR) thay vì đọc ra rồi ghi lại.\n- Transaction + isolation level phù hợp cho nhóm thao tác liên quan.\n- Unique constraint ở DB: lưới an toàn cuối cho check-then-insert — DB tự chặn bản ghi trùng.\n- Idempotency key cho request có thể bị retry (thanh toán, webhook).",
+        "Nguyên tắc: enforce ở tầng DB thay vì chỉ kiểm tra ở tầng ứng dụng — mọi kiểm tra ở app đều có khoảng hở thời gian."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "91214-race-condition-o-backend-la-gi-co-nhung-cach-nao-de-phong-tranh",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "d74b2762-b901-57af-98f5-cac40f9823b9",
+    "question": "Blocking và non-blocking I/O khác nhau thế nào? Server xử lý nhiều request đồng thời ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91215-blocking-va-non-blocking-i-o-khac-nhau-the-nao-server-xu-ly-nhieu-request-dong-t",
+    "slug": "blocking-va-non-blocking-i-o-khac-nhau-the-nao-server-xu-ly-nhieu-request-dong-thoi-ra-sao-d74b2762-b901-57af-98f5-cac40f9823b9",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hai mô hình xử lý nhiều request đồng thời:\n- Thread-per-request (Java servlet truyền thống, PHP-FPM): mỗi request một thread, code viết tuần tự dễ đọc, blocking không sao vì các thread khác vẫn chạy. Chi phí: mỗi thread tốn bộ nhớ stack + context switch — hàng chục nghìn kết nối đồng thời trở nên tốn kém.\n- Event loop (Node.js, Nginx): một thread chạy event loop + non-blocking I/O; hàng nghìn kết nối chỉ là các entry chờ sự kiện, rất rẻ với workload I/O-bound. Đổi lại, một tác vụ CPU-bound (tính toán nặng, parse JSON khổng lồ) sẽ chặn toàn bộ loop — mọi request khác phải chờ; cần đẩy sang worker thread/process riêng."
+      ],
+      "details": [
+        "Hướng mới: virtual thread (Java 21) / goroutine (Go) cho phép viết code kiểu blocking nhưng runtime lo phần non-blocking bên dưới."
+      ],
+      "points": [
+        "Blocking I/O: thread gọi thao tác I/O (đọc file, query DB, gọi HTTP) phải đứng chờ đến khi có kết quả — trong lúc đó không làm được việc khác.",
+        "Non-blocking I/O: lời gọi trả về ngay; kết quả được báo lại qua callback/event khi sẵn sàng, thread rảnh để xử lý việc khác."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "91215-blocking-va-non-blocking-i-o-khac-nhau-the-nao-server-xu-ly-nhieu-request-dong-t",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "e1617290-5f63-5423-8be5-e30b50c1ba4e",
+    "question": "Phân biệt các loại JOIN trong SQL? Viết một query dùng GROUP BY và HAVING — HAVING khác WHERE thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91422-phan-biet-cac-loai-join-trong-sql-viet-mot-query-dung-group-by-va-having-having",
+    "slug": "phan-biet-cac-loai-join-trong-sql-viet-mot-query-dung-group-by-va-having-having-khac-where-the-nao-e1617290-5f63-5423-8be5-e30b50c1ba4e",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Các loại JOIN (ví dụ users ↔ orders):\n- INNER JOIN: chỉ hàng khớp ở cả hai bảng — user có ít nhất một đơn.\n- LEFT JOIN: mọi hàng bảng trái + phần khớp bảng phải; không khớp → cột phải là NULL — mọi user, kể cả chưa có đơn.\n- RIGHT JOIN: đối xứng ngược lại (thực tế ít dùng — viết lại thành LEFT cho dễ đọc).\n- FULL OUTER JOIN: giữ cả hàng không khớp ở hai phía.\n- CROSS JOIN: tích Descartes — mọi cặp kết hợp.",
+        "WHERE vs HAVING: WHERE lọc từng hàng trước khi gom nhóm nên không dùng được hàm tổng hợp; HAVING lọc nhóm sau khi GROUP BY nên mới dùng được SUM/COUNT/AVG. Mọi cột trong SELECT không nằm trong hàm tổng hợp phải xuất hiện ở GROUP BY."
+      ],
+      "details": [
+        "GROUP BY + HAVING — câu hay gặp: \"khách nào có tổng chi tiêu trên 1 triệu\":",
+        "Lỗi hay gặp: đếm \"user chưa có đơn\" bằng COUNT(*) sau LEFT JOIN (đếm cả hàng NULL — phải dùng COUNT(o.id)); đặt điều kiện của bảng phải vào WHERE khiến LEFT JOIN thành INNER (điều kiện đó phải nằm trong ON)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "SELECT u.id, u.name, SUM(o.amount) AS total_spent\nFROM   users u\nJOIN   orders o ON o.user_id = u.id\nWHERE  o.status = 'paid'          -- filters ROWS, before grouping\nGROUP  BY u.id, u.name\nHAVING SUM(o.amount) > 1000000    -- filters GROUPS, after aggregation\nORDER  BY total_spent DESC;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "91422-phan-biet-cac-loai-join-trong-sql-viet-mot-query-dung-group-by-va-having-having",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "a25ca829-4926-53ac-b8fd-679261e1e631",
+    "question": "Soft delete và hard delete khác nhau thế nào? Bạn chọn cách nào và cài đặt ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91424-soft-delete-va-hard-delete-khac-nhau-the-nao-ban-chon-cach-nao-va-cai-dat-ra-sao",
+    "slug": "soft-delete-va-hard-delete-khac-nhau-the-nao-ban-chon-cach-nao-va-cai-dat-ra-sao-a25ca829-4926-53ac-b8fd-679261e1e631",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Trade-off của soft delete:\n- Được: khôi phục khi thao tác nhầm, giữ lịch sử phục vụ audit, bảng con tham chiếu không gãy FK.\n- Mất: mọi query phải nhớ lọc (quên một chỗ là dữ liệu \"đã xóa\" lộ ra UI); unique constraint hỏng — email đã \"xóa\" vẫn chặn đăng ký mới; bảng và index phình theo thời gian; và không thỏa yêu cầu xóa thật theo luật bảo vệ dữ liệu (GDPR right to erasure).",
+        "Cách chọn thực dụng:\n- Dữ liệu nghiệp vụ user có thể xóa nhầm (đơn hàng, bài viết) → soft delete + job purge xóa thật sau N ngày (grace period).\n- Dữ liệu cá nhân phải xóa theo luật, bảng log/dữ liệu tạm → hard delete (hoặc anonymize).\n- Cần audit đầy đủ → hướng thứ ba: copy bản ghi sang bảng archive/audit log rồi hard delete — bảng chính sạch, lịch sử vẫn còn."
+      ],
+      "details": [
+        "Lỗi hay gặp: rải điều kiện deleted_at IS NULL bằng tay khắp code thay vì gom về một tầng chung (default scope của ORM, view); soft delete bảng cha nhưng query bảng con vẫn coi bản ghi cha là sống."
+      ],
+      "points": [
+        "Hard delete: DELETE thật — dữ liệu biến mất, bảng/index gọn, nhưng không khôi phục được và mất dấu vết.",
+        "Soft delete: chỉ đánh dấu đã xóa (cột deleted_at timestamp, NULL = còn sống); mọi query đọc phải lọc WHERE deleted_at IS NULL. Khôi phục = set lại NULL."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "ALTER TABLE users ADD COLUMN deleted_at timestamptz;\n-- unique email enforced only among live rows\nCREATE UNIQUE INDEX users_email_live ON users(email) WHERE deleted_at IS NULL;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "91424-soft-delete-va-hard-delete-khac-nhau-the-nao-ban-chon-cach-nao-va-cai-dat-ra-sao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "7c69ba5b-d114-5e4f-9174-2bab89212fa4",
+    "question": "Primary key và foreign key khác nhau thế nào? Referential integrity là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/91303-primary-key-va-foreign-key-khac-nhau-the-nao-referential-integrity-la-gi",
+    "slug": "primary-key-va-foreign-key-khac-nhau-the-nao-referential-integrity-la-gi-7c69ba5b-d114-5e4f-9174-2bab89212fa4",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Referential integrity (toàn vẹn tham chiếu): DB đảm bảo mọi giá trị foreign key phải trỏ tới một hàng có thật ở bảng cha — không thể tạo đơn hàng cho user không tồn tại. Khi hàng cha bị xóa/sửa, hành vi do ON DELETE/ON UPDATE quy định: CASCADE (xóa/cập nhật lan sang con), RESTRICT/NO ACTION (chặn nếu còn con tham chiếu), SET NULL/SET DEFAULT."
+      ],
+      "details": [
+        "Ý nghĩa: ràng buộc này để DB tự canh tính nhất quán quan hệ, thay vì phó mặc cho code ứng dụng kiểm tra (dễ sót)."
+      ],
+      "points": [
+        "Primary key (khóa chính): một hoặc nhiều cột định danh duy nhất mỗi hàng. Giá trị phải duy nhất và khác NULL; mỗi bảng có tối đa một primary key (thường tự tạo index B-tree cho nó).",
+        "Foreign key (khóa ngoại): cột trong bảng con tham chiếu tới primary key của bảng cha, thể hiện quan hệ (vd orders.user_id trỏ tới users.id)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "91303-primary-key-va-foreign-key-khac-nhau-the-nao-referential-integrity-la-gi",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "136d5f32-b982-5110-b290-f5e592bda982",
+    "question": "Normalization và denormalization là gì? Đánh đổi ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91107-normalization-va-denormalization-la-gi-danh-doi-ra-sao",
+    "slug": "normalization-va-denormalization-la-gi-danh-doi-ra-sao-136d5f32-b982-5110-b290-f5e592bda982",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Normalization: tổ chức dữ liệu để loại trùng lặp — tách thành nhiều bảng liên kết bằng khóa, mỗi dữ kiện lưu một chỗ (theo các dạng chuẩn 1NF/2NF/3NF).\n- Lợi: ghi/cập nhật gọn, tránh dữ liệu mâu thuẫn, tiết kiệm dung lượng.\n- Hại: đọc phải JOIN nhiều bảng → truy vấn phức tạp và có thể chậm."
+      ],
+      "details": [
+        "Denormalization: cố ý thêm dữ liệu trùng (gộp bảng, lưu giá trị tính sẵn) để đọc nhanh, ít JOIN.\n- Lợi: đọc nhanh, hợp báo cáo/analytics/đọc nhiều.\n- Hại: dễ lệch dữ liệu (cùng thông tin ở nhiều nơi), ghi phức tạp, tốn dung lượng.",
+        "Chốt: hệ giao dịch (OLTP) thường chuẩn hóa để đúng đắn; nơi đọc chi phối/analytics thì bỏ chuẩn có chọn lọc để tăng tốc."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "91107-normalization-va-denormalization-la-gi-danh-doi-ra-sao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "f1b62e14-d8b5-5e9c-9cb7-c3ba56566ea3",
+    "question": "Phân biệt SQL và NoSQL, khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91006-phan-biet-sql-va-nosql-khi-nao-dung-cai-nao",
+    "slug": "phan-biet-sql-va-nosql-khi-nao-dung-cai-nao-f1b62e14-d8b5-5e9c-9cb7-c3ba56566ea3",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "SQL (quan hệ): dữ liệu ở bảng, schema cố định, quan hệ qua khóa chính/ngoại, ACID đầy đủ, thường scale dọc. Hợp hệ giao dịch cần nhất quán mạnh và quan hệ dữ liệu chặt (tài chính, đơn hàng)."
+      ],
+      "details": [
+        "NoSQL: nhiều loại — document (JSON), key-value, wide-column, graph; schema linh hoạt, scale ngang qua cluster, throughput cao; đánh đổi nới lỏng một phần ACID. Hợp dữ liệu bán cấu trúc, cần lặp nhanh, đọc/ghi quy mô lớn (catalog, profile, IoT, real-time).",
+        "Chọn theo mô hình truy vấn + yêu cầu nhất quán + cách scale, không theo trào lưu. Nhiều hệ dùng cả hai (polyglot persistence)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "91006-phan-biet-sql-va-nosql-khi-nao-dung-cai-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "507b317f-511c-5dac-8c8f-3460dd6ccc73",
+    "question": "Database index hoạt động thế nào? Vì sao query có index nhanh hơn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91007-database-index-hoat-dong-the-nao-vi-sao-query-co-index-nhanh-hon",
+    "slug": "database-index-hoat-dong-the-nao-vi-sao-query-co-index-nhanh-hon-507b317f-511c-5dac-8c8f-3460dd6ccc73",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Index là cấu trúc dữ liệu riêng, có thứ tự (thường là B-tree) giữ bản sao cột được đánh index + con trỏ tới hàng. Nhờ có thứ tự, DB tìm bằng cách đi cây thay vì quét toàn bảng (full table scan) → tra cứu nhanh trên WHERE, JOIN, ORDER BY của cột đó."
+      ],
+      "details": [
+        "Đánh đổi: tốn thêm dung lượng và làm chậm ghi (mỗi INSERT/UPDATE/DELETE phải cập nhật index).",
+        "Liên quan hay hỏi — N+1 query: lặp query con cho từng bản ghi (1 query cha + N query con). Khắc phục bằng JOIN/eager loading/batch thay vì gọi trong vòng lặp. Dùng EXPLAIN để xem query có dùng index không."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "91007-database-index-hoat-dong-the-nao-vi-sao-query-co-index-nhanh-hon",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "aab0e1ef-fd25-5094-989c-ebf6025b23fb",
+    "question": "ORM là gì? Ưu và nhược điểm?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91111-orm-la-gi-uu-va-nhuoc-diem",
+    "slug": "orm-la-gi-uu-va-nhuoc-diem-aab0e1ef-fd25-5094-989c-ebf6025b23fb",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "ORM (Object-Relational Mapping) ánh xạ bảng DB ↔ object/class trong code, để thao tác dữ liệu bằng đối tượng thay vì viết SQL tay (vd Prisma, TypeORM, Hibernate, Drizzle)."
+      ],
+      "details": [
+        "Ưu:\n- Viết nhanh, ít boilerplate, code gần với domain.\n- An toàn hơn: query được tham số hóa sẵn → giảm SQL injection.\n- Trừu tượng hóa DB, hỗ trợ migration, type-safety (với TS).",
+        "Nhược:\n- Leaky abstraction: query phức tạp/tối ưu vẫn phải hiểu SQL bên dưới.\n- Dễ dính N+1 query nếu không eager-load đúng.\n- Query sinh ra có thể kém tối ưu; khó kiểm soát chi tiết; thêm một lớp học tập."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "91111-orm-la-gi-uu-va-nhuoc-diem",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "ad4b1388-4aa8-55e7-a161-4ed072e6f11a",
+    "question": "Transaction trong database là gì? BEGIN/COMMIT/ROLLBACK hoạt động ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91201-transaction-trong-database-la-gi-begin-commit-rollback-hoat-dong-ra-sao",
+    "slug": "transaction-trong-database-la-gi-begin-commit-rollback-hoat-dong-ra-sao-ad4b1388-4aa8-55e7-a161-4ed072e6f11a",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Transaction là một nhóm câu lệnh chạy như một đơn vị atomic — hoặc tất cả thành công, hoặc không gì cả."
+      ],
+      "details": [
+        "Ví dụ chuyển tiền: trừ tài khoản A và cộng tài khoản B phải cùng thành công; nếu bước hai lỗi thì ROLLBACK để không mất tiền. Đây chính là chữ A (Atomicity) trong ACID; DB ghi write-ahead log (WAL) để đảm bảo durability và khôi phục sau crash — còn rollback trong PostgreSQL dựa trên MVCC (bản ghi cũ vẫn còn, transaction chỉ bị đánh dấu hủy).",
+        "Lưu ý: autocommit bật mặc định ở nhiều client → mỗi câu lệnh là một transaction; muốn gộp nhiều câu thành một đơn vị phải BEGIN tường minh."
+      ],
+      "points": [
+        "BEGIN: mở transaction.",
+        "COMMIT: xác nhận; mọi thay đổi trở nên bền vững và thấy được với transaction khác.",
+        "ROLLBACK: hủy; đưa DB về trạng thái trước BEGIN."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "91201-transaction-trong-database-la-gi-begin-commit-rollback-hoat-dong-ra-sao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "a11485ff-3b1e-5138-b1c4-135bbc3f508a",
+    "question": "Connection pooling là gì và vì sao quan trọng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91306-connection-pooling-la-gi-va-vi-sao-quan-trong",
+    "slug": "connection-pooling-la-gi-va-vi-sao-quan-trong-a11485ff-3b1e-5138-b1c4-135bbc3f508a",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mở một kết nối DB tốn kém: bắt tay TCP, thiết lập TLS, xác thực, cấp phát tài nguyên phía server — mất mili-giây và tiêu tốn bộ nhớ mỗi kết nối. Nếu mỗi request mở rồi đóng kết nối riêng thì độ trễ và tải tăng nhanh."
+      ],
+      "details": [
+        "Connection pool giữ sẵn một tập kết nối đang mở, tái sử dụng: request mượn một kết nối rảnh, dùng xong trả lại pool thay vì đóng. Lợi ích:\n- Giảm độ trễ: bỏ chi phí thiết lập lặp lại.\n- Giới hạn tải DB: DB có trần max_connections; pool chặn số kết nối đồng thời, tránh làm DB quá tải.",
+        "Tham số hay chỉnh: kích thước tối thiểu/tối đa, thời gian chờ mượn, idle timeout. Lưu ý kiến trúc serverless/nhiều instance: mỗi instance một pool nhỏ có thể cộng dồn vượt trần DB → dùng pooler bên ngoài (PgBouncer, RDS Proxy) đặt giữa app và DB. Pool quá nhỏ gây chờ đợi; quá lớn làm nghẽn DB — cần đo và cân chỉnh."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "91306-connection-pooling-la-gi-va-vi-sao-quan-trong",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "4391b107-627f-58ac-bf43-ee1434d69807",
+    "question": "N+1 query problem là gì và khắc phục ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92014-n-1-query-problem-la-gi-va-khac-phuc-ra-sao",
+    "slug": "n-1-query-problem-la-gi-va-khac-phuc-ra-sao-4391b107-627f-58ac-bf43-ee1434d69807",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "N+1 xảy ra khi lấy một danh sách rồi lặp gọi thêm một truy vấn con cho từng phần tử: 1 query lấy N bản ghi cha + N query lấy dữ liệu con → N+1 lần vào DB. Thường gặp với ORM khi truy cập quan hệ trong vòng lặp (lazy loading)."
+      ],
+      "details": [
+        "Ví dụ: lấy 100 bài viết (1 query) rồi với mỗi bài lại query tác giả (100 query) = 101 lần round-trip.",
+        "Khắc phục:\n- JOIN: gộp cha + con trong một truy vấn.\n- Eager loading: ORM nạp sẵn quan hệ (Prisma include, ActiveRecord includes, Hibernate JOIN FETCH).\n- Batch / WHERE IN (...): gom N id con thành một truy vấn (DataLoader dùng cách này).",
+        "số lần round-trip mạng tới DB"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- N+1: 1 + 100 round-trips\nSELECT * FROM posts LIMIT 100;\nSELECT * FROM users WHERE id = ?; -- repeated for each post\n-- Fix: batch into one query\nSELECT * FROM users WHERE id IN (1, 2, ...);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "92014-n-1-query-problem-la-gi-va-khac-phuc-ra-sao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "2f92114b-cb04-5dcf-b3c0-1b0c1ff00e25",
+    "question": "Redis là gì? Có những kiểu dữ liệu nào và dùng cho việc gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92059-redis-la-gi-co-nhung-kieu-du-lieu-nao-va-dung-cho-viec-gi",
+    "slug": "redis-la-gi-co-nhung-kieu-du-lieu-nao-va-dung-cho-viec-gi-2f92114b-cb04-5dcf-b3c0-1b0c1ff00e25",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Redis là kho dữ liệu key–value in-memory (lưu chủ yếu trong RAM) → đọc/ghi cực nhanh (thường dưới 1ms). Điểm mạnh là nó không chỉ lưu chuỗi mà là \"data structure server\" với nhiều kiểu dữ liệu gốc:"
+      ],
+      "details": [
+        "Ứng dụng phổ biến:\n- Cache giảm tải DB (kèm TTL để tự hết hạn).\n- Session store, rate limiting (INCR + EXPIRE).\n- Hàng đợi / pub-sub nhẹ, leaderboard (ZSet).",
+        "Lưu ý: dữ liệu ở RAM (đắt, giới hạn dung lượng); Redis có persistence (RDB snapshot, AOF log) để không mất hết khi khởi động lại, nhưng vẫn dùng chủ yếu cho dữ liệu tạm/nóng, không thay DB bền vững làm nguồn sự thật. Khả dụng cao: Sentinel tự failover cho setup một master; Redis Cluster shard ngang tự động (16384 hash slot)."
+      ],
+      "points": [
+        "String: giá trị đơn (cache trang, token, đếm với INCR).",
+        "Hash: tập field–value trong một key (lưu object, vd thông tin session).",
+        "List: danh sách theo thứ tự chèn (hàng đợi đơn giản, feed gần đây).",
+        "Set: tập phần tử duy nhất, không thứ tự (tag, kiểm tồn tại nhanh, phép giao/hợp).",
+        "Sorted set (ZSet): set có điểm số để sắp xếp (bảng xếp hạng, hàng đợi ưu tiên, dữ liệu theo thời gian).",
+        "Streams"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "92059-redis-la-gi-co-nhung-kieu-du-lieu-nao-va-dung-cho-viec-gi",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "bb6ce284-e491-5274-b8ee-a1733c20cd1f",
+    "question": "ACID là gì? Các mức transaction isolation và hiện tượng chúng ngăn?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "acid-la-gi-cac-muc-transaction-isolation-va-hien-tuong-chung-ngan-bb6ce284-e491-5274-b8ee-a1733c20cd1f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "8d78e31e-a608-59eb-a963-c4af3f614761",
+    "question": "Tối ưu một câu query chậm như thế nào? EXPLAIN dùng để làm gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "toi-uu-mot-cau-query-cham-nhu-the-nao-explain-dung-de-lam-gi-8d78e31e-a608-59eb-a963-c4af3f614761",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "a2fcc9b8-230e-571d-b4e1-0d50c5678e61",
+    "question": "Chiến lược migration schema database an toàn (zero-downtime) gồm những gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "chien-luoc-migration-schema-database-an-toan-zero-downtime-gom-nhung-gi-a2fcc9b8-230e-571d-b4e1-0d50c5678e61",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "10586abb-c7d5-5f4c-abef-a5d78faa2cfc",
+    "question": "Database replication là gì? Đồng bộ và bất đồng bộ khác nhau ra sao, replication lag là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "database-replication-la-gi-dong-bo-va-bat-dong-bo-khac-nhau-ra-sao-replication-lag-la-gi-10586abb-c7d5-5f4c-abef-a5d78faa2cfc",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "f4d63774-cdb8-5f9a-bcd1-a3d48939fecf",
+    "question": "Database sharding là gì? Phân biệt với replication và partitioning, có thách thức gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "database-sharding-la-gi-phan-biet-voi-replication-va-partitioning-co-thach-thuc-gi-f4d63774-cdb8-5f9a-bcd1-a3d48939fecf",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "2b9696fa-acf4-5e6f-99fc-b55a7e3c4ab4",
+    "question": "Deadlock là gì, do đâu và cách tránh?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "deadlock-la-gi-do-dau-va-cach-tranh-2b9696fa-acf4-5e6f-99fc-b55a7e3c4ab4",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "ab28b7f1-2887-577a-b9af-9e4de443295d",
+    "question": "Bloom filter là gì và dùng để làm gì trong hệ backend?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "bloom-filter-la-gi-va-dung-de-lam-gi-trong-he-backend-ab28b7f1-2887-577a-b9af-9e4de443295d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "6031201d-ef4a-5730-88c7-72764fafba14",
+    "question": "CDN là gì và vì sao cần dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/91304-cdn-la-gi-va-vi-sao-can-dung",
+    "slug": "cdn-la-gi-va-vi-sao-can-dung-6031201d-ef4a-5730-88c7-72764fafba14",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "CDN (Content Delivery Network) là mạng lưới server phân tán theo địa lý đặt gần người dùng, lưu bản sao cache của nội dung để phục vụ từ điểm gần nhất thay vì luôn phải về server gốc (origin)."
+      ],
+      "details": [
+        "Lợi ích:\n- Giảm độ trễ: dữ liệu đi quãng đường ngắn hơn tới user → tải nhanh hơn.\n- Giảm tải origin: phần lớn request tĩnh được cache tại edge, origin nhẹ hơn.\n- Chịu tải và chống tấn công: hấp thụ traffic đột biến, phân tán và làm dịu DDoS.",
+        "Cache-Control: private, no-store",
+        "Thường dùng cho tài nguyên tĩnh (ảnh, CSS, JS, video, font) và cả response động có thể cache. Cơ chế làm mới: cache theo TTL, và purge/invalidate hoặc đổi URL có version (app.abc123.js) khi nội dung thay đổi."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "91304-cdn-la-gi-va-vi-sao-can-dung",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "343c87fe-2648-51fa-80c9-acd6715c6ce2",
+    "question": "Bạn sẽ thiết kế schema database cho chức năng đặt vé / đơn hàng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91425-ban-se-thiet-ke-schema-database-cho-chuc-nang-dat-ve-don-hang-the-nao",
+    "slug": "ban-se-thiet-ke-schema-database-cho-chuc-nang-dat-ve-don-hang-the-nao-343c87fe-2648-51fa-80c9-acd6715c6ce2",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đi từ danh từ trong nghiệp vụ → bảng, rồi chốt quan hệ và ràng buộc.",
+        "Những quyết định cần nói được:\n- Quan hệ n–n tách bảng nối: một đơn nhiều sản phẩm, một sản phẩm ở nhiều đơn → order_items.\n- Snapshot giá tại thời điểm mua (unit_price trong order_items): giá sản phẩm đổi sau này không được làm sai đơn cũ — đừng JOIN sang products.price để tính lại tiền.\n- status là state machine (pending → paid → shipped / cancelled): bước chuyển hợp lệ do code kiểm soát; cần audit thì thêm bảng order_status_history.\n- Ràng buộc để DB tự kiểm soát: FK, CHECK (quantity > 0), unique key chống trùng (vd idempotency key trên orders).\n- Index theo truy vấn thật: orders(user_id, created_at DESC) cho \"đơn của tôi\"; order_items(product_id) cho thống kê bán chạy."
+      ],
+      "details": [
+        "Riêng đặt vé (chỗ ngồi hữu hạn) thêm hai điểm:\n- Mỗi ghế của một suất chiếu/chuyến là một hàng riêng (show_seats); bảng bookings giữ chỗ có expires_at — giữ 10 phút chưa thanh toán thì nhả.\n- Chống hai người lấy cùng ghế: unique constraint (show_id, seat_id) trên booking còn hiệu lực + claim ghế bằng UPDATE ... WHERE atomic (cùng cơ chế với bài chống oversell).",
+        "Bảng lõi cho đơn hàng:",
+        "Lỗi hay gặp: chỉ lưu tổng tiền mà không lưu đơn giá từng dòng; nhét items thành JSON trong orders (mất khả năng query và ràng buộc); quên TTL giữ chỗ khiến ghế bị khóa vĩnh viễn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "users(id, email UNIQUE, ...)\nproducts(id, name, price, stock)\norders(id, user_id FK, status, total_amount, created_at)\norder_items(order_id FK, product_id FK, quantity, unit_price,\n            PRIMARY KEY (order_id, product_id))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "91425-ban-se-thiet-ke-schema-database-cho-chuc-nang-dat-ve-don-hang-the-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "da8e34aa-0b37-5257-beec-eadd53072f11",
+    "question": "Load balancer L4 và L7 khác gì? Có những thuật toán phân phối nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92207-load-balancer-l4-va-l7-khac-gi-co-nhung-thuat-toan-phan-phoi-nao",
+    "slug": "load-balancer-l4-va-l7-khac-gi-co-nhung-thuat-toan-phan-phoi-nao-da8e34aa-0b37-5257-beec-eadd53072f11",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Load balancer chia traffic cho nhiều server để tránh quá tải và loại bỏ single point of failure."
+      ],
+      "details": [
+        "Thuật toán phổ biến:\n- Round robin / weighted round robin.\n- Least connections (server ít kết nối nhất).\n- IP hash / consistent hashing (giữ client về đúng server).",
+        "Load balancer cần health check để tự loại server hỏng khỏi pool."
+      ],
+      "points": [
+        "L4 (transport): định tuyến theo IP/port, không đọc nội dung → nhanh, throughput cao, nhưng ít linh hoạt.",
+        "L7 (application): đọc HTTP (path, header, cookie) → định tuyến theo nội dung, TLS termination, sticky session, nhưng tốn CPU hơn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "92207-load-balancer-l4-va-l7-khac-gi-co-nhung-thuat-toan-phan-phoi-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "d61cd19b-ce3f-59e1-8be9-78766f3a7e92",
+    "question": "Reverse proxy và API gateway khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91114-reverse-proxy-va-api-gateway-khac-nhau-the-nao",
+    "slug": "reverse-proxy-va-api-gateway-khac-nhau-the-nao-d61cd19b-ce3f-59e1-8be9-78766f3a7e92",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Reverse proxy (vd Nginx, HAProxy) đứng trước server, nhận request thay cho chúng và chuyển tiếp. Chức năng hạ tầng chung: TLS termination, load balancing, cache, nén, che giấu topology nội bộ."
+      ],
+      "details": [
+        "API gateway là một reverse proxy chuyên cho API, thêm các mối lo tầng ứng dụng ở một điểm vào duy nhất cho hệ (thường microservices):\n- Định tuyến request tới đúng service.\n- Authentication/authorization tập trung.\n- Rate limiting, quota, API key.\n- Aggregation (gộp nhiều service call), chuyển đổi giao thức, logging/metrics.",
+        "Chốt: mọi API gateway đều là reverse proxy, nhưng reverse proxy thuần chỉ lo chuyển tiếp/hạ tầng; API gateway gánh thêm logic API cross-cutting. Hệ nhỏ dùng reverse proxy là đủ; nhiều microservice thì gateway giúp gom các mối lo chung."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "91114-reverse-proxy-va-api-gateway-khac-nhau-the-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "89099117-1d2d-5ad3-a26b-41f993e2af30",
+    "question": "Vì sao service nên stateless để scale ngang?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91117-vi-sao-service-nen-stateless-de-scale-ngang",
+    "slug": "vi-sao-service-nen-stateless-de-scale-ngang-89099117-1d2d-5ad3-a26b-41f993e2af30",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Stateless: server không giữ trạng thái phiên trong bộ nhớ giữa các request — mỗi request tự chứa đủ thông tin, hoặc trạng thái được đẩy ra kho ngoài dùng chung (DB, Redis, JWT phía client)."
+      ],
+      "details": [
+        "Vì sao quan trọng cho horizontal scaling (thêm nhiều instance thay vì làm một máy mạnh hơn):\n- Request đi tới instance nào cũng được → load balancer chia tự do, không cần \"sticky session\".\n- Thêm/bớt instance dễ dàng (autoscale) mà không mất dữ liệu người dùng.\n- Một instance chết không kéo theo mất session → chịu lỗi tốt hơn.",
+        "Hệ quả thực tế: đừng lưu session/giỏ hàng/bộ đếm trong RAM một instance; đưa ra Redis/DB. Đây cũng là lý do REST đề cao stateless. Dữ liệu thực sự có trạng thái (DB) thì tách riêng và scale bằng cơ chế khác (replication/sharding)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "91117-vi-sao-service-nen-stateless-de-scale-ngang",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "2af3b2b5-39f2-535f-8b41-df9164c4cfb6",
+    "question": "Scale dọc (vertical) và scale ngang (horizontal) khác nhau thế nào? Đánh đổi ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91312-scale-doc-vertical-va-scale-ngang-horizontal-khac-nhau-the-nao-danh-doi-ra-sao",
+    "slug": "scale-doc-vertical-va-scale-ngang-horizontal-khac-nhau-the-nao-danh-doi-ra-sao-2af3b2b5-39f2-535f-8b41-df9164c4cfb6",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Thực tế: scale dọc trước vì nhanh và rẻ về công sức tới khi chạm trần hoặc cần tính sẵn sàng cao; sau đó scale ngang cho tầng ứng dụng (dễ, nếu đã stateless) và xử lý tầng dữ liệu riêng bằng read replica/sharding. Hai hướng không loại trừ nhau — thường kết hợp."
+      ],
+      "details": [],
+      "points": [
+        "Scale dọc (scale up): làm một máy mạnh hơn — thêm CPU, RAM, ổ đĩa. Đơn giản, không cần đổi kiến trúc/code, tránh được độ phức tạp phân tán. Nhược: có trần phần cứng, giá tăng phi tuyến ở cấu hình cao, và vẫn là một điểm chết duy nhất (single point of failure).",
+        "Scale ngang (scale out): thêm nhiều máy rồi chia tải qua load balancer. Ưu: mở rộng gần như không giới hạn, chịu lỗi tốt (một máy chết vẫn còn máy khác), tận dụng phần cứng phổ thông rẻ. Nhược: đòi hỏi service stateless (đẩy state ra Redis/DB dùng chung), thêm độ phức tạp của dữ liệu phân tán (replication/sharding, nhất quán)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "91312-scale-doc-vertical-va-scale-ngang-horizontal-khac-nhau-the-nao-danh-doi-ra-sao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "f249996f-8c5d-534c-bea1-caf282b6f783",
+    "question": "Health check và graceful shutdown là gì? Vì sao cần?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91118-health-check-va-graceful-shutdown-la-gi-vi-sao-can",
+    "slug": "health-check-va-graceful-shutdown-la-gi-vi-sao-can-f249996f-8c5d-534c-bea1-caf282b6f783",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Health check: endpoint (vd /healthz) để load balancer/orchestrator (Kubernetes) biết instance có sống và sẵn sàng nhận traffic không. Hai loại thường phân biệt:\n- Liveness: process còn sống không? Fail → restart instance.\n- Readiness: đã sẵn sàng phục vụ chưa (đã nối DB, nạp xong cache)? Fail → ngừng gửi traffic tới nó nhưng không kill."
+      ],
+      "details": [
+        "Graceful shutdown: khi instance nhận tín hiệu dừng (SIGTERM lúc deploy/scale-down), nó không cắt đột ngột mà: ngừng nhận request mới → xử lý nốt request đang chạy (trong một khoảng grace) → đóng kết nối DB/queue → mới thoát.",
+        "Vì sao cần: tránh rớt request giữa chừng, mất dữ liệu hay trả lỗi cho user khi deploy/rolling update. Kết hợp: readiness báo \"đang tắt\" để LB rút traffic trước, rồi graceful drain phần còn lại."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "91118-health-check-va-graceful-shutdown-la-gi-vi-sao-can",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "0e8bd73c-edd1-5ff6-9dbb-14f2f6602489",
+    "question": "Observability là gì? Phân biệt logs, metrics, traces.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91119-observability-la-gi-phan-biet-logs-metrics-traces",
+    "slug": "observability-la-gi-phan-biet-logs-metrics-traces-0e8bd73c-edd1-5ff6-9dbb-14f2f6602489",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Observability là khả năng hiểu hệ đang xảy ra gì từ bên ngoài qua dữ liệu nó phát ra — để trả lời \"cái gì hỏng, ở đâu, vì sao\", nhất là trong hệ phân tán. Ba trụ cột:"
+      ],
+      "details": [
+        "Ghép lại: metric báo có sự cố → trace khoanh vùng service → log soi chi tiết nguyên nhân. Chuẩn chung: OpenTelemetry."
+      ],
+      "points": [
+        "Logs: bản ghi sự kiện rời rạc kèm thời điểm và ngữ cảnh (\"event X, user Y, lỗi Z\"). Chi tiết, hợp điều tra một ca cụ thể. Nên dùng structured log (JSON) và correlation id để lần theo.",
+        "Metrics: số liệu tổng hợp theo thời gian (request/s, p95 latency, error rate, CPU). Nhẹ, hợp dashboard và alert khi vượt ngưỡng; trả lời \"có vấn đề không\".",
+        "Traces: theo dấu một request đi qua nhiều service (mỗi chặng là một span). Trả lời \"chậm/lỗi ở service nào trong chuỗi\"; cốt lõi cho microservices."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "91119-observability-la-gi-phan-biet-logs-metrics-traces",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "28af91ad-8f93-5f0a-aea6-f18698704b5b",
+    "question": "Monolith và microservices: đánh đổi ra sao, khi nào chọn cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92220-monolith-va-microservices-danh-doi-ra-sao-khi-nao-chon-cai-nao",
+    "slug": "monolith-va-microservices-danh-doi-ra-sao-khi-nao-chon-cai-nao-28af91ad-8f93-5f0a-aea6-f18698704b5b",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Lời khuyên thực tế (monolith-first): bắt đầu bằng monolith được module hóa tốt; tách microservice khi đội nhóm/domain đã đủ lớn và ranh giới rõ. Tách sớm dễ trả giá cho phức tạp không cần thiết."
+      ],
+      "details": [],
+      "points": [
+        "Monolith: toàn bộ ứng dụng trong một codebase/deploy. Ưu: đơn giản, dễ dev/test/deploy lúc đầu, gọi hàm trong tiến trình rất nhanh, không có độ phức tạp phân tán. Nhược: khi lớn thì build/deploy chậm, coupling tăng, khó scale từng phần.",
+        "Microservices: chia thành nhiều dịch vụ nhỏ, deploy độc lập, mỗi dịch vụ sở hữu dữ liệu riêng. Ưu: scale và deploy độc lập, đội nhóm tự chủ, cô lập lỗi tốt hơn. Nhược: độ phức tạp phân tán (mạng, nhất quán, quan sát), chi phí vận hành cao, test end-to-end khó."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "92220-monolith-va-microservices-danh-doi-ra-sao-khi-nao-chon-cai-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "d63b259f-ee48-5294-ac9b-1239b0494d25",
+    "question": "Xử lý đồng bộ và bất đồng bộ khác nhau thế nào? Khi nào nên chuyển sang async?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91309-xu-ly-dong-bo-va-bat-dong-bo-khac-nhau-the-nao-khi-nao-nen-chuyen-sang-async",
+    "slug": "xu-ly-dong-bo-va-bat-dong-bo-khac-nhau-the-nao-khi-nao-nen-chuyen-sang-async-d63b259f-ee48-5294-ac9b-1239b0494d25",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Chuyển sang async khi:\n- Tác vụ chậm/nặng không cần kết quả tức thì: gửi email, xử lý ảnh/video, tạo báo cáo, gọi API bên thứ ba chậm.\n- Cần làm phẳng traffic đột biến (queue hấp thụ spike) và tách rời các thành phần để scale độc lập."
+      ],
+      "details": [
+        "Đánh đổi: async phức tạp hơn — phải theo dõi trạng thái công việc, xử lý retry/thất bại, và đảm bảo idempotent vì message có thể bị xử lý lại. Đừng async hóa mọi thứ: tác vụ nhanh, cần kết quả ngay thì đồng bộ vẫn đúng và gọn hơn."
+      ],
+      "points": [
+        "Đồng bộ (synchronous): client gửi request và chờ tới khi xong, nhận kết quả ngay trong response. Đơn giản, dễ suy luận, nhưng giữ tài nguyên (connection, thread) suốt thời gian xử lý và độ trễ = thời gian tác vụ.",
+        "Bất đồng bộ (asynchronous): server nhận request rồi trả lời ngay (thường 202 Accepted kèm nơi tra trạng thái), việc nặng được đẩy vào hàng đợi/worker xử lý nền; client poll hoặc nhận callback/webhook khi có kết quả."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "91309-xu-ly-dong-bo-va-bat-dong-bo-khac-nhau-the-nao-khi-nao-nen-chuyen-sang-async",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "ab459c35-5792-57e6-b9c7-408abfa5a2ce",
+    "question": "Message queue (point-to-point) và pub/sub khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91310-message-queue-point-to-point-va-pub-sub-khac-nhau-the-nao",
+    "slug": "message-queue-point-to-point-va-pub-sub-khac-nhau-the-nao-ab459c35-5792-57e6-b9c7-408abfa5a2ce",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hai mô hình gửi message bất đồng bộ, khác nhau ở ai nhận message:"
+      ],
+      "details": [
+        "Chốt: queue = chia việc (mỗi message một người làm); pub/sub = phát broadcast (mỗi message mọi người nghe). Nhiều hệ kết hợp: publish sự kiện lên topic, mỗi consumer group có queue riêng để xử lý một lần trong nhóm (vd SNS + SQS, hoặc Kafka với consumer group). Cả hai đều giúp decoupling và chịu tải."
+      ],
+      "points": [
+        "Message queue (point-to-point): mỗi message được đúng một consumer xử lý. Nhiều consumer cùng đọc một queue thì chia nhau việc (competing consumers) để tăng throughput, nhưng một message chỉ giao cho một trong số đó. Hợp phân phối tác vụ: mỗi job làm đúng một lần (xử lý ảnh, gửi mail).",
+        "Pub/sub (publish-subscribe): message được fan-out tới mọi subscriber đang quan tâm — một sự kiện, nhiều bên nhận đồng thời và độc lập. Publisher không cần biết có bao nhiêu/những ai là subscriber. Hợp phát sự kiện: một OrderCreated cho cả service kho, service email, service analytics cùng phản ứng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "91310-message-queue-point-to-point-va-pub-sub-khac-nhau-the-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "c6e5ec6f-c95b-51c6-80b2-1f8b3dfae247",
+    "question": "Khi user đăng ký xong cần gửi email chào mừng, bạn xử lý gửi email/notification thế nào — gọi trực tiếp trong request hay qua queue?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91414-khi-user-dang-ky-xong-can-gui-email-chao-mung-ban-xu-ly-gui-email-notification-t",
+    "slug": "khi-user-dang-ky-xong-can-gui-email-chao-mung-ban-xu-ly-gui-email-notification-the-nao-goi-truc-tiep-c6e5ec6f-c95b-51c6-80b2-1f8b3dfae247",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không gửi inline trong request. SMTP/nhà cung cấp có thể chậm hoặc lỗi tạm thời; nếu chờ, response bị treo và nếu gửi lỗi thì cả request signup fail dù user đã tạo xong."
+      ],
+      "details": [
+        "Thiết kế: ghi user vào DB → đẩy một message vào queue (SQS/RabbitMQ/Redis) → trả response ngay. Một worker riêng consume queue và gọi provider gửi email.",
+        "notification_id",
+        "Vì sao queue tốt hơn:\n- Tách rời (decouple): web request nhanh, việc chậm chạy nền.\n- Retry: gửi lỗi thì message quay lại queue thử lại (có backoff).\n- Dead-letter queue (DLQ): message thử N lần vẫn lỗi thì chuyển sang DLQ để điều tra, không kẹt queue chính.\n- Chịu được tải dồn (burst): đăng ký ồ ạt thì queue làm bộ đệm.",
+        "ít nhất một lần"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// worker consuming the queue — idempotent per notification_id\nconst r = await db.query(\n  \"INSERT INTO sent_notifications(notification_id) VALUES($1) ON CONFLICT DO NOTHING\",\n  [msg.notificationId],\n)\nif (r.rowCount === 0) { ack(msg); return } // already sent, skip\nawait mailer.send(msg.email)\nack(msg) // on failure: nack → the queue retries"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "91414-khi-user-dang-ky-xong-can-gui-email-chao-mung-ban-xu-ly-gui-email-notification-t",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "42690422-4a47-5602-9871-989788cc1b8f",
+    "question": "Bạn sẽ thiết kế luồng upload file lớn (vài trăm MB) thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91408-ban-se-thiet-ke-luong-upload-file-lon-vai-tram-mb-the-nao",
+    "slug": "ban-se-thiet-ke-luong-upload-file-lon-vai-tram-mb-the-nao-42690422-4a47-5602-9871-989788cc1b8f",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đừng đẩy toàn bộ byte đi qua server ứng dụng — nó chiếm bộ nhớ/băng thông và giới hạn payload. Dùng direct-to-storage bằng presigned URL.",
+        "Ưu: server không gánh byte, scale tốt, tận dụng hạ tầng storage. Nhược: cần cấu hình CORS/quyền cẩn thận, khó chèn xử lý (quét virus, resize) ngay trên luồng → làm bất đồng bộ sau khi upload xong."
+      ],
+      "details": [
+        "Luồng presigned (S3):\n1. Client gọi API xin quyền upload. Server xác thực + phân quyền, sinh presigned URL (chữ ký tạm, hết hạn sau vài phút, ràng buộc bucket/key/content-type/kích thước).\n2. Server trả URL cho client. Client PUT file thẳng lên S3, không đi qua server app.\n3. Sau khi lên xong, S3 bắn event (hoặc client báo) → server ghi metadata (owner, key, size) vào DB.",
+        "Direct-to-storage vs qua server: qua server chỉ hợp file nhỏ hoặc cần biến đổi/kiểm duyệt đồng bộ; file lớn thì presigned + xử lý hậu kỳ. File rất lớn nên kèm multipart/chunked (xem câu resumable). Lỗi hay gặp: presigned không giới hạn size/type → thành điểm upload không kiểm soát."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "import { S3Client, PutObjectCommand } from \"@aws-sdk/client-s3\"\nimport { getSignedUrl } from \"@aws-sdk/s3-request-presigner\"\nconst s3 = new S3Client({ region: \"ap-southeast-1\" })\n// after auth + validating type/size, sign a short-lived PUT\nconst cmd = new PutObjectCommand({ Bucket: \"uploads\", Key: key, ContentType: type })\nconst url = await getSignedUrl(s3, cmd, { expiresIn: 300 })   // 5 min\n// client then: fetch(url, { method: \"PUT\", body: file })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "91408-ban-se-thiet-ke-luong-upload-file-lon-vai-tram-mb-the-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "ba5d7951-8456-5146-9f90-aa21b7db8ef4",
+    "question": "Bạn sẽ thiết kế luồng upload ảnh có resize/tối ưu và phục vụ qua CDN thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91409-ban-se-thiet-ke-luong-upload-anh-co-resize-toi-uu-va-phuc-vu-qua-cdn-the-nao",
+    "slug": "ban-se-thiet-ke-luong-upload-anh-co-resize-toi-uu-va-phuc-vu-qua-cdn-the-nao-ba5d7951-8456-5146-9f90-aa21b7db8ef4",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tách lúc nhận ảnh khỏi lúc phục vụ ảnh."
+      ],
+      "details": [
+        "Nhận (upload): client upload ảnh gốc thẳng lên object storage bằng presigned URL (như câu file lớn). Kiểm tra type/size trước khi cấp URL.",
+        "Accept",
+        "width",
+        "height",
+        "Xử lý (transform): hai hướng phổ biến —\n- Xử lý sẵn (eager): sau upload, một worker/hàm (event-driven) tạo sẵn các biến thể (thumbnail, medium, WebP/AVIF) rồi lưu lại. Đơn giản khi số kích thước cố định, nhưng tốn chỗ và không linh hoạt.\n- Xử lý theo yêu cầu (on-the-fly qua image CDN): giữ một bản gốc; CDN/dịch vụ ảnh resize + đổi định dạng + nén theo tham số URL (vd ?w=400&format=auto) lần đầu rồi cache. Linh hoạt, đỡ tốn chỗ — thường là lựa chọn nên có.",
+        "Phục vụ"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "91409-ban-se-thiet-ke-luong-upload-anh-co-resize-toi-uu-va-phuc-vu-qua-cdn-the-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "30698304-4f34-5b87-9fd9-31a42a9eac54",
+    "question": "Lưu file ở đâu: object storage, trong DB, hay filesystem? Bạn chọn thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91412-luu-file-o-dau-object-storage-trong-db-hay-filesystem-ban-chon-the-nao",
+    "slug": "luu-file-o-dau-object-storage-trong-db-hay-filesystem-ban-chon-the-nao-30698304-4f34-5b87-9fd9-31a42a9eac54",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ba hướng, mỗi hướng hợp một bối cảnh:"
+      ],
+      "details": [
+        "Cách chọn: web nhiều file/ảnh, cần scale + CDN → object storage (mặc định). Cần nhất quán giao dịch tuyệt đối, file nhỏ → cân nhắc DB. App nhỏ/tạm → filesystem. Lỗi hay gặp: lưu file lớn vào DB làm backup và query chậm dần."
+      ],
+      "points": [
+        "Object storage (S3/GCS/R2): lưu byte trên storage, chỉ giữ metadata + key/URL trong DB. Ưu: scale gần như vô hạn, rẻ, phục vụ qua CDN dễ, không gánh app server. Nhược: cần dịch vụ ngoài, nhất quán \"eventual\" ở vài thao tác. Mặc định nên chọn cho web hiện đại.",
+        "Trong DB (BLOB): lưu byte thẳng vào cột blob. Ưu: giao dịch atomic (file + record cùng commit/rollback), backup/permission chung một chỗ. Nhược: DB tăng dung lượng nhanh, backup nặng, chậm khi phục vụ file lớn, khó cache/CDN. Chỉ hợp file nhỏ, ít, cần tính nhất quán chặt (vd chữ ký số).",
+        "Filesystem (đĩa server): đơn giản, nhanh cục bộ. Nhược: khó scale nhiều instance (đĩa không chia sẻ), phải tự lo backup/replication, mất máy là mất file. Hợp app đơn lẻ hoặc file tạm."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "91412-luu-file-o-dau-object-storage-trong-db-hay-filesystem-ban-chon-the-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "f57804b4-9e70-55d7-bee2-472e6f37de87",
+    "question": "User bấm \"Export CSV\" nhưng dữ liệu hàng trăm nghìn dòng, request bị timeout. Bạn thiết kế lại luồng export thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91419-user-bam-export-csv-nhung-du-lieu-hang-tram-nghin-dong-request-bi-timeout-ban-th",
+    "slug": "user-bam-export-csv-nhung-du-lieu-hang-tram-nghin-dong-request-bi-timeout-ban-thiet-ke-lai-luong-exp-f57804b4-9e70-55d7-bee2-472e6f37de87",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vấn đề: gom hết dữ liệu vào bộ nhớ rồi trả trong một HTTP request đồng bộ → tốn RAM, vượt timeout của proxy/gateway. Hai hướng:",
+        "Chọn: vài nghìn dòng → streaming đủ. Hàng trăm nghìn+/ báo cáo nặng → background job, thoát hẳn khỏi vòng đời request."
+      ],
+      "details": [
+        "1. Streaming response (dữ liệu vừa/lớn vừa):\n- Query theo lô (cursor/LIMIT), ghi từng chunk ra response stream, Transfer-Encoding: chunked, không giữ toàn bộ trong RAM.\n- Đơn giản, tải về ngay, nhưng vẫn giữ một kết nối mở lâu — dễ đứt nếu quá dài, và bên trước (CDN/LB) vẫn có thể timeout.",
+        "2. Background job (khuyến nghị cho dữ liệu rất lớn):\n- Request chỉ tạo job (đẩy vào queue) và trả 202 Accepted + job_id ngay.\n- Worker chạy nền: query theo lô, ghi file, upload lên object storage (S3).\n- Khi xong, cho user tải qua presigned URL (link có hạn, không lộ credential) — báo qua polling GET /jobs/{id}, email, hoặc notification realtime."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// streaming: batch by cursor, flush each chunk, never buffer all rows\nres.setHeader(\"Content-Type\", \"text/csv\")\nres.setHeader(\"Transfer-Encoding\", \"chunked\")\nfor await (const row of db.cursor(\"SELECT * FROM orders WHERE ...\")) {\n  res.write(toCsvLine(row))\n}\nres.end()\n// very large / heavy: return 202 + job_id instead; a worker uploads to S3 (presigned URL)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "91419-user-bam-export-csv-nhung-du-lieu-hang-tram-nghin-dong-request-bi-timeout-ban-th",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "349477ec-26f7-503b-acf5-b326ff5f2e90",
+    "question": "Bạn sẽ làm tính năng notification realtime (chấm đỏ, tin nhắn mới) bằng WebSocket thế nào, và scale ra sao khi chạy nhiều instance server?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-se-lam-tinh-nang-notification-realtime-cham-do-tin-nhan-moi-bang-websocket-the-nao-va-scale-ra-s-349477ec-26f7-503b-acf5-b326ff5f2e90",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "5526501f-d10b-501a-974b-1e6392264075",
+    "question": "CAP theorem là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cap-theorem-la-gi-5526501f-d10b-501a-974b-1e6392264075",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "52c810b1-afdd-5616-bead-de405a5d58b5",
+    "question": "Eventual consistency là gì? Đánh đổi với strong consistency?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "eventual-consistency-la-gi-danh-doi-voi-strong-consistency-52c810b1-afdd-5616-bead-de405a5d58b5",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "0c1dbb54-4504-59d6-8d1f-27170f5f2f7c",
+    "question": "Circuit breaker và retry với exponential backoff giải quyết gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "circuit-breaker-va-retry-voi-exponential-backoff-giai-quyet-gi-0c1dbb54-4504-59d6-8d1f-27170f5f2f7c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "39efc0a8-f75a-55ca-b134-513bdc9aefaa",
+    "question": "Một endpoint đọc nhiều (vd trang sản phẩm) đang chậm, bạn thêm cache-aside với Redis thế nào và xử lý invalidation, cache stampede ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mot-endpoint-doc-nhieu-vd-trang-san-pham-dang-cham-ban-them-cache-aside-voi-redis-the-nao-va-xu-ly-i-39efc0a8-f75a-55ca-b134-513bdc9aefaa",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "fdda6d9b-800e-5f40-98a1-20ea45a3c177",
+    "question": "Consistent hashing là gì và giải quyết vấn đề gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "consistent-hashing-la-gi-va-giai-quyet-van-de-gi-fdda6d9b-800e-5f40-98a1-20ea45a3c177",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "b200a612-a95e-5b60-830a-48add508b4a6",
+    "question": "Distributed lock là gì? Vì sao mutex trong tiến trình không đủ, và Redis làm thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "distributed-lock-la-gi-vi-sao-mutex-trong-tien-trinh-khong-du-va-redis-lam-the-nao-b200a612-a95e-5b60-830a-48add508b4a6",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "d0ce0c8b-7137-5ce7-ab1d-c2e70b35aef7",
+    "question": "Two-phase commit (2PC) là gì? Vì sao thường bị né ở hệ quy mô lớn?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "two-phase-commit-2pc-la-gi-vi-sao-thuong-bi-ne-o-he-quy-mo-lon-d0ce0c8b-7137-5ce7-ab1d-c2e70b35aef7",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "2b6eb14b-bf90-56a6-a238-a6dd52c4188c",
+    "question": "Saga pattern xử lý giao dịch phân tán qua nhiều service thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "saga-pattern-xu-ly-giao-dich-phan-tan-qua-nhieu-service-the-nao-2b6eb14b-bf90-56a6-a238-a6dd52c4188c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "882e0de5-7372-5843-93a3-c46514866e0a",
+    "question": "Bạn sẽ thiết kế upload có thể tiếp tục (resumable/chunked) kèm thanh tiến trình thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-se-thiet-ke-upload-co-the-tiep-tuc-resumable-chunked-kem-thanh-tien-trinh-the-nao-882e0de5-7372-5843-93a3-c46514866e0a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "b48a4d2b-8698-5ad0-a51c-454297be6658",
+    "question": "Bạn sẽ thiết kế luồng thanh toán qua cổng ngoài (Stripe/SePay) và xử lý webhook thế nào để không mất tiền hoặc cộng đơn hai lần?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-se-thiet-ke-luong-thanh-toan-qua-cong-ngoai-stripe-sepay-va-xu-ly-webhook-the-nao-de-khong-mat-t-b48a4d2b-8698-5ad0-a51c-454297be6658",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "3a8e6d2a-177e-59a6-a0ad-b308c9c65bdc",
+    "question": "Thiết kế luồng flash sale: 100 suất nhưng 10.000 người bấm mua cùng lúc — làm sao không bán vượt (oversell)?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "thiet-ke-luong-flash-sale-100-suat-nhung-10-000-nguoi-bam-mua-cung-luc-lam-sao-khong-ban-vuot-overse-3a8e6d2a-177e-59a6-a0ad-b308c9c65bdc",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "7b84026e-41e0-5f0f-9c9a-0bc361bb8cae",
+    "question": "Microservice giao tiếp đồng bộ (REST/gRPC) hay bất đồng bộ (message) khi nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "microservice-giao-tiep-dong-bo-rest-grpc-hay-bat-dong-bo-message-khi-nao-7b84026e-41e0-5f0f-9c9a-0bc361bb8cae",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "5a39c1d8-e2ee-5f2b-8c50-a8134e7851da",
+    "question": "Design pattern là gì? GoF chia thành mấy nhóm?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92239-design-pattern-la-gi-gof-chia-thanh-may-nhom",
+    "slug": "design-pattern-la-gi-gof-chia-thanh-may-nhom-5a39c1d8-e2ee-5f2b-8c50-a8134e7851da",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Design pattern là giải pháp tái sử dụng cho các vấn đề thiết kế phần mềm hay lặp lại — không phải code copy-paste, mà là khuôn mẫu để tổ chức lớp/đối tượng. Lợi ích: có từ vựng chung (nói \"Observer\" là hiểu ngay), tránh phát minh lại, thiết kế dễ mở rộng."
+      ],
+      "details": [
+        "\"Gang of Four\" (GoF) phân 23 pattern kinh điển thành 3 nhóm:\n- Creational (tạo đối tượng): Singleton, Factory Method, Abstract Factory, Builder, Prototype.\n- Structural (ghép lớp/đối tượng): Adapter, Decorator, Facade, Proxy, Composite, Bridge, Flyweight.\n- Behavioral (phân chia trách nhiệm & giao tiếp): Observer, Strategy, Command, State, Iterator, Template Method, Chain of Responsibility, Mediator, Visitor...",
+        "Lưu ý: pattern là công cụ, đừng lạm dụng — áp khi vấn đề thực sự khớp, tránh over-engineering."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": "92239-design-pattern-la-gi-gof-chia-thanh-may-nhom",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "27d8542c-dc35-5a49-9671-a6710d6d7ca7",
+    "question": "SOLID gồm những nguyên tắc nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92246-solid-gom-nhung-nguyen-tac-nao",
+    "slug": "solid-gom-nhung-nguyen-tac-nao-27d8542c-dc35-5a49-9671-a6710d6d7ca7",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Năm nguyên tắc thiết kế hướng đối tượng giúp code dễ bảo trì, mở rộng, ít coupling (Robert C. Martin tổng hợp):"
+      ],
+      "details": [
+        "Mục tiêu chung: giảm coupling, tăng cohesion, dễ test và thay đổi. Là công cụ tư duy, không phải luật cứng — cân bằng với YAGNI/KISS."
+      ],
+      "points": [
+        "S – Single Responsibility: mỗi lớp chỉ có một lý do để thay đổi (một trách nhiệm).",
+        "O – Open/Closed: mở để mở rộng, đóng để sửa đổi — thêm tính năng bằng code mới, không sửa code đã chạy ổn (thường qua abstraction/polymorphism).",
+        "L – Liskov Substitution: đối tượng lớp con phải thay thế được lớp cha mà không phá vỡ hành vi mong đợi.",
+        "I – Interface Segregation: nhiều interface nhỏ, chuyên biệt tốt hơn một interface to; client không bị buộc phụ thuộc phương thức nó không dùng.",
+        "D – Dependency Inversion: module cấp cao phụ thuộc vào abstraction, không vào chi tiết cụ thể (nền tảng của dependency injection)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": "92246-solid-gom-nhung-nguyen-tac-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "4032706c-abf8-5f4c-a98c-6c1e497f82b9",
+    "question": "Dependency Injection (DI) là gì? Các loại DI và framework hỗ trợ?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2115-dependency-injection-di-la-gi-cac-loai-di-va-framework-ho-tro",
+    "slug": "dependency-injection-di-la-gi-cac-loai-di-va-framework-ho-tro-4032706c-abf8-5f4c-a98c-6c1e497f82b9",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "DI là technique mà object nhận dependencies từ bên ngoài thay vì tự tạo — là cơ chế triển khai DIP.",
+        "Framework DI: NestJS dùng IoC container với decorators @Injectable(), @Inject() — tự động resolve dependency tree. Trong Go không có framework DI phổ biến, thường dùng manual DI qua wire (Google) hoặc constructor functions."
+      ],
+      "details": [
+        "Ba loại DI:",
+        "Lợi ích: loose coupling, dễ test (inject mock), dễ swap implementation. Anti-pattern: Service Locator (class tự gọi container.get('UserRepo')) — tạo hidden dependency."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "// (1) Constructor Injection (phổ biến nhất)\nclass UserService {\n  constructor(private userRepo: UserRepository) {}\n}\n\n// (2) Setter/Property Injection (cho optional dependency)\nclass UserService {\n  setRepository(repo: UserRepository) { this.repo = repo }\n}\n\n// (3) Method Injection (chỉ cần cho một operation)\nclass UserService {\n  getUser(id: string, repo: UserRepository) { return repo.find(id) }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": "2115-dependency-injection-di-la-gi-cac-loai-di-va-framework-ho-tro",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "0cd8395c-f353-5da1-bb12-96e1526b6b1f",
+    "question": "Singleton pattern là gì? Có nhược điểm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92240-singleton-pattern-la-gi-co-nhuoc-diem-gi",
+    "slug": "singleton-pattern-la-gi-co-nhuoc-diem-gi-0cd8395c-f353-5da1-bb12-96e1526b6b1f",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Singleton đảm bảo một lớp chỉ có đúng một thể hiện (instance) trong toàn ứng dụng và cung cấp một điểm truy cập toàn cục tới nó. Thường dùng cho tài nguyên dùng chung: config, logger, connection pool, cache."
+      ],
+      "details": [
+        "Cách làm điển hình: constructor private + một biến static giữ instance + phương thức getInstance() tạo lười (lazy) khi cần lần đầu.",
+        "dependency injection",
+        "Nhược điểm (hay bị hỏi):\n- Thực chất là global state → khó test (khó mock/inject), che giấu phụ thuộc, dễ gây coupling ngầm.\n- Không an toàn đa luồng nếu khởi tạo lười mà không đồng bộ (cần double-checked locking hoặc eager init).\n- Vi phạm Single Responsibility (vừa lo nghiệp vụ vừa lo vòng đời của chính nó)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": "92240-singleton-pattern-la-gi-co-nhuoc-diem-gi",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "b783711c-1fc3-5194-8f90-5016d047c781",
+    "question": "Factory Method (và Abstract Factory) giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/92241-factory-method-va-abstract-factory-giai-quyet-van-de-gi",
+    "slug": "factory-method-va-abstract-factory-giai-quyet-van-de-gi-b783711c-1fc3-5194-8f90-5016d047c781",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vấn đề: khi code tạo đối tượng bằng new ConcreteClass() rải rác, nó bị gắn chặt vào lớp cụ thể → muốn đổi/ thêm loại phải sửa nhiều nơi."
+      ],
+      "details": [
+        "Lợi ích chung: tách việc tạo đối tượng khỏi việc dùng nó, tập trung logic khởi tạo về một chỗ, giảm coupling. Đánh đổi: thêm số lượng lớp/độ gián tiếp."
+      ],
+      "points": [
+        "Factory Method: định nghĩa một phương thức tạo đối tượng, để lớp con quyết định tạo loại cụ thể nào. Code gọi làm việc với interface/abstract type, không biết lớp cụ thể → dễ mở rộng (thêm loại mới chỉ cần thêm factory con), tuân Open/Closed và Dependency Inversion.",
+        "Abstract Factory: tạo cả một họ đối tượng liên quan (ví dụ Button + Checkbox theo cùng một theme) mà không ràng vào lớp cụ thể, đảm bảo các sản phẩm đi cùng nhau nhất quán."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": "92241-factory-method-va-abstract-factory-giai-quyet-van-de-gi",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "5920ee44-1823-5b41-97c3-ff2c276899bc",
+    "question": "Partition và consumer group trong Kafka hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91206-partition-va-consumer-group-trong-kafka-hoat-dong-the-nao",
+    "slug": "partition-va-consumer-group-trong-kafka-hoat-dong-the-nao-5920ee44-1823-5b41-97c3-ff2c276899bc",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Một topic Kafka được chia thành nhiều partition — mỗi partition là một log append-only, có thứ tự. Ghi/đọc song song trên nhiều partition là cách Kafka scale throughput."
+      ],
+      "details": [
+        "Chọn số partition đủ lớn ngay từ đầu (khó giảm sau này), cân bằng giữa mức song song và chi phí quản lý."
+      ],
+      "points": [
+        "Thứ tự chỉ đảm bảo trong một partition, không phải toàn topic. Message cùng key luôn vào cùng partition → giữ thứ tự theo key.",
+        "Consumer group: nhiều consumer chia nhau đọc; Kafka gán mỗi partition cho tối đa một consumer trong group → xử lý song song, không trùng. Do đó số consumer hữu ích ≤ số partition (consumer thừa sẽ idle, không được gán partition).",
+        "Mỗi group giữ offset riêng → nhiều group đọc độc lập cùng một topic (fan-out)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": "91206-partition-va-consumer-group-trong-kafka-hoat-dong-the-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "ed0f9d35-4e33-587a-96a5-2cdf96634b0f",
+    "question": "Dead letter queue (DLQ) là gì và dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91207-dead-letter-queue-dlq-la-gi-va-dung-khi-nao",
+    "slug": "dead-letter-queue-dlq-la-gi-va-dung-khi-nao-ed0f9d35-4e33-587a-96a5-2cdf96634b0f",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "DLQ là một hàng đợi phụ chứa các message không xử lý được sau khi đã retry đủ số lần (sai định dạng, bug consumer, dữ liệu không hợp lệ...)."
+      ],
+      "details": [
+        "Vì sao cần:\n- Tránh poison message làm kẹt hoặc lặp vô hạn cả hàng đợi chính.\n- Cô lập lỗi để hàng đợi chính vẫn chạy tiếp.\n- Giữ lại message lỗi để điều tra, sửa, rồi replay sau.",
+        "Cách dùng: đặt ngưỡng retry (max receive count); vượt ngưỡng → chuyển message sang DLQ; gắn alert khi DLQ có message; định kỳ xem xét và xử lý lại. Có sẵn ở SQS và RabbitMQ; với Kafka thường tự dựng bằng một topic riêng (vd orders.DLT) do Kafka không có DLQ tích hợp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": "91207-dead-letter-queue-dlq-la-gi-va-dung-khi-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "1de65c09-5479-5e53-8094-3ecabe8532ba",
+    "question": "RabbitMQ là gì và khi nào nên dùng nó?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2901-rabbitmq-la-gi-va-khi-nao-nen-dung-no",
+    "slug": "rabbitmq-la-gi-va-khi-nao-nen-dung-no-1de65c09-5479-5e53-8094-3ecabe8532ba",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "RabbitMQ là message broker mã nguồn mở, cho phép các ứng dụng giao tiếp bất đồng bộ thông qua một broker trung gian thay vì gọi trực tiếp lẫn nhau."
+      ],
+      "details": [],
+      "points": [
+        "Dùng khi cần tách ghép (decouple) các service, xử lý tác vụ nền như gửi email, resize ảnh, và tăng độ tin cậy của hệ thống khi có lỗi xảy ra.",
+        "Điểm khác biệt so với gọi API trực tiếp: nếu một service bị down, messages sẽ nằm đợi trong RabbitMQ cho đến khi service đó khôi phục."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": "2901-rabbitmq-la-gi-va-khi-nao-nen-dung-no",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "447b18c5-d338-5831-a081-c6e8f47ce989",
+    "question": "Có mấy loại exchange trong RabbitMQ và mỗi loại dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2919-co-may-loai-exchange-trong-rabbitmq-va-moi-loai-dung-khi-nao",
+    "slug": "co-may-loai-exchange-trong-rabbitmq-va-moi-loai-dung-khi-nao-447b18c5-d338-5831-a081-c6e8f47ce989",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Có 4 loại exchange chính:"
+      ],
+      "details": [
+        "Thực tế hay dùng Direct và Topic nhất."
+      ],
+      "points": [
+        "Direct — định tuyến dựa trên exact match routing_key, dùng phân phối task đến worker cụ thể;",
+        "Fanout — broadcast mọi message đến tất cả queue đã bind bất kể routing_key, dùng cho notification;",
+        "Topic — định tuyến theo pattern wildcard (* khớp một từ, # khớp không hoặc nhiều từ), dùng cho hệ thống event phân cấp;",
+        "Headers — định tuyến theo header attribute thay vì routing_key, dùng khi logic phức tạp"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": "2919-co-may-loai-exchange-trong-rabbitmq-va-moi-loai-dung-khi-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "9520b7ed-54eb-58b0-a66a-4e2653987b50",
+    "question": "Làm thế nào để xử lý message bị lỗi và retry trong RabbitMQ?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2936-lam-the-nao-de-xu-ly-message-bi-loi-va-retry-trong-rabbitmq",
+    "slug": "lam-the-nao-de-xu-ly-message-bi-loi-va-retry-trong-rabbitmq-9520b7ed-54eb-58b0-a66a-4e2653987b50",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "RabbitMQ không tự retry message bị lỗi — đó là nhiệm vụ của consumer."
+      ],
+      "details": [
+        "Các pattern phổ biến:",
+        "Để cap số lần retry, consumer đọc header x-death — RabbitMQ populate header này mỗi khi message đi qua DLX."
+      ],
+      "points": [
+        "Nack + requeue: consumer bắt exception, gửi nack với requeue=true, message quay lại queue (cần cẩn thận để tránh loop vô hạn).",
+        "Dead-letter + retry: message fail → dead-letter queue → retry consumer đợi N giây rồi republish lên queue gốc.",
+        "Circuit breaker: phát hiện liên tục fail, tạm dừng consume, kiểm tra sau"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": "2936-lam-the-nao-de-xu-ly-message-bi-loi-va-retry-trong-rabbitmq",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "f42380a4-f9d3-5007-a7d2-54748540baf3",
+    "question": "Các chiến lược caching (cache-aside, write-through) và cách vô hiệu hóa (invalidate) cache?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91010-cac-chien-luoc-caching-cache-aside-write-through-va-cach-vo-hieu-hoa-invalidate",
+    "slug": "cac-chien-luoc-caching-cache-aside-write-through-va-cach-vo-hieu-hoa-invalidate-cache-f42380a4-f9d3-5007-a7d2-54748540baf3",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cache giữ dữ liệu hay dùng ở tầng nhanh (RAM, vd Redis) → giảm tải DB, tăng tốc đọc."
+      ],
+      "details": [
+        "Chiến lược đọc/ghi:\n- Cache-aside (lazy loading): app đọc cache trước; miss thì đọc DB rồi ghi vào cache. Phổ biến nhất; cache chỉ chứa dữ liệu thật được dùng.\n- Write-through: ghi đồng thời vào cache và DB → cache luôn mới, nhưng ghi chậm hơn.\n- Write-behind: ghi cache trước, đẩy xuống DB sau (nhanh, rủi ro mất dữ liệu nếu sập).",
+        "Vô hiệu hóa cache: TTL (hết hạn tự động), xóa/ghi đè khi dữ liệu đổi, và eviction khi đầy (vd LRU). \"Cache invalidation\" là một trong hai bài toán khó kinh điển của CS."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": "91010-cac-chien-luoc-caching-cache-aside-write-through-va-cach-vo-hieu-hoa-invalidate",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "1ee20325-84ef-5695-a527-17f8ff5e4020",
+    "question": "Unit test, integration test và e2e test khác nhau thế nào? Nên phân bổ tỉ lệ ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/774-unit-test-integration-test-va-e2e-test-khac-nhau-the-nao-nen-phan-bo-ti-le-ra-sa",
+    "slug": "unit-test-integration-test-va-e2e-test-khac-nhau-the-nao-nen-phan-bo-ti-le-ra-sao-1ee20325-84ef-5695-a527-17f8ff5e4020",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Phân bổ: nhiều unit → ít integration → rất ít e2e (nguyên tắc \"kim tự tháp\" test). Lý do: test nhanh/rẻ chạy thường xuyên bắt lỗi sớm; e2e chậm và mơ hồ nên chỉ phủ luồng cốt lõi. Quy tắc chung: viết test ở tầng thấp nhất có thể bắt được lỗi đó."
+      ],
+      "details": [],
+      "points": [
+        "Unit test: kiểm tra một đơn vị nhỏ (hàm, class) trong cô lập, mock/stub dependency. Chạy trong mili-giây, fail chỉ đúng chỗ hỏng → dễ tìm nguyên nhân, viết nhiều nhất.",
+        "Integration test: kiểm tra nhiều thành phần ghép với nhau — code với DB thật, gọi API service khác, đọc/ghi queue. Chậm hơn vì cần hạ tầng (DB test, container).",
+        "E2E test: chạy cả hệ thống theo góc nhìn người dùng (qua UI hoặc API), toàn bộ stack thật. Đắt nhất, chậm nhất, dễ flaky (fail chập chờn vì timing/network) → chỉ giữ vài luồng quan trọng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 76,
+    "sourceSlug": "774-unit-test-integration-test-va-e2e-test-khac-nhau-the-nao-nen-phan-bo-ti-le-ra-sa",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "95ee1ca7-6d10-564b-aed6-5a3c7119419e",
+    "question": "Test doubles: mock, stub, spy, fake khác nhau như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "test-doubles-mock-stub-spy-fake-khac-nhau-nhu-the-nao-95ee1ca7-6d10-564b-aed6-5a3c7119419e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 77,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "133ed4b2-37ca-5f2b-bc45-90bcdb801c1b",
+    "question": "Phân biệt authentication và authorization? Server verify JWT thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91015-phan-biet-authentication-va-authorization-server-verify-jwt-the-nao",
+    "slug": "phan-biet-authentication-va-authorization-server-verify-jwt-the-nao-133ed4b2-37ca-5f2b-bc45-90bcdb801c1b",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Thứ tự: xác thực trước, phân quyền sau. Sai quyền → 403; chưa xác thực → 401."
+      ],
+      "details": [
+        "Server verify JWT: token gồm header.payload.signature. Server tính lại chữ ký trên header.payload bằng secret (HS256) hoặc public key (RS256) và so với signature → phát hiện sửa đổi; đồng thời kiểm claim exp (hết hạn), iss/aud. Vì stateless nên không tra DB — đổi lại khó thu hồi trước hạn (dùng access token sống ngắn + refresh, hoặc blacklist). Với OAuth2, SPA nên dùng Authorization Code + PKCE."
+      ],
+      "points": [
+        "Authentication (xác thực): bạn là ai — kiểm danh tính (mật khẩu, OAuth, passkey).",
+        "Authorization (phân quyền): bạn được làm gì — kiểm quyền truy cập tài nguyên (RBAC, scope)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 78,
+    "sourceSlug": "91015-phan-biet-authentication-va-authorization-server-verify-jwt-the-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "4c5b345c-4c67-5a77-aae0-5e59e186917d",
+    "question": "Xác thực bằng session và bằng token (JWT) khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91305-xac-thuc-bang-session-va-bang-token-jwt-khac-nhau-the-nao",
+    "slug": "xac-thuc-bang-session-va-bang-token-jwt-khac-nhau-the-nao-4c5b345c-4c67-5a77-aae0-5e59e186917d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tóm gọn hướng dùng: web app một domain cần thu hồi chặt → session cookie; API/nhiều service không giữ state → token. Chọn thế nào cho một hệ cụ thể (kèm luồng refresh/revoke) là câu thiết kế riêng."
+      ],
+      "details": [],
+      "points": [
+        "Session (stateful): sau khi đăng nhập, server lưu dữ liệu phiên ở phía server (bộ nhớ/Redis/DB) và trả về một session id dạng opaque (chuỗi vô nghĩa, không chứa thông tin) trong cookie. Mỗi request server tra store để biết là ai. Ưu: thu hồi tức thì (xóa phiên server-side), đổi quyền dễ. Nhược: cần store phiên dùng chung khi scale nhiều instance; cookie kéo theo rủi ro CSRF.",
+        "Token/JWT (stateless): server cấp một token có chữ ký chứa sẵn claim (user id, vai trò, exp); client gửi kèm ở header Authorization: Bearer .... Server chỉ verify chữ ký, không cần tra DB. Ưu: hợp stateless/scale ngang, tiện cho API/mobile/microservice. Nhược: khó thu hồi trước hạn → dùng access token sống ngắn + refresh token; payload chỉ base64 (không mã hóa) nên không để dữ liệu nhạy cảm."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 79,
+    "sourceSlug": "91305-xac-thuc-bang-session-va-bang-token-jwt-khac-nhau-the-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "77c1abf0-f1ab-5726-b247-4a3398ae83d7",
+    "question": "Bạn sẽ thiết kế luồng refresh token thế nào? Lưu token ở đâu cho an toàn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91401-ban-se-thiet-ke-luong-refresh-token-the-nao-luu-token-o-dau-cho-an-toan",
+    "slug": "ban-se-thiet-ke-luong-refresh-token-the-nao-luu-token-o-dau-cho-an-toan-77c1abf0-f1ab-5726-b247-4a3398ae83d7",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Access token ngắn hạn (5–15 phút) gửi kèm Authorization: Bearer; refresh token dài hạn chỉ dùng để xin access mới."
+      ],
+      "details": [
+        "Lưu ở đâu: refresh token trong cookie httpOnly + Secure + SameSite (JS không đọc được → chống XSS đánh cắp); access token giữ in-memory (biến JS). Tránh localStorage cho cả hai vì XSS đọc được.",
+        "Thu hồi",
+        "Xoay vòng token (rotation): mỗi lần gọi /refresh cấp refresh mới + vô hiệu cái cũ. Nếu một refresh cũ (đã dùng) bị dùng lại → coi là bị đánh cắp, thu hồi cả \"family\" token của phiên đó.",
+        "Xử lý 401"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "let refreshing = null\nasync function authFetch(req) {\n  let res = await fetch(req)\n  if (res.status === 401) {\n    refreshing ??= fetch(\"/refresh\", { credentials: \"include\" })\n    await refreshing.finally(() => { refreshing = null })\n    res = await fetch(req) // retry once with the new access token\n  }\n  return res\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 80,
+    "sourceSlug": "91401-ban-se-thiet-ke-luong-refresh-token-the-nao-luu-token-o-dau-cho-an-toan",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "fbc6a93d-7066-5f2e-a58b-14899a983f96",
+    "question": "Bạn sẽ thiết kế luồng reset password an toàn thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91403-ban-se-thiet-ke-luong-reset-password-an-toan-the-nao",
+    "slug": "ban-se-thiet-ke-luong-reset-password-an-toan-the-nao-fbc6a93d-7066-5f2e-a58b-14899a983f96",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mục tiêu: chỉ chủ email thật mới đặt lại được mật khẩu, và không rò rỉ tài khoản nào tồn tại.",
+        "Lỗi hay gặp: token đoán được, không hết hạn, dùng lại nhiều lần, hoặc lộ \"email không tồn tại\" ở bước 1."
+      ],
+      "details": [
+        "Luồng:\n1. User nhập email → luôn trả lời cùng một thông báo (\"nếu email tồn tại, chúng tôi đã gửi link\") bất kể có tồn tại hay không → chống user enumeration.\n2. Tạo token ngẫu nhiên đủ dài (vd 32 byte từ CSPRNG). Lưu hash của token trong DB (không lưu token thô), kèm user_id và expires_at (15–60 phút).\n3. Gửi token qua link email; token chỉ dùng một lần (single-use) — dùng xong hoặc đổi pass xong thì xóa/vô hiệu.\n4. Khi user mở link + đặt pass mới: tra hash, kiểm tra chưa hết hạn và chưa dùng, cập nhật mật khẩu (hash bằng bcrypt/argon2), rồi vô hiệu token + thu hồi các session đang mở.",
+        "Nên rate-limit cả bước gửi link."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "import { randomBytes, createHash } from \"crypto\"\nconst sha256 = (s) => createHash(\"sha256\").update(s).digest(\"hex\")\n// request: email the raw token, store only its hash\nconst token = randomBytes(32).toString(\"hex\")\nawait db.resetTokens.insert({ userId, tokenHash: sha256(token), expiresAt: Date.now() + 30 * 60_000 })\n// verify: look up by hash, check unused + not expired, then single-use delete\nconst row = await db.resetTokens.findByHash(sha256(input))\nif (!row || row.used || row.expiresAt < Date.now()) throw new Error(\"invalid token\")"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 81,
+    "sourceSlug": "91403-ban-se-thiet-ke-luong-reset-password-an-toan-the-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "6d40f338-4f2b-5e1f-9389-c254593c65dd",
+    "question": "Session hay JWT? Bạn chọn cái nào cho một app cụ thể và vì sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91404-session-hay-jwt-ban-chon-cai-nao-cho-mot-app-cu-the-va-vi-sao",
+    "slug": "session-hay-jwt-ban-chon-cai-nao-cho-mot-app-cu-the-va-vi-sao-6d40f338-4f2b-5e1f-9389-c254593c65dd",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khác biệt gốc: session giữ trạng thái ở server (cookie chỉ mang session id, muốn thu hồi thì xoá bản ghi), còn JWT đẩy trạng thái vào token đã ký để mỗi service tự verify mà không gọi về auth service — đổi lại token đã phát thì không rút lại được trước hạn. Interviewer hỏi dạng này là chờ quyết định cho một hệ cụ thể kèm luồng vận hành. Trả lời bằng khung 3 câu hỏi:"
+      ],
+      "details": [
+        "1. Cần thu hồi tức thì không? (ban user, đổi mật khẩu phải logout mọi thiết bị ngay) → nghiêng session/stateful.\n2. Bao nhiêu bên tiêu thụ token? Một web app cùng domain → session cookie là đủ; nhiều service/mobile/API cho bên thứ ba → JWT tiện vì mỗi service tự verify chữ ký, không gọi về auth service.\n3. Đã có store chia sẻ chưa? Hệ đã chạy Redis sẵn → chi phí \"stateful\" gần bằng 0, bớt hẳn một lý do chọn JWT.",
+        "Áp vào hệ cụ thể:\n- App ngân hàng / admin monolith → session cookie (httpOnly + Secure + SameSite): revoke tức thì là yêu cầu cứng, một domain nên cookie tự nhiên.\n- Hệ microservice + mobile app → JWT access 10–15 phút + refresh token, và phần \"thu hồi\" nằm ở refresh:\n- Refresh lưu hash trong DB theo phiên/thiết bị → thu hồi được từng thiết bị; access ngắn nên khoảng \"không thu hồi được\" chỉ tối đa vài phút.\n- Xoay vòng (rotation): mỗi lần refresh cấp token mới + vô hiệu cái cũ; refresh cũ bị dùng lại → coi là bị đánh cắp, thu hồi cả phiên.\n- Logout = xóa bản ghi refresh + xóa cookie; cần ban khẩn cấp → thêm denylist jti hoặc token_version trên user.",
+        "Chốt: mô hình lai này lấy JWT cho tốc độ verify giữa các service, nhưng giữ quyền thu hồi ở phần stateful của refresh token — không phải \"dùng JWT thì chịu, không logout được\"."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 82,
+    "sourceSlug": "91404-session-hay-jwt-ban-chon-cai-nao-cho-mot-app-cu-the-va-vi-sao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "00c1acf9-c2c1-5b50-8b3e-638417483ff1",
+    "question": "Bạn sẽ chống brute-force / dò mật khẩu ở trang đăng nhập thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91405-ban-se-chong-brute-force-do-mat-khau-o-trang-dang-nhap-the-nao",
+    "slug": "ban-se-chong-brute-force-do-mat-khau-o-trang-dang-nhap-the-nao-00c1acf9-c2c1-5b50-8b3e-638417483ff1",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Phối nhiều lớp, không dựa vào một biện pháp duy nhất:"
+      ],
+      "details": [],
+      "points": [
+        "Rate limit theo IP và theo tài khoản (vd tối đa N lần/phút). Khóa theo account chống việc đổi IP; khóa theo IP chống spray một IP nhiều account.",
+        "Exponential backoff: mỗi lần sai tăng dần thời gian chờ (1s, 2s, 4s...) thay vì khóa cứng — làm chậm bot mà ít phiền user thật.",
+        "Account lockout tạm thời sau nhiều lần sai (kèm cẩn trọng: khóa cứng dễ bị lợi dụng làm DoS khóa tài khoản người khác → ưu tiên backoff + cảnh báo).",
+        "CAPTCHA bật lên sau vài lần thất bại (không bật ngay từ đầu để đỡ phiền).",
+        "Chống credential stuffing: MFA, kiểm tra mật khẩu lộ (haveibeenpwned), theo dõi đăng nhập bất thường (thiết bị/địa điểm lạ).",
+        "Thông báo lỗi mơ hồ"
+      ],
+      "sections": [
+        "Lỗi hay gặp: chỉ rate-limit theo IP (bot dùng proxy pool xoay IP dễ vượt), hoặc lockout cứng thành lỗ hổng DoS."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// count failed attempts per account+IP in a rolling window (Redis)\nconst key = `login:fail:${email}:${ip}`\nconst fails = await redis.incr(key)\nif (fails === 1) await redis.expire(key, 900)   // 15-min window\nif (fails > 5) throw new Error(\"too many attempts, slow down\")\n// on successful login: await redis.del(key)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 83,
+    "sourceSlug": "91405-ban-se-chong-brute-force-do-mat-khau-o-trang-dang-nhap-the-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "655b8caf-0fb4-5fea-b010-61694acca969",
+    "question": "Lưu token phía client ở đâu: httpOnly cookie, localStorage hay in-memory?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91407-luu-token-phia-client-o-dau-httponly-cookie-localstorage-hay-in-memory",
+    "slug": "luu-token-phia-client-o-dau-httponly-cookie-localstorage-hay-in-memory-655b8caf-0fb4-5fea-b010-61694acca969",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mỗi chỗ đánh đổi giữa hai nguy cơ khác nhau — XSS và CSRF."
+      ],
+      "details": [
+        "Khuyến nghị thực dụng: refresh token trong cookie httpOnly+Secure+SameSite; access token in-memory. Tránh để token dài hạn trong localStorage. Dù chọn gì, vá XSS vẫn là ưu tiên số một — XSS thắng thì mọi cách lưu đều gãy."
+      ],
+      "points": [
+        "localStorage: JS đọc/ghi dễ, tiện gắn Authorization header (nên miễn nhiễm CSRF). Nhưng XSS đọc được → một script chèn vào là mất token. Không nên dùng cho token nhạy cảm.",
+        "Cookie httpOnly + Secure + SameSite: JS không đọc được → chống XSS đánh cắp token. Nhưng cookie tự động gửi kèm request → mở CSRF, cần phòng bằng SameSite=Lax/Strict + anti-CSRF token cho thao tác đổi trạng thái.",
+        "In-memory (biến JS): an toàn nhất trước XSS-lâu-dài (mất khi reload, không nằm trên disk), nhưng mất khi refresh trang → thường ghép với refresh token trong cookie httpOnly để lấy lại access."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 84,
+    "sourceSlug": "91407-luu-token-phia-client-o-dau-httponly-cookie-localstorage-hay-in-memory",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "d176e671-a8e7-5db1-8c41-e96d7f94bd18",
+    "question": "SQL injection là gì và cách phòng chống?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91014-sql-injection-la-gi-va-cach-phong-chong",
+    "slug": "sql-injection-la-gi-va-cach-phong-chong-d176e671-a8e7-5db1-8c41-e96d7f94bd18",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Phòng chống (theo thứ tự hiệu quả — OWASP):\n1. Prepared statement / parameterized query — tách code SQL khỏi dữ liệu; input luôn được coi là giá trị, không bao giờ là lệnh. Đây là biện pháp chính.\n2. Stored procedure viết an toàn (không tự ghép SQL động bên trong).\n3. Allow-list cho phần không tham số hóa được (tên bảng/cột, chiều sort).\n4. Least privilege cho tài khoản DB; validate input là lớp phụ."
+      ],
+      "details": [
+        "Tránh escape thủ công làm biện pháp chính — mong manh. ORM dùng đúng cũng tham số hóa sẵn."
+      ],
+      "points": [],
+      "sections": [
+        "SQL injection xảy ra khi app ghép chuỗi input người dùng vào câu SQL → kẻ tấn công chèn lệnh SQL để lộ/sửa dữ liệu, thậm chí chiếm DB."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// BAD — input becomes part of the SQL code\ndb.query(\"SELECT * FROM users WHERE name = '\" + input + \"'\")\n// GOOD — parameterized: input is always treated as data\ndb.query('SELECT * FROM users WHERE name = ?', [input])"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 85,
+    "sourceSlug": "91014-sql-injection-la-gi-va-cach-phong-chong",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "748cae01-e8ed-5e08-8d6d-6ad48050399a",
+    "question": "CSRF là gì và cách phòng chống?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91308-csrf-la-gi-va-cach-phong-chong",
+    "slug": "csrf-la-gi-va-cach-phong-chong-748cae01-e8ed-5e08-8d6d-6ad48050399a",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "CSRF (Cross-Site Request Forgery) lợi dụng việc trình duyệt tự động gửi cookie theo mọi request tới một site. Kẻ tấn công dụ user đã đăng nhập truy cập trang độc hại; trang đó âm thầm gửi request tới site nạn nhân (vd form chuyển tiền, đổi email) — request đi kèm cookie phiên hợp lệ nên server tưởng là user thật thực hiện."
+      ],
+      "details": [
+        "Phòng chống (theo OWASP):\n- SameSite cookie: đặt SameSite=Lax (mặc định của trình duyệt hiện đại) hoặc Strict → cookie không gửi kèm trong request cross-site. Lớp phòng thủ nền tảng.\n- Anti-CSRF token: server sinh token bí mật, khó đoán, gắn vào form/request; server đối chiếu khi nhận. Kiểu synchronizer token hoặc signed double-submit. Site độc hại không đọc/đoán được token.\n- Kiểm tra Origin/Referer cho request thay đổi trạng thái.",
+        "Điểm quan trọng: API dùng token trong header Authorization (không phải cookie tự gửi) ít bị CSRF hơn, vì trình duyệt không tự đính token vào request cross-site. Ngược lại, xác thực bằng session cookie thì bắt buộc phải có biện pháp chống CSRF."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 86,
+    "sourceSlug": "91308-csrf-la-gi-va-cach-phong-chong",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "2e5df924-40ed-59f8-ac45-d8e38669e1de",
+    "question": "Lưu mật khẩu thế nào cho đúng? Hashing khác encryption ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91120-luu-mat-khau-the-nao-cho-dung-hashing-khac-encryption-ra-sao",
+    "slug": "luu-mat-khau-the-nao-cho-dung-hashing-khac-encryption-ra-sao-2e5df924-40ed-59f8-ac45-d8e38669e1de",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hashing khác encryption: encryption hai chiều (có khóa để giải mã lại). Hash một chiều — không thể đảo ngược. Mật khẩu phải hash, không encrypt: DB chỉ giữ hash, kể cả bị lộ cũng không lấy lại được mật khẩu gốc. Tuyệt đối không lưu plaintext."
+      ],
+      "details": [
+        "Làm đúng (theo OWASP):\n- Dùng hàm băm mật khẩu chuyên dụng, chậm có chủ đích: argon2id (khuyến nghị hàng đầu), bcrypt, hoặc scrypt/PBKDF2. Không dùng MD5/SHA-256 trần — chúng quá nhanh, dễ brute-force bằng GPU.\n- Salt: chuỗi ngẫu nhiên duy nhất mỗi user, thêm vào trước khi băm → hai người cùng mật khẩu ra hash khác nhau, vô hiệu rainbow table (các thư viện trên tự sinh salt và nhúng vào output).\n- Work factor / cost: chỉnh cho băm đủ chậm (vd ~vài trăm ms) để cản brute-force; tăng dần theo phần cứng.\n- Cân nhắc pepper (secret chung, lưu tách khỏi DB) như lớp phụ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 87,
+    "sourceSlug": "91120-luu-mat-khau-the-nao-cho-dung-hashing-khac-encryption-ra-sao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "0d20ebc0-f440-50a3-82a0-f3f71a775df5",
+    "question": "HTTPS/TLS hoạt động thế nào? Handshake gồm những bước nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91121-https-tls-hoat-dong-the-nao-handshake-gom-nhung-buoc-nao",
+    "slug": "https-tls-hoat-dong-the-nao-handshake-gom-nhung-buoc-nao-0d20ebc0-f440-50a3-82a0-f3f71a775df5",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "HTTPS = HTTP chạy trên TLS. TLS cho ba đảm bảo: mã hóa (nghe lén không đọc được), toàn vẹn (không sửa được giữa đường), xác thực (chắc đang nói với đúng server qua chứng chỉ)."
+      ],
+      "details": [
+        "Handshake (rút gọn) trước khi truyền dữ liệu:\n1. Client gửi ClientHello: các phiên bản TLS và cipher suite hỗ trợ + số ngẫu nhiên.\n2. Server chọn tham số, gửi certificate (chứa public key, do CA ký).\n3. Client verify chứng chỉ qua chuỗi CA tin cậy (đúng domain, còn hạn, không thu hồi).\n4. Hai bên trao đổi khóa (ECDHE cho forward secrecy) để cùng suy ra một khóa phiên đối xứng — bất đối xứng chỉ dùng để thiết lập, không dùng cho dữ liệu (chậm).\n5. Đổi sang mã hóa; từ đó dữ liệu được mã hóa bằng khóa đối xứng (nhanh).",
+        "TLS 1.3 rút gọn còn ~1 vòng (1-RTT, có 0-RTT). Thực hành đúng: chỉ TLS 1.2+, cipher mạnh, HSTS, chứng chỉ hợp lệ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 88,
+    "sourceSlug": "91121-https-tls-hoat-dong-the-nao-handshake-gom-nhung-buoc-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "07f315ef-82a5-521e-84e8-47677d5f0362",
+    "question": "CORS là gì và cấu hình phía server thế nào cho đúng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91122-cors-la-gi-va-cau-hinh-phia-server-the-nao-cho-dung",
+    "slug": "cors-la-gi-va-cau-hinh-phia-server-the-nao-cho-dung-07f315ef-82a5-521e-84e8-47677d5f0362",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Trình duyệt áp same-origin policy: JS ở origin A mặc định không đọc được response từ origin B (khác scheme/host/port). CORS là cơ chế server cho phép có kiểm soát một số cross-origin request, bằng cách trả các header phản hồi."
+      ],
+      "details": [
+        "Đây là quyết định phía server:\n- Access-Control-Allow-Origin: origin được phép. Liệt kê rõ các origin tin cậy; không dùng * cho API cần credential/nhạy cảm.\n- Access-Control-Allow-Methods / -Headers: method và header được phép.\n- Access-Control-Allow-Credentials: true nếu cần gửi cookie — khi đó không được dùng * cho origin.\n- Preflight: với request \"non-simple\" (PUT/DELETE, header tùy biến), trình duyệt gửi OPTIONS trước; server phải trả đúng các header trên (kèm Max-Age để cache).",
+        "Lưu ý bảo mật: CORS không phải cơ chế xác thực — nó chỉ nới same-origin cho trình duyệt. Đừng phản chiếu (reflect) bừa Origin của request vào Allow-Origin; hãy allow-list."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 89,
+    "sourceSlug": "91122-cors-la-gi-va-cau-hinh-phia-server-the-nao-cho-dung",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "9309c06b-a6cf-5bf0-878d-caf6a93f9920",
+    "question": "OWASP Top 10 là gì? Kể vài rủi ro chính và secrets management.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91123-owasp-top-10-la-gi-ke-vai-rui-ro-chinh-va-secrets-management",
+    "slug": "owasp-top-10-la-gi-ke-vai-rui-ro-chinh-va-secrets-management-9309c06b-a6cf-5bf0-878d-caf6a93f9920",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "OWASP Top 10 là danh sách 10 nhóm rủi ro bảo mật web nghiêm trọng nhất, cập nhật định kỳ — dùng làm khung tối thiểu để rà soát ứng dụng. Vài mục cốt lõi:\n- Broken Access Control: kiểm quyền thiếu/sai → user thấy/sửa dữ liệu người khác. Thường đứng đầu.\n- Cryptographic Failures: bảo vệ dữ liệu nhạy cảm kém (không TLS, hash mật khẩu yếu).\n- Injection: SQL/command/LDAP injection — dữ liệu bị hiểu thành lệnh (dùng query tham số hóa).\n- Insecure Design, Security Misconfiguration, Vulnerable Components (thư viện có CVE), Identification/Auth Failures, SSRF..."
+      ],
+      "details": [
+        "Secrets management (liên quan Cryptographic/Misconfiguration): không hardcode API key/DB password/token trong code hay commit vào Git. Đưa vào biến môi trường hoặc secret manager (Vault, AWS Secrets Manager, Vercel env); phân quyền tối thiểu, rotate định kỳ, và tách secret theo môi trường (dev/prod)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 90,
+    "sourceSlug": "91123-owasp-top-10-la-gi-ke-vai-rui-ro-chinh-va-secrets-management",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "4b90ab2c-6ffc-55e4-bc93-6cfa9373c683",
+    "question": "RBAC và ABAC khác nhau thế nào? Khi nào chọn cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91211-rbac-va-abac-khac-nhau-the-nao-khi-nao-chon-cai-nao",
+    "slug": "rbac-va-abac-khac-nhau-the-nao-khi-nao-chon-cai-nao-4b90ab2c-6ffc-55e4-bc93-6cfa9373c683",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai là mô hình phân quyền (authorization):"
+      ],
+      "details": [
+        "Thực tế thường kết hợp: RBAC làm nền, thêm vài luật ABAC cho trường hợp phụ thuộc ngữ cảnh. OWASP khuyến nghị enforce quyền ở server và mặc định deny (chỉ mở cái được phép)."
+      ],
+      "points": [
+        "RBAC (Role-Based): gán quyền theo vai trò (admin, editor, viewer); user nhận quyền qua role. Đơn giản, dễ hiểu và audit; hợp phần lớn ứng dụng. Nhược điểm: bùng nổ số role khi luật quá chi tiết (\"role explosion\").",
+        "ABAC (Attribute-Based): quyết định dựa trên thuộc tính của user, tài nguyên, hành động và ngữ cảnh (phòng ban, chủ sở hữu, giờ, IP). Linh hoạt, biểu đạt được luật tinh vi (\"chỉ chủ tài liệu sửa được, trong giờ hành chính\"). Nhược điểm: phức tạp, khó test và audit hơn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 91,
+    "sourceSlug": "91211-rbac-va-abac-khac-nhau-the-nao-khi-nao-chon-cai-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "6531c264-4c95-5b0b-a846-49107884996c",
+    "question": "Input validation và sanitization khác nhau thế nào? Vì sao quan trọng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91212-input-validation-va-sanitization-khac-nhau-the-nao-vi-sao-quan-trong",
+    "slug": "input-validation-va-sanitization-khac-nhau-the-nao-vi-sao-quan-trong-6531c264-4c95-5b0b-a846-49107884996c",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nguyên tắc cốt lõi (OWASP): không bao giờ tin input từ client; validate ở server (client-side chỉ để cải thiện UX). Quan trọng vì input độc là gốc của SQL injection, XSS, path traversal..."
+      ],
+      "details": [
+        "Điểm hay nhầm: validation không thay thế phòng thủ theo ngữ cảnh — chống SQLi phải parameterized query, chống XSS phải output encoding đúng nơi hiển thị. Validation là lớp phòng thủ bổ sung, không phải lớp duy nhất."
+      ],
+      "points": [
+        "Validation: kiểm input có hợp lệ không (kiểu, độ dài, khoảng giá trị, định dạng) và từ chối nếu sai. Ưu tiên allow-list (chỉ chấp nhận cái đúng) hơn deny-list (chặn cái xấu — dễ sót).",
+        "Sanitization: làm sạch/biến đổi input để an toàn khi dùng (loại/thoát ký tự nguy hiểm, chuẩn hóa)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 92,
+    "sourceSlug": "91212-input-validation-va-sanitization-khac-nhau-the-nao-vi-sao-quan-trong",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "11b04acc-2243-5d9a-a758-0a1c2668c402",
+    "question": "Bạn sẽ chống upload file độc hại thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-se-chong-upload-file-doc-hai-the-nao-11b04acc-2243-5d9a-a758-0a1c2668c402",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 93,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "cba20c77-70d9-5b37-a154-71dfaff6fbfa",
+    "question": "OAuth2 nhìn từ phía server: 4 role là gì, các grant type chính khác nhau thế nào, và vì sao password grant bị loại bỏ?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "oauth2-nhin-tu-phia-server-4-role-la-gi-cac-grant-type-chinh-khac-nhau-the-nao-va-vi-sao-password-gr-cba20c77-70d9-5b37-a154-71dfaff6fbfa",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 94,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "ae798dd8-450b-53e5-bf93-3eced6bae354",
+    "question": "Bạn sẽ thiết kế luồng đăng nhập Google (OAuth2) từ đầu đến cuối thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-se-thiet-ke-luong-dang-nhap-google-oauth2-tu-dau-den-cuoi-the-nao-ae798dd8-450b-53e5-bf93-3eced6bae354",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 95,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "2de8f588-18e1-5fd6-88bb-8f2aa8cdb9f1",
+    "question": "Với JWT stateless, làm sao logout / thu hồi token trước khi hết hạn?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "voi-jwt-stateless-lam-sao-logout-thu-hoi-token-truoc-khi-het-han-2de8f588-18e1-5fd6-88bb-8f2aa8cdb9f1",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 96,
+    "sourceSlug": null,
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "fdf2fe63-5cd1-5889-9577-14d2b10cd364",
+    "question": "Container và máy ảo (VM) khác nhau thế nào? Docker giải quyết vấn đề gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/91302-container-va-may-ao-vm-khac-nhau-the-nao-docker-giai-quyet-van-de-gi",
+    "slug": "container-va-may-ao-vm-khac-nhau-the-nao-docker-giai-quyet-van-de-gi-fdf2fe63-5cd1-5889-9577-14d2b10cd364",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Docker đóng gói ứng dụng cùng toàn bộ phụ thuộc (thư viện, runtime, config) vào một image bất biến; image chạy giống nhau ở mọi nơi hỗ trợ container. Điều này giải quyết vấn đề thường gặp \"chạy được trên máy tôi mà\" — môi trường dev/test/prod đồng nhất."
+      ],
+      "details": [
+        "Đánh đổi: container cô lập yếu hơn VM vì chung kernel — cần cân nhắc với workload nhạy cảm về bảo mật/đa khách hàng."
+      ],
+      "points": [
+        "Máy ảo (VM): ảo hóa phần cứng qua hypervisor; mỗi VM chạy hệ điều hành khách đầy đủ riêng. Cô lập mạnh, nhưng nặng (hàng GB, khởi động chậm hàng chục giây).",
+        "Container: ảo hóa ở tầng hệ điều hành; các container dùng chung kernel của host nhưng chạy trong không gian tiến trình/tệp cô lập. Nhẹ (hàng MB), khởi động trong mili-giây, chạy được nhiều container hơn trên cùng phần cứng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 97,
+    "sourceSlug": "91302-container-va-may-ao-vm-khac-nhau-the-nao-docker-giai-quyet-van-de-gi",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "ce849f34-b286-5a67-a99e-341cb5c4f83f",
+    "question": "TCP và UDP khác nhau thế nào? Khi nào dùng cái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92140-tcp-va-udp-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "slug": "tcp-va-udp-khac-nhau-the-nao-khi-nao-dung-cai-nao-ce849f34-b286-5a67-a99e-341cb5c4f83f",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai là giao thức tầng transport, nhưng đánh đổi khác nhau giữa độ tin cậy và tốc độ."
+      ],
+      "details": [
+        "QUIC (nền của HTTP/3) là giao thức transport chạy ở user space trên nền UDP, tự cài đặt độ tin cậy, thứ tự và kiểm soát tắc nghẽn."
+      ],
+      "points": [
+        "TCP — hướng kết nối, tin cậy: bắt tay 3 bước, đảm bảo đến nơi, đúng thứ tự, có kiểm soát lỗi, retransmit, flow control và congestion control. Chi phí cao hơn, độ trễ lớn hơn. Dùng khi không được mất dữ liệu: HTTP/HTTPS, email, SSH, truyền file.",
+        "UDP — không kết nối, không đảm bảo: gửi datagram \"bắn và quên\", không retransmit, không đảm bảo thứ tự → nhanh, độ trễ thấp, overhead nhỏ. Dùng khi tốc độ quan trọng hơn việc mất gói lẻ tẻ: video/voice call, game realtime, DNS, streaming."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 98,
+    "sourceSlug": "92140-tcp-va-udp-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "59cd8fbe-348f-557c-84e3-2b4769566bee",
+    "question": "DNS là gì? Quá trình phân giải tên miền diễn ra thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92142-dns-la-gi-qua-trinh-phan-giai-ten-mien-dien-ra-the-nao",
+    "slug": "dns-la-gi-qua-trinh-phan-giai-ten-mien-dien-ra-the-nao-59cd8fbe-348f-557c-84e3-2b4769566bee",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "DNS (Domain Name System) là \"danh bạ\" của internet — dịch tên miền dễ nhớ (example.com) sang địa chỉ IP mà máy dùng để kết nối."
+      ],
+      "details": [
+        "Quá trình phân giải (đệ quy) khi truy cập một tên chưa cache:\n1. Resolver (thường của ISP) nhận truy vấn.\n2. Hỏi root server → chỉ tới TLD server của .com.\n3. Hỏi TLD server → chỉ tới authoritative server của example.com.\n4. Authoritative server trả về IP.\n5. Resolver cache theo TTL và trả cho client.",
+        "Các record hay gặp: A (IPv4), AAAA (IPv6), CNAME (bí danh), MX (mail), TXT (xác minh/SPF), NS (name server). Cache ở nhiều tầng (trình duyệt, OS, resolver) giúp phân giải sau đó gần như tức thì."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 99,
+    "sourceSlug": "92142-dns-la-gi-qua-trinh-phan-giai-ten-mien-dien-ra-the-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "31446b48-cb38-5d73-a396-da12792fd4fe",
+    "question": "Blue-green và canary deployment khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91213-blue-green-va-canary-deployment-khac-nhau-the-nao",
+    "slug": "blue-green-va-canary-deployment-khac-nhau-the-nao-31446b48-cb38-5d73-a396-da12792fd4fe",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai giảm rủi ro khi release và tránh downtime:"
+      ],
+      "details": [
+        "Liên quan: rolling update (thay dần từng instance) và feature flag (bật/tắt tính năng độc lập với deploy). Chọn theo mức chịu rủi ro và khả năng quan sát của hệ thống."
+      ],
+      "points": [
+        "Blue-green: chạy hai môi trường song song — \"blue\" (đang live) và \"green\" (bản mới). Test xong thì chuyển toàn bộ traffic sang green một lần; nếu lỗi thì switch ngược tức thì. Rollback rất nhanh, nhưng tốn gấp đôi hạ tầng và vẫn đổi 100% người dùng cùng lúc.",
+        "Canary: đưa bản mới ra một phần nhỏ người dùng (vd 5%), theo dõi metric (tỉ lệ lỗi, latency), rồi tăng dần tới 100%. Phát hiện sự cố sớm trên phạm vi nhỏ, nhưng release lâu hơn và cần giám sát/tự động hóa tốt."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 100,
+    "sourceSlug": "91213-blue-green-va-canary-deployment-khac-nhau-the-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "812a64ec-201e-5d3d-9177-93ba2f26dffc",
+    "question": "Merge vs Rebase: khi nào dùng cái nào? Giải thích golden rule of rebasing.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4016-merge-vs-rebase-khi-nao-dung-cai-nao-giai-thich-golden-rule-of-rebasing",
+    "slug": "merge-vs-rebase-khi-nao-dung-cai-nao-giai-thich-golden-rule-of-rebasing-812a64ec-201e-5d3d-9177-93ba2f26dffc",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Merge: tạo merge commit, preserve history đầy đủ. git log --graph thấy nhánh. Non-destructive — không thay đổi existing commits."
+      ],
+      "details": [
+        "Rebase: replay commits lên đỉnh của branch khác, tạo linear history. Rewrite commit hashes.",
+        "git pull --rebase",
+        "git rebase -i origin/main",
+        "Golden Rule of Rebasing: KHÔNG BAO GIỜ rebase branch đã được share/push lên remote mà người khác đang dùng.",
+        "Khi dùng rebase (an toàn):",
+        "Khi dùng merge:",
+        "Vì sao: rebase tạo commits MỚI với hash khác. Nếu teammate đã pull branch của bạn, họ có commits với hash cũ. Khi bạn force push sau rebase, history của họ và remote diverge → họ phải resolve \"fake conflicts\" khi pull."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 101,
+    "sourceSlug": "4016-merge-vs-rebase-khi-nao-dung-cai-nao-giai-thich-golden-rule-of-rebasing",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "4d3c7da1-22e4-5866-b517-dad350ceb3b7",
+    "question": "Đang merge feature branch vào main, gặp conflict trong file do cả 2 sides đều refactor. Quy trình resolve an toàn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4021-dang-merge-feature-branch-vao-main-gap-conflict-trong-file-do-ca-2-sides-deu-ref",
+    "slug": "dang-merge-feature-branch-vao-main-gap-conflict-trong-file-do-ca-2-sides-deu-refactor-quy-trinh-reso-4d3c7da1-22e4-5866-b517-dad350ceb3b7",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Worst case conflict: không phải thêm/xóa dòng đơn giản mà là structural refactor — function bị rename, logic được reorganize.",
+        "2. Dùng 3-panel merge tool — git mergetool (trái: ours, phải: theirs, giữa: base — common ancestor, dưới: result). Không resolve bằng tay trong terminal với structural conflict."
+      ],
+      "details": [
+        "3. Resolve và verify: git add src/file.ts, chạy test cho phần code đó TRƯỚC khi git merge --continue.",
+        "Quy trình an toàn:",
+        "1. Hiểu context trước khi resolve:",
+        "4. Sau merge: review lại diff của merge commit — git diff main~1..main -- src/file.ts.",
+        "Nguyên tắc: khi không chắc, chọn solution bảo toàn logic của cả 2 sides thay vì chọn 1 side. Đừng dùng -X ours hay -X theirs với structural conflicts."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "git log --oneline main..feature/my-branch   # commits của feature\ngit log --oneline feature/my-branch..main   # commits của main\ngit diff $(git merge-base HEAD feature/my-branch) feature/my-branch -- src/file.ts"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 102,
+    "sourceSlug": "4021-dang-merge-feature-branch-vao-main-gap-conflict-trong-file-do-ca-2-sides-deu-ref",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "3f4ebe39-28a3-5a38-95bf-2cc6bb80fa0f",
+    "question": "Undo một public commit đã merge vào main: revert vs reset — khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4022-undo-mot-public-commit-da-merge-vao-main-revert-vs-reset-khi-nao-dung-cai-nao",
+    "slug": "undo-mot-public-commit-da-merge-vao-main-revert-vs-reset-khi-nao-dung-cai-nao-3f4ebe39-28a3-5a38-95bf-2cc6bb80fa0f",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Reset (git reset --hard HEAD~1): di chuyển HEAD pointer về commit cũ, xóa commits khỏi history. KHÔNG dùng trên main/shared branch — sẽ cần force push, làm hỏng history của mọi người đã pull.",
+        "Ví dụ thực tế: deploy feature lên production, users báo lỗi nghiêm trọng → git revert -m 1 <merge-commit> → push → deploy → feature bị undo ngay mà không ảnh hưởng history."
+      ],
+      "details": [
+        "Revert (git revert <commit>): tạo commit MỚI undo changes của commit cũ. An toàn cho shared branches vì không rewrite history.",
+        "Khi nào dùng reset: trên local branch chưa share, hoặc clean up local staging area.",
+        "Lưu ý revert merge commit: nếu sau đó muốn re-merge feature đó, phải revert lại revert commit trước — không thể merge thẳng vì git sẽ \"thấy\" commits đã được merge rồi."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# Revert 1 commit:\ngit revert abc123\n# Revert merge commit (phải chỉ định mainline parent):\ngit revert -m 1 abc123  # -m 1 = giữ lại parent thứ 1 (main branch)\n\n# Revert range commits:\ngit revert abc123..def456\n# Revert nhiều commits nhưng chỉ 1 commit revert:\ngit revert --no-commit abc123 def456\ngit commit -m \"revert: remove broken payment feature\""
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 103,
+    "sourceSlug": "4022-undo-mot-public-commit-da-merge-vao-main-revert-vs-reset-khi-nao-dung-cai-nao",
+    "departments": [
+      "backend"
+    ]
+  },
+  {
+    "id": "66aac4df-ac09-5382-8878-2acba5a03a48",
+    "question": "CI/CD là gì? Continuous Integration, Delivery và Deployment khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91313-ci-cd-la-gi-continuous-integration-delivery-va-deployment-khac-nhau-the-nao",
+    "slug": "ci-cd-la-gi-continuous-integration-delivery-va-deployment-khac-nhau-the-nao-66aac4df-ac09-5382-8878-2acba5a03a48",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Pipeline điển hình:\nCopy\nbuild → test (unit/integration) → quét bảo mật/lint → deploy (staging → prod)\n, kết hợp chiến lược ít rủi ro (canary, blue-green). Lợi ích: phản hồi nhanh, thay đổi nhỏ dễ soát, release đều đặn và ít rủi ro hơn \"big bang\"."
+      ],
+      "details": [],
+      "points": [
+        "Continuous Integration (CI): lập trình viên merge thay đổi vào nhánh chính thường xuyên (ít nhất mỗi ngày); mỗi lần merge tự động build + chạy test. Mục tiêu: phát hiện xung đột/lỗi tích hợp sớm, khi còn nhỏ, thay vì gộp một cục lớn cuối kỳ. Cần code tự kiểm thử và build tự động, nhanh.",
+        "Continuous Delivery: mở rộng CI để nhánh chính luôn ở trạng thái sẵn sàng deploy; đưa lên production là một nút bấm/phê duyệt thủ công.",
+        "Continuous Deployment: đi thêm một bước — mọi thay đổi qua được pipeline được tự động lên production, không cần can thiệp tay."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "build → test (unit/integration) → quét bảo mật/lint → deploy (staging → prod)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 104,
+    "sourceSlug": "91313-ci-cd-la-gi-continuous-integration-delivery-va-deployment-khac-nhau-the-nao",
+    "departments": [
+      "backend"
+    ]
+  }
+]

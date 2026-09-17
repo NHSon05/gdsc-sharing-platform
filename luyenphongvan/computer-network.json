@@ -1,0 +1,1119 @@
+[
+  {
+    "id": "0da7cfd8-1786-5e2d-b2f3-4720110dba67",
+    "question": "Mô hình OSI 7 tầng là gì? Mỗi tầng có chức năng gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2301-mo-hinh-osi-7-tang-la-gi-moi-tang-co-chuc-nang-gi",
+    "slug": "mo-hinh-osi-7-tang-la-gi-moi-tang-co-chuc-nang-gi-0da7cfd8-1786-5e2d-b2f3-4720110dba67",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mô hình OSI (Open Systems Interconnection) chia giao tiếp mạng thành 7 tầng từ dưới lên: Physical (truyền bit qua cáp/sóng), Data Link (đóng gói frame, MAC address, phát hiện lỗi), Network (định tuyến gói tin qua IP), Transport (kiểm soát luồng & lỗi, TCP/UDP), Session (quản lý phiên kết nối), Presentation (mã hóa/giải mã, nén dữ liệu), Application (giao thức ứng dụng HTTP/FTP/SMTP)."
+      ],
+      "details": [
+        "Trong thực tế, lập trình viên chủ yếu làm việc với tầng 4–7: tầng Transport xác định TCP hay UDP, tầng Application chứa logic nghiệp vụ HTTP/WebSocket. Mô hình OSI mang tính lý thuyết giúp debug và thiết kế hệ thống — ví dụ khi gói tin bị mất có thể trace từng tầng để xác định vấn đề nằm ở đâu (card mạng lỗi = tầng 1, ARP storm = tầng 2, routing sai = tầng 3)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "2301-mo-hinh-osi-7-tang-la-gi-moi-tang-co-chuc-nang-gi"
+  },
+  {
+    "id": "3b7e4fd7-62d3-58d7-8f6c-b18464233e27",
+    "question": "Mô hình TCP/IP khác gì so với mô hình OSI?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2302-mo-hinh-tcp-ip-khac-gi-so-voi-mo-hinh-osi",
+    "slug": "mo-hinh-tcp-ip-khac-gi-so-voi-mo-hinh-osi-3b7e4fd7-62d3-58d7-8f6c-b18464233e27",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "TCP/IP (hay DoD model) gộp OSI 7 tầng xuống còn 4 tầng: Network Access (= Physical + Data Link), Internet (= Network), Transport (giữ nguyên), Application (= Session + Presentation + Application)."
+      ],
+      "details": [
+        "TCP/IP là mô hình thực tiễn được dùng trong toàn bộ Internet hiện đại, trong khi OSI là mô hình tham chiếu lý thuyết để chuẩn hóa giao tiếp giữa các vendor. Khi lập trình với socket (Node.js net, Go net.Dial), bạn đang làm việc ở tầng Transport của TCP/IP. Hiểu sự khác biệt này giúp khi đọc tài liệu — RFC mô tả TCP/IP, còn sách giáo khoa network dùng OSI."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "2302-mo-hinh-tcp-ip-khac-gi-so-voi-mo-hinh-osi"
+  },
+  {
+    "id": "86df9189-8b32-5c64-acc0-9866c2d6540f",
+    "question": "TCP 3-way handshake hoạt động thế nào? Tại sao cần 3 bước?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2304-tcp-3-way-handshake-hoat-dong-the-nao-tai-sao-can-3-buoc",
+    "slug": "tcp-3-way-handshake-hoat-dong-the-nao-tai-sao-can-3-buoc-86df9189-8b32-5c64-acc0-9866c2d6540f",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "TCP 3-way handshake (SYN→SYN-ACK→ACK) thiết lập kết nối bằng cách đồng bộ sequence numbers của cả hai phía."
+      ],
+      "details": [
+        "Ba bước gồm:"
+      ],
+      "points": [
+        "Client gửi SYN với sequence number ngẫu nhiên X",
+        "Server trả SYN-ACK với ACK=X+1 và sequence number Y của server",
+        "Client gửi ACK=Y+1 xác nhận nhận được Y. Sau đó kết nối được thiết lập và dữ liệu có thể truyền"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "2304-tcp-3-way-handshake-hoat-dong-the-nao-tai-sao-can-3-buoc"
+  },
+  {
+    "id": "72793ef3-ef49-56b6-a0bd-539337b47ff8",
+    "question": "DNS hoạt động thế nào? Giải thích quá trình resolve một domain name.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2306-dns-hoat-dong-the-nao-giai-thich-qua-trinh-resolve-mot-domain-name",
+    "slug": "dns-hoat-dong-the-nao-giai-thich-qua-trinh-resolve-mot-domain-name-72793ef3-ef49-56b6-a0bd-539337b47ff8",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "DNS (Domain Name System) dịch domain name (google.com) thành IP address. Quá trình resolve:"
+      ],
+      "details": [
+        "Có nhiều record type: A (IPv4), AAAA (IPv6), CNAME (alias), MX (mail), TXT (SPF/DKIM), NS (name server). Thực tế lập trình: DNS propagation khi thay đổi record có thể mất vài giờ đến 48h tùy TTL. Dùng dig, nslookup để debug; DNS-over-HTTPS (DoH) và DNS-over-TLS (DoT) mã hóa DNS queries để tăng privacy."
+      ],
+      "points": [
+        "Browser kiểm tra local cache",
+        "Hỏi OS resolver (kiểm tra /etc/hosts)",
+        "Hỏi Recursive Resolver của ISP",
+        "Resolver hỏi Root Name Server (biết địa chỉ TLD servers)",
+        "Hỏi TLD Name Server (.com, .vn)",
+        "Hỏi Authoritative Name Server của domain (trả về IP cuối cùng). Kết quả được cache theo TTL (Time To Live)"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "2306-dns-hoat-dong-the-nao-giai-thich-qua-trinh-resolve-mot-domain-name"
+  },
+  {
+    "id": "8faf1f9e-0469-534e-ae6f-529c6e2edf38",
+    "question": "WebSocket khác gì so với HTTP thông thường? Khi nào nên dùng WebSocket?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2308-websocket-khac-gi-so-voi-http-thong-thuong-khi-nao-nen-dung-websocket",
+    "slug": "websocket-khac-gi-so-voi-http-thong-thuong-khi-nao-nen-dung-websocket-8faf1f9e-0469-534e-ae6f-529c6e2edf38",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "HTTP là request-response: client luôn phải khởi tạo request trước, server không thể chủ động push data. WebSocket là full-duplex persistent connection: sau khi upgrade từ HTTP (101 Switching Protocols), cả client và server có thể gửi message bất kỳ lúc nào với latency rất thấp (không cần header HTTP cho mỗi message)."
+      ],
+      "details": [
+        "WebSocket phù hợp cho: real-time chat, live notifications, collaborative editing (Google Docs), live trading/stock prices, game online, live dashboard."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "2308-websocket-khac-gi-so-voi-http-thong-thuong-khi-nao-nen-dung-websocket"
+  },
+  {
+    "id": "1b3129f5-70af-50a8-8b96-f4191fae1c00",
+    "question": "Các HTTP status codes quan trọng: phân biệt 401 vs 403, 502 vs 504, và các 3xx redirects?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2343-cac-http-status-codes-quan-trong-phan-biet-401-vs-403-502-vs-504-va-cac-3xx-redi",
+    "slug": "cac-http-status-codes-quan-trong-phan-biet-401-vs-403-502-vs-504-va-cac-3xx-redirects-1b3129f5-70af-50a8-8b96-f4191fae1c00",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "HTTP status codes chia thành 5 nhóm: 1xx info, 2xx success, 3xx redirect, 4xx client error, 5xx server error — các code quan trọng nhất là 401/403, 301/302, 502/504."
+      ],
+      "details": [
+        "1xx (Informational): 100 Continue, 101 Switching Protocols (WebSocket upgrade).",
+        "2xx (Success):",
+        "3xx (Redirect): 301 Moved Permanently (SEO: cập nhật bookmark, search engine index URL mới), 302 Found (temporary, không thay đổi index), 303 See Other (sau POST → redirect GET), 304 Not Modified (cache valid, không gửi body).",
+        "4xx (Client Error): 400 Bad Request (invalid input), 401 Unauthorized (chưa authenticate — cần login), 403 Forbidden (đã authenticate nhưng không có quyền — không phải vấn đề login), 404 Not Found, 405 Method Not Allowed, 422 Unprocessable Entity (validation error trong REST API), 429 Too Many Requests (rate limited).",
+        "5xx (Server Error): 500 Internal Server Error (generic server bug), 502 Bad Gateway (reverse proxy nhận response invalid từ upstream server — upstream crash hoặc send malformed response), 503 Service Unavailable (server overloaded/maintenance), 504 Gateway Timeout (reverse proxy không nhận được response từ upstream trong thời gian quy định — upstream quá chậm)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "2343-cac-http-status-codes-quan-trong-phan-biet-401-vs-403-502-vs-504-va-cac-3xx-redi"
+  },
+  {
+    "id": "93b95725-b0e8-59ff-8bf0-818600e52461",
+    "question": "Private IP và public IP khác nhau thế nào? Các dải private là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93203-private-ip-va-public-ip-khac-nhau-the-nao-cac-dai-private-la-gi",
+    "slug": "private-ip-va-public-ip-khac-nhau-the-nao-cac-dai-private-la-gi-93b95725-b0e8-59ff-8bf0-818600e52461",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Public IP là địa chỉ định tuyến được trên Internet toàn cầu, duy nhất, do ISP/RIR cấp. Private IP chỉ dùng nội bộ trong LAN, không định tuyến ra Internet, và có thể trùng nhau giữa các mạng khác nhau."
+      ],
+      "details": [
+        "Ba dải private (RFC 1918):\n- 10.0.0.0/8 (10.0.0.0 – 10.255.255.255)\n- 172.16.0.0/12 (172.16.0.0 – 172.31.255.255)\n- 192.168.0.0/16 (192.168.0.0 – 192.168.255.255)\nThiết bị dùng private IP phải qua NAT để ra Internet. Ngoài ra còn dải loopback 127.0.0.0/8 (localhost) và link-local 169.254.0.0/16 (APIPA, tự gán khi DHCP lỗi)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "93203-private-ip-va-public-ip-khac-nhau-the-nao-cac-dai-private-la-gi"
+  },
+  {
+    "id": "1185094c-52bf-5c7e-89dd-090b45b3ba26",
+    "question": "MAC address và IP address khác nhau thế nào? Vì sao cần cả hai?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93204-mac-address-va-ip-address-khac-nhau-the-nao-vi-sao-can-ca-hai",
+    "slug": "mac-address-va-ip-address-khac-nhau-the-nao-vi-sao-can-ca-hai-1185094c-52bf-5c7e-89dd-090b45b3ba26",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "MAC address là định danh vật lý 48-bit gắn cứng vào card mạng (NIC), hoạt động ở tầng 2 (Data Link) và chỉ có ý nghĩa trong phạm vi một LAN. IP address là định danh logic ở tầng 3 (Network), có thể thay đổi theo mạng và định tuyến được xuyên nhiều mạng."
+      ],
+      "details": [
+        "Cần cả hai vì chúng làm việc ở hai tầng khác nhau: IP xác định \"đích cuối cùng ở đâu\" trên toàn Internet (không đổi suốt hành trình), còn MAC xác định \"chặng kế tiếp là ai\" trong từng LAN (MAC nguồn/đích được viết lại ở mỗi hop router). Hình dung: IP như địa chỉ nhà nhận thư (cố định), MAC như tên người giao ở từng trạm trung chuyển. ARP là cầu nối ánh xạ IP→MAC."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "93204-mac-address-va-ip-address-khac-nhau-the-nao-vi-sao-can-ca-hai"
+  },
+  {
+    "id": "d2cc7ca3-3f88-599b-a875-ccb7cbb43a22",
+    "question": "Hub, switch và router khác nhau thế nào? Mỗi thiết bị hoạt động ở tầng nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93205-hub-switch-va-router-khac-nhau-the-nao-moi-thiet-bi-hoat-dong-o-tang-nao",
+    "slug": "hub-switch-va-router-khac-nhau-the-nao-moi-thiet-bi-hoat-dong-o-tang-nao-d2cc7ca3-3f88-599b-a875-ccb7cbb43a22",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "Hub (tầng 1 — Physical): thiết bị đơn giản, nhận bit ở một cổng rồi lặp lại ra tất cả cổng khác. Mọi thiết bị chung một collision domain, băng thông bị chia sẻ — gần như tuyệt chủng ngày nay.",
+        "Switch (tầng 2 — Data Link): học MAC address của thiết bị trên mỗi cổng (MAC table) và chỉ chuyển frame tới đúng cổng đích. Mỗi cổng là một collision domain riêng, hiệu năng cao hơn hub nhiều.",
+        "Router (tầng 3 — Network): kết nối các mạng khác nhau, định tuyến gói tin dựa trên IP, và phân tách broadcast domain. Là thiết bị đưa lưu lượng ra Internet.\nTóm lại: hub lặp bit, switch chuyển frame theo MAC trong một LAN, router định tuyến gói theo IP giữa các LAN."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "93205-hub-switch-va-router-khac-nhau-the-nao-moi-thiet-bi-hoat-dong-o-tang-nao"
+  },
+  {
+    "id": "7edb8649-d771-5fe6-bee0-f21c49dc248c",
+    "question": "Các cổng well-known là gì? Kể vài cổng thông dụng.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93212-cac-cong-well-known-la-gi-ke-vai-cong-thong-dung",
+    "slug": "cac-cong-well-known-la-gi-ke-vai-cong-thong-dung-7edb8649-d771-5fe6-bee0-f21c49dc248c",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cổng (port) là số 16-bit (0–65535) giúp tầng Transport phân biệt nhiều dịch vụ chạy trên cùng một IP. IANA chia ba khoảng: well-known (0–1023, dịch vụ hệ thống), registered (1024–49151), và dynamic/ephemeral (49152–65535, dùng cho client tạm thời)."
+      ],
+      "details": [
+        "Vài cổng well-known thường gặp:\n- 22 — SSH (remote shell, TCP)\n- 53 — DNS (phân giải tên, chủ yếu UDP, TCP cho zone transfer)\n- 80 — HTTP (TCP)\n- 443 — HTTPS (TCP; HTTP/3 chạy QUIC trên UDP 443)\n- 25 — SMTP (chuyển mail); 587 — SMTP submission\nNhớ vài cổng đầu giúp đọc log/firewall rule và debug kết nối nhanh — ví dụ thấy traffic tới 443 tức là HTTPS."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "93212-cac-cong-well-known-la-gi-ke-vai-cong-thong-dung"
+  },
+  {
+    "id": "b098bed9-fa08-5f7b-954e-541adb030fbc",
+    "question": "REST, GraphQL và gRPC khác nhau thế nào? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2309-rest-graphql-va-grpc-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "slug": "rest-graphql-va-grpc-khac-nhau-the-nao-khi-nao-dung-cai-nao-b098bed9-fa08-5f7b-954e-541adb030fbc",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "REST dùng HTTP verbs (GET/POST/PUT/DELETE) + URL resources, stateless, dễ cache, phổ biến nhất — phù hợp CRUD APIs đơn giản, public APIs, mobile apps."
+      ],
+      "details": [
+        "GraphQL cho phép client chỉ định chính xác data cần lấy qua query language, giải quyết over-fetching/under-fetching của REST, có single endpoint — phù hợp khi nhiều client (web/mobile) cần data shapes khác nhau, hoặc data graph phức tạp.",
+        "gRPC dùng Protocol Buffers (binary, nhỏ hơn JSON ~3-5x), HTTP/2 multiplexing, strongly-typed contracts, hỗ trợ streaming bidirectional — phù hợp microservices internal communication, khi performance critical.",
+        "Trong thực tế: public-facing API thường dùng REST; BFF (Backend for Frontend) hoặc dashboard phức tạp hỏi dùng GraphQL (Shopify, GitHub); service mesh nội bộ dùng gRPC (Google, Netflix)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "2309-rest-graphql-va-grpc-khac-nhau-the-nao-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "67dfd2ac-5079-5ded-82a2-071ca960be7f",
+    "question": "Các thuật toán load balancing phổ biến là gì? Ưu nhược điểm của từng loại?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2310-cac-thuat-toan-load-balancing-pho-bien-la-gi-uu-nhuoc-diem-cua-tung-loai",
+    "slug": "cac-thuat-toan-load-balancing-pho-bien-la-gi-uu-nhuoc-diem-cua-tung-loai-67dfd2ac-5079-5ded-82a2-071ca960be7f",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Load balancing phân phối request qua nhiều server — thuật toán phổ biến bao gồm Round Robin, Least Connections, và IP Hash, mỗi loại phù hợp với use case khác nhau."
+      ],
+      "details": [
+        "Trong thực tế: Nginx/HAProxy/AWS ALB hỗ trợ hầu hết các thuật toán này; Kubernetes dùng iptables/ipvs với round-robin mặc định. Health check là thành phần bắt buộc — LB phải tự động loại server unhealthy khỏi pool."
+      ],
+      "points": [
+        "Round Robin: phân phối request lần lượt qua các server — đơn giản nhưng không tính đến load thực tế.",
+        "Weighted Round Robin: server mạnh hơn nhận nhiều request hơn theo tỷ lệ cấu hình.",
+        "Least Connections: gửi đến server có ít active connections nhất — tốt khi request duration không đều nhau.",
+        "Least Response Time: chọn server có response time thấp nhất — cần monitoring liên tục.",
+        "IP Hash: hash IP client để luôn route đến cùng một server (sticky session) — quan trọng khi app có state (session).",
+        "Random: chọn ngẫu nhiên — đơn giản, hoạt động tốt với số lượng server lớn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "2310-cac-thuat-toan-load-balancing-pho-bien-la-gi-uu-nhuoc-diem-cua-tung-loai"
+  },
+  {
+    "id": "886c9fab-d23d-59ef-bd74-e9ed596ff22f",
+    "question": "Reverse proxy và forward proxy khác nhau thế nào? Tại sao reverse proxy quan trọng trong production?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2311-reverse-proxy-va-forward-proxy-khac-nhau-the-nao-tai-sao-reverse-proxy-quan-tron",
+    "slug": "reverse-proxy-va-forward-proxy-khac-nhau-the-nao-tai-sao-reverse-proxy-quan-trong-trong-production-886c9fab-d23d-59ef-bd74-e9ed596ff22f",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Forward proxy đứng giữa client và internet: client cấu hình proxy, mọi request đi qua proxy — dùng để ẩn danh tính client, bypass geo-restriction, corporate filtering."
+      ],
+      "details": [
+        "Reverse proxy đứng trước server: client không biết server thật sự, mọi request qua reverse proxy trước — dùng để load balancing, SSL termination, caching, compression, security (ẩn internal architecture). Reverse proxy quan trọng trong production vì:"
+      ],
+      "points": [
+        "SSL termination — giải mã HTTPS một lần tại proxy, backend dùng HTTP thuần",
+        "Load balancing giữa các server instances",
+        "Caching static assets, giảm load backend",
+        "Rate limiting và WAF protection",
+        "Gzip/Brotli compression. Nginx là reverse proxy phổ biến nhất; Caddy tự động HTTPS; Cloudflare là reverse proxy CDN toàn cầu. Trong Next.js/Vercel, Edge Network đóng vai trò reverse proxy trước Next.js server"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "2311-reverse-proxy-va-forward-proxy-khac-nhau-the-nao-tai-sao-reverse-proxy-quan-tron"
+  },
+  {
+    "id": "00ac5e6b-3e13-52c5-bfa8-6ba97d8fde71",
+    "question": "CDN hoạt động thế nào? Khi nào nên và không nên dùng CDN?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2312-cdn-hoat-dong-the-nao-khi-nao-nen-va-khong-nen-dung-cdn",
+    "slug": "cdn-hoat-dong-the-nao-khi-nao-nen-va-khong-nen-dung-cdn-00ac5e6b-3e13-52c5-bfa8-6ba97d8fde71",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "CDN (Content Delivery Network) là mạng lưới server phân tán toàn cầu (PoP - Points of Presence). Khi user request file, CDN router tìm server gần nhất về mặt địa lý/network. Lần đầu cache miss: CDN fetch từ origin server và cache lại. Các lần sau: phục vụ từ edge cache — giảm latency đáng kể (từ 200ms còn 20ms) và giảm tải origin. CDN xử lý: static assets (JS/CSS/images), video streaming, software downloads, và ngày nay cả dynamic content qua Edge Functions."
+      ],
+      "details": [
+        "Nên dùng CDN khi: user phân tán toàn cầu, static assets chiếm traffic lớn, cần DDoS protection, media streaming. Không hiệu quả khi: nội dung cực kỳ dynamic/personalized (không cache được), API responses có private data, nội dung thay đổi liên tục với TTL ngắn.",
+        "Cache invalidation là thách thức lớn: dùng content hashing (main.abc123.js) để bust cache ngay lập tức khi deploy."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "2312-cdn-hoat-dong-the-nao-khi-nao-nen-va-khong-nen-dung-cdn"
+  },
+  {
+    "id": "0f6fb6cc-70b5-51d4-91d5-b8457ddfa7d8",
+    "question": "CORS là gì? Giải thích chi tiết cơ chế preflight request và cách cấu hình đúng.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2313-cors-la-gi-giai-thich-chi-tiet-co-che-preflight-request-va-cach-cau-hinh-dung",
+    "slug": "cors-la-gi-giai-thich-chi-tiet-co-che-preflight-request-va-cach-cau-hinh-dung-0f6fb6cc-70b5-51d4-91d5-b8457ddfa7d8",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "CORS (Cross-Origin Resource Sharing) là cơ chế browser ngăn JavaScript đọc response từ origin khác (khác domain/port/protocol) — Same-Origin Policy. Khi cần cross-origin, server phải trả về CORS headers. Simple requests (GET/POST với Content-Type text/plain hoặc form) không cần preflight. Preflight request là OPTIONS request tự động browser gửi trước khi gửi non-simple request (PUT/DELETE/custom headers/JSON body) — server phải trả Access-Control-Allow-Methods, Access-Control-Allow-Headers, Access-Control-Allow-Origin."
+      ],
+      "details": [
+        "Cấu hình đúng: Access-Control-Allow-Origin: https://yourdomain.com (không nên * cho authenticated endpoints), Access-Control-Allow-Credentials: true nếu dùng cookies, Access-Control-Max-Age: 86400 để cache preflight. Lỗi phổ biến: đặt * cùng credentials: true sẽ bị browser block; CORS chỉ là browser policy, không bảo vệ server-to-server calls."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "2313-cors-la-gi-giai-thich-chi-tiet-co-che-preflight-request-va-cach-cau-hinh-dung"
+  },
+  {
+    "id": "4f1d0e73-d830-58f5-a0ed-7a6a06e6b811",
+    "question": "Rate limiting là gì? Các chiến lược rate limiting phổ biến và cách implement?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2314-rate-limiting-la-gi-cac-chien-luoc-rate-limiting-pho-bien-va-cach-implement",
+    "slug": "rate-limiting-la-gi-cac-chien-luoc-rate-limiting-pho-bien-va-cach-implement-4f1d0e73-d830-58f5-a0ed-7a6a06e6b811",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Rate limiting giới hạn số request trong khoảng thời gian để bảo vệ server khỏi abuse, DDoS, và đảm bảo fair usage."
+      ],
+      "details": [
+        "Các thuật toán:\n- Fixed Window: đếm request trong window cố định (100 req/minute) — đơn giản nhưng có edge case tại boundary.\n- Sliding Window Log: lưu timestamp từng request, đếm trong rolling window — chính xác nhưng tốn memory.\n- Sliding Window Counter: kết hợp hai window giữa — balance giữa độ chính xác và hiệu quả.\n- Token Bucket: bucket chứa tokens, mỗi request tiêu 1 token, token được refill đều — cho phép burst ngắn hạn.\n- Leaky Bucket: queue request và xử lý với tốc độ cố định — smooth output.",
+        "Implement: Redis INCR + EXPIRE cho distributed rate limiting; response headers X-RateLimit-Limit, X-RateLimit-Remaining, Retry-After để client biết limit. Rate limit theo IP, user ID, API key, hoặc kết hợp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "2314-rate-limiting-la-gi-cac-chien-luoc-rate-limiting-pho-bien-va-cach-implement"
+  },
+  {
+    "id": "dfcf6e71-b1ab-5442-a83b-bfdb4722e681",
+    "question": "So sánh các phương thức API authentication: OAuth2, JWT và API Key. Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2315-so-sanh-cac-phuong-thuc-api-authentication-oauth2-jwt-va-api-key-khi-nao-dung-ca",
+    "slug": "so-sanh-cac-phuong-thuc-api-authentication-oauth2-jwt-va-api-key-khi-nao-dung-cai-nao-dfcf6e71-b1ab-5442-a83b-bfdb4722e681",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "API Key phù hợp machine-to-machine, JWT cho stateless user auth, OAuth2 cho third-party authorization — mỗi pattern có trade-off riêng về security và complexity."
+      ],
+      "details": [
+        "Thực tế: Internal API dùng JWT; Public API cho developers dùng API Key; Login với Google/GitHub dùng OAuth2 + OpenID Connect (OIDC) để lấy user identity."
+      ],
+      "points": [
+        "API Key: chuỗi secret gửi trong header (X-API-Key) hoặc query param — đơn giản, phù hợp server-to-server, machine-to-machine; không có expiry tự động; nếu lộ phải revoke thủ công.",
+        "JWT (JSON Web Token): self-contained token chứa claims (user ID, roles) được ký bằng secret/private key — stateless, không cần query DB mỗi request; có expiry; Access token (15 phút) + Refresh token (7-30 ngày) là pattern chuẩn; nhược điểm: không thể revoke trước expiry trừ khi dùng blocklist.",
+        "OAuth2: authorization framework (không phải authentication) — cho phép third-party app access resource thay mặt user mà không cần share password; các flows: Authorization Code (web app), PKCE (mobile/SPA), Client Credentials (server-to-server), Device Flow (TV/CLI)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "2315-so-sanh-cac-phuong-thuc-api-authentication-oauth2-jwt-va-api-key-khi-nao-dung-ca"
+  },
+  {
+    "id": "1893d883-d9dd-5244-ba6b-53fb9d81d764",
+    "question": "WebSocket scaling gặp những thách thức gì? Cách giải quyết trong hệ thống nhiều server?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2316-websocket-scaling-gap-nhung-thach-thuc-gi-cach-giai-quyet-trong-he-thong-nhieu-s",
+    "slug": "websocket-scaling-gap-nhung-thach-thuc-gi-cach-giai-quyet-trong-he-thong-nhieu-server-1893d883-d9dd-5244-ba6b-53fb9d81d764",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "WebSocket là persistent connection — mỗi connected client chiếm một file descriptor và memory trên server. Với 10,000 concurrent connections, single server có thể chịu được; nhưng khi scale horizontal lên nhiều server, gặp vấn đề: client A kết nối server 1, client B kết nối server 2, làm sao server 1 biết để gửi message tới client B?"
+      ],
+      "details": [
+        "Giải pháp:",
+        "Ngoài ra: WebSocket không qua CDN cache được; cần load balancer hỗ trợ upgrade protocol (Nginx proxy_http_version 1.1, proxy_set_header Upgrade)."
+      ],
+      "points": [
+        "Sticky sessions (IP hash) — load balancer luôn route cùng client về cùng server, nhưng không giúp giao tiếp cross-server",
+        "Pub/Sub broker: tất cả server subscribe vào Redis Pub/Sub hoặc Kafka, khi cần broadcast/unicast thì publish vào broker, server nào cũng nhận được; Socket.IO có adapter pattern cho việc này",
+        "Dedicated WebSocket service: tách service riêng (Pusher, Ably, AWS API Gateway WebSocket) xử lý connection management"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "2316-websocket-scaling-gap-nhung-thach-thuc-gi-cach-giai-quyet-trong-he-thong-nhieu-s"
+  },
+  {
+    "id": "e29ff139-202c-5d69-b883-e102fa8f83a1",
+    "question": "Server-Sent Events (SSE) vs WebSocket vs Long Polling: so sánh và khi nào dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2337-server-sent-events-sse-vs-websocket-vs-long-polling-so-sanh-va-khi-nao-dung",
+    "slug": "server-sent-events-sse-vs-websocket-vs-long-polling-so-sanh-va-khi-nao-dung-e29ff139-202c-5d69-b883-e102fa8f83a1",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Long Polling, SSE và WebSocket là 3 cách server push data đến client, khác nhau về directionality, overhead và độ phức tạp."
+      ],
+      "details": [
+        "Long Polling: client gửi request, server giữ connection open cho đến khi có data mới (hoặc timeout), rồi response; client lập tức gửi request mới. Đơn giản, works everywhere, nhưng tốn nhiều connection hơn, overhead HTTP header mỗi request. Server-Sent Events (SSE): client gửi 1 GET request, server giữ connection và push events theo format data: ...\\n\\n. Unidirectional (server → client only), automatic reconnect, native browser support (EventSource API), over HTTP/1.1 có thể bị giới hạn 6 connections/domain nhưng HTTP/2 giải quyết. Phù hợp: notifications, live feeds, progress updates. WebSocket: bidirectional, full-duplex — cả client và server đều có thể initiate message. Overhead nhỏ hơn (binary frame). Phức tạp hơn (cần WebSocket server, proxy config). Phù hợp: chat, collaborative editing, game, trading.",
+        "Chọn SSE khi: chỉ server → client, HTTP/2 available, đơn giản hơn WS. Chọn WebSocket khi: cần bidirectional, low-latency message từ client → server thường xuyên."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "2337-server-sent-events-sse-vs-websocket-vs-long-polling-so-sanh-va-khi-nao-dung"
+  },
+  {
+    "id": "6476d7cb-9b62-5dc4-9f8d-6f2f5cb16b82",
+    "question": "TCP 4-way handshake (connection teardown) hoạt động như thế nào? TIME_WAIT state là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2338-tcp-4-way-handshake-connection-teardown-hoat-dong-nhu-the-nao-time-wait-state-la",
+    "slug": "tcp-4-way-handshake-connection-teardown-hoat-dong-nhu-the-nao-time-wait-state-la-gi-6476d7cb-9b62-5dc4-9f8d-6f2f5cb16b82",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "TCP dùng 4-way handshake (FIN/ACK/FIN/ACK) để đóng kết nối; sau đó initiator vào TIME_WAIT (2×MSL ≈ 60s) để đảm bảo ACK cuối được nhận."
+      ],
+      "details": [
+        "TCP close connection cần 4 bước vì mỗi direction đóng độc lập:",
+        "TIME_WAIT state: sau khi client gửi ACK cuối, client vào TIME_WAIT trong 2*MSL (Maximum Segment Lifetime, thường 60 giây) trước khi port được tái sử dụng. Mục đích:",
+        "Vấn đề thực tế: server với nhiều short-lived connections (HTTP/1.1) có thể bị exhausted ephemeral ports do quá nhiều TIME_WAIT sockets. Giải pháp: tcp_tw_reuse=1 (Linux, reuse TIME_WAIT sockets cho outgoing connections), HTTP/2 multiplexing, keep-alive connections."
+      ],
+      "points": [
+        "Client gửi FIN — muốn đóng kết nối",
+        "Server gửi ACK — xác nhận, nhưng server vẫn có thể tiếp tục gửi data (half-close)",
+        "Server gửi FIN — server cũng muốn đóng",
+        "Client gửi ACK — xác nhận",
+        "đảm bảo server nhận được ACK cuối (nếu ACK mất, server retransmit FIN, client trong TIME_WAIT có thể trả ACK lại)",
+        "đảm bảo packets cũ từ connection trước không được nhầm cho connection mới"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "2338-tcp-4-way-handshake-connection-teardown-hoat-dong-nhu-the-nao-time-wait-state-la"
+  },
+  {
+    "id": "4dcf0147-415e-5c5c-b08f-2ac0918fd86e",
+    "question": "IPv4 vs IPv6: sự khác biệt chính và tại sao transition diễn ra chậm?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2340-ipv4-vs-ipv6-su-khac-biet-chinh-va-tai-sao-transition-dien-ra-cham",
+    "slug": "ipv4-vs-ipv6-su-khac-biet-chinh-va-tai-sao-transition-dien-ra-cham-4dcf0147-415e-5c5c-b08f-2ac0918fd86e",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "IPv4 (32-bit, ~4.3 tỷ địa chỉ) đã cạn từ 2011; IPv6 (128-bit) giải quyết triệt để nhưng transition chậm do backward incompatibility và NAT workaround vẫn hoạt động đủ tốt."
+      ],
+      "details": [
+        "IPv4: 32-bit address (~4.3 tỷ địa chỉ) — cạn kiệt từ 2011. NAT (Network Address Translation) là workaround: nhiều devices share 1 IP public. Header 20-60 bytes, checksum.",
+        "IPv6: 128-bit address (~3.4 × 10^38 địa chỉ) — không bao giờ cạn kiệt. Không cần NAT (end-to-end connectivity), header đơn giản hơn 40 bytes cố định (không checksum, extension headers), auto-configuration (SLAAC), built-in IPsec. Notation: 2001:0db8:85a3::8a2e:0370:7334.",
+        "Thực tế: Google reports ~45% traffic dùng IPv6; major CDN và cloud đều dual-stack. Lập trình viên nên bind server trên :: (IPv6 wildcard, cũng accept IPv4) thay vì 0.0.0.0.",
+        "Tại sao transition chậm:"
+      ],
+      "points": [
+        "NAT giải quyết IPv4 exhaustion tốt đủ cho nhiều use case",
+        "IPv4 và IPv6 không backward compatible — cần dual-stack (chạy cả hai) hoặc tunneling",
+        "thiết bị cũ không support IPv6",
+        "middle-boxes (firewall, load balancer) cần update"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "2340-ipv4-vs-ipv6-su-khac-biet-chinh-va-tai-sao-transition-dien-ra-cham"
+  },
+  {
+    "id": "6efe9ed7-84f5-5012-920a-fd7e8f969152",
+    "question": "TLS 1.3 khác gì so với TLS 1.2? Tại sao TLS 1.3 được khuyến nghị?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2341-tls-1-3-khac-gi-so-voi-tls-1-2-tai-sao-tls-1-3-duoc-khuyen-nghi",
+    "slug": "tls-1-3-khac-gi-so-voi-tls-1-2-tai-sao-tls-1-3-duoc-khuyen-nghi-6efe9ed7-84f5-5012-920a-fd7e8f969152",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "TLS 1.3 (2018) cải tiến TLS 1.2: giảm từ 2-RTT xuống 1-RTT, bắt buộc forward secrecy (ECDHE), loại bỏ cipher cũ và mã hóa certificate — nhanh hơn và an toàn hơn đáng kể."
+      ],
+      "details": [
+        "TLS 1.2 (2008): handshake 2-RTT, hỗ trợ nhiều cipher suite cũ (RC4, DES, export-grade), RSA key exchange cho phép decrypt retroactively nếu có private key (không có forward secrecy trừ khi dùng ECDHE).",
+        "TLS 1.3 (2018):"
+      ],
+      "points": [
+        "1-RTT handshake (giảm 1 round-trip so với TLS 1.2)",
+        "0-RTT cho resumed sessions (client gửi data ngay trong handshake, nhưng có replay attack risk)",
+        "Forward secrecy bắt buộc: loại bỏ RSA key exchange, chỉ dùng ephemeral Diffie-Hellman (ECDHE) — session key thay đổi mỗi session, ngay cả khi server private key bị lộ sau này cũng không decrypt được session cũ",
+        "Bỏ cipher cũ: loại bỏ MD5, SHA-1, RC4, DES, 3DES, RSA static",
+        "Encrypted handshake: certificate được mã hóa (TLS 1.2 gửi certificate plaintext). TLS 1.3 nhanh hơn và an toàn hơn — Chrome, Firefox, Nginx đều default TLS 1.3. Disable TLS 1.0/1.1 trong production (PCI DSS requirement)"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "2341-tls-1-3-khac-gi-so-voi-tls-1-2-tai-sao-tls-1-3-duoc-khuyen-nghi"
+  },
+  {
+    "id": "34139a93-181e-5ee1-b515-d312ce7b54bc",
+    "question": "Mutual TLS (mTLS) là gì? Khi nào cần dùng trong microservices?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2342-mutual-tls-mtls-la-gi-khi-nao-can-dung-trong-microservices",
+    "slug": "mutual-tls-mtls-la-gi-khi-nao-can-dung-trong-microservices-34139a93-181e-5ee1-b515-d312ce7b54bc",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "mTLS (Mutual TLS) yêu cầu cả client và server present certificate, đảm bảo both-way authentication — cần thiết trong zero-trust microservice environments."
+      ],
+      "details": [
+        "TLS thông thường: chỉ client verify server certificate (1-way TLS).",
+        "mTLS (Mutual TLS): cả server VÀ client đều present certificate và verify lẫn nhau — đảm bảo cả hai bên đều là ai nói là họ. Trong microservices: service A gọi service B, mTLS đảm bảo B chỉ accept request từ service được authorize và A biết đang nói chuyện với đúng B.",
+        "Tại sao cần mTLS trong microservices: zero-trust network — không trust bất kỳ internal traffic nào chỉ vì trong private network; ngăn rogue service impersonate service khác; service-level authentication (không phải user-level).",
+        "Nhược điểm:",
+        "Implement: mỗi service có certificate issued bởi internal CA (Certificate Authority); Kubernetes SPIFFE/SPIRE tự động issue và rotate certificate cho workloads. Service mesh (Istio, Linkerd) implement mTLS tự động ở sidecar proxy level — developer không cần handle TLS trong application code."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "2342-mutual-tls-mtls-la-gi-khi-nao-can-dung-trong-microservices"
+  },
+  {
+    "id": "d234c2fb-2d5e-55bd-9c36-248a85c803cb",
+    "question": "Subnetting và CIDR notation là gì? Cách tính subnet trong thực tế?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2344-subnetting-va-cidr-notation-la-gi-cach-tinh-subnet-trong-thuc-te",
+    "slug": "subnetting-va-cidr-notation-la-gi-cach-tinh-subnet-trong-thuc-te-d234c2fb-2d5e-55bd-9c36-248a85c803cb",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "CIDR (Classless Inter-Domain Routing) notation: 192.168.1.0/24 — 24 bit đầu là network prefix, 8 bit còn lại là host. /24 = 256 địa chỉ (2^8), 254 usable (trừ network address và broadcast). Phổ biến: /8 (class A, 16M hosts), /16 (class B, 65K hosts), /24 (class C, 254 hosts). Private ranges: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16."
+      ],
+      "details": [
+        "Tính subnet nhanh: /24 → subnet mask 255.255.255.0; /25 → 128 hosts, 2 subnet từ /24; /26 → 64 hosts, 4 subnets.",
+        "Trong AWS VPC: tạo VPC /16, chia thành subnets /24 (1 per AZ) — public subnet (route to Internet Gateway) và private subnet (route to NAT Gateway). Security Group và Network ACL hoạt động ở layer subnet/instance.",
+        "Thực tế lập trình: khi Docker tạo container network 172.17.0.0/16, Kubernetes pod CIDR thường 10.244.0.0/16, node CIDR 10.0.0.0/24. Hiểu CIDR giúp debug network connectivity issues giữa containers và services."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "2344-subnetting-va-cidr-notation-la-gi-cach-tinh-subnet-trong-thuc-te"
+  },
+  {
+    "id": "a4bc91d7-8b39-5537-aebd-9ee682724978",
+    "question": "Load balancer L4 vs L7: khác nhau như thế nào và khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2345-load-balancer-l4-vs-l7-khac-nhau-nhu-the-nao-va-khi-nao-dung-cai-nao",
+    "slug": "load-balancer-l4-vs-l7-khac-nhau-nhu-the-nao-va-khi-nao-dung-cai-nao-a4bc91d7-8b39-5537-aebd-9ee682724978",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "L4 LB route dựa trên IP/port (nhanh hơn, protocol-agnostic); L7 LB đọc HTTP content để route thông minh hơn (URL path, headers, cookies) nhưng cần terminate connection."
+      ],
+      "details": [
+        "L4 Load Balancer (Transport layer): hoạt động ở tầng TCP/UDP — không đọc HTTP content, chỉ route dựa trên IP + port. Forward packets trực tiếp (NAT hoặc Direct Server Return). Nhanh hơn (< 1ms), throughput cao hơn, xử lý bất kỳ TCP/UDP protocol. Không thể routing dựa trên URL path, host header, hay cookies. Ví dụ: AWS NLB, HAProxy TCP mode.",
+        "L7 Load Balancer (Application layer): terminate connection, đọc HTTP headers/body, routing based on URL path (/api → service A, /static → CDN), Host header (virtual hosting), cookie (sticky sessions), content-type. SSL termination. Có thể modify request/response. Chậm hơn L4 một chút nhưng cực kỳ linh hoạt. Ví dụ: AWS ALB, Nginx, HAProxy HTTP mode.",
+        "Khi dùng L4: non-HTTP protocol (database TCP, MQTT, custom binary protocol), cần max throughput/performance, stateful connections như WebSocket dài hạn.",
+        "Khi dùng L7: HTTP/HTTPS routing, microservices với nhiều service trên cùng port, cần WAF/rate limiting/auth tại LB layer."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "2345-load-balancer-l4-vs-l7-khac-nhau-nhu-the-nao-va-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "933aba84-7350-53cb-bd63-c6e59d76adcd",
+    "question": "Latency vs Bandwidth vs Throughput: phân biệt và tối ưu như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2346-latency-vs-bandwidth-vs-throughput-phan-biet-va-toi-uu-nhu-the-nao",
+    "slug": "latency-vs-bandwidth-vs-throughput-phan-biet-va-toi-uu-nhu-the-nao-933aba84-7350-53cb-bd63-c6e59d76adcd",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Latency (độ trễ per packet), Bandwidth (dung lượng tối đa), và Throughput (data thực sự truyền) là 3 metric khác nhau — tối ưu từng metric cần chiến lược riêng."
+      ],
+      "details": [
+        "Latency: thời gian một packet đi từ A đến B (RTT = round-trip time). Bao gồm: propagation delay (tốc độ ánh sáng, không thể thay đổi), transmission delay (kích thước packet / bandwidth), processing delay (router, load balancer).",
+        "Bandwidth: dung lượng tối đa của đường truyền (Mbps/Gbps).",
+        "Throughput: data thực sự truyền được trong thực tế — bị ảnh hưởng bởi packet loss, latency, protocol overhead. Throughput ≤ bandwidth.",
+        "Tối ưu latency:",
+        "Bandwidth-Delay Product (BDP): bandwidth × RTT = số bytes 'in flight' tối đa. TCP window size phải >= BDP để không bottleneck.",
+        "Tối ưu throughput:",
+        "Tối ưu bandwidth:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "2346-latency-vs-bandwidth-vs-throughput-phan-biet-va-toi-uu-nhu-the-nao"
+  },
+  {
+    "id": "9212fdfe-3fb0-5d77-bc5b-d1efe40941de",
+    "question": "HTTP Keep-Alive và Connection Pooling: cơ chế và tác động đến performance?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2347-http-keep-alive-va-connection-pooling-co-che-va-tac-dong-den-performance",
+    "slug": "http-keep-alive-va-connection-pooling-co-che-va-tac-dong-den-performance-9212fdfe-3fb0-5d77-bc5b-d1efe40941de",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "HTTP Keep-Alive và Connection Pool đều tránh overhead tạo kết nối mới cho mỗi request — quan trọng cho performance của cả HTTP calls và database queries."
+      ],
+      "details": [
+        "HTTP Keep-Alive (persistent connection): HTTP/1.0 default là close connection sau mỗi request (mỗi request = TCP handshake + TLS handshake + request + response + close = nhiều overhead). HTTP/1.1 default Connection: keep-alive — reuse TCP connection cho nhiều request liên tiếp, tránh handshake overhead. Keep-Alive: timeout=5, max=1000 — connection idle 5s thì close, tối đa 1000 requests.",
+        "Connection Pool (client-side): client maintain pool of pre-established connections — khi cần request, lấy connection từ pool thay vì tạo mới. Cần thiết cho database connections (PostgreSQL/MySQL pool), HTTP connections đến external services.",
+        "Config quan trọng: pool size (số connections tối đa — quá nhỏ: queuing, quá lớn: resource waste), idle timeout (close connections không dùng), connection lifetime (rotate để tránh stale connections).",
+        "Node.js http.globalAgent: mặc định pool HTTP connections, keepAlive: true và maxSockets: Infinity. Với database: pg-pool, Prisma connection pool — thiếu pool là lỗi phổ biến khiến DB bị overloaded với quá nhiều short-lived connections."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "2347-http-keep-alive-va-connection-pooling-co-che-va-tac-dong-den-performance"
+  },
+  {
+    "id": "1299f81d-db88-56e0-89ec-744d773b6a7d",
+    "question": "Connection timeout vs Read timeout vs Write timeout: phân biệt và cấu hình đúng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2349-connection-timeout-vs-read-timeout-vs-write-timeout-phan-biet-va-cau-hinh-dung",
+    "slug": "connection-timeout-vs-read-timeout-vs-write-timeout-phan-biet-va-cau-hinh-dung-1299f81d-db88-56e0-89ec-744d773b6a7d",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Connection timeout (thiết lập TCP), Read timeout (nhận response) và Write timeout (gửi request) là 3 loại timeout khác nhau — phải set cả 3 để tránh thread/connection leak."
+      ],
+      "details": [
+        "Connection timeout: thời gian tối đa để thiết lập TCP connection (3-way handshake). Thường 3-10 giây. Nếu timeout: server unreachable, firewall block, hoặc server quá tải không accept connections mới.",
+        "Read timeout (response timeout): thời gian tối đa để nhận response sau khi request đã gửi. Nếu timeout: server quá chậm, heavy processing, hoặc network issue. Thường 30-60 giây cho API calls, 5-10 giây cho microservices.",
+        "Write timeout (send timeout): thời gian tối đa để gửi request (upload) đến server. Thường liên quan đến slow upload.",
+        "Connect-and-Read timeout pattern (Axios):"
+      ],
+      "points": [
+        "Microservices internal: connect 1s, read 5-10s.",
+        "External API calls: connect 3s, read 30s.",
+        "Kết hợp với retry và circuit breaker để handle failures gracefully."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "2349-connection-timeout-vs-read-timeout-vs-write-timeout-phan-biet-va-cau-hinh-dung"
+  },
+  {
+    "id": "a1f1e148-9e5f-55bb-b752-2079dacb49bb",
+    "question": "ARP hoạt động thế nào? Khi nào một máy cần gửi ARP request?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93200-arp-hoat-dong-the-nao-khi-nao-mot-may-can-gui-arp-request",
+    "slug": "arp-hoat-dong-the-nao-khi-nao-mot-may-can-gui-arp-request-a1f1e148-9e5f-55bb-b752-2079dacb49bb",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "ARP (Address Resolution Protocol) ánh xạ IP address (tầng 3) sang MAC address (tầng 2) trong cùng một LAN. Khi máy A muốn gửi gói tới một IP đích cùng subnet nhưng chưa biết MAC của nó, A broadcast một ARP request (\"Ai đang giữ IP 192.168.1.5?\") ra toàn LAN. Máy sở hữu IP đó trả lời bằng ARP reply (unicast) chứa MAC của mình. A lưu cặp IP↔MAC vào ARP cache (có TTL) để lần sau khỏi hỏi lại."
+      ],
+      "details": [
+        "Nếu đích nằm khác subnet, A không ARP đích trực tiếp mà ARP để lấy MAC của default gateway rồi gửi frame tới router. ARP spoofing (giả mạo reply) là một vector tấn công MITM phổ biến bên trong LAN."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "93200-arp-hoat-dong-the-nao-khi-nao-mot-may-can-gui-arp-request"
+  },
+  {
+    "id": "1082bfb7-2d33-55e2-a630-aa6a7257113e",
+    "question": "DHCP cấp phát IP động thế nào? Giải thích 4 bước DORA.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93201-dhcp-cap-phat-ip-dong-the-nao-giai-thich-4-buoc-dora",
+    "slug": "dhcp-cap-phat-ip-dong-the-nao-giai-thich-4-buoc-dora-1082bfb7-2d33-55e2-a630-aa6a7257113e",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "DHCP (Dynamic Host Configuration Protocol) tự động cấp IP và cấu hình mạng (subnet mask, gateway, DNS) cho client, tránh phải đặt IP tĩnh thủ công. Quy trình 4 bước DORA:\n- Discover: client mới broadcast để tìm DHCP server.\n- Offer: server đề nghị một IP kèm lease.\n- Request: client broadcast xác nhận chọn offer đó.\n- Ack: server chốt và ghi nhận lease (thời hạn thuê IP).\nIP được cấp có thời hạn (lease time); client gia hạn (renew) khi dùng hết khoảng nửa lease. Broadcast được dùng vì client chưa có IP để gửi unicast. Trong mạng nhiều subnet, DHCP relay chuyển tiếp request tới một server tập trung."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "93201-dhcp-cap-phat-ip-dong-the-nao-giai-thich-4-buoc-dora"
+  },
+  {
+    "id": "ec6207fb-b2d0-5186-b49c-7194c7fc0594",
+    "question": "NAT là gì? Nó giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93202-nat-la-gi-no-giai-quyet-van-de-gi",
+    "slug": "nat-la-gi-no-giai-quyet-van-de-gi-ec6207fb-b2d0-5186-b49c-7194c7fc0594",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "NAT (Network Address Translation) dịch địa chỉ IP private bên trong LAN thành một IP public khi ra Internet, và dịch ngược lại khi phản hồi về. Router giữ một bảng NAT map cặp (private IP:port ↔ public IP:port)."
+      ],
+      "details": [
+        "Vấn đề nó giải: IPv4 chỉ có ~4 tỉ địa chỉ, không đủ cho mọi thiết bị. NAT (dạng PAT/overload) cho phép hàng trăm thiết bị trong nhà hay công ty chia sẻ một IP public duy nhất, phân biệt nhau qua port. Hệ quả phụ: thiết bị sau NAT không thể bị kết nối vào trực tiếp từ ngoài (một lớp che chắn), nhưng gây khó cho P2P/VoIP — cần kỹ thuật NAT traversal (STUN/TURN). IPv6 với không gian địa chỉ khổng lồ làm giảm nhu cầu NAT."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "93202-nat-la-gi-no-giai-quyet-van-de-gi"
+  },
+  {
+    "id": "95f1b424-2e75-5cf1-802a-5da889d60980",
+    "question": "ICMP là gì? ping và traceroute hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93207-icmp-la-gi-ping-va-traceroute-hoat-dong-the-nao",
+    "slug": "icmp-la-gi-ping-va-traceroute-hoat-dong-the-nao-95f1b424-2e75-5cf1-802a-5da889d60980",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "ICMP (Internet Control Message Protocol) là giao thức tầng 3 dùng để báo lỗi và chẩn đoán mạng (không mang dữ liệu ứng dụng), ví dụ \"Destination Unreachable\" hay \"Time Exceeded\".\n- ping gửi ICMP Echo Request tới đích và chờ Echo Reply, đo round-trip time và tỉ lệ mất gói — kiểm tra host có sống và độ trễ bao nhiêu.\n- traceroute lợi dụng trường TTL: gửi loạt gói với TTL=1, 2, 3... Mỗi router giảm TTL đi 1; khi TTL về 0, router trả về ICMP Time Exceeded, để lộ IP của mình. Nhờ đó vẽ ra đường đi từng hop tới đích. (Trên Windows traceroute dùng ICMP; trên Linux mặc định dùng UDP nhưng cùng nguyên lý TTL.)\nNhiều firewall chặn ICMP, nên ping timeout không chắc chắn nghĩa là host đã chết."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "93207-icmp-la-gi-ping-va-traceroute-hoat-dong-the-nao"
+  },
+  {
+    "id": "0f55c8d8-e34d-5f55-91ad-7532bee629e7",
+    "question": "Encapsulation và decapsulation diễn ra thế nào khi gói tin đi qua các tầng của chồng giao thức (mô hình TCP/IP)?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93208-encapsulation-va-decapsulation-dien-ra-the-nao-khi-goi-tin-di-qua-cac-tang-cua-c",
+    "slug": "encapsulation-va-decapsulation-dien-ra-the-nao-khi-goi-tin-di-qua-cac-tang-cua-chong-giao-thuc-mo-hi-0f55c8d8-e34d-5f55-91ad-7532bee629e7",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Encapsulation là quá trình mỗi tầng (từ trên xuống, ở phía gửi) bọc dữ liệu của tầng trên bằng header (và đôi khi trailer) của mình. Theo mô hình TCP/IP 5 tầng:\n- Application: data\n- Transport: thêm TCP header → segment, hoặc UDP header → datagram (có port nguồn/đích)\n- Network: thêm IP header → packet (IP nguồn/đích)\n- Data Link: thêm frame header + trailer (MAC, FCS) → frame\n- Physical: truyền thành bit trên đường truyền.\nDecapsulation là quá trình ngược ở phía nhận: mỗi tầng bóc header của mình, đọc thông tin điều khiển, rồi chuyển payload lên tầng trên. Mỗi tầng chỉ \"đọc\" đúng header của tầng tương ứng nên các tầng độc lập nhau."
+      ],
+      "details": [
+        "Lưu ý: mô hình OSI có 7 tầng — tách thêm Presentation và Session phía trên Application; mạng thực tế thường dùng mô hình TCP/IP gộp chúng vào Application. Hình dung như những phong bì lồng nhau: mỗi trạm chỉ mở đúng lớp của mình."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "93208-encapsulation-va-decapsulation-dien-ra-the-nao-khi-goi-tin-di-qua-cac-tang-cua-c"
+  },
+  {
+    "id": "6d774c2b-f4e1-576c-ae05-449e2dc26729",
+    "question": "Mã hóa đối xứng và bất đối xứng khác nhau thế nào? Vì sao TLS dùng cả hai?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93209-ma-hoa-doi-xung-va-bat-doi-xung-khac-nhau-the-nao-vi-sao-tls-dung-ca-hai",
+    "slug": "ma-hoa-doi-xung-va-bat-doi-xung-khac-nhau-the-nao-vi-sao-tls-dung-ca-hai-6d774c2b-f4e1-576c-ae05-449e2dc26729",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "Mã hóa đối xứng: dùng chung một khóa bí mật cho cả mã hóa lẫn giải mã (AES, ChaCha20). Rất nhanh, phù hợp mã hóa lượng lớn dữ liệu — nhưng hai bên cần một cách an toàn để cùng có khóa.",
+        "Mã hóa bất đối xứng: dùng một cặp khóa public/private (RSA, ECC). Dữ liệu mã bằng public key chỉ giải được bằng private key tương ứng (và ngược lại cho chữ ký số). Giải quyết bài toán trao đổi khóa mà không cần chia sẻ bí mật trước, nhưng chậm hơn nhiều.\nVì sao TLS/HTTPS dùng cả hai: bất đối xứng chỉ dùng trong handshake để xác thực server và thỏa thuận an toàn một session key; sau đó toàn bộ dữ liệu được mã hóa đối xứng bằng session key đó để đạt tốc độ. Lấy ưu điểm của cả hai."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "93209-ma-hoa-doi-xung-va-bat-doi-xung-khac-nhau-the-nao-vi-sao-tls-dung-ca-hai"
+  },
+  {
+    "id": "c97d4481-bb2b-52bf-a8fe-ca8ee1844a38",
+    "question": "VPN và tunneling hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93210-vpn-va-tunneling-hoat-dong-the-nao",
+    "slug": "vpn-va-tunneling-hoat-dong-the-nao-c97d4481-bb2b-52bf-a8fe-ca8ee1844a38",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "VPN (Virtual Private Network) tạo một \"đường hầm\" mã hóa qua mạng công cộng (Internet) để thiết bị truy cập tài nguyên như đang ở trong mạng nội bộ, đồng thời giấu lưu lượng khỏi bên trung gian."
+      ],
+      "details": [
+        "Tunneling là kỹ thuật nền: gói tin gốc (kể cả header IP nội bộ) được đóng gói (encapsulate) làm payload bên trong một gói tin khác, truyền qua Internet tới endpoint VPN; tại đó nó được bóc ra và chuyển tiếp vào mạng đích. Với VPN bảo mật, gói gốc còn được mã hóa trước khi bọc (IPsec, WireGuard, OpenVPN).",
+        "Kết quả:"
+      ],
+      "points": [
+        "bảo mật — nội dung được mã hóa, chống nghe lén trên Wi-Fi công cộng",
+        "truy cập từ xa — như đang ngồi trong mạng công ty",
+        "ẩn IP thật — bên ngoài chỉ thấy IP của VPN server"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "93210-vpn-va-tunneling-hoat-dong-the-nao"
+  },
+  {
+    "id": "daa13642-85f8-5665-a6f5-76de38eb0f9d",
+    "question": "Cache-Control headers: no-cache vs no-store vs max-age, ETag và Last-Modified hoạt động thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cache-control-headers-no-cache-vs-no-store-vs-max-age-etag-va-last-modified-hoat-dong-the-nao-daa13642-85f8-5665-a6f5-76de38eb0f9d",
+    "access": "pro",
+    "departments": [
+      "base"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": null
+  },
+  {
+    "id": "0163866e-9196-5a6c-b7e8-ce75a38de739",
+    "question": "Flow control và congestion control trong TCP khác nhau thế nào? Sliding window hoạt động ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "flow-control-va-congestion-control-trong-tcp-khac-nhau-the-nao-sliding-window-hoat-dong-ra-sao-0163866e-9196-5a6c-b7e8-ce75a38de739",
+    "access": "pro",
+    "departments": [
+      "base"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": null
+  },
+  {
+    "id": "2ebe2165-d917-561b-aa7c-b3fdb0e439a3",
+    "question": "Static routing và dynamic routing khác nhau thế nào? So sánh OSPF với RIP; default gateway là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "static-routing-va-dynamic-routing-khac-nhau-the-nao-so-sanh-ospf-voi-rip-default-gateway-la-gi-2ebe2165-d917-561b-aa7c-b3fdb0e439a3",
+    "access": "pro",
+    "departments": [
+      "base"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": null
+  }
+]

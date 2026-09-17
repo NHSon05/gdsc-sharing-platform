@@ -1,0 +1,3242 @@
+[
+  {
+    "id": "9407c1d4-a5dd-584a-b510-aaf531017f84",
+    "question": "Value type và reference type khác nhau như thế nào trong C#?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2701-value-type-va-reference-type-khac-nhau-nhu-the-nao-trong-c",
+    "slug": "value-type-va-reference-type-khac-nhau-nhu-the-nao-trong-c-9407c1d4-a5dd-584a-b510-aaf531017f84",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Value type và reference type khác nhau ở cách biến nắm giữ dữ liệu: biến value type chứa giá trị, biến reference type chứa reference trỏ tới object trên heap."
+      ],
+      "details": [
+        "Hãy hình dung value type như bản photo — mỗi người giữ bản sao riêng. Reference type như link Drive — mọi người cùng sửa trên một file.",
+        "Về cơ chế, khi gán a = b với value type, runtime sao chép nội dung (với struct là từng field). Với reference type, chỉ sao chép reference nên hai biến cùng trỏ tới một instance. Hệ quả là khác biệt khi truyền tham số, so sánh và xử lý null. Value type, trừ Nullable<T>, không thể là null và so sánh theo giá trị; reference type có thể là null và so sánh theo reference, trừ các type override Equals như string hay record.",
+        "Vị trí lưu trữ không cố định như mô tả cũ \"value type luôn ở stack\". Value type nằm inline nơi khai báo: biến local thì trên stack, field trong class thì nằm trong object trên heap, khi boxing thì thành object trên heap. Reference type luôn có object trên heap, biến chỉ giữ reference.",
+        "Lỗi thường gặp là lạm dụng struct vì nghĩ luôn nhẹ hơn class, hoặc sửa struct trong List<T> qua foreach và ngạc nhiên vì bản gốc không đổi do đang sửa trên bản sao. Lỗi khác là boxing vô ý khi truyền struct vào tham số object hoặc interface, tạo allocation không cần thiết.",
+        "Lưu ý:"
+      ],
+      "points": [
+        "struct, enum, int, double, bool, record struct là value type.",
+        "class, record, interface, delegate, array, string là reference type."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "2701-value-type-va-reference-type-khac-nhau-nhu-the-nao-trong-c"
+  },
+  {
+    "id": "a7ae03d2-9323-5038-9005-b36e25076001",
+    "question": "Nullable type là gì và khi nào nên dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2703-nullable-type-la-gi-va-khi-nao-nen-dung",
+    "slug": "nullable-type-la-gi-va-khi-nao-nen-dung-a7ae03d2-9323-5038-9005-b36e25076001",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Nullable type là kiểu dữ liệu cho phép value type nhận thêm giá trị null, ví dụ int? age = null;. Bên dưới nó là struct Nullable<T> bọc value type lại, nên int? thực chất là Nullable<int>.",
+        "Lỗi thường gặp: dùng Nullable<T> cho reference type — không cần, vì reference type đã nullable sẵn. Trong C# 8+, reference type có nullable annotation (string?) nhưng đó là cảnh báo compile-time, không phải wrapper runtime như Nullable<T>. Cũng đừng nhầm int? với int mặc định 0; nếu database trả về NULL, ép sang int sẽ lỗi."
+      ],
+      "details": [
+        "Hãy nghĩ như một ô input có checkbox \"không có dữ liệu\": giá trị có thể là số, hoặc trạng thái \"không có\" — khác với số 0. Điều này quan trọng vì value type như int, bool, DateTime mặc định không thể là null; nếu bạn cần biểu diễn \"chưa có\", nullable là cách chuẩn.",
+        "Cơ chế hoạt động: Nullable<T> có hai thành phần chính — HasValue (kiểm tra có giá trị hay không) và Value (lấy giá trị thật). Khi HasValue == false, truy cập Value sẽ ném InvalidOperationException. C# cung cấp cú pháp T? cho mọi value type, và các toán tử như ?? để cung cấp giá trị mặc định: int actualAge = age ?? 0;. Ngoài ra, nullable còn hỗ trợ ?. (null-conditional) khi truy cập thành viên.",
+        "Ví dụ:",
+        "Lưu ý: Chỉ dùng nullable khi \"vắng mặt\" là trạng thái hợp lệ, không phải để tránh lỗi. Nếu giá trị luôn phải có, hãy để kiểu không nullable và xử lý lỗi rõ ràng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "int? age = null;\n\nif (age.HasValue)\n{\n    Console.WriteLine($\"Age: {age.Value}\");\n}\nelse\n{\n    Console.WriteLine(\"Age not provided\");\n}\n\nint displayAge = age ?? 0; // 0 khi null"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "2703-nullable-type-la-gi-va-khi-nao-nen-dung"
+  },
+  {
+    "id": "48523267-0b3a-5f6d-9e2c-71e9fd0fb43d",
+    "question": "Tại sao String lại immutable trong C#?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2704-tai-sao-string-lai-immutable-trong-c",
+    "slug": "tai-sao-string-lai-immutable-trong-c-48523267-0b3a-5f6d-9e2c-71e9fd0fb43d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "String trong C# là kiểu tham chiếu nhưng có hành vi bất biến — một khi được tạo, nội dung của nó không thể thay đổi. Mọi phương thức như Replace(), Substring(), ToUpper() đều trả về chuỗi mới, không sửa chuỗi gốc.",
+        "Lưu ý: string.Empty và \"\" về cơ bản là cùng một giá trị (CLR intern)."
+      ],
+      "details": [
+        "Cơ chế bên trong: CLR thực hiện string interning — nhưng chỉ tự động intern string literal/const; chuỗi tạo động không tự động vào intern pool trừ khi gọi string.Intern(). Nhờ immutable mà việc tái dùng tham chiếu interned mới an toàn tuyệt đối.",
+        "Khi cần so sánh nội dung chuỗi, dùng string.Equals() hoặc == — cả hai đã được overload để so sánh nội dung, không phải tham chiếu."
+      ],
+      "points": [
+        "Thread-safety: Vì không thể thay đổi nội dung, nhiều thread đọc chung một string mà không cần lock.",
+        "String interning: CLR duy trì một pool (intern pool) chứa các string có nội dung trùng nhau. Nếu không immutable, việc thay đổi một string sẽ vô tình thay đổi giá trị ở nơi khác đang tham chiếu đến nó — logic sẽ sai ngay."
+      ],
+      "sections": [
+        "Lỗi thường gặp: Ghép chuỗi trong vòng lặp tạo ra nhiều đối tượng string rác, gây áp lực lên garbage collector."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "string original = \"hello\";\nstring modified = original.Replace('h', 'H');\n// original vẫn là \"hello\" — không bị ảnh hưởng\nConsole.WriteLine(original); // hello\nConsole.WriteLine(modified); // Hello"
+        },
+        {
+          "language": "CSHARP",
+          "code": "// Không nên\nstring result = \"\";\nfor (int i = 0; i < 1000; i++)\n    result += i.ToString(); // mỗi lần += tạo string mới\n\n// Nên dùng StringBuilder\nvar sb = new System.Text.StringBuilder();\nfor (int i = 0; i < 1000; i++)\n    sb.Append(i.ToString()); // sửa đổi cùng một buffer\nstring result = sb.ToString();"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "2704-tai-sao-string-lai-immutable-trong-c"
+  },
+  {
+    "id": "715f1e43-9efa-58b6-9472-b13bf90ceaec",
+    "question": "CLR (Common Language Runtime) là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2705-clr-common-language-runtime-la-gi",
+    "slug": "clr-common-language-runtime-la-gi-715f1e43-9efa-58b6-9472-b13bf90ceaec",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "CLR (Common Language Runtime) là môi trường thực thi có quản lý của .NET, chịu trách nhiệm chạy mã đã biên dịch ra Intermediate Language (IL) và cung cấp các dịch vụ như garbage collection, quản lý bộ nhớ, kiểm tra type safety và xử lý exception."
+      ],
+      "details": [
+        "Hãy hình dung CLR như lớp giám sát giữa mã của bạn và hệ điều hành. Bạn đưa assembly chứa IL và metadata, nó kiểm tra tính hợp lệ, biên dịch ra mã máy cho CPU hiện tại và giám sát để thu hồi tài nguyên an toàn.",
+        "Về cơ chế, các ngôn ngữ .NET như C#, F# đều biên dịch ra IL và metadata trong assembly (.dll/.exe) thay vì mã máy. Khi khởi chạy, CLR nạp assembly và verifier kiểm tra type safety theo Common Type System (CTS) để ngăn truy cập bộ nhớ sai kiểu. JIT compiler (hiện tại là RyuJIT) chuyển IL thành mã máy native theo nhu cầu và cache lại để lần gọi sau không biên dịch lại. Trong lúc chạy, CLR quản lý managed heap với GC theo generation để thu hồi đối tượng không còn tham chiếu, quản lý thread và exception, đồng thời hỗ trợ interop để gọi mã unmanaged. Nhờ IL, cùng assembly có thể chạy trên Windows, Linux, macOS nếu có runtime tương ứng.",
+        "Lỗi thường gặp là đồng nhất CLR với toàn bộ .NET, hoặc nghĩ GC giải phóng ngay khi biến ra khỏi scope. GC chỉ chạy khi có áp lực bộ nhớ hoặc đạt ngưỡng generation, nên tài nguyên unmanaged vẫn cần Dispose/using. Một nhầm lẫn khác là cho rằng JIT xảy ra lúc build; thực tế JIT xảy ra lúc runtime, khác với AOT như NativeAOT biên dịch trước khi chạy.",
+        "Lưu ý: Phân biệt CLR với BCL: CLR là engine thực thi, BCL là thư viện lớp cơ sở chạy trên CLR. Với .NET Framework, CLR chỉ chạy trên Windows; với .NET 5+ hiện nay, runtime dựa trên CLR đã hỗ trợ cross-platform."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "2705-clr-common-language-runtime-la-gi"
+  },
+  {
+    "id": "9429c15c-5d6e-589a-aeed-1bec20d2fcb8",
+    "question": "Garbage collection hoạt động như thế nào và khi nào thì chạy?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2706-garbage-collection-hoat-dong-nhu-the-nao-va-khi-nao-thi-chay",
+    "slug": "garbage-collection-hoat-dong-nhu-the-nao-va-khi-nao-thi-chay-9429c15c-5d6e-589a-aeed-1bec20d2fcb8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Garbage collection tự động giải phóng bộ nhớ của các object không còn được tham chiếu."
+      ],
+      "details": [],
+      "points": [
+        "GC chạy khi áp lực bộ nhớ tăng cao, hệ thống sắp hết RAM, hoặc khi gọi tường minh GC.Collect().",
+        "Các object không còn accessible từ root references (stack, static fields) sẽ trở nên eligible để thu gom."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "2706-garbage-collection-hoat-dong-nhu-the-nao-va-khi-nao-thi-chay"
+  },
+  {
+    "id": "3a9284a6-12d8-5a6d-a49f-558ac05d6d43",
+    "question": "const và readonly khác nhau như thế nào trong C#?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2708-const-va-readonly-khac-nhau-nhu-the-nao-trong-c",
+    "slug": "const-va-readonly-khac-nhau-nhu-the-nao-trong-c-3a9284a6-12d8-5a6d-a49f-558ac05d6d43",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "const khai báo hằng số tại compile-time, giá trị được nhúng trực tiếp vào bytecode và luôn là static. readonly cho phép gán một lần duy nhất lúc khai báo hoặc trong constructor, có thể là per-instance."
+      ],
+      "details": [
+        "Dùng const cho các giá trị thực sự là hằng số không bao giờ thay đổi; dùng readonly cho các giá trị được tính toán lúc runtime hoặc cần biến thể theo instance."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "2708-const-va-readonly-khac-nhau-nhu-the-nao-trong-c"
+  },
+  {
+    "id": "64b75531-72f3-5283-9bbb-3bd3a4990404",
+    "question": "String và StringBuilder khác nhau như thế nào và khi nào nên dùng cái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2709-string-va-stringbuilder-khac-nhau-nhu-the-nao-va-khi-nao-nen-dung-cai-nao",
+    "slug": "string-va-stringbuilder-khac-nhau-nhu-the-nao-va-khi-nao-nen-dung-cai-nao-64b75531-72f3-5283-9bbb-3bd3a4990404",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "String là immutable — mỗi lần ghép chuỗi tạo ra một object mới, tốn bộ nhớ và CPU. StringBuilder là mutable và sửa đổi in-place, hiệu quả hơn nhiều khi ghép nhiều đoạn."
+      ],
+      "details": [],
+      "points": [
+        "Trong vòng lặp ghép chuỗi, StringBuilder nhanh hơn hẳn.",
+        "Dùng StringBuilder khi xây dựng chuỗi động từ nhiều phần; dùng String cho các thao tác đơn giản."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "2709-string-va-stringbuilder-khac-nhau-nhu-the-nao-va-khi-nao-nen-dung-cai-nao"
+  },
+  {
+    "id": "68a9f3c9-56fa-55ed-8cfa-03758c346884",
+    "question": "Toán tử == và phương thức Equals() khác nhau như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2711-toan-tu-va-phuong-thuc-equals-khac-nhau-nhu-the-nao",
+    "slug": "toan-tu-va-phuong-thuc-equals-khac-nhau-nhu-the-nao-68a9f3c9-56fa-55ed-8cfa-03758c346884",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Toán tử == so sánh theo tham chiếu đối với class (trừ khi bị override) nhưng so sánh theo giá trị với struct và kiểu nguyên thủy. Equals() mặc định so sánh theo giá trị."
+      ],
+      "details": [],
+      "points": [
+        "Với custom types, nên override cả hai để nhất quán.",
+        "Để tuân thủ best practice, hãy implement cả IEquatable<T> cùng với việc override GetHashCode()."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "2711-toan-tu-va-phuong-thuc-equals-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "0786ea58-f77b-5fe1-9fca-7257d713db89",
+    "question": "Class và struct khác nhau như thế nào trong C#?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2713-class-va-struct-khac-nhau-nhu-the-nao-trong-c",
+    "slug": "class-va-struct-khac-nhau-nhu-the-nao-trong-c-0786ea58-f77b-5fe1-9fca-7257d713db89",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Class là reference type lưu trên heap; struct là value type lưu trên stack."
+      ],
+      "details": [],
+      "points": [
+        "Class hỗ trợ kế thừa; struct thì không (ngôn ngữ không cho phép kế thừa từ value type — không phải \"mặc định sealed\").",
+        "Class dùng reference equality; struct dùng value equality."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "2713-class-va-struct-khac-nhau-nhu-the-nao-trong-c"
+  },
+  {
+    "id": "d6b78edb-d651-5686-aef5-dae98ad18556",
+    "question": "Collection expression trong C# 12 là gì và có lợi thế gì về hiệu năng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2762-collection-expression-trong-c-12-la-gi-va-co-loi-the-gi-ve-hieu-nang",
+    "slug": "collection-expression-trong-c-12-la-gi-va-co-loi-the-gi-ve-hieu-nang-d6b78edb-d651-5686-aef5-dae98ad18556",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Collection expression dùng cú pháp ngoặc vuông [1, 2, 3] để khởi tạo array, list và span thay cho new List<int> { 1, 2, 3 } truyền thống."
+      ],
+      "details": [],
+      "points": [
+        "Hỗ trợ spread operator để ghép collection: int[] combined = [..array1, ..array2].",
+        "Code ngắn gọn hơn; compiler tối ưu hóa initialization, tránh cấp phát trung gian không cần thiết."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "2762-collection-expression-trong-c-12-la-gi-va-co-loi-the-gi-ve-hieu-nang"
+  },
+  {
+    "id": "83efe7cf-4bd6-58d4-a191-c0a99a81faea",
+    "question": "Toán tử is và as khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94025-toan-tu-is-va-as-khac-nhau-the-nao",
+    "slug": "toan-tu-is-va-as-khac-nhau-the-nao-83efe7cf-4bd6-58d4-a191-c0a99a81faea",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai kiểm tra kiểu lúc runtime nhưng trả về khác nhau:",
+        "InvalidCastException",
+        "- as: thử ép kiểu, thành công trả về đối tượng, thất bại trả về null (không ném exception)."
+      ],
+      "details": [
+        "Chỉ dùng được cho reference type và nullable type."
+      ],
+      "points": [
+        "is: trả về bool — đối tượng có tương thích kiểu không. Với pattern matching (C# 7+) còn gán luôn biến đã ép kiểu:"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "if (obj is string s)      // đúng kiểu → gán s, không cần cast lại\n    Console.WriteLine(s.Length);"
+        },
+        {
+          "language": "CSHARP",
+          "code": "string? s = obj as string;\nif (s != null) { /* ... */ }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "94025-toan-tu-is-va-as-khac-nhau-the-nao"
+  },
+  {
+    "id": "948853bf-22bf-55ad-9bd6-b079d8dcb236",
+    "question": "Managed code và unmanaged code khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94027-managed-code-va-unmanaged-code-khac-nhau-the-nao",
+    "slug": "managed-code-va-unmanaged-code-khac-nhau-the-nao-948853bf-22bf-55ad-9bd6-b079d8dcb236",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Managed code là code chạy dưới sự quản lý của CLR (Common Language Runtime) — C#, F#, VB.NET biên dịch ra IL rồi CLR lo giúp: garbage collection, type safety, kiểm tra biên mảng, xử lý exception, JIT ra mã máy."
+      ],
+      "details": [
+        "Unmanaged code chạy trực tiếp trên hệ điều hành, không có CLR: C/C++ tự cấp phát và giải phóng bộ nhớ (malloc/free, new/delete), không có GC. .NET gọi sang code này qua P/Invoke (Win32 API) hoặc COM interop.",
+        "Hệ quả cần nhớ:\n- Bộ nhớ managed do GC theo dõi và thu hồi tự động.\n- Tài nguyên unmanaged (file handle, socket, con trỏ native) GC không biết cách dọn → phải giải phóng tay qua IDisposable/Dispose hoặc finalizer.",
+        "Hình dung: managed code chạy trong \"sân có trọng tài\" (CLR lo an toàn và dọn dẹp); unmanaged code chạy ngoài sân, tự chịu trách nhiệm bộ nhớ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "94027-managed-code-va-unmanaged-code-khac-nhau-the-nao"
+  },
+  {
+    "id": "1df31261-d4a6-5614-8176-bc06da86157b",
+    "question": "Tuple / ValueTuple là gì? Deconstruction dùng thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94029-tuple-valuetuple-la-gi-deconstruction-dung-the-nao",
+    "slug": "tuple-valuetuple-la-gi-deconstruction-dung-the-nao-1df31261-d4a6-5614-8176-bc06da86157b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác Tuple<> cũ: Tuple<> là reference type, bất biến, chỉ có Item1, Item2... khó đọc. ValueTuple là value type, có tên field, và có thể sửa."
+      ],
+      "details": [
+        "Deconstruction tách tuple thành các biến rời:"
+      ],
+      "points": [],
+      "sections": [
+        "ValueTuple ((int, string)) là kiểu value type nhẹ để nhóm nhiều giá trị lại mà không cần khai báo class/struct riêng — hữu ích khi muốn trả nhiều giá trị từ một method."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "(int count, string name) GetUser() => (42, \"Định\");\nvar u = GetUser();\nConsole.WriteLine(u.count);   // 42 — truy cập qua tên field"
+        },
+        {
+          "language": "CSHARP",
+          "code": "var (count, name) = GetUser();     // count = 42, name = \"Định\"\n(int a, int b) = (1, 2);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "94029-tuple-valuetuple-la-gi-deconstruction-dung-the-nao"
+  },
+  {
+    "id": "8d902ae3-d90b-5624-8233-e7d4e100dfce",
+    "question": "Thứ tự đăng ký middleware trong ASP.NET Core có quan trọng không? Use, Run, Map khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96550-thu-tu-dang-ky-middleware-trong-asp-net-core-co-quan-trong-khong-use-run-map-kha",
+    "slug": "thu-tu-dang-ky-middleware-trong-asp-net-core-co-quan-trong-khong-use-run-map-khac-nhau-the-nao-8d902ae3-d90b-5624-8233-e7d4e100dfce",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Rất quan trọng.",
+        "Hai lỗi thứ tự hay gặp:\n- Đặt UseAuthorization trước UseRouting → chưa biết endpoint nào được chọn nên [Authorize] không có hiệu lực; analyzer ASP0001 cảnh báo trường hợp này.\n- Đặt UseExceptionHandler sau các middleware khác → exception ném ra ở tầng trên nó không được bắt."
+      ],
+      "details": [
+        "Pipeline được ghép đúng theo thứ tự đăng ký: mỗi middleware bọc middleware kế tiếp, request đi xuôi và response đi ngược lại.",
+        "Middleware xử lý cross-cutting cho mọi request; nếu chỉ cần chạy quanh action của MVC thì dùng filter."
+      ],
+      "points": [
+        "app.Use(...): chạy code rồi gọi next — có thể đi tiếp hoặc short-circuit (không gọi next, trả response luôn).",
+        "app.Map(\"/admin\", ...)",
+        "app.Run(...): terminal, không có next, pipeline kết thúc tại đó."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "app.UseExceptionHandler(\"/error\"); // outermost: catches everything below\napp.UseRouting();\napp.UseAuthentication();           // who are you?\napp.UseAuthorization();            // are you allowed?\napp.MapControllers();"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "96550-thu-tu-dang-ky-middleware-trong-asp-net-core-co-quan-trong-khong-use-run-map-kha"
+  },
+  {
+    "id": "a23b6908-3a02-5e36-957b-afe51a0e6cdc",
+    "question": "IHostedService và BackgroundService là gì? Khi nào dùng để chạy tác vụ nền?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96551-ihostedservice-va-backgroundservice-la-gi-khi-nao-dung-de-chay-tac-vu-nen",
+    "slug": "ihostedservice-va-backgroundservice-la-gi-khi-nao-dung-de-chay-tac-vu-nen-a23b6908-3a02-5e36-957b-afe51a0e6cdc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng cho: polling queue, dọn dữ liệu định kỳ, warm-up cache, consumer message broker."
+      ],
+      "details": [
+        "Lưu ý:\n- Phải tôn trọng stoppingToken, nếu không host sẽ chờ đủ shutdown timeout rồi kill.\n- Exception không bắt trong ExecuteAsync mặc định làm dừng cả host từ .NET 6 trở đi — bọc try/catch và log.\n- Worker sống trong process của web app, nên scale-out nhiều instance sẽ chạy trùng job; cần khoá phân tán hoặc tách thành worker service riêng."
+      ],
+      "points": [],
+      "sections": [
+        "IHostedService là hợp đồng cho công việc chạy theo vòng đời của host: StartAsync được gọi khi app khởi động, StopAsync khi app tắt (graceful shutdown). BackgroundService là lớp trừu tượng dựng sẵn trên IHostedService, chỉ cần override ExecuteAsync."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "public class OrderCleanupWorker : BackgroundService\n{\n    protected override async Task ExecuteAsync(CancellationToken stoppingToken)\n    {\n        while (!stoppingToken.IsCancellationRequested)\n        {\n            await DoWorkAsync(stoppingToken);\n            await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken);\n        }\n    }\n}\n\nbuilder.Services.AddHostedService<OrderCleanupWorker>();"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "96551-ihostedservice-va-backgroundservice-la-gi-khi-nao-dung-de-chay-tac-vu-nen"
+  },
+  {
+    "id": "d70ac9e3-c1b7-546c-9c62-2385dd41e0c7",
+    "question": "Options pattern là gì? IOptions, IOptionsSnapshot và IOptionsMonitor khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96552-options-pattern-la-gi-ioptions-ioptionssnapshot-va-ioptionsmonitor-khac-nhau-the",
+    "slug": "options-pattern-la-gi-ioptions-ioptionssnapshot-va-ioptionsmonitor-khac-nhau-the-nao-d70ac9e3-c1b7-546c-9c62-2385dd41e0c7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba interface khác nhau ở lifetime và khả năng nhận thay đổi:"
+      ],
+      "details": [
+        "Thêm .ValidateDataAnnotations().ValidateOnStart() để app fail ngay lúc khởi động nếu cấu hình thiếu, thay vì lỗi khi request đầu tiên chạy vào."
+      ],
+      "points": [
+        "IOptions<T>: singleton, đọc một lần lúc app khởi động, không nhận cấu hình đổi sau đó. Mặc định dùng cái này.",
+        "IOptionsMonitor<T>",
+        ".CurrentValue",
+        "BackgroundService",
+        "IOptionsSnapshot<T>: scoped, tính lại một lần mỗi request nên nhận được giá trị mới khi file config reload. Không inject được vào singleton."
+      ],
+      "sections": [
+        "Options pattern bind một section trong appsettings.json vào class strongly-typed rồi inject qua DI, thay vì đọc IConfiguration[\"Key:SubKey\"] bằng chuỗi khắp nơi."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "builder.Services.Configure<MailOptions>(\n    builder.Configuration.GetSection(\"Mail\"));\n\npublic class MailSender(IOptions<MailOptions> options)\n{\n    private readonly MailOptions _opt = options.Value;\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "96552-options-pattern-la-gi-ioptions-ioptionssnapshot-va-ioptionsmonitor-khac-nhau-the"
+  },
+  {
+    "id": "4d7514fa-bea6-5562-8ac5-90f5a12f7f76",
+    "question": "Nullable reference types (#nullable enable) là gì? Toán tử ! dùng để làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96553-nullable-reference-types-nullable-enable-la-gi-toan-tu-dung-de-lam-gi",
+    "slug": "nullable-reference-types-nullable-enable-la-gi-toan-tu-dung-de-lam-gi-4d7514fa-bea6-5562-8ac5-90f5a12f7f76",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Nullable reference types là tính năng phân tích tĩnh lúc biên dịch giúp giảm NullReferenceException.",
+        "Mấu chốt hay bị hỏi: đây chỉ là warning, không phải error, và không có gì thay đổi lúc runtime — không có kiểm tra null nào được sinh thêm. Dữ liệu từ ngoài (JSON, DB, reflection) vẫn có thể đưa null vào một biến khai báo không-null."
+      ],
+      "details": [
+        "Khi bật (<Nullable>enable</Nullable> trong csproj — mặc định của project mới), compiler coi mọi reference type là không được null, muốn cho phép null thì khai báo string?.",
+        "Toán tử ! (null-forgiving) tắt cảnh báo cho một biểu thức: user!.Name nghĩa là \"tôi bảo đảm chỗ này không null\". Nó không sinh ra kiểm tra nào, chỉ đổi trạng thái null trong phân tích của compiler — dùng bừa là quay lại đúng bug cũ. Chỉ dùng khi bạn chắc chắn nhưng không diễn đạt được qua kiểu, ví dụ sau một hàm kiểm tra tuỳ biến.",
+        "Muốn ép nghiêm ngặt thì bật <WarningsAsErrors>Nullable</WarningsAsErrors>."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "string name = null;      // warning CS8600\nstring? maybe = null;    // fine\nint length = maybe.Length;   // warning CS8602: possible dereference of null"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "96553-nullable-reference-types-nullable-enable-la-gi-toan-tu-dung-de-lam-gi"
+  },
+  {
+    "id": "917224e3-7ff7-55c0-878a-403a3b3fe0e8",
+    "question": "Bạn dùng những lệnh nào để thêm, áp dụng và gỡ một migration trong EF Core? Muốn quay lui về migration trước thì làm sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96600-ban-dung-nhung-lenh-nao-de-them-ap-dung-va-go-mot-migration-trong-ef-core-muon-q",
+    "slug": "ban-dung-nhung-lenh-nao-de-them-ap-dung-va-go-mot-migration-trong-ef-core-muon-quay-lui-ve-migration-917224e3-7ff7-55c0-878a-403a3b3fe0e8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Quay lui: database update nhận tên migration đích.",
+        "Thứ tự quan trọng: migrations remove chỉ xoá được migration chưa apply. Nếu đã apply mà xoá file trước, model snapshot lệch với DB và lần add sau sẽ sinh migration sai."
+      ],
+      "details": [
+        "Đưa tên migration trước cái muốn bỏ, EF sẽ chạy phần Down():",
+        "Với production, đừng gỡ migration đã chạy — viết một migration mới đảo lại thay đổi. Deploy thường dùng dotnet ef migrations script --idempotent để sinh script SQL cho DBA duyệt thay vì chạy database update trực tiếp."
+      ],
+      "points": [],
+      "sections": [
+        "Bốn lệnh cơ bản của dotnet ef:"
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "dotnet ef migrations add AddOrderTable   # scaffold migration from model diff\ndotnet ef database update                # apply all pending migrations\ndotnet ef migrations list                # show applied / pending\ndotnet ef migrations remove              # delete the LAST migration (must be unapplied)"
+        },
+        {
+          "language": "BASH",
+          "code": "dotnet ef database update AddCustomerTable   # roll back to this point\ndotnet ef migrations remove                  # now safe to delete the reverted file\ndotnet ef database update 0                  # revert everything"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "96600-ban-dung-nhung-lenh-nao-de-them-ap-dung-va-go-mot-migration-trong-ef-core-muon-q"
+  },
+  {
+    "id": "05461b9d-cb6b-54c2-9b68-e3d67dcf06fa",
+    "question": "Vì sao AddDbContext đăng ký DbContext theo lifetime scoped? Đăng ký singleton thì hỏng ở đâu?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96601-vi-sao-adddbcontext-dang-ky-dbcontext-theo-lifetime-scoped-dang-ky-singleton-thi",
+    "slug": "vi-sao-adddbcontext-dang-ky-dbcontext-theo-lifetime-scoped-dang-ky-singleton-thi-hong-o-dau-05461b9d-cb6b-54c2-9b68-e3d67dcf06fa",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "AddDbContext mặc định là scoped vì một DbContext được thiết kế cho một đơn vị công việc ngắn: mở, đọc/ghi, SaveChanges, rồi dispose. Trong web app, đơn vị đó khớp đúng với một HTTP request.",
+        "Hệ quả: một service singleton không được inject DbContext trực tiếp — đó là lỗi captive dependency."
+      ],
+      "details": [
+        "Singleton hỏng ở ba điểm:",
+        "Trong trường hợp đó dùng IDbContextFactory<T> hoặc IServiceScopeFactory để tạo scope riêng."
+      ],
+      "points": [
+        "Không thread-safe. DbContext không hỗ trợ nhiều thao tác chạy song song. Hai request đồng thời dùng chung instance sẽ ném InvalidOperationException: A second operation was started on this context instance before a previous operation completed.",
+        "Change tracker tích luỹ vô hạn. Mọi entity đã query đều bị giữ lại, bộ nhớ tăng dần và các query sau chậm dần vì phải quét snapshot."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "builder.Services.AddDbContext<AppDbContext>(o => o.UseNpgsql(cs)); // scoped"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "96601-vi-sao-adddbcontext-dang-ky-dbcontext-theo-lifetime-scoped-dang-ky-singleton-thi"
+  },
+  {
+    "id": "34db9856-c30c-59ee-b8ca-c4c7da965fa7",
+    "question": "Vì sao nên Select sang DTO thay vì trả thẳng entity từ Web API?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96602-vi-sao-nen-select-sang-dto-thay-vi-tra-thang-entity-tu-web-api",
+    "slug": "vi-sao-nen-select-sang-dto-thay-vi-tra-thang-entity-tu-web-api-34db9856-c30c-59ee-b8ca-c4c7da965fa7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai lý do, một về hiệu năng và một về hợp đồng API.",
+        "Hợp đồng API: entity là mô hình của DB, DTO là mô hình của API. Trả entity làm rò rỉ cột nội bộ (PasswordHash, IsDeleted, khoá ngoại) và biến mọi thay đổi schema thành breaking change cho client. Ngoài ra navigation property hai chiều dễ gây vòng lặp khi serialize JSON."
+      ],
+      "details": [
+        "Hiệu năng: trả entity buộc EF SELECT toàn bộ cột, kể cả Description dài hay cột byte[] không ai dùng. Projection sinh SQL chỉ lấy cột cần và không đưa entity vào change tracker, nên nhẹ hơn hẳn.",
+        "Lưu ý: projection cho ra object không được track, nên chỉ hợp cho luồng đọc. Khi cần cập nhật thì query entity bình thường."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "var items = await db.Orders\n    .Where(o => o.CustomerId == id)\n    .Select(o => new OrderSummaryDto(o.Id, o.Total, o.Customer.Name))\n    .ToListAsync();"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "96602-vi-sao-nen-select-sang-dto-thay-vi-tra-thang-entity-tu-web-api"
+  },
+  {
+    "id": "d4e5a33f-96be-51d9-a4b0-1909d60eb7f2",
+    "question": "Trong Web API, [ApiController] xử lý validation thế nào? Có cần tự kiểm tra ModelState.IsValid nữa không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96603-trong-web-api-apicontroller-xu-ly-validation-the-nao-co-can-tu-kiem-tra-modelsta",
+    "slug": "trong-web-api-apicontroller-xu-ly-validation-the-nao-co-can-tu-kiem-tra-modelstate-isvalid-nua-khong-d4e5a33f-96be-51d9-a4b0-1909d60eb7f2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Body trả về là ValidationProblemDetails (RFC 7807) với dictionary errors map tên field sang danh sách lỗi — client parse được theo chuẩn."
+      ],
+      "details": [
+        "Khi controller có [ApiController], ASP.NET Core tự gắn ModelStateInvalidFilter: nếu model binding hoặc data annotation thất bại, framework trả 400 ngay và action không chạy.",
+        "Muốn đổi định dạng lỗi thì cấu hình InvalidModelStateResponseFactory; muốn tắt hẳn thì SuppressModelStateInvalidFilter = true rồi tự kiểm ModelState.",
+        "Lưu ý phạm vi: filter này chỉ bắt lỗi cú pháp/format (thiếu field, sai kiểu, ngoài range). Luật nghiệp vụ như \"mã khách hàng phải tồn tại\" vẫn phải kiểm trong service và trả 400/409 thủ công."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "public record CreateOrderDto(\n    [Required] string CustomerCode,\n    [Range(1, 100)] int Quantity);\n\n[ApiController]\n[Route(\"api/orders\")]\npublic class OrdersController : ControllerBase\n{\n    [HttpPost]\n    public async Task<IActionResult> Create(CreateOrderDto dto)\n    {\n        // ModelState is guaranteed valid here\n    }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "96603-trong-web-api-apicontroller-xu-ly-validation-the-nao-co-can-tu-kiem-tra-modelsta"
+  },
+  {
+    "id": "71bb6773-bec0-5c66-b7a0-c5b4fb9f335f",
+    "question": "Abstract class là gì và khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2714-abstract-class-la-gi-va-khi-nao-nen-dung",
+    "slug": "abstract-class-la-gi-va-khi-nao-nen-dung-71bb6773-bec0-5c66-b7a0-c5b4fb9f335f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Abstract class là class được đánh dấu abstract, không thể tạo instance trực tiếp và được dùng làm base class để các class con kế thừa.",
+        "Lỗi thường gặp:\n- Cố gắng new PaymentProcessor(...) -> lỗi compile.\n- Quên override abstract member -> subclass vẫn là abstract, không tạo được instance.\n- Đặt logic quá nhiều vào abstract class khiến hệ thống phân cấp cứng nhắc, khó thay đổi; lúc này composition hoặc interface linh hoạt hơn.\n- Nhầm lẫn abstract với virtual: virtual đã có implementation và có thể không override, abstract thì bắt buộc."
+      ],
+      "details": [
+        "Hãy hình dung nó như bản thiết kế khung của một dòng sản phẩm: phần móng, khung, hệ thống điện nước đã làm sẵn (concrete members và state), nhưng một số phòng để trống và yêu cầu đội thi công sau phải hoàn thiện theo đúng quy cách (abstract members).",
+        "Về cơ chế, compiler chặn new trên abstract class. Class này có thể chứa field, property, constructor, concrete method, virtual method, và abstract method/property (chỉ khai báo chữ ký, không có body). Class con bắt buộc override tất cả abstract member thì mới trở thành concrete và tạo được instance. Vì C# chỉ cho single inheritance với class, một class chỉ kế thừa được một abstract class nhưng có thể implement nhiều interface. Constructor của abstract class không dùng để tạo object trực tiếp mà được gọi qua base() khi khởi tạo subclass để thiết lập state chung.",
+        "Lưu ý: Dùng abstract class khi các class có quan hệ is-a rõ ràng và cần chia sẻ state/logic chung; dùng interface khi bạn cần định nghĩa capability cho nhiều nhánh class không liên quan hoặc cần đa kế thừa về hành vi."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "abstract class PaymentProcessor\n{\n    protected readonly string MerchantId; // state chung\n    protected PaymentProcessor(string merchantId) => MerchantId = merchantId;\n\n    public void Log(string msg) => Console.WriteLine($\"[{MerchantId}] {msg}\"); // logic dùng chung\n\n    public abstract Task<bool> ChargeAsync(decimal amount); // buộc subclass định nghĩa\n}\n\nclass MomoProcessor : PaymentProcessor\n{\n    public MomoProcessor(string id) : base(id) {}\n    public override Task<bool> ChargeAsync(decimal amount) => Task.FromResult(true);\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "2714-abstract-class-la-gi-va-khi-nao-nen-dung"
+  },
+  {
+    "id": "8abec919-6df5-5008-9074-fae37df04201",
+    "question": "Abstract class và interface khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2715-abstract-class-va-interface-khac-nhau-nhu-the-nao",
+    "slug": "abstract-class-va-interface-khac-nhau-nhu-the-nao-8abec919-6df5-5008-9074-fae37df04201",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Abstract class có constructor, fields, và có thể mix abstract/concrete methods."
+      ],
+      "details": [],
+      "points": [
+        "Interface (trước C# 8) là pure contract chỉ chứa abstract members.",
+        "Một class chỉ kế thừa được một abstract class nhưng có thể implement nhiều interface."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "2715-abstract-class-va-interface-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "e2247457-6bbd-560c-ab44-317f25a28098",
+    "question": "Record trong C# là gì và khác class như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2717-record-trong-c-la-gi-va-khac-class-nhu-the-nao",
+    "slug": "record-trong-c-la-gi-va-khac-class-nhu-the-nao-e2247457-6bbd-560c-ab44-317f25a28098",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Record (C# 9+) là immutable reference type với equality dựa trên giá trị field, không phải tham chiếu — hai record có cùng giá trị được coi là bằng nhau."
+      ],
+      "details": [],
+      "points": [
+        "Record có cú pháp ngắn gọn với positional parameters và tự động implement GetHashCode() cùng Equals().",
+        "Dùng record cho DTOs, value objects và domain model immutable."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "2717-record-trong-c-la-gi-va-khac-class-nhu-the-nao"
+  },
+  {
+    "id": "615c7441-2c68-587a-81bd-34f5e95afee8",
+    "question": "Interface là gì và C# hỗ trợ multiple inheritance như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2718-interface-la-gi-va-c-ho-tro-multiple-inheritance-nhu-the-nao",
+    "slug": "interface-la-gi-va-c-ho-tro-multiple-inheritance-nhu-the-nao-615c7441-2c68-587a-81bd-34f5e95afee8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Interface là một contract chỉ định các method/property mà class phải implement."
+      ],
+      "details": [],
+      "points": [
+        "C# không hỗ trợ kế thừa nhiều class nhưng cho phép implement nhiều interface.",
+        "Điều này giúp đạt được polymorphism trên các type không liên quan nhau."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "2718-interface-la-gi-va-c-ho-tro-multiple-inheritance-nhu-the-nao"
+  },
+  {
+    "id": "b907ebad-d318-55a2-b203-d1fb3915b9f6",
+    "question": "Extension method là gì trong C#?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2719-extension-method-la-gi-trong-c",
+    "slug": "extension-method-la-gi-trong-c-b907ebad-d318-55a2-b203-d1fb3915b9f6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Extension method cho phép thêm method mới vào class đã có mà không cần subclass hay sửa source code."
+      ],
+      "details": [],
+      "points": [
+        "Khai báo chúng là static trong static class: public static void CustomMethod(this MyClass obj) {}.",
+        "Extension method hữu ích để thêm functionality cho third-party types hoặc framework types và hỗ trợ method chaining."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "2719-extension-method-la-gi-trong-c"
+  },
+  {
+    "id": "fb34e339-96ab-595a-b475-2deaef70c78e",
+    "question": "Generics trong C# là gì và tại sao quan trọng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2720-generics-trong-c-la-gi-va-tai-sao-quan-trong",
+    "slug": "generics-trong-c-la-gi-va-tai-sao-quan-trong-fb34e339-96ab-595a-b475-2deaef70c78e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Generics cung cấp code type-safe và có thể tái dùng thông qua cú pháp <T>: List<int>, Dictionary<string, object>."
+      ],
+      "details": [],
+      "points": [
+        "Chúng loại bỏ boxing/unboxing overhead, cho phép kiểm tra kiểu tại compile-time và cải thiện hiệu năng đáng kể.",
+        "Dùng generics để tạo containers và methods linh hoạt hoạt động được với nhiều kiểu dữ liệu trong khi vẫn đảm bảo type safety."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "2720-generics-trong-c-la-gi-va-tai-sao-quan-trong"
+  },
+  {
+    "id": "8edd9f57-46e1-542e-b75d-2c52e3866d17",
+    "question": "Property khác field như thế nào trong C#?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2722-property-khac-field-nhu-the-nao-trong-c",
+    "slug": "property-khac-field-nhu-the-nao-trong-c-8edd9f57-46e1-542e-b75d-2c52e3866d17",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Property cung cấp quyền truy cập có kiểm soát vào private field thông qua get/set accessors, thực thi encapsulation."
+      ],
+      "details": [],
+      "points": [
+        "Field là biến member trực tiếp.",
+        "{ get; set; }",
+        "Property cho phép validation, computed values và change notification."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "2722-property-khac-field-nhu-the-nao-trong-c"
+  },
+  {
+    "id": "85bcf6b8-52c5-5e20-8e8c-13da90664a6e",
+    "question": "LINQ là gì và có những ưu điểm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2723-linq-la-gi-va-co-nhung-uu-diem-gi",
+    "slug": "linq-la-gi-va-co-nhung-uu-diem-gi-85bcf6b8-52c5-5e20-8e8c-13da90664a6e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "LINQ (Language Integrated Query) thống nhất cách truy vấn các nguồn dữ liệu khác nhau (collections, database, XML) bằng cú pháp nhất quán."
+      ],
+      "details": [
+        "Ưu điểm: type safety tại compile-time, IntelliSense hỗ trợ, query dễ đọc như SQL, giảm boilerplate. Hỗ trợ cả method syntax và query syntax — compiler chuyển đổi cả hai thành biểu diễn nội tại giống nhau."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "2723-linq-la-gi-va-co-nhung-uu-diem-gi"
+  },
+  {
+    "id": "1e577c42-7998-5a02-8fa4-afd88c87aa35",
+    "question": "IEnumerable và IQueryable khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2724-ienumerable-va-iqueryable-khac-nhau-nhu-the-nao",
+    "slug": "ienumerable-va-iqueryable-khac-nhau-nhu-the-nao-1e577c42-7998-5a02-8fa4-afd88c87aa35",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "IEnumerable<T> hoạt động trên in-memory collections, tải toàn bộ dữ liệu rồi mới filter (LINQ to Objects). IQueryable<T> nhắm vào nguồn dữ liệu remote (database), xây dựng expression tree và thực thi filter tại nguồn để tiết kiệm băng thông."
+      ],
+      "details": [
+        "Dùng IQueryable cho dataset lớn; dùng IEnumerable cho collections đã có sẵn trong bộ nhớ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "2724-ienumerable-va-iqueryable-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "5e1f1027-ea4a-51a3-a1e0-f69c05449aa5",
+    "question": "Deferred execution và immediate execution trong LINQ là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2725-deferred-execution-va-immediate-execution-trong-linq-la-gi",
+    "slug": "deferred-execution-va-immediate-execution-trong-linq-la-gi-5e1f1027-ea4a-51a3-a1e0-f69c05449aa5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Deferred execution trì hoãn việc thực thi query cho đến khi dữ liệu thực sự được truy cập — var result = collection.Where(x => x > 5) chưa chạy cho đến khi bạn iterate hoặc gọi ToList()."
+      ],
+      "details": [],
+      "points": [
+        "Immediate execution chạy ngay lập tức: ToList(), ToArray(), Count(), First().",
+        "Hầu hết LINQ operators dùng deferred execution."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "2725-deferred-execution-va-immediate-execution-trong-linq-la-gi"
+  },
+  {
+    "id": "ce16d4b8-6d24-540d-9b15-de723e093dd2",
+    "question": "Query syntax và method syntax trong LINQ khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2726-query-syntax-va-method-syntax-trong-linq-khac-nhau-nhu-the-nao",
+    "slug": "query-syntax-va-method-syntax-trong-linq-khac-nhau-nhu-the-nao-ce16d4b8-6d24-540d-9b15-de723e093dd2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Query syntax trông giống SQL: var result = from x in list where x > 5 select x;."
+      ],
+      "details": [
+        "Method syntax dùng lambda expressions:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "var result = list.Where(x => x > 5).Select(x => x);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "2726-query-syntax-va-method-syntax-trong-linq-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "03317be1-73f0-5de5-bd91-125ef4ebc955",
+    "question": "N+1 query problem là gì và giải quyết như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2727-n-1-query-problem-la-gi-va-giai-quyet-nhu-the-nao",
+    "slug": "n-1-query-problem-la-gi-va-giai-quyet-nhu-the-nao-03317be1-73f0-5de5-bd91-125ef4ebc955",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "N+1 xảy ra khi một query tải parent records, rồi với mỗi parent lại có thêm một query riêng để tải children (1 + N queries)."
+      ],
+      "details": [],
+      "points": [
+        "Lazy loading trong Entity Framework hay gây ra vấn đề này.",
+        "Giải quyết bằng eager loading: .Include() cho quan hệ trực tiếp, .ThenInclude() cho quan hệ lồng nhau."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "2727-n-1-query-problem-la-gi-va-giai-quyet-nhu-the-nao"
+  },
+  {
+    "id": "d5c1515c-ce93-5c0f-8ac5-576214f240cf",
+    "question": "GroupBy trong LINQ hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2728-groupby-trong-linq-hoat-dong-nhu-the-nao",
+    "slug": "groupby-trong-linq-hoat-dong-nhu-the-nao-d5c1515c-ce93-5c0f-8ac5-576214f240cf",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "GroupBy tổ chức các phần tử theo một key, trả về các group mà mỗi group chứa key và các element tương ứng: students.GroupBy(s => s.Department)."
+      ],
+      "details": [],
+      "points": [
+        "Hỗ trợ grouping theo nhiều key thông qua anonymous object: students.GroupBy(s => new { s.Department, s.Year }).",
+        "Kết quả có thể được tổng hợp thêm bằng Count(), Sum() hoặc Select() trên từng group."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "2728-groupby-trong-linq-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "f8083f1b-a6fa-5bed-96e3-709b5a575eee",
+    "question": "Select và SelectMany khác nhau như thế nào trong LINQ?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2729-select-va-selectmany-khac-nhau-nhu-the-nao-trong-linq",
+    "slug": "select-va-selectmany-khac-nhau-nhu-the-nao-trong-linq-f8083f1b-a6fa-5bed-96e3-709b5a575eee",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Select chiếu mỗi phần tử sang dạng mới (quan hệ 1-1). SelectMany làm phẳng các nested collections thành một sequence duy nhất (1-nhiều): students.SelectMany(s => s.Subjects) gộp tất cả danh sách subject thành một. Select giữ nguyên cấu trúc phân cấp; SelectMany xóa bỏ nesting — hữu ích khi cần flatten collection lồng nhau."
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "2729-select-va-selectmany-khac-nhau-nhu-the-nao-trong-linq"
+  },
+  {
+    "id": "b6cbe18f-da11-535b-8847-3510f80583b3",
+    "question": "AsNoTracking() là gì và khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2730-asnotracking-la-gi-va-khi-nao-nen-dung",
+    "slug": "asnotracking-la-gi-va-khi-nao-nen-dung-b6cbe18f-da11-535b-8847-3510f80583b3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "AsNoTracking() tắt change tracking của Entity Framework cho các entity được truy vấn."
+      ],
+      "details": [],
+      "points": [
+        "Mặc định, EF theo dõi mọi entity để phát hiện thay đổi khi SaveChanges() được gọi — điều này tiêu tốn bộ nhớ và CPU.",
+        "Với các query read-only, dùng .AsNoTracking() để cải thiện hiệu năng và giảm memory usage."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "2730-asnotracking-la-gi-va-khi-nao-nen-dung"
+  },
+  {
+    "id": "015384b8-a6e1-5098-8a10-626fd1a6092e",
+    "question": "Async/await khác multithreading truyền thống như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2731-async-await-khac-multithreading-truyen-thong-nhu-the-nao",
+    "slug": "async-await-khac-multithreading-truyen-thong-nhu-the-nao-015384b8-a6e1-5098-8a10-626fd1a6092e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Async/await xử lý I/O operations hiệu quả mà không block thread — thread được giải phóng trong lúc chờ và được trả lại thread pool."
+      ],
+      "details": [],
+      "points": [
+        "Multithreading tạo thread mới (tốn khoảng 1MB stack mỗi thread).",
+        "Async phù hợp và scalable hơn cho I/O-bound work (web request, database calls)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "2731-async-await-khac-multithreading-truyen-thong-nhu-the-nao"
+  },
+  {
+    "id": "fb3854e8-3453-54c9-ba20-a76e126cceb3",
+    "question": "Tại sao nên tránh blocking calls như .Result và .Wait()?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2732-tai-sao-nen-tranh-blocking-calls-nhu-result-va-wait",
+    "slug": "tai-sao-nen-tranh-blocking-calls-nhu-result-va-wait-fb3854e8-3453-54c9-ba20-a76e126cceb3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Các blocking call như .Result dừng thread hiện tại lại để chờ task hoàn thành."
+      ],
+      "details": [],
+      "points": [
+        "Trong UI app (WPF, WinForms) hoặc classic ASP.NET (có SynchronizationContext), nếu continuation của task cần dùng đúng thread đó thì cả hai cùng chờ nhau — deadlock thường gặp.",
+        "Lưu ý: ASP.NET Core (Kestrel) KHÔNG cài SynchronizationContext nên deadlock này không xảy ra ở đó — nhưng vẫn nên tránh .Result vì block thread pool."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "2732-tai-sao-nen-tranh-blocking-calls-nhu-result-va-wait"
+  },
+  {
+    "id": "fd652fee-52a5-5713-8181-0a69c63b314a",
+    "question": "ConfigureAwait(false) là gì và khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2733-configureawait-false-la-gi-va-khi-nao-nen-dung",
+    "slug": "configureawait-false-la-gi-va-khi-nao-nen-dung-fd652fee-52a5-5713-8181-0a69c63b314a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "ConfigureAwait(false) báo cho async runtime không cần resume trên synchronization context đã được capture."
+      ],
+      "details": [],
+      "points": [
+        "Điều này quan trọng trong library code và services nơi không cần thread affinity.",
+        "Lý do chính trong code hiện đại: tránh context-switching overhead và là \"good library citizen\" — không bắt context của caller."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "2733-configureawait-false-la-gi-va-khi-nao-nen-dung"
+  },
+  {
+    "id": "bdb26dde-ba58-54c0-afc1-2adff7bc8c92",
+    "question": "Race condition là gì và làm thế nào để ngăn chặn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2734-race-condition-la-gi-va-lam-the-nao-de-ngan-chan",
+    "slug": "race-condition-la-gi-va-lam-the-nao-de-ngan-chan-bdb26dde-ba58-54c0-afc1-2adff7bc8c92",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Race condition xảy ra khi nhiều thread truy cập shared data đồng thời và tạo ra kết quả không thể đoán trước."
+      ],
+      "details": [],
+      "points": [
+        "Ngăn chặn bằng các synchronization primitives: câu lệnh lock, Interlocked operations, hoặc immutable data structures.",
+        "Dùng volatile cho single fields cần visibility."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "2734-race-condition-la-gi-va-lam-the-nao-de-ngan-chan"
+  },
+  {
+    "id": "245e942f-680d-583b-b959-67928ba03a98",
+    "question": "Task và Thread khác nhau như thế nào trong C#?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2735-task-va-thread-khac-nhau-nhu-the-nao-trong-c",
+    "slug": "task-va-thread-khac-nhau-nhu-the-nao-trong-c-245e942f-680d-583b-b959-67928ba03a98",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Thread là OS construct cấp thấp tiêu tốn tài nguyên đáng kể (~1MB stack)."
+      ],
+      "details": [],
+      "points": [
+        "Task là abstraction cấp cao đại diện cho công việc bất đồng bộ, được tối ưu cho I/O.",
+        "Task dùng thread pool để hiệu quả hơn. Task.Run() tạo background task từ thread pool."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "2735-task-va-thread-khac-nhau-nhu-the-nao-trong-c"
+  },
+  {
+    "id": "ae1d43af-859e-53ba-b0bd-d45c6f2f7725",
+    "question": "Fire-and-forget task là gì và tại sao nguy hiểm?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2737-fire-and-forget-task-la-gi-va-tai-sao-nguy-hiem",
+    "slug": "fire-and-forget-task-la-gi-va-tai-sao-nguy-hiem-ae1d43af-859e-53ba-b0bd-d45c6f2f7725",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Fire-and-forget task thực thi mà không được await: _ = someAsync();."
+      ],
+      "details": [],
+      "points": [
+        "Nguy hiểm vì exceptions biến mất trong im lặng, gây ra lỗi rất khó debug.",
+        "TaskScheduler.UnobservedTaskException",
+        "Luôn capture task result hoặc await."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "2737-fire-and-forget-task-la-gi-va-tai-sao-nguy-hiem"
+  },
+  {
+    "id": "609d108f-388f-5d24-a2ad-9eca7023ea06",
+    "question": "Làm thế nào để hủy đúng cách một async operation trong C#?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2739-lam-the-nao-de-huy-dung-cach-mot-async-operation-trong-c",
+    "slug": "lam-the-nao-de-huy-dung-cach-mot-async-operation-trong-c-609d108f-388f-5d24-a2ad-9eca7023ea06",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Truyền CancellationToken vào các async methods và kiểm tra token.IsCancellationRequested định kỳ."
+      ],
+      "details": [],
+      "points": [
+        "Ném OperationCanceledException khi phát hiện cancellation.",
+        "Gọi cts.Cancel() để báo hiệu hủy bỏ; dùng cts.CancelAfter(TimeSpan) cho timeout tự động."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "2739-lam-the-nao-de-huy-dung-cach-mot-async-operation-trong-c"
+  },
+  {
+    "id": "a4eb01f5-a995-51fc-8fcf-2e1445f846c2",
+    "question": "Lazy loading và eager loading trong Entity Framework khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2741-lazy-loading-va-eager-loading-trong-entity-framework-khac-nhau-nhu-the-nao",
+    "slug": "lazy-loading-va-eager-loading-trong-entity-framework-khac-nhau-nhu-the-nao-a4eb01f5-a995-51fc-8fcf-2e1445f846c2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Lazy loading tự động tải related data khi được truy cập — customer.Orders kích hoạt một query khi truy cập."
+      ],
+      "details": [],
+      "points": [
+        "Cần bật qua UseLazyLoadingProxies().",
+        "Eager loading tải dữ liệu trước bằng .Include(c => c.Orders), giảm số query."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "2741-lazy-loading-va-eager-loading-trong-entity-framework-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "c41e87ac-86ab-56c3-8f91-04ffbd603f9b",
+    "question": "Migrations trong Entity Framework là gì và hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2742-migrations-trong-entity-framework-la-gi-va-hoat-dong-nhu-the-nao",
+    "slug": "migrations-trong-entity-framework-la-gi-va-hoat-dong-nhu-the-nao-c41e87ac-86ab-56c3-8f91-04ffbd603f9b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Migration theo dõi thay đổi schema database dưới dạng C# code."
+      ],
+      "details": [],
+      "points": [
+        "Tạo migration bằng Add-Migration MigrationName sau khi thay đổi model.",
+        "Update-Database",
+        "Migration sinh ra method Up() (áp dụng thay đổi) và Down() (rollback)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "2742-migrations-trong-entity-framework-la-gi-va-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "8d81c450-cc62-53ef-940f-2ba984d93e38",
+    "question": "DbContext là gì và nó quản lý những gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2744-dbcontext-la-gi-va-no-quan-ly-nhung-gi",
+    "slug": "dbcontext-la-gi-va-no-quan-ly-nhung-gi-8d81c450-cc62-53ef-940f-2ba984d93e38",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "DbContext đại diện cho một session với database, quản lý entity instances, change tracking và SaveChanges()."
+      ],
+      "details": [],
+      "points": [
+        "Nó theo dõi tất cả entities đã tải (added, modified, deleted).",
+        "Implement IDisposable — luôn dùng using statement."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "2744-dbcontext-la-gi-va-no-quan-ly-nhung-gi"
+  },
+  {
+    "id": "91a779d2-cded-529e-aaea-9b9f9d6f8a67",
+    "question": "Explicit loading trong EF Core là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2746-explicit-loading-trong-ef-core-la-gi",
+    "slug": "explicit-loading-trong-ef-core-la-gi-91a779d2-cded-529e-aaea-9b9f9d6f8a67",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Explicit loading tải related data thủ công sau khi đã tải parent: context.Entry(order).Reference(o => o.Customer).Load() cho single reference hoặc context.Entry(order).Collection(o => o.Items).Load() cho collection."
+      ],
+      "details": [],
+      "points": [
+        "Cung cấp kiểm soát chính xác — chỉ tải khi thực sự cần, tiết kiệm bandwidth.",
+        "Tuy nhiên chậm hơn eager loading nếu cuối cùng cần tải tất cả."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "2746-explicit-loading-trong-ef-core-la-gi"
+  },
+  {
+    "id": "39191bd9-3fac-56e9-b5d7-914b558d4544",
+    "question": "Add, Update, và Attach trong EF Core khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2748-add-update-va-attach-trong-ef-core-khac-nhau-nhu-the-nao",
+    "slug": "add-update-va-attach-trong-ef-core-khac-nhau-nhu-the-nao-39191bd9-3fac-56e9-b5d7-914b558d4544",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Add() đánh dấu entity là mới (INSERT khi SaveChanges). Update() đánh dấu là đã sửa đổi (UPDATE). Attach() thêm vào context mà không đánh dấu modified — chỉ lưu khi properties thực sự thay đổi."
+      ],
+      "details": [
+        "Dùng Add cho entity mới, Update cho detached entity cần thay thế toàn bộ, Attach cho batch updates có chọn lọc."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "2748-add-update-va-attach-trong-ef-core-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "477214df-a655-5119-89ea-f92d64339ddb",
+    "question": "Change tracking trong EF Core là gì và khi nào nên tắt?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2750-change-tracking-trong-ef-core-la-gi-va-khi-nao-nen-tat",
+    "slug": "change-tracking-trong-ef-core-la-gi-va-khi-nao-nen-tat-477214df-a655-5119-89ea-f92d64339ddb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Change tracking theo dõi các entity đã tải, phát hiện sửa đổi trong quá trình SaveChanges()."
+      ],
+      "details": [],
+      "points": [
+        "Tính năng này tiêu tốn bộ nhớ và xử lý.",
+        "ExecuteUpdate()",
+        "ExecuteDelete()",
+        "SaveChanges()",
+        "Tắt bằng .AsNoTracking() khi đọc dữ liệu mà không có ý định sửa."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "2750-change-tracking-trong-ef-core-la-gi-va-khi-nao-nen-tat"
+  },
+  {
+    "id": "e404a1e1-cc08-55d5-b401-edfaaad51593",
+    "question": "Middleware trong ASP.NET Core là gì và hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2751-middleware-trong-asp-net-core-la-gi-va-hoat-dong-nhu-the-nao",
+    "slug": "middleware-trong-asp-net-core-la-gi-va-hoat-dong-nhu-the-nao-e404a1e1-cc08-55d5-b401-edfaaad51593",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Middleware là các C# class xử lý HTTP request/response theo pipeline."
+      ],
+      "details": [],
+      "points": [
+        "Mỗi middleware nhận request, có thể sửa đổi nó, chuyển tiếp cho middleware tiếp theo qua next(), rồi xử lý response trên đường về.",
+        "Middleware phổ biến: authentication, authorization, logging, CORS."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "2751-middleware-trong-asp-net-core-la-gi-va-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "20e0ad52-33fb-52d4-b7d7-e22126753e13",
+    "question": "Dependency Injection trong ASP.NET Core là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2752-dependency-injection-trong-asp-net-core-la-gi",
+    "slug": "dependency-injection-trong-asp-net-core-la-gi-20e0ad52-33fb-52d4-b7d7-e22126753e13",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dependency Injection cung cấp cho object các dependency của nó thông qua constructor thay vì tự tạo."
+      ],
+      "details": [],
+      "points": [
+        "ASP.NET Core có built-in IoC container (IServiceProvider).",
+        "Đăng ký service trong Program.cs: services.AddScoped<IService, Service>()."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "2752-dependency-injection-trong-asp-net-core-la-gi"
+  },
+  {
+    "id": "63e4b726-ec28-514d-8548-6bb93c876612",
+    "question": "3 lifetime của Dependency Injection trong ASP.NET Core là gì và dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2753-3-lifetime-cua-dependency-injection-trong-asp-net-core-la-gi-va-dung-khi-nao",
+    "slug": "3-lifetime-cua-dependency-injection-trong-asp-net-core-la-gi-va-dung-khi-nao-63e4b726-ec28-514d-8548-6bb93c876612",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "ASP.NET Core hỗ trợ ba lifetime, lựa chọn theo đặc tính stateful của service."
+      ],
+      "details": [
+        "Không bao giờ inject Scoped vào Singleton — gây \"captive dependency\" bug nghiêm trọng (xem #2775)."
+      ],
+      "points": [
+        "Transient: instance mới mỗi lần resolve — stateless utilities, helper",
+        "Scoped: cùng instance trong một HTTP request — DbContext, UnitOfWork"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "2753-3-lifetime-cua-dependency-injection-trong-asp-net-core-la-gi-va-dung-khi-nao"
+  },
+  {
+    "id": "44b5359a-493a-584a-8c56-33bdc4d8a2fc",
+    "question": "Routing trong ASP.NET Core hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2754-routing-trong-asp-net-core-hoat-dong-nhu-the-nao",
+    "slug": "routing-trong-asp-net-core-hoat-dong-nhu-the-nao-44b5359a-493a-584a-8c56-33bdc4d8a2fc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Routing ánh xạ HTTP request đến controller action."
+      ],
+      "details": [],
+      "points": [
+        "Có hai cách: conventional routing dùng pattern định sẵn ({controller}/{action}/{id}) và attribute routing dùng [Route] attribute trực tiếp trên controller/action.",
+        "Attribute routing cho kiểm soát chi tiết hơn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "2754-routing-trong-asp-net-core-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "a2b3b4de-6ef1-5626-91d3-c64a6b33f1ae",
+    "question": "Model binding trong ASP.NET Core là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2755-model-binding-trong-asp-net-core-la-gi",
+    "slug": "model-binding-trong-asp-net-core-la-gi-a2b3b4de-6ef1-5626-91d3-c64a6b33f1ae",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Model binding tự động chuyển đổi HTTP request data (form fields, route data, query strings, JSON body) thành .NET objects."
+      ],
+      "details": [],
+      "points": [
+        "Bind form fields vào action parameters theo tên, JSON body vào complex types, route parameters vào action parameters.",
+        "Dùng [FromBody], [FromRoute], [FromQuery] để chỉ định nguồn rõ ràng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "2755-model-binding-trong-asp-net-core-la-gi"
+  },
+  {
+    "id": "b86dc93d-eee4-5cdd-850e-ba151dce693f",
+    "question": "HttpContext là gì và cách sử dụng như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2757-httpcontext-la-gi-va-cach-su-dung-nhu-the-nao",
+    "slug": "httpcontext-la-gi-va-cach-su-dung-nhu-the-nao-b86dc93d-eee4-5cdd-850e-ba151dce693f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "HttpContext đóng gói thông tin HTTP request/response, có thể truy cập qua ControllerBase.HttpContext hoặc IHttpContextAccessor."
+      ],
+      "details": [],
+      "points": [
+        "Truy cập request properties: Request.Headers, Request.Query, Request.Path, User identity.",
+        "Dùng cho các thao tác context-specific như set response headers, đọc user claims, hay truyền dữ liệu qua request pipeline."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": "2757-httpcontext-la-gi-va-cach-su-dung-nhu-the-nao"
+  },
+  {
+    "id": "4becea82-462d-5be5-a774-12da66edb7e4",
+    "question": "IActionResult và ActionResult<T> khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2758-iactionresult-va-actionresult-t-khac-nhau-nhu-the-nao",
+    "slug": "iactionresult-va-actionresult-t-khac-nhau-nhu-the-nao-4becea82-462d-5be5-a774-12da66edb7e4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "IActionResult là interface cho tất cả action return types. ActionResult là implementation non-generic. ActionResult<T> cho phép trả về cả typed response thành công lẫn error results."
+      ],
+      "details": [],
+      "points": [
+        "Các implementation phổ biến: OkObjectResult (200), NotFoundResult (404), BadRequestResult (400), CreatedAtActionResult (201).",
+        "Dùng ActionResult<T> trong Web API để đặc tả rõ kiểu trả về."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "2758-iactionresult-va-actionresult-t-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "847f015e-7b85-5a6f-835d-9d27ba48cab0",
+    "question": "Làm thế nào để implement authentication và authorization trong ASP.NET Core?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2760-lam-the-nao-de-implement-authentication-va-authorization-trong-asp-net-core",
+    "slug": "lam-the-nao-de-implement-authentication-va-authorization-trong-asp-net-core-847f015e-7b85-5a6f-835d-9d27ba48cab0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Authentication xác minh danh tính người dùng; authorization kiểm tra quyền hạn."
+      ],
+      "details": [],
+      "points": [
+        "Dùng AddAuthentication() để đăng ký auth scheme (JWT, cookies, OAuth) và AddAuthorization() để cấu hình policies.",
+        "Middleware: app.UseAuthentication() phải đặt trước app.UseAuthorization() — thứ tự quan trọng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "2760-lam-the-nao-de-implement-authentication-va-authorization-trong-asp-net-core"
+  },
+  {
+    "id": "8084edfb-f7ea-5dd4-93f4-97a8e76d7fed",
+    "question": "Primary constructor trong C# 12 là gì và nó giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2761-primary-constructor-trong-c-12-la-gi-va-no-giai-quyet-van-de-gi",
+    "slug": "primary-constructor-trong-c-12-la-gi-va-no-giai-quyet-van-de-gi-8084edfb-f7ea-5dd4-93f4-97a8e76d7fed",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Primary constructor cho phép khai báo tham số constructor trực tiếp trên class/struct: public class Person(string name, int age) {}. Các tham số này có phạm vi dùng được trong toàn bộ class body. Giúp loại bỏ boilerplate khởi tạo field lặp đi lặp lại, code gọn hơn cho data class. Không chỉ dành cho record — từ C# 12 áp dụng cho mọi class/struct."
+      ],
+      "details": [
+        "Lưu ý: compiler không tự tạo backing field trong non-record class, cần tự gán tham số vào field khi cần lưu trữ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": "2761-primary-constructor-trong-c-12-la-gi-va-no-giai-quyet-van-de-gi"
+  },
+  {
+    "id": "7d662e14-1182-5dc6-81d8-17582b04d2e8",
+    "question": "Minimal APIs trong .NET 8 là gì và khi nào nên dùng thay controller?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2765-minimal-apis-trong-net-8-la-gi-va-khi-nao-nen-dung-thay-controller",
+    "slug": "minimal-apis-trong-net-8-la-gi-va-khi-nao-nen-dung-thay-controller-7d662e14-1182-5dc6-81d8-17582b04d2e8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Minimal APIs khai báo HTTP endpoint trực tiếp trong Program.cs mà không cần class controller: app.MapPost(\"/users\", handler)."
+      ],
+      "details": [],
+      "points": [
+        "Phù hợp cho microservice nhỏ, REST API đơn giản vì ít boilerplate. .NET 8 cung cấp Minimal APIs tương thích AOT.",
+        "Giới hạn: ít cấu trúc hơn cho ứng dụng phức tạp."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": "2765-minimal-apis-trong-net-8-la-gi-va-khi-nao-nen-dung-thay-controller"
+  },
+  {
+    "id": "ff50b3c0-57b1-50bb-9617-f0378f695e65",
+    "question": "Blazor với render modes thống nhất là gì và điểm khác biệt so với Blazor Server và WebAssembly truyền thống?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2766-blazor-voi-render-modes-thong-nhat-la-gi-va-diem-khac-biet-so-voi-blazor-server",
+    "slug": "blazor-voi-render-modes-thong-nhat-la-gi-va-diem-khac-biet-so-voi-blazor-server-va-webassembly-truye-ff50b3c0-57b1-50bb-9617-f0378f695e65",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Blazor với render modes thống nhất (từ .NET 8+) kết hợp server-side và WebAssembly rendering trong cùng một ứng dụng — render phía server ban đầu để tải nhanh, sau đó chuyển sang WebAssembly phía client cho tương tác."
+      ],
+      "details": [],
+      "points": [
+        "Một codebase duy nhất xử lý cả hai mô hình.",
+        "Giải quyết bài toán \"phải chọn Blazor Server hoặc WebAssembly\"."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": "2766-blazor-voi-render-modes-thong-nhat-la-gi-va-diem-khac-biet-so-voi-blazor-server"
+  },
+  {
+    "id": "f2cc981f-9170-5c33-8fe1-f0a997590d3b",
+    "question": "Health Checks trong ASP.NET Core là gì và tại sao cần thiết cho ứng dụng cloud?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2771-health-checks-trong-asp-net-core-la-gi-va-tai-sao-can-thiet-cho-ung-dung-cloud",
+    "slug": "health-checks-trong-asp-net-core-la-gi-va-tai-sao-can-thiet-cho-ung-dung-cloud-f2cc981f-9170-5c33-8fe1-f0a997590d3b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Health checks expose trạng thái ứng dụng qua HTTP endpoint (/health)."
+      ],
+      "details": [
+        "Cấu hình:"
+      ],
+      "points": [
+        "Implement IHealthCheck: trả về HealthCheckResult.Healthy/Degraded/Unhealthy.",
+        "Container orchestrator (Kubernetes) dùng liveness probe (có nên restart?) và readiness probe (có nhận traffic?)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "builder.Services.AddHealthChecks().AddDbContextCheck<MyDbContext>()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": "2771-health-checks-trong-asp-net-core-la-gi-va-tai-sao-can-thiet-cho-ung-dung-cloud"
+  },
+  {
+    "id": "70b071fb-45a9-5bf4-b300-1e1780ce9256",
+    "question": "Keyed Services ([FromKeyedServices]) trong .NET 8 giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2774-keyed-services-fromkeyedservices-trong-net-8-giai-quyet-van-de-gi",
+    "slug": "keyed-services-fromkeyedservices-trong-net-8-giai-quyet-van-de-gi-70b071fb-45a9-5bf4-b300-1e1780ce9256",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khi có nhiều implementation của cùng một interface, DI truyền thống chỉ resolve được implementation cuối đăng ký."
+      ],
+      "details": [
+        "Keyed services cho phép đặt tên:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "services.AddKeyedScoped<INotifier, EmailNotifier>(\"email\")"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": "2774-keyed-services-fromkeyedservices-trong-net-8-giai-quyet-van-de-gi"
+  },
+  {
+    "id": "f5a8c47e-46fd-5d05-b148-1e31ca1efb2b",
+    "question": "Boxing và unboxing là gì? Chi phí của chúng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94020-boxing-va-unboxing-la-gi-chi-phi-cua-chung",
+    "slug": "boxing-va-unboxing-la-gi-chi-phi-cua-chung-f5a8c47e-46fd-5d05-b148-1e31ca1efb2b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Chi phí:\n- Boxing cấp phát bộ nhớ trên heap → tạo áp lực cho GC.\n- Unboxing tốn một lần kiểm tra kiểu; sai kiểu ném InvalidCastException."
+      ],
+      "details": [
+        "Boxing hay xảy ra âm thầm khi đưa value type vào API kiểu object (vd ArrayList, string.Format). Tránh nó bằng generics (List<int> thay ArrayList) để giữ dữ liệu ở dạng value type, không cấp phát heap."
+      ],
+      "points": [],
+      "sections": [
+        "Boxing là việc gói một value type (int, struct...) vào một object trên heap để coi nó như reference type. Unboxing là thao tác ngược lại: lấy value type ra khỏi box, cần ép kiểu tường minh và phải đúng kiểu gốc."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "int n = 42;\nobject boxed = n;        // boxing: cấp phát trên heap, copy giá trị vào\nint back = (int)boxed;   // unboxing: kiểm tra kiểu + copy ra"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": "94020-boxing-va-unboxing-la-gi-chi-phi-cua-chung"
+  },
+  {
+    "id": "916b258c-7dcc-593d-aa09-e2ff69fb6546",
+    "question": "Delegate là gì? Multicast delegate hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94021-delegate-la-gi-multicast-delegate-hoat-dong-the-nao",
+    "slug": "delegate-la-gi-multicast-delegate-hoat-dong-the-nao-916b258c-7dcc-593d-aa09-e2ff69fb6546",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Delegate là một kiểu an toàn kiểu (type-safe) trỏ tới một hoặc nhiều method có cùng chữ ký.",
+        "Multicast: một delegate có thể giữ danh sách nhiều method (invocation list)."
+      ],
+      "details": [
+        "Nó cho phép truyền method như một tham số — nền tảng của callback, event và LINQ.",
+        "Dùng += để thêm, -= để bớt; khi gọi, tất cả chạy theo thứ tự đăng ký.",
+        "Nếu một method trong chuỗi ném exception, các method còn lại không chạy. Func<>, Action<>, Predicate<> là các delegate dựng sẵn của .NET."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "Action<string> log = Console.WriteLine;\nlog(\"hello\");            // gọi qua delegate"
+        },
+        {
+          "language": "CSHARP",
+          "code": "Action pipe = () => Console.Write(\"A\");\npipe += () => Console.Write(\"B\");\npipe();                  // in \"AB\""
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": "94021-delegate-la-gi-multicast-delegate-hoat-dong-the-nao"
+  },
+  {
+    "id": "ff10f463-94e8-5cd8-872a-322bcaacd137",
+    "question": "Dispose khác Finalize thế nào? IDisposable và using dùng ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94023-dispose-khac-finalize-the-nao-idisposable-va-using-dung-ra-sao",
+    "slug": "dispose-khac-finalize-the-nao-idisposable-va-using-dung-ra-sao-ff10f463-94e8-5cd8-872a-322bcaacd137",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai đều để dọn tài nguyên, khác nhau ở thời điểm và ai gọi:",
+        "Dispose pattern chuẩn: Dispose() giải phóng cả managed lẫn unmanaged rồi gọi GC.SuppressFinalize(this) để bỏ qua finalizer (vì đã dọn tay)."
+      ],
+      "details": [
+        "using đảm bảo Dispose() luôn được gọi kể cả khi có exception:",
+        "Chỉ viết finalizer khi class trực tiếp giữ tài nguyên unmanaged."
+      ],
+      "points": [
+        "Finalize (viết dưới dạng destructor ~T()): do GC gọi, không xác định thời điểm. Chỉ là lưới an toàn để giải phóng tài nguyên unmanaged nếu lập trình viên quên. Làm chậm GC → hạn chế dùng.",
+        "Dispose (interface IDisposable): bạn gọi một cách xác định, ngay khi dùng xong (file, socket, DB connection)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "using (var file = File.OpenText(\"a.txt\"))\n{\n    // ...\n}   // Dispose() gọi tự động ở đây\n\nusing var conn = new SqlConnection(cs);   // cú pháp using declaration (C# 8+)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": "94023-dispose-khac-finalize-the-nao-idisposable-va-using-dung-ra-sao"
+  },
+  {
+    "id": "37216ddd-73cd-5085-9108-a2ebfffa350e",
+    "question": "ref, out và in khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94024-ref-out-va-in-khac-nhau-the-nao",
+    "slug": "ref-out-va-in-khac-nhau-the-nao-37216ddd-73cd-5085-9108-a2ebfffa350e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả ba đều truyền tham số theo tham chiếu (không copy), khác ở hướng dữ liệu và ràng buộc khởi tạo:"
+      ],
+      "details": [],
+      "points": [
+        "ref: cần truyền vào rồi lấy ra giá trị đã đổi (vd hoán đổi).",
+        "out: chỉ để trả nhiều giá trị ra ngoài — kinh điển là mẫu Try... (int.TryParse)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "void Swap(ref int a, ref int b) { (a, b) = (b, a); }\nbool TryParse(string s, out int value) { value = 0; /* ... */ return true; }\ndouble Length(in Vector3 v) => Math.Sqrt(v.X*v.X + v.Y*v.Y + v.Z*v.Z); // v không sửa được"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": "94024-ref-out-va-in-khac-nhau-the-nao"
+  },
+  {
+    "id": "8c37b5cf-0083-5e20-905c-7c3df7b26ad3",
+    "question": "virtual, override và new khác nhau thế nào trong việc ghi đè method?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94028-virtual-override-va-new-khac-nhau-the-nao-trong-viec-ghi-de-method",
+    "slug": "virtual-override-va-new-khac-nhau-the-nao-trong-viec-ghi-de-method-8c37b5cf-0083-5e20-905c-7c3df7b26ad3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba từ khóa quyết định method nào chạy khi gọi qua tham chiếu lớp cha:"
+      ],
+      "details": [],
+      "points": [
+        "virtual: đánh dấu method của lớp cha cho phép ghi đè.",
+        "override: lớp con thay thế thật sự method virtual → gọi qua tham chiếu cha vẫn chạy bản con (runtime dispatch = đa hình)."
+      ],
+      "sections": [
+        "Chốt: muốn đa hình thật (gọi qua kiểu cha vẫn ra hành vi con) thì cặp virtual/override. new chỉ để giấu method trùng tên và thường là dấu hiệu thiết kế cần xem lại."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "class Animal { public virtual string Speak() => \"...\"; }\nclass Dog : Animal { public override string Speak() => \"Gâu\"; }\nclass Cat : Animal { public new string Speak() => \"Meo\"; }\n\nAnimal d = new Dog();\nAnimal c = new Cat();\nd.Speak();   // \"Gâu\"  → override: chạy bản con\nc.Speak();   // \"...\"  → new: che, tham chiếu Animal chạy bản cha"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": "94028-virtual-override-va-new-khac-nhau-the-nao-trong-viec-ghi-de-method"
+  },
+  {
+    "id": "a4255b7f-6579-5197-998f-6a88e2d46faf",
+    "question": "Gọi 3 API độc lập thì dùng Task.WhenAll thế nào? Nếu 2 task cùng ném exception thì catch bắt được mấy cái?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96554-goi-3-api-doc-lap-thi-dung-task-whenall-the-nao-neu-2-task-cung-nem-exception-th",
+    "slug": "goi-3-api-doc-lap-thi-dung-task-whenall-the-nao-neu-2-task-cung-nem-exception-thi-catch-bat-duoc-may-a4255b7f-6579-5197-998f-6a88e2d46faf",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "await từng cái một là chạy tuần tự — tổng thời gian bằng tổng các lần chờ.",
+        "Về exception: task do WhenAll trả về giữ AggregateException chứa tất cả lỗi, nhưng await chỉ ném lại exception đầu tiên. Nếu 2 task cùng hỏng, catch chỉ thấy 1 cái, cái còn lại biến mất khỏi log."
+      ],
+      "details": [
+        "Muốn song song thì khởi động hết rồi mới await Task.WhenAll.",
+        "Muốn lấy đủ thì giữ biến task lại rồi đọc .Exception:"
+      ],
+      "points": [],
+      "sections": [
+        "Lưu ý thêm: chỉ song song hoá khi các lời gọi thật sự độc lập, và không dùng chung một DbContext cho nhiều task song song — DbContext không thread-safe."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "// sequential: ~300ms if each call takes 100ms\nvar a = await GetUserAsync(id);\nvar b = await GetOrdersAsync(id);\n\n// parallel: ~100ms\nvar userTask = GetUserAsync(id);\nvar orderTask = GetOrdersAsync(id);\nawait Task.WhenAll(userTask, orderTask);\nvar user = await userTask;   // already completed, just unwraps"
+        },
+        {
+          "language": "CSHARP",
+          "code": "var all = Task.WhenAll(userTask, orderTask);\ntry { await all; }\ncatch { foreach (var e in all.Exception!.InnerExceptions) _logger.LogError(e, \"sub-task failed\"); }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": "96554-goi-3-api-doc-lap-thi-dung-task-whenall-the-nao-neu-2-task-cung-nem-exception-th"
+  },
+  {
+    "id": "2b124329-35c1-5dea-a2b6-49881c5e2a00",
+    "question": "Nhận vào IEnumerable<T> rồi duyệt nó 2 lần thì chuyện gì xảy ra?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96555-nhan-vao-ienumerable-t-roi-duyet-no-2-lan-thi-chuyen-gi-xay-ra",
+    "slug": "nhan-vao-ienumerable-t-roi-duyet-no-2-lan-thi-chuyen-gi-xay-ra-2b124329-35c1-5dea-a2b6-49881c5e2a00",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Query LINQ chạy lazy: Where, Select chỉ mô tả phép biến đổi, dữ liệu chỉ được kéo ra khi có ai đó bắt đầu duyệt.",
+        "Nếu orders thực chất là db.Orders.Where(...) thì đoạn trên bắn 3 query xuống database. Nếu nguồn là một iterator yield return đọc file hoặc gọi API, chi phí nhân lên tương ứng; nguồn có side effect thì còn sai kết quả. Với nguồn chỉ duyệt được một lần (stream, IEnumerator thủ công) lần thứ hai có thể trả về rỗng."
+      ],
+      "details": [
+        "Mỗi lần duyệt là chạy lại toàn bộ nguồn.",
+        "Cách xử lý: vật chất hoá một lần rồi dùng lại.",
+        "Nguyên tắc thực dụng: nhận IEnumerable<T> ở tham số cho linh hoạt, nhưng nếu định dùng nhiều lần thì ToList() ngay đầu method; còn khi trả về từ tầng repository thì trả List<T>/IReadOnlyList<T> để caller không vô tình duyệt lại query."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "public void Report(IEnumerable<Order> orders)\n{\n    if (!orders.Any()) return;           // enumeration #1\n    var total = orders.Sum(o => o.Total); // enumeration #2\n    foreach (var o in orders) { }         // enumeration #3\n}"
+        },
+        {
+          "language": "CSHARP",
+          "code": "var list = orders as IReadOnlyList<Order> ?? orders.ToList();"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": "96555-nhan-vao-ienumerable-t-roi-duyet-no-2-lan-thi-chuyen-gi-xay-ra"
+  },
+  {
+    "id": "ccef8495-5b5f-56b0-a502-308378821a9c",
+    "question": "Vì sao phải tránh async void? Trường hợp nào được phép dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96556-vi-sao-phai-tranh-async-void-truong-hop-nao-duoc-phep-dung",
+    "slug": "vi-sao-phai-tranh-async-void-truong-hop-nao-duoc-phep-dung-ccef8495-5b5f-56b0-a502-308378821a9c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "async void có ba khác biệt so với async Task, cả ba đều bất lợi:",
+        "Ngoại lệ hợp lệ duy nhất: event handler, vì delegate của event có chữ ký trả void."
+      ],
+      "details": [
+        "1. Không await được — caller không có Task để chờ, nên method có thể vẫn đang chạy khi caller đã đi tiếp hoặc khi request đã kết thúc.\n2. Exception không bắt được bằng try/catch thông thường — với async Task, lỗi được gói vào Task; với async void, lỗi được ném thẳng lên SynchronizationContext đang hoạt động, thường dẫn tới crash process.\n3. Không test được — không có gì để await trong unit test.",
+        "Ngay cả khi đó vẫn nên bọc toàn bộ thân handler trong try/catch để lỗi không thoát ra ngoài.",
+        "Nếu thật sự cần fire-and-forget trong web API thì dùng cơ chế có kiểm soát (hàng đợi, BackgroundService, hoặc IHostApplicationLifetime) chứ không thả async void."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "async void FireAndForget() => throw new InvalidOperationException();\n\ntry { FireAndForget(); }\ncatch (Exception) { /* never reached — process may crash */ }"
+        },
+        {
+          "language": "CSHARP",
+          "code": "private async void OnSaveClicked(object sender, EventArgs e)\n{\n    try { await SaveAsync(); }\n    catch (Exception ex) { _logger.LogError(ex, \"save failed\"); }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": "96556-vi-sao-phai-tranh-async-void-truong-hop-nao-duoc-phep-dung"
+  },
+  {
+    "id": "102ccc3a-ea8f-5714-96bc-72df09ea1cbe",
+    "question": "Inject DbContext (scoped) thẳng vào BackgroundService thì gặp lỗi gì? Xử lý ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96557-inject-dbcontext-scoped-thang-vao-backgroundservice-thi-gap-loi-gi-xu-ly-ra-sao",
+    "slug": "inject-dbcontext-scoped-thang-vao-backgroundservice-thi-gap-loi-gi-xu-ly-ra-sao-102ccc3a-ea8f-5714-96bc-72df09ea1cbe",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "AddHostedService<T>() đăng ký worker dưới dạng singleton, và host không tạo scope nào cho nó.",
+        "(Thông báo này đến từ scope validation, mặc định bật ở môi trường Development.)"
+      ],
+      "details": [
+        "Inject thẳng một service scoped như DbContext sẽ ném ngay lúc khởi động:",
+        "Giả sử vượt được kiểm tra đó thì còn tệ hơn: DbContext sẽ sống suốt đời app, change tracker tích luỹ vô hạn, kết nối không được trả về pool, và nó không thread-safe. Đây chính là captive dependency.",
+        "Cách đúng: inject IServiceScopeFactory, tạo scope cho mỗi vòng lặp công việc và resolve trong scope đó."
+      ],
+      "points": [],
+      "sections": [
+        "Scope nằm trong vòng lặp, không nằm ngoài — mỗi lượt xử lý là một unit of work sạch, dispose xong thì trả kết nối."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "Cannot consume scoped service 'AppDbContext' from singleton 'IHostedService'"
+        },
+        {
+          "language": "CSHARP",
+          "code": "public class SyncWorker(IServiceScopeFactory scopeFactory) : BackgroundService\n{\n    protected override async Task ExecuteAsync(CancellationToken stoppingToken)\n    {\n        while (!stoppingToken.IsCancellationRequested)\n        {\n            await using var scope = scopeFactory.CreateAsyncScope();\n            var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();\n            await ProcessBatchAsync(db, stoppingToken);\n\n            await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);\n        }\n    }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": "96557-inject-dbcontext-scoped-thang-vao-backgroundservice-thi-gap-loi-gi-xu-ly-ra-sao"
+  },
+  {
+    "id": "cc0887ca-d5ca-559e-a9dc-82111321861f",
+    "question": "Vì sao không nên new HttpClient() trong mỗi request? IHttpClientFactory giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96558-vi-sao-khong-nen-new-httpclient-trong-moi-request-ihttpclientfactory-giai-quyet",
+    "slug": "vi-sao-khong-nen-new-httpclient-trong-moi-request-ihttpclientfactory-giai-quyet-van-de-gi-cc0887ca-d5ca-559e-a9dc-82111321861f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "HttpClient được thiết kế để dùng lại. Tạo mới rồi dispose theo từng request gây hai vấn đề đối nghịch nhau:"
+      ],
+      "details": [
+        "IHttpClientFactory quản lý vòng đời của HttpMessageHandler: pool và tái sử dụng handler, đồng thời xoay vòng theo HandlerLifetime (mặc định 2 phút) nên giải quyết cả hai. Kèm theo đó là cấu hình tập trung và chỗ để gắn DelegatingHandler (retry, auth header, logging)."
+      ],
+      "points": [
+        "Socket exhaustion: dispose không giải phóng socket ngay, kết nối nằm ở trạng thái TIME_WAIT vài phút. Tải cao thì cạn cổng khả dụng của OS, biểu hiện là SocketException dù service đích vẫn khoẻ.",
+        "Nhưng nếu chuyển sang một static HttpClient sống mãi thì gặp lỗi ngược: client chỉ resolve DNS lúc mở kết nối và không tôn trọng TTL, nên khi backend đổi IP (thường gặp khi deploy blue/green, load balancer đổi node) nó vẫn gọi vào IP cũ."
+      ],
+      "sections": [
+        "Giải pháp thay thế nếu không muốn dùng factory: một HttpClient singleton với\nCopy\nSocketsHttpHandler { PooledConnectionLifetime = TimeSpan.FromMinutes(2) }"
+      ],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "builder.Services.AddHttpClient<PaymentClient>(c =>\n{\n    c.BaseAddress = new Uri(\"https://api.partner.vn/\");\n    c.Timeout = TimeSpan.FromSeconds(10);\n});\n\npublic class PaymentClient(HttpClient http) { /* injected, do not dispose */ }"
+        },
+        {
+          "language": "CSHARP",
+          "code": "SocketsHttpHandler { PooledConnectionLifetime = TimeSpan.FromMinutes(2) }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": "96558-vi-sao-khong-nen-new-httpclient-trong-moi-request-ihttpclientfactory-giai-quyet"
+  },
+  {
+    "id": "d694cf39-a5cd-5f69-b13f-cae1f267eeee",
+    "question": "Trong ASP.NET Core, CancellationToken khai báo ở action đến từ đâu và nên truyền tới đâu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96559-trong-asp-net-core-cancellationtoken-khai-bao-o-action-den-tu-dau-va-nen-truyen",
+    "slug": "trong-asp-net-core-cancellationtoken-khai-bao-o-action-den-tu-dau-va-nen-truyen-toi-dau-d694cf39-a5cd-5f69-b13f-cae1f267eeee",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Nguyên tắc: truyền token xuống tận đáy — EF Core (ToListAsync(ct)), HttpClient, Redis, file I/O. Nếu chỉ nhận rồi bỏ đó thì user huỷ request nhưng server vẫn chạy hết query nặng, tốn kết nối DB vô ích.",
+        "Hai lưu ý khi vận hành:\n- Khi bị huỷ, lời gọi ném OperationCanceledException. Đừng log nó ở mức Error — client huỷ là chuyện bình thường, log Error sẽ làm nhiễu cảnh báo.\n- Không truyền request token vào công việc phải hoàn tất (ghi audit log, publish message sau khi commit) — client ngắt kết nối sẽ cắt ngang giữa chừng."
+      ],
+      "details": [
+        "Cần ghép thêm timeout của riêng service thì tạo linked token:"
+      ],
+      "points": [],
+      "sections": [
+        "Khai báo tham số CancellationToken ở action hoặc minimal API endpoint thì model binding tự gán HttpContext.RequestAborted — token này bị huỷ khi client ngắt kết nối (đóng tab, timeout, huỷ request)."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "[HttpGet(\"reports\")]\npublic async Task<IActionResult> GetReport(CancellationToken ct)\n{\n    var rows = await _db.Orders.Where(o => o.IsPaid).ToListAsync(ct);\n    var res  = await _http.GetAsync(\"https://api.partner.vn/rate\", ct);\n    return Ok(rows);\n}"
+        },
+        {
+          "language": "CSHARP",
+          "code": "using var cts = CancellationTokenSource.CreateLinkedTokenSource(ct);\ncts.CancelAfter(TimeSpan.FromSeconds(5));\nvar data = await _slowApi.FetchAsync(cts.Token);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": "96559-trong-asp-net-core-cancellationtoken-khai-bao-o-action-den-tu-dau-va-nen-truyen"
+  },
+  {
+    "id": "658ab33b-d277-5d36-b4c0-5e6cac63ef4e",
+    "question": "Vì sao không nên viết _logger.LogInformation($\"User {userId} da dang nhap\")?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96560-vi-sao-khong-nen-viet-logger-loginformation-user-userid-da-dang-nhap",
+    "slug": "vi-sao-khong-nen-viet-logger-loginformation-user-userid-da-dang-nhap-658ab33b-d277-5d36-b4c0-5e6cac63ef4e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì string interpolation làm mất structured logging và làm mất luôn tối ưu theo log level.",
+        "Điểm thứ hai về hiệu năng: với template, chuỗi chỉ được dựng khi level đó thật sự bật; với $\"...\" chuỗi luôn được dựng, kể cả khi log Debug đang tắt ở production."
+      ],
+      "details": [
+        "API logging của .NET nhận message template cùng danh sách tham số. Provider (Serilog, OpenTelemetry, Application Insights) lưu template và từng cặp tên–giá trị riêng, nhờ vậy bạn truy vấn được userId = 42 trên hệ thống tập trung. Nếu nội suy sẵn thành chuỗi, log chỉ còn một câu văn phẳng, không lọc được, và mỗi lần gọi là một chuỗi khác nhau nên không nhóm được theo sự kiện.",
+        "Analyzer CA2254 bắt đúng lỗi này. Với đường log nóng, dùng source generator [LoggerMessage] để loại bỏ cả boxing lẫn cấp phát.",
+        "Lưu ý placeholder trong template khớp theo thứ tự, không theo tên — đặt sai thứ tự tham số là ghi nhầm giá trị."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "// bad: value baked into the message, string built even when Information is off\n_logger.LogInformation($\"User {userId} logged in from {ip}\");\n\n// good: template stays constant, values captured as named properties\n_logger.LogInformation(\"User {UserId} logged in from {Ip}\", userId, ip);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": "96560-vi-sao-khong-nen-viet-logger-loginformation-user-userid-da-dang-nhap"
+  },
+  {
+    "id": "024cb330-1f0d-57e2-9c8f-309da457fb21",
+    "question": "Cartesian explosion trong EF Core là gì? AsSplitQuery() giải quyết ra sao và đánh đổi là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96604-cartesian-explosion-trong-ef-core-la-gi-assplitquery-giai-quyet-ra-sao-va-danh-d",
+    "slug": "cartesian-explosion-trong-ef-core-la-gi-assplitquery-giai-quyet-ra-sao-va-danh-doi-la-gi-024cb330-1f0d-57e2-9c8f-309da457fb21",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Mọi cột của Blogs bị lặp lại 100 lần trên đường truyền. Số bản ghi nhân lên theo tích, nên với dữ liệu thật thời gian và bộ nhớ tăng rất nhanh.",
+        "Đánh đổi: nhiều round-trip hơn tới DB, và các câu SQL không nằm trong cùng một transaction nên dữ liệu có thể không nhất quán nếu có ghi xen giữa. Với luồng đọc thuần thì hiếm khi là vấn đề; cần chắc chắn thì bọc trong transaction serializable."
+      ],
+      "details": [
+        "AsSplitQuery() bảo EF tách thành nhiều câu SQL — một cho entity gốc, một cho mỗi collection — rồi ghép ở client:",
+        "Quy tắc thực hành: một collection Include thì để single query; từ hai trở lên thì cân nhắc split. Có thể bật mặc định bằng UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery) và ghi đè từng query bằng AsSingleQuery()."
+      ],
+      "points": [],
+      "sections": [
+        "Khi một query Include từ hai collection navigation trở lên ở cùng cấp, EF dịch thành JOIN, và kết quả là tích Descartes của các collection đó."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "// blog with 10 posts and 10 contributors -> 100 rows for ONE blog\nvar blogs = await db.Blogs\n    .Include(b => b.Posts)\n    .Include(b => b.Contributors)\n    .ToListAsync();"
+        },
+        {
+          "language": "CSHARP",
+          "code": "var blogs = await db.Blogs\n    .Include(b => b.Posts)\n    .Include(b => b.Contributors)\n    .AsSplitQuery()\n    .ToListAsync();"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": "96604-cartesian-explosion-trong-ef-core-la-gi-assplitquery-giai-quyet-ra-sao-va-danh-d"
+  },
+  {
+    "id": "195f980e-78f8-5cba-88d8-6d6fb1bb891a",
+    "question": "Một API EF Core chậm bất thường, bạn nghi N+1. Phát hiện và xác nhận bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96605-mot-api-ef-core-cham-bat-thuong-ban-nghi-n-1-phat-hien-va-xac-nhan-bang-cach-nao",
+    "slug": "mot-api-ef-core-cham-bat-thuong-ban-nghi-n-1-phat-hien-va-xac-nhan-bang-cach-nao-195f980e-78f8-5cba-88d8-6d6fb1bb891a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Bước đầu là nhìn SQL thật, không đoán.",
+        "Dấu hiệu N+1 rất dễ nhận: sau một SELECT danh sách là hàng loạt SELECT giống hệt nhau chỉ khác giá trị tham số trong WHERE."
+      ],
+      "details": [
+        "EF Core có simple logging bật trong vài dòng:",
+        "EnableSensitiveDataLogging ghi cả giá trị tham số — hữu ích khi debug nhưng không bật ở production vì log sẽ chứa dữ liệu người dùng.",
+        "Nguyên nhân phổ biến nhất là lazy loading: mỗi lần chạm navigation property trong vòng lặp là một round-trip.",
+        "Ở production, nơi không bật log verbose được, dùng Microsoft.EntityFrameworkCore.Database.Command ở mức Information trong structured logging, hoặc APM (Application Insights, OpenTelemetry) để xem số DB call trên mỗi request."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "optionsBuilder\n    .LogTo(Console.WriteLine, LogLevel.Information)\n    .EnableSensitiveDataLogging();   // dev only"
+        },
+        {
+          "language": "CSHARP",
+          "code": "foreach (var order in orders)\n    total += order.Customer.Discount;   // one query per order"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 76,
+    "sourceSlug": "96605-mot-api-ef-core-cham-bat-thuong-ban-nghi-n-1-phat-hien-va-xac-nhan-bang-cach-nao"
+  },
+  {
+    "id": "a70b1b37-acb1-51ad-930c-1baa4fd0038f",
+    "question": "Khi cần chạy raw SQL trong EF Core, FromSql và FromSqlRaw khác nhau thế nào về an toàn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96606-khi-can-chay-raw-sql-trong-ef-core-fromsql-va-fromsqlraw-khac-nhau-the-nao-ve-an",
+    "slug": "khi-can-chay-raw-sql-trong-ef-core-fromsql-va-fromsqlraw-khac-nhau-the-nao-ve-an-toan-a70b1b37-acb1-51ad-930c-1baa4fd0038f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "FromSql (và FromSqlInterpolated) nhận chuỗi nội suy nhưng không nối chuỗi: mỗi {...} được EF chuyển thành một DbParameter riêng.",
+        "FromSqlRaw nhận chuỗi thô."
+      ],
+      "details": [
+        "Vì vậy nó an toàn trước SQL injection theo thiết kế.",
+        "Nếu nối biến vào chuỗi thì giá trị người dùng đi thẳng vào câu SQL — đây chính là lỗ hổng injection:",
+        "Ghi nhớ thực dụng: mặc định dùng FromSql; chỉ dùng FromSqlRaw khi phần SQL động là tên bảng/cột — mà tên bảng/cột thì không tham số hoá được, nên phải whitelist thay vì lấy trực tiếp từ input. Với câu không trả về entity, dùng ExecuteSqlAsync / SqlQuery<T>."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "var orders = await db.Orders\n    .FromSql($\"SELECT * FROM orders WHERE customer_code = {code}\")\n    .ToListAsync();\n// -> SELECT * FROM orders WHERE customer_code = @p0"
+        },
+        {
+          "language": "CSHARP",
+          "code": "// vulnerable\ndb.Orders.FromSqlRaw(\"SELECT * FROM orders WHERE customer_code = '\" + code + \"'\");\n\n// safe\ndb.Orders.FromSqlRaw(\"SELECT * FROM orders WHERE customer_code = {0}\", code);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 77,
+    "sourceSlug": "96606-khi-can-chay-raw-sql-trong-ef-core-fromsql-va-fromsqlraw-khac-nhau-the-nao-ve-an"
+  },
+  {
+    "id": "e1d1e385-a472-5d8d-887e-ae86fe86bc93",
+    "question": "Cần cập nhật trạng thái cho 100.000 bản ghi. ExecuteUpdate khác cách load rồi SaveChanges thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96608-can-cap-nhat-trang-thai-cho-100-000-ban-ghi-executeupdate-khac-cach-load-roi-sav",
+    "slug": "can-cap-nhat-trang-thai-cho-100-000-ban-ghi-executeupdate-khac-cach-load-roi-savechanges-the-nao-e1d1e385-a472-5d8d-887e-ae86fe86bc93",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cách truyền thống phải query 100.000 entity về, track hết trong change tracker rồi sinh 100.000 câu UPDATE. Tốn bộ nhớ và round-trip.",
+        "Ba điểm phải nhớ:"
+      ],
+      "details": [
+        "ExecuteUpdate dịch thẳng LINQ thành một câu UPDATE duy nhất, không load và không track gì:",
+        "Giới hạn: chỉ update/delete (insert vẫn cần Add + SaveChanges), mỗi lời gọi là một round-trip riêng, và chỉ hỗ trợ provider quan hệ."
+      ],
+      "points": [
+        "Chạy ngay lập tức, không đợi SaveChanges, và không tự mở transaction. Muốn gộp nhiều ExecuteUpdate thành atomic thì tự BeginTransaction.",
+        "Không đi qua change tracker. Entity đang được track vẫn giữ giá trị cũ; nếu sau đó gọi SaveChanges trên chính entity đó, giá trị cũ sẽ ghi đè kết quả bulk. Tránh trộn hai kiểu ghi trên cùng một entity trong một unit of work."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "await db.Orders\n    .Where(o => o.CreatedAt < cutoff && o.Status == OrderStatus.Pending)\n    .ExecuteUpdateAsync(s => s\n        .SetProperty(o => o.Status, OrderStatus.Expired)\n        .SetProperty(o => o.UpdatedAt, DateTime.UtcNow));"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 78,
+    "sourceSlug": "96608-can-cap-nhat-trang-thai-cho-100-000-ban-ghi-executeupdate-khac-cach-load-roi-sav"
+  },
+  {
+    "id": "bcfafbff-034f-59dd-89f3-1c72dc8ce9e4",
+    "question": "Seed dữ liệu ban đầu trong EF Core làm thế nào? HasData có hạn chế gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96609-seed-du-lieu-ban-dau-trong-ef-core-lam-the-nao-hasdata-co-han-che-gi",
+    "slug": "seed-du-lieu-ban-dau-trong-ef-core-lam-the-nao-hasdata-co-han-che-gi-bcfafbff-034f-59dd-89f3-1c72dc8ce9e4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "EF so sánh dữ liệu seed giữa hai lần migration để sinh insert/update/delete tương ứng — nghĩa là seed cũng được version hoá cùng schema."
+      ],
+      "details": [
+        "Hạn chế của HasData:\n- Bắt buộc chỉ định primary key tường minh, kể cả khi khoá là identity, vì EF cần biết dòng nào để update/delete ở migration sau.\n- Không dùng được navigation property; phải gán trực tiếp giá trị khoá ngoại.\n- Chỉ hợp dữ liệu tĩnh: không gọi được service, không hash password, không DateTime.Now (giá trị sẽ bị bake cứng vào file migration).",
+        "Từ EF Core 9, UseSeeding / UseAsyncSeeding (cấu hình trên DbContextOptionsBuilder) là cách được khuyến nghị cho seed động — code chạy khi khởi tạo context, gọi được DI, và được bảo vệ bởi cơ chế khoá migration nên nhiều instance khởi động cùng lúc không chèn trùng.",
+        "Thực tế hay dùng cả hai: HasData cho bảng tra cứu bất biến, UseAsyncSeeding cho dữ liệu cần logic."
+      ],
+      "points": [],
+      "sections": [
+        "HasData khai báo dữ liệu ngay trong model, và EF đưa nó vào migration dưới dạng InsertData/UpdateData:"
+      ],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "protected override void OnModelCreating(ModelBuilder b)\n{\n    b.Entity<Role>().HasData(\n        new Role { Id = 1, Code = \"ADMIN\" },\n        new Role { Id = 2, Code = \"USER\" });\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 79,
+    "sourceSlug": "96609-seed-du-lieu-ban-dau-trong-ef-core-lam-the-nao-hasdata-co-han-che-gi"
+  },
+  {
+    "id": "a494a9f3-a77e-535b-9a52-6672ee7fc1e6",
+    "question": "Bạn thiết kế xử lý lỗi toàn cục cho Web API thế nào để client luôn nhận một format lỗi nhất quán?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96610-ban-thiet-ke-xu-ly-loi-toan-cuc-cho-web-api-the-nao-de-client-luon-nhan-mot-form",
+    "slug": "ban-thiet-ke-xu-ly-loi-toan-cuc-cho-web-api-the-nao-de-client-luon-nhan-mot-format-loi-nhat-quan-a494a9f3-a77e-535b-9a52-6672ee7fc1e6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Các điểm cần nắm:\n- ProblemDetails là RFC 7807 — client có cấu trúc cố định (type, title, status, detail, instance) để parse, không phải mỗi endpoint một kiểu.\n- Có thể đăng ký nhiều handler, chúng chạy theo thứ tự đăng ký; trả false để nhường cho handler sau.\n- Handler có lifetime singleton — không inject dịch vụ scoped trực tiếp.\n- Không đưa ex.ToString() vào response ở production; log stack trace phía server, trả cho client một traceId để đối chiếu."
+      ],
+      "details": [
+        "So với middleware try/catch viết tay: cùng ý tưởng nhưng có sẵn tích hợp ProblemDetails và cơ chế chuỗi handler."
+      ],
+      "points": [],
+      "sections": [
+        "Từ .NET 8, cách chuẩn là IExceptionHandler kết hợp AddProblemDetails, thay cho việc rải try/catch trong controller."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "public sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger)\n    : IExceptionHandler\n{\n    public async ValueTask<bool> TryHandleAsync(\n        HttpContext ctx, Exception ex, CancellationToken ct)\n    {\n        logger.LogError(ex, \"Unhandled exception on {Path}\", ctx.Request.Path);\n\n        var problem = new ProblemDetails\n        {\n            Status = ex is NotFoundException ? StatusCodes.Status404NotFound\n                                             : StatusCodes.Status500InternalServerError,\n            Title = \"An error occurred\",\n            Instance = ctx.Request.Path,\n        };\n\n        ctx.Response.StatusCode = problem.Status.Value;\n        await ctx.Response.WriteAsJsonAsync(problem, ct);\n        return true;   // false -> pass to the next handler\n    }\n}\n\nbuilder.Services.AddProblemDetails();\nbuilder.Services.AddExceptionHandler<GlobalExceptionHandler>();\n// ...\napp.UseExceptionHandler();"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 80,
+    "sourceSlug": "96610-ban-thiet-ke-xu-ly-loi-toan-cuc-cho-web-api-the-nao-de-client-luon-nhan-mot-form"
+  },
+  {
+    "id": "b1f0c543-d171-53d3-bf60-eac8af77b736",
+    "question": "API đang chạy cần đổi response breaking mà không làm hỏng client cũ. Bạn versioning API thế nào trong ASP.NET Core?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96611-api-dang-chay-can-doi-response-breaking-ma-khong-lam-hong-client-cu-ban-versioni",
+    "slug": "api-dang-chay-can-doi-response-breaking-ma-khong-lam-hong-client-cu-ban-versioning-api-the-nao-trong-b1f0c543-d171-53d3-bf60-eac8af77b736",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng thư viện Asp.Versioning (trước là Microsoft.AspNetCore.Mvc.Versioning).",
+        "Ba chiến lược thường gặp:\n- URL segment (/api/v1/orders) — nhìn thấy ngay trong log và analytics, dễ test bằng bất kỳ HTTP client nào; đổi lại URL của cùng một resource thay đổi theo version.\n- Query string (/api/orders?api-version=1.0) — mặc định của thư viện, giữ nguyên đường dẫn resource, dễ thêm vào request có sẵn.\n- Header (X-Api-Version: 2) — URL sạch nhất, nhưng khó test bằng trình duyệt và dễ bị cache middleware bỏ qua nếu không khai Vary."
+      ],
+      "details": [
+        "Đăng ký một lần rồi chọn chiến lược đọc version.",
+        "Không có lựa chọn đúng tuyệt đối. Thực tế phổ biến nhất là URL segment vì rõ ràng khi vận hành. Đi kèm nên có Deprecated = true trên version cũ và ReportApiVersions để client biết version nào sắp gỡ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSHARP",
+          "code": "builder.Services.AddApiVersioning(o =>\n{\n    o.DefaultApiVersion = new ApiVersion(1, 0);\n    o.AssumeDefaultVersionWhenUnspecified = true;\n    o.ReportApiVersions = true;      // adds api-supported-versions header\n    o.ApiVersionReader = new UrlSegmentApiVersionReader();\n}).AddMvc();\n\n[ApiController]\n[ApiVersion(\"1.0\")]\n[ApiVersion(\"2.0\")]\n[Route(\"api/v{version:apiVersion}/orders\")]\npublic class OrdersController : ControllerBase\n{\n    [HttpGet, MapToApiVersion(\"2.0\")]\n    public Task<IActionResult> GetV2() => ...;\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 81,
+    "sourceSlug": "96611-api-dang-chay-can-doi-response-breaking-ma-khong-lam-hong-client-cu-ban-versioni"
+  },
+  {
+    "id": "6648c5ee-ec67-5295-a6b9-bd530629af15",
+    "question": "SynchronizationContext là gì và tại sao nó quan trọng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "synchronizationcontext-la-gi-va-tai-sao-no-quan-trong-6648c5ee-ec67-5295-a6b9-bd530629af15",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 82,
+    "sourceSlug": null
+  },
+  {
+    "id": "76353c7d-e3e5-58df-aa2a-ce650df716c3",
+    "question": "Khi nào nên dùng ValueTask thay vì Task?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-nen-dung-valuetask-thay-vi-task-76353c7d-e3e5-58df-aa2a-ce650df716c3",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 83,
+    "sourceSlug": null
+  },
+  {
+    "id": "3c8e7dc7-a697-50ee-887b-d2669e3a221a",
+    "question": "Làm thế nào để tối ưu EF Core queries cho performance?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-the-nao-de-toi-uu-ef-core-queries-cho-performance-3c8e7dc7-a697-50ee-887b-d2669e3a221a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 84,
+    "sourceSlug": null
+  },
+  {
+    "id": "1cb1f85e-fbd1-5d84-83fd-9ecf858d923c",
+    "question": "Làm thế nào để xử lý concurrency conflicts trong EF Core?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-the-nao-de-xu-ly-concurrency-conflicts-trong-ef-core-1cb1f85e-fbd1-5d84-83fd-9ecf858d923c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 85,
+    "sourceSlug": null
+  },
+  {
+    "id": "b345fa43-7ed7-50e7-b008-7687bf31dd89",
+    "question": "Làm thế nào để chạy migrations trong CI/CD pipeline production?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-the-nao-de-chay-migrations-trong-ci-cd-pipeline-production-b345fa43-7ed7-50e7-b008-7687bf31dd89",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 86,
+    "sourceSlug": null
+  },
+  {
+    "id": "0100cc14-9460-53bd-89cb-5e6954d3dd82",
+    "question": "Action filter và middleware khác nhau như thế nào trong ASP.NET Core?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "action-filter-va-middleware-khac-nhau-nhu-the-nao-trong-asp-net-core-0100cc14-9460-53bd-89cb-5e6954d3dd82",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 87,
+    "sourceSlug": null
+  },
+  {
+    "id": "632e0474-791d-5fe6-abd2-8980e9a32b86",
+    "question": "Native AOT compilation là gì và tại sao quan trọng cho cloud deployment?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "native-aot-compilation-la-gi-va-tai-sao-quan-trong-cho-cloud-deployment-632e0474-791d-5fe6-abd2-8980e9a32b86",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 88,
+    "sourceSlug": null
+  },
+  {
+    "id": "413f6532-983d-539e-af97-36cecd23513c",
+    "question": "YARP là gì và giải quyết vấn đề gì trong kiến trúc microservices?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "yarp-la-gi-va-giai-quyet-van-de-gi-trong-kien-truc-microservices-413f6532-983d-539e-af97-36cecd23513c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 89,
+    "sourceSlug": null
+  },
+  {
+    "id": "49008691-5436-56ef-a2a4-7ae83d355d0f",
+    "question": "gRPC và Minimal APIs khác nhau như thế nào khi dùng cho giao tiếp giữa các service?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "grpc-va-minimal-apis-khac-nhau-nhu-the-nao-khi-dung-cho-giao-tiep-giua-cac-service-49008691-5436-56ef-a2a4-7ae83d355d0f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 90,
+    "sourceSlug": null
+  },
+  {
+    "id": "0cddd76f-7b92-59fb-8a0b-e270c7c9a1dc",
+    "question": "CQRS là gì và khi nào nên kết hợp với MediatR?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cqrs-la-gi-va-khi-nao-nen-ket-hop-voi-mediatr-0cddd76f-7b92-59fb-8a0b-e270c7c9a1dc",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 91,
+    "sourceSlug": null
+  },
+  {
+    "id": "b8f84f55-961e-57f2-9726-f0d4d4ba991b",
+    "question": "MediatR pipeline behavior là gì và dùng để xử lý cross-cutting concerns như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mediatr-pipeline-behavior-la-gi-va-dung-de-xu-ly-cross-cutting-concerns-nhu-the-nao-b8f84f55-961e-57f2-9726-f0d4d4ba991b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 92,
+    "sourceSlug": null
+  },
+  {
+    "id": "64a5d5c4-8a4e-5a7f-ac2a-d44ef4cc6d88",
+    "question": "Captive dependency problem trong DI là gì và làm thế nào để tránh?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "captive-dependency-problem-trong-di-la-gi-va-lam-the-nao-de-tranh-64a5d5c4-8a4e-5a7f-ac2a-d44ef4cc6d88",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 93,
+    "sourceSlug": null
+  },
+  {
+    "id": "17b3873e-f870-5bd3-8c03-6975dabf64bb",
+    "question": "Event khác delegate như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "event-khac-delegate-nhu-the-nao-17b3873e-f870-5bd3-8c03-6975dabf64bb",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 94,
+    "sourceSlug": null
+  },
+  {
+    "id": "4d363f91-45d6-5422-9678-7594fd477672",
+    "question": "Reflection trong .NET là gì? Khi nào nên dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "reflection-trong-net-la-gi-khi-nao-nen-dung-4d363f91-45d6-5422-9678-7594fd477672",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 95,
+    "sourceSlug": null
+  },
+  {
+    "id": "2e201ee0-2a22-5921-ad5f-90aeb840ee13",
+    "question": "catch (Exception ex) when (cond) khác gì so với catch rồi kiểm tra điều kiện và throw;?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "catch-exception-ex-when-cond-khac-gi-so-voi-catch-roi-kiem-tra-dieu-kien-va-throw-2e201ee0-2a22-5921-ad5f-90aeb840ee13",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 96,
+    "sourceSlug": null
+  },
+  {
+    "id": "82d10459-8952-5fcb-92e1-02022eb70544",
+    "question": "Span<T> và Memory<T> là gì? Vì sao Span<T> không dùng được trong method async?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "span-t-va-memory-t-la-gi-vi-sao-span-t-khong-dung-duoc-trong-method-async-82d10459-8952-5fcb-92e1-02022eb70544",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 97,
+    "sourceSlug": null
+  },
+  {
+    "id": "d737bd56-a9f1-534c-a6b1-bd32deab7f44",
+    "question": "API .NET trên production latency tăng dần, thỉnh thoảng timeout nhưng CPU chỉ ~20%. Chẩn đoán thread pool starvation thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "api-net-tren-production-latency-tang-dan-thinh-thoang-timeout-nhung-cpu-chi-20-chan-doan-thread-pool-d737bd56-a9f1-534c-a6b1-bd32deab7f44",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 98,
+    "sourceSlug": null
+  },
+  {
+    "id": "7b5a7d15-3923-569e-97d2-e627e7c47021",
+    "question": "Vì sao Where(o => IsValid(o)) trên IQueryable của EF Core lại ném InvalidOperationException?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vi-sao-where-o-isvalid-o-tren-iqueryable-cua-ef-core-lai-nem-invalidoperationexception-7b5a7d15-3923-569e-97d2-e627e7c47021",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 99,
+    "sourceSlug": null
+  },
+  {
+    "id": "8d618f82-de17-5775-942f-ad3d87f30cc9",
+    "question": "Trả về IAsyncEnumerable<T> khác Task<List<T>> thế nào? [EnumeratorCancellation] để làm gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "tra-ve-iasyncenumerable-t-khac-task-list-t-the-nao-enumeratorcancellation-de-lam-gi-8d618f82-de17-5775-942f-ad3d87f30cc9",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 100,
+    "sourceSlug": null
+  },
+  {
+    "id": "41f631a5-a9b1-534a-b12f-dd4ef68313c2",
+    "question": "SaveChanges đã tự nằm trong transaction chưa? Khi nào phải BeginTransaction, và vì sao bật EnableRetryOnFailure lại làm BeginTransaction ném exception?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "savechanges-da-tu-nam-trong-transaction-chua-khi-nao-phai-begintransaction-va-vi-sao-bat-enableretry-41f631a5-a9b1-534a-b12f-dd4ef68313c2",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 101,
+    "sourceSlug": null
+  },
+  {
+    "id": "3c023efe-cc68-5c39-b1f5-5e4e22019060",
+    "question": "Hai dev cùng tạo migration trên hai nhánh, merge lại thì conflict ở ModelSnapshot. Bạn xử lý thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "hai-dev-cung-tao-migration-tren-hai-nhanh-merge-lai-thi-conflict-o-modelsnapshot-ban-xu-ly-the-nao-3c023efe-cc68-5c39-b1f5-5e4e22019060",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 102,
+    "sourceSlug": null
+  },
+  {
+    "id": "2bc8de1d-f317-5856-a770-d4050f7a299b",
+    "question": "AddDbContext, AddDbContextPool và AddDbContextFactory khác nhau ra sao? Trong một BackgroundService thì dùng cái nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "adddbcontext-adddbcontextpool-va-adddbcontextfactory-khac-nhau-ra-sao-trong-mot-backgroundservice-th-2bc8de1d-f317-5856-a770-d4050f7a299b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 103,
+    "sourceSlug": null
+  },
+  {
+    "id": "a13a625e-bd59-5dbc-9dee-f85aeb59196b",
+    "question": "Query LINQ báo could not be translated. Vì sao EF Core 3.0 trở đi lại ném exception thay vì tự chạy phía client như trước?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "query-linq-bao-could-not-be-translated-vi-sao-ef-core-3-0-tro-di-lai-nem-exception-thay-vi-tu-chay-p-a13a625e-bd59-5dbc-9dee-f85aeb59196b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 104,
+    "sourceSlug": null
+  },
+  {
+    "id": "ba6570be-9107-57ef-8991-42c0e074112e",
+    "question": "Endpoint upload file 2GB bị OutOfMemory và lỗi 413. Bạn thiết kế lại luồng upload file lớn trong ASP.NET Core thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "endpoint-upload-file-2gb-bi-outofmemory-va-loi-413-ban-thiet-ke-lai-luong-upload-file-lon-trong-asp-ba6570be-9107-57ef-8991-42c0e074112e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 105,
+    "sourceSlug": null
+  }
+]

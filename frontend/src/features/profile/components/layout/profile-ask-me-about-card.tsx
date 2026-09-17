@@ -55,7 +55,7 @@ export function ProfileAskMeAboutCard({
         {topics.map((topic, idx) => (
           <div
             key={idx}
-            className="flex items-center gap-2 rounded-xl border border-neutral-200/80 bg-neutral-50/60 px-3 py-1.5 text-xs font-medium text-neutral-700 transition-colors hover:border-neutral-300 dark:border-zinc-800 dark:bg-zinc-900/60 dark:text-zinc-300 dark:hover:border-zinc-700"
+            className="flex items-center gap-2 rounded-xl border border-neutral-200/80 bg-neutral-50/60 px-3 py-1.5 text-sm font-medium text-neutral-800 transition-colors hover:border-neutral-300 dark:border-zinc-800 dark:bg-zinc-900/60 dark:text-zinc-300 dark:hover:border-zinc-700"
           >
             <span
               className={`flex size-4.5 items-center justify-center rounded-md text-[10px] ${
@@ -64,7 +64,11 @@ export function ProfileAskMeAboutCard({
                   : "bg-neutral-200 text-neutral-600 dark:bg-zinc-700 dark:text-zinc-300"
               }`}
             >
-              {topic.active ? <Check className="size-3" /> : <Plus className="size-3" />}
+              {topic.active ? (
+                <Check className="size-3" />
+              ) : (
+                <Plus className="size-3" />
+              )}
             </span>
             <span>{topic.label}</span>
             {topic.count !== undefined && (

@@ -1,0 +1,644 @@
+[
+  {
+    "id": "a3ed2a64-beca-5bed-90ea-7415cae378af",
+    "question": "Micro-frontend là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/14001-micro-frontend-la-gi",
+    "slug": "micro-frontend-la-gi-a3ed2a64-beca-5bed-90ea-7415cae378af",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Micro-frontend là kiến trúc chia giao diện thành nhiều ứng dụng frontend độc lập, mỗi ứng dụng do một team sở hữu trọn vẹn (từ code tới deploy), rồi tích hợp lại thành một sản phẩm."
+      ],
+      "details": [
+        "Zalando xây dựng Project Mosaic (2015) — chia trang thành các fragment như Header, Product, Search, mỗi fragment do một team sở hữu và deploy độc lập mà không cần phối hợp release với các team khác."
+      ],
+      "points": [
+        "Nó áp ý tưởng microservices lên phía frontend."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "14001-micro-frontend-la-gi"
+  },
+  {
+    "id": "3d691e54-cc05-5eb8-b17e-4418927a78c1",
+    "question": "Micro-frontend khác monolith frontend ở đâu? Khi nào nên dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/14002-micro-frontend-khac-monolith-frontend-o-dau-khi-nao-nen-dung",
+    "slug": "micro-frontend-khac-monolith-frontend-o-dau-khi-nao-nen-dung-3d691e54-cc05-5eb8-b17e-4418927a78c1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Monolith frontend là một codebase và một lần deploy duy nhất cho toàn bộ UI; micro-frontend là nhiều app deploy độc lập, chia theo team."
+      ],
+      "details": [],
+      "points": [
+        "Lợi ích chính của micro-frontend: team tự chủ, deploy độc lập (không phải release đồng bộ), scale được tổ chức nhiều team, và có thể trộn nhiều framework.",
+        "Chỉ nên dùng khi có nhiều team lớn cùng làm trên một sản phẩm và codebase đủ phức tạp để monolith trở thành nút thắt.",
+        "Lưu ý: app nhỏ hoặc một team mà dùng micro-frontend thì chỉ gánh thêm độ phức tạp (nhiều pipeline, duplicate dependency, lo nhất quán UI) mà không nhận lại lợi ích — lúc đó một monolith module hóa tốt là đủ."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "14002-micro-frontend-khac-monolith-frontend-o-dau-khi-nao-nen-dung"
+  },
+  {
+    "id": "4edfcfa4-a477-5cdc-92b0-f4ee58e5dc15",
+    "question": "Chia sẻ về micro-frontend ở công ty bạn đang làm (nếu có)?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/14000-chia-se-ve-micro-frontend-o-cong-ty-ban-dang-lam-neu-co",
+    "slug": "chia-se-ve-micro-frontend-o-cong-ty-ban-dang-lam-neu-co-4edfcfa4-a477-5cdc-92b0-f4ee58e5dc15",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Đây là câu hỏi kinh nghiệm — người phỏng vấn muốn biết bạn đã làm thật hay chỉ đọc lý thuyết, nên trả lời theo trải nghiệm thật và có cấu trúc."
+      ],
+      "details": [
+        "Nếu công ty bạn có dùng: kể theo mạch —",
+        "Nếu chưa từng dùng: nói thẳng \"chưa\", rồi thể hiện hiểu biết — khi nào nên dùng, bạn sẽ tiếp cận thế nào, và tham chiếu cách các công ty lớn làm (Zalando tích hợp ở server bằng ESI, DAZN tích hợp phía client) để cho thấy bạn nắm pattern.",
+        "Lưu ý: đừng bịa kinh nghiệm — người phỏng vấn sẽ hỏi sâu vào chi tiết (versioning, fault isolation, shared state...); thà nói \"chưa làm nhưng hiểu pattern\" còn hơn bị phát hiện."
+      ],
+      "points": [
+        "bối cảnh: vì sao chọn (nhiều team, monolith deploy nghẽn, cần nâng cấp dần khỏi legacy)",
+        "cách tích hợp: build-time hay run-time, dùng gì (Module Federation / single-spa / iframe / Web Components)",
+        "cách các mảnh giao tiếp và chia sẻ dependency",
+        "ưu/nhược THỰC TẾ team gặp (vd duplicate deps, giữ UI nhất quán) và cách xử lý",
+        "kết quả (deploy nhanh hơn, team bớt xung đột khi làm chung)"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "14000-chia-se-ve-micro-frontend-o-cong-ty-ban-dang-lam-neu-co"
+  },
+  {
+    "id": "306fe3f1-4392-53f6-a823-d0e5f0ab2b5c",
+    "question": "Có những cách nào để tích hợp các micro-frontend lại với nhau?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/14003-co-nhung-cach-nao-de-tich-hop-cac-micro-frontend-lai-voi-nhau",
+    "slug": "co-nhung-cach-nao-de-tich-hop-cac-micro-frontend-lai-voi-nhau-306fe3f1-4392-53f6-a823-d0e5f0ab2b5c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Chia làm hai nhóm. Build-time: mỗi micro-frontend publish thành package, app container cài vào như thư viện — đơn giản nhưng container phải rebuild và redeploy mỗi khi một mảnh thay đổi, nên mất tính độc lập. Run-time (được ưa dùng hơn): container nạp các mảnh lúc chạy, gồm iframe (tách biệt rất mạnh nhưng routing/communication/UX khó), Web Components, nạp JavaScript qua module loading (Module Federation là cách phổ biến nhất hiện nay), và tích hợp ở server (Server-Side Includes / Edge-Side Includes)."
+      ],
+      "details": [
+        "Lưu ý: build-time integration phá vỡ chính lợi ích cốt lõi của micro-frontend (deploy độc lập), nên đa số dự án thực tế chọn run-time integration."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "14003-co-nhung-cach-nao-de-tich-hop-cac-micro-frontend-lai-voi-nhau"
+  },
+  {
+    "id": "8f601267-95d1-5edd-afbd-d7d850d2b5ce",
+    "question": "Module Federation là gì? Hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/14004-module-federation-la-gi-hoat-dong-nhu-the-nao",
+    "slug": "module-federation-la-gi-hoat-dong-nhu-the-nao-8f601267-95d1-5edd-afbd-d7d850d2b5ce",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Module Federation là tính năng của Webpack 5 cho phép một app (host) nạp code từ app khác (remote) ngay lúc runtime, kèm cơ chế chia sẻ dependency — đây là nền tảng phổ biến nhất để dựng micro-frontend hiện nay.",
+        "remoteEntry.js"
+      ],
+      "details": [
+        "Remote khai báo những module nó chia sẻ ra ngoài (exposes); host khai báo các remotes muốn dùng và shared để dùng chung một bản thư viện như React."
+      ],
+      "points": [
+        "Rspack và Vite cũng có plugin tương đương.",
+        "Lưu ý: nếu cấu hình shared sai (không đặt singleton: true) thì host và remote nạp hai bản React khác nhau → lỗi \"invalid hook call\"."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "14004-module-federation-la-gi-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "fb7d0c71-88b0-5d2e-a687-e4ed7bf61759",
+    "question": "single-spa là gì? Nó giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/14005-single-spa-la-gi-no-giai-quyet-van-de-gi",
+    "slug": "single-spa-la-gi-no-giai-quyet-van-de-gi-fb7d0c71-88b0-5d2e-a687-e4ed7bf61759",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "single-spa là một framework điều phối (orchestrator): một root-config đăng ký các micro-frontend và quyết định mảnh nào active theo route hiện tại, còn mỗi micro-frontend export các lifecycle bootstrap / mount / unmount để root-config gọi khi vào/rời route."
+      ],
+      "details": [],
+      "points": [
+        "Nhờ vậy bạn có thể chạy nhiều framework (React, Vue, Angular) cùng một trang.",
+        "Mỗi mảnh khai báo activeWhen (ví dụ active khi path bắt đầu bằng /checkout).",
+        "Khác biệt với Module Federation: single-spa phụ trách phần điều phối và vòng đời (cái nào hiện, khi nào mount/unmount), còn Module Federation phụ trách phần nạp và chia sẻ code — trong thực tế hai cái thường được dùng kèm nhau.",
+        "Lưu ý: vì các app mount/unmount động, mỗi app phải dọn dẹp sạch (event listener, timer) trong unmount để tránh rò rỉ bộ nhớ."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "14005-single-spa-la-gi-no-giai-quyet-van-de-gi"
+  },
+  {
+    "id": "4de3e183-4fd8-5464-b6ec-b6ab75e77719",
+    "question": "Các micro-frontend giao tiếp với nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/14006-cac-micro-frontend-giao-tiep-voi-nhau-nhu-the-nao",
+    "slug": "cac-micro-frontend-giao-tiep-voi-nhau-nhu-the-nao-4de3e183-4fd8-5464-b6ec-b6ab75e77719",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Nguyên tắc: ưu tiên coupling lỏng."
+      ],
+      "details": [
+        "Ba cách thường dùng:",
+        "Martin Fowler khuyên gửi message/event và tránh shared state giữa các micro-frontend.",
+        "Lưu ý: dùng một global object trên window hay một shared store làm kênh giao tiếp chính sẽ tạo coupling chặt và khó biết \"hợp đồng\" giữa các bên — chỉ nên dùng event/props với payload tối thiểu và contract rõ ràng."
+      ],
+      "points": [
+        "gửi sự kiện/message — browser CustomEvent hoặc một event bus (pub/sub) nhỏ, các mảnh không gọi thẳng nhau;",
+        "shell truyền props và callback xuống từng micro-frontend (rõ hợp đồng nhất);",
+        "đồng bộ qua URL — URL là \"shared state\" tự nhiên và an toàn để nhiều mảnh cùng đọc"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "14006-cac-micro-frontend-giao-tiep-voi-nhau-nhu-the-nao"
+  },
+  {
+    "id": "08bc0309-3ef7-5403-aa64-9862e361ae2f",
+    "question": "Routing hoạt động ra sao trong kiến trúc micro-frontend?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/14008-routing-hoat-dong-ra-sao-trong-kien-truc-micro-frontend",
+    "slug": "routing-hoat-dong-ra-sao-trong-kien-truc-micro-frontend-08bc0309-3ef7-5403-aa64-9862e361ae2f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Mô hình thường gặp: shell/container giữ routing cấp cao — quyết định path nào thì kích hoạt micro-frontend nào — còn mỗi micro-frontend tự quản các sub-route bên trong nó."
+      ],
+      "details": [
+        "Ví dụ shell map /checkout/* cho app Checkout, rồi bên trong app Checkout có route con /checkout/payment, /checkout/review. single-spa làm việc này qua activeWhen."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "14008-routing-hoat-dong-ra-sao-trong-kien-truc-micro-frontend"
+  },
+  {
+    "id": "991e7192-9cc4-5dba-9ac1-5fccf2e25bb2",
+    "question": "Làm sao tách biệt CSS để các micro-frontend không ghi đè style của nhau?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/14009-lam-sao-tach-biet-css-de-cac-micro-frontend-khong-ghi-de-style-cua-nhau",
+    "slug": "lam-sao-tach-biet-css-de-cac-micro-frontend-khong-ghi-de-style-cua-nhau-991e7192-9cc4-5dba-9ac1-5fccf2e25bb2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì CSS mặc định là global, style của một mảnh dễ rò rỉ và ghi đè mảnh khác ngoài ý muốn."
+      ],
+      "details": [],
+      "points": [
+        "Các cách tách biệt: đặt tiền tố/quy ước BEM cho class, dùng CSS Modules (hash tên class), CSS-in-JS (scope theo component), hoặc Shadow DOM (tách biệt mạnh nhất — style không lọt ra/vào).",
+        "Trong thực tế nên kết hợp một design system dùng chung (để UI nhất quán) với một cơ chế scoping (để không xung đột).",
+        "Lưu ý: Shadow DOM tách biệt tuyệt đối nhưng cũng chặn cả style/theme dùng chung lọt vào, nên chia sẻ design token và đổi theme sẽ khó hơn — cân nhắc đánh đổi giữa tách biệt và khả năng đồng bộ giao diện."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "14009-lam-sao-tach-biet-css-de-cac-micro-frontend-khong-ghi-de-style-cua-nhau"
+  },
+  {
+    "id": "bf23b0e3-7409-5371-9da9-a45be5a02588",
+    "question": "Micro-frontend có nhược điểm và thách thức gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/14011-micro-frontend-co-nhuoc-diem-va-thach-thuc-gi",
+    "slug": "micro-frontend-co-nhuoc-diem-va-thach-thuc-gi-bf23b0e3-7409-5371-9da9-a45be5a02588",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Đổi lấy team autonomy, micro-frontend kéo theo nhiều chi phí: payload lớn hơn vì duplicate dependency (mỗi mảnh có thể mang theo bản thư viện riêng nếu không chia sẻ tốt); độ phức tạp vận hành tăng (nhiều pipeline CI/CD, nhiều artifact, nhiều môi trường); rủi ro UI/UX không nhất quán nếu thiếu design system chung; và debug/observability xuyên nhiều app khó hơn hẳn monolith."
+      ],
+      "details": [
+        "Lưu ý: nhiều nhóm sau khi triển khai mới nhận ra \"lẽ ra một monolith module hóa tốt là đủ\" — đừng chọn micro-frontend vì hype; chỉ dùng khi quy mô tổ chức và codebase thật sự cần, và đã chấp nhận chi phí phức tạp đi kèm."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "14011-micro-frontend-co-nhuoc-diem-va-thach-thuc-gi"
+  },
+  {
+    "id": "b220d581-34bb-53b2-ab59-22d21c7a432a",
+    "question": "Dùng iframe để dựng micro-frontend có ưu và nhược điểm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/14014-dung-iframe-de-dung-micro-frontend-co-uu-va-nhuoc-diem-gi",
+    "slug": "dung-iframe-de-dung-micro-frontend-co-uu-va-nhuoc-diem-gi-b220d581-34bb-53b2-ab59-22d21c7a432a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "iframe cho mức tách biệt mạnh nhất — CSS và JavaScript của mỗi mảnh tách biệt hoàn toàn, không xung đột với nhau — và dễ nhúng app cũ hoặc app khác stack."
+      ],
+      "details": [],
+      "points": [
+        "Nhưng đổi lại UX kém: routing và deep-link khó đồng bộ, chia sẻ state phải qua postMessage, tự động resize chiều cao phức tạp, SEO yếu (nội dung trong iframe khó index), accessibility và quản lý focus khó, và tải nặng hơn.",
+        "Hình dung như nhúng một ứng dụng bên thứ ba vào trang.",
+        "Lưu ý: dùng iframe cho micro-frontend nội bộ thường mang lại nhiều phiền toái UX hơn là lợi ích — chỉ nên chọn khi cần tách biệt tuyệt đối, ví dụ nhúng app legacy hoặc app bên thứ ba không kiểm soát được."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "14014-dung-iframe-de-dung-micro-frontend-co-uu-va-nhuoc-diem-gi"
+  },
+  {
+    "id": "3b7c0d89-40cb-5612-a5f9-b62acb59daf5",
+    "question": "Dùng Web Components cho micro-frontend như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/14015-dung-web-components-cho-micro-frontend-nhu-the-nao",
+    "slug": "dung-web-components-cho-micro-frontend-nhu-the-nao-3b7c0d89-40cb-5612-a5f9-b62acb59daf5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Mỗi micro-frontend được đóng gói thành một custom element (ví dụ <team-cart>), shell chỉ cần đặt thẻ đó vào DOM là xong — đây là cách chuẩn hoá interface giữa các framework khác nhau."
+      ],
+      "details": [],
+      "points": [
+        "Custom Elements cộng Shadow DOM cho phép tách biệt style một cách tự nhiên, và giao tiếp với khung qua attributes (vào) và DOM events (ra).",
+        "Rất hợp khi cần trộn React, Vue, Angular.",
+        "Hạn chế: SSR và hydrate phức tạp hơn, một số framework cần wrapper để xuất ra custom element.",
+        "Lưu ý: Shadow DOM tách biệt style nên design system/theme chung khó lọt vào — dùng CSS custom properties hoặc ::part() để cho phép tuỳ biến xuyên qua ranh giới shadow."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "14015-dung-web-components-cho-micro-frontend-nhu-the-nao"
+  },
+  {
+    "id": "5c703744-81a4-5715-81d6-36f3da83d4b5",
+    "question": "Module Federation và single-spa khác nhau thế nào? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/14017-module-federation-va-single-spa-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "slug": "module-federation-va-single-spa-khac-nhau-the-nao-khi-nao-dung-cai-nao-5c703744-81a4-5715-81d6-36f3da83d4b5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai thứ giải quyết hai vấn đề khác nhau và bổ trợ nhau, không loại trừ nhau."
+      ],
+      "details": [
+        "Module Federation lo việc NẠP và CHIA SẺ code lúc runtime (qua webpack/rspack) — host nạp module từ remote và dùng chung dependency.",
+        "single-spa lo việc ĐIỀU PHỐI và VÒNG ĐỜI app — đăng ký các micro-frontend, quyết định cái nào active theo route, gọi mount/unmount.",
+        "Lưu ý: đừng mặc định là phải chọn một trong hai — câu trả lời \"tuỳ nhu cầu, và thường dùng kèm nhau\" thường được đánh giá cao hơn."
+      ],
+      "points": [
+        "Chọn Module Federation khi các team cùng stack (ví dụ đều React) và muốn chia sẻ code cùng dependency lúc runtime.",
+        "Chọn single-spa khi cần trộn nhiều framework và quản lý mount theo route.",
+        "Nhiều dự án dùng single-spa để orchestration CỘNG Module Federation để loading."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "14017-module-federation-va-single-spa-khac-nhau-the-nao-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "607b1929-b4ca-5925-9bf1-4573a08772b4",
+    "question": "Test micro-frontend như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/14019-test-micro-frontend-nhu-the-nao",
+    "slug": "test-micro-frontend-nhu-the-nao-607b1929-b4ca-5925-9bf1-4573a08772b4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "Test theo tầng đúng với tinh thần độc lập: mỗi micro-frontend tự chạy unit và integration test như một app bình thường; phần khó là chỗ tích hợp, nên thêm contract test cho hợp đồng giao tiếp giữa các mảnh (event/props) và một ít end-to-end cho các luồng đi xuyên nhiều mảnh ở shell.",
+        "Martin Fowler nhấn mạnh: test tích hợp nên tập trung vào contract và cách các mảnh tích hợp với nhau, không nhân bản lại unit test đã có trong từng mảnh.",
+        "Lưu ý: chỉ test từng mảnh mà bỏ test tích hợp thì lỗi sẽ xuất hiện đúng chỗ các mảnh giao tiếp; ngược lại đừng e2e mọi thứ vì chậm và dễ gãy — cân bằng giữa contract test và e2e tối thiểu."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "14019-test-micro-frontend-nhu-the-nao"
+  },
+  {
+    "id": "8f9beddc-8d48-57b4-b705-33eb6e5418fa",
+    "question": "Ưu và nhược điểm của micro-frontend là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/14021-uu-va-nhuoc-diem-cua-micro-frontend-la-gi",
+    "slug": "uu-va-nhuoc-diem-cua-micro-frontend-la-gi-8f9beddc-8d48-57b4-b705-33eb6e5418fa",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Tóm tắt: đổi \"tốc độ tổ chức\" lấy \"độ phức tạp kỹ thuật\"."
+      ],
+      "details": [
+        "Lưu ý: chỉ chọn micro-frontend khi điểm nghẽn của monolith (các team xung đột khi làm chung, deploy nghẽn cổ chai) đã lớn hơn chi phí phức tạp mà nó mang lại — đừng chọn vì hype.",
+        "Ưu điểm:",
+        "Nhược điểm:"
+      ],
+      "points": [
+        "team tự chủ — mỗi team sở hữu một mảnh từ đầu đến cuối",
+        "deploy độc lập — release riêng, không chờ nhau",
+        "scale được tổ chức nhiều team trên cùng sản phẩm",
+        "tự do tech stack và nâng cấp dần (migrate khỏi legacy từng phần)",
+        "tách biệt lỗi nếu thiết kế đúng"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "14021-uu-va-nhuoc-diem-cua-micro-frontend-la-gi"
+  },
+  {
+    "id": "3d955d5f-8d1b-58d5-ae8b-19ea2c11e99c",
+    "question": "Có những công nghệ và framework nào để xây micro-frontend?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/14022-co-nhung-cong-nghe-va-framework-nao-de-xay-micro-frontend",
+    "slug": "co-nhung-cong-nghe-va-framework-nao-de-xay-micro-frontend-3d955d5f-8d1b-58d5-ae8b-19ea2c11e99c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Chia làm hai nhóm, cộng thêm tooling cho monorepo."
+      ],
+      "details": [
+        "Thư viện tích hợp:\n- Module Federation (webpack 5, có bản cho Rspack/Vite): nạp và chia sẻ code lúc runtime — phổ biến nhất hiện nay.\n- single-spa: orchestrator điều phối và quản vòng đời app theo route.\n- qiankun (Alibaba): dựng trên single-spa, thêm sandbox JS/CSS, hợp enterprise.\n- Piral: mô hình \"pilets\" cắm động vào một shell kiểu portal.\n- Luigi (SAP): khai báo, hướng enterprise.\n- Bit: chia sẻ component xuyên nhiều app.",
+        "Kỹ thuật nền tảng: Web Components, import maps, iframe, và ESI/SSI (tích hợp ở server).",
+        "Monorepo: Nx, Turborepo để quản nhiều app/lib trong một repo."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "14022-co-nhung-cong-nghe-va-framework-nao-de-xay-micro-frontend"
+  },
+  {
+    "id": "d88e4225-42d7-5e4e-bb90-97d7b76963f8",
+    "question": "Làm sao chia sẻ dependency chung và tránh tải trùng (vd nhiều bản React)?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-sao-chia-se-dependency-chung-va-tranh-tai-trung-vd-nhieu-ban-react-d88e4225-42d7-5e4e-bb90-97d7b76963f8",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": null
+  },
+  {
+    "id": "1a46172f-8c78-5cec-b048-be9c3f714b65",
+    "question": "Independent deployment trong micro-frontend đạt được bằng cách nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "independent-deployment-trong-micro-frontend-dat-duoc-bang-cach-nao-1a46172f-8c78-5cec-b048-be9c3f714b65",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": null
+  },
+  {
+    "id": "5650f0fb-55b0-5b98-8a79-a570b646e0f8",
+    "question": "Làm sao chia sẻ state toàn cục giữa các micro-frontend một cách an toàn?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-sao-chia-se-state-toan-cuc-giua-cac-micro-frontend-mot-cach-an-toan-5650f0fb-55b0-5b98-8a79-a570b646e0f8",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": null
+  },
+  {
+    "id": "f720a8a5-0384-5397-be52-928a53b89548",
+    "question": "Server-side rendering (SSR) với micro-frontend khác gì so với tích hợp ở client?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "server-side-rendering-ssr-voi-micro-frontend-khac-gi-so-voi-tich-hop-o-client-f720a8a5-0384-5397-be52-928a53b89548",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": null
+  },
+  {
+    "id": "33de93e4-e79a-5437-9eda-62637b1a22ac",
+    "question": "Import maps là gì và đóng vai trò gì trong micro-frontend?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "import-maps-la-gi-va-dong-vai-tro-gi-trong-micro-frontend-33de93e4-e79a-5437-9eda-62637b1a22ac",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": null
+  },
+  {
+    "id": "9d20b4f0-3866-5819-a11e-459724512abc",
+    "question": "Làm sao để một micro-frontend lỗi không làm sập cả trang (fault isolation)?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-sao-de-mot-micro-frontend-loi-khong-lam-sap-ca-trang-fault-isolation-9d20b4f0-3866-5819-a11e-459724512abc",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": null
+  }
+]

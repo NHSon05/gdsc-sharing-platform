@@ -1,0 +1,434 @@
+[
+  {
+    "id": "2d28e737-cbee-5c31-bd69-29da1c106075",
+    "question": "Vite là gì? Tại sao nhanh hơn Webpack trong development?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/753-vite-la-gi-tai-sao-nhanh-hon-webpack-trong-development",
+    "slug": "vite-la-gi-tai-sao-nhanh-hon-webpack-trong-development-2d28e737-cbee-5c31-bd69-29da1c106075",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vite là build tool thế hệ mới của Evan You. Dev server không bundle — browser hỏi file nào thì Vite transform đúng file đó qua native ESM, nên cold start gần như tức thì bất kể project lớn cỡ nào."
+      ],
+      "details": [
+        "Lên production Vite lại bundle bằng Rollup chứ không dùng esbuild, vì Rollup tree-shaking tốt hơn và output nhỏ hơn; esbuild vẫn được giữ cho khâu minify vì nhanh hơn Terser.",
+        "Plugin của Vite tương thích với Rollup plugin API — @vitejs/plugin-react (React Fast Refresh), @vitejs/plugin-vue, vite-plugin-pwa. Vite cũng là nền của SvelteKit, Qwik, Astro và một phần Remix."
+      ],
+      "points": [
+        "esbuild pre-bundling: lần start đầu, Vite dùng esbuild (viết bằng Rust, nhanh hơn bundler JS 10-100 lần) gộp node_modules thành một module để browser khỏi phải request hàng nghìn file nhỏ; kết quả cache trong node_modules/.vite.",
+        "Native ESM serving: source được serve thẳng dưới dạng ES module, browser tự lo dependency graph, Vite chỉ transform đúng file mà request hiện tại cần.",
+        "HMR: chỉ invalidate module vừa đổi cùng những file import trực tiếp nó, không xử lý lại cả bundle graph."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "753-vite-la-gi-tai-sao-nhanh-hon-webpack-trong-development"
+  },
+  {
+    "id": "d8fabc5c-5ece-544e-9d94-ed4dac438469",
+    "question": "pnpm khác npm và yarn như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/757-pnpm-khac-npm-va-yarn-nhu-the-nao",
+    "slug": "pnpm-khac-npm-va-yarn-nhu-the-nao-d8fabc5c-5ece-544e-9d94-ed4dac438469",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "pnpm dùng content-addressable store: mỗi package version lưu một lần trong global store (~/.pnpm-store), tất cả projects symlink đến store — tiết kiệm disk đáng kể (100 projects dùng React chỉ lưu 1 copy). node_modules structure: pnpm tạo non-flat node_modules — mỗi package chỉ thấy dependencies được khai báo trong package.json của nó (strict mode)."
+      ],
+      "details": [],
+      "points": [
+        "Phantom dependencies: npm/yarn hoist packages lên root node_modules, code có thể import packages không khai báo trong dependencies — chạy được locally nhưng fail ở nơi khác; pnpm strict mode ngăn phantom deps bằng cách không hoist.",
+        "Workspace protocol: pnpm-workspace.yaml khai báo workspace packages; 'my-lib': 'workspace:*' trong dependencies để ref local packages — pnpm tự resolve khi install, thay bằng version thật khi publish.",
+        "Performance: pnpm nhanh hơn npm vì hardlinks, parallel installs; tương đương hoặc nhanh hơn Yarn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "757-pnpm-khac-npm-va-yarn-nhu-the-nao"
+  },
+  {
+    "id": "d03ba4c0-c72a-5e66-b7cb-09d97ab7d5d2",
+    "question": "Webpack là gì? Vai trò trong modern web development?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/751-webpack-la-gi-vai-tro-trong-modern-web-development",
+    "slug": "webpack-la-gi-vai-tro-trong-modern-web-development-d03ba4c0-c72a-5e66-b7cb-09d97ab7d5d2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Webpack là module bundler gộp toàn bộ asset (JS, CSS, ảnh) thành các file bundle đã tối ưu."
+      ],
+      "details": [
+        "Khái niệm cốt lõi:\n- Entry — điểm bắt đầu của dependency graph, thường là src/index.js.\n- Output — nơi ghi bundle ra, ví dụ dist/bundle.js.\n- Loader — biến file thành module (babel-loader cho JSX, css-loader parse import CSS).\n- Plugin — can thiệp vào vòng đời build (HtmlWebpackPlugin sinh HTML, MiniCssExtractPlugin tách CSS ra file riêng, DefinePlugin chèn hằng số).\n- Mode (development/production) — tự bật bộ tối ưu tương ứng.",
+        "webpack-dev-server serve bundle từ bộ nhớ và HMR thay module mà không reload trang. Code splitting thì dùng import() động, Webpack tự cắt chunk và load khi cần.",
+        "Vì sao đang bị thay thế: config dài ra (file webpack.config.js hàng trăm dòng) và dev server chậm vì phải bundle cả app cả lúc khởi động lẫn lúc HMR — Vite/Turbopack giải bài này bằng native ESM.",
+        "Dù vậy Webpack vẫn còn phổ biến ở nhiều project enterprise, ở Create React App đã eject, và ở những build pipeline tự dựng cần độ linh hoạt cao."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "751-webpack-la-gi-vai-tro-trong-modern-web-development"
+  },
+  {
+    "id": "43ee70d5-fea3-5271-ba3a-5e5a86ff0316",
+    "question": "Loaders và Plugins trong Webpack khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/752-loaders-va-plugins-trong-webpack-khac-nhau-nhu-the-nao",
+    "slug": "loaders-va-plugins-trong-webpack-khac-nhau-nhu-the-nao-43ee70d5-fea3-5271-ba3a-5e5a86ff0316",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Quy tắc kinh nghiệm: cần biến đổi một loại file → loader; cần can thiệp vào tiến trình build → plugin."
+      ],
+      "details": [
+        "Loader biến đổi file thành module, hoạt động ở mức từng file trong pipeline resolve module. Thứ tự chạy là phải sang trái (dưới lên trên trong mảng config) — ['style-loader', 'css-loader', 'sass-loader'] chạy sass-loader trước tiên.",
+        "Loader hay gặp: babel-loader (ES6+/JSX → ES5), css-loader (parse @import và url()), style-loader (chèn CSS vào DOM), sass-loader (SCSS → CSS), file-loader/asset modules (ảnh, font), ts-loader/swc-loader (TypeScript). Viết loader riêng khá dễ: chỉ là một function nhận source string, biến đổi rồi trả về string mới.",
+        "Plugin móc vào vòng đời của Webpack compiler qua các hook (beforeRun, emit, done).",
+        "Plugin hay gặp: HtmlWebpackPlugin (sinh HTML kèm thẻ script), MiniCssExtractPlugin (tách CSS ra file riêng thay vì nhét vào JS), TerserPlugin (minify JS), DefinePlugin (thay hằng số lúc build, ví dụ NODE_ENV), BundleAnalyzerPlugin (nhìn thấy bundle nặng ở đâu)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "752-loaders-va-plugins-trong-webpack-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "fb073faa-5e4e-5622-8ce4-6e7fb91f0a8c",
+    "question": "Sự khác biệt giữa Vite dev server và Webpack dev server?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/754-su-khac-biet-giua-vite-dev-server-va-webpack-dev-server",
+    "slug": "su-khac-biet-giua-vite-dev-server-va-webpack-dev-server-fb073faa-5e4e-5622-8ce4-6e7fb91f0a8c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Cold start: Webpack dev server phải bundle toàn bộ module graph rồi server mới sẵn sàng — project 1000 module mất 10-30 giây. Vite khởi động dưới 1 giây bất kể project to cỡ nào, vì nó không pre-bundle source."
+      ],
+      "details": [
+        "Đánh đổi: Vite chạy dev bằng ESM còn production thì bundle bằng Rollup — hai môi trường có thể hành xử khác nhau, dễ lệch nhất ở circular import và thứ tự nạp module.",
+        "Project càng lớn lợi thế của Vite càng rõ: cold start của Webpack tăng tuyến tính theo số module, còn Vite gần như không đổi. Turbopack (Next.js 13+) là bản kế nhiệm Webpack do Vercel viết bằng Rust, nhắm thẳng vào tốc độ dev mode của Vite."
+      ],
+      "points": [
+        "Pre-bundle dependency: Vite dùng esbuild pre-bundle node_modules đúng một lần rồi cache, browser chỉ nạp vài file thay vì hàng nghìn. Webpack thì bundle tất cả cùng nhau.",
+        "HMR: Webpack phải compile lại module bị đổi cùng các dependency của nó, module lớn có thể mất 1-10 giây. Vite chỉ invalidate đúng module đã đổi rồi lan lên theo import chain, thường dưới 100ms.",
+        "Độ chính xác: Vite biết chính xác file nào đổi nên chỉ cập nhật đúng phần đó; đi kèm React Fast Refresh thì state của component còn được giữ nguyên."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "754-su-khac-biet-giua-vite-dev-server-va-webpack-dev-server"
+  },
+  {
+    "id": "9d6b9210-8835-5a3a-87ab-4edd1329843d",
+    "question": "Babel là gì? Vai trò trong JavaScript toolchain?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/755-babel-la-gi-vai-tro-trong-javascript-toolchain",
+    "slug": "babel-la-gi-vai-tro-trong-javascript-toolchain-9d6b9210-8835-5a3a-87ab-4edd1329843d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Babel là JavaScript compiler với 3-phase pipeline: Parse (source code → AST via @babel/parser), Transform (plugins traverse và modify AST — ví dụ arrow function plugin chuyển () => {} thành function() {}), Generate (AST → output code via @babel/generator)."
+      ],
+      "details": [],
+      "points": [
+        "Polyfills vs transforms: transforms là syntax changes (const → var, class → prototype); polyfills là runtime additions cho missing APIs (Promise, Array.from, fetch) — Babel transforms syntax nhưng không tự polyfill APIs. core-js là polyfill library chuẩn — @babel/preset-env với useBuiltIns: 'usage' tự động import chỉ polyfills cần thiết dựa trên browserslist config. browserslist config (trong package.json hoặc .browserslistrc): target browsers list như '> 0.5%, last 2 versions, not dead' — preset-env compile chỉ những features không được target browsers hỗ trợ natively, giảm output size.",
+        "Plugin order: plugins chạy trước presets, plugins first-to-last, presets last-to-first (legacy behavior).",
+        "Babel vs SWC vs esbuild: Babel chậm nhất (JS) nhưng most customizable plugin ecosystem; SWC nhanh hơn 20-70x (Rust), ít plugins hơn; esbuild nhanh nhất nhưng không hỗ trợ custom transforms."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "755-babel-la-gi-vai-tro-trong-javascript-toolchain"
+  },
+  {
+    "id": "673483ec-d5aa-5919-88e0-8e625b4978a5",
+    "question": "SWC là gì? So sánh với Babel?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/756-swc-la-gi-so-sanh-voi-babel",
+    "slug": "swc-la-gi-so-sanh-voi-babel-673483ec-d5aa-5919-88e0-8e625b4978a5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "SWC (Speedy Web Compiler) là compiler JS/TS viết bằng Rust — nhanh hơn Babel 20-70 lần khi chạy đơn luồng, và tới 70 lần khi tận dụng nhiều core."
+      ],
+      "details": [
+        "Hạn chế nằm ở hệ plugin: plugin SWC viết bằng WebAssembly nên khó làm hơn plugin Babel (chỉ là JS), và hệ sinh thái nhỏ hơn nhiều. Một số transform nâng cao của Babel — custom macro, babel-plugin-macros — vẫn chưa có bản tương đương.",
+        "Khi nào chưa chuyển được: project phụ thuộc plugin Babel đặc thù (babel-plugin-styled-components, babel-plugin-import để tree-shake) hoặc cần transform tự viết."
+      ],
+      "points": [
+        "Trong Next.js: từ bản 12, SWC thay Babel ở khâu transpile và thay Terser ở khâu minify — cold build nhanh gấp 5, HMR nhanh gấp 3. Nếu project còn .babelrc, Next.js tự phát hiện và migrate.",
+        "Tương thích: SWC làm được hầu hết transform của Babel — tương đương preset-env, TypeScript, JSX, decorator.",
+        "Dùng ở đâu: @swc/core gọi trực tiếp trong script Node.js, swc-loader cho Webpack, và @vitejs/plugin-react cũng chạy được trên SWC. Deno dùng SWC nội bộ để transpile TypeScript."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "756-swc-la-gi-so-sanh-voi-babel"
+  },
+  {
+    "id": "cb0c479b-e24a-5b4d-8c1c-86b8a0d1aef9",
+    "question": "Microservices vs monolith frontend architecture. Federated module?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/980-microservices-vs-monolith-frontend-architecture-federated-module",
+    "slug": "microservices-vs-monolith-frontend-architecture-federated-module-cb0c479b-e24a-5b4d-8c1c-86b8a0d1aef9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Monolith frontend là kiến trúc một repo chứa toàn bộ code frontend, đơn giản nhưng khó scale khi team lớn vì mọi thay đổi đều phải deploy cùng lúc."
+      ],
+      "details": [],
+      "points": [
+        "Micro-frontend chia frontend thành nhiều ứng dụng nhỏ độc lập, mỗi team quản lý và deploy riêng.",
+        "Module Federation cho phép các ứng dụng chia sẻ dependency tại runtime — ban đầu là tính năng của webpack, nhưng khái niệm này đã không còn giới hạn trong webpack: Vite có @originjs/vite-plugin-federation, Rspack/Rsbuild cũng hỗ trợ native.",
+        "Đánh đổi là tăng độ phức tạp về infrastructure, versioning, và trải nghiệm nhất quán — chỉ phù hợp cho tổ chức lớn có nhiều team phát triển song song."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "980-microservices-vs-monolith-frontend-architecture-federated-module"
+  },
+  {
+    "id": "fed15147-5ea5-55b3-a084-b77f07afaecc",
+    "question": "HMR (Hot Module Replacement) hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2041-hmr-hot-module-replacement-hoat-dong-nhu-the-nao",
+    "slug": "hmr-hot-module-replacement-hoat-dong-nhu-the-nao-fed15147-5ea5-55b3-a084-b77f07afaecc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vite HMR nhanh hơn Webpack vì native ESM — chỉ invalidate module thay đổi thay vì recompile bundle graph; React Fast Refresh giữ component state khi edit function body, remount khi thay đổi hook order."
+      ],
+      "details": [
+        "HMR thay thế modules trong running app mà không reload trang — giữ nguyên application state, chỉ update phần code thay đổi. Webpack HMR mechanism: Webpack watch filesystem, khi file thay đổi, compile lại module thành chunk update; dev server gửi manifest qua WebSocket cho browser; browser download update chunk; HMR runtime apply module update theo module graph — nếu module có module.hot.accept() handler, handler được gọi; nếu không, propagate lên parent modules; nếu không module nào handle, fallback toàn bộ page reload. Vite HMR: nhanh hơn nhiều vì native ESM — browser import file trực tiếp, khi file thay đổi Vite chỉ invalidate module đó và direct importers (không recompile cả bundle graph). React Fast Refresh (Vite plugin / Next.js): HMR cho React components giữ nguyên component state — edit function body, component re-render với state hiện tại (không reset state như full reload). Nếu thay đổi hooks order hay component signature → full remount. State preservation: chỉ local state được giữ; Redux/Zustand store state cũng giữ (stored outside component tree). Debugging HMR failures: nếu HMR không work, kiểm tra console — thường do circular dependencies hoặc module không có HMR handlers."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "2041-hmr-hot-module-replacement-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "1ebc420a-ed35-505a-b378-2ac8a309668a",
+    "question": "Source maps là gì? Cách cấu hình cho development và production?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2042-source-maps-la-gi-cach-cau-hinh-cho-development-va-production",
+    "slug": "source-maps-la-gi-cach-cau-hinh-cho-development-va-production-1ebc420a-ed35-505a-b378-2ac8a309668a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Không serve .map files publicly trong production — upload lên Sentry/Datadog trong CI để lấy readable stack traces mà không expose source code; hidden-source-map là strategy chuẩn cho production bundles."
+      ],
+      "details": [
+        "Source maps ánh xạ compiled/minified code về original source code — khi error xảy ra trong production bundle, stack trace hiển thị file/line trong TypeScript source thay vì minified gibberish. Format: file .map JSON chứa mappings từ generated code → source; referenced trong bundle qua //# sourceMappingURL=bundle.js.map. Types trong Webpack/Vite: eval-source-map (dev, fast rebuild, in-bundle); source-map (production, external .map file, full quality); hidden-source-map (không expose URL trong bundle, upload .map file lên error tracking riêng); nosources-source-map (stack traces nhưng không expose source code). Production strategy: không serve .map files publicly (expose source code và IP); upload .map files lên Sentry/Datadog trong CI pipeline; Sentry webpack plugin/vite plugin tự động upload và delete .map files. TypeScript: \"sourceMap\": true trong tsconfig.json; \"inlineSources\": true để embed source content trong .map (không cần host original files). Vite: sourcemap: true trong vite.config.ts → explicit .map files; sourcemap: 'inline' → embed trong bundle (lớn hơn). Security: .map files chứa original source code — nếu serve publicly, users có thể đọc full source; production .map chỉ nên accessible bởi error tracking service."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "2042-source-maps-la-gi-cach-cau-hinh-cho-development-va-production"
+  },
+  {
+    "id": "f768bc75-9b27-563b-9524-228b4dc1f565",
+    "question": "ESM vs CommonJS: tại sao ecosystem đang chuyển sang ESM?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2043-esm-vs-commonjs-tai-sao-ecosystem-dang-chuyen-sang-esm",
+    "slug": "esm-vs-commonjs-tai-sao-ecosystem-dang-chuyen-sang-esm-f768bc75-9b27-563b-9524-228b4dc1f565",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "ESM là standard với static imports và tree shaking — CJS dynamic require() không tree-shakeable; browser native support ESM; Vite dev server nhanh vì không bundle, serve native ESM; CJS không thể require() ESM (async)."
+      ],
+      "details": [
+        "CommonJS (CJS): require() synchronous, dynamic (có thể dùng trong if/function), module.exports là bất kỳ giá trị. Node.js default. Không tree-shakeable (bundler không biết exports nào được dùng vì dynamic). ESM: import/export static (phải ở top-level), asynchronous loading, chính thức là JavaScript standard (TC39). Tree-shakeable. Top-level await. import.meta.url. Tại sao ESM thắng: Tree shaking — ESM static structure cho phép bundler eliminate dead code (cùng import 1 hàm từ lodash-es vs lodash cũ); Async loading — ESM modules load async, CJS synchronous blocking; Standard — browsers native support ESM, Node.js thêm support từ v12; Better DX — Vite native ESM dev server cực nhanh vì không bundle. Node.js interop hiện tại: CJS có thể require() CJS; ESM có thể import CJS (chỉ default export); CJS không thể require() ESM (async) — phải dùng dynamic import(). Dual package (publish cả CJS lẫn ESM): exports field trong package.json với conditional exports. Lưu ý: Dual package hazard — app có thể load cả CJS lẫn ESM version của cùng package (2 instances, state không share). TypeScript: \"module\": \"ESNext\" + \"moduleResolution\": \"Bundler\" cho modern projects."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "2043-esm-vs-commonjs-tai-sao-ecosystem-dang-chuyen-sang-esm"
+  },
+  {
+    "id": "24a6d1c7-7e70-54a9-90e6-25869db37a23",
+    "question": "Monorepo là gì? Công cụ phổ biến để quản lý monorepo?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "monorepo-la-gi-cong-cu-pho-bien-de-quan-ly-monorepo-24a6d1c7-7e70-54a9-90e6-25869db37a23",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": null
+  },
+  {
+    "id": "26b845aa-680d-5635-8160-ee22c1b38780",
+    "question": "Tree shaking là gì? Điều kiện để tree shaking hoạt động?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "tree-shaking-la-gi-dieu-kien-de-tree-shaking-hoat-dong-26b845aa-680d-5635-8160-ee22c1b38780",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": null
+  },
+  {
+    "id": "790df982-44a5-50e9-b91d-57377565267e",
+    "question": "Dynamic import() và code splitting: cách implement hiệu quả?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dynamic-import-va-code-splitting-cach-implement-hieu-qua-790df982-44a5-50e9-b91d-57377565267e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": null
+  },
+  {
+    "id": "15673a4d-f966-520d-a398-5f97b9afd704",
+    "question": "Tree shaking deep dive: tại sao một số packages không tree-shakeable?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "tree-shaking-deep-dive-tai-sao-mot-so-packages-khong-tree-shakeable-15673a4d-f966-520d-a398-5f97b9afd704",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": null
+  }
+]

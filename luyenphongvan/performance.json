@@ -1,0 +1,1089 @@
+[
+  {
+    "id": "72243732-28df-508c-9325-35f715d10b32",
+    "question": "Lighthouse là gì? Làm sao cải thiện điểm Lighthouse cho website?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/884-lighthouse-la-gi-lam-sao-cai-thien-diem-lighthouse-cho-website",
+    "slug": "lighthouse-la-gi-lam-sao-cai-thien-diem-lighthouse-cho-website-72243732-28df-508c-9325-35f715d10b32",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lighthouse là công cụ của Google đánh giá website theo 4 tiêu chí:"
+      ],
+      "details": [
+        "Mục tiêu: Performance > 90, Accessibility > 90. Đo bằng Chrome DevTools tab Lighthouse hoặc PageSpeed Insights."
+      ],
+      "points": [
+        "Performance: lazy load images (loading='lazy'), code splitting với React.lazy, compress assets (gzip/brotli), preload fonts quan trọng.",
+        "Accessibility: mọi image có alt text, color contrast đủ ratio, dùng ARIA cho interactive elements.",
+        "Best Practices: dùng HTTPS, không console errors, không deprecated APIs.",
+        "SEO: meta tags đầy đủ (title, description), semantic HTML (h1, nav, main), sitemap.xml."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "884-lighthouse-la-gi-lam-sao-cai-thien-diem-lighthouse-cho-website"
+  },
+  {
+    "id": "22d3cea9-619c-5729-aff9-a1202bbcccc8",
+    "question": "Website load chậm — bạn tiếp cận debug thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/95010-website-load-cham-ban-tiep-can-debug-the-nao",
+    "slug": "website-load-cham-ban-tiep-can-debug-the-nao-22d3cea9-619c-5729-aff9-a1202bbcccc8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Nguyên tắc: đo trước khi sửa — xác định chậm ở khâu nào (server, network hay render) rồi mới optimize."
+      ],
+      "details": [
+        "Trình bày theo trình tự đo → khoanh vùng → sửa → đo lại cho thấy tư duy hệ thống, thay vì liệt kê mẹo rời rạc."
+      ],
+      "points": [
+        "Chạy Lighthouse / PageSpeed Insights — lấy tổng quan LCP/INP/CLS và danh sách opportunities; PageSpeed có cả field data từ user thật (CrUX).",
+        "DevTools Network tab — đọc waterfall: TTFB cao → vấn đề nằm ở server/DB/thiếu CDN; nhiều request lớn → ảnh chưa tối ưu, bundle to, third-party scripts.",
+        "DevTools Performance tab — record quá trình load: long tasks chặn main thread, resource render-blocking, layout shifts.",
+        "Thủ phạm thường gặp — ảnh không nén/sai kích thước, JS bundle lớn chưa code-split, web font chặn render, thiếu cache/CDN, API response chậm.",
+        "Sửa theo impact — xử lý phần chiếm nhiều thời gian nhất trong waterfall trước; đo lại sau mỗi thay đổi; xác nhận bằng field data thay vì chỉ lab data."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "95010-website-load-cham-ban-tiep-can-debug-the-nao"
+  },
+  {
+    "id": "5ac5e4b6-69ba-5f68-9478-13707b4282f4",
+    "question": "Vì sao Next.js khuyên dùng next/image thay cho thẻ <img> thường? Khi nào <img> vẫn chấp nhận được?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97300-vi-sao-next-js-khuyen-dung-next-image-thay-cho-the-img-thuong-khi-nao-img-van-ch",
+    "slug": "vi-sao-next-js-khuyen-dung-next-image-thay-cho-the-img-thuong-khi-nao-img-van-chap-nhan-duoc-5ac5e4b6-69ba-5f68-9478-13707b4282f4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "next/image là một <img> được bọc thêm bốn thứ mà tự làm tay rất tốn công:",
+        "<img> vẫn ổn khi: ảnh là SVG icon nhỏ, ảnh đã tối ưu sẵn từ CDN riêng, hoặc bạn self-host mà không muốn trả chi phí xử lý ảnh."
+      ],
+      "details": [
+        "Khi đó vẫn nên tự đặt width/height và loading=\"lazy\" — đó mới là phần thực sự quan trọng."
+      ],
+      "points": [
+        "Chuyển định dạng và resize theo yêu cầu: server sinh ra bản WebP/AVIF đúng kích thước màn hình đang xem, thay vì bắt điện thoại tải ảnh 3000px.",
+        "Chống layout shift: bắt buộc khai báo width/height (hoặc fill), nên trình duyệt giữ sẵn chỗ → không đẩy nội dung khi ảnh về, giữ CLS thấp.",
+        "Lazy load mặc định: ảnh ngoài viewport không tải cho tới khi cuộn tới.",
+        "priority cho ảnh hero để nó được preload, phục vụ LCP."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "import Image from 'next/image'\n\n<Image src=\"/hero.jpg\" width={1200} height={630} alt=\"Product hero\" priority />"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "97300-vi-sao-next-js-khuyen-dung-next-image-thay-cho-the-img-thuong-khi-nao-img-van-ch"
+  },
+  {
+    "id": "80b7e57c-01d0-5b0d-9162-15e33984e77e",
+    "question": "next/font giúp gì cho hiệu năng? Nó chống layout shift do font bằng cách nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97302-next-font-giup-gi-cho-hieu-nang-no-chong-layout-shift-do-font-bang-cach-nao",
+    "slug": "next-font-giup-gi-cho-hieu-nang-no-chong-layout-shift-do-font-bang-cach-nao-80b7e57c-01d0-5b0d-9162-15e33984e77e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "next/font xử lý ba vấn đề của web font:"
+      ],
+      "details": [
+        "1. Self-host tự động. File font Google được tải về lúc build và phục vụ từ chính domain của bạn. Không còn request sang fonts.googleapis.com → bớt một vòng DNS + TLS tới host lạ, và không có dữ liệu request gửi sang bên thứ ba.\n2. Preload đúng file. Font được thêm vào <link rel=\"preload\"> ngay từ HTML đầu tiên, thay vì chờ CSS parse xong mới phát hiện ra.\n3. Chống layout shift. Đây là phần hay bị hỏi: next/font đọc metric của font thật (chiều cao chữ, bề rộng trung bình) rồi sinh ra một fallback font được chỉnh tỉ lệ qua size-adjust, ascent-override. Chữ hiển thị bằng font hệ thống trong lúc chờ sẽ chiếm gần đúng diện tích của font thật, nên khi font thật về, chữ không nhảy — CLS gần như bằng 0."
+      ],
+      "points": [],
+      "sections": [
+        "Gọi loader ở module scope (ngoài component), nếu không sẽ lỗi build."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "import { Inter } from 'next/font/google'\n\nconst inter = Inter({ subsets: ['latin'], display: 'swap' })\n// <body className={inter.className}>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "97302-next-font-giup-gi-cho-hieu-nang-no-chong-layout-shift-do-font-bang-cach-nao"
+  },
+  {
+    "id": "b909e96e-d632-5768-b22f-50572838383c",
+    "question": "Reflow và repaint khác nhau thế nào? Thao tác nào gây reflow?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97501-reflow-va-repaint-khac-nhau-the-nao-thao-tac-nao-gay-reflow",
+    "slug": "reflow-va-repaint-khac-nhau-the-nao-thao-tac-nao-gay-reflow-b909e96e-d632-5768-b22f-50572838383c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Reflow (layout) là khi trình duyệt phải tính lại hình học — vị trí, kích thước của box. Repaint chỉ vẽ lại pixel mà hình học không đổi. Reflow luôn kéo theo repaint; repaint thì không kéo theo reflow."
+      ],
+      "details": [
+        "Gây reflow: đổi width, height, padding, margin, top/left, font-size, thêm/xóa node DOM, resize cửa sổ.\nChỉ repaint: đổi color, background-color, visibility, box-shadow.\nChỉ composite (rẻ nhất): transform và opacity — chạy trên compositor, không đụng main thread layout.",
+        "Hay bị hỏi tiếp là layout thrashing: đọc thuộc tính hình học ngay sau khi ghi style, buộc trình duyệt flush layout đồng bộ trong mỗi vòng lặp."
+      ],
+      "points": [],
+      "sections": [
+        "Vì vậy animation nên ưu tiên transform/opacity thay vì left/width."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// bad: read after write forces a synchronous layout each iteration\nfor (const el of items) {\n  el.style.width = el.offsetWidth + 10 + 'px'\n}\n\n// good: batch reads, then batch writes\nconst widths = items.map((el) => el.offsetWidth)\nitems.forEach((el, i) => { el.style.width = widths[i] + 10 + 'px' })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "97501-reflow-va-repaint-khac-nhau-the-nao-thao-tac-nao-gay-reflow"
+  },
+  {
+    "id": "381843ac-3ff3-53dd-9935-d0ae771baf4c",
+    "question": "Core Web Vitals là gì? Ba metrics chính là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/781-core-web-vitals-la-gi-ba-metrics-chinh-la-gi",
+    "slug": "core-web-vitals-la-gi-ba-metrics-chinh-la-gi-381843ac-3ff3-53dd-9935-d0ae771baf4c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Core Web Vitals là bộ ba chỉ số của Google đo trải nghiệm người dùng thực, là yếu tố SEO ranking từ 2021.",
+        "Lưu ý: field data (user thật) khác lab data (môi trường kiểm soát) — optimize theo field data."
+      ],
+      "details": [
+        "Cách đo:\n- PageSpeed Insights (field data từ Chrome UX Report + lab data từ Lighthouse) và Search Console Core Web Vitals report.\n- Thư viện web-vitals (API callback):",
+        "TTFB và FCP không phải Core Web Vital nhưng là diagnostic metric quan trọng (TTFB ảnh hưởng LCP mạnh)."
+      ],
+      "points": [
+        "LCP (Largest Contentful Paint) — tốc độ loading: thời điểm render phần tử lớn nhất trong viewport. Good <2.5s, poor >4s.",
+        "INP (Interaction to Next Paint) — độ phản hồi, thay thế FID từ 3/2024: quan sát tất cả interaction trong phiên nhưng báo cáo giá trị gần-tệ-nhất (interaction chậm nhất, bỏ qua vài outlier) — không phải tổng cộng dồn mọi delay. Good <200ms, poor >500ms.",
+        "CLS (Cumulative Layout Shift) — ổn định thị giác: mức layout shift ngoài ý muốn. Good <0.1, poor >0.25."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "import { onLCP, onINP, onCLS } from 'web-vitals'\nonLCP(console.log)\nonINP(console.log)\nonCLS(console.log)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "781-core-web-vitals-la-gi-ba-metrics-chinh-la-gi"
+  },
+  {
+    "id": "834337c9-bece-58ce-a8cd-a6d0e8d5fa25",
+    "question": "LCP (Largest Contentful Paint) là gì? Cách cải thiện LCP?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/782-lcp-largest-contentful-paint-la-gi-cach-cai-thien-lcp",
+    "slug": "lcp-largest-contentful-paint-la-gi-cach-cai-thien-lcp-834337c9-bece-58ce-a8cd-a6d0e8d5fa25",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "LCP đo thời điểm render phần tử lớn nhất trong viewport — thường là hero image, block text lớn hoặc video poster. Good <2.5s, poor >4s."
+      ],
+      "details": [
+        "Cách cải thiện:\n- Cải thiện TTFB trước — server response time, CDN, edge caching; TTFB là phần nền của mọi LCP.\n- Tối ưu ảnh — serve WebP/AVIF (nhỏ hơn JPEG 25–50%), đúng kích thước container, responsive srcset.\n- Preload LCP image — <link rel='preload' as='image' href='hero.webp'> trong <head> + fetchpriority='high' để browser ưu tiên fetch sớm.\n- Không lazy-load LCP image — loading='lazy' trên hero image làm LCP tăng đáng kể; chỉ lazy-load below-fold.\n- Loại bỏ render-blocking resources — defer/async JS không critical, inline critical CSS, preconnect third-party domains.\n- Next.js next/image — tự convert format, responsive size, lazy mặc định; thêm prop priority cho LCP image.",
+        "Lỗi hay gặp: LCP image đặt bằng CSS background-image bị discover trễ (browser phải parse xong CSS) — dùng <img> cho LCP element."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "782-lcp-largest-contentful-paint-la-gi-cach-cai-thien-lcp"
+  },
+  {
+    "id": "26c011ae-e166-50be-88a8-196db29a77d2",
+    "question": "CLS (Cumulative Layout Shift) là gì? Nguyên nhân và cách fix?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/783-cls-cumulative-layout-shift-la-gi-nguyen-nhan-va-cach-fix",
+    "slug": "cls-cumulative-layout-shift-la-gi-nguyen-nhan-va-cach-fix-26c011ae-e166-50be-88a8-196db29a77d2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "CLS đo mức layout shift ngoài ý muốn trong suốt vòng đời trang (không chỉ lúc loading). Good <0.1, poor >0.25."
+      ],
+      "details": [
+        "Cách tính (định nghĩa hiện tại, từ 6/2021):\n- Mỗi shift có điểm = impact fraction × distance fraction.\n- Các shift được gom thành session window (tối đa 5s, ngắt khi có khoảng lặng 1s); điểm CLS của trang = window tệ nhất — không còn là tổng cộng dồn mọi shift như định nghĩa cũ.\n- Shift trong vòng 500ms sau user input (hadRecentInput) không tính vào score.",
+        "Nguyên nhân và fix:\n- Ảnh/video thiếu dimensions — luôn set width/height attribute hoặc CSS aspect-ratio để browser reserve chỗ trước khi load.\n- Web font gây FOUT — font-display: swap + size-adjust khớp metrics fallback font; preload font critical.\n- Content inject động (banner, cookie notice, ads) — reserve chỗ bằng min-height; không chèn content phía trên nội dung đã render.\n- Infinite scroll — append item phía dưới viewport, không phía trên.\n- Animation — dùng transform: translateY() thay top/margin (transform không trigger layout).",
+        "Debug: Chrome DevTools Performance panel, bật Layout Shift Regions trong Rendering tab."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "783-cls-cumulative-layout-shift-la-gi-nguyen-nhan-va-cach-fix"
+  },
+  {
+    "id": "16a86222-8837-50ce-a17a-804a80d6ad55",
+    "question": "Lazy loading là gì? Cách implement trong React?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/784-lazy-loading-la-gi-cach-implement-trong-react",
+    "slug": "lazy-loading-la-gi-cach-implement-trong-react-16a86222-8837-50ce-a17a-804a80d6ad55",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lazy loading trì hoãn tải resource đến khi thực sự cần — giảm initial load time và Time to Interactive."
+      ],
+      "details": [
+        "Đánh đổi: lazy loading tạo waterfall (request phải chờ parent component render xong) — cẩn thận với critical path, chỉ lazy-load phần thật sự non-critical."
+      ],
+      "points": [
+        "Ảnh — <img loading='lazy'> native: browser tự tải khi scroll gần đến; không dùng cho LCP image.",
+        "Component React — const HeavyChart = React.lazy(() => import('./HeavyChart')) + <Suspense fallback={<Spinner/>}>; chunk được split tự động và load on demand. Dùng cho component nặng: chart library, editor, PDF viewer.",
+        "Next.js — dynamic(() => import('./Map'), { ssr: false }) cho component chỉ chạy được trên browser.",
+        "Route-based — mỗi route một chunk với React Router + React.lazy(); đây là pattern chuẩn.",
+        "Preload trước khi cần — gọi import('./HeavyPage') trong onMouseEnter để giảm perceived latency khi user sắp navigate.",
+        "Intersection Observer — API detect element vào viewport để trigger lazy load; nền tảng của nhiều lazy-loading library."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "784-lazy-loading-la-gi-cach-implement-trong-react"
+  },
+  {
+    "id": "1e9c210a-81ba-5a38-b3c1-d5257fe128bc",
+    "question": "Code splitting là gì? Các chiến lược code splitting trong web apps?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/785-code-splitting-la-gi-cac-chien-luoc-code-splitting-trong-web-apps",
+    "slug": "code-splitting-la-gi-cac-chien-luoc-code-splitting-trong-web-apps-1e9c210a-81ba-5a38-b3c1-d5257fe128bc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Code splitting chia bundle thành nhiều chunk nhỏ — initial load nhẹ hơn, phần còn lại tải on demand. Nền tảng là dynamic import(): trả về Promise, bundler tự tách chunk riêng."
+      ],
+      "details": [
+        "Các chiến lược:\n- Route-based — mỗi route một chunk (React Router + React.lazy()); chiến lược nên làm đầu tiên.\n- Component-based — lazy-load component nặng (rich text editor, PDF viewer, 3D) chỉ khi cần.\n- Vendor splitting — tách node_modules thành chunk riêng (ít thay đổi hơn app code → cache lâu hơn). Webpack: SplitChunksPlugin. Vite: cấu hình thủ công qua build.rollupOptions.output.manualChunks — auto vendor-split đã bị bỏ từ Vite 2.9, plugin opt-in splitVendorChunkPlugin cũng đã deprecated.\n- Shared chunks — code dùng chung nhiều route tách riêng, tránh duplicate trong nhiều chunk.\n- Prefetch/preload — <link rel='prefetch'> cho navigation kế tiếp (lúc browser idle); Webpack magic comment: import(/* webpackPrefetch: true */ './NextPage').",
+        "Phân tích: webpack-bundle-analyzer, vite-bundle-visualizer, source-map-explorer.",
+        "Lưu ý: quá nhiều chunk nhỏ có thể tệ hơn một chunk lớn do overhead request — HTTP/2 multiplexing giảm nhưng không xóa hẳn vấn đề."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "785-code-splitting-la-gi-cac-chien-luoc-code-splitting-trong-web-apps"
+  },
+  {
+    "id": "f1750b06-c228-5fb4-a37c-290dba6b9cb8",
+    "question": "HTTP caching hoạt động như thế nào? Cache-Control headers?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/786-http-caching-hoat-dong-nhu-the-nao-cache-control-headers",
+    "slug": "http-caching-hoat-dong-nhu-the-nao-cache-control-headers-f1750b06-c228-5fb4-a37c-290dba6b9cb8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "HTTP caching giảm bandwidth và latency bằng cách lưu response tại browser hoặc CDN, điều khiển qua header Cache-Control."
+      ],
+      "details": [
+        "Directives chính:\n- max-age=3600 — cache 1 giờ trước khi stale; no-cache — phải revalidate với server trước khi dùng (không phải 'không cache'); no-store — không cache bao giờ (sensitive data).\n- public — CDN được phép cache; private — chỉ browser; immutable — bỏ qua revalidation kể cả khi hết max-age, dùng cho asset có content hash.",
+        "Chiến lược thực dụng:\n- Static assets có hash (bundle.abc123.js) — public, max-age=31536000, immutable: cache 1 năm, không bao giờ revalidate.\n- HTML — no-cache: revalidate mỗi lần, serve từ cache nếu ETag khớp.\n- Conditional request — client gửi If-None-Match (ETag) / If-Modified-Since; nếu không đổi, server trả 304 Not Modified không body — tiết kiệm bandwidth.\n- stale-while-revalidate — max-age=60, stale-while-revalidate=300: serve bản stale ngay, revalidate chạy nền — zero latency impact.\n- CDN — đặt s-maxage riêng để CDN (Cloudflare, Vercel Edge) cache lâu hơn browser.",
+        "Cache busting: đổi URL khi content đổi (content hash trong tên file, query ?v=2)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "786-http-caching-hoat-dong-nhu-the-nao-cache-control-headers"
+  },
+  {
+    "id": "9823c43b-ba43-5082-a930-12d3673eb453",
+    "question": "Image optimization trong web: các kỹ thuật phổ biến?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/787-image-optimization-trong-web-cac-ky-thuat-pho-bien",
+    "slug": "image-optimization-trong-web-cac-ky-thuat-pho-bien-9823c43b-ba43-5082-a930-12d3673eb453",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Tối ưu ảnh là một trong những cách hiệu quả nhất để giảm page weight và cải thiện LCP."
+      ],
+      "details": [],
+      "points": [
+        "Format hiện đại — WebP nhỏ hơn JPEG 25–34%, AVIF ~50% (encode chậm hơn); dùng <picture> với fallback cho browser chưa support.",
+        "Responsive images — srcset + sizes để browser chọn đúng size theo device; next/image tự generate.",
+        "Đúng kích thước — không serve ảnh 2000px cho container 400px; Image CDN (Cloudinary, Imgix) resize on demand qua URL params.",
+        "Nén — lossy (JPEG quality 80 thường không phân biệt được với 100) hoặc lossless (PNG, WebP lossless); tools: Squoosh, Sharp, ImageMagick.",
+        "Lazy load — loading='lazy' cho ảnh below-fold; không áp dụng cho LCP image.",
+        "Preload ảnh critical — <link rel='preload' as='image' href='hero.webp' imagesrcset='...'> cho hero image.",
+        "LQIP",
+        "placeholder='blur'"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "787-image-optimization-trong-web-cac-ky-thuat-pho-bien"
+  },
+  {
+    "id": "4fc7c08e-a143-509a-9b7a-c567e72a4900",
+    "question": "Các chỉ số web performance LCP, INP, CLS, TTFB là gì và tối ưu thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/977-cac-chi-so-web-performance-lcp-inp-cls-ttfb-la-gi-va-toi-uu-the-nao",
+    "slug": "cac-chi-so-web-performance-lcp-inp-cls-ttfb-la-gi-va-toi-uu-the-nao-4fc7c08e-a143-509a-9b7a-c567e72a4900",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "LCP (Largest Contentful Paint) đo thời gian phần tử lớn nhất hiển thị trên màn hình, phản ánh tốc độ tải trực quan. INP (Interaction to Next Paint) đo thời gian phản hồi của tất cả tương tác trong suốt vòng đời trang, không chỉ tương tác đầu tiên — thay thế FID từ tháng 3/2024 trong Core Web Vitals. CLS (Cumulative Layout Shift) đo mức độ dịch chuyển layout bất ngờ, ảnh hưởng đến trải nghiệm ổn định thị giác. TTFB (Time to First Byte) đo thời gian từ lúc gửi request đến khi nhận byte đầu tiên từ server."
+      ],
+      "details": [
+        "Để tối ưu: lazy load hình ảnh, code splitting, minify tài nguyên, cache hiệu quả, dùng CDN, và tối ưu server response time."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "977-cac-chi-so-web-performance-lcp-inp-cls-ttfb-la-gi-va-toi-uu-the-nao"
+  },
+  {
+    "id": "0cb7175b-974d-583b-9e1c-993164d80bb3",
+    "question": "Browser rendering pipeline. Critical rendering path?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/979-browser-rendering-pipeline-critical-rendering-path",
+    "slug": "browser-rendering-pipeline-critical-rendering-path-0cb7175b-974d-583b-9e1c-993164d80bb3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Browser rendering pipeline gồm các bước:"
+      ],
+      "details": [
+        "Critical rendering path là chuỗi bước tối thiểu trình duyệt phải hoàn thành trước khi hiển thị trang — CSS và JavaScript mặc định sẽ block quá trình render.",
+        "Tối ưu bằng cách: inline critical CSS, defer hoặc async cho JavaScript, giảm kích thước CSS/JS, và dùng DevTools Coverage để tìm code không sử dụng."
+      ],
+      "points": [
+        "parse HTML thành DOM tree,",
+        "parse CSS thành CSSOM tree,",
+        "kết hợp DOM và CSSOM thành render tree,",
+        "tính toán layout (vị trí, kích thước),",
+        "paint (vẽ pixel),",
+        "composite (ghép các layer)"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "979-browser-rendering-pipeline-critical-rendering-path"
+  },
+  {
+    "id": "7bc7f9aa-0911-5289-ad6f-8fca5a204f77",
+    "question": "Reflow (layout) vs repaint khác nhau gì? Layout thrashing là gì và tránh thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/95011-reflow-layout-vs-repaint-khac-nhau-gi-layout-thrashing-la-gi-va-tranh-the-nao",
+    "slug": "reflow-layout-vs-repaint-khac-nhau-gi-layout-thrashing-la-gi-va-tranh-the-nao-7bc7f9aa-0911-5289-ad6f-8fca5a204f77",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Reflow (layout) là browser tính lại vị trí và kích thước phần tử — tốn kém; repaint chỉ vẽ lại pixel — rẻ hơn; layout thrashing là ép reflow đồng bộ lặp lại do xen kẽ đọc–ghi style."
+      ],
+      "details": [
+        "Debug: DevTools Performance tab đánh dấu forced reflow kèm stack trace tới dòng code gây ra."
+      ],
+      "points": [
+        "Reflow trigger — thay đổi ảnh hưởng geometry: width/height, font-size, thêm/xóa DOM node, đổi display; reflow thường kéo theo repaint.",
+        "Repaint trigger — thay đổi chỉ ảnh hưởng hình ảnh: color, background, visibility — không cần tính lại layout.",
+        "transform / opacity — thường chạy ở compositor thread, không gây reflow lẫn repaint → lựa chọn đúng cho animation.",
+        "Layout thrashing (forced synchronous layout) — đọc thuộc tính layout (offsetHeight, getBoundingClientRect()) ngay sau khi ghi style buộc browser phải layout ngay lập tức để trả lời; lặp trong vòng for → hàng loạt layout đồng bộ, main thread nghẽn.",
+        "Cách tránh — batch: đọc tất cả trước, ghi sau; dồn write vào requestAnimationFrame; cache giá trị đã đọc; thư viện như FastDOM tự tách read/write."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "95011-reflow-layout-vs-repaint-khac-nhau-gi-layout-thrashing-la-gi-va-tranh-the-nao"
+  },
+  {
+    "id": "df621adc-4958-5789-b995-ca6ff4e0e0b3",
+    "question": "Dùng useMemo/useCallback sai có thể làm app chậm hơn không dùng. Vì sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97155-dung-usememo-usecallback-sai-co-the-lam-app-cham-hon-khong-dung-vi-sao",
+    "slug": "dung-usememo-usecallback-sai-co-the-lam-app-cham-hon-khong-dung-vi-sao-df621adc-4958-5789-b995-ca6ff4e0e0b3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Có.",
+        "Ba kiểu dùng sai hay gặp:\n- Memo hoá phép tính rẻ — cộng, nối chuỗi, map trên 10 phần tử. Chi phí quản lý lớn hơn chi phí tính.\n- Dependency là tham chiếu luôn đổi — useMemo(..., [options]) với options là object literal từ cha: cache không bao giờ trúng, chỉ tốn thêm.\n- useCallback cho hàm truyền vào component không memo — con vẫn render lại mỗi lần, ổn định tham chiếu chẳng để làm gì."
+      ],
+      "details": [
+        "Cả hai đều không miễn phí: mỗi hook thêm một entry vào bộ nhớ của component, thêm mảng dependency phải tạo và so sánh mỗi lần render, và giữ giá trị cũ sống lâu hơn cần thiết trong bộ nhớ.",
+        "Dùng khi có lý do rõ: phép tính thật sự nặng (lọc/sắp xếp danh sách lớn), giữ tham chiếu ổn định cho memo con hoặc cho dependency của useEffect, hoặc giữ danh tính của object đưa vào context value. Nguyên tắc: đo trước bằng Profiler, memo hoá sau."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JSX",
+          "code": "// worse than doing nothing: the computation is cheaper than the bookkeeping\nconst total = useMemo(() => price * qty, [price, qty])\nconst label = useMemo(() => `${first} ${last}`, [first, last])"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "97155-dung-usememo-usecallback-sai-co-the-lam-app-cham-hon-khong-dung-vi-sao"
+  },
+  {
+    "id": "d69cd8cb-6fd8-57a6-8a65-7838f197624d",
+    "question": "Trang bị khựng khi gõ vào một ô input ở form lớn. Bạn chẩn đoán và sửa thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97156-trang-bi-khung-khi-go-vao-mot-o-input-o-form-lon-ban-chan-doan-va-sua-the-nao",
+    "slug": "trang-bi-khung-khi-go-vao-mot-o-input-o-form-lon-ban-chan-doan-va-sua-the-nao-d69cd8cb-6fd8-57a6-8a65-7838f197624d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Nguyên nhân điển hình: state đặt quá cao. Ô input controlled giữ state ở component cha (hoặc ở App), nên mỗi ký tự gõ vào làm render lại toàn bộ cây con — kể cả bảng, biểu đồ, danh sách không liên quan."
+      ],
+      "details": [
+        "Hướng sửa theo thứ tự ưu tiên:",
+        "1. Colocate state — đưa state xuống đúng component dùng nó. Nếu chỉ ô search cần giá trị, tách thành <SearchField /> giữ state riêng và chỉ báo lên trên khi cần (submit, debounce).\n2. Tách component — bọc phần dùng state vào một component nhỏ, phần nặng nằm ngoài phạm vi render lại.\n3. Hoãn phần nặng — useDeferredValue cho giá trị dùng để lọc danh sách, giữ ô input phản hồi tức thì.\n4. Chỉ khi vẫn chậm mới tính tới memo cho các nhánh đắt tiền.",
+        "Lift state up vẫn đúng khi nhiều component thật sự cần chia sẻ giá trị đó — đừng colocate tới mức phải đồng bộ hai nguồn sự thật. Nguyên tắc: đặt state ở tổ tiên chung gần nhất của những component cần nó, không cao hơn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "97156-trang-bi-khung-khi-go-vao-mot-o-input-o-form-lon-ban-chan-doan-va-sua-the-nao"
+  },
+  {
+    "id": "e245b3a0-5b51-5846-af7f-116c783abbb1",
+    "question": "Trang danh sách sản phẩm tải chậm vì ảnh. Bạn tối ưu những gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97159-trang-danh-sach-san-pham-tai-cham-vi-anh-ban-toi-uu-nhung-gi",
+    "slug": "trang-danh-sach-san-pham-tai-cham-vi-anh-ban-toi-uu-nhung-gi-e245b3a0-5b51-5846-af7f-116c783abbb1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Ảnh thường chiếm phần lớn dung lượng trang, và xử lý sai còn gây layout shift.",
+        "Trong Next.js, next/image gói sẵn các phần này: tự sinh srcset, tự lazy load trừ khi đặt priority, và bắt buộc khai báo kích thước nên tránh được layout shift."
+      ],
+      "details": [
+        "Việc cần làm:\n- Lazy load ảnh dưới màn hình đầu: loading=\"lazy\". Ảnh trong viewport đầu tiên (LCP) phải để loading=\"eager\" kèm fetchpriority=\"high\" — lazy load ảnh hero làm LCP tệ đi.\n- Đặt width/height hoặc aspect-ratio để trình duyệt giữ chỗ, tránh Cumulative Layout Shift khi ảnh tải xong.\n- Phục vụ đúng kích thước qua srcset + sizes — không gửi ảnh 2000px cho thumbnail 200px.\n- Định dạng hiện đại (WebP/AVIF) với fallback.",
+        "Với ảnh hero, nhớ priority — đây là lỗi hay gặp khiến LCP kém dù đã dùng next/image."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JSX",
+          "code": "<img\n  src=\"/p/200.webp\"\n  srcSet=\"/p/200.webp 200w, /p/400.webp 400w\"\n  sizes=\"(max-width: 640px) 50vw, 200px\"\n  width={200}\n  height={200}\n  loading=\"lazy\"\n  decoding=\"async\"\n  alt={product.name}\n/>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "97159-trang-danh-sach-san-pham-tai-cham-vi-anh-ban-toi-uu-nhung-gi"
+  },
+  {
+    "id": "8b030eb6-08be-5c3f-8a66-3181d1e159b9",
+    "question": "Chia bundle bằng lazy + Suspense nên đặt ranh giới ở đâu? Đặt sai gây vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97160-chia-bundle-bang-lazy-suspense-nen-dat-ranh-gioi-o-dau-dat-sai-gay-van-de-gi",
+    "slug": "chia-bundle-bang-lazy-suspense-nen-dat-ranh-gioi-o-dau-dat-sai-gay-van-de-gi-8b030eb6-08be-5c3f-8a66-3181d1e159b9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Ranh giới nên chọn:\n- Theo route — mặc định hợp lý nhất, người dùng chỉ tải code trang đang xem.\n- Component nặng, ít dùng — rich text editor, chart library, map, modal phức tạp, code viewer.\n- Nhánh theo điều kiện — giao diện admin, tab hiếm khi mở."
+      ],
+      "details": [
+        "Đặt sai thì:\n- Chia quá nhỏ — hàng chục chunk vài KB, tăng số request và overhead, tổng thời gian tải xấu hơn.\n- lazy cho component luôn hiển thị ngay — chỉ đổi từ tải một lần thành tải hai chặng (waterfall), màn hình nhấp nháy skeleton vô ích.\n- Khai báo lazy bên trong component — mỗi lần render tạo một kiểu component mới → React unmount/mount lại, mất state và tải lại. Luôn khai báo ở top-level module.\n- Không có Suspense bao ngoài hoặc fallback khác chiều cao nội dung thật → layout shift.",
+        "Kèm theo: preload khi người dùng hover/focus vào nút mở, để chunk có sẵn lúc thực sự cần."
+      ],
+      "points": [],
+      "sections": [
+        "lazy biến một import tĩnh thành import() động, tạo chunk riêng chỉ tải khi component được render lần đầu."
+      ],
+      "codeExamples": [
+        {
+          "language": "JSX",
+          "code": "const Editor = lazy(() => import('./Editor'))\n\n<Suspense fallback={<EditorSkeleton />}>\n  {isEditing && <Editor />}\n</Suspense>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "97160-chia-bundle-bang-lazy-suspense-nen-dat-ranh-gioi-o-dau-dat-sai-gay-van-de-gi"
+  },
+  {
+    "id": "90d24335-f713-5c2b-9c5b-7d2ffcb5bd97",
+    "question": "Dùng React DevTools Profiler thế nào để tìm ra component gây chậm?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97161-dung-react-devtools-profiler-the-nao-de-tim-ra-component-gay-cham",
+    "slug": "dung-react-devtools-profiler-the-nao-de-tim-ra-component-gay-cham-90d24335-f713-5c2b-9c5b-7d2ffcb5bd97",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Quy trình thực tế:"
+      ],
+      "details": [
+        "1. Bật \"Highlight updates when components render\" trong tab Components. Thao tác thử vài lần — viền nhấp nháy chỉ ngay những vùng render lại ngoài mong đợi (gõ một ký tự mà cả sidebar nháy là dấu hiệu rõ).\n2. Record một tương tác ở tab Profiler: bấm record, thực hiện đúng hành động chậm, dừng record.\n3. Đọc flamegraph — chiều rộng là thời gian render của component và cây con. Thanh xám là component không render lần đó. Tìm thanh rộng bất thường.\n4. Ranked chart — sắp xếp component theo thời gian render giảm dần, đi thẳng vào thủ phạm.\n5. Bật \"Record why each component rendered\" trong Profiler settings — mỗi commit sẽ ghi rõ lý do: props thay đổi (prop nào), state thay đổi, hook thay đổi, hay parent rendered.",
+        "Lưu ý khi đọc số:\n- Đo trên build production (profiling build) — development build chậm hơn nhiều lần, kết luận dễ sai.\n- Bật CPU throttling 4x-6x để tái hiện máy yếu; nhiều vấn đề chỉ lộ ra ở đó.\n- Nhiều commit rất nhanh liên tiếp thường xấu hơn một commit hơi lâu — chú ý cả biểu đồ commit ở trên.",
+        "Nếu React render nhanh mà trang vẫn giật, chuyển sang tab Performance của trình duyệt: nút thắt lúc đó nằm ở layout/paint hoặc script bên thứ ba, không phải ở React."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "97161-dung-react-devtools-profiler-the-nao-de-tim-ra-component-gay-cham"
+  },
+  {
+    "id": "7fe6316a-29c0-560b-904c-2b17dc6819de",
+    "question": "First Load JS của trang lên 800KB. Bạn điều tra và giảm bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97309-first-load-js-cua-trang-len-800kb-ban-dieu-tra-va-giam-bang-cach-nao",
+    "slug": "first-load-js-cua-trang-len-800kb-ban-dieu-tra-va-giam-bang-cach-nao-7fe6316a-29c0-560b-904c-2b17dc6819de",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Bản đồ treemap cho thấy ngay thư viện nào chiếm chỗ. Bảng tổng kết của next build cũng liệt kê First Load JS từng route."
+      ],
+      "details": [
+        "Lưu ý con số này không chỉ là dung lượng tải: mỗi KB JavaScript còn tốn thời gian parse và execute, ảnh hưởng trực tiếp tới INP trên máy yếu.",
+        "Các cách cắt giảm, theo thứ tự hiệu quả:"
+      ],
+      "points": [
+        "Kéo component xuống server. Phần lớn bundle lớn là do 'use client' đặt quá cao trong cây. Đẩy ranh giới xuống thật sát chỗ cần tương tác — component chỉ hiển thị thì để nguyên Server Component, code của nó không đi vào bundle.",
+        "Sửa barrel import. import { Button } from '@/components' qua một index.ts re-export tất cả có thể kéo theo cả thư viện. Import thẳng đường dẫn cụ thể, hoặc khai báo optimizePackageImports cho các package UI/icon.",
+        "Đổi thư viện nặng. moment (~70KB kèm locale) đổi sang date-fns hoặc Intl có sẵn; lodash đổi sang import từng hàm.",
+        "next/dynamic cho những khối chỉ dùng khi tương tác: modal, editor, chart, bản đồ.",
+        "Kiểm tra trùng lặp. Hai phiên bản của cùng một package trong pnpm-lock nghĩa là nó bị đóng gói hai lần."
+      ],
+      "sections": [
+        "Đo trước, sửa sau. Bật bundle analyzer để biết chunk nào nặng:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// next.config.js\nconst withBundleAnalyzer = require('@next/bundle-analyzer')({ enabled: process.env.ANALYZE === 'true' })\nmodule.exports = withBundleAnalyzer({})\n// ANALYZE=true next build"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "97309-first-load-js-cua-trang-len-800kb-ban-dieu-tra-va-giam-bang-cach-nao"
+  },
+  {
+    "id": "8b2a06b5-23f3-594a-bbc9-1d1eed10a67b",
+    "question": "Lighthouse chấm 95 điểm nhưng người dùng vẫn kêu chậm. Đo Core Web Vitals thật của người dùng trong Next.js bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97310-lighthouse-cham-95-diem-nhung-nguoi-dung-van-keu-cham-do-core-web-vitals-that-cu",
+    "slug": "lighthouse-cham-95-diem-nhung-nguoi-dung-van-keu-cham-do-core-web-vitals-that-cua-nguoi-dung-trong-n-8b2a06b5-23f3-594a-bbc9-1d1eed10a67b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì Lighthouse là lab data: một lần chạy, một thiết bị mô phỏng, mạng mô phỏng, không cache, không extension. Người dùng thật thì đủ loại máy, mạng 3G, tab chạy nền. Cái quyết định xếp hạng là field data — số liệu thu từ người dùng thật.",
+        "Đặt component này trong root layout. Dùng sendBeacon để dữ liệu vẫn gửi được khi người dùng đóng tab."
+      ],
+      "details": [
+        "Next.js có sẵn hook để bắt số liệu đó ngay trong app:",
+        "Đọc số liệu cho đúng: luôn nhìn phân vị 75 chứ không phải trung bình — trung bình bị nhóm máy mạnh kéo xuống đẹp trong khi 25% người dùng vẫn chậm. Chia theo route và theo loại thiết bị, vì thường chỉ một vài trang cụ thể có vấn đề.",
+        "Ngưỡng \"tốt\": LCP dưới 2.5s, CLS dưới 0.1, INP dưới 200ms."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "'use client'\nimport { useReportWebVitals } from 'next/web-vitals'\n\nexport function WebVitals() {\n  useReportWebVitals((metric) => {\n    navigator.sendBeacon('/api/vitals', JSON.stringify({\n      name: metric.name,   // LCP | CLS | INP | FCP | TTFB\n      value: metric.value,\n      id: metric.id,\n      path: window.location.pathname,\n    }))\n  })\n  return null\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "97310-lighthouse-cham-95-diem-nhung-nguoi-dung-van-keu-cham-do-core-web-vitals-that-cu"
+  },
+  {
+    "id": "145af92d-aeff-5dea-82ec-ec5f5103da42",
+    "question": "preload, prefetch, preconnect và dns-prefetch khác nhau thế nào? Dùng cái nào khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97505-preload-prefetch-preconnect-va-dns-prefetch-khac-nhau-the-nao-dung-cai-nao-khi-n",
+    "slug": "preload-prefetch-preconnect-va-dns-prefetch-khac-nhau-the-nao-dung-cai-nao-khi-nao-145af92d-aeff-5dea-82ec-ec5f5103da42",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả bốn đều là resource hint, khác nhau ở thời điểm và mức độ công việc trình duyệt làm trước.",
+        "Lưu ý thực chiến: font phải có crossorigin dù cùng origin, thiếu sẽ tải lại lần hai."
+      ],
+      "details": [
+        "Và preload quá nhiều thứ sẽ giành băng thông với chính tài nguyên quan trọng, làm LCP xấu đi."
+      ],
+      "points": [
+        "preload — tải ngay, ưu tiên cao một tài nguyên trang hiện tại chắc chắn cần nhưng trình duyệt phát hiện muộn (font trong CSS, ảnh LCP nằm trong CSS background, script tách chunk). Bắt buộc khai as đúng, sai as sẽ tải hai lần.",
+        "prefetch — tải với ưu tiên thấp nhất, cho điều hướng tương lai. Ví dụ prefetch bundle của trang chi tiết khi người dùng đang ở trang danh sách.",
+        "preconnect — không tải file, chỉ bắt tay trước với origin khác: DNS + TCP + TLS. Có lợi khi biết chắc sắp gọi tới CDN/API đó. Đừng khai quá 2-3 origin vì mỗi kết nối vẫn tốn tài nguyên.",
+        "dns-prefetch — chỉ phân giải DNS, rẻ hơn preconnect, hợp làm phương án dự phòng cho origin ít chắc chắn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "97505-preload-prefetch-preconnect-va-dns-prefetch-khac-nhau-the-nao-dung-cai-nao-khi-n"
+  },
+  {
+    "id": "e1da6e2b-c932-5c6d-a9c4-18435a3dcb71",
+    "question": "LCP, INP, CLS đo cái gì? Ngưỡng tốt là bao nhiêu và cải thiện từng chỉ số ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97508-lcp-inp-cls-do-cai-gi-nguong-tot-la-bao-nhieu-va-cai-thien-tung-chi-so-ra-sao",
+    "slug": "lcp-inp-cls-do-cai-gi-nguong-tot-la-bao-nhieu-va-cai-thien-tung-chi-so-ra-sao-e1da6e2b-c932-5c6d-a9c4-18435a3dcb71",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba chỉ số Core Web Vitals đo ba trải nghiệm khác nhau:"
+      ],
+      "details": [
+        "Cách đo: Lighthouse/DevTools là lab data (máy mình, mạng giả lập); con số Google dùng xếp hạng là field data từ CrUX. Trong app tự đo bằng thư viện web-vitals rồi bắn về analytics. Chênh lệch lab và field là câu hỏi nối tiếp rất hay gặp — lab không có mạng thật, thiết bị yếu, và không có tương tác người dùng nên INP thường không đo được trong lab."
+      ],
+      "points": [
+        "LCP (Largest Contentful Paint) — thời điểm phần tử nội dung lớn nhất trong viewport hiển thị. Tốt: ≤ 2.5s. Thường là ảnh banner hoặc khối heading. Cải thiện: giảm TTFB, preload ảnh LCP và cho fetchpriority=\"high\", không lazy-load ảnh trên màn hình đầu, cắt bớt CSS/JS chặn render.",
+        "INP (Interaction to Next Paint) — độ trễ từ lúc người dùng tương tác tới khung hình kế tiếp, lấy theo tương tác chậm nhất trong phiên. Tốt: ≤ 200ms. Đã thay FID từ 2024. Cải thiện: chia nhỏ long task, giảm khối lượng render lại của React, tránh xử lý nặng đồng bộ trong handler.",
+        "CLS (Cumulative Layout Shift) — tổng mức dịch chuyển layout ngoài ý muốn. Tốt: ≤ 0.1. Cải thiện: khai width/height (hoặc aspect-ratio) cho ảnh và iframe, chừa sẵn chỗ cho banner/quảng cáo, dùng font-display: optional hoặc preload font để tránh nhảy chữ."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "97508-lcp-inp-cls-do-cai-gi-nguong-tot-la-bao-nhieu-va-cai-thien-tung-chi-so-ra-sao"
+  },
+  {
+    "id": "3e1e163e-2253-544f-ad94-7487aa66486f",
+    "question": "loading=\"lazy\" và fetchpriority dùng thế nào cho đúng? Vì sao ảnh trên màn hình đầu không nên lazy-load?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97509-loading-lazy-va-fetchpriority-dung-the-nao-cho-dung-vi-sao-anh-tren-man-hinh-dau",
+    "slug": "loading-lazy-va-fetchpriority-dung-the-nao-cho-dung-vi-sao-anh-tren-man-hinh-dau-khong-nen-lazy-load-3e1e163e-2253-544f-ad94-7487aa66486f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "loading=\"lazy\" bảo trình duyệt hoãn tải ảnh cho tới khi sắp lọt viewport, làm nhẹ đợt tải đầu. fetchpriority thì không đổi thứ tự phát hiện, chỉ chỉnh mức ưu tiên khi trình duyệt xếp hàng tải.",
+        "Vì sao không lazy-load ảnh màn hình đầu: ảnh lazy chỉ được xếp hàng sau khi layout xong và biết nó nằm trong viewport, nên bị tải trễ hơn hẳn so với ảnh thường. Nếu đó là phần tử LCP thì LCP xấu đi đáng kể. Đây là lỗi rất hay gặp khi lập trình viên bật loading=\"lazy\" cho toàn bộ ảnh."
+      ],
+      "details": [
+        "Cách dùng đúng theo vị trí:",
+        "Luôn khai width/height (hoặc aspect-ratio): trình duyệt chừa sẵn chỗ nên không phát sinh CLS khi ảnh về. Thêm decoding=\"async\" để việc giải mã ảnh không chặn main thread."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "97509-loading-lazy-va-fetchpriority-dung-the-nao-cho-dung-vi-sao-anh-tren-man-hinh-dau"
+  },
+  {
+    "id": "d56c72ac-883e-5fc4-96c7-ebde9ec2c8c8",
+    "question": "Passive event listener là gì? Vì sao nó làm cuộn trang mượt hơn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97510-passive-event-listener-la-gi-vi-sao-no-lam-cuon-trang-muot-hon",
+    "slug": "passive-event-listener-la-gi-vi-sao-no-lam-cuon-trang-muot-hon-d56c72ac-883e-5fc4-96c7-ebde9ec2c8c8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Với touchstart, touchmove, wheel, trình duyệt không biết trước handler có gọi preventDefault() để chặn cuộn hay không. Nếu listener không khai gì, trình duyệt phải chờ handler chạy xong rồi mới quyết định cuộn — mỗi lần chạm là một lần trễ, cuộn thấy khựng.",
+        "Lưu ý:\n- Trong listener passive mà vẫn gọi preventDefault() thì lệnh bị bỏ qua và console cảnh báo.\n- Chrome đã mặc định passive cho touchstart/touchmove/wheel gắn ở window, document, document.body; các phần tử khác vẫn cần khai tay.\n- Muốn chặn cuộn (vd khóa nền khi mở modal), cách bền hơn là dùng CSS touch-action: none / overflow: hidden thay vì preventDefault() trong handler."
+      ],
+      "details": [
+        "{ passive: true } là lời cam kết \"handler này sẽ không gọi preventDefault()\", nên trình duyệt cuộn ngay lập tức song song với việc chạy handler."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// scroll starts immediately, handler runs in parallel\nwindow.addEventListener('touchmove', onMove, { passive: true })\n\n// need to block scrolling -> must stay non-passive\nel.addEventListener('wheel', onWheel, { passive: false })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "97510-passive-event-listener-la-gi-vi-sao-no-lam-cuon-trang-muot-hon"
+  },
+  {
+    "id": "367e0b01-5738-5f77-9be3-9067357ad304",
+    "question": "Một trang tải rất chậm vì bundle JavaScript quá lớn — bạn chia nhỏ thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97664-mot-trang-tai-rat-cham-vi-bundle-javascript-qua-lon-ban-chia-nho-the-nao",
+    "slug": "mot-trang-tai-rat-cham-vi-bundle-javascript-qua-lon-ban-chia-nho-the-nao-367e0b01-5738-5f77-9be3-9067357ad304",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Đo trước, cắt sau. Mở bundle analyzer để biết dung lượng đến từ đâu; thường 2–3 thư viện nặng chiếm phần lớn (thư viện biểu đồ, trình soạn thảo rich text, thư viện xử lý ngày tháng, bản đồ).",
+        "3. Thay thư viện nặng bằng API sẵn có: định dạng ngày giờ dùng Intl thay cho thư viện ngày tháng đầy đủ; icon import lẻ từng cái thay vì import cả bộ.\n4. Kiểm tra tree-shaking: import { debounce } from 'lodash' kéo cả gói, lodash-es hoặc import đúng đường dẫn con thì không."
+      ],
+      "details": [
+        "Thứ tự xử lý theo mức hiệu quả:",
+        "1. Tách theo route. Mỗi trang là một chunk riêng, người dùng vào trang chủ không phải tải code của trang quản trị.\n2. Lazy load theo tương tác. Code chỉ chạy khi mở modal, chuyển tab hay cuộn xuống thì để lazy + Suspense:",
+        "Hai bẫy thường gặp:"
+      ],
+      "points": [
+        "Chia quá vụn làm tăng số request và thời gian chờ chuỗi phụ thuộc; nhóm các chunk nhỏ liên quan lại.",
+        "Fallback rỗng khiến trang nhảy layout khi chunk về. Dùng skeleton đúng kích thước, và prefetch chunk khi người dùng hover vào nút mở để cảm giác tức thì."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JSX",
+          "code": "const ReportChart = lazy(() => import('./report-chart'))\n\n{showChart && (\n  <Suspense fallback={<ChartSkeleton />}>\n    <ReportChart data={data} />\n  </Suspense>\n)}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "97664-mot-trang-tai-rat-cham-vi-bundle-javascript-qua-lon-ban-chia-nho-the-nao"
+  },
+  {
+    "id": "384ec250-07ab-5e5f-9071-bf790c3d1d9a",
+    "question": "p99 tính từ histogram thế nào? Vì sao không được lấy trung bình p99 của nhiều instance?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98507-p99-tinh-tu-histogram-the-nao-vi-sao-khong-duoc-lay-trung-binh-p99-cua-nhieu-ins",
+    "slug": "p99-tinh-tu-histogram-the-nao-vi-sao-khong-duoc-lay-trung-binh-p99-cua-nhieu-instance-384ec250-07ab-5e5f-9071-bf790c3d1d9a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Histogram không lưu từng giá trị mà đếm số quan sát rơi vào các bucket cộng dồn: le=0.1, le=0.5, le=1, le=+Inf. Mỗi bucket là một counter, cộng được giữa các instance. p99 được nội suy từ các bucket này (histogram_quantile(0.99, ...) trong PromQL), nên độ chính xác phụ thuộc vào việc bucket có đặt sát vùng giá trị thật hay không — bucket le=1 rồi nhảy thẳng le=10 thì mọi p99 trong khoảng đó đều là ước lượng thô.",
+        "A gánh gần như toàn bộ traffic nên p99 thật của cả cụm gần 100ms, không phải 500ms. Trung bình có trọng số theo traffic cũng vẫn sai, vì phân vị phụ thuộc vào hình dạng phân bố, không phải vào giá trị phân vị của từng phần.",
+        "sum by (le)"
+      ],
+      "details": [
+        "Vì sao không trung bình các p99: phân vị không cộng tuyến tính. Trung bình của p99 hai instance không phải p99 của toàn hệ.",
+        "Cách đúng: cộng bucket counter của mọi instance rồi mới tính phân vị một lần trên tổng:",
+        "Đây cũng là lý do nên dùng histogram thay vì summary: summary tính phân vị ngay tại phía client nên không gộp được giữa các instance."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PROMQL",
+          "code": "instance A: 1000 req/s, p99 = 100ms\ninstance B:   10 req/s, p99 = 900ms\naverage of the two p99 = 500ms   # meaningless"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "98507-p99-tinh-tu-histogram-the-nao-vi-sao-khong-duoc-lay-trung-binh-p99-cua-nhieu-ins"
+  },
+  {
+    "id": "89bdeeab-343f-58cc-896b-c1d2166d5a48",
+    "question": "Bundle analysis: cách phát hiện và giảm bundle size?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "bundle-analysis-cach-phat-hien-va-giam-bundle-size-89bdeeab-343f-58cc-896b-c1d2166d5a48",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": null
+  },
+  {
+    "id": "a913f51d-55eb-5053-8c9b-3c3079464a2b",
+    "question": "Service Worker và caching strategy trong PWA là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "service-worker-va-caching-strategy-trong-pwa-la-gi-a913f51d-55eb-5053-8c9b-3c3079464a2b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": null
+  },
+  {
+    "id": "262f3cf9-1275-5855-9fa3-7066457c1473",
+    "question": "Virtual scrolling (windowing) là gì? Khi nào cần dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "virtual-scrolling-windowing-la-gi-khi-nao-can-dung-262f3cf9-1275-5855-9fa3-7066457c1473",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": null
+  },
+  {
+    "id": "a38e88c3-7890-56aa-a8c5-67284a0e461a",
+    "question": "Bảng 10.000 dòng scroll giật. Bạn xử lý theo thứ tự nào, và virtualization có những cạm bẫy gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "bang-10-000-dong-scroll-giat-ban-xu-ly-theo-thu-tu-nao-va-virtualization-co-nhung-cam-bay-gi-a38e88c3-7890-56aa-a8c5-67284a0e461a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": null
+  },
+  {
+    "id": "37811f03-d0e9-5508-afc6-2afed991e2ff",
+    "question": "Long task là gì và ảnh hưởng INP thế nào? Cắt nhỏ công việc trên main thread bằng cách nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "long-task-la-gi-va-anh-huong-inp-the-nao-cat-nho-cong-viec-tren-main-thread-bang-cach-nao-37811f03-d0e9-5508-afc6-2afed991e2ff",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": null
+  },
+  {
+    "id": "730541e8-a5e6-5380-accd-fb8c0a0b87c7",
+    "question": "Người dùng báo \"API chậm\". Bạn chẩn đoán từ đầu đến cuối thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "nguoi-dung-bao-api-cham-ban-chan-doan-tu-dau-den-cuoi-the-nao-730541e8-a5e6-5380-accd-fb8c0a0b87c7",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": null
+  }
+]

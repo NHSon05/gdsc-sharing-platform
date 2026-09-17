@@ -101,6 +101,72 @@ namespace GdscSharingPlatform.Infrastructure.Persistence.Migrations
                     b.ToTable("Departments", "gdsc");
                 });
 
+            modelBuilder.Entity("GdscSharingPlatform.Domain.Interviews.InterviewQuestion", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Access")
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("text")
+                        .HasComputedColumnSql("\"Data\"->>'access'", true);
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<string>("Data")
+                        .IsRequired()
+                        .HasColumnType("jsonb");
+
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("text")
+                        .HasComputedColumnSql("\"Data\"->>'level'", true);
+
+                    b.Property<bool>("NeedsReview")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("boolean")
+                        .HasComputedColumnSql("(\"Data\"->>'needsReview')::boolean", true);
+
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("text")
+                        .HasComputedColumnSql("\"Data\"->>'question'", true);
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("text")
+                        .HasComputedColumnSql("\"Data\"->>'slug'", true);
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id")
+                        .HasName("InterviewQuestions_pkey");
+
+                    b.HasIndex("Level");
+
+                    b.HasIndex("Slug")
+                        .IsUnique()
+                        .HasDatabaseName("InterviewQuestions_Slug_key");
+
+                    b.ToTable("InterviewQuestions", "gdsc", t =>
+                        {
+                            t.HasCheckConstraint("InterviewQuestions_Data_check", "jsonb_typeof(\"Data\") = 'object'");
+
+                            t.HasCheckConstraint("InterviewQuestions_Status_check", "\"Status\" IN ('draft', 'published')");
+
+                            t.HasCheckConstraint("InterviewQuestions_check", "\"Data\"->>'id' IS NOT NULL AND \"Id\" = (\"Data\"->>'id')::uuid");
+                        });
+                });
+
             modelBuilder.Entity("GdscSharingPlatform.Domain.Memberships.ClubGeneration", b =>
                 {
                     b.Property<Guid>("Id")

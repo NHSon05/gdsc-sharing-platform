@@ -1,0 +1,1685 @@
+[
+  {
+    "id": "71bfb513-3d62-5af7-8120-00c4c444b955",
+    "question": "FastAPI là gì và khi nào nên dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8000-fastapi-la-gi-va-khi-nao-nen-dung",
+    "slug": "fastapi-la-gi-va-khi-nao-nen-dung-71bfb513-3d62-5af7-8120-00c4c444b955",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "FastAPI là framework Python để xây dựng HTTP API, dựa trên type hints, Starlette và Pydantic. Nó phù hợp khi cần API typed, tài liệu OpenAPI tự động, validation rõ ràng, hiệu năng tốt và developer experience mạnh."
+      ],
+      "details": [
+        "Nên dùng FastAPI cho REST API, internal services, backend cho AI/data products, service cần async I/O hoặc cần sinh SDK từ OpenAPI. Nếu app chủ yếu là server-rendered pages hoặc admin CRUD truyền thống, Django có thể phù hợp hơn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "8000-fastapi-la-gi-va-khi-nao-nen-dung"
+  },
+  {
+    "id": "6b68e3e7-f244-544e-b6b2-5d706348c4e9",
+    "question": "Path operation trong FastAPI là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8001-path-operation-trong-fastapi-la-gi",
+    "slug": "path-operation-trong-fastapi-la-gi-6b68e3e7-f244-544e-b6b2-5d706348c4e9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Path operation là function gắn với một HTTP method và path, ví dụ GET /users/{id} hoặc POST /orders. FastAPI đọc type hints từ function parameters để parse path params, query params, body, header, cookie và validate tự động."
+      ],
+      "details": [
+        "Điểm mạnh là route handler vừa là code xử lý request vừa là contract cho OpenAPI docs. Vì vậy type hints và response model nên được viết nghiêm túc, không chỉ để editor autocomplete."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "8001-path-operation-trong-fastapi-la-gi"
+  },
+  {
+    "id": "fe37bbcd-01fe-581b-b846-d5a71d1e1d04",
+    "question": "Pydantic model trong FastAPI dùng để làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8002-pydantic-model-trong-fastapi-dung-de-lam-gi",
+    "slug": "pydantic-model-trong-fastapi-dung-de-lam-gi-fe37bbcd-01fe-581b-b846-d5a71d1e1d04",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Pydantic model định nghĩa schema cho request body, response, settings hoặc object trung gian. FastAPI dùng model để validate input, serialize output và sinh OpenAPI schema."
+      ],
+      "details": [
+        "Model nên tách theo use-case: UserCreate cho input tạo mới, UserRead cho response, UserUpdate cho partial update. Không nên expose trực tiếp database model nếu nó có field nhạy cảm như password hash hoặc internal flags."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "8002-pydantic-model-trong-fastapi-dung-de-lam-gi"
+  },
+  {
+    "id": "255e6d00-3ef0-58e2-8781-e84e960a147e",
+    "question": "FastAPI tự sinh OpenAPI docs như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8003-fastapi-tu-sinh-openapi-docs-nhu-the-nao",
+    "slug": "fastapi-tu-sinh-openapi-docs-nhu-the-nao-255e6d00-3ef0-58e2-8781-e84e960a147e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "FastAPI sinh OpenAPI từ path operations, type hints, Pydantic models, status codes, dependencies và metadata. Mặc định app có Swagger UI ở /docs và ReDoc ở /redoc."
+      ],
+      "details": [
+        "Docs tự động chỉ đáng tin khi contract được viết rõ: đặt response model, status code đúng, mô tả lỗi, phân biệt input/output schema và không trả dữ liệu tùy tiện bằng raw dict ở các endpoint quan trọng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "8003-fastapi-tu-sinh-openapi-docs-nhu-the-nao"
+  },
+  {
+    "id": "c090c9f2-9f8e-55bc-a6db-e8fa01aca867",
+    "question": "Request body, path params và query params trong FastAPI được phân biệt thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8004-request-body-path-params-va-query-params-trong-fastapi-duoc-phan-biet-the-nao",
+    "slug": "request-body-path-params-va-query-params-trong-fastapi-duoc-phan-biet-the-nao-c090c9f2-9f8e-55bc-a6db-e8fa01aca867",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "FastAPI phân biệt dựa trên vị trí khai báo và type: parameter có trong path template là path param; primitive parameter không nằm trong path thường là query param; Pydantic model thường là request body."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Trong API public, nên đặt validation constraints rõ ràng bằng Annotated, Path, Query, Body để docs và lỗi 422 chính xác."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "@app.post(\"/users/{user_id}\")\nasync def update_user(user_id: int, notify: bool = False, payload: UserUpdate = Body()):\n    return {\"id\": user_id, \"notify\": notify, \"payload\": payload}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "8004-request-body-path-params-va-query-params-trong-fastapi-duoc-phan-biet-the-nao"
+  },
+  {
+    "id": "9aeed823-ad3b-5c22-b286-c670ad592164",
+    "question": "APIRouter dùng để tổ chức FastAPI app như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8009-apirouter-dung-de-to-chuc-fastapi-app-nhu-the-nao",
+    "slug": "apirouter-dung-de-to-chuc-fastapi-app-nhu-the-nao-9aeed823-ad3b-5c22-b286-c670ad592164",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "APIRouter gom routes theo feature/module, cho phép đặt prefix, tags, dependencies và responses chung. Root app include router qua app.include_router()."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "App lớn nên tách theo domain như users, orders, billing, không tách theo technical layer kiểu tất cả controllers chung một file."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "router = APIRouter(prefix=\"/users\", tags=[\"users\"])\n\n@router.get(\"/{user_id}\")\nasync def get_user(user_id: int):\n    return await service.get_user(user_id)\n\napp.include_router(router)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "8009-apirouter-dung-de-to-chuc-fastapi-app-nhu-the-nao"
+  },
+  {
+    "id": "197f3fd2-ab8e-5c63-9bd5-6e1087d9006a",
+    "question": "BackgroundTasks trong FastAPI dùng cho việc gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8016-backgroundtasks-trong-fastapi-dung-cho-viec-gi",
+    "slug": "backgroundtasks-trong-fastapi-dung-cho-viec-gi-197f3fd2-ab8e-5c63-9bd5-6e1087d9006a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "BackgroundTasks chạy task sau khi response đã gửi, phù hợp cho việc nhẹ như gửi email, ghi audit log hoặc gọi webhook không critical. Nó không thay thế queue thật."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Nếu task cần retry, scheduling, durability hoặc chạy lâu, nên dùng Celery/RQ/Arq, message broker hoặc workflow engine."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "@app.post(\"/signup\")\nasync def signup(payload: Signup, tasks: BackgroundTasks):\n    user = await create_user(payload)\n    tasks.add_task(send_welcome_email, user.email)\n    return user"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "8016-backgroundtasks-trong-fastapi-dung-cho-viec-gi"
+  },
+  {
+    "id": "af84f1d2-50bf-565c-a8c2-07f10c4b0c74",
+    "question": "Lifespan/startup-shutdown trong FastAPI dùng để làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8018-lifespan-startup-shutdown-trong-fastapi-dung-de-lam-gi",
+    "slug": "lifespan-startup-shutdown-trong-fastapi-dung-de-lam-gi-af84f1d2-50bf-565c-a8c2-07f10c4b0c74",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Lifespan quản lý resource cấp app như connection pool, cache client, ML model hoặc scheduler. Code trước yield chạy khi app startup, code sau yield chạy khi shutdown, giúp mở và đóng resource đúng vòng đời."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Không nên tạo resource nặng ở global import nếu nó cần cleanup hoặc phụ thuộc cấu hình runtime."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "@asynccontextmanager\nasync def lifespan(app: FastAPI):\n    app.state.redis = await Redis.from_url(REDIS_URL)\n    yield\n    await app.state.redis.aclose()\n\napp = FastAPI(lifespan=lifespan)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "8018-lifespan-startup-shutdown-trong-fastapi-dung-de-lam-gi"
+  },
+  {
+    "id": "48c86a17-5a21-58fa-acdf-946e2d17097c",
+    "question": "ASGI và Uvicorn liên quan gì tới FastAPI?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8021-asgi-va-uvicorn-lien-quan-gi-toi-fastapi",
+    "slug": "asgi-va-uvicorn-lien-quan-gi-toi-fastapi-48c86a17-5a21-58fa-acdf-946e2d17097c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "FastAPI là ASGI application; ASGI là interface cho Python async web apps. Uvicorn là ASGI server phổ biến dùng để chạy FastAPI, nhận HTTP/WebSocket request và gọi app theo ASGI protocol."
+      ],
+      "details": [
+        "Trong production, số process/workers phụ thuộc CPU, memory, blocking I/O và cách scale bằng container/orchestrator. Không tăng workers mù quáng nếu app giữ nhiều connection pool hoặc model lớn trong memory."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "8021-asgi-va-uvicorn-lien-quan-gi-toi-fastapi"
+  },
+  {
+    "id": "296ba89b-ffd2-5a01-a55a-903b9352e2e6",
+    "question": "FastAPI response status code nên thiết kế thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8034-fastapi-response-status-code-nen-thiet-ke-the-nao",
+    "slug": "fastapi-response-status-code-nen-thiet-ke-the-nao-296ba89b-ffd2-5a01-a55a-903b9352e2e6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Status code nên phản ánh kết quả API: 200 cho đọc/update thành công, 201 cho create, 204 cho delete/no content, 400 cho input semantic sai, 401 chưa xác thực, 403 không đủ quyền, 404 không tồn tại, 409 conflict."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Không nên dùng 200 cho mọi thứ vì client, monitoring và retry policy sẽ mất tín hiệu."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "@app.post(\"/users\", status_code=status.HTTP_201_CREATED, response_model=UserRead)\nasync def create_user(payload: UserCreate):\n    return await service.create(payload)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "8034-fastapi-response-status-code-nen-thiet-ke-the-nao"
+  },
+  {
+    "id": "637bac8f-c5d1-5246-9859-2e49612f8a87",
+    "question": "Endpoint khai báo async def nhưng bên trong gọi requests.get() thì chuyện gì xảy ra?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96400-endpoint-khai-bao-async-def-nhung-ben-trong-goi-requests-get-thi-chuyen-gi-xay-r",
+    "slug": "endpoint-khai-bao-async-def-nhung-ben-trong-goi-requests-get-thi-chuyen-gi-xay-ra-637bac8f-c5d1-5246-9859-2e49612f8a87",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Toàn bộ event loop bị chặn trong suốt thời gian chờ HTTP, nên mọi request khác của tiến trình đó cũng phải xếp hàng chờ theo.",
+        "httpx.AsyncClient",
+        "client bất đồng bộ",
+        "await anyio.to_thread.run_sync(blocking_fn)",
+        "await asyncio.to_thread(blocking_fn)"
+      ],
+      "details": [
+        "Lý do: hàm async def chạy trực tiếp trên event loop. Loop chỉ chuyển sang việc khác tại các điểm await. Một lời gọi blocking (requests, time.sleep, driver DB đồng bộ, xử lý dữ liệu nặng) giữ luôn thread đang chạy loop, không nhả quyền điều khiển.",
+        "Dấu hiệu nhận biết khi vận hành: p99 latency của mọi endpoint tăng cùng lúc, kể cả /health."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "@app.get(\"/bad\")\nasync def bad():\n    return requests.get(URL).json()   # blocks the loop\n\n@app.get(\"/good\")\nasync def good():\n    async with httpx.AsyncClient() as client:\n        r = await client.get(URL)      # yields back to the loop\n    return r.json()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "96400-endpoint-khai-bao-async-def-nhung-ben-trong-goi-requests-get-thi-chuyen-gi-xay-r"
+  },
+  {
+    "id": "9f819aed-08f9-5ca9-ade4-27097ffec8bc",
+    "question": "Annotated[User, Depends(get_user)] khác cách viết user = Depends(get_user) cũ ở chỗ nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96401-annotated-user-depends-get-user-khac-cach-viet-user-depends-get-user-cu-o-cho-na",
+    "slug": "annotated-user-depends-get-user-khac-cach-viet-user-depends-get-user-cu-o-cho-nao-9f819aed-08f9-5ca9-ade4-27097ffec8bc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Annotated đặt Depends vào phần kiểu, không phải phần giá trị mặc định.",
+        "Ba lợi ích thực tế:\n- Kiểu được giữ nguyên → editor và mypy vẫn hiểu user là User, thay vì suy ra kiểu của Depends.\n- Không vướng thứ tự tham số: cách cũ biến tham số thành \"có giá trị mặc định\", nên tham số bắt buộc phía sau sẽ báo lỗi cú pháp.\n- Tái sử dụng: gán ra một alias (CurrentUser) rồi dùng lại ở hàng chục route, đổi dependency chỉ sửa một chỗ."
+      ],
+      "details": [
+        "FastAPI khuyến nghị cách này từ bản 0.95.0, và Ruff có rule FAST002 để bắt cách viết cũ.",
+        "Hàm dependency vẫn có thể gọi trực tiếp trong test vì chữ ký của nó không bị Depends làm bẩn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "CurrentUser = Annotated[User, Depends(get_current_user)]\n\n@app.get(\"/me\")\nasync def me(user: CurrentUser):\n    return user\n\n# old style\n@app.get(\"/me-old\")\nasync def me_old(user: User = Depends(get_current_user)):\n    return user"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "96401-annotated-user-depends-get-user-khac-cach-viet-user-depends-get-user-cu-o-cho-na"
+  },
+  {
+    "id": "7761f551-919f-5210-9fac-76bb22e3e566",
+    "question": "Muốn response chỉ chứa field đã thực sự được set, không kèm giá trị mặc định — làm thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96402-muon-response-chi-chua-field-da-thuc-su-duoc-set-khong-kem-gia-tri-mac-dinh-lam",
+    "slug": "muon-response-chi-chua-field-da-thuc-su-duoc-set-khong-kem-gia-tri-mac-dinh-lam-the-nao-7761f551-919f-5210-9fac-76bb22e3e566",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng response_model_exclude_unset=True trên decorator của path operation.",
+        "Hai biến thể hay dùng chung:\n- response_model_exclude_none=True — bỏ field có giá trị None (khác exclude_unset: field set tường minh bằng None vẫn bị loại).\n- response_model_include / response_model_exclude — chọn hoặc loại theo tên field."
+      ],
+      "details": [
+        "FastAPI sẽ serialize model bằng exclude_unset, tức bỏ qua mọi field chưa được gán tường minh khi tạo object.",
+        "Ứng dụng thường gặp: response của PATCH và các API trả về \"chỉ phần đã thay đổi\", để client phân biệt được \"không gửi field này\" với \"field này bằng null\"."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class Item(BaseModel):\n    name: str\n    description: str | None = None\n    price: float\n    tax: float = 10.5\n\n@app.get(\"/items/{item_id}\", response_model=Item, response_model_exclude_unset=True)\nasync def read_item(item_id: str):\n    return Item(name=\"Foo\", price=50.2)\n    # response: {\"name\": \"Foo\", \"price\": 50.2}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "96402-muon-response-chi-chua-field-da-thuc-su-duoc-set-khong-kem-gia-tri-mac-dinh-lam"
+  },
+  {
+    "id": "355c5811-0bdb-5aa4-aaf4-8229678c235f",
+    "question": "Chạy FastAPI ở production có dùng uvicorn --reload được không? Đặt bao nhiêu worker?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96403-chay-fastapi-o-production-co-dung-uvicorn-reload-duoc-khong-dat-bao-nhieu-worker",
+    "slug": "chay-fastapi-o-production-co-dung-uvicorn-reload-duoc-khong-dat-bao-nhieu-worker-355c5811-0bdb-5aa4-aaf4-8229678c235f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Không. --reload chỉ dành cho môi trường phát triển: nó theo dõi thay đổi file và khởi động lại tiến trình, tốn CPU và kém ổn định.",
+        "Vì sao cần nhiều worker: một tiến trình Python chỉ chạy một event loop trên một core (GIL). Nhiều worker cho phép dùng hết CPU và chịu lỗi tốt hơn — một worker chết thì process manager khởi động lại."
+      ],
+      "details": [
+        "Production chạy nhiều worker process thay vì reload.",
+        "Chọn số worker: điểm khởi đầu phổ biến là 2 * số core + 1 với workload cân bằng, nhưng nếu app chủ yếu chờ IO thì mỗi worker đã xử lý được nhiều request đồng thời, tăng worker chỉ tốn RAM. Đo rồi chỉnh, đừng lấy công thức làm mục tiêu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# development\nuvicorn app.main:app --reload\n\n# production: nhieu process tren 1 may\nuvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4\n# hoac dung gunicorn lam process manager\ngunicorn app.main:app -k uvicorn.workers.UvicornWorker -w 4"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "96403-chay-fastapi-o-production-co-dung-uvicorn-reload-duoc-khong-dat-bao-nhieu-worker"
+  },
+  {
+    "id": "37a0b176-862e-5dd7-a76a-894f7e06a7ef",
+    "question": "response_model giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8005-response-model-giai-quyet-van-de-gi",
+    "slug": "response-model-giai-quyet-van-de-gi-37a0b176-862e-5dd7-a76a-894f7e06a7ef",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "response_model ép output theo schema đã khai báo: validate/serialize response, lọc field không được expose và sinh OpenAPI chính xác."
+      ],
+      "details": [
+        "Ví dụ tránh trả password hash:"
+      ],
+      "points": [],
+      "sections": [
+        "Không nên dựa vào việc route handler vô tình không trả field nhạy cảm; hãy để schema response làm lớp bảo vệ rõ ràng."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class UserRead(BaseModel):\n    id: int\n    email: str\n\n@app.get(\"/users/{user_id}\", response_model=UserRead)\nasync def get_user(user_id: int):\n    return await users_repo.get(user_id)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "8005-response-model-giai-quyet-van-de-gi"
+  },
+  {
+    "id": "95139349-61fb-5933-a5ed-c7d5ed6f5edd",
+    "question": "Dependency Injection trong FastAPI hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8006-dependency-injection-trong-fastapi-hoat-dong-the-nao",
+    "slug": "dependency-injection-trong-fastapi-hoat-dong-the-nao-95139349-61fb-5933-a5ed-c7d5ed6f5edd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "FastAPI dependency là callable được khai báo bằng Depends hoặc Security. FastAPI tự gọi dependency, truyền request params cần thiết, cache kết quả trong request nếu cùng dependency được dùng nhiều lần, rồi inject kết quả vào handler."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Dependency phù hợp cho auth, DB session, settings, pagination, tenant context và shared validation."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]) -> User:\n    return await auth_service.verify(token)\n\n@app.get(\"/me\")\nasync def me(user: Annotated[User, Depends(get_current_user)]):\n    return user"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "8006-dependency-injection-trong-fastapi-hoat-dong-the-nao"
+  },
+  {
+    "id": "8033da19-fc3f-5117-a914-15b031649810",
+    "question": "Dependency với yield dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8007-dependency-voi-yield-dung-khi-nao",
+    "slug": "dependency-voi-yield-dung-khi-nao-8033da19-fc3f-5117-a914-15b031649810",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dependency dùng yield phù hợp cho resource có setup/cleanup như database session, transaction, file handle hoặc external client. Code trước yield chạy trước handler, code sau yield chạy sau response path operation hoàn tất hoặc khi có exception.",
+        "Không nên tạo global mutable session dùng chung nhiều request."
+      ],
+      "details": [
+        "Ví dụ DB session:",
+        "Mỗi request nên có session/resource scope rõ ràng để tránh leak connection và race condition."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "async def get_session():\n    async with async_sessionmaker() as session:\n        yield session"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "8007-dependency-voi-yield-dung-khi-nao"
+  },
+  {
+    "id": "fd621217-9b6f-5c09-a7a9-aa011959e4fd",
+    "question": "async def và def route trong FastAPI khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8008-async-def-va-def-route-trong-fastapi-khac-nhau-the-nao",
+    "slug": "async-def-va-def-route-trong-fastapi-khac-nhau-the-nao-fd621217-9b6f-5c09-a7a9-aa011959e4fd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "async def chạy trong event loop và phù hợp khi handler await async I/O như async database driver, HTTP client hoặc message broker. def sync handler được chạy trong threadpool để không block event loop."
+      ],
+      "details": [
+        "Sai lầm thường gặp là viết async def nhưng gọi thư viện blocking như requests hoặc sync DB driver bên trong; điều đó vẫn block event loop. Nếu dependency/blocking library chưa async, dùng def route hoặc chuyển sang thư viện async tương ứng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "8008-async-def-va-def-route-trong-fastapi-khac-nhau-the-nao"
+  },
+  {
+    "id": "8e6d851b-fea8-5c34-936c-35632b1f0f6b",
+    "question": "Pydantic v2 ảnh hưởng gì tới FastAPI code?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8010-pydantic-v2-anh-huong-gi-toi-fastapi-code",
+    "slug": "pydantic-v2-anh-huong-gi-toi-fastapi-code-8e6d851b-fea8-5c34-936c-35632b1f0f6b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "FastAPI dùng Pydantic để validate và serialize dữ liệu, nên cần nắm các API chính của Pydantic version đang dùng trong dự án. Với Pydantic v2, các điểm hay gặp là model_config, model_validate(), model_dump() và validators bằng @field_validator/@model_validator."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Khi review FastAPI code, cần kiểm tra validators, serialization, ORM mapping và custom types vì đây là nơi dễ lệch behavior nhất."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class UserRead(BaseModel):\n    id: int\n    email: EmailStr\n    model_config = ConfigDict(from_attributes=True)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "8010-pydantic-v2-anh-huong-gi-toi-fastapi-code"
+  },
+  {
+    "id": "59767318-8726-5285-be69-c71a9ed60d34",
+    "question": "Partial update/PATCH trong FastAPI nên thiết kế thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8011-partial-update-patch-trong-fastapi-nen-thiet-ke-the-nao",
+    "slug": "partial-update-patch-trong-fastapi-nen-thiet-ke-the-nao-59767318-8726-5285-be69-c71a9ed60d34",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "PATCH nên dùng model riêng với fields optional, sau đó chỉ apply field nào client gửi. Với Pydantic v2, model_dump(exclude_unset=True) giúp phân biệt field không gửi với field gửi giá trị null."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Không nên reuse model create cho PATCH vì create thường required fields, còn PATCH phải biểu diễn partial mutation."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class UserPatch(BaseModel):\n    name: str | None = None\n    bio: str | None = None\n\nchanges = payload.model_dump(exclude_unset=True)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "8011-partial-update-patch-trong-fastapi-nen-thiet-ke-the-nao"
+  },
+  {
+    "id": "8cf1892c-d0c1-5992-b0ce-0d5391743edf",
+    "question": "FastAPI xử lý lỗi validation và business errors như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8012-fastapi-xu-ly-loi-validation-va-business-errors-nhu-the-nao",
+    "slug": "fastapi-xu-ly-loi-validation-va-business-errors-nhu-the-nao-8cf1892c-d0c1-5992-b0ce-0d5391743edf",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Lỗi validation request tự động trả 422 với chi tiết field lỗi. Business error nên dùng HTTPException hoặc custom exception + exception handler để response nhất quán.",
+        "Không nên trả { \"error\": ... } thủ công với status 200."
+      ],
+      "details": [
+        "Ví dụ:",
+        "API client cần status code đúng để retry, log, alert và xử lý UX chính xác."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "if not user:\n    raise HTTPException(status_code=404, detail=\"User not found\")"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "8012-fastapi-xu-ly-loi-validation-va-business-errors-nhu-the-nao"
+  },
+  {
+    "id": "bb6db3c2-3dc2-5a33-8588-cbb1f8f2351f",
+    "question": "OAuth2/JWT trong FastAPI thường được implement thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8013-oauth2-jwt-trong-fastapi-thuong-duoc-implement-the-nao",
+    "slug": "oauth2-jwt-trong-fastapi-thuong-duoc-implement-the-nao-bb6db3c2-3dc2-5a33-8588-cbb1f8f2351f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Pattern phổ biến: login endpoint verify credentials, cấp access token ngắn hạn; protected endpoints dùng dependency đọc Bearer token, verify signature/expiry, load user và inject current_user."
+      ],
+      "details": [
+        "Ví dụ dependency rút gọn:"
+      ],
+      "points": [],
+      "sections": [
+        "Trong production cần refresh token, revoke/session strategy, password hashing mạnh, rotation secret/key và phân quyền theo scope/role."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "oauth2_scheme = OAuth2PasswordBearer(tokenUrl=\"/auth/login\")\n\nasync def current_user(token: Annotated[str, Depends(oauth2_scheme)]):\n    payload = jwt.decode(token, SECRET, algorithms=[\"HS256\"])\n    return await users.get(payload[\"sub\"])"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "8013-oauth2-jwt-trong-fastapi-thuong-duoc-implement-the-nao"
+  },
+  {
+    "id": "26b2d5c1-dc3e-5967-8599-77334afbc208",
+    "question": "CORS trong FastAPI cần cấu hình ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8014-cors-trong-fastapi-can-cau-hinh-ra-sao",
+    "slug": "cors-trong-fastapi-can-cau-hinh-ra-sao-26b2d5c1-dc3e-5967-8599-77334afbc208",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "CORS được cấu hình bằng CORSMiddleware. Không nên dùng wildcard origin cùng credentials trong production; hãy whitelist domain cụ thể theo môi trường.",
+        "CORS chỉ là chính sách browser, không phải security boundary cho API."
+      ],
+      "details": [
+        "Ví dụ:",
+        "Backend vẫn phải authenticate và authorize request."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "app.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"https://app.example.com\"],\n    allow_credentials=True,\n    allow_methods=[\"GET\", \"POST\", \"PATCH\", \"DELETE\"],\n    allow_headers=[\"Authorization\", \"Content-Type\"],\n)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "8014-cors-trong-fastapi-can-cau-hinh-ra-sao"
+  },
+  {
+    "id": "961e86cb-cf24-5093-a7ed-a6cfaab16b88",
+    "question": "FastAPI tích hợp SQL database nên quản lý session thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8015-fastapi-tich-hop-sql-database-nen-quan-ly-session-the-nao",
+    "slug": "fastapi-tich-hop-sql-database-nen-quan-ly-session-the-nao-961e86cb-cf24-5093-a7ed-a6cfaab16b88",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Mỗi request nên có session scope riêng, thường tạo bằng dependency yield. Service/repository nhận session qua dependency hoặc qua function parameter, commit/rollback ở layer rõ ràng.",
+        "Tránh global session dùng chung nhiều request."
+      ],
+      "details": [
+        "Ví dụ:",
+        "Với SQLAlchemy async, cần dùng async engine/driver tương ứng như asyncpg cho PostgreSQL."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "async def get_db():\n    async with SessionLocal() as session:\n        yield session\n\n@app.post(\"/users\")\nasync def create_user(db: Annotated[AsyncSession, Depends(get_db)]):\n    ..."
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "8015-fastapi-tich-hop-sql-database-nen-quan-ly-session-the-nao"
+  },
+  {
+    "id": "6e57a985-84f4-5d6f-8c07-2afe0641e644",
+    "question": "Middleware trong FastAPI dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8017-middleware-trong-fastapi-dung-khi-nao",
+    "slug": "middleware-trong-fastapi-dung-khi-nao-6e57a985-84f4-5d6f-8c07-2afe0641e644",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Middleware bọc toàn bộ request/response, phù hợp cho cross-cutting concern như request id, logging, timing, CORS, compression, trusted host hoặc security headers."
+      ],
+      "details": [
+        "Ví dụ timing middleware:"
+      ],
+      "points": [],
+      "sections": [
+        "Không nên nhét business logic vào middleware vì nó thiếu context của route handler và khó test theo domain."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "@app.middleware(\"http\")\nasync def add_process_time(request: Request, call_next):\n    start = time.perf_counter()\n    response = await call_next(request)\n    response.headers[\"X-Process-Time\"] = str(time.perf_counter() - start)\n    return response"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "8017-middleware-trong-fastapi-dung-khi-nao"
+  },
+  {
+    "id": "e23107ee-2a23-5a00-89c0-f32692c17745",
+    "question": "Test FastAPI endpoint nên viết như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8019-test-fastapi-endpoint-nen-viet-nhu-the-nao",
+    "slug": "test-fastapi-endpoint-nen-viet-nhu-the-nao-e23107ee-2a23-5a00-89c0-f32692c17745",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Với endpoint sync/normal, dùng TestClient. Với async test cần gọi async DB/client, dùng pytest.mark.anyio và httpx.AsyncClient hoặc ASGI transport."
+      ],
+      "details": [
+        "Ví dụ override dependency:"
+      ],
+      "points": [],
+      "sections": [
+        "Test tốt nên cover status code, response schema, auth path, validation lỗi 422 và side effect quan trọng."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "app.dependency_overrides[get_current_user] = lambda: User(id=1, email=\"a@example.com\")\nclient = TestClient(app)\nresponse = client.get(\"/me\")\nassert response.status_code == 200"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "8019-test-fastapi-endpoint-nen-viet-nhu-the-nao"
+  },
+  {
+    "id": "506e3932-2a93-5809-850c-94bafcd8356a",
+    "question": "Test database với FastAPI cần lưu ý gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8020-test-database-voi-fastapi-can-luu-y-gi",
+    "slug": "test-database-voi-fastapi-can-luu-y-gi-506e3932-2a93-5809-850c-94bafcd8356a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Không nên để test dùng chung production database. Dùng test database riêng, transaction rollback, fixture tạo schema, hoặc container database tùy mức integration."
+      ],
+      "details": [
+        "Với dependency DB session, test có thể override dependency để inject session test:"
+      ],
+      "points": [],
+      "sections": [
+        "Cần đảm bảo isolation giữa tests: reset data, rollback transaction hoặc tạo database/schema riêng cho từng test worker."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "async def override_db():\n    async with TestSessionLocal() as session:\n        yield session\n\napp.dependency_overrides[get_db] = override_db"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "8020-test-database-voi-fastapi-can-luu-y-gi"
+  },
+  {
+    "id": "7280ef28-b7b0-51b9-85c2-10da604605c9",
+    "question": "FastAPI app trong Docker nên tối ưu gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8022-fastapi-app-trong-docker-nen-toi-uu-gi",
+    "slug": "fastapi-app-trong-docker-nen-toi-uu-gi-7280ef28-b7b0-51b9-85c2-10da604605c9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Docker image nên dùng base image rõ version, cài dependency có cache tốt, không chạy bằng root nếu không cần, copy source sau dependency để tận dụng layer cache, và expose healthcheck endpoint."
+      ],
+      "details": [
+        "Ví dụ command phổ biến:"
+      ],
+      "points": [],
+      "sections": [
+        "Trong production nên cấu hình env vars, structured logs stdout/stderr, graceful shutdown, readiness/liveness probe và giới hạn CPU/memory từ orchestrator."
+      ],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "CMD [\"fastapi\", \"run\", \"app/main.py\", \"--port\", \"8000\"]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "8022-fastapi-app-trong-docker-nen-toi-uu-gi"
+  },
+  {
+    "id": "575d8949-adbb-5b0f-b337-31743517fe33",
+    "question": "StreamingResponse và FileResponse dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8024-streamingresponse-va-fileresponse-dung-khi-nao",
+    "slug": "streamingresponse-va-fileresponse-dung-khi-nao-575d8949-adbb-5b0f-b337-31743517fe33",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "StreamingResponse dùng khi response lớn hoặc sinh dần như export CSV, proxy stream, AI token stream. FileResponse dùng trả file có sẵn trên disk và xử lý headers phù hợp."
+      ],
+      "details": [
+        "Ví dụ streaming:"
+      ],
+      "points": [],
+      "sections": [
+        "Cần chú ý client disconnect, timeout, backpressure và không giữ toàn bộ payload lớn trong memory."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "async def rows():\n    for row in data:\n        yield json.dumps(row) + \"\\n\"\n\nreturn StreamingResponse(rows(), media_type=\"application/x-ndjson\")"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "8024-streamingresponse-va-fileresponse-dung-khi-nao"
+  },
+  {
+    "id": "6bb56f29-1ebf-529d-9f34-a912f589cb00",
+    "question": "SSE khác WebSocket trong FastAPI như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8026-sse-khac-websocket-trong-fastapi-nhu-the-nao",
+    "slug": "sse-khac-websocket-trong-fastapi-nhu-the-nao-6bb56f29-1ebf-529d-9f34-a912f589cb00",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "SSE là stream một chiều từ server tới client qua HTTP, tự reconnect tốt trong browser và phù hợp notification, progress, AI token stream hoặc dashboard chỉ cần server push. WebSocket hai chiều và phù hợp khi client/server đều gửi liên tục."
+      ],
+      "details": [
+        "Nếu chỉ cần server push text events, SSE đơn giản hơn WebSocket và dễ đi qua proxy hơn. Nếu cần binary, bidirectional protocol, presence hoặc low-latency interaction hai chiều, dùng WebSocket."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "8026-sse-khac-websocket-trong-fastapi-nhu-the-nao"
+  },
+  {
+    "id": "3ac33937-792c-5fb0-8e6b-7d05df48153a",
+    "question": "File upload trong FastAPI nên dùng bytes hay UploadFile?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8027-file-upload-trong-fastapi-nen-dung-bytes-hay-uploadfile",
+    "slug": "file-upload-trong-fastapi-nen-dung-bytes-hay-uploadfile-3ac33937-792c-5fb0-8e6b-7d05df48153a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "bytes đọc toàn bộ file vào memory, chỉ phù hợp file nhỏ. UploadFile dùng spooled file, có metadata như filename/content_type và hỗ trợ async read, phù hợp file lớn hơn."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Production cần giới hạn size, validate content type thật, scan nếu cần, lưu object storage và tránh tin filename từ client."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "@app.post(\"/avatar\")\nasync def upload_avatar(file: UploadFile):\n    content_type = file.content_type\n    data = await file.read()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "8027-file-upload-trong-fastapi-nen-dung-bytes-hay-uploadfile"
+  },
+  {
+    "id": "4b5c2cc9-0975-58f9-8ccc-4f16d6125cc3",
+    "question": "Settings và environment variables trong FastAPI nên quản lý thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8028-settings-va-environment-variables-trong-fastapi-nen-quan-ly-the-nao",
+    "slug": "settings-va-environment-variables-trong-fastapi-nen-quan-ly-the-nao-4b5c2cc9-0975-58f9-8ccc-4f16d6125cc3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng Pydantic Settings hoặc pydantic-settings để parse env vars có type, default và validation. Settings nên được inject qua dependency hoặc tạo singleton cached rõ ràng.",
+        "Không commit secret vào repo."
+      ],
+      "details": [
+        "Ví dụ:",
+        "Tách config theo môi trường qua env vars, secret manager hoặc orchestrator secrets."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class Settings(BaseSettings):\n    database_url: str\n    jwt_secret: SecretStr\n\n@lru_cache\ndef get_settings() -> Settings:\n    return Settings()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "8028-settings-va-environment-variables-trong-fastapi-nen-quan-ly-the-nao"
+  },
+  {
+    "id": "3f995f52-3c42-5082-a218-2554bcc7315d",
+    "question": "FastAPI project nên tổ chức theo layer hay theo feature?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8031-fastapi-project-nen-to-chuc-theo-layer-hay-theo-feature",
+    "slug": "fastapi-project-nen-to-chuc-theo-layer-hay-theo-feature-3f995f52-3c42-5082-a218-2554bcc7315d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Với app nhỏ, layer đơn giản như routers/services/repositories đủ dùng. Với app lớn, nên tổ chức theo feature/domain để giảm coupling: mỗi domain có router, schemas, service, repository và tests riêng."
+      ],
+      "details": [
+        "Quan trọng là route handler mỏng: parse request, gọi service/use-case, trả response. Business logic không nên nằm dày trong handler vì khó test và khó reuse cho worker/message consumer."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "8031-fastapi-project-nen-to-chuc-theo-layer-hay-theo-feature"
+  },
+  {
+    "id": "beb0f9a3-4083-5718-b4d7-59e3f7f81baa",
+    "question": "Health check trong FastAPI nên tách liveness và readiness như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8038-health-check-trong-fastapi-nen-tach-liveness-va-readiness-nhu-the-nao",
+    "slug": "health-check-trong-fastapi-nen-tach-liveness-va-readiness-nhu-the-nao-beb0f9a3-4083-5718-b4d7-59e3f7f81baa",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Liveness trả lời câu hỏi process còn sống không, nên đơn giản và ít dependency. Readiness trả lời app đã sẵn sàng nhận traffic chưa, có thể kiểm database/cache/critical dependency."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Nếu readiness fail, orchestrator nên ngừng route traffic nhưng không nhất thiết restart process ngay."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "@app.get(\"/health/live\")\nasync def live():\n    return {\"status\": \"ok\"}\n\n@app.get(\"/health/ready\")\nasync def ready(db: Annotated[AsyncSession, Depends(get_db)]):\n    await db.execute(text(\"SELECT 1\"))\n    return {\"status\": \"ready\"}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "8038-health-check-trong-fastapi-nen-tach-liveness-va-readiness-nhu-the-nao"
+  },
+  {
+    "id": "e204b133-473d-5e8e-946d-6d6f3f94ad96",
+    "question": "Endpoint khai báo def (không async) được FastAPI chạy ở đâu? Threadpool đó có giới hạn không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96404-endpoint-khai-bao-def-khong-async-duoc-fastapi-chay-o-dau-threadpool-do-co-gioi",
+    "slug": "endpoint-khai-bao-def-khong-async-duoc-fastapi-chay-o-dau-threadpool-do-co-gioi-han-khong-e204b133-473d-5e8e-946d-6d6f3f94ad96",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Starlette đẩy hàm def sang một threadpool qua anyio.to_thread.run_sync, nên code đồng bộ không chặn event loop. Threadpool này có giới hạn: AnyIO mặc định 40 thread cho toàn tiến trình.",
+        "Lưu ý trước khi nâng số:\n- Thread vẫn tốn stack và context switch; nâng lên vài trăm thường phản tác dụng.\n- Pool kết nối DB phải đủ lớn tương ứng, nếu không sẽ chỉ dời điểm nghẽn.\n- Event loop vẫn là nơi lập lịch cho các thread này. Nếu loop bị chặn bởi một async def viết sai, request def cũng không được giao thread dù pool đang rỗng."
+      ],
+      "details": [
+        "Hệ quả khi tải cao: request thứ 41 trở đi xếp hàng chờ thread rảnh, latency tăng dần chứ không lỗi. Nếu endpoint def gọi DB đồng bộ mất 200ms thì trần thông lượng của tiến trình xấp xỉ 40 / 0.2 = 200 req/s, bất kể máy còn CPU."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "import anyio\n\n@app.on_event(\"startup\")\nasync def raise_thread_limit():\n    limiter = anyio.to_thread.current_default_thread_limiter()\n    limiter.total_tokens = 100"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "96404-endpoint-khai-bao-def-khong-async-duoc-fastapi-chay-o-dau-threadpool-do-co-gioi"
+  },
+  {
+    "id": "05e43a56-3df7-57ee-ab8a-a931ea797a2e",
+    "question": "Một dependency xuất hiện ở nhiều nhánh trong cùng một request có bị gọi lặp không? use_cache để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96405-mot-dependency-xuat-hien-o-nhieu-nhanh-trong-cung-mot-request-co-bi-goi-lap-khon",
+    "slug": "mot-dependency-xuat-hien-o-nhieu-nhanh-trong-cung-mot-request-co-bi-goi-lap-khong-use-cache-de-lam-g-05e43a56-3df7-57ee-ab8a-a931ea797a2e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ở ví dụ trên get_db_user chỉ truy vấn DB một lần dù được khai báo hai chỗ. Khoá cache là cặp (callable, tham số) trong phạm vi request, không phải cache toàn cục."
+      ],
+      "details": [
+        "FastAPI cache giá trị dependency theo từng request: nếu nhiều dependency khác cùng phụ thuộc vào get_settings, hàm đó chỉ chạy một lần, kết quả được dùng lại cho mọi nhánh trong request đó.",
+        "functools.lru_cache",
+        "Muốn ép gọi lại mỗi lần thì tắt: Depends(get_value, use_cache=False) — dùng khi dependency trả về thứ phải mới mỗi lần, ví dụ sinh id hoặc lấy timestamp.",
+        "dependencies=[...]"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "async def get_db_user(token: Annotated[str, Depends(oauth2)]) -> User: ...\n\nasync def require_admin(user: Annotated[User, Depends(get_db_user)]): ...\n\n@app.get(\"/admin/report\")\nasync def report(\n    user: Annotated[User, Depends(get_db_user)],      # reuses cached value\n    _: Annotated[None, Depends(require_admin)],\n): ..."
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "96405-mot-dependency-xuat-hien-o-nhieu-nhanh-trong-cung-mot-request-co-bi-goi-lap-khon"
+  },
+  {
+    "id": "ce519f63-47ca-5458-b38b-bd2c8add3284",
+    "question": "Trả thẳng object SQLAlchemy từ endpoint mà Pydantic v2 báo lỗi validate — cấu hình thế nào cho đúng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96406-tra-thang-object-sqlalchemy-tu-endpoint-ma-pydantic-v2-bao-loi-validate-cau-hinh",
+    "slug": "tra-thang-object-sqlalchemy-tu-endpoint-ma-pydantic-v2-bao-loi-validate-cau-hinh-the-nao-cho-dung-ce519f63-47ca-5458-b38b-bd2c8add3284",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Bật from_attributes=True trong model_config của schema.",
+        "Các tuỳ chọn model_config hay dùng kèm:\n- populate_by_name=True — cho phép nạp bằng tên field lẫn alias (hữu ích khi API dùng camelCase mà code dùng snake_case, kết hợp alias_generator).\n- extra='forbid' — chặn field lạ ở schema đầu vào, tránh client gửi thừa mà bị bỏ qua âm thầm.\n- str_strip_whitespace=True — cắt khoảng trắng thừa ở mọi field chuỗi."
+      ],
+      "details": [
+        "Pydantic v2 mặc định chỉ đọc dict; với ORM object nó phải được cho phép đọc thuộc tính thay vì khoá dict (v1 gọi là orm_mode).",
+        "Lưu ý về mặt an toàn: schema output nên khai báo danh sách field trắng như trên, đừng trả nguyên model ORM ra ngoài — nếu bảng thêm cột password_hash thì schema tường minh vẫn không lộ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from pydantic import BaseModel, ConfigDict\n\nclass UserOut(BaseModel):\n    model_config = ConfigDict(from_attributes=True)\n\n    id: int\n    email: str\n\n@app.get(\"/users/{user_id}\", response_model=UserOut)\nasync def get_user(user_id: int, db: DbSession):\n    return await db.get(User, user_id)   # ORM object, FastAPI validates it"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "96406-tra-thang-object-sqlalchemy-tu-endpoint-ma-pydantic-v2-bao-loi-validate-cau-hinh"
+  },
+  {
+    "id": "172db467-81f8-535b-ac67-9972a2c14e2c",
+    "question": "field_validator và model_validator khác nhau ra sao? mode='before' với mode='after' chọn cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96407-field-validator-va-model-validator-khac-nhau-ra-sao-mode-before-voi-mode-after-c",
+    "slug": "field-validator-va-model-validator-khac-nhau-ra-sao-mode-before-voi-mode-after-chon-cai-nao-172db467-81f8-535b-ac67-9972a2c14e2c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "field_validator kiểm tra một field, model_validator kiểm tra quan hệ giữa nhiều field — ví dụ end_date phải sau start_date, hay \"phải có ít nhất một trong hai số điện thoại\".",
+        "Hai lưu ý: model_validator(mode='after') nhận chính instance (self) và phải trả về nó; còn mode='before' nhận dict dữ liệu thô."
+      ],
+      "details": [
+        "mode quyết định thời điểm chạy so với bước ép kiểu của Pydantic:\n- mode='before': chạy trước khi ép kiểu, nhận dữ liệu thô. Dùng để chuẩn hoá đầu vào (cắt khoảng trắng, tách chuỗi thành list, đổi chuỗi rỗng thành None). Giá trị vào chưa được đảm bảo đúng kiểu.\n- mode='after' (mặc định): chạy sau khi ép kiểu và validate xong, nên giá trị đã đúng kiểu khai báo. Dùng cho luật nghiệp vụ.",
+        "Trong validator nên raise ValueError — FastAPI sẽ chuyển thành response 422 chuẩn, không cần tự ném HTTPException."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from pydantic import BaseModel, field_validator, model_validator\n\nclass Booking(BaseModel):\n    email: str\n    start_date: date\n    end_date: date\n\n    @field_validator(\"email\", mode=\"before\")\n    @classmethod\n    def normalize_email(cls, v: str) -> str:\n        return v.strip().lower()\n\n    @model_validator(mode=\"after\")\n    def check_range(self) -> \"Booking\":\n        if self.end_date <= self.start_date:\n            raise ValueError(\"end_date must be after start_date\")\n        return self"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "96407-field-validator-va-model-validator-khac-nhau-ra-sao-mode-before-voi-mode-after-c"
+  },
+  {
+    "id": "93766ab2-d51d-5e4a-a73f-37a9f7200d12",
+    "question": "Test endpoint async bằng httpx.AsyncClient + ASGITransport khác TestClient ở điểm nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96408-test-endpoint-async-bang-httpx-asyncclient-asgitransport-khac-testclient-o-diem",
+    "slug": "test-endpoint-async-bang-httpx-asyncclient-asgitransport-khac-testclient-o-diem-nao-93766ab2-d51d-5e4a-a73f-37a9f7200d12",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai điểm hay vấp:\n- ASGITransport gọi app in-process, không mở cổng mạng, nhưng không chạy lifespan. Nếu app khởi tạo engine hay client trong lifespan, phải bọc thêm LifespanManager (gói asgi-lifespan) hoặc tự khởi tạo trong fixture.\n- Cần khai báo backend cho anyio, thường là fixture anyio_backend trả về \"asyncio\", nếu không test sẽ bị bỏ qua hoặc lỗi plugin."
+      ],
+      "details": [
+        "Với test chỉ kiểm tra status code và JSON, TestClient vẫn đủ và ngắn hơn. Chuyển sang AsyncClient khi test cần thao tác async ngoài lời gọi HTTP."
+      ],
+      "points": [],
+      "sections": [
+        "TestClient là client đồng bộ: nó tự dựng một event loop bên trong để chạy app, nên thân test không await được các hàm async khác (gọi trực tiếp repository async, kiểm tra DB async). AsyncClient + ASGITransport giữ test nằm trong cùng một event loop với app."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "import pytest\nfrom httpx import ASGITransport, AsyncClient\n\n@pytest.mark.anyio\nasync def test_create_order():\n    transport = ASGITransport(app=app)\n    async with AsyncClient(transport=transport, base_url=\"http://test\") as ac:\n        r = await ac.post(\"/orders\", json={\"sku\": \"A1\"})\n    assert r.status_code == 201\n    assert await repo.count_orders() == 1     # possible only in async test"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "96408-test-endpoint-async-bang-httpx-asyncclient-asgitransport-khac-testclient-o-diem"
+  },
+  {
+    "id": "2b41be3c-6175-5d59-a15d-77c29a112243",
+    "question": "Export CSV 1 triệu dòng qua FastAPI mà không để RAM tăng đột biến — thiết kế thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96410-export-csv-1-trieu-dong-qua-fastapi-ma-khong-de-ram-tang-dot-bien-thiet-ke-the-n",
+    "slug": "export-csv-1-trieu-dong-qua-fastapi-ma-khong-de-ram-tang-dot-bien-thiet-ke-the-nao-2b41be3c-6175-5d59-a15d-77c29a112243",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Bốn điểm hay sai khi triển khai:\n- Vòng đời session: generator chạy sau khi handler trả về. Nếu session được đóng bởi dependency yield, con trỏ sẽ chết giữa chừng. Mở session riêng bên trong generator hoặc dùng cursor phía server tự quản lý.\n- Không có Content-Length nên client thấy tiến trình dạng chunked, không có phần trăm. Cần progress bar thì phải chuyển sang sinh file nền rồi trả link tải.\n- Middleware kiểu BaseHTTPMiddleware (kể cả GZip đặt sai chỗ) có thể gom toàn bộ body vào bộ nhớ, xoá sạch lợi ích của streaming.\n- Generator đồng bộ (def có yield) vẫn được hỗ trợ và chạy trong threadpool — dùng nó nếu driver DB là loại đồng bộ, đừng trộn lời gọi blocking vào generator async."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Trả StreamingResponse với một generator đọc dữ liệu theo lô, thay vì dựng cả file trong bộ nhớ rồi trả một lần."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from fastapi.responses import StreamingResponse\n\nasync def rows_csv(db):\n    yield \"id,email,created_at\\n\"\n    async for chunk in db.stream_scalars(select(User).execution_options(yield_per=1000)):\n        yield f\"{chunk.id},{chunk.email},{chunk.created_at}\\n\"\n\n@app.get(\"/export/users\")\nasync def export_users(db: DbSession):\n    return StreamingResponse(\n        rows_csv(db),\n        media_type=\"text/csv\",\n        headers={\"Content-Disposition\": 'attachment; filename=\"users.csv\"'},\n    )"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "96410-export-csv-1-trieu-dong-qua-fastapi-ma-khong-de-ram-tang-dot-bien-thiet-ke-the-n"
+  },
+  {
+    "id": "063c38df-6043-5d6e-948c-63f87091b99a",
+    "question": "FastAPI authorization nên thiết kế theo role hay scope?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "fastapi-authorization-nen-thiet-ke-theo-role-hay-scope-063c38df-6043-5d6e-948c-63f87091b99a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": null
+  },
+  {
+    "id": "f4d64208-c6ea-569c-8f45-ec336a4a1228",
+    "question": "WebSocket trong FastAPI khác HTTP endpoint thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "websocket-trong-fastapi-khac-http-endpoint-the-nao-f4d64208-c6ea-569c-8f45-ec336a4a1228",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": null
+  },
+  {
+    "id": "12a8f1c3-e363-502e-b359-2b4870adb08c",
+    "question": "Observability cho FastAPI production cần những gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "observability-cho-fastapi-production-can-nhung-gi-12a8f1c3-e363-502e-b359-2b4870adb08c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": null
+  },
+  {
+    "id": "879faaed-42ee-5110-8989-2707bc63d9e7",
+    "question": "FastAPI app bị chậm thì debug từ đâu?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "fastapi-app-bi-cham-thi-debug-tu-dau-879faaed-42ee-5110-8989-2707bc63d9e7",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": null
+  },
+  {
+    "id": "53015a5f-f1b8-5567-bcb6-bafc5dbae8a4",
+    "question": "FastAPI có nên dùng repository pattern không?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "fastapi-co-nen-dung-repository-pattern-khong-53015a5f-f1b8-5567-bcb6-bafc5dbae8a4",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": null
+  },
+  {
+    "id": "6d1334bd-9189-5ca7-b894-56557109a688",
+    "question": "Những lỗi security hay gặp trong FastAPI API là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "nhung-loi-security-hay-gap-trong-fastapi-api-la-gi-6d1334bd-9189-5ca7-b894-56557109a688",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": null
+  },
+  {
+    "id": "1e3b6c81-4e35-5844-bb8e-29fc45acf999",
+    "question": "Tách input schema và output schema trong FastAPI khi nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "tach-input-schema-va-output-schema-trong-fastapi-khi-nao-1e3b6c81-4e35-5844-bb8e-29fc45acf999",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": null
+  },
+  {
+    "id": "3e14dd6a-146d-568a-b557-885b22bc7b04",
+    "question": "Transaction boundary trong FastAPI service nên đặt ở đâu?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "transaction-boundary-trong-fastapi-service-nen-dat-o-dau-3e14dd6a-146d-568a-b557-885b22bc7b04",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": null
+  },
+  {
+    "id": "f0c48678-2ff7-5fc3-aa59-820d28ad8fd5",
+    "question": "FastAPI API versioning nên làm như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "fastapi-api-versioning-nen-lam-nhu-the-nao-f0c48678-2ff7-5fc3-aa59-820d28ad8fd5",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": null
+  },
+  {
+    "id": "29afaac1-3900-5831-bc34-2b6a5d756494",
+    "question": "Khi nào không nên chọn FastAPI?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-khong-nen-chon-fastapi-29afaac1-3900-5831-bc34-2b6a5d756494",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": null
+  },
+  {
+    "id": "6f8d39ae-3b31-568e-aacd-06c00682cfea",
+    "question": "Vì sao dùng DB session lấy từ dependency yield bên trong BackgroundTasks lại lỗi ở FastAPI mới?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vi-sao-dung-db-session-lay-tu-dependency-yield-ben-trong-backgroundtasks-lai-loi-o-fastapi-moi-6f8d39ae-3b31-568e-aacd-06c00682cfea",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": null
+  },
+  {
+    "id": "fb73dada-2375-531d-ae6b-bc7a16726954",
+    "question": "BaseHTTPMiddleware khác pure ASGI middleware thế nào? Khi nào buộc phải bỏ BaseHTTPMiddleware?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "basehttpmiddleware-khac-pure-asgi-middleware-the-nao-khi-nao-buoc-phai-bo-basehttpmiddleware-fb73dada-2375-531d-ae6b-bc7a16726954",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": null
+  },
+  {
+    "id": "f84d5487-24e1-5f84-bc50-804a66b1bde5",
+    "question": "Async SQLAlchemy báo MissingGreenlet: greenlet_spawn has not been called khi đọc relationship — nguyên nhân và cách sửa?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "async-sqlalchemy-bao-missinggreenlet-greenlet-spawn-has-not-been-called-khi-doc-relationship-nguyen-f84d5487-24e1-5f84-bc50-804a66b1bde5",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": null
+  },
+  {
+    "id": "9e22c9cd-bf01-5a68-989a-ab8caf71af88",
+    "question": "Client đóng kết nối giữa chừng thì FastAPI có tự dừng handler không? Xử lý thế nào cho endpoint chạy lâu?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "client-dong-ket-noi-giua-chung-thi-fastapi-co-tu-dung-handler-khong-xu-ly-the-nao-cho-endpoint-chay-9e22c9cd-bf01-5a68-989a-ab8caf71af88",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": null
+  }
+]

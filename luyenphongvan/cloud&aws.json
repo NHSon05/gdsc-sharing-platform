@@ -1,0 +1,1608 @@
+[
+  {
+    "id": "6416ac5c-119d-5ad5-a8ba-cbf674ae5baa",
+    "question": "Cloud Computing là gì? Phân biệt IaaS, PaaS và SaaS.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2401-cloud-computing-la-gi-phan-biet-iaas-paas-va-saas",
+    "slug": "cloud-computing-la-gi-phan-biet-iaas-paas-va-saas-6416ac5c-119d-5ad5-a8ba-cbf674ae5baa",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cloud Computing là mô hình cung cấp tài nguyên công nghệ thông tin (máy chủ, lưu trữ, mạng, phần mềm) qua internet theo mô hình trả-theo-dùng (pay-as-you-go), thay vì tự đầu tư hạ tầng vật lý."
+      ],
+      "details": [
+        "IaaS (Infrastructure as a Service) cung cấp tài nguyên hạ tầng thô như máy ảo, mạng, lưu trữ — ví dụ AWS EC2, Azure VM; người dùng tự quản lý OS và runtime. PaaS (Platform as a Service) cung cấp nền tảng để deploy ứng dụng mà không cần quan tâm đến hạ tầng bên dưới — ví dụ AWS Elastic Beanstalk, Heroku, Google App Engine; developer chỉ cần push code. SaaS (Software as a Service) là phần mềm hoàn chỉnh chạy trên cloud, người dùng chỉ cần sử dụng qua browser — ví dụ Gmail, Salesforce, Jira.",
+        "Lựa chọn mô hình phụ thuộc vào mức độ kiểm soát cần thiết: IaaS linh hoạt nhất nhưng tốn công vận hành nhất, SaaS tiện lợi nhất nhưng ít tùy biến nhất."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "2401-cloud-computing-la-gi-phan-biet-iaas-paas-va-saas"
+  },
+  {
+    "id": "25c5b175-05d3-56d5-8a45-cfc04935f544",
+    "question": "AWS EC2 là gì? Các loại instance type phổ biến và khi nào nên chọn loại nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2402-aws-ec2-la-gi-cac-loai-instance-type-pho-bien-va-khi-nao-nen-chon-loai-nao",
+    "slug": "aws-ec2-la-gi-cac-loai-instance-type-pho-bien-va-khi-nao-nen-chon-loai-nao-25c5b175-05d3-56d5-8a45-cfc04935f544",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Amazon EC2 (Elastic Compute Cloud) là dịch vụ cung cấp máy chủ ảo (virtual machines) trên AWS, cho phép khởi chạy, cấu hình và quản lý server với nhiều OS và cấu hình phần cứng khác nhau."
+      ],
+      "details": [
+        "Instance type được nhóm theo họ: T-series (t3, t4g) là burstable general-purpose, phù hợp workload nhẹ, chi phí thấp nhất; M-series (m6i, m7g) là general-purpose cân bằng CPU/RAM, dùng cho web server, app server; C-series (c6i, c7g) tối ưu compute, dùng cho xử lý batch, encoding video; R-series (r6i) tối ưu memory, phù hợp database in-memory, Redis; P/G-series dùng cho GPU workload như ML training.",
+        "Pricing model gồm On-Demand (tính theo giây, tối thiểu 60 giây — linh hoạt nhất), Reserved Instances (cam kết 1-3 năm, giảm 30-60%), Spot Instances (dùng capacity dư, giảm đến 90% nhưng có thể bị terminate), và Savings Plans. Best practice: dùng Spot cho batch jobs, Reserved cho production baseline, On-Demand cho traffic spike."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "2402-aws-ec2-la-gi-cac-loai-instance-type-pho-bien-va-khi-nao-nen-chon-loai-nao"
+  },
+  {
+    "id": "48616ba9-96e3-5b6f-ad2c-d0f314e453a5",
+    "question": "VPC là gì? Giải thích public subnet vs private subnet và tại sao cần phân tách chúng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2406-vpc-la-gi-giai-thich-public-subnet-vs-private-subnet-va-tai-sao-can-phan-tach-ch",
+    "slug": "vpc-la-gi-giai-thich-public-subnet-vs-private-subnet-va-tai-sao-can-phan-tach-chung-48616ba9-96e3-5b6f-ad2c-d0f314e453a5",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Amazon VPC (Virtual Private Cloud) là mạng ảo riêng biệt, cô lập trong AWS cloud, cho phép bạn kiểm soát hoàn toàn môi trường mạng: chọn IP range (CIDR), tạo subnet, cấu hình route table, gateway."
+      ],
+      "details": [
+        "Public subnet là subnet có route đến Internet Gateway (IGW), các resource trong đó (EC2 với public IP) có thể nhận kết nối từ internet trực tiếp — thường dùng cho load balancer, bastion host, NAT Gateway. Private subnet không có route trực tiếp ra internet; resource muốn ra internet phải đi qua NAT Gateway (một chiều, ra ngoài được nhưng không nhận được kết nối từ ngoài) — thường dùng cho app server, database, Lambda.",
+        "Phân tách giúp giảm attack surface: database không bao giờ expose trực tiếp ra internet, chỉ app server trong private subnet mới kết nối được tới DB. Best practice: mỗi AZ có 1 public + 1 private subnet; dùng VPC Flow Logs để audit traffic; dùng VPC Endpoint (PrivateLink) để kết nối AWS services (S3, DynamoDB) mà không cần ra internet."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "2406-vpc-la-gi-giai-thich-public-subnet-vs-private-subnet-va-tai-sao-can-phan-tach-ch"
+  },
+  {
+    "id": "d1b9c10f-6ab7-5b4e-be31-284ed2ab7493",
+    "question": "Amazon Route 53 là gì? Giải thích các routing policy và use case của từng loại.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2408-amazon-route-53-la-gi-giai-thich-cac-routing-policy-va-use-case-cua-tung-loai",
+    "slug": "amazon-route-53-la-gi-giai-thich-cac-routing-policy-va-use-case-cua-tung-loai-d1b9c10f-6ab7-5b4e-be31-284ed2ab7493",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Amazon Route 53 là dịch vụ DNS (Domain Name System) managed, highly available của AWS với SLA 100% uptime; tên gọi từ cổng DNS TCP/UDP 53."
+      ],
+      "details": [
+        "Các routing policy:\n- Simple routing — map domain tới một IP/resource, không có logic\n- Weighted routing — phân phối traffic theo tỷ lệ phần trăm (vd: 90% v1, 10% v2 cho canary deployment)\n- Latency-based routing — route đến region AWS có latency thấp nhất so với client\n- Geolocation routing — route theo quốc gia/châu lục của client (dùng cho content localization, compliance data residency)\n- Geoproximity routing — tương tự geolocation nhưng có thể shift traffic theo bias\n- Failover routing — primary/secondary, tự động chuyển sang secondary khi health check fail\n- Multi-value routing — trả về nhiều IP ngẫu nhiên, client tự chọn (load balancing cơ bản phía DNS)",
+        "Health Checks tích hợp cho phép Route 53 detect endpoint unhealthy và tự động failover. Route 53 Resolver cung cấp DNS resolution giữa on-premise và VPC qua Direct Connect/VPN."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "2408-amazon-route-53-la-gi-giai-thich-cac-routing-policy-va-use-case-cua-tung-loai"
+  },
+  {
+    "id": "85c3299c-4217-52dd-8b53-0fc9898a5bba",
+    "question": "Amazon CloudFront là gì? Giải thích cách CDN hoạt động và các tính năng bảo mật của CloudFront.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2409-amazon-cloudfront-la-gi-giai-thich-cach-cdn-hoat-dong-va-cac-tinh-nang-bao-mat-c",
+    "slug": "amazon-cloudfront-la-gi-giai-thich-cach-cdn-hoat-dong-va-cac-tinh-nang-bao-mat-cua-cloudfront-85c3299c-4217-52dd-8b53-0fc9898a5bba",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Amazon CloudFront là CDN của AWS với hơn 450 edge location toàn cầu, cache content (HTML, CSS, JS, ảnh, video) tại edge gần người dùng để giảm latency và giảm tải cho origin."
+      ],
+      "details": [
+        "Luồng chạy: request tới edge gần nhất → cache HIT thì trả ngay; cache MISS thì fetch từ origin (S3, ALB, EC2 hay server tự dựng), cache lại theo TTL rồi trả về client.",
+        "Về bảo mật:\n- HTTPS đầu-cuối, TLS terminate ngay tại edge.\n- Origin Access Control (OAC) để chỉ CloudFront mới đọc được S3 bucket, không phải mở public.\n- Tích hợp AWS WAF để lọc request độc hại.\n- Shield Standard miễn phí chống DDoS tầng L3/L4, Shield Advanced cho DDoS tầng L7.\n- Signed URL và signed cookie để giới hạn truy cập nội dung trả phí.",
+        "Cache behavior cấu hình theo path pattern — ví dụ /api/* không cache còn /static/* cache một năm. Muốn can thiệp vào request/response ngay tại edge thì dùng CloudFront Functions hoặc Lambda@Edge.",
+        "Chi phí tính trên lượng data truyền và số request."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "2409-amazon-cloudfront-la-gi-giai-thich-cach-cdn-hoat-dong-va-cac-tinh-nang-bao-mat-c"
+  },
+  {
+    "id": "c1f33c2a-cfcb-5b21-95c3-58e0c07101f2",
+    "question": "Shared Responsibility Model của AWS là gì? Ai chịu trách nhiệm phần nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94100-shared-responsibility-model-cua-aws-la-gi-ai-chiu-trach-nhiem-phan-nao",
+    "slug": "shared-responsibility-model-cua-aws-la-gi-ai-chiu-trach-nhiem-phan-nao-c1f33c2a-cfcb-5b21-95c3-58e0c07101f2",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Shared Responsibility Model là ranh giới phân chia trách nhiệm bảo mật giữa AWS và khách hàng. Nguyên tắc gọn: AWS lo *security of the cloud, khách hàng lo security in the cloud*."
+      ],
+      "details": [
+        "Ranh giới dịch chuyển theo loại dịch vụ. Với EC2 (IaaS) khách hàng phải tự vá OS. Với dịch vụ managed như S3, RDS, Lambda, AWS lo thêm phần OS/runtime, nhưng khách hàng vẫn luôn chịu trách nhiệm cấu hình quyền truy cập và dữ liệu — ví dụ một S3 bucket để public là lỗi phía khách hàng, không phải AWS."
+      ],
+      "points": [
+        "AWS chịu trách nhiệm phần hạ tầng nền: data center vật lý, phần cứng, mạng lõi, và phần mềm nền của các managed service (hypervisor, host OS).",
+        "Khách hàng chịu trách nhiệm những gì mình cấu hình và đưa lên: OS guest và bản vá của EC2, cấu hình Security Group, quản lý IAM (user, role, key), mã hóa dữ liệu, và chính dữ liệu ứng dụng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "94100-shared-responsibility-model-cua-aws-la-gi-ai-chiu-trach-nhiem-phan-nao"
+  },
+  {
+    "id": "964aa63d-b6d2-5904-82ed-9d3ba464dc17",
+    "question": "Phân biệt Region và Availability Zone (AZ) trong AWS.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94101-phan-biet-region-va-availability-zone-az-trong-aws",
+    "slug": "phan-biet-region-va-availability-zone-az-trong-aws-964aa63d-b6d2-5904-82ed-9d3ba464dc17",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đây là hai tầng của hạ tầng vật lý AWS."
+      ],
+      "details": [
+        "Vì sao quan trọng: chọn Region theo độ gần người dùng (giảm latency), yêu cầu chủ quyền dữ liệu (data residency), và giá. Còn AZ là công cụ để đạt high availability: deploy trên nhiều AZ (multi-AZ) để nếu một AZ hỏng, ứng dụng vẫn chạy — ví dụ RDS Multi-AZ giữ một standby ở AZ khác, hoặc đặt EC2 sau load balancer trải trên vài AZ."
+      ],
+      "points": [
+        "Region là một khu vực địa lý riêng biệt (ví dụ ap-southeast-1 Singapore, us-east-1 N. Virginia). Mỗi Region tách biệt hoàn toàn với Region khác về mặt vật lý và, theo mặc định, dữ liệu không rời khỏi Region trừ khi bạn chủ động chuyển.",
+        "Availability Zone (AZ) là một hoặc nhiều data center nằm bên trong một Region, có nguồn điện, làm mát và mạng độc lập. Mỗi Region gồm nhiều AZ (thường 3+), cách nhau đủ xa để không cùng chịu một sự cố cục bộ, nhưng nối với nhau bằng link độ trễ thấp."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "94101-phan-biet-region-va-availability-zone-az-trong-aws"
+  },
+  {
+    "id": "f4a9e182-1ba4-5882-a6e5-7f7cbccb55e5",
+    "question": "Stop và Terminate một EC2 instance khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94102-stop-va-terminate-mot-ec2-instance-khac-nhau-the-nao",
+    "slug": "stop-va-terminate-mot-ec2-instance-khac-nhau-the-nao-f4a9e182-1ba4-5882-a6e5-7f7cbccb55e5",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Stop là tạm dừng, Terminate là xóa vĩnh viễn."
+      ],
+      "details": [
+        "Stop (chỉ áp dụng cho instance dùng EBS làm root):\n- Instance tắt như tắt máy tính; root EBS volume được giữ lại, nên dữ liệu trên đó còn nguyên khi start lại.\n- Không tính phí compute khi dừng, nhưng vẫn trả phí lưu trữ EBS.\n- Khi start lại thường đổi sang host vật lý khác: public IP (auto-assign) thay đổi, dữ liệu trên instance store bị mất, private IP giữ nguyên.",
+        "Terminate:\n- Instance bị xóa hẳn, không thể start lại — muốn dùng lại phải launch instance mới.\n- Root EBS volume mặc định bị xóa theo (DeleteOnTermination = true), trừ khi bạn đã tắt cờ này.\n- Elastic IP bị gỡ liên kết (disassociate) nhưng vẫn được cấp cho tài khoản (vẫn tính phí khi không gắn) — không tự release; instance store mất hoàn toàn.",
+        "Hình dung: Stop giống tắt laptop rồi bật lại — ổ cứng còn đó. Terminate giống vứt bỏ máy — mọi thứ không được sao lưu ngoài đều biến mất. Muốn giữ dữ liệu trước khi terminate thì tạo snapshot/AMI."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "94102-stop-va-terminate-mot-ec2-instance-khac-nhau-the-nao"
+  },
+  {
+    "id": "b966d186-de2e-58b6-944e-ea70fd4aff5f",
+    "question": "AMI (Amazon Machine Image) là gì? Dùng để làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/94103-ami-amazon-machine-image-la-gi-dung-de-lam-gi",
+    "slug": "ami-amazon-machine-image-la-gi-dung-de-lam-gi-b966d186-de2e-58b6-944e-ea70fd4aff5f",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "AMI (Amazon Machine Image) là một template chỉ-đọc chứa đầy đủ thông tin để khởi chạy một EC2 instance. Một AMI gồm:"
+      ],
+      "details": [
+        "Dùng để làm gì: mỗi lần launch một instance, bạn phải chọn một AMI làm điểm xuất phát. Nguồn AMI gồm: AWS cung cấp (Amazon Linux, Ubuntu, Windows), AWS Marketplace, cộng đồng, hoặc custom AMI của chính bạn.",
+        "Giá trị thực tế nằm ở custom AMI (golden image): cài sẵn runtime, agent, và cấu hình bảo mật vào một máy, rồi tạo AMI từ nó. Sau đó Auto Scaling Group launch hàng loạt instance giống hệt trong vài giây thay vì cài từ đầu — vừa nhanh, vừa đảm bảo mọi máy đồng nhất (immutable infrastructure). AMI gắn với một Region; muốn dùng ở Region khác phải copy sang."
+      ],
+      "points": [
+        "Một hoặc nhiều EBS snapshot (hoặc template cho instance-store) — tức trạng thái ổ đĩa: OS, thư viện, ứng dụng đã cài, cấu hình.",
+        "Quyền launch (ai được dùng AMI này).",
+        "Block device mapping — mô tả volume nào gắn khi instance khởi động."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "94103-ami-amazon-machine-image-la-gi-dung-de-lam-gi"
+  },
+  {
+    "id": "b73811a2-75f2-5bf4-8d2a-4114144bb1ef",
+    "question": "Ứng dụng chạy trên EC2 cần đọc file trong S3. Vì sao không nên nhúng access key vào code hay biến môi trường?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98450-ung-dung-chay-tren-ec2-can-doc-file-trong-s3-vi-sao-khong-nen-nhung-access-key-v",
+    "slug": "ung-dung-chay-tren-ec2-can-doc-file-trong-s3-vi-sao-khong-nen-nhung-access-key-vao-code-hay-bien-moi-b73811a2-75f2-5bf4-8d2a-4114144bb1ef",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì access key của IAM user là credential dài hạn: nó không tự hết hạn, và một khi lọt ra ngoài (commit nhầm lên Git, log ra console, lộ trong image Docker) thì kẻ tấn công dùng được cho tới khi có người phát hiện và thu hồi thủ công."
+      ],
+      "details": [
+        "Cách đúng: gắn IAM role cho máy chạy ứng dụng.\n- EC2: tạo IAM role → gắn qua instance profile. Ứng dụng lấy credential tạm thời từ Instance Metadata Service (IMDS), AWS tự xoay vòng theo giờ.\n- EKS/pod: dùng IRSA (IAM Roles for Service Accounts) — service account của pod map sang IAM role qua OIDC.\n- Lambda / ECS task: execution role / task role.",
+        "Điểm quan trọng cho phỏng vấn: không cần sửa code. AWS SDK có default credential provider chain, tự tìm credential theo thứ tự env var → shared profile → container/IMDS. Bỏ hết access key đi thì SDK tự rơi xuống bước IMDS."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// no keys in code: the SDK resolves the instance role automatically\nconst s3 = new S3Client({ region: 'ap-southeast-1' })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "98450-ung-dung-chay-tren-ec2-can-doc-file-trong-s3-vi-sao-khong-nen-nhung-access-key-v"
+  },
+  {
+    "id": "befe58a7-5ca6-57e5-8d6b-e2c6e5a5ffe0",
+    "question": "Presigned URL của S3 là gì? Thiết kế luồng cho người dùng upload ảnh lên S3 thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98451-presigned-url-cua-s3-la-gi-thiet-ke-luong-cho-nguoi-dung-upload-anh-len-s3-the-n",
+    "slug": "presigned-url-cua-s3-la-gi-thiet-ke-luong-cho-nguoi-dung-upload-anh-len-s3-the-nao-befe58a7-5ca6-57e5-8d6b-e2c6e5a5ffe0",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Presigned URL là một URL S3 đã được ký sẵn bằng credential của backend, kèm thời hạn hết hạn. Ai cầm URL đó thì làm được đúng một thao tác đã ký (GET để tải, PUT để ghi) trên đúng một object, mà không cần có credential AWS."
+      ],
+      "details": [
+        "Luồng upload thường dùng:\n1. Client gọi backend: \"tôi muốn upload avatar.jpg, 300KB, image/jpeg\".\n2. Backend kiểm tra quyền + kích thước + content-type, sinh key ngẫu nhiên (vd users/<id>/<uuid>.jpg), ký presigned PUT hạn 5 phút, trả URL về.\n3. Browser PUT thẳng file lên S3 — không đi qua backend.\n4. Client báo backend \"xong\", backend lưu key vào DB (hoặc dùng S3 Event Notification để xác nhận).",
+        "Lợi ích chính: file lớn không chiếm băng thông và bộ nhớ của server ứng dụng, và không cần tăng giới hạn body size của API.",
+        "Lưu ý hay bị hỏi tiếp:\n- Bucket phải cấu hình CORS thì browser mới PUT được (nếu không sẽ lỗi preflight).\n- URL hết hạn theo thời gian ký; ký ngắn (5–15 phút).\n- Muốn ràng buộc kích thước tối đa ngay ở S3 thì dùng presigned POST policy thay vì presigned PUT.\n- Tải file riêng tư cũng ký GET tương tự, không cần mở public bucket."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "98451-presigned-url-cua-s3-la-gi-thiet-ke-luong-cho-nguoi-dung-upload-anh-len-s3-the-n"
+  },
+  {
+    "id": "de0f119a-bcb8-5477-ad96-ab816122d9a1",
+    "question": "Log ứng dụng đẩy lên CloudWatch Logs thì mặc định giữ bao lâu? Cấu hình cảnh báo khi có lỗi thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98452-log-ung-dung-day-len-cloudwatch-logs-thi-mac-dinh-giu-bao-lau-cau-hinh-canh-bao",
+    "slug": "log-ung-dung-day-len-cloudwatch-logs-thi-mac-dinh-giu-bao-lau-cau-hinh-canh-bao-khi-co-loi-the-nao-de0f119a-bcb8-5477-ad96-ab816122d9a1",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mặc định log group có retention là Never expire — log giữ vĩnh viễn và bạn trả tiền lưu trữ mãi. Đây là khoản chi phí bị quên phổ biến nhất trên CloudWatch. Việc đầu tiên khi tạo log group là set retention (vd 14 hoặc 30 ngày với log ứng dụng, dài hơn cho log audit)."
+      ],
+      "details": [
+        "Ba khoản tính tiền của CloudWatch Logs cần phân biệt: ingest (theo GB đẩy vào), storage (theo GB-tháng lưu), và query (Logs Insights quét bao nhiêu dữ liệu).",
+        "1. Metric có sẵn → alarm thẳng. Ví dụ Lambda có metric Errors, Throttles; ALB có HTTPCode_Target_5XX_Count. Tạo alarm theo ngưỡng, action gửi vào SNS topic (email/Slack/PagerDuty).",
+        "2. Log chưa có metric → tạo metric filter trên log group để đếm dòng khớp mẫu, rồi alarm trên metric đó.",
+        "Cảnh báo lỗi — hai đường:",
+        "Nhớ cấu hình xử lý trạng thái INSUFFICIENT_DATA cho metric thưa."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "filter pattern: ?ERROR ?Exception\nmetric:        AppErrorCount\nalarm:         Sum >= 5 in 5 minutes  ->  SNS"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "98452-log-ung-dung-day-len-cloudwatch-logs-thi-mac-dinh-giu-bao-lau-cau-hinh-canh-bao"
+  },
+  {
+    "id": "b4e312d9-bb9c-5232-8f29-0bd2b7426771",
+    "question": "RDS Multi-AZ và Read Replica khác nhau thế nào? Multi-AZ có giúp giảm tải đọc không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98453-rds-multi-az-va-read-replica-khac-nhau-the-nao-multi-az-co-giup-giam-tai-doc-kho",
+    "slug": "rds-multi-az-va-read-replica-khac-nhau-the-nao-multi-az-co-giup-giam-tai-doc-khong-b4e312d9-bb9c-5232-8f29-0bd2b7426771",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hai thứ giải quyết hai bài toán khác nhau: Multi-AZ là tính sẵn sàng, read replica là mở rộng khả năng đọc."
+      ],
+      "details": [
+        "Multi-AZ (deployment 1 standby):\n- Có một standby ở AZ khác, replicate đồng bộ.\n- Standby không phục vụ truy vấn — bạn không kết nối tới nó được. Nên câu trả lời cho vế sau là không, Multi-AZ tự nó không giảm tải đọc.\n- Khi primary hỏng hoặc lúc patch, RDS failover: bản ghi DNS của endpoint trỏ sang standby, thường mất khoảng vài chục giây tới hơn một phút. App chỉ cần kết nối bằng endpoint, không hardcode IP, và phải chịu được việc connection bị đứt lúc chuyển.",
+        "Read replica:\n- Replicate bất đồng bộ → có replica lag. Ghi xong đọc ngay ở replica có thể chưa thấy dữ liệu (read-your-write không đảm bảo).\n- Có endpoint riêng; app phải chủ động tách route: ghi vào primary, đọc báo cáo/dashboard vào replica.\n- Có thể promote thành instance độc lập, nên đôi khi dùng cho migration hoặc DR cross-region.",
+        "Thực tế production thường dùng cả hai: Multi-AZ cho HA, thêm read replica khi truy vấn đọc thật sự là nút thắt."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "98453-rds-multi-az-va-read-replica-khac-nhau-the-nao-multi-az-co-giup-giam-tai-doc-kho"
+  },
+  {
+    "id": "10933971-1c66-50ad-abed-1543073008fd",
+    "question": "AWS Lambda là gì? Khi nào nên dùng Lambda thay vì EC2? Giải thích cold start và cách giảm thiểu.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2403-aws-lambda-la-gi-khi-nao-nen-dung-lambda-thay-vi-ec2-giai-thich-cold-start-va-ca",
+    "slug": "aws-lambda-la-gi-khi-nao-nen-dung-lambda-thay-vi-ec2-giai-thich-cold-start-va-cach-giam-thieu-10933971-1c66-50ad-abed-1543073008fd",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "AWS Lambda là dịch vụ serverless compute: bạn upload code function, Lambda lo provisioning, scaling và availability."
+      ],
+      "details": [
+        "Lambda hợp khi: workload hướng sự kiện (S3 trigger, SQS consumer, API Gateway), task ngắn dưới 15 phút, traffic thất thường hoặc rất thấp, và khi muốn giảm gánh vận hành.",
+        "Dùng EC2 khi: cần kiểm soát OS/runtime, workload chạy liên tục 24/7, cần lưu trữ cục bộ bền, hoặc cần cấu hình mạng phức tạp.",
+        "Cold start xảy ra khi Lambda phải dựng environment mới — khởi tạo container, nạp code, bật runtime — thường mất 100ms đến 1 giây tuỳ runtime, trong đó Java và .NET chậm hơn Node.js/Python đáng kể.",
+        "Giảm cold start bằng:\n- Provisioned Concurrency để giữ sẵn N instance ấm.\n- Chọn runtime nhẹ (Node.js, Python).\n- Giảm kích thước package.\n- Đưa phần khởi tạo ra ngoài handler để nó chỉ chạy một lần.\n- Dùng Lambda SnapStart nếu là Java.",
+        "Chi phí"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "2403-aws-lambda-la-gi-khi-nao-nen-dung-lambda-thay-vi-ec2-giai-thich-cold-start-va-ca"
+  },
+  {
+    "id": "94692ec7-4b59-56ce-aca9-9aa881b94f7c",
+    "question": "Phân biệt ECS và EKS. Khi nào nên chọn ECS Fargate thay vì EKS?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2404-phan-biet-ecs-va-eks-khi-nao-nen-chon-ecs-fargate-thay-vi-eks",
+    "slug": "phan-biet-ecs-va-eks-khi-nao-nen-chon-ecs-fargate-thay-vi-eks-94692ec7-4b59-56ce-aca9-9aa881b94f7c",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Amazon ECS (Elastic Container Service) là dịch vụ container orchestration native AWS, đơn giản hơn, tích hợp chặt với các dịch vụ AWS khác (IAM, ALB, CloudWatch), phù hợp team không có Kubernetes expertise. Amazon EKS (Elastic Kubernetes Service) là managed Kubernetes, phù hợp khi team đã có K8s knowledge, cần ecosystem K8s (Helm, custom controllers), hoặc cần portability giữa cloud providers."
+      ],
+      "details": [
+        "Fargate là serverless compute engine cho cả ECS và EKS, loại bỏ việc quản lý EC2 node — bạn chỉ định CPU/RAM per task, AWS tự scale; chi phí cao hơn EC2 mode nhưng không cần manage node lifecycle, security patching.",
+        "Nên chọn ECS Fargate khi: team nhỏ, muốn đơn giản hóa operations, workload không cần K8s features đặc biệt, và cost không phải ưu tiên hàng đầu. Nên chọn EKS khi: đang migrate từ on-premise K8s, cần stateful workload phức tạp, hoặc cần advanced scheduling (GPU, spot). Với EKS Fargate, không có persistent storage local và không hỗ trợ DaemonSets."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "2404-phan-biet-ecs-va-eks-khi-nao-nen-chon-ecs-fargate-thay-vi-eks"
+  },
+  {
+    "id": "7abe7524-9079-5af6-bac1-23c3ce640d7e",
+    "question": "Amazon API Gateway là gì? Phân biệt REST API và HTTP API. Cách tích hợp với Lambda?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2405-amazon-api-gateway-la-gi-phan-biet-rest-api-va-http-api-cach-tich-hop-voi-lambda",
+    "slug": "amazon-api-gateway-la-gi-phan-biet-rest-api-va-http-api-cach-tich-hop-voi-lambda-7abe7524-9079-5af6-bac1-23c3ce640d7e",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Amazon API Gateway là managed service cho phép tạo, publish, bảo vệ và monitor HTTP/WebSocket API ở scale lớn — cổng kết nối giữa client và backend (Lambda, EC2, hoặc bất kỳ HTTP endpoint)."
+      ],
+      "details": [
+        "REST API (v1) là loại cũ hơn, hỗ trợ đầy đủ tính năng: request/response transformation, API keys, usage plans, custom authorizers, caching; phù hợp enterprise API cần nhiều tính năng. HTTP API (v2) ra mắt 2019, đơn giản hơn, nhanh hơn (~60% latency thấp hơn), rẻ hơn (~70%) so với REST API; hỗ trợ JWT authorizer, Lambda proxy integration, CORS — phù hợp microservices hiện đại. WebSocket API cho realtime bidirectional communication.",
+        "Tích hợp Lambda: chọn Lambda Proxy Integration để API Gateway forward toàn bộ request (headers, body, query params) vào event object của Lambda; response Lambda phải có format {statusCode, headers, body}.",
+        "Bảo mật API bằng: Cognito User Pool authorizer, Lambda custom authorizer (kiểm tra JWT/API key tùy chỉnh), hoặc IAM authorization. Throttling mặc định 10,000 RPS per account, có thể tăng qua request. Pricing: HTTP API ~$1/triệu request, REST API ~$3.5/triệu request."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "2405-amazon-api-gateway-la-gi-phan-biet-rest-api-va-http-api-cach-tich-hop-voi-lambda"
+  },
+  {
+    "id": "7f868104-fc09-5f23-819e-9258bb4b60b6",
+    "question": "Phân biệt Security Groups và Network ACLs (NACLs). Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2407-phan-biet-security-groups-va-network-acls-nacls-khi-nao-dung-cai-nao",
+    "slug": "phan-biet-security-groups-va-network-acls-nacls-khi-nao-dung-cai-nao-7f868104-fc09-5f23-819e-9258bb4b60b6",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "SG là stateful instance-level firewall; NACL là stateless subnet-level filter."
+      ],
+      "details": [
+        "Security Group (SG) hoạt động ở cấp độ instance (ENI level), là stateful — khi cho phép inbound traffic, outbound response tự động được allow không cần rule riêng; chỉ có allow rules, không có deny rules; áp dụng cho EC2, RDS, Lambda (VPC mode), v.v.",
+        "Network ACL (NACL) hoạt động ở cấp độ subnet, là stateless — phải define cả inbound và outbound rules riêng biệt; có cả allow và deny rules; rule được evaluate theo thứ tự số (100, 200...), rule đầu tiên match sẽ áp dụng. Vì stateless, NACL phức tạp hơn để configure đúng — cần cho phép ephemeral ports (1024-65535) cho outbound responses.",
+        "Thực tế: Security Group là defense chính, được dùng cho mọi resource; NACL là defense thứ hai ở subnet level, dùng khi cần block toàn bộ subnet hoặc block IP/CIDR range cụ thể (ví dụ chặn IP tấn công DDoS nhanh). Best practice: principle of least privilege cho SG — chỉ mở port cần thiết, chỉ allow source cụ thể (không dùng 0.0.0.0/0 trừ khi cần public access)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "2407-phan-biet-security-groups-va-network-acls-nacls-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "5f7f5d79-35dd-5596-8cb8-42bc8fd084d8",
+    "question": "Phân biệt Application Load Balancer (ALB), Network Load Balancer (NLB) và Gateway Load Balancer. Khi nào dùng loại nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2410-phan-biet-application-load-balancer-alb-network-load-balancer-nlb-va-gateway-loa",
+    "slug": "phan-biet-application-load-balancer-alb-network-load-balancer-nlb-va-gateway-load-balancer-khi-nao-d-5f7f5d79-35dd-5596-8cb8-42bc8fd084d8",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "ALB cho Layer-7 HTTP routing; NLB cho Layer-4 high-perf TCP/UDP; GWLB cho virtual network appliances."
+      ],
+      "details": [
+        "Application Load Balancer (ALB) hoạt động ở Layer 7 (HTTP/HTTPS), hỗ trợ content-based routing (theo host header, path, query string, HTTP method, headers), WebSocket, HTTP/2, gRPC; tích hợp Cognito authentication, WAF, Lambda target; phù hợp cho web application, microservices, REST API.",
+        "Network Load Balancer (NLB) hoạt động ở Layer 4 (TCP/UDP/TLS), cực kỳ high performance (hàng triệu RPS, latency microseconds), static IP hoặc Elastic IP per AZ — quan trọng khi client cần IP cố định (whitelist firewall), preserve source IP; phù hợp cho gaming, IoT, financial trading, TCP-based protocol.",
+        "Gateway Load Balancer (GWLB) dùng cho deploy, scale và manage third-party virtual appliances (firewalls, IDS/IPS, deep packet inspection) — traffic đi qua appliance trước khi đến destination. Cross-zone load balancing: ALB bật mặc định (miễn phí), NLB tắt mặc định (tốn phí nếu bật). Sticky sessions: ALB dùng cookie, NLB dùng 5-tuple hash. Health check: ALB check HTTP status code, NLB check TCP/HTTP. Pricing: ALB tính LCU (Load Balancer Capacity Unit), NLB tính NLCU."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "2410-phan-biet-application-load-balancer-alb-network-load-balancer-nlb-va-gateway-loa"
+  },
+  {
+    "id": "9aa8f844-b908-5827-9993-55dc445f0628",
+    "question": "Amazon S3 storage classes là gì? Giải thích lifecycle policy và cách tối ưu chi phí lưu trữ.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2411-amazon-s3-storage-classes-la-gi-giai-thich-lifecycle-policy-va-cach-toi-uu-chi-p",
+    "slug": "amazon-s3-storage-classes-la-gi-giai-thich-lifecycle-policy-va-cach-toi-uu-chi-phi-luu-tru-9aa8f844-b908-5827-9993-55dc445f0628",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "S3 có 7 storage class, từ Standard (hot) đến Glacier Deep Archive (cold compliance), mỗi loại tối ưu chi phí cho một access pattern khác nhau — lifecycle policy giúp tự động chuyển đổi và giảm bill."
+      ],
+      "details": [
+        "Các storage class:\n- S3 Standard ($0.023/GB) — high durability 11 nines, high availability 99.99%, dùng cho data truy cập thường xuyên\n- S3 Intelligent-Tiering — tự động chuyển giữa frequent/infrequent/archive tiers, phù hợp khi không biết trước access pattern\n- S3 Standard-IA ($0.0125/GB) — infrequent access, rẻ hơn nhưng có phí retrieval, dùng cho backup, disaster recovery\n- S3 One Zone-IA ($0.01/GB) — chỉ lưu 1 AZ, rẻ hơn 20% nhưng rủi ro hơn\n- S3 Glacier Instant Retrieval — archival với instant access\n- S3 Glacier Flexible Retrieval — retrieval 1-12h\n- S3 Glacier Deep Archive ($0.00099/GB) — rẻ nhất, retrieval 12-48h, phù hợp compliance archive",
+        "Lifecycle policy tự động transition object giữa storage class hoặc expire/delete theo thời gian — ví dụ: log files chuyển sang IA sau 30 ngày, Glacier sau 90 ngày, delete sau 365 ngày. S3 Object Lock (WORM) ngăn xóa/overwrite object, dùng cho compliance. Versioning bật để protect khỏi xóa nhầm nhưng tăng cost — dùng lifecycle để expire old versions."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "2411-amazon-s3-storage-classes-la-gi-giai-thich-lifecycle-policy-va-cach-toi-uu-chi-p"
+  },
+  {
+    "id": "87a74798-cddd-57e1-9833-4c9ddf38e168",
+    "question": "So sánh DynamoDB và RDS. Khi nào nên dùng NoSQL thay vì SQL trên AWS?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2412-so-sanh-dynamodb-va-rds-khi-nao-nen-dung-nosql-thay-vi-sql-tren-aws",
+    "slug": "so-sanh-dynamodb-va-rds-khi-nao-nen-dung-nosql-thay-vi-sql-tren-aws-87a74798-cddd-57e1-9833-4c9ddf38e168",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Amazon DynamoDB là fully managed NoSQL key-value và document database với single-digit millisecond latency ở mọi scale, serverless (không quản lý server), tự động scale, tích hợp DAX (in-memory cache). DynamoDB phù hợp khi: schema flexible (JSON documents), access pattern đơn giản và predictable (query by partition key ± sort key), cần scale đến hàng triệu RPS, serverless architecture, session store, gaming leaderboard, IoT data."
+      ],
+      "details": [
+        "Amazon RDS hỗ trợ MySQL, PostgreSQL, MariaDB, Oracle, SQL Server — managed service lo patching, backup, multi-AZ. RDS phù hợp khi: cần ACID transactions phức tạp, relationship giữa nhiều entity, ad-hoc query linh hoạt (complex JOINs), reporting, existing SQL expertise. Amazon Aurora là RDS-compatible engine tự xây dựng của AWS: Aurora MySQL/PostgreSQL nhanh gấp 3-5x so với MySQL/PostgreSQL gốc, auto-storage scaling đến 128TB, Aurora Serverless v2 scale theo fractional ACU, Aurora Global Database cho multi-region.",
+        "DynamoDB pricing: provisioned capacity (RCU/WCU) hoặc on-demand; RDS pricing theo instance size + storage. Anti-pattern cho DynamoDB: nhiều access pattern phức tạp, cần full-text search, cần reporting."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "2412-so-sanh-dynamodb-va-rds-khi-nao-nen-dung-nosql-thay-vi-sql-tren-aws"
+  },
+  {
+    "id": "dbcd0251-ef9d-5f87-8e69-3071ce598297",
+    "question": "Amazon ElastiCache là gì? Phân biệt Redis và Memcached trên ElastiCache. Các pattern caching phổ biến?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2413-amazon-elasticache-la-gi-phan-biet-redis-va-memcached-tren-elasticache-cac-patte",
+    "slug": "amazon-elasticache-la-gi-phan-biet-redis-va-memcached-tren-elasticache-cac-pattern-caching-pho-bien-dbcd0251-ef9d-5f87-8e69-3071ce598297",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Amazon ElastiCache là dịch vụ managed in-memory caching, hỗ trợ Redis và Memcached, giúp giảm latency database và tăng throughput ứng dụng."
+      ],
+      "details": [
+        "ElastiCache for Redis hỗ trợ data structures phong phú (strings, hashes, lists, sets, sorted sets, streams), persistence (RDB/AOF snapshots), replication (primary + read replicas), cluster mode (sharding tự động), pub/sub, Lua scripting, transaction; phù hợp cho session store, leaderboard, pub/sub, distributed locking, job queue. ElastiCache for Memcached đơn giản hơn, chỉ key-value string, multi-threaded (tận dụng multi-core tốt hơn), không có persistence hay replication, dễ horizontal scale; phù hợp khi chỉ cần simple object caching và horizontal scaling thuần túy.",
+        "Caching patterns:\n- Cache-aside (lazy loading) — app check cache trước, miss thì query DB rồi populate cache\n- Write-through — ghi vào cache và DB đồng thời, data luôn fresh nhưng write latency cao\n- Write-behind (write-back) — ghi vào cache trước, async sync xuống DB, giảm write latency nhưng risk data loss\n- Read-through — cache layer tự handle DB read khi miss",
+        "TTL đặt phù hợp tránh stale data; Cache Stampede problem giải quyết bằng mutex/probabilistic early expiration. ElastiCache Serverless (2023) tự scale capacity tự động."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "2413-amazon-elasticache-la-gi-phan-biet-redis-va-memcached-tren-elasticache-cac-patte"
+  },
+  {
+    "id": "c8f897b6-af58-5749-8134-9d51f8e0c29a",
+    "question": "Phân biệt EBS, EFS và Instance Store. Use case và giới hạn của từng loại?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2414-phan-biet-ebs-efs-va-instance-store-use-case-va-gioi-han-cua-tung-loai",
+    "slug": "phan-biet-ebs-efs-va-instance-store-use-case-va-gioi-han-cua-tung-loai-c8f897b6-af58-5749-8134-9d51f8e0c29a",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Amazon EBS (Elastic Block Store) là block storage gắn vào EC2 instance, như ổ cứng ảo; chỉ gắn được vào 1 EC2 tại một thời điểm (trừ EBS Multi-Attach cho io1/io2), persist sau khi instance terminate (nếu không set DeleteOnTermination), replicated trong cùng AZ."
+      ],
+      "details": [
+        "Loại EBS:\n- gp3 (general purpose SSD, mặc định khuyến nghị, 3000 IOPS base, $0.08/GB)\n- io2 Block Express (high IOPS cho database production, đến 256,000 IOPS, đắt hơn)\n- st1 (throughput-optimized HDD, sequential read/write cho big data)\n- sc1 (cold HDD, rẻ nhất, ít dùng)",
+        "Amazon EFS (Elastic File System) là managed NFS (Network File System) có thể mount đồng thời vào nhiều EC2 instances, thậm chí across AZ — phù hợp cho shared file storage, content management, home directories; auto-scale, không cần provision trước; Standard và Infrequent Access tiers; đắt hơn EBS (~$0.30/GB vs $0.08/GB).",
+        "Instance Store (ephemeral storage) là storage vật lý gắn trực tiếp vào host server, cực nhanh (NVMe SSD), không tốn phí riêng, nhưng mất data khi instance stop/terminate/fail — chỉ dùng cho temporary data, cache, scratch space. EBS snapshot backup lên S3, cross-region copy được."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "2414-phan-biet-ebs-efs-va-instance-store-use-case-va-gioi-han-cua-tung-loai"
+  },
+  {
+    "id": "99589834-093d-53b3-b85d-24f9fb35cace",
+    "question": "Amazon Aurora có gì đặc biệt? Giải thích Aurora architecture và Aurora Serverless v2.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2415-amazon-aurora-co-gi-dac-biet-giai-thich-aurora-architecture-va-aurora-serverless",
+    "slug": "amazon-aurora-co-gi-dac-biet-giai-thich-aurora-architecture-va-aurora-serverless-v2-99589834-093d-53b3-b85d-24f9fb35cace",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Amazon Aurora là cloud-native relational database engine do AWS xây dựng từ đầu, tương thích MySQL và PostgreSQL. Architecture Aurora khác biệt: storage layer tách khỏi compute layer — storage tự động scale đến 128TB, replicate 6 copies trên 3 AZ (4/6 write quorum, 3/6 read quorum), healing tự động khi có node fail; điều này cho phép failover nhanh (<30s) và read replicas lag thấp (<100ms)."
+      ],
+      "details": [
+        "Throughput Aurora MySQL nhanh gấp 5x MySQL gốc, Aurora PostgreSQL nhanh gấp 3x PostgreSQL gốc nhờ shared storage architecture loại bỏ replication log shipping. Aurora Global Database: 1 primary region + tối đa 5 secondary regions, replication lag <1s, phù hợp disaster recovery và global read scaling — failover cross-region trong <1 phút.",
+        "Aurora Serverless v2 (2022) scale compute theo fractional ACU (Aurora Capacity Unit) từ 0.5 đến 128 ACU, scale up trong vài giây, phù hợp workload có spike bất thường, dev/test environment, multi-tenant SaaS. Aurora Serverless v2 không scale về 0 (khác v1); Aurora Serverless v1 có thể scale về 0 nhưng cold start lâu.",
+        "Aurora Machine Learning tích hợp SageMaker và Comprehend trực tiếp từ SQL. Backtrack feature cho Aurora MySQL cho phép rewind database về thời điểm bất kỳ trong 72h mà không cần restore snapshot."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "2415-amazon-aurora-co-gi-dac-biet-giai-thich-aurora-architecture-va-aurora-serverless"
+  },
+  {
+    "id": "f48a8743-daa4-5500-b153-eddf00bbc588",
+    "question": "Amazon Redshift là gì? Khi nào dùng Redshift thay vì RDS? Giải thích columnar storage và distribution styles.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2416-amazon-redshift-la-gi-khi-nao-dung-redshift-thay-vi-rds-giai-thich-columnar-stor",
+    "slug": "amazon-redshift-la-gi-khi-nao-dung-redshift-thay-vi-rds-giai-thich-columnar-storage-va-distribution-f48a8743-daa4-5500-b153-eddf00bbc588",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Amazon Redshift là petabyte-scale data warehouse dựa trên columnar storage, tối ưu cho OLAP (Online Analytical Processing) — complex queries trên large datasets, reporting, BI. Khác biệt với OLTP (RDS): Redshift lưu data theo cột thay vì hàng, giúp compression tốt hơn và scan nhanh hơn khi chỉ cần một số cột trong query analytic."
+      ],
+      "details": [
+        "Redshift cluster gồm: 1 leader node (parse/plan query, coordinate) + nhiều compute nodes (lưu data, thực thi query); Redshift Serverless tự động scale.",
+        "Distribution styles quyết định data phân phối thế nào:\n- EVEN — phân phối đều qua tất cả nodes, tốt khi không có JOIN\n- KEY — phân phối theo giá trị của column, tốt khi JOIN thường xuyên trên column đó (co-locate related data)\n- ALL — copy toàn bộ table vào mọi node, chỉ dùng cho dimension tables nhỏ\n- AUTO — Redshift tự chọn",
+        "Sort keys giúp range scan hiệu quả (như index trong traditional DB). Redshift Spectrum cho phép query data trực tiếp trên S3 (data lake) mà không cần load vào Redshift — pay per query. Materialized views cho pre-computed aggregation. Redshift phù hợp: business reporting, historical data analysis, data lake queries; không phù hợp: OLTP, nhiều small updates, NoSQL flexible schema."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "2416-amazon-redshift-la-gi-khi-nao-dung-redshift-thay-vi-rds-giai-thich-columnar-stor"
+  },
+  {
+    "id": "400a0549-46ac-50f1-b74d-78731aea16d3",
+    "question": "Phân biệt SQS, SNS và EventBridge. Khi nào dùng từng service trong kiến trúc event-driven?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2417-phan-biet-sqs-sns-va-eventbridge-khi-nao-dung-tung-service-trong-kien-truc-event",
+    "slug": "phan-biet-sqs-sns-va-eventbridge-khi-nao-dung-tung-service-trong-kien-truc-event-driven-400a0549-46ac-50f1-b74d-78731aea16d3",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Amazon SQS (Simple Queue Service) là managed message queue cho point-to-point async messaging: producer gửi message vào queue, consumer poll và xử lý; message tồn tại cho đến khi consumer xóa (đến 14 ngày); hỗ trợ Standard queue (at-least-once, best-effort ordering) và FIFO queue (exactly-once, strict ordering, 300 TPS base; high-throughput mode hỗ trợ đến 30,000 TPS); Dead Letter Queue (DLQ) cho message xử lý thất bại nhiều lần; Visibility Timeout ngăn 2 consumer cùng xử lý một message. Dùng SQS khi: decouple producer/consumer với different speed, buffer traffic spike, retry failed jobs."
+      ],
+      "details": [
+        "Amazon SNS (Simple Notification Service) là pub/sub messaging: publisher gửi message vào topic, SNS fan-out đến nhiều subscribers (SQS queues, Lambda, HTTP endpoint, email, SMS) đồng thời; không lưu trữ message. Dùng SNS khi: broadcast notification, fan-out một event đến nhiều consumers.",
+        "Amazon EventBridge là event bus serverless thế hệ mới, hỗ trợ event routing dựa trên content (filter theo pattern JSON), tích hợp 200+ AWS services và SaaS (Salesforce, Datadog), Schema Registry, event replay, pipes; mạnh hơn SNS cho complex routing. Dùng EventBridge khi: event-driven microservices, cross-account event routing, integrate với SaaS, cần content-based routing.",
+        "Pattern phổ biến: SNS → SQS fan-out (SNS fan-out đến nhiều SQS queues để nhiều consumer xử lý độc lập)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "2417-phan-biet-sqs-sns-va-eventbridge-khi-nao-dung-tung-service-trong-kien-truc-event"
+  },
+  {
+    "id": "c5567efb-8369-57bb-9966-c4da0c03de33",
+    "question": "Amazon Kinesis là gì? So sánh Kinesis Data Streams, Firehose và Analytics. Khi nào dùng Kinesis thay vì SQS?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2418-amazon-kinesis-la-gi-so-sanh-kinesis-data-streams-firehose-va-analytics-khi-nao",
+    "slug": "amazon-kinesis-la-gi-so-sanh-kinesis-data-streams-firehose-va-analytics-khi-nao-dung-kinesis-thay-vi-c5567efb-8369-57bb-9966-c4da0c03de33",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Amazon Kinesis là family dịch vụ xử lý real-time streaming data."
+      ],
+      "details": [
+        "Kinesis Data Streams (KDS): ingest và store streaming data tạm thời (1-365 ngày), nhiều consumer đọc cùng một stream độc lập (consumer group độc lập), throughput scale bằng shard (1 shard = 1MB/s in, 2MB/s out, 1000 records/s), dùng cho real-time analytics, cần nhiều consumer đọc cùng data, replay events.",
+        "Kinesis Firehose (Data Firehose): fully managed, không cần code consumer — tự động load streaming data vào S3, Redshift, OpenSearch, Splunk; transform data bằng Lambda inline; buffer size + interval để batch; không có replay/retention dài; đơn giản nhất khi chỉ cần pipe data vào data store.",
+        "Kinesis Data Analytics: chạy SQL hoặc Apache Flink trên streaming data real-time, tính aggregation trong window (tumbling/sliding), anomaly detection; pay per KPU (Kinesis Processing Unit).",
+        "Nên dùng Kinesis thay SQS khi: cần nhiều independent consumers đọc cùng stream, cần replay data, ordering quan trọng, real-time analytics, high-volume log ingestion (hàng GB/s). Nên dùng SQS khi: chỉ cần 1 consumer type, task queue pattern, cần exactly-once processing (FIFO), không cần replay. Kinesis đắt hơn SQS, SQS đơn giản hơn để dùng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "2418-amazon-kinesis-la-gi-so-sanh-kinesis-data-streams-firehose-va-analytics-khi-nao"
+  },
+  {
+    "id": "8b0b9f95-1a5b-598d-97f9-e6ebcb9a7303",
+    "question": "AWS Step Functions là gì? Giải thích Standard vs Express workflows và các use case phù hợp.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2419-aws-step-functions-la-gi-giai-thich-standard-vs-express-workflows-va-cac-use-cas",
+    "slug": "aws-step-functions-la-gi-giai-thich-standard-vs-express-workflows-va-cac-use-case-phu-hop-8b0b9f95-1a5b-598d-97f9-e6ebcb9a7303",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "AWS Step Functions là serverless workflow orchestration service, cho phép coordinate nhiều Lambda functions và AWS services thành workflows có trạng thái (state machines), với visual diagram, error handling, retry logic, và audit trail tự động. Định nghĩa workflow bằng Amazon States Language (JSON/YAML); các state types: Task (invoke Lambda/service), Choice (conditional branching), Parallel (chạy branches song song), Map (iterate over array), Wait (delay), Pass, Succeed, Fail."
+      ],
+      "details": [
+        "Tích hợp trực tiếp với 200+ AWS services qua SDK integrations (không cần Lambda wrapper cho nhiều tác vụ). So với Lambda orchestration thủ công: Step Functions giải quyết error handling, retry, timeout, saga pattern cho distributed transactions dễ dàng hơn."
+      ],
+      "points": [
+        "Standard Workflows: tối đa 1 năm execution duration, exactly-once execution semantics, execution history stored 90 ngày để audit/debug, tính tiền per state transition ($0.025/1000 transitions); phù hợp cho long-running business processes, order fulfillment, human approval flows.",
+        "Express Workflows: tối đa 5 phút, at-least-once semantics, không lưu execution history dài hạn (log vào CloudWatch), giá rẻ hơn ($1/triệu workflow executions + duration); phù hợp cho high-volume, short-duration workflows như IoT data processing, streaming data transformation."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "2419-aws-step-functions-la-gi-giai-thich-standard-vs-express-workflows-va-cac-use-cas"
+  },
+  {
+    "id": "7aa1426f-422f-5779-bf92-e200713fa0c5",
+    "question": "AWS CloudFormation và CDK là gì? Phân biệt và khi nào nên dùng CDK thay vì CloudFormation thuần?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2420-aws-cloudformation-va-cdk-la-gi-phan-biet-va-khi-nao-nen-dung-cdk-thay-vi-cloudf",
+    "slug": "aws-cloudformation-va-cdk-la-gi-phan-biet-va-khi-nao-nen-dung-cdk-thay-vi-cloudformation-thuan-7aa1426f-422f-5779-bf92-e200713fa0c5",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "AWS CloudFormation là Infrastructure as Code (IaC) service, định nghĩa AWS resources bằng YAML/JSON templates, deploy và manage infrastructure theo stack; hỗ trợ rollback tự động khi deploy fail, drift detection, change sets (preview thay đổi trước khi apply), nested stacks, cross-stack references."
+      ],
+      "details": [
+        "AWS CDK (Cloud Development Kit) là framework cho phép định nghĩa infrastructure bằng ngôn ngữ lập trình quen thuộc (TypeScript, Python, Java, Go, C#); CDK synthesize thành CloudFormation template, sau đó deploy bình thường.",
+        "CDK mạnh hơn CloudFormation thuần vì: code abstraction (loops, conditions, functions thay vì repeat YAML), Constructs library cung cấp high-level patterns (L2/L3 constructs như aws-ecs-patterns.ApplicationLoadBalancedFargateService), type safety và IDE autocomplete, unit testing infrastructure code bằng Jest.",
+        "Nên dùng CDK khi: team biết lập trình, infrastructure phức tạp cần abstraction, muốn reuse patterns qua constructs, cần generate nhiều tài nguyên tương tự. Nên dùng CloudFormation thuần khi: team không muốn học CDK, template đơn giản, cần maximum transparency. Terraform là alternative multi-cloud (không lock-in AWS), Pulumi tương tự CDK nhưng multi-cloud."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "2420-aws-cloudformation-va-cdk-la-gi-phan-biet-va-khi-nao-nen-dung-cdk-thay-vi-cloudf"
+  },
+  {
+    "id": "01ea814f-da3f-5fee-bf82-2fbd7b74ca39",
+    "question": "AWS IAM là gì? Giải thích sự khác biệt giữa IAM Users, Groups, Roles và Policies. Best practices bảo mật IAM?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2421-aws-iam-la-gi-giai-thich-su-khac-biet-giua-iam-users-groups-roles-va-policies-be",
+    "slug": "aws-iam-la-gi-giai-thich-su-khac-biet-giua-iam-users-groups-roles-va-policies-best-practices-bao-mat-01ea814f-da3f-5fee-bf82-2fbd7b74ca39",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "AWS IAM (Identity and Access Management) kiểm soát authentication (ai được phép vào) và authorization (được phép làm gì) trong AWS account."
+      ],
+      "details": [
+        "Các định danh: IAM User — định danh cho người dùng cụ thể hoặc ứng dụng, có credentials dài hạn — không nên dùng cho ứng dụng chạy trên AWS. IAM Group — nhóm chứa Users, áp dụng policy chung cho cả nhóm. IAM Role — định danh không có credentials dài hạn, được assume bởi AWS service (EC2, Lambda), user khác, hoặc external identity (SAML, OIDC); credentials tạm thời qua STS (15 phút đến 12 giờ).",
+        "IAM Policy là JSON document định nghĩa permissions; có 2 loại: Identity-based policy (attach vào user/group/role) và Resource-based policy (attach vào resource như S3 bucket, SQS queue — cho phép cross-account access). Policy evaluation: explicit Deny > explicit Allow > implicit Deny.",
+        "Best practices:\n- Không dùng root account (tạo admin IAM user)\n- Bật MFA cho mọi user\n- Principle of least privilege\n- Dùng Roles thay vì access keys cho EC2/Lambda\n- Rotate access keys định kỳ\n- Dùng IAM Access Analyzer để phát hiện over-permissive policies\n- Dùng Permission Boundary để giới hạn max permissions delegate được"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "2421-aws-iam-la-gi-giai-thich-su-khac-biet-giua-iam-users-groups-roles-va-policies-be"
+  },
+  {
+    "id": "5c7ecf31-b401-5ae9-80fe-78558ad5d918",
+    "question": "Amazon CloudWatch là gì? Giải thích Metrics, Logs, Alarms, Dashboards và các best practices monitoring.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2425-amazon-cloudwatch-la-gi-giai-thich-metrics-logs-alarms-dashboards-va-cac-best-pr",
+    "slug": "amazon-cloudwatch-la-gi-giai-thich-metrics-logs-alarms-dashboards-va-cac-best-practices-monitoring-5c7ecf31-b401-5ae9-80fe-78558ad5d918",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Amazon CloudWatch là observability service tập trung cho monitoring AWS resources và applications."
+      ],
+      "details": [
+        "Best practices: enable detailed monitoring cho production EC2, set up alarms cho critical metrics (error rate > 1%, P99 latency > 2s, CPU > 80%), dùng EMF (Embedded Metric Format) để gửi structured metrics từ Lambda logs, tạo custom dashboard cho each service, set log retention policy để kiểm soát cost."
+      ],
+      "points": [
+        "CloudWatch Metrics: time-series data points (CPU, memory, request count, latency); AWS services tự động gửi metrics (vd: EC2 CPUUtilization mỗi 5 phút, hoặc 1 phút với detailed monitoring); custom metrics từ ứng dụng qua PutMetricData API hoặc CloudWatch agent ($0.30/metric/month).",
+        "CloudWatch Logs: collect, store và search log data; Log Groups (container) → Log Streams (từng instance/function); Metric Filters extract metrics từ log patterns; Log Insights cho ad-hoc query logs bằng query language; export sang S3 cho long-term retention; Subscription Filters stream logs real-time tới Lambda/Kinesis/OpenSearch.",
+        "CloudWatch Alarms: trigger khi metric vượt threshold; actions: SNS notification, EC2 Auto Scaling, EC2 action (stop/reboot/terminate); Composite Alarms kết hợp nhiều alarms; Anomaly Detection dùng ML để tự động detect anomaly."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "2425-amazon-cloudwatch-la-gi-giai-thich-metrics-logs-alarms-dashboards-va-cac-best-pr"
+  },
+  {
+    "id": "adbe864e-5281-56d1-8e1f-754fa1e185d7",
+    "question": "Làm thế nào để bảo mật một ứng dụng web trên AWS từ đầu đến cuối? (WAF, Shield, GuardDuty, Security Hub)",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2428-lam-the-nao-de-bao-mat-mot-ung-dung-web-tren-aws-tu-dau-den-cuoi-waf-shield-guar",
+    "slug": "lam-the-nao-de-bao-mat-mot-ung-dung-web-tren-aws-tu-dau-den-cuoi-waf-shield-guardduty-security-hub-adbe864e-5281-56d1-8e1f-754fa1e185d7",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bảo mật theo layers (defense in depth):"
+      ],
+      "details": [
+        "Edge layer — CloudFront với AWS WAF để filter malicious requests (SQL injection, XSS, OWASP Top 10 rules), rate limiting, geo-blocking; Shield Standard (miễn phí, auto) chống DDoS L3/L4, Shield Advanced ($3000/month) cho L7 DDoS mitigation tự động với support team 24/7.",
+        "Network layer — VPC với public/private subnets, Security Groups strict, NACLs, VPC Flow Logs để audit traffic; không expose database ra public; dùng AWS Network Firewall cho stateful inspection.",
+        "Compute layer — EC2/Lambda trong private subnet, IMDSv2 (Instance Metadata Service v2) bắt buộc để chống SSRF, least privilege IAM roles, SSM Session Manager thay vì SSH (không cần port 22 mở).",
+        "Data layer — encrypt at rest bằng KMS (S3, RDS, DynamoDB), encrypt in transit (HTTPS, TLS 1.2+), Secrets Manager cho credentials, S3 Block Public Access account-level.",
+        "Identity layer",
+        "Monitoring"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "2428-lam-the-nao-de-bao-mat-mot-ung-dung-web-tren-aws-tu-dau-den-cuoi-waf-shield-guar"
+  },
+  {
+    "id": "abc05827-3ea1-52e7-a830-56d5a8ed68b0",
+    "question": "Cho EC2 ở private subnet ra internet: NAT Gateway và NAT instance khác nhau ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94104-cho-ec2-o-private-subnet-ra-internet-nat-gateway-va-nat-instance-khac-nhau-ra-sa",
+    "slug": "cho-ec2-o-private-subnet-ra-internet-nat-gateway-va-nat-instance-khac-nhau-ra-sao-abc05827-3ea1-52e7-a830-56d5a8ed68b0",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Instance trong private subnet không có route trực tiếp ra internet. Để nó gọi ra ngoài (tải update, gọi API) mà không nhận kết nối vào, traffic phải đi qua một NAT đặt ở public subnet. Có hai cách:"
+      ],
+      "details": [
+        "NAT Gateway — dịch vụ managed của AWS:\n- AWS lo scaling (tự co giãn tới hàng chục Gbps), tính sẵn sàng và vá lỗi.\n- Có độ dự phòng trong một AZ, nhưng gắn với một AZ duy nhất → muốn chịu lỗi thì tạo NAT Gateway ở mỗi AZ.\n- Tính phí theo giờ + theo GB xử lý. Không thể dùng làm bastion, không gắn Security Group.",
+        "NAT instance — một EC2 do bạn tự vận hành, bật IP forwarding:\n- Bạn tự chịu patch, tự scale, tự lo HA (là single point of failure nếu chỉ có một).\n- Rẻ hơn ở lưu lượng nhỏ và linh hoạt hơn: gắn được Security Group, kiêm bastion, tùy biến port forwarding.",
+        "Chốt: production gần như luôn chọn NAT Gateway vì đỡ vận hành và bền hơn; NAT instance chỉ hợp cho môi trường dev/lab, chi phí cực thấp, hoặc khi cần một tính năng đặc thù NAT Gateway không có."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "94104-cho-ec2-o-private-subnet-ra-internet-nat-gateway-va-nat-instance-khac-nhau-ra-sa"
+  },
+  {
+    "id": "1d0fe62f-2c3b-5b80-b21c-1872cf77d707",
+    "question": "VPC Peering và Transit Gateway khác nhau thế nào? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94105-vpc-peering-va-transit-gateway-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "slug": "vpc-peering-va-transit-gateway-khac-nhau-the-nao-khi-nao-dung-cai-nao-1d0fe62f-2c3b-5b80-b21c-1872cf77d707",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai đều nối các VPC lại với nhau, khác ở mô hình kết nối."
+      ],
+      "details": [
+        "VPC Peering là kết nối một-một giữa hai VPC:\n- Traffic đi trực tiếp, độ trễ thấp, không tính phí theo giờ (chỉ trả data transfer).\n- Không bắc cầu (non-transitive): nếu A peer B và B peer C, thì A không tự động thấy C — phải peer A–C riêng.\n- Với N VPC cần nối lưới đầy đủ cần N*(N-1)/2 kết nối → số peering bùng nổ, khó quản lý khi nhiều VPC.",
+        "Transit Gateway (TGW) là hub trung tâm kiểu bánh xe nan hoa (hub-and-spoke):\n- Mỗi VPC chỉ gắn một lần vào TGW; TGW định tuyến giữa chúng → routing có bắc cầu, quản lý tập trung bằng route table của TGW.\n- Nối được cả VPC, VPN, Direct Connect, và cross-Region (peering giữa các TGW).\n- Có phí theo giờ cho mỗi attachment + phí xử lý dữ liệu, và thêm một chặng (hop) so với peering trực tiếp.",
+        "Chọn thế nào: vài VPC, cần độ trễ/chi phí thấp và không cần transit → VPC Peering. Nhiều VPC (chục trở lên), cần topology tập trung, transitive routing, và kết nối hybrid → Transit Gateway."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "94105-vpc-peering-va-transit-gateway-khac-nhau-the-nao-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "882d397b-bf20-57c5-9635-49ed41e378d5",
+    "question": "Elastic IP và public IP (auto-assigned) khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94106-elastic-ip-va-public-ip-auto-assigned-khac-nhau-the-nao",
+    "slug": "elastic-ip-va-public-ip-auto-assigned-khac-nhau-the-nao-882d397b-bf20-57c5-9635-49ed41e378d5",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai đều là địa chỉ IPv4 công khai để truy cập instance từ internet, khác ở tính ổn định và quyền sở hữu."
+      ],
+      "details": [
+        "Public IP tự cấp (auto-assigned):\n- AWS cấp từ pool chung khi instance khởi động (nếu subnet bật auto-assign).\n- Không cố định: IP bị nhả và đổi mỗi khi instance stop→start, và mất hẳn khi terminate. Bạn không \"sở hữu\" nó.\n- Miễn phí, phù hợp instance ngắn hạn, không cần địa chỉ bền.",
+        "Elastic IP (EIP):\n- Là public IP bạn cấp phát cho account và sở hữu cho tới khi tự release.\n- Cố định: IP không đổi qua stop/start. Điểm mạnh là remap được — gỡ khỏi instance hỏng và gắn sang instance khỏe trong vài giây, hữu ích cho failover mà không phải đổi DNS.\n- Tính phí cho địa chỉ IPv4 công khai (theo chính sách hiện hành của AWS), kể cả khi đang gắn — nên chỉ giữ EIP thực sự cần.",
+        "Chốt: cần một IPv4 công khai cố định, gắn với ứng dụng (whitelist firewall bên thứ ba, failover) → dùng Elastic IP. Còn nếu chỉ cần ra/vào tạm thời, ưu tiên đặt instance sau load balancer hoặc dùng DNS thay vì gán IP cứng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "94106-elastic-ip-va-public-ip-auto-assigned-khac-nhau-the-nao"
+  },
+  {
+    "id": "72bc0477-dd7b-5cc0-bfcc-7e3c04ca36e0",
+    "question": "Review IAM policy thấy \"Action\": \"s3:*\" với \"Resource\": \"*\". Vấn đề ở đâu và siết lại thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98454-review-iam-policy-thay-action-s3-voi-resource-van-de-o-dau-va-siet-lai-the-nao",
+    "slug": "review-iam-policy-thay-action-s3-voi-resource-van-de-o-dau-va-siet-lai-the-nao-72bc0477-dd7b-5cc0-bfcc-7e3c04ca36e0",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Policy đó cấp toàn quyền S3 trên mọi bucket của account, vi phạm nguyên tắc least privilege. Rủi ro cụ thể: một service chỉ cần đọc một bucket nhưng lại có thể DeleteBucket, đọc bucket chứa log/backup của hệ thống khác, hoặc ghi đè dữ liệu — nếu service bị chiếm quyền thì bán kính thiệt hại là cả account.",
+        "Cách làm thực tế thay vì ngồi đoán quyền:",
+        "AccessDenied",
+        "IAM Access Analyzer",
+        "permissions boundary"
+      ],
+      "details": [
+        "1. Action: liệt kê đúng action cần, không dùng wildcard rộng.\n2. Resource: chỉ định ARN cụ thể. Nhớ hai ARN khác nhau — bucket (cho ListBucket) và object (cho GetObject).\n3. Condition: thêm ràng buộc theo prefix, tag, source VPC endpoint, aws:SecureTransport.",
+        "Một lưu ý hay bị bỏ qua: \"Resource\": \"*\" là bắt buộc với vài action cấp account (vd s3:ListAllMyBuckets) — chỗ đó không phải lỗi, nhưng nên tách riêng statement thay vì gộp chung với action ghi/xoá.",
+        "Siết theo ba trục:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "98454-review-iam-policy-thay-action-s3-voi-resource-van-de-o-dau-va-siet-lai-the-nao"
+  },
+  {
+    "id": "95277f1f-e7da-568b-8a20-82efd7132e7e",
+    "question": "CI/CD trên GitHub Actions cần deploy lên AWS. Bạn cấu hình quyền thế nào để không phải lưu access key trong secrets?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98455-ci-cd-tren-github-actions-can-deploy-len-aws-ban-cau-hinh-quyen-the-nao-de-khong",
+    "slug": "ci-cd-tren-github-actions-can-deploy-len-aws-ban-cau-hinh-quyen-the-nao-de-khong-phai-luu-access-key-95277f1f-e7da-568b-8a20-82efd7132e7e",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Dùng OIDC federation: GitHub Actions phát hành một OIDC token ngắn hạn cho mỗi lần chạy job, AWS tin nhà phát hành đó và đổi token lấy credential tạm qua sts:AssumeRoleWithWebIdentity. Không có access key nào nằm trong repo secrets.",
+        "bất kỳ",
+        "Chi tiết dễ sai và hay bị hỏi lại:",
+        "không",
+        "repo:<org>/<repo>:ref:refs/heads/main",
+        "environment:production"
+      ],
+      "details": [
+        "Các bước:\n1. Tạo IAM OIDC identity provider trỏ tới nhà phát hành của GitHub Actions.\n2. Tạo IAM role với trust policy chỉ chấp nhận token từ provider đó, và có Condition khoá đúng repo/branch qua claim sub.\n3. Gắn permission policy hẹp (chỉ deploy được đúng service cần) cho role.\n4. Trong workflow, xin quyền id-token: write rồi assume role, lấy credential tạm.",
+        "So với access key lưu trong secrets: credential ở đây hết hạn sau vài giờ, không cần xoay vòng thủ công, và mỗi lần assume đều để lại vết trong CloudTrail kèm thông tin repo/run."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "98455-ci-cd-tren-github-actions-can-deploy-len-aws-ban-cau-hinh-quyen-the-nao-de-khong"
+  },
+  {
+    "id": "9e54b144-2184-5244-9527-8e54d3730f69",
+    "question": "Deploy service sau ALB, target group báo unhealthy nhưng SSH vào instance thì app vẫn chạy. Bạn debug theo hướng nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98456-deploy-service-sau-alb-target-group-bao-unhealthy-nhung-ssh-vao-instance-thi-app",
+    "slug": "deploy-service-sau-alb-target-group-bao-unhealthy-nhung-ssh-vao-instance-thi-app-van-chay-ban-debug-9e54b144-2184-5244-9527-8e54d3730f69",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Health check của ALB là request HTTP thật do load balancer gửi tới target, nên \"app chạy\" trên máy chưa đủ. Kiểm tra theo thứ tự:"
+      ],
+      "details": [
+        "1. Security group của target có cho phép traffic từ security group của ALB trên đúng traffic port không. Đây là nguyên nhân phổ biến nhất — nên tham chiếu SG-của-ALB thay vì mở CIDR.\n2. Port: health check port mặc định là traffic-port. App nghe 3000 nhưng target group đăng ký cổng 80 thì check luôn fail.\n3. Path và mã trả về: mặc định check / và coi 200 là healthy. Nếu / trả 302 (redirect sang login) hoặc 404 thì unhealthy. Tạo endpoint /healthz trả 200 gọn nhẹ, hoặc chỉnh Matcher.\n4. App bind địa chỉ nào: nghe 127.0.0.1 thay vì 0.0.0.0 thì chỉ chính máy đó gọi được — đúng với triệu chứng \"curl trên máy thì được\".\n5. Ngưỡng thời gian: app khởi động chậm hơn interval × unhealthy threshold sẽ bị kill rồi thay mới liên tục. Nới HealthCheckIntervalSeconds/threshold, và với ECS thì đặt healthCheckGracePeriodSeconds.\n6. Health check bị chính nó làm chậm: endpoint health mà đi query DB, DB chậm là cả fleet rớt khỏi LB. Health check nên nông.",
+        "Đọc lý do trực tiếp trong console ở cột health status details (vd Request timed out, Health checks failed with these codes: [404]) — mỗi thông báo chỉ thẳng vào một trong các nhóm trên. Khi rollback/deploy, nhớ deregistration delay (mặc định 300s) là lý do target ở trạng thái draining lâu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "98456-deploy-service-sau-alb-target-group-bao-unhealthy-nhung-ssh-vao-instance-thi-app"
+  },
+  {
+    "id": "e93538e9-af27-5ba1-b592-cff909cc55f2",
+    "question": "App sau load balancer log ra toàn IP nội bộ, không thấy IP thật của client. Nguyên nhân và cách lấy IP thật?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98457-app-sau-load-balancer-log-ra-toan-ip-noi-bo-khong-thay-ip-that-cua-client-nguyen",
+    "slug": "app-sau-load-balancer-log-ra-toan-ip-noi-bo-khong-thay-ip-that-cua-client-nguyen-nhan-va-cach-lay-ip-e93538e9-af27-5ba1-b592-cff909cc55f2",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì ALB kết thúc kết nối TCP rồi mở kết nối mới tới target, nên remoteAddr mà app thấy chính là IP node của ALB trong subnet.",
+        "Điểm quan trọng về bảo mật:",
+        "append",
+        "chỉ tin số hop bạn kiểm soát",
+        "X-Forwarded-For",
+        "app.set('trust proxy', 1)"
+      ],
+      "details": [
+        "IP thật của client nằm ở header X-Forwarded-For, cùng với X-Forwarded-Proto (http/https gốc) và X-Forwarded-Port.",
+        "Với NLB thì khác: NLB hoạt động ở tầng 4, không có header HTTP để chèn.\n- Target group kiểu instance/IP với client IP preservation bật thì socket nhìn thấy thẳng IP client.\n- Nếu không, bật Proxy Protocol v2 trên target group và cho app/proxy đọc được nó.",
+        "Còn CloudFront đứng trước thì IP thật đọc từ CloudFront-Viewer-Address, còn X-Forwarded-For sẽ có thêm hop của CloudFront."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "X-Forwarded-For: 203.0.113.10, 70.41.3.18"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "98457-app-sau-load-balancer-log-ra-toan-ip-noi-bo-khong-thay-ip-that-cua-client-nguyen"
+  },
+  {
+    "id": "fde5891e-9a4f-513c-a1ae-72a64189f452",
+    "question": "Đặt CloudFront trước S3 để phục vụ static asset: chặn truy cập thẳng vào bucket thế nào, và deploy bản mới mà người dùng vẫn thấy file cũ thì xử lý ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98458-dat-cloudfront-truoc-s3-de-phuc-vu-static-asset-chan-truy-cap-thang-vao-bucket-t",
+    "slug": "dat-cloudfront-truoc-s3-de-phuc-vu-static-asset-chan-truy-cap-thang-vao-bucket-the-nao-va-deploy-ban-fde5891e-9a4f-513c-a1ae-72a64189f452",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Chặn truy cập thẳng: giữ bucket private hoàn toàn (bật Block Public Access) và dùng Origin Access Control (OAC). CloudFront ký request tới S3 bằng SigV4; bucket policy chỉ cho phép principal cloudfront.amazonaws.com với Condition khoá đúng ARN của distribution. Người dùng gọi URL S3 trực tiếp sẽ nhận 403. OAC là bản thay thế cho OAI cũ (OAI vẫn chạy nhưng không nên dùng cho thiết lập mới)."
+      ],
+      "details": [
+        "Vì sao vẫn thấy file cũ: CloudFront cache theo object ở từng edge location, TTL do Cache-Control của origin hoặc cache policy quyết định. Upload đè lên S3 không làm edge cache mất hiệu lực.",
+        "Hai cách xử lý, và câu trả lời tốt là chọn cách thứ hai:",
+        "1. Invalidation — gọi API tạo invalidation cho /* hoặc từng path. Nhược điểm: có độ trễ vài phút, chỉ một lượng path nhất định mỗi tháng là miễn phí, phần vượt tính tiền, và dễ thành thói quen \"cứ deploy là xoá sạch cache\".\n2. Versioned filename (khuyến nghị) — build ra app.9f3c2a.js, main.4b81.css. File có hash không bao giờ đổi nội dung, nên đặt Cache-Control: public, max-age=31536000, immutable. Chỉ index.html để TTL ngắn (hoặc no-cache), vì nó là thứ trỏ sang bundle mới. Deploy chỉ cần invalidation cho /index.html, hoặc không cần gì cả.",
+        "Giữ nguyên tắc: tài nguyên bất biến thì cache dài, tài liệu điều hướng thì cache ngắn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "98458-dat-cloudfront-truoc-s3-de-phuc-vu-static-asset-chan-truy-cap-thang-vao-bucket-t"
+  },
+  {
+    "id": "777fa992-d841-5a75-bfa1-7577bafbe19b",
+    "question": "Team 5 người cần chạy API Node.js trên AWS. Bạn chọn Lambda, ECS Fargate hay EC2 và dựa trên tiêu chí gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98459-team-5-nguoi-can-chay-api-node-js-tren-aws-ban-chon-lambda-ecs-fargate-hay-ec2-v",
+    "slug": "team-5-nguoi-can-chay-api-node-js-tren-aws-ban-chon-lambda-ecs-fargate-hay-ec2-va-dua-tren-tieu-chi-777fa992-d841-5a75-bfa1-7577bafbe19b",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Quyết định theo hình dạng traffic, thời lượng request và mức vận hành team gánh nổi, không theo \"cái nào hiện đại hơn\"."
+      ],
+      "details": [
+        "Lambda — chọn khi traffic thưa hoặc bùng nổ theo đợt, mỗi request ngắn (dưới vài giây), và bạn muốn không quản server. Trả tiền theo lần gọi và GB-giây, nên lúc không ai dùng thì gần như không tốn. Đánh đổi: cold start, giới hạn thời gian tối đa 15 phút, kích thước gói//tmp hạn chế, và vấn đề connection tới RDS khi số instance đồng thời tăng.",
+        "ECS Fargate — mặc định hợp lý cho API HTTP chạy thường trực của team nhỏ. Đóng gói Docker, khai báo CPU/RAM, ECS lo đặt container; không phải vá OS, không quản AMI hay ASG. Giá mỗi vCPU-giờ cao hơn EC2 nhưng tiết kiệm thời gian vận hành, mà với team 5 người thì thời gian mới là chi phí lớn nhất. Tiến trình sống lâu nên connection pool tới DB ổn định.",
+        "EC2 — chọn khi cần kiểm soát mức máy: GPU, instance đặc thù, phần mềm phải cài trên host, hoặc khi tải ổn định và lớn tới mức chênh lệch đơn giá bù được công vận hành (thêm Reserved/Savings Plans, Spot cho worker). Đổi lại phải tự lo patch, AMI, ASG, health check.",
+        "Chốt cho tình huống này: API Node.js thường trực, team nhỏ → Fargate. Tách phần việc bất đồng bộ (resize ảnh, webhook, cron) sang Lambda vì đúng dạng burst ngắn. Chỉ chuyển xuống EC2 khi có nhu cầu cụ thể mà Fargate không đáp ứng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "98459-team-5-nguoi-can-chay-api-node-js-tren-aws-ban-chon-lambda-ecs-fargate-hay-ec2-v"
+  },
+  {
+    "id": "bbdef87c-d546-5fa8-9d0f-a8098950f339",
+    "question": "Lưu DB password và API key của ứng dụng: chọn Secrets Manager hay SSM Parameter Store?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98460-luu-db-password-va-api-key-cua-ung-dung-chon-secrets-manager-hay-ssm-parameter-s",
+    "slug": "luu-db-password-va-api-key-cua-ung-dung-chon-secrets-manager-hay-ssm-parameter-store-bbdef87c-d546-5fa8-9d0f-a8098950f339",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai đều mã hoá bằng KMS, phân quyền bằng IAM và có audit trong CloudTrail. Khác nhau ở xoay vòng tự động và giá."
+      ],
+      "details": [
+        "Secrets Manager\n- Có rotation tích hợp: gắn Lambda rotation, với RDS/Redshift/DocumentDB thì AWS cung cấp sẵn hàm rotation.\n- Hỗ trợ cross-account và replicate secret sang region khác.\n- Tính tiền theo secret mỗi tháng cộng phí API call.",
+        "Parameter Store (SSM)\n- Kiểu Standard miễn phí (giới hạn số lượng và 4KB/tham số), kiểu Advanced trả phí (8KB, policy hết hạn).\n- Dùng SecureString để mã hoá bằng KMS.\n- Không có rotation dựng sẵn — tự viết.\n- Hợp với config thường (feature flag, endpoint, tên bucket) chứ không chỉ secret.",
+        "Cách chọn thực tế:\n- Secret cần xoay vòng hoặc do bên khác dùng chung (DB master password, key thanh toán) → Secrets Manager.\n- Config và secret ít nhạy cảm, số lượng nhiều, ngân sách chặt → Parameter Store SecureString.\n- Dự án nhỏ hoàn toàn có thể dùng Parameter Store cho tất cả rồi nâng dần.",
+        "Dù chọn cái nào, hai nguyên tắc không đổi: không lưu secret trong biến môi trường của repo hay image Docker, và đọc secret lúc khởi động rồi cache trong bộ nhớ thay vì gọi API mỗi request (vừa tốn tiền vừa dễ bị throttle). Cache thì kèm cơ chế nạp lại khi secret xoay vòng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "98460-luu-db-password-va-api-key-cua-ung-dung-chon-secrets-manager-hay-ssm-parameter-s"
+  },
+  {
+    "id": "04760666-0502-5c57-a18c-b081a9e65d3d",
+    "question": "AWS KMS và Secrets Manager là gì? Giải thích envelope encryption và khi nào dùng từng service.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "aws-kms-va-secrets-manager-la-gi-giai-thich-envelope-encryption-va-khi-nao-dung-tung-service-04760666-0502-5c57-a18c-b081a9e65d3d",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": null
+  },
+  {
+    "id": "fd0ced86-e542-527b-8b90-e94fcde3cbd0",
+    "question": "AWS X-Ray là gì? Giải thích distributed tracing và cách instrument ứng dụng Node.js/Lambda với X-Ray.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "aws-x-ray-la-gi-giai-thich-distributed-tracing-va-cach-instrument-ung-dung-node-js-lambda-voi-x-ray-fd0ced86-e542-527b-8b90-e94fcde3cbd0",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": null
+  },
+  {
+    "id": "7e369850-db19-54a3-be65-30c3658e4624",
+    "question": "AWS Well-Architected Framework gồm những trụ cột nào? Giải thích từng pillar và best practices chính.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "aws-well-architected-framework-gom-nhung-tru-cot-nao-giai-thich-tung-pillar-va-best-practices-chinh-7e369850-db19-54a3-be65-30c3658e4624",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": null
+  },
+  {
+    "id": "36a4a303-8dca-5439-95d9-4f637414c046",
+    "question": "Multi-AZ vs Multi-Region là gì? Khi nào cần multi-region và đánh đổi về độ phức tạp và chi phí?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "multi-az-vs-multi-region-la-gi-khi-nao-can-multi-region-va-danh-doi-ve-do-phuc-tap-va-chi-phi-36a4a303-8dca-5439-95d9-4f637414c046",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": null
+  },
+  {
+    "id": "44daa117-182c-5a73-8b2d-8cf6738ec2be",
+    "question": "Giải thích các Disaster Recovery strategies trên AWS: Backup & Restore, Pilot Light, Warm Standby, Multi-Site Active-Active.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "giai-thich-cac-disaster-recovery-strategies-tren-aws-backup-restore-pilot-light-warm-standby-multi-s-44daa117-182c-5a73-8b2d-8cf6738ec2be",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": null
+  },
+  {
+    "id": "7c838dbc-c0da-5bee-b290-afece4d28500",
+    "question": "Serverless architecture patterns là gì? Giải thích các pattern phổ biến: API + Lambda, event-driven, saga pattern.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "serverless-architecture-patterns-la-gi-giai-thich-cac-pattern-pho-bien-api-lambda-event-driven-saga-7c838dbc-c0da-5bee-b290-afece4d28500",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": null
+  },
+  {
+    "id": "61415168-c0c3-5c66-b198-1a913fd80427",
+    "question": "Các chiến lược tối ưu chi phí AWS là gì? Làm thế nào để giảm AWS bill 30-50% mà không ảnh hưởng performance?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cac-chien-luoc-toi-uu-chi-phi-aws-la-gi-lam-the-nao-de-giam-aws-bill-30-50-ma-khong-anh-huong-perfor-61415168-c0c3-5c66-b198-1a913fd80427",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": null
+  },
+  {
+    "id": "6aed9a55-5b0b-5f1d-84fd-d08b432214be",
+    "question": "Auto-scaling strategies trên AWS là gì? Giải thích Target Tracking, Step Scaling, Scheduled Scaling và Predictive Scaling.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "auto-scaling-strategies-tren-aws-la-gi-giai-thich-target-tracking-step-scaling-scheduled-scaling-va-6aed9a55-5b0b-5f1d-84fd-d08b432214be",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": null
+  },
+  {
+    "id": "53c17c46-30bf-5a0c-a653-666c148d16d7",
+    "question": "Blue/Green deployment và Canary deployment trên AWS là gì? Giải thích cách implement từng strategy.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "blue-green-deployment-va-canary-deployment-tren-aws-la-gi-giai-thich-cach-implement-tung-strategy-53c17c46-30bf-5a0c-a653-666c148d16d7",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": null
+  },
+  {
+    "id": "649c3e92-a7a2-5dd1-be41-2eaf50bbbc9a",
+    "question": "Lambda sau API Gateway thỉnh thoảng trả lỗi 502 và 429, p99 latency vọt lên vài giây. Bạn phân tích và xử lý thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lambda-sau-api-gateway-thinh-thoang-tra-loi-502-va-429-p99-latency-vot-len-vai-giay-ban-phan-tich-va-649c3e92-a7a2-5dd1-be41-2eaf50bbbc9a",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": null
+  },
+  {
+    "id": "92f944f1-3d2d-576b-94c7-d5b66ca8f871",
+    "question": "Scale ứng dụng lên nhiều container thì RDS báo \"too many connections\". Nguyên nhân và cách xử lý ở kiến trúc?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "scale-ung-dung-len-nhieu-container-thi-rds-bao-too-many-connections-nguyen-nhan-va-cach-xu-ly-o-kien-92f944f1-3d2d-576b-94c7-d5b66ca8f871",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": null
+  },
+  {
+    "id": "1e1d72ba-6b2d-52cf-8de9-11bcaa754223",
+    "question": "Service trong private subnet gọi S3 rất nhiều, hoá đơn NAT Gateway tăng mạnh. NAT Gateway tính tiền chỗ nào và bạn tối ưu ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "service-trong-private-subnet-goi-s3-rat-nhieu-hoa-don-nat-gateway-tang-manh-nat-gateway-tinh-tien-ch-1e1d72ba-6b2d-52cf-8de9-11bcaa754223",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": null
+  },
+  {
+    "id": "802ef026-fe87-5a38-b15f-601e072bbb85",
+    "question": "Hoá đơn AWS tháng này tăng gần gấp đôi trong khi lượng người dùng gần như không đổi. Bạn điều tra và cắt giảm thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "hoa-don-aws-thang-nay-tang-gan-gap-doi-trong-khi-luong-nguoi-dung-gan-nhu-khong-doi-ban-dieu-tra-va-802ef026-fe87-5a38-b15f-601e072bbb85",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": null
+  },
+  {
+    "id": "ebbc064e-65d8-537a-b4c8-a197d4e49746",
+    "question": "Role đã có policy Allow s3:GetObject nhưng gọi vẫn AccessDenied. AWS quyết định cho phép hay từ chối theo trình tự nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "role-da-co-policy-allow-s3-getobject-nhung-goi-van-accessdenied-aws-quyet-dinh-cho-phep-hay-tu-choi-ebbc064e-65d8-537a-b4c8-a197d4e49746",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": null
+  }
+]

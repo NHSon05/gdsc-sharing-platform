@@ -1,0 +1,2904 @@
+[
+  {
+    "id": "4ad87f29-5a6a-52e2-9460-960b5049f942",
+    "question": "Thẻ DOCTYPE là gì? Tại sao cần khai báo DOCTYPE?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3-the-doctype-la-gi-tai-sao-can-khai-bao-doctype",
+    "slug": "the-doctype-la-gi-tai-sao-can-khai-bao-doctype-4ad87f29-5a6a-52e2-9460-960b5049f942",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "DOCTYPE (Document Type Declaration) khai báo phiên bản HTML đang dùng và phải nằm ở dòng đầu tiên.",
+        "Nó quyết định browser render ở standards mode hay quirks mode.",
+        "Lưu ý: DOCTYPE không phải thẻ HTML và không phải comment — đặt nó sau một comment hay một dòng trắng có BOM vẫn đủ để rơi vào quirks mode ở một số browser."
+      ],
+      "details": [
+        "HTML5 chỉ cần một dòng:",
+        "Thiếu DOCTYPE → quirks mode, và khác biệt lớn nhất là box model: width bị tính gộp cả padding + border (kiểu IE5) thay vì chỉ phần content.",
+        "Luôn để nó là byte đầu tiên của file."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!DOCTYPE html>\n<html lang=\"vi\">\n  <head><meta charset=\"utf-8\"></head>\n  <body>...</body>\n</html>"
+        },
+        {
+          "language": "JS",
+          "code": "document.compatMode\n// 'CSS1Compat' = standards mode\n// 'BackCompat'  = quirks mode"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "3-the-doctype-la-gi-tai-sao-can-khai-bao-doctype"
+  },
+  {
+    "id": "185d3373-90eb-54a2-b4ac-769f9085d573",
+    "question": "Cấu trúc cơ bản của một tài liệu HTML bao gồm những gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/4-cau-truc-co-ban-cua-mot-tai-lieu-html-bao-gom-nhung-gi",
+    "slug": "cau-truc-co-ban-cua-mot-tai-lieu-html-bao-gom-nhung-gi-185d3373-90eb-54a2-b4ac-769f9085d573",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: <meta charset> phải nằm trong 1024 byte đầu của tài liệu, nếu không browser đã đoán encoding xong rồi và tiếng Việt hiện thành ký tự lỗi."
+      ],
+      "details": [],
+      "points": [
+        "<!DOCTYPE html> — bật standards mode.",
+        "<html> — phần tử gốc; lang ảnh hưởng trực tiếp tới screen reader và Google Translate.",
+        "<head> — metadata, không hiển thị: <title>, <meta>, <link>, <script>.",
+        "<body> — toàn bộ nội dung người dùng nhìn thấy."
+      ],
+      "sections": [
+        "Một tài liệu HTML tối thiểu gồm bốn phần:"
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!DOCTYPE html>            <!-- render mode -->\n<html lang=\"vi\">           <!-- root element, lang cho screen reader + dịch tự động -->\n  <head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <title>Tiêu đề tab</title>\n    <link rel=\"stylesheet\" href=\"/style.css\">\n  </head>\n  <body>\n    <h1>Nội dung hiển thị</h1>\n  </body>\n</html>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "4-cau-truc-co-ban-cua-mot-tai-lieu-html-bao-gom-nhung-gi"
+  },
+  {
+    "id": "43ba0060-0711-52ec-a714-394231595fa0",
+    "question": "Block-level element và Inline element khác nhau như thế nào trong HTML?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8-block-level-element-va-inline-element-khac-nhau-nhu-the-nao-trong-html",
+    "slug": "block-level-element-va-inline-element-khac-nhau-nhu-the-nao-trong-html-43ba0060-0711-52ec-a714-394231595fa0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác nhau ở cách element tham gia vào dòng: block chiếm một dòng riêng, inline nằm cùng dòng với văn bản xung quanh.",
+        "HTML5 không còn phân loại element theo block/inline — đó là thuộc tính trình bày do CSS display quyết định, còn HTML dùng content category."
+      ],
+      "details": [
+        "display: inline-block cho phép element nằm cùng dòng mà vẫn nhận width/height.",
+        "Ngoại lệ: <img>, <video>, <iframe> mặc định là inline nhưng vẫn nhận width/height, vì chúng là replaced element — nội dung có kích thước gốc riêng. Spec ghi width áp cho \"mọi element trừ non-replaced inline element\".",
+        "Lưu ý: trên inline element, margin-top/margin-bottom không có tác dụng, còn trên block thì cả bốn chiều đều có. padding/border dọc vẫn được vẽ nhưng không đẩy các dòng xung quanh ra, nên nền và viền chồng lên dòng bên cạnh.",
+        "Vì vậy <a> được phép bọc cả một khối <div>."
+      ],
+      "points": [
+        "Block (<div>, <p>, <h1>): chiếm hết chiều rộng còn trống, luôn bắt đầu dòng mới, đặt được width/height.",
+        "Inline (<span>, <a>, <strong>): rộng đúng bằng nội dung, không bắt đầu dòng mới, width/height không có tác dụng."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<p>Đoạn văn <span style=\"width:300px;margin-top:40px\">span này không rộng 300px và cũng không dịch xuống</span></p>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "8-block-level-element-va-inline-element-khac-nhau-nhu-the-nao-trong-html"
+  },
+  {
+    "id": "e9f353f2-3d58-5ac9-aa39-497a83f54b7f",
+    "question": "HTML Attribute (thuộc tính) là gì? Cho ví dụ?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/12-html-attribute-thuoc-tinh-la-gi-cho-vi-du",
+    "slug": "html-attribute-thuoc-tinh-la-gi-cho-vi-du-e9f353f2-3d58-5ac9-aa39-497a83f54b7f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba nhóm hay gặp:\n- Global — dùng được trên mọi thẻ: id, class, style, title, hidden, data-*.\n- Riêng từng thẻ: href (a), src/alt (img), type/name (input).\n- Boolean — chỉ cần có mặt: disabled, checked, required."
+      ],
+      "details": [
+        "Tên attribute không phân biệt hoa thường, giá trị thì có: class=\"Btn\" khác class=\"btn\".",
+        "Lưu ý: target=\"_blank\" mà thiếu rel=\"noopener\" thì trang đích đọc được window.opener — browser hiện đại đã mặc định chặn, nhưng interviewer vẫn hỏi và code cũ vẫn cần thêm tay."
+      ],
+      "points": [],
+      "sections": [
+        "Attribute cung cấp thông tin bổ sung cho element, viết trong thẻ mở theo cú pháp name=\"value\":"
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<a href=\"https://example.com\" target=\"_blank\" rel=\"noopener\">Link</a>\n<img src=\"/logo.png\" alt=\"Logo công ty\" width=\"120\">\n<input type=\"email\" placeholder=\"you@example.com\" required>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "12-html-attribute-thuoc-tinh-la-gi-cho-vi-du"
+  },
+  {
+    "id": "e25e3bb9-12c6-5277-9317-d8f60203766b",
+    "question": "Boolean attribute trong HTML là gì? Cho ví dụ?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/13-boolean-attribute-trong-html-la-gi-cho-vi-du",
+    "slug": "boolean-attribute-trong-html-la-gi-cho-vi-du-e25e3bb9-12c6-5277-9317-d8f60203766b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Boolean attribute chỉ có hai trạng thái: có mặt = true, vắng mặt = false.",
+        "Nhóm hay gặp: disabled, checked, selected, required, readonly, autofocus, hidden, multiple, defer, async."
+      ],
+      "details": [
+        "Giá trị gán cho nó không được xét đến.",
+        "Muốn tắt thì phải gỡ hẳn attribute, không phải gán giá trị khác:"
+      ],
+      "points": [],
+      "sections": [
+        "Chốt: phân biệt attribute (chuỗi trong HTML) và property (giá trị boolean trong DOM) là mấu chốt của câu này — trong React, disabled={false} an toàn vì React tự gỡ attribute."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "input.removeAttribute('disabled')   // đúng\ninput.disabled = false              // đúng — property nhận boolean thật\ninput.setAttribute('disabled', 'false') // sai — vẫn disabled"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "13-boolean-attribute-trong-html-la-gi-cho-vi-du"
+  },
+  {
+    "id": "78f4172e-6f5e-5ba8-bee6-e7b5705967df",
+    "question": "Custom data attribute (data-*) trong HTML là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/14-custom-data-attribute-data-trong-html-la-gi",
+    "slug": "custom-data-attribute-data-trong-html-la-gi-78f4172e-6f5e-5ba8-bee6-e7b5705967df",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Ứng dụng thực tế: gắn hook cho test (data-testid), truyền id xuống event delegation, đánh dấu state cho CSS thay vì thêm/bớt class."
+      ],
+      "details": [
+        "Lưu ý: dataset luôn trả string — Number(li.dataset.userId) chứ đừng so sánh thẳng với số. Và đừng nhét dữ liệu nhạy cảm vào đây: nó nằm nguyên trong HTML gửi về client."
+      ],
+      "points": [],
+      "sections": [
+        "data-* cho phép gắn dữ liệu tuỳ ý lên element mà vẫn hợp lệ theo HTML spec (dùng attribute tự chế như userid=\"123\" thì không).",
+        "Dùng được cả trong CSS:"
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<li data-user-id=\"123\" data-role=\"admin\" data-active>Định</li>"
+        },
+        {
+          "language": "JS",
+          "code": "const li = document.querySelector('li')\nli.dataset.userId   // '123'  — kebab-case tự đổi sang camelCase\nli.dataset.role     // 'admin'\nli.dataset.userId = '456'      // ghi ngược lại DOM\ndelete li.dataset.role         // gỡ attribute"
+        },
+        {
+          "language": "CSS",
+          "code": "li[data-role=\"admin\"] { font-weight: 700; }\nli[data-active] { color: var(--accent); }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "14-custom-data-attribute-data-trong-html-la-gi"
+  },
+  {
+    "id": "d2863fb6-7c2c-5540-affb-783a94796457",
+    "question": "Semantic HTML là gì? Tại sao quan trọng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/16-semantic-html-la-gi-tai-sao-quan-trong",
+    "slug": "semantic-html-la-gi-tai-sao-quan-trong-d2863fb6-7c2c-5540-affb-783a94796457",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Bốn lý do nó đáng giá:\n1. Accessibility — screen reader nhảy thẳng tới landmark (main, nav, header); với <div> thì không có gì để nhảy tới.\n2. SEO — search engine hiểu đâu là nội dung chính, đâu là điều hướng.\n3. Bảo trì — đọc cấu trúc là hiểu, không phải dò tên class.\n4. Hành vi mặc định — <button> có sẵn focus, Enter/Space, trạng thái disabled; <div onclick> phải tự làm lại tất cả."
+      ],
+      "details": [
+        "Chốt: thẻ semantic bị hỏi nhiều nhất trong phỏng vấn không phải <article> mà là <button> vs <div onclick> — trả lời được ý số 4 là ăn điểm."
+      ],
+      "points": [],
+      "sections": [
+        "Semantic HTML là dùng thẻ mô tả đúng vai trò nội dung thay vì <div>/<span> trung tính."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!-- không semantic -->\n<div class=\"header\">\n  <div class=\"nav\">...</div>\n</div>\n<div class=\"content\">\n  <div class=\"post\">...</div>\n</div>\n\n<!-- semantic -->\n<header>\n  <nav>...</nav>\n</header>\n<main>\n  <article>...</article>\n</main>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "16-semantic-html-la-gi-tai-sao-quan-trong"
+  },
+  {
+    "id": "0f336f4f-3029-5e15-8945-e3758949797a",
+    "question": "Sự khác biệt giữa <div> và <section> là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/17-su-khac-biet-giua-div-va-section-la-gi",
+    "slug": "su-khac-biet-giua-div-va-section-la-gi-0f336f4f-3029-5e15-8945-e3758949797a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Quy tắc quyết định:\n- Chỉ cần chỗ để gắn display:flex, padding, background → <div>.\n- Khối này có tiêu đề riêng và có thể xuất hiện trong mục lục của trang → <section>."
+      ],
+      "details": [
+        "Spec nói rõ: <section> nên luôn có heading. Một <section> không heading thì với screen reader gần như vô dụng, và đúng ra nên là <div>.",
+        "Lưu ý: đổi hết <div> thành <section> cho \"semantic hơn\" là phản tác dụng — landmark bị loãng, screen reader phải đọc qua hàng chục region vô danh."
+      ],
+      "points": [],
+      "sections": [
+        "<div> là container không mang nghĩa; <section> là một khối nội dung có chủ đề riêng."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!-- div: chỉ để bọc cho layout -->\n<div class=\"grid\">\n  <section>\n    <h2>Mô tả sản phẩm</h2>\n    <p>...</p>\n  </section>\n  <section>\n    <h2>Đánh giá</h2>\n    <p>...</p>\n  </section>\n</div>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "17-su-khac-biet-giua-div-va-section-la-gi"
+  },
+  {
+    "id": "a7c24c63-623d-5f3b-a46a-5105ac95196e",
+    "question": "<article> và <section> khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/18-article-va-section-khac-nhau-the-nao",
+    "slug": "article-va-section-khac-nhau-the-nao-a7c24c63-623d-5f3b-a46a-5105ac95196e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Phép thử: đem khối đó sang RSS feed hoặc site khác mà vẫn hiểu → <article>. Cần trang gốc mới hiểu → <section>."
+      ],
+      "details": [
+        "Hai thẻ lồng nhau được cả hai chiều: article chứa section (chương mục của bài), section chứa article (danh sách card/comment).",
+        "Chốt: card sản phẩm, tweet, comment, bài blog đều là <article> — không phải chỉ \"bài viết dài\" mới dùng được thẻ này."
+      ],
+      "points": [],
+      "sections": [
+        "<article> là nội dung đứng riêng vẫn có nghĩa; <section> là một phần trong mạch nội dung của trang."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<article>                     <!-- một bài blog, đem đi nơi khác vẫn đọc được -->\n  <header><h2>Tiêu đề bài</h2></header>\n  <section><h3>Phần 1</h3>...</section>\n  <section><h3>Phần 2</h3>...</section>\n  <footer>Đăng ngày ...</footer>\n</article>\n\n<section>                     <!-- danh sách bình luận: cần context của bài -->\n  <h2>Bình luận</h2>\n  <article>...</article>     <!-- mỗi bình luận lại tự đứng được -->\n  <article>...</article>\n</section>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "18-article-va-section-khac-nhau-the-nao"
+  },
+  {
+    "id": "74ff8f39-8afb-54d3-9d1c-28cdf1643687",
+    "question": "<header>, <footer>, <nav>, <main>, <aside> dùng khi nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/19-header-footer-nav-main-aside-dung-khi-nao",
+    "slug": "header-footer-nav-main-aside-dung-khi-nao-74ff8f39-8afb-54d3-9d1c-28cdf1643687",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: <header>/<footer> chỉ được tính là landmark banner/contentinfo khi nằm trực tiếp trong <body>. Đặt trong <article> thì mất vai trò đó — đúng theo spec, không phải lỗi."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Năm thẻ landmark, mỗi thẻ trả lời một câu hỏi \"khối này đóng vai gì trong trang\":"
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<body>\n  <header>                  <!-- giới thiệu / brand / search -->\n    <nav>...</nav>          <!-- điều hướng chính -->\n  </header>\n\n  <main>                    <!-- nội dung chính, DUY NHẤT 1 trên trang -->\n    <article>\n      <header>...</header>  <!-- header cấp article, hợp lệ -->\n      <p>...</p>\n      <footer>...</footer>\n    </article>\n  </main>\n\n  <aside>...</aside>        <!-- liên quan gián tiếp: sidebar, bài liên quan -->\n  <footer>...</footer>      <!-- copyright, liên hệ -->\n</body>"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Thẻ",
+            "Số lần / trang",
+            "Screen reader",
+            "<main>",
+            "đúng 1",
+            "đích của \"skip to content\"",
+            "<nav>",
+            "nhiều",
+            "liệt kê trong danh sách landmark",
+            "<header> / <footer>",
+            "<header>",
+            "<footer>",
+            "nhiều (mỗi article một cái)",
+            "banner / contentinfo khi ở cấp trang",
+            "<aside>",
+            "nhiều",
+            "complementary"
+          ]
+        }
+      ]
+    },
+    "legacyId": 10,
+    "sourceSlug": "19-header-footer-nav-main-aside-dung-khi-nao"
+  },
+  {
+    "id": "e60e983c-5583-5461-bb33-49ff87629156",
+    "question": "<figure> và <figcaption> dùng để làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/20-figure-va-figcaption-dung-de-lam-gi",
+    "slug": "figure-va-figcaption-dung-de-lam-gi-e60e983c-5583-5461-bb33-49ff87629156",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Điểm hay bị nhầm: figcaption không thay được alt."
+      ],
+      "details": [
+        "Nếu caption đã mô tả đủ nội dung ảnh thì để alt=\"\" là đúng — tránh screen reader đọc hai lần.",
+        "Lưu ý: dùng <figure> cho ảnh trang trí trong layout. Figure hàm ý \"có thể chuyển sang phụ lục mà bài vẫn đọc được\" — banner hay icon không thuộc nhóm này, để <img> thường."
+      ],
+      "points": [],
+      "sections": [
+        "<figure> gói nội dung minh hoạ tách được khỏi mạch văn (ảnh, biểu đồ, đoạn code, video); <figcaption> là chú thích của nó, đặt ở đầu hoặc cuối."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<figure>\n  <img src=\"chart.png\" alt=\"Doanh thu tăng từ 2 tỷ lên 5 tỷ trong Q1 2026\">\n  <figcaption>Doanh thu quý 1/2026 theo tháng</figcaption>\n</figure>"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Ai đọc được",
+            "Nói cái gì",
+            "alt",
+            "nội dung",
+            "chỉ screen reader",
+            "<figcaption>",
+            "nội dung của ảnh",
+            "mọi người",
+            "ngữ cảnh của ảnh"
+          ]
+        }
+      ]
+    },
+    "legacyId": 11,
+    "sourceSlug": "20-figure-va-figcaption-dung-de-lam-gi"
+  },
+  {
+    "id": "f9cc0b21-343e-59ce-b250-69913bf4ce99",
+    "question": "HTML5 có những tính năng mới nào so với HTML4?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/26-html5-co-nhung-tinh-nang-moi-nao-so-voi-html4",
+    "slug": "html5-co-nhung-tinh-nang-moi-nao-so-voi-html4-f9cc0b21-343e-59ce-b250-69913bf4ce99",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "HTML5 (2014) thay đổi ba mảng lớn so với HTML4:",
+        "Cộng thêm phần ít ai nhớ nhưng quan trọng: HTML5 chuẩn hoá cách parse HTML lỗi. Trước đó mỗi browser tự đoán một kiểu, đó là nguồn gốc của phần lớn bug \"chạy trên Chrome, hỏng trên Firefox\" thời HTML4."
+      ],
+      "details": [
+        "1. Ngữ nghĩa & media — thẻ landmark <header>, <nav>, <article>, <section>, <figure>; <audio>/<video> chạy thẳng không cần Flash; <canvas> và SVG inline.",
+        "2. API trình duyệt — localStorage/sessionStorage, IndexedDB, Geolocation, Web Worker, WebSocket, History API, Drag & Drop.",
+        "3. Form — validation dựng sẵn và kiểu input mới:",
+        "Chốt: DOCTYPE rút còn <!DOCTYPE html> cũng là thay đổi của HTML5 — vì spec bỏ hẳn ràng buộc DTD của SGML."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<form>\n  <input type=\"email\" required>          <!-- browser tự báo lỗi -->\n  <input type=\"date\">\n  <input type=\"number\" min=\"1\" max=\"10\">\n  <input type=\"range\">\n  <input type=\"color\">\n  <button>Gửi</button>\n</form>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "26-html5-co-nhung-tinh-nang-moi-nao-so-voi-html4"
+  },
+  {
+    "id": "ea924d78-7d20-5c02-98d0-4882e6af9c3d",
+    "question": "Canvas và SVG khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/27-canvas-va-svg-khac-nhau-the-nao",
+    "slug": "canvas-va-svg-khac-nhau-the-nao-ea924d78-7d20-5c02-98d0-4882e6af9c3d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác nhau ở cái browser giữ lại sau khi vẽ.",
+        "Chọn thế nào: game, particle, xử lý ảnh, biểu đồ realtime nhiều điểm → Canvas. Icon, logo, biểu đồ tương tác vài chục phần tử → SVG."
+      ],
+      "details": [],
+      "points": [
+        "Canvas — bitmap. Bạn vẽ pixel bằng JS, vẽ xong browser không nhớ hình gì đã vẽ.",
+        "SVG — mỗi hình là một DOM node, có thể style bằng CSS, gắn event listener, thay đổi qua JS."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Canvas",
+            "SVG",
+            "Nhiều đối tượng (10k+)",
+            "tốt",
+            "chậm, DOM phình",
+            "Zoom",
+            "vỡ",
+            "nét",
+            "Bắt sự kiện trên từng hình",
+            "tự tính toạ độ"
+          ]
+        }
+      ]
+    },
+    "legacyId": 13,
+    "sourceSlug": "27-canvas-va-svg-khac-nhau-the-nao"
+  },
+  {
+    "id": "92e9376c-2442-5cb9-8ae3-005554a2ec27",
+    "question": "Method GET và POST khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/41-method-get-va-post-khac-nhau-the-nao",
+    "slug": "method-get-va-post-khac-nhau-the-nao-92e9376c-2442-5cb9-8ae3-005554a2ec27",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Điểm hay bị nói sai: POST không an toàn hơn GET. Cả hai đều đi qua mạng dạng thô nếu không có HTTPS. Khác biệt thật là dữ liệu GET bị ghi lại ở lịch sử trình duyệt, access log, Referer header — nên đừng đưa token hay mật khẩu vào query string."
+      ],
+      "details": [
+        "Chọn thế nào: đọc/lọc/tìm kiếm → GET (chia sẻ được link kết quả). Tạo/sửa/xoá → POST."
+      ],
+      "points": [],
+      "sections": [
+        "GET gắn dữ liệu vào URL, POST gửi trong body."
+      ],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "GET",
+            "POST",
+            "Vị trí dữ liệu",
+            "query string",
+            "request body",
+            "Bookmark / share link",
+            "được",
+            "không",
+            "Nằm trong lịch sử & log server",
+            "có",
+            "Idempotent (gửi lại không đổi kết quả)",
+            "có",
+            "không"
+          ]
+        }
+      ]
+    },
+    "legacyId": 14,
+    "sourceSlug": "41-method-get-va-post-khac-nhau-the-nao"
+  },
+  {
+    "id": "096d62e5-9d0c-59ad-b804-77c563b69099",
+    "question": "Các input types trong HTML5 có những gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/42-cac-input-types-trong-html5-co-nhung-gi",
+    "slug": "cac-input-types-trong-html5-co-nhung-gi-096d62e5-9d0c-59ad-b804-77c563b69099",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba nhóm:\n- Chữ & số: text, password, email, number, tel, url, search.\n- Ngày giờ: date, time, datetime-local, month, week.\n- Tương tác & media: color, range, file, checkbox, radio, hidden, submit, reset, button."
+      ],
+      "details": [
+        "Lưu ý: dùng type=\"number\" cho số điện thoại. Nó cắt số 0 đứng đầu, hiện nút tăng/giảm vô nghĩa, và cuộn chuột trên field làm đổi giá trị. Số điện thoại dùng type=\"tel\" kèm pattern.",
+        "Chốt: type không thay được validation phía server — mọi ràng buộc HTML đều bỏ qua được bằng DevTools."
+      ],
+      "points": [],
+      "sections": [
+        "Mỗi type đổi cả bàn phím trên mobile, UI của control và validation mặc định."
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "42-cac-input-types-trong-html5-co-nhung-gi"
+  },
+  {
+    "id": "5556323d-33ce-5936-917c-f3c442008981",
+    "question": "<label> element quan trọng thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/43-label-element-quan-trong-the-nao",
+    "slug": "label-element-quan-trong-the-nao-5556323d-33ce-5936-917c-f3c442008981",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "<label> nối phần chữ mô tả với control.",
+        "Ba thứ có được ngay:\n1. Click vào chữ = focus/tick input — vùng bấm rộng ra rất nhiều trên mobile, đặc biệt với checkbox nhỏ.\n2. Screen reader đọc đúng tên field khi focus tới.\n3. Test bền hơn — getByLabelText('Email') không vỡ khi đổi class hay cấu trúc DOM.",
+        "Placeholder biến mất ngay khi gõ, nên người dùng quên field này là gì; độ tương phản thấp; và một số screen reader không đọc. Placeholder là ví dụ định dạng (you@example.com), không phải nhãn."
+      ],
+      "details": [
+        "Hai cách viết:",
+        "Lỗi phổ biến nhất: dùng placeholder thay label.",
+        "Chốt: cần ẩn nhãn vì lý do thiết kế thì dùng CSS .sr-only, đừng bỏ hẳn <label>."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!-- 1. explicit: for trỏ tới id của input -->\n<label for=\"email\">Email</label>\n<input id=\"email\" type=\"email\">\n\n<!-- 2. implicit: bọc input trong label -->\n<label>Email <input type=\"email\"></label>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "43-label-element-quan-trong-the-nao"
+  },
+  {
+    "id": "c3b8a5a7-10ca-5899-b1d7-101576611b5f",
+    "question": "<select> và <datalist> khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/44-select-va-datalist-khac-nhau-the-nao",
+    "slug": "select-va-datalist-khac-nhau-the-nao-c3b8a5a7-10ca-5899-b1d7-101576611b5f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Chọn thế nào: tập cố định và server phải nhận đúng mã (quốc gia, danh mục, trạng thái) → <select>. Ô tìm kiếm, tag, thành phố có gợi ý nhưng cho phép giá trị mới → <datalist>."
+      ],
+      "details": [
+        "Lưu ý: <datalist> không tự validate — người dùng gõ gì server nhận nấy, vẫn phải kiểm tra lại. Ngoài ra giao diện dropdown của nó khác nhau khá nhiều giữa các browser, không style được nhiều; cần kiểm soát giao diện thì phải tự dựng combobox."
+      ],
+      "points": [],
+      "sections": [
+        "<select> giới hạn lựa chọn; <datalist> chỉ gợi ý, người dùng vẫn gõ tự do."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!-- select: giá trị PHẢI nằm trong danh sách -->\n<label for=\"country\">Quốc gia</label>\n<select id=\"country\" name=\"country\">\n  <option value=\"vn\">Việt Nam</option>\n  <option value=\"sg\">Singapore</option>\n</select>\n\n<!-- datalist: gợi ý, gõ gì cũng được -->\n<label for=\"tech\">Công nghệ</label>\n<input id=\"tech\" name=\"tech\" list=\"tech-options\">\n<datalist id=\"tech-options\">\n  <option value=\"React\">\n  <option value=\"Vue\">\n</datalist>"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "option.value",
+            "Nhập giá trị ngoài danh sách",
+            "<select>",
+            "không",
+            "được",
+            "Gõ để lọc",
+            "<datalist>",
+            "không (chỉ nhảy theo chữ cái)",
+            "có",
+            "Giá trị gửi đi",
+            "đúng chuỗi đã gõ"
+          ]
+        }
+      ]
+    },
+    "legacyId": 17,
+    "sourceSlug": "44-select-va-datalist-khac-nhau-the-nao"
+  },
+  {
+    "id": "6fd05a8a-db4d-5541-a2de-d7acb8a42af9",
+    "question": "<fieldset> và <legend> dùng để làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/45-fieldset-va-legend-dung-de-lam-gi",
+    "slug": "fieldset-va-legend-dung-de-lam-gi-6fd05a8a-db4d-5541-a2de-d7acb8a42af9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Giá trị lớn nhất nằm ở nhóm radio/checkbox. Mỗi radio có label riêng (\"Khi nhận hàng\"), nhưng không có gì nói đang chọn cho câu hỏi nào. Screen reader đọc legend trước mỗi lựa chọn → \"Hình thức thanh toán, Khi nhận hàng, radio 1/2\".",
+        "Lưu ý: <fieldset> có style mặc định (border, padding, và min-width: min-content khó ghi đè) hay phá layout flex/grid."
+      ],
+      "details": [
+        "Mẹo ít người biết: disabled trên <fieldset> vô hiệu hoá toàn bộ control bên trong — tiện cho trạng thái đang gửi form:",
+        "Reset bằng border: 0; padding: 0; min-width: 0; thay vì bỏ luôn thẻ."
+      ],
+      "points": [],
+      "sections": [
+        "<fieldset> nhóm các control liên quan, <legend> là nhãn của cả nhóm."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<fieldset>\n  <legend>Hình thức thanh toán</legend>\n\n  <label><input type=\"radio\" name=\"pay\" value=\"cod\"> Khi nhận hàng</label>\n  <label><input type=\"radio\" name=\"pay\" value=\"bank\"> Chuyển khoản</label>\n</fieldset>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "45-fieldset-va-legend-dung-de-lam-gi"
+  },
+  {
+    "id": "38beabab-43dd-59b9-8e79-29aad57d65f6",
+    "question": "Accessibility (a11y) là gì? Tại sao quan trọng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/56-accessibility-a11y-la-gi-tai-sao-quan-trong",
+    "slug": "accessibility-a11y-la-gi-tai-sao-quan-trong-38beabab-43dd-59b9-8e79-29aad57d65f6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Accessibility (a11y — 11 chữ cái giữa chữ a và y) là làm cho web dùng được với mọi người, gồm người khiếm thị, khiếm thính, hạn chế vận động và hạn chế nhận thức.",
+        "Chốt: phần lớn lỗi a11y trong thực tế không cần ARIA — chỉ cần dùng đúng thẻ HTML sẵn có."
+      ],
+      "details": [
+        "Bốn lý do, xếp theo thứ tự interviewer muốn nghe:",
+        "1. Người dùng thật — khoảng 15% dân số thế giới có một dạng khuyết tật. Chưa kể tình huống tạm thời: gãy tay, đang bế con, đọc điện thoại ngoài nắng.\n2. Pháp lý — WCAG 2.1 mức AA là chuẩn được tham chiếu trong ADA (Mỹ) và EN 301 549 (EU). Nhiều hợp đồng doanh nghiệp yêu cầu bằng văn bản.\n3. Kỹ thuật trùng nhau với SEO — heading đúng cấp, alt, landmark, tên nút rõ ràng đều là thứ crawler cần.\n4. Chất lượng chung — phụ đề video giúp cả người xem ở nơi ồn; tương phản tốt giúp mọi người đọc ngoài trời.",
+        "Trả lời được ý này thường ăn điểm hơn là liệt kê tiêu chuẩn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!-- cùng một nút, hai chất lượng khác nhau -->\n<div onclick=\"save()\">Lưu</div>            <!-- không tab tới được, không Enter được -->\n<button type=\"button\" onclick=\"save()\">Lưu</button>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "56-accessibility-a11y-la-gi-tai-sao-quan-trong"
+  },
+  {
+    "id": "db198532-c20f-502b-b8ad-012bb652b846",
+    "question": "ARIA là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/57-aria-la-gi",
+    "slug": "aria-la-gi-db198532-c20f-502b-b8ad-012bb652b846",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "ARIA (Accessible Rich Internet Applications) là bộ attribute bổ sung ngữ nghĩa cho screen reader khi HTML gốc không diễn tả đủ.",
+        "ARIA chỉ đổi cách screen reader mô tả, không thêm hành vi: đặt role=\"button\" lên <div> không làm phím Enter hoạt động, không đưa nó vào tab order, không có trạng thái disabled."
+      ],
+      "details": [
+        "Ba nhóm:",
+        "Lưu ý: ARIA sai còn tệ hơn không có ARIA. aria-hidden=\"true\" trên một nút đang focus được sẽ tạo ra phần tử \"tồn tại với bàn phím nhưng vô hình với screen reader\" — người dùng tab vào một chỗ không được đọc tên."
+      ],
+      "points": [],
+      "sections": [
+        "Quy tắc số 1 của ARIA: đừng dùng ARIA nếu HTML đã làm được."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!-- role: vai trò -->\n<div role=\"dialog\" aria-modal=\"true\">...</div>\n\n<!-- state: trạng thái, thay đổi theo tương tác -->\n<button aria-expanded=\"false\" aria-controls=\"menu\">Menu</button>\n\n<!-- property: thuộc tính, thường cố định -->\n<input aria-label=\"Tìm kiếm\" aria-describedby=\"hint\">"
+        },
+        {
+          "language": "HTML",
+          "code": "<div role=\"button\" tabindex=\"0\" onkeydown=\"...\">Gửi</div>   <!-- phải tự viết lại mọi thứ -->\n<button>Gửi</button>                                        <!-- đã có sẵn tất cả -->"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "57-aria-la-gi"
+  },
+  {
+    "id": "7deb0413-e36b-5e40-a2b7-d39980a2e2df",
+    "question": "Alt text quan trọng thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/58-alt-text-quan-trong-the-nao",
+    "slug": "alt-text-quan-trong-the-nao-7deb0413-e36b-5e40-a2b7-d39980a2e2df",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "alt mô tả ảnh cho screen reader, và hiện ra khi ảnh không tải được.",
+        "Lỗi hay gặp, theo thứ tự phổ biến:\n- alt=\"IMG_2043.jpg\" — screen reader đọc nguyên tên file.\n- alt=\"hình ảnh sản phẩm\" — không thêm thông tin gì.\n- Bắt đầu bằng \"Hình ảnh của…\" — screen reader đã tự thông báo đây là ảnh rồi.\n- Bỏ hẳn alt — tệ nhất: screen reader không biết bỏ qua hay đọc, thường đọc luôn URL."
+      ],
+      "details": [
+        "Nội dung viết gì phụ thuộc vai trò của ảnh:",
+        "Phân biệt alt=\"\" (cố ý bỏ qua) và không có alt (thiếu sót) là chi tiết hay bị hỏi.",
+        "Chốt: phép thử nhanh — đọc to trang mà thay mỗi ảnh bằng alt của nó; nếu câu văn vẫn trôi và không mất thông tin thì alt đã đúng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "58-alt-text-quan-trong-the-nao"
+  },
+  {
+    "id": "b53cf258-369e-5c89-96ee-edfa780e991f",
+    "question": "Web Storage API: localStorage và sessionStorage khác nhau ở đâu?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93701-web-storage-api-localstorage-va-sessionstorage-khac-nhau-o-dau",
+    "slug": "web-storage-api-localstorage-va-sessionstorage-khac-nhau-o-dau-b53cf258-369e-5c89-96ee-edfa780e991f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai là kho key-value cùng API (setItem, getItem, removeItem, clear), chỉ lưu chuỗi, dung lượng ~5–10MB, đồng bộ, gắn theo origin. Khác nhau ở vòng đời và phạm vi:"
+      ],
+      "details": [
+        "Vì chỉ lưu string nên object phải JSON.stringify khi ghi và JSON.parse khi đọc."
+      ],
+      "points": [
+        "localStorage: tồn tại vô thời hạn đến khi xóa thủ công. Chia sẻ giữa mọi tab/cửa sổ cùng origin.",
+        "sessionStorage: sống theo từng tab, mất khi đóng tab. Không chia sẻ sang tab khác (kể cả cùng origin)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "localStorage.setItem(\"user\", JSON.stringify({ id: 1 }))\nJSON.parse(localStorage.getItem(\"user\"))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "93701-web-storage-api-localstorage-va-sessionstorage-khac-nhau-o-dau"
+  },
+  {
+    "id": "b5fe9f99-5c54-5288-8fe6-3b896e3438bf",
+    "question": "Vì sao một div gắn onClick không thay thế được <button>?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97450-vi-sao-mot-div-gan-onclick-khong-thay-the-duoc-button",
+    "slug": "vi-sao-mot-div-gan-onclick-khong-thay-the-duoc-button-b5fe9f99-5c54-5288-8fe6-3b896e3438bf",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì onClick chỉ mang lại hành vi chuột. <button> là phần tử tương tác dựng sẵn, kèm theo cả một tập hành vi mà div không có:",
+        "Vẫn còn thiếu disabled, submit form, và hành vi mặc định theo từng nền tảng."
+      ],
+      "details": [
+        "Muốn div tương đương thì phải tự làm lại tất cả:"
+      ],
+      "points": [
+        "Focus được bằng bàn phím (nằm trong tab order tự nhiên).",
+        "Kích hoạt bằng Enter và Space — trình duyệt tự chuyển thành sự kiện click.",
+        "<form>",
+        "Role button trong accessibility tree, nên screen reader đọc \"nút, Lưu\" thay vì đọc trơ nội dung.",
+        "type=\"submit\"",
+        "Trạng thái disabled chặn cả click lẫn focus.",
+        "Nguyên tắc: dùng phần tử gốc trước, chỉ dựng lại bằng ARIA khi thật sự không có phần tử phù hợp.",
+        "Lý do thường gặp khiến người ta chọn div là \"khó style\" — có thể xử lý bằng all: unset hoặc reset border/background trên chính <button>."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<div role=\"button\" tabindex=\"0\" onclick=\"save()\"\n     onkeydown=\"if (event.key === 'Enter' || event.key === ' ') save()\">Save</div>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "97450-vi-sao-mot-div-gan-onclick-khong-thay-the-duoc-button"
+  },
+  {
+    "id": "328124f3-17d2-5d46-9bc9-5c727edd5f97",
+    "question": "Có mấy cách liên kết <label> với input? Dùng placeholder thay label được không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97451-co-may-cach-lien-ket-label-voi-input-dung-placeholder-thay-label-duoc-khong",
+    "slug": "co-may-cach-lien-ket-label-voi-input-dung-placeholder-thay-label-duoc-khong-328124f3-17d2-5d46-9bc9-5c727edd5f97",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Cách 1 được ưu tiên vì linh hoạt về layout và tương thích rộng hơn với trợ năng. Lưu ý for khớp với id, không phải name."
+      ],
+      "details": [
+        "Liên kết đúng cho ba lợi ích: screen reader đọc được nhãn khi focus vào ô, click vào chữ thì focus nhảy vào ô, và vùng bấm rộng hơn trên mobile.",
+        "placeholder không thay được label:\n- Nó biến mất khi người dùng bắt đầu gõ → mất ngữ cảnh khi kiểm tra lại form.\n- Màu mặc định nhạt, thường fail contrast.\n- Hỗ trợ trợ năng không đồng nhất giữa các trình duyệt/screen reader.",
+        "Nếu thiết kế bắt buộc không hiện chữ, vẫn giữ <label> nhưng ẩn về mặt thị giác bằng class sr-only (clip 1px), hoặc dùng aria-label trên input. Không dùng display: none — nó gỡ luôn khỏi accessibility tree."
+      ],
+      "points": [],
+      "sections": [
+        "Hai cách liên kết chuẩn:"
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!-- 1. explicit: for trỏ tới id của input -->\n<label for=\"email\">Email</label>\n<input id=\"email\" type=\"email\">\n\n<!-- 2. implicit: bọc input trong label -->\n<label>Email <input type=\"email\"></label>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "97451-co-may-cach-lien-ket-label-voi-input-dung-placeholder-thay-label-duoc-khong"
+  },
+  {
+    "id": "260f7859-b8b3-5335-b65a-9e6b2938c865",
+    "question": "Viết alt cho ảnh thế nào là đúng? Khi nào để alt=\"\"?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97452-viet-alt-cho-anh-the-nao-la-dung-khi-nao-de-alt",
+    "slug": "viet-alt-cho-anh-the-nao-la-dung-khi-nao-de-alt-260f7859-b8b3-5335-b65a-9e6b2938c865",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "alt mô tả chức năng của ảnh trong ngữ cảnh, không phải mô tả pixel. Cùng một tấm ảnh có thể cần alt khác nhau ở hai trang khác nhau.",
+        "alt=\"\" (rỗng, vẫn phải có thuộc tính) dùng cho ảnh thuần trang trí, hoặc ảnh mà nội dung đã được nói bằng chữ ngay bên cạnh — nếu để alt mô tả nữa thì screen reader đọc lặp hai lần."
+      ],
+      "details": [
+        "Sai thường gặp:\n- Bỏ hẳn thuộc tính alt: nhiều screen reader sẽ đọc tên file (IMG_20240102.jpg), tệ hơn alt=\"\".\n- Viết \"hình ảnh của...\", \"ảnh chụp...\" — screen reader đã tự thông báo đó là ảnh.\n- Nhồi từ khoá SEO vào alt.\n- Ảnh phức tạp (biểu đồ, sơ đồ) nhét cả đoạn dài vào alt; nên tóm tắt ngắn trong alt rồi đặt mô tả đầy đủ ở phần văn bản gần đó.",
+        "Ba trường hợp chính:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "97452-viet-alt-cho-anh-the-nao-la-dung-khi-nao-de-alt"
+  },
+  {
+    "id": "afad730f-aa06-5f28-9fe1-e64c08e685dd",
+    "question": "First rule of ARIA là gì? Khi nào KHÔNG nên thêm role/thuộc tính ARIA?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97453-first-rule-of-aria-la-gi-khi-nao-khong-nen-them-role-thuoc-tinh-aria",
+    "slug": "first-rule-of-aria-la-gi-khi-nao-khong-nen-them-role-thuoc-tinh-aria-afad730f-aa06-5f28-9fe1-e64c08e685dd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Quy tắc số 1 của ARIA: nếu có phần tử HTML gốc mang sẵn ngữ nghĩa và hành vi bạn cần, hãy dùng phần tử đó thay vì gán role ARIA.",
+        "Không nên dùng ARIA khi:\n- Chỉ để \"cho chắc\" trên phần tử gốc (<ul role=\"list\">, <input type=\"checkbox\" role=\"checkbox\">) — thừa, và nếu gõ sai role thì làm hỏng ngữ nghĩa vốn đúng.\n- Gán role mà không viết kèm phần bàn phím — role=\"button\" trên div mà không có tabindex và xử lý Enter/Space khiến screen reader hứa \"đây là nút\" nhưng người dùng không bấm được. Đây là ý của câu \"no ARIA is better than bad ARIA\".\n- Đặt aria-hidden=\"true\" lên phần tử đang chứa nội dung focus được — người dùng bàn phím vẫn tab vào được nhưng screen reader không đọc gì."
+      ],
+      "details": [
+        "ARIA chỉ đổi cách phần tử được mô tả trong accessibility tree — nó không thêm hành vi nào: không focus, không phím tắt, không xử lý sự kiện.",
+        "ARIA hợp lý khi HTML không có sẵn: tab, combobox, live region, aria-expanded, aria-current."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!-- Thừa: nav đã có role navigation, button đã có role button -->\n<nav role=\"navigation\"><button role=\"button\">Menu</button></nav>\n\n<!-- Đủ -->\n<nav><button>Menu</button></nav>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "97453-first-rule-of-aria-la-gi-khi-nao-khong-nen-them-role-thuoc-tinh-aria"
+  },
+  {
+    "id": "e70375f5-7689-56e8-a886-8db0a8487d62",
+    "question": "WCAG 1.4.1 Use of Color yêu cầu gì? Viền đỏ báo lỗi và biểu đồ phân biệt bằng màu sai ở đâu?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100301-wcag-1-4-1-use-of-color-yeu-cau-gi-vien-do-bao-loi-va-bieu-do-phan-biet-bang-mau",
+    "slug": "wcag-1-4-1-use-of-color-yeu-cau-gi-vien-do-bao-loi-va-bieu-do-phan-biet-bang-mau-sai-o-dau-e70375f5-7689-56e8-a886-8db0a8487d62",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Tiêu chí 1.4.1 (mức A) nói màu không được là kênh duy nhất truyền tải thông tin, chỉ ra hành động hay phân biệt trạng thái. Đây là tiêu chí khác hẳn 1.4.3 Contrast: contrast đủ mà vẫn trượt 1.4.1 là chuyện bình thường.",
+        "Cách kiểm nhanh: chụp màn hình rồi chuyển sang grayscale."
+      ],
+      "details": [
+        "Ba chỗ hay dính nhất:",
+        "1. Ô input lỗi chỉ đổi viền đỏ. Người mù màu đỏ-lục (khoảng 8% nam giới) nhìn viền đỏ và viền xám gần như nhau. Phải thêm chữ lỗi hoặc icon cạnh ô.",
+        "2. Link nằm trong đoạn văn chỉ khác màu. Nếu bỏ gạch chân, WCAG yêu cầu link phải chênh 3:1 so với chữ xung quanh và có tín hiệu phi-màu khi hover/focus. Đơn giản nhất là giữ text-decoration: underline.",
+        "3. Biểu đồ chỉ có chú giải màu. Line chart 5 đường 5 màu là ca thất bại rõ nhất — thêm kiểu nét (stroke-dasharray), marker khác hình, hoặc nhãn đặt thẳng cuối mỗi đường."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!-- trượt: chỉ có màu -->\n<input class=\"is-invalid\">\n\n<!-- đạt: màu + icon + chữ -->\n<input aria-invalid=\"true\" aria-describedby=\"err\">\n<p id=\"err\"><WarningIcon aria-hidden=\"true\" /> Số điện thoại phải có 10 chữ số</p>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "100301-wcag-1-4-1-use-of-color-yeu-cau-gi-vien-do-bao-loi-va-bieu-do-phan-biet-bang-mau"
+  },
+  {
+    "id": "db1485b6-6c98-5f77-a510-38a7907564d3",
+    "question": "Trang song ngữ Việt - Anh thì thuộc tính lang đặt ở đâu cho đúng 3.1.1 và 3.1.2?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100304-trang-song-ngu-viet-anh-thi-thuoc-tinh-lang-dat-o-dau-cho-dung-3-1-1-va-3-1-2",
+    "slug": "trang-song-ngu-viet-anh-thi-thuoc-tinh-lang-dat-o-dau-cho-dung-3-1-1-va-3-1-2-db1485b6-6c98-5f77-a510-38a7907564d3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai tiêu chí tách bạch:\n- 3.1.1 Language of Page (mức A): ngôn ngữ mặc định của trang phải khai báo được bằng máy — tức lang trên thẻ <html>.\n- 3.1.2 Language of Parts (mức AA): mỗi đoạn nội dung thuộc ngôn ngữ khác phải tự khai báo lang của nó.",
+        "Lý do rất cụ thể: screen reader đổi bộ phát âm theo lang. Trang để lang=\"en\" mà nội dung tiếng Việt sẽ được đọc bằng giọng Anh — ra một chuỗi âm vô nghĩa. Đây là lỗi mặc định của nhiều template Next.js vì app/layout.tsx sinh sẵn <html lang=\"en\">.",
+        "Dùng mã BCP 47: vi, en, en-US, zh-Hans. Sai chính tả (vn thay vì vi) thì coi như không khai báo."
+      ],
+      "details": [
+        "Ngoại lệ của 3.1.2: tên riêng, thuật ngữ kỹ thuật, và từ nước ngoài đã thành từ mượn trong ngôn ngữ chính. Nghĩa là không cần bọc lang=\"en\" quanh mọi chữ deploy, commit, bug trong bài viết tiếng Việt — chỉ cần cho câu hoặc đoạn thực sự bằng tiếng Anh.",
+        "Lưu ý thêm: lang cũng đổi cách trình duyệt chọn font, ngắt dòng, và dấu nháy kép thông minh — sửa nó thường sửa luôn vài lỗi trình bày.",
+        "Với app đổi ngôn ngữ tại chỗ, lang phải đổi theo:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<html lang=\"vi\">\n  <p>Anh ấy nói <span lang=\"en\">let us circle back on that</span> rồi tắt máy.</p>\n</html>"
+        },
+        {
+          "language": "TSX",
+          "code": "const { locale } = useLanguage()\nuseEffect(() => { document.documentElement.lang = locale }, [locale])"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "100304-trang-song-ngu-viet-anh-thi-thuoc-tinh-lang-dat-o-dau-cho-dung-3-1-1-va-3-1-2"
+  },
+  {
+    "id": "60d47474-573a-5935-8492-1624f16266a4",
+    "question": "Vì sao link \"Xem thêm\" bị chê khi audit WCAG 2.4.4? Link chỉ có icon thì xử lý ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100306-vi-sao-link-xem-them-bi-che-khi-audit-wcag-2-4-4-link-chi-co-icon-thi-xu-ly-ra-s",
+    "slug": "vi-sao-link-xem-them-bi-che-khi-audit-wcag-2-4-4-link-chi-co-icon-thi-xu-ly-ra-sao-60d47474-573a-5935-8492-1624f16266a4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "2.4.4 Link Purpose (In Context) — mức A — yêu cầu đích đến của link phải suy ra được từ chữ trong link, hoặc từ ngữ cảnh chương trình đọc được (câu chứa nó, ô bảng, mục danh sách).",
+        "Lưu ý cách thứ ba giữ nguyên phần chữ nhìn thấy nên designer không phải đổi gì.",
+        "Icon phải aria-hidden=\"true\" để screen reader không đọc trùng."
+      ],
+      "details": [
+        "Vấn đề của \"Xem thêm\" nằm ở cách người dùng screen reader thật sự duyệt trang: họ mở danh sách toàn bộ link (phím K trong NVDA, rotor trong VoiceOver) để quét nhanh. Danh sách đó hiện ra mười dòng \"Xem thêm\" giống hệt nhau, tách khỏi mọi ngữ cảnh xung quanh.",
+        "Link chỉ có icon thì bản thân nó không có chữ nào — phải cấp accessible name:",
+        "Hai điểm hay bị hỏi thêm:\n- \"Nhiều link cùng chữ nhưng khác đích\" là lỗi nặng hơn \"chữ chung chung\": hai link \"Tải xuống\" trỏ hai file khác nhau khiến người dùng không cách nào chọn đúng.\n- 2.4.4 chấp nhận ngữ cảnh xung quanh; muốn chữ link tự đứng một mình là tiêu chí 2.4.9, mức AAA — không bắt buộc cho dự án nhắm AA."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!-- yếu -->\n<h3>Lộ trình Backend</h3>\n<p>…</p>\n<a href=\"/roadmap/backend\">Xem thêm</a>\n\n<!-- tốt: chữ link tự đứng được -->\n<a href=\"/roadmap/backend\">Xem lộ trình Backend</a>\n\n<!-- hoặc giữ nhãn ngắn cho mắt, bổ nghĩa cho screen reader -->\n<a href=\"/roadmap/backend\">Xem thêm<span class=\"sr-only\"> về lộ trình Backend</span></a>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "100306-vi-sao-link-xem-them-bi-che-khi-audit-wcag-2-4-4-link-chi-co-icon-thi-xu-ly-ra-s"
+  },
+  {
+    "id": "6b16099c-c201-509b-bffd-963efb4ded60",
+    "question": "Thuộc tính id và class khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/15-thuoc-tinh-id-va-class-khac-nhau-nhu-the-nao",
+    "slug": "thuoc-tinh-id-va-class-khac-nhau-nhu-the-nao-6b16099c-c201-509b-bffd-963efb4ded60",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì specificity của id cao hơn class 10 lần bậc, style gắn vào id gần như không override được bằng class — nên quy ước phổ biến là id để móc nối (JS/anchor/a11y), class để style."
+      ],
+      "details": [
+        "Lưu ý JSX: React dùng className thay class và htmlFor thay for, vì class/for là từ khoá của JavaScript."
+      ],
+      "points": [],
+      "sections": [
+        "id duy nhất trên toàn trang, class dùng lại thoải mái."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<section id=\"pricing\" class=\"card card--wide\">...</section>\n<!-- một element nhiều class; nhưng chỉ một id -->"
+        },
+        {
+          "language": "JS",
+          "code": "document.getElementById('pricing')          // nhanh, chỉ trả 1 element\ndocument.querySelectorAll('.card')          // trả NodeList"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "#pricing",
+            "Số lần xuất hiện",
+            "id",
+            "1",
+            "nhiều",
+            "Specificity",
+            "class",
+            "label[for]",
+            "(1,0,0)",
+            "(0,1,0)",
+            "aria-labelledby",
+            "Dùng cho",
+            "anchor #pricing, label[for], aria-labelledby",
+            "style, nhóm element"
+          ]
+        }
+      ]
+    },
+    "legacyId": 30,
+    "sourceSlug": "15-thuoc-tinh-id-va-class-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "fd78831d-f698-58ba-8509-a7f74b2ff0bb",
+    "question": "<mark>, <strong>, <em> khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/21-mark-strong-em-khac-nhau-the-nao",
+    "slug": "mark-strong-em-khac-nhau-the-nao-fd78831d-f698-58ba-8509-a7f74b2ff0bb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Đối lập với chúng là <b> và <i> — chỉ đổi hình thức, không mang nghĩa. Dùng <i> cho tên khoa học, thuật ngữ ngoại lai; dùng <b> cho từ khoá cần nổi mà không quan trọng hơn."
+      ],
+      "details": [
+        "Lưu ý: dùng <strong> chỉ để cho chữ đậm rồi lại font-weight: normal — screen reader vẫn đọc nhấn mạnh trong khi mắt thường không thấy gì. Để chữ đậm thuần tuý về mặt trình bày, đặt CSS trên <span>."
+      ],
+      "points": [],
+      "sections": [
+        "Cả ba đều có nghĩa ngữ nghĩa, khác nhau ở loại nhấn:"
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<p><strong>Cảnh báo:</strong> không tắt máy khi đang cập nhật.</p>\n<p>Tôi <em>không</em> nói anh ấy lấy tiền.</p>   <!-- đổi trọng âm, đổi nghĩa câu -->\n<p>Kết quả cho \"react\": Học <mark>React</mark> từ đầu</p>"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Thẻ",
+            "Nghĩa",
+            "Mặc định",
+            "<strong>",
+            "mức độ quan trọng",
+            "mức độ quan trọng cao",
+            "<em>",
+            "đậm",
+            "nhấn trọng âm, đổi sắc thái câu",
+            "nghiêng",
+            "<mark>",
+            "liên quan tới ngữ cảnh hiện tại (từ khoá tìm kiếm)",
+            "nền vàng"
+          ]
+        }
+      ]
+    },
+    "legacyId": 31,
+    "sourceSlug": "21-mark-strong-em-khac-nhau-the-nao"
+  },
+  {
+    "id": "0392f56f-5abc-5648-a2c8-7967e855b099",
+    "question": "Thẻ <time> được sử dụng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/22-the-time-duoc-su-dung-de-lam-gi",
+    "slug": "the-time-duoc-su-dung-de-lam-gi-0392f56f-5abc-5648-a2c8-7967e855b099",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "datetime phải theo ISO 8601. Nếu bỏ datetime thì phần text bên trong bắt buộc tự nó là chuỗi ngày hợp lệ.",
+        "Lưu ý: viết datetime=\"15/03/2026\" theo thói quen Việt Nam — không phải ISO, browser và crawler bỏ qua."
+      ],
+      "details": [
+        "Dùng ở đâu: ngày đăng bài (Google đọc để hiển thị trong kết quả tìm kiếm), lịch sự kiện, changelog, và mọi chỗ hiển thị \"3 giờ trước\" — text hiển thị là tương đối, datetime giữ mốc tuyệt đối.",
+        "Luôn YYYY-MM-DD."
+      ],
+      "points": [],
+      "sections": [
+        "<time> gắn một mốc thời gian máy đọc được vào phần chữ mà người đọc thấy."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<time datetime=\"2026-03-15T09:00+07:00\">9h sáng thứ Sáu, 15/3</time>\n<time datetime=\"2026-03\">tháng 3/2026</time>\n<time datetime=\"PT2H30M\">2 tiếng rưỡi</time>"
+        },
+        {
+          "language": "HTML",
+          "code": "<time datetime=\"2026-08-21T01:30+07:00\" title=\"21/08/2026 01:30\">3 giờ trước</time>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "22-the-time-duoc-su-dung-de-lam-gi"
+  },
+  {
+    "id": "a88781a1-426c-532d-b8a3-1e32b87b532e",
+    "question": "Semantic HTML ảnh hưởng SEO như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/23-semantic-html-anh-huong-seo-nhu-the-nao",
+    "slug": "semantic-html-anh-huong-seo-nhu-the-nao-a88781a1-426c-532d-b8a3-1e32b87b532e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Semantic HTML không phải yếu tố xếp hạng trực tiếp, nhưng ảnh hưởng gián tiếp qua ba đường:",
+        "3. alt cho image search và trải nghiệm truy cập tốt hơn."
+      ],
+      "details": [
+        "1. Crawler hiểu đúng đâu là nội dung chính. <main>/<article> tách nội dung khỏi menu và sidebar, nên đoạn trích trong kết quả tìm kiếm lấy đúng chỗ. Heading <h1>–<h3> dựng dàn ý bài.",
+        "2. Rich result. Semantic markup không tự sinh rich result — cái đó do structured data làm. Nhưng hai thứ đi cùng nhau:",
+        "Chốt: đừng trả lời \"dùng semantic là lên top\". Câu trả lời đúng là: semantic giúp máy hiểu đúng cấu trúc, còn thứ hạng vẫn do nội dung, tốc độ và liên kết quyết định."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<article>\n  <h1>Cách tối ưu LCP</h1>\n  <time datetime=\"2026-03-15\">15/3/2026</time>\n</article>\n<script type=\"application/ld+json\">\n{ \"@context\":\"https://schema.org\", \"@type\":\"Article\",\n  \"headline\":\"Cách tối ưu LCP\", \"datePublished\":\"2026-03-15\" }\n</script>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "23-semantic-html-anh-huong-seo-nhu-the-nao"
+  },
+  {
+    "id": "c6de55b7-c563-5629-b55a-f5f24549e9cb",
+    "question": "Khi nào dùng <dl>, <dt>, <dd>?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/24-khi-nao-dung-dl-dt-dd",
+    "slug": "khi-nao-dung-dl-dt-dd-c6de55b7-c563-5629-b55a-f5f24549e9cb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Hợp nhất với: metadata bài viết, glossary, bảng thông số sản phẩm, FAQ (<dt> là câu hỏi, <dd> là câu trả lời)."
+      ],
+      "details": [
+        "Khi cần một lớp bọc để style, spec chỉ cho phép <div> bao cặp dt/dd bên trong <dl>, không cho phép thẻ khác.",
+        "Lưu ý: dùng <ul><li>Tác giả: ...</li></ul> cho danh sách key–value vì tiện. Nó vẫn chạy, nhưng screen reader mất quan hệ khoá–giá trị và mất luôn thông tin \"một khoá có nhiều giá trị\"."
+      ],
+      "points": [],
+      "sections": [
+        "<dl> là danh sách cặp khoá – giá trị hoặc thuật ngữ – định nghĩa."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<dl>\n  <dt>Tác giả</dt>\n  <dd>Nguyễn Đăng Định</dd>\n\n  <dt>Ngày đăng</dt>\n  <dd><time datetime=\"2026-03-15\">15/3/2026</time></dd>\n\n  <dt>Thẻ</dt>            <!-- một dt, nhiều dd -->\n  <dd>React</dd>\n  <dd>Performance</dd>\n</dl>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "24-khi-nao-dung-dl-dt-dd"
+  },
+  {
+    "id": "ad1f6b2d-2940-5a0d-9b8f-5eb22a18cccd",
+    "question": "Thẻ <details> và <summary> hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/25-the-details-va-summary-hoat-dong-the-nao",
+    "slug": "the-details-va-summary-hoat-dong-the-nao-ad1f6b2d-2940-5a0d-9b8f-5eb22a18cccd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: đặt animation height cho phần nội dung sẽ không chạy vì browser toggle thẳng display."
+      ],
+      "details": [
+        "Dùng ::details-content hoặc animate phần tử con thay vì chính <details>."
+      ],
+      "points": [],
+      "sections": [
+        "<details> là accordion có sẵn trong browser, không cần JS.",
+        "Lợi thế so với accordion tự viết: có sẵn bàn phím (Enter/Space), đúng vai trò cho screen reader, và nội dung bên trong vẫn được Ctrl+F tìm thấy — browser tự bung ra."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<details name=\"faq\">                <!-- name: chỉ mở 1 cái tại một thời điểm -->\n  <summary>Có hoàn tiền không?</summary>\n  <p>Hoàn 100% trong 7 ngày đầu.</p>\n</details>\n\n<details open>                       <!-- mở sẵn -->\n  <summary>Điều khoản</summary>\n  <p>...</p>\n</details>"
+        },
+        {
+          "language": "CSS",
+          "code": "details > summary { list-style: none; cursor: pointer; }  /* bỏ mũi tên mặc định */\ndetails[open] > summary { font-weight: 600; }"
+        },
+        {
+          "language": "JS",
+          "code": "detailsEl.addEventListener('toggle', () => console.log(detailsEl.open))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "25-the-details-va-summary-hoat-dong-the-nao"
+  },
+  {
+    "id": "83e34f60-b6d0-50be-909e-4769b58eef38",
+    "question": "Progressive Web App (PWA) là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/31-progressive-web-app-pwa-la-gi",
+    "slug": "progressive-web-app-pwa-la-gi-83e34f60-b6d0-50be-909e-4769b58eef38",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "PWA là web app dùng một nhóm API để đạt trải nghiệm gần app native: chạy offline, cài được lên màn hình chính, nhận push notification.",
+        "Lưu ý: Service Worker cũ bị cache rất dai — deploy bản mới mà không xử lý skipWaiting/versioning thì user vẫn chạy bản cũ sau nhiều lần reload."
+      ],
+      "details": [
+        "Ba điều kiện bắt buộc:\n1. HTTPS — Service Worker chỉ chạy trên secure context (localhost được miễn).\n2. Service Worker — proxy nằm giữa app và mạng, cho phép phục vụ từ cache khi mất mạng.\n3. Web App Manifest — khai báo tên, icon, màu, chế độ hiển thị.",
+        "Đây là sự cố PWA hay gặp nhất trong thực tế."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JSON",
+          "code": "if ('serviceWorker' in navigator) {\n  navigator.serviceWorker.register('/sw.js')\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "31-progressive-web-app-pwa-la-gi"
+  },
+  {
+    "id": "b727487f-bbb8-5478-a428-d97fbbb4ab79",
+    "question": "HTML5 form validation có những attribute nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/46-html5-form-validation-co-nhung-attribute-nao",
+    "slug": "html5-form-validation-co-nhung-attribute-nao-b727487f-bbb8-5478-a428-d97fbbb4ab79",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Style theo trạng thái bằng pseudo-class:",
+        "Lưu ý 1: :invalid bôi đỏ ngay khi trang vừa mở vì field rỗng đã là invalid. Dùng :user-invalid (hoặc tự thêm class sau blur) mới đúng trải nghiệm."
+      ],
+      "details": [
+        "Lưu ý 2: pattern không dùng cờ regex và luôn được neo hai đầu — không cần ^...$.",
+        "Chốt: validation HTML chỉ để phản hồi nhanh cho người dùng; server vẫn phải kiểm tra lại toàn bộ."
+      ],
+      "points": [],
+      "sections": [
+        "Validation dựng sẵn chạy khi submit, không cần JS:"
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<form>\n  <input name=\"email\" type=\"email\" required>\n  <input name=\"age\" type=\"number\" min=\"18\" max=\"99\" step=\"1\">\n  <input name=\"user\" pattern=\"[a-z0-9_]{3,16}\" title=\"3–16 ký tự thường, số hoặc _\">\n  <input name=\"bio\" maxlength=\"200\" minlength=\"10\">\n  <button>Gửi</button>\n</form>"
+        },
+        {
+          "language": "CSS",
+          "code": "input:user-invalid { border-color: var(--rose-ink); }   /* chỉ đỏ SAU khi user rời field */\ninput:valid { border-color: var(--green); }"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Attribute",
+            "Áp cho",
+            "required",
+            "mọi control",
+            "pattern",
+            "text, tel, email, url, password, search",
+            "min / max / step",
+            "number, range, date/time",
+            "min",
+            "max",
+            "minlength / maxlength",
+            "các kiểu nhập chữ",
+            "step"
+          ]
+        }
+      ]
+    },
+    "legacyId": 37,
+    "sourceSlug": "46-html5-form-validation-co-nhung-attribute-nao"
+  },
+  {
+    "id": "0445c12c-360f-5161-a05c-d6f634314bc9",
+    "question": "readonly và disabled khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/47-readonly-va-disabled-khac-nhau-the-nao",
+    "slug": "readonly-va-disabled-khac-nhau-the-nao-0445c12c-360f-5161-a05c-d6f634314bc9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Chọn thế nào: hiển thị giá trị hệ thống sinh ra mà server vẫn cần nhận lại (mã đơn, tổng tiền đã tính) → readonly. Field không áp dụng trong ngữ cảnh hiện tại → disabled."
+      ],
+      "details": [
+        "Lưu ý 1: dùng disabled cho ô \"Tổng tiền\" thì server không nhận được giá trị đó. Muốn field vẫn được gửi lên server nhưng hiển thị mờ, dùng readonly kèm CSS.",
+        "Lưu ý 2: readonly không áp dụng cho <select>, <input type=checkbox|radio>. Với các control này chỉ có disabled, và nếu vẫn cần gửi giá trị thì thêm <input type=\"hidden\"> đi kèm."
+      ],
+      "points": [],
+      "sections": [
+        "Khác biệt quyết định nằm ở giá trị có được gửi lên server hay không."
+      ],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            ":disabled",
+            "có",
+            "Sửa được",
+            "readonly",
+            "không",
+            "Focus / tab tới",
+            "disabled",
+            "được",
+            "không",
+            "Bôi đen, copy",
+            "được",
+            "không",
+            "Gửi kèm form",
+            "Giao diện mặc định",
+            "có"
+          ]
+        }
+      ]
+    },
+    "legacyId": 38,
+    "sourceSlug": "47-readonly-va-disabled-khac-nhau-the-nao"
+  },
+  {
+    "id": "2d527f8c-e8c9-5d31-ba51-8577836254cc",
+    "question": "Enctype attribute có những giá trị nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/48-enctype-attribute-co-nhung-gia-tri-nao",
+    "slug": "enctype-attribute-co-nhung-gia-tri-nao-2d527f8c-e8c9-5d31-ba51-8577836254cc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: quên enctype=\"multipart/form-data\" khi upload — browser vẫn gửi form, nhưng chỉ gửi tên file dạng chuỗi, không có nội dung. Server nhận được avatar=\"anh.png\" và không hiểu vì sao file rỗng."
+      ],
+      "details": [
+        "Ghi chú: gửi bằng fetch với FormData thì không được tự đặt Content-Type — browser cần tự sinh boundary."
+      ],
+      "points": [],
+      "sections": [
+        "enctype quyết định cách browser đóng gói dữ liệu form khi method=\"post\"."
+      ],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Giá trị",
+            "Khi nào dùng",
+            "Dạng body",
+            "application/x-www-form-urlencoded",
+            "có file",
+            "mặc định, dữ liệu chữ",
+            "name=Dinh&age=30",
+            "chia phần theo boundary",
+            "debug",
+            "thô, không encode",
+            "multipart/form-data",
+            "text/plain"
+          ]
+        }
+      ]
+    },
+    "legacyId": 39,
+    "sourceSlug": "48-enctype-attribute-co-nhung-gia-tri-nao"
+  },
+  {
+    "id": "5f20e3ef-15a1-5d4a-bd4f-aa459a0703cb",
+    "question": "Autocomplete attribute hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/49-autocomplete-attribute-hoat-dong-the-nao",
+    "slug": "autocomplete-attribute-hoat-dong-the-nao-5f20e3ef-15a1-5d4a-bd4f-aa459a0703cb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Đặt được ở cấp <form> (áp cho cả form) hoặc từng input. autocomplete=\"off\" chỉ nên dùng cho field thật sự dùng một lần."
+      ],
+      "details": [
+        "Lưu ý: dùng cùng autocomplete=\"current-password\" cho ô \"mật khẩu mới\" — trình quản lý mật khẩu điền lại mật khẩu cũ, và không gợi ý sinh mật khẩu mới. Phân biệt current-password / new-password là chi tiết hay được hỏi khi phỏng vấn về form.",
+        "Chốt: đây là tối ưu chuyển đổi rẻ nhất trên mobile — điền tay địa chỉ trên điện thoại là chỗ người dùng bỏ cuộc nhiều nhất."
+      ],
+      "points": [],
+      "sections": [
+        "autocomplete nói cho browser biết field này chứa loại dữ liệu gì, để gợi ý đúng thứ đã lưu."
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "49-autocomplete-attribute-hoat-dong-the-nao"
+  },
+  {
+    "id": "09a8c585-4b64-5dfb-bade-c366131045e6",
+    "question": "Constraint Validation API là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/50-constraint-validation-api-la-gi",
+    "slug": "constraint-validation-api-la-gi-09a8c585-4b64-5dfb-bade-c366131045e6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Các cờ trong validity: valueMissing, typeMismatch, patternMismatch, tooShort, tooLong, rangeUnderflow, rangeOverflow, stepMismatch, customError."
+      ],
+      "details": [
+        "Lưu ý: quên gọi setCustomValidity('') khi giá trị đã hợp lệ — field kẹt ở trạng thái lỗi vĩnh viễn và form không bao giờ submit được. Đây là bug hay gặp nhất với API này."
+      ],
+      "points": [],
+      "sections": [
+        "Constraint Validation API là mặt JavaScript của validation dựng sẵn — cho phép đọc trạng thái và đặt thông báo lỗi riêng."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const form  = document.querySelector('form')\nconst email = form.elements.email\n\nemail.addEventListener('input', () => {\n  if (email.validity.typeMismatch) {\n    email.setCustomValidity('Email chưa đúng định dạng, ví dụ: ban@congty.vn')\n  } else if (email.validity.valueMissing) {\n    email.setCustomValidity('Vui lòng nhập email')\n  } else {\n    email.setCustomValidity('')      // chuỗi rỗng = hợp lệ\n  }\n})\n\nform.addEventListener('submit', (e) => {\n  if (!form.checkValidity()) {       // kiểm tra, KHÔNG hiện bong bóng lỗi\n    e.preventDefault()\n    form.reportValidity()            // kiểm tra VÀ hiện bong bóng + focus\n  }\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "50-constraint-validation-api-la-gi"
+  },
+  {
+    "id": "1de15a22-aef9-57f4-a706-3d642c9d6130",
+    "question": "FormData API dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/51-formdata-api-dung-de-lam-gi",
+    "slug": "formdata-api-dung-de-lam-gi-1de15a22-aef9-57f4-a706-3d642c9d6130",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý 1: input không có name sẽ không xuất hiện trong FormData — kể cả khi có id và value."
+      ],
+      "details": [
+        "Lưu ý 2: Object.fromEntries giữ lại giá trị cuối với các field trùng tên (nhóm checkbox); trường hợp đó phải dùng getAll().",
+        "Lưu ý 3: control đang disabled không được thu thập — xem thêm câu về readonly vs disabled."
+      ],
+      "points": [],
+      "sections": [
+        "FormData thu thập dữ liệu form thành cặp khoá–giá trị, kể cả file, để gửi bằng JavaScript.",
+        "Chuyển sang JSON khi API cần:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const form = document.querySelector('form')\n\nform.addEventListener('submit', async (e) => {\n  e.preventDefault()\n  const fd = new FormData(form)      // lấy mọi field có thuộc tính name\n\n  fd.append('source', 'web')         // thêm field ngoài form\n  fd.get('email')                    // đọc một giá trị\n  fd.getAll('tags')                  // nhiều giá trị cùng tên (checkbox)\n\n  await fetch('/api/profile', { method: 'POST', body: fd })\n  // KHÔNG set Content-Type — browser tự sinh boundary cho multipart\n})"
+        },
+        {
+          "language": "JS",
+          "code": "const json = Object.fromEntries(new FormData(form))   // mất field trùng tên"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "51-formdata-api-dung-de-lam-gi"
+  },
+  {
+    "id": "447fc3f1-e9f6-509b-b7a7-e9b660e9855c",
+    "question": "WCAG là gì? Có bao nhiêu cấp độ?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/59-wcag-la-gi-co-bao-nhieu-cap-do",
+    "slug": "wcag-la-gi-co-bao-nhieu-cap-do-447fc3f1-e9f6-509b-b7a7-e9b660e9855c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "WCAG (Web Content Accessibility Guidelines) là bộ tiêu chí của W3C để đo mức độ truy cập được của nội dung web."
+      ],
+      "details": [
+        "Ba cấp:\n- A — tối thiểu, thiếu là chặn hẳn một nhóm người dùng.\n- AA — mức mọi dự án nhắm tới; đây là mức luật pháp và hợp đồng tham chiếu.\n- AAA — cao nhất, không phải nội dung nào cũng đạt được; W3C không khuyến nghị lấy AAA làm mục tiêu cho cả site.",
+        "Phiên bản: 2.0 (2008) → 2.1 (2018, thêm mobile và low-vision) → 2.2 (2023).",
+        "Bốn nguyên tắc — POUR:",
+        "Chốt: khi được hỏi \"làm a11y đến mức nào\", câu trả lời thực tế là AA — nói AAA thường lộ ra là chưa từng làm thật."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Nghĩa",
+            "Ví dụ tiêu chí",
+            "alt",
+            "P",
+            "Perceivable",
+            "nhận biết được",
+            "alt cho ảnh, phụ đề video, tương phản màu",
+            "Operable",
+            "thao tác được",
+            "dùng được bằng bàn phím, đủ thời gian, không gây co giật",
+            "Understandable",
+            "hiểu được",
+            "ngôn ngữ trang, nhãn rõ ràng, báo lỗi hữu ích",
+            "Robust",
+            "bền vững",
+            "HTML hợp lệ, ARIA đúng, hoạt động với công nghệ hỗ trợ"
+          ]
+        }
+      ]
+    },
+    "legacyId": 43,
+    "sourceSlug": "59-wcag-la-gi-co-bao-nhieu-cap-do"
+  },
+  {
+    "id": "6a23e9cc-3bc5-584c-831c-f7565ae5a2ec",
+    "question": "aria-label, aria-labelledby, aria-describedby khác nhau?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/60-aria-label-aria-labelledby-aria-describedby-khac-nhau",
+    "slug": "aria-label-aria-labelledby-aria-describedby-khac-nhau-6a23e9cc-3bc5-584c-831c-f7565ae5a2ec",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Thứ tự tính tên: aria-labelledby > aria-label > <label for> > nội dung bên trong."
+      ],
+      "details": [
+        "Lưu ý 1: aria-label đè lên chữ hiển thị. Nút ghi \"Gửi đơn\" mà aria-label=\"Submit\" thì người dùng lệnh giọng nói đọc thấy \"Gửi đơn\" nhưng hệ thống lại chờ \"Submit\".",
+        "Lưu ý 2: aria-label không có tác dụng trên element không có role tương tác như <div>, <span> thuần — nhiều screen reader bỏ qua hoàn toàn."
+      ],
+      "points": [],
+      "sections": [
+        "Cả ba đều cấp tên hoặc mô tả cho screen reader, khác nhau ở nguồn chữ và vai trò."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!-- aria-label: đặt tên bằng chuỗi, khi không có chữ hiển thị -->\n<button aria-label=\"Đóng\">×</button>\n\n<!-- aria-labelledby: lấy tên từ element khác, nối nhiều id được -->\n<div role=\"dialog\" aria-labelledby=\"dlg-title\">\n  <h2 id=\"dlg-title\">Xác nhận xoá</h2>\n</div>\n\n<!-- aria-describedby: mô tả PHỤ, đọc sau tên -->\n<input id=\"pw\" type=\"password\" aria-describedby=\"pw-hint pw-err\">\n<p id=\"pw-hint\">Tối thiểu 8 ký tự</p>\n<p id=\"pw-err\" role=\"alert\"></p>"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Nguồn",
+            "Vai trò",
+            "Ưu tiên",
+            "aria-labelledby",
+            "tên",
+            "id của element khác",
+            "aria-label",
+            "cao nhất",
+            "chuỗi viết thẳng",
+            "thua labelledby",
+            "aria-describedby",
+            "id của element khác",
+            "đọc sau tên"
+          ]
+        }
+      ]
+    },
+    "legacyId": 44,
+    "sourceSlug": "60-aria-label-aria-labelledby-aria-describedby-khac-nhau"
+  },
+  {
+    "id": "aba40479-1b2e-505f-a7e2-1469644ed8b2",
+    "question": "Keyboard navigation quan trọng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/61-keyboard-navigation-quan-trong-the-nao",
+    "slug": "keyboard-navigation-quan-trong-the-nao-aba40479-1b2e-505f-a7e2-1469644ed8b2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Bàn phím là đường vào duy nhất với người hạn chế vận động, người dùng screen reader, và cả người dùng thành thạo muốn nhanh.",
+        "Lưu ý: modal mở ra nhưng focus vẫn nằm ở trang nền — người dùng Tab \"ra ngoài\" hộp thoại mà không biết. Modal cần đưa focus vào trong, giữ vòng focus, và trả focus về nút đã mở nó khi đóng."
+      ],
+      "details": [
+        "Phím quy ước — làm sai là người dùng mắc kẹt:",
+        "Cách kiểm tra rẻ nhất: rút chuột ra, dùng thử toàn bộ luồng chính bằng bàn phím. Chỗ nào không tới được hoặc không biết mình đang ở đâu là lỗi."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "/* SAI: xoá hẳn dấu focus */\n:focus { outline: none; }\n\n/* ĐÚNG: chỉ hiện khi điều hướng bằng bàn phím, và vẫn thấy rõ */\n:focus-visible {\n  outline: 2px solid var(--accent);\n  outline-offset: 2px;\n}"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Phím",
+            "Hành vi mong đợi",
+            "Tab",
+            "Tab / Shift+Tab",
+            "Shift+Tab",
+            "đi tới / lùi giữa các control",
+            "kích hoạt link và nút",
+            "kích hoạt nút, tick checkbox, cuộn trang",
+            "Enter",
+            "Space",
+            "đóng modal, popover, huỷ thao tác",
+            "mũi tên",
+            "Esc",
+            "di chuyển trong widget: menu, tab, slider, radio group"
+          ]
+        }
+      ]
+    },
+    "legacyId": 45,
+    "sourceSlug": "61-keyboard-navigation-quan-trong-the-nao"
+  },
+  {
+    "id": "e267fbfd-88ef-554a-808c-a84051dd7473",
+    "question": "tabindex attribute hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/62-tabindex-attribute-hoat-dong-the-nao",
+    "slug": "tabindex-attribute-hoat-dong-the-nao-e267fbfd-88ef-554a-808c-a84051dd7473",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Link, button, input, select, textarea đã focus được sẵn — thêm tabindex=\"0\" là thừa.",
+        "Lưu ý: tabindex dương làm thứ tự Tab lệch hẳn khỏi thứ tự nhìn thấy."
+      ],
+      "details": [
+        "Dùng -1 cho những chỗ cần đưa focus tới bằng code nhưng không nên có trong luồng Tab:"
+      ],
+      "points": [
+        "Chỉ cần một element tabindex=\"1\" là toàn bộ trang bị xáo: nó được duyệt trước mọi element tabindex=\"0\", kể cả những element đứng trên nó.",
+        "Muốn đổi thứ tự thì sửa thứ tự DOM."
+      ],
+      "sections": [
+        "tabindex quyết định element có nằm trong thứ tự Tab hay không."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<div tabindex=\"0\">Tab tới được, theo đúng thứ tự DOM</div>\n<div tabindex=\"-1\" id=\"panel\">Không tab tới, nhưng focus bằng JS được</div>\n<button tabindex=\"3\">Ép lên trước — nên tránh</button>"
+        },
+        {
+          "language": "JS",
+          "code": "// sau khi chuyển route trong SPA\ndocument.getElementById('page-title').focus()   // element đó có tabindex=\"-1\""
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Giá trị",
+            "Vào tab order",
+            "0",
+            "được",
+            "có, theo thứ tự DOM",
+            "element.focus()",
+            "được",
+            "không",
+            "có, nhảy lên trước tất cả",
+            "-1",
+            "> 0",
+            "được"
+          ]
+        }
+      ]
+    },
+    "legacyId": 46,
+    "sourceSlug": "62-tabindex-attribute-hoat-dong-the-nao"
+  },
+  {
+    "id": "afe9f726-fca7-503b-baef-5d968a508cf3",
+    "question": "Color contrast yêu cầu gì theo WCAG?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/63-color-contrast-yeu-cau-gi-theo-wcag",
+    "slug": "color-contrast-yeu-cau-gi-theo-wcag-afe9f726-fca7-503b-baef-5d968a508cf3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Tỉ lệ tương phản đo độ chênh sáng giữa màu chữ và màu nền, tính từ 1:1 (trùng nhau) tới 21:1 (đen trên trắng).",
+        "Công cụ: panel Accessibility trong Chrome DevTools (chọn màu là thấy tỉ lệ ngay), Lighthouse, WebAIM Contrast Checker, axe DevTools."
+      ],
+      "details": [
+        "Điểm hay bị bỏ sót: yêu cầu 3:1 cũng áp cho thành phần giao diện, không chỉ chữ — viền ô input, icon trạng thái, đường phân cách mang thông tin.",
+        "Lưu ý: dùng màu là kênh thông tin duy nhất. Ô input báo lỗi chỉ bằng viền đỏ thì người mù màu (khoảng 8% nam giới) không phân biệt được. Luôn kèm icon hoặc chữ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "/* #999 trên nền trắng = 2.85:1 → trượt AA */\n.meta { color: #949494; }   /* 4.54:1 — vừa đủ đạt */"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Nội dung",
+            "AA",
+            "AAA",
+            "4.5:1",
+            "Chữ thường",
+            "7:1",
+            "Chữ lớn (≥18.66px, hoặc ≥14px in đậm)",
+            "4.5:1",
+            "Viền input, icon mang nghĩa",
+            "—"
+          ]
+        }
+      ]
+    },
+    "legacyId": 47,
+    "sourceSlug": "63-color-contrast-yeu-cau-gi-theo-wcag"
+  },
+  {
+    "id": "81c261d9-aca0-5d21-8402-63e5da02e3bb",
+    "question": "defer và async trên thẻ <script> khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93700-defer-va-async-tren-the-script-khac-nhau-nhu-the-nao",
+    "slug": "defer-va-async-tren-the-script-khac-nhau-nhu-the-nao-81c261d9-aca0-5d21-8402-63e5da02e3bb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai đều tải script song song với việc parse HTML nên không chặn render. Khác nhau ở thời điểm thực thi:"
+      ],
+      "details": [
+        "Cả hai chỉ có tác dụng với script external (src); script inline bỏ qua chúng."
+      ],
+      "points": [
+        "async: chạy ngay khi tải xong, có thể chen ngang lúc HTML còn đang parse. Thứ tự thực thi không đảm bảo (script nào tải xong trước chạy trước). Hợp cho script độc lập: analytics, ads.",
+        "defer: chờ HTML parse xong mới chạy, trước sự kiện DOMContentLoaded. Giữ đúng thứ tự các thẻ trong tài liệu. Hợp cho script phụ thuộc DOM hoặc phụ thuộc nhau."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "93700-defer-va-async-tren-the-script-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "41de8be8-58ba-5b2f-b690-d0495713c2ea",
+    "question": "Phần tử <dialog>: showModal() khác show() / close() thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93702-phan-tu-dialog-showmodal-khac-show-close-the-nao",
+    "slug": "phan-tu-dialog-showmodal-khac-show-close-the-nao-41de8be8-58ba-5b2f-b690-d0495713c2ea",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Phần tử <dialog> mở được ở hai chế độ:"
+      ],
+      "details": [
+        "close([value]) đóng dialog ở cả hai chế độ và có thể gán returnValue; nút <button> trong <form method=\"dialog\"> cũng tự đóng và ghi giá trị."
+      ],
+      "points": [
+        "showModal() — mở dạng modal: đưa dialog lên top layer, có pseudo-element ::backdrop phủ nền, bẫy focus trong dialog, nhấn Esc để đóng, và phần nền trở nên inert (không tương tác được).",
+        "show() — mở dạng non-modal: không có backdrop, không bẫy focus, không đóng bằng Esc; nền vẫn tương tác bình thường (kiểu popover cạnh nội dung)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "dlg.showModal()   // modal + backdrop + focus trap\ndlg.close(\"ok\")   // đóng, dlg.returnValue === \"ok\""
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "93702-phan-tu-dialog-showmodal-khac-show-close-the-nao"
+  },
+  {
+    "id": "195c904a-4c48-531b-8c14-6f72ccabbcee",
+    "question": "Vì sao mở link tab mới nên kèm rel=\"noopener\" cùng target=\"_blank\"?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93703-vi-sao-mo-link-tab-moi-nen-kem-rel-noopener-cung-target-blank",
+    "slug": "vi-sao-mo-link-tab-moi-nen-kem-rel-noopener-cung-target-blank-195c904a-4c48-531b-8c14-6f72ccabbcee",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Khi dùng target=\"_blank\", trang mới nhận được tham chiếu window.opener trỏ ngược về trang gốc. Trang đích (nhất là link ngoài không kiểm soát) có thể lợi dụng để window.opener.location = \"trang-giả\" — kỹ thuật reverse tabnabbing (đánh tráo tab cũ sang trang lừa đảo). Ngoài ra hai tab còn chung tiến trình, ảnh hưởng hiệu năng."
+      ],
+      "details": [
+        "rel=\"noopener\" cắt liên kết đó: trang mới nhận window.opener === null. Thêm noreferrer nếu muốn ẩn luôn header Referer."
+      ],
+      "points": [],
+      "sections": [
+        "Trình duyệt hiện đại đã ngầm áp noopener cho target=\"_blank\", nhưng ghi rõ vẫn là thói quen an toàn (hỗ trợ trình duyệt cũ)."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<a href=\"https://ngoai.example\" target=\"_blank\" rel=\"noopener noreferrer\">Mở</a>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "93703-vi-sao-mo-link-tab-moi-nen-kem-rel-noopener-cung-target-blank"
+  },
+  {
+    "id": "be3f355d-a80a-5800-8af6-c796467c019e",
+    "question": "Accessible name của một phần tử được tính từ đâu? Thứ tự ưu tiên thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97454-accessible-name-cua-mot-phan-tu-duoc-tinh-tu-dau-thu-tu-uu-tien-the-nao",
+    "slug": "accessible-name-cua-mot-phan-tu-duoc-tinh-tu-dau-thu-tu-uu-tien-the-nao-be3f355d-a80a-5800-8af6-c796467c019e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Accessible name là chuỗi mà screen reader đọc lên để định danh phần tử (khác với role và state). Trình duyệt tính nó theo thuật toán accname, duyệt lần lượt và dừng ở nguồn đầu tiên có giá trị không rỗng:",
+        "Hệ quả hay bị dính khi phỏng vấn:\n- aria-label ghi đè nội dung nhìn thấy → người dùng ra lệnh giọng nói đọc chữ trên nút mà không khớp tên. Nếu có chữ hiển thị, accessible name nên chứa đúng chữ đó.\n- aria-labelledby vẫn lấy được nội dung của phần tử hidden, nhưng phần tử đích phải tồn tại — id sai thì tên rỗng, không có cảnh báo nào.\n- aria-label trên phần tử không tương tác, không có role (như div, span) thường bị bỏ qua."
+      ],
+      "details": [
+        "1. aria-labelledby — trỏ tới id của phần tử khác, nối nội dung các phần tử đó lại.\n2. aria-label — chuỗi viết thẳng.\n3. Nguồn gốc của HTML — <label for> với form control, <caption> với table, alt với img, <legend> với fieldset.\n4. Nội dung bên trong — chỉ với các role cho phép lấy tên từ nội dung (button, link, heading...).\n5. title — chỉ là lưới an toàn cuối cùng, không nên dựa vào.",
+        "Kiểm tra bằng tab Accessibility của DevTools: xem trường \"Name\" và nguồn nào đang thắng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!-- Đọc là \"Đóng\": aria-labelledby thắng cả text bên trong -->\n<button aria-labelledby=\"t\" aria-label=\"Huỷ\">X<span id=\"t\" hidden>Đóng</span></button>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "97454-accessible-name-cua-mot-phan-tu-duoc-tinh-tu-dau-thu-tu-uu-tien-the-nao"
+  },
+  {
+    "id": "8eb8d295-bc6f-535d-8f34-986c63e78788",
+    "question": "Form submit lỗi: làm sao để screen reader biết ô nào sai và sai gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97455-form-submit-loi-lam-sao-de-screen-reader-biet-o-nao-sai-va-sai-gi",
+    "slug": "form-submit-loi-lam-sao-de-screen-reader-biet-o-nao-sai-va-sai-gi-8eb8d295-bc6f-535d-8f34-986c63e78788",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Tô đỏ viền là tín hiệu chỉ dành cho mắt. Cần ba mảnh ghép:",
+        "3. Đưa người dùng tới lỗi: sau khi submit hỏng, chuyển focus vào ô lỗi đầu tiên (hoặc vào phần tóm tắt lỗi đầu trang có tabindex=\"-1\"). Nếu chỉ render danh sách lỗi mà không chuyển focus, người dùng bàn phím vẫn đứng ở nút submit và không biết có gì đã đổi."
+      ],
+      "details": [
+        "1. Đánh dấu ô lỗi: aria-invalid=\"true\" để screen reader đọc \"không hợp lệ\" khi focus vào ô. Bỏ về false/gỡ hẳn khi người dùng sửa xong.",
+        "2. Nối thông báo lỗi vào ô: aria-describedby trỏ tới id của phần tử chứa nội dung lỗi — screen reader đọc nhãn, rồi đọc mô tả lỗi ngay sau đó.",
+        "Chi tiết thực chiến:\n- Nội dung lỗi phải nói cách sửa, không chỉ \"Không hợp lệ\" (WCAG 3.3.3).\n- Dùng aria-describedby cho lỗi, <label> cho nhãn — đừng nhồi lỗi vào aria-label vì nó thay luôn nhãn.\n- Một ô có thể trỏ nhiều id (aria-describedby=\"email-hint email-err\").\n- Nếu lỗi xuất hiện ngay lúc gõ, bọc thêm live region để thông báo — nhưng để polite để không ngắt lời người dùng ở mỗi ký tự."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<label for=\"email\">Email</label>\n<input id=\"email\" type=\"email\" aria-invalid=\"true\" aria-describedby=\"email-err\">\n<p id=\"email-err\">Email phải có dạng ten@mien.com</p>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "97455-form-submit-loi-lam-sao-de-screen-reader-biet-o-nao-sai-va-sai-gi"
+  },
+  {
+    "id": "537c3545-7ea9-539c-8d99-641b6b106e7f",
+    "question": "Nội dung đổi động (toast, kết quả tìm kiếm, số lượng giỏ hàng) thông báo cho screen reader ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97456-noi-dung-doi-dong-toast-ket-qua-tim-kiem-so-luong-gio-hang-thong-bao-cho-screen",
+    "slug": "noi-dung-doi-dong-toast-ket-qua-tim-kiem-so-luong-gio-hang-thong-bao-cho-screen-reader-ra-sao-537c3545-7ea9-539c-8d99-641b6b106e7f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Chọn mức độ:\n- aria-live=\"polite\" (hoặc role=\"status\"): đợi người dùng ngừng thao tác rồi đọc. Dùng cho hầu hết trường hợp — kết quả tìm kiếm, \"đã lưu\", số lượng giỏ hàng.\n- aria-live=\"assertive\" (hoặc role=\"alert\"): ngắt ngang để đọc ngay. Chỉ dùng cho lỗi nghiêm trọng, hết phiên đăng nhập."
+      ],
+      "details": [
+        "Các lỗi khiến live region \"không kêu\":\n- Chèn cả node chứa aria-live cùng lúc với nội dung. Trợ năng chỉ theo dõi những vùng đã tồn tại từ trước, nên container phải render sẵn (rỗng), rồi mới cập nhật text vào.\n- Vùng bị display: none khi cập nhật.\n- Đọc lặp liên tục vì ghi đè nội dung quá nhiều lần — nên debounce.\n- Nội dung dài: aria-atomic=\"true\" bắt đọc lại toàn vùng, false chỉ đọc phần đổi.",
+        "Không cần live region nếu thao tác đã chuyển focus tới nội dung mới — lúc đó screen reader đọc theo focus, thêm live region sẽ thành đọc hai lần."
+      ],
+      "points": [],
+      "sections": [
+        "Dùng live region: một vùng DOM có aria-live, khi nội dung bên trong thay đổi thì screen reader tự đọc mà không cần chuyển focus."
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "97456-noi-dung-doi-dong-toast-ket-qua-tim-kiem-so-luong-gio-hang-thong-bao-cho-screen"
+  },
+  {
+    "id": "5fbd9266-a5ad-5e00-a39e-6193d92095d2",
+    "question": "Mở và đóng modal thì phải xử lý focus thế nào cho đúng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97457-mo-va-dong-modal-thi-phai-xu-ly-focus-the-nao-cho-dung",
+    "slug": "mo-va-dong-modal-thi-phai-xu-ly-focus-the-nao-cho-dung-5fbd9266-a5ad-5e00-a39e-6193d92095d2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Bốn bước, thiếu bước nào cũng làm người dùng bàn phím lạc chỗ:",
+        "Về mặt ngữ nghĩa, modal cần role=\"dialog\" + aria-modal=\"true\" + một accessible name (aria-labelledby trỏ tới tiêu đề). Dùng <dialog> với showModal() thì trình duyệt lo phần lớn việc này giúp."
+      ],
+      "details": [
+        "1. Nhớ phần tử đang focus trước khi mở (document.activeElement).",
+        "2. Chuyển focus vào trong modal ngay khi mở — vào phần tử tương tác đầu tiên, hoặc vào chính container (đặt tabindex=\"-1\") nếu nội dung dài và muốn screen reader đọc từ đầu.",
+        "3. Giữ focus trong modal khi đang mở — Tab từ phần tử cuối quay về phần tử đầu, Shift+Tab thì ngược lại. Đồng thời chặn nội dung nền: dùng inert trên phần còn lại của trang.",
+        "<body>",
+        "Sai hay gặp:",
+        "4. Đóng modal thì trả focus về phần tử đã mở nó, và cho Escape đóng được."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const opener = document.activeElement\nopenDialog()\n// khi đóng:\ncloseDialog()\nopener?.focus()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "97457-mo-va-dong-modal-thi-phai-xu-ly-focus-the-nao-cho-dung"
+  },
+  {
+    "id": "460b8684-923e-5458-b814-862ee2354e5f",
+    "question": "Tự viết dropdown menu thì cần hỗ trợ bàn phím những gì? Roving tabindex là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97458-tu-viet-dropdown-menu-thi-can-ho-tro-ban-phim-nhung-gi-roving-tabindex-la-gi",
+    "slug": "tu-viet-dropdown-menu-thi-can-ho-tro-ban-phim-nhung-gi-roving-tabindex-la-gi-460b8684-923e-5458-b814-862ee2354e5f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Một dropdown chỉ nghe click là bỏ rơi toàn bộ người dùng bàn phím. Tập phím tối thiểu theo APG (menu button):",
+        "Nhờ vậy người dùng Tab một lần là qua cả menu, còn điều hướng bên trong dùng mũi tên — đúng thói quen của widget desktop."
+      ],
+      "details": [
+        "Trạng thái phải khai báo: nút mang aria-expanded=\"true|false\" và aria-haspopup; container mang role=\"menu\", item mang role=\"menuitem\".",
+        "Roving tabindex là kỹ thuật để nhóm item chỉ chiếm một điểm dừng Tab: chỉ item đang active có tabindex=\"0\", các item còn lại tabindex=\"-1\"; khi nhấn mũi tên thì đổi giá trị này và gọi .focus().",
+        "Cách thay thế là aria-activedescendant (focus DOM đứng yên ở container, chỉ đổi id item active), hay dùng cho combobox."
+      ],
+      "points": [
+        "Enter / Space / ArrowDown trên nút: mở menu và focus item đầu.",
+        "ArrowDown / ArrowUp: di chuyển giữa các item (nên cuộn vòng).",
+        "Home / End: nhảy item đầu / cuối.",
+        "Escape: đóng menu và trả focus về nút.",
+        "Tab: đóng menu, đi tiếp ra ngoài — không kẹt bên trong.",
+        "Click ra ngoài: đóng menu."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "function focusItem(items, next) {\n  items.forEach((el, i) => { el.tabIndex = i === next ? 0 : -1 })\n  items[next].focus()\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": "97458-tu-viet-dropdown-menu-thi-can-ho-tro-ban-phim-nhung-gi-roving-tabindex-la-gi"
+  },
+  {
+    "id": "6b196189-fe42-5ec7-91d3-63de3e88ce0b",
+    "question": "prefers-reduced-motion dùng thế nào cho đúng? Có phải tắt sạch mọi animation?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97459-prefers-reduced-motion-dung-the-nao-cho-dung-co-phai-tat-sach-moi-animation",
+    "slug": "prefers-reduced-motion-dung-the-nao-cho-dung-co-phai-tat-sach-moi-animation-6b196189-fe42-5ec7-91d3-63de3e88ce0b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "prefers-reduced-motion là media query phản ánh cài đặt \"giảm chuyển động\" ở hệ điều hành. Người bật nó thường bị rối loạn tiền đình: parallax, zoom lớn, phần tử bay ngang màn hình có thể gây chóng mặt, buồn nôn.",
+        "Ưu tiên viết theo hướng thêm animation khi được phép (@media (prefers-reduced-motion: no-preference)) để mặc định luôn an toàn.",
+        "WCAG 2.2 tiêu chí 2.3.3 Animation from Interactions yêu cầu cho phép tắt animation do tương tác gây ra, trừ khi nó thiết yếu."
+      ],
+      "details": [
+        "\"Reduced\" không phải \"none\". Cách làm đúng là thay chuyển động lớn bằng chuyển động nhỏ hoặc fade, giữ lại phản hồi trạng thái để giao diện không mất mạch:",
+        "Với JS animation (requestAnimationFrame, canvas, thư viện motion) media query CSS không tự áp — phải kiểm tra thủ công và render một khung tĩnh:",
+        "Với video/GIF tự chạy hơn 5 giây thì phải có nút tạm dừng (2.2.2), độc lập với media query này."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".card { transition: transform .3s ease; }\n\n@media (prefers-reduced-motion: reduce) {\n  .card { transition: opacity .15s ease; transform: none; }\n}"
+        },
+        {
+          "language": "JS",
+          "code": "const mq = window.matchMedia('(prefers-reduced-motion: reduce)')\nif (mq.matches) drawStaticFrame()\nelse startLoop()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "97459-prefers-reduced-motion-dung-the-nao-cho-dung-co-phai-tat-sach-moi-animation"
+  },
+  {
+    "id": "c86afa3e-453a-5a22-a729-e97d3ff42257",
+    "question": "Bạn kiểm tra accessibility của một trang bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97460-ban-kiem-tra-accessibility-cua-mot-trang-bang-cach-nao",
+    "slug": "ban-kiem-tra-accessibility-cua-mot-trang-bang-cach-nao-c86afa3e-453a-5a22-a729-e97d3ff42257",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Kết hợp máy quét tự động với kiểm tra thủ công — công cụ tự động chỉ bắt được một phần lỗi (thiếu alt, contrast, thiếu label, id trùng), phần còn lại là logic mà máy không đánh giá được."
+      ],
+      "details": [
+        "Tự động:\n- axe DevTools hoặc tab Lighthouse (mục Accessibility) trong Chrome — quét nhanh một trang.\n- @axe-core/react hoặc jest-axe/vitest-axe để chạy trong test, chặn hồi quy ở CI.\n- HTML validator: markup sai lồng nhau cũng làm hỏng accessibility tree.",
+        "Thủ công — phần quan trọng hơn:\n1. Rút chuột ra: Tab qua toàn trang. Có nhìn thấy focus ring không? Thứ tự có khớp thứ tự trên màn hình không? Có bị kẹt ở đâu không?\n2. Zoom 200% / co viewport xuống 320px: nội dung có bị cắt hay phải cuộn ngang không.\n3. Screen reader thật: VoiceOver (macOS/iOS, Cmd+F5), NVDA (Windows, miễn phí). Nghe nhãn của nút, nghe thông báo sau khi submit.\n4. Cây accessibility trong DevTools: kiểm tra role và accessible name của từng phần tử tương tác.",
+        "Điều cần nói rõ khi phỏng vấn: Lighthouse 100 điểm không đồng nghĩa trang dùng được — nút vẫn có thể không bấm được bằng bàn phím, thứ tự focus vẫn có thể lộn xộn. Điểm số là sàn, không phải trần."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "97460-ban-kiem-tra-accessibility-cua-mot-trang-bang-cach-nao"
+  },
+  {
+    "id": "49896397-1166-5dcf-b9bd-4053e6a1955b",
+    "question": "Zoom trình duyệt lên 400% thì layout vỡ và phải cuộn ngang. WCAG quy định thế nào (1.4.10, 1.4.4, 1.4.12)?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100302-zoom-trinh-duyet-len-400-thi-layout-vo-va-phai-cuon-ngang-wcag-quy-dinh-the-nao",
+    "slug": "zoom-trinh-duyet-len-400-thi-layout-vo-va-phai-cuon-ngang-wcag-quy-dinh-the-nao-1-4-10-1-4-4-1-4-12-49896397-1166-5dcf-b9bd-4053e6a1955b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba tiêu chí khác nhau, hay bị gộp làm một:",
+        "Ngoại lệ của 1.4.10: nội dung buộc phải bố cục hai chiều mới dùng được — bản đồ, bảng dữ liệu lớn, sơ đồ, khuông nhạc. Bảng dữ liệu được miễn cuộn ngang; card layout thì không."
+      ],
+      "details": [
+        "Vì sao 400% zoom lại ra con số 320px: trên viewport 1280px, zoom 400% khiến vùng hiển thị còn tương đương 320 CSS px. Nghĩa là nếu responsive tới 320px đúng cách thì 1.4.10 gần như tự đạt — reflow không phải yêu cầu riêng cho người khuyết tật, nó chính là mobile layout.",
+        "Những gì làm hỏng reflow: width cố định bằng px, min-width trên container, bảng nhiều cột nhồi ngang, modal width: 600px cứng.",
+        "Kiểm tra: DevTools đặt viewport 320x256, hoặc Cmd/Ctrl + + bảy lần trên màn 1280px. Với 1.4.12 thì chạy bookmarklet Text Spacing của WAI."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "/* trượt */\n.panel { width: 600px; }\n\n/* đạt */\n.panel { width: min(600px, 100%); }"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Tiêu chí",
+            "Mức",
+            "Yêu cầu",
+            "line-height: 1.5",
+            "1.4.10 Reflow",
+            "AA",
+            "letter-spacing: .12em",
+            "Nội dung dùng được ở bề rộng 320 CSS px mà không phải cuộn theo cả hai chiều",
+            "AA",
+            "Phóng chữ tới 200% không mất nội dung hay chức năng",
+            "word-spacing: .16em",
+            "2em",
+            "AA",
+            "Không vỡ khi người dùng ép line-height: 1.5, letter-spacing: .12em, word-spacing: .16em, khoảng cách đoạn 2em"
+          ]
+        }
+      ]
+    },
+    "legacyId": 58,
+    "sourceSlug": "100302-zoom-trinh-duyet-len-400-thi-layout-vo-va-phai-cuon-ngang-wcag-quy-dinh-the-nao"
+  },
+  {
+    "id": "72dc6186-4284-50ad-92ec-a393c23a8a5e",
+    "question": "Keyboard trap (2.1.2) là gì? Thứ tự Tab lệch so với thứ tự nhìn thấy có vi phạm 2.4.3 không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100303-keyboard-trap-2-1-2-la-gi-thu-tu-tab-lech-so-voi-thu-tu-nhin-thay-co-vi-pham-2-4",
+    "slug": "keyboard-trap-2-1-2-la-gi-thu-tu-tab-lech-so-voi-thu-tu-nhin-thay-co-vi-pham-2-4-3-khong-72dc6186-4284-50ad-92ec-a393c23a8a5e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "2.1.2 No Keyboard Trap (mức A): nếu focus vào được một vùng bằng bàn phím thì cũng phải ra được bằng bàn phím, dùng phím thông thường (Tab, Shift+Tab, mũi tên). Nếu cần phím đặc biệt để thoát thì phải nói cho người dùng biết trước.",
+        "2.4.3 Focus Order (mức A) là tiêu chí khác: thứ tự nhận focus phải giữ được nghĩa và thao tác được, không bắt buộc trùng khít thứ tự thị giác. Nhưng lệch nhiều thì gần như chắc chắn trượt, vì người dùng mất mạch."
+      ],
+      "details": [
+        "Ba nguồn trap hay gặp trong app React:\n- Modal tự viết giữ focus bên trong nhưng quên xử lý Escape và quên nút đóng có thể Tab tới.\n- Editor nhúng (CodeMirror, Monaco, canvas) nuốt phím Tab để chèn thụt lề. Cách xử lý chuẩn: Escape rồi Tab để thoát, và ghi hướng dẫn ngay cạnh editor.\n- Widget nhúng iframe của bên thứ ba — quảng cáo, chat, video player.",
+        "Nguyên nhân lệch phổ biến nhất là CSS đổi thứ tự hiển thị mà DOM giữ nguyên: order trong flex, grid-area, flex-direction: row-reverse, position: absolute kéo phần tử lên đầu màn hình. Tab đi theo DOM, mắt đi theo CSS.",
+        "Lưu ý: đừng chữa bằng tabindex dương (tabindex=\"1\") — nó nhấc phần tử lên trước toàn bộ tab order tự nhiên của trang và rất khó bảo trì. Sửa bằng cách xếp lại DOM.",
+        "Cách kiểm: rút chuột, Tab từ đầu tới cuối trang. Focus ring phải luôn nhìn thấy, đi theo thứ tự đọc, và quay ra được thanh địa chỉ của trình duyệt."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// trap không cố ý: bắt Tab mà không có đường ra\neditor.addEventListener('keydown', (e) => {\n  if (e.key === 'Tab') { e.preventDefault(); insertTab() }\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": "100303-keyboard-trap-2-1-2-la-gi-thu-tu-tab-lech-so-voi-thu-tu-nhin-thay-co-vi-pham-2-4"
+  },
+  {
+    "id": "246ed5c6-b652-510e-80c9-6de96a72f02f",
+    "question": "WCAG 1.3.1 Info and Relationships nói gì? Bảng dữ liệu và nhóm radio phải markup thế nào cho đạt?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100305-wcag-1-3-1-info-and-relationships-noi-gi-bang-du-lieu-va-nhom-radio-phai-markup",
+    "slug": "wcag-1-3-1-info-and-relationships-noi-gi-bang-du-lieu-va-nhom-radio-phai-markup-the-nao-cho-dat-246ed5c6-b652-510e-80c9-6de96a72f02f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "1.3.1 (mức A) yêu cầu: quan hệ giữa các phần nội dung mà mắt nhìn ra được thì máy cũng phải đọc ra được. Mắt thấy \"cột này là tiêu đề của hàng dưới\", \"bốn ô radio này thuộc chung một câu hỏi\" — screen reader chỉ biết điều đó nếu markup nói ra.",
+        "Không có scope, screen reader đọc từng ô rời rạc \"1.2 tỷ\" mà không kèm \"Q1, Doanh thu\" — người dùng mất hoàn toàn ngữ cảnh. Bảng nhiều tầng tiêu đề thì dùng headers/id.",
+        "Mỗi input đã có label riêng, nhưng thiếu legend thì screen reader đọc \"Chuyển khoản, nút radio\" mà không biết đang chọn cho câu hỏi nào."
+      ],
+      "details": [
+        "Đây là tiêu chí bị trượt nhiều nhất trong các đợt audit, vì nó bao trùm cả heading, danh sách, bảng, form và landmark.",
+        "Bảng dữ liệu — dùng <th> kèm scope, và <caption> làm tên bảng:",
+        "Nhóm radio hoặc checkbox — bọc bằng <fieldset> và đặt câu hỏi vào <legend>:",
+        "Lưu ý: dùng <table> để dàn layout, hoặc dựng bảng bằng <div> có display: grid — cả hai đều xoá sạch quan hệ hàng-cột trong accessibility tree."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<table>\n  <caption>Doanh thu theo quý</caption>\n  <thead>\n    <tr><th scope=\"col\">Quý</th><th scope=\"col\">Doanh thu</th></tr>\n  </thead>\n  <tbody>\n    <tr><th scope=\"row\">Q1</th><td>1.2 tỷ</td></tr>\n  </tbody>\n</table>"
+        },
+        {
+          "language": "HTML",
+          "code": "<fieldset>\n  <legend>Hình thức thanh toán</legend>\n  <label><input type=\"radio\" name=\"pay\" value=\"cod\"> Khi nhận hàng</label>\n  <label><input type=\"radio\" name=\"pay\" value=\"bank\"> Chuyển khoản</label>\n</fieldset>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": "100305-wcag-1-3-1-info-and-relationships-noi-gi-bang-du-lieu-va-nhom-radio-phai-markup"
+  },
+  {
+    "id": "35950405-9995-5f66-b544-f24abf9e11dd",
+    "question": "WCAG 3.2.1 và 3.2.2 coi thay đổi ngữ cảnh nào là bất ngờ? Chọn <select> xong tự submit có vi phạm không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100307-wcag-3-2-1-va-3-2-2-coi-thay-doi-ngu-canh-nao-la-bat-ngo-chon-select-xong-tu-sub",
+    "slug": "wcag-3-2-1-va-3-2-2-coi-thay-doi-ngu-canh-nao-la-bat-ngo-chon-select-xong-tu-submit-co-vi-pham-khong-35950405-9995-5f66-b544-f24abf9e11dd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "\"Thay đổi ngữ cảnh\" (change of context) theo WCAG là một trong bốn thứ: đổi user agent, đổi viewport, đổi focus, hoặc thay đổi nội dung làm đứt mạch trang. Đổi nội dung bình thường — mở accordion, lọc danh sách tại chỗ — không tính.",
+        "Vẫn được tự động nếu báo trước tử tế: ghi rõ ngay cạnh control (\"Chọn tỉnh sẽ tải lại danh sách quận\"), đặt trước control chứ không phải sau. Lọc lại danh sách ngay trên trang mà không dời focus thì không phải thay đổi ngữ cảnh — vẫn nên báo qua vùng aria-live."
+      ],
+      "details": [
+        "Trả lời câu <select> tự submit: có, vi phạm 3.2.2 nếu không báo trước. Người dùng bàn phím duyệt option bằng phím mũi tên trong nhiều trình duyệt, mỗi lần mũi tên là một lần change — trang nhảy đi ngay ở option đầu tiên và họ không bao giờ chạm được tới option thứ ba.",
+        "Ca thường gặp khác: ô OTP tự nhảy focus sang ô kế khi gõ đủ ký tự. Cái này không bị 3.2.2 cấm vì đúng kỳ vọng của người dùng, nhưng phải làm cho Backspace quay lại được ô trước — nếu không thì thành trap kiểu khác."
+      ],
+      "points": [
+        "3.2.1 On Focus (A): chỉ nhận focus thôi thì không được gây thay đổi ngữ cảnh. Ví dụ trượt: Tab vào ô select rồi popup mở ra; focus vào input cuối cùng liền tự submit form.",
+        "3.2.2 On Input (A): đổi giá trị một control không được tự gây thay đổi ngữ cảnh, trừ khi đã báo trước cho người dùng."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!-- trượt -->\n<select onchange=\"location = this.value\">…</select>\n\n<!-- đạt: hành động do người dùng chủ động kích hoạt -->\n<label for=\"sort\">Sắp xếp theo</label>\n<select id=\"sort\" name=\"sort\">…</select>\n<button type=\"submit\">Áp dụng</button>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": "100307-wcag-3-2-1-va-3-2-2-coi-thay-doi-ngu-canh-nao-la-bat-ngo-chon-select-xong-tu-sub"
+  },
+  {
+    "id": "9d046fc4-c83b-5287-8a5c-c396de2f4327",
+    "question": "History API dùng để làm gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "history-api-dung-de-lam-gi-9d046fc4-c83b-5287-8a5c-c396de2f4327",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": null
+  },
+  {
+    "id": "49495ab9-79d8-5db8-9923-2ee17aca35aa",
+    "question": "WebSocket khác HTTP thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "websocket-khac-http-the-nao-49495ab9-79d8-5db8-9923-2ee17aca35aa",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": null
+  },
+  {
+    "id": "13522a36-46a3-54da-9f8e-e6d6acaaf4ad",
+    "question": "Intersection Observer API là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "intersection-observer-api-la-gi-13522a36-46a3-54da-9f8e-e6d6acaaf4ad",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": null
+  },
+  {
+    "id": "4fc20f61-5012-5f72-8106-807d2e6a295f",
+    "question": "Web Components gồm những công nghệ nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "web-components-gom-nhung-cong-nghe-nao-4fc20f61-5012-5f72-8106-807d2e6a295f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": null
+  },
+  {
+    "id": "8d6455d0-5b09-5187-8cb5-be45dab4ca7d",
+    "question": "<input type='file'> có những tính năng gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "input-type-file-co-nhung-tinh-nang-gi-8d6455d0-5b09-5187-8cb5-be45dab4ca7d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": null
+  },
+  {
+    "id": "fa7b033c-95e4-58ce-b1fe-9b33f2618ed1",
+    "question": "Làm thế nào để tạo custom form validation?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-the-nao-de-tao-custom-form-validation-fa7b033c-95e4-58ce-b1fe-9b33f2618ed1",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": null
+  },
+  {
+    "id": "a2a7b8b9-4d85-5c0b-bcfa-d4d8d15b7e5c",
+    "question": "Làm sao tối ưu form cho mobile?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-sao-toi-uu-form-cho-mobile-a2a7b8b9-4d85-5c0b-bcfa-d4d8d15b7e5c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": null
+  },
+  {
+    "id": "5cb2d5cf-4693-5f58-85a8-02e032004716",
+    "question": "aria-live dùng khi nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "aria-live-dung-khi-nao-5cb2d5cf-4693-5f58-85a8-02e032004716",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": null
+  },
+  {
+    "id": "f8546321-5c4e-515e-b4ee-c204b45c1d3c",
+    "question": "Skip links là gì và tại sao cần?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "skip-links-la-gi-va-tai-sao-can-f8546321-5c4e-515e-b4ee-c204b45c1d3c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": null
+  },
+  {
+    "id": "a1cda7f0-e7da-5467-8342-d9b66a0fcb45",
+    "question": "Focus management trong SPA quan trọng thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "focus-management-trong-spa-quan-trong-the-nao-a1cda7f0-e7da-5467-8342-d9b66a0fcb45",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": null
+  },
+  {
+    "id": "4d2fc588-4653-567b-b9dc-cb476c2baa14",
+    "question": "Heading hierarchy (h1-h6) tại sao quan trọng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "heading-hierarchy-h1-h6-tai-sao-quan-trong-4d2fc588-4653-567b-b9dc-cb476c2baa14",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": null
+  },
+  {
+    "id": "97603c24-5873-5243-b960-b87388eeb3d3",
+    "question": "Tự viết component Tabs cho đúng chuẩn thì cần những gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "tu-viet-component-tabs-cho-dung-chuan-thi-can-nhung-gi-97603c24-5873-5243-b960-b87388eeb3d3",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": null
+  },
+  {
+    "id": "8243893d-5f64-54c5-b3a6-80768eb29038",
+    "question": "Focus trap tự viết hay hỏng ở đâu? inert và aria-hidden giải quyết được gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "focus-trap-tu-viet-hay-hong-o-dau-inert-va-aria-hidden-giai-quyet-duoc-gi-8243893d-5f64-54c5-b3a6-80768eb29038",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": null
+  },
+  {
+    "id": "99d0d507-a78d-56b8-95af-3776180f6a60",
+    "question": "Chuyển modal tự viết sang <dialog> thì được gì và vẫn phải tự làm gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "chuyen-modal-tu-viet-sang-dialog-thi-duoc-gi-va-van-phai-tu-lam-gi-99d0d507-a78d-56b8-95af-3776180f6a60",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": null
+  },
+  {
+    "id": "9e77f4de-caae-52f5-bcb2-497d8ef996fd",
+    "question": "Có mấy cách ẩn nội dung? Cách nào ẩn khỏi mắt nhưng vẫn đọc được bằng screen reader?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "co-may-cach-an-noi-dung-cach-nao-an-khoi-mat-nhung-van-doc-duoc-bang-screen-reader-9e77f4de-caae-52f5-bcb2-497d8ef996fd",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 76,
+    "sourceSlug": null
+  },
+  {
+    "id": "fd8df759-09b9-53c5-b096-f713be7e23ee",
+    "question": "Designer đưa màu chữ xám nhạt fail contrast, bạn xử lý và giải thích thế nào? WCAG 2.2 còn tiêu chí nào hay bị bỏ sót?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "designer-dua-mau-chu-xam-nhat-fail-contrast-ban-xu-ly-va-giai-thich-the-nao-wcag-2-2-con-tieu-chi-na-fd8df759-09b9-53c5-b096-f713be7e23ee",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 77,
+    "sourceSlug": null
+  },
+  {
+    "id": "3d9acae4-746f-5566-84c9-74c56f3eaff3",
+    "question": "Hợp đồng outsourcing với khách EU yêu cầu sản phẩm đạt WCAG 2.1 AA. Bạn triển khai và chứng minh conformance thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "hop-dong-outsourcing-voi-khach-eu-yeu-cau-san-pham-dat-wcag-2-1-aa-ban-trien-khai-va-chung-minh-conf-3d9acae4-746f-5566-84c9-74c56f3eaff3",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 78,
+    "sourceSlug": null
+  }
+]

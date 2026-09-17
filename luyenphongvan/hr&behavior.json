@@ -1,0 +1,2896 @@
+[
+  {
+    "id": "b3a51d1a-c78c-569a-8bd8-6af40e175810",
+    "question": "Hãy giới thiệu về bản thân bạn.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1091-hay-gioi-thieu-ve-ban-than-ban",
+    "slug": "hay-gioi-thieu-ve-ban-than-ban-b3a51d1a-c78c-569a-8bd8-6af40e175810",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: một bản tóm tắt 60-90 giây liên quan đến công việc, không phải tiểu sử đời tư. Công thức \"hiện tại → quá khứ → tương lai\": bạn đang làm gì, đã làm được gì nổi bật, và vì sao muốn vị trí này."
+      ],
+      "details": [
+        "Tránh: kể lể từ thời sinh viên, hoặc đọc lại nguyên CV.",
+        "Trả lời mẫu: \"Hiện tại tôi là Frontend dev 3 năm, chủ yếu React/TypeScript ở một công ty fintech. Dự án gần nhất tôi tối ưu thời gian load trang checkout giảm 40%. Tôi muốn chuyển sang vị trí này vì được làm product quy mô lớn hơn và đi sâu về performance — đúng thứ tôi đang theo đuổi.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "1091-hay-gioi-thieu-ve-ban-than-ban"
+  },
+  {
+    "id": "d523e52f-3d43-5b58-b4ed-35bd19cfe379",
+    "question": "Tại sao bạn chọn ngành IT?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1096-tai-sao-ban-chon-nganh-it",
+    "slug": "tai-sao-ban-chon-nganh-it-d523e52f-3d43-5b58-b4ed-35bd19cfe379",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: một lý do chân thực và cụ thể, cho thấy bạn gắn bó lâu dài chứ không chạy theo lương."
+      ],
+      "details": [
+        "Tránh: lý do quá tổng quát (\"vì IT lương cao\", \"vì xu hướng\").",
+        "Trả lời mẫu: \"Tôi thích cảm giác biến một ý tưởng thành sản phẩm chạy được mà người khác dùng hàng ngày. Lần đầu tự build một web app nhỏ cho cửa hàng của gia đình, thấy nó thật sự tiết kiệm thời gian cho mọi người — từ đó tôi biết mình muốn làm nghề này lâu dài.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "1096-tai-sao-ban-chon-nganh-it"
+  },
+  {
+    "id": "b35cbd8d-b99a-5d1e-90d1-dacf428f54a0",
+    "question": "Bạn thấy mình ở đâu trong 5 năm tới?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1097-ban-thay-minh-o-dau-trong-5-nam-toi",
+    "slug": "ban-thay-minh-o-dau-trong-5-nam-toi-b35cbd8d-b99a-5d1e-90d1-dacf428f54a0",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn có định hướng, và định hướng đó khớp với con đường công ty có thể cho. Chia 2 mốc: ngắn hạn (kỹ thuật) và dài hạn (chiều sâu hoặc leadership)."
+      ],
+      "details": [
+        "Tránh: nói \"muốn làm quản lý\" khi vị trí thuần kỹ thuật, hoặc trả lời mơ hồ \"chưa biết\".",
+        "Trả lời mẫu: \"1-2 năm tới tôi muốn vững vai trò full-stack và làm chủ được cả phần backend. 3-5 năm tôi muốn thành người mà team tin tưởng về mặt kỹ thuật — tech lead hoặc chuyên gia một mảng sâu, tùy hướng công ty cần.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "1097-ban-thay-minh-o-dau-trong-5-nam-toi"
+  },
+  {
+    "id": "5b83257f-c3b9-555e-ad95-74d059e462cb",
+    "question": "Điều gì khiến bạn hứng thú với vị trí này? Vì sao là công ty này chứ không phải nơi khác?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1099-dieu-gi-khien-ban-hung-thu-voi-vi-tri-nay-vi-sao-la-cong-ty-nay-chu-khong-phai-n",
+    "slug": "dieu-gi-khien-ban-hung-thu-voi-vi-tri-nay-vi-sao-la-cong-ty-nay-chu-khong-phai-noi-khac-5b83257f-c3b9-555e-ad95-74d059e462cb",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn đã tìm hiểu công ty thật, không rải CV đại trà. Nêu 2-3 yếu tố cụ thể từ JD/sản phẩm/team."
+      ],
+      "details": [
+        "Tránh: \"vì công ty nổi tiếng\", \"vì lương\" — và đừng chê công ty lớn để khen công ty này.",
+        "Trả lời mẫu: \"Tôi thích stack TypeScript/React và việc team chỉ 5 người — nghĩa là tôi thấy được tác động trực tiếp của mình lên product. Tôi cũng theo dõi blog kỹ thuật của công ty và thích cách các bạn ưu tiên chất lượng code. So với một corp lớn, ở đây tôi học nhanh hơn và làm chủ nhiều hơn.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "1099-dieu-gi-khien-ban-hung-thu-voi-vi-tri-nay-vi-sao-la-cong-ty-nay-chu-khong-phai-n"
+  },
+  {
+    "id": "b42bdb61-c194-5a47-b34a-9893dca3afdf",
+    "question": "Bạn muốn phát triển theo hướng nào: Fullstack, Backend, Frontend hay khác?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1100-ban-muon-phat-trien-theo-huong-nao-fullstack-backend-frontend-hay-khac",
+    "slug": "ban-muon-phat-trien-theo-huong-nao-fullstack-backend-frontend-hay-khac-b42bdb61-c194-5a47-b34a-9893dca3afdf",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn có chính kiến về hướng đi và lý do kỹ thuật đằng sau, đồng thời đủ linh hoạt với nhu cầu thực tế."
+      ],
+      "details": [
+        "Tránh: \"gì cũng được\".",
+        "Trả lời mẫu: \"Tôi theo hướng Backend vì thích thiết kế database, tối ưu API và xử lý hệ thống chịu tải. Nhưng tôi vẫn giữ được kỹ năng frontend để hiểu toàn cảnh sản phẩm — điều đó giúp tôi thiết kế API mà phía client thực sự dễ dùng.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "1100-ban-muon-phat-trien-theo-huong-nao-fullstack-backend-frontend-hay-khac"
+  },
+  {
+    "id": "07bf9d25-8d3f-55dd-90e2-864aa81b47c2",
+    "question": "Tại sao bạn rời công ty cũ? Điều gì khiến bạn khó chịu nhất ở đó?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1106-tai-sao-ban-roi-cong-ty-cu-dieu-gi-khien-ban-kho-chiu-nhat-o-do",
+    "slug": "tai-sao-ban-roi-cong-ty-cu-dieu-gi-khien-ban-kho-chiu-nhat-o-do-07bf9d25-8d3f-55dd-90e2-864aa81b47c2",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: lý do hướng tới (\"đi tìm gì\") chứ không phải chạy trốn, và khi nói về điểm chưa hài lòng thì gắn vào quy trình/kỹ thuật, không phải con người."
+      ],
+      "details": [
+        "Tránh: nói xấu sếp, đồng nghiệp hay công ty cũ — đây là cờ đỏ lớn nhất.",
+        "Trả lời mẫu: \"Tôi học được nhiều ở công ty cũ, nhưng họ tập trung mảng marketing còn tôi muốn đi sâu về fintech. Điều khiến tôi sốt ruột là chưa có CI/CD và quy trình review nên deploy chậm và rủi ro — tôi muốn một môi trường có nền tảng DevOps tốt hơn để làm việc hiệu quả hơn.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "1106-tai-sao-ban-roi-cong-ty-cu-dieu-gi-khien-ban-kho-chiu-nhat-o-do"
+  },
+  {
+    "id": "0039a6b1-d3ea-597f-9cfc-f9f4106791b8",
+    "question": "Hãy kể về lần bạn làm việc nhóm thành công.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1116-hay-ke-ve-lan-ban-lam-viec-nhom-thanh-cong",
+    "slug": "hay-ke-ve-lan-ban-lam-viec-nhom-thanh-cong-0039a6b1-d3ea-597f-9cfc-f9f4106791b8",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: vai trò cụ thể của bạn trong kết quả chung, không phải \"cả team cùng cố gắng\". Trả lời theo STAR."
+      ],
+      "details": [
+        "Trả lời mẫu (STAR):"
+      ],
+      "points": [
+        "Tình huống: team 5 người, deadline 1 tháng cho release v2.0.",
+        "Nhiệm vụ: tôi phụ trách module thanh toán và phối hợp tiến độ chung.",
+        "Hành động: tôi đề xuất chia task rõ ràng, daily standup 10 phút, và peer review chéo.",
+        "Kết quả: ship đúng hạn, không có bug nghiêm trọng trong tháng đầu; sau đó team giữ luôn cách làm này."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "1116-hay-ke-ve-lan-ban-lam-viec-nhom-thanh-cong"
+  },
+  {
+    "id": "cbb644e4-8567-559a-ada9-3df0edbe3448",
+    "question": "Bạn thích làm việc nhóm hay làm việc một mình hơn?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1119-ban-thich-lam-viec-nhom-hay-lam-viec-mot-minh-hon",
+    "slug": "ban-thich-lam-viec-nhom-hay-lam-viec-mot-minh-hon-cbb644e4-8567-559a-ada9-3df0edbe3448",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn làm tốt cả hai và biết khi nào cần cái nào."
+      ],
+      "details": [
+        "Tránh: chọn cực đoan một phía — nghe như khó hợp tác hoặc không tự chủ được.",
+        "Trả lời mẫu: \"Tôi cần cả hai. Làm một mình cho tôi sự tập trung sâu để giải quyết vấn đề khó. Làm nhóm giúp tôi va chạm ý tưởng và học từ người khác — nhiều quyết định kiến trúc tốt nhất của tôi đến từ một cuộc tranh luận lành mạnh với đồng nghiệp.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "1119-ban-thich-lam-viec-nhom-hay-lam-viec-mot-minh-hon"
+  },
+  {
+    "id": "80870c64-c08a-5d13-968a-347c9d5ca0ef",
+    "question": "Kể về project mà bạn tự hào nhất.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1126-ke-ve-project-ma-ban-tu-hao-nhat",
+    "slug": "ke-ve-project-ma-ban-tu-hao-nhat-80870c64-c08a-5d13-968a-347c9d5ca0ef",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: vai trò cụ thể của bạn, thử thách thật và kết quả đo được."
+      ],
+      "details": [
+        "Tránh: mô tả công nghệ chung chung mà không nói bạn đã làm gì.",
+        "Trả lời mẫu (STAR):"
+      ],
+      "points": [
+        "Tình huống: nền tảng e-commerce bị chậm khi traffic tăng.",
+        "Nhiệm vụ: tôi phụ trách thiết kế lại phần backend chịu tải.",
+        "Hành động: tôi thêm caching, tối ưu truy vấn và đánh index hợp lý, đo trước/sau từng bước.",
+        "Kết quả: thời gian phản hồi giảm 10 lần, hệ thống trụ được mùa sale — đây là lần tôi thấy rõ tác động kỹ thuật lên kinh doanh."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "1126-ke-ve-project-ma-ban-tu-hao-nhat"
+  },
+  {
+    "id": "5d631da7-d694-5abe-b6fa-67941b568117",
+    "question": "Bạn đã từng gặp một bug nghiêm trọng trên production chưa? Bạn xử lý thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1127-ban-da-tung-gap-mot-bug-nghiem-trong-tren-production-chua-ban-xu-ly-the-nao",
+    "slug": "ban-da-tung-gap-mot-bug-nghiem-trong-tren-production-chua-ban-xu-ly-the-nao-5d631da7-d694-5abe-b6fa-67941b568117",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn giữ bình tĩnh, ưu tiên khôi phục dịch vụ trước, rồi mới tìm nguyên nhân gốc và rút bài học."
+      ],
+      "details": [
+        "Tránh: kể như một sự cố nghiêm trọng mà không có quy trình.",
+        "Trả lời mẫu (STAR):"
+      ],
+      "points": [
+        "Tình huống: một truy vấn DB chậm khiến người dùng không load được dữ liệu trong giờ cao điểm.",
+        "Hành động: tôi giảm thiểu trước (bật cache tạm để khôi phục dịch vụ), sau đó tìm nguyên nhân là thiếu index và thêm vào.",
+        "Kết quả: khôi phục trong ~30 phút; sau đó tôi thêm cảnh báo monitor query chậm để bắt sớm lần sau. Bài học: luôn có alert cho slow query."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "1127-ban-da-tung-gap-mot-bug-nghiem-trong-tren-production-chua-ban-xu-ly-the-nao"
+  },
+  {
+    "id": "8ee886dd-13ef-5573-b7cb-bc729840b0aa",
+    "question": "Khi bạn mắc lỗi trong code, bạn xử lý thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1135-khi-ban-mac-loi-trong-code-ban-xu-ly-the-nao",
+    "slug": "khi-ban-mac-loi-trong-code-ban-xu-ly-the-nao-8ee886dd-13ef-5573-b7cb-bc729840b0aa",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn minh bạch, fix nhanh và phòng ngừa tái phạm — vì che giấu bug luôn tệ hơn."
+      ],
+      "details": [
+        "Tránh: tỏ ra bạn không bao giờ sai.",
+        "Trả lời mẫu: \"Tôi báo ngay cho team thay vì giấu, vì giấu chỉ làm hậu quả lớn hơn. Tôi fix nhanh nhất có thể, rồi tìm nguyên nhân gốc và thêm test hoặc cảnh báo để lỗi tương tự không lặp lại. Tôi xem mỗi lỗi là một cách để hệ thống và bản thân chắc chắn hơn.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "1135-khi-ban-mac-loi-trong-code-ban-xu-ly-the-nao"
+  },
+  {
+    "id": "46fb47e7-938b-532b-9ce4-d30178ae6c81",
+    "question": "Có 3 task nhưng chỉ 1 ngày, bạn ưu tiên thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1141-co-3-task-nhung-chi-1-ngay-ban-uu-tien-the-nao",
+    "slug": "co-3-task-nhung-chi-1-ngay-ban-uu-tien-the-nao-46fb47e7-938b-532b-9ce4-d30178ae6c81",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn có khung ưu tiên rõ và biết giao tiếp khi không kịp tất cả."
+      ],
+      "details": [
+        "Tránh: \"tôi cố làm hết\" — thiếu thực tế.",
+        "Trả lời mẫu: \"Đầu tiên tôi hỏi PM đâu là việc ảnh hưởng lớn nhất tới business. Nếu không rõ, tôi dùng ma trận khẩn cấp/quan trọng — làm việc vừa khẩn vừa quan trọng trước. Quan trọng không kém: tôi báo sớm rằng chỉ kịp 1-2 việc trong ngày để mọi người chủ động, thay vì để cuối ngày mới vỡ lẽ.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "1141-co-3-task-nhung-chi-1-ngay-ban-uu-tien-the-nao"
+  },
+  {
+    "id": "8eaed7b3-1cca-5cb9-b859-22fe9494fe21",
+    "question": "Bạn kỳ vọng mức lương bao nhiêu? Có mức tối thiểu không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1143-ban-ky-vong-muc-luong-bao-nhieu-co-muc-toi-thieu-khong",
+    "slug": "ban-ky-vong-muc-luong-bao-nhieu-co-muc-toi-thieu-khong-8eaed7b3-1cca-5cb9-b859-22fe9494fe21",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn đã khảo sát thị trường và đưa ra một khoảng hợp lý, đồng thời khéo hỏi ngược ngân sách của công ty."
+      ],
+      "details": [
+        "Tránh: tự \"neo\" mình ở một con số tối thiểu quá sớm, hoặc nói \"bao nhiêu cũng được\".",
+        "Trả lời mẫu: \"Dựa trên báo cáo lương (ITviec Salary Report, VietnamWorks) và 3 năm kinh nghiệm của tôi, khoảng tôi mong đợi là 20-25 triệu/tháng. Nhưng tôi linh hoạt và muốn biết khoảng ngân sách công ty dành cho vị trí này để mình trao đổi cho sát.\" Đừng vội tiết lộ mức tối thiểu — hỏi range trước giúp bạn có lợi thế thương lượng.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "1143-ban-ky-vong-muc-luong-bao-nhieu-co-muc-toi-thieu-khong"
+  },
+  {
+    "id": "60a0ff33-534b-51ae-ae8b-78c6cebf9deb",
+    "question": "Phúc lợi nào quan trọng nhất với bạn?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1146-phuc-loi-nao-quan-trong-nhat-voi-ban",
+    "slug": "phuc-loi-nao-quan-trong-nhat-voi-ban-60a0ff33-534b-51ae-ae8b-78c6cebf9deb",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn có thứ tự ưu tiên rõ và thực tế, hướng tới giá trị lâu dài chứ không phải perk ngắn hạn."
+      ],
+      "details": [
+        "Tránh: liệt kê tất cả mọi thứ (không có ưu tiên).",
+        "Trả lời mẫu: \"Ba thứ quan trọng nhất với tôi là lương cơ bản công bằng, bảo hiểm sức khỏe, và ngân sách học tập (course, hội thảo). Sự linh hoạt về remote là điểm cộng tốt. Tôi quan tâm những thứ giúp tôi làm việc bền vững và phát triển hơn là các perk vui mắt nhất thời.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "1146-phuc-loi-nao-quan-trong-nhat-voi-ban"
+  },
+  {
+    "id": "2aae21fa-78d0-595e-a939-ea7500814487",
+    "question": "Bạn muốn làm việc từ xa không? Bao nhiêu ngày mỗi tuần?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1147-ban-muon-lam-viec-tu-xa-khong-bao-nhieu-ngay-moi-tuan",
+    "slug": "ban-muon-lam-viec-tu-xa-khong-bao-nhieu-ngay-moi-tuan-2aae21fa-78d0-595e-a939-ea7500814487",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: sở thích thật của bạn, và nó có khớp với chính sách công ty không. Mô hình hybrid đang phổ biến nhất."
+      ],
+      "details": [
+        "Tránh: đặt điều kiện cứng nhắc trước khi hiểu cách công ty vận hành.",
+        "Trả lời mẫu: \"Tôi thích mô hình hybrid — khoảng 3 ngày ở văn phòng để hợp tác và gắn kết team, 2 ngày ở nhà cho phần việc cần tập trung sâu. Nhưng tôi linh hoạt theo nhịp của team; điều tôi quan tâm là kết quả công việc hơn là chỗ ngồi.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "1147-ban-muon-lam-viec-tu-xa-khong-bao-nhieu-ngay-moi-tuan"
+  },
+  {
+    "id": "3fe01e1a-768d-56a5-b8ac-b28c9480bb37",
+    "question": "Phong cách làm việc của bạn là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1153-phong-cach-lam-viec-cua-ban-la-gi",
+    "slug": "phong-cach-lam-viec-cua-ban-la-gi-3fe01e1a-768d-56a5-b8ac-b28c9480bb37",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: mô tả cụ thể kèm ví dụ, để họ hình dung bạn có hợp với cách team vận hành không."
+      ],
+      "details": [
+        "Tránh: tính từ rỗng như \"tôi chăm chỉ\".",
+        "Trả lời mẫu: \"Tôi thiên về có tổ chức và chủ động — thích lên kế hoạch trước khi bắt tay, chia việc thành mốc rõ ràng và update tiến độ thường xuyên để team đồng bộ. Tôi cũng thích làm việc trong các vòng lặp ngắn: làm, lấy feedback sớm, rồi điều chỉnh.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "1153-phong-cach-lam-viec-cua-ban-la-gi"
+  },
+  {
+    "id": "7c7a6b91-8b2a-5f62-a404-9de0a7329cf2",
+    "question": "Bạn làm việc hiệu quả nhất trong môi trường như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1154-ban-lam-viec-hieu-qua-nhat-trong-moi-truong-nhu-the-nao",
+    "slug": "ban-lam-viec-hieu-qua-nhat-trong-moi-truong-nhu-the-nao-7c7a6b91-8b2a-5f62-a404-9de0a7329cf2",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: môi trường lý tưởng của bạn có khớp với thực tế công ty không — đây là cách họ kiểm tra mức độ phù hợp hai chiều."
+      ],
+      "details": [
+        "Tránh: mô tả môi trường hoàn toàn ngược với những gì công ty có.",
+        "Trả lời mẫu: \"Tôi làm tốt nhất ở môi trường hợp tác nhưng vẫn có khoảng thời gian yên tĩnh để tập trung sâu. Lý tưởng là standup ngắn buổi sáng để đồng bộ, rồi những khối thời gian không bị gián đoạn để code. Một văn hóa giao tiếp cởi mở, hỏi được tự nhiên, cũng rất quan trọng với tôi.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "1154-ban-lam-viec-hieu-qua-nhat-trong-moi-truong-nhu-the-nao"
+  },
+  {
+    "id": "c81c5394-0970-5f85-8deb-0ca1f592dd2e",
+    "question": "Bạn đã từng làm việc từ xa toàn thời gian chưa? Cảm nhận thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1157-ban-da-tung-lam-viec-tu-xa-toan-thoi-gian-chua-cam-nhan-the-nao",
+    "slug": "ban-da-tung-lam-viec-tu-xa-toan-thoi-gian-chua-cam-nhan-the-nao-c81c5394-0970-5f85-8deb-0ca1f592dd2e",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn tự nhận thức được điểm mạnh/yếu của bản thân khi remote, và thành thật về trade-off."
+      ],
+      "details": [
+        "Tránh: tô hồng hoàn toàn (\"remote lúc nào cũng tuyệt\").",
+        "Trả lời mẫu: \"Tôi từng remote toàn thời gian 3 tháng. Năng suất cho việc cần tập trung rất tốt, nhưng về lâu dài tôi thấy hơi tách biệt và nhớ những trao đổi tự nhiên với team. Vì vậy hybrid là điểm cân bằng tốt nhất với tôi — và tôi chủ động giữ kết nối qua các buổi sync ngắn khi làm remote.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "1157-ban-da-tung-lam-viec-tu-xa-toan-thoi-gian-chua-cam-nhan-the-nao"
+  },
+  {
+    "id": "8a71e61b-1ee7-51ce-97ec-a37be833ab8d",
+    "question": "Bạn có dự định gắn bó lâu dài với công ty không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1162-ban-co-du-dinh-gan-bo-lau-dai-voi-cong-ty-khong",
+    "slug": "ban-co-du-dinh-gan-bo-lau-dai-voi-cong-ty-khong-8a71e61b-1ee7-51ce-97ec-a37be833ab8d",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: một câu trả lời tích cực nhưng thực tế, kèm điều kiện khiến bạn muốn ở lại."
+      ],
+      "details": [
+        "Tránh: hứa hẹn \"cả đời\" (không đáng tin) hoặc tỏ ra sắp nhảy việc.",
+        "Trả lời mẫu: \"Tôi không thích nhảy việc liên tục và muốn xây chiều sâu ở một nơi. Tôi dự định gắn bó 3-4 năm hoặc hơn, miễn là tôi còn được phát triển, công việc còn ý nghĩa và lộ trình rõ ràng. Đó cũng là những thứ tôi đang tìm hiểu ở vị trí này.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "1162-ban-co-du-dinh-gan-bo-lau-dai-voi-cong-ty-khong"
+  },
+  {
+    "id": "016ec053-d353-510f-ba05-0e63c9ffa037",
+    "question": "Cân bằng công việc - cuộc sống quan trọng thế nào với bạn? Bạn có lo về văn hóa làm việc quá sức không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1163-can-bang-cong-viec-cuoc-song-quan-trong-the-nao-voi-ban-ban-co-lo-ve-van-hoa-lam",
+    "slug": "can-bang-cong-viec-cuoc-song-quan-trong-the-nao-voi-ban-ban-co-lo-ve-van-hoa-lam-viec-qua-suc-khong-016ec053-d353-510f-ba05-0e63c9ffa037",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn coi trọng sự bền vững nhưng thực tế về đặc thù ngành, và biết hỏi ngược một cách chuyên nghiệp về workload."
+      ],
+      "details": [
+        "Tránh: nghe như ngại làm thêm bất cứ lúc nào, hoặc ngược lại chấp nhận burnout.",
+        "Trả lời mẫu: \"Quan trọng, vì làm bền mới đi xa. Tôi hiểu đôi lúc cần tăng tốc trước release, và tôi sẵn sàng. Tôi kỳ vọng nhịp 8-9 tiếng/ngày là chuẩn, OT có bù hợp lý. Cho tôi hỏi lại: team thường có hay bị vỡ deadline không, và cơ cấu nhân sự có đủ để tránh quá tải không?\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "1163-can-bang-cong-viec-cuoc-song-quan-trong-the-nao-voi-ban-ban-co-lo-ve-van-hoa-lam"
+  },
+  {
+    "id": "a89f8526-acac-539c-a35c-3188f6cf03ed",
+    "question": "Bạn làm gì ngoài giờ code?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1164-ban-lam-gi-ngoai-gio-code",
+    "slug": "ban-lam-gi-ngoai-gio-code-a89f8526-acac-539c-a35c-3188f6cf03ed",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn là người cân bằng, có đời sống ngoài công việc giúp bạn tái tạo năng lượng — một câu hỏi phá băng."
+      ],
+      "details": [
+        "Tránh: trả lời \"tôi chỉ code\" (nghe dễ burnout) hoặc kể lể quá riêng tư.",
+        "Trả lời mẫu: \"Tôi chơi bóng rổ cuối tuần, đọc blog kỹ thuật và thỉnh thoảng đi meetup developer. Có hoạt động ngoài màn hình giúp tôi nạp lại năng lượng và thật ra lại nghĩ ra giải pháp tốt hơn khi quay lại công việc.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "1164-ban-lam-gi-ngoai-gio-code"
+  },
+  {
+    "id": "d2042ad9-209b-58c7-8222-8c18f8b158f7",
+    "question": "Bạn cập nhật kiến thức và học công nghệ mới bằng cách nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1166-ban-cap-nhat-kien-thuc-va-hoc-cong-nghe-moi-bang-cach-nao",
+    "slug": "ban-cap-nhat-kien-thuc-va-hoc-cong-nghe-moi-bang-cach-nao-d2042ad9-209b-58c7-8222-8c18f8b158f7",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: một quy trình học cụ thể, kết hợp lý thuyết và thực hành, chứ không chỉ \"đọc cho biết\"."
+      ],
+      "details": [
+        "Tránh: trả lời chung chung \"tôi tự học trên mạng\".",
+        "Trả lời mẫu: \"Tôi đọc documentation chính thức trước để nắm nền, rồi build ngay một project nhỏ để áp dụng — ví dụ tôi học Go bằng cách viết một CLI tool. Tôi theo dõi vài engineering blog (Netflix, Uber), dev.to, và học best practice qua việc review code của senior. Việc làm tay là phần quan trọng nhất, vì chỉ đọc thì rất nhanh quên.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "1166-ban-cap-nhat-kien-thuc-va-hoc-cong-nghe-moi-bang-cach-nao"
+  },
+  {
+    "id": "36d54b71-82f9-552f-a292-9f6cd4d6664e",
+    "question": "Side project gần đây nhất của bạn là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1167-side-project-gan-day-nhat-cua-ban-la-gi",
+    "slug": "side-project-gan-day-nhat-cua-ban-la-gi-36d54b71-82f9-552f-a292-9f6cd4d6664e",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: sự chủ động học hỏi và bạn thật sự đã hoàn thành một thứ gì đó. Side project thể hiện tinh thần tự học tốt hơn chứng chỉ."
+      ],
+      "details": [
+        "Tránh: kể một ý tưởng dang dở mà không có kết quả.",
+        "Trả lời mẫu: \"Gần nhất tôi build một app theo dõi chi tiêu cá nhân bằng React + Node, có deploy thật để dùng hàng ngày. Qua đó tôi hiểu sâu hơn về state management và quy trình deploy production. Tôi thích side project vì được thử công nghệ mới mà không sợ rủi ro như trên hệ thống công ty.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "1167-side-project-gan-day-nhat-cua-ban-la-gi"
+  },
+  {
+    "id": "248f1a87-5ad4-5949-8f62-e3235afdee01",
+    "question": "Bạn có câu hỏi nào cho chúng tôi không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/13015-ban-co-cau-hoi-nao-cho-chung-toi-khong",
+    "slug": "ban-co-cau-hoi-nao-cho-chung-toi-khong-248f1a87-5ad4-5949-8f62-e3235afdee01",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn thật sự quan tâm và đã suy nghĩ về vị trí. Luôn chuẩn bị 2-3 câu hỏi thông minh."
+      ],
+      "details": [
+        "Tránh: \"không, anh/chị nói rõ hết rồi\" — nghe như thờ ơ; và đừng hỏi lương/nghỉ phép ngay ở vòng đầu.",
+        "Trả lời mẫu (hỏi ngược): \"Thành công ở vị trí này trong 6 tháng đầu trông như thế nào?\" · \"Thử thách kỹ thuật lớn nhất team đang đối mặt là gì?\" · \"Quy trình review code và release của team ra sao?\" Những câu này cho thấy bạn nghĩ về việc đóng góp, không chỉ nhận việc.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "13015-ban-co-cau-hoi-nao-cho-chung-toi-khong"
+  },
+  {
+    "id": "2fa24d26-5c66-52d2-baff-7ad345ba31b0",
+    "question": "Điểm mạnh và điểm yếu lớn nhất của bạn là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/13016-diem-manh-va-diem-yeu-lon-nhat-cua-ban-la-gi",
+    "slug": "diem-manh-va-diem-yeu-lon-nhat-cua-ban-la-gi-2fa24d26-5c66-52d2-baff-7ad345ba31b0",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: điểm mạnh khớp với công việc (kèm bằng chứng), và điểm yếu thật kèm cách bạn đang khắc phục."
+      ],
+      "details": [
+        "Tránh: điểm yếu giả như \"tôi quá cầu toàn\" — ai cũng biết đó là né tránh.",
+        "Trả lời mẫu: \"Điểm mạnh của tôi là chia vấn đề lớn thành các bước nhỏ rõ ràng — nhờ vậy team tôi ước lượng sát hơn. Điểm yếu: tôi từng ngại nhờ giúp đỡ và tự ôm việc quá lâu. Tôi đang sửa bằng cách đặt mốc \\\"kẹt quá 30 phút thì hỏi\\\", và nó giúp tôi giao việc tốt hơn hẳn.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "13016-diem-manh-va-diem-yeu-lon-nhat-cua-ban-la-gi"
+  },
+  {
+    "id": "d9e61a3a-cc9b-56d3-9a67-122ac02cc439",
+    "question": "Kể về một lần bạn bất đồng với đồng nghiệp về giải pháp kỹ thuật. Kết quả ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98850-ke-ve-mot-lan-ban-bat-dong-voi-dong-nghiep-ve-giai-phap-ky-thuat-ket-qua-ra-sao",
+    "slug": "ke-ve-mot-lan-ban-bat-dong-voi-dong-nghiep-ve-giai-phap-ky-thuat-ket-qua-ra-sao-d9e61a3a-cc9b-56d3-9a67-122ac02cc439",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Người phỏng vấn không đo xem ai đúng, họ đo cách bạn tranh luận: có dựa trên dữ kiện không, có chốt được không, có giữ được quan hệ làm việc không."
+      ],
+      "details": [
+        "Khung STAR:\n- Situation — bối cảnh ngắn: \"Team em cần chọn cách đồng bộ dữ liệu giữa hai service.\"\n- Task — vai trò của bạn: bạn là người viết phần đó.\n- Action — điểm chính. Nêu: bạn đưa ra tiêu chí so sánh (thời gian làm, rủi ro, chi phí vận hành), làm thử nghiệm nhỏ hoặc đo số liệu, và đưa quyết định ra chỗ có người quyết (tech lead, buổi design review).\n- Result — chốt lại được gì, và điều gì xảy ra sau đó.",
+        "Ví dụ mẫu (rút gọn): \"Bạn cùng team muốn gọi API đồng bộ, em muốn đẩy qua queue. Em không tranh luận suông mà dựng thử cả hai trong một buổi, đo p95 và mô phỏng lúc service kia sập. Cách gọi đồng bộ làm request treo theo. Em trình bày số liệu, team chọn queue. Về sau bạn đó cũng là người mở rộng consumer.\"",
+        "Lỗi hay mắc:\n- Kể câu chuyện mà bạn luôn đúng và đối phương ngu ngơ — nghe rất giả.\n- Trả lời chung chung \"em luôn lắng nghe và dung hoà\" mà không có tình huống thật.\n- Chốt bằng \"cuối cùng bọn em vẫn cãi nhau\" — thiếu kết quả.",
+        "Một câu chuyện bạn nhượng bộ vì lý lẽ đối phương tốt hơn cũng được điểm cao, miễn là bạn nói rõ đã đổi ý vì dữ kiện nào."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "98850-ke-ve-mot-lan-ban-bat-dong-voi-dong-nghiep-ve-giai-phap-ky-thuat-ket-qua-ra-sao"
+  },
+  {
+    "id": "fc820679-042c-59ac-ba43-284af3638c94",
+    "question": "Nếu đến sát deadline mà bạn biết chắc không kịp, bạn xử lý thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98851-neu-den-sat-deadline-ma-ban-biet-chac-khong-kip-ban-xu-ly-the-nao",
+    "slug": "neu-den-sat-deadline-ma-ban-biet-chac-khong-kip-ban-xu-ly-the-nao-fc820679-042c-59ac-ba43-284af3638c94",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Câu này kiểm tra thời điểm bạn báo và chất lượng thông tin bạn báo, không phải khả năng thức đêm."
+      ],
+      "details": [
+        "Bốn bước nên nói ra:\n1. Báo sớm nhất có thể — ngay khi biết sẽ trễ, không phải sáng hôm nộp. Trễ mà báo trước 3 ngày thì team còn xoay được; báo trước 3 tiếng thì không.\n2. Báo kèm con số — \"còn 3 ngày nữa mới xong\", chứ không phải \"chắc hơi trễ\". Kèm lý do cụ thể (yêu cầu phát sinh, phụ thuộc API bên thứ ba chưa sẵn sàng).\n3. Đưa phương án, không đưa vấn đề trần — cắt scope phần nào để kịp bản dùng được, phần nào đẩy sang sprint sau, hoặc cần thêm người ở đâu.\n4. Hỏi lại tiêu chí ưu tiên — người quyết cắt gì là PM/quản lý, không phải bạn tự cắt rồi im lặng.",
+        "Ví dụ mẫu: \"Làm tới ngày thứ 4 em thấy phần xuất báo cáo phức tạp hơn dự kiến vì phải hỗ trợ 3 định dạng. Em báo PM ngay hôm đó, đề xuất bản đầu chỉ xuất CSV để kịp demo, hai định dạng còn lại đẩy sprint sau. PM đồng ý, buổi demo vẫn diễn ra đúng lịch.\"",
+        "Lỗi hay mắc:\n- \"Em sẽ cố tăng ca cho kịp\" như câu trả lời duy nhất — nghe chăm chỉ nhưng cho thấy bạn không quản lý được rủi ro.\n- Im lặng tới phút chót rồi mới báo.\n- Tự ý cắt tính năng mà không hỏi ai, dẫn tới bàn giao thiếu.",
+        "Nếu bạn có ví dụ mình ước lượng sai và rút ra cách ước lượng tốt hơn (chia task nhỏ hơn, cộng thêm biên độ cho phần chưa rõ), hãy kể — đó là phần nhà tuyển dụng muốn nghe nhất."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "98851-neu-den-sat-deadline-ma-ban-biet-chac-khong-kip-ban-xu-ly-the-nao"
+  },
+  {
+    "id": "cc7847f5-a059-5cf0-b59e-78ea8eec4040",
+    "question": "Kể về một lần bạn nhận nhận xét gay gắt trong code review. Bạn phản ứng thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98852-ke-ve-mot-lan-ban-nhan-nhan-xet-gay-gat-trong-code-review-ban-phan-ung-the-nao",
+    "slug": "ke-ve-mot-lan-ban-nhan-nhan-xet-gay-gat-trong-code-review-ban-phan-ung-the-nao-cc7847f5-a059-5cf0-b59e-78ea8eec4040",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Điều được đánh giá là bạn có tách được nội dung góp ý khỏi giọng điệu hay không. Code review gắt là chuyện thường ở team có tiêu chuẩn cao."
+      ],
+      "details": [
+        "Cách trả lời theo STAR: - Situation — một PR bị reviewer để lại nhiều nhận xét, có nhận xét viết cộc lốc. - Action — ba việc cụ thể:",
+        "Ví dụ mẫu: \"Reviewer viết 'query này chắc chắn N+1, đọc lại đi'. Em hơi tự ái nhưng bật log SQL lên thì đúng là 1 + 50 truy vấn. Em sửa bằng eager loading, và sau đó thêm bước bật log truy vấn vào thói quen tự kiểm tra trước khi mở PR.\"",
+        "Lỗi hay mắc:\n- Kể theo hướng đổ lỗi reviewer thiếu lịch sự — bạn sẽ bị nhìn nhận là khó làm việc chung.\n- \"Em luôn tiếp thu 100%\" mà không có ví dụ nào bạn phản biện lại — nghe thụ động.\n- Sửa cho xong mà không hiểu lý do; lần sau vẫn sai chỗ đó.",
+        "Có thể nói thêm ranh giới: nếu nhận xét công kích cá nhân chứ không nói về code, cách xử lý là trao đổi riêng hoặc nhờ lead, không đôi co trong comment PR."
+      ],
+      "points": [
+        "đọc lại phần bị góp ý và kiểm chứng bằng code",
+        "hỏi lại rõ ràng khi chưa hiểu lý do (\"anh muốn tách hàm này vì lý do test hay vì tái sử dụng?\")",
+        "sửa và ghi lại nguyên tắc đó để lần sau không lặp. - Result — PR merge được, và bạn nêu một thay đổi lâu dài: thêm quy ước vào checklist, hoặc từ đó tự review trước khi mở PR"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "98852-ke-ve-mot-lan-ban-nhan-nhan-xet-gay-gat-trong-code-review-ban-phan-ung-the-nao"
+  },
+  {
+    "id": "d8de12b7-53f8-51a2-a075-9d4cdb6ebf8c",
+    "question": "Điểm yếu lớn nhất của bạn là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98853-diem-yeu-lon-nhat-cua-ban-la-gi",
+    "slug": "diem-yeu-lon-nhat-cua-ban-la-gi-d8de12b7-53f8-51a2-a075-9d4cdb6ebf8c",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Câu này gần như chắc chắn xuất hiện. Người hỏi muốn thấy bạn tự nhận thức được và đang xử lý, chứ không tìm lý do loại bạn."
+      ],
+      "details": [
+        "Công thức ba phần:\n1. Một điểm yếu thật, có thật, liên quan nghề — nhưng không phải năng lực lõi của vị trí đang ứng tuyển.\n2. Hệ quả cụ thể đã xảy ra — cho thấy bạn không bịa.\n3. Việc bạn đang làm để khắc phục + kết quả đo được.",
+        "Ví dụ mẫu: \"Em hay ôm task quá lâu trước khi nhờ giúp, vì ngại làm phiền. Có lần em mất gần hai ngày cho một lỗi cấu hình mà senior nhìn ra trong mười phút. Từ đó em đặt quy tắc riêng: kẹt quá 60 phút mà không tiến triển thì đăng vào kênh team kèm những gì đã thử. Vài sprint gần đây thời gian chờ của em giảm rõ và không còn task nào bị treo cả ngày.\"",
+        "Các điểm yếu nói được ở phỏng vấn dev: ước lượng thời gian còn lệch, viết tài liệu chưa quen, ngại nói trước đông người, hay sa đà tối ưu quá sớm, tiếng Anh nghe nói chưa tốt.",
+        "Lỗi hay mắc:\n- \"Điểm yếu của em là quá cầu toàn / làm việc quá chăm\" — công thức cũ, người phỏng vấn nghe nhàm và coi là né tránh.\n- Nói một điểm yếu chí mạng với vị trí (ứng tuyển backend mà \"em không thích debug\").\n- Chỉ nêu điểm yếu rồi dừng, không có phần đang khắc phục.\n- Nói \"em không có điểm yếu nào\"."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "98853-diem-yeu-lon-nhat-cua-ban-la-gi"
+  },
+  {
+    "id": "bfc9546f-b8d0-5219-a2d8-f5cb5b9c2d77",
+    "question": "Lương gross và lương net khác nhau thế nào? Khi nhận offer nên thoả thuận theo loại nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98900-luong-gross-va-luong-net-khac-nhau-the-nao-khi-nhan-offer-nen-thoa-thuan-theo-lo",
+    "slug": "luong-gross-va-luong-net-khac-nhau-the-nao-khi-nhan-offer-nen-thoa-thuan-theo-loai-nao-bfc9546f-b8d0-5219-a2d8-f5cb5b9c2d77",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Gross là tổng thu nhập trước khi trừ, net là số thực nhận về tài khoản. Phần chênh giữa hai con số là bảo hiểm bắt buộc (BHXH 8% + BHYT 1,5% + BHTN 1% = 10,5% phần người lao động đóng) và thuế thu nhập cá nhân sau khi trừ giảm trừ gia cảnh."
+      ],
+      "details": [
+        "Cách trả lời gọn khi được hỏi:\n- \"Em quen trao đổi theo gross vì đó là con số trên hợp đồng, dễ so sánh giữa các công ty và là cơ sở tính thưởng, tăng lương.\"",
+        "Vì sao nên chốt theo gross: thưởng tháng 13, tỷ lệ tăng lương hằng năm, mức đóng bảo hiểm đều tính trên lương gross ghi trong hợp đồng. Deal net khiến bạn khó đối chiếu và phần thuế biến động (thay đổi người phụ thuộc, giảm trừ) sẽ do công ty gánh hoặc đẩy lại cho bạn tuỳ cách diễn giải hợp đồng.",
+        "Điểm phải hỏi rõ: công ty đóng bảo hiểm trên lương thực tế hay chỉ trên lương cơ bản (một số nơi tách lương thành lương cơ bản thấp + phụ cấp để giảm mức đóng). Điều này ảnh hưởng trực tiếp tới trợ cấp thất nghiệp và thai sản sau này."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "98900-luong-gross-va-luong-net-khac-nhau-the-nao-khi-nhan-offer-nen-thoa-thuan-theo-lo"
+  },
+  {
+    "id": "e52ebf51-c70d-588d-b878-66bc8ae104fe",
+    "question": "Nhà tuyển dụng hỏi \"Lương hiện tại của bạn bao nhiêu?\" — có nên khai con số thật không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98901-nha-tuyen-dung-hoi-luong-hien-tai-cua-ban-bao-nhieu-co-nen-khai-con-so-that-khon",
+    "slug": "nha-tuyen-dung-hoi-luong-hien-tai-cua-ban-bao-nhieu-co-nen-khai-con-so-that-khong-e52ebf51-c70d-588d-b878-66bc8ae104fe",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bạn không có nghĩa vụ khai lương cũ, nhưng ở thị trường Việt Nam nhiều nhà tuyển dụng vẫn xem đó là mốc để tính offer, nên né hoàn toàn có thể bị coi là thiếu hợp tác. Cách xử lý cân bằng: chuyển trọng tâm từ lương cũ sang giá trị của vị trí mới."
+      ],
+      "details": [
+        "Mẫu trả lời:\n- \"Mức hiện tại của em nằm trong khoảng phù hợp với vai trò cũ. Vị trí này phạm vi rộng hơn (thêm phần X, Y), nên em mong muốn khoảng A–B triệu gross. Anh/chị có thể chia sẻ dải lương công ty dự kiến cho vị trí này không ạ?\"",
+        "Nguyên tắc:\n- Không nói dối con số. Một số công ty yêu cầu sao kê hoặc quyết định lương khi onboard; lệch là mất offer.\n- Nếu muốn không tiết lộ, nói rõ và lịch sự: \"Em xin phép không chia sẻ chi tiết hợp đồng cũ, nhưng kỳ vọng của em là khoảng A–B.\"\n- Chuẩn bị trước dải lương thị trường cho level của mình (báo cáo lương IT hằng năm, tin tuyển dụng cùng vị trí) để con số bạn đưa ra có cơ sở."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "98901-nha-tuyen-dung-hoi-luong-hien-tai-cua-ban-bao-nhieu-co-nen-khai-con-so-that-khon"
+  },
+  {
+    "id": "4f77e79f-d6a6-5cb7-a30a-6bdda4348a3c",
+    "question": "Công ty outsource, product và startup khác nhau ở điểm nào? Mỗi loại hợp với ai?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98902-cong-ty-outsource-product-va-startup-khac-nhau-o-diem-nao-moi-loai-hop-voi-ai",
+    "slug": "cong-ty-outsource-product-va-startup-khac-nhau-o-diem-nao-moi-loai-hop-voi-ai-4f77e79f-d6a6-5cb7-a30a-6bdda4348a3c",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khác nhau chủ yếu ở ai sở hữu sản phẩm và nguồn tiền."
+      ],
+      "details": [
+        "Outsource (gia công) — làm phần mềm theo hợp đồng cho khách hàng nước ngoài hoặc doanh nghiệp khác. Doanh thu tính theo dự án/giờ công.\n- Được: tiếp xúc nhiều domain và tech stack, quy trình rõ, cơ hội đi onsite, tiếng Anh dùng thường xuyên.\n- Hạn chế: ít quyền quyết định kỹ thuật, dự án kết thúc là chuyển, khó theo sản phẩm tới khi trưởng thành; deadline theo cam kết với khách nên có giai đoạn OT.",
+        "Product — công ty tự làm và bán sản phẩm của mình.\n- Được: đi cùng sản phẩm dài hạn, thấy tác động tới người dùng thật, được đầu tư vào chất lượng và kỹ thuật lâu dài.\n- Hạn chế: stack ít thay đổi, nhiều việc bảo trì hệ thống cũ.",
+        "Startup — product nhưng chưa ổn định về mô hình kinh doanh và dòng tiền.\n- Được: phạm vi công việc rộng, lên trách nhiệm nhanh, có thể có cổ phần/ESOP.\n- Hạn chế: rủi ro tài chính, quy trình mỏng, dễ đổi hướng sản phẩm.",
+        "Chọn theo giai đoạn nghề nghiệp: mới đi làm muốn quét rộng công nghệ và rèn quy trình thì outsource hợp; muốn đào sâu một domain và làm chủ chất lượng thì product; chấp nhận rủi ro để đổi lấy tốc độ trưởng thành thì startup."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "98902-cong-ty-outsource-product-va-startup-khac-nhau-o-diem-nao-moi-loai-hop-voi-ai"
+  },
+  {
+    "id": "6b593795-32b1-581f-8549-0b0c29515615",
+    "question": "Thời gian thử việc theo luật Việt Nam là bao lâu, lương bao nhiêu? Cần chú ý gì trong 2 tháng thử việc?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98903-thoi-gian-thu-viec-theo-luat-viet-nam-la-bao-lau-luong-bao-nhieu-can-chu-y-gi-tr",
+    "slug": "thoi-gian-thu-viec-theo-luat-viet-nam-la-bao-lau-luong-bao-nhieu-can-chu-y-gi-trong-2-thang-thu-viec-6b593795-32b1-581f-8549-0b0c29515615",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Theo Bộ luật Lao động 2019:\n- Thời gian thử việc (Điều 25): tối đa 60 ngày với công việc cần trình độ cao đẳng trở lên — đúng với hầu hết vị trí lập trình viên; 180 ngày chỉ áp dụng cho người quản lý doanh nghiệp; 30 ngày cho trình độ trung cấp; 6 ngày với công việc khác. Chỉ được thử việc một lần cho một công việc.\n- Lương thử việc (Điều 26): ít nhất 85% mức lương của công việc đó.\n- Chấm dứt (Điều 27): trong thời gian thử việc, mỗi bên đều được huỷ hợp đồng thử việc mà không cần báo trước và không phải bồi thường."
+      ],
+      "details": [
+        "Cần chú ý:\n- Yêu cầu văn bản ghi rõ mức lương thử việc, mức chính thức sau khi đạt, và tiêu chí đánh giá. Nếu chỉ nói miệng \"qua thử việc sẽ tăng\", rất khó đối chiếu.\n- Hỏi bảo hiểm được đóng từ thời điểm nào.\n- Chủ động xin feedback giữa kỳ (tuần 3–4) thay vì đợi đến buổi đánh giá cuối.\n- Mục tiêu 2 tháng đầu không phải viết nhiều code nhất, mà là giao được vài thay đổi hoàn chỉnh và chứng minh bạn tự tìm được thông tin trong codebase."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "98903-thoi-gian-thu-viec-theo-luat-viet-nam-la-bao-lau-luong-bao-nhieu-can-chu-y-gi-tr"
+  },
+  {
+    "id": "cbf068d8-2e3d-5cfa-abf4-06373bad9b27",
+    "question": "Junior, Middle và Senior khác nhau thực chất ở điểm nào, ngoài số năm kinh nghiệm?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98950-junior-middle-va-senior-khac-nhau-thuc-chat-o-diem-nao-ngoai-so-nam-kinh-nghiem",
+    "slug": "junior-middle-va-senior-khac-nhau-thuc-chat-o-diem-nao-ngoai-so-nam-kinh-nghiem-cbf068d8-2e3d-5cfa-abf4-06373bad9b27",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Số năm chỉ là chỉ dấu thô. Điểm phân biệt thật nằm ở phạm vi vấn đề tự xử lý được và mức giám sát cần có."
+      ],
+      "details": [
+        "Một cách kiểm chứng nhanh khi tự đánh giá: mô tả một quyết định kỹ thuật gần đây, kèm phương án bạn đã loại và lý do loại. Junior thường kể lại cách làm; senior kể lại đánh đổi.",
+        "Trong phỏng vấn, nếu bị hỏi \"em thấy mình ở level nào\", nên trả lời bằng phạm vi công việc tự chủ được, tránh nói suông \"em nghĩ em là senior vì đã đi làm 5 năm\"."
+      ],
+      "points": [
+        "Junior: được giao task đã mô tả rõ, cần review kỹ, câu hỏi thường là \"code này chạy chưa\". Giá trị nằm ở tốc độ học và mức độ chủ động hỏi khi bí.",
+        "Middle: nhận một feature vừa, tự chia nhỏ, tự xử lý phần lớn tình huống phát sinh, ít cần theo sát. Bắt đầu nghĩ tới lỗi biên, log, test, khả năng bảo trì — không chỉ \"chạy được\".",
+        "Senior: nhận một vấn đề chứ không phải một task. Tự làm rõ yêu cầu với PM/BA, chọn phương án và chịu trách nhiệm hệ quả, thấy trước rủi ro vận hành, và nâng năng lực người xung quanh qua review, thiết kế, tài liệu."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "98950-junior-middle-va-senior-khac-nhau-thuc-chat-o-diem-nao-ngoai-so-nam-kinh-nghiem"
+  },
+  {
+    "id": "d62182f6-c3df-5a06-bfc0-ca707729ce35",
+    "question": "Khi review code người khác, viết nhận xét thế nào để góp ý được việc mà không làm người nhận khó chịu?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98951-khi-review-code-nguoi-khac-viet-nhan-xet-the-nao-de-gop-y-duoc-viec-ma-khong-lam",
+    "slug": "khi-review-code-nguoi-khac-viet-nhan-xet-the-nao-de-gop-y-duoc-viec-ma-khong-lam-nguoi-nhan-kho-chiu-d62182f6-c3df-5a06-bfc0-ca707729ce35",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nguyên tắc gốc: nhận xét nhắm vào code, không nhắm vào người, và nêu rõ lý do thay vì chỉ ra lệnh.",
+        "cải thiện được sức khoẻ tổng thể của codebase"
+      ],
+      "details": [],
+      "points": [
+        "Thay \"anh viết hàm này sai rồi\" bằng \"hàm này chưa xử lý trường hợp danh sách rỗng, dòng 42 sẽ ném lỗi\".",
+        "Giải thích tại sao, để người nhận học được nguyên tắc chứ không chỉ sửa một chỗ. Nếu góp ý dài, kèm link tài liệu hoặc đoạn code mẫu.",
+        "Phân loại mức độ. Việc bắt buộc sửa và việc tuỳ chọn phải khác nhau rõ ràng, thường quy ước bằng tiền tố:",
+        "Hỏi thay vì phán khi bạn chưa chắc — người viết thường có bối cảnh bạn không biết."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "98951-khi-review-code-nguoi-khac-viet-nhan-xet-the-nao-de-gop-y-duoc-viec-ma-khong-lam"
+  },
+  {
+    "id": "e41872c9-8780-5119-8005-6269afaba331",
+    "question": "Vào một dự án lớn đã chạy nhiều năm, bạn bắt đầu đọc code từ đâu?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98952-vao-mot-du-an-lon-da-chay-nhieu-nam-ban-bat-dau-doc-code-tu-dau",
+    "slug": "vao-mot-du-an-lon-da-chay-nhieu-nam-ban-bat-dau-doc-code-tu-dau-e41872c9-8780-5119-8005-6269afaba331",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không đọc từ trên xuống dưới theo thư mục — sẽ chìm trong chi tiết. Đi theo luồng chạy thật."
+      ],
+      "details": [
+        "Thứ tự thường hiệu quả:",
+        "1. Chạy được dự án trên máy trước. Không dựng được môi trường thì mọi việc đọc đều là suy đoán. Ghi lại các bước dựng vì README thường đã lỗi thời.\n2. Tìm điểm vào (entry point): route/controller, consumer message queue, cron job. Từ đó lần một request tiêu biểu đi qua các lớp cho đến database.\n3. Đọc schema database và các model chính. Cấu trúc dữ liệu tiết lộ mô hình nghiệp vụ nhanh hơn đọc hàm.\n4. Đọc test của module quan trọng — test là đặc tả còn sống và nêu rõ các trường hợp biên hệ thống quan tâm.\n5. Đọc lịch sử Git ở file bạn phải sửa: git log -p <file>, git blame để biết vì sao đoạn khó hiểu tồn tại. Nếu dự án có thư mục doc/adr, đọc các bản ghi quyết định kiến trúc trước tiên.",
+        "Cách chốt hiểu biết: nhận một bug nhỏ hoặc một thay đổi nhỏ có thật rồi làm cho xong. Sửa một chỗ thật cho ta hiểu hệ thống nhiều hơn đọc lướt cả tuần."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "98952-vao-mot-du-an-lon-da-chay-nhieu-nam-ban-bat-dau-doc-code-tu-dau"
+  },
+  {
+    "id": "8026d4d5-3d8b-5dc6-bbb5-cc8daa056831",
+    "question": "Viết tài liệu kỹ thuật ở mức \"đủ dùng\" nghĩa là viết gì và bỏ gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98953-viet-tai-lieu-ky-thuat-o-muc-du-dung-nghia-la-viet-gi-va-bo-gi",
+    "slug": "viet-tai-lieu-ky-thuat-o-muc-du-dung-nghia-la-viet-gi-va-bo-gi-8026d4d5-3d8b-5dc6-bbb5-cc8daa056831",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đủ dùng nghĩa là ghi lại thứ code không tự nói được, chủ yếu là lý do. Code đã mô tả cách làm; tài liệu mô tả bối cảnh và ràng buộc."
+      ],
+      "details": [
+        "Nên viết:\n- README chạy được: cài gì, biến môi trường nào, chạy lệnh nào để lên dev, chạy test ra sao. Đây là tài liệu được đọc nhiều nhất.\n- Bản ghi quyết định (ADR) cho các lựa chọn khó đảo ngược: chọn công nghệ, chia service, đổi mô hình dữ liệu. Mỗi bản 1-2 trang: bối cảnh, quyết định, hệ quả. Để trong repo (doc/adr/0007-chon-redis-lam-cache.md) để nó được version cùng code.\n- Runbook cho việc vận hành lặp lại: xử lý khi hàng đợi ùn, cách rollback, cách chạy lại job hỏng.",
+        "Nên bỏ:\n- Tài liệu mô tả lại từng hàm — sẽ lệch với code sau vài sprint, mà lệch còn tệ hơn không có.\n- Sơ đồ đẹp nhưng không ai cập nhật. Ưu tiên sơ đồ mức cao ít thay đổi.",
+        "Quy tắc thực dụng: nếu bạn phải giải thích cùng một điều cho người thứ hai, hãy viết nó xuống và gửi link lần sau."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "98953-viet-tai-lieu-ky-thuat-o-muc-du-dung-nghia-la-viet-gi-va-bo-gi"
+  },
+  {
+    "id": "59c0ac56-56ee-5f03-9ef0-3f6d338c4457",
+    "question": "Lộ trình từ Junior lên Senior là gì theo bạn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1098-lo-trinh-tu-junior-len-senior-la-gi-theo-ban",
+    "slug": "lo-trinh-tu-junior-len-senior-la-gi-theo-ban-59c0ac56-56ee-5f03-9ef0-3f6d338c4457",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn hiểu Senior không chỉ là \"code giỏi hơn\" mà là phạm vi ảnh hưởng và tính tự chủ tăng dần. Nêu 3 mốc kèm thứ thay đổi ở mỗi mốc."
+      ],
+      "details": [
+        "Trả lời mẫu: \"Junior (0-2 năm): học nền tảng, code dưới sự review. Middle (2-5 năm): làm việc độc lập, tự chịu trách nhiệm một module, review code người khác. Senior (5+ năm): thiết kế kiến trúc, cân nhắc trade-off, và nâng cả team lên qua mentoring. Điểm chuyển không phải số năm, mà là khi bạn được tin giao những quyết định mơ hồ hơn.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "1098-lo-trinh-tu-junior-len-senior-la-gi-theo-ban"
+  },
+  {
+    "id": "54df6b46-1323-5081-9fa0-cfa9fb0d6371",
+    "question": "Bạn ưu tiên cái gì hơn: lương cao hay học hỏi nhiều?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1103-ban-uu-tien-cai-gi-hon-luong-cao-hay-hoc-hoi-nhieu",
+    "slug": "ban-uu-tien-cai-gi-hon-luong-cao-hay-hoc-hoi-nhieu-54df6b46-1323-5081-9fa0-cfa9fb0d6371",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: một câu trả lời cân bằng và thành thật, phù hợp với giai đoạn sự nghiệp của bạn."
+      ],
+      "details": [
+        "Tránh: nói \"tôi không quan tâm lương\" (thiếu thật) hoặc \"lương là tất cả\" (thiếu cam kết).",
+        "Trả lời mẫu: \"Lương đủ sống và công bằng là điều kiện cần. Nhưng ở giai đoạn này tôi ưu tiên môi trường cho tôi học và đảm nhận việc khó, vì kỹ năng tăng thì giá trị — và cả lương — sẽ tăng theo một cách bền vững hơn.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "1103-ban-uu-tien-cai-gi-hon-luong-cao-hay-hoc-hoi-nhieu"
+  },
+  {
+    "id": "0c3a77d5-9aef-5372-b74e-5abe9971c2c3",
+    "question": "Cách bạn giải thích một khái niệm kỹ thuật phức tạp cho người không rành kỹ thuật?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1113-cach-ban-giai-thich-mot-khai-niem-ky-thuat-phuc-tap-cho-nguoi-khong-ranh-ky-thua",
+    "slug": "cach-ban-giai-thich-mot-khai-niem-ky-thuat-phuc-tap-cho-nguoi-khong-ranh-ky-thuat-0c3a77d5-9aef-5372-b74e-5abe9971c2c3",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn biết bỏ jargon và dùng hình ảnh quen thuộc — kỹ năng cốt lõi khi làm việc với PM, sales, khách hàng."
+      ],
+      "details": [
+        "Tránh: giải thích bằng thuật ngữ kỹ thuật khác.",
+        "Trả lời mẫu: \"Tôi bắt đầu từ kết quả họ quan tâm, rồi dùng một hình dung quen thuộc. Ví dụ giải thích database index: \\\"giống như mục lục cuối sách — thay vì lật từng trang, bạn nhảy thẳng tới đúng trang cần.\\\" Sau đó tôi hỏi lại xem họ đã hình dung được chưa rồi mới đi sâu hơn nếu cần.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "1113-cach-ban-giai-thich-mot-khai-niem-ky-thuat-phuc-tap-cho-nguoi-khong-ranh-ky-thua"
+  },
+  {
+    "id": "3a6b4e9c-750b-5a62-973e-56a4a86b3fca",
+    "question": "Hãy kể về lần bạn có xung đột với đồng nghiệp.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1117-hay-ke-ve-lan-ban-co-xung-dot-voi-dong-nghiep",
+    "slug": "hay-ke-ve-lan-ban-co-xung-dot-voi-dong-nghiep-3a6b4e9c-750b-5a62-973e-56a4a86b3fca",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn xử lý bất đồng chuyên nghiệp, đặt việc chung trên cái tôi — không phải bạn \"thắng\"."
+      ],
+      "details": [
+        "Tránh: kể xấu đồng nghiệp, hoặc nói \"tôi chưa từng xung đột\" (nghe né tránh).",
+        "Trả lời mẫu (STAR):"
+      ],
+      "points": [
+        "Tình huống: tôi và một backend dev bất đồng về việc validate dữ liệu ở client hay server.",
+        "Nhiệm vụ: cần chốt một hướng trước demo 2 ngày tới.",
+        "Hành động: tôi hẹn 1-1 15 phút, đưa số liệu (payload, edge case) thay vì tranh luận quan điểm, và đề xuất validate cả hai phía vì lý do bảo mật.",
+        "Kết quả: cả hai đồng ý, ship đúng hạn, và đưa quy ước này vào checklist review."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "1117-hay-ke-ve-lan-ban-co-xung-dot-voi-dong-nghiep"
+  },
+  {
+    "id": "3c635f3d-ea40-54e8-a25d-be0f2301ca95",
+    "question": "Khi một thành viên trong team không hoàn thành task, bạn sẽ làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1118-khi-mot-thanh-vien-trong-team-khong-hoan-thanh-task-ban-se-lam-gi",
+    "slug": "khi-mot-thanh-vien-trong-team-khong-hoan-thanh-task-ban-se-lam-gi-3c635f3d-ea40-54e8-a25d-be0f2301ca95",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn hỗ trợ trước, phán xét sau, và minh bạch khi ảnh hưởng tới tiến độ chung."
+      ],
+      "details": [
+        "Tránh: nhảy thẳng vào chỉ trích hoặc mách sếp ngay.",
+        "Trả lời mẫu: \"Đầu tiên tôi hỏi xem bạn ấy có đang bị chặn ở đâu và tôi giúp được gì — đôi khi chỉ là thiếu context hoặc kẹt một dependency. Nếu việc trễ ảnh hưởng tới release, tôi sẽ cùng bạn ấy báo manager một cách minh bạch và đề xuất phương án (giãn scope, chia lại task), thay vì để vỡ deadline trong im lặng.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "1118-khi-mot-thanh-vien-trong-team-khong-hoan-thanh-task-ban-se-lam-gi"
+  },
+  {
+    "id": "5776efe1-1f4c-5df8-9aac-06967a4cfec6",
+    "question": "Cách bạn ứng xử với một senior dev review code rất khắt khe?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1120-cach-ban-ung-xu-voi-mot-senior-dev-review-code-rat-khat-khe",
+    "slug": "cach-ban-ung-xu-voi-mot-senior-dev-review-code-rat-khat-khe-5776efe1-1f4c-5df8-9aac-06967a4cfec6",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn coi review khắt khe là cơ hội học, biết tách phản hồi khỏi cái tôi, nhưng vẫn dám trao đổi khi không đồng ý."
+      ],
+      "details": [
+        "Tránh: tỏ ra phòng thủ, hoặc sửa cho qua mà không hiểu vì sao.",
+        "Trả lời mẫu: \"Tôi hỏi lý do đằng sau mỗi comment — hiểu cái \\\"vì sao\\\" giúp tôi viết code tốt hơn lần sau chứ không chỉ pass review lần này. Nếu tôi không đồng ý, tôi đưa luận điểm kèm dữ liệu và trao đổi trên tinh thần cùng tìm giải pháp tốt nhất, không phải bảo vệ code của mình.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "1120-cach-ban-ung-xu-voi-mot-senior-dev-review-code-rat-khat-khe"
+  },
+  {
+    "id": "00f05c43-b22b-5a5c-8769-7890cb79dd3b",
+    "question": "Bạn đã từng mentor hoặc kèm cặp một junior developer chưa?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1121-ban-da-tung-mentor-hoac-kem-cap-mot-junior-developer-chua",
+    "slug": "ban-da-tung-mentor-hoac-kem-cap-mot-junior-developer-chua-00f05c43-b22b-5a5c-8769-7890cb79dd3b",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn biết nâng người khác lên, kể cả khi chưa làm mentor chính thức. Dạy lại là dấu hiệu bạn hiểu sâu."
+      ],
+      "details": [
+        "Tránh: trả lời cụt \"chưa\".",
+        "Trả lời mẫu: \"Chưa chính thức, nhưng tôi thường ngồi cùng junior khi họ kẹt — tôi không sửa hộ mà hỏi dẫn dắt để họ tự tìm ra. Tôi cũng viết lại vài lỗi hay gặp thành note ngắn cho team. Việc dạy lại buộc tôi phải hiểu thật sâu, nên tôi muốn phát triển kỹ năng mentor một cách bài bản hơn.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "1121-ban-da-tung-mentor-hoac-kem-cap-mot-junior-developer-chua"
+  },
+  {
+    "id": "230d4002-29e2-52e0-a68c-b0e8606a7291",
+    "question": "Khi deadline gấp và áp lực team cao, bạn xử lý thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1122-khi-deadline-gap-va-ap-luc-team-cao-ban-xu-ly-the-nao",
+    "slug": "khi-deadline-gap-va-ap-luc-team-cao-ban-xu-ly-the-nao-230d4002-29e2-52e0-a68c-b0e8606a7291",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn giữ được bình tĩnh, sắp xếp ưu tiên và giao tiếp minh bạch thay vì cố ôm hết."
+      ],
+      "details": [
+        "Tránh: \"tôi làm thêm giờ tới khi xong\" — nghe như không biết quản lý.",
+        "Trả lời mẫu (STAR):"
+      ],
+      "points": [
+        "Tình huống: trước release, đội phát sinh thêm bug critical mà thời gian không đủ.",
+        "Hành động: tôi cùng team xếp lại ưu tiên — fix critical trước, đề xuất lùi các feature không thiết yếu, và update PM mỗi ngày để không ai bất ngờ.",
+        "Kết quả: ship đúng phần quan trọng đúng hạn, phần còn lại vào sprint sau; PM đánh giá cao sự minh bạch."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "1122-khi-deadline-gap-va-ap-luc-team-cao-ban-xu-ly-the-nao"
+  },
+  {
+    "id": "54488e87-0b6c-5d57-9d86-3fcc7a5104f3",
+    "question": "Khi deadline gấp, bạn chấp nhận cắt bỏ điều gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1128-khi-deadline-gap-ban-chap-nhan-cat-bo-dieu-gi",
+    "slug": "khi-deadline-gap-ban-chap-nhan-cat-bo-dieu-gi-54488e87-0b6c-5d57-9d86-3fcc7a5104f3",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn phân biệt được giữa nợ kỹ thuật tạm thời (chấp nhận được) và chất lượng/an toàn (không bao giờ cắt), và có kế hoạch trả nợ."
+      ],
+      "details": [
+        "Tránh: \"tôi không cắt gì cả\" (thiếu thực tế) hoặc cắt cả testing/security.",
+        "Trả lời mẫu: \"Tôi có thể tạm hoãn việc viết unit test đầy đủ hoặc refactor cho đẹp, nhưng vẫn test tay kỹ các luồng chính và không bao giờ bỏ qua bảo mật hay xử lý lỗi. Quan trọng là tôi ghi lại phần nợ đó và đặt lịch trả ngay sprint sau, không để nó trôi luôn.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "1128-khi-deadline-gap-ban-chap-nhan-cat-bo-dieu-gi"
+  },
+  {
+    "id": "6b18a0c4-c3bc-5fb1-ac4a-e7f16a928877",
+    "question": "Bạn đã từng từ chối một task vì thấy không khả thi trong thời gian cho phép chưa?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1129-ban-da-tung-tu-choi-mot-task-vi-thay-khong-kha-thi-trong-thoi-gian-cho-phep-chua",
+    "slug": "ban-da-tung-tu-choi-mot-task-vi-thay-khong-kha-thi-trong-thoi-gian-cho-phep-chua-6b18a0c4-c3bc-5fb1-ac4a-e7f16a928877",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn dám nói lên rủi ro một cách dựa trên dữ liệu và đưa phương án thay thế, không chỉ nói \"không\"."
+      ],
+      "details": [
+        "Tránh: tỏ ra dễ dãi, nhận hết mọi việc, hoặc cứng nhắc từ chối.",
+        "Trả lời mẫu (STAR):"
+      ],
+      "points": [
+        "Tình huống: PM muốn một feature trong 5 ngày, tôi ước lượng cần 2 tuần để làm đúng.",
+        "Hành động: tôi trình bày rõ rủi ro nếu làm vội (bug, bảo trì khó), rồi đề xuất phương án 1 tuần với scope thu gọn — ship phần lõi trước, phần phụ làm sau.",
+        "Kết quả: PM chọn phương án thu gọn; chúng tôi giao đúng hạn mà không phải gánh nợ kỹ thuật nặng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "1129-ban-da-tung-tu-choi-mot-task-vi-thay-khong-kha-thi-trong-thoi-gian-cho-phep-chua"
+  },
+  {
+    "id": "2dd9530e-e00d-58b5-8ce3-430403f9c877",
+    "question": "Bạn đã từng refactor một codebase lớn chưa? Cách tiếp cận của bạn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1131-ban-da-tung-refactor-mot-codebase-lon-chua-cach-tiep-can-cua-ban",
+    "slug": "ban-da-tung-refactor-mot-codebase-lon-chua-cach-tiep-can-cua-ban-2dd9530e-e00d-58b5-8ce3-430403f9c877",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: một chiến lược an toàn, không \"đập đi xây lại\" liều lĩnh. Nguyên tắc cốt lõi: có lưới an toàn trước khi đụng dao."
+      ],
+      "details": [
+        "Trả lời mẫu (STAR):"
+      ],
+      "points": [
+        "Tình huống: module thanh toán cũ rối, khó thêm tính năng.",
+        "Hành động: tôi viết test bao phủ hành vi hiện tại trước, refactor từng phần nhỏ, chạy test liên tục, và deploy theo từng bước thay vì một lần lớn.",
+        "Kết quả: code dễ mở rộng hơn, không gây sự cố cho người dùng; team áp dụng luôn quy trình \"test trước khi refactor\" này."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "1131-ban-da-tung-refactor-mot-codebase-lon-chua-cach-tiep-can-cua-ban"
+  },
+  {
+    "id": "c1d37af4-e8ae-5c9c-9585-44774670ce8f",
+    "question": "Bạn giải quyết một vấn đề về performance như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1132-ban-giai-quyet-mot-van-de-ve-performance-nhu-the-nao",
+    "slug": "ban-giai-quyet-mot-van-de-ve-performance-nhu-the-nao-c1d37af4-e8ae-5c9c-9585-44774670ce8f",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn đo trước khi sửa, tìm đúng bottleneck thay vì phỏng đoán."
+      ],
+      "details": [
+        "Tránh: \"tôi tối ưu code\" chung chung mà không có cách xác định nguyên nhân.",
+        "Trả lời mẫu (STAR):"
+      ],
+      "points": [
+        "Tình huống: một trang load chậm bị khách phàn nàn.",
+        "Hành động: tôi profile bằng DevTools, xác định một API call là điểm nghẽn (chứ không phải render), thêm cache và gộp request.",
+        "Kết quả: trang nhanh hơn ~3 lần; tôi đặt thêm metric để theo dõi và phát hiện hồi quy sớm. Quy trình của tôi luôn là: đo → tìm nghẽn → sửa → đo lại."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "1132-ban-giai-quyet-mot-van-de-ve-performance-nhu-the-nao"
+  },
+  {
+    "id": "ef5868f0-3984-58dc-9cfb-49f471785f82",
+    "question": "Kể về một project từng thất bại — và bài học lớn nhất bạn rút ra.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1134-ke-ve-mot-project-tung-that-bai-va-bai-hoc-lon-nhat-ban-rut-ra",
+    "slug": "ke-ve-mot-project-tung-that-bai-va-bai-hoc-lon-nhat-ban-rut-ra-ef5868f0-3984-58dc-9cfb-49f471785f82",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn dám nhận thất bại, nhìn ra nguyên nhân và thay đổi cách làm sau đó. Đây cũng là câu \"bài học quý giá nhất\"."
+      ],
+      "details": [
+        "Tránh: đổ lỗi hoàn cảnh, hoặc chọn thất bại giả \"tôi làm quá kỹ\".",
+        "Trả lời mẫu (STAR):"
+      ],
+      "points": [
+        "Tình huống: một project tôi tham gia trễ 2 tháng.",
+        "Nhiệm vụ: phần tôi phụ trách bị đánh giá thấp về độ phức tạp.",
+        "Hành động: tôi nhận phần trách nhiệm của mình, ngồi lại phân tích vì sao ước lượng sai.",
+        "Kết quả: tôi học cách đào sâu requirement từ đầu và luôn cộng thêm buffer 20%. Bài học đó giúp các ước lượng sau của tôi sát hơn hẳn — đây là bài học giá trị nhất tôi từng có."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "1134-ke-ve-mot-project-tung-that-bai-va-bai-hoc-lon-nhat-ban-rut-ra"
+  },
+  {
+    "id": "570a8c6d-8e5f-5e86-86b8-ba21c96eee3d",
+    "question": "Bạn đã từng đưa phản hồi/phê bình cho đồng nghiệp chưa?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1136-ban-da-tung-dua-phan-hoi-phe-binh-cho-dong-nghiep-chua",
+    "slug": "ban-da-tung-dua-phan-hoi-phe-binh-cho-dong-nghiep-chua-570a8c6d-8e5f-5e86-86b8-ba21c96eee3d",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn phản hồi mang tính xây dựng — riêng tư, cụ thể, kèm giải pháp — chứ không mơ hồ hay công khai làm mất mặt."
+      ],
+      "details": [
+        "Tránh: né tránh phản hồi vì sợ va chạm.",
+        "Trả lời mẫu: \"Tôi đưa phản hồi trong 1-1, nói cụ thể về vấn đề chứ không về con người, và luôn kèm một hướng cải thiện. Ví dụ thay vì \\\"code khó đọc\\\", tôi nói \\\"hàm này dài 200 dòng, tách ra theo bước sẽ dễ test hơn\\\". Cách này giúp người nghe tiếp thu mà không thấy bị tấn công.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "1136-ban-da-tung-dua-phan-hoi-phe-binh-cho-dong-nghiep-chua"
+  },
+  {
+    "id": "ca9c2e59-d2c3-5b1a-970c-5e53efc4c675",
+    "question": "Bạn xử lý phản hồi tiêu cực như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1139-ban-xu-ly-phan-hoi-tieu-cuc-nhu-the-nao",
+    "slug": "ban-xu-ly-phan-hoi-tieu-cuc-nhu-the-nao-ca9c2e59-d2c3-5b1a-970c-5e53efc4c675",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn tiếp nhận không phòng thủ, suy ngẫm và biến thành hành động cải thiện."
+      ],
+      "details": [
+        "Tránh: tỏ ra bị tổn thương hoặc phản bác ngay.",
+        "Trả lời mẫu: \"Tôi cảm ơn người góp ý và cố tách cảm xúc khỏi nội dung. Tôi hỏi lại cho rõ nếu chưa hiểu, rồi chọn ra một việc cụ thể để cải thiện thay vì cố sửa tất cả cùng lúc. Thực tế, những phản hồi khó nghe nhất lại giúp tôi tiến bộ nhanh nhất.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "1139-ban-xu-ly-phan-hoi-tieu-cuc-nhu-the-nao"
+  },
+  {
+    "id": "eb97fc07-02ad-5c72-9c0a-2e14e13455fd",
+    "question": "Bạn đã từng phải chọn giữa hai cách tiếp cận kỹ thuật chưa?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1140-ban-da-tung-phai-chon-giua-hai-cach-tiep-can-ky-thuat-chua",
+    "slug": "ban-da-tung-phai-chon-giua-hai-cach-tiep-can-ky-thuat-chua-eb97fc07-02ad-5c72-9c0a-2e14e13455fd",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn quyết định dựa trên tiêu chí rõ ràng (performance, bảo trì, kỹ năng team, thời gian) chứ không theo cảm tính hay trend."
+      ],
+      "details": [
+        "Tránh: nói một cách \"luôn tốt hơn\".",
+        "Trả lời mẫu (STAR):"
+      ],
+      "points": [
+        "Tình huống: cần chọn giữa microservices và monolith cho một sản phẩm mới.",
+        "Hành động: tôi cân nhắc team chỉ 4 người, cần ra mắt nhanh, và độ phức tạp vận hành — rồi chọn monolith với ranh giới module rõ.",
+        "Kết quả: ra mắt đúng hạn; chúng tôi tách service đầu tiên 1 năm sau khi thật sự cần scale. Quyết định khớp với bối cảnh, không chạy theo xu hướng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "1140-ban-da-tung-phai-chon-giua-hai-cach-tiep-can-ky-thuat-chua"
+  },
+  {
+    "id": "7897746d-c624-5fa3-a8e0-eb4fe75e682c",
+    "question": "Nếu công ty offer thấp hơn kỳ vọng, bạn có nhận không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1145-neu-cong-ty-offer-thap-hon-ky-vong-ban-co-nhan-khong",
+    "slug": "neu-cong-ty-offer-thap-hon-ky-vong-ban-co-nhan-khong-7897746d-c624-5fa3-a8e0-eb4fe75e682c",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn linh hoạt nhưng biết giới hạn, và biết thương lượng phần đãi ngộ ngoài lương cứng."
+      ],
+      "details": [
+        "Tránh: chấp nhận ngay vô điều kiện (mất giá) hoặc từ chối thẳng (cứng nhắc).",
+        "Trả lời mẫu: \"Nếu chênh trong khoảng 10% và tôi thật sự thích cơ hội, tôi sẵn sàng trao đổi. Nếu thấp hơn nhiều, tôi sẽ hỏi về các phần khác để bù đắp — thời gian linh hoạt, ngân sách học tập, review lương sau 6 tháng, hay cổ phần. Tôi nhìn tổng đãi ngộ và lộ trình, không chỉ con số khởi điểm.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "1145-neu-cong-ty-offer-thap-hon-ky-vong-ban-co-nhan-khong"
+  },
+  {
+    "id": "d4e96038-a133-5569-8413-810ae6351dfc",
+    "question": "Bạn đã từng đàm phán lương thành công chưa?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1150-ban-da-tung-dam-phan-luong-thanh-cong-chua",
+    "slug": "ban-da-tung-dam-phan-luong-thanh-cong-chua-d4e96038-a133-5569-8413-810ae6351dfc",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn đàm phán dựa trên giá trị đã tạo ra và dữ liệu thị trường, đúng thời điểm — không phải đòi hỏi cảm tính."
+      ],
+      "details": [
+        "Tránh: kể như một cuộc mặc cả căng thẳng.",
+        "Trả lời mẫu: \"Có. Sau khi tôi nhận thêm trách nhiệm và liên tục giao kết quả tốt, tôi chuẩn bị một danh sách đóng góp cụ thể kèm dữ liệu lương thị trường, rồi đề xuất tăng vào kỳ review. Tôi được tăng 15%. Mấu chốt là tôi thương lượng bằng giá trị đã chứng minh và chọn đúng thời điểm, chứ không chỉ vì \\\"đã lâu chưa tăng\\\".\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": "1150-ban-da-tung-dam-phan-luong-thanh-cong-chua"
+  },
+  {
+    "id": "c7a615ac-9b62-5229-8fd5-1f115600ee91",
+    "question": "Bạn thích lương cố định hay có phần thưởng biến đổi?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1152-ban-thich-luong-co-dinh-hay-co-phan-thuong-bien-doi",
+    "slug": "ban-thich-luong-co-dinh-hay-co-phan-thuong-bien-doi-c7a615ac-9b62-5229-8fd5-1f115600ee91",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn cân bằng giữa ổn định và động lực, hiểu trade-off."
+      ],
+      "details": [
+        "Tránh: chọn cực đoan mà không có lý do.",
+        "Trả lời mẫu: \"Tôi ưu tiên lương cứng ổn định làm nền, cộng thêm thưởng theo hiệu suất/dự án và thưởng Tết (tháng 13). Lương cứng cho tôi sự an tâm để tập trung làm tốt; phần thưởng gắn nỗ lực của tôi với kết quả chung. Miễn là tiêu chí thưởng minh bạch và nằm trong tầm ảnh hưởng của tôi.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "1152-ban-thich-luong-co-dinh-hay-co-phan-thuong-bien-doi"
+  },
+  {
+    "id": "da1dfefb-d2e4-584f-8e68-c0e771a9985e",
+    "question": "Bạn thích phong cách quản lý nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1155-ban-thich-phong-cach-quan-ly-nao",
+    "slug": "ban-thich-phong-cach-quan-ly-nao-da1dfefb-d2e4-584f-8e68-c0e771a9985e",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn biết mình cần gì ở manager để làm việc tốt, và đủ linh hoạt để thích nghi."
+      ],
+      "details": [
+        "Tránh: mô tả nghe như bạn cần bị giám sát hoặc không chịu được phản hồi.",
+        "Trả lời mẫu: \"Tôi hợp với phong cách coaching — manager đưa định hướng và kỳ vọng rõ, nhưng tin tưởng giao quyền tự chủ trong cách thực hiện. Tôi thích phản hồi đều đặn, kể cả phản hồi thẳng thắn, vì tôi muốn luôn biết mình đang ở đâu để cải thiện.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "1155-ban-thich-phong-cach-quan-ly-nao"
+  },
+  {
+    "id": "6f30f3e9-25ba-54fc-9162-6316520e6e32",
+    "question": "Bạn thích công ty kiểu nào: startup, scale-up hay tập đoàn lớn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1158-ban-thich-cong-ty-kieu-nao-startup-scale-up-hay-tap-doan-lon",
+    "slug": "ban-thich-cong-ty-kieu-nao-startup-scale-up-hay-tap-doan-lon-6f30f3e9-25ba-54fc-9162-6316520e6e32",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn hiểu sự khác biệt và lựa chọn của bạn khớp với chính loại hình công ty đang phỏng vấn."
+      ],
+      "details": [
+        "Tránh: khen kiểu công ty ngược hẳn với nơi bạn đang ứng tuyển.",
+        "Trả lời mẫu: \"Tôi hợp nhất với scale-up — đủ nguồn lực để làm sản phẩm chất lượng, nhưng vẫn đủ nhỏ để thấy rõ tác động của mình. Startup đôi khi quá hỗn loạn, tập đoàn lớn lại nhiều tầng nấc. Đó cũng là một lý do tôi thấy công ty mình rất phù hợp.\" (Điều chỉnh theo đúng loại hình công ty bạn ứng tuyển.)"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": "1158-ban-thich-cong-ty-kieu-nao-startup-scale-up-hay-tap-doan-lon"
+  },
+  {
+    "id": "6518402c-8519-5008-8f6a-151a16480dfb",
+    "question": "Văn hóa công ty quan trọng với bạn không? Công ty này hợp với bạn ở điểm nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1160-van-hoa-cong-ty-quan-trong-voi-ban-khong-cong-ty-nay-hop-voi-ban-o-diem-nao",
+    "slug": "van-hoa-cong-ty-quan-trong-voi-ban-khong-cong-ty-nay-hop-voi-ban-o-diem-nao-6518402c-8519-5008-8f6a-151a16480dfb",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: văn hóa thật sự quan trọng với bạn, và bạn đã tìm hiểu giá trị của công ty để chỉ ra điểm khớp cụ thể."
+      ],
+      "details": [
+        "Tránh: khen chung chung \"tôi thích văn hóa công ty\" mà không nói được điểm nào.",
+        "Trả lời mẫu: \"Rất quan trọng — văn hóa định hình cách mình làm việc, hợp tác và phát triển. Tìm hiểu trước, tôi thấy công ty đề cao tinh thần học hỏi và ownership. Cả hai khớp với cách tôi làm việc: tôi thích môi trường được tự chủ và khuyến khích chia sẻ kiến thức, thay vì làm việc trong các silo tách biệt.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": "1160-van-hoa-cong-ty-quan-trong-voi-ban-khong-cong-ty-nay-hop-voi-ban-o-diem-nao"
+  },
+  {
+    "id": "6d115c7d-7b6d-5ac3-a3ce-3da7a1648eb3",
+    "question": "Bạn có mentor không? Mối quan hệ đó diễn ra thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1172-ban-co-mentor-khong-moi-quan-he-do-dien-ra-the-nao",
+    "slug": "ban-co-mentor-khong-moi-quan-he-do-dien-ra-the-nao-6d115c7d-7b6d-5ac3-a3ce-3da7a1648eb3",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn chủ động tận dụng mentoring và biến nó thành hành động, chứ không thụ động chờ được chỉ dạy."
+      ],
+      "details": [
+        "Tránh: \"không có ai\" mà không nói cách bạn vẫn tự tìm người học hỏi.",
+        "Trả lời mẫu: \"Tôi có một mentor là senior dev, mỗi tháng 1-1 một lần. Tôi luôn chuẩn bị sẵn câu hỏi cụ thể trước buổi gặp và thực hiện ngay phản hồi sau đó, rồi báo lại kết quả ở buổi sau. Cách đó khiến mối quan hệ thật sự hiệu quả cho cả hai, chứ không chỉ là trò chuyện chung chung.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": "1172-ban-co-mentor-khong-moi-quan-he-do-dien-ra-the-nao"
+  },
+  {
+    "id": "12531fd6-1413-57fb-bdb1-3ac88b0da840",
+    "question": "Bạn có bao giờ cảm thấy \"bị tụt hậu\" với các xu hướng công nghệ không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1175-ban-co-bao-gio-cam-thay-bi-tut-hau-voi-cac-xu-huong-cong-nghe-khong",
+    "slug": "ban-co-bao-gio-cam-thay-bi-tut-hau-voi-cac-xu-huong-cong-nghe-khong-12531fd6-1413-57fb-bdb1-3ac88b0da840",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn thực tế về FOMO công nghệ và có chiến lược học khôn ngoan — tập trung nền tảng thay vì chạy theo mọi trend."
+      ],
+      "details": [
+        "Tránh: tỏ ra bạn biết hết mọi thứ, hoặc lo lắng thái quá.",
+        "Trả lời mẫu: \"Đôi khi có, nhất là khi mỗi tuần lại có một framework mới. Nhưng tôi học cách tập trung vào kỹ năng nền tảng — cấu trúc dữ liệu, thiết kế hệ thống, nguyên lý phần mềm — vì chúng chuyển giao được giữa các công nghệ, còn trend thì đến rồi đi. Tôi chọn học sâu một thứ thật sự cần thay vì lướt qua mười thứ.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": "1175-ban-co-bao-gio-cam-thay-bi-tut-hau-voi-cac-xu-huong-cong-nghe-khong"
+  },
+  {
+    "id": "32ae6abb-e6a1-5ecc-9bb5-8ecb3f2e9cf1",
+    "question": "Vì sao chúng tôi nên tuyển bạn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/13014-vi-sao-chung-toi-nen-tuyen-ban",
+    "slug": "vi-sao-chung-toi-nen-tuyen-ban-32ae6abb-e6a1-5ecc-9bb5-8ecb3f2e9cf1",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn ghép được kỹ năng của mình với đúng nhu cầu trong JD, bằng bằng chứng chứ không tự khen."
+      ],
+      "details": [
+        "Tránh: liệt kê tính từ (\"chăm chỉ, nhiệt huyết\") mà không có dẫn chứng.",
+        "Trả lời mẫu: \"JD cần người vừa làm được performance vừa giao tiếp với team product. Đó đúng là thứ tôi đã làm: lần gần nhất tôi giảm 40% thời gian load và tự trình bày phương án với PM để chốt scope. Tôi mang đúng bộ kỹ năng các bạn đang thiếu, và có thể bắt nhịp nhanh.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": "13014-vi-sao-chung-toi-nen-tuyen-ban"
+  },
+  {
+    "id": "08534ac8-a878-5233-bc20-b22f4460cbb0",
+    "question": "Kể về lần bạn phải làm việc với một stakeholder hoặc người khó tính.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/13017-ke-ve-lan-ban-phai-lam-viec-voi-mot-stakeholder-hoac-nguoi-kho-tinh",
+    "slug": "ke-ve-lan-ban-phai-lam-viec-voi-mot-stakeholder-hoac-nguoi-kho-tinh-08534ac8-a878-5233-bc20-b22f4460cbb0",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn giữ chuyên nghiệp, tìm hiểu động cơ phía sau hành vi khó chịu, và xây được lòng tin."
+      ],
+      "details": [
+        "Tránh: mô tả người kia như \"kẻ xấu\" mà không nói bạn đã làm gì để cải thiện quan hệ.",
+        "Trả lời mẫu (STAR):"
+      ],
+      "points": [
+        "Tình huống: một stakeholder liên tục đổi yêu cầu và gắt khi tiến độ chậm.",
+        "Hành động: tôi hẹn một buổi để hiểu áp lực của họ — hóa ra họ bị sếp ép. Tôi đề xuất gửi update ngắn 2 lần/tuần và chốt scope bằng văn bản.",
+        "Kết quả: số lần đổi yêu cầu giảm hẳn, quan hệ dịu lại, và dự án về đích đúng hạn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": "13017-ke-ve-lan-ban-phai-lam-viec-voi-mot-stakeholder-hoac-nguoi-kho-tinh"
+  },
+  {
+    "id": "e0d8f33f-6b06-509f-b679-be533debd56c",
+    "question": "Bạn xử lý thế nào khi nhận nhiều yêu cầu mâu thuẫn cùng lúc từ nhiều người?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/13019-ban-xu-ly-the-nao-khi-nhan-nhieu-yeu-cau-mau-thuan-cung-luc-tu-nhieu-nguoi",
+    "slug": "ban-xu-ly-the-nao-khi-nhan-nhieu-yeu-cau-mau-thuan-cung-luc-tu-nhieu-nguoi-e0d8f33f-6b06-509f-b679-be533debd56c",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: bạn không âm thầm gánh hết hay tự ý chọn, mà làm rõ ưu tiên một cách minh bạch giữa các bên."
+      ],
+      "details": [
+        "Tránh: \"tôi làm cho người to tiếng nhất\" hoặc cố làm hết rồi vỡ.",
+        "Trả lời mẫu: \"Tôi liệt kê các yêu cầu kèm thời gian cần thiết, rồi đưa ra để các bên cùng thấy bức tranh chung. Tôi hỏi đâu là việc ảnh hưởng lớn nhất tới mục tiêu chung và đề xuất thứ tự — thường người yêu cầu sẽ tự điều chỉnh khi thấy đánh đổi. Nếu vẫn kẹt, tôi để manager hoặc PM làm trọng tài, vì việc ưu tiên là quyết định của họ chứ không phải của riêng tôi.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": "13019-ban-xu-ly-the-nao-khi-nhan-nhieu-yeu-cau-mau-thuan-cung-luc-tu-nhieu-nguoi"
+  },
+  {
+    "id": "f73a1131-bb77-5735-83e6-7799de8e40ab",
+    "question": "Bạn định nghĩa \"thành công\" trong công việc như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/13020-ban-dinh-nghia-thanh-cong-trong-cong-viec-nhu-the-nao",
+    "slug": "ban-dinh-nghia-thanh-cong-trong-cong-viec-nhu-the-nao-f73a1131-bb77-5735-83e6-7799de8e40ab",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà PV muốn nghe: giá trị thật của bạn, và nó có khớp với cách công ty đo lường thành công không."
+      ],
+      "details": [
+        "Tránh: định nghĩa chỉ xoay quanh chức danh hoặc tiền.",
+        "Trả lời mẫu: \"Với tôi, thành công là giải quyết được vấn đề thật cho người dùng và thấy mình giỏi hơn so với năm trước. Cụ thể hơn: sản phẩm tôi làm tạo ra giá trị đo được, đồng đội tin tưởng giao cho tôi việc khó, và tôi giúp được người khác trong team đi lên. Chức danh và lương là kết quả đi kèm, không phải thước đo chính.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": "13020-ban-dinh-nghia-thanh-cong-trong-cong-viec-nhu-the-nao"
+  },
+  {
+    "id": "07681f72-db2b-5cc1-903d-1a861df3efb4",
+    "question": "Kể về một dự án bạn tham gia mà thất bại. Bạn học được gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98855-ke-ve-mot-du-an-ban-tham-gia-ma-that-bai-ban-hoc-duoc-gi",
+    "slug": "ke-ve-mot-du-an-ban-tham-gia-ma-that-bai-ban-hoc-duoc-gi-07681f72-db2b-5cc1-903d-1a861df3efb4",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Người hỏi kiểm tra hai thứ: bạn có nhìn thẳng vào thất bại không, và bài học rút ra có áp dụng được không hay chỉ là câu chữ."
+      ],
+      "details": [
+        "Cách dựng câu trả lời:\n- Định nghĩa thất bại cho rõ — dự án bị huỷ, ra mắt nhưng không ai dùng, trễ hạn tới mức mất khách, hoặc phải viết lại từ đầu. Đừng chọn một dự án chỉ hơi chậm.\n- Nêu vai trò thật của bạn — bạn phụ trách phần nào, quyết định nào có phần bạn trong đó.\n- Nguyên nhân, không phải cái cớ — thường là: xác định sai vấn đề người dùng, phạm vi mở rộng không kiểm soát, chọn công nghệ vì thích chứ không vì phù hợp, hoặc không ai kiểm chứng giả định từ sớm.\n- Bài học kèm bằng chứng đã áp dụng — ở dự án sau bạn làm khác đi thế nào.",
+        "Ví dụ mẫu: \"Bọn em làm một module báo cáo trong bốn tháng, ra mắt xong ba tháng chỉ có hai người dùng. Nguyên nhân gốc: không ai nói chuyện với người dùng thật trước khi làm, cả team dựa vào một yêu cầu chuyển qua nhiều lớp trung gian. Em học được rằng phải kiểm chứng nhu cầu bằng bản dựng thô trước khi viết code thật. Ở dự án sau em đề xuất làm bản mẫu trong một tuần cho ba người dùng thử, kết quả là bọn em cắt được nửa số màn hình dự kiến.\"",
+        "Lỗi hay mắc:\n- Chọn một \"thất bại\" giả (dự án thành công nhưng trễ hai ngày) — người phỏng vấn nhận ra ngay.\n- Đổ hết cho sếp, cho khách hàng, cho team khác. Kể cả khi đúng là vậy, hãy nêu phần bạn có thể làm khác đi.\n- Bài học chung chung kiểu \"em học được phải giao tiếp nhiều hơn\" mà không có hành động cụ thể sau đó."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": "98855-ke-ve-mot-du-an-ban-tham-gia-ma-that-bai-ban-hoc-duoc-gi"
+  },
+  {
+    "id": "a87bec9d-4099-53f3-9a94-e137277625c2",
+    "question": "Khi yêu cầu thay đổi liên tục giữa sprint, bạn xử lý thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98856-khi-yeu-cau-thay-doi-lien-tuc-giua-sprint-ban-xu-ly-the-nao",
+    "slug": "khi-yeu-cau-thay-doi-lien-tuc-giua-sprint-ban-xu-ly-the-nao-a87bec9d-4099-53f3-9a94-e137277625c2",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Yêu cầu đổi là chuyện bình thường; điều được đánh giá là bạn có biến thay đổi thành quyết định có kiểm soát hay chỉ than phiền."
+      ],
+      "details": [
+        "Bốn việc nên nêu:\n1. Ghi lại thay đổi ở nơi chính thức — cập nhật ticket, comment vào ticket, hoặc email xác nhận. Yêu cầu nói miệng ở hành lang mà không ghi lại là nguồn tranh cãi về sau.\n2. Định lượng tác động — \"thêm phần này thì task tăng khoảng 2 ngày và phải sửa cả phần thanh toán\". Đưa con số để người quyết cân nhắc, đừng chỉ nói \"khó lắm\".\n3. Đánh đổi rõ ràng — nếu thêm A vào sprint này thì B lùi lại. Để PM chọn, đừng tự nhận hết rồi trễ cả hai.\n4. Thiết kế để dễ đổi — với vùng nghiệp vụ hay biến động, tách cấu hình ra khỏi mã cứng, dựng giao diện phía sau một lớp trừu tượng mỏng, tránh tối ưu sớm phần chưa chốt.",
+        "Ví dụ mẫu: \"Ở dự án tính phí vận chuyển, quy tắc giá đổi ba lần trong hai sprint. Sau lần thứ hai em đề xuất đưa bảng quy tắc ra cấu hình trong DB thay vì viết cứng trong code. Từ đó mỗi lần đổi giá chỉ mất một lần cập nhật dữ liệu thay vì một lần phát hành.\"",
+        "Lỗi hay mắc:\n- Nhận hết mọi thay đổi và im lặng làm thêm giờ — dẫn tới trễ toàn bộ sprint mà không ai biết.\n- Từ chối cứng \"đã chốt rồi không đổi\" — nghe thiếu hợp tác, nhất là ở công ty làm outsourcing.\n- Không ghi lại, tới lúc nghiệm thu thì hai bên nhớ khác nhau.",
+        "Điểm cộng: nói được ranh giới giữa làm rõ yêu cầu (miễn phí, nên khuyến khích) và thay đổi phạm vi (cần đánh giá lại thời gian), và ai là người có thẩm quyền chấp thuận."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": "98856-khi-yeu-cau-thay-doi-lien-tuc-giua-sprint-ban-xu-ly-the-nao"
+  },
+  {
+    "id": "e27ccf00-6359-5fd6-8277-7bdb17e0b326",
+    "question": "Kể về một lần bạn tranh luận với PM/BA hoặc QA về phạm vi công việc. Bạn giải quyết ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98857-ke-ve-mot-lan-ban-tranh-luan-voi-pm-ba-hoac-qa-ve-pham-vi-cong-viec-ban-giai-quy",
+    "slug": "ke-ve-mot-lan-ban-tranh-luan-voi-pm-ba-hoac-qa-ve-pham-vi-cong-viec-ban-giai-quyet-ra-sao-e27ccf00-6359-5fd6-8277-7bdb17e0b326",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Người hỏi muốn biết bạn có làm việc được với vai trò không phải kỹ thuật hay không, đặc biệt khi hai bên nhìn cùng một ticket theo hai cách khác nhau."
+      ],
+      "details": [
+        "Nguyên tắc chung: tranh luận phải quay về mô tả yêu cầu và tiêu chí nghiệm thu, không quay về ai nói gì trong cuộc họp nào.",
+        "Cách xử lý theo từng vai trò:\n- Với BA/PM khi phạm vi mập mờ: hỏi câu cụ thể thay vì tranh cãi trừu tượng — \"khi người dùng nhập số âm thì hiển thị gì?\", \"trường này bắt buộc hay tuỳ chọn?\". Chốt lại bằng văn bản trong ticket.\n- Với QA khi có tranh cãi bug hay yêu cầu mới: đối chiếu với tiêu chí nghiệm thu đã viết. Nếu tiêu chí không nói tới trường hợp đó thì đây là khoảng trống yêu cầu, cần BA quyết, không phải cãi nhau xem \"đây có phải bug không\".\n- Khi vẫn không thống nhất: đưa lên người có thẩm quyền quyết định, kèm hai phương án và chi phí từng phương án.",
+        "Ví dụ mẫu: \"QA log một bug là màn hình lịch sử không hiển thị đơn đã huỷ. Em kiểm tra tiêu chí nghiệm thu thì phần đó không đề cập. Thay vì tranh luận, em đưa vào buổi refinement, BA xác nhận đơn huỷ cần hiển thị kèm nhãn trạng thái. Bọn em ghi thành một ticket mới với ước lượng riêng thay vì nhét vào ticket cũ.\"",
+        "Lỗi hay mắc:\n- Nói theo kiểu coi thường vai trò khác (\"BA không hiểu kỹ thuật\") — bị đánh giá là khó phối hợp.\n- Nhận mọi thứ QA báo là bug và sửa ngay, làm phạm vi phình ra ngoài kiểm soát.\n- Kết thúc câu chuyện bằng bực bội, không có kết quả cụ thể."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": "98857-ke-ve-mot-lan-ban-tranh-luan-voi-pm-ba-hoac-qa-ve-pham-vi-cong-viec-ban-giai-quy"
+  },
+  {
+    "id": "5696be75-17d9-5da5-89dd-268c96a6d9eb",
+    "question": "Nếu được giao kèm một bạn junior mới vào, bạn sẽ làm gì trong tháng đầu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98859-neu-duoc-giao-kem-mot-ban-junior-moi-vao-ban-se-lam-gi-trong-thang-dau",
+    "slug": "neu-duoc-giao-kem-mot-ban-junior-moi-vao-ban-se-lam-gi-trong-thang-dau-5696be75-17d9-5da5-89dd-268c96a6d9eb",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Câu này hay xuất hiện khi tuyển từ mid-level trở lên, vì công ty muốn biết bạn có nhân rộng được năng lực hay chỉ làm tốt phần của mình."
+      ],
+      "details": [
+        "Kế hoạch tháng đầu nên nói được:\n- Tuần 1 — chạy được và có kết quả nhỏ. Mục tiêu là bạn đó tự dựng được môi trường và merge được một pull request nhỏ (sửa chữ, sửa lỗi nhỏ). Cảm giác hoàn thành sớm quan trọng hơn hiểu hết kiến trúc.\n- Tuần 2-3 — task thật, có ranh giới rõ. Giao task đã chia nhỏ, kèm tiêu chí hoàn thành và một mốc kiểm tra giữa chừng để bạn đó không đi sai hướng cả tuần.\n- Tuần 4 — tăng độ khó, giảm mức can thiệp. Để bạn đó tự thiết kế phần nhỏ và trình bày lại trước khi code.\n- Xuyên suốt: một buổi 1:1 mỗi tuần khoảng 30 phút, và quy tắc chặn: kẹt quá 60-90 phút thì phải hỏi, kèm phần đã thử.",
+        "Cách review code cho junior: phân biệt rõ bắt buộc sửa với góp ý tuỳ chọn. Giải thích lý do đằng sau chứ không chỉ ra lệnh. Đừng viết lại code của họ trong comment — đó là cách nhanh nhất khiến người mới ngừng suy nghĩ.",
+        "Ví dụ mẫu: \"Em kèm một bạn fresher. Ngày đầu em ngồi cùng dựng môi trường và ghi lại vào README vì chính em cũng phát hiện tài liệu thiếu 2 bước. Em cắt task đầu tiên thành 3 phần nhỏ. Đến tháng thứ hai bạn ấy tự nhận task cỡ vừa và bắt đầu review PR cho người khác.\"",
+        "Lỗi hay mắc:\n- \"Em sẽ bảo bạn ấy tự đọc code cho quen\" — không phải hướng dẫn.\n- Giao task quá khó tuần đầu, hoặc ngược lại chỉ giao việc lặt vặt suốt hai tháng.\n- Sửa hộ mọi lỗi vì làm hộ nhanh hơn giải thích — người mới không tiến bộ và bạn thành nút thắt."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": "98859-neu-duoc-giao-kem-mot-ban-junior-moi-vao-ban-se-lam-gi-trong-thang-dau"
+  },
+  {
+    "id": "27a5f885-7dcd-5a04-ae30-f2696116c945",
+    "question": "Khi bạn phải chạy song song nhiều đầu việc từ nhiều dự án, bạn sắp xếp ưu tiên bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98860-khi-ban-phai-chay-song-song-nhieu-dau-viec-tu-nhieu-du-an-ban-sap-xep-uu-tien-ba",
+    "slug": "khi-ban-phai-chay-song-song-nhieu-dau-viec-tu-nhieu-du-an-ban-sap-xep-uu-tien-bang-cach-nao-27a5f885-7dcd-5a04-ae30-f2696116c945",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Người hỏi muốn nghe một cách sắp xếp có thể mô tả được, và cách bạn xử lý khi các đầu việc thuộc về những người quản lý khác nhau."
+      ],
+      "details": [
+        "Tiêu chí sắp xếp, theo thứ tự:\n1. Đang chặn người khác hoặc chặn người dùng — sự cố production, task mà hai người khác đang chờ. Làm trước, kể cả khi nó nhỏ.\n2. Có hạn cứng bên ngoài — buổi demo với khách, ngày lên sóng chiến dịch, hạn tuân thủ.\n3. Giá trị chia cho công sức — việc nhỏ mà lợi ích lớn làm trước.\n4. Việc quan trọng nhưng không gấp — trả nợ kỹ thuật, viết test. Phải cấp chỗ cố định trong sprint, nếu không nó sẽ không bao giờ được làm.",
+        "Khi hai quản lý cùng đòi ưu tiên: bạn không phải người quyết. Việc của bạn là làm cho xung đột hiện ra: đưa danh sách công việc hiện tại kèm ước lượng, nói rõ \"nếu làm A trước thì B lùi 2 ngày\", và để hai bên chốt với nhau. Ghi lại kết quả.",
+        "Ví dụ mẫu: \"Có giai đoạn em nhận việc từ hai dự án. Em duy trì một danh sách chung, mỗi thứ Hai gửi cho cả hai quản lý danh sách theo thứ tự kèm ước lượng. Lần đầu có xung đột, hai anh tự trao đổi và chốt trong 10 phút. Từ đó em không còn bị giao chồng nhau nữa.\"",
+        "Lỗi hay mắc:\n- Nhận hết rồi làm song song cả năm việc — mọi thứ đều dở dang, chuyển ngữ cảnh liên tục làm chậm tất cả.\n- Chọn theo cảm tính hoặc theo ai giục to nhất.\n- Tự quyết bỏ việc của một bên mà không thông báo.",
+        "Điểm cộng:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": "98860-khi-ban-phai-chay-song-song-nhieu-dau-viec-tu-nhieu-du-an-ban-sap-xep-uu-tien-ba"
+  },
+  {
+    "id": "7ba7604a-8672-5915-a8c2-d4b6005c8e3f",
+    "question": "Đồng đội nhận phần việc mà đến sát ngày vẫn chưa xong, ảnh hưởng tới phần của bạn. Bạn làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98863-dong-doi-nhan-phan-viec-ma-den-sat-ngay-van-chua-xong-anh-huong-toi-phan-cua-ban",
+    "slug": "dong-doi-nhan-phan-viec-ma-den-sat-ngay-van-chua-xong-anh-huong-toi-phan-cua-ban-ban-lam-gi-7ba7604a-8672-5915-a8c2-d4b6005c8e3f",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Người hỏi muốn biết bạn xử lý theo hướng giải quyết vấn đề hay theo hướng quy trách nhiệm, và bạn có leo thang đúng lúc không."
+      ],
+      "details": [
+        "Thứ tự nên làm:\n1. Hỏi trực tiếp và sớm, riêng tư. Hỏi để biết tình trạng thật và nguyên nhân: kẹt kỹ thuật, bị giao thêm việc khác, hay hiểu sai yêu cầu. Ba nguyên nhân này cần ba cách xử lý khác nhau.\n2. Đề nghị giúp cụ thể. \"Anh chia cho em phần xử lý API, anh làm phần giao diện được không\" — cụ thể hơn nhiều so với \"cần gì cứ nói\".\n3. Giảm phụ thuộc phía mình. Thoả thuận trước phần giao tiếp (kiểu dữ liệu, hợp đồng API) rồi dùng dữ liệu giả để làm tiếp, không ngồi chờ.\n4. Báo lên khi ảnh hưởng tới cam kết chung. Báo theo hướng nêu rủi ro tiến độ, không nêu tên để quy lỗi: \"phần tích hợp đang trễ, nếu sau thứ Tư chưa có thì bản demo phải lùi\".\n5. Sau sprint, nói ở retro theo hướng hệ thống — có phải task quá lớn không có mốc kiểm tra giữa chừng không, có phải người đó bị giao chồng việc không.",
+        "Ví dụ mẫu: \"Bạn làm phần API trễ hai ngày. Em hỏi riêng thì biết bạn kẹt ở phần xác thực. Em chốt trước hợp đồng dữ liệu và dựng mock để làm tiếp phần của em, đồng thời ngồi cùng bạn một tiếng gỡ phần xác thực. Bọn em kịp demo. Ở retro, team thống nhất chia task lớn kèm mốc kiểm tra giữa chừng.\"",
+        "Lỗi hay mắc:\n- Im lặng chờ tới ngày cuối rồi báo cáo \"tại bạn kia\" — bạn cũng chịu trách nhiệm vì đã thấy sớm mà không nói.\n- Mách quản lý ngay trước khi hỏi người đó một câu.\n- Tự làm hộ toàn bộ phần của người khác — che mất vấn đề thật và bạn quá tải."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": "98863-dong-doi-nhan-phan-viec-ma-den-sat-ngay-van-chua-xong-anh-huong-toi-phan-cua-ban"
+  },
+  {
+    "id": "f1160b0a-359c-5881-923c-49f384f50a67",
+    "question": "Bạn từng làm việc với team ở múi giờ khác hoặc làm remote toàn phần chưa? Bạn giữ tiến độ bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98864-ban-tung-lam-viec-voi-team-o-mui-gio-khac-hoac-lam-remote-toan-phan-chua-ban-giu",
+    "slug": "ban-tung-lam-viec-voi-team-o-mui-gio-khac-hoac-lam-remote-toan-phan-chua-ban-giu-tien-do-bang-cach-n-f1160b0a-359c-5881-923c-49f384f50a67",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Câu này phổ biến ở công ty outsourcing làm cho khách Nhật, Mỹ, châu Âu, và ở công ty product có team phân tán. Điểm được đánh giá là bạn có làm việc bất đồng bộ được không."
+      ],
+      "details": [
+        "Những thói quen nên nêu:\n- Viết trước, họp sau. Mọi quyết định và cập nhật nằm ở nơi tra cứu được (ticket, tài liệu, kênh chat), không nằm trong đầu người tham gia cuộc gọi.\n- Tận dụng phần giờ giao nhau. Xác định khung 2-3 tiếng trùng nhau và dành nó cho việc cần trao đổi hai chiều (gỡ vướng, review thiết kế). Việc một chiều thì viết.\n- Cập nhật đủ chi tiết để người khác đọc lúc bạn đang ngủ. Nêu đã làm gì, đang vướng gì, cần ai trả lời gì. Câu hỏi phải nêu kèm phương án dự phòng: \"nếu không kịp trả lời, em sẽ làm theo phương án A\".\n- Gom câu hỏi. Hỏi từng câu rời rạc thì mỗi vòng mất một ngày.\n- Thống nhất mức khẩn. Cái gì gọi điện ngay, cái gì để tin nhắn, cái gì để mai trả lời cũng được.",
+        "Ví dụ mẫu: \"Em làm với khách ở châu Âu, lệch 6 tiếng, trùng nhau khoảng từ 15h tới 18h giờ Việt Nam. Em chuyển sang cập nhật viết mỗi cuối ngày kèm câu hỏi có phương án mặc định, và giữ khung giờ trùng cho việc cần bàn. Số vòng qua lại cho một yêu cầu giảm từ khoảng 3 ngày xuống còn 1 ngày.\"",
+        "Lỗi hay mắc:\n- Chỉ nói \"em quen làm remote, em tự giác\" mà không nêu cách làm.\n- Chờ được trả lời mới làm tiếp, mỗi lần chờ mất trọn một ngày.\n- Nhắn câu hỏi mơ hồ kiểu \"anh xem giúp em cái này bị lỗi\" mà không kèm log, bước tái hiện, hoặc phần đã thử.",
+        "Nếu chưa từng làm remote, hãy nói thật và nêu thói quen tương đương bạn đang có (viết tài liệu quyết định, cập nhật trạng thái hằng ngày trong ticket)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": "98864-ban-tung-lam-viec-voi-team-o-mui-gio-khac-hoac-lam-remote-toan-phan-chua-ban-giu"
+  },
+  {
+    "id": "3755167a-3a6a-5618-bbb2-0c814efa5e17",
+    "question": "Có nên là người đưa con số lương trước không? Nếu bị ép nêu con số ngay vòng đầu thì xử lý thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98904-co-nen-la-nguoi-dua-con-so-luong-truoc-khong-neu-bi-ep-neu-con-so-ngay-vong-dau",
+    "slug": "co-nen-la-nguoi-dua-con-so-luong-truoc-khong-neu-bi-ep-neu-con-so-ngay-vong-dau-thi-xu-ly-the-nao-3755167a-3a6a-5618-bbb2-0c814efa5e17",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nguyên tắc chung: để công ty nói dải lương trước nếu được, vì họ đã có ngân sách cho vị trí. Nhưng ở Việt Nam, HR thường hỏi kỳ vọng ngay vòng sàng lọc để loại nhanh, nên né mãi sẽ kéo dài quy trình vô ích."
+      ],
+      "details": [
+        "Cách xử lý theo thứ tự:\n1. Hỏi ngược trước: \"Công ty đã có dải lương dự kiến cho vị trí này chưa ạ? Em muốn xem có khớp kỳ vọng không trước khi cả hai bên dành thêm thời gian.\"\n2. Nếu họ vẫn đẩy về phía bạn, đưa một khoảng thay vì một con số: \"Khoảng A–B triệu gross, tuỳ phạm vi công việc và phúc lợi.\"\n3. Đặt cận dưới của khoảng bằng mức bạn thực sự hài lòng, không phải mức tối thiểu chấp nhận được — nhà tuyển dụng gần như luôn offer quanh cận dưới.",
+        "Chuẩn bị trước buổi phỏng vấn: ba con số — mức mong muốn, mức sàn sẽ từ chối nếu thấp hơn, và mức thị trường cho level của bạn (tra từ báo cáo lương IT và tin tuyển dụng cùng vị trí). Không có ba con số này thì mọi câu trả lời đều là cảm tính.",
+        "Tránh trả lời \"bao nhiêu cũng được, em ưu tiên học hỏi\" — câu đó thường dẫn tới offer ở cận dưới ngân sách."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": "98904-co-nen-la-nguoi-dua-con-so-luong-truoc-khong-neu-bi-ep-neu-con-so-ngay-vong-dau"
+  },
+  {
+    "id": "0bc5ff32-84f6-5b7e-bdd7-674c81b33786",
+    "question": "Đang cầm hai offer với lương chênh nhau, bạn so sánh thế nào cho đúng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98905-dang-cam-hai-offer-voi-luong-chenh-nhau-ban-so-sanh-the-nao-cho-dung",
+    "slug": "dang-cam-hai-offer-voi-luong-chenh-nhau-ban-so-sanh-the-nao-cho-dung-0bc5ff32-84f6-5b7e-bdd7-674c81b33786",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "So sánh tổng thu nhập một năm và điều kiện làm việc, không so lương tháng."
+      ],
+      "details": [
+        "Quy về cùng đơn vị — thu nhập năm:\n- Lương gross × 12 + thưởng tháng 13 (có bảo đảm trên hợp đồng hay chỉ hứa miệng?) + thưởng hiệu suất (mức thực trả năm ngoái là bao nhiêu, không phải mức tối đa) + phụ cấp cố định (ăn trưa, đi lại, điện thoại).",
+        "Các khoản khó quy ra tiền nhưng ảnh hưởng lớn:\n- Bảo hiểm đóng trên lương nào — full lương hay chỉ lương cơ bản.\n- OT: có trả không, tính hệ số bao nhiêu, tần suất thực tế ra sao (hỏi thẳng: \"tháng gần nhất team OT mấy buổi?\").\n- Cổ phần/ESOP: định giá gần nhất, lịch vesting, cliff bao lâu, điều kiện khi nghỉ. Với startup chưa có vòng gọi vốn rõ ràng, nên coi giá trị kỳ vọng gần bằng 0 khi ra quyết định.\n- Ngày phép, chi phí đi lại/thời gian di chuyển, ngân sách học tập, chính sách remote.",
+        "Yếu tố quyết định dài hạn: công việc đó có đưa bạn tới level tiếp theo không — ai review code, hệ thống có đủ phức tạp để học, quy trình kỹ thuật thế nào. Chênh vài triệu một tháng thường nhỏ hơn nhiều so với chênh lệch năng lực tích luỹ sau hai năm."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": "98905-dang-cam-hai-offer-voi-luong-chenh-nhau-ban-so-sanh-the-nao-cho-dung"
+  },
+  {
+    "id": "594afe73-74c1-588f-80d3-6e10cd655396",
+    "question": "Đã nhận được offer nhưng thấp hơn kỳ vọng, bạn deal lại thế nào để không mất offer?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98906-da-nhan-duoc-offer-nhung-thap-hon-ky-vong-ban-deal-lai-the-nao-de-khong-mat-offe",
+    "slug": "da-nhan-duoc-offer-nhung-thap-hon-ky-vong-ban-deal-lai-the-nao-de-khong-mat-offer-594afe73-74c1-588f-80d3-6e10cd655396",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Thời điểm tốt nhất để đàm phán là sau khi có offer và trước khi ký — lúc đó công ty đã chọn bạn và ngại tuyển lại từ đầu. Rủi ro mất offer vì đàm phán lịch sự là rất thấp."
+      ],
+      "details": [
+        "Trình tự:\n1. Cảm ơn và xác nhận quan tâm trước tiên: \"Em rất hứng thú với vị trí này.\"\n2. Nêu con số cụ thể kèm lý do dựa trên năng lực, không dựa trên nhu cầu cá nhân: \"Dựa trên kinh nghiệm X năm với [công nghệ chính của vị trí] và việc em sẽ đảm nhận thêm phần [Y], em mong mức A. Anh/chị xem có điều chỉnh được không ạ?\"\n3. Đưa phương án thay thế nếu ngân sách cứng: rút ngắn chu kỳ review lương xuống 6 tháng kèm mục tiêu ghi rõ, ký thưởng, thêm ngày phép, ngân sách học tập, hoặc chính sách remote.\n4. Chốt bằng văn bản. Mọi cam kết chỉ nói miệng — tăng lương sau 6 tháng, thưởng — phải nằm trong offer letter hoặc email xác nhận.",
+        "Không nên: lấy offer ảo ra ép, đàm phán qua nhiều vòng nhỏ lẻ (mỗi lần một khoản), hay đưa lý do \"vì em cần tiền trả nợ/thuê nhà\". Đàm phán một lần, gọn, có căn cứ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": "98906-da-nhan-duoc-offer-nhung-thap-hon-ky-vong-ban-deal-lai-the-nao-de-khong-mat-offe"
+  },
+  {
+    "id": "a13d7182-84da-5985-a4a7-302e3643e2cb",
+    "question": "CV của bạn có khoảng trống 8 tháng không đi làm. Nhà tuyển dụng hỏi thì giải thích thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98907-cv-cua-ban-co-khoang-trong-8-thang-khong-di-lam-nha-tuyen-dung-hoi-thi-giai-thic",
+    "slug": "cv-cua-ban-co-khoang-trong-8-thang-khong-di-lam-nha-tuyen-dung-hoi-thi-giai-thich-the-nao-a13d7182-84da-5985-a4a7-302e3643e2cb",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khoảng trống không phải điểm loại; cách bạn kể về nó mới là thứ được đánh giá. Trả lời theo ba nhịp: lý do ngắn gọn — bạn đã làm gì trong thời gian đó — vì sao sẵn sàng quay lại."
+      ],
+      "details": [
+        "Mẫu:\n- \"Sau khi kết thúc dự án ở công ty cũ, em dừng khoảng 8 tháng để [lý do thật: chăm sức khoẻ / việc gia đình / học chuyển hướng sang backend]. Trong thời gian đó em hoàn thành [khoá học/chứng chỉ cụ thể] và làm [dự án cá nhân có link repo], đã triển khai chạy thật. Hiện em đã ổn định và muốn quay lại làm toàn thời gian.\"",
+        "Nguyên tắc:\n- Nói thật. Bịa một công việc để lấp chỗ trống sẽ lộ khi kiểm tra tham chiếu hoặc khi khai sổ bảo hiểm xã hội.\n- Không xin lỗi dài dòng hay kể lể. Một đến hai câu về lý do là đủ.\n- Có bằng chứng cụ thể cho việc bạn không bị mai một kỹ năng: repo, bài viết, chứng chỉ, đóng góp mã nguồn mở. Đây là phần nhà tuyển dụng thật sự quan tâm.\n- Ghi khoảng trống trên CV theo năm–tháng thay vì giấu: \"2025/03 – 2025/11: nghỉ và tự học Golang, dự án X\". Giấu bằng cách chỉ ghi năm thường bị hỏi lại và tạo cảm giác che đậy."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 76,
+    "sourceSlug": "98907-cv-cua-ban-co-khoang-trong-8-thang-khong-di-lam-nha-tuyen-dung-hoi-thi-giai-thic"
+  },
+  {
+    "id": "44bbba2b-f94e-507d-bcda-c9210af48f06",
+    "question": "CV của bạn có 3 công ty trong 3 năm. Nhà tuyển dụng lo bạn sẽ lại nghỉ sớm — trả lời sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98908-cv-cua-ban-co-3-cong-ty-trong-3-nam-nha-tuyen-dung-lo-ban-se-lai-nghi-som-tra-lo",
+    "slug": "cv-cua-ban-co-3-cong-ty-trong-3-nam-nha-tuyen-dung-lo-ban-se-lai-nghi-som-tra-loi-sao-44bbba2b-f94e-507d-bcda-c9210af48f06",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Điều nhà tuyển dụng thật sự muốn biết không phải \"vì sao anh nghỉ\" mà là \"lần này có khác không\". Trả lời phải chứng minh các lần chuyển việc có một hướng đi nhất quán, không phải phản ứng ngẫu nhiên."
+      ],
+      "details": [
+        "Khung trả lời:\n1. Gộp các lần chuyển thành một mạch: \"Ba lần chuyển đều theo một hướng: từ làm giao diện thuần sang hệ thống có lưu lượng lớn. Công ty A cho em nền tảng React, công ty B là lần đầu em làm việc với hệ thống có hàng nghìn request mỗi phút, công ty C em bắt đầu tự thiết kế API.\"\n2. Nêu lý do khách quan cho các lần ngắn: dự án bị dừng, công ty cắt giảm, khách hàng kết thúc hợp đồng — nếu đúng là vậy. Đây là lý do rất phổ biến ở mảng outsource và không bị trừ điểm.\n3. Nói rõ vì sao vị trí này là điểm dừng dài hơn: gắn với thứ cụ thể tại công ty đó (domain, quy mô hệ thống, lộ trình kỹ thuật), không nói chung chung \"em muốn gắn bó lâu dài\".",
+        "Tránh: nói xấu công ty cũ, đổ hết cho sếp hoặc đồng nghiệp, hoặc lý do duy nhất là \"chỗ mới trả cao hơn\". Nếu lý do thật là lương, hãy diễn đạt theo hướng phạm vi công việc và mức đóng góp tăng lên."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 77,
+    "sourceSlug": "98908-cv-cua-ban-co-3-cong-ty-trong-3-nam-nha-tuyen-dung-lo-ban-se-lai-nghi-som-tra-lo"
+  },
+  {
+    "id": "55c48218-959c-5198-ab0d-99828925a1d1",
+    "question": "Tiếng Anh giao tiếp của bạn còn yếu. Nên ứng tuyển thế nào và trả lời ra sao khi bị hỏi về trình độ tiếng Anh?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98909-tieng-anh-giao-tiep-cua-ban-con-yeu-nen-ung-tuyen-the-nao-va-tra-loi-ra-sao-khi",
+    "slug": "tieng-anh-giao-tiep-cua-ban-con-yeu-nen-ung-tuyen-the-nao-va-tra-loi-ra-sao-khi-bi-hoi-ve-trinh-do-t-55c48218-959c-5198-ab0d-99828925a1d1",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không nói dối trình độ. Nhiều công ty kiểm tra ngay bằng vài câu tiếng Anh trong buổi phỏng vấn hoặc một vòng với khách hàng."
+      ],
+      "details": [
+        "Trả lời trung thực kèm mức độ cụ thể:\n- \"Em đọc tài liệu kỹ thuật và trao đổi qua văn bản tốt — hằng ngày em đọc docs, viết mô tả pull request và trả lời comment bằng tiếng Anh. Nghe nói thì em còn chậm, đang học [cách cụ thể: 3 buổi/tuần với lớp giao tiếp, tham gia daily bằng tiếng Anh]. Nếu vị trí cần họp trực tiếp với khách hàng, em cần vài tháng để theo kịp.\"",
+        "Chiến lược ứng tuyển:\n- Nhắm đúng loại vị trí: công ty product trong nước, đội có BrSE/PM làm cầu nối, hoặc dự án Nhật/Hàn thường yêu cầu nói tiếng Anh thấp hơn dự án Mỹ/Âu.\n- Ưu tiên nơi giao tiếp chủ yếu bất đồng bộ bằng văn bản (issue, pull request, tài liệu) — đó là điểm mạnh dễ bù nhất.\n- Tăng phần chứng minh được: viết mô tả dự án trong CV bằng tiếng Anh gọn gàng, README repo bằng tiếng Anh. Nhà tuyển dụng đọc được ngay.",
+        "Điểm quan trọng: tiếng Anh yếu làm hẹp lựa chọn chứ không chặn hoàn toàn, nhưng nó là trần lương rõ rệt ở thị trường IT Việt Nam — nên coi việc học là đầu tư nghề nghiệp, không phải việc phụ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 78,
+    "sourceSlug": "98909-tieng-anh-giao-tiep-cua-ban-con-yeu-nen-ung-tuyen-the-nao-va-tra-loi-ra-sao-khi"
+  },
+  {
+    "id": "b298191d-a1d9-57cf-8dc6-3d85f8e3b905",
+    "question": "Bạn muốn chuyển từ PHP sang Go, hoặc từ Frontend sang Backend. Trình bày thế nào để không bị coi là \"làm lại từ đầu\"?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98910-ban-muon-chuyen-tu-php-sang-go-hoac-tu-frontend-sang-backend-trinh-bay-the-nao-d",
+    "slug": "ban-muon-chuyen-tu-php-sang-go-hoac-tu-frontend-sang-backend-trinh-bay-the-nao-de-khong-bi-coi-la-la-b298191d-a1d9-57cf-8dc6-3d85f8e3b905",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhà tuyển dụng lo hai điều: bạn mất bao lâu để làm được việc, và bạn có bỏ cuộc giữa chừng không. Câu trả lời phải giải quyết đúng hai điều đó."
+      ],
+      "details": [
+        "1. Tách phần chuyển được và phần phải học.\n- Phần chuyển được: hiểu HTTP, thiết kế API, SQL và tối ưu truy vấn, Git, kiểm thử, đọc log, làm việc với hệ thống đang chạy. Đây là phần chiếm phần lớn công việc hằng ngày và không phụ thuộc ngôn ngữ.\n- Phần phải học: cú pháp, mô hình đồng thời (goroutine/channel), hệ sinh thái thư viện, thói quen xử lý lỗi của Go. Nói thẳng và ước lượng: \"khoảng 2–3 tháng để viết code sản xuất được, phần thiết kế hệ thống thì em dùng lại được ngay.\"",
+        "2. Có bằng chứng đã bắt đầu chuyển từ trước khi phỏng vấn. Đây là điểm quyết định — một dịch vụ nhỏ viết bằng Go đã deploy, một phần trong dự án cũ bạn xin làm bằng Go, hoặc một module backend bạn nhận thêm khi còn làm frontend. Nói \"em muốn học Go\" mà không có gì để xem thì mọi cam kết đều rỗng.",
+        "3. Nêu lý do chuyển gắn với công việc, không phải theo xu hướng: \"Ở dự án cũ, phần xử lý hàng đợi bằng PHP không đáp ứng được lưu lượng, em tham gia viết lại một service bằng Go và muốn đi sâu hướng đó.\"",
+        "Thực tế thị trường: chuyển ngang trong cùng mảng (PHP → Go) thường giữ được level và mức lương; chuyển vai trò (FE → BE) có thể phải chấp nhận lùi nửa bậc trong 6–12 tháng đầu. Biết trước điều này giúp bạn thương lượng thực tế hơn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 79,
+    "sourceSlug": "98910-ban-muon-chuyen-tu-php-sang-go-hoac-tu-frontend-sang-backend-trinh-bay-the-nao-d"
+  },
+  {
+    "id": "abde25c7-af1d-570b-ab6c-b8fe34d9af9a",
+    "question": "Bạn ước lượng thời gian cho một task như thế nào? Vì sao ước lượng hay lệch?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98954-ban-uoc-luong-thoi-gian-cho-mot-task-nhu-the-nao-vi-sao-uoc-luong-hay-lech",
+    "slug": "ban-uoc-luong-thoi-gian-cho-mot-task-nhu-the-nao-vi-sao-uoc-luong-hay-lech-abde25c7-af1d-570b-ab6c-b8fe34d9af9a",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cách làm được việc nhất là chia nhỏ rồi mới ước lượng. Ước lượng một task lớn theo cảm tính gần như luôn thiếu, vì phần chưa nghĩ tới không xuất hiện trong đầu khi ước lượng."
+      ],
+      "details": [
+        "Quy trình:",
+        "1. Chia task tới mức mỗi phần dưới một ngày công. Phần nào không chia được nghĩa là bạn chưa hiểu nó — đó chính là rủi ro lớn nhất.\n2. Ước lượng từng phần, cộng lại, rồi cộng thêm các việc thật sự tồn tại nhưng hay bị quên: viết test, sửa sau review, merge conflict, deploy, kiểm thử lại sau khi QA trả về.\n3. Ước lượng theo thời gian làm việc thực tế, không phải thời gian ngồi bàn. Một ngày làm việc hiếm khi có 8 giờ tập trung vì còn họp, hỗ trợ người khác, xử lý sự cố.\n4. Với phần mơ hồ, tách một spike có giới hạn thời gian (ví dụ 4 giờ tìm hiểu) rồi ước lượng lại sau spike, thay vì đoán bừa một con số.",
+        "Lý do lệch phổ biến: yêu cầu chưa rõ nên phát sinh giữa chừng, phụ thuộc bên ngoài (API đối tác, người khác review), và thiên hướng lạc quan — ta nhớ lần làm suôn sẻ nhất chứ không nhớ lần trung bình.",
+        "Cách nói với người phỏng vấn cho thấy sự chín: đưa khoảng kèm giả định (\"3-5 ngày, với giả định API thanh toán có sandbox sẵn\"), không đưa một con số trần trụi."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 80,
+    "sourceSlug": "98954-ban-uoc-luong-thoi-gian-cho-mot-task-nhu-the-nao-vi-sao-uoc-luong-hay-lech"
+  },
+  {
+    "id": "89168143-c1b7-5b03-92a6-919b99a5227f",
+    "question": "Đang làm mà thấy sẽ trễ so với ước lượng ban đầu, bạn xử lý thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98955-dang-lam-ma-thay-se-tre-so-voi-uoc-luong-ban-dau-ban-xu-ly-the-nao",
+    "slug": "dang-lam-ma-thay-se-tre-so-voi-uoc-luong-ban-dau-ban-xu-ly-the-nao-89168143-c1b7-5b03-92a6-919b99a5227f",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nguyên tắc: báo sớm ngay khi tín hiệu xuất hiện, kèm phương án — không im lặng làm tiếp rồi báo vào ngày cuối. Giá trị của thông tin trễ hạn giảm dần theo thời gian; báo trước 3 ngày thì team còn xoay được, báo trước 3 giờ thì không."
+      ],
+      "details": [
+        "Cách báo có cấu trúc:",
+        "1. Trạng thái thật: đã xong phần nào, còn phần nào.\n2. Nguyên nhân cụ thể, không nói chung chung: \"API bên đối tác không có sandbox, phải tự dựng mock, phát sinh 1,5 ngày\".\n3. Mốc mới kèm mức tự tin.\n4. Các lựa chọn để người quyết định chọn, thay vì chỉ báo tin xấu:\n- cắt phạm vi (ra trước phần chính, phần phụ sang sprint sau),\n- thêm người vào phần tách rời được,\n- lùi hạn,\n- ra bản tạm chấp nhận được (ví dụ nhập tay tạm thời) rồi hoàn thiện sau.",
+        "Sau khi xong, ghi lại vì sao lệch để lần ước lượng sau chính xác hơn. Đây là điều phân biệt người lệch một lần với người lệch mãi.",
+        "Điều nên tránh: hứa \"cố gắng kịp\" mà không đổi gì trong kế hoạch, hoặc âm thầm cắt test để bù thời gian."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 81,
+    "sourceSlug": "98955-dang-lam-ma-thay-se-tre-so-voi-uoc-luong-ban-dau-ban-xu-ly-the-nao"
+  },
+  {
+    "id": "a5c9ade5-4911-5670-b4c7-3059bd2bebc9",
+    "question": "Bạn chia một task lớn thành các phần nhỏ như thế nào để giao được và review được?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98956-ban-chia-mot-task-lon-thanh-cac-phan-nho-nhu-the-nao-de-giao-duoc-va-review-duoc",
+    "slug": "ban-chia-mot-task-lon-thanh-cac-phan-nho-nhu-the-nao-de-giao-duoc-va-review-duoc-a5c9ade5-4911-5670-b4c7-3059bd2bebc9",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tiêu chí của một phần nhỏ tốt: tự nó chạy được và merge được, không làm hỏng nhánh chính, và review trong khoảng 30 phút là hiểu hết."
+      ],
+      "details": [
+        "Các cách chia thường dùng:",
+        "Khi giao cho người khác, mỗi phần cần kèm đầu ra kỳ vọng và cách kiểm chứng: sửa file nào, thế nào là xong, test gì để biết đúng. Task được mô tả bằng \"làm phần thanh toán\" thì không ai nhận được.",
+        "Lợi ích thực tế: PR nhỏ được review nhanh hơn và bắt lỗi tốt hơn, dễ rollback, và giảm rủi ro khi một phần bị chặn."
+      ],
+      "points": [
+        "Theo lát cắt dọc (vertical slice): mỗi phần đi hết từ API đến database cho một trường hợp nhỏ, thay vì cắt ngang theo tầng (\"làm hết database trước, sau đó làm hết API\") — cắt ngang khiến không có gì kiểm chứng được cho tới cuối.",
+        "Tách phần chuẩn bị ra trước: đổi tên, di chuyển file, refactor mở đường đi riêng một PR. Trộn refactor lớn với thay đổi hành vi làm review không phân biệt nổi đâu là logic mới.",
+        "Dùng feature flag để merge code chưa hoàn chỉnh nhưng đã tắt, tránh nhánh sống lâu và merge conflict.",
+        "Tách theo trường hợp nghiệp vụ: luồng thành công trước, rồi tới các nhánh lỗi, rồi tới tối ưu."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 82,
+    "sourceSlug": "98956-ban-chia-mot-task-lon-thanh-cac-phan-nho-nhu-the-nao-de-giao-duoc-va-review-duoc"
+  },
+  {
+    "id": "8d57d7e7-8307-5255-8998-3a8a96916cf0",
+    "question": "Được giao review code của người giỏi hơn hoặc ở mảng bạn không rành, bạn review cái gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98957-duoc-giao-review-code-cua-nguoi-gioi-hon-hoac-o-mang-ban-khong-ranh-ban-review-c",
+    "slug": "duoc-giao-review-code-cua-nguoi-gioi-hon-hoac-o-mang-ban-khong-ranh-ban-review-cai-gi-8d57d7e7-8307-5255-8998-3a8a96916cf0",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bạn vẫn có thứ để đóng góp, chỉ cần đổi trọng tâm sang những điểm không cần chuyên môn sâu hơn tác giả:"
+      ],
+      "details": [
+        "Cách viết nhận xét khi chưa chắc: đặt câu hỏi thay vì khẳng định — \"chỗ này nếu request bị lặp thì có tạo hai bản ghi không?\". Nếu tác giả có lý do, bạn học được; nếu là thiếu sót thật, bạn vừa chặn được một lỗi.",
+        "Điều cần tránh: approve chiếu lệ vì ngại. Trong review, câu \"mình chưa đủ nắm phần thuật toán này, nhờ thêm một người nữa xem\" là phản hồi hợp lệ và trung thực."
+      ],
+      "points": [
+        "Tính dễ hiểu: nếu bạn đọc mà không hiểu, đó là một tín hiệu thật — người sửa nó sáu tháng nữa cũng sẽ không hiểu. Đề nghị đặt lại tên, tách hàm, hoặc thêm một dòng giải thích lý do.",
+        "Phần bạn thật sự nắm: xử lý lỗi, log, cấu hình, biến môi trường, migration có chạy ngược được không, ảnh hưởng tới module bạn đang giữ.",
+        "Trường hợp biên: rỗng, trùng, timeout, gọi lại hai lần, dữ liệu cũ đã tồn tại trước khi có thay đổi này.",
+        "Kiểm chứng: có test cho hành vi mới không, mô tả PR có nói rõ vì sao thay đổi không."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 83,
+    "sourceSlug": "98957-duoc-giao-review-code-cua-nguoi-gioi-hon-hoac-o-mang-ban-khong-ranh-ban-review-c"
+  },
+  {
+    "id": "9fb995d5-556a-5f77-b622-eb3a25bf5b5e",
+    "question": "Nợ kỹ thuật (technical debt) là gì? Bạn nhận diện, ghi nhận và thuyết phục cấp trên dành thời gian trả nợ bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98958-no-ky-thuat-technical-debt-la-gi-ban-nhan-dien-ghi-nhan-va-thuyet-phuc-cap-tren",
+    "slug": "no-ky-thuat-technical-debt-la-gi-ban-nhan-dien-ghi-nhan-va-thuyet-phuc-cap-tren-danh-thoi-gian-tra-n-9fb995d5-556a-5f77-b622-eb3a25bf5b5e",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nợ kỹ thuật là phần thiết kế/mã nguồn được chấp nhận ở mức chưa tốt để đi nhanh hơn trong ngắn hạn; phần chênh lệch đó sinh \"lãi\" dưới dạng mọi thay đổi về sau đều chậm và rủi ro hơn. Nợ không xấu tự thân — nợ có ý thức và có kế hoạch trả là một quyết định kinh doanh hợp lệ; nợ do cẩu thả và không ai biết mới là vấn đề."
+      ],
+      "details": [
+        "Nhận diện qua tín hiệu đo được, không qua cảm tính:\n- Một thay đổi nhỏ phải sửa nhiều nơi, hoặc lặp lại cùng một lỗi ở nhiều chỗ.\n- Thời gian từ commit tới lên production dài, deploy phải làm tay.\n- Vùng code có tần suất sửa lỗi cao (dùng git log đếm số commit fix theo file).\n- Không dám sửa vì không có test bao phủ.",
+        "Ghi nhận: tạo ticket trong cùng backlog với feature, mô tả theo tác động chứ không theo mỹ học code — \"module X không có test nên mỗi lần sửa mất thêm 1 ngày kiểm thử tay\", kèm chi phí ước lượng để trả.",
+        "Thuyết phục: quy về ngôn ngữ của người quyết định — thời gian, rủi ro, tiền. So sánh \"trả 3 ngày bây giờ\" với \"mỗi tính năng liên quan tốn thêm 1 ngày, quý này còn 6 tính năng\". Đề xuất tỷ lệ cố định mỗi sprint (thường 10-20% năng lực) dễ được duyệt hơn xin một đợt refactor lớn. Và gắn việc trả nợ vào tính năng sắp làm: dọn ngay vùng code mà sprint tới phải đụng đến."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 84,
+    "sourceSlug": "98958-no-ky-thuat-technical-debt-la-gi-ban-nhan-dien-ghi-nhan-va-thuyet-phuc-cap-tren"
+  },
+  {
+    "id": "bd647973-7cef-5afe-9359-ee744e52eabd",
+    "question": "Đi làm full-time, thời gian rảnh ít — bạn học công nghệ mới thế nào cho hiệu quả?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98959-di-lam-full-time-thoi-gian-ranh-it-ban-hoc-cong-nghe-moi-the-nao-cho-hieu-qua",
+    "slug": "di-lam-full-time-thoi-gian-ranh-it-ban-hoc-cong-nghe-moi-the-nao-cho-hieu-qua-bd647973-7cef-5afe-9359-ee744e52eabd",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Điểm mấu chốt không phải học nhiều giờ hơn, mà là gắn việc học vào công việc đang làm để có lặp lại và phản hồi thật."
+      ],
+      "details": [
+        "Cách vận hành:",
+        "Cũng nên chấp nhận là không thể theo hết. Nền tảng (mạng, database, thiết kế hệ thống, cấu trúc dữ liệu) mất giá rất chậm; framework thì thay liên tục — ưu tiên phần lâu bền, học phần thay đổi nhanh khi thật sự cần."
+      ],
+      "points": [
+        "Học có mục tiêu ứng dụng. Chọn thứ sẽ dùng trong 1-3 tháng tới (dự án sắp tới cần Redis, team sắp chuyển sang TypeScript), không chạy theo mọi công nghệ đang được nhắc tới.",
+        "Học qua một sản phẩm nhỏ có thật, không dừng ở xem video. Một dịch vụ nhỏ chạy được dạy nhiều hơn mười khoá học xem hết.",
+        "Tận dụng giờ làm hợp pháp: nhận task chạm vào công nghệ đó, xung phong làm spike, đề xuất áp dụng ở một phần rủi ro thấp.",
+        "Đọc tài liệu gốc trước blog. Blog nhanh nhưng lỗi thời và thiếu ngữ cảnh; tài liệu chính thức và changelog cho biết cái gì thật sự thay đổi."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 85,
+    "sourceSlug": "98959-di-lam-full-time-thoi-gian-ranh-it-ban-hoc-cong-nghe-moi-the-nao-cho-hieu-qua"
+  },
+  {
+    "id": "735758c2-35a7-56a7-b33f-3b7fc10b6350",
+    "question": "Nên học sâu một mảng hay học rộng nhiều công nghệ? Bạn chọn thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98960-nen-hoc-sau-mot-mang-hay-hoc-rong-nhieu-cong-nghe-ban-chon-the-nao",
+    "slug": "nen-hoc-sau-mot-mang-hay-hoc-rong-nhieu-cong-nghe-ban-chon-the-nao-735758c2-35a7-56a7-b33f-3b7fc10b6350",
+    "access": "free",
+    "departments": [
+      "career"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Câu trả lời được dùng nhiều trong thực tế là mô hình chữ T: sâu ở một mảng đủ để là người được hỏi khi có vấn đề khó, rộng vừa đủ ở các mảng liền kề để hiểu và làm việc được với người khác."
+      ],
+      "details": [
+        "Vì sao cần cả hai:\n- Chỉ rộng mà không sâu: làm được nhiều việc mức trung bình, nhưng không ai giao phần khó, và rất khó chứng minh giá trị khi lên senior.\n- Chỉ sâu mà không rộng: mạnh khi công nghệ đó còn được dùng, rủi ro khi thị trường hoặc công ty đổi hướng, và khó tham gia bàn thiết kế hệ thống.",
+        "Cách chọn theo giai đoạn:\n- 1-3 năm đầu: nên đi sâu trước một ngăn xếp chính (một ngôn ngữ, một framework, database quan hệ). Nhảy công nghệ liên tục ở giai đoạn này khiến hồ sơ nhìn rời rạc và kỹ năng nào cũng dở dang.\n- Sau đó mở rộng theo hướng liền kề công việc: backend học thêm hạ tầng, hàng đợi, quan sát hệ thống; frontend học thêm hiệu năng, kiểm thử, một chút backend.\n- Phần nền tảng luôn nên sâu dù chọn hướng nào: cấu trúc dữ liệu, mạng, database, thiết kế hệ thống — vì nó chuyển được sang mọi ngăn xếp.",
+        "Khi trả lời phỏng vấn, gắn lựa chọn với định hướng nghề nghiệp cụ thể, không nói chung chung \"em học cả hai\"."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 86,
+    "sourceSlug": "98960-nen-hoc-sau-mot-mang-hay-hoc-rong-nhieu-cong-nghe-ban-chon-the-nao"
+  },
+  {
+    "id": "dce6a925-4287-5b1f-acad-642636e56b12",
+    "question": "Nếu công việc không cho bạn cơ hội phát triển hoặc không được thăng tiến sau 2 năm, bạn sẽ làm gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "neu-cong-viec-khong-cho-ban-co-hoi-phat-trien-hoac-khong-duoc-thang-tien-sau-2-nam-ban-se-lam-gi-dce6a925-4287-5b1f-acad-642636e56b12",
+    "access": "pro",
+    "departments": [
+      "career"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 87,
+    "sourceSlug": null
+  },
+  {
+    "id": "d0a3949f-8784-5439-88b1-e7c26fc1d19c",
+    "question": "Bạn đã từng đứng ra dẫn dắt một project hoặc task lớn chưa?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-da-tung-dung-ra-dan-dat-mot-project-hoac-task-lon-chua-d0a3949f-8784-5439-88b1-e7c26fc1d19c",
+    "access": "pro",
+    "departments": [
+      "career"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 88,
+    "sourceSlug": null
+  },
+  {
+    "id": "98a915d1-b819-5627-8e40-46a6d810eeeb",
+    "question": "Nếu cả team không đồng ý với ý kiến của bạn, bạn sẽ làm gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "neu-ca-team-khong-dong-y-voi-y-kien-cua-ban-ban-se-lam-gi-98a915d1-b819-5627-8e40-46a6d810eeeb",
+    "access": "pro",
+    "departments": [
+      "career"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 89,
+    "sourceSlug": null
+  },
+  {
+    "id": "12cc9a7e-8303-5468-9b85-89182b360995",
+    "question": "Bạn đã từng tranh luận với BA/PM về một requirement chưa?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-da-tung-tranh-luan-voi-ba-pm-ve-mot-requirement-chua-12cc9a7e-8303-5468-9b85-89182b360995",
+    "access": "pro",
+    "departments": [
+      "career"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 90,
+    "sourceSlug": null
+  },
+  {
+    "id": "9d28d632-632f-579a-9dfd-869559334920",
+    "question": "Bạn đã từng thay đổi quan điểm về một cách tiếp cận kỹ thuật chưa?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-da-tung-thay-doi-quan-diem-ve-mot-cach-tiep-can-ky-thuat-chua-9d28d632-632f-579a-9dfd-869559334920",
+    "access": "pro",
+    "departments": [
+      "career"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 91,
+    "sourceSlug": null
+  },
+  {
+    "id": "e7335857-8405-58d8-81ee-28e611b1683d",
+    "question": "Bạn đã từng đề xuất một ý tưởng mới mà khó triển khai chưa?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-da-tung-de-xuat-mot-y-tuong-moi-ma-kho-trien-khai-chua-e7335857-8405-58d8-81ee-28e611b1683d",
+    "access": "pro",
+    "departments": [
+      "career"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 92,
+    "sourceSlug": null
+  },
+  {
+    "id": "ab0d4575-4cef-51e8-851f-bda949c81093",
+    "question": "Kể về lần bạn nhận trách nhiệm vượt ngoài vai trò được giao (ownership).",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ke-ve-lan-ban-nhan-trach-nhiem-vuot-ngoai-vai-tro-duoc-giao-ownership-ab0d4575-4cef-51e8-851f-bda949c81093",
+    "access": "pro",
+    "departments": [
+      "career"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 93,
+    "sourceSlug": null
+  },
+  {
+    "id": "dde82ce2-fbea-52d6-9499-40a2d5092fa1",
+    "question": "Kể về một lần bạn gây sự cố trên production. Bạn đã làm gì trong lúc đó và sau đó?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ke-ve-mot-lan-ban-gay-su-co-tren-production-ban-da-lam-gi-trong-luc-do-va-sau-do-dde82ce2-fbea-52d6-9499-40a2d5092fa1",
+    "access": "pro",
+    "departments": [
+      "career"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 94,
+    "sourceSlug": null
+  },
+  {
+    "id": "24e35833-c65e-5e6c-bd3a-3dd7838b9157",
+    "question": "Bạn được giao maintain một hệ thống cũ, không tài liệu, người viết đã nghỉ. Bạn bắt đầu từ đâu?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-duoc-giao-maintain-mot-he-thong-cu-khong-tai-lieu-nguoi-viet-da-nghi-ban-bat-dau-tu-dau-24e35833-c65e-5e6c-bd3a-3dd7838b9157",
+    "access": "pro",
+    "departments": [
+      "career"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 95,
+    "sourceSlug": null
+  },
+  {
+    "id": "3b3d6aa8-b059-53b5-a020-d19ad831f49e",
+    "question": "Nếu sếp hoặc tech lead yêu cầu làm theo hướng kỹ thuật bạn tin là sai, bạn xử lý thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "neu-sep-hoac-tech-lead-yeu-cau-lam-theo-huong-ky-thuat-ban-tin-la-sai-ban-xu-ly-the-nao-3b3d6aa8-b059-53b5-a020-d19ad831f49e",
+    "access": "pro",
+    "departments": [
+      "career"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 96,
+    "sourceSlug": null
+  },
+  {
+    "id": "ef24ee7d-4f17-54d2-8d74-6aad4c0f4976",
+    "question": "Kể về một cải tiến bạn chủ động đề xuất mà không ai yêu cầu. Bạn thuyết phục team bằng cách nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ke-ve-mot-cai-tien-ban-chu-dong-de-xuat-ma-khong-ai-yeu-cau-ban-thuyet-phuc-team-bang-cach-nao-ef24ee7d-4f17-54d2-8d74-6aad4c0f4976",
+    "access": "pro",
+    "departments": [
+      "career"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 97,
+    "sourceSlug": null
+  },
+  {
+    "id": "6a22a78b-33d9-52a5-8b08-1b4f004382ef",
+    "question": "Vì sao bạn muốn rời công ty hiện tại?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vi-sao-ban-muon-roi-cong-ty-hien-tai-6a22a78b-33d9-52a5-8b08-1b4f004382ef",
+    "access": "pro",
+    "departments": [
+      "career"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 98,
+    "sourceSlug": null
+  },
+  {
+    "id": "37d62b3c-4fdc-5ff2-ba7f-c4c27c73e40f",
+    "question": "Bạn muốn làm remote cho công ty nước ngoài từ Việt Nam. Cần chuẩn bị gì về kỹ năng, hợp đồng và thuế?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-muon-lam-remote-cho-cong-ty-nuoc-ngoai-tu-viet-nam-can-chuan-bi-gi-ve-ky-nang-hop-dong-va-thue-37d62b3c-4fdc-5ff2-ba7f-c4c27c73e40f",
+    "access": "pro",
+    "departments": [
+      "career"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 99,
+    "sourceSlug": null
+  },
+  {
+    "id": "1776c202-04e8-5156-b5ed-9e41a3312e46",
+    "question": "Bạn dựa vào tiêu chí nào để quyết định khi nào nên nhảy việc và khi nào nên ở lại?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-dua-vao-tieu-chi-nao-de-quyet-dinh-khi-nao-nen-nhay-viec-va-khi-nao-nen-o-lai-1776c202-04e8-5156-b5ed-9e41a3312e46",
+    "access": "pro",
+    "departments": [
+      "career"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 100,
+    "sourceSlug": null
+  }
+]

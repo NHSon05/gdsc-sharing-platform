@@ -1,0 +1,2075 @@
+[
+  {
+    "id": "23ca6a96-73b1-5b3f-afde-d9e31d2f5862",
+    "question": "Angular là gì? Khác AngularJS, React và Vue như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3600-angular-la-gi-khac-angularjs-react-va-vue-nhu-the-nao",
+    "slug": "angular-la-gi-khac-angularjs-react-va-vue-nhu-the-nao-23ca6a96-73b1-5b3f-afde-d9e31d2f5862",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Angular là framework frontend full-featured dùng TypeScript để xây dựng SPA, enterprise app và hybrid-rendered web app."
+      ],
+      "details": [
+        "AngularJS là dòng 1.x cũ, khác kiến trúc hoàn toàn và không nên gọi lẫn với Angular hiện đại. So với React/Vue, Angular opinionated hơn: có DI, Router, Forms, HttpClient, CLI, testing và build pipeline chính thức; đổi lại learning curve cao hơn nhưng team lớn có convention rõ hơn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "3600-angular-la-gi-khac-angularjs-react-va-vue-nhu-the-nao"
+  },
+  {
+    "id": "37db424a-321c-5b1a-a919-e53d03ee0d23",
+    "question": "Component trong Angular gồm những phần nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3601-component-trong-angular-gom-nhung-phan-nao",
+    "slug": "component-trong-angular-gom-nhung-phan-nao-37db424a-321c-5b1a-a919-e53d03ee0d23",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Component là building block chính của Angular UI."
+      ],
+      "details": [
+        "Một component thường gồm class TypeScript chứa state/logic, template HTML chứa binding, style CSS scoped theo component và metadata trong @Component như selector, templateUrl, styleUrl, imports. Với standalone component, dependency được khai báo trực tiếp trong imports thay vì cần NgModule."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "3601-component-trong-angular-gom-nhung-phan-nao"
+  },
+  {
+    "id": "ce7fc075-c70c-5ac9-9249-8fb1e610ac78",
+    "question": "Standalone component là gì và tại sao Angular khuyến nghị dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3602-standalone-component-la-gi-va-tai-sao-angular-khuyen-nghi-dung",
+    "slug": "standalone-component-la-gi-va-tai-sao-angular-khuyen-nghi-dung-ce7fc075-c70c-5ac9-9249-8fb1e610ac78",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Standalone component là component tự quản lý các dependencies của nó thông qua mảng imports bên trong decorator @Component và có thể bootstrap trực tiếp bằng bootstrapApplication() mà không cần đến NgModule."
+      ],
+      "details": [
+        "Lợi ích chính:\n- Giảm boilerplate: Loại bỏ sự cồng kềnh của NgModule.\n- Dễ hiểu hơn: Dependency graph (biểu đồ phụ thuộc) rõ ràng, code dễ đọc và maintain.\n- Lazy loading dễ hơn: Có thể lười tải (lazy load) từng component trực tiếp qua route thay vì phải tạo nguyên một module."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "3602-standalone-component-la-gi-va-tai-sao-angular-khuyen-nghi-dung"
+  },
+  {
+    "id": "be7aaa47-9d9d-5192-a5cc-b41786b858d9",
+    "question": "Interpolation, property binding và event binding khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3607-interpolation-property-binding-va-event-binding-khac-nhau-the-nao",
+    "slug": "interpolation-property-binding-va-event-binding-khac-nhau-the-nao-be7aaa47-9d9d-5192-a5cc-b41786b858d9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Interpolation {{ value }} render text ra template."
+      ],
+      "details": [
+        "Property binding [disabled]=\"isSaving()\" set property DOM/component input theo expression. Event binding (click)=\"save()\" lắng nghe event và gọi method. Quy tắc nhanh: dùng {{ }} cho text, [ ] để đẩy dữ liệu xuống view/component con, ( ) để nhận event từ view/component con."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "3607-interpolation-property-binding-va-event-binding-khac-nhau-the-nao"
+  },
+  {
+    "id": "a1e1892e-d8fa-5bc3-ad43-3800f41efdd3",
+    "question": "Two-way binding [(ngModel)] hoạt động thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3608-two-way-binding-ngmodel-hoat-dong-the-nao",
+    "slug": "two-way-binding-ngmodel-hoat-dong-the-nao-a1e1892e-d8fa-5bc3-ad43-3800f41efdd3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "[(ngModel)] là cú pháp banana-in-a-box kết hợp property binding và event binding: dữ liệu đi xuống input, thay đổi từ input đẩy ngược lên model."
+      ],
+      "details": [
+        "Nó thuộc FormsModule và phù hợp với form đơn giản. Với form phức tạp, validation nhiều bước hoặc test nghiêm túc, nên dùng Reactive Forms vì model explicit hơn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "3608-two-way-binding-ngmodel-hoat-dong-the-nao"
+  },
+  {
+    "id": "4aee98c2-a3fa-5d93-978e-c3d41509e67a",
+    "question": "Input và Output trong Angular component dùng để làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3609-input-va-output-trong-angular-component-dung-de-lam-gi",
+    "slug": "input-va-output-trong-angular-component-dung-de-lam-gi-4aee98c2-a3fa-5d93-978e-c3d41509e67a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "input() hoặc @Input() nhận data từ parent xuống child."
+      ],
+      "details": [
+        "output() hoặc @Output() phát event từ child lên parent. Pattern chuẩn là one-way data flow: parent sở hữu state, child nhận input và emit event khi user tương tác. Tránh để child mutate object input trực tiếp vì dễ tạo side effect khó debug."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "3609-input-va-output-trong-angular-component-dung-de-lam-gi"
+  },
+  {
+    "id": "6155462c-81d6-5f7b-a0c8-12d6c1747d1d",
+    "question": "Directive trong Angular là gì? Structural directive khác attribute directive thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3612-directive-trong-angular-la-gi-structural-directive-khac-attribute-directive-the",
+    "slug": "directive-trong-angular-la-gi-structural-directive-khac-attribute-directive-the-nao-6155462c-81d6-5f7b-a0c8-12d6c1747d1d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Directive là class gắn behavior vào DOM hoặc template."
+      ],
+      "details": [
+        "Attribute directive thay đổi behavior/appearance của element có sẵn, ví dụ highlight hoặc permission state. Structural directive thay đổi cấu trúc DOM bằng cách thêm/xóa view. Trong Angular hiện đại, legacy *ngIf, *ngFor, *ngSwitch đã bị deprecate từ v20 để ưu tiên block syntax như @if, @for, @switch."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "3612-directive-trong-angular-la-gi-structural-directive-khac-attribute-directive-the"
+  },
+  {
+    "id": "cc0e30a7-9ce2-5c7c-b2c4-bec1d7bfc828",
+    "question": "Signal trong Angular là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3617-signal-trong-angular-la-gi",
+    "slug": "signal-trong-angular-la-gi-cc0e30a7-9ce2-5c7c-b2c4-bec1d7bfc828",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Signal là reactive value được đọc bằng cách gọi function, ví dụ count(), và được cập nhật bằng set() hoặc update()."
+      ],
+      "details": [
+        "Khi signal được đọc trong template hoặc computed, Angular track dependency đó; khi value đổi, phần phụ thuộc được cập nhật. Signal giúp state local rõ ràng hơn và giảm nhu cầu dùng RxJS cho các state đồng bộ đơn giản."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "3617-signal-trong-angular-la-gi"
+  },
+  {
+    "id": "22d58d02-8b77-59ab-8803-9de7d42414ed",
+    "question": "Dependency Injection trong Angular là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3626-dependency-injection-trong-angular-la-gi",
+    "slug": "dependency-injection-trong-angular-la-gi-22d58d02-8b77-59ab-8803-9de7d42414ed",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Dependency Injection là cơ chế để class nhận dependency từ Angular injector thay vì tự new dependency đó."
+      ],
+      "details": [
+        "Component/service chỉ khai báo cần gì, còn provider quyết định instance nào được cấp. Lợi ích: code dễ test, dễ mock, giảm coupling và quản lý singleton/shared services nhất quán."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "3626-dependency-injection-trong-angular-la-gi"
+  },
+  {
+    "id": "1646abab-e658-538b-af13-ace7f6869f1b",
+    "question": "Angular Router cơ bản gồm những gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3632-angular-router-co-ban-gom-nhung-gi",
+    "slug": "angular-router-co-ban-gom-nhung-gi-1646abab-e658-538b-af13-ace7f6869f1b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Angular Router map URL sang component thông qua route config."
+      ],
+      "details": [
+        "App standalone thường dùng provideRouter(routes), template đặt <router-outlet /> làm nơi render route hiện tại, và navigation dùng routerLink hoặc Router.navigate(). Route có thể chứa path params, query params, redirects, nested routes, lazy loading, guards và resolvers."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "3632-angular-router-co-ban-gom-nhung-gi"
+  },
+  {
+    "id": "5fe83f27-17f9-58ad-b605-501207545f8d",
+    "question": "HttpClient trong Angular dùng để làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3644-httpclient-trong-angular-dung-de-lam-gi",
+    "slug": "httpclient-trong-angular-dung-de-lam-gi-5fe83f27-17f9-58ad-b605-501207545f8d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "HttpClient là service chính thức để gọi HTTP API, trả về Observable và hỗ trợ typed response, interceptors, params, headers, progress events và testing utilities."
+      ],
+      "details": [
+        "Trong standalone app thường cấu hình bằng provideHttpClient(). Vì Observable của HTTP request là cold, request chỉ chạy khi được subscribe, ví dụ qua service, async pipe hoặc bridge sang signal."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "3644-httpclient-trong-angular-dung-de-lam-gi"
+  },
+  {
+    "id": "6c3b7c97-242a-520f-ae50-388f68cd6e8c",
+    "question": "Angular TestBed dùng để làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3655-angular-testbed-dung-de-lam-gi",
+    "slug": "angular-testbed-dung-de-lam-gi-6c3b7c97-242a-520f-ae50-388f68cd6e8c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "TestBed tạo testing module/environment để render component, inject services và override providers trong unit test."
+      ],
+      "details": [
+        "Nó hữu ích khi test component standalone, service có DI, provider override, pipe/directive hoặc behavior cần gần Angular runtime thật. Với logic thuần TypeScript không phụ thuộc Angular runtime, có thể test class/function trực tiếp để nhanh và ít boilerplate hơn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "3655-angular-testbed-dung-de-lam-gi"
+  },
+  {
+    "id": "73ac4bf9-5ef0-59a7-ba13-758fcb6a372e",
+    "question": "Nên đặt code khởi tạo ở constructor hay ngOnInit? Vì sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97608-nen-dat-code-khoi-tao-o-constructor-hay-ngoninit-vi-sao",
+    "slug": "nen-dat-code-khoi-tao-o-constructor-hay-ngoninit-vi-sao-73ac4bf9-5ef0-59a7-ba13-758fcb6a372e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Quy tắc thực tế:\n- constructor: chỉ nhận dependency (hoặc dùng inject()) và gán field đơn giản. Không gọi API, không đụng DOM.\n- ngOnInit: khởi tạo dựa trên input — gọi API, set up form, subscribe.\n- Cần DOM đã render (đo kích thước, focus) thì phải đợi ngAfterViewInit."
+      ],
+      "details": [
+        "Giữ constructor mỏng cũng giúp unit test dễ hơn: tạo component không kéo theo side effect."
+      ],
+      "points": [],
+      "sections": [
+        "constructor là của class TypeScript, chạy khi Angular tạo instance — lúc này @Input() chưa được gán. ngOnInit là lifecycle hook của Angular, chạy sau lần ngOnChanges đầu tiên, tức là input đã sẵn sàng."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "export class UserCard implements OnInit {\n  @Input() userId!: string\n  private http = inject(HttpClient)\n  user?: User\n\n  constructor() {\n    console.log(this.userId)  // undefined — input not bound yet\n  }\n\n  ngOnInit() {\n    this.http.get<User>(`/api/users/${this.userId}`).subscribe(u => (this.user = u))\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "97608-nen-dat-code-khoi-tao-o-constructor-hay-ngoninit-vi-sao"
+  },
+  {
+    "id": "a3dd14bd-5b3c-55c0-b8d5-e1f28b6d7f02",
+    "question": "Signal chứa array/object: vì sao items().push(x) không làm UI cập nhật? set và update khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97609-signal-chua-array-object-vi-sao-items-push-x-khong-lam-ui-cap-nhat-set-va-update",
+    "slug": "signal-chua-array-object-vi-sao-items-push-x-khong-lam-ui-cap-nhat-set-va-update-khac-nhau-the-nao-a3dd14bd-5b3c-55c0-b8d5-e1f28b6d7f02",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Đọc signal bằng cách gọi như hàm (items()) vì đó chính là điểm Angular ghi nhận dependency: mọi computed/effect/template đọc signal đều được đăng ký để chạy lại khi giá trị đổi. Hệ quả: luôn coi dữ liệu trong signal là bất biến, cập nhật bằng cách tạo mảng/object mới."
+      ],
+      "details": [],
+      "points": [
+        "set(value): gán giá trị mới không phụ thuộc giá trị cũ.",
+        "update(fn): tính giá trị mới từ giá trị cũ — an toàn hơn khi cập nhật liên tiếp.",
+        "mutate()"
+      ],
+      "sections": [
+        "Vì signal phát tín hiệu thay đổi dựa trên so sánh tham chiếu khi bạn ghi giá trị mới. items().push(x) chỉ đọc signal rồi mutate mảng tại chỗ — signal không hề biết có gì thay đổi, nên không thông báo cho template."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const items = signal<string[]>([])\n\nitems().push('a')                       // wrong: no notification, UI stays stale\n\nitems.set(['a'])                        // set: replace with a brand-new value\nitems.update(list => [...list, 'a'])    // update: derive the new value from the old"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "97609-signal-chua-array-object-vi-sao-items-push-x-khong-lam-ui-cap-nhat-set-va-update"
+  },
+  {
+    "id": "5b9dfb10-732d-536d-8f21-5bd0c69aa487",
+    "question": "Angular application bootstrap hiện đại hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3603-angular-application-bootstrap-hien-dai-hoat-dong-nhu-the-nao",
+    "slug": "angular-application-bootstrap-hien-dai-hoat-dong-nhu-the-nao-5b9dfb10-732d-536d-8f21-5bd0c69aa487",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Với standalone app, entrypoint thường gọi bootstrapApplication(AppComponent, appConfig)."
+      ],
+      "details": [
+        "Ví dụ cấu hình root phổ biến:"
+      ],
+      "points": [],
+      "sections": [
+        "Cách này thay thế pattern cũ platformBrowserDynamic().bootstrapModule(AppModule) trong nhiều project mới, giúp root configuration nằm trong provider functions tree-shakable và dễ tách theo môi trường."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "bootstrapApplication(AppComponent, {\n  providers: [\n    provideRouter(routes),\n    provideHttpClient(),\n  ],\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "3603-angular-application-bootstrap-hien-dai-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "7162f1e5-73e2-547f-ac53-66b7dd352187",
+    "question": "NgModule còn vai trò gì trong Angular hiện đại?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3604-ngmodule-con-vai-tro-gi-trong-angular-hien-dai",
+    "slug": "ngmodule-con-vai-tro-gi-trong-angular-hien-dai-7162f1e5-73e2-547f-ac53-66b7dd352187",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "NgModule vẫn là public API và vẫn gặp nhiều trong enterprise codebase."
+      ],
+      "details": [
+        "Vai trò chính còn lại: gom declarations/providers trong legacy modules, expose library API cũ, cấu hình forRoot/forChild, hoặc bridge với third-party package chưa standalone. Với app mới, NgModule không còn là đơn vị bắt buộc; route-level lazy loading có thể import trực tiếp standalone component hoặc route array."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "3604-ngmodule-con-vai-tro-gi-trong-angular-hien-dai"
+  },
+  {
+    "id": "48b53d48-da20-5517-99a3-8895814c1f95",
+    "question": "Lifecycle hooks trong Angular chạy theo thứ tự nào và dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3605-lifecycle-hooks-trong-angular-chay-theo-thu-tu-nao-va-dung-khi-nao",
+    "slug": "lifecycle-hooks-trong-angular-chay-theo-thu-tu-nao-va-dung-khi-nao-48b53d48-da20-5517-99a3-8895814c1f95",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Các hook hay gặp: ngOnChanges chạy khi input đổi, lần đầu chạy trước ngOnInit; ngOnInit chạy một lần sau khi input initial xong; ngAfterViewInit dùng khi view/query đã sẵn sàng; ngOnDestroy hoặc DestroyRef dùng cleanup."
+      ],
+      "details": [
+        "Ví dụ cleanup hiện đại:"
+      ],
+      "points": [],
+      "sections": [
+        "Từ Angular hiện đại, afterNextRender/afterEveryRender phù hợp cho DOM work sau render và không chạy trong SSR/prerender."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "@Component({ template: \"{{ userId() }}\" })\nexport class UserPage {\n  userId = input.required<string>()\n\n  constructor() {\n    inject(DestroyRef).onDestroy(() => console.log(\"cleanup\"))\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "3605-lifecycle-hooks-trong-angular-chay-theo-thu-tu-nao-va-dung-khi-nao"
+  },
+  {
+    "id": "f86ae4f7-02ae-5f76-955c-36b6382aee75",
+    "question": "Angular compiler và template type checking giúp gì cho production app?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3606-angular-compiler-va-template-type-checking-giup-gi-cho-production-app",
+    "slug": "angular-compiler-va-template-type-checking-giup-gi-cho-production-app-f86ae4f7-02ae-5f76-955c-36b6382aee75",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Angular compiler phân tích template trước runtime, bind với TypeScript types và phát hiện lỗi như sai input name, sai kiểu truyền vào component, pipe không tồn tại hoặc variable template không hợp lệ."
+      ],
+      "details": [
+        "Bật strict template checking trong tsconfig giúp bắt lỗi sớm trong CI thay vì chờ user gặp runtime bug. Với app lớn, đây là lợi thế quan trọng của Angular so với template không type-safe."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "3606-angular-compiler-va-template-type-checking-giup-gi-cho-production-app"
+  },
+  {
+    "id": "a3513715-cc0b-546c-af84-51b795f41b13",
+    "question": "Signal input input() khác @Input() truyền thống thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3610-signal-input-input-khac-input-truyen-thong-the-nao",
+    "slug": "signal-input-input-khac-input-truyen-thong-the-nao-a3513715-cc0b-546c-af84-51b795f41b13",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "input() tạo một InputSignal đọc bằng cách gọi function, ví dụ userId(), và compose tự nhiên với computed() hoặc effect()."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "@Input() vẫn dùng được, nhất là trong code cũ; nhưng khi viết component mới, signal input giúp template và reactive state nhất quán hơn."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "@Component({ template: \"<p>User {{ userId() }}</p>\" })\nexport class UserCard {\n  userId = input.required<string>()\n  displayId = computed(() => `#${this.userId()}`)\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "3610-signal-input-input-khac-input-truyen-thong-the-nao"
+  },
+  {
+    "id": "ec4bcb3d-fe83-5bf8-a904-309884d5b81f",
+    "question": "Model input model() dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3611-model-input-model-dung-khi-nao",
+    "slug": "model-input-model-dung-khi-nao-ec4bcb3d-fe83-5bf8-a904-309884d5b81f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "model() định nghĩa input có thể ghi, đồng thời tạo output <name>Change để hỗ trợ two-way binding cho custom component."
+      ],
+      "details": [
+        "Ví dụ checkbox tự emit thay đổi:"
+      ],
+      "points": [],
+      "sections": [
+        "Dùng cho component chỉnh sửa một giá trị như checkbox/date picker; nếu component chỉ render dữ liệu, dùng input() read-only rõ hơn."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "@Component({ template: `<button (click)=\"checked.update(v => !v)\">{{ checked() }}</button>` })\nexport class ToggleButton {\n  checked = model(false)\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "3611-model-input-model-dung-khi-nao"
+  },
+  {
+    "id": "d747bcf2-88ca-539c-930f-a09d45dfc7d2",
+    "question": "Control flow mới @if, @for, @switch khác *ngIf, *ngFor thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3613-control-flow-moi-if-for-switch-khac-ngif-ngfor-the-nao",
+    "slug": "control-flow-moi-if-for-switch-khac-ngif-ngfor-the-nao-d747bcf2-88ca-539c-930f-a09d45dfc7d2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Control flow block là cú pháp template built-in, không cần import directive và dễ type-check hơn."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Từ Angular v20, NgIf, NgFor, NgSwitch đã deprecate, nên code mới nên dùng block syntax."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "@if (user(); as u) {\n  <h2>{{ u.name }}</h2>\n} @else {\n  <app-login />\n}\n\n@for (item of items(); track item.id) {\n  <app-row [item]=\"item\" />\n} @empty {\n  <p>No data</p>\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "3613-control-flow-moi-if-for-switch-khac-ngif-ngfor-the-nao"
+  },
+  {
+    "id": "2632371a-62c3-5fd6-9682-7e7ffa837810",
+    "question": "Tại sao track trong @for quan trọng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3614-tai-sao-track-trong-for-quan-trong",
+    "slug": "tai-sao-track-trong-for-quan-trong-2632371a-62c3-5fd6-9682-7e7ffa837810",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "track cho Angular biết item nào là cùng một entity khi list thay đổi, giúp reuse DOM/component instance thay vì destroy/recreate sai cách."
+      ],
+      "details": [
+        "Ví dụ đúng với dữ liệu có id:",
+        "track"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "@for (user of users(); track user.id) {\n  <app-user-row [user]=\"user\" />\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "3614-tai-sao-track-trong-for-quan-trong"
+  },
+  {
+    "id": "32f33cba-c365-5bfb-bea8-0db7d0d1e07c",
+    "question": "@defer block dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3615-defer-block-dung-de-lam-gi",
+    "slug": "defer-block-dung-de-lam-gi-32f33cba-c365-5bfb-bea8-0db7d0d1e07c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "@defer cho phép trì hoãn load/render một phần template và dependencies của nó theo trigger như viewport, interaction, hover, timer hoặc idle."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Dùng cho UI chưa cần ngay để giảm initial bundle và cải thiện Core Web Vitals."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "@defer (on viewport; prefetch on idle) {\n  <app-heavy-chart />\n} @placeholder {\n  <app-chart-skeleton />\n} @loading {\n  <p>Loading chart...</p>\n} @error {\n  <p>Cannot load chart</p>\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "3615-defer-block-dung-de-lam-gi"
+  },
+  {
+    "id": "9f683abf-05a9-53ce-8d6c-dde068a80e26",
+    "question": "Content projection với ng-content dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3616-content-projection-voi-ng-content-dung-khi-nao",
+    "slug": "content-projection-voi-ng-content-dung-khi-nao-9f683abf-05a9-53ce-8d6c-dde068a80e26",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "ng-content cho phép parent truyền markup vào layout của child component, tương tự slot."
+      ],
+      "details": [
+        "Ví dụ card có slot tiêu đề và nội dung:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<app-card>\n  <h2 card-title>Profile</h2>\n  <app-profile />\n</app-card>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "3616-content-projection-voi-ng-content-dung-khi-nao"
+  },
+  {
+    "id": "e50c3af2-f1b6-5006-b82c-cc460e9f01d9",
+    "question": "signal, computed và effect khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3618-signal-computed-va-effect-khac-nhau-the-nao",
+    "slug": "signal-computed-va-effect-khac-nhau-the-nao-e50c3af2-f1b6-5006-b82c-cc460e9f01d9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "signal giữ state có thể ghi; computed derive giá trị read-only; effect chạy side effect khi dependency signal đổi."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Không nên dùng effect để propagate state giữa signals nếu computed hoặc linkedSignal biểu đạt được quan hệ đó rõ hơn."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "const count = signal(0)\nconst doubled = computed(() => count() * 2)\n\neffect(() => {\n  localStorage.setItem(\"count\", String(count()))\n})\n\ncount.update(v => v + 1)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "3618-signal-computed-va-effect-khac-nhau-the-nao"
+  },
+  {
+    "id": "0b4a17b8-2810-5e70-a680-080e552a604a",
+    "question": "View query và content query khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3619-view-query-va-content-query-khac-nhau-the-nao",
+    "slug": "view-query-va-content-query-khac-nhau-the-nao-0b4a17b8-2810-5e70-a680-080e552a604a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "View query đọc element/component nằm trong template của chính component; content query đọc nội dung parent project vào qua ng-content."
+      ],
+      "details": [
+        "Ví dụ signal query hiện đại:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "@Component({ template: `<input #searchBox />` })\nexport class SearchPanel {\n  searchBox = viewChild<ElementRef<HTMLInputElement>>(\"searchBox\")\n\n  focus() {\n    this.searchBox()?.nativeElement.focus()\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "3619-view-query-va-content-query-khac-nhau-the-nao"
+  },
+  {
+    "id": "0a47f258-b887-5ee1-bbb5-9d3af2539b66",
+    "question": "Observable và Signal khác nhau thế nào trong Angular?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3621-observable-va-signal-khac-nhau-the-nao-trong-angular",
+    "slug": "observable-va-signal-khac-nhau-the-nao-trong-angular-0a47f258-b887-5ee1-bbb5-9d3af2539b66",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Observable biểu diễn stream theo thời gian, có cancellation, operators mạnh và phù hợp với HTTP, WebSocket, router events hoặc async pipelines."
+      ],
+      "details": [
+        "Bridge khi cần đưa stream vào template signal-based:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "const user$ = this.http.get<User>(\"/api/me\")\nconst user = toSignal(user$, { initialValue: null })\nconst userChanges$ = toObservable(user)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "3621-observable-va-signal-khac-nhau-the-nao-trong-angular"
+  },
+  {
+    "id": "302750e4-b94f-5836-b5de-8771ab9f1b0d",
+    "question": "OnPush change detection hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3622-onpush-change-detection-hoat-dong-the-nao",
+    "slug": "onpush-change-detection-hoat-dong-the-nao-302750e4-b94f-5836-b5de-8771ab9f1b0d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "ChangeDetectionStrategy.OnPush giảm số lần check component bằng cách chỉ cập nhật khi input reference đổi, event trong component xảy ra, async pipe emit, signal được đọc trong template đổi, hoặc component được mark for check."
+      ],
+      "details": [
+        "Nó hiệu quả khi state immutable và component tree lớn. Lưu ý: mutate object/array tại chỗ có thể không trigger update như mong muốn; nên replace reference hoặc dùng signal update đúng cách."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "3622-onpush-change-detection-hoat-dong-the-nao"
+  },
+  {
+    "id": "560b2e13-fd95-5cca-872b-2b5dbc317c30",
+    "question": "async pipe giúp gì khi dùng Observable trong template?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3624-async-pipe-giup-gi-khi-dung-observable-trong-template",
+    "slug": "async-pipe-giup-gi-khi-dung-observable-trong-template-560b2e13-fd95-5cca-872b-2b5dbc317c30",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "async pipe subscribe Observable/Promise, render latest value và tự unsubscribe khi view bị destroy."
+      ],
+      "details": [
+        "Nó giảm memory leak so với subscribe thủ công trong component. Với OnPush, mỗi lần Observable emit, async pipe cũng mark component để update. Nếu cần transform nhiều stream phức tạp, xử lý trong component/service bằng RxJS rồi expose stream đã sẵn sàng cho template."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "3624-async-pipe-giup-gi-khi-dung-observable-trong-template"
+  },
+  {
+    "id": "016918a7-afc6-5f1e-8c1c-215d4996de6b",
+    "question": "Pure pipe và impure pipe khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3625-pure-pipe-va-impure-pipe-khac-nhau-the-nao",
+    "slug": "pure-pipe-va-impure-pipe-khac-nhau-the-nao-016918a7-afc6-5f1e-8c1c-215d4996de6b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Pipe transform dữ liệu trong template. Mặc định pipe là pure: Angular chỉ gọi lại khi primitive value đổi hoặc object/array reference đổi, nên hiệu năng tốt hơn.",
+        "pure: false"
+      ],
+      "details": [
+        "Ví dụ custom pure pipe:",
+        "computed()"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "@Pipe({ name: \"kebabCase\" })\nexport class KebabCasePipe implements PipeTransform {\n  transform(value: string): string {\n    return value.toLowerCase().replaceAll(\" \", \"-\")\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "3625-pure-pipe-va-impure-pipe-khac-nhau-the-nao"
+  },
+  {
+    "id": "f3d27317-7a5c-51fa-8922-bffe0609edc3",
+    "question": "providedIn: \"root\" khác provider trong component thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3627-providedin-root-khac-provider-trong-component-the-nao",
+    "slug": "providedin-root-khac-provider-trong-component-the-nao-f3d27317-7a5c-51fa-8922-bffe0609edc3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "providedIn: \"root\" đăng ký service ở root injector, thường là singleton toàn app và tree-shakable nếu không dùng."
+      ],
+      "details": [
+        "Ví dụ component provider tạo store riêng cho mỗi wizard:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "@Component({\n  selector: \"app-wizard\",\n  providers: [WizardStore],\n  template: \"<ng-content />\",\n})\nexport class WizardComponent {}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "3627-providedin-root-khac-provider-trong-component-the-nao"
+  },
+  {
+    "id": "d9230580-2b9d-5b87-9290-72e2fcc79468",
+    "question": "inject() khác constructor injection thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3628-inject-khac-constructor-injection-the-nao",
+    "slug": "inject-khac-constructor-injection-the-nao-d9230580-2b9d-5b87-9290-72e2fcc79468",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Constructor injection khai báo dependency qua constructor parameters, rõ ràng và quen thuộc."
+      ],
+      "details": [
+        "Ví dụ functional guard dùng inject():"
+      ],
+      "points": [],
+      "sections": [
+        "inject() gọn hơn cho guards, resolvers, interceptors hoặc field initializers; chỉ gọi trong injection context hợp lệ."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "export const authGuard: CanActivateFn = () => {\n  const auth = inject(AuthService)\n  const router = inject(Router)\n\n  return auth.isLoggedIn() ? true : router.createUrlTree([\"/login\"])\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "3628-inject-khac-constructor-injection-the-nao"
+  },
+  {
+    "id": "5c3678f5-c02b-5bf5-ac21-c7cae82a7cff",
+    "question": "InjectionToken dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3629-injectiontoken-dung-khi-nao",
+    "slug": "injectiontoken-dung-khi-nao-5c3678f5-c02b-5bf5-ac21-c7cae82a7cff",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "InjectionToken dùng khi dependency không phải class concrete, ví dụ config object, primitive value, feature flag, API URL hoặc interface không tồn tại ở runtime."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Với config cần lazy hoặc phụ thuộc dependency khác, provider có thể dùng useFactory."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "export const API_URL = new InjectionToken<string>(\"API_URL\")\n\nbootstrapApplication(AppComponent, {\n  providers: [{ provide: API_URL, useValue: \"/api\" }],\n})\n\nconst apiUrl = inject(API_URL)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "3629-injectiontoken-dung-khi-nao"
+  },
+  {
+    "id": "e43bea25-8364-520a-b4ed-ee709cd08186",
+    "question": "Provider strategies useClass, useValue, useFactory, useExisting khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3631-provider-strategies-useclass-usevalue-usefactory-useexisting-khac-nhau-the-nao",
+    "slug": "provider-strategies-useclass-usevalue-usefactory-useexisting-khac-nhau-the-nao-e43bea25-8364-520a-b4ed-ee709cd08186",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "useClass tạo instance từ class cụ thể, thường để đổi implementation."
+      ],
+      "details": [
+        "Ví dụ các provider strategy:"
+      ],
+      "points": [],
+      "sections": [
+        "useValue cấp object/value có sẵn, useFactory tạo dependency động và có thể inject dependency khác, useExisting alias token này sang token khác để reuse cùng instance."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "providers: [\n  { provide: Logger, useClass: ConsoleLogger },\n  { provide: API_URL, useValue: \"/api\" },\n  { provide: SESSION_ID, useFactory: () => crypto.randomUUID() },\n  { provide: OLD_LOGGER, useExisting: Logger },\n]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "3631-provider-strategies-useclass-usevalue-usefactory-useexisting-khac-nhau-the-nao"
+  },
+  {
+    "id": "e88a03c2-ed7c-554c-a250-d51b14cfc2fa",
+    "question": "Lazy loading route trong Angular hiện đại làm thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3633-lazy-loading-route-trong-angular-hien-dai-lam-the-nao",
+    "slug": "lazy-loading-route-trong-angular-hien-dai-lam-the-nao-e88a03c2-ed7c-554c-a250-d51b14cfc2fa",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Với standalone component, route có thể dùng loadComponent; với feature có nhiều child routes, dùng loadChildren để import route array."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Nên đặt boundary theo feature/screen thật sự, không tách quá nhỏ khiến waterfall request tăng."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "export const routes: Routes = [\n  {\n    path: \"admin\",\n    loadComponent: () => import(\"./admin/admin.page\").then(m => m.AdminPage),\n  },\n  {\n    path: \"settings\",\n    loadChildren: () => import(\"./settings/routes\").then(m => m.SETTINGS_ROUTES),\n  },\n]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "3633-lazy-loading-route-trong-angular-hien-dai-lam-the-nao"
+  },
+  {
+    "id": "2691f0bf-56d3-55fc-9e6b-cd2c52b19d1b",
+    "question": "Route guards có bảo mật API thật sự không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3634-route-guards-co-bao-mat-api-that-su-khong",
+    "slug": "route-guards-co-bao-mat-api-that-su-khong-2691f0bf-56d3-55fc-9e6b-cd2c52b19d1b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Không."
+      ],
+      "details": [
+        "Route guard chỉ kiểm soát navigation phía client để cải thiện UX, ví dụ redirect user chưa login hoặc chặn rời form chưa lưu. Bảo mật thật phải nằm ở backend/API authorization vì user có thể gọi API trực tiếp hoặc sửa code client. Guard nên được xem là lớp UX, không phải security boundary."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "3634-route-guards-co-bao-mat-api-that-su-khong"
+  },
+  {
+    "id": "5e370a7e-3241-528f-bf36-6222ba916229",
+    "question": "Resolver trong Angular Router dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3635-resolver-trong-angular-router-dung-khi-nao",
+    "slug": "resolver-trong-angular-router-dung-khi-nao-5e370a7e-3241-528f-bf36-6222ba916229",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Resolver fetch hoặc chuẩn bị data trước khi route activate, giúp component nhận data đã sẵn sàng và xử lý loading/error ở routing layer."
+      ],
+      "details": [
+        "Ví dụ functional resolver:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "export const userResolver: ResolveFn<User> = route => {\n  const api = inject(UserApi)\n  return api.getUser(route.paramMap.get(\"id\")!)\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "3635-resolver-trong-angular-router-dung-khi-nao"
+  },
+  {
+    "id": "d38b3cbe-4966-550d-b72d-9bd42c96cb02",
+    "question": "withComponentInputBinding() giúp gì khi đọc route params?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3636-withcomponentinputbinding-giup-gi-khi-doc-route-params",
+    "slug": "withcomponentinputbinding-giup-gi-khi-doc-route-params-d38b3cbe-4966-550d-b72d-9bd42c96cb02",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "withComponentInputBinding() bind path params, query params, matrix params và route data vào component inputs có cùng tên."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Cách này làm component dễ test hơn và giảm coupling với ActivatedRoute."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "bootstrapApplication(AppComponent, {\n  providers: [provideRouter(routes, withComponentInputBinding())],\n})\n\n@Component({ template: \"User {{ id() }}\" })\nexport class UserPage {\n  id = input.required<string>()\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "3636-withcomponentinputbinding-giup-gi-khi-doc-route-params"
+  },
+  {
+    "id": "77b10c49-a55b-59c9-9abf-56eee9e3ce45",
+    "question": "Đọc route params và query params trong Angular như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3637-doc-route-params-va-query-params-trong-angular-nhu-the-nao",
+    "slug": "doc-route-params-va-query-params-trong-angular-nhu-the-nao-77b10c49-a55b-59c9-9abf-56eee9e3ce45",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Cách hiện đại nên ưu tiên withComponentInputBinding() nếu param map trực tiếp vào input. Khi cần đọc router state phức tạp, dùng ActivatedRoute và paramMap/queryParamMap."
+      ],
+      "details": [
+        "Ví dụ bridge route param sang signal:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "@Component({ template: \"User {{ id() }}\" })\nexport class UserPage {\n  private route = inject(ActivatedRoute)\n  id = toSignal(this.route.paramMap.pipe(map(params => params.get(\"id\"))), {\n    initialValue: null,\n  })\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "3637-doc-route-params-va-query-params-trong-angular-nhu-the-nao"
+  },
+  {
+    "id": "d884c78e-7a2c-5805-bf72-52cbded3f393",
+    "question": "Typed Reactive Forms giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3639-typed-reactive-forms-giai-quyet-van-de-gi",
+    "slug": "typed-reactive-forms-giai-quyet-van-de-gi-d884c78e-7a2c-5805-bf72-52cbded3f393",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Typed Forms giúp FormControl, FormGroup và valueChanges mang đúng TypeScript type, giảm lỗi truy cập field sai hoặc submit payload sai shape."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Trong app lớn, typed forms làm refactor an toàn hơn vì compiler phát hiện form contract bị lệch."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "const form = new FormGroup({\n  email: new FormControl(\"\", { nonNullable: true, validators: [Validators.email] }),\n})\n\nconst email: string = form.controls.email.value"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "3639-typed-reactive-forms-giai-quyet-van-de-gi"
+  },
+  {
+    "id": "9c6e2c5b-70b7-529c-acf6-32982c497ff7",
+    "question": "Custom validator trong Reactive Forms viết như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3640-custom-validator-trong-reactive-forms-viet-nhu-the-nao",
+    "slug": "custom-validator-trong-reactive-forms-viet-nhu-the-nao-9c6e2c5b-70b7-529c-acf6-32982c497ff7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Validator là function nhận AbstractControl và trả về ValidationErrors | null."
+      ],
+      "details": [
+        "Ví dụ cross-field validator:"
+      ],
+      "points": [],
+      "sections": [
+        "Async validator phù hợp check server như username đã tồn tại; cần debounce/cancel để không bắn request quá nhiều."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "function passwordsMatch(group: AbstractControl): ValidationErrors | null {\n  const password = group.get(\"password\")?.value\n  const confirm = group.get(\"confirm\")?.value\n\n  return password === confirm ? null : { passwordMismatch: true }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "3640-custom-validator-trong-reactive-forms-viet-nhu-the-nao"
+  },
+  {
+    "id": "a7fb7bc9-08a6-50ae-b16c-bec381e479d5",
+    "question": "FormArray dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3642-formarray-dung-khi-nao",
+    "slug": "formarray-dung-khi-nao-a7fb7bc9-08a6-50ae-b16c-bec381e479d5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "FormArray dùng khi số lượng control động, ví dụ nhiều số điện thoại, danh sách địa chỉ, line items trong invoice hoặc survey questions."
+      ],
+      "details": [
+        "Ví dụ thêm phone control động:"
+      ],
+      "points": [
+        "Nếu mỗi item có nhiều field, thường dùng FormArray<FormGroup<...>>.",
+        "Cần cẩn thận validation và track trong template để không làm mất state khi thêm/xóa dòng."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "const phones = new FormArray([\n  new FormControl(\"\", { nonNullable: true }),\n])\n\nphones.push(new FormControl(\"\", { nonNullable: true }))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "3642-formarray-dung-khi-nao"
+  },
+  {
+    "id": "fc181ca9-cf64-5d9f-acd4-5ed6602e7322",
+    "question": "HTTP interceptor dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3645-http-interceptor-dung-khi-nao",
+    "slug": "http-interceptor-dung-khi-nao-fc181ca9-cf64-5d9f-acd4-5ed6602e7322",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Interceptor xử lý cross-cutting concern cho request/response: attach auth token, refresh token, correlation id, logging, retry, error normalization hoặc loading indicator."
+      ],
+      "details": [
+        "Ví dụ functional interceptor:"
+      ],
+      "points": [],
+      "sections": [
+        "Nên giữ interceptor mỏng; business transform để trong API service."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "export const authInterceptor: HttpInterceptorFn = (req, next) => {\n  const token = inject(AuthService).token()\n  const authReq = req.clone({ setHeaders: { Authorization: `Bearer ${token}` } })\n\n  return next(authReq)\n}\n\nprovideHttpClient(withInterceptors([authInterceptor]))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "3645-http-interceptor-dung-khi-nao"
+  },
+  {
+    "id": "220a381c-0b31-573e-bc4b-7b1a10c96821",
+    "question": "switchMap, mergeMap, concatMap, exhaustMap khác nhau thế nào trong Angular?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3646-switchmap-mergemap-concatmap-exhaustmap-khac-nhau-the-nao-trong-angular",
+    "slug": "switchmap-mergemap-concatmap-exhaustmap-khac-nhau-the-nao-trong-angular-220a381c-0b31-573e-bc4b-7b1a10c96821",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "switchMap hủy request trước và lấy request mới nhất, phù hợp search/autocomplete.",
+        "mergeMap",
+        "concatMap",
+        "exhaustMap"
+      ],
+      "details": [
+        "Ví dụ search box:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "results$ = this.search.valueChanges.pipe(\n  debounceTime(300),\n  distinctUntilChanged(),\n  switchMap(term => this.http.get<SearchResult[]>(\"/api/search\", { params: { q: term } })),\n)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "3646-switchmap-mergemap-concatmap-exhaustmap-khac-nhau-the-nao-trong-angular"
+  },
+  {
+    "id": "06e23a35-7c6e-59c7-abee-3f9b0dc8fde0",
+    "question": "Làm sao tránh memory leak khi subscribe Observable?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3647-lam-sao-tranh-memory-leak-khi-subscribe-observable",
+    "slug": "lam-sao-tranh-memory-leak-khi-subscribe-observable-06e23a35-7c6e-59c7-abee-3f9b0dc8fde0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Ưu tiên async pipe trong template vì tự unsubscribe."
+      ],
+      "details": [
+        "Khi phải subscribe trong class, dùng takeUntilDestroyed() với DestroyRef:"
+      ],
+      "points": [],
+      "sections": [
+        "Không cần unsubscribe với HTTP Observable hoàn tất một lần, nhưng vẫn cần cẩn thận với streams dài như router events, form valueChanges, interval, WebSocket hoặc Subject từ service."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "private destroyRef = inject(DestroyRef)\n\nngOnInit() {\n  this.router.events\n    .pipe(takeUntilDestroyed(this.destroyRef))\n    .subscribe(event => this.trackNavigation(event))\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "3647-lam-sao-tranh-memory-leak-khi-subscribe-observable"
+  },
+  {
+    "id": "2e1503a6-e522-5024-99de-41fad9279d33",
+    "question": "Xử lý lỗi HTTP trong Angular nên làm ở đâu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3648-xu-ly-loi-http-trong-angular-nen-lam-o-dau",
+    "slug": "xu-ly-loi-http-trong-angular-nen-lam-o-dau-2e1503a6-e522-5024-99de-41fad9279d33",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lỗi HTTP nên được xử lý ở đúng tầng: component/store xử lý lỗi nghiệp vụ cần hiển thị cụ thể; API service normalize response; interceptor xử lý cross-cutting concern như auth, retry, correlation id hoặc global error logging."
+      ],
+      "details": [
+        "Ví dụ service trả fallback có kiểm soát:"
+      ],
+      "points": [],
+      "sections": [
+        "Không nuốt mọi lỗi ở interceptor vì component sẽ mất ngữ cảnh để hiển thị message đúng."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "loadUsers() {\n  return this.http.get<User[]>(\"/api/users\").pipe(\n    retry({ count: 2, delay: 500 }),\n    catchError(error => {\n      this.logger.error(error)\n      return of([])\n    }),\n  )\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "3648-xu-ly-loi-http-trong-angular-nen-lam-o-dau"
+  },
+  {
+    "id": "5b0cbb2e-5ea9-59e0-9e6c-adfb627dfe14",
+    "question": "Angular SSR và hydration giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3649-angular-ssr-va-hydration-giai-quyet-van-de-gi",
+    "slug": "angular-ssr-va-hydration-giai-quyet-van-de-gi-5b0cbb2e-5ea9-59e0-9e6c-adfb627dfe14",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "SSR render HTML trên server để cải thiện first content, SEO và perceived performance."
+      ],
+      "details": [
+        "Cấu hình hydration phía client thường nằm ở bootstrap:",
+        "window"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "bootstrapApplication(AppComponent, {\n  providers: [provideClientHydration(withEventReplay())],\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "3649-angular-ssr-va-hydration-giai-quyet-van-de-gi"
+  },
+  {
+    "id": "bf98ee16-0a8c-5b0b-a1fd-71f09551bf87",
+    "question": "Các lỗi hydration mismatch phổ biến trong Angular là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3651-cac-loi-hydration-mismatch-pho-bien-trong-angular-la-gi",
+    "slug": "cac-loi-hydration-mismatch-pho-bien-trong-angular-la-gi-bf98ee16-0a8c-5b0b-a1fd-71f09551bf87",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Các lỗi phổ biến: render dựa vào Date.now()/random, đọc window hoặc localStorage khi server render, format ngày theo timezone khác nhau, mutate DOM bằng library ngoài Angular trước hydration, hoặc API trả data khác giữa server và client."
+      ],
+      "details": [
+        "Guard browser-only code:"
+      ],
+      "points": [],
+      "sections": [
+        "Cách fix là làm render deterministic, dùng transfer cache/data, platform checks và defer DOM-dependent widgets."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "const platformId = inject(PLATFORM_ID)\nif (isPlatformBrowser(platformId)) {\n  localStorage.setItem(\"seen\", \"true\")\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "3651-cac-loi-hydration-mismatch-pho-bien-trong-angular-la-gi"
+  },
+  {
+    "id": "34db951f-72cc-55ab-ba6c-a50c81757d02",
+    "question": "Tối ưu bundle Angular nên bắt đầu từ đâu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3652-toi-uu-bundle-angular-nen-bat-dau-tu-dau",
+    "slug": "toi-uu-bundle-angular-nen-bat-dau-tu-dau-34db951f-72cc-55ab-ba6c-a50c81757d02",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Bắt đầu bằng route-level lazy loading, kiểm tra bundle analyzer/source-map-explorer, loại bỏ dependency nặng không cần thiết và dùng @defer cho UI chưa cần ngay."
+      ],
+      "details": [
+        "Tiếp theo tối ưu shared module/imports để tránh kéo cả thư viện vào initial chunk. Đừng micro-optimize trước khi đo; mục tiêu là giảm JavaScript critical path của màn hình đầu tiên."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "3652-toi-uu-bundle-angular-nen-bat-dau-tu-dau"
+  },
+  {
+    "id": "e3563da9-c49e-5ae5-ad31-b4d97032195b",
+    "question": "Angular hỗ trợ accessibility (a11y) thế nào? CDK a11y module cung cấp gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3653-angular-ho-tro-accessibility-a11y-the-nao-cdk-a11y-module-cung-cap-gi",
+    "slug": "angular-ho-tro-accessibility-a11y-the-nao-cdk-a11y-module-cung-cap-gi-e3563da9-c49e-5ae5-ad31-b4d97032195b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Angular xây accessible component qua: semantic HTML, ARIA attributes, và @angular/cdk/a11y (stable) — bộ utility a11y dùng phổ biến trong production."
+      ],
+      "details": [
+        "Các tool chính của CDK a11y:\n- FocusTrap (cdkTrapFocus) — giữ focus trong modal/dialog, không cho tab ra ngoài.\n- LiveAnnouncer — đọc thông báo động cho screen reader (announce(\"Đã lưu\")).\n- FocusMonitor — theo dõi focus đến từ chuột/bàn phím/programmatic để style khác nhau.\n- cdkAriaLive, A11yModule cho keyboard navigation list (ListKeyManager)."
+      ],
+      "points": [],
+      "sections": [
+        "Lưu ý 2026: Angular đang phát triển package @angular/aria (experimental) — headless directives cho WAI-ARIA pattern (toolbar, tabs, listbox...) — đáng theo dõi nhưng production hiện vẫn dùng CDK a11y + semantic HTML."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "constructor(private announcer: LiveAnnouncer) {}\nsave() { this.announcer.announce(\"Đã lưu thành công\", \"polite\") }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "3653-angular-ho-tro-accessibility-a11y-the-nao-cdk-a11y-module-cung-cap-gi"
+  },
+  {
+    "id": "361a30da-494b-53e7-abc3-6f1e8dcca012",
+    "question": "animate.enter và animate.leave khác legacy Angular animations thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3654-animate-enter-va-animate-leave-khac-legacy-angular-animations-the-nao",
+    "slug": "animate-enter-va-animate-leave-khac-legacy-angular-animations-the-nao-361a30da-494b-53e7-abc3-6f1e8dcca012",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "animate.enter và animate.leave là API animation mới được compiler hỗ trợ trực tiếp, dùng CSS class hoặc callback khi element vào/rời DOM. Docs Angular hiện tại khuyến nghị native CSS với hai API này cho code mới; nhiều API trong @angular/animations legacy đã bị deprecate."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Điểm cần nhớ: nếu dùng callback cho animate.leave, phải gọi animationComplete() để Angular remove element đúng lúc."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "@if (open()) {\n  <section animate.enter=\"fade-in\" animate.leave=\"fade-out\">Panel</section>\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "3654-animate-enter-va-animate-leave-khac-legacy-angular-animations-the-nao"
+  },
+  {
+    "id": "2de043b7-d5e1-5320-8b9f-2231775bf9f7",
+    "question": "Angular CLI testing hiện đại dùng Karma hay Vitest?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3656-angular-cli-testing-hien-dai-dung-karma-hay-vitest",
+    "slug": "angular-cli-testing-hien-dai-dung-karma-hay-vitest-2de043b7-d5e1-5320-8b9f-2231775bf9f7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Angular docs hiện tại mô tả project CLI mới dùng Vitest với jsdom mặc định, trong khi Karma vẫn được hỗ trợ cho migration/legacy."
+      ],
+      "details": [
+        "Khi phỏng vấn, nên nói rõ bối cảnh version: codebase cũ có thể vẫn Karma/Jasmine, project mới nên cân nhắc Vitest; E2E vẫn là lớp riêng như Playwright/Cypress."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "3656-angular-cli-testing-hien-dai-dung-karma-hay-vitest"
+  },
+  {
+    "id": "e104a26b-1574-53ab-86dc-f51d4cd55811",
+    "question": "Test HttpClient trong Angular như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3657-test-httpclient-trong-angular-nhu-the-nao",
+    "slug": "test-httpclient-trong-angular-nhu-the-nao-e104a26b-1574-53ab-86dc-f51d4cd55811",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng provideHttpClient() cùng provideHttpClientTesting() để thay backend thật bằng test backend, rồi dùng HttpTestingController để assert request và flush response."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [
+        "Thứ tự provider quan trọng: provideHttpClient() phải đứng trước provideHttpClientTesting()."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "TestBed.configureTestingModule({\n  providers: [UserApi, provideHttpClient(), provideHttpClientTesting()],\n})\n\nconst api = TestBed.inject(UserApi)\nconst http = TestBed.inject(HttpTestingController)\nconst promise = firstValueFrom(api.getUser(\"42\"))\n\nhttp.expectOne(\"/api/users/42\").flush({ id: \"42\", name: \"Ada\" })\nawait expectAsync(promise).toBeResolved()\nhttp.verify()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "3657-test-httpclient-trong-angular-nhu-the-nao"
+  },
+  {
+    "id": "d7e681c5-3409-5f5b-bec5-8565f8aa3adc",
+    "question": "Khi nào Angular app cần NgRx, Signal Store hoặc state management library?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3658-khi-nao-angular-app-can-ngrx-signal-store-hoac-state-management-library",
+    "slug": "khi-nao-angular-app-can-ngrx-signal-store-hoac-state-management-library-d7e681c5-3409-5f5b-bec5-8565f8aa3adc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Không phải Angular app nào cũng cần global state library. Local component state nên dùng signals; server stream/cache có thể giữ Observable trong service; feature state vừa phải có thể dùng service/store tự viết."
+      ],
+      "details": [
+        "Pattern store nhỏ bằng signal:"
+      ],
+      "points": [],
+      "sections": [
+        "Cân nhắc NgRx/Signal Store khi state dùng chung nhiều route, mutation phức tạp, cần devtools/time travel, effect orchestration hoặc convention mạnh cho team lớn."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "@Injectable({ providedIn: \"root\" })\nexport class CartStore {\n  private readonly _items = signal<CartItem[]>([])\n  readonly items = this._items.asReadonly()\n  readonly total = computed(() => this._items().reduce((sum, item) => sum + item.price, 0))\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "3658-khi-nao-angular-app-can-ngrx-signal-store-hoac-state-management-library"
+  },
+  {
+    "id": "ecc591fe-3738-593b-a0fb-3f549396219c",
+    "question": "Lỗi ExpressionChangedAfterItHasBeenCheckedError (NG0100) do đâu và sửa thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97610-loi-expressionchangedafterithasbeencheckederror-ng0100-do-dau-va-sua-the-nao",
+    "slug": "loi-expressionchangedafterithasbeencheckederror-ng0100-do-dau-va-sua-the-nao-ecc591fe-3738-593b-a0fb-3f549396219c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Đây là lỗi chỉ xuất hiện ở dev mode. Sau mỗi vòng change detection, Angular chạy thêm một vòng kiểm tra; nếu giá trị binding ở vòng hai khác vòng một, nghĩa là có gì đó thay đổi state sau khi view đã được kiểm tra — Angular báo lỗi vì view đang hiển thị dữ liệu không nhất quán với model.",
+        "computed()",
+        "pipe",
+        "ngOnInit",
+        "ngAfterViewInit",
+        "cdr.detectChanges()",
+        "setTimeout(...)"
+      ],
+      "details": [
+        "Hai nguyên nhân điển hình:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "// 1. binding to a getter that returns a new reference every call\nget options() { return { label: this.name } }   // new object each CD run\n\n// 2. child changes parent state in ngAfterViewInit\nngAfterViewInit() { this.parent.title = 'ready' }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": "97610-loi-expressionchangedafterithasbeencheckederror-ng0100-do-dau-va-sua-the-nao"
+  },
+  {
+    "id": "33a1e08f-a11a-5eef-8cb5-9db460d161c4",
+    "question": "Component đặt OnPush nhưng dữ liệu đổi mà UI không cập nhật — chẩn đoán và xử lý thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97611-component-dat-onpush-nhung-du-lieu-doi-ma-ui-khong-cap-nhat-chan-doan-va-xu-ly-t",
+    "slug": "component-dat-onpush-nhung-du-lieu-doi-ma-ui-khong-cap-nhat-chan-doan-va-xu-ly-the-nao-33a1e08f-a11a-5eef-8cb5-9db460d161c4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Với OnPush, Angular chỉ kiểm tra component khi có một trong các tín hiệu: input thay đổi tham chiếu, event từ template của chính nó, async pipe phát giá trị, hoặc signal đọc trong template thay đổi. Ngoài các trường hợp đó, dù dữ liệu đã đổi, view vẫn giữ nguyên.",
+        "markForCheck()",
+        "detectChanges()",
+        "chuỗi cha",
+        "vòng change detection kế tiếp"
+      ],
+      "details": [
+        "Ba nguyên nhân hay gặp:",
+        "async",
+        "markForCheck"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "// 1. mutate the input object instead of replacing it\nthis.user.name = 'new'                  // same reference → no check\nthis.user = { ...this.user, name: 'new' }  // đúng\n\n// 2. state updated from outside the component template\nthis.socket.onMessage(msg => {\n  this.messages.push(msg)\n  this.cdr.markForCheck()               // mark this component + ancestors dirty\n})\n\n// 3. subscribe manually and assign, instead of using the async pipe"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "97611-component-dat-onpush-nhung-du-lieu-doi-ma-ui-khong-cap-nhat-chan-doan-va-xu-ly-t"
+  },
+  {
+    "id": "778377c8-a3ef-5e42-86a6-a1136e5e4c8f",
+    "question": "takeUntilDestroyed dùng thế nào cho đúng? Vì sao đôi khi báo lỗi NG0203?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97612-takeuntildestroyed-dung-the-nao-cho-dung-vi-sao-doi-khi-bao-loi-ng0203",
+    "slug": "takeuntildestroyed-dung-the-nao-cho-dung-vi-sao-doi-khi-bao-loi-ng0203-778377c8-a3ef-5e42-86a6-a1136e5e4c8f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "NG0203 nghĩa là bạn gọi một API cần injection context (inject(), takeUntilDestroyed() không tham số) ở nơi Angular không còn giữ context đó — trong ngOnInit, trong callback, trong hàm async sau await. Ba cách xử lý:\n- Gọi trong field initializer hoặc constructor.\n- Truyền DestroyRef tường minh: takeUntilDestroyed(this.destroyRef) (destroyRef phải được inject() ở constructor).\n- Bọc bằng runInInjectionContext(injector, () => ...) khi thật sự cần."
+      ],
+      "details": [
+        "Lưu ý: chỉ dùng cho stream sống lâu (form valueChanges, websocket, router events, interval). HTTP request đã tự hoàn tất sau một lần phát nên không cần — ưu tiên async pipe hoặc toSignal() để khỏi quản lý subscription."
+      ],
+      "points": [],
+      "sections": [
+        "takeUntilDestroyed() (từ @angular/core/rxjs-interop) hoàn tất Observable khi context bị huỷ, thay cho mẫu destroy$ = new Subject() + ngOnDestroy thủ công."
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "export class SearchBox {\n  private destroyRef = inject(DestroyRef)\n\n  constructor() {\n    // hoạt động: called inside an injection context\n    this.search.valueChanges.pipe(takeUntilDestroyed()).subscribe(...)\n  }\n\n  ngOnInit() {\n    // NG0203 without an explicit ref — no injection context here\n    this.ws.messages$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(...)\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "97612-takeuntildestroyed-dung-the-nao-cho-dung-vi-sao-doi-khi-bao-loi-ng0203"
+  },
+  {
+    "id": "0a55731a-c41f-5793-8c01-55918d6f3653",
+    "question": "Trong Angular, làm sao đưa async data (HTTP) vào signal-based code? toSignal() khác resource() thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "trong-angular-lam-sao-dua-async-data-http-vao-signal-based-code-tosignal-khac-resource-the-nao-0a55731a-c41f-5793-8c01-55918d6f3653",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": null
+  },
+  {
+    "id": "31840bbb-d62e-599e-b98d-f58561f7de51",
+    "question": "Zoneless Angular là gì và khi nào nên cân nhắc?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "zoneless-angular-la-gi-va-khi-nao-nen-can-nhac-31840bbb-d62e-599e-b98d-f58561f7de51",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": null
+  },
+  {
+    "id": "d63f8397-2628-5d42-a149-a0786faec9fa",
+    "question": "Hierarchical injectors ảnh hưởng thế nào đến state và memory leak?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "hierarchical-injectors-anh-huong-the-nao-den-state-va-memory-leak-d63f8397-2628-5d42-a149-a0786faec9fa",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": null
+  },
+  {
+    "id": "e4321276-85a6-5fbe-bba6-a5d2274e478a",
+    "question": "ControlValueAccessor dùng khi nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "controlvalueaccessor-dung-khi-nao-e4321276-85a6-5fbe-bba6-a5d2274e478a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": null
+  },
+  {
+    "id": "8392dc15-732e-5d70-887a-5ed34d5cbec4",
+    "question": "Reactive Forms vs Template-driven Forms trong Angular khác nhau thế nào? Khi nào dùng cái nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "reactive-forms-vs-template-driven-forms-trong-angular-khac-nhau-the-nao-khi-nao-dung-cai-nao-8392dc15-732e-5d70-887a-5ed34d5cbec4",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": null
+  },
+  {
+    "id": "a68c25c5-4ecd-557e-9c7a-a83a39d2d1f3",
+    "question": "Hydration trong Angular SSR là gì? Non-destructive hydration hoạt động thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "hydration-trong-angular-ssr-la-gi-non-destructive-hydration-hoat-dong-the-nao-a68c25c5-4ecd-557e-9c7a-a83a39d2d1f3",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": null
+  },
+  {
+    "id": "2c45d555-72ec-5f08-9cd7-4b8f6c7a0d8e",
+    "question": "Khi migrate Angular legacy app lên phiên bản mới, quy trình an toàn là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-migrate-angular-legacy-app-len-phien-ban-moi-quy-trinh-an-toan-la-gi-2c45d555-72ec-5f08-9cd7-4b8f6c7a0d8e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": null
+  },
+  {
+    "id": "bd180717-51c5-5c71-9128-4d25658868bb",
+    "question": "Chuyển một app Angular sang zoneless: những chỗ nào hỏng và phải sửa gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "chuyen-mot-app-angular-sang-zoneless-nhung-cho-nao-hong-va-phai-sua-gi-bd180717-51c5-5c71-9128-4d25658868bb",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": null
+  },
+  {
+    "id": "9766b1d1-8f98-5ed3-8d87-4606ebd332ea",
+    "question": "Khi nào **không** nên dùng effect()? Dùng gì thay thế?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-khong-nen-dung-effect-dung-gi-thay-the-9766b1d1-8f98-5ed3-8d87-4606ebd332ea",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": null
+  },
+  {
+    "id": "bb250850-1cda-5de7-b3a5-983d7030281b",
+    "question": "Thiết kế luồng refresh token bằng HTTP interceptor: xử lý sao để nhiều request 401 cùng lúc không gọi refresh nhiều lần?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "thiet-ke-luong-refresh-token-bang-http-interceptor-xu-ly-sao-de-nhieu-request-401-cung-luc-khong-goi-bb250850-1cda-5de7-b3a5-983d7030281b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": null
+  }
+]

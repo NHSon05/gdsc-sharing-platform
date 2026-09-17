@@ -1,0 +1,2232 @@
+[
+  {
+    "id": "4b2582b1-77b5-5f3f-9835-772072041094",
+    "question": "PostgreSQL là gì và khi nào nên chọn?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8100-postgresql-la-gi-va-khi-nao-nen-chon",
+    "slug": "postgresql-la-gi-va-khi-nao-nen-chon-4b2582b1-77b5-5f3f-9835-772072041094",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "PostgreSQL là relational database (cơ sở dữ liệu quan hệ) mã nguồn mở — dữ liệu nằm trong các bảng có cột rõ ràng và ràng buộc chặt chẽ. Điểm mạnh chính: SQL chuẩn, transaction ACID (làm là đúng và đủ, không nửa vời), nhiều loại index để query nhanh, và kiểu JSONB cho phép lưu dữ liệu linh hoạt như NoSQL ngay trong DB quan hệ."
+      ],
+      "details": [
+        "Nên chọn khi: dữ liệu có quan hệ rõ (một user có nhiều order...), cần chính xác tuyệt đối (thanh toán, tồn kho), query phức tạp hoặc làm báo cáo. Không nên chọn khi workload chủ yếu là cache key-value (Redis hợp hơn), time-series cực lớn, hoặc chỉ lưu document mà không cần ràng buộc quan hệ. Đừng chọn chỉ vì \"quen tay\"."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "8100-postgresql-la-gi-va-khi-nao-nen-chon"
+  },
+  {
+    "id": "d7abc470-6dae-5573-9685-ab19fd26ac9e",
+    "question": "Primary key, unique key và foreign key khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8101-primary-key-unique-key-va-foreign-key-khac-nhau-the-nao",
+    "slug": "primary-key-unique-key-va-foreign-key-khac-nhau-the-nao-d7abc470-6dae-5573-9685-ab19fd26ac9e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Cả ba đều là ràng buộc nhưng phục vụ mục đích khác nhau:"
+      ],
+      "details": [
+        "Mẹo trả lời phỏng vấn: PK = danh tính, UNIQUE = quy tắc nghiệp vụ (email duy nhất), FK = giữ dữ liệu liên kết không bị \"mồ côi\". Đừng bỏ FK chỉ để code linh hoạt hơn nếu dữ liệu cần nhất quán."
+      ],
+      "points": [
+        "Primary key: định danh duy nhất mỗi dòng (mỗi user một id). Đây là cột mà các bảng khác thường trỏ tới.",
+        "Unique key: đảm bảo một (hoặc vài) cột không trùng, ví dụ email không được lặp — nhưng nó không phải \"danh tính chính\" của dòng.",
+        "Foreign key: đảm bảo giá trị ở bảng con phải có thật ở bảng cha (order.user_id phải ứng với một user tồn tại)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "8101-primary-key-unique-key-va-foreign-key-khac-nhau-the-nao"
+  },
+  {
+    "id": "55f52703-0783-5f33-9c61-654e8c49f3ea",
+    "question": "NULL trong PostgreSQL cần hiểu thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8102-null-trong-postgresql-can-hieu-the-nao",
+    "slug": "null-trong-postgresql-can-hieu-the-nao-55f52703-0783-5f33-9c61-654e8c49f3ea",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "NULL nghĩa là \"không biết / chưa có\", chứ không phải chuỗi rỗng, số 0 hay false. Vì là \"không biết\" nên so sánh = NULL luôn cho kết quả không xác định — phải dùng IS NULL / IS NOT NULL."
+      ],
+      "details": [
+        "Một bẫy hay gặp: unique constraint cho phép nhiều dòng cùng NULL, vì hai giá trị \"không biết\" không được coi là bằng nhau. Nếu nghiệp vụ cần chỉ một dòng được null trong một nhóm, dùng partial unique index hoặc constraint phù hợp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "8102-null-trong-postgresql-can-hieu-the-nao"
+  },
+  {
+    "id": "a91f23d1-d020-5f08-b79b-0a71c40a97ab",
+    "question": "Transaction trong PostgreSQL giải quyết vấn đề gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8103-transaction-trong-postgresql-giai-quyet-van-de-gi",
+    "slug": "transaction-trong-postgresql-giai-quyet-van-de-gi-a91f23d1-d020-5f08-b79b-0a71c40a97ab",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Transaction gom nhiều câu lệnh thành một khối \"được ăn cả, ngã về không\": commit thì mọi thay đổi được ghi bền vững, rollback thì hủy sạch như chưa từng chạy. Trong lúc chưa commit, thay đổi chưa hiện ra như dữ liệu hoàn chỉnh với transaction khác (theo isolation rules)."
+      ],
+      "details": [
+        "Ví dụ chuyển tiền — trừ tài khoản này, cộng tài khoản kia, cả hai phải cùng thành công:"
+      ],
+      "points": [],
+      "sections": [
+        "Đây là nền tảng để tránh dữ liệu \"nửa vời\" trong thanh toán, tồn kho, đặt chỗ và mọi workflow nhiều bước."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "BEGIN;\nUPDATE accounts SET balance = balance - 100 WHERE id = 1;\nUPDATE accounts SET balance = balance + 100 WHERE id = 2;\nCOMMIT;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "8103-transaction-trong-postgresql-giai-quyet-van-de-gi"
+  },
+  {
+    "id": "f872fa05-9025-5d75-9578-35439be792fb",
+    "question": "Constraint và index khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8104-constraint-va-index-khac-nhau-the-nao",
+    "slug": "constraint-va-index-khac-nhau-the-nao-f872fa05-9025-5d75-9578-35439be792fb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Dễ lẫn vì một số constraint tự tạo index, nhưng vai trò khác nhau: constraint là quy tắc dữ liệu (primary key, foreign key, unique, check, not null), còn index là cấu trúc giúp tìm/đọc nhanh hơn. Một unique constraint thường tạo unique index ở bên dưới để thực thi, nhưng không phải index nào cũng là quy tắc nghiệp vụ."
+      ],
+      "details": [
+        "Những quy tắc nghiệp vụ nên khai báo bằng constraint:"
+      ],
+      "points": [],
+      "sections": [
+        "Nếu chỉ tạo index để query nhanh hơn thì đừng nhầm nó với một quy tắc dữ liệu — nó không ép tính duy nhất hay điều kiện gì cả."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "ALTER TABLE users ADD CONSTRAINT users_email_unique UNIQUE (email);\nALTER TABLE orders ADD CONSTRAINT positive_total CHECK (total >= 0);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "8104-constraint-va-index-khac-nhau-the-nao"
+  },
+  {
+    "id": "5165cfa1-63d3-5240-93a9-8505b80fabc9",
+    "question": "Index trong PostgreSQL giúp gì và có trade-off gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8105-index-trong-postgresql-giup-gi-va-co-trade-off-gi",
+    "slug": "index-trong-postgresql-giup-gi-va-co-trade-off-gi-5165cfa1-63d3-5240-93a9-8505b80fabc9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Index giống mục lục cuối sách: thay vì lật từng trang để tìm một từ, database nhảy thẳng tới đúng dòng. Nhờ đó các query lọc (WHERE), join hay sắp xếp (ORDER BY) nhanh hơn hẳn, và việc tìm theo giá trị duy nhất gần như tức thì."
+      ],
+      "details": [
+        "Đánh đổi: index tốn thêm disk và làm ghi chậm hơn — mỗi INSERT/UPDATE/DELETE phải cập nhật cả index. Vì vậy đừng index mọi cột; chỉ index cột thật sự hay dùng để tìm kiếm. Đôi khi database còn bỏ qua index nếu nó không lọc bớt được mấy dòng (lọc kém hiệu quả)."
+      ],
+      "points": [],
+      "sections": [
+        "Muốn biết một query có dùng index hay không, chạy EXPLAIN ANALYZE để xem kế hoạch thực thi."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "CREATE INDEX idx_users_email ON users (email);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "8105-index-trong-postgresql-giup-gi-va-co-trade-off-gi"
+  },
+  {
+    "id": "c74ac862-7886-56c5-a48a-ea0604e122e8",
+    "question": "JOIN types trong PostgreSQL khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8118-join-types-trong-postgresql-khac-nhau-the-nao",
+    "slug": "join-types-trong-postgresql-khac-nhau-the-nao-c74ac862-7886-56c5-a48a-ea0604e122e8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "JOIN ghép dòng giữa hai bảng; khác nhau ở chỗ có giữ lại dòng không khớp hay không:"
+      ],
+      "details": [
+        "Lưu ý: sau LEFT JOIN, nếu đặt điều kiện về bảng phải trong WHERE, bạn vô tình loại hết dòng NULL và biến nó thành INNER JOIN. Muốn giữ dòng không khớp, đặt điều kiện đó trong ON."
+      ],
+      "points": [
+        "INNER JOIN: chỉ giữ dòng khớp ở cả hai bảng.",
+        "LEFT JOIN: giữ toàn bộ bảng trái, bên phải không khớp thì điền NULL.",
+        "RIGHT JOIN: ngược lại, giữ toàn bộ bảng phải.",
+        "FULL OUTER JOIN: giữ cả hai phía, thiếu thì NULL."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "8118-join-types-trong-postgresql-khac-nhau-the-nao"
+  },
+  {
+    "id": "af5a80f1-700f-5f80-b45a-c7d0a13d5c0b",
+    "question": "UPSERT trong PostgreSQL dùng như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8128-upsert-trong-postgresql-dung-nhu-the-nao",
+    "slug": "upsert-trong-postgresql-dung-nhu-the-nao-af5a80f1-700f-5f80-b45a-c7d0a13d5c0b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "UPSERT = \"update nếu đã có, insert nếu chưa\"."
+      ],
+      "details": [
+        "Trong PostgreSQL viết bằng INSERT ... ON CONFLICT: khi câu insert đụng một unique constraint/index, bạn bảo nó update thay vì báo lỗi (hoặc bỏ qua)."
+      ],
+      "points": [
+        "EXCLUDED là dòng đáng lẽ được insert.",
+        "Cần chỉ rõ cột gây xung đột (conflict target).",
+        "Với logic phức tạp, để ý race condition, trigger phụ và việc cập nhật updated_at."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "INSERT INTO users (email, name)\nVALUES ('a@example.com', 'Ada')\nON CONFLICT (email) DO UPDATE\nSET name = EXCLUDED.name;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "8128-upsert-trong-postgresql-dung-nhu-the-nao"
+  },
+  {
+    "id": "38db87bf-29af-509a-9528-4538a29385e1",
+    "question": "RETURNING trong PostgreSQL hữu ích khi nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8129-returning-trong-postgresql-huu-ich-khi-nao",
+    "slug": "returning-trong-postgresql-huu-ich-khi-nao-38db87bf-29af-509a-9528-4538a29385e1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "RETURNING cho phép INSERT, UPDATE, DELETE, MERGE trả về luôn các dòng vừa bị tác động, khỏi cần query lại lần nữa."
+      ],
+      "details": [
+        "Rất tiện để lấy id vừa sinh, ghi log dòng vừa đổi, hoặc cập nhật xong trả thẳng response cho client."
+      ],
+      "points": [],
+      "sections": [
+        "Lợi ích kép: giảm số lần đi-về với DB, và tránh race condition — vì nếu ghi xong rồi query lại, dòng đó có thể đã bị transaction khác sửa trong khoảng giữa."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "UPDATE orders\nSET status = 'paid'\nWHERE id = 42\nRETURNING id, status, updated_at;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "8129-returning-trong-postgresql-huu-ich-khi-nao"
+  },
+  {
+    "id": "b8d77b3d-d964-55eb-b2a0-78d7c51355e4",
+    "question": "CTE trong PostgreSQL dùng khi nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8135-cte-trong-postgresql-dung-khi-nao",
+    "slug": "cte-trong-postgresql-dung-khi-nao-b8d77b3d-d964-55eb-b2a0-78d7c51355e4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "CTE (mệnh đề WITH) cho phép đặt tên cho một subquery, để chẻ một query phức tạp thành từng bước dễ đọc — hoặc dùng kèm câu lệnh sửa dữ liệu."
+      ],
+      "details": [
+        "PostgreSQL hiện đại (từ bản 12) thường tự \"inline\" CTE để tối ưu, nhưng vẫn nên biết về việc materialization khi cần tinh chỉnh hiệu năng."
+      ],
+      "points": [],
+      "sections": [
+        "Dùng CTE chủ yếu để query dễ đọc hơn; nếu hiệu năng quan trọng, hãy kiểm tra lại kế hoạch bằng EXPLAIN."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "WITH paid_orders AS (\n  SELECT * FROM orders WHERE status = 'paid'\n)\nSELECT user_id, count(*) FROM paid_orders GROUP BY user_id;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "8135-cte-trong-postgresql-dung-khi-nao"
+  },
+  {
+    "id": "0dddfccb-ad80-5dd9-897a-85724f5957ec",
+    "question": "Dead tuple là gì? Table bloat gây ảnh hưởng gì và phát hiện bằng cách nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97801-dead-tuple-la-gi-table-bloat-gay-anh-huong-gi-va-phat-hien-bang-cach-nao",
+    "slug": "dead-tuple-la-gi-table-bloat-gay-anh-huong-gi-va-phat-hien-bang-cach-nao-0dddfccb-ad80-5dd9-897a-85724f5957ec",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Dead tuple là phiên bản dòng đã bị UPDATE thay thế hoặc DELETE đánh dấu, nhưng không transaction nào còn cần nhìn thấy nữa. Nó vẫn nằm trong file dữ liệu cho tới khi VACUUM đánh dấu vùng đó tái sử dụng được.",
+        "last_autovacuum"
+      ],
+      "details": [
+        "Bloat là khi lượng dead tuple tích luỹ khiến bảng (và index của nó) chiếm nhiều trang đĩa hơn dữ liệu sống rất nhiều.",
+        "Nguyên nhân thường gặp: bảng job/queue bị update liên tục, batch DELETE lớn, hoặc có transaction chạy dài giữ snapshot khiến vacuum không dọn được."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "select relname,\n       n_live_tup,\n       n_dead_tup,\n       last_autovacuum\nfrom pg_stat_user_tables\norder by n_dead_tup desc\nlimit 10;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "97801-dead-tuple-la-gi-table-bloat-gay-anh-huong-gi-va-phat-hien-bang-cach-nao"
+  },
+  {
+    "id": "202c447e-fb4e-5796-bae7-fa25c373949e",
+    "question": "Autovacuum làm những việc gì? Khi nào nó chạy không kịp?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97802-autovacuum-lam-nhung-viec-gi-khi-nao-no-chay-khong-kip",
+    "slug": "autovacuum-lam-nhung-viec-gi-khi-nao-no-chay-khong-kip-202c447e-fb4e-5796-bae7-fa25c373949e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Autovacuum là tiến trình nền tự động chạy hai việc trên từng bảng:"
+      ],
+      "details": [
+        "1. VACUUM — thu hồi không gian của dead tuple để tái sử dụng, cập nhật visibility map, và đẩy lùi ngưỡng transaction ID wraparound.\n2. ANALYZE — cập nhật thống kê phân bố dữ liệu để planner chọn plan đúng.",
+        "Nó khởi động khi số dòng thay đổi vượt ngưỡng, mặc định khoảng autovacuum_vacuum_threshold (50) cộng autovacuum_vacuum_scale_factor (0.2) nhân số dòng — tức khoảng 20% bảng bị thay đổi.",
+        "Khi nào không kịp:\n- Bảng rất lớn: 20% của bảng 100 triệu dòng là 20 triệu thay đổi — quá muộn. Hạ autovacuum_vacuum_scale_factor riêng cho bảng đó.\n- Transaction chạy dài (kể cả trên replica có hot_standby_feedback) giữ snapshot cũ → vacuum không được phép dọn tuple mà transaction đó có thể còn cần.\n- Bị throttle: autovacuum_vacuum_cost_delay giới hạn I/O; bảng ghi nhanh hơn tốc độ dọn.\n- Quá ít worker: autovacuum_max_workers mặc định 3, nhiều bảng lớn phải xếp hàng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "alter table events set (autovacuum_vacuum_scale_factor = 0.02);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "97802-autovacuum-lam-nhung-viec-gi-khi-nao-no-chay-khong-kip"
+  },
+  {
+    "id": "0390ce2f-83cf-5cf6-90ee-0d493e605ec2",
+    "question": "Vì sao mỗi kết nối tới PostgreSQL tốn tài nguyên? max_connections đặt cao có sao không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97808-vi-sao-moi-ket-noi-toi-postgresql-ton-tai-nguyen-max-connections-dat-cao-co-sao",
+    "slug": "vi-sao-moi-ket-noi-toi-postgresql-ton-tai-nguyen-max-connections-dat-cao-co-sao-khong-0390ce2f-83cf-5cf6-90ee-0d493e605ec2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "PostgreSQL dùng mô hình process-per-connection: mỗi kết nối là một process hệ điều hành riêng, không phải thread."
+      ],
+      "details": [
+        "Chi phí đi kèm mỗi kết nối:\n- Bộ nhớ riêng của backend process: work_mem cho mỗi thao tác sort/hash, temp_buffers, catalog cache, plan cache. Một kết nối idle vẫn giữ vài MB.\n- Chi phí context switch của scheduler khi số process vượt xa số CPU core.\n- Một số cấu trúc dùng chung (vd snapshot, lock table) phải quét theo số backend → chi phí tăng theo max_connections ngay cả khi kết nối đang idle.",
+        "Đặt max_connections = 2000 không làm server phục vụ được 2000 truy vấn song song — CPU vẫn chỉ có ngần ấy core. Kết quả thường thấy là throughput giảm vì tranh chấp và context switch, cộng nguy cơ hết RAM khi nhiều truy vấn cùng cấp phát work_mem.",
+        "Cách làm đúng: giữ max_connections ở mức vừa phải (thường vài trăm) và đặt connection pooler ở phía trước. Điểm xuất phát phổ biến cho pool size là quanh mức số core * 2 + số spindle rồi đo throughput thực tế mà điều chỉnh, thay vì tăng vô hạn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "97808-vi-sao-moi-ket-noi-toi-postgresql-ton-tai-nguyen-max-connections-dat-cao-co-sao"
+  },
+  {
+    "id": "8b364e3e-66f9-5b40-9e7d-ef2b60b5382d",
+    "question": "Production chậm nhưng không biết truy vấn nào gây ra. Dùng pg_stat_statements thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97813-production-cham-nhung-khong-biet-truy-van-nao-gay-ra-dung-pg-stat-statements-the",
+    "slug": "production-cham-nhung-khong-biet-truy-van-nao-gay-ra-dung-pg-stat-statements-the-nao-8b364e3e-66f9-5b40-9e7d-ef2b60b5382d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "(Extension cần có trong shared_preload_libraries, tức phải restart một lần.)",
+        "EXPLAIN ANALYZE",
+        "total_exec_time",
+        "mean_exec_time",
+        "rows / calls rất lớn"
+      ],
+      "details": [
+        "Tìm truy vấn tốn tổng thời gian nhiều nhất — thường quan trọng hơn truy vấn chậm nhất:",
+        "Sau khi tối ưu, select pg_stat_statements_reset(); để đo lại từ mốc sạch. Bổ sung log_min_duration_statement (vd 1000 ms) để bắt các truy vấn chậm kèm tham số thật, thứ mà pg_stat_statements đã chuẩn hoá đi mất."
+      ],
+      "points": [],
+      "sections": [
+        "pg_stat_statements là extension gom thống kê tích luỹ theo từng dạng truy vấn — nó chuẩn hoá tham số nên where id = 1 và where id = 2 được tính chung."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "create extension if not exists pg_stat_statements;"
+        },
+        {
+          "language": "SQL",
+          "code": "select calls,\n       round(total_exec_time::numeric, 1) as total_ms,\n       round(mean_exec_time::numeric, 2)  as mean_ms,\n       rows,\n       query\nfrom pg_stat_statements\norder by total_exec_time desc\nlimit 10;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "97813-production-cham-nhung-khong-biet-truy-van-nao-gay-ra-dung-pg-stat-statements-the"
+  },
+  {
+    "id": "c1131fa8-aab9-5eb4-8da4-a35c1c808728",
+    "question": "B-tree, GIN, GiST và BRIN index dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8106-b-tree-gin-gist-va-brin-index-dung-khi-nao",
+    "slug": "b-tree-gin-gist-va-brin-index-dung-khi-nao-c1131fa8-aab9-5eb4-8da4-a35c1c808728",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "PostgreSQL có nhiều loại index, mỗi loại hợp với một kiểu dữ liệu/truy vấn:"
+      ],
+      "details": [
+        "Ví dụ GIN cho cột JSONB:"
+      ],
+      "points": [
+        "B-tree (mặc định): tốt cho so sánh bằng, khoảng (<, >, BETWEEN) và sắp xếp trên giá trị thường (số, chuỗi, ngày).",
+        "GIN: cho dữ liệu \"nhiều giá trị trong một ô\" như JSONB, mảng, full-text search — kiểu \"index ngược\".",
+        "GiST: cho dữ liệu hình học, khoảng, hoặc toán tử tùy biến (vị trí địa lý, range).",
+        "BRIN: cho bảng cực lớn mà dữ liệu sắp xếp tự nhiên theo thứ tự ghi, ví dụ log/timestamp chỉ thêm vào cuối — index rất nhỏ và rẻ."
+      ],
+      "sections": [
+        "Chọn theo kiểu toán tử/truy vấn thực tế, đừng chọn vì tên nghe \"mạnh\" hơn."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "CREATE INDEX idx_events_payload_gin ON events USING gin (payload);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "8106-b-tree-gin-gist-va-brin-index-dung-khi-nao"
+  },
+  {
+    "id": "b035a06e-9b98-5ca4-96a4-5a6d2d33a312",
+    "question": "Composite index thứ tự column quan trọng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8107-composite-index-thu-tu-column-quan-trong-the-nao",
+    "slug": "composite-index-thu-tu-column-quan-trong-the-nao-b035a06e-9b98-5ca4-96a4-5a6d2d33a312",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Trong composite index (index nhiều cột) kiểu B-tree, thứ tự cột rất quan trọng — giống danh bạ sắp theo \"họ rồi tên\": tra theo họ rất nhanh, nhưng tra chỉ theo tên thì gần như vô dụng."
+      ],
+      "details": [
+        "Index (tenant_id, status, created_at) phục vụ tốt query lọc tenant_id, rồi status, rồi sắp theo created_at; nó KHÔNG tương đương (created_at, status, tenant_id).",
+        "Luôn kiểm chứng bằng query thật và EXPLAIN ANALYZE."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "CREATE INDEX idx_orders_tenant_status_created\nON orders (tenant_id, status, created_at DESC);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "8107-composite-index-thu-tu-column-quan-trong-the-nao"
+  },
+  {
+    "id": "950fe033-3dd2-53b5-bbf2-5b605a1479f5",
+    "question": "Partial index dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8108-partial-index-dung-khi-nao",
+    "slug": "partial-index-dung-khi-nao-950fe033-3dd2-53b5-bbf2-5b605a1479f5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Partial index chỉ index những dòng thỏa một điều kiện, thay vì cả bảng. Rất hợp khi query thường chỉ quan tâm một phần nhỏ: bản ghi đang active, job chưa xử lý, hay dòng chưa bị xóa mềm."
+      ],
+      "details": [
+        "Ví dụ ép email duy nhất, nhưng chỉ với user chưa bị xóa mềm:"
+      ],
+      "points": [],
+      "sections": [
+        "Vì nhỏ hơn nên nó nhanh và rẻ hơn index toàn bảng — nhưng database chỉ dùng được nó khi điều kiện trong query khớp với điều kiện WHERE của index."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "CREATE UNIQUE INDEX idx_users_email_active\nON users (email)\nWHERE deleted_at IS NULL;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "8108-partial-index-dung-khi-nao"
+  },
+  {
+    "id": "4a234776-211c-59fe-9cb0-37b5fdd1e02e",
+    "question": "Isolation levels trong PostgreSQL khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8110-isolation-levels-trong-postgresql-khac-nhau-the-nao",
+    "slug": "isolation-levels-trong-postgresql-khac-nhau-the-nao-4a234776-211c-59fe-9cb0-37b5fdd1e02e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Isolation level quyết định một transaction \"nhìn thấy\" công việc đang chạy dở của transaction khác đến đâu. PostgreSQL có ba mức thực tế (Read Uncommitted bị xử lý như Read Committed):"
+      ],
+      "details": [
+        "Chọn theo ràng buộc nghiệp vụ. Với đặt chỗ/thanh toán/tồn kho dễ tranh chấp, cần khóa dòng hoặc Serializable + retry, đừng chỉ \"đọc rồi ghi\" ở mức Read Committed."
+      ],
+      "points": [
+        "Read Committed (mặc định): mỗi câu lệnh thấy ảnh chụp dữ liệu mới nhất đã commit. Hai lần đọc trong cùng transaction có thể ra khác nhau.",
+        "Repeatable Read: giữ một ảnh chụp cố định suốt transaction, đọc lại vẫn như cũ.",
+        "Serializable: đảm bảo kết quả y như thể các transaction chạy lần lượt; nếu phát hiện xung đột thì hủy một cái để bạn thử lại."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "8110-isolation-levels-trong-postgresql-khac-nhau-the-nao"
+  },
+  {
+    "id": "75e1626d-dd02-5aa3-9fb7-770b1f397b82",
+    "question": "SELECT FOR UPDATE dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8111-select-for-update-dung-khi-nao",
+    "slug": "select-for-update-dung-khi-nao-75e1626d-dd02-5aa3-9fb7-770b1f397b82",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "SELECT ... FOR UPDATE khóa đúng các dòng vừa chọn, để transaction khác không thể update/delete chúng cho đến khi bạn commit hoặc rollback."
+      ],
+      "details": [
+        "Nó dành cho tình huống \"đọc — sửa — ghi\" cần an toàn, ví dụ trừ tồn kho hay lấy job khỏi hàng đợi."
+      ],
+      "points": [],
+      "sections": [
+        "Giữ transaction càng ngắn càng tốt: khóa lâu sẽ chặn người khác, gây timeout và nguy cơ deadlock."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "BEGIN;\nSELECT * FROM inventory WHERE sku = 'A' FOR UPDATE;\nUPDATE inventory SET stock = stock - 1 WHERE sku = 'A';\nCOMMIT;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "8111-select-for-update-dung-khi-nao"
+  },
+  {
+    "id": "f3824d7b-97f9-56e8-ae4d-3f60638dbabd",
+    "question": "UUID, serial và identity column nên chọn thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8114-uuid-serial-va-identity-column-nen-chon-the-nao",
+    "slug": "uuid-serial-va-identity-column-nen-chon-the-nao-f3824d7b-97f9-56e8-ae4d-3f60638dbabd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Ba cách tạo khóa chính tự sinh:"
+      ],
+      "details": [
+        "Đánh đổi: integer nhỏ gọn, index sắp gần nhau nên nhanh, dễ debug bằng mắt; UUID rộng hơn, index to hơn, và UUID ngẫu nhiên ghi rải rác nên kém locality (cân nhắc UUIDv7 nếu cần thứ tự thời gian). Đừng chọn UUID chỉ vì thấy phổ biến nếu hệ thống không thật sự cần ID phân tán."
+      ],
+      "points": [
+        "serial: cách viết tắt cũ, ngầm tạo một sequence. Còn chạy được nhưng không còn là cách khuyến nghị.",
+        "GENERATED ... AS IDENTITY: cách chuẩn SQL, rõ ràng hơn, để tạo số tự tăng — nên ưu tiên cho ID dạng integer.",
+        "UUID: hợp khi cần sinh ID ở nhiều nơi mà không trùng nhau (phân tán), giấu thứ tự/số lượng, hoặc trộn dữ liệu từ nhiều nguồn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "8114-uuid-serial-va-identity-column-nen-chon-the-nao"
+  },
+  {
+    "id": "b21da5f2-3745-5585-896a-923b95aeac1f",
+    "question": "json và jsonb khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8115-json-va-jsonb-khac-nhau-the-nao",
+    "slug": "json-va-jsonb-khac-nhau-the-nao-b21da5f2-3745-5585-896a-923b95aeac1f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "json lưu nguyên văn bản JSON và phân tích lại mỗi lần dùng. jsonb lưu dạng nhị phân đã phân tích sẵn — mất định dạng và thứ tự key gốc, nhưng query và đánh index nhanh hơn nhiều. Hầu hết ứng dụng nên dùng jsonb."
+      ],
+      "details": [
+        "Ví dụ tìm theo nội dung JSON (toán tử \"chứa\" @>):",
+        "Đừng dùng nó để né thiết kế quan hệ cho dữ liệu vốn có quan hệ và ràng buộc rõ ràng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "SELECT * FROM events\nWHERE payload @> '{\"type\":\"checkout\"}'::jsonb;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "8115-json-va-jsonb-khac-nhau-the-nao"
+  },
+  {
+    "id": "fcd278c9-80a9-55e0-8153-0708824d708f",
+    "question": "Khi nào nên normalize thay vì dùng JSONB?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8116-khi-nao-nen-normalize-thay-vi-dung-jsonb",
+    "slug": "khi-nao-nen-normalize-thay-vi-dung-jsonb-fcd278c9-80a9-55e0-8153-0708824d708f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Chọn normalize (tách thành cột/bảng riêng) khi field cần join, hay lọc, cần ràng buộc/foreign key, cần update độc lập hoặc dùng cho báo cáo. Chọn JSONB khi cấu trúc hay đổi, ít khi query sâu, metadata thay đổi liên tục, hoặc cần giữ nguyên payload từ hệ thống ngoài."
+      ],
+      "details": [
+        "Quy tắc thực tế: dữ liệu cốt lõi của nghiệp vụ nên là cột/bảng rõ ràng; dữ liệu phụ hoặc nửa cấu trúc thì để JSONB. Dấu hiệu nên normalize: bạn cứ phải liên tục tạo index trên từng field bên trong JSONB để query — lúc đó JSONB đang gánh việc của bảng quan hệ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "8116-khi-nao-nen-normalize-thay-vi-dung-jsonb"
+  },
+  {
+    "id": "e704dfc7-d8a0-53c1-a84e-15a04c7c8b64",
+    "question": "Generated columns trong PostgreSQL dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8117-generated-columns-trong-postgresql-dung-khi-nao",
+    "slug": "generated-columns-trong-postgresql-dung-khi-nao-e704dfc7-d8a0-53c1-a84e-15a04c7c8b64",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Generated column là cột mà giá trị được tự tính từ các cột khác, nên bạn không phải lặp lại logic đó ở tầng app và có thể index/query trực tiếp trên nó."
+      ],
+      "details": [
+        "Hợp với công thức cố định, thuộc về dữ liệu: họ tên đầy đủ, key đã chuẩn hóa, hay một số tiền tính sẵn."
+      ],
+      "points": [],
+      "sections": [
+        "Đừng dùng generated column cho thứ phụ thuộc trạng thái bên ngoài, múi giờ thay đổi, hay hàm không \"immutable\" (kết quả có thể đổi theo thời điểm) — PostgreSQL sẽ không cho."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "ALTER TABLE users ADD COLUMN full_name text\nGENERATED ALWAYS AS (first_name || ' ' || last_name) STORED;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "8117-generated-columns-trong-postgresql-dung-khi-nao"
+  },
+  {
+    "id": "e633c18e-d0e4-50fd-9b08-0eda693b786a",
+    "question": "Window function trong PostgreSQL dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8119-window-function-trong-postgresql-dung-khi-nao",
+    "slug": "window-function-trong-postgresql-dung-khi-nao-e633c18e-d0e4-50fd-9b08-0eda693b786a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Window function tính toán dựa trên một nhóm dòng liên quan nhưng không gộp các dòng lại như GROUP BY — bạn vẫn giữ từng dòng và có thêm cột tính toán. Hợp với xếp hạng, cộng dồn (running total), trung bình trượt, khử trùng lặp, hay so dòng hiện tại với dòng trước."
+      ],
+      "details": [
+        "Ví dụ lấy đơn mới nhất của mỗi user (đánh số trong từng nhóm rồi giữ số 1):"
+      ],
+      "points": [],
+      "sections": [
+        "Nó thường giúp tránh query N+1 hoặc phải xử lý xếp hạng thủ công ở tầng app."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "SELECT * FROM (\n  SELECT orders.*, row_number() OVER (PARTITION BY user_id ORDER BY created_at DESC) AS rn\n  FROM orders\n) t\nWHERE rn = 1;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "8119-window-function-trong-postgresql-dung-khi-nao"
+  },
+  {
+    "id": "a6b7e399-d1b5-5fcd-ac74-958e1cc3aba0",
+    "question": "ANALYZE và statistics ảnh hưởng query plan như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8122-analyze-va-statistics-anh-huong-query-plan-nhu-the-nao",
+    "slug": "analyze-va-statistics-anh-huong-query-plan-nhu-the-nao-a6b7e399-d1b5-5fcd-ac74-958e1cc3aba0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "ANALYZE thu thập thống kê về phân bố dữ liệu (cột này có bao nhiêu giá trị khác nhau, giá trị nào hay gặp...). Planner dựa vào đó để đoán mỗi bước query trả về bao nhiêu dòng, rồi chọn cách chạy. Nếu thống kê cũ hoặc thiếu, planner đoán sai và có thể chọn nhầm index, kiểu join hay kiểu scan → query chậm."
+      ],
+      "details": [
+        "Sau khi nạp/sửa dữ liệu hàng loạt, chạy ANALYZE để planner có số liệu mới. Với cột phân bố lệch hoặc các cột phụ thuộc lẫn nhau, có thể cần tăng \"statistics target\" hoặc dùng extended statistics."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "8122-analyze-va-statistics-anh-huong-query-plan-nhu-the-nao"
+  },
+  {
+    "id": "a57a84b7-4723-55e5-8cd3-e38c4d0a5845",
+    "question": "Connection pool trong PostgreSQL vì sao quan trọng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8123-connection-pool-trong-postgresql-vi-sao-quan-trong",
+    "slug": "connection-pool-trong-postgresql-vi-sao-quan-trong-a57a84b7-4723-55e5-8cd3-e38c4d0a5845",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Mỗi kết nối tới PostgreSQL là một process riêng khá nặng (tốn RAM). Nếu app mở quá nhiều kết nối, DB có thể cạn bộ nhớ, CPU bận chuyển ngữ cảnh và latency xấu đi. Connection pool giải quyết bằng cách giữ sẵn một số kết nối và tái sử dụng thay vì mở mới liên tục."
+      ],
+      "details": [
+        "Thực tế thường dùng pool ở tầng app hoặc PgBouncer đặt trước DB. Lưu ý: phải cộng tổng số kết nối của tất cả instance/worker/replica, không chỉ một máy. Kích thước pool nên dựa trên sức chứa của DB và đặc tính workload, không phải theo số request đồng thời."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "8123-connection-pool-trong-postgresql-vi-sao-quan-trong"
+  },
+  {
+    "id": "1ad4c75a-8bab-5394-9410-bdaf6c125a13",
+    "question": "Migration schema PostgreSQL cần làm sao để ít downtime?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8126-migration-schema-postgresql-can-lam-sao-de-it-downtime",
+    "slug": "migration-schema-postgresql-can-lam-sao-de-it-downtime-1ad4c75a-8bab-5394-9410-bdaf6c125a13",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Migration ít downtime cốt ở chỗ tránh các thao tác khóa bảng lâu hoặc viết lại cả bảng vào giờ cao điểm."
+      ],
+      "details": [
+        "Pattern an toàn theo nhiều bước: thêm cột nullable → backfill dữ liệu theo từng lô nhỏ → deploy code app đọc/ghi tương thích cả cũ lẫn mới → cuối cùng mới thêm constraint/index (dùng CONCURRENTLY để không khóa ghi).",
+        "Luôn test trên dữ liệu giống production và chuẩn bị sẵn kế hoạch rollback."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "CREATE INDEX CONCURRENTLY idx_orders_created_at ON orders (created_at);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "8126-migration-schema-postgresql-can-lam-sao-de-it-downtime"
+  },
+  {
+    "id": "045a8358-ced2-51d3-aea1-d6fedaa84378",
+    "question": "Soft delete trong PostgreSQL ảnh hưởng index và constraint thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8127-soft-delete-trong-postgresql-anh-huong-index-va-constraint-the-nao",
+    "slug": "soft-delete-trong-postgresql-anh-huong-index-va-constraint-the-nao-045a8358-ced2-51d3-aea1-d6fedaa84378",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Soft delete = không xóa thật mà đánh dấu, thường bằng cột deleted_at. Hệ quả: gần như mọi query phải thêm WHERE deleted_at IS NULL, và điều này ảnh hưởng tới index lẫn unique constraint — vì một email \"đã xóa\" về lý thuyết có thể được dùng lại."
+      ],
+      "details": [
+        "Ví dụ ép email duy nhất chỉ trong nhóm user còn sống:"
+      ],
+      "points": [],
+      "sections": [
+        "Cần cân nhắc: chính sách lưu trữ, yêu cầu xóa thật (GDPR), bloat, đặt filter mặc định, và rủi ro lập trình viên quên lọc dòng đã xóa."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "CREATE UNIQUE INDEX idx_users_email_not_deleted\nON users (email)\nWHERE deleted_at IS NULL;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "8127-soft-delete-trong-postgresql-anh-huong-index-va-constraint-the-nao"
+  },
+  {
+    "id": "294657bd-47da-5c83-8385-2e03cd6463c8",
+    "question": "Enum type trong PostgreSQL có nên dùng không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8136-enum-type-trong-postgresql-co-nen-dung-khong",
+    "slug": "enum-type-trong-postgresql-co-nen-dung-khong-294657bd-47da-5c83-8385-2e03cd6463c8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Enum trong PostgreSQL giới hạn một cột chỉ nhận một tập giá trị cố định và làm schema tự mô tả (nhìn là biết có những trạng thái nào). Hợp với tập trạng thái ổn định, ít đổi như order status. Nhưng enum khó \"tiến hóa\" hơn bảng tra cứu (lookup table): thêm/sửa/sắp xếp giá trị, gắn metadata, đa ngôn ngữ hay đánh dấu ngừng dùng đều vướng."
+      ],
+      "details": [
+        "Quy tắc thực tế: dùng enum cho tập nhỏ, ổn định, không cần metadata kèm theo. Dùng bảng lookup/reference khi giá trị do nghiệp vụ quản lý hoặc có thuộc tính riêng (nhãn hiển thị, thứ tự, mô tả...)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "8136-enum-type-trong-postgresql-co-nen-dung-khong"
+  },
+  {
+    "id": "ac64e36f-2445-5ad1-a916-3c335f11e61f",
+    "question": "Viết báo cáo doanh thu theo tháng sao cho **tháng không có đơn vẫn hiện dòng 0**?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97710-viet-bao-cao-doanh-thu-theo-thang-sao-cho-thang-khong-co-don-van-hien-dong-0",
+    "slug": "viet-bao-cao-doanh-thu-theo-thang-sao-cho-thang-khong-co-don-van-hien-dong-0-ac64e36f-2445-5ad1-a916-3c335f11e61f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "GROUP BY chỉ sinh ra dòng cho dữ liệu đã tồn tại — tháng không có đơn thì không có dòng nào để gom.",
+        "COALESCE(r.amount, 0)",
+        ">= from AND < to",
+        "LEFT JOIN phải bắt đầu từ bảng lịch"
+      ],
+      "details": [
+        "Cách chuẩn là tự sinh dải thời gian rồi LEFT JOIN dữ liệu vào.",
+        "MySQL không có generate_series; thay bằng bảng lịch (calendar_months) tạo sẵn hoặc recursive CTE."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "WITH months AS (\n  SELECT generate_series(\n    date_trunc('month', :from_date::date),\n    date_trunc('month', :to_date::date),\n    interval '1 month'\n  ) AS month\n),\nrevenue AS (\n  SELECT date_trunc('month', created_at) AS month, SUM(total) AS amount\n  FROM orders\n  WHERE status = 'paid'\n    AND created_at >= :from_date AND created_at < :to_date\n  GROUP BY 1\n)\nSELECT\n  m.month,\n  COALESCE(r.amount, 0) AS revenue\nFROM months m\nLEFT JOIN revenue r ON r.month = m.month\nORDER BY m.month;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "97710-viet-bao-cao-doanh-thu-theo-thang-sao-cho-thang-khong-co-don-van-hien-dong-0"
+  },
+  {
+    "id": "47e0fed8-6163-5623-834d-2dc7757f276e",
+    "question": "Expression index là gì? Dùng nó để tìm email không phân biệt hoa thường thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97754-expression-index-la-gi-dung-no-de-tim-email-khong-phan-biet-hoa-thuong-the-nao",
+    "slug": "expression-index-la-gi-dung-no-de-tim-email-khong-phan-biet-hoa-thuong-the-nao-47e0fed8-6163-5623-834d-2dc7757f276e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Expression index (index trên biểu thức) đánh index lên kết quả của một biểu thức thay vì giá trị cột thô.",
+        "CREATE INDEX",
+        "WHERE upper(email) = ...",
+        "lower(email)",
+        "Quy tắc khớp:"
+      ],
+      "details": [
+        "Nó giải quyết đúng tình huống mà điều kiện bắt buộc phải bọc cột trong hàm.",
+        "Ràng buộc: hàm dùng trong expression index phải là IMMUTABLE — cùng đầu vào luôn cho cùng đầu ra. Vì vậy now() hay to_char(ts, ...) phụ thuộc timezone bị từ chối; muốn index theo ngày của một timestamptz thì phải ép timezone tường minh, ví dụ ((created_at AT TIME ZONE 'UTC')::date).",
+        "Chi phí: biểu thức được tính lại mỗi lần INSERT/UPDATE nên ghi đắt hơn index thường. Nếu cùng một chuẩn hoá được dùng ở khắp nơi, cân nhắc lưu hẳn một generated column rồi đánh index bình thường lên cột đó — dễ đọc và dễ tái sử dụng hơn.",
+        "duy nhất không phân biệt hoa thường"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "CREATE INDEX idx_users_email_lower ON users (lower(email));\n\n-- planner matches this query to the index above\nSELECT * FROM users WHERE lower(email) = lower($1);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "97754-expression-index-la-gi-dung-no-de-tim-email-khong-phan-biet-hoa-thuong-the-nao"
+  },
+  {
+    "id": "e0eb5894-3d9d-53e8-95ee-61f520cb3469",
+    "question": "Đọc output EXPLAIN ANALYZE thế nào? cost và actual time khác nhau ra sao, và rows lệch nói lên điều gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97756-doc-output-explain-analyze-the-nao-cost-va-actual-time-khac-nhau-ra-sao-va-rows",
+    "slug": "doc-output-explain-analyze-the-nao-cost-va-actual-time-khac-nhau-ra-sao-va-rows-lech-noi-len-dieu-gi-e0eb5894-3d9d-53e8-95ee-61f520cb3469",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Mỗi dòng trong plan là một node, thụt lề sâu hơn là node con chạy trước.",
+        "CREATE STATISTICS",
+        "Dấu hiệu quan trọng nhất là rows lệch."
+      ],
+      "details": [
+        "Đọc từ trong ra ngoài.",
+        "Mẹo: dùng EXPLAIN (ANALYZE, BUFFERS) để thấy số trang đọc từ cache và từ đĩa — thường chỉ ra vấn đề rõ hơn cả thời gian. Lưu ý EXPLAIN ANALYZE thực thi thật truy vấn, nên với UPDATE/DELETE phải bọc trong transaction rồi ROLLBACK."
+      ],
+      "points": [
+        "cost=start..total là ước lượng của planner theo đơn vị nội bộ (không phải mili giây). Số đầu là chi phí tới khi trả dòng đầu tiên, số sau là tới dòng cuối. Chỉ dùng để so sánh giữa các plan, không có ý nghĩa tuyệt đối.",
+        "actual time=start..total là thời gian thật tính bằng ms, cho mỗi lần lặp. Nếu loops=100 thì tổng thời gian của node đó là total × 100.",
+        "rows trong cost là ước lượng; rows trong actual là thực tế."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "Seq Scan on orders  (cost=0.00..18334.00 rows=12 width=64)\n                    (actual time=0.021..412.883 rows=48219 loops=1)\n  Filter: (status = 'pending'::text)\n  Rows Removed by Filter: 951781\nPlanning Time: 0.184 ms\nExecution Time: 448.220 ms"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "97756-doc-output-explain-analyze-the-nao-cost-va-actual-time-khac-nhau-ra-sao-va-rows"
+  },
+  {
+    "id": "17b00dc6-a0a3-5cea-b418-398803c1b2c2",
+    "question": "Seq Scan, Index Scan và Bitmap Heap Scan khác nhau thế nào? Khi nào planner chọn bitmap?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97757-seq-scan-index-scan-va-bitmap-heap-scan-khac-nhau-the-nao-khi-nao-planner-chon-b",
+    "slug": "seq-scan-index-scan-va-bitmap-heap-scan-khac-nhau-the-nao-khi-nao-planner-chon-bitmap-17b00dc6-a0a3-5cea-b418-398803c1b2c2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Ba node này là ba cách khác nhau để lấy dòng ra khỏi bảng, khác nhau ở mẫu truy cập đĩa.",
+        "kết hợp nhiều index",
+        "Khi nào chọn bitmap:"
+      ],
+      "details": [
+        "Seq Scan — đọc toàn bộ bảng tuần tự theo thứ tự trang. Không cần index. Nhanh nhất khi phải lấy phần lớn bảng, vì đọc tuần tự rẻ hơn nhiều so với đọc ngẫu nhiên.",
+        "Recheck Cond",
+        "Index Scan — đi qua B-tree, với mỗi entry khớp thì nhảy về bảng lấy dòng. Mỗi lần nhảy là một truy cập ngẫu nhiên. Tối ưu khi số dòng khớp rất ít hoặc khi cần dữ liệu đã sắp xếp sẵn theo index.",
+        "Bitmap Heap Scan — đứng giữa hai loại trên, luôn đi kèm node con Bitmap Index Scan:\n1. Quét index, đánh dấu vào một bitmap các trang chứa dòng khớp (chưa đọc bảng).\n2. Sắp xếp bitmap theo thứ tự trang vật lý, rồi đọc bảng một lượt theo thứ tự đó."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "Bitmap Heap Scan on orders  (rows=41200)\n  Recheck Cond: (customer_id = 42)\n  Heap Blocks: exact=3891\n  ->  Bitmap Index Scan on idx_orders_customer  (rows=41200)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "97757-seq-scan-index-scan-va-bitmap-heap-scan-khac-nhau-the-nao-khi-nao-planner-chon-b"
+  },
+  {
+    "id": "a8e8d664-4ddf-5e56-8668-5156592cc0cd",
+    "question": "Cần thêm index cho một bảng 200 triệu dòng đang chạy production. Làm thế nào để không khoá bảng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97760-can-them-index-cho-mot-bang-200-trieu-dong-dang-chay-production-lam-the-nao-de-k",
+    "slug": "can-them-index-cho-mot-bang-200-trieu-dong-dang-chay-production-lam-the-nao-de-khong-khoa-bang-a8e8d664-4ddf-5e56-8668-5156592cc0cd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "CREATE INDEX thường lấy khoá SHARE trên bảng — chặn mọi INSERT/UPDATE/DELETE cho tới khi index dựng xong. Với bảng lớn việc này kéo dài hàng chục phút, tương đương ngừng ghi.",
+        "CREATE UNIQUE INDEX CONCURRENTLY",
+        "ALTER TABLE ... ADD CONSTRAINT ... USING INDEX",
+        "không chặn ghi"
+      ],
+      "details": [
+        "Dùng CONCURRENTLY:",
+        "Những ràng buộc phải nhớ:\n- Không chạy được trong transaction block. Nhiều công cụ migration (Rails, Django, Prisma) mặc định bọc migration trong transaction — phải tắt tường minh cho bước này.\n- Có thể thất bại giữa chừng và để lại index ở trạng thái INVALID. Index hỏng vẫn tốn chi phí ghi nhưng không được planner dùng. Kiểm tra rồi dọn:"
+      ],
+      "points": [
+        "Bị chặn bởi transaction dài đang mở. Trước khi chạy nên kiểm tra pg_stat_activity để chắc không có transaction treo.",
+        "DROP INDEX cũng có biến thể CONCURRENTLY, và REINDEX CONCURRENTLY có từ PostgreSQL 12."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "CREATE INDEX CONCURRENTLY idx_orders_created_at ON orders (created_at);"
+        },
+        {
+          "language": "SQL",
+          "code": "SELECT indexrelid::regclass FROM pg_index WHERE NOT indisvalid;\nDROP INDEX CONCURRENTLY idx_orders_created_at;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "97760-can-them-index-cho-mot-bang-200-trieu-dong-dang-chay-production-lam-the-nao-de-k"
+  },
+  {
+    "id": "c0c01cc7-12cd-5745-966d-89690bb996a1",
+    "question": "PostgreSQL lưu nhiều phiên bản của một dòng ra sao? xmin/xmax là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97800-postgresql-luu-nhieu-phien-ban-cua-mot-dong-ra-sao-xmin-xmax-la-gi",
+    "slug": "postgresql-luu-nhieu-phien-ban-cua-mot-dong-ra-sao-xmin-xmax-la-gi-c0c01cc7-12cd-5745-966d-89690bb996a1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "PostgreSQL không sửa dòng tại chỗ. Mỗi UPDATE ghi một phiên bản mới của dòng (tuple mới) và đánh dấu phiên bản cũ là hết hiệu lực. DELETE chỉ đánh dấu, không xoá byte ngay.",
+        "nhìn thấy được"
+      ],
+      "details": [
+        "Mỗi tuple mang hai cột hệ thống:",
+        "Hệ quả thực tế:\n- Đọc không chặn ghi và ghi không chặn đọc — reader nhìn phiên bản cũ thay vì chờ lock.\n- Bảng bị UPDATE nhiều sẽ tích luỹ phiên bản chết → cần VACUUM dọn.\n- count(*) phải quét để xác định tuple nào còn nhìn thấy được, nên không có kết quả tức thời như một số DB khác."
+      ],
+      "points": [
+        "xmin — id transaction đã tạo ra phiên bản này.",
+        "xmax — id transaction đã xoá/thay thế nó (0 nếu còn sống)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "select xmin, xmax, id, status from orders where id = 7;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "97800-postgresql-luu-nhieu-phien-ban-cua-mot-dong-ra-sao-xmin-xmax-la-gi"
+  },
+  {
+    "id": "6815b8df-d375-5eb9-a293-0f624cc52546",
+    "question": "VACUUM FULL khác VACUUM thường thế nào? Vì sao không nên chạy trên bảng đang phục vụ?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97804-vacuum-full-khac-vacuum-thuong-the-nao-vi-sao-khong-nen-chay-tren-bang-dang-phuc",
+    "slug": "vacuum-full-khac-vacuum-thuong-the-nao-vi-sao-khong-nen-chay-tren-bang-dang-phuc-vu-6815b8df-d375-5eb9-a293-0f624cc52546",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Hai lệnh giải quyết hai việc khác nhau."
+      ],
+      "details": [
+        "VACUUM (và autovacuum): đánh dấu không gian dead tuple là tái sử dụng được cho chính bảng đó. File trên đĩa hầu như không nhỏ lại. Chỉ lấy SHARE UPDATE EXCLUSIVE — SELECT, INSERT, UPDATE, DELETE vẫn chạy bình thường.",
+        "VACUUM FULL: viết lại toàn bộ bảng sang file mới, bỏ hết khoảng trống, rồi hoán đổi. Đĩa thực sự được trả về hệ điều hành. Nhưng nó lấy ACCESS EXCLUSIVE lock trên bảng suốt thời gian chạy — mọi truy vấn, kể cả SELECT, đều bị chặn cho tới khi xong.",
+        "Chi phí thực tế:\n- Cần dung lượng trống bằng khoảng kích thước bảng để dựng bản sao.\n- Bảng vài trăm GB có thể khoá hàng chục phút đến hàng giờ.\n- Lock chờ ở đầu hàng đợi sẽ chặn luôn các truy vấn đến sau, kể cả khi truy vấn đó chỉ cần lock nhẹ.",
+        "Cách thay thế khi phải giảm dung lượng trên hệ thống đang chạy:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "97804-vacuum-full-khac-vacuum-thuong-the-nao-vi-sao-khong-nen-chay-tren-bang-dang-phuc"
+  },
+  {
+    "id": "e6ace5a5-4f8f-58db-80f8-52d024b0599a",
+    "question": "Truy vấn jsonb bằng toán tử nào để dùng được index? Khi nào không nên nhét dữ liệu vào jsonb?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97806-truy-van-jsonb-bang-toan-tu-nao-de-dung-duoc-index-khi-nao-khong-nen-nhet-du-lie",
+    "slug": "truy-van-jsonb-bang-toan-tu-nao-de-dung-duoc-index-khi-nao-khong-nen-nhet-du-lieu-vao-jsonb-e6ace5a5-4f8f-58db-80f8-52d024b0599a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Khi nào không nên dùng jsonb:\n- Field được truy vấn và lọc thường xuyên → nên là cột thật, có kiểu và constraint. jsonb không có NOT NULL, FOREIGN KEY hay kiểm tra kiểu cho field bên trong.\n- Document lớn và bị update thường xuyên → mỗi lần cập nhật ghi lại toàn bộ giá trị (đã TOAST), tạo bloat.\n- Cần JOIN theo giá trị bên trong → phải ép kiểu ở mọi truy vấn, planner ước lượng số dòng kém."
+      ],
+      "details": [
+        "jsonb phù hợp nhất cho phần thực sự không có schema cố định: payload webhook thô, metadata tuỳ biến theo khách hàng, snapshot audit."
+      ],
+      "points": [
+        "@> (containment), ?, ?|, ?& (tồn tại key) → dùng được GIN mặc định (jsonb_ops).",
+        "jsonb_path_ops nhỏ và nhanh hơn nhưng chỉ hỗ trợ @>.",
+        "Nếu chỉ lọc theo một field cố định, một expression index trên (payload ->> 'type') rẻ hơn nhiều so với GIN toàn bộ document."
+      ],
+      "sections": [
+        "B-tree thường không giúp gì cho việc tìm bên trong document. jsonb cần GIN index, và chỉ một số toán tử mới dùng được nó."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "create index on events using gin (payload);\n\n-- uses the GIN index (containment)\nselect * from events where payload @> '{\"type\": \"order_paid\"}';\n\n-- does NOT use it: the ->> operator extracts text, GIN cannot help\nselect * from events where payload ->> 'type' = 'order_paid';"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "97806-truy-van-jsonb-bang-toan-tu-nao-de-dung-duoc-index-khi-nao-khong-nen-nhet-du-lie"
+  },
+  {
+    "id": "e3ed77f3-5c7e-553f-b495-37665a70fb24",
+    "question": "Bảng log 500 triệu dòng, chỉ query 30 ngày gần nhất — thiết kế partition theo thời gian thế nào? Partition pruning cần điều kiện gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97807-bang-log-500-trieu-dong-chi-query-30-ngay-gan-nhat-thiet-ke-partition-theo-thoi",
+    "slug": "bang-log-500-trieu-dong-chi-query-30-ngay-gan-nhat-thiet-ke-partition-theo-thoi-gian-the-nao-partiti-e3ed77f3-5c7e-553f-b495-37665a70fb24",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Lợi ích chính không phải là truy vấn nhanh hơn, mà là vòng đời dữ liệu: xoá dữ liệu cũ bằng drop table request_logs_2026_01 chạy tức thì, không tạo dead tuple như DELETE hàng trăm triệu dòng."
+      ],
+      "details": [
+        "Partition pruning — planner loại bỏ partition không liên quan — chỉ xảy ra khi:\n- WHERE lọc trực tiếp trên partition key. Lọc theo cột khác thì phải quét mọi partition.\n- Điều kiện so sánh được với biên partition. where created_at >= now() - interval '30 days' vẫn prune được ở thời điểm chạy (runtime pruning), nhưng EXPLAIN không kèm ANALYZE sẽ vẫn hiện tất cả partition.\n- Bọc partition key trong hàm (where date(created_at) = ...) làm mất pruning.",
+        "Lưu ý khác: primary key phải chứa partition key, và unique constraint chỉ có hiệu lực trong phạm vi từng partition. Cần tạo sẵn partition tương lai bằng job định kỳ, nếu không INSERT sẽ lỗi vì không tìm được partition phù hợp."
+      ],
+      "points": [],
+      "sections": [
+        "Dùng declarative range partitioning theo cột thời gian, mỗi tháng (hoặc mỗi tuần nếu lượng ghi lớn) một partition."
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "create table request_logs (\n  id        bigserial,\n  created_at timestamptz not null,\n  payload   jsonb\n) partition by range (created_at);\n\ncreate table request_logs_2026_08\n  partition of request_logs\n  for values from ('2026-08-01') to ('2026-09-01');"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "97807-bang-log-500-trieu-dong-chi-query-30-ngay-gan-nhat-thiet-ke-partition-theo-thoi"
+  },
+  {
+    "id": "9a4b7412-7adc-5cba-bafc-d0116a047a26",
+    "question": "Streaming replication hoạt động thế nào? Đo replication lag bằng gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97810-streaming-replication-hoat-dong-the-nao-do-replication-lag-bang-gi",
+    "slug": "streaming-replication-hoat-dong-the-nao-do-replication-lag-bang-gi-9a4b7412-7adc-5cba-bafc-d0116a047a26",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Streaming replication là replication vật lý: primary ghi thay đổi vào WAL, standby mở một kết nối tới primary và nhận stream WAL liên tục, rồi replay từng record để giữ bản sao byte-level giống hệt.",
+        "synchronous_commit = on",
+        "synchronous_standby_names",
+        "Đồng bộ hay bất đồng bộ:"
+      ],
+      "details": [
+        "Các trạng thái vị trí WAL trên standby, theo thứ tự:\n- sent_lsn — primary đã gửi tới đâu.\n- write_lsn — standby đã ghi vào file OS.\n- flush_lsn — đã fsync xuống đĩa.\n- replay_lsn — đã replay xong, tức truy vấn trên standby mới nhìn thấy tới đây.",
+        "Đo lag từ primary:",
+        "Nguyên nhân lag thường gặp: standby yếu hơn primary (replay là một process đơn), I/O đĩa chậm, hoặc truy vấn dài trên standby chặn replay khi bật max_standby_streaming_delay lớn."
+      ],
+      "points": [],
+      "sections": [
+        "Đo lag tính bằng thời gian, chạy trên standby:"
+      ],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "select application_name,\n       state,\n       pg_wal_lsn_diff(sent_lsn, replay_lsn) as replay_bytes\nfrom pg_stat_replication;"
+        },
+        {
+          "language": "SQL",
+          "code": "select now() - pg_last_xact_replay_timestamp() as replay_delay;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "97810-streaming-replication-hoat-dong-the-nao-do-replication-lag-bang-gi"
+  },
+  {
+    "id": "ad996e47-c207-5624-b7ac-01aa5269fcd8",
+    "question": "Logical replication khác physical replication thế nào? Dùng trong tình huống nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97812-logical-replication-khac-physical-replication-the-nao-dung-trong-tinh-huong-nao",
+    "slug": "logical-replication-khac-physical-replication-the-nao-dung-trong-tinh-huong-nao-ad996e47-c207-5624-b7ac-01aa5269fcd8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Physical (streaming) replication copy WAL ở mức byte: standby là bản sao y hệt toàn bộ cluster, cùng phiên bản major, không ghi được, không chọn được bảng."
+      ],
+      "details": [
+        "Logical replication giải mã WAL thành thay đổi ở mức dòng (INSERT/UPDATE/DELETE) rồi gửi tới subscriber theo mô hình publication/subscription.",
+        "Dùng khi: nâng cấp major version gần như không downtime (replicate sang cluster mới rồi cắt traffic), đẩy một tập bảng sang hệ thống phân tích, gộp dữ liệu từ nhiều nguồn, hoặc feed CDC.",
+        "Giới hạn cần nhớ: không tự replicate thay đổi DDL — thêm cột phải làm thủ công ở cả hai phía. Bảng phải có primary key (hoặc REPLICA IDENTITY FULL) thì UPDATE/DELETE mới replicate được. Sequence không được đồng bộ giá trị. Và replication slot của subscriber đã ngừng hoạt động sẽ giữ WAL lại vô hạn trên publisher cho tới khi đầy đĩa — luôn giám sát pg_replication_slots."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- on the publisher (requires wal_level = logical)\ncreate publication orders_pub for table orders, order_items;\n\n-- on the subscriber\ncreate subscription orders_sub\n  connection 'host=... dbname=...'\n  publication orders_pub;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "97812-logical-replication-khac-physical-replication-the-nao-dung-trong-tinh-huong-nao"
+  },
+  {
+    "id": "2ec539c5-64f1-536e-9e5e-891f89705f1f",
+    "question": "statement_timeout và idle_in_transaction_session_timeout khác nhau thế nào? Nên đặt bao nhiêu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97815-statement-timeout-va-idle-in-transaction-session-timeout-khac-nhau-the-nao-nen-d",
+    "slug": "statement-timeout-va-idle-in-transaction-session-timeout-khac-nhau-the-nao-nen-dat-bao-nhieu-2ec539c5-64f1-536e-9e5e-891f89705f1f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Hai tham số chặn hai kiểu sự cố khác nhau.",
+        "idle_in_transaction"
+      ],
+      "details": [
+        "statement_timeout — huỷ một câu lệnh chạy quá lâu. Bảo vệ khỏi truy vấn lỗi plan, quét toàn bảng ngoài ý muốn, hay báo cáo nặng lọt vào giờ cao điểm.",
+        "idle_in_transaction_session_timeout — ngắt session đã BEGIN nhưng đứng yên không làm gì, không COMMIT cũng không ROLLBACK. Đây là trạng thái nguy hiểm nhất vì session đó vẫn giữ lock, giữ snapshot cũ khiến vacuum không dọn được dead tuple, và với PgBouncer thì giữ luôn một server connection. Nguyên nhân điển hình: ứng dụng mở transaction rồi gọi một API bên ngoài, hoặc lập trình viên BEGIN trong psql rồi bỏ đó.",
+        "Còn lock_timeout bổ sung góc thứ ba: giới hạn thời gian chờ lấy lock, không tính thời gian thực thi.",
+        "postgresql.conf"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- default for the app user\nalter role app_user set statement_timeout = '15s';\nalter role app_user set idle_in_transaction_session_timeout = '30s';\n\n-- report user needs longer\nalter role report_user set statement_timeout = '5min';"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "97815-statement-timeout-va-idle-in-transaction-session-timeout-khac-nhau-the-nao-nen-d"
+  },
+  {
+    "id": "d00e046f-1c21-5937-b490-362e5dae6f70",
+    "question": "SELECT ... FOR UPDATE, FOR NO KEY UPDATE và FOR SHARE khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97855-select-for-update-for-no-key-update-va-for-share-khac-nhau-the-nao",
+    "slug": "select-for-update-for-no-key-update-va-for-share-khac-nhau-the-nao-d00e046f-1c21-5937-b490-362e5dae6f70",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Cả ba đều là row-level lock lấy tường minh trong một SELECT, khác nhau ở mức độ chặt và ở việc chặn ai.",
+        "SELECT FOR UPDATE",
+        "Lưu ý:"
+      ],
+      "details": [
+        "Khi cần khoá quan hệ cha–con, chọn FOR NO KEY UPDATE cho hàng cha để không chặn oan việc chèn hàng con."
+      ],
+      "points": [
+        "FOR UPDATE — chặt nhất. Giữ hàng để chính bạn sửa hoặc xoá; mọi transaction khác muốn FOR UPDATE, FOR SHARE, UPDATE hay DELETE trên hàng đó đều phải chờ.",
+        "FOR NO KEY UPDATE — nhẹ hơn, cho phép sửa các cột không thuộc key. Đây chính là mức khoá mà một câu UPDATE thường tự lấy. Nó không chặn FOR KEY SHARE, nên transaction khác vẫn chèn được hàng con tham chiếu tới nó.",
+        "FOR SHARE — khoá chia sẻ: nhiều transaction cùng đọc và cùng giữ được, nhưng tất cả đều chặn người muốn sửa. Dùng khi bạn cần đảm bảo hàng đó không đổi đến cuối transaction mà bản thân không sửa nó."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "BEGIN;\nSELECT balance FROM wallets WHERE user_id = 42 FOR UPDATE;  -- giữ hàng\nUPDATE wallets SET balance = balance - 100 WHERE user_id = 42;\nCOMMIT;                                                      -- khoá nhả ở đây"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "97855-select-for-update-for-no-key-update-va-for-share-khac-nhau-the-nao"
+  },
+  {
+    "id": "345e47b7-7bf2-5511-a021-6d5f544a77ce",
+    "question": "Nhiều worker cùng lấy job từ một bảng hàng đợi — SKIP LOCKED và NOWAIT giải quyết thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97856-nhieu-worker-cung-lay-job-tu-mot-bang-hang-doi-skip-locked-va-nowait-giai-quyet",
+    "slug": "nhieu-worker-cung-lay-job-tu-mot-bang-hang-doi-skip-locked-va-nowait-giai-quyet-the-nao-345e47b7-7bf2-5511-a021-6d5f544a77ce",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Với SELECT ... FOR UPDATE trần, mọi worker cùng nhắm hàng cũ nhất nên chỉ một worker chạy, số còn lại xếp hàng chờ đúng hàng đó. Hai bổ ngữ thay đổi hành vi chờ:",
+        "Điểm cần nhớ:",
+        "không còn nhất quán theo thứ tự"
+      ],
+      "details": [],
+      "points": [
+        "SKIP LOCKED — bỏ qua các hàng đang bị khoá và lấy hàng kế tiếp còn rảnh. Đây là cách chuẩn để nhiều worker rút job song song.",
+        "NOWAIT — không chờ, gặp hàng đang khoá thì ném lỗi ngay. Dùng khi bạn muốn thất bại nhanh và báo lại cho người dùng (\"bản ghi đang được người khác chỉnh sửa\") thay vì để request treo."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "BEGIN;\nUPDATE jobs SET status = 'running'\nWHERE id = (\n  SELECT id FROM jobs\n  WHERE status = 'pending'\n  ORDER BY created_at\n  FOR UPDATE SKIP LOCKED\n  LIMIT 1\n)\nRETURNING *;\nCOMMIT;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "97856-nhieu-worker-cung-lay-job-tu-mot-bang-hang-doi-skip-locked-va-nowait-giai-quyet"
+  },
+  {
+    "id": "c8f849a2-5d3e-5dfa-9f3d-3800793d32c1",
+    "question": "lock_timeout, statement_timeout và idle_in_transaction_session_timeout khác nhau thế nào? Đặt sao cho hợp lý?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97857-lock-timeout-statement-timeout-va-idle-in-transaction-session-timeout-khac-nhau",
+    "slug": "lock-timeout-statement-timeout-va-idle-in-transaction-session-timeout-khac-nhau-the-nao-dat-sao-cho-c8f849a2-5d3e-5dfa-9f3d-3800793d32c1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Ba tham số cắt ba nguyên nhân treo khác nhau:",
+        "statement_timeout",
+        "idle_in_transaction_session_timeout",
+        "lock_timeout",
+        "Cách đặt thường dùng:"
+      ],
+      "details": [
+        "Timeout không thay thế được thiết kế đúng: deadlock chỉ biến mất khi mọi luồng khoá các hàng theo cùng một thứ tự (ví dụ luôn khoá account_id tăng dần). Timeout chỉ đảm bảo hệ thống không đứng im vô hạn khi thiết kế đó bị vi phạm."
+      ],
+      "points": [
+        "statement_timeout — huỷ một câu lệnh chạy quá lâu. Chặn truy vấn nặng ngoài dự kiến chiếm tài nguyên.",
+        "lock_timeout — huỷ câu lệnh nếu chờ khoá quá lâu, còn thời gian chạy thực tế thì không tính. Quan trọng nhất khi chạy DDL: một ALTER TABLE chờ khoá sẽ xếp hàng toàn bộ request phía sau.",
+        "idle_in_transaction_session_timeout — ngắt phiên đã BEGIN nhưng ngồi không quá lâu. Đây là loại kết nối gây hại âm thầm nhất: nó vẫn giữ khoá và giữ snapshot cũ khiến VACUUM không dọn được bản ghi chết."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "-- đặt cho riêng phiên chạy migration\nSET lock_timeout = '3s';\nSET statement_timeout = '60s';\nALTER TABLE orders ADD COLUMN note text;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "97857-lock-timeout-statement-timeout-va-idle-in-transaction-session-timeout-khac-nhau"
+  },
+  {
+    "id": "7eb108c4-72c1-55ef-a0ba-19e50b99c6a5",
+    "question": "EXPLAIN và EXPLAIN ANALYZE khác nhau thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "explain-va-explain-analyze-khac-nhau-the-nao-7eb108c4-72c1-55ef-a0ba-19e50b99c6a5",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": null
+  },
+  {
+    "id": "a1349976-8290-51ae-8703-14dacc02c472",
+    "question": "SKIP LOCKED dùng để build job queue như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "skip-locked-dung-de-build-job-queue-nhu-the-nao-a1349976-8290-51ae-8703-14dacc02c472",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": null
+  },
+  {
+    "id": "d0640788-099e-5859-83b9-387c6a24b6db",
+    "question": "Deadlock trong PostgreSQL xảy ra khi nào và xử lý ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "deadlock-trong-postgresql-xay-ra-khi-nao-va-xu-ly-ra-sao-d0640788-099e-5859-83b9-387c6a24b6db",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": null
+  },
+  {
+    "id": "85fa9c9b-a2e1-536c-9abc-53c0697491d9",
+    "question": "Index-only scan là gì và vì sao đôi khi không xảy ra?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "index-only-scan-la-gi-va-vi-sao-doi-khi-khong-xay-ra-85fa9c9b-a2e1-536c-9abc-53c0697491d9",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": null
+  },
+  {
+    "id": "3de4b5b0-32dd-551d-97ed-cb263aaf5a45",
+    "question": "Replication trong PostgreSQL gồm những kiểu nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "replication-trong-postgresql-gom-nhung-kieu-nao-3de4b5b0-32dd-551d-97ed-cb263aaf5a45",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": null
+  },
+  {
+    "id": "6782af0f-ced0-5041-8253-f0fdb9f233e9",
+    "question": "Backup và PITR trong PostgreSQL cần những gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "backup-va-pitr-trong-postgresql-can-nhung-gi-6782af0f-ced0-5041-8253-f0fdb9f233e9",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": null
+  },
+  {
+    "id": "c0843a1d-8a97-57fe-9284-675c71981554",
+    "question": "Full-text search trong PostgreSQL khi nào đủ dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "full-text-search-trong-postgresql-khi-nao-du-dung-c0843a1d-8a97-57fe-9284-675c71981554",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": null
+  },
+  {
+    "id": "7e498c77-366d-5280-b18a-e5a2a5ebde85",
+    "question": "Partitioning trong PostgreSQL dùng khi nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "partitioning-trong-postgresql-dung-khi-nao-7e498c77-366d-5280-b18a-e5a2a5ebde85",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": null
+  },
+  {
+    "id": "5610e71e-4bca-5f5e-871d-edf48f274f99",
+    "question": "Advisory lock trong PostgreSQL dùng khi nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "advisory-lock-trong-postgresql-dung-khi-nao-5610e71e-4bca-5f5e-871d-edf48f274f99",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": null
+  },
+  {
+    "id": "5c424ef5-714d-509c-a8b4-4b073124e8de",
+    "question": "Tại sao query có index nhưng PostgreSQL vẫn sequential scan?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "tai-sao-query-co-index-nhung-postgresql-van-sequential-scan-5c424ef5-714d-509c-a8b4-4b073124e8de",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": null
+  },
+  {
+    "id": "47c6b0d1-3ca7-51f9-ae3b-a28f8163d24a",
+    "question": "MVCC trong PostgreSQL là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mvcc-trong-postgresql-la-gi-47c6b0d1-3ca7-51f9-ae3b-a28f8163d24a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": null
+  },
+  {
+    "id": "9ba5ae97-8464-56c5-a204-11f30db51fda",
+    "question": "Read replica có giải quyết được mọi vấn đề scale đọc không?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "read-replica-co-giai-quyet-duoc-moi-van-de-scale-doc-khong-9ba5ae97-8464-56c5-a204-11f30db51fda",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": null
+  },
+  {
+    "id": "a048a931-ad39-54de-8685-9594a708fdf1",
+    "question": "N+1 query với PostgreSQL thường xử lý thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "n-1-query-voi-postgresql-thuong-xu-ly-the-nao-a048a931-ad39-54de-8685-9594a708fdf1",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": null
+  },
+  {
+    "id": "3bfc1a57-bb75-5737-8e59-aa8ea4c82bf3",
+    "question": "Thiết kế PostgreSQL multi-tenant có những lựa chọn nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "thiet-ke-postgresql-multi-tenant-co-nhung-lua-chon-nao-3bfc1a57-bb75-5737-8e59-aa8ea4c82bf3",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": null
+  },
+  {
+    "id": "644b5676-03ee-5bc7-8831-5dd9e01a78a6",
+    "question": "DISTINCT ON của PostgreSQL làm gì? So với ROW_NUMBER() khi lấy bản ghi mới nhất mỗi nhóm thì nên chọn cái nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "distinct-on-cua-postgresql-lam-gi-so-voi-row-number-khi-lay-ban-ghi-moi-nhat-moi-nhom-thi-nen-chon-c-644b5676-03ee-5bc7-8831-5dd9e01a78a6",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": null
+  },
+  {
+    "id": "e3494438-e861-5ede-986c-377267f8ca59",
+    "question": "Truy vấn cây danh mục nhiều cấp bằng recursive CTE như thế nào? Chống vòng lặp vô hạn ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "truy-van-cay-danh-muc-nhieu-cap-bang-recursive-cte-nhu-the-nao-chong-vong-lap-vo-han-ra-sao-e3494438-e861-5ede-986c-377267f8ca59",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": null
+  },
+  {
+    "id": "a4a5351c-539b-585a-b917-101432e6c0cf",
+    "question": "CTE trong PostgreSQL có phải là \"optimization fence\" không? MATERIALIZED / NOT MATERIALIZED để làm gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cte-trong-postgresql-co-phai-la-optimization-fence-khong-materialized-not-materialized-de-lam-gi-a4a5351c-539b-585a-b917-101432e6c0cf",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": null
+  },
+  {
+    "id": "be5f5292-aa93-57ed-b54b-9c91a52dc567",
+    "question": "Cập nhật hàng loạt từ một bảng khác nên viết UPDATE ... FROM hay MERGE? Khác gì INSERT ... ON CONFLICT?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cap-nhat-hang-loat-tu-mot-bang-khac-nen-viet-update-from-hay-merge-khac-gi-insert-on-conflict-be5f5292-aa93-57ed-b54b-9c91a52dc567",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": null
+  },
+  {
+    "id": "bb15da00-0b03-53b7-b9c9-7a2cb81a4b36",
+    "question": "Index bloat là gì? Vì sao index phình lên dù số dòng không đổi, và xử lý thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "index-bloat-la-gi-vi-sao-index-phinh-len-du-so-dong-khong-doi-va-xu-ly-the-nao-bb15da00-0b03-53b7-b9c9-7a2cb81a4b36",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": null
+  },
+  {
+    "id": "a2a85080-8ba2-5998-8370-71ae2e39059a",
+    "question": "Làm sao tìm ra index nào đang thừa hoặc không được dùng để xoá bớt?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-sao-tim-ra-index-nao-dang-thua-hoac-khong-duoc-dung-de-xoa-bot-a2a85080-8ba2-5998-8370-71ae2e39059a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": null
+  },
+  {
+    "id": "8b0d7952-f103-5472-a648-be449b3dc1ed",
+    "question": "HOT update trong PostgreSQL là gì? Vì sao thêm index có thể làm sập throughput ghi của bảng update nhiều?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "hot-update-trong-postgresql-la-gi-vi-sao-them-index-co-the-lam-sap-throughput-ghi-cua-bang-update-nh-8b0d7952-f103-5472-a648-be449b3dc1ed",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": null
+  },
+  {
+    "id": "6bbf94c0-aa94-5304-9c6a-257820cb5f4d",
+    "question": "Transaction ID wraparound là gì? Vì sao nó có thể làm database ngừng nhận ghi?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "transaction-id-wraparound-la-gi-vi-sao-no-co-the-lam-database-ngung-nhan-ghi-6bbf94c0-aa94-5304-9c6a-257820cb5f4d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": null
+  },
+  {
+    "id": "24a306de-0d9e-53c5-ae52-43c1da8af3ad",
+    "question": "TOAST trong PostgreSQL là gì? Nó ảnh hưởng hiệu năng khi lưu giá trị lớn thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "toast-trong-postgresql-la-gi-no-anh-huong-hieu-nang-khi-luu-gia-tri-lon-the-nao-24a306de-0d9e-53c5-ae52-43c1da8af3ad",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": null
+  },
+  {
+    "id": "76aeebad-13b8-5bcc-8328-bd46ea8d6175",
+    "question": "PgBouncer transaction mode hoạt động ra sao? Vì sao prepared statement và session state hay lỗi khi bật?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "pgbouncer-transaction-mode-hoat-dong-ra-sao-vi-sao-prepared-statement-va-session-state-hay-loi-khi-b-76aeebad-13b8-5bcc-8328-bd46ea8d6175",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": null
+  },
+  {
+    "id": "9ff2930f-b125-5264-8f06-79e4b72f32bd",
+    "question": "User tạo đơn xong, chuyển sang trang danh sách thì không thấy đơn vừa tạo vì hệ thống đọc từ replica. Bạn xử lý luồng này thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "user-tao-don-xong-chuyen-sang-trang-danh-sach-thi-khong-thay-don-vua-tao-vi-he-thong-doc-tu-replica-9ff2930f-b125-5264-8f06-79e4b72f32bd",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": null
+  },
+  {
+    "id": "d671cc91-31e9-5cbc-9a19-80515e8a1ec0",
+    "question": "Một câu ALTER TABLE chạy trên production làm treo cả ứng dụng dù bảng nhỏ. Chẩn đoán bằng pg_locks ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mot-cau-alter-table-chay-tren-production-lam-treo-ca-ung-dung-du-bang-nho-chan-doan-bang-pg-locks-ra-d671cc91-31e9-5cbc-9a19-80515e8a1ec0",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": null
+  },
+  {
+    "id": "e0f08f66-4189-55a7-a8b3-2f69f12d6841",
+    "question": "Vì sao REPEATABLE READ của PostgreSQL ném lỗi \"could not serialize access\"? Ứng dụng phải xử lý ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vi-sao-repeatable-read-cua-postgresql-nem-loi-could-not-serialize-access-ung-dung-phai-xu-ly-ra-sao-e0f08f66-4189-55a7-a8b3-2f69f12d6841",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": null
+  }
+]

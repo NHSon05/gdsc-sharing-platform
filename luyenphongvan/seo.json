@@ -1,0 +1,735 @@
+[
+  {
+    "id": "42cffc0b-3fe9-5b31-9738-eacdcee71b4d",
+    "question": "SEO là gì? Tại sao frontend developer cần hiểu SEO?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1071-seo-la-gi-tai-sao-frontend-developer-can-hieu-seo",
+    "slug": "seo-la-gi-tai-sao-frontend-developer-can-hieu-seo-42cffc0b-3fe9-5b31-9738-eacdcee71b4d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "SEO (Search Engine Optimization) là tối ưu hóa website để đạt thứ hạng cao trên Google, Bing, và các công cụ tìm kiếm. 68% online experiences bắt đầu từ search engine — frontend developer ảnh hưởng trực tiếp đến khả năng index và rank của trang."
+      ],
+      "details": [
+        "Frontend developer trực tiếp ảnh hưởng SEO vì:"
+      ],
+      "points": [
+        "HTML structure quyết định cách Google hiểu nội dung (semantic tags, heading hierarchy)",
+        "Performance ảnh hưởng ranking (Core Web Vitals là ranking signal từ 2021)",
+        "Rendering strategy quyết định Google có index được content không (CSR vs SSR)",
+        "Technical SEO implementation (meta tags, structured data, sitemap) thường do frontend làm"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "1071-seo-la-gi-tai-sao-frontend-developer-can-hieu-seo"
+  },
+  {
+    "id": "08bb4aee-e43a-551b-8539-7d41cee19dae",
+    "question": "Meta tags quan trọng nhất cho SEO là gì? Cách viết title và description hiệu quả?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1072-meta-tags-quan-trong-nhat-cho-seo-la-gi-cach-viet-title-va-description-hieu-qua",
+    "slug": "meta-tags-quan-trong-nhat-cho-seo-la-gi-cach-viet-title-va-description-hieu-qua-08bb4aee-e43a-551b-8539-7d41cee19dae",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Có 5 meta tags quan trọng nhất mà frontend dev cần nắm: title, description, robots, canonical, và Open Graph."
+      ],
+      "details": [
+        "Title tag (<title>): quan trọng nhất, hiển thị trên tab browser và kết quả tìm kiếm. Quy tắc: 50-60 ký tự, chứa keyword chính ở đầu, unique cho mỗi trang, format: 'Primary Keyword - Secondary | Brand'.",
+        "Meta description (<meta name='description'>): mô tả trang hiển thị dưới title trên Google. Quy tắc: 150-160 ký tự, chứa keyword tự nhiên, có call-to-action, unique.",
+        "Meta robots (<meta name='robots'>): điều khiển indexing — index,follow (mặc định), noindex (không index), nofollow (không follow links).",
+        "Canonical (<link rel='canonical'>): chỉ định URL chính thức khi có duplicate content."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "1072-meta-tags-quan-trong-nhat-cho-seo-la-gi-cach-viet-title-va-description-hieu-qua"
+  },
+  {
+    "id": "9255b0c6-dada-5158-85c6-ebcb07b74bf2",
+    "question": "robots.txt là gì? Cách cấu hình đúng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1074-robots-txt-la-gi-cach-cau-hinh-dung",
+    "slug": "robots-txt-la-gi-cach-cau-hinh-dung-9255b0c6-dada-5158-85c6-ebcb07b74bf2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "robots.txt là file text đặt ở root domain (example.com/robots.txt) hướng dẫn search engine bots nên/không nên crawl phần nào của website. Syntax: User-agent: * (áp dụng cho tất cả bots), Disallow: /admin (không crawl /admin), Allow: /admin/public (ngoại lệ cho phép), Sitemap: https://example.com/sitemap.xml."
+      ],
+      "details": [
+        "Lưu ý quan trọng: robots.txt chỉ là 'yêu cầu', bot xấu có thể bỏ qua. Disallow KHÔNG giống noindex — trang vẫn có thể xuất hiện trên Google nếu có backlinks. Muốn chắc chắn không index → dùng <meta name='robots' content='noindex'>.",
+        "Sai lầm: block CSS/JS files khiến Google không render được trang → ảnh hưởng SEO nghiêm trọng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "1074-robots-txt-la-gi-cach-cau-hinh-dung"
+  },
+  {
+    "id": "f9558bf0-3222-55eb-964a-a4457691c459",
+    "question": "Sitemap XML là gì? Khi nào cần và cách tạo?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1075-sitemap-xml-la-gi-khi-nao-can-va-cach-tao",
+    "slug": "sitemap-xml-la-gi-khi-nao-can-va-cach-tao-f9558bf0-3222-55eb-964a-a4457691c459",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Sitemap XML (sitemap.xml) là file liệt kê tất cả URLs quan trọng của website, giúp search engine khám phá và index nhanh hơn. Format: <urlset> chứa nhiều <url>, mỗi url có <loc> (URL), <lastmod> (ngày cập nhật), <changefreq> và <priority> — lưu ý Google đã giảm tầm quan trọng của hai trường này từ ~2022 (vẫn giữ cho tương thích)."
+      ],
+      "details": [
+        "Khi nào CẦN: website lớn (>500 trang), trang mới tạo chưa có backlinks, website có nhiều content động (blog, e-commerce), trang deep link (>3 clicks từ homepage). Khi nào KHÔNG cần: website nhỏ (<50 trang) với navigation tốt.",
+        "Trong Next.js: dùng app/sitemap.ts export function trả về mảng URLs — Next.js tự generate sitemap.xml. Giới hạn: max 50,000 URLs hoặc 50MB mỗi sitemap, dùng sitemap index cho website lớn hơn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "1075-sitemap-xml-la-gi-khi-nao-can-va-cach-tao"
+  },
+  {
+    "id": "d8c45e16-3533-55e7-bd7c-07fd877597d6",
+    "question": "Canonical URL là gì? Khi nào cần sử dụng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1076-canonical-url-la-gi-khi-nao-can-su-dung",
+    "slug": "canonical-url-la-gi-khi-nao-can-su-dung-d8c45e16-3533-55e7-bd7c-07fd877597d6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Canonical URL (<link rel='canonical' href='...'>) cho Google biết URL nào là 'bản gốc' khi có nhiều URLs chứa cùng nội dung."
+      ],
+      "details": [
+        "Ví dụ: /products?sort=price và /products?sort=name cùng nội dung → canonical trỏ về /products. Khi nào CẦN:",
+        "Lưu ý: canonical phải là absolute URL, self-referencing canonical cũng tốt (mỗi trang canonical trỏ về chính nó)."
+      ],
+      "points": [
+        "URL parameters tạo duplicate (filters, sort, pagination)",
+        "HTTP vs HTTPS, www vs non-www",
+        "Syndicated content (bài viết đăng trên nhiều site)",
+        "Mobile URL khác desktop URL. Nếu không có canonical, Google tự chọn 'bản gốc' — có thể chọn sai. Trong Next.js: dùng metadata.alternates.canonical trong generateMetadata()"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "1076-canonical-url-la-gi-khi-nao-can-su-dung"
+  },
+  {
+    "id": "64297eec-5476-5993-aa07-fdb839a6d3d1",
+    "question": "Alt text cho images: tại sao quan trọng và cách viết đúng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1093-alt-text-cho-images-tai-sao-quan-trong-va-cach-viet-dung",
+    "slug": "alt-text-cho-images-tai-sao-quan-trong-va-cach-viet-dung-64297eec-5476-5993-aa07-fdb839a6d3d1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Alt text (alt attribute trên <img>) mô tả nội dung ảnh cho:"
+      ],
+      "details": [
+        "Cách viết tốt: mô tả cụ thể, ngắn gọn (125 ký tự), chứa keyword tự nhiên (không keyword stuffing).",
+        "alt='dog', alt='image1.jpg', alt='best dog training tips buy now click here'.",
+        "Khi nào để trống (alt=''): decorative images không mang thông tin (icons, dividers, background patterns). Ảnh text (infographic, banner): alt text nên chứa text trong ảnh."
+      ],
+      "points": [
+        "Search engines — Google không 'nhìn' ảnh, dùng alt text để hiểu ảnh và rank trên Google Images,",
+        "Screen readers — người khiếm thị nghe mô tả ảnh,",
+        "Fallback — hiển thị khi ảnh không load được"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "alt='Golden retriever puppy playing fetch in park'"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "1093-alt-text-cho-images-tai-sao-quan-trong-va-cach-viet-dung"
+  },
+  {
+    "id": "7fa3b74b-28ff-5c6d-a359-fed0852e3f49",
+    "question": "Mobile-first indexing là gì? Dev cần lưu ý gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/95021-mobile-first-indexing-la-gi-dev-can-luu-y-gi",
+    "slug": "mobile-first-indexing-la-gi-dev-can-luu-y-gi-7fa3b74b-28ff-5c6d-a359-fed0852e3f49",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Mobile-first indexing nghĩa là Google dùng phiên bản mobile của trang (crawl bằng Googlebot smartphone) để index và ranking — không phải phiên bản desktop. Nội dung chỉ có trên desktop mà thiếu trên mobile sẽ không được tính khi xếp hạng."
+      ],
+      "details": [
+        "Dev cần lưu ý:",
+        "Google khuyến nghị responsive design (1 URL, 1 HTML cho mọi thiết bị) — dễ triển khai nhất và tránh toàn bộ vấn đề parity của kiểu separate URLs (m.example.com)."
+      ],
+      "points": [
+        "Content parity — bản mobile phải chứa cùng nội dung chính với desktop; ẩn bớt nội dung trên mobile đồng nghĩa mất nội dung trong index",
+        "Structured data và meta robots phải có mặt như nhau trên cả 2 phiên bản",
+        "Không lazy-load nội dung chính theo user interaction (scroll/click) — Googlebot không tương tác với trang",
+        "Không block resources (CSS/JS/ảnh) trong robots.txt",
+        "Ảnh chất lượng cao, alt text đầy đủ, URL ảnh ổn định (không đổi mỗi lần load)",
+        "Title và meta description tương đương giữa 2 phiên bản"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "95021-mobile-first-indexing-la-gi-dev-can-luu-y-gi"
+  },
+  {
+    "id": "aa35037d-fbe7-5f53-9064-b0757ae68661",
+    "question": "CSR, SSR, SSG ảnh hưởng SEO như thế nào? Cách Google crawl SPA?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1077-csr-ssr-ssg-anh-huong-seo-nhu-the-nao-cach-google-crawl-spa",
+    "slug": "csr-ssr-ssg-anh-huong-seo-nhu-the-nao-cach-google-crawl-spa-aa35037d-fbe7-5f53-9064-b0757ae68661",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Rendering strategy là yếu tố critical ảnh hưởng khả năng Google index content — CSR là rủi ro cao nhất, SSR/SSG an toàn nhất."
+      ],
+      "details": [
+        "CSR (Client-Side Rendering): HTML ban đầu trống, JS render content → Google phải chờ JS execute (second wave indexing). Rủi ro: Googlebot có thể timeout, content không index đầy đủ, crawl budget lãng phí.",
+        "SSR (Server-Side Rendering): HTML đầy đủ từ server → Google index ngay lập tức, tốt nhất cho SEO.",
+        "SSG (Static Site Generation): HTML pre-built → nhanh nhất, SEO tốt cho content tĩnh.",
+        "Google crawl SPA: Googlebot dùng Chromium headless (evergreen — luôn theo bản Chrome ổn định từ 2019), render JS rồi mới index — độ trễ render trung bình chỉ vài giây đến vài phút, nhưng CSR vẫn mang rủi ro index: render budget, JS lỗi khiến content không xuất hiện. Nếu bắt buộc CSR: đảm bảo critical content nằm trong initial HTML. Lưu ý Google đã deprecated dynamic rendering (coi là workaround, không phải giải pháp lâu dài) — dùng SSR/SSG hoặc prerendering thay thế."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "1077-csr-ssr-ssg-anh-huong-seo-nhu-the-nao-cach-google-crawl-spa"
+  },
+  {
+    "id": "98f7e7a5-4358-5fb5-8714-85b5374d909d",
+    "question": "Core Web Vitals là gì? Ảnh hưởng thế nào đến SEO ranking?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1078-core-web-vitals-la-gi-anh-huong-the-nao-den-seo-ranking",
+    "slug": "core-web-vitals-la-gi-anh-huong-the-nao-den-seo-ranking-98f7e7a5-4358-5fb5-8714-85b5374d909d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Core Web Vitals (CWV) là 3 metrics đo trải nghiệm người dùng, là ranking signal của Google từ 2021. INP thay thế FID từ tháng 3/2024."
+      ],
+      "details": [
+        "LCP (Largest Contentful Paint): thời gian render phần tử lớn nhất (hero image, heading) — target: <2.5s. Cải thiện: optimize images (WebP, lazy load), preload fonts, SSR/SSG.",
+        "INP (Interaction to Next Paint): thời gian phản hồi khi user interact (click, tap) — target: <200ms. Cải thiện: code split, defer heavy JS, reduce main thread work.",
+        "CLS (Cumulative Layout Shift): mức độ layout bị 'nhảy' — target: <0.1. Cải thiện: set width/height cho images/videos, font-display swap, avoid dynamic content injection above fold.",
+        "Google Search Console báo CWV cho từng URL. Trang có CWV tốt được ưu tiên ranking khi 2 trang có relevance tương đương."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "1078-core-web-vitals-la-gi-anh-huong-the-nao-den-seo-ranking"
+  },
+  {
+    "id": "a1d5f519-eba9-5c65-ba93-8f0144b6f06e",
+    "question": "Structured Data (Schema.org) là gì? Lợi ích cho SEO?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1080-structured-data-schema-org-la-gi-loi-ich-cho-seo",
+    "slug": "structured-data-schema-org-la-gi-loi-ich-cho-seo-a1d5f519-eba9-5c65-ba93-8f0144b6f06e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Structured Data (JSON-LD) là cách mark up content để Google hiểu semantic context và có thể hiển thị Rich Results. Format phổ biến: JSON-LD trong <script type='application/ld+json'>."
+      ],
+      "details": [
+        "Lợi ích: Rich Results — kết quả tìm kiếm đặc biệt với rating stars, price, availability, breadcrumbs, sitelinks — giúp kết quả nổi bật hơn trên SERP. Lưu ý: từ tháng 8/2023 Google giới hạn FAQ rich results (chỉ hiển thị cho site chính phủ/y tế có thẩm quyền) và gỡ bỏ HowTo rich results — đừng coi FAQPage schema là cách giành rich snippet cho site thông thường. Schema phổ biến cho frontend: Article (blog), Product (e-commerce), BreadcrumbList (breadcrumbs), Organization (company info), WebSite (search box trong Google). Trong Next.js: tạo component <JsonLd> render <script> tag với JSON.stringify(data). Validate bằng Google Rich Results Test."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "1080-structured-data-schema-org-la-gi-loi-ich-cho-seo"
+  },
+  {
+    "id": "cb3313b9-e4bb-5cd3-bccf-0fccb6d25528",
+    "question": "Open Graph và Twitter Cards là gì? Cách implement trong Next.js?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1081-open-graph-va-twitter-cards-la-gi-cach-implement-trong-next-js",
+    "slug": "open-graph-va-twitter-cards-la-gi-cach-implement-trong-next-js-cb3313b9-e4bb-5cd3-bccf-0fccb6d25528",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Open Graph và Twitter Cards kiểm soát preview khi share link trên social media — share preview đẹp → nhiều click → nhiều traffic → nhiều backlinks → ranking tăng gián tiếp."
+      ],
+      "details": [
+        "Open Graph (OG): meta tags chuẩn Facebook để kiểm soát preview trên Facebook, LinkedIn, Zalo, Telegram. Tags quan trọng: og:title, og:description, og:image (1200x630px recommended), og:url, og:type.",
+        "Twitter Cards: tương tự OG nhưng cho Twitter/X — twitter:card ('summary_large_image' phổ biến nhất), twitter:title, twitter:description, twitter:image.",
+        "Trong Next.js App Router: dùng metadata export hoặc generateMetadata() — Next.js tự generate OG và Twitter meta tags."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "1081-open-graph-va-twitter-cards-la-gi-cach-implement-trong-next-js"
+  },
+  {
+    "id": "c0910e2a-88d8-545b-b1d1-7d7dfdace255",
+    "question": "Internal linking ảnh hưởng SEO như thế nào? Best practices?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1082-internal-linking-anh-huong-seo-nhu-the-nao-best-practices",
+    "slug": "internal-linking-anh-huong-seo-nhu-the-nao-best-practices-c0910e2a-88d8-545b-b1d1-7d7dfdace255",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Internal linking phân phối link equity và giúp Google khám phá trang — trang không có internal link nào trỏ đến là 'orphan page', có thể không bao giờ được index."
+      ],
+      "details": [
+        "Ảnh hưởng SEO:",
+        "Best practices: dùng descriptive anchor text (không 'click here'), link từ high-authority pages đến important pages, sử dụng breadcrumbs, related posts, sidebar navigation. Trong React/Next.js: dùng <Link> component (không phải <a>) để SPA navigation nhưng vẫn render <a> cho SEO."
+      ],
+      "points": [
+        "Crawlability: Google khám phá trang mới qua internal links",
+        "Link equity: trang được nhiều internal links trỏ đến sẽ rank cao hơn",
+        "Context: anchor text của internal link giúp Google hiểu trang đích nói về gì"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "1082-internal-linking-anh-huong-seo-nhu-the-nao-best-practices"
+  },
+  {
+    "id": "6669bf9f-abe8-589f-960d-2adfb790f978",
+    "question": "Metadata API trong Next.js App Router hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1086-metadata-api-trong-next-js-app-router-hoat-dong-nhu-the-nao",
+    "slug": "metadata-api-trong-next-js-app-router-hoat-dong-nhu-the-nao-6669bf9f-abe8-589f-960d-2adfb790f978",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Next.js App Router Metadata API thay thế hoàn toàn react-helmet — type-safe, server-rendered, cascade từ layout xuống page."
+      ],
+      "details": [
+        "2 cách dùng:",
+        "Metadata cascade: layout metadata → page metadata (page override layout). Tính năng: title.template (pattern cho child pages, ví dụ '%s | MyApp'), openGraph, twitter, robots, alternates (canonical, hreflang), icons (favicon), verification (Google Search Console).",
+        "Next.js tự động generate <title>, <meta>, OG tags, Twitter cards, canonical URL từ metadata object — không cần thư viện bên ngoài."
+      ],
+      "points": [
+        "Static metadata: export const metadata: Metadata = { title: '...', description: '...' } từ layout.tsx hoặc page.tsx",
+        "Dynamic metadata: export\nCopy\nasync function generateMetadata({ params }) { ... return { title, description } }\n— fetch data rồi generate meta tags"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "async function generateMetadata({ params }) { ... return { title, description } }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "1086-metadata-api-trong-next-js-app-router-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "5663e7d1-d50d-5fc0-aa3c-a6d22f305c4b",
+    "question": "Cách tạo dynamic sitemap và robots.txt trong Next.js App Router?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1087-cach-tao-dynamic-sitemap-va-robots-txt-trong-next-js-app-router",
+    "slug": "cach-tao-dynamic-sitemap-va-robots-txt-trong-next-js-app-router-5663e7d1-d50d-5fc0-aa3c-a6d22f305c4b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Next.js App Router tích hợp native sitemap và robots.txt với TypeScript type-safety — không cần plugin hay static files."
+      ],
+      "details": [
+        "Sitemap: tạo app/sitemap.ts export default function trả về mảng MetadataRoute.Sitemap. Mỗi item có url, lastModified, changeFrequency, priority. Có thể fetch data từ DB/CMS để generate dynamic URLs. Cho website lớn: export thêm generateSitemaps() từ app/sitemap.ts — trả về mảng { id }, Next.js gọi default export với từng id để tạo nhiều sitemap (serve tại /sitemap/[id].xml).",
+        "robots.txt: tạo app/robots.ts export default function trả về MetadataRoute.Robots object với rules (User-Agent, allow, disallow) và sitemap URL.",
+        "Ví dụ:\nCopy\n{ rules: { userAgent: '*', allow: '/', disallow: '/admin/' }, sitemap: 'https://example.com/sitemap.xml' }\n. Cả 2 đều type-safe với TypeScript, auto-generate tại build time."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "{ rules: { userAgent: '*', allow: '/', disallow: '/admin/' }, sitemap: 'https://example.com/sitemap.xml' }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "1087-cach-tao-dynamic-sitemap-va-robots-txt-trong-next-js-app-router"
+  },
+  {
+    "id": "a49a14e2-38ec-5c54-b7fb-1dcc90a615f1",
+    "question": "next/image tối ưu SEO và performance như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1088-next-image-toi-uu-seo-va-performance-nhu-the-nao",
+    "slug": "next-image-toi-uu-seo-va-performance-nhu-the-nao-a49a14e2-38ec-5c54-b7fb-1dcc90a615f1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "next/image tự động handle lazy loading, responsive srcset, WebP conversion, và CLS prevention — 5 tính năng trực tiếp cải thiện Core Web Vitals."
+      ],
+      "details": [
+        "SEO impact: LCP cải thiện (ranking signal), CLS giảm (ranking signal), smaller images = faster page = better crawl experience. Luôn thêm alt text mô tả ảnh cho Google Image Search và accessibility."
+      ],
+      "points": [
+        "Lazy loading mặc định — chỉ load khi gần viewport, giảm initial page weight",
+        "Responsive images — tự generate srcset với nhiều sizes, browser chọn size phù hợp",
+        "Format optimization — auto convert sang WebP/AVIF nếu browser hỗ trợ, giảm 30-50% file size",
+        "Prevent CLS — bắt buộc width/height hoặc fill, tránh layout shift",
+        "Priority loading — set priority={true} cho LCP image (above-the-fold)"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "1088-next-image-toi-uu-seo-va-performance-nhu-the-nao"
+  },
+  {
+    "id": "9b5bfb8a-2e8c-5665-9bb5-12934b661b14",
+    "question": "URL structure ảnh hưởng SEO thế nào? Best practices?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1094-url-structure-anh-huong-seo-the-nao-best-practices",
+    "slug": "url-structure-anh-huong-seo-the-nao-best-practices-9b5bfb8a-2e8c-5665-9bb5-12934b661b14",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "URL là signal nhẹ cho Google hiểu nội dung, nhưng ảnh hưởng CTR đáng kể vì user đọc URL trước khi click — URL xấu mất click dù rank cao."
+      ],
+      "details": [
+        "Best practices:",
+        "Trong Next.js: file-based routing tạo clean URLs tự động."
+      ],
+      "points": [
+        "Ngắn gọn, descriptive: /blog/react-query-tutorial tốt hơn /blog/post?id=123",
+        "Dùng hyphens (-) ngăn cách từ, KHÔNG dùng underscores (_) — Google coi hyphen là word separator, underscore không",
+        "Lowercase only — /About và /about là 2 URLs khác nhau (duplicate content)",
+        "Tránh parameters khi có thể — /products/shoes tốt hơn /products?category=shoes",
+        "Tránh thay đổi URL — nếu bắt buộc, 301 redirect URL cũ → mới",
+        "Include keyword target — nhưng tự nhiên"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "1094-url-structure-anh-huong-seo-the-nao-best-practices"
+  },
+  {
+    "id": "66da047d-4e55-52a3-9455-07e0055133ad",
+    "question": "301 vs 302 vs 308 redirect — khác nhau gì và ảnh hưởng SEO thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/95020-301-vs-302-vs-308-redirect-khac-nhau-gi-va-anh-huong-seo-the-nao",
+    "slug": "301-vs-302-vs-308-redirect-khac-nhau-gi-va-anh-huong-seo-the-nao-66da047d-4e55-52a3-9455-07e0055133ad",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác biệt cốt lõi: 301/308 = permanent, 302/307 = temporary — và cặp 307/308 giữ nguyên HTTP method + body, còn 301/302 cho phép browser đổi POST thành GET (hành vi lịch sử)."
+      ],
+      "details": [
+        "Ảnh hưởng SEO:",
+        "Chọn thế nào: đổi URL vĩnh viễn → 301 (đủ cho trang GET thông thường) hoặc 308 (khi cần giữ method cho form/API endpoint). Tạm thời (A/B test, bảo trì, campaign) → 302/307. Tránh redirect chains (A→B→C) — tốn crawl budget và chậm với user."
+      ],
+      "points": [
+        "Redirect permanent là tín hiệu để Google chọn URL đích làm canonical — indexing pipeline chuyển sang index URL mới",
+        "Redirect temporary: Googlebot vẫn follow nhưng KHÔNG coi URL đích là canonical — URL cũ tiếp tục được giữ trong index",
+        "Link equity: redirect permanent chuyển tín hiệu ranking sang URL đích — đổi domain hay restructure URL cứ dùng 301/308, không sợ 'mất PageRank'",
+        "Soft 404: redirect hàng loạt trang đã xóa về homepage hoặc trang không liên quan bị Google coi là soft 404 — redirect về trang thay thế liên quan, hoặc trả 404/410 thật"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "95020-301-vs-302-vs-308-redirect-khac-nhau-gi-va-anh-huong-seo-the-nao"
+  },
+  {
+    "id": "6beab479-c929-5b35-908e-2010c0f076fc",
+    "question": "Crawl budget là gì? Cách tối ưu cho website lớn?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "crawl-budget-la-gi-cach-toi-uu-cho-website-lon-6beab479-c929-5b35-908e-2010c0f076fc",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": null
+  },
+  {
+    "id": "901ddc10-0818-5e8d-b457-aed381ad664e",
+    "question": "Internationalization (i18n) SEO: hreflang là gì? Cách implement?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "internationalization-i18n-seo-hreflang-la-gi-cach-implement-901ddc10-0818-5e8d-b457-aed381ad664e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": null
+  },
+  {
+    "id": "b1fd0ce6-cf3e-5f89-b3da-ad63b390edb6",
+    "question": "JavaScript SEO: những lỗi phổ biến khiến Google không index được content?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "javascript-seo-nhung-loi-pho-bien-khien-google-khong-index-duoc-content-b1fd0ce6-cf3e-5f89-b3da-ad63b390edb6",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": null
+  },
+  {
+    "id": "d4f6f8c4-0a85-547b-93fa-bbf538fcbe95",
+    "question": "Dynamic OG images trong Next.js là gì? Cách tạo?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dynamic-og-images-trong-next-js-la-gi-cach-tao-d4f6f8c4-0a85-547b-93fa-bbf538fcbe95",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": null
+  },
+  {
+    "id": "8eabdac5-8f81-523a-b220-24013541a599",
+    "question": "generateStaticParams và ISR ảnh hưởng SEO thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "generatestaticparams-va-isr-anh-huong-seo-the-nao-8eabdac5-8f81-523a-b220-24013541a599",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": null
+  },
+  {
+    "id": "91c14558-a2d0-551c-b2fb-0e0ce0c2a8ac",
+    "question": "Cách tối ưu Largest Contentful Paint (LCP) trong React/Next.js?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cach-toi-uu-largest-contentful-paint-lcp-trong-react-next-js-91c14558-a2d0-551c-b2fb-0e0ce0c2a8ac",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": null
+  },
+  {
+    "id": "85c111b9-f214-51be-96d9-b833f335ecb0",
+    "question": "SEO audit checklist cho frontend developer: cần kiểm tra những gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "seo-audit-checklist-cho-frontend-developer-can-kiem-tra-nhung-gi-85c111b9-f214-51be-96d9-b833f335ecb0",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": null
+  }
+]

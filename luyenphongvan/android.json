@@ -1,0 +1,2019 @@
+[
+  {
+    "id": "64cd31d4-dece-582d-a910-e64743ae5378",
+    "question": "val và var trong Kotlin khác nhau như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3001-val-va-var-trong-kotlin-khac-nhau-nhu-the-nao",
+    "slug": "val-va-var-trong-kotlin-khac-nhau-nhu-the-nao-64cd31d4-dece-582d-a910-e64743ae5378",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "val khai báo biến chỉ đọc, không thể gán lại sau khi khởi tạo (tương tự final trong Java), còn var khai báo biến có thể thay đổi giá trị."
+      ],
+      "details": [],
+      "points": [
+        "Dùng val làm mặc định giúp code an toàn hơn và phù hợp với nguyên tắc immutability trong kiến trúc MVVM.",
+        "Kotlin compiler khuyến khích dùng val ở mọi nơi có thể."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "3001-val-va-var-trong-kotlin-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "99abd2e2-aa3e-591d-8d29-4c179a572253",
+    "question": "Giải thích null safety trong Kotlin và sự khác biệt giữa kiểu nullable và non-nullable.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3002-giai-thich-null-safety-trong-kotlin-va-su-khac-biet-giua-kieu-nullable-va-non-nu",
+    "slug": "giai-thich-null-safety-trong-kotlin-va-su-khac-biet-giua-kieu-nullable-va-non-nullable-99abd2e2-aa3e-591d-8d29-4c179a572253",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Trong Kotlin, biến mặc định không được phép null để loại bỏ NullPointerException."
+      ],
+      "details": [],
+      "points": [
+        "Muốn cho phép null, bạn khai báo kiểu nullable bằng ? (ví dụ String?).",
+        "Compiler bắt buộc bạn xử lý null ngay lúc biên dịch qua các toán tử như ?. (safe call) hoặc !! (ép buộc).",
+        "Điều này giúp các lỗi liên quan đến null không thể lọt qua bước compile."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "3002-giai-thich-null-safety-trong-kotlin-va-su-khac-biet-giua-kieu-nullable-va-non-nu"
+  },
+  {
+    "id": "11eb0469-0ba7-5e24-ae42-bf6916210b0c",
+    "question": "Extension function trong Kotlin là gì và hoạt động như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3003-extension-function-trong-kotlin-la-gi-va-hoat-dong-nhu-the-nao",
+    "slug": "extension-function-trong-kotlin-la-gi-va-hoat-dong-nhu-the-nao-11eb0469-0ba7-5e24-ae42-bf6916210b0c",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Extension function cho phép bạn thêm method mới vào class có sẵn mà không cần kế thừa hay sửa code gốc."
+      ],
+      "details": [
+        "Ví dụ có thể thêm method thẳng vào class String:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "fun String.isPhoneNumber(): Boolean { return this.length == 10 }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "3003-extension-function-trong-kotlin-la-gi-va-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "c45c9611-044b-532b-b9cd-ddb2ca682cdf",
+    "question": "Data class trong Kotlin là gì và nó tự động tạo ra những gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3004-data-class-trong-kotlin-la-gi-va-no-tu-dong-tao-ra-nhung-gi",
+    "slug": "data-class-trong-kotlin-la-gi-va-no-tu-dong-tao-ra-nhung-gi-c45c9611-044b-532b-b9cd-ddb2ca682cdf",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Data class tự động sinh ra các method boilerplate như equals(), hashCode(), toString() và copy()."
+      ],
+      "details": [],
+      "points": [
+        "Data class cần ít nhất một tham số trong constructor và rất phù hợp để chứa dữ liệu (như response API hay model database).",
+        "Chúng không thể là abstract, open, sealed, hay inner class, và tất cả tham số constructor phải được đánh dấu val hoặc var."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "3004-data-class-trong-kotlin-la-gi-va-no-tu-dong-tao-ra-nhung-gi"
+  },
+  {
+    "id": "b6b73071-42a3-5773-be9c-b48013d6df49",
+    "question": "Companion object trong Kotlin là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3011-companion-object-trong-kotlin-la-gi",
+    "slug": "companion-object-trong-kotlin-la-gi-b6b73071-42a3-5773-be9c-b48013d6df49",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Companion object cho phép định nghĩa các thành viên kiểu static (hằng số, factory method) bên trong class, thuộc về class chứ không phải instance."
+      ],
+      "details": [],
+      "points": [
+        "Mỗi class chỉ có một companion object.",
+        "Có thể gọi trực tiếp mà không cần tạo instance: MyClass.myStaticMethod().",
+        "Giống static trong Java nhưng linh hoạt hơn vì có thể implement interface."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "3011-companion-object-trong-kotlin-la-gi"
+  },
+  {
+    "id": "4351a2a0-4f7d-56e0-b45e-5735194c306c",
+    "question": "Giải thích Android Activity lifecycle và mục đích của từng method.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3013-giai-thich-android-activity-lifecycle-va-muc-dich-cua-tung-method",
+    "slug": "giai-thich-android-activity-lifecycle-va-muc-dich-cua-tung-method-4351a2a0-4f7d-56e0-b45e-5735194c306c",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Activity lifecycle có 6 method chính theo thứ tự: onCreate() (khởi tạo), onStart() (trở nên visible), onResume() (có focus), onPause() (mất focus), onStop() (không còn visible), onDestroy() (dọn dẹp)."
+      ],
+      "details": [],
+      "points": [
+        "Hiểu lifecycle rất quan trọng vì bạn phải lưu state trong onSaveInstanceState() và khôi phục trong onCreate().",
+        "Memory leak thường xảy ra khi giữ strong reference đến Activity quá vòng đời của nó."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "3013-giai-thich-android-activity-lifecycle-va-muc-dich-cua-tung-method"
+  },
+  {
+    "id": "b5909401-259a-56dc-ac46-eca2a6580586",
+    "question": "Intent trong Android là gì và có mấy loại?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3017-intent-trong-android-la-gi-va-co-may-loai",
+    "slug": "intent-trong-android-la-gi-va-co-may-loai-b5909401-259a-56dc-ac46-eca2a6580586",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Intent là object nhắn tin để yêu cầu một hành động từ component khác trong app."
+      ],
+      "details": [],
+      "points": [
+        "Explicit intent chỉ định chính xác component cần khởi động (ví dụ mở một Activity cụ thể trong app).",
+        "Implicit intent khai báo action mà không chỉ định component, để hệ thống tìm app phù hợp xử lý (ví dụ mở URL trong browser).",
+        "Cả hai loại đều có thể truyền dữ liệu qua bundle."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "3017-intent-trong-android-la-gi-va-co-may-loai"
+  },
+  {
+    "id": "39434b9d-d17f-5a7e-9751-2e3be7c6b60b",
+    "question": "Các loại Android permission và cách xử lý runtime permissions?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3021-cac-loai-android-permission-va-cach-xu-ly-runtime-permissions",
+    "slug": "cac-loai-android-permission-va-cach-xu-ly-runtime-permissions-39434b9d-d17f-5a7e-9751-2e3be7c6b60b",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Normal permission (internet, vibrate) được cấp tự động khi cài đặt."
+      ],
+      "details": [],
+      "points": [
+        "Dangerous permission (camera, location, contacts) phải xin lúc runtime.",
+        "Để xin runtime permission: tạo ActivityResultContract, dùng registerForActivityResult(), và kiểm tra\nCopy\nContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED\ntrước khi dùng tính năng được bảo vệ.",
+        "Từ Android 6 trở đi, bỏ qua runtime permission sẽ làm app crash."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "3021-cac-loai-android-permission-va-cach-xu-ly-runtime-permissions"
+  },
+  {
+    "id": "e4aea8bf-127f-5718-a6dd-b1355fa40395",
+    "question": "Intent filter và implicit intent là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3023-intent-filter-va-implicit-intent-la-gi",
+    "slug": "intent-filter-va-implicit-intent-la-gi-e4aea8bf-127f-5718-a6dd-b1355fa40395",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Intent filter được khai báo trong manifest để chỉ định loại implicit intent mà Activity có thể xử lý."
+      ],
+      "details": [
+        "Ví dụ Intent với action ACTION_VIEW và data http:// có thể mở browser."
+      ],
+      "points": [
+        "Chúng định nghĩa action, category, và kiểu dữ liệu.",
+        "Khi bạn gửi implicit intent, hệ thống tìm tất cả app có Intent filter phù hợp."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "3023-intent-filter-va-implicit-intent-la-gi"
+  },
+  {
+    "id": "9b78730a-abe8-5d0e-92bd-44c45cbb9c65",
+    "question": "Sự khác biệt giữa Process và Thread trong Android?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3024-su-khac-biet-giua-process-va-thread-trong-android",
+    "slug": "su-khac-biet-giua-process-va-thread-trong-android-9b78730a-abe8-5d0e-92bd-44c45cbb9c65",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Process là một instance riêng biệt của app với bộ nhớ và tài nguyên riêng, chạy độc lập với các process khác."
+      ],
+      "details": [],
+      "points": [
+        "Thread là đơn vị thực thi nhẹ hơn trong một process, chia sẻ bộ nhớ với các thread khác.",
+        "Android app có main thread (UI thread) xử lý toàn bộ UI, còn background thread xử lý tác vụ nặng.",
+        "Tuyệt đối không được block main thread."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "3024-su-khac-biet-giua-process-va-thread-trong-android"
+  },
+  {
+    "id": "1e6cb8c0-d844-5d3f-8343-096ccb3b639a",
+    "question": "Jetpack Compose là gì và tại sao nó đang thay thế XML layouts?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3025-jetpack-compose-la-gi-va-tai-sao-no-dang-thay-the-xml-layouts",
+    "slug": "jetpack-compose-la-gi-va-tai-sao-no-dang-thay-the-xml-layouts-1e6cb8c0-d844-5d3f-8343-096ccb3b639a",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Jetpack Compose là bộ công cụ UI declarative hiện đại cho phép xây dựng giao diện Android bằng Kotlin function thay vì XML."
+      ],
+      "details": [],
+      "points": [
+        "Nó đang thay thế XML vì code ngắn gọn hơn, type-safe, và dễ tái sử dụng hơn.",
+        "Compose tự động cập nhật UI khi state thay đổi, loại bỏ boilerplate và giúp UI dễ test hơn.",
+        "Google đã tuyên bố đây là cách tiếp cận được khuyến nghị cho UI Android."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "3025-jetpack-compose-la-gi-va-tai-sao-no-dang-thay-the-xml-layouts"
+  },
+  {
+    "id": "65df7c26-bd79-541e-a5ca-c7b332f8a9e4",
+    "question": "Composable function là gì và điều kiện để một function là Composable?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3026-composable-function-la-gi-va-dieu-kien-de-mot-function-la-composable",
+    "slug": "composable-function-la-gi-va-dieu-kien-de-mot-function-la-composable-65df7c26-bd79-541e-a5ca-c7b332f8a9e4",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "@Composable đánh dấu một Kotlin function là pure, idempotent (cùng input → cùng output), và được gọi bởi Compose runtime chứ không phải do bạn gọi thủ công — đây là ràng buộc quan trọng nhất."
+      ],
+      "details": [],
+      "points": [
+        "Function phải trả về Unit, không có side effect trực tiếp, và chạy nhanh.",
+        "Annotation @Composable báo cho Compose runtime theo dõi recomposition và state change."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "3026-composable-function-la-gi-va-dieu-kien-de-mot-function-la-composable"
+  },
+  {
+    "id": "c2b1bbfe-43c7-5eb4-92b9-0521509cf9d1",
+    "question": "Modifier trong Jetpack Compose là gì? Cho ví dụ.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3032-modifier-trong-jetpack-compose-la-gi-cho-vi-du",
+    "slug": "modifier-trong-jetpack-compose-la-gi-cho-vi-du-c2b1bbfe-43c7-5eb4-92b9-0521509cf9d1",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Modifier là object có thể chain lại để thêm behavior, styling, hay layout cho composable."
+      ],
+      "details": [
+        "Ví dụ: .size(100.dp), .background(Color.Blue), .padding(16.dp), .clickable { }, .weight(1f). Thứ tự quan trọng vì modifier chain từ trái sang phải: .padding().background() khác với .background().padding(). Modifier là lập trình hàm ứng dụng tốt nhất, kết hợp các behavior nhỏ thành behavior phức tạp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "3032-modifier-trong-jetpack-compose-la-gi-cho-vi-du"
+  },
+  {
+    "id": "4246e8e9-6240-5811-a613-bcf023fabb4d",
+    "question": "ViewModel là gì và tại sao nên dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3041-viewmodel-la-gi-va-tai-sao-nen-dung",
+    "slug": "viewmodel-la-gi-va-tai-sao-nen-dung-4246e8e9-6240-5811-a613-bcf023fabb4d",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "ViewModel lưu trữ dữ liệu UI theo cách lifecycle-aware, tồn tại qua configuration change như xoay màn hình."
+      ],
+      "details": [],
+      "points": [
+        "Nó không giữ reference đến View (ngăn memory leak) và là nơi lý tưởng để đặt business logic, gọi API, và quản lý state.",
+        "Tạo ViewModel mỗi màn hình bằng viewModel() trong Compose hoặc ViewModelProvider trong Activity/Fragment.",
+        "Tuyệt đối không truyền Activity hay View vào ViewModel."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "3041-viewmodel-la-gi-va-tai-sao-nen-dung"
+  },
+  {
+    "id": "ad7f85c3-f88f-5fd4-8678-7d2f72b4d4dd",
+    "question": "Room database là gì và tại sao dùng thay vì SQLite trực tiếp?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3047-room-database-la-gi-va-tai-sao-dung-thay-vi-sqlite-truc-tiep",
+    "slug": "room-database-la-gi-va-tai-sao-dung-thay-vi-sqlite-truc-tiep-ad7f85c3-f88f-5fd4-8678-7d2f72b4d4dd",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Room là lớp trừu tượng type-safe trên SQLite, tự động sinh code lúc compile, ngăn SQL injection và lỗi runtime."
+      ],
+      "details": [],
+      "points": [
+        "Bạn định nghĩa entity (data class), DAO (database access object với query), và Database class.",
+        "Room hỗ trợ LiveData/Flow để quan sát thay đổi database.",
+        "An toàn và dễ dùng hơn SQLite thô rất nhiều, và tích hợp tốt với coroutine và Compose."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "3047-room-database-la-gi-va-tai-sao-dung-thay-vi-sqlite-truc-tiep"
+  },
+  {
+    "id": "ccec68e2-a6da-59d3-a7cd-2af30bc55094",
+    "question": "DAO (Data Access Object) trong Room là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3048-dao-data-access-object-trong-room-la-gi",
+    "slug": "dao-data-access-object-trong-room-la-gi-ccec68e2-a6da-59d3-a7cd-2af30bc55094",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "DAO là interface với các method cho thao tác CRUD trên database. Bạn annotate method với @Query, @Insert, @Update, @Delete. Room sinh implementation lúc compile."
+      ],
+      "details": [
+        "Ví dụ:\nCopy\n@Query(\"SELECT * FROM users WHERE id = :id\") suspend fun getUser(id: Int): User\n. DAO là nơi định nghĩa query, và dùng suspend function giúp query tự động chạy trên background thread."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "@Query(\"SELECT * FROM users WHERE id = :id\") suspend fun getUser(id: Int): User"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "3048-dao-data-access-object-trong-room-la-gi"
+  },
+  {
+    "id": "3464be3c-f0e1-5d90-8221-6d3f54816615",
+    "question": "Retrofit là gì và hoạt động như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3049-retrofit-la-gi-va-hoat-dong-nhu-the-nao",
+    "slug": "retrofit-la-gi-va-hoat-dong-nhu-the-nao-3464be3c-f0e1-5d90-8221-6d3f54816615",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Retrofit là HTTP client type-safe chuyển REST API thành Kotlin interface."
+      ],
+      "details": [],
+      "points": [
+        "Bạn định nghĩa interface với method được annotate bằng HTTP verb như @GET, @POST, thêm kiểu request/response, và Retrofit tự sinh implementation.",
+        "Nó tự động deserialize JSON response thành Kotlin object, xử lý header, và hỗ trợ cả callback lẫn coroutine.",
+        "OkHttp là thư viện networking nền mà Retrofit dùng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "3049-retrofit-la-gi-va-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "88bf74eb-e1c4-58de-b667-4a6ad0232a94",
+    "question": "Gradle là gì và vai trò của nó trong quá trình build Android?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93803-gradle-la-gi-va-vai-tro-cua-no-trong-qua-trinh-build-android",
+    "slug": "gradle-la-gi-va-vai-tro-cua-no-trong-qua-trinh-build-android-88bf74eb-e1c4-58de-b667-4a6ad0232a94",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Gradle là hệ thống build tự động mà Android dùng để biên dịch mã, gói tài nguyên, và tạo ra file APK/AAB. Android Gradle Plugin (AGP) mở rộng Gradle với các tác vụ riêng cho Android."
+      ],
+      "details": [
+        "Vai trò chính:\n- Quản lý dependency: khai báo thư viện, Gradle tải và resolve tự động.\n- Build variants: kết hợp build type (debug/release) với product flavor (vd free/paid) để sinh nhiều biến thể từ một codebase.\n- Đóng gói: biên dịch Kotlin/Java, xử lý resources, chạy R8/ProGuard (thu nhỏ + obfuscate), ký (sign) app.",
+        "Cấu hình nằm trong các file build.gradle(.kts): cấp project (thiết lập chung) và cấp module (dependency, config của từng module). Cách quản lý phiên bản dependency hiện đại là version catalog (libs.versions.toml)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "93803-gradle-la-gi-va-vai-tro-cua-no-trong-qua-trinh-build-android"
+  },
+  {
+    "id": "7bd6a80f-d742-5118-a2e3-401122b220e3",
+    "question": "Sealed class trong Kotlin là gì và có ứng dụng gì trong Android?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3005-sealed-class-trong-kotlin-la-gi-va-co-ung-dung-gi-trong-android",
+    "slug": "sealed-class-trong-kotlin-la-gi-va-co-ung-dung-gi-trong-android-7bd6a80f-d742-5118-a2e3-401122b220e3",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Sealed class giới hạn một class hierarchy thành tập hợp subclass cố định, được định nghĩa trong cùng một file hoặc package."
+      ],
+      "details": [],
+      "points": [
+        "Rất phù hợp để biểu diễn các trạng thái giới hạn như response API (Success/Error/Loading).",
+        "Khi dùng với when, compiler bắt buộc xử lý hết tất cả subclass, không cần nhánh else, giúp code an toàn hơn rất nhiều."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "3005-sealed-class-trong-kotlin-la-gi-va-co-ung-dung-gi-trong-android"
+  },
+  {
+    "id": "46873b5e-deb3-5d32-ae9b-47388026b7ef",
+    "question": "Các scope function (let, run, apply, also, with) là gì và khi nào dùng từng loại?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3006-cac-scope-function-let-run-apply-also-with-la-gi-va-khi-nao-dung-tung-loai",
+    "slug": "cac-scope-function-let-run-apply-also-with-la-gi-va-khi-nao-dung-tung-loai-46873b5e-deb3-5d32-ae9b-47388026b7ef",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Scope function thực thi một block code trên một object trong một scope tạm thời. let chạy code chỉ khi object khác null (trả về kết quả lambda). run giống let nhưng dùng this thay vì tham số. apply cấu hình object và trả về chính object đó (dùng khi khởi tạo). also giống apply nhưng truyền object vào làm tham số. with giống run nhưng cú pháp khác."
+      ],
+      "details": [
+        "Chọn loại dựa vào nhu cầu null-safety, giá trị trả về, hay cách tham chiếu object."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "3006-cac-scope-function-let-run-apply-also-with-la-gi-va-khi-nao-dung-tung-loai"
+  },
+  {
+    "id": "4cdb8a82-0f66-5d75-ac5c-f9e301e07aea",
+    "question": "Coroutine là gì và tại sao tốt hơn callback?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3007-coroutine-la-gi-va-tai-sao-tot-hon-callback",
+    "slug": "coroutine-la-gi-va-tai-sao-tot-hon-callback-4cdb8a82-0f66-5d75-ac5c-f9e301e07aea",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Coroutine là các hàm nhẹ có thể tạm dừng và tiếp tục, cho phép lập trình bất đồng bộ hiệu quả mà không block thread."
+      ],
+      "details": [],
+      "points": [
+        "Khác với callback dễ dẫn đến \"callback hell\", coroutine cho phép viết code bất đồng bộ trông như code tuần tự, dễ đọc hơn nhiều.",
+        "Một thread có thể chạy hàng nghìn coroutine nhờ cơ chế suspension, tiết kiệm bộ nhớ và tăng hiệu suất đáng kể."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "3007-coroutine-la-gi-va-tai-sao-tot-hon-callback"
+  },
+  {
+    "id": "7bdfcea7-b7f0-547f-86ff-4fd128408433",
+    "question": "Sự khác nhau giữa launch và async trong Kotlin coroutines?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3008-su-khac-nhau-giua-launch-va-async-trong-kotlin-coroutines",
+    "slug": "su-khac-nhau-giua-launch-va-async-trong-kotlin-coroutines-7bdfcea7-b7f0-547f-86ff-4fd128408433",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "launch là coroutine fire-and-forget, trả về Job và không trả về kết quả. async dùng khi cần thực hiện tác vụ và lấy kết quả về, trả về Deferred."
+      ],
+      "details": [],
+      "points": [
+        "Dùng launch cho tác vụ độc lập (như cập nhật UI), còn async khi cần kết quả trả về (như fetch data từ network).",
+        "Phải gọi await() trên Deferred để lấy kết quả."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "3008-su-khac-nhau-giua-launch-va-async-trong-kotlin-coroutines"
+  },
+  {
+    "id": "1a2c76c2-689f-5113-8a6a-b375a016f9fc",
+    "question": "Suspend function trong Kotlin là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3009-suspend-function-trong-kotlin-la-gi",
+    "slug": "suspend-function-trong-kotlin-la-gi-1a2c76c2-689f-5113-8a6a-b375a016f9fc",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Suspend function là hàm được đánh dấu bằng từ khóa suspend, có thể bị tạm dừng và tiếp tục bởi coroutine."
+      ],
+      "details": [
+        "Ví dụ điển hình là bất kỳ hàm nào được đánh dấu suspend bên trong viewModelScope.launch {}."
+      ],
+      "points": [
+        "Chúng chỉ có thể được gọi từ suspend function khác hoặc trong một coroutine scope.",
+        "Suspend function là nền tảng của Kotlin coroutines, cho phép viết code bất đồng bộ theo kiểu tuần tự."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "3009-suspend-function-trong-kotlin-la-gi"
+  },
+  {
+    "id": "03330db3-7684-5a56-a692-a9fb6d9eab84",
+    "question": "Kotlin xử lý exception trong coroutine như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3010-kotlin-xu-ly-exception-trong-coroutine-nhu-the-nao",
+    "slug": "kotlin-xu-ly-exception-trong-coroutine-nhu-the-nao-03330db3-7684-5a56-a692-a9fb6d9eab84",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bạn có thể dùng try-catch thông thường bên trong coroutine để xử lý exception cục bộ."
+      ],
+      "details": [],
+      "points": [
+        "Với exception không được bắt, dùng CoroutineExceptionHandler để bắt ở cấp coroutine scope. viewModelScope dùng SupervisorJob nên coroutine con thất bại không hủy coroutine anh em, nhưng exception không được bắt sẽ KHÔNG tự động được log — chúng sẽ crash coroutine đó trong im lặng trừ khi bạn thêm CoroutineExceptionHandler hoặc try-catch.",
+        "Structured concurrency đảm bảo exception trong coroutine con được truyền lên đúng cách cho scope cha."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "3010-kotlin-xu-ly-exception-trong-coroutine-nhu-the-nao"
+  },
+  {
+    "id": "9f75773f-04d6-5651-bce8-2ebc7dc91520",
+    "question": "Destructuring trong Kotlin là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3012-destructuring-trong-kotlin-la-gi",
+    "slug": "destructuring-trong-kotlin-la-gi-9f75773f-04d6-5651-bce8-2ebc7dc91520",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Destructuring cho phép bạn tách một object thành các biến riêng lẻ trong một câu lệnh duy nhất."
+      ],
+      "details": [
+        "Ví dụ val (name, age) = person trích xuất thuộc tính từ data class."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "3012-destructuring-trong-kotlin-la-gi"
+  },
+  {
+    "id": "b0a016b2-1152-548b-8fe8-c4791f5fffd6",
+    "question": "Sự khác biệt giữa replace() và add() trong Fragment transactions?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3016-su-khac-biet-giua-replace-va-add-trong-fragment-transactions",
+    "slug": "su-khac-biet-giua-replace-va-add-trong-fragment-transactions-b0a016b2-1152-548b-8fe8-c4791f5fffd6",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "replace() xóa Fragment hiện tại và thêm Fragment mới vào chỗ đó — khi back thì Fragment bị replace sẽ được tạo lại. add() giữ Fragment hiện có và chồng Fragment mới lên trên — khi back thì quay về Fragment cũ."
+      ],
+      "details": [
+        "Dùng replace() để điều hướng giữa các màn hình, còn add() cho overlay như dialog hay bottom sheet."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "3016-su-khac-biet-giua-replace-va-add-trong-fragment-transactions"
+  },
+  {
+    "id": "a2dd8845-c140-5442-8876-ef520a4d1e2b",
+    "question": "Service trong Android là gì và khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3018-service-trong-android-la-gi-va-khi-nao-nen-dung",
+    "slug": "service-trong-android-la-gi-va-khi-nao-nen-dung-a2dd8845-c140-5442-8876-ef520a4d1e2b",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Service là component chạy nền không có tương tác người dùng, thích hợp cho các tác vụ chạy lâu như phát nhạc, tải file, hay theo dõi vị trí."
+      ],
+      "details": [],
+      "points": [
+        "Service không có UI nhưng chạy trên main thread mặc định, nên cần offload tác vụ nặng sang background thread hoặc coroutine.",
+        "Foreground service hiển thị notification liên tục và dùng cho tác vụ nền ưu tiên cao."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "3018-service-trong-android-la-gi-va-khi-nao-nen-dung"
+  },
+  {
+    "id": "6cb2caa2-17ff-5493-bfaf-029afe9176ea",
+    "question": "BroadcastReceiver là gì và hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3019-broadcastreceiver-la-gi-va-hoat-dong-nhu-the-nao",
+    "slug": "broadcastreceiver-la-gi-va-hoat-dong-nhu-the-nao-6cb2caa2-17ff-5493-bfaf-029afe9176ea",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "BroadcastReceiver là component lắng nghe các broadcast trong toàn hệ thống (như pin yếu, thay đổi network, hay broadcast tùy chỉnh)."
+      ],
+      "details": [],
+      "points": [
+        "Bạn đăng ký nó trong manifest (static) hoặc trong code (dynamic), và nó kích hoạt onReceive() khi nhận được broadcast phù hợp.",
+        "Tránh thực hiện tác vụ nặng trong onReceive() vì phải hoàn thành nhanh — dùng WorkManager cho tác vụ dài."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "3019-broadcastreceiver-la-gi-va-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "4410471d-86b0-5847-90b1-cefb1fcd41e7",
+    "question": "ContentProvider là gì và dùng trong trường hợp nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3020-contentprovider-la-gi-va-dung-trong-truong-hop-nao",
+    "slug": "contentprovider-la-gi-va-dung-trong-truong-hop-nao-4410471d-86b0-5847-90b1-cefb1fcd41e7",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "ContentProvider là lớp trừu tượng cung cấp quyền truy cập có kiểm soát vào dữ liệu của app cho các app hoặc process khác."
+      ],
+      "details": [],
+      "points": [
+        "Nó dùng URI để xác định resource và implement các thao tác CRUD qua query(), insert(), update(), delete().",
+        "Danh bạ, lịch, và ảnh đều dùng ContentProvider.",
+        "Chúng đảm bảo tính nhất quán dữ liệu, bảo mật qua permission, và cho phép chia sẻ dữ liệu qua ranh giới app."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "3020-contentprovider-la-gi-va-dung-trong-truong-hop-nao"
+  },
+  {
+    "id": "43d0ce70-feda-5fee-a991-a778eb8c1744",
+    "question": "savedInstanceState và onSaveInstanceState() khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3022-savedinstancestate-va-onsaveinstancestate-khac-nhau-nhu-the-nao",
+    "slug": "savedinstancestate-va-onsaveinstancestate-khac-nhau-nhu-the-nao-43d0ce70-feda-5fee-a991-a778eb8c1744",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "onSaveInstanceState() là callback để lưu trạng thái UI tạm thời (như vị trí scroll) trước khi activity bị destroy do configuration change."
+      ],
+      "details": [],
+      "points": [
+        "Bundle này được truyền vào onCreate() hoặc onRestoreInstanceState().",
+        "Khác với lưu trữ lâu dài như SharedPreferences hay database.",
+        "Dùng nó cho trạng thái tạm thời dễ lưu hơn là phải tạo lại UI từ đầu."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "3022-savedinstancestate-va-onsaveinstancestate-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "d0ac670a-ca2b-574a-ba8a-e0f6d02691c9",
+    "question": "Giải thích state management trong Jetpack Compose với mutableStateOf và remember.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3027-giai-thich-state-management-trong-jetpack-compose-voi-mutablestateof-va-remember",
+    "slug": "giai-thich-state-management-trong-jetpack-compose-voi-mutablestateof-va-remember-d0ac670a-ca2b-574a-ba8a-e0f6d02691c9",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "mutableStateOf() tạo một state object có thể quan sát, kích hoạt recomposition khi thay đổi. remember lưu cache giá trị state qua các lần recomposition để không bị tạo lại mỗi lần."
+      ],
+      "details": [
+        "Kết hợp lại: `val count = remember { mutableStateOf"
+      ],
+      "points": [
+        "} hoặc ngắn gọn hơn là var count by remember { mutableStateOf",
+        "}. Khi count` thay đổi, chỉ các composable đang đọc nó mới recompose, không phải cả màn hình"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "3027-giai-thich-state-management-trong-jetpack-compose-voi-mutablestateof-va-remember"
+  },
+  {
+    "id": "aa9d5feb-bafe-5553-a309-1e9d55147db6",
+    "question": "Sự khác biệt giữa remember và rememberSaveable?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3028-su-khac-biet-giua-remember-va-remembersaveable",
+    "slug": "su-khac-biet-giua-remember-va-remembersaveable-aa9d5feb-bafe-5553-a309-1e9d55147db6",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "remember giữ state qua các lần recomposition trong scope của composable nhưng mất khi configuration change như xoay màn hình. rememberSaveable persist state qua configuration change bằng cách tự động lưu vào Bundle."
+      ],
+      "details": [
+        "Dùng rememberSaveable cho dữ liệu người dùng nhập (form fields) và remember cho state UI tạm thời (animation values). rememberSaveable có overhead cao hơn một chút."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "3028-su-khac-biet-giua-remember-va-remembersaveable"
+  },
+  {
+    "id": "56d88109-5448-501c-ae53-c4be6d74d224",
+    "question": "State hoisting trong Jetpack Compose là gì và tại sao quan trọng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3029-state-hoisting-trong-jetpack-compose-la-gi-va-tai-sao-quan-trong",
+    "slug": "state-hoisting-trong-jetpack-compose-la-gi-va-tai-sao-quan-trong-56d88109-5448-501c-ae53-c4be6d74d224",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "State hoisting nghĩa là chuyển state từ composable con lên composable cha, làm cho composable con trở nên stateless."
+      ],
+      "details": [
+        "Ví dụ hoist state của TextField lên cha để nhiều composable có thể đọc."
+      ],
+      "points": [
+        "Composable stateless nhận state qua tham số và callback để cập nhật state, giúp tái sử dụng trên nhiều màn hình."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "3029-state-hoisting-trong-jetpack-compose-la-gi-va-tai-sao-quan-trong"
+  },
+  {
+    "id": "21a16d95-6dd7-5c93-8524-e3ecf2d30ccb",
+    "question": "LaunchedEffect là gì và khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3030-launchedeffect-la-gi-va-khi-nao-nen-dung",
+    "slug": "launchedeffect-la-gi-va-khi-nao-nen-dung-21a16d95-6dd7-5c93-8524-e3ecf2d30ccb",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "LaunchedEffect là side-effect function khởi chạy một coroutine scope gắn với lifecycle của composable. Dùng cho các tác vụ một lần như load data, animation, hay analytics. Nó chạy khi key parameter thay đổi và hủy khi composable rời khỏi composition."
+      ],
+      "details": [
+        "Ví dụ: LaunchedEffect(userId) { loadUserData(userId) } load lại data mỗi khi userId thay đổi."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "3030-launchedeffect-la-gi-va-khi-nao-nen-dung"
+  },
+  {
+    "id": "b5aa51a5-ce29-506b-9833-12681fa3eb2b",
+    "question": "Làm thế nào để xử lý navigation trong Jetpack Compose?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3033-lam-the-nao-de-xu-ly-navigation-trong-jetpack-compose",
+    "slug": "lam-the-nao-de-xu-ly-navigation-trong-jetpack-compose-b5aa51a5-ce29-506b-9833-12681fa3eb2b",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Dùng Compose Navigation library với NavController và NavHost."
+      ],
+      "details": [],
+      "points": [
+        "Định nghĩa NavGraph với các màn hình và route, rồi dùng navController.navigate(route) để điều hướng.",
+        "State được giữ lại khi quay về màn hình trước.",
+        "Với Compose Navigation 2.8+ (stable từ Oct 2024), dùng type-safe routes qua @Serializable thay vì string-based routes. BackHandler cho phép tùy chỉnh hành vi nút back."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "3033-lam-the-nao-de-xu-ly-navigation-trong-jetpack-compose"
+  },
+  {
+    "id": "46006a58-774f-56b1-b4e4-85eb45421950",
+    "question": "Làm thế nào để implement theming trong Jetpack Compose?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3035-lam-the-nao-de-implement-theming-trong-jetpack-compose",
+    "slug": "lam-the-nao-de-implement-theming-trong-jetpack-compose-46006a58-774f-56b1-b4e4-85eb45421950",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Dùng MaterialTheme (Material 3) hoặc CompositionLocal tùy chỉnh để tập trung hóa các thuộc tính theme."
+      ],
+      "details": [],
+      "points": [
+        "Định nghĩa màu sắc, typography, và shape trong theme object, dùng CompositionLocalProvider để cung cấp chúng cho cây composable.",
+        "Wrap app trong\nCopy\nMaterialTheme(colorScheme = colorScheme, typography = typography) { App() }\n— lưu ý tham số là colorScheme (Material 3), không phải colors (Material 2).",
+        "Hỗ trợ dark/light mode qua isSystemInDarkTheme()."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "MaterialTheme(colorScheme = colorScheme, typography = typography) { App() }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "3035-lam-the-nao-de-implement-theming-trong-jetpack-compose"
+  },
+  {
+    "id": "cb9de3bb-34e2-5821-88a4-a61783a4c909",
+    "question": "MVVM architecture là gì và cấu trúc ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3037-mvvm-architecture-la-gi-va-cau-truc-ra-sao",
+    "slug": "mvvm-architecture-la-gi-va-cau-truc-ra-sao-cb9de3bb-34e2-5821-88a4-a61783a4c909",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "MVVM (Model-View-ViewModel) tách UI logic khỏi business logic: Model chứa dữ liệu và business rule, View hiển thị UI (Activity/Fragment/Composable), ViewModel chứa UI state và logic, tồn tại qua configuration change."
+      ],
+      "details": [],
+      "points": [
+        "ViewModel expose LiveData/StateFlow để View observe.",
+        "Sự tách biệt này cải thiện khả năng test (test ViewModel không cần UI), tái sử dụng, và bảo trì.",
+        "Hầu hết app Android ngày nay đều dùng MVVM."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "3037-mvvm-architecture-la-gi-va-cau-truc-ra-sao"
+  },
+  {
+    "id": "34ac58fe-0237-5e09-8277-463839b403ae",
+    "question": "Repository pattern là gì và tại sao quan trọng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3039-repository-pattern-la-gi-va-tai-sao-quan-trong",
+    "slug": "repository-pattern-la-gi-va-tai-sao-quan-trong-34ac58fe-0237-5e09-8277-463839b403ae",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Repository pattern trừu tượng hóa các nguồn dữ liệu (local database, remote API, cache) sau một interface duy nhất, để ViewModel không cần biết dữ liệu đến từ đâu."
+      ],
+      "details": [],
+      "points": [
+        "Sự decoupling này giúp test dễ hơn (mock repository) và cho phép đổi nguồn dữ liệu mà không cần sửa ViewModel.",
+        "Repository điều phối giữa dữ liệu local và remote, implement caching strategy, và là single source of truth."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "3039-repository-pattern-la-gi-va-tai-sao-quan-trong"
+  },
+  {
+    "id": "f5134504-8cfd-5173-b19c-5af2291509a6",
+    "question": "Sự khác biệt giữa LiveData và StateFlow?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3040-su-khac-biet-giua-livedata-va-stateflow",
+    "slug": "su-khac-biet-giua-livedata-va-stateflow-f5134504-8cfd-5173-b19c-5af2291509a6",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "StateFlow là lựa chọn ưu tiên cho code mới (2025) — tích hợp tự nhiên với coroutine, luôn có value non-null có thể đọc an toàn, và hoạt động tốt với Compose."
+      ],
+      "details": [],
+      "points": [
+        "LiveData lifecycle-aware và tự động unsubscribe nhưng đang ở chế độ maintenance.",
+        "StateFlow yêu cầu initial value; LiveData thì không.",
+        "Khi dùng StateFlow trong Fragment, observe trong repeatOnLifecycle để tránh memory leak."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "3040-su-khac-biet-giua-livedata-va-stateflow"
+  },
+  {
+    "id": "9148dfb2-8b76-5fac-9cdf-622d1e03ebe5",
+    "question": "Dependency injection là gì và tại sao quan trọng trong Android?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3042-dependency-injection-la-gi-va-tai-sao-quan-trong-trong-android",
+    "slug": "dependency-injection-la-gi-va-tai-sao-quan-trong-trong-android-9148dfb2-8b76-5fac-9cdf-622d1e03ebe5",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Dependency injection nghĩa là cung cấp dependency của một object qua tham số thay vì object tự tạo bên trong."
+      ],
+      "details": [
+        "Lợi ích: test dễ hơn (truyền mock dependency), loose coupling, linh hoạt khi đổi implementation.",
+        "Ví dụ: thay vì val database = Database.getInstance() bên trong class, hãy truyền vào: class MyClass(val database: Database). Code modular và testable hơn nhiều."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "3042-dependency-injection-la-gi-va-tai-sao-quan-trong-trong-android"
+  },
+  {
+    "id": "8623473e-8dfb-5b9b-8dcb-5a340b4cd0e4",
+    "question": "Hilt là gì và nó đơn giản hóa dependency injection như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3043-hilt-la-gi-va-no-don-gian-hoa-dependency-injection-nhu-the-nao",
+    "slug": "hilt-la-gi-va-no-don-gian-hoa-dependency-injection-nhu-the-nao-8623473e-8dfb-5b9b-8dcb-5a340b4cd0e4",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hilt là thư viện DI được xây trên Dagger, thiết kế riêng cho Android."
+      ],
+      "details": [],
+      "points": [
+        "Nó loại bỏ boilerplate bằng cách cung cấp module có sẵn cho Android component.",
+        "Đánh dấu Application với @HiltAndroidApp, Activity/Fragment với @AndroidEntryPoint, và inject bằng @Inject.",
+        "Hilt tự động quản lý scope (như @Singleton) và tích hợp liền mạch với ViewModel và composable."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "3043-hilt-la-gi-va-no-don-gian-hoa-dependency-injection-nhu-the-nao"
+  },
+  {
+    "id": "e58a6b52-a293-5d15-adc3-f84224fb38a2",
+    "question": "Các Hilt scope khác nhau có ý nghĩa gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3046-cac-hilt-scope-khac-nhau-co-y-nghia-gi",
+    "slug": "cac-hilt-scope-khac-nhau-co-y-nghia-gi-e58a6b52-a293-5d15-adc3-f84224fb38a2",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hilt scope kiểm soát thời gian sống của dependency instance: @Singleton sống suốt vòng đời app, @ActivityScoped theo vòng đời Activity, @ViewModelScoped theo ViewModel, và @FragmentScoped theo Fragment."
+      ],
+      "details": [],
+      "points": [
+        "Scope mặc định là unscoped (tạo instance mới mỗi lần).",
+        "Chọn scope dựa vào thời gian muốn tái sử dụng instance. @Singleton phổ biến nhất nhưng dùng loại khác để quản lý bộ nhớ tốt hơn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "3046-cac-hilt-scope-khac-nhau-co-y-nghia-gi"
+  },
+  {
+    "id": "536b3ec4-f79d-54d1-8a0a-5c79e28f3d18",
+    "question": "Interceptor trong Retrofit/OkHttp là gì và cách dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3050-interceptor-trong-retrofit-okhttp-la-gi-va-cach-dung",
+    "slug": "interceptor-trong-retrofit-okhttp-la-gi-va-cach-dung-536b3ec4-f79d-54d1-8a0a-5c79e28f3d18",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "Application interceptor chạy một lần cho mỗi request; network interceptor chạy cho từng lần gọi network thực tế (kể cả redirect và retry).",
+        "Dùng phổ biến: gắn auth header, log request/response, xử lý refresh token, cache."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": null,
+          "code": "OkHttpClient.Builder()\n    .addInterceptor { chain ->\n        val request = chain.request().newBuilder()\n            .addHeader(\"Authorization\", token)\n            .build()\n        chain.proceed(request)\n    }\n    .build()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "3050-interceptor-trong-retrofit-okhttp-la-gi-va-cach-dung"
+  },
+  {
+    "id": "cc175533-25cf-5550-8cb8-4459260e91b6",
+    "question": "Làm thế nào để implement authentication với Retrofit?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3051-lam-the-nao-de-implement-authentication-voi-retrofit",
+    "slug": "lam-the-nao-de-implement-authentication-voi-retrofit-cc175533-25cf-5550-8cb8-4459260e91b6",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Dùng Interceptor để thêm auth header vào mọi request."
+      ],
+      "details": [],
+      "points": [
+        "Khi token hết hạn, interface Authenticator xử lý token refresh bằng cách chặn response 401 và retry với token mới.",
+        "Lưu token an toàn trong EncryptedSharedPreferences.",
+        "Gửi token trong Authorization header: Authorization: Bearer token."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "3051-lam-the-nao-de-implement-authentication-voi-retrofit"
+  },
+  {
+    "id": "e20c0e4c-fb88-5f40-bf00-fa65ca3620b9",
+    "question": "DataStore là gì và khác SharedPreferences như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3052-datastore-la-gi-va-khac-sharedpreferences-nhu-the-nao",
+    "slug": "datastore-la-gi-va-khac-sharedpreferences-nhu-the-nao-e20c0e4c-fb88-5f40-bf00-fa65ca3620b9",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "DataStore là sự thay thế hiện đại cho SharedPreferences, được xây dựng trên coroutine và Flow cho lưu trữ dữ liệu type-safe và transactional."
+      ],
+      "details": [],
+      "points": [
+        "Async-first (không blocking), hỗ trợ protocol buffer cho type safety, và an toàn hơn SharedPreferences vốn có vấn đề threading.",
+        "Dùng context.dataStore.data.map { it.setting } để đọc và context.dataStore.updateData { it.copy(setting = value) } để ghi."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "3052-datastore-la-gi-va-khac-sharedpreferences-nhu-the-nao"
+  },
+  {
+    "id": "ef5012d5-cc21-560c-ae48-a6f62407c325",
+    "question": "WorkManager là gì và khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3053-workmanager-la-gi-va-khi-nao-nen-dung",
+    "slug": "workmanager-la-gi-va-khi-nao-nen-dung-ef5012d5-cc21-560c-ae48-a6f62407c325",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "WorkManager lên lịch background work có thể defer được, tồn tại qua app restart và system reboot."
+      ],
+      "details": [],
+      "points": [
+        "Nó tự động xử lý Doze Mode và App Standby, chọn cơ chế scheduling tốt nhất (JobScheduler, BroadcastReceiver).",
+        "Dùng cho tác vụ đáng tin cậy, không khẩn cấp như sync data, upload file, hay báo cáo định kỳ.",
+        "Tạo Worker subclass, dùng OneTimeWorkRequest hoặc PeriodicWorkRequest, và enqueue với WorkManager.enqueue()."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "3053-workmanager-la-gi-va-khi-nao-nen-dung"
+  },
+  {
+    "id": "6ffd0376-fe42-5366-98c8-245d69cf00c4",
+    "question": "Paging 3 library là gì và tại sao nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3054-paging-3-library-la-gi-va-tai-sao-nen-dung",
+    "slug": "paging-3-library-la-gi-va-tai-sao-nen-dung-6ffd0376-fe42-5366-98c8-245d69cf00c4",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Paging 3 là thư viện phân trang được khuyến nghị, load hiệu quả dataset lớn từ nguồn local/remote."
+      ],
+      "details": [],
+      "points": [
+        "Bạn tạo PagingSource (hoặc RemoteMediator cho network+database), dùng Pager để tạo paginated stream, và collect PagingData trong UI với collectAsLazyPagingItems().",
+        "Nó xử lý tự động loading, appending, retry, và deduplication, loại bỏ lỗi phân trang thủ công."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "3054-paging-3-library-la-gi-va-tai-sao-nen-dung"
+  },
+  {
+    "id": "6b4682ea-e905-544b-bfb2-b3da67b5336a",
+    "question": "Observer pattern là gì và được dùng như thế nào trong Android?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3065-observer-pattern-la-gi-va-duoc-dung-nhu-the-nao-trong-android",
+    "slug": "observer-pattern-la-gi-va-duoc-dung-nhu-the-nao-trong-android-6b4682ea-e905-544b-bfb2-b3da67b5336a",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Observer pattern cho phép các object (observer) đăng ký nhận thông báo về thay đổi trạng thái của object khác (subject)."
+      ],
+      "details": [],
+      "points": [
+        "Trong Android, LiveData/StateFlow là các implementation của pattern này.",
+        "Khi bạn gọi observe() hoặc collect(), bạn đang đăng ký làm observer.",
+        "Khi dữ liệu thay đổi, tất cả observer được thông báo, decoupling nguồn dữ liệu khỏi UI."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "3065-observer-pattern-la-gi-va-duoc-dung-nhu-the-nao-trong-android"
+  },
+  {
+    "id": "ad382b51-3385-5b17-965c-31b0c5a3c774",
+    "question": "Làm thế nào để xử lý configuration change như xoay màn hình?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3066-lam-the-nao-de-xu-ly-configuration-change-nhu-xoay-man-hinh",
+    "slug": "lam-the-nao-de-xu-ly-configuration-change-nhu-xoay-man-hinh-ad382b51-3385-5b17-965c-31b0c5a3c774",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Configuration change destroy và recreate Activity/Fragment."
+      ],
+      "details": [],
+      "points": [
+        "Bảo toàn state bằng: SavedInstanceState (UI state tạm thời), ViewModel (logic và data), và SharedPreferences/DataStore (data lâu dài).",
+        "Không nên dùng android:configChanges để tắt recreation trừ khi thực sự cần thiết.",
+        "Trong Compose, state tự động tồn tại qua rotation nếu dùng rememberSaveable."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "3066-lam-the-nao-de-xu-ly-configuration-change-nhu-xoay-man-hinh"
+  },
+  {
+    "id": "f27a8d64-bba0-5e80-8af1-b9c0a189281f",
+    "question": "Context trong Android là gì? Phân biệt Application context và Activity context (liên quan memory leak).",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93800-context-trong-android-la-gi-phan-biet-application-context-va-activity-context-li",
+    "slug": "context-trong-android-la-gi-phan-biet-application-context-va-activity-context-lien-quan-memory-leak-f27a8d64-bba0-5e80-8af1-b9c0a189281f",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Context là cầu nối tới tài nguyên và dịch vụ hệ thống: truy cập resources, khởi động Activity/Service, lấy getSystemService(), mở database... Về vòng đời có hai loại chính:"
+      ],
+      "details": [
+        "Memory leak xảy ra khi một object sống lâu (singleton, static, thread) giữ tham chiếu tới Activity context. GC không thu hồi được Activity đã finish() vì vẫn còn ai đó tham chiếu, kéo theo cả cây View. Quy tắc: cái gì sống lâu hơn màn hình thì truyền applicationContext; chỉ dùng Activity context cho việc liên quan UI của chính màn hình đó."
+      ],
+      "points": [
+        "Activity context: gắn với vòng đời một Activity, biết về theme/UI. Dùng khi cần theme đúng: inflate layout, tạo Dialog, hiển thị View.",
+        "Application context: sống suốt vòng đời tiến trình, độc lập với UI. Dùng cho việc \"sống lâu hơn màn hình\": singleton, thư viện, WorkManager."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "93800-context-trong-android-la-gi-phan-biet-application-context-va-activity-context-li"
+  },
+  {
+    "id": "4ed2d2a2-a42a-5a07-8237-c6a547244ba9",
+    "question": "ANR (Application Not Responding) là gì và cách phòng tránh?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93801-anr-application-not-responding-la-gi-va-cach-phong-tranh",
+    "slug": "anr-application-not-responding-la-gi-va-cach-phong-tranh-4ed2d2a2-a42a-5a07-8237-c6a547244ba9",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "ANR là hộp thoại hệ thống hiện ra khi main thread (UI thread) bị chặn quá lâu nên app không phản hồi. Các ngưỡng chính:"
+      ],
+      "details": [
+        "Nguyên nhân điển hình: làm việc nặng trên main thread — I/O đĩa/mạng, query database lớn, parse JSON khổng lồ, bitmap lớn, hoặc lock/deadlock.",
+        "Cách phòng tránh:\n- Đẩy mọi tác vụ nặng khỏi main thread: coroutine + Dispatchers.IO, WorkManager cho việc chạy nền/trì hoãn được.\n- Không I/O hay truy vấn DB đồng bộ trên UI thread.\n- Giữ callback vòng đời và onReceive() thật nhẹ.\n- Theo dõi trên Android vitals (Play Console) để bắt ANR thực tế từ người dùng."
+      ],
+      "points": [
+        "Không xử lý input event (chạm, phím) trong 5 giây.",
+        "BroadcastReceiver.onReceive() chạy quá lâu (10 giây foreground, 60 giây background).",
+        "Service không hoàn tất khởi động/thao tác đúng hạn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "93801-anr-application-not-responding-la-gi-va-cach-phong-tranh"
+  },
+  {
+    "id": "e9ee3207-9685-59a5-a712-fac93f08f110",
+    "question": "RecyclerView là gì và cơ chế view recycling hoạt động ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93802-recyclerview-la-gi-va-co-che-view-recycling-hoat-dong-ra-sao",
+    "slug": "recyclerview-la-gi-va-co-che-view-recycling-hoat-dong-ra-sao-e9ee3207-9685-59a5-a712-fac93f08f110",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "RecyclerView là widget hiển thị danh sách/lưới lớn hiệu quả bằng cách tái sử dụng một số ít View thay vì tạo View cho mọi item. Hình dung một cửa sổ chỉ thấy vài dòng: khi cuộn, dòng trôi khỏi màn hình không bị hủy mà được đưa vào RecycledViewPool rồi bind lại dữ liệu mới cho dòng sắp hiện ra."
+      ],
+      "details": [
+        "Các mảnh chính:\n- Adapter: onCreateViewHolder() tạo View (ít khi được gọi), onBindViewHolder() gán dữ liệu (gọi liên tục khi cuộn).\n- ViewHolder: giữ tham chiếu tới các View con để khỏi findViewById lặp lại.\n- LayoutManager: quyết định cách sắp xếp (linear, grid, staggered).",
+        "Nhờ recycling, số View giữ trong bộ nhớ xấp xỉ số item hiển thị được, không phụ thuộc tổng số item. Dùng DiffUtil/ListAdapter để cập nhật danh sách tối thiểu thay vì notifyDataSetChanged()."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "93802-recyclerview-la-gi-va-co-che-view-recycling-hoat-dong-ra-sao"
+  },
+  {
+    "id": "706d0560-58d7-5462-8c0d-1f02cd8cf3ee",
+    "question": "Sự khác nhau giữa LaunchedEffect, DisposableEffect, và SideEffect?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "su-khac-nhau-giua-launchedeffect-disposableeffect-va-sideeffect-706d0560-58d7-5462-8c0d-1f02cd8cf3ee",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": null
+  },
+  {
+    "id": "6ade41db-f93a-5c69-afbc-7a4ee7a9f92b",
+    "question": "derivedStateOf là gì và khi nào nên dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "derivedstateof-la-gi-va-khi-nao-nen-dung-6ade41db-f93a-5c69-afbc-7a4ee7a9f92b",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": null
+  },
+  {
+    "id": "bcb5e1d7-d53c-5cd2-a17c-d98d18e7503b",
+    "question": "CompositionLocal là gì và hoạt động như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "compositionlocal-la-gi-va-hoat-dong-nhu-the-nao-bcb5e1d7-d53c-5cd2-a17c-d98d18e7503b",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": null
+  },
+  {
+    "id": "fcd6cfe4-fd4a-5a03-a562-7f08fabd350a",
+    "question": "MVI architecture là gì và khác MVVM như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mvi-architecture-la-gi-va-khac-mvvm-nhu-the-nao-fcd6cfe4-fd4a-5a03-a562-7f08fabd350a",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": null
+  },
+  {
+    "id": "5520a8b1-5d3e-5291-bb31-92c03bee812a",
+    "question": "Clean Architecture là gì và có những layer nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "clean-architecture-la-gi-va-co-nhung-layer-nao-5520a8b1-5d3e-5291-bb31-92c03bee812a",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": null
+  },
+  {
+    "id": "a40cbfc8-5d18-5d83-bdb1-3e7dd29e6afc",
+    "question": "Use Case pattern là gì và khi nào nên tạo một Use Case?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "use-case-pattern-la-gi-va-khi-nao-nen-tao-mot-use-case-a40cbfc8-5d18-5d83-bdb1-3e7dd29e6afc",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": null
+  },
+  {
+    "id": "9c749f88-3fca-52cf-89f9-2f7acb2c0bb7",
+    "question": "ProGuard và R8 là gì, chúng tối ưu app như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "proguard-va-r8-la-gi-chung-toi-uu-app-nhu-the-nao-9c749f88-3fca-52cf-89f9-2f7acb2c0bb7",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": null
+  },
+  {
+    "id": "8b4f755a-6029-553d-a046-3c5920d181d0",
+    "question": "App Bundle là gì và chúng giảm kích thước app như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "app-bundle-la-gi-va-chung-giam-kich-thuoc-app-nhu-the-nao-8b4f755a-6029-553d-a046-3c5920d181d0",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": null
+  },
+  {
+    "id": "b62c5ba6-e105-5ffd-be52-4eaa7025e3ad",
+    "question": "Dynamic feature module là gì và khi nào nên dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dynamic-feature-module-la-gi-va-khi-nao-nen-dung-b62c5ba6-e105-5ffd-be52-4eaa7025e3ad",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": null
+  },
+  {
+    "id": "8d7e3034-f4f6-5efa-9973-bba05b3bb015",
+    "question": "Làm thế nào để tối ưu app performance và các metric quan trọng là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-the-nao-de-toi-uu-app-performance-va-cac-metric-quan-trong-la-gi-8d7e3034-f4f6-5efa-9973-bba05b3bb015",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": null
+  },
+  {
+    "id": "fd5db427-88aa-52dc-8675-db588c2c0af8",
+    "question": "Testing trong Jetpack Compose là gì và khác Espresso như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "testing-trong-jetpack-compose-la-gi-va-khac-espresso-nhu-the-nao-fd5db427-88aa-52dc-8675-db588c2c0af8",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": null
+  },
+  {
+    "id": "33bb0d03-4a6d-581f-a52c-ccc1b58fce1e",
+    "question": "Kotlin Multiplatform (KMP) là gì và liên quan đến Android như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "kotlin-multiplatform-kmp-la-gi-va-lien-quan-den-android-nhu-the-nao-33bb0d03-4a6d-581f-a52c-ccc1b58fce1e",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": null
+  },
+  {
+    "id": "7b846253-a53c-5345-8670-998f8a56af81",
+    "question": "Instrumentation testing và unit testing khác nhau như thế nào và khi nào dùng loại nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "instrumentation-testing-va-unit-testing-khac-nhau-nhu-the-nao-va-khi-nao-dung-loai-nao-7b846253-a53c-5345-8670-998f8a56af81",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": null
+  },
+  {
+    "id": "a0d7a4c2-8a9f-59b9-870d-bd0df4f5923a",
+    "question": "Best practice về memory management trong Android là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "best-practice-ve-memory-management-trong-android-la-gi-a0d7a4c2-8a9f-59b9-870d-bd0df4f5923a",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": null
+  },
+  {
+    "id": "5e586ea6-8e21-5e76-8c75-f20ccda2ef53",
+    "question": "Làm thế nào để implement CI/CD cho Android app?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-the-nao-de-implement-ci-cd-cho-android-app-5e586ea6-8e21-5e76-8c75-f20ccda2ef53",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": null
+  },
+  {
+    "id": "e8d1ec5f-c6d6-50d1-87a6-09fafad66216",
+    "question": "Certificate pinning là gì và cách implement?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "certificate-pinning-la-gi-va-cach-implement-e8d1ec5f-c6d6-50d1-87a6-09fafad66216",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": null
+  },
+  {
+    "id": "be57124b-73bd-5dc1-9229-07c76c224241",
+    "question": "Sự khác biệt giữa hot flow và cold flow?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "su-khac-biet-giua-hot-flow-va-cold-flow-be57124b-73bd-5dc1-9229-07c76c224241",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": null
+  },
+  {
+    "id": "fbc6ccf2-9c23-5554-8e35-d4fe6b6ce84b",
+    "question": "Inline function trong Kotlin là gì? Giải thích inline, noinline và reified.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "inline-function-trong-kotlin-la-gi-giai-thich-inline-noinline-va-reified-fbc6ccf2-9c23-5554-8e35-d4fe6b6ce84b",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": null
+  },
+  {
+    "id": "e021e645-747e-5789-9920-2f0b6627494e",
+    "question": "Phân biệt cold / warm / hot start và cách tối ưu thời gian khởi động app.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "phan-biet-cold-warm-hot-start-va-cach-toi-uu-thoi-gian-khoi-dong-app-e021e645-747e-5789-9920-2f0b6627494e",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": null
+  }
+]

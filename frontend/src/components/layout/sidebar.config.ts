@@ -53,7 +53,7 @@ export const MAIN_NAV_ITEMS: SidebarNavItemConfig[] = [
   },
   {
     titleKey: "sidebar.learning",
-    href: "#learning",
+    href: "/learning",
     icon: GraduationCap,
   },
 ];

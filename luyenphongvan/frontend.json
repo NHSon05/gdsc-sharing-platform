@@ -1,0 +1,3302 @@
+[
+  {
+    "id": "4ad87f29-5a6a-52e2-9460-960b5049f942",
+    "question": "Thẻ DOCTYPE là gì? Tại sao cần khai báo DOCTYPE?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3-the-doctype-la-gi-tai-sao-can-khai-bao-doctype",
+    "slug": "the-doctype-la-gi-tai-sao-can-khai-bao-doctype-4ad87f29-5a6a-52e2-9460-960b5049f942",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "DOCTYPE (Document Type Declaration) khai báo phiên bản HTML đang dùng và phải nằm ở dòng đầu tiên.",
+        "Nó quyết định browser render ở standards mode hay quirks mode.",
+        "Lưu ý: DOCTYPE không phải thẻ HTML và không phải comment — đặt nó sau một comment hay một dòng trắng có BOM vẫn đủ để rơi vào quirks mode ở một số browser."
+      ],
+      "details": [
+        "HTML5 chỉ cần một dòng:",
+        "Thiếu DOCTYPE → quirks mode, và khác biệt lớn nhất là box model: width bị tính gộp cả padding + border (kiểu IE5) thay vì chỉ phần content.",
+        "Luôn để nó là byte đầu tiên của file."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!DOCTYPE html>\n<html lang=\"vi\">\n  <head><meta charset=\"utf-8\"></head>\n  <body>...</body>\n</html>"
+        },
+        {
+          "language": "JS",
+          "code": "document.compatMode\n// 'CSS1Compat' = standards mode\n// 'BackCompat'  = quirks mode"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "3-the-doctype-la-gi-tai-sao-can-khai-bao-doctype",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "43ba0060-0711-52ec-a714-394231595fa0",
+    "question": "Block-level element và Inline element khác nhau như thế nào trong HTML?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8-block-level-element-va-inline-element-khac-nhau-nhu-the-nao-trong-html",
+    "slug": "block-level-element-va-inline-element-khac-nhau-nhu-the-nao-trong-html-43ba0060-0711-52ec-a714-394231595fa0",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khác nhau ở cách element tham gia vào dòng: block chiếm một dòng riêng, inline nằm cùng dòng với văn bản xung quanh.",
+        "HTML5 không còn phân loại element theo block/inline — đó là thuộc tính trình bày do CSS display quyết định, còn HTML dùng content category."
+      ],
+      "details": [
+        "display: inline-block cho phép element nằm cùng dòng mà vẫn nhận width/height.",
+        "Ngoại lệ: <img>, <video>, <iframe> mặc định là inline nhưng vẫn nhận width/height, vì chúng là replaced element — nội dung có kích thước gốc riêng. Spec ghi width áp cho \"mọi element trừ non-replaced inline element\".",
+        "Lưu ý: trên inline element, margin-top/margin-bottom không có tác dụng, còn trên block thì cả bốn chiều đều có. padding/border dọc vẫn được vẽ nhưng không đẩy các dòng xung quanh ra, nên nền và viền chồng lên dòng bên cạnh.",
+        "Vì vậy <a> được phép bọc cả một khối <div>."
+      ],
+      "points": [
+        "Block (<div>, <p>, <h1>): chiếm hết chiều rộng còn trống, luôn bắt đầu dòng mới, đặt được width/height.",
+        "Inline (<span>, <a>, <strong>): rộng đúng bằng nội dung, không bắt đầu dòng mới, width/height không có tác dụng."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<p>Đoạn văn <span style=\"width:300px;margin-top:40px\">span này không rộng 300px và cũng không dịch xuống</span></p>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "8-block-level-element-va-inline-element-khac-nhau-nhu-the-nao-trong-html",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "d2863fb6-7c2c-5540-affb-783a94796457",
+    "question": "Semantic HTML là gì? Tại sao quan trọng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/16-semantic-html-la-gi-tai-sao-quan-trong",
+    "slug": "semantic-html-la-gi-tai-sao-quan-trong-d2863fb6-7c2c-5540-affb-783a94796457",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bốn lý do nó đáng giá:\n1. Accessibility — screen reader nhảy thẳng tới landmark (main, nav, header); với <div> thì không có gì để nhảy tới.\n2. SEO — search engine hiểu đâu là nội dung chính, đâu là điều hướng.\n3. Bảo trì — đọc cấu trúc là hiểu, không phải dò tên class.\n4. Hành vi mặc định — <button> có sẵn focus, Enter/Space, trạng thái disabled; <div onclick> phải tự làm lại tất cả."
+      ],
+      "details": [
+        "Chốt: thẻ semantic bị hỏi nhiều nhất trong phỏng vấn không phải <article> mà là <button> vs <div onclick> — trả lời được ý số 4 là ăn điểm."
+      ],
+      "points": [],
+      "sections": [
+        "Semantic HTML là dùng thẻ mô tả đúng vai trò nội dung thay vì <div>/<span> trung tính."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!-- không semantic -->\n<div class=\"header\">\n  <div class=\"nav\">...</div>\n</div>\n<div class=\"content\">\n  <div class=\"post\">...</div>\n</div>\n\n<!-- semantic -->\n<header>\n  <nav>...</nav>\n</header>\n<main>\n  <article>...</article>\n</main>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "16-semantic-html-la-gi-tai-sao-quan-trong",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "5556323d-33ce-5936-917c-f3c442008981",
+    "question": "<label> element quan trọng thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/43-label-element-quan-trong-the-nao",
+    "slug": "label-element-quan-trong-the-nao-5556323d-33ce-5936-917c-f3c442008981",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "<label> nối phần chữ mô tả với control.",
+        "Ba thứ có được ngay:\n1. Click vào chữ = focus/tick input — vùng bấm rộng ra rất nhiều trên mobile, đặc biệt với checkbox nhỏ.\n2. Screen reader đọc đúng tên field khi focus tới.\n3. Test bền hơn — getByLabelText('Email') không vỡ khi đổi class hay cấu trúc DOM.",
+        "Placeholder biến mất ngay khi gõ, nên người dùng quên field này là gì; độ tương phản thấp; và một số screen reader không đọc. Placeholder là ví dụ định dạng (you@example.com), không phải nhãn."
+      ],
+      "details": [
+        "Hai cách viết:",
+        "Lỗi phổ biến nhất: dùng placeholder thay label.",
+        "Chốt: cần ẩn nhãn vì lý do thiết kế thì dùng CSS .sr-only, đừng bỏ hẳn <label>."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!-- 1. explicit: for trỏ tới id của input -->\n<label for=\"email\">Email</label>\n<input id=\"email\" type=\"email\">\n\n<!-- 2. implicit: bọc input trong label -->\n<label>Email <input type=\"email\"></label>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "43-label-element-quan-trong-the-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "b727487f-bbb8-5478-a428-d97fbbb4ab79",
+    "question": "HTML5 form validation có những attribute nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/46-html5-form-validation-co-nhung-attribute-nao",
+    "slug": "html5-form-validation-co-nhung-attribute-nao-b727487f-bbb8-5478-a428-d97fbbb4ab79",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Style theo trạng thái bằng pseudo-class:",
+        "Lưu ý 1: :invalid bôi đỏ ngay khi trang vừa mở vì field rỗng đã là invalid. Dùng :user-invalid (hoặc tự thêm class sau blur) mới đúng trải nghiệm."
+      ],
+      "details": [
+        "Lưu ý 2: pattern không dùng cờ regex và luôn được neo hai đầu — không cần ^...$.",
+        "Chốt: validation HTML chỉ để phản hồi nhanh cho người dùng; server vẫn phải kiểm tra lại toàn bộ."
+      ],
+      "points": [],
+      "sections": [
+        "Validation dựng sẵn chạy khi submit, không cần JS:"
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<form>\n  <input name=\"email\" type=\"email\" required>\n  <input name=\"age\" type=\"number\" min=\"18\" max=\"99\" step=\"1\">\n  <input name=\"user\" pattern=\"[a-z0-9_]{3,16}\" title=\"3–16 ký tự thường, số hoặc _\">\n  <input name=\"bio\" maxlength=\"200\" minlength=\"10\">\n  <button>Gửi</button>\n</form>"
+        },
+        {
+          "language": "CSS",
+          "code": "input:user-invalid { border-color: var(--rose-ink); }   /* chỉ đỏ SAU khi user rời field */\ninput:valid { border-color: var(--green); }"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Attribute",
+            "Áp cho",
+            "required",
+            "mọi control",
+            "pattern",
+            "text, tel, email, url, password, search",
+            "min / max / step",
+            "min",
+            "max",
+            "step",
+            "number, range, date/time",
+            "minlength / maxlength",
+            "minlength",
+            "maxlength",
+            "các kiểu nhập chữ"
+          ]
+        }
+      ]
+    },
+    "legacyId": 5,
+    "sourceSlug": "46-html5-form-validation-co-nhung-attribute-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "0445c12c-360f-5161-a05c-d6f634314bc9",
+    "question": "readonly và disabled khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/47-readonly-va-disabled-khac-nhau-the-nao",
+    "slug": "readonly-va-disabled-khac-nhau-the-nao-0445c12c-360f-5161-a05c-d6f634314bc9",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Chọn thế nào: hiển thị giá trị hệ thống sinh ra mà server vẫn cần nhận lại (mã đơn, tổng tiền đã tính) → readonly. Field không áp dụng trong ngữ cảnh hiện tại → disabled."
+      ],
+      "details": [
+        "Lưu ý 1: dùng disabled cho ô \"Tổng tiền\" thì server không nhận được giá trị đó. Muốn field vẫn được gửi lên server nhưng hiển thị mờ, dùng readonly kèm CSS.",
+        "Lưu ý 2: readonly không áp dụng cho <select>, <input type=checkbox|radio>. Với các control này chỉ có disabled, và nếu vẫn cần gửi giá trị thì thêm <input type=\"hidden\"> đi kèm."
+      ],
+      "points": [],
+      "sections": [
+        "Khác biệt quyết định nằm ở giá trị có được gửi lên server hay không."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<!-- GỬI kèm form -->\n<input name=\"code\" value=\"HD-2026-001\" readonly>\n\n<!-- KHÔNG gửi -->\n<input name=\"promo\" value=\"SALE50\" disabled>"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            ":disabled",
+            "Sửa được",
+            "readonly",
+            "không",
+            "không",
+            "disabled",
+            "Focus / tab tới",
+            "được",
+            "không",
+            "như thường",
+            "mờ đi",
+            "Nhận :disabled trong CSS",
+            "không",
+            "có"
+          ]
+        }
+      ]
+    },
+    "legacyId": 6,
+    "sourceSlug": "47-readonly-va-disabled-khac-nhau-the-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "5b773f02-7743-5a47-8027-b106d18f797a",
+    "question": "CSS box model là gì? box-sizing: border-box giải quyết gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90115-css-box-model-la-gi-box-sizing-border-box-giai-quyet-gi",
+    "slug": "css-box-model-la-gi-box-sizing-border-box-giai-quyet-gi-5b773f02-7743-5a47-8027-b106d18f797a",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mỗi phần tử là một hộp gồm 4 lớp từ trong ra ngoài: content → padding → border → margin."
+      ],
+      "details": [
+        "Vì vậy dự án thường reset toàn cục:"
+      ],
+      "points": [
+        "Mặc định content-box: width/height chỉ tính phần content; padding và border cộng thêm vào kích thước hiển thị. Đặt width: 200px; padding: 20px; border: 2px → rộng thực tế 244px, dễ vỡ layout.",
+        "border-box: width/height đã bao gồm padding + border; content tự co lại. Đặt width: 200px → luôn hiển thị đúng 200px."
+      ],
+      "sections": [
+        "Ghi chú: margin không bao giờ nằm trong width; margin dọc giữa các block có thể collapse (gộp) — dễ gây bất ngờ về khoảng cách."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "*, *::before, *::after { box-sizing: border-box; }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "90115-css-box-model-la-gi-box-sizing-border-box-giai-quyet-gi",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "6baf987c-d324-5921-a0c4-2336409f21bd",
+    "question": "em và rem khác nhau thế nào? Nên dùng đơn vị nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90119-em-va-rem-khac-nhau-the-nao-nen-dung-don-vi-nao",
+    "slug": "em-va-rem-khac-nhau-the-nao-nen-dung-don-vi-nao-6baf987c-d324-5921-a0c4-2336409f21bd",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai là đơn vị tương đối theo font-size, nhưng lấy mốc khác nhau:"
+      ],
+      "details": [
+        "Ví dụ: cha 2em, con 2em → con thực tế 4em so với gốc.",
+        "Thực hành:\n- rem cho font-size, spacing tổng thể, layout — ổn định và hỗ trợ accessibility (người dùng chỉnh cỡ chữ trình duyệt).\n- em khi muốn thành phần co giãn theo cỡ chữ cục bộ (vd padding của một nút tỉ lệ với chữ trong nút).\n- Tránh đặt font-size bằng px cố định trên <html> để không chặn tùy chỉnh của người dùng."
+      ],
+      "points": [
+        "rem (root em): luôn tính theo font-size của phần tử gốc <html>. Một mốc duy nhất → nhất quán, dễ đoán, không bị dồn tầng.",
+        "em: với thuộc tính font-size, tính theo font-size của phần tử cha; với các thuộc tính khác (padding, margin, width...), tính theo font-size của chính phần tử. Khi lồng nhiều cấp, em nhân dồn (compounding) → dễ lệch ngoài ý muốn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "90119-em-va-rem-khac-nhau-the-nao-nen-dung-don-vi-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "bd8da832-8cae-52c0-90ab-d14f89593ff4",
+    "question": "Phân biệt display: none, visibility: hidden và opacity: 0?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90216-phan-biet-display-none-visibility-hidden-va-opacity-0",
+    "slug": "phan-biet-display-none-visibility-hidden-va-opacity-0-bd8da832-8cae-52c0-90ab-d14f89593ff4",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả ba đều làm element \"biến mất\" nhưng khác nhau về layout, tương tác và a11y:"
+      ],
+      "details": [
+        "Thực hành: toggle hẳn một khối → display: none; giữ layout ổn định khi ẩn/hiện → visibility; hiệu ứng fade → opacity (nhớ chặn tương tác bằng pointer-events: none hoặc kết hợp visibility khi đã ẩn hoàn toàn)."
+      ],
+      "points": [
+        "display: none: gỡ element khỏi layout — không chiếm chỗ, không render, con cháu ẩn theo và không ghi đè lại được. Bị loại khỏi accessibility tree (screen reader bỏ qua). Không transition được vì element bị gỡ/gắn lại.",
+        "visibility: hidden: element vô hình nhưng vẫn chiếm chỗ trong layout. Không nhận sự kiện chuột, không focus được, ẩn khỏi screen reader. Con cháu có thể tự hiện lại bằng visibility: visible.",
+        "opacity: 0"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "90216-phan-biet-display-none-visibility-hidden-va-opacity-0",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "47d3c50f-3a1f-51e8-b9a1-1fbbc7d29951",
+    "question": "Responsive design là gì? Media query, mobile-first và viewport meta hoạt động thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90217-responsive-design-la-gi-media-query-mobile-first-va-viewport-meta-hoat-dong-the",
+    "slug": "responsive-design-la-gi-media-query-mobile-first-va-viewport-meta-hoat-dong-the-nao-47d3c50f-3a1f-51e8-b9a1-1fbbc7d29951",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Responsive design = một codebase hiển thị tốt trên mọi kích thước màn hình, thay vì làm site riêng cho mobile. Ba mảnh ghép chính:"
+      ],
+      "details": [
+        "Bổ trợ: layout co giãn bằng flexbox/grid + đơn vị tương đối (%, rem, clamp()), ảnh responsive bằng srcset/sizes. Xu hướng mới: container query — respond theo bề rộng của container thay vì viewport."
+      ],
+      "points": [
+        "Viewport meta: <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> — bảo trình duyệt mobile render theo bề rộng thật của thiết bị thay vì giả lập viewport desktop ~980px rồi thu nhỏ. Thiếu tag này thì mọi media query gần như vô nghĩa trên điện thoại.",
+        "Media query: @media (min-width: 768px) { ... } áp CSS theo điều kiện — bề rộng viewport, hướng xoay, prefers-color-scheme, prefers-reduced-motion...",
+        "max-width"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "90217-responsive-design-la-gi-media-query-mobile-first-va-viewport-meta-hoat-dong-the",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "900b7554-f8e9-5af7-a597-8a5e8cd1c217",
+    "question": "Phân biệt display: block, inline và inline-block?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90303-phan-biet-display-block-inline-va-inline-block",
+    "slug": "phan-biet-display-block-inline-va-inline-block-900b7554-f8e9-5af7-a597-8a5e8cd1c217",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ba giá trị display này quyết định phần tử tham gia luồng layout thế nào:"
+      ],
+      "details": [
+        "Lưu ý: layout hiện đại thường dùng flex/grid cho việc sắp xếp, nhưng ba giá trị nền tảng này vẫn quyết định hành vi mặc định của từng thẻ."
+      ],
+      "points": [
+        "block: <div>, <p>, <h1>, <section> — chiếm hết bề ngang có sẵn, nằm chồng theo cột.",
+        "nhận width/height và margin/padding dọc",
+        "inline: <span>, <a>, <strong> — chỉ rộng bằng nội dung, chảy trong dòng văn bản; đặt width/height vô nghĩa.",
+        "inline-block"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "width",
+            "Xuống dòng mới",
+            "block",
+            "Có (chiếm cả hàng)",
+            "Không (nằm cùng dòng)",
+            "inline",
+            "height",
+            "margin",
+            "Không (cùng dòng)",
+            "width/height",
+            "padding",
+            "inline-block",
+            "Có tác dụng",
+            "Có tác dụng",
+            "margin/padding dọc",
+            "Đủ tác dụng (đẩy layout)",
+            "Ngang có; dọc không đẩy layout",
+            "Đủ tác dụng",
+            "dọc không đẩy"
+          ]
+        }
+      ]
+    },
+    "legacyId": 11,
+    "sourceSlug": "90303-phan-biet-display-block-inline-va-inline-block",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "5f15eec0-c9ee-5943-92d5-e296edcf61d1",
+    "question": "Có những cách nào để căn giữa một phần tử bằng CSS (center a div)?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90412-co-nhung-cach-nao-de-can-giua-mot-phan-tu-bang-css-center-a-div",
+    "slug": "co-nhung-cach-nao-de-can-giua-mot-phan-tu-bang-css-center-a-div-5f15eec0-c9ee-5943-92d5-e296edcf61d1",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Các cách chính, xếp theo mức nên dùng hiện nay:",
+        "**2.",
+        "Dùng translate(-50%) thay vì margin âm cố định vì nó tính theo kích thước của chính phần tử — không cần biết trước width/height."
+      ],
+      "details": [
+        "1. Flexbox — mặc định cho hầu hết trường hợp:",
+        "Grid** — ngắn nhất:",
+        "4. margin: auto — căn giữa ngang cho block có width (margin: 0 auto); riêng trong flex/grid context, margin: auto căn giữa được cả hai chiều.",
+        "display: table-cell",
+        "line-height",
+        "5. text-align: center — chỉ căn nội dung inline (chữ, ảnh inline) bên trong block, không căn chính block đó."
+      ],
+      "points": [],
+      "sections": [
+        "3. position: absolute + translate — khi phần tử tách khỏi luồng (overlay, modal):"
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".parent { display: flex; justify-content: center; align-items: center; }"
+        },
+        {
+          "language": "CSS",
+          "code": ".parent { display: grid; place-items: center; }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "90412-co-nhung-cach-nao-de-can-giua-mot-phan-tu-bang-css-center-a-div",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "43bb9943-b4b2-5e11-9239-f4e050908d82",
+    "question": "CSS specificity (độ ưu tiên) tính thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90116-css-specificity-do-uu-tien-tinh-the-nao",
+    "slug": "css-specificity-do-uu-tien-tinh-the-nao-43bb9943-b4b2-5e11-9239-f4e050908d82",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khi nhiều rule cùng nhắm một phần tử, trình duyệt chọn rule có specificity cao nhất. Tính theo bộ ba (A, B, C):"
+      ],
+      "details": [
+        "So sánh lần lượt A → B → C, bên nào lớn hơn thắng. Ngoài thang này:",
+        "Thực hành: giữ specificity thấp và đều (ưu tiên class), tránh lồng ID và !important."
+      ],
+      "points": [
+        "A — số ID selector (#id).",
+        "div",
+        "B — số class, attribute, pseudo-class (.x, [type], :hover).",
+        "::before",
+        "style=\"…\"",
+        "!important đè lên tất cả (trừ một !important khác cùng cấp) — nên tránh, dấu hiệu CSS khó bảo trì.",
+        "Cùng specificity → rule viết sau thắng (thứ tự nguồn).",
+        "Universal *, :where() có specificity 0."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "90116-css-specificity-do-uu-tien-tinh-the-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "afce5cf8-b476-5765-88ce-5be1b39f0c93",
+    "question": "Flexbox và Grid khác nhau thế nào? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90117-flexbox-va-grid-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "slug": "flexbox-va-grid-khac-nhau-the-nao-khi-nao-dung-cai-nao-afce5cf8-b476-5765-88ce-5be1b39f0c93",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ghi nhớ: Flexbox — nội dung định hình layout (content-first); Grid — layout định hình nội dung (layout-first). Thực tế hay kết hợp: Grid dựng khung trang, Flexbox căn chi tiết bên trong."
+      ],
+      "details": [],
+      "points": [
+        "Flexbox = layout một chiều (hàng hoặc cột). Phân bổ không gian dọc theo một trục; hợp khi số item động và bạn muốn chúng tự co giãn/xuống dòng.",
+        "Trục chính: flex-direction, justify-content (căn theo trục chính), align-items (căn theo trục phụ), gap, flex: 1.",
+        "Dùng cho: thanh nav, toolbar, hàng nút, căn giữa một khối, danh sách card wrap.",
+        "Grid = layout hai chiều (hàng và cột cùng lúc). Bạn định nghĩa khung lưới trước rồi đặt item vào.",
+        "grid-template-columns/rows, gap, grid-area, repeat(), minmax(), fr.",
+        "Dùng cho: layout trang tổng thể, dashboard, gallery, layout phức tạp cần canh cả 2 chiều."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "90117-flexbox-va-grid-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "b29f0719-3d60-506b-ac3c-31da47b77572",
+    "question": "Các giá trị position (static/relative/absolute/fixed/sticky) khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90118-cac-gia-tri-position-static-relative-absolute-fixed-sticky-khac-nhau-the-nao",
+    "slug": "cac-gia-tri-position-static-relative-absolute-fixed-sticky-khac-nhau-the-nao-b29f0719-3d60-506b-ac3c-31da47b77572",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ghi chú: z-index có hiệu lực trên phần tử đã positioned (khác static) và cả flex/grid item, và phụ thuộc stacking context."
+      ],
+      "details": [],
+      "points": [
+        "static (mặc định): theo luồng bình thường; top/left/z-index không có tác dụng.",
+        "relative: vẫn giữ chỗ trong luồng nhưng dịch chuyển theo top/left… so với vị trí gốc của chính nó. Thường dùng để làm mốc cho con absolute.",
+        "absolute: thoát khỏi luồng (không chiếm chỗ); định vị theo tổ tiên gần nhất có position khác static (nếu không có thì theo viewport).",
+        "fixed: thoát luồng, định vị theo viewport; không cuộn theo trang (hợp header cố định, nút back-to-top).",
+        "sticky: lai giữa relative và fixed — cuộn bình thường tới ngưỡng top rồi \"dính\" lại. Cần chỉ định ngưỡng (top: 0) và bị giới hạn trong phần tử cha."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "90118-cac-gia-tri-position-static-relative-absolute-fixed-sticky-khac-nhau-the-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "de3cdfcc-aa5c-5c09-8e7c-067dbae296e1",
+    "question": "CSS custom properties (biến CSS) là gì? Khác biến của Sass thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90310-css-custom-properties-bien-css-la-gi-khac-bien-cua-sass-the-nao",
+    "slug": "css-custom-properties-bien-css-la-gi-khac-bien-cua-sass-the-nao-de3cdfcc-aa5c-5c09-8e7c-067dbae296e1",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đặc điểm quan trọng:\n- Kế thừa theo cây DOM và có scope: khai báo ở :root là toàn cục; khai báo trong một selector chỉ áp cho phần tử đó và con cháu → override cục bộ dễ dàng.\n- Động lúc runtime: đổi qua element.style.setProperty('--brand', ...) bằng JS, hoặc đổi trong media query / [data-theme] → cả cây tự cập nhật. Đây là nền tảng của theming (dark mode).\n- var(--x, fallback) cho giá trị dự phòng khi biến chưa định nghĩa."
+      ],
+      "details": [
+        "Khác biến Sass ($x): biến Sass được biên dịch mất lúc build — chỉ là hằng số tĩnh, không tồn tại trong CSS xuất ra, không đổi được bằng JS hay theo scope DOM lúc chạy. Custom property sống trong trình duyệt, nên linh hoạt hơn cho theme và tương tác động; Sass var vẫn tiện cho logic build-time (loop, tính toán)."
+      ],
+      "points": [],
+      "sections": [
+        "CSS custom property = biến khai báo bằng tiền tố --, đọc lại bằng hàm var():"
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ":root { --brand: #0891b2; --gap: 16px; }\n.button { background: var(--brand); padding: var(--gap); }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "90310-css-custom-properties-bien-css-la-gi-khac-bien-cua-sass-the-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "832302a8-af5c-5af2-86e2-40f4dd7bdb5e",
+    "question": "Pseudo-class và pseudo-element khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90311-pseudo-class-va-pseudo-element-khac-nhau-the-nao",
+    "slug": "pseudo-class-va-pseudo-element-khac-nhau-the-nao-832302a8-af5c-5af2-86e2-40f4dd7bdb5e",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Quy ước cú pháp: pseudo-class dùng :, pseudo-element dùng :: (chuẩn CSS3). Bốn pseudo-element đời đầu (::before, ::after, ::first-line, ::first-letter) vẫn chấp nhận một dấu : để tương thích cũ, nhưng nên viết hai dấu."
+      ],
+      "details": [],
+      "points": [
+        "Pseudo-class (một dấu hai chấm :): chọn phần tử theo trạng thái hoặc vị trí trong cây — chứ không tạo gì mới. Ví dụ: :hover, :focus, :active, :checked, :disabled, :first-child, :nth-child(2n), :not(...). Nó trả lời \"phần tử này đang ở trạng thái nào / đứng thứ mấy\".",
+        "Pseudo-element (hai dấu hai chấm ::): tạo/định dạng một phần con ảo của phần tử — phần không có sẵn trong DOM. Ví dụ: ::before, ::after (chèn nội dung trang trí qua content), ::first-line, ::first-letter, ::placeholder, ::selection."
+      ],
+      "sections": [
+        "Lưu ý: ::before/::after bắt buộc có thuộc tính content (kể cả content: '') mới hiển thị."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "a:hover { color: blue; }          /* state */\n.card::after { content: ''; }      /* virtual child */"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "90311-pseudo-class-va-pseudo-element-khac-nhau-the-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "697d7c46-001f-5cf1-9559-b99c372640d5",
+    "question": "CSS transition và animation khác nhau thế nào? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90312-css-transition-va-animation-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "slug": "css-transition-va-animation-khac-nhau-the-nao-khi-nao-dung-cai-nao-697d7c46-001f-5cf1-9559-b99c372640d5",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "- transition: nội suy giữa hai trạng thái — giá trị hiện tại và giá trị mới — khi có gì đó kích hoạt (hover, đổi class, thêm/bớt inline style).",
+        "- animation + @keyframes: định nghĩa chuỗi nhiều mốc (0%, 50%, 100%), tự chạy không cần trigger, hỗ trợ lặp (infinite), đảo chiều (alternate), delay, và tạm dừng.",
+        "Chọn nhanh: hiệu ứng hai trạng thái, do tương tác (hover, mở/đóng, đổi màu) → transition; chuỗi nhiều bước, tự chạy, lặp (spinner, skeleton loading, pulse) → animation."
+      ],
+      "details": [
+        "Cần một \"cú hích\" để chạy, chỉ đi một chiều tại một thời điểm, và không tự lặp.",
+        "Kiểm soát chi tiết hơn.",
+        "Hiệu năng (chung cho cả hai): ưu tiên animate transform và opacity — chúng chạy trên compositor, không gây reflow/repaint; tránh animate width, top, left, margin. Nhớ tôn trọng prefers-reduced-motion."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".btn { transition: background 0.2s ease; }\n  .btn:hover { background: #333; }"
+        },
+        {
+          "language": "CSS",
+          "code": "@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .5; } }\n  .dot { animation: pulse 1s ease-in-out infinite; }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "90312-css-transition-va-animation-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "5d10a6cb-b188-5ee3-85e4-472dbe0fd70a",
+    "question": "Web accessibility (a11y): vai trò của semantic HTML và ARIA?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90208-web-accessibility-a11y-vai-tro-cua-semantic-html-va-aria",
+    "slug": "web-accessibility-a11y-vai-tro-cua-semantic-html-va-aria-5d10a6cb-b188-5ee3-85e4-472dbe0fd70a",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Semantic HTML trước tiên: <button>, <a>, <nav>, <main>, <label>, heading đúng cấp — chúng có sẵn role, focus, điều khiển bàn phím, và ý nghĩa cho screen reader. Quy tắc ARIA số 1: đừng dùng ARIA nếu đã có element HTML gốc làm được (một <div onClick> không bằng một <button>)."
+      ],
+      "details": [
+        "ARIA (Accessible Rich Internet Applications) bổ sung ngữ nghĩa khi buộc phải dùng element phi ngữ nghĩa hoặc widget động: role, aria-label, aria-expanded, aria-hidden, aria-live.",
+        "Điểm mấu chốt: ARIA chỉ đổi accessibility tree, không tự thêm hành vi → bạn vẫn phải tự xử lý keyboard và focus. Cơ bản khác: alt cho ảnh, <label> cho input, focus nhìn thấy được, tương phản màu đủ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "90208-web-accessibility-a11y-vai-tro-cua-semantic-html-va-aria",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "742d9c6f-e934-5c77-ae68-6c0af1be76da",
+    "question": "Stacking context là gì? Vì sao z-index cao mà phần tử vẫn bị che?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "stacking-context-la-gi-vi-sao-z-index-cao-ma-phan-tu-van-bi-che-742d9c6f-e934-5c77-ae68-6c0af1be76da",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "69462ecb-e49f-5a10-8442-616a033c9d11",
+    "question": "Khác nhau giữa == và ===? Khi nào nên dùng cái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90106-khac-nhau-giua-va-khi-nao-nen-dung-cai-nao",
+    "slug": "khac-nhau-giua-va-khi-nao-nen-dung-cai-nao-69462ecb-e49f-5a10-8442-616a033c9d11",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vài ca == gây bất ngờ:\n- 0 == '' → true\n- 0 == false → true\n- null == undefined → true (nhưng null === undefined → false)\n- NaN == NaN → false (dùng Number.isNaN)"
+      ],
+      "details": [
+        "Khuyến nghị: luôn dùng === để tránh lỗi ép kiểu ngầm. Ngoại lệ tiện dụng duy nhất: x == null để kiểm tra \"null hoặc undefined\" trong một lần.",
+        "Ghi chú: Object.is giống === nhưng xử lý NaN và -0 chính xác hơn."
+      ],
+      "points": [
+        "=== (strict): so sánh cả kiểu và giá trị, không ép kiểu. 1 === '1' → false.",
+        "== (loose): ép kiểu hai vế về cùng dạng rồi mới so sánh, dẫn tới nhiều kết quả khó đoán."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "90106-khac-nhau-giua-va-khi-nao-nen-dung-cai-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "0688a88b-7cdc-53ef-9937-f1be800b1bd1",
+    "question": "Spread, rest và destructuring (ES6+) dùng thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90110-spread-rest-va-destructuring-es6-dung-the-nao",
+    "slug": "spread-rest-va-destructuring-es6-dung-the-nao-0688a88b-7cdc-53ef-9937-f1be800b1bd1",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Phân biệt: cùng ký hiệu ... nhưng spread trải ra ở vế phải/lời gọi, rest gom lại ở vế trái/tham số. Lưu ý spread chỉ sao chép nông (nested object vẫn dùng chung tham chiếu)."
+      ],
+      "details": [],
+      "points": [
+        "Destructuring: rút giá trị từ mảng/object ra biến.",
+        "const [a, b] = arr, const { x, y } = obj.",
+        "function f(first, ...others)",
+        "const [head, ...tail] = arr",
+        "Đổi tên { x: newX }, mặc định { x = 0 }, lồng nhau, dùng cho tham số hàm.",
+        "Spread ...: \"trải\" phần tử ra.",
+        "Sao chép nông + gộp: [...a, ...b], { ...o1, ...o2 } (key sau đè key trước).",
+        "Truyền mảng làm đối số: fn(...args).",
+        "Rest ...: \"gom\" phần còn lại thành một biến."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "90110-spread-rest-va-destructuring-es6-dung-the-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "566b24ca-6df2-568d-9a91-5320ddf66a9f",
+    "question": "Phân biệt map, filter, reduce?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90111-phan-biet-map-filter-reduce",
+    "slug": "phan-biet-map-filter-reduce-566b24ca-6df2-568d-9a91-5320ddf66a9f",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả ba là method thuần (không sửa mảng gốc), trả về giá trị mới, hợp phong cách khai báo:"
+      ],
+      "details": [
+        "Ghi nhớ:\n- map/filter thực chất viết được bằng reduce — reduce tổng quát nhất.\n- Luôn truyền giá trị khởi tạo cho reduce để tránh lỗi trên mảng rỗng.\n- map khác forEach: map trả mảng mới, forEach chỉ chạy side effect và trả undefined."
+      ],
+      "points": [
+        "map: biến đổi từng phần tử, trả mảng cùng độ dài. [1,2,3].map(x => x * 2) → [2,4,6].",
+        "filter: giữ phần tử thỏa điều kiện, trả mảng ngắn hơn hoặc bằng. [1,2,3,4].filter(x => x % 2 === 0) → [2,4].",
+        "reduce: gộp cả mảng về một giá trị (số, object, thậm chí mảng) qua accumulator. [1,2,3].reduce((acc, x) => acc + x, 0) → 6."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "90111-phan-biet-map-filter-reduce",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "c8d5197f-3a29-5e6e-a7e9-51c8649d20d2",
+    "question": "Primitive type và reference type trong JavaScript khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90214-primitive-type-va-reference-type-trong-javascript-khac-nhau-the-nao",
+    "slug": "primitive-type-va-reference-type-trong-javascript-khac-nhau-the-nao-c8d5197f-3a29-5e6e-a7e9-51c8649d20d2",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "JavaScript có 7 kiểu primitive (string, number, boolean, undefined, null, symbol, bigint) và kiểu reference — object, array, function."
+      ],
+      "details": [
+        "Hệ quả thực tế: gán biến không bao giờ tạo bản sao độc lập — muốn tách hẳn phải clone (xem câu shallow vs deep copy)."
+      ],
+      "points": [
+        "Copy: gán primitive sang biến khác là sao chép giá trị — hai biến độc lập. Gán object chỉ sao chép tham chiếu — hai biến trỏ cùng một object.",
+        "So sánh: primitive so sánh theo giá trị ('a' === 'a' → true); object so sánh theo danh tính tham chiếu ({} === {} → false vì là hai object khác nhau).",
+        "Mutation: primitive bất biến — mọi thao tác chuỗi/số tạo giá trị mới. Object sửa qua một tham chiếu thì mọi tham chiếu khác đều thấy thay đổi — nguồn bug thường gặp khi truyền object vào hàm rồi hàm sửa lên nó."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "90214-primitive-type-va-reference-type-trong-javascript-khac-nhau-the-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "a6916e4c-5ea3-508a-9c05-0beb84a0eb38",
+    "question": "Phân biệt null và undefined?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90301-phan-biet-null-va-undefined",
+    "slug": "phan-biet-null-va-undefined-a6916e4c-5ea3-508a-9c05-0beb84a0eb38",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai đều biểu thị \"không có giá trị\" nhưng khác nhau về ý nghĩa và nguồn gốc:"
+      ],
+      "details": [
+        "Khác biệt hay bị hỏi:\n- typeof undefined → 'undefined', còn typeof null → 'object' (một lỗi lịch sử của JS, vẫn giữ để tương thích).\n- null == undefined → true (loose), nhưng null === undefined → false (strict).\n- Cả hai đều falsy.",
+        "Thực hành: dùng undefined cho \"chưa khởi tạo\" (để engine lo), dùng null khi muốn cố ý đánh dấu một biến/field là rỗng."
+      ],
+      "points": [
+        "undefined: biến đã khai báo nhưng chưa gán, tham số hàm thiếu, property không tồn tại, hàm không return — do engine tự đặt. Đây là \"chưa có gì\".",
+        "null: lập trình viên chủ động gán để nói \"cố ý rỗng, chưa có object\". Đây là \"cố tình không có gì\"."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "90301-phan-biet-null-va-undefined",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "1229de93-df1b-54a0-8ada-4e49d6f4e252",
+    "question": "Giá trị truthy/falsy là gì? Liệt kê các giá trị falsy trong JavaScript.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90302-gia-tri-truthy-falsy-la-gi-liet-ke-cac-gia-tri-falsy-trong-javascript",
+    "slug": "gia-tri-truthy-falsy-la-gi-liet-ke-cac-gia-tri-falsy-trong-javascript-1229de93-df1b-54a0-8ada-4e49d6f4e252",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khi một giá trị được dùng ở ngữ cảnh boolean (if, !, &&, ||, toán tử ba ngôi), JS ép nó về true hoặc false. Giá trị ép thành false gọi là falsy, còn lại là truthy."
+      ],
+      "details": [
+        "Chỉ có 8 giá trị falsy (nhớ hết là đủ):",
+        "Mọi giá trị khác đều truthy — kể cả những cái dễ nhầm: '0' (chuỗi), 'false' (chuỗi), [] (mảng rỗng), {} (object rỗng), và hàm.",
+        "Lưu ý: if (arr.length) đúng, nhưng if (arr) luôn true kể cả mảng rỗng. Kiểm tra số 0 hợp lệ thì đừng dùng if (count) (sẽ trượt 0) — dùng if (count != null) hoặc kiểm tra rõ ràng."
+      ],
+      "points": [
+        "0, -0, 0n (BigInt zero)",
+        "'' (chuỗi rỗng)",
+        "undefined",
+        "NaN"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "90302-gia-tri-truthy-falsy-la-gi-liet-ke-cac-gia-tri-falsy-trong-javascript",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "dd308372-19ce-5bed-aada-7549e92b1b08",
+    "question": "Phân biệt cookie, localStorage và sessionStorage?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90114-phan-biet-cookie-localstorage-va-sessionstorage",
+    "slug": "phan-biet-cookie-localstorage-va-sessionstorage-dd308372-19ce-5bed-aada-7549e92b1b08",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả ba lưu dữ liệu ở client nhưng khác nhau rõ:"
+      ],
+      "details": [
+        "Chọn:\n- Cookie cho dữ liệu server cần mỗi request (phiên đăng nhập) — đặt HttpOnly, Secure, SameSite.\n- localStorage cho dữ liệu client bền, không nhạy cảm (theme, cấu hình UI).\n- sessionStorage cho state tạm theo tab (bước wizard, form nháp).",
+        "Cả hai Web Storage đều đồng bộ + chỉ chuỗi (phải JSON.stringify), và không nên lưu token nhạy cảm vì JS/XSS đọc được."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Cookie",
+            "localStorage",
+            "Expires",
+            "Dung lượng",
+            "Max-Age",
+            "~4KB",
+            "~5–10MB",
+            "HttpOnly",
+            "~5–10MB",
+            "Gửi kèm request",
+            "Có (mỗi HTTP request)",
+            "Không",
+            "Không",
+            "Vòng đời",
+            "theo Expires/Max-Age",
+            "tới khi bị xóa",
+            "Có",
+            "theo origin",
+            "+ tab"
+          ]
+        }
+      ]
+    },
+    "legacyId": 27,
+    "sourceSlug": "90114-phan-biet-cookie-localstorage-va-sessionstorage",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "5ed36155-3b8c-563d-ad9c-7b834c3aa457",
+    "question": "Phân biệt <script>, <script async> và <script defer>?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90013-phan-biet-script-script-async-va-script-defer",
+    "slug": "phan-biet-script-script-async-va-script-defer-5ed36155-3b8c-563d-ad9c-7b834c3aa457",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả async và defer chỉ áp dụng cho script external — vô nghĩa với inline script."
+      ],
+      "details": [],
+      "points": [
+        "<script> thường: tải rồi chạy ngay, chặn việc parse HTML; nhiều script chạy đúng thứ tự.",
+        "async: tải song song trong khi parse HTML, chạy ngay khi tải xong (có thể chen giữa lúc render), KHÔNG đảm bảo thứ tự giữa các script. Hợp script độc lập: analytics, ads.",
+        "defer: tải song song trong khi parse, chạy sau khi parse xong (ngay trước DOMContentLoaded), giữ đúng thứ tự trong tài liệu. Hợp script phụ thuộc DOM hoặc phụ thuộc nhau."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "90013-phan-biet-script-script-async-va-script-defer",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "c9c19843-810f-557b-b8ad-70dfe622667d",
+    "question": "Các HTTP method (GET/POST/PUT/PATCH/DELETE) và nhóm status code hay gặp là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90305-cac-http-method-get-post-put-patch-delete-va-nhom-status-code-hay-gap-la-gi",
+    "slug": "cac-http-method-get-post-put-patch-delete-va-nhom-status-code-hay-gap-la-gi-c9c19843-810f-557b-b8ad-70dfe622667d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "HTTP method báo mục đích của request:"
+      ],
+      "details": [
+        "Idempotent = gọi nhiều lần cho cùng kết quả trạng thái như gọi một lần (quan trọng khi retry).",
+        "Nhóm status code:\n- 2xx thành công — 200 OK, 201 Created, 204 No Content.\n- 3xx chuyển hướng — 301 (vĩnh viễn), 302/307 (tạm thời), 304 Not Modified (dùng cache).\n- 4xx lỗi phía client — 400 (request sai), 401 (chưa xác thực), 403 (không đủ quyền), 404 (không tìm thấy), 429 (quá nhiều request).\n- 5xx lỗi phía server — 500, 502, 503.",
+        "Mẹo phân biệt hay bị hỏi: 401 = \"bạn là ai?\" (chưa đăng nhập), 403 = \"biết bạn là ai rồi nhưng không cho\"."
+      ],
+      "points": [
+        "GET — lấy dữ liệu, không có body, an toàn (không đổi trạng thái) và idempotent; có thể cache.",
+        "POST — tạo mới / gửi dữ liệu; không idempotent (gọi 2 lần tạo 2 bản ghi).",
+        "PUT — thay thế toàn bộ một resource; idempotent (gọi lại kết quả như nhau).",
+        "PATCH — cập nhật một phần resource.",
+        "DELETE — xóa resource; idempotent."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "90305-cac-http-method-get-post-put-patch-delete-va-nhom-status-code-hay-gap-la-gi",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "da5b84d2-ab01-5681-bbeb-467ab98c8e8f",
+    "question": "SPA và MPA khác nhau thế nào? Khi nào chọn mỗi loại?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90223-spa-va-mpa-khac-nhau-the-nao-khi-nao-chon-moi-loai",
+    "slug": "spa-va-mpa-khac-nhau-the-nao-khi-nao-chon-moi-loai-da5b84d2-ab01-5681-bbeb-467ab98c8e8f",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đánh đổi chính:"
+      ],
+      "details": [
+        "Chọn: app tương tác nhiều, phiên dài (dashboard, editor, chat) → SPA; site thiên nội dung (blog, tin tức, landing, e-commerce đặt nặng SEO) → MPA. Thực tế hiện nay meta-framework (Next.js, Nuxt) lai hai mô hình: server render từng trang cho SEO + client navigation mượt như SPA."
+      ],
+      "points": [
+        "SPA (Single-Page Application): server trả về một trang HTML ban đầu, sau đó JavaScript đảm nhận toàn bộ — chuyển \"trang\" bằng client-side routing (đổi URL qua History API, render view mới) không reload trình duyệt. React/Vue/Angular là công cụ dựng SPA điển hình.",
+        "MPA (Multi-Page Application): mỗi URL là một trang HTML riêng do server render; mỗi lần điều hướng là một lần tải trang đầy đủ.",
+        "SPA: điều hướng mượt, giữ được state giữa các view (giỏ hàng, form đang nhập), ranh giới FE/BE rõ (API) — nhưng tải JS ban đầu nặng, SEO cần thêm SSR/prerender, và phải tự lo routing, quản lý state, code splitting.",
+        "MPA: đơn giản, SEO tự nhiên, mỗi trang chỉ tải phần nó cần — nhưng mỗi lần chuyển trang là màn hình trắng ngắn và state client mất."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "90223-spa-va-mpa-khac-nhau-the-nao-khi-nao-chon-moi-loai",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "d099ebce-f74e-58ef-871a-eaa103cb0b3a",
+    "question": "Closure là gì? Cho một trường hợp dùng thực tế.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90101-closure-la-gi-cho-mot-truong-hop-dung-thuc-te",
+    "slug": "closure-la-gi-cho-mot-truong-hop-dung-thuc-te-d099ebce-f74e-58ef-871a-eaa103cb0b3a",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Closure = một hàm giữ tham chiếu tới scope nơi nó được khai báo, nên vẫn đọc/ghi được biến của scope cha ngay cả khi hàm cha đã chạy xong. Nói cách khác, hàm \"nhớ\" môi trường tạo ra nó.",
+        "Lỗi thường gặp: dùng var trong vòng lặp tạo callback → mọi callback cùng chia sẻ một biến."
+      ],
+      "details": [
+        "Sửa bằng let (tạo binding mới mỗi vòng) hoặc IIFE."
+      ],
+      "points": [
+        "Nền tảng của closure là lexical scoping — phạm vi biến xác định lúc viết code, không phải lúc gọi.",
+        "Ứng dụng thường gặp:",
+        "Biến private / đóng gói trạng thái (module pattern, counter, factory function).",
+        "Ghi nhớ giá trị cho callback: setTimeout, event handler, debounce/throttle.",
+        "Currying / partial application",
+        "Currying / partial application."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "function makeCounter() {\n  let count = 0 // private — only the returned fn can access it\n  return () => ++count\n}\nconst next = makeCounter()\nnext() // 1\nnext() // 2 — count is still alive after makeCounter returned"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "90101-closure-la-gi-cho-mot-truong-hop-dung-thuc-te",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "cf62e328-6ff3-52d5-ae95-f1e5befc00f3",
+    "question": "this trong JavaScript được xác định thế nào? call, apply, bind khác nhau ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90102-this-trong-javascript-duoc-xac-dinh-the-nao-call-apply-bind-khac-nhau-ra-sao",
+    "slug": "this-trong-javascript-duoc-xac-dinh-the-nao-call-apply-bind-khac-nhau-ra-sao-cf62e328-6ff3-52d5-ae95-f1e5befc00f3",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "this phụ thuộc cách hàm được gọi, không phải nơi định nghĩa (trừ arrow function). Thứ tự ưu tiên:"
+      ],
+      "details": [
+        "1. new → this là object mới tạo.\n2. call/apply/bind → this là giá trị truyền vào.\n3. Method call obj.fn() → this là obj.\n4. Gọi trơn fn() → undefined (strict mode) hoặc globalThis.",
+        "Arrow function không có this riêng — kế thừa this từ scope bao ngoài (lexical), nên hợp cho callback.",
+        "Gắn this thủ công:\n- call(thisArg, a, b) — gọi ngay, đối số rời.\n- apply(thisArg, [a, b]) — gọi ngay, đối số dạng mảng.\n- bind(thisArg) — không gọi ngay, trả về hàm mới đã khóa this."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "90102-this-trong-javascript-duoc-xac-dinh-the-nao-call-apply-bind-khac-nhau-ra-sao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "4f28bcdf-5f39-56e1-9bf4-5e078df755b3",
+    "question": "Hoisting là gì? Khác biệt giữa var, let, const và scope?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90104-hoisting-la-gi-khac-biet-giua-var-let-const-va-scope",
+    "slug": "hoisting-la-gi-khac-biet-giua-var-let-const-va-scope-4f28bcdf-5f39-56e1-9bf4-5e078df755b3",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hoisting: khai báo được \"nâng\" lên đầu scope lúc biên dịch. Nhưng cách khởi tạo khác nhau:"
+      ],
+      "details": [
+        "Thực hành: mặc định dùng const, cần gán lại thì let, tránh var."
+      ],
+      "points": [
+        "TDZ (Temporal Dead Zone): vùng từ đầu block tới dòng khai báo let/const — truy cập ở đây ném ReferenceError.",
+        "const khóa việc gán lại binding, không \"đóng băng\" object — vẫn sửa được property (muốn bất biến thật thì Object.freeze).",
+        "Function declaration được hoist cả thân hàm; function expression thì không."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "let / const",
+            "{}",
+            "Scope",
+            "var",
+            "function",
+            "Hoist",
+            "let",
+            "undefined",
+            "undefined",
+            "có, khởi tạo undefined",
+            "có, nhưng TDZ",
+            "let",
+            "const",
+            "Truy cập trước khai báo",
+            "Gán lại",
+            "được",
+            "let được, const không",
+            "Redeclare cùng scope",
+            "được",
+            "block",
+            "không",
+            "TDZ"
+          ]
+        }
+      ]
+    },
+    "legacyId": 33,
+    "sourceSlug": "90104-hoisting-la-gi-khac-biet-giua-var-let-const-va-scope",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "871e47fc-794f-5b24-a045-40d92274e2fb",
+    "question": "Prototypal inheritance (kế thừa qua prototype) hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90105-prototypal-inheritance-ke-thua-qua-prototype-hoat-dong-the-nao",
+    "slug": "prototypal-inheritance-ke-thua-qua-prototype-hoat-dong-the-nao-871e47fc-794f-5b24-a045-40d92274e2fb",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mỗi object có một liên kết ẩn [[Prototype]] (đọc qua Object.getPrototypeOf, hoặc __proto__) trỏ tới object khác. Khi truy cập một property mà object không có, engine đi ngược lên chuỗi prototype cho tới khi tìm thấy hoặc chạm null. Đó là prototype chain."
+      ],
+      "details": [
+        "Lợi ích: method định nghĩa một lần trên prototype, mọi instance chia sẻ — tiết kiệm bộ nhớ."
+      ],
+      "points": [
+        "obj.hasOwnProperty(k) phân biệt property riêng và kế thừa.",
+        "Object.create(proto) tạo object với prototype chỉ định.",
+        "class là syntactic sugar (cú pháp rút gọn) trên prototype: extends gắn prototype cha, method của class nằm trên Class.prototype để mọi instance dùng chung.",
+        "Khác OOP class-based (Java): JS kế thừa object → object, không cần \"khuôn\" class thật."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "90105-prototypal-inheritance-ke-thua-qua-prototype-hoat-dong-the-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "bfffffb3-7844-504e-a95f-0cfe48c526bf",
+    "question": "Promise và callback khác nhau thế nào? async/await giải quyết gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90107-promise-va-callback-khac-nhau-the-nao-async-await-giai-quyet-gi",
+    "slug": "promise-va-callback-khac-nhau-the-nao-async-await-giai-quyet-gi-bfffffb3-7844-504e-a95f-0cfe48c526bf",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Callback: truyền hàm để gọi khi xong. Lồng nhiều callback bất đồng bộ → \"callback hell\": khó đọc, khó xử lý lỗi, đảo ngược quyền kiểm soát (inversion of control)."
+      ],
+      "details": [
+        "Promise: object đại diện cho kết quả tương lai, có 3 trạng thái pending → fulfilled | rejected. Ưu điểm:\n- Chain phẳng bằng .then, gộp lỗi bằng một .catch.\n- Tổ hợp: Promise.all (chờ tất cả), allSettled, race, any.",
+        "async/await: cú pháp trên Promise, viết code bất đồng bộ trông như đồng bộ:\n- await tạm dừng hàm async tới khi Promise settle.\n- Bắt lỗi bằng try/catch quen thuộc.\n- Cẩn thận: các await tuần tự chạy nối tiếp — muốn song song thì await Promise.all([...]).",
+        "Hàm async luôn trả về Promise."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "90107-promise-va-callback-khac-nhau-the-nao-async-await-giai-quyet-gi",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "af3ef23c-e20f-54d2-8520-eb25002eae94",
+    "question": "Debounce và throttle khác nhau thế nào? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90109-debounce-va-throttle-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "slug": "debounce-va-throttle-khac-nhau-the-nao-khi-nao-dung-cai-nao-af3ef23c-e20f-54d2-8520-eb25002eae94",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai giới hạn tần suất chạy một hàm bị kích hoạt liên tục, nhưng theo cách khác nhau:",
+        "Cả hai đều dựa trên closure giữ timer."
+      ],
+      "details": [
+        "Mẹo nhớ: debounce = \"chờ yên rồi mới làm\"; throttle = \"làm đều tay theo nhịp\".",
+        "Nên có cancel() để dọn timer khi component unmount, tránh gọi trên state đã hủy."
+      ],
+      "points": [
+        "Debounce: gom nhiều lần gọi thành một — chỉ chạy sau khi ngừng kích hoạt một khoảng wait. Mỗi lần gọi mới sẽ reset đồng hồ.",
+        "Dùng cho: ô search gõ phím (chờ người dùng ngừng gõ), validate form, auto-save, xử lý resize khi hoàn tất.",
+        "Throttle: chạy tối đa một lần mỗi khoảng thời gian, dù kích hoạt bao nhiêu lần.",
+        "Dùng cho: scroll, mousemove, kéo-thả, bắn sự kiện theo nhịp đều."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "function debounce(fn, wait) {\n  let timer\n  return (...args) => {\n    clearTimeout(timer)\n    timer = setTimeout(() => fn(...args), wait)\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "90109-debounce-va-throttle-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "6dc4d92d-1822-56d5-ab41-253341dce6d3",
+    "question": "Shallow copy và deep copy khác nhau thế nào? Sao chép sâu bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90112-shallow-copy-va-deep-copy-khac-nhau-the-nao-sao-chep-sau-bang-cach-nao",
+    "slug": "shallow-copy-va-deep-copy-khac-nhau-the-nao-sao-chep-sau-bang-cach-nao-6dc4d92d-1822-56d5-ab41-253341dce6d3",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Object/array là kiểu tham chiếu; gán b = a chỉ chép tham chiếu, sửa b là sửa luôn a."
+      ],
+      "details": [
+        "Chọn: state phẳng → shallow (nhanh, đủ); cấu trúc lồng sâu → structuredClone."
+      ],
+      "points": [
+        "Shallow copy: sao chép một cấp; property lồng bên trong vẫn dùng chung tham chiếu.",
+        "Cách: { ...obj }, Object.assign({}, obj), arr.slice(), [...arr].",
+        "Đủ khi dữ liệu phẳng (thường gặp khi cập nhật state bất biến trong React).",
+        "Deep copy: sao chép đệ quy mọi cấp, hoàn toàn tách biệt.",
+        "structuredClone(obj) — API chuẩn, xử lý được Date, Map, Set, vòng tham chiếu.",
+        "JSON.parse(JSON.stringify(obj)) — nhanh gọn nhưng mất undefined, function, Date (thành string), và ném lỗi khi gặp vòng tham chiếu (circular reference)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "90112-shallow-copy-va-deep-copy-khac-nhau-the-nao-sao-chep-sau-bang-cach-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "782f04c2-23f8-5117-a3a7-c5d1ae76480d",
+    "question": "Arrow function khác function thường ở những điểm nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90215-arrow-function-khac-function-thuong-o-nhung-diem-nao",
+    "slug": "arrow-function-khac-function-thuong-o-nhung-diem-nao-782f04c2-23f8-5117-a3a7-c5d1ae76480d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Arrow function không chỉ là cú pháp ngắn — nó khác function thường ở bốn điểm:"
+      ],
+      "details": [
+        "Thực hành: arrow hợp với callback ngắn và code trong class/component muốn giữ this bên ngoài; tránh dùng arrow cho method của object literal hoặc handler cần this là element — vì this sẽ không trỏ vào đối tượng mong muốn."
+      ],
+      "points": [
+        "this: arrow không có this riêng — nó lấy this từ scope bao quanh lúc định nghĩa (lexical) và không đổi được bằng call/apply/bind. Function thường có this xác định theo cách gọi (qua object, new, standalone...).",
+        "arguments: arrow không có object arguments riêng — dùng rest parameter (...args) thay thế.",
+        "Constructor: arrow không dùng được với new (không có prototype, không phải constructor).",
+        "Hoisting: function declaration được hoist đầy đủ nên gọi được trước dòng khai báo; arrow gán vào const/let nằm trong temporal dead zone — dùng trước khi khai báo sẽ ném lỗi."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "90215-arrow-function-khac-function-thuong-o-nhung-diem-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "e6953bde-2fcd-5193-b7a8-0e88431c90ad",
+    "question": "Optional chaining ?. và nullish coalescing ?? giải quyết vấn đề gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90306-optional-chaining-va-nullish-coalescing-giai-quyet-van-de-gi",
+    "slug": "optional-chaining-va-nullish-coalescing-giai-quyet-van-de-gi-e6953bde-2fcd-5193-b7a8-0e88431c90ad",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì sao ?? hơn || trong nhiều ca: || trả vế phải với mọi giá trị falsy — nên 0 || 10 → 10, '' || 'x' → 'x', ghi đè nhầm những giá trị hợp lệ. ?? chỉ chặn null/undefined, giữ nguyên 0, '', false."
+      ],
+      "details": [],
+      "points": [
+        "Optional chaining ?.: truy cập property/gọi method lồng sâu mà không lỗi khi gặp null/undefined. user?.address?.city — nếu user hoặc address là null/undefined thì trả về undefined thay vì ném TypeError. Dùng được với property (a?.b), index (a?.[i]), và gọi hàm (fn?.()). Nó short-circuit: gặp nullish là dừng, không đọc tiếp bên phải.",
+        "Nullish coalescing ??: trả về vế phải chỉ khi vế trái là null hoặc undefined. value ?? 'default'."
+      ],
+      "sections": [
+        "Lưu ý: không được trộn ?? với ||/&& mà không có ngoặc — cú pháp bắt buộc để tránh nhập nhằng thứ tự."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const count = data.count ?? 10   // keeps 0 if count is 0\nconst name = user?.profile?.name ?? 'Guest'"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "90306-optional-chaining-va-nullish-coalescing-giai-quyet-van-de-gi",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "ad2ecc8e-2490-5bf4-9058-cac62338610a",
+    "question": "Map và Set khác gì object và array thường? Khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90307-map-va-set-khac-gi-object-va-array-thuong-khi-nao-nen-dung",
+    "slug": "map-va-set-khac-gi-object-va-array-thuong-khi-nao-nen-dung-ad2ecc8e-2490-5bf4-9058-cac62338610a",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Map — tập cặp key–value, thay cho việc dùng object làm dictionary:"
+      ],
+      "details": [
+        "Set — tập giá trị không trùng lặp:",
+        "Khi nào dùng object/array: cần serialize JSON (Map/Set không stringify thẳng được), hoặc dữ liệu có cấu trúc cố định như một record. Dùng Map khi key động/không phải string hoặc cần thứ tự + kích thước; dùng Set khi cần tính duy nhất và kiểm tra thành viên nhanh.",
+        "Ghi chú: WeakMap/WeakSet giữ tham chiếu yếu tới key là object → không chặn GC, hợp cache gắn theo vòng đời object."
+      ],
+      "points": [
+        "Key bất kỳ kiểu (object, function, số...), không như object (key luôn ép về string/symbol).",
+        "Giữ đúng thứ tự chèn khi duyệt.",
+        "Có .size, và các method set/get/has/delete; duyệt trực tiếp bằng for...of.",
+        "Không có key kế thừa từ prototype → tra cứu an toàn, không đụng 'toString', '__proto__'.",
+        "Thêm/xóa key thường xuyên hiệu quả hơn object.",
+        "Tự loại trùng; has() kiểm tra tồn tại nhanh (O(1) trung bình) thay vì array.includes() (O(n)).",
+        "Khử trùng mảng gọn: [...new Set(arr)]."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "90307-map-va-set-khac-gi-object-va-array-thuong-khi-nao-nen-dung",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "ae4ad0f4-1db3-5b35-9813-d54a80562bfe",
+    "question": "Phân biệt Promise.all, allSettled, race và any?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90308-phan-biet-promise-all-allsettled-race-va-any",
+    "slug": "phan-biet-promise-all-allsettled-race-va-any-ae4ad0f4-1db3-5b35-9813-d54a80562bfe",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bốn combinator nhận một mảng promise, khác nhau ở điều kiện settle:"
+      ],
+      "details": [
+        "Mẹo nhớ: all = tất cả thắng hoặc fail-fast; allSettled = chờ hết, không bỏ ai; race = ai xong trước (kể cả lỗi); any = ai thành công trước."
+      ],
+      "points": [
+        "Promise.all: chờ tất cả fulfilled → trả mảng kết quả theo đúng thứ tự. Fail-fast: chỉ một promise reject là reject ngay với lỗi đó (không chờ số còn lại). Dùng khi cần đủ mọi kết quả và muốn dừng sớm nếu một cái hỏng.",
+        "Promise.allSettled: chờ tất cả settle (dù fulfilled hay rejected), không bao giờ reject → trả mảng object { status: 'fulfilled', value } hoặc { status: 'rejected', reason }. Dùng khi muốn chạy hết và xử lý từng kết quả riêng, không để một lỗi làm hỏng cả nhóm.",
+        "Promise.race: settle theo promise về đích đầu tiên — fulfilled hay rejected đều được (kết quả/lỗi của cái nhanh nhất). Dùng cho timeout (đua request với một promise hẹn giờ).",
+        "Promise.any: trả fulfilled đầu tiên; chỉ reject khi tất cả đều reject (ném AggregateError gom mọi lỗi). Dùng khi chỉ cần một nguồn thành công (đua nhiều mirror)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "90308-phan-biet-promise-all-allsettled-race-va-any",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "26df84bc-1e88-5f7a-9211-1e3c041719bc",
+    "question": "Vì sao 0.1 + 0.2 !== 0.3? NaN là gì và kiểm tra thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90309-vi-sao-0-1-0-2-0-3-nan-la-gi-va-kiem-tra-the-nao",
+    "slug": "vi-sao-0-1-0-2-0-3-nan-la-gi-va-kiem-tra-the-nao-26df84bc-1e88-5f7a-9211-1e3c041719bc",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "0.1 + 0.2 → 0.30000000000000004: JS chỉ có một kiểu số — IEEE 754 double (64-bit floating point). Các phân số như 0.1, 0.2 không biểu diễn chính xác ở hệ nhị phân (giống 1/3 không hết ở hệ thập phân), nên phép cộng tích lũy sai số nhỏ. Đây là đặc tính của mọi ngôn ngữ dùng float, không riêng JS.",
+        "Với tiền tệ: tính bằng đơn vị nhỏ nhất (cent/đồng, số nguyên) hoặc dùng thư viện decimal."
+      ],
+      "details": [
+        "Cách so sánh số thực an toàn: kiểm tra sai lệch nhỏ hơn một ngưỡng (epsilon):",
+        "NaN (Not-a-Number): kết quả của phép toán số không hợp lệ (0/0, parseInt('abc'), Math.sqrt(-1)). Đặc điểm lạ: NaN không bằng chính nó — NaN === NaN → false. Vì vậy:\n- Kiểm tra bằng Number.isNaN(x) (chuẩn, không ép kiểu) — đừng dùng global isNaN() cũ vì nó ép kiểu trước (isNaN('abc') → true gây hiểu nhầm).\n- Hoặc mẹo x !== x chỉ đúng khi x là NaN."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "Math.abs(0.1 + 0.2 - 0.3) < Number.EPSILON // true"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "90309-vi-sao-0-1-0-2-0-3-nan-la-gi-va-kiem-tra-the-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "edf45386-e94e-50d9-bb6f-0a9e72007a7d",
+    "question": "ES Modules (ESM) và CommonJS (CJS) khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90211-es-modules-esm-va-commonjs-cjs-khac-nhau-the-nao",
+    "slug": "es-modules-esm-va-commonjs-cjs-khac-nhau-the-nao-edf45386-e94e-50d9-bb6f-0a9e72007a7d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khác nữa: ESM luôn chạy strict mode, và this ở top-level là undefined (CJS là module.exports)."
+      ],
+      "details": [
+        "Node hỗ trợ cả hai (.mjs hoặc \"type\": \"module\"); trình duyệt chỉ hiểu ESM qua <script type=\"module\">."
+      ],
+      "points": [
+        "CommonJS (Node.js truyền thống): require() / module.exports, nạp đồng bộ lúc runtime, và động (có thể require trong if). Cấu trúc module không phân tích tĩnh được hoàn toàn.",
+        "ES Modules (chuẩn ngôn ngữ): import / export, cấu trúc tĩnh — phân tích được lúc build nên hỗ trợ tree-shaking; nạp bất đồng bộ, có top-level await và import() động. Dùng live binding (import phản ánh giá trị hiện tại của export)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "90211-es-modules-esm-va-commonjs-cjs-khac-nhau-the-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "db788fc5-8eea-5ab5-8ebf-a50d99cffc42",
+    "question": "Event bubbling, capturing và event delegation là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90108-event-bubbling-capturing-va-event-delegation-la-gi",
+    "slug": "event-bubbling-capturing-va-event-delegation-la-gi-db788fc5-8eea-5ab5-8ebf-a50d99cffc42",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Một sự kiện DOM lan theo 3 pha: capturing (từ document đi xuống target) → target → bubbling (từ target đi ngược lên). Mặc định addEventListener nghe ở pha bubbling; truyền { capture: true } để nghe ở pha capturing."
+      ],
+      "details": [
+        "Event delegation: thay vì gắn listener cho từng phần tử con, gắn một listener ở phần tử cha và dựa vào bubbling để bắt sự kiện, rồi phân nhánh theo event.target. Lợi ích:\n- Ít listener → tốn ít bộ nhớ.\n- Tự động áp dụng cho phần tử con thêm động sau này.",
+        "Hay dùng cho danh sách dài, bảng, menu."
+      ],
+      "points": [
+        "event.target = phần tử thực sự bị tác động; event.currentTarget = phần tử đang gắn listener.",
+        "stopPropagation() chặn lan tiếp; preventDefault() chặn hành vi mặc định (2 việc khác nhau)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "90108-event-bubbling-capturing-va-event-delegation-la-gi",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "b30b0827-1839-599d-9f9b-569d5c2c5a60",
+    "question": "Web Worker và Service Worker khác nhau thế nào? Dùng mỗi loại khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90218-web-worker-va-service-worker-khac-nhau-the-nao-dung-moi-loai-khi-nao",
+    "slug": "web-worker-va-service-worker-khac-nhau-the-nao-dung-moi-loai-khi-nao-b30b0827-1839-599d-9f9b-569d5c2c5a60",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai đều là script chạy trên thread riêng, tách khỏi main thread và không truy cập được DOM — nhưng vai trò khác hẳn:"
+      ],
+      "details": [
+        "Chọn nhanh: cần tính toán song song → Web Worker; cần offline/cache/push → Service Worker. Chúng không thay thế nhau và có thể dùng đồng thời."
+      ],
+      "points": [
+        "Web Worker: thread tính toán cho một trang. Dùng để đẩy việc nặng CPU (parse file lớn, xử lý ảnh, tính toán dữ liệu) ra khỏi main thread → UI vẫn phản hồi. Giao tiếp bằng postMessage; vòng đời gắn với trang — trang đóng thì worker chết.",
+        "Service Worker: đóng vai proxy giữa app và network, đăng ký theo scope/origin và phục vụ chung mọi tab. Chặn sự kiện fetch để trả response từ Cache Storage → offline support (nền tảng của PWA), cùng push notification và background sync. Event-driven: trình duyệt đánh thức khi có sự kiện rồi tắt đi, không sống thường trực; chỉ chạy trên HTTPS."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "90218-web-worker-va-service-worker-khac-nhau-the-nao-dung-moi-loai-khi-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "29db75c1-8ca5-5c0a-896d-52e7c842c10c",
+    "question": "fetch khác XMLHttpRequest thế nào? Hủy một request đang chạy bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90219-fetch-khac-xmlhttprequest-the-nao-huy-mot-request-dang-chay-bang-cach-nao",
+    "slug": "fetch-khac-xmlhttprequest-the-nao-huy-mot-request-dang-chay-bang-cach-nao-29db75c1-8ca5-5c0a-896d-52e7c842c10c",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "fetch là API chuẩn hiện đại thay cho XHR:"
+      ],
+      "details": [
+        "Hủy request bằng AbortController:"
+      ],
+      "points": [
+        "Trả về Promise → dùng thẳng với async/await thay vì callback onreadystatechange.",
+        "API sạch hơn với object Request/Response, hỗ trợ streaming body, và là API duy nhất dùng được trong Service Worker.",
+        "Điểm hay gây bất ngờ: fetch không reject khi HTTP lỗi (404/500) — Promise chỉ reject khi lỗi mạng; phải tự kiểm tra response.ok.",
+        "XHR chỉ còn lợi thế ở progress event cho upload (xhr.upload.onprogress).",
+        "Tạo const controller = new AbortController(), truyền { signal: controller.signal } vào fetch.",
+        "Gọi controller.abort() → Promise reject với AbortError (nên bắt riêng, đừng báo như lỗi thật).",
+        "Use case điển hình: hủy request cũ khi người dùng gõ tiếp ô search, hoặc trong cleanup của useEffect khi component unmount — tránh setState trên component đã gỡ và race condition giữa các response về không đúng thứ tự."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const controller = new AbortController()\nfetch('/api/search', { signal: controller.signal })\n  .catch((err) => {\n    if (err.name !== 'AbortError') throw err // aborts are expected\n  })\ncontroller.abort() // cancel the in-flight request"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "90219-fetch-khac-xmlhttprequest-the-nao-huy-mot-request-dang-chay-bang-cach-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "be3f6fbf-8728-5292-b606-ccb2ee446795",
+    "question": "IntersectionObserver là gì? Vì sao hơn cách nghe sự kiện scroll?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90315-intersectionobserver-la-gi-vi-sao-hon-cach-nghe-su-kien-scroll",
+    "slug": "intersectionobserver-la-gi-vi-sao-hon-cach-nghe-su-kien-scroll-be3f6fbf-8728-5292-b606-ccb2ee446795",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì sao hơn nghe scroll + getBoundingClientRect():\n- Sự kiện scroll bắn rất dày, chạy trên main thread; mỗi lần gọi getBoundingClientRect() lại buộc reflow đồng bộ → dễ giật khung hình, phải tự debounce/throttle.\n- IntersectionObserver được trình duyệt tính ngoài main thread, chỉ báo khi thật sự có thay đổi giao cắt → mượt và tiết kiệm hơn."
+      ],
+      "details": [
+        "Ứng dụng điển hình: lazy-load ảnh/component, infinite scroll (nạp thêm khi chạm cuối danh sách), kích hoạt animation khi cuộn tới, đo hiển thị quảng cáo (impression). Cùng họ còn có ResizeObserver (theo dõi đổi kích thước) và MutationObserver (theo dõi đổi DOM)."
+      ],
+      "points": [],
+      "sections": [
+        "IntersectionObserver là API trình duyệt theo dõi bất đồng bộ khi một phần tử giao (intersect) với viewport (hoặc một phần tử cha cuộn được), rồi gọi callback khi mức hiển thị vượt các ngưỡng (threshold) ta đặt."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const io = new IntersectionObserver((entries) => {\n  entries.forEach((e) => {\n    if (e.isIntersecting) { /* element entered view */ }\n  })\n}, { threshold: 0.1, rootMargin: '0px' })\nio.observe(targetEl)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "90315-intersectionobserver-la-gi-vi-sao-hon-cach-nghe-su-kien-scroll",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "60051fd7-a798-5977-8fc1-3982c74e62d9",
+    "question": "Event loop hoạt động thế nào? Phân biệt microtask và macrotask.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "event-loop-hoat-dong-the-nao-phan-biet-microtask-va-macrotask-60051fd7-a798-5977-8fc1-3982c74e62d9",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "171c5dbc-ba19-582f-b86e-4138147e8df8",
+    "question": "JavaScript quản lý bộ nhớ và thu gom rác (garbage collection) thế nào? Các loại memory leak thường gặp?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "javascript-quan-ly-bo-nho-va-thu-gom-rac-garbage-collection-the-nao-cac-loai-memory-leak-thuong-gap-171c5dbc-ba19-582f-b86e-4138147e8df8",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "b2b6f503-e5f8-5a77-925e-d43a6daaf64d",
+    "question": "Điều gì xảy ra khi trình duyệt render một trang? (critical rendering path, reflow/repaint)",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dieu-gi-xay-ra-khi-trinh-duyet-render-mot-trang-critical-rendering-path-reflow-repaint-b2b6f503-e5f8-5a77-925e-d43a6daaf64d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "5746fc31-ecf9-5381-9b4c-1c89f25997ec",
+    "question": "Điều gì xảy ra từ khi gõ URL vào trình duyệt tới khi trang hiển thị?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dieu-gi-xay-ra-tu-khi-go-url-vao-trinh-duyet-toi-khi-trang-hien-thi-5746fc31-ecf9-5381-9b4c-1c89f25997ec",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "6ba158d9-4438-52b6-915e-dc59397bd533",
+    "question": "WebSocket khác HTTP polling và Server-Sent Events (SSE) thế nào? Dùng mỗi loại khi nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "websocket-khac-http-polling-va-server-sent-events-sse-the-nao-dung-moi-loai-khi-nao-6ba158d9-4438-52b6-915e-dc59397bd533",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "ef87a631-ce88-58b6-b19c-1a4964422657",
+    "question": "Làm sao xây ô search có debounce và huỷ được request cũ để tránh kết quả cũ ghi đè kết quả mới?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-sao-xay-o-search-co-debounce-va-huy-duoc-request-cu-de-tranh-ket-qua-cu-ghi-de-ket-qua-moi-ef87a631-ce88-58b6-b19c-1a4964422657",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "d9b2fd08-9e1e-5145-be26-ff4283a45023",
+    "question": "Bạn xử lý lỗi và retry khi fetch dữ liệu thế nào (error boundary, backoff, phân biệt lỗi mạng vs 4xx/5xx)?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-xu-ly-loi-va-retry-khi-fetch-du-lieu-the-nao-error-boundary-backoff-phan-biet-loi-mang-vs-4xx-5x-d9b2fd08-9e1e-5145-be26-ff4283a45023",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "fd9662cb-efab-5b13-9c49-84783a825bad",
+    "question": "Bạn thiết kế luồng upload file phía frontend thế nào (preview, progress, hủy, file lớn)?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-thiet-ke-luong-upload-file-phia-frontend-the-nao-preview-progress-huy-file-lon-fd9662cb-efab-5b13-9c49-84783a825bad",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "75ae2ee5-4029-57ec-857f-87b9cdb4785d",
+    "question": "Phân biệt type và interface trong TypeScript? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90201-phan-biet-type-va-interface-trong-typescript-khi-nao-dung-cai-nao",
+    "slug": "phan-biet-type-va-interface-trong-typescript-khi-nao-dung-cai-nao-75ae2ee5-4029-57ec-857f-87b9cdb4785d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai đều mô tả shape của object và phần lớn thay thế được cho nhau. Khác biệt cốt lõi:"
+      ],
+      "details": [
+        "Quy tắc kinh nghiệm (TS team): ưu tiên interface cho object thuần / kế thừa; chuyển sang type khi cần feature chỉ type có (union, tuple, utility phức tạp). Khác biệt hiệu năng nhỏ, không phải yếu tố quyết định."
+      ],
+      "points": [
+        "interface: mở rộng bằng extends, và có declaration merging — khai báo trùng tên sẽ gộp lại. Hợp public API của thư viện, mô hình hướng đối tượng.",
+        "type (type alias): đặt tên cho bất kỳ kiểu — union, intersection, tuple, primitive, mapped/conditional types. Không merge, không re-open sau khi khai báo."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "90201-phan-biet-type-va-interface-trong-typescript-khi-nao-dung-cai-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "bfd9f87a-0320-5241-b40c-28213df94622",
+    "question": "Generics trong TypeScript là gì? Vì sao dùng generic thay vì any?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90202-generics-trong-typescript-la-gi-vi-sao-dung-generic-thay-vi-any",
+    "slug": "generics-trong-typescript-la-gi-vi-sao-dung-generic-thay-vi-any-bfd9f87a-0320-5241-b40c-28213df94622",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Generic = tham số hóa kiểu: viết hàm/class/type hoạt động trên nhiều kiểu mà vẫn giữ quan hệ giữa các kiểu."
+      ],
+      "details": [
+        "Khác any: generic giữ nguyên kiểm tra kiểu ở nơi gọi (call site vẫn biết kiểu cụ thể), còn any tắt kiểm tra và làm mất autocomplete. Dùng nhiều cho collection, response API, và hook (useState<T>)."
+      ],
+      "points": [
+        "function identity<T>(x: T): T — T được suy ra từ đối số truyền vào, giá trị trả về giữ đúng kiểu đó.",
+        "Constraint: <T extends { id: number }> giới hạn T phải có shape nhất định.",
+        "Default: <T = string>."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "90202-generics-trong-typescript-la-gi-vi-sao-dung-generic-thay-vi-any",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "fbcb8e13-6358-576b-a90f-69d6d6bec6f6",
+    "question": "Các utility type hay dùng (Partial, Pick, Omit, Record) làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90203-cac-utility-type-hay-dung-partial-pick-omit-record-lam-gi",
+    "slug": "cac-utility-type-hay-dung-partial-pick-omit-record-lam-gi-fbcb8e13-6358-576b-a90f-69d6d6bec6f6",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "TypeScript có sẵn các type biến đổi một type gốc, giúp dẫn xuất thay vì khai báo lại (DRY):"
+      ],
+      "details": [
+        "Lợi ích chính: một nguồn sự thật — sửa type gốc thì mọi type phái sinh cập nhật theo, không lệch."
+      ],
+      "points": [
+        "Partial<T> — mọi field thành optional (hợp payload update/patch).",
+        "Required<T> — mọi field thành bắt buộc.",
+        "Pick<T, K> — lấy ra một tập field K từ T.",
+        "Omit<T, K> — loại bỏ tập field K khỏi T.",
+        "Record<K, V> — object với key kiểu K, value kiểu V (dictionary/map).",
+        "Khác: Readonly<T>, ReturnType<F>, Parameters<F>..."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": "90203-cac-utility-type-hay-dung-partial-pick-omit-record-lam-gi",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "c3fe65d8-a5af-57d5-959b-304f3685f439",
+    "question": "Phân biệt any, unknown và never trong TypeScript?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "phan-biet-any-unknown-va-never-trong-typescript-c3fe65d8-a5af-57d5-959b-304f3685f439",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "b7a21ab0-9dd0-5804-a300-dc5e70a8483a",
+    "question": "Phân biệt props và state trong React?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90304-phan-biet-props-va-state-trong-react",
+    "slug": "phan-biet-props-va-state-trong-react-b7a21ab0-9dd0-5804-a300-dc5e70a8483a",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai đều là dữ liệu điều khiển những gì component render, nhưng khác nhau về quyền sở hữu và khả năng thay đổi:"
+      ],
+      "details": [
+        "Điểm mấu chốt:\n- Cùng một dữ liệu: nếu component tự sở hữu và thay đổi → state; nếu nhận từ ngoài → props.\n- Muốn con \"đổi\" dữ liệu của cha: cha truyền hàm callback qua props, con gọi để yêu cầu cha cập nhật state (lifting state up).\n- Đừng sao chép props vào state rồi để hai bên lệch nhau — chỉ làm vậy khi thật sự cần giá trị khởi tạo độc lập."
+      ],
+      "points": [
+        "Props (properties): dữ liệu cha truyền xuống con. Với chính component nhận, props là chỉ đọc (read-only) — không được sửa. Luồng dữ liệu một chiều, từ trên xuống. Đổi giá trị props là việc của cha.",
+        "State: dữ liệu nội bộ do chính component quản lý qua useState/useReducer. Thay đổi được bằng hàm setter, và mỗi lần đổi sẽ kích hoạt re-render."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": "90304-phan-biet-props-va-state-trong-react",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "62f4c82c-e0a1-5c3a-a4f7-0e732323683e",
+    "question": "Điều gì khiến một component React re-render? Làm sao giảm re-render thừa?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90224-dieu-gi-khien-mot-component-react-re-render-lam-sao-giam-re-render-thua",
+    "slug": "dieu-gi-khien-mot-component-react-re-render-lam-sao-giam-re-render-thua-62f4c82c-e0a1-5c3a-a4f7-0e732323683e",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Một component render lại khi:"
+      ],
+      "details": [
+        "Re-render không đồng nghĩa cập nhật DOM (React diff rồi chỉ commit phần khác), nhưng render thừa trên cây lớn vẫn tốn CPU. Cách giảm, theo thứ tự ưu tiên:",
+        "Nguyên tắc: đo trước bằng React DevTools Profiler, chỉ tối ưu chỗ re-render gây chậm thật."
+      ],
+      "points": [
+        "State của chính nó đổi (setState/useState/useReducer).",
+        "Cha render lại — mặc định React render toàn bộ cây con, bất kể props có đổi hay không. Điểm hay hiểu nhầm: \"props đổi\" không phải trigger độc lập — con render vì cha render.",
+        "Context nó subscribe đổi value.",
+        "Đưa state xuống thấp (colocation): state chỉ dùng cho ô search thì đặt trong component search, đừng đặt ở page — mỗi phím gõ khỏi render cả trang.",
+        "Children/composition pattern: component nhận phần tĩnh qua children thì khi state của nó đổi, children (element đã tạo từ cha) không render lại.",
+        "Tách context theo tần suất thay đổi (theme riêng, user riêng) để consumer không bị render bởi giá trị nó không dùng.",
+        "React.memo cho component con nặng + useMemo/useCallback giữ reference props ổn định. React Compiler tự động hóa phần lớn việc memo này."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": "90224-dieu-gi-khien-mot-component-react-re-render-lam-sao-giam-re-render-thua",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "fd4b698f-25df-5f35-8b01-4a81f32dd833",
+    "question": "Virtual DOM là gì và reconciliation hoạt động ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90120-virtual-dom-la-gi-va-reconciliation-hoat-dong-ra-sao",
+    "slug": "virtual-dom-la-gi-va-reconciliation-hoat-dong-ra-sao-fd4b698f-25df-5f35-8b01-4a81f32dd833",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Virtual DOM (VDOM): bản mô tả UI bằng object JS nhẹ, phản chiếu cây DOM thật. Thao tác trên object rẻ hơn nhiều so với thao tác trực tiếp trên DOM thật."
+      ],
+      "details": [
+        "Khi state/props đổi, React:\n1. Tạo cây VDOM mới cho lần render.\n2. Reconciliation / diffing: so cây mới với cây cũ để tìm khác biệt.\n3. Commit: chỉ áp những thay đổi tối thiểu vào DOM thật theo lô (batch).",
+        "React dùng vài heuristic để diff nhanh (O(n) thay vì O(n³)):\n- Element khác loại (<div> → <span>) → thay cả cây con, không cố khớp.\n- Cùng loại → giữ node, chỉ cập nhật attribute/con đổi.\n- Danh sách con → dựa vào key để nhận diện phần tử qua các lần render (vì sao key quan trọng).",
+        "Mục đích không phải \"nhanh hơn DOM\" tuyệt đối, mà là mô hình khai báo: bạn mô tả UI mong muốn, React lo cách cập nhật hiệu quả."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": "90120-virtual-dom-la-gi-va-reconciliation-hoat-dong-ra-sao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "a38414b2-50b5-5d89-b8ea-8386a13b9a94",
+    "question": "Prop key trong danh sách React để làm gì? Vì sao không nên dùng index?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90121-prop-key-trong-danh-sach-react-de-lam-gi-vi-sao-khong-nen-dung-index",
+    "slug": "prop-key-trong-danh-sach-react-de-lam-gi-vi-sao-khong-nen-dung-index-a38414b2-50b5-5d89-b8ea-8386a13b9a94",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "key cho React danh tính ổn định của mỗi phần tử trong danh sách qua các lần render. Nhờ đó khi diff, React biết phần tử nào được giữ, thêm, xóa, hay đổi chỗ thay vì dựng lại toàn bộ."
+      ],
+      "details": [
+        "Vì sao không nên dùng array index làm key: khi danh sách bị thêm/xóa/sắp xếp lại, index gắn với vị trí chứ không gắn với dữ liệu → React ghép nhầm phần tử cũ với dữ liệu mới. Hậu quả:\n- State cục bộ lệch (giá trị input, checkbox dính nhầm dòng).\n- Render sai hoặc cập nhật DOM thừa.",
+        "Đúng: dùng id ổn định, duy nhất từ dữ liệu (item.id).",
+        "Lưu ý:\n- key chỉ cần duy nhất giữa các anh em, không cần toàn cục.\n- Dùng index chỉ tạm chấp nhận khi danh sách tĩnh, không đổi thứ tự, không có state cục bộ.\n- key là gợi ý cho React, không truyền xuống làm prop của component."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": "90121-prop-key-trong-danh-sach-react-de-lam-gi-vi-sao-khong-nen-dung-index",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "3049aa30-5adf-5df9-a7cd-02003c0e438e",
+    "question": "Rules of Hooks là gì? Dependency array của useEffect hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90122-rules-of-hooks-la-gi-dependency-array-cua-useeffect-hoat-dong-the-nao",
+    "slug": "rules-of-hooks-la-gi-dependency-array-cua-useeffect-hoat-dong-the-nao-3049aa30-5adf-5df9-a7cd-02003c0e438e",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Rules of Hooks (bắt buộc để React khớp đúng state qua các lần render):\n1. Chỉ gọi hook ở cấp cao nhất — không đặt trong if, vòng lặp, hàm lồng. React nhận diện hook theo thứ tự gọi, nên thứ tự phải ổn định.\n2. Chỉ gọi hook từ function component hoặc custom hook (không gọi từ hàm JS thường)."
+      ],
+      "details": [
+        "Dependency array của useEffect quyết định khi nào effect chạy lại:\n- useEffect(fn) — không mảng deps → chạy sau mỗi render.\n- useEffect(fn, []) — mảng rỗng → chạy một lần sau mount (+ cleanup khi unmount).\n- useEffect(fn, [a, b]) — chạy lại khi a hoặc b đổi (so sánh Object.is).",
+        "Điểm hay bị hỏi:\n- Phải liệt kê mọi giá trị reactive effect dùng (props, state, hàm) — thiếu → stale closure (đọc giá trị cũ). ESLint exhaustive-deps cảnh báo.\n- Trả về hàm cleanup để hủy subscription/timer trước lần chạy sau và khi unmount.\n- Hàm/object tạo mới mỗi render làm deps \"đổi\" liên tục → bọc useCallback/useMemo."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": "90122-rules-of-hooks-la-gi-dependency-array-cua-useeffect-hoat-dong-the-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "8a0c95d1-1707-57a0-a40b-bf16e5ced2f5",
+    "question": "Controlled và uncontrolled component khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90123-controlled-va-uncontrolled-component-khac-nhau-the-nao",
+    "slug": "controlled-va-uncontrolled-component-khac-nhau-the-nao-8a0c95d1-1707-57a0-a40b-bf16e5ced2f5",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Phân biệt theo nơi giữ giá trị của form input:"
+      ],
+      "details": [
+        "Khuyến nghị: mặc định dùng controlled cho hầu hết form vì kiểm soát và validate tốt hơn; chọn uncontrolled khi cần tối giản hoặc truy cập DOM trực tiếp.",
+        "Lưu ý: một input đừng để lẫn value và defaultValue — chọn một kiểu."
+      ],
+      "points": [
+        "Controlled: React state là nguồn sự thật duy nhất. Input nhận value={state} và cập nhật qua onChange. React kiểm soát mọi lần gõ.",
+        "Ưu: dễ validate tức thời, disable nút, format khi gõ, đồng bộ nhiều field.",
+        "Nhược: mỗi phím gõ là một lần re-render (thường không đáng ngại).",
+        "Uncontrolled: DOM tự giữ giá trị; React đọc khi cần qua ref (inputRef.current.value). Dùng defaultValue cho giá trị khởi tạo.",
+        "Ưu: ít code, ít re-render; hợp form đơn giản, tích hợp thư viện non-React, hoặc <input type=\"file\"> (luôn uncontrolled)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": "90123-controlled-va-uncontrolled-component-khac-nhau-the-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "fbee892c-4b45-53e5-8791-32f0bf651661",
+    "question": "useRef dùng để làm gì? Khác useState ở điểm nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90313-useref-dung-de-lam-gi-khac-usestate-o-diem-nao",
+    "slug": "useref-dung-de-lam-gi-khac-usestate-o-diem-nao-fbee892c-4b45-53e5-8791-32f0bf651661",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "useRef trả về một object { current } ổn định qua mọi lần render (cùng một tham chiếu). Sửa ref.current không kích hoạt re-render. Hai công dụng chính:"
+      ],
+      "details": [
+        "1. Tham chiếu tới DOM node: gắn ref={myRef} vào JSX rồi thao tác trực tiếp — inputRef.current.focus(), đo getBoundingClientRect(), điều khiển <video>, cuộn.\n2. Lưu giá trị mutable qua các render mà không cần hiển thị: id của setInterval/setTimeout, giá trị \"trước đó\" (previous value), cờ nội bộ (đã mount chưa), một instance thư viện ngoài.",
+        "Khác useState:",
+        "Nguyên tắc: nếu thay đổi giá trị cần vẽ lại UI → useState; nếu chỉ cần nhớ giữa các render mà không hiển thị → useRef. Không đọc/ghi ref.current trong lúc render (chỉ trong event handler hoặc useEffect) để giữ render thuần khiết."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "ref.current",
+            "Đổi giá trị → re-render",
+            "useRef",
+            "Đọc giá trị mới",
+            "Đồng bộ ngay (ref.current)",
+            "useState",
+            "Sau lần render kế tiếp",
+            "Dùng cho",
+            "Dữ liệu không ảnh hưởng UI",
+            "Dữ liệu hiển thị trên UI",
+            "Không",
+            "Có"
+          ]
+        }
+      ]
+    },
+    "legacyId": 66,
+    "sourceSlug": "90313-useref-dung-de-lam-gi-khac-usestate-o-diem-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "fd7f1734-97ca-506d-b61a-dc484fa1de4b",
+    "question": "useReducer khác useState thế nào? Khi nào nên chọn useReducer?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90314-usereducer-khac-usestate-the-nao-khi-nao-nen-chon-usereducer",
+    "slug": "usereducer-khac-usestate-the-nao-khi-nao-nen-chon-usereducer-fd7f1734-97ca-506d-b61a-dc484fa1de4b",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai đều quản lý state trong component; useReducer là dạng tổng quát hơn cho logic cập nhật phức tạp."
+      ],
+      "details": [
+        "Chọn useReducer khi:\n- Nhiều field state liên quan cần cập nhật cùng nhau (form nhiều bước, state có sub-object).\n- State kế tiếp phụ thuộc state trước theo nhiều nhánh (đóng/mở/loading/error).\n- Muốn tách logic ra khỏi UI: reducer là hàm thuần → dễ test độc lập, dễ đọc khi có nhiều loại action.\n- Tối ưu: dispatch có tham chiếu ổn định, truyền xuống con sâu mà không cần useCallback.",
+        "Ưu điểm phụ: mọi cách state đổi được tập trung một chỗ (reducer) thay vì rải rác nhiều lời gọi setter — dễ suy luận và debug. Với state đơn giản thì useState gọn hơn, đừng dùng reducer cho mọi thứ."
+      ],
+      "points": [
+        "useState: cập nhật trực tiếp bằng setter — hợp state đơn giản, độc lập (một cờ boolean, một chuỗi input).",
+        "useReducer(reducer, initialState): gom logic cập nhật vào một hàm reducer thuần (state, action) => newState; component chỉ dispatch(action) để mô tả \"chuyện gì xảy ra\", reducer quyết định state mới thế nào."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": "90314-usereducer-khac-usestate-the-nao-khi-nao-nen-chon-usereducer",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "9d0e9a91-934d-5b05-80a0-f6115b76bdb6",
+    "question": "Context API dùng để làm gì? Khi nào nên dùng Context, khi nào cần Redux?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90206-context-api-dung-de-lam-gi-khi-nao-nen-dung-context-khi-nao-can-redux",
+    "slug": "context-api-dung-de-lam-gi-khi-nao-nen-dung-context-khi-nao-can-redux-9d0e9a91-934d-5b05-80a0-f6115b76bdb6",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Context truyền dữ liệu xuyên cây component mà không phải chuyền prop qua từng tầng (prop drilling): createContext → <Provider value> → useContext."
+      ],
+      "details": [
+        "Lưu ý quan trọng: Context không phải state manager. Mọi consumer sẽ re-render khi value đổi (dù chỉ dùng một phần nhỏ) → nó hợp với dữ liệu ít thay đổi: theme, locale, user/auth, cấu hình app.",
+        "Khi nào cần Redux/Zustand: state đổi thường xuyên/phức tạp, cần selector để tránh re-render thừa, middleware, devtools, cache. Riêng server state (dữ liệu từ API) → dùng React Query thay vì đưa server state vào Context. Mẹo giảm re-render: chia nhỏ context hoặc memo hóa value."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": "90206-context-api-dung-de-lam-gi-khi-nao-nen-dung-context-khi-nao-can-redux",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "5362374f-5d7f-52c0-a10f-810fb05caa7d",
+    "question": "Redux hoạt động thế nào: store, action, reducer, middleware phối hợp ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90409-redux-hoat-dong-the-nao-store-action-reducer-middleware-phoi-hop-ra-sao",
+    "slug": "redux-hoat-dong-the-nao-store-action-reducer-middleware-phoi-hop-ra-sao-5362374f-5d7f-52c0-a10f-810fb05caa7d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Redux là một store toàn cục với luồng dữ liệu một chiều (one-way data flow):",
+        "Vì sao thiết kế như vậy: state chỉ đổi qua action + reducer thuần → mọi thay đổi truy vết được (time-travel debugging trong Redux DevTools), side effect bị dồn về một tầng duy nhất."
+      ],
+      "details": [
+        "1. UI dispatch một action — plain object mô tả \"chuyện gì vừa xảy ra\": { type: 'cart/itemAdded', payload: item }.\n2. Action đi qua middleware (nếu có) — nơi duy nhất được làm side effect: gọi API, log, tác vụ async (redux-thunk/saga). Middleware có thể chặn, biến đổi, hoặc dispatch thêm action.\n3. Reducer nhận (state, action) và trả về state MỚI — hàm thuần: không mutate state cũ, không gọi API, không random; cùng input luôn cho cùng output.\n4. Store thay state hiện tại bằng kết quả reducer và thông báo cho các subscriber.\n5. UI đọc state qua selector (useSelector) — component chỉ re-render khi phần state nó chọn thay đổi.",
+        "Hiện nay nên viết qua Redux Toolkit: createSlice (dùng Immer nên viết như mutate mà kết quả vẫn immutable) + createAsyncThunk cho async."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// reducer: a pure function\nfunction cartReducer(state = initialState, action) {\n  switch (action.type) {\n    case 'cart/itemAdded':\n      return { ...state, items: [...state.items, action.payload] }\n    default:\n      return state\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": "90409-redux-hoat-dong-the-nao-store-action-reducer-middleware-phoi-hop-ra-sao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "0713a01e-676a-56cb-82f7-1f416b8492b0",
+    "question": "Memoization là gì? useMemo, useCallback và React.memo khác nhau ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90213-memoization-la-gi-usememo-usecallback-va-react-memo-khac-nhau-ra-sao",
+    "slug": "memoization-la-gi-usememo-usecallback-va-react-memo-khac-nhau-ra-sao-0713a01e-676a-56cb-82f7-1f416b8492b0",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Memoization = lưu lại kết quả theo input: khi input lặp lại, trả kết quả đã tính thay vì tính lại. Trong React có ba công cụ:"
+      ],
+      "details": [
+        "Đừng lạm dụng: bản thân việc so sánh và lưu deps cũng tốn chi phí, chỉ dùng khi phép tính thật sự nặng hoặc khi chặn được re-render đo lường được. React Compiler tự memo hóa nên giảm nhu cầu làm thủ công."
+      ],
+      "points": [
+        "useMemo(fn, deps): nhớ giá trị của một phép tính nặng; chỉ tính lại khi deps đổi.",
+        "useCallback(fn, deps): nhớ tham chiếu hàm (để truyền xuống con mà không tạo hàm mới mỗi lần render).",
+        "React.memo(Component): bọc một component để bỏ re-render khi props (so sánh nông) không đổi."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": "90213-memoization-la-gi-usememo-usecallback-va-react-memo-khac-nhau-ra-sao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "a004532f-4338-54aa-a577-9ee5087e2b2e",
+    "question": "Vì sao gọi setState xong đọc state vẫn thấy giá trị cũ? Batching trong React hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90408-vi-sao-goi-setstate-xong-doc-state-van-thay-gia-tri-cu-batching-trong-react-hoat",
+    "slug": "vi-sao-goi-setstate-xong-doc-state-van-thay-gia-tri-cu-batching-trong-react-hoat-dong-the-nao-a004532f-4338-54aa-a577-9ee5087e2b2e",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Batching: React gom nhiều lần setState trong cùng một event handler và chỉ re-render MỘT lần sau khi handler chạy xong — tránh render dở dang giữa chừng. Từ React 18, batching là tự động ở mọi nơi (cả trong promise, setTimeout, native event) — trước đó chỉ trong event handler của React."
+      ],
+      "details": [
+        "Hệ quả hay bị hỏi: gọi setCount(count + 1) ba lần liên tiếp chỉ tăng 1, vì cả ba lần đều đọc cùng snapshot count = 0. Muốn cập nhật dựa trên giá trị mới nhất trong hàng đợi → dùng updater function:"
+      ],
+      "points": [],
+      "sections": [
+        "Vì state trong React là snapshot của lần render hiện tại: setState không sửa biến ngay mà yêu cầu một lần render mới; mọi dòng code phía sau trong cùng handler vẫn đọc giá trị của snapshot cũ.",
+        "useEffect"
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const [count, setCount] = useState(0)\nfunction handleClick() {\n  setCount(count + 1) // schedule a render with 1\n  console.log(count)  // still 0 — same snapshot\n}"
+        },
+        {
+          "language": "JS",
+          "code": "setCount(c => c + 1) // three of these do increment by 3"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": "90408-vi-sao-goi-setstate-xong-doc-state-van-thay-gia-tri-cu-batching-trong-react-hoat",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "80f43248-9cab-5a33-9a6c-273ab816c640",
+    "question": "React.lazy và <Suspense> hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90204-react-lazy-va-suspense-hoat-dong-the-nao",
+    "slug": "react-lazy-va-suspense-hoat-dong-the-nao-80f43248-9cab-5a33-9a6c-273ab816c640",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "React.lazy(() => import('./X')) khai báo một component nạp động: bundler tách nó thành chunk riêng, chỉ tải khi component thực sự render → code splitting.",
+        "<Suspense fallback={...}> bọc component lazy (hoặc component đọc dữ liệu qua data lib hỗ trợ Suspense) và hiển thị fallback trong lúc chờ.",
+        "Fallback hiện khi bất kỳ con nào đang suspend; nhiều lazy trong cùng một Suspense chia sẻ chung một fallback.",
+        "Dùng phổ biến: split theo route, tab nặng, modal mở theo tương tác.",
+        "Nên kết hợp error boundary để bắt lỗi khi tải chunk thất bại (mạng lỗi)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": "90204-react-lazy-va-suspense-hoat-dong-the-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "c77c51d5-3594-5c1f-bebd-0eb128884c46",
+    "question": "Error boundary trong React là gì? Nó bắt được lỗi loại nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90205-error-boundary-trong-react-la-gi-no-bat-duoc-loi-loai-nao",
+    "slug": "error-boundary-trong-react-la-gi-no-bat-duoc-loi-loai-nao-c77c51d5-3594-5c1f-bebd-0eb128884c46",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Error boundary = một class component cài static getDerivedStateFromError() và/hoặc componentDidCatch(), nó bắt lỗi render của cây con rồi hiện UI dự phòng thay vì làm sập cả app (màn trắng)."
+      ],
+      "details": [
+        "Bắt được: lỗi khi render, trong lifecycle, và constructor của các component con.",
+        "KHÔNG bắt:\n- Lỗi trong event handler (dùng try/catch thường).\n- Code bất đồng bộ (setTimeout, callback fetch).\n- Lỗi ở SSR.\n- Lỗi ném ra từ chính error boundary.",
+        "React chưa có bản hook chính thức → thực tế dùng thư viện react-error-boundary. Đặt nhiều boundary theo tầng (route, widget) để cô lập sự cố cục bộ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": "90205-error-boundary-trong-react-la-gi-no-bat-duoc-loi-loai-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "2b15ba79-6a2d-5295-b484-f4f6293386e6",
+    "question": "Bạn xử lý các trạng thái loading / error / empty của một view lấy dữ liệu thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90405-ban-xu-ly-cac-trang-thai-loading-error-empty-cua-mot-view-lay-du-lieu-the-nao",
+    "slug": "ban-xu-ly-cac-trang-thai-loading-error-empty-cua-mot-view-lay-du-lieu-the-nao-2b15ba79-6a2d-5295-b484-f4f6293386e6",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Một view fetch dữ liệu có bốn trạng thái, không phải một, và tôi thiết kế cả bốn ngay từ đầu: loading, error, empty (thành công nhưng không có dữ liệu), và success có dữ liệu. Bỏ sót empty là lỗi hay gặp — danh sách rỗng lại hiện spinner mãi hoặc màn trắng."
+      ],
+      "details": [],
+      "points": [
+        "Loading → skeleton, không phải spinner đơn thuần. Skeleton mô phỏng đúng layout sắp hiện, nên khi dữ liệu về, layout không bị nhảy (giảm CLS). Spinner giữa màn thì khi có dữ liệu layout đổi đột ngột.",
+        "Chống layout shift: đặt sẵn chiều cao/khung cho ảnh và card (width/height hoặc aspect-ratio) để nội dung về không đẩy mọi thứ xuống. Đây trực tiếp là chỉ số CLS của Web Vitals.",
+        "Error → có message rõ và nút retry. Đừng chỉ in \"Something went wrong\". Cho người dùng hành động: thử lại, hoặc phân biệt lỗi mạng (\"kiểm tra kết nối\") với 4xx/5xx.",
+        "Empty → empty state có ngữ cảnh: giải thích vì sao trống và gợi ý bước tiếp theo (ví dụ \"Chưa có đơn nào — tạo đơn đầu tiên\"), thay vì bảng trống trơn."
+      ],
+      "sections": [
+        "Mẹo: giữ khung ngoài (padding, chiều cao container) cố định qua cả bốn trạng thái để chuyển giữa chúng mượt, không giật."
+      ],
+      "codeExamples": [
+        {
+          "language": "JSX",
+          "code": "if (isLoading) return <Skeleton />\nif (isError) return <ErrorState onRetry={refetch} />\nif (!data?.length) return <EmptyState />  // succeeded but no data\nreturn <List items={data} />"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": "90405-ban-xu-ly-cac-trang-thai-loading-error-empty-cua-mot-view-lay-du-lieu-the-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "a84f9205-9f66-56a9-8bad-ba626480bbf8",
+    "question": "So sánh các pattern tái sử dụng logic trong React: HOC, render props và custom hook — vì sao hooks thắng thế?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "so-sanh-cac-pattern-tai-su-dung-logic-trong-react-hoc-render-props-va-custom-hook-vi-sao-hooks-thang-a84f9205-9f66-56a9-8bad-ba626480bbf8",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "43de41ac-f3c5-5925-a9dc-d3343a87c0c4",
+    "question": "Phân biệt CSR, SSR và SSG? Khi nào dùng cái nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "phan-biet-csr-ssr-va-ssg-khi-nao-dung-cai-nao-43de41ac-f3c5-5925-a9dc-d3343a87c0c4",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 76,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "7f53d866-4ee5-508b-a3a6-c7beddf42594",
+    "question": "useEffect và useLayoutEffect khác nhau thế nào? Khi nào cần useLayoutEffect?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "useeffect-va-uselayouteffect-khac-nhau-the-nao-khi-nao-can-uselayouteffect-7f53d866-4ee5-508b-a3a6-c7beddf42594",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 77,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "2fe274b0-b5d1-5314-80b0-f09e2d0d1916",
+    "question": "Bạn xây một form phức tạp với validation và autosave/draft thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-xay-mot-form-phuc-tap-voi-validation-va-autosave-draft-the-nao-2fe274b0-b5d1-5314-80b0-f09e2d0d1916",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 78,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "a15fd93f-c1d7-5555-958f-a7c4705cbe06",
+    "question": "Bạn sẽ triển khai infinite scroll (hoặc phân trang) cho một danh sách dài thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-se-trien-khai-infinite-scroll-hoac-phan-trang-cho-mot-danh-sach-dai-the-nao-a15fd93f-c1d7-5555-958f-a7c4705cbe06",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 79,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "f9c25638-c5c3-511c-9e7b-216ea74146cf",
+    "question": "React Query (TanStack Query) là gì? staleTime và cache khác nhau ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "react-query-tanstack-query-la-gi-staletime-va-cache-khac-nhau-ra-sao-f9c25638-c5c3-511c-9e7b-216ea74146cf",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 80,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "47ae30a3-c7f8-5564-a35b-e24288edd049",
+    "question": "Hydration là gì? Lỗi hydration mismatch do đâu và tránh thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "hydration-la-gi-loi-hydration-mismatch-do-dau-va-tranh-the-nao-47ae30a3-c7f8-5564-a35b-e24288edd049",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 81,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "24e896a9-6fd7-5bc2-8e9e-4ff5584ad927",
+    "question": "Optimistic update là gì và bạn rollback thế nào khi request thất bại?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "optimistic-update-la-gi-va-ban-rollback-the-nao-khi-request-that-bai-24e896a9-6fd7-5bc2-8e9e-4ff5584ad927",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 82,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "44e7f3d1-79aa-5c3a-a699-aebe0eb71124",
+    "question": "Bạn xử lý protected route và auth state phía client thế nào (redirect khi chưa login, tránh flash nội dung)?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-xu-ly-protected-route-va-auth-state-phia-client-the-nao-redirect-khi-chua-login-tranh-flash-noi-44e7f3d1-79aa-5c3a-a699-aebe0eb71124",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 83,
+    "sourceSlug": null,
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "cdacb61c-a945-543e-a1cf-5f2892dff0a0",
+    "question": "Tree-shaking là gì và dựa vào đâu để hoạt động?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90014-tree-shaking-la-gi-va-dua-vao-dau-de-hoat-dong",
+    "slug": "tree-shaking-la-gi-va-dua-vao-dau-de-hoat-dong-cdacb61c-a945-543e-a1cf-5f2892dff0a0",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tree-shaking = loại bỏ code chết (dead-code elimination): bundler bỏ các export không được import ra khỏi bundle production."
+      ],
+      "details": [
+        "Nó dựa vào cấu trúc tĩnh của ES module — import/export phân tích được lúc build. Vì vậy không được để Babel transpile ESM sang CommonJS nếu muốn tree-shake.",
+        "sideEffects trong package.json báo file nào \"thuần\" (không side effect) để bundler bỏ nguyên module không dùng. Cẩn thận: file CSS import, polyfill có side effect → đừng đặt sideEffects: false tùy tiện để tránh loại nhầm chúng.",
+        "Chỉ hiệu quả đầy đủ ở mode: 'production' (có minify để thực sự xóa code đã đánh dấu)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 84,
+    "sourceSlug": "90014-tree-shaking-la-gi-va-dua-vao-dau-de-hoat-dong",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "166cee7d-1e31-5637-a28a-aab9b549c819",
+    "question": "HTTP caching cho static asset hoạt động thế nào? Cache-Control, ETag và cache busting là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90220-http-caching-cho-static-asset-hoat-dong-the-nao-cache-control-etag-va-cache-bust",
+    "slug": "http-caching-cho-static-asset-hoat-dong-the-nao-cache-control-etag-va-cache-busting-la-gi-166cee7d-1e31-5637-a28a-aab9b549c819",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Trình duyệt cache response theo header từ server, giúp lần truy cập sau không phải tải lại asset:"
+      ],
+      "details": [
+        "Cặp đôi chuẩn: HTML dùng no-cache (luôn revalidate để lấy danh sách asset mới nhất), còn asset có hash cache vĩnh viễn. Đây là mặc định của Next.js/Vite khi build production."
+      ],
+      "points": [
+        "Cache-Control: max-age=N — response còn \"tươi\" trong N giây; trong khoảng đó trình duyệt dùng bản cache không hỏi server (nhanh nhất). Thêm immutable để báo file không bao giờ đổi nội dung.",
+        "ETag (validation): server gắn mã định danh nội dung; khi cache hết hạn, trình duyệt gửi If-None-Match — nội dung chưa đổi thì server trả 304 Not Modified không kèm body → tiết kiệm băng thông nhưng vẫn tốn một round-trip.",
+        "Cache busting bằng hash filename: bundler nhúng hash nội dung vào tên file (app.3f9a1c.js). Nhờ đó asset đặt được max-age=31536000, immutable (cache 1 năm, không bao giờ revalidate) — khi deploy bản mới, nội dung đổi → hash đổi → URL mới, trình duyệt tự tải bản mới."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 85,
+    "sourceSlug": "90220-http-caching-cho-static-asset-hoat-dong-the-nao-cache-control-etag-va-cache-bust",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "6cef2972-7d1c-5209-ad1a-2f1de6e64d7b",
+    "question": "Code splitting và dynamic import() là gì? Khi nào nên tách chunk?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90210-code-splitting-va-dynamic-import-la-gi-khi-nao-nen-tach-chunk",
+    "slug": "code-splitting-va-dynamic-import-la-gi-khi-nao-nen-tach-chunk-6cef2972-7d1c-5209-ad1a-2f1de6e64d7b",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Thay vì gửi một bundle to cho toàn app, code splitting chia thành nhiều chunk tải theo nhu cầu → giảm JS phải parse/execute ban đầu, cải thiện thời gian tương tác (TTI)."
+      ],
+      "details": [
+        "Đánh đổi: chia quá nhỏ thành nhiều chunk → nhiều request và overhead; cân bằng bằng prefetch các chunk sắp cần."
+      ],
+      "points": [
+        "import('./mod') động trả về Promise; bundler (webpack/Vite) tự tách một chunk riêng ngay tại điểm gọi.",
+        "Điểm split phổ biến: theo route, component nặng (chart, editor, map), tính năng chỉ dùng sau khi người dùng tương tác.",
+        "React: React.lazy + <Suspense>. Next.js: next/dynamic."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 86,
+    "sourceSlug": "90210-code-splitting-va-dynamic-import-la-gi-khi-nao-nen-tach-chunk",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "eb1f3ece-c738-543c-ac23-b07fe7cec912",
+    "question": "Tối ưu ảnh và asset trên frontend gồm những kỹ thuật nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90209-toi-uu-anh-va-asset-tren-frontend-gom-nhung-ky-thuat-nao",
+    "slug": "toi-uu-anh-va-asset-tren-frontend-gom-nhung-ky-thuat-nao-eb1f3ece-c738-543c-ac23-b07fe7cec912",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ảnh thường là phần nặng nhất của trang, nên tối ưu:"
+      ],
+      "details": [
+        "Với asset khác: minify, gzip/brotli, và code splitting cho JS/CSS."
+      ],
+      "points": [
+        "Lazy-load ảnh ngoài viewport: <img loading=\"lazy\"> — hoãn tải tới khi gần cuộn đến.",
+        "Responsive images: srcset + sizes để trình duyệt tự chọn kích thước hợp với DPR/viewport → không tải ảnh to thừa trên mobile.",
+        "Định dạng hiện đại: WebP/AVIF nhẹ hơn JPEG/PNG đáng kể; dùng <picture> để fallback.",
+        "Đặt width/height (hoặc aspect-ratio) để tránh layout shift (CLS).",
+        "Nén ảnh, phục vụ qua CDN, preload ảnh LCP, decoding=\"async\"."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 87,
+    "sourceSlug": "90209-toi-uu-anh-va-asset-tren-frontend-gom-nhung-ky-thuat-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "9e057d2c-549c-5fab-8a9a-ae3c4acafaf4",
+    "question": "Core Web Vitals (LCP, INP, CLS) là gì? Đo và cải thiện thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90411-core-web-vitals-lcp-inp-cls-la-gi-do-va-cai-thien-the-nao",
+    "slug": "core-web-vitals-lcp-inp-cls-la-gi-do-va-cai-thien-the-nao-9e057d2c-549c-5fab-8a9a-ae3c4acafaf4",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Core Web Vitals là ba chỉ số Google dùng đánh giá trải nghiệm trang (và là tín hiệu xếp hạng tìm kiếm), tính trên người dùng thật tại percentile 75:"
+      ],
+      "details": [
+        "Đo: field data (người dùng thật) qua CrUX / PageSpeed Insights / thư viện web-vitals; lab data (môi trường tái hiện) qua Lighthouse, DevTools. Google xếp hạng dựa trên field data.",
+        "Cải thiện:\n- LCP: giảm TTFB (cache, CDN), preload ảnh hero + font, không lazy-load ảnh LCP, cắt giảm CSS/JS chặn render.\n- INP: chia nhỏ long task trên main thread, giảm lượng JS chạy lúc tương tác, tránh handler nặng, virtualization cho DOM lớn.\n- CLS: đặt width/height (hoặc aspect-ratio) cho ảnh/video/ads, chừa sẵn chỗ cho nội dung động, font-display: swap để hạn chế nhảy font, animate bằng transform thay vì thuộc tính layout."
+      ],
+      "points": [
+        "LCP (Largest Contentful Paint) — tốc độ tải: thời điểm phần tử nội dung lớn nhất trong viewport hiển thị xong. Tốt ≤ 2.5s.",
+        "INP (Interaction to Next Paint) — độ phản hồi: độ trễ từ tương tác đến frame kế tiếp, xét trên toàn phiên (thay thế FID từ 3/2024). Tốt ≤ 200ms.",
+        "CLS (Cumulative Layout Shift) — ổn định thị giác: tổng mức layout bị xê dịch bất ngờ. Tốt ≤ 0.1."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 88,
+    "sourceSlug": "90411-core-web-vitals-lcp-inp-cls-la-gi-do-va-cai-thien-the-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "42cffc0b-3fe9-5b31-9738-eacdcee71b4d",
+    "question": "SEO là gì? Tại sao frontend developer cần hiểu SEO?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1071-seo-la-gi-tai-sao-frontend-developer-can-hieu-seo",
+    "slug": "seo-la-gi-tai-sao-frontend-developer-can-hieu-seo-42cffc0b-3fe9-5b31-9738-eacdcee71b4d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "SEO (Search Engine Optimization) là tối ưu hóa website để đạt thứ hạng cao trên Google, Bing, và các công cụ tìm kiếm. 68% online experiences bắt đầu từ search engine — frontend developer ảnh hưởng trực tiếp đến khả năng index và rank của trang."
+      ],
+      "details": [
+        "Frontend developer trực tiếp ảnh hưởng SEO vì:"
+      ],
+      "points": [
+        "HTML structure quyết định cách Google hiểu nội dung (semantic tags, heading hierarchy)",
+        "Performance ảnh hưởng ranking (Core Web Vitals là ranking signal từ 2021)",
+        "Rendering strategy quyết định Google có index được content không (CSR vs SSR)",
+        "Technical SEO implementation (meta tags, structured data, sitemap) thường do frontend làm"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 89,
+    "sourceSlug": "1071-seo-la-gi-tai-sao-frontend-developer-can-hieu-seo",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "08bb4aee-e43a-551b-8539-7d41cee19dae",
+    "question": "Meta tags quan trọng nhất cho SEO là gì? Cách viết title và description hiệu quả?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/1072-meta-tags-quan-trong-nhat-cho-seo-la-gi-cach-viet-title-va-description-hieu-qua",
+    "slug": "meta-tags-quan-trong-nhat-cho-seo-la-gi-cach-viet-title-va-description-hieu-qua-08bb4aee-e43a-551b-8539-7d41cee19dae",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Có 5 meta tags quan trọng nhất mà frontend dev cần nắm: title, description, robots, canonical, và Open Graph."
+      ],
+      "details": [
+        "Title tag (<title>): quan trọng nhất, hiển thị trên tab browser và kết quả tìm kiếm. Quy tắc: 50-60 ký tự, chứa keyword chính ở đầu, unique cho mỗi trang, format: 'Primary Keyword - Secondary | Brand'.",
+        "Meta description (<meta name='description'>): mô tả trang hiển thị dưới title trên Google. Quy tắc: 150-160 ký tự, chứa keyword tự nhiên, có call-to-action, unique.",
+        "Meta robots (<meta name='robots'>): điều khiển indexing — index,follow (mặc định), noindex (không index), nofollow (không follow links).",
+        "Canonical (<link rel='canonical'>): chỉ định URL chính thức khi có duplicate content."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 90,
+    "sourceSlug": "1072-meta-tags-quan-trong-nhat-cho-seo-la-gi-cach-viet-title-va-description-hieu-qua",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "aa35037d-fbe7-5f53-9064-b0757ae68661",
+    "question": "CSR, SSR, SSG ảnh hưởng SEO như thế nào? Cách Google crawl SPA?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1077-csr-ssr-ssg-anh-huong-seo-nhu-the-nao-cach-google-crawl-spa",
+    "slug": "csr-ssr-ssg-anh-huong-seo-nhu-the-nao-cach-google-crawl-spa-aa35037d-fbe7-5f53-9064-b0757ae68661",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Rendering strategy là yếu tố critical ảnh hưởng khả năng Google index content — CSR là rủi ro cao nhất, SSR/SSG an toàn nhất."
+      ],
+      "details": [
+        "CSR (Client-Side Rendering): HTML ban đầu trống, JS render content → Google phải chờ JS execute (second wave indexing). Rủi ro: Googlebot có thể timeout, content không index đầy đủ, crawl budget lãng phí.",
+        "SSR (Server-Side Rendering): HTML đầy đủ từ server → Google index ngay lập tức, tốt nhất cho SEO.",
+        "SSG (Static Site Generation): HTML pre-built → nhanh nhất, SEO tốt cho content tĩnh.",
+        "Google crawl SPA: Googlebot dùng Chromium headless (evergreen — luôn theo bản Chrome ổn định từ 2019), render JS rồi mới index — độ trễ render trung bình chỉ vài giây đến vài phút, nhưng CSR vẫn mang rủi ro index: render budget, JS lỗi khiến content không xuất hiện. Nếu bắt buộc CSR: đảm bảo critical content nằm trong initial HTML. Lưu ý Google đã deprecated dynamic rendering (coi là workaround, không phải giải pháp lâu dài) — dùng SSR/SSG hoặc prerendering thay thế."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 91,
+    "sourceSlug": "1077-csr-ssr-ssg-anh-huong-seo-nhu-the-nao-cach-google-crawl-spa",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "98f7e7a5-4358-5fb5-8714-85b5374d909d",
+    "question": "Core Web Vitals là gì? Ảnh hưởng thế nào đến SEO ranking?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/1078-core-web-vitals-la-gi-anh-huong-the-nao-den-seo-ranking",
+    "slug": "core-web-vitals-la-gi-anh-huong-the-nao-den-seo-ranking-98f7e7a5-4358-5fb5-8714-85b5374d909d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Core Web Vitals (CWV) là 3 metrics đo trải nghiệm người dùng, là ranking signal của Google từ 2021. INP thay thế FID từ tháng 3/2024."
+      ],
+      "details": [
+        "LCP (Largest Contentful Paint): thời gian render phần tử lớn nhất (hero image, heading) — target: <2.5s. Cải thiện: optimize images (WebP, lazy load), preload fonts, SSR/SSG.",
+        "INP (Interaction to Next Paint): thời gian phản hồi khi user interact (click, tap) — target: <200ms. Cải thiện: code split, defer heavy JS, reduce main thread work.",
+        "CLS (Cumulative Layout Shift): mức độ layout bị 'nhảy' — target: <0.1. Cải thiện: set width/height cho images/videos, font-display swap, avoid dynamic content injection above fold.",
+        "Google Search Console báo CWV cho từng URL. Trang có CWV tốt được ưu tiên ranking khi 2 trang có relevance tương đương."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 92,
+    "sourceSlug": "1078-core-web-vitals-la-gi-anh-huong-the-nao-den-seo-ranking",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "10347fcb-47b4-59cf-82d6-38b18f862403",
+    "question": "Vừa commit nhầm (message sai hoặc quên file), làm sao sửa mà không tạo commit mới?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/4011-vua-commit-nham-message-sai-hoac-quen-file-lam-sao-sua-ma-khong-tao-commit-moi",
+    "slug": "vua-commit-nham-message-sai-hoac-quen-file-lam-sao-sua-ma-khong-tao-commit-moi-10347fcb-47b4-59cf-82d6-38b18f862403",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Lưu ý quan trọng:\n- --amend tạo commit MỚI với hash khác — không phải edit in-place\n- KHÔNG amend commits trên main/develop hoặc bất kỳ shared branch\n- --force-with-lease an toàn hơn --force — sẽ fail nếu remote có commits mới mà local chưa có (tránh overwrite người khác)\n- Nếu cần sửa commit cũ hơn (không phải last): dùng git rebase -i"
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Amend last commit — chỉ dùng khi commit CHƯA push:"
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# Chỉ sửa message:\ngit commit --amend -m \"feat: correct message here\"\n\n# Thêm file bị quên:\ngit add forgotten-file.ts\ngit commit --amend --no-edit  # giữ nguyên message\n\n# Sửa cả file lẫn message:\ngit add forgotten-file.ts\ngit commit --amend -m \"feat: complete implementation with tests\""
+        },
+        {
+          "language": "BASH",
+          "code": "git commit --amend -m \"corrected message\"\ngit push --force-with-lease origin feature/my-branch"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 93,
+    "sourceSlug": "4011-vua-commit-nham-message-sai-hoac-quen-file-lam-sao-sua-ma-khong-tao-commit-moi",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "812a64ec-201e-5d3d-9177-93ba2f26dffc",
+    "question": "Merge vs Rebase: khi nào dùng cái nào? Giải thích golden rule of rebasing.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4016-merge-vs-rebase-khi-nao-dung-cai-nao-giai-thich-golden-rule-of-rebasing",
+    "slug": "merge-vs-rebase-khi-nao-dung-cai-nao-giai-thich-golden-rule-of-rebasing-812a64ec-201e-5d3d-9177-93ba2f26dffc",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Merge: tạo merge commit, preserve history đầy đủ. git log --graph thấy nhánh. Non-destructive — không thay đổi existing commits."
+      ],
+      "details": [
+        "Rebase: replay commits lên đỉnh của branch khác, tạo linear history. Rewrite commit hashes.",
+        "Golden Rule of Rebasing: KHÔNG BAO GIỜ rebase branch đã được share/push lên remote mà người khác đang dùng.",
+        "Vì sao: rebase tạo commits MỚI với hash khác. Nếu teammate đã pull branch của bạn, họ có commits với hash cũ. Khi bạn force push sau rebase, history của họ và remote diverge → họ phải resolve \"fake conflicts\" khi pull.",
+        "Khi dùng rebase (an toàn):\n- Trên local feature branch chưa push\n- git pull --rebase để sync với remote (thay vì tạo merge commit)\n- Clean up commits trước khi tạo PR: git rebase -i origin/main"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 94,
+    "sourceSlug": "4016-merge-vs-rebase-khi-nao-dung-cai-nao-giai-thich-golden-rule-of-rebasing",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "4d3c7da1-22e4-5866-b517-dad350ceb3b7",
+    "question": "Đang merge feature branch vào main, gặp conflict trong file do cả 2 sides đều refactor. Quy trình resolve an toàn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4021-dang-merge-feature-branch-vao-main-gap-conflict-trong-file-do-ca-2-sides-deu-ref",
+    "slug": "dang-merge-feature-branch-vao-main-gap-conflict-trong-file-do-ca-2-sides-deu-refactor-quy-trinh-reso-4d3c7da1-22e4-5866-b517-dad350ceb3b7",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Worst case conflict: không phải thêm/xóa dòng đơn giản mà là structural refactor — function bị rename, logic được reorganize.",
+        "2. Dùng 3-panel merge tool — git mergetool (trái: ours, phải: theirs, giữa: base — common ancestor, dưới: result). Không resolve bằng tay trong terminal với structural conflict."
+      ],
+      "details": [
+        "3. Resolve và verify: git add src/file.ts, chạy test cho phần code đó TRƯỚC khi git merge --continue.",
+        "4. Sau merge: review lại diff của merge commit — git diff main~1..main -- src/file.ts.",
+        "Quy trình an toàn:",
+        "Nguyên tắc: khi không chắc, chọn solution bảo toàn logic của cả 2 sides thay vì chọn 1 side. Đừng dùng -X ours hay -X theirs với structural conflicts.",
+        "1. Hiểu context trước khi resolve:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "git log --oneline main..feature/my-branch   # commits của feature\ngit log --oneline feature/my-branch..main   # commits của main\ngit diff $(git merge-base HEAD feature/my-branch) feature/my-branch -- src/file.ts"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 95,
+    "sourceSlug": "4021-dang-merge-feature-branch-vao-main-gap-conflict-trong-file-do-ca-2-sides-deu-ref",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "3f4ebe39-28a3-5a38-95bf-2cc6bb80fa0f",
+    "question": "Undo một public commit đã merge vào main: revert vs reset — khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4022-undo-mot-public-commit-da-merge-vao-main-revert-vs-reset-khi-nao-dung-cai-nao",
+    "slug": "undo-mot-public-commit-da-merge-vao-main-revert-vs-reset-khi-nao-dung-cai-nao-3f4ebe39-28a3-5a38-95bf-2cc6bb80fa0f",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Reset (git reset --hard HEAD~1): di chuyển HEAD pointer về commit cũ, xóa commits khỏi history. KHÔNG dùng trên main/shared branch — sẽ cần force push, làm hỏng history của mọi người đã pull.",
+        "Ví dụ thực tế: deploy feature lên production, users báo lỗi nghiêm trọng → git revert -m 1 <merge-commit> → push → deploy → feature bị undo ngay mà không ảnh hưởng history."
+      ],
+      "details": [
+        "Revert (git revert <commit>): tạo commit MỚI undo changes của commit cũ. An toàn cho shared branches vì không rewrite history.",
+        "Khi nào dùng reset: trên local branch chưa share, hoặc clean up local staging area.",
+        "Lưu ý revert merge commit: nếu sau đó muốn re-merge feature đó, phải revert lại revert commit trước — không thể merge thẳng vì git sẽ \"thấy\" commits đã được merge rồi."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# Revert 1 commit:\ngit revert abc123\n# Revert merge commit (phải chỉ định mainline parent):\ngit revert -m 1 abc123  # -m 1 = giữ lại parent thứ 1 (main branch)\n\n# Revert range commits:\ngit revert abc123..def456\n# Revert nhiều commits nhưng chỉ 1 commit revert:\ngit revert --no-commit abc123 def456\ngit commit -m \"revert: remove broken payment feature\""
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 96,
+    "sourceSlug": "4022-undo-mot-public-commit-da-merge-vao-main-revert-vs-reset-khi-nao-dung-cai-nao",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "30ce17a6-d44d-55d5-8455-d81b6bab5deb",
+    "question": "Same-Origin Policy là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90007-same-origin-policy-la-gi",
+    "slug": "same-origin-policy-la-gi-30ce17a6-d44d-55d5-8455-d81b6bab5deb",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Origin = scheme + host + port; hai URL cùng origin khi cả ba khớp (khác scheme http/https, khác port, hay khác subdomain đều là cross-origin)."
+      ],
+      "details": [
+        "SOP hạn chế tương tác cross-origin:\n- Đọc cross-origin (fetch/XHR đọc nội dung response) → chặn mặc định, muốn đọc phải qua CORS.\n- Nhúng cross-origin (<img>, <script>, <link rel=stylesheet>, <iframe>, font) → cho phép, nhưng chỉ lộ metadata chứ không cho JS đọc nội dung.\n- Ghi/điều hướng cross-origin (click link, submit form) → thường cho phép.",
+        "Giao tiếp giữa hai window khác origin dùng window.postMessage."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 97,
+    "sourceSlug": "90007-same-origin-policy-la-gi",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "226d6344-f03a-5f76-ba4d-2ef0b121aa53",
+    "question": "JWT gồm những phần nào? Payload có được mã hóa không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/90011-jwt-gom-nhung-phan-nao-payload-co-duoc-ma-hoa-khong",
+    "slug": "jwt-gom-nhung-phan-nao-payload-co-duoc-ma-hoa-khong-226d6344-f03a-5f76-ba4d-2ef0b121aa53",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "JWT (RFC 7519) gồm 3 phần ngăn bởi dấu chấm: header.payload.signature, mỗi phần mã hóa Base64URL."
+      ],
+      "details": [
+        "Quan trọng: payload chỉ encode chứ KHÔNG encrypt — ai có token đều đọc được nội dung. Vì vậy không đặt thông tin bí mật vào payload trừ khi đã mã hóa (JWE). Token bị ký chống sửa, không chống đọc."
+      ],
+      "points": [
+        "Header: loại token + thuật toán ký (vd HS256).",
+        "Payload: các claim — thông tin về chủ thể + metadata.",
+        "Signature: ký header+payload bằng HMAC/RSA/ECDSA với secret/private key → đảm bảo toàn vẹn (phát hiện nếu bị sửa) và xác nhận nguồn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 98,
+    "sourceSlug": "90011-jwt-gom-nhung-phan-nao-payload-co-duoc-ma-hoa-khong",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "e6e2f122-ee56-5ff4-8b5d-339e903e8e36",
+    "question": "CORS và preflight request là gì? Vì sao hay gặp lỗi CORS?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90006-cors-va-preflight-request-la-gi-vi-sao-hay-gap-loi-cors",
+    "slug": "cors-va-preflight-request-la-gi-vi-sao-hay-gap-loi-cors-e6e2f122-ee56-5ff4-8b5d-339e903e8e36",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Same-Origin Policy chặn fetch/XHR đọc dữ liệu cross-origin; CORS là cơ chế server dùng HTTP header để cho phép origin khác đọc."
+      ],
+      "details": [
+        "Lỗi CORS thường gặp:\n- Thiếu Access-Control-Allow-Origin.\n- Dùng * khi request có credentials — phải ghi origin cụ thể + Access-Control-Allow-Credentials: true.\n- Preflight bị từ chối (OPTIONS không trả 2xx).",
+        "Lưu ý: CORS do trình duyệt thực thi — không phải cơ chế bảo vệ server."
+      ],
+      "points": [
+        "Simple request (GET/HEAD/POST + Content-Type safelisted): không có preflight.",
+        "Preflighted: khi dùng method khác, custom header, hoặc Content-Type: application/json → trình duyệt gửi OPTIONS trước kèm Access-Control-Request-Method/-Headers; server phải trả Access-Control-Allow-Origin/-Methods/-Headers."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 99,
+    "sourceSlug": "90006-cors-va-preflight-request-la-gi-vi-sao-hay-gap-loi-cors",
+    "departments": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "26ee68e8-8596-56f1-a66f-6a827920ce0f",
+    "question": "Luồng refresh token (silent refresh) hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/90002-luong-refresh-token-silent-refresh-hoat-dong-the-nao",
+    "slug": "luong-refresh-token-silent-refresh-hoat-dong-the-nao-26ee68e8-8596-56f1-a66f-6a827920ce0f",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Access token sống ngắn; khi nó hết hạn, client dùng refresh token (sống lâu hơn) gọi endpoint /token để lấy access token mới — không bắt người dùng đăng nhập lại. Đó là \"silent refresh\"."
+      ],
+      "details": [
+        "Refresh token rotation: mỗi lần refresh, server cấp refresh token MỚI và vô hiệu cái cũ. Nếu một refresh token cũ bị dùng lại (dấu hiệu bị đánh cắp/replay), server phát hiện và có thể thu hồi cả chuỗi token của phiên đó.",
+        "Refresh token nên nằm trong cookie HttpOnly; access token mới đưa về in-memory để dùng cho các request kế tiếp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 100,
+    "sourceSlug": "90002-luong-refresh-token-silent-refresh-hoat-dong-the-nao",
+    "departments": [
+      "frontend"
+    ]
+  }
+]

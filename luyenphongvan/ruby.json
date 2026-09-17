@@ -1,0 +1,2108 @@
+[
+  {
+    "id": "ef305c5c-7d87-5d6c-85d8-d757476c4322",
+    "question": "Ruby là gì? Điểm nổi bật so với các ngôn ngữ khác?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10100-ruby-la-gi-diem-noi-bat-so-voi-cac-ngon-ngu-khac",
+    "slug": "ruby-la-gi-diem-noi-bat-so-voi-cac-ngon-ngu-khac-ef305c5c-7d87-5d6c-85d8-d757476c4322",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ruby (Matz, 1995) là ngôn ngữ thông dịch, dynamic typing, thuần hướng đối tượng, theo triết lý \"developer happiness\" — code đọc gần như tiếng Anh."
+      ],
+      "details": [
+        "Khác biệt so với ngôn ngữ khác:\n- Mọi thứ đều là object — kể cả 5 hay nil (viết được 5.times { ... }), khác C/Java vốn có kiểu nguyên thủy riêng.\n- Mọi thứ là biểu thức: if, case, cả phần thân method đều trả về giá trị — khác Java/C#.\n- Block & iterator thay cho for loop: each, map, select ngắn gọn; closure/DSL mạnh hơn Python.\n- Open class + metaprogramming linh hoạt bậc nhất: thêm/định nghĩa lại method lúc chạy — chính là nền tảng làm nên Rails.",
+        "Đánh đổi: chạy chậm hơn ngôn ngữ biên dịch và lỗi kiểu chỉ lộ lúc runtime."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "10100-ruby-la-gi-diem-noi-bat-so-voi-cac-ngon-ngu-khac"
+  },
+  {
+    "id": "d8b98042-2fb1-5d0d-bc36-e53059898f67",
+    "question": "Symbol và String trong Ruby khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10101-symbol-va-string-trong-ruby-khac-nhau-the-nao",
+    "slug": "symbol-va-string-trong-ruby-khac-nhau-the-nao-d8b98042-2fb1-5d0d-bc36-e53059898f67",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng Symbol cho hash key, method name, trạng thái cố định (:pending, :active). Dùng String khi cần thao tác văn bản: cắt, nối, format."
+      ],
+      "details": [
+        "Hình dung: Symbol như \"nhãn dán\" cố định, String như tờ giấy có thể viết đè."
+      ],
+      "points": [],
+      "sections": [
+        "String là mutable, mỗi lần tạo là 1 object mới trong heap. Symbol là immutable, mỗi tên symbol chỉ tồn tại 1 lần trong memory (interned)."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "\"hello\".object_id == \"hello\".object_id  # false — 2 object khác nhau\n:hello.object_id  == :hello.object_id   # true  — cùng 1 object"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "10101-symbol-va-string-trong-ruby-khac-nhau-the-nao"
+  },
+  {
+    "id": "adea237d-8c92-52f4-822f-c83b7f995096",
+    "question": "freeze trong Ruby dùng để làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10102-freeze-trong-ruby-dung-de-lam-gi",
+    "slug": "freeze-trong-ruby-dung-de-lam-gi-adea237d-8c92-52f4-822f-c83b7f995096",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì sao dùng: tránh sửa nhầm hằng số, dùng string làm hash key an toàn, tiết kiệm memory (Ruby có thể cache frozen string)."
+      ],
+      "details": [
+        "String literal trở thành frozen khi bật # frozen_string_literal: true (magic comment có từ Ruby 2.3)."
+      ],
+      "points": [],
+      "sections": [
+        "Object#freeze làm object trở thành immutable — mọi cố gắng sửa đổi sẽ raise FrozenError (Ruby ≥ 2.5) hoặc RuntimeError."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "str = \"hello\"\nstr.freeze\nstr << \" world\"  # => FrozenError: can't modify frozen String\n\n# Kiểm tra\nstr.frozen?  # => true"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "10102-freeze-trong-ruby-dung-de-lam-gi"
+  },
+  {
+    "id": "a604c383-8dff-5fc4-8278-694dc65fef47",
+    "question": "Biến instance (@) và biến class (@@) trong Ruby khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10103-bien-instance-va-bien-class-trong-ruby-khac-nhau-the-nao",
+    "slug": "bien-instance-va-bien-class-trong-ruby-khac-nhau-the-nao-a604c383-8dff-5fc4-8278-694dc65fef47",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Biến instance (@): thuộc về từng object riêng, mỗi instance có bản sao riêng.\nBiến class (@@): chia sẻ giữa mọi instance của class và các subclass.",
+        "Lưu ý: @@ được kế thừa xuống subclass — sửa ở subclass làm thay đổi class cha."
+      ],
+      "details": [
+        "Nhiều Rubyist khuyên dùng class-level instance variable (@var trong context class) thay @@ để tránh rò rỉ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class Counter\n  @@total = 0          # class variable — dùng chung\n\n  def initialize(name)\n    @name = name       # instance variable — riêng mỗi object\n    @@total += 1\n  end\n\n  def self.total = @@total\nend\n\na = Counter.new(\"A\")\nb = Counter.new(\"B\")\nCounter.total  # => 2"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "10103-bien-instance-va-bien-class-trong-ruby-khac-nhau-the-nao"
+  },
+  {
+    "id": "d99f4aee-cb25-5f7f-981a-98886507806b",
+    "question": "Public, private, protected trong Ruby khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10104-public-private-protected-trong-ruby-khac-nhau-the-nao",
+    "slug": "public-private-protected-trong-ruby-khac-nhau-the-nao-d99f4aee-cb25-5f7f-981a-98886507806b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "protected thường dùng để so sánh giữa 2 instance cùng class (ví dụ def >(other); balance > other.balance; end). private được kế thừa và có thể gọi trong subclass nhưng không dùng explicit receiver. Ruby ≥ 2.7: cho phép self.private_method trong cùng object."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Visibility",
+            "Gọi từ bên ngoài",
+            "Gọi trong subclass",
+            "public",
+            "Có",
+            "Có",
+            "Có",
+            "protected",
+            "Không",
+            "Có (instance cùng class/subclass)",
+            "Có",
+            "private",
+            "Không",
+            "Có (implicit receiver)",
+            "Có (implicit receiver)"
+          ]
+        }
+      ]
+    },
+    "legacyId": 5,
+    "sourceSlug": "10104-public-private-protected-trong-ruby-khac-nhau-the-nao"
+  },
+  {
+    "id": "f7b60d3b-f84e-5ca2-9af8-6551ee5364e4",
+    "question": "Block trong Ruby là gì? yield dùng thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10110-block-trong-ruby-la-gi-yield-dung-the-nao",
+    "slug": "block-trong-ruby-la-gi-yield-dung-the-nao-f7b60d3b-f84e-5ca2-9af8-6551ee5364e4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Block là một đoạn code ẩn danh truyền cho method, không phải object, không gán vào biến được."
+      ],
+      "details": [],
+      "points": [
+        "Viết bằng {} (1 dòng) hoặc do...end (nhiều dòng).",
+        "Method gọi block bằng yield."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "def greet\n  puts \"Before\"\n  yield            # gọi block\n  puts \"After\"\nend\n\ngreet { puts \"Hello!\" }\n# Before\n# Hello!\n# After\n\n# yield với argument\ndef double(n)\n  yield(n * 2)\nend\ndouble(5) { |x| puts x }  # => 10\n\n# Kiểm tra block có được truyền không\ndef safe_call\n  yield if block_given?\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "10110-block-trong-ruby-la-gi-yield-dung-the-nao"
+  },
+  {
+    "id": "40563a5b-4510-537a-8167-9b90ab4dfa4d",
+    "question": "Module trong Ruby là gì? Khác class ở điểm nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10120-module-trong-ruby-la-gi-khac-class-o-diem-nao",
+    "slug": "module-trong-ruby-la-gi-khac-class-o-diem-nao-40563a5b-4510-537a-8167-9b90ab4dfa4d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Module là tập hợp method và constant — không thể khởi tạo, không thể kế thừa. Hai vai trò chính:\n1. Namespace — tránh trùng tên: Payments::Invoice vs Mailer::Invoice.\n2. Mixin — include vào class để chia sẻ method."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Class",
+            "Module",
+            "new",
+            "Khởi tạo",
+            "Không",
+            "Kế thừa",
+            "<",
+            "Không",
+            "Mixin",
+            "Không",
+            "include",
+            "include / extend / prepend"
+          ]
+        }
+      ]
+    },
+    "legacyId": 7,
+    "sourceSlug": "10120-module-trong-ruby-la-gi-khac-class-o-diem-nao"
+  },
+  {
+    "id": "17c67cc1-e1f0-576f-90bb-dc5cc275052d",
+    "question": "Cấu trúc xử lý exception trong Ruby như thế nào? begin/rescue/ensure hoạt động ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10140-cau-truc-xu-ly-exception-trong-ruby-nhu-the-nao-begin-rescue-ensure-hoat-dong-ra",
+    "slug": "cau-truc-xu-ly-exception-trong-ruby-nhu-the-nao-begin-rescue-ensure-hoat-dong-ra-sao-17c67cc1-e1f0-576f-90bb-dc5cc275052d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Thứ tự thực thi:\n1. begin — code có thể raise.\n2. rescue — bắt exception theo loại, khớp từ trên xuống.\n3. else — chạy nếu không có exception nào xảy ra.\n4. ensure — luôn luôn chạy (đóng file, release connection)."
+      ],
+      "details": [
+        "Lưu ý: rescue mặc định chỉ bắt StandardError và subclass — không bắt Exception gốc (như SystemExit, NoMemoryError)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "begin\n  result = 10 / 0\nrescue ZeroDivisionError => e\n  puts \"Caught: #{e.message}\"  # Caught: divided by 0\nrescue ArgumentError, TypeError => e\n  puts \"Bad input: #{e.message}\"\nelse\n  puts \"No error, result = #{result}\"  # chạy khi KHÔNG có exception\nensure\n  puts \"Always runs\"  # dọn dẹp resource, luôn chạy dù exception hay không\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "10140-cau-truc-xu-ly-exception-trong-ruby-nhu-the-nao-begin-rescue-ensure-hoat-dong-ra"
+  },
+  {
+    "id": "8a2bd299-2110-52d7-9926-7eef58b4d7a5",
+    "question": "Cây phân cấp Exception trong Ruby như thế nào? Tại sao không nên rescue Exception?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10141-cay-phan-cap-exception-trong-ruby-nhu-the-nao-tai-sao-khong-nen-rescue-exception",
+    "slug": "cay-phan-cap-exception-trong-ruby-nhu-the-nao-tai-sao-khong-nen-rescue-exception-8a2bd299-2110-52d7-9926-7eef58b4d7a5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Tại sao không rescue Exception: nó bắt cả SystemExit và Interrupt — Ctrl+C bị nuốt, process không tắt được."
+      ],
+      "details": [
+        "Luôn dùng rescue StandardError (hoặc subclass cụ thể)."
+      ],
+      "points": [],
+      "sections": [
+        "Exception là gốc của toàn bộ cây:"
+      ],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "Exception\n├── StandardError  ← rescue bắt ở đây mặc định\n│   ├── RuntimeError  ← raise không có class → RuntimeError\n│   ├── ArgumentError\n│   ├── TypeError\n│   ├── NoMethodError\n│   ├── ZeroDivisionError\n│   └── ...\n├── SystemExit      ← exit() / at_exit\n├── Interrupt       ← Ctrl+C / SIGINT\n└── NoMemoryError   ← hết RAM"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "10141-cay-phan-cap-exception-trong-ruby-nhu-the-nao-tai-sao-khong-nen-rescue-exception"
+  },
+  {
+    "id": "08d8c863-411c-5bd7-b851-d681184760a7",
+    "question": "RubyGems và Bundler là gì? Gemfile dùng thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10144-rubygems-va-bundler-la-gi-gemfile-dung-the-nao",
+    "slug": "rubygems-va-bundler-la-gi-gemfile-dung-the-nao-08d8c863-411c-5bd7-b851-d681184760a7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "RubyGems là package manager của Ruby — mỗi thư viện đóng gói thành một gem. CLI: gem install <name>."
+      ],
+      "details": [
+        "Bundler quản lý dependency của project: lock phiên bản cụ thể vào Gemfile.lock, đảm bảo mọi môi trường (dev/staging/prod) dùng đúng version."
+      ],
+      "points": [],
+      "sections": [
+        "bundle install cài gems và tạo/cập nhật Gemfile.lock. Commit Gemfile.lock vào git cho app; với gem/library thì thêm vào .gitignore."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# Gemfile\nsource \"https://rubygems.org\"\nruby \"3.3.0\"\n\ngem \"sinatra\", \"~> 3.1\"  # ~> 3.1 = >= 3.1, < 4.0\ngem \"pg\", \">= 1.5\"\n\ngroup :development, :test do\n  gem \"rspec\"\n  gem \"rubocop\"\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "10144-rubygems-va-bundler-la-gi-gemfile-dung-the-nao"
+  },
+  {
+    "id": "60094fa3-4225-52e1-a2da-5d63ec235060",
+    "question": "Bốn toán tử so sánh bằng trong Ruby (==, eql?, equal?, ===) khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10146-bon-toan-tu-so-sanh-bang-trong-ruby-eql-equal-khac-nhau-the-nao",
+    "slug": "bon-toan-tu-so-sanh-bang-trong-ruby-eql-equal-khac-nhau-the-nao-60094fa3-4225-52e1-a2da-5d63ec235060",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Hình dung: == hỏi \"bằng nhau không?\", equal? hỏi \"có phải cùng một vật không?\"."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "1   == 1.0      # => true  (giá trị bằng)\n1.eql?(1.0)    # => false (khác class: Integer vs Float)\n1.equal?(1)    # => true  (Integer nhỏ cached cùng object)\n\"a\".equal?(\"a\")# => false (2 String object khác nhau)\n\n# === — dùng ngầm trong case/when\ncase 42\nwhen 1..50   then puts \"trong khoảng\"  # Range#=== gọi include?\nwhen Integer then puts \"là integer\"\nend"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Toán tử",
+            "So sánh",
+            "Dùng khi",
+            "==",
+            "giá trị (thường được override)",
+            "so sánh tổng quát",
+            "giá trị và cùng class (dùng cho hash key)",
+            "eql?",
+            "1.eql?(1.0) → false",
+            "object identity — cùng object_id",
+            "kiểm tra cùng object",
+            "1.eql?(1.0)",
+            "\"case equality\" — mỗi class override theo nghĩa riêng",
+            "when trong case",
+            "object_id",
+            "===",
+            "when",
+            "case"
+          ]
+        }
+      ]
+    },
+    "legacyId": 11,
+    "sourceSlug": "10146-bon-toan-tu-so-sanh-bang-trong-ruby-eql-equal-khac-nhau-the-nao"
+  },
+  {
+    "id": "0f6b2064-49db-564c-bc8c-4e6e06ab789c",
+    "question": "each và map khác nhau thế nào trong Ruby? Khi nào dùng cái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10148-each-va-map-khac-nhau-the-nao-trong-ruby-khi-nao-dung-cai-nao",
+    "slug": "each-va-map-khac-nhau-the-nao-trong-ruby-khi-nao-dung-cai-nao-0f6b2064-49db-564c-bc8c-4e6e06ab789c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Quy tắc: Nếu không dùng giá trị trả về → each. Nếu cần array mới → map. map! biến đổi in-place (thay đổi array gốc)."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "map / collect",
+            "each",
+            "Return",
+            "object gốc (self)",
+            "array mới chứa kết quả",
+            "map",
+            "Mục đích",
+            "side-effect (in, ghi file...)",
+            "biến đổi, tạo dữ liệu mới",
+            "collect"
+          ]
+        }
+      ]
+    },
+    "legacyId": 12,
+    "sourceSlug": "10148-each-va-map-khac-nhau-the-nao-trong-ruby-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "f4dce43c-8a8f-5d34-8574-fb9cf7548d36",
+    "question": "attr_accessor, attr_reader, attr_writer trong Ruby là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10150-attr-accessor-attr-reader-attr-writer-trong-ruby-la-gi",
+    "slug": "attr-accessor-attr-reader-attr-writer-trong-ruby-la-gi-f4dce43c-8a8f-5d34-8574-fb9cf7548d36",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba macro này tự động sinh getter/setter cho instance variable:"
+      ],
+      "details": [
+        "Đây là ví dụ metaprogramming cơ bản nhất của Ruby — macro gọi define_method nội bộ để sinh method lúc load class."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Macro",
+            "Sinh ra",
+            "Dùng khi",
+            "attr_reader :x",
+            "chỉ đọc",
+            "chỉ ghi",
+            "cả hai",
+            "def x = @x",
+            "đọc + ghi",
+            "attr_writer :x",
+            "def x=(v); @x=v; end",
+            "attr_accessor :x"
+          ]
+        }
+      ]
+    },
+    "legacyId": 13,
+    "sourceSlug": "10150-attr-accessor-attr-reader-attr-writer-trong-ruby-la-gi"
+  },
+  {
+    "id": "ef2279a3-b372-53a2-8034-b856320b90fe",
+    "question": "Semantic versioning trong Gemfile: ~>, >=, = khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10155-semantic-versioning-trong-gemfile-khac-nhau-the-nao",
+    "slug": "semantic-versioning-trong-gemfile-khac-nhau-the-nao-ef2279a3-b372-53a2-8034-b856320b90fe",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Bundler dùng pessimistic constraint operator ~> (twiddle-wakka) để cân bằng giữa nhận patch/minor mới và tránh breaking change:"
+      ],
+      "details": [
+        "Best practice: dùng ~> với 2 phần số cho app (~> 7.1), 3 phần số cho gem nhạy cảm (~> 1.5.0)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Ràng buộc",
+            "Nghĩa",
+            "Khoảng hợp lệ",
+            "\"~> 2.1\"",
+            "nhận 2.x mới",
+            "chỉ nhận patch 2.1.x",
+            "không giới hạn trên",
+            ">= 2.1, < 3.0",
+            "nguy hiểm với major version",
+            "đúng version này",
+            "pin cứng",
+            "\"~> 2.1.0\"",
+            ">= 2.1.0, < 2.2.0",
+            "\">= 2.1\"",
+            "\"= 2.1.3\""
+          ]
+        }
+      ]
+    },
+    "legacyId": 14,
+    "sourceSlug": "10155-semantic-versioning-trong-gemfile-khac-nhau-the-nao"
+  },
+  {
+    "id": "419f5324-153b-505e-a2de-6d23a4830506",
+    "question": "nil?, empty? và blank? trong Ruby khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10159-nil-empty-va-blank-trong-ruby-khac-nhau-the-nao",
+    "slug": "nil-empty-va-blank-trong-ruby-khac-nhau-the-nao-419f5324-153b-505e-a2de-6d23a4830506",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Quy tắc thực tế: dùng nil? khi cần đúng nil; dùng empty? cho collection; dùng blank? (Rails) khi validate input user vì xử lý cả nil và whitespace."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "nil.nil?      # => true\n\"\".nil?       # => false\n\n\"\".empty?     # => true\n\" \".empty?    # => false   — khoảng trắng không phải empty\nnil.empty?    # => NoMethodError!\n\n# Chỉ Rails:\n\"\".blank?     # => true\n\" \".blank?    # => true    — khác empty?\nnil.blank?    # => true"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Method",
+            "Trả true khi",
+            "Lưu ý",
+            "true",
+            "chỉ khi object là nil",
+            "có trên mọi object (kế thừa Object)",
+            "string/array/hash có độ dài = 0",
+            "nil?",
+            "nil.empty? → NoMethodError",
+            "nil, false, empty?, hoặc chỉ khoảng trắng",
+            "chỉ có trong Rails (ActiveSupport)",
+            "nil",
+            "Object",
+            "empty?",
+            "Rails",
+            "nil.empty?",
+            "NoMethodError"
+          ]
+        }
+      ]
+    },
+    "legacyId": 15,
+    "sourceSlug": "10159-nil-empty-va-blank-trong-ruby-khac-nhau-the-nao"
+  },
+  {
+    "id": "ea07100f-9ca0-5d97-869c-1c3f0593d7ef",
+    "question": "load, require và require_relative trong Ruby khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10160-load-require-va-require-relative-trong-ruby-khac-nhau-the-nao",
+    "slug": "load-require-va-require-relative-trong-ruby-khac-nhau-the-nao-ea07100f-9ca0-5d97-869c-1c3f0593d7ef",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khi nào dùng cái nào:\n- require — gem, stdlib (JSON, Net::HTTP...)\n- require_relative — file trong cùng project\n- load — hiếm; khi muốn reload file đang thay đổi (như config hot-reload)"
+      ],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "load 'utils.rb'          # load lại mỗi lần gọi\nrequire 'json'            # từ gem/stdlib, cache\nrequire_relative 'models/user'  # relative từ file này"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "load",
+            "Đường dẫn",
+            "Phải có đuôi .rb",
+            "Không cần đuôi",
+            "require",
+            "Không cần đuôi",
+            "Caching",
+            "Không — load lại mỗi lần",
+            "require_relative",
+            "Có — chỉ load 1 lần",
+            "Có — chỉ load 1 lần",
+            "Đường dẫn gốc",
+            ".rb",
+            "$LOAD_PATH",
+            "Tương đối so với file hiện tại",
+            "$LOAD_PATH"
+          ]
+        }
+      ]
+    },
+    "legacyId": 16,
+    "sourceSlug": "10160-load-require-va-require-relative-trong-ruby-khac-nhau-the-nao"
+  },
+  {
+    "id": "6f0bb532-c3e5-5116-bac9-d1417c98762e",
+    "question": "super và super() trong Ruby khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10164-super-va-super-trong-ruby-khac-nhau-the-nao",
+    "slug": "super-va-super-trong-ruby-khac-nhau-the-nao-6f0bb532-c3e5-5116-bac9-d1417c98762e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai đều gọi method cùng tên ở superclass, nhưng khác nhau về argument:"
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Lưu ý: dùng super không tường minh khi signature parent và child giống nhau; dùng super(arg1, arg2) hoặc super() khi cần kiểm soát arg."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class Animal\n  def initialize(name, age)\n    @name, @age = name, age\n  end\nend\n\nclass Dog < Animal\n  def initialize(name, age, breed)\n    super(name, age)   # tường minh — chỉ truyền 2 arg\n    @breed = breed\n  end\nend\n\nclass Cat < Animal\n  def initialize(name, age)\n    super           # forward cả name + age\n  end\nend\n\nclass Bird < Animal\n  def initialize(name)\n    super()         # gọi Animal#initialize không arg → ArgumentError sẽ xảy ra nếu parent yêu cầu arg\n  end\nend"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "super",
+            "Argument truyền lên",
+            "Tự động forward tất cả arg của method hiện tại",
+            "Gọi superclass method không có argument",
+            "super()",
+            "tất cả"
+          ]
+        }
+      ]
+    },
+    "legacyId": 17,
+    "sourceSlug": "10164-super-va-super-trong-ruby-khac-nhau-the-nao"
+  },
+  {
+    "id": "9fc48885-9c37-544d-8536-c866d3c3e70f",
+    "question": "respond_to? và is_a? / kind_of? trong Ruby dùng để làm gì? Khi nào dùng cái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/10168-respond-to-va-is-a-kind-of-trong-ruby-dung-de-lam-gi-khi-nao-dung-cai-nao",
+    "slug": "respond-to-va-is-a-kind-of-trong-ruby-dung-de-lam-gi-khi-nao-dung-cai-nao-9fc48885-9c37-544d-8536-c866d3c3e70f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "respond_to?(method_name) — kiểm tra object có thể respond với method đó không (duck typing). Trả false với private method mặc định, trừ khi truyền true làm arg thứ 2.",
+        "Dùng respond_to? khi viết generic code (không quan tâm class, chỉ quan tâm hành vi — đúng tinh thần Ruby)."
+      ],
+      "details": [
+        "is_a?(klass) / kind_of?(klass) — kiểm tra object thuộc class/module đó không (type checking). Cả hai là alias nhau.",
+        "Dùng is_a? khi cần xác nhận type thật sự (bất thường trong Ruby thuần, phổ biến hơn khi tương tác với C extension/API bên ngoài)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "str = \"hello\"\n\nstr.respond_to?(:upcase)   # => true\nstr.respond_to?(:nonexist) # => false\nstr.is_a?(String)           # => true\nstr.is_a?(Comparable)      # => true — cả module\n\n# Ưu tiên respond_to? cho duck typing:\ndef process(obj)\n  if obj.respond_to?(:read)\n    obj.read\n  else\n    raise ArgumentError, \"Expected a readable object\"\n  end\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "10168-respond-to-va-is-a-kind-of-trong-ruby-dung-de-lam-gi-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "d7d0e4c6-7571-5d88-b112-ea1a97ce2a24",
+    "question": "Duck typing trong Ruby là gì? Tại sao đây là điểm mạnh của ngôn ngữ?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10105-duck-typing-trong-ruby-la-gi-tai-sao-day-la-diem-manh-cua-ngon-ngu",
+    "slug": "duck-typing-trong-ruby-la-gi-tai-sao-day-la-diem-manh-cua-ngon-ngu-d7d0e4c6-7571-5d88-b112-ea1a97ce2a24",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "\"Nếu nó đi như vịt và kêu như vịt, thì nó là vịt.\" — Ruby không kiểm tra kiểu của object, chỉ quan tâm object có respond với method được gọi hay không."
+      ],
+      "details": [
+        "Tại sao mạnh: viết code generic không cần interface/abstract class; dễ test (mock bất kỳ object nào có method phù hợp); khuyến khích thiết kế theo hành vi chứ không phải phân cấp kế thừa.",
+        "Phòng thủ bằng respond_to?: obj.write(\"data\") if obj.respond_to?(:write)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "10105-duck-typing-trong-ruby-la-gi-tai-sao-day-la-diem-manh-cua-ngon-ngu"
+  },
+  {
+    "id": "3c326298-e509-546e-927a-dd71fbe9afb7",
+    "question": "Phân biệt proc và lambda trong Ruby?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10111-phan-biet-proc-va-lambda-trong-ruby",
+    "slug": "phan-biet-proc-va-lambda-trong-ruby-3c326298-e509-546e-927a-dd71fbe9afb7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai đều là object Proc, khác ở 2 điểm then chốt:"
+      ],
+      "details": [
+        "1. Kiểm tra arity:\n- lambda: sai số arg → ArgumentError.\n- proc: thiếu → nil, thừa → bỏ qua.",
+        "2. Semantics của return:\n- lambda: return chỉ thoát khỏi lambda.\n- proc: return thoát khỏi method chứa nó (có thể gây LocalJumpError nếu không trong method)."
+      ],
+      "points": [],
+      "sections": [
+        "Hình dung: lambda hành xử như method thật; proc như đoạn code dán thẳng vào chỗ gọi."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "lam = lambda { |x| x * 2 }\nlam.call(3)     # => 6\nlam.call(3, 99) # => ArgumentError\n\npr = proc { |x| x * 2 }\npr.call(3, 99)  # => 6 (99 bị bỏ)\n\n# Phân biệt return\ndef test_lambda\n  lam = lambda { return 10 }\n  lam.call\n  \"after lambda\"  # luôn chạy đến đây\nend\n\ndef test_proc\n  pr = proc { return 10 }\n  pr.call\n  \"after proc\"    # KHÔNG bao giờ chạy\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "10111-phan-biet-proc-va-lambda-trong-ruby"
+  },
+  {
+    "id": "c90bb592-d767-5a87-a9f9-c667c7b959b1",
+    "question": "Enumerable module trong Ruby cung cấp những gì? Cho ví dụ map, select, inject.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10112-enumerable-module-trong-ruby-cung-cap-nhung-gi-cho-vi-du-map-select-inject",
+    "slug": "enumerable-module-trong-ruby-cung-cap-nhung-gi-cho-vi-du-map-select-inject-c90bb592-d767-5a87-a9f9-c667c7b959b1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Enumerable là module mixin — class nào implement each đều có thể include Enumerable để nhận ngay ~60 method: map, select, reject, inject, sort_by, group_by, flat_map...",
+        "Class nào implement each và include Enumerable sẽ nhận toàn bộ ~60 method này miễn phí."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "nums = [1, 2, 3, 4, 5]\n\nnums.map { |n| n ** 2 }              # => [1, 4, 9, 16, 25]\nnums.select(&:odd?)                   # => [1, 3, 5]\nnums.inject(0) { |sum, n| sum + n }  # => 15\nnums.inject(:+)                       # shorthand => 15\n(1..6).group_by { |n| n % 3 }        # => {1=>[1,4], 2=>[2,5], 0=>[3,6]}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "10112-enumerable-module-trong-ruby-cung-cap-nhung-gi-cho-vi-du-map-select-inject"
+  },
+  {
+    "id": "d5f50e70-ae73-5bfb-80f2-d646db27a01d",
+    "question": "Lazy enumerator trong Ruby là gì? Khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10113-lazy-enumerator-trong-ruby-la-gi-khi-nao-nen-dung",
+    "slug": "lazy-enumerator-trong-ruby-la-gi-khi-nao-nen-dung-d5f50e70-ae73-5bfb-80f2-d646db27a01d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Lazy enumerator trì hoãn tính toán cho đến khi giá trị thực sự cần — không tạo array trung gian.",
+        "Khi nào dùng:\n- Dãy vô hạn ((1..)).\n- Pipeline nhiều bước với filter aggressive (phần lớn bị loại sớm).\n- Đọc file lớn từng dòng mà không cần load hết vào memory."
+      ],
+      "details": [
+        "Cực kỳ hữu ích khi xử lý chuỗi vô hạn hoặc pipeline dài."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# Không lazy — tạo mảng trung gian khổng lồ trước khi lấy 5 phần tử\n(1..Float::INFINITY).select(&:odd?).map { |n| n ** 2 }.first(5)\n# => sẽ không bao giờ dừng!\n\n# Lazy — chỉ tính khi cần\n(1..Float::INFINITY).lazy.select(&:odd?).map { |n| n ** 2 }.first(5)\n# => [1, 9, 25, 49, 81]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "10113-lazy-enumerator-trong-ruby-la-gi-khi-nao-nen-dung"
+  },
+  {
+    "id": "223edba0-1cf2-5c93-9458-136b22bc4564",
+    "question": "include, extend, và prepend trong Ruby khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10121-include-extend-va-prepend-trong-ruby-khac-nhau-the-nao",
+    "slug": "include-extend-va-prepend-trong-ruby-khac-nhau-the-nao-223edba0-1cf2-5c93-9458-136b22bc4564",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả 3 đều đưa module vào class, nhưng tác dụng lên method lookup chain khác nhau:"
+      ],
+      "details": [
+        "prepend chèn module trước class trong lookup chain — khi gọi method, module được tìm trước. Thường dùng để wrap method mà không monkey-patch (pattern AOP / decorator): module định nghĩa save gọi super để tiếp tục vào save gốc của class."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Keyword",
+            "Method thêm vào",
+            "Gọi từ",
+            "include",
+            "instance methods",
+            "object instances",
+            "class methods (singleton)",
+            "extend",
+            "class trực tiếp",
+            "instance methods (ưu tiên hơn class)",
+            "object instances, override class methods",
+            "prepend"
+          ]
+        }
+      ]
+    },
+    "legacyId": 23,
+    "sourceSlug": "10121-include-extend-va-prepend-trong-ruby-khac-nhau-the-nao"
+  },
+  {
+    "id": "1b22667e-fe20-501e-ac1d-ba5f3759cd03",
+    "question": "Comparable module trong Ruby dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10122-comparable-module-trong-ruby-dung-de-lam-gi",
+    "slug": "comparable-module-trong-ruby-dung-de-lam-gi-1b22667e-fe20-501e-ac1d-ba5f3759cd03",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Comparable cho phép class định nghĩa thứ tự bằng cách implement duy nhất 1 method <=> (spaceship operator), sau đó nhận miễn phí: <, <=, >, >=, between?, clamp, và cả sort."
+      ],
+      "details": [
+        "<=> trả 0 nếu bằng, -1 nếu nhỏ hơn, 1 nếu lớn hơn. Hình dung: ký <=> một lần, cả module Comparable làm phần còn lại."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "10122-comparable-module-trong-ruby-dung-de-lam-gi"
+  },
+  {
+    "id": "93ab0904-f54b-5327-a614-a6c12a013201",
+    "question": "Open class (Monkey Patching) trong Ruby là gì? Ưu và nhược điểm?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10123-open-class-monkey-patching-trong-ruby-la-gi-uu-va-nhuoc-diem",
+    "slug": "open-class-monkey-patching-trong-ruby-la-gi-uu-va-nhuoc-diem-93ab0904-f54b-5327-a614-a6c12a013201",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ruby cho phép mở lại bất kỳ class nào — kể cả built-in như String, Integer — để thêm hoặc ghi đè method.",
+        "Ưu điểm: DSL ngắn gọn, tự nhiên (Rails dùng rộng rãi: 2.days.ago). Nhược điểm: ghi đè ngầm method của gem khác → bug khó trace; upgrade Ruby/gem có thể conflict; khó biết method đến từ đâu."
+      ],
+      "details": [
+        "Gọi là open class hay monkey patching.",
+        "Thay thế an toàn hơn: Refinement (refine ... using) — monkey patch chỉ có hiệu lực trong scope khai báo using."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class Integer\n  def factorial\n    return 1 if self <= 1\n    self * (self - 1).factorial\n  end\nend\n\n5.factorial  # => 120"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "10123-open-class-monkey-patching-trong-ruby-la-gi-uu-va-nhuoc-diem"
+  },
+  {
+    "id": "4f134459-c74a-574f-9c40-e19427df5443",
+    "question": "Metaprogramming trong Ruby là gì? Cho ví dụ thực tế.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10130-metaprogramming-trong-ruby-la-gi-cho-vi-du-thuc-te",
+    "slug": "metaprogramming-trong-ruby-la-gi-cho-vi-du-thuc-te-4f134459-c74a-574f-9c40-e19427df5443",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Metaprogramming là viết code sinh ra hoặc sửa đổi code khác lúc runtime — thay vì viết cứng từng method, ta dùng các công cụ của Ruby để tự động hóa. Ví dụ đơn giản nhất: attr_accessor :name tự sinh getter + setter thay vì viết thủ công."
+      ],
+      "details": [
+        "Công cụ chính:\n- define_method — định nghĩa method động.\n- method_missing — bắt call đến method chưa tồn tại.\n- send / public_send — gọi method bằng tên string/symbol.\n- class_eval / instance_eval — chạy code trong context class/object.",
+        "Rails dùng metaprogramming rộng rãi: has_many, belongs_to, validates đều là macro sinh method lúc load class."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "10130-metaprogramming-trong-ruby-la-gi-cho-vi-du-thuc-te"
+  },
+  {
+    "id": "80bdd069-eee4-5bac-930a-5f747f34fdb8",
+    "question": "method_missing trong Ruby hoạt động thế nào? Cần lưu ý gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10131-method-missing-trong-ruby-hoat-dong-the-nao-can-luu-y-gi",
+    "slug": "method-missing-trong-ruby-hoat-dong-the-nao-can-luu-y-gi-80bdd069-eee4-5bac-930a-5f747f34fdb8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý bắt buộc:\n1. Luôn super trong nhánh không xử lý để giữ NoMethodError.\n2. Luôn override respond_to_missing? kèm theo — không thì respond_to? trả sai.\n3. method_missing chậm hơn method thật (không được cache). Cân nhắc dùng define_method khi biết trước tên method."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Khi gọi method không tồn tại, Ruby leo lên method lookup chain, không tìm thấy thì gọi method_missing trên object đó."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class DynamicFinder\n  def method_missing(name, *args)\n    if name.to_s.start_with?(\"find_by_\")\n      field = name.to_s.sub(\"find_by_\", \"\")\n      puts \"Finding by #{field} = #{args.first}\"\n    else\n      super   # PHẢI gọi super để các error thực sự vẫn bubble up\n    end\n  end\n\n  def respond_to_missing?(name, include_private = false)\n    name.to_s.start_with?(\"find_by_\") || super\n  end\nend\n\nDynamicFinder.new.find_by_email(\"x@y.com\")  # => Finding by email = x@y.com"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "10131-method-missing-trong-ruby-hoat-dong-the-nao-can-luu-y-gi"
+  },
+  {
+    "id": "381e9260-4026-5b2f-acf9-fc2d493a713c",
+    "question": "define_method khác gì def thông thường? Khi nào dùng define_method?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10132-define-method-khac-gi-def-thong-thuong-khi-nao-dung-define-method",
+    "slug": "define-method-khac-gi-def-thong-thuong-khi-nao-dung-define-method-381e9260-4026-5b2f-acf9-fc2d493a713c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khi dùng define_method:\n- Sinh nhiều method theo pattern (tránh copy-paste).\n- Tên method đến từ data (symbol array, config...).\n- Cần closure (capture biến từ scope tạo method)."
+      ],
+      "details": [
+        "define_method + block là closure, còn def thì không capture biến ngoài."
+      ],
+      "points": [],
+      "sections": [
+        "def là keyword — tên method phải là identifier tĩnh biết lúc viết code. define_method là method nhận tên động (string/symbol), cho phép tạo method theo pattern lúc runtime."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class Status\n  STATES = %i[pending active suspended]\n\n  STATES.each do |state|\n    define_method(\"#{state}?\") do\n      @state == state\n    end\n    define_method(\"#{state}!\") do\n      @state = state\n    end\n  end\nend\n\nobj = Status.new\nobj.active!    # setter\nobj.active?    # => true\nobj.pending?   # => false"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "10132-define-method-khac-gi-def-thong-thuong-khi-nao-dung-define-method"
+  },
+  {
+    "id": "46ac64d5-89aa-5f61-a520-7361cb8088bf",
+    "question": "Cách tạo custom exception trong Ruby? Best practice là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10142-cach-tao-custom-exception-trong-ruby-best-practice-la-gi",
+    "slug": "cach-tao-custom-exception-trong-ruby-best-practice-la-gi-46ac64d5-89aa-5f61-a520-7361cb8088bf",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Best practice:\n- Tên kết thúc bằng Error.\n- Kế thừa StandardError, không phải Exception.\n- Tạo 1 base error class cho mỗi library/module.\n- Thêm context data qua attr_reader để caller biết chi tiết."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Kế thừa từ StandardError (hoặc subclass của nó) — không phải từ Exception gốc."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# Pattern chuẩn: tạo base error cho library, sau đó specialise\nmodule PaymentGateway\n  class Error < StandardError; end\n  class ConnectionError < Error; end\n  class InsufficientFundsError < Error\n    def initialize(amount, balance)\n      super(\"Need #{amount} but only have #{balance}\")\n      @amount  = amount\n      @balance = balance\n    end\n    attr_reader :amount, :balance\n  end\nend\n\n# Caller có thể rescue broad hoặc narrow:\nrescue PaymentGateway::Error => e        # bắt mọi lỗi payment\nrescue PaymentGateway::InsufficientFundsError => e  # chỉ bắt thiếu tiền"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "10142-cach-tao-custom-exception-trong-ruby-best-practice-la-gi"
+  },
+  {
+    "id": "e921beee-e331-55e4-8646-12845f4c6af3",
+    "question": "raise và retry trong Ruby dùng thế nào? Cần lưu ý gì khi dùng retry?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10143-raise-va-retry-trong-ruby-dung-the-nao-can-luu-y-gi-khi-dung-retry",
+    "slug": "raise-va-retry-trong-ruby-dung-the-nao-can-luu-y-gi-khi-dung-retry-e921beee-e331-55e4-8646-12845f4c6af3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "raise ném exception."
+      ],
+      "details": [
+        "Có 3 dạng:"
+      ],
+      "points": [],
+      "sections": [
+        "retry khởi động lại begin block từ đầu — chỉ dùng được trong rescue:",
+        "Lưu ý: retry không có giới hạn → vòng lặp vô tận; không reset state → lặp lỗi mãi; retry blind → che giấu bug thực sự. Rule: luôn có counter/limit và chỉ retry với exception biết cách handle."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "raise                              # re-raise exception hiện tại\nraise \"something went wrong\"       # RuntimeError với message\nraise ArgumentError, \"bad value\"   # explicit class + message"
+        },
+        {
+          "language": "RUBY",
+          "code": "MAX_RETRIES = 3\nattempts = 0\n\nbegin\n  attempts += 1\n  connect_to_api\nrescue NetworkError => e\n  retry if attempts < MAX_RETRIES\n  raise  # hết retry → re-raise\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "10143-raise-va-retry-trong-ruby-dung-the-nao-can-luu-y-gi-khi-dung-retry"
+  },
+  {
+    "id": "bab99cb5-d66d-5518-9cbf-7444c97aebac",
+    "question": "Mutable và immutable trong Ruby: những type nào mặc định immutable?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10147-mutable-va-immutable-trong-ruby-nhung-type-nao-mac-dinh-immutable",
+    "slug": "mutable-va-immutable-trong-ruby-nhung-type-nao-mac-dinh-immutable-bab99cb5-d66d-5518-9cbf-7444c97aebac",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ruby object mặc định mutable (có thể sửa sau khi tạo). Trừ:\n- Integer, Float, Symbol — immutable theo thiết kế ngôn ngữ (không có setter).\n- Bất kỳ object nào đã freeze.\n- String literal khi bật # frozen_string_literal: true (mặc định của Rubocop)."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Hình dung: Integer/Symbol như hằng số toán học — giá trị 5 không thể \"bị sửa\", chỉ có thể tạo 6 mới."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "str = +\"mutable\"   # unary + tạo mutable string (Ruby 2.3+)\nstr << \" OK\"       # => \"mutable OK\"\n\nfrozen_str = -\"immutable\"  # unary - tạo frozen string\nfrozen_str << \"!\"          # => FrozenError\n\n:sym << \"x\"   # NoMethodError — Symbol không có <<\n42.frozen?    # => true — Integer luôn frozen"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "10147-mutable-va-immutable-trong-ruby-nhung-type-nao-mac-dinh-immutable"
+  },
+  {
+    "id": "74336ed5-34c2-5262-a5c4-20e550c2f1cc",
+    "question": "Method lookup chain (MRO) trong Ruby hoạt động thế nào khi có module mixin?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10151-method-lookup-chain-mro-trong-ruby-hoat-dong-the-nao-khi-co-module-mixin",
+    "slug": "method-lookup-chain-mro-trong-ruby-hoat-dong-the-nao-khi-co-module-mixin-74336ed5-34c2-5262-a5c4-20e550c2f1cc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "prepend chèn module trước class trong chain, include chèn sau class (trước superclass)."
+      ],
+      "details": [
+        "Hình dung: ancestors là danh sách ưu tiên tra cứu — phần tử đầu tiên có method phù hợp thắng."
+      ],
+      "points": [],
+      "sections": [
+        "Khi gọi method, Ruby tìm theo thứ tự: object eigenclass → class → prepended modules (LIFO) → included modules (LIFO) → superclass và cứ thế leo lên đến BasicObject."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "module M1; def hello = \"M1\"; end\nmodule M2; def hello = \"M2\"; end\n\nclass Base\n  def hello = \"Base\"\nend\n\nclass Child < Base\n  include M1\n  include M2   # include sau → cao hơn trong chain\nend\n\nChild.ancestors\n# => [Child, M2, M1, Base, Object, Kernel, BasicObject]\n\nChild.new.hello  # => \"M2\"  — M2 được tìm thấy trước"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "10151-method-lookup-chain-mro-trong-ruby-hoat-dong-the-nao-khi-co-module-mixin"
+  },
+  {
+    "id": "afeaddee-cff3-54b0-b1ce-45eb5726cb93",
+    "question": "class_eval và instance_eval trong Ruby dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10153-class-eval-va-instance-eval-trong-ruby-dung-de-lam-gi",
+    "slug": "class-eval-va-instance-eval-trong-ruby-dung-de-lam-gi-afeaddee-cff3-54b0-b1ce-45eb5726cb93",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "class_eval (alias module_eval): chạy block trong ngữ cảnh class — method định nghĩa trong đó là instance method của class đó.",
+        "instance_eval: chạy block trong ngữ cảnh object cụ thể — method định nghĩa là singleton method của object đó."
+      ],
+      "sections": [
+        "Dùng class_eval khi động thêm method vào class biết qua biến (không phải tên literal). instance_eval ít gặp hơn, thường trong DSL builder (Rack middleware config, v.v.)."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "String.class_eval do\n  def palindrome?\n    self == self.reverse\n  end\nend\n\"racecar\".palindrome?  # => true\n\nobj = Object.new\nobj.instance_eval { def greet = \"hello from singleton\" }\nobj.greet  # => \"hello from singleton\""
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "10153-class-eval-va-instance-eval-trong-ruby-dung-de-lam-gi"
+  },
+  {
+    "id": "0c715ca6-82ec-5987-9d6a-126068b25f74",
+    "question": "throw/catch trong Ruby khác gì raise/rescue?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10154-throw-catch-trong-ruby-khac-gi-raise-rescue",
+    "slug": "throw-catch-trong-ruby-khac-gi-raise-rescue-0c715ca6-82ec-5987-9d6a-126068b25f74",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "raise/rescue là cơ chế exception handling — dùng khi có lỗi thật.\nthrow/catch là cơ chế control flow — dùng để thoát khỏi vòng lặp lồng nhau mà không có lỗi gì.",
+        "throw không phải exception — nó không tạo stack trace, không chậm như raise. Dùng khi cần thoát sớm mà break không đủ (vì break chỉ thoát 1 cấp vòng lặp)."
+      ],
+      "details": [
+        "Hình dung: raise như báo cháy; throw như nút eject — thoát nhanh không có cảnh báo."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# throw/catch — thoát sớm khỏi nested loop\nresult = catch(:found) do\n  (1..100).each do |i|\n    (1..100).each do |j|\n      throw(:found, [i, j]) if i * j == 42\n    end\n  end\n  nil  # không tìm thấy\nend\n\nputs result.inspect  # => [1, 42] hoặc [2, 21] ..."
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "10154-throw-catch-trong-ruby-khac-gi-raise-rescue"
+  },
+  {
+    "id": "8820a159-d132-5535-8494-c6eec8ec5900",
+    "question": "Tại sao Ruby có GIL (Global Interpreter Lock)? Ảnh hưởng thế nào đến concurrency?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10156-tai-sao-ruby-co-gil-global-interpreter-lock-anh-huong-the-nao-den-concurrency",
+    "slug": "tai-sao-ruby-co-gil-global-interpreter-lock-anh-huong-the-nao-den-concurrency-8820a159-d132-5535-8494-c6eec8ec5900",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "MRI Ruby (CRuby) có GIL (còn gọi GVL — Global VM Lock): chỉ 1 thread được thực thi Ruby bytecode tại một thời điểm, ngay cả trên multi-core CPU."
+      ],
+      "details": [
+        "Lý do tồn tại: đơn giản hoá garbage collector và C extension — không cần lock từng object.",
+        "Ảnh hưởng:\n- CPU-bound work (tính toán nặng): nhiều thread không tăng hiệu năng → dùng Process.fork hoặc Ractors (Ruby 3.0+).\n- I/O-bound work (HTTP call, DB, file): GIL tự động nhả khi thread chờ I/O → nhiều thread vẫn hữu ích."
+      ],
+      "points": [],
+      "sections": [
+        "JRuby / TruffleRuby không có GIL → parallelism thật sự."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "threads = urls.map { |url| Thread.new { Net::HTTP.get(URI(url)) } }\nthreads.each(&:join)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "10156-tai-sao-ruby-co-gil-global-interpreter-lock-anh-huong-the-nao-den-concurrency"
+  },
+  {
+    "id": "551fc465-964b-5261-94bf-f22d06cc9e02",
+    "question": "Safe navigation operator &. trong Ruby là gì? Khác gì so với .try?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10161-safe-navigation-operator-trong-ruby-la-gi-khac-gi-so-voi-try",
+    "slug": "safe-navigation-operator-trong-ruby-la-gi-khac-gi-so-voi-try-551fc465-964b-5261-94bf-f22d06cc9e02",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác .try (Rails):\n- &. là Ruby core — bảo toàn NoMethodError nếu method không tồn tại trên object thật.\n- .try nuốt cả lỗi khi method không tồn tại — có thể che giấu bug."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "&. (lonely operator / safe navigation, Ruby 2.3+) gọi method chỉ khi receiver không phải nil — nếu nil thì trả về nil thay vì raise NoMethodError.",
+        "Dùng &. trong production Ruby; dùng .try khi thực sự muốn fallback im lặng."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "user = nil\nuser.name           # => NoMethodError!\nuser&.name          # => nil\nuser&.name&.upcase  # => nil — chain dừng ngay khi gặp nil\n\nuser = User.new(name: \"Alice\")\nuser&.name          # => \"Alice\""
+        },
+        {
+          "language": "RUBY",
+          "code": "42.try(:nonexistent)  # => nil  (nuốt lỗi)\n42&.nonexistent       # => NoMethodError (đúng hành vi)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "10161-safe-navigation-operator-trong-ruby-la-gi-khac-gi-so-voi-try"
+  },
+  {
+    "id": "20db64d8-1f82-50ab-ada8-fc93ab453a10",
+    "question": "Symbol#to_proc và & operator hoạt động thế nào? Khi nào dùng &method(:name)?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10162-symbol-to-proc-va-operator-hoat-dong-the-nao-khi-nao-dung-method-name",
+    "slug": "symbol-to-proc-va-operator-hoat-dong-the-nao-khi-nao-dung-method-name-20db64d8-1f82-50ab-ada8-fc93ab453a10",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "& trước một object sẽ gọi to_proc trên nó rồi truyền kết quả như một block."
+      ],
+      "details": [
+        "Symbol implement to_proc để tạo block gọi method cùng tên trên mỗi phần tử."
+      ],
+      "points": [],
+      "sections": [
+        "Khi dùng &method(:name): khi muốn pass một method (không phải method của element) vào iterator — ví dụ method(:puts), method(:validate), hoặc bất kỳ method cần nhận element làm argument đầu tiên."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# Dài dòng:\n[1, 2, 3].map { |n| n.to_s }   # => [\"1\", \"2\", \"3\"]\n\n# Ngắn hơn với Symbol#to_proc:\n[1, 2, 3].map(&:to_s)           # => [\"1\", \"2\", \"3\"]\n\n# &method(:name) — khi method nhận argument (không phải receiver)\nwords = [\"hello\", \"WORLD\"]\nwords.select(&method(:puts))   # puts mỗi phần tử\n\ndef odd?(n) = n.odd?\n[1, 2, 3, 4].select(&method(:odd?))  # => [1, 3]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "10162-symbol-to-proc-va-operator-hoat-dong-the-nao-khi-nao-dung-method-name"
+  },
+  {
+    "id": "99c05d89-2833-54df-a808-0e064dd9c460",
+    "question": "tap và then/yield_self trong Ruby dùng để làm gì? Khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10163-tap-va-then-yield-self-trong-ruby-dung-de-lam-gi-khac-nhau-the-nao",
+    "slug": "tap-va-then-yield-self-trong-ruby-dung-de-lam-gi-khac-nhau-the-nao-99c05d89-2833-54df-a808-0e064dd9c460",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai đều yield self vào block, nhưng return value khác:"
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "yield_self là tên gốc (Ruby 2.5), then là alias thêm ở Ruby 2.6 — hiện nay ưu tiên dùng then vì đọc tự nhiên hơn."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# tap — trả về self, không ảnh hưởng pipeline\n[1, 2, 3]\n  .map { |n| n * 2 }\n  .tap { |arr| puts \"After map: #{arr}\" }  # debug\n  .select(&:odd?)\n# => []\n\n# then — trả về kết quả block, tiếp tục biến đổi\nuser_id = 42\nuser_id\n  .then { |id| User.find(id) }\n  .then { |user| user.profile }\n  .then { |profile| profile.avatar_url }"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Method",
+            "Return",
+            "Dùng khi",
+            "tap",
+            "self (object gốc)",
+            "debug, side-effect giữa chain",
+            "then / yield_self",
+            "self",
+            "giá trị block trả về",
+            "transform, tích hợp non-chainable func vào pipeline",
+            "then",
+            "yield_self"
+          ]
+        }
+      ]
+    },
+    "legacyId": 38,
+    "sourceSlug": "10163-tap-va-then-yield-self-trong-ruby-dung-de-lam-gi-khac-nhau-the-nao"
+  },
+  {
+    "id": "502a3159-4f48-5b2f-8966-ebc1b029b9c2",
+    "question": "dup và clone trong Ruby khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10165-dup-va-clone-trong-ruby-khac-nhau-the-nao",
+    "slug": "dup-va-clone-trong-ruby-khac-nhau-the-nao-502a3159-4f48-5b2f-8966-ebc1b029b9c2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai tạo shallow copy của object — instance variable được sao chép theo tham chiếu (nested object vẫn là cùng 1 object). Điểm khác biệt:"
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Quy tắc: dup khi muốn bản sao mutable sạch; clone khi cần giữ nguyên tính chất object."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "original = \"hello\".freeze\n\noriginal.dup.frozen?    # => false  — unfrozen copy\noriginal.clone.frozen?  # => true   — vẫn frozen\n\n# Singleton method\nobj = Object.new\ndef obj.greet = \"hi\"\n\nobj.dup.greet    # => NoMethodError — singleton không được copy\nobj.clone.greet  # => \"hi\""
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "dup",
+            "Giữ frozen state",
+            "Không — luôn tạo object mutable",
+            "Có — copy vẫn frozen nếu original frozen",
+            "clone",
+            "Giữ singleton methods",
+            "Không",
+            "Có",
+            "Giữ extended modules",
+            "Không",
+            "Có"
+          ]
+        }
+      ]
+    },
+    "legacyId": 39,
+    "sourceSlug": "10165-dup-va-clone-trong-ruby-khac-nhau-the-nao"
+  },
+  {
+    "id": "caa074fa-c168-59d3-8dca-73dc8c90e840",
+    "question": "alias và alias_method trong Ruby khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10166-alias-va-alias-method-trong-ruby-khac-nhau-the-nao",
+    "slug": "alias-va-alias-method-trong-ruby-khac-nhau-the-nao-caa074fa-c168-59d3-8dca-73dc8c90e840",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng alias_method trong module/metaprogramming."
+      ],
+      "details": [
+        "Dùng alias khi cần cú pháp đơn giản trong class body."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class Parent\n  def greet = \"hello from Parent\"\n  alias_method :hi, :greet\nend\n\nclass Child < Parent\n  def greet = \"hello from Child\"\nend\n\nChild.new.hi   # => \"hello from Child\"  (alias_method — dynamic)\n\n# Nếu dùng alias trong Parent:\n# Child.new.hi   # => \"hello from Parent\"  (alias — static)"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "alias",
+            "Loại",
+            "Keyword (cú pháp ngôn ngữ)",
+            "Method của Module",
+            "alias_method",
+            "Cú pháp",
+            "alias new_name old_name (không dấu phẩy, chỉ symbol/bare word)",
+            "alias_method :new_name, :old_name (symbol/string, dấu phẩy)",
+            "alias new_name old_name",
+            "Tên động",
+            "Không hỗ trợ",
+            "Có — nhận biến/expression",
+            "alias_method :new_name, :old_name"
+          ]
+        }
+      ]
+    },
+    "legacyId": 40,
+    "sourceSlug": "10166-alias-va-alias-method-trong-ruby-khac-nhau-the-nao"
+  },
+  {
+    "id": "c8b219db-a1c1-5a3f-b77b-674fa2c51215",
+    "question": "Method chaining trong Ruby là gì? Cách implement một chainable API?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10169-method-chaining-trong-ruby-la-gi-cach-implement-mot-chainable-api",
+    "slug": "method-chaining-trong-ruby-la-gi-cach-implement-mot-chainable-api-c8b219db-a1c1-5a3f-b77b-674fa2c51215",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Method chaining là kỹ thuật gọi nhiều method liên tiếp trên cùng một object bằng cách mỗi method trả về self.",
+        "ActiveRecord, Arel và hầu hết Ruby DSL đều dùng pattern này."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class QueryBuilder\n  def initialize\n    @conditions = []\n    @order = nil\n    @limit = nil\n  end\n\n  def where(condition)\n    @conditions << condition\n    self  # trả về self để chain tiếp\n  end\n\n  def order(column)\n    @order = column\n    self\n  end\n\n  def limit(n)\n    @limit = n\n    self\n  end\n\n  def to_sql\n    sql = \"SELECT * FROM users\"\n    sql += \" WHERE #{@conditions.join(' AND ')}\" unless @conditions.empty?\n    sql += \" ORDER BY #{@order}\" if @order\n    sql += \" LIMIT #{@limit}\" if @limit\n    sql\n  end\nend\n\nQueryBuilder.new\n  .where(\"age > 18\")\n  .where(\"active = true\")\n  .order(\"name\")\n  .limit(10)\n  .to_sql\n# => \"SELECT * FROM users WHERE age > 18 AND active = true ORDER BY name LIMIT 10\""
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "10169-method-chaining-trong-ruby-la-gi-cach-implement-mot-chainable-api"
+  },
+  {
+    "id": "a7898d8b-02a0-5dfd-87bc-3b69b38c9122",
+    "question": "Thread-safe Singleton pattern trong Ruby implement thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10170-thread-safe-singleton-pattern-trong-ruby-implement-the-nao",
+    "slug": "thread-safe-singleton-pattern-trong-ruby-implement-the-nao-a7898d8b-02a0-5dfd-87bc-3b69b38c9122",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Singleton module dùng Mutex nội bộ để đảm bảo instance chỉ được tạo 1 lần dù nhiều thread cùng gọi lần đầu."
+      ],
+      "details": [
+        "Ứng dụng: config object, connection pool (1 instance), logger dùng chung, registry global. Lưu ý: Singleton là global state — khó test; cân nhắc dependency injection thay thế trong code production."
+      ],
+      "points": [],
+      "sections": [
+        "Ruby có module Singleton trong stdlib — include nó để tạo class chỉ có đúng 1 instance, thread-safe:"
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "require 'singleton'\n\nclass AppConfig\n  include Singleton\n\n  attr_accessor :debug, :log_level\n\n  def initialize\n    @debug     = false\n    @log_level = :info\n  end\nend\n\nconfig = AppConfig.instance\nconfig.debug = true\n\nAppConfig.instance.equal?(config)  # => true — cùng object\nAppConfig.new                       # => NoMethodError — private"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "10170-thread-safe-singleton-pattern-trong-ruby-implement-the-nao"
+  },
+  {
+    "id": "dfcb6b85-148e-5f05-abeb-0a3b13068d64",
+    "question": "Marshal trong Ruby là gì? Khi nào dùng và khi nào không nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10171-marshal-trong-ruby-la-gi-khi-nao-dung-va-khi-nao-khong-nen-dung",
+    "slug": "marshal-trong-ruby-la-gi-khi-nao-dung-va-khi-nao-khong-nen-dung-dfcb6b85-148e-5f05-abeb-0a3b13068d64",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Marshal là module serialization built-in của Ruby — chuyển đổi object thành binary string (dump) và khôi phục lại (load).",
+        "Khi dùng: cache phức tạp (Rails session store mặc định là Marshal), queue serialization (Sidekiq với một số cấu hình), gRPC/IPC nội bộ Ruby process."
+      ],
+      "details": [
+        "Hoàn toàn Ruby-specific, không portable qua ngôn ngữ khác.",
+        "Khi KHÔNG dùng:\n- Input từ user/network — Marshal.load trên data không tin cậy cho phép remote code execution (lỗ hổng bảo mật nghiêm trọng).\n- Lưu trữ lâu dài hoặc chia sẻ với ngôn ngữ khác — dùng JSON/MessagePack."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "class Point\n  attr_reader :x, :y\n  def initialize(x, y)\n    @x, @y = x, y\n  end\nend\n\npoint = Point.new(3, 4)\n\n# Serialize → binary\nbinary = Marshal.dump(point)\n\n# Deserialize ← binary\nrestored = Marshal.load(binary)\nputs restored.x  # => 3"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "10171-marshal-trong-ruby-la-gi-khi-nao-dung-va-khi-nao-khong-nen-dung"
+  },
+  {
+    "id": "edad6429-9134-52cc-b811-64c905d6fabf",
+    "question": "Cách implement một custom Enumerator trong Ruby? Enumerator.new dùng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10172-cach-implement-mot-custom-enumerator-trong-ruby-enumerator-new-dung-the-nao",
+    "slug": "cach-implement-mot-custom-enumerator-trong-ruby-enumerator-new-dung-the-nao-edad6429-9134-52cc-b811-64c905d6fabf",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Enumerator.new nhận một block với yielder — gọi yielder << value (hoặc yielder.yield value) để emit từng giá trị."
+      ],
+      "details": [
+        "Giá trị chỉ được tính khi caller yêu cầu (lazy-compatible)."
+      ],
+      "points": [],
+      "sections": [
+        "enum_for(:method_name) (alias to_enum) là cách tiêu chuẩn cho method each trả về Enumerator khi không có block — giúp tương thích với .lazy, .map, .select."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "# Fibonacci vô hạn\nfib = Enumerator.new do |yielder|\n  a, b = 0, 1\n  loop do\n    yielder << a\n    a, b = b, a + b\n  end\nend\n\nfib.first(8)          # => [0, 1, 1, 2, 3, 5, 8, 13]\nfib.lazy.select(&:odd?).first(5)  # => [1, 1, 3, 5, 13]\n\n# Custom Enumerator trên class có sẵn\nclass BinaryTree\n  def each\n    return enum_for(:each) unless block_given?  # tạo Enumerator nếu không có block\n    # ... traverse logic\n  end\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "10172-cach-implement-mot-custom-enumerator-trong-ruby-enumerator-new-dung-the-nao"
+  },
+  {
+    "id": "0cfd56d1-f3be-59f7-94b4-e614ecedde3e",
+    "question": "Làm thế nào để implement method chaining với exception handling an toàn trong Ruby (Railway-Oriented Programming)?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/10175-lam-the-nao-de-implement-method-chaining-voi-exception-handling-an-toan-trong-ru",
+    "slug": "lam-the-nao-de-implement-method-chaining-voi-exception-handling-an-toan-trong-ruby-railway-oriented-0cfd56d1-f3be-59f7-94b4-e614ecedde3e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Railway-Oriented Programming (ROP) áp dụng Result pattern — mỗi bước trả về success hoặc failure, chain chỉ tiếp tục khi success.",
+        "Gem dry-rb (dry-monads, dry-validation) cung cấp full ROP/monad cho production."
+      ],
+      "details": [
+        "Cách đơn giản nhất trong Ruby là dùng gem dry-monads hoặc tự implement với Struct:",
+        "Pattern này tránh exception cho business logic — exception chỉ dùng cho lỗi hệ thống thực sự."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "Success = Struct.new(:value)\nFailure = Struct.new(:error)\n\ndef parse_age(input)\n  n = Integer(input)\n  n > 0 ? Success.new(n) : Failure.new(\"Age must be positive\")\nrescue ArgumentError\n  Failure.new(\"Not a valid integer\")\nend\n\ndef validate_adult(age)\n  age >= 18 ? Success.new(age) : Failure.new(\"Must be 18+\")\nend\n\nresult = parse_age(\"25\")\nresult = validate_adult(result.value) if result.is_a?(Success)\n\ncase result\nin Success[value] then puts \"Valid age: #{value}\"\nin Failure[error] then puts \"Error: #{error}\"\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "10175-lam-the-nao-de-implement-method-chaining-voi-exception-handling-an-toan-trong-ru"
+  },
+  {
+    "id": "eb48b945-4f94-581e-8640-b3929aa9de87",
+    "question": "yield và nhận block tường minh bằng &block khác nhau thế nào? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96710-yield-va-nhan-block-tuong-minh-bang-block-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "slug": "yield-va-nhan-block-tuong-minh-bang-block-khac-nhau-the-nao-khi-nao-dung-cai-nao-eb48b945-4f94-581e-8640-b3929aa9de87",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác biệt cần biết:\n- yield không cấp phát object; &block tạo một Proc mỗi lần gọi method → chậm hơn một chút, đáng quan tâm ở đường dẫn nóng.\n- Chỉ có &block mới truyền block sang method khác được (other_method(&block)), hoặc lưu vào biến instance để gọi sau.\n- Gọi yield khi không có block sẽ ném LocalJumpError. Kiểm tra trước bằng block_given? (với block ẩn) hoặc unless block (với block tường minh).",
+        "Chọn: mặc định dùng yield — ngắn và nhanh hơn."
+      ],
+      "details": [
+        "Chuyển sang &block khi cần truyền tiếp, lưu lại, hoặc kiểm tra block."
+      ],
+      "points": [],
+      "sections": [
+        "yield gọi block ẩn mà method nhận được; &block chuyển block thành một object Proc để có thể lưu, truyền tiếp hoặc kiểm tra."
+      ],
+      "codeExamples": [
+        {
+          "language": "RUBY",
+          "code": "def with_retry_implicit\n  yield                       # implicit block, nothing allocated\nend\n\ndef with_retry_explicit(&block)\n  raise ArgumentError, 'block required' unless block\n  Retryer.new.run(&block)     # can be stored and forwarded\nend"
+        },
+        {
+          "language": "RUBY",
+          "code": "def each_item\n  return to_enum(:each_item) unless block_given?  # usable without a block\n  @items.each { |i| yield i }\nend"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "96710-yield-va-nhan-block-tuong-minh-bang-block-khac-nhau-the-nao-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "46255af5-52d8-57c2-bac5-c992df7e5d05",
+    "question": "Giải thích Closure trong Ruby. Block có phải closure không?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "giai-thich-closure-trong-ruby-block-co-phai-closure-khong-46255af5-52d8-57c2-bac5-c992df7e5d05",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": null
+  },
+  {
+    "id": "80260895-6bc1-58d2-9489-2b6bd46fbd1b",
+    "question": "Singleton method trong Ruby là gì? self. và eigenclass liên quan thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "singleton-method-trong-ruby-la-gi-self-va-eigenclass-lien-quan-the-nao-80260895-6bc1-58d2-9489-2b6bd46fbd1b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": null
+  },
+  {
+    "id": "ead91941-04b7-5f3e-a991-c07474daa245",
+    "question": "Hook methods trong Ruby là gì? Nêu ví dụ inherited, included, extended.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "hook-methods-trong-ruby-la-gi-neu-vi-du-inherited-included-extended-ead91941-04b7-5f3e-a991-c07474daa245",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": null
+  },
+  {
+    "id": "3d385c25-e8ec-54e4-bb3d-4083cbeb9c5f",
+    "question": "send và public_send trong Ruby khác nhau thế nào? Khi nào nên dùng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "send-va-public-send-trong-ruby-khac-nhau-the-nao-khi-nao-nen-dung-3d385c25-e8ec-54e4-bb3d-4083cbeb9c5f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": null
+  },
+  {
+    "id": "992314c5-8571-5330-9854-aa6290be025f",
+    "question": "Garbage Collection trong Ruby hoạt động thế nào? Generational GC là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "garbage-collection-trong-ruby-hoat-dong-the-nao-generational-gc-la-gi-992314c5-8571-5330-9854-aa6290be025f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": null
+  },
+  {
+    "id": "d7c0070b-bb12-5f4e-b847-59b5e2a0c5b0",
+    "question": "Fiber trong Ruby là gì? Khác Thread thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "fiber-trong-ruby-la-gi-khac-thread-the-nao-d7c0070b-bb12-5f4e-b847-59b5e2a0c5b0",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": null
+  },
+  {
+    "id": "81168293-0e9c-5ba2-9612-c2a1c710eca7",
+    "question": "Struct trong Ruby là gì? Khi nào nên dùng Struct thay vì class?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "struct-trong-ruby-la-gi-khi-nao-nen-dung-struct-thay-vi-class-81168293-0e9c-5ba2-9612-c2a1c710eca7",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": null
+  },
+  {
+    "id": "dfcc935c-7b26-50b3-b20a-7d43715f8d85",
+    "question": "ObjectSpace trong Ruby là gì? Dùng để làm gì trong thực tế?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "objectspace-trong-ruby-la-gi-dung-de-lam-gi-trong-thuc-te-dfcc935c-7b26-50b3-b20a-7d43715f8d85",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": null
+  },
+  {
+    "id": "9a3f3cde-83d8-5b6b-a463-048f6efe1440",
+    "question": "Pattern matching trong Ruby (Ruby 3.0+) là gì? Cho ví dụ in và case/in.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "pattern-matching-trong-ruby-ruby-3-0-la-gi-cho-vi-du-in-va-case-in-9a3f3cde-83d8-5b6b-a463-048f6efe1440",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": null
+  },
+  {
+    "id": "accf2f6b-fb4d-5775-8908-2a6738f1dda8",
+    "question": "Refinement trong Ruby là gì? Khác Monkey Patching thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "refinement-trong-ruby-la-gi-khac-monkey-patching-the-nao-accf2f6b-fb4d-5775-8908-2a6738f1dda8",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": null
+  },
+  {
+    "id": "53fe5888-6e84-5a5a-a721-ed85faa580ad",
+    "question": "Ractor trong Ruby (3.0+) là gì? Giải quyết vấn đề gì mà Thread không làm được?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ractor-trong-ruby-3-0-la-gi-giai-quyet-van-de-gi-ma-thread-khong-lam-duoc-53fe5888-6e84-5a5a-a721-ed85faa580ad",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": null
+  },
+  {
+    "id": "1a1c38fd-0bac-511d-a348-e27217ec9232",
+    "question": "frozen_string_literal: true magic comment trong Ruby là gì? Ảnh hưởng thế nào đến performance?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "frozen-string-literal-true-magic-comment-trong-ruby-la-gi-anh-huong-the-nao-den-performance-1a1c38fd-0bac-511d-a348-e27217ec9232",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": null
+  },
+  {
+    "id": "8d6cf48a-aa0f-553e-b0fc-cda25e2db92c",
+    "question": "Data.define trong Ruby 3.2 là gì? Khác Struct ở điểm nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "data-define-trong-ruby-3-2-la-gi-khac-struct-o-diem-nao-8d6cf48a-aa0f-553e-b0fc-cda25e2db92c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": null
+  },
+  {
+    "id": "c466f454-b7c2-5b60-ab54-f050dea24dc4",
+    "question": "Puma nên cấu hình bao nhiêu worker và bao nhiêu thread? GVL ảnh hưởng thế nào tới quyết định đó?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "puma-nen-cau-hinh-bao-nhieu-worker-va-bao-nhieu-thread-gvl-anh-huong-the-nao-toi-quyet-dinh-do-c466f454-b7c2-5b60-ab54-f050dea24dc4",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": null
+  },
+  {
+    "id": "2047991a-bd05-5647-b71a-03ddb876447f",
+    "question": "Process Puma/Sidekiq tăng RAM dần rồi không tụt lại. Đây có phải memory leak không? Xử lý thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "process-puma-sidekiq-tang-ram-dan-roi-khong-tut-lai-day-co-phai-memory-leak-khong-xu-ly-the-nao-2047991a-bd05-5647-b71a-03ddb876447f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": null
+  }
+]

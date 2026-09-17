@@ -1,0 +1,2786 @@
+[
+  {
+    "id": "c8ee1d12-d334-5161-a8e1-429c2bf24f7c",
+    "question": "Django là gì và khi nào nên chọn nó?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/9200-django-la-gi-va-khi-nao-nen-chon-no",
+    "slug": "django-la-gi-va-khi-nao-nen-chon-no-c8ee1d12-d334-5161-a8e1-429c2bf24f7c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Django là web framework Python kiểu \"batteries-included\" — ORM, admin, auth, form, template, migration đều có sẵn. Cài xong là gần như đủ đồ để dựng một app production, không phải đi gom 5–7 thư viện rời rồi tự ráp lại."
+      ],
+      "details": [
+        "Hợp với: app server-rendered nhiều trang quản trị, dự án nhiều bảng cần migrations + admin panel cho team non-dev nhập liệu, hoặc prototype nhanh cho startup. Còn nếu chỉ làm REST API thuần kiểu microservice hay cần async-first hiệu năng cao thì FastAPI thường gọn hơn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "9200-django-la-gi-va-khi-nao-nen-chon-no"
+  },
+  {
+    "id": "7b1adc95-704a-5556-8853-ab0f97332c70",
+    "question": "Kiến trúc MVT của Django khác MVC ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/9201-kien-truc-mvt-cua-django-khac-mvc-ra-sao",
+    "slug": "kien-truc-mvt-cua-django-khac-mvc-ra-sao-7b1adc95-704a-5556-8853-ab0f97332c70",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Django dùng MVT (Model–View–Template) — bản chất giống MVC nhưng đổi tên cho khớp vai trò thực tế. Model = bảng + business logic, View = function/class nhận request trả response (đóng vai Controller trong MVC), Template = file HTML render dữ liệu (đóng vai View trong MVC)."
+      ],
+      "details": [
+        "Điểm hay làm người mới lạc: \"View\" của Django không phải lớp hiển thị — nó là nơi quyết định request đi đâu, gọi gì, trả gì. Việc render HTML là của Template."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "request → URLconf → View (gọi Model, chọn Template) → Response"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "9201-kien-truc-mvt-cua-django-khac-mvc-ra-sao"
+  },
+  {
+    "id": "33f83ec0-6ad9-535a-9a9a-3f8f65f5952c",
+    "question": "Project và app trong Django khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/9202-project-va-app-trong-django-khac-nhau-the-nao",
+    "slug": "project-va-app-trong-django-khac-nhau-the-nao-33f83ec0-6ad9-535a-9a9a-3f8f65f5952c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Project là toàn bộ website — 1 settings, 1 deployment. App là một module nghiệp vụ nằm trong project, đóng gói riêng models.py, views.py, urls.py, migrations/, có thể bê đi cài lại ở project khác. Một project chứa nhiều app."
+      ],
+      "details": [
+        "Ví dụ một shop: project mystore chứa các app accounts (user/profile), catalog (product/category), orders (cart/checkout), payments (gateway). Mỗi app gói trọn một mảng nghiệp vụ — đó chính là ý \"reusable app\" mà Django nhắc tới."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "9202-project-va-app-trong-django-khac-nhau-the-nao"
+  },
+  {
+    "id": "77b473c0-a2df-512d-a229-31c4e9e32a2b",
+    "question": "manage.py để làm gì và hay dùng lệnh nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/9204-manage-py-de-lam-gi-va-hay-dung-lenh-nao",
+    "slug": "manage-py-de-lam-gi-va-hay-dung-lenh-nao-77b473c0-a2df-512d-a229-31c4e9e32a2b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "manage.py là CLI wrapper quanh django-admin, set sẵn DJANGO_SETTINGS_MODULE cho project hiện tại. Nhờ đó python manage.py <cmd> luôn chạy đúng config dev/test/prod đang chọn, không cần khai báo lại."
+      ],
+      "details": [
+        "Mấy lệnh dùng nhiều:"
+      ],
+      "points": [],
+      "sections": [
+        "Hai thứ hay quên: runserver chỉ dành cho dev (production phải dùng Gunicorn/Uvicorn), và file migration sinh ra bắt buộc commit cùng PR — bỏ sót là vỡ deploy ở môi trường khác."
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "python manage.py runserver         # dev server :8000\npython manage.py makemigrations    # sinh file migration từ thay đổi models\npython manage.py migrate           # apply migration vào DB\npython manage.py createsuperuser   # tạo admin account\npython manage.py shell             # REPL có Django context\npython manage.py test              # chạy test suite\npython manage.py collectstatic     # gom static cho production\npython manage.py startapp <name>   # scaffold app mới"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "9204-manage-py-de-lam-gi-va-hay-dung-lenh-nao"
+  },
+  {
+    "id": "b15bfc3d-433e-5581-ade6-67cddc84a973",
+    "question": "Model và migration trong Django liên quan thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/9205-model-va-migration-trong-django-lien-quan-the-nao",
+    "slug": "model-va-migration-trong-django-lien-quan-the-nao-b15bfc3d-433e-5581-ade6-67cddc84a973",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Sau khi sửa model (thêm field, đổi type), chạy lại makemigrations để sinh file 0002_...py mới."
+      ],
+      "details": [
+        "File migration sinh ra phải commit vào git để môi trường khác cũng có đường đi giống bạn."
+      ],
+      "points": [],
+      "sections": [
+        "Model là Python class kế thừa models.Model, định nghĩa bảng + field + quan hệ. Migration là file Python ghi lại thay đổi schema — Django đọc để biết cần ALTER TABLE gì khi migrate."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class Post(models.Model):\n    title = models.CharField(max_length=200)\n    created_at = models.DateTimeField(auto_now_add=True)"
+        },
+        {
+          "language": "BASH",
+          "code": "python manage.py makemigrations   # sinh 0001_initial.py\npython manage.py migrate          # apply lên DB"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "9205-model-va-migration-trong-django-lien-quan-the-nao"
+  },
+  {
+    "id": "ccae93db-fbd0-5719-9ab6-cdfb57e3b806",
+    "question": "FBV và CBV khác nhau ở điểm nào, khi nào dùng cái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/9212-fbv-va-cbv-khac-nhau-o-diem-nao-khi-nao-dung-cai-nao",
+    "slug": "fbv-va-cbv-khac-nhau-o-diem-nao-khi-nao-dung-cai-nao-ccae93db-fbd0-5719-9ab6-cdfb57e3b806",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "FBV hợp cho view một lần đặc thù — webhook handler, custom action, integration đơn giản. CBV hợp khi nhiều view chia sẻ pattern (CRUD), hoặc cần composition qua mixin như LoginRequiredMixin, PermissionRequiredMixin."
+      ],
+      "details": [
+        "Nhìn ngoài CBV trông gọn hơn FBV, nhưng khi mixin chồng nhiều tầng, chuỗi MRO (method resolution order) trở nên khó debug. Đọc source View.dispatch() một lần để nắm chắc flow là khoản đầu tư đáng giá."
+      ],
+      "points": [],
+      "sections": [
+        "FBV (Function-Based View) là một function nhận request trả HttpResponse — đọc một mạch từ trên xuống, rất trực quan. CBV (Class-Based View) là class kế thừa từ View hoặc generic class (ListView, DetailView...), tổ chức theo HTTP method (get(), post()) và cho phép gắn mixin để tái sử dụng logic."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# FBV\ndef post_list(request):\n    posts = Post.objects.published()\n    return render(request, 'posts/list.html', {'posts': posts})\n\n# CBV\nclass PostListView(ListView):\n    model = Post\n    template_name = 'posts/list.html'\n    queryset = Post.objects.published()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "9212-fbv-va-cbv-khac-nhau-o-diem-nao-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "4666c1f4-cdf8-523d-b25b-acccec6f9a04",
+    "question": "URLconf hoạt động ra sao và nên tổ chức urls.py thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/9213-urlconf-hoat-dong-ra-sao-va-nen-to-chuc-urls-py-the-nao",
+    "slug": "urlconf-hoat-dong-ra-sao-va-nen-to-chuc-urls-py-the-nao-4666c1f4-cdf8-523d-b25b-acccec6f9a04",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khi request đến, Django duyệt request.path với danh sách urlpatterns theo thứ tự khai báo, dùng path() hoặc re_path().",
+        "reverse('blog:post-detail', kwargs={...})"
+      ],
+      "details": [
+        "Match xong thì capture group được pass vào view tương ứng.",
+        "path('<slug:slug>/')",
+        "path('new/', ...)"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# config/urls.py (root)\nfrom django.urls import path, include\n\nurlpatterns = [\n    path('admin/', admin.site.urls),\n    path('api/v1/', include('apps.api.urls')),\n    path('blog/', include('apps.blog.urls', namespace='blog')),\n]\n\n# apps/blog/urls.py\napp_name = 'blog'\nurlpatterns = [\n    path('', views.PostListView.as_view(), name='post-list'),\n    path('<slug:slug>/', views.PostDetailView.as_view(), name='post-detail'),\n]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "9213-urlconf-hoat-dong-ra-sao-va-nen-to-chuc-urls-py-the-nao"
+  },
+  {
+    "id": "837d9510-d2a8-56a4-a794-11fcf8305b31",
+    "question": "Django Template Language khác Jinja2 ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/9218-django-template-language-khac-jinja2-ra-sao",
+    "slug": "django-template-language-khac-jinja2-ra-sao-837d9510-d2a8-56a4-a794-11fcf8305b31",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Django Template Language (DTL) là engine mặc định, an toàn theo design: không cho gọi function tuỳ ý từ template, auto-escape HTML, cú pháp {{ var }} / {% tag %}. Jinja2 linh hoạt hơn — gọi được Python expression đầy đủ, có macro, render nhanh hơn."
+      ],
+      "details": [
+        "Chọn DTL nếu team không cần logic phức tạp trong template (đúng tinh thần Django: logic ở view, template chỉ hiển thị). Chọn Jinja2 khi cần macro mạnh hoặc đã quen từ Flask. Có thể đăng ký cả 2 engine cùng lúc qua TEMPLATES setting, mỗi engine có folder riêng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "DJANGO",
+          "code": "{# DTL #}\n<ul>\n{% for p in posts %}\n  <li>{{ p.title }} — {{ p.published_at|date:\"d/m/Y\" }}</li>\n{% endfor %}\n</ul>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "9218-django-template-language-khac-jinja2-ra-sao"
+  },
+  {
+    "id": "c5a75415-d712-575f-ae39-1e914feca676",
+    "question": "CSRF token trong Django bảo vệ khỏi tấn công gì và dùng thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/9220-csrf-token-trong-django-bao-ve-khoi-tan-cong-gi-va-dung-the-nao",
+    "slug": "csrf-token-trong-django-bao-ve-khoi-tan-cong-gi-va-dung-the-nao-c5a75415-d712-575f-ae39-1e914feca676",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "CSRF (Cross-Site Request Forgery) là kiểu tấn công khi site độc hại lừa trình duyệt người dùng (đã đăng nhập site của bạn) gửi request thay đổi dữ liệu thay họ. Token CSRF là chuỗi ngẫu nhiên per-session: server phát ra → client gửi lại trong POST → server so khớp, không khớp là từ chối.",
+        "@csrf_exempt"
+      ],
+      "details": [
+        "Django bật CsrfViewMiddleware mặc định. Trong template form HTML, chỉ cần chèn {% csrf_token %}:"
+      ],
+      "points": [
+        "API token-based ở header (JWT, API key) mới được miễn vì bản thân header đã chống CSRF.",
+        "Webhook bên thứ ba thì phải verify bằng signature HMAC chứ không phải bỏ CSRF."
+      ],
+      "sections": [
+        "Với API/AJAX dùng cookie session, đọc cookie csrftoken rồi gửi qua header X-CSRFToken:"
+      ],
+      "codeExamples": [
+        {
+          "language": "DJANGO",
+          "code": "<form method=\"post\" action=\"/posts/create/\">\n  {% csrf_token %}\n  {{ form }}\n  <button type=\"submit\">Save</button>\n</form>"
+        },
+        {
+          "language": "JAVASCRIPT",
+          "code": "fetch('/api/posts/', {\n  method: 'POST',\n  headers: {'X-CSRFToken': getCookie('csrftoken'), 'Content-Type': 'application/json'},\n  body: JSON.stringify(payload),\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "9220-csrf-token-trong-django-bao-ve-khoi-tan-cong-gi-va-dung-the-nao"
+  },
+  {
+    "id": "aab3260d-04a6-5e69-bb15-66a26c856290",
+    "question": "Middleware trong Django là gì và để làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/9222-middleware-trong-django-la-gi-va-de-lam-gi",
+    "slug": "middleware-trong-django-la-gi-va-de-lam-gi-aab3260d-04a6-5e69-bb15-66a26c856290",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Middleware là callable bọc quanh pipeline request → view → response, chạy trước/sau view cho mọi request."
+      ],
+      "details": [
+        "Hợp với các cross-cutting concern: auth, session, CSRF, logging, GZip, security header, gắn tenant context vào request."
+      ],
+      "points": [
+        "Đừng nhồi business logic vào middleware vì nó chạy cho mọi request kể cả static/admin, rất dễ thành bottleneck.",
+        "Việc nào chỉ liên quan một view thì đặt ở view hoặc decorator."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class RequestIdMiddleware:\n    def __init__(self, get_response):\n        self.get_response = get_response\n\n    def __call__(self, request):\n        request.id = uuid.uuid4().hex\n        response = self.get_response(request)\n        response['X-Request-ID'] = request.id\n        return response"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "9222-middleware-trong-django-la-gi-va-de-lam-gi"
+  },
+  {
+    "id": "80841b87-e067-5057-a138-64302fa2e306",
+    "question": "django.contrib.auth cung cấp sẵn những gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/9226-django-contrib-auth-cung-cap-san-nhung-gi",
+    "slug": "django-contrib-auth-cung-cap-san-nhung-gi-80841b87-e067-5057-a138-64302fa2e306",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Session lưu trong DB (bảng django_session) hoặc Redis nếu set SESSION_ENGINE = 'django.contrib.sessions.backends.cache'. Cookie chỉ giữ session key, không giữ data thực."
+      ],
+      "details": [
+        "Một thứ rất quan trọng cho dự án mới: User.username mặc định unique và dài 150 ký tự, không phù hợp với app dùng email làm username. Phải luôn tạo custom user (xem [[#9227]]) trước khi migrate lần đầu — đổi AUTH_USER_MODEL sau khi đã có data là rất đau."
+      ],
+      "points": [],
+      "sections": [
+        "django.contrib.auth là module auth built-in: model User, hash password (PBKDF2 mặc định), session-based login/logout, decorator @login_required, hệ thống permission (group, permission), template tag {% if user.is_authenticated %}, view sẵn cho login/logout/password reset."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from django.contrib.auth import authenticate, login, logout\n\ndef signin(request):\n    user = authenticate(request, username=email, password=password)\n    if user:\n        login(request, user)\n        return redirect('home')\n    return render(request, 'login.html', {'error': 'Invalid'})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "9226-django-contrib-auth-cung-cap-san-nhung-gi"
+  },
+  {
+    "id": "a4fc6e44-b3ea-5330-b9c4-c90a7782e433",
+    "question": "Django REST Framework (DRF) là gì và giải quyết bài toán gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/9230-django-rest-framework-drf-la-gi-va-giai-quyet-bai-toan-gi",
+    "slug": "django-rest-framework-drf-la-gi-va-giai-quyet-bai-toan-gi-a4fc6e44-b3ea-5330-b9c4-c90a7782e433",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "DRF là thư viện trên Django chuyên cho REST API: serializer (validate + parse JSON), viewset (gom logic CRUD), router (sinh URL tự động), authentication/permission/throttling/pagination, và browsable API UI để test."
+      ],
+      "details": [
+        "Không có DRF bạn vẫn có thể trả JsonResponse từ Django view, nhưng phải tự code validate, schema, pagination, content negotiation. DRF gói sẵn mấy convention đó để team chỉ tập trung vào domain.",
+        "ModelViewSet"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# views.py\nclass PostViewSet(viewsets.ModelViewSet):\n    queryset = Post.objects.all()\n    serializer_class = PostSerializer\n    permission_classes = [IsAuthenticatedOrReadOnly]\n\n# urls.py\nrouter = DefaultRouter()\nrouter.register('posts', PostViewSet)\nurlpatterns = router.urls   # GET/POST/PUT/PATCH/DELETE /posts/ và /posts/<id>/"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "9230-django-rest-framework-drf-la-gi-va-giai-quyet-bai-toan-gi"
+  },
+  {
+    "id": "d9d7a6d4-98dc-51ce-aee1-8501a30456d7",
+    "question": "WSGI và ASGI khác nhau ra sao, Django chọn cái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/9246-wsgi-va-asgi-khac-nhau-ra-sao-django-chon-cai-nao",
+    "slug": "wsgi-va-asgi-khac-nhau-ra-sao-django-chon-cai-nao-d9d7a6d4-98dc-51ce-aee1-8501a30456d7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "WSGI (Web Server Gateway Interface) là interface đồng bộ giữa Python web app và server (Gunicorn, uWSGI) — mỗi request một worker thread/process, request xong worker rảnh."
+      ],
+      "details": [
+        "Một hiểu lầm quan trọng: đổi sang ASGI không tự động tăng tốc view sync. View sync vẫn chạy trong threadpool, hiệu năng không đổi. Lợi chỉ thấy rõ khi view thực sự viết bằng async def + await (async HTTP client, ORM .aget()). Mặc định cứ WSGI cho đến khi có nhu cầu cụ thể."
+      ],
+      "points": [
+        "Đơn giản, ổn định, là mặc định của Django. ASGI (Asynchronous Server Gateway Interface) là interface bất đồng bộ, hỗ trợ async def view, WebSocket, HTTP/2, long-polling.",
+        "Server: Uvicorn, Daphne, Hypercorn."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# WSGI\ngunicorn config.wsgi:application --workers 4 --bind 0.0.0.0:8000\n\n# ASGI\nuvicorn config.asgi:application --workers 4 --host 0.0.0.0 --port 8000"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "9246-wsgi-va-asgi-khac-nhau-ra-sao-django-chon-cai-nao"
+  },
+  {
+    "id": "3e93c528-42d0-5cfc-9e6b-a09dd3d84a47",
+    "question": "get_object_or_404, Http404, redirect, reverse dùng kết hợp thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/9254-get-object-or-404-http404-redirect-reverse-dung-ket-hop-the-nao",
+    "slug": "get-object-or-404-http404-redirect-reverse-dung-ket-hop-the-nao-3e93c528-42d0-5cfc-9e6b-a09dd3d84a47",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Đây là 4 helper hay dùng nhất trong view, làm code ngắn và nhất quán.",
+        "POST → redirect → GET"
+      ],
+      "details": [
+        "get_object_or_404(Model, **lookup) gọi .get(), nếu DoesNotExist thì raise Http404 → Django tự trả 404 page, đỡ phải try/except lặp đi lặp lại. Http404 là exception built-in; raise ở đâu thì Django cũng chặn được và render 404.html (hoặc handler404 custom). redirect(to, *args, **kwargs) return HttpResponseRedirect — to có thể là URL string, URL name, hoặc model instance (Django sẽ gọi .get_absolute_url()). reverse('namespace:name', kwargs={...}) đảo ngược URL name thành URL string — dùng trong code Python; {% url %} là phiên bản template tag.",
+        "Và get_object_or_404 chỉ nên dùng cho object user có quyền thấy; check permission trước hoặc thêm filter vào lookup (vd author=request.user) để tránh leak existence — sự khác biệt 404 vs 403 với object private cũng có thể tiết lộ thông tin."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from django.shortcuts import get_object_or_404, redirect, render\nfrom django.urls import reverse\nfrom django.http import Http404\n\ndef edit_post(request, slug):\n    post = get_object_or_404(Post, slug=slug, author=request.user)\n    if post.locked:\n        raise Http404('Post is locked')        # hoặc redirect kèm message\n    if request.method == 'POST':\n        # ... process form ...\n        return redirect('blog:post-detail', slug=post.slug)\n        # ↑ tương đương: redirect(reverse('blog:post-detail', kwargs={'slug': post.slug}))\n    return render(request, 'blog/edit.html', {'post': post})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "9254-get-object-or-404-http404-redirect-reverse-dung-ket-hop-the-nao"
+  },
+  {
+    "id": "8f4892cc-f27e-52c2-aa16-d63a5e776910",
+    "question": "get() và filter() trong Django ORM khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93530-get-va-filter-trong-django-orm-khac-nhau-the-nao",
+    "slug": "get-va-filter-trong-django-orm-khac-nhau-the-nao-8f4892cc-f27e-52c2-aa16-d63a5e776910",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng get() khi chắc chắn truy vấn ra một bản ghi theo khóa duy nhất (pk, unique). Dùng filter() cho danh sách hoặc điều kiện có thể rỗng — QuerySet rỗng không phải lỗi."
+      ],
+      "details": [],
+      "points": [
+        "filter(**kwargs): trả về một QuerySet (0..n bản ghi), lazy (chỉ chạy SQL khi được duyệt), và chain được tiếp.",
+        "get(**kwargs): trả về đúng một object. Không có → ném DoesNotExist; nhiều hơn một → ném MultipleObjectsReturned."
+      ],
+      "sections": [
+        "Cần \"1 hoặc 404\" trong view thì dùng get_object_or_404."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "User.objects.get(pk=1)              # 1 record or raises\nUser.objects.filter(is_active=True) # QuerySet (có thể rỗng)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "93530-get-va-filter-trong-django-orm-khac-nhau-the-nao"
+  },
+  {
+    "id": "9ac17633-9d68-5b5f-9af0-b036fe58f0ae",
+    "question": "null=True và blank=True trong model field khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93531-null-true-va-blank-true-trong-model-field-khac-nhau-the-nao",
+    "slug": "null-true-va-blank-true-trong-model-field-khac-nhau-the-nao-9ac17633-9d68-5b5f-9af0-b036fe58f0ae",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai thứ ở hai tầng khác nhau, độc lập với nhau:"
+      ],
+      "details": [
+        "Quy ước của Django:\n- Field text/char: nên blank=True mà không null=True. Django khuyến nghị \"rỗng\" là chuỗi '', tránh có hai kiểu rỗng (NULL và '').\n- Field số / ngày / ForeignKey muốn cho phép bỏ trống: cần cả hai null=True, blank=True (vì không có \"chuỗi rỗng\" để lưu)."
+      ],
+      "points": [
+        "null=True: tầng database — cho phép cột chứa NULL.",
+        "blank=True: tầng validation (form/admin) — cho phép để trống khi nhập."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "bio = models.TextField(blank=True)                    # '' khi trống\nage = models.IntegerField(null=True, blank=True)      # NULL khi trống"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "93531-null-true-va-blank-true-trong-model-field-khac-nhau-the-nao"
+  },
+  {
+    "id": "2687073b-6385-5fd6-becc-06d79b87f63b",
+    "question": "Django gọi kiến trúc của mình là MVT — nó map sang MVC cổ điển thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93533-django-goi-kien-truc-cua-minh-la-mvt-no-map-sang-mvc-co-dien-the-nao",
+    "slug": "django-goi-kien-truc-cua-minh-la-mvt-no-map-sang-mvc-co-dien-the-nao-2687073b-6385-5fd6-becc-06d79b87f63b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Django gọi mô hình của mình là MTV/MVT (Model–Template–View) — cùng bản chất MVC nhưng đổi tên cho khớp vai trò thực tế:"
+      ],
+      "details": [
+        "Bản thân framework đóng vai controller định tuyến qua URLconf. Điểm hay gây nhầm: \"View\" của Django là Controller, không phải lớp hiển thị — render HTML là việc của Template."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "93533-django-goi-kien-truc-cua-minh-la-mvt-no-map-sang-mvc-co-dien-the-nao"
+  },
+  {
+    "id": "4688b4c3-630f-51eb-98cf-0fe1173d2e58",
+    "question": "Template inheritance trong Django hoạt động thế nào ({% extends %} / {% block %})?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93535-template-inheritance-trong-django-hoat-dong-the-nao-extends-block",
+    "slug": "template-inheritance-trong-django-hoat-dong-the-nao-extends-block-4688b4c3-630f-51eb-98cf-0fe1173d2e58",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Một template cha (base.html) định nghĩa khung chung và các \"lỗ trống\" bằng {% block ten %}{% endblock %}."
+      ],
+      "details": [
+        "Template con mở đầu bằng {% extends \"base.html\" %} rồi override từng block."
+      ],
+      "points": [
+        "Trong block con, gọi {{ block.super }} để chèn thêm vào nội dung cha thay vì thay hẳn.",
+        "Mục đích: tránh lặp layout (header/footer/nav) khắp các trang."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "DJANGO",
+          "code": "{# base.html #}\n<title>{% block title %}Site{% endblock %}</title>\n<main>{% block content %}{% endblock %}</main>\n\n{# page.html #}\n{% extends \"base.html\" %}\n{% block title %}Trang chủ{% endblock %}\n{% block content %}...{% endblock %}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "93535-template-inheritance-trong-django-hoat-dong-the-nao-extends-block"
+  },
+  {
+    "id": "9d80cc11-492b-52a4-8ed5-79a7dbae385d",
+    "question": "aggregate() và annotate() khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96350-aggregate-va-annotate-khac-nhau-the-nao",
+    "slug": "aggregate-va-annotate-khac-nhau-the-nao-9d80cc11-492b-52a4-8ed5-79a7dbae385d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Về SQL: aggregate() sinh một SELECT AVG(...) không GROUP BY; annotate() sinh JOIN + GROUP BY theo khoá chính của model gốc."
+      ],
+      "details": [
+        "Hệ quả thực tế: kết quả annotate() vẫn filter() / order_by() tiếp được theo cột vừa gắn (.order_by('-book_count')), còn aggregate() là điểm kết thúc chuỗi — gọi xong là ra giá trị, không nối thêm được."
+      ],
+      "points": [],
+      "sections": [
+        "aggregate() thu cả QuerySet về một dict duy nhất; annotate() gắn thêm một cột tính toán vào từng dòng và vẫn trả về QuerySet."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from django.db.models import Avg, Count\n\n# one summary value for the whole table\nBook.objects.aggregate(Avg('price'))\n# -> {'price__avg': 120.5}\n\n# one extra field per row\nauthors = Author.objects.annotate(book_count=Count('book'))\nauthors[0].book_count   # 12"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "96350-aggregate-va-annotate-khac-nhau-the-nao"
+  },
+  {
+    "id": "1d556bcc-4346-5516-8b7d-d1c3e2765ff1",
+    "question": "Muốn biết QuerySet có dữ liệu hay không thì dùng exists(), count() hay len()?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96351-muon-biet-queryset-co-du-lieu-hay-khong-thi-dung-exists-count-hay-len",
+    "slug": "muon-biet-queryset-co-du-lieu-hay-khong-thi-dung-exists-count-hay-len-1d556bcc-4346-5516-8b7d-d1c3e2765ff1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Chọn theo việc bạn sẽ làm tiếp với dữ liệu, vì QuerySet chỉ chạy query khi bị đánh giá và cache kết quả sau lần đánh giá đầu tiên."
+      ],
+      "details": [
+        "Hoặc ngược lại, dùng len(qs) chỉ để kiểm tra rỗng trên bảng lớn — kéo toàn bộ dòng về vô ích."
+      ],
+      "points": [
+        "Chỉ cần biết có hay không → qs.exists(). SQL sinh ra là SELECT 1 ... LIMIT 1, không kéo dòng nào về Python.",
+        "Chỉ cần số lượng → qs.count() → SELECT COUNT(*), database đếm, không tải object.",
+        "Sẽ duyệt qua toàn bộ dữ liệu ngay sau đó",
+        "if qs:",
+        "không tốn thêm query"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "if Order.objects.filter(user=user).exists():   # cheapest existence check\n    ...\n\norders = Order.objects.filter(user=user)\nif orders:            # evaluates and fills the cache\n    for o in orders:  # no second query\n        ..."
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "96351-muon-biet-queryset-co-du-lieu-hay-khong-thi-dung-exists-count-hay-len"
+  },
+  {
+    "id": "9be0b50c-f602-52fa-9ddc-d6ad5e9c2605",
+    "question": "Đẩy task Celery thì nên truyền cả model instance hay chỉ truyền id?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96352-day-task-celery-thi-nen-truyen-ca-model-instance-hay-chi-truyen-id",
+    "slug": "day-task-celery-thi-nen-truyen-ca-model-instance-hay-chi-truyen-id-9be0b50c-f602-52fa-9ddc-d6ad5e9c2605",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Chỉ truyền id (primary key), rồi để task tự query lại."
+      ],
+      "details": [
+        "Tham số của task phải đi qua broker nên bị serialize (mặc định JSON). Một model instance vừa không serialize được bằng JSON, vừa là ảnh chụp dữ liệu tại thời điểm đẩy task — đến lúc worker chạy, bản ghi trong DB có thể đã đổi, và bạn sẽ ghi đè bằng dữ liệu cũ.",
+        "Lưu ý kèm theo: task chạy trên tiến trình khác nên bản ghi có thể đã bị xoá trước khi worker nhận việc — bắt Model.DoesNotExist và kết thúc êm thay vì để task fail và retry vô ích."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "@shared_task\ndef send_invoice(order_id):\n    order = Order.objects.get(pk=order_id)   # always the current state\n    ...\n\nsend_invoice.delay(order.id)   # not send_invoice.delay(order)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "96352-day-task-celery-thi-nen-truyen-ca-model-instance-hay-chi-truyen-id"
+  },
+  {
+    "id": "c18ae1d3-91ac-540b-a772-f0edaa3e5faf",
+    "question": "APIView, generic view (ListCreateAPIView) và ViewSet — chọn cái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96353-apiview-generic-view-listcreateapiview-va-viewset-chon-cai-nao",
+    "slug": "apiview-generic-view-listcreateapiview-va-viewset-chon-cai-nao-c18ae1d3-91ac-540b-a772-f0edaa3e5faf",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba mức trừu tượng chồng lên nhau, chọn theo mức độ \"chuẩn CRUD\" của endpoint.",
+        "Nguyên tắc chọn:",
+        "ModelViewSet"
+      ],
+      "details": [],
+      "points": [
+        "APIView — gần nhất với view thuần: bạn tự viết get(), post(). Dùng khi endpoint không phải CRUD trên một model: /auth/login, /reports/export, endpoint gọi service ngoài.",
+        "Generic view (ListCreateAPIView, RetrieveUpdateDestroyAPIView) — khai báo queryset + serializer_class, DRF lo phần còn lại. Dùng khi endpoint là CRUD nhưng bạn muốn tự kiểm soát URL.",
+        "ModelViewSet — gộp cả 6 action (list, create, retrieve, update, partial_update, destroy) vào một class, đăng ký qua Router để tự sinh URL.",
+        "Cần một hai action lẻ, URL không theo quy ước router → generic view."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class OrderViewSet(viewsets.ModelViewSet):\n    queryset = Order.objects.all()\n    serializer_class = OrderSerializer\n\nrouter.register(r'orders', OrderViewSet)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "96353-apiview-generic-view-listcreateapiview-va-viewset-chon-cai-nao"
+  },
+  {
+    "id": "e3e6894d-beb6-515f-a582-61d461a6a87d",
+    "question": "Quản lý settings.py cho nhiều môi trường (dev/staging/prod) thế nào cho đúng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9203-quan-ly-settings-py-cho-nhieu-moi-truong-dev-staging-prod-the-nao-cho-dung",
+    "slug": "quan-ly-settings-py-cho-nhieu-moi-truong-dev-staging-prod-the-nao-cho-dung-e3e6894d-beb6-515f-a582-61d461a6a87d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khi chạy thì chỉ định bằng DJANGO_SETTINGS_MODULE=config.settings.prod. Mấy thứ secret như SECRET_KEY, DATABASE_URL, API key đọc qua os.environ hoặc thư viện django-environ."
+      ],
+      "details": [
+        "Hai cái dễ làm hỏng production: một là from .dev import * trong prod.py rồi override — rất dễ rò DEBUG=True ra ngoài. Luôn đi từ base.py. Hai là để SECRET_KEY mặc định trong code — đó là lỗ hổng nghiêm trọng, CI phải kiểm tra biến môi trường tồn tại trước khi cho deploy."
+      ],
+      "points": [],
+      "sections": [
+        "Cách phổ biến nhất là tách settings thành package theo môi trường, đọc secret qua biến môi trường, và tuyệt đối không commit file .env thật vào repo:"
+      ],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "config/settings/\n  __init__.py\n  base.py       # phần chung: INSTALLED_APPS, MIDDLEWARE, TEMPLATES\n  dev.py        # from .base import *; DEBUG=True; SQLite\n  prod.py       # from .base import *; DEBUG=False; Postgres; SECURE_*\n  test.py       # in-memory DB, EMAIL_BACKEND=locmem"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "9203-quan-ly-settings-py-cho-nhieu-moi-truong-dev-staging-prod-the-nao-cho-dung"
+  },
+  {
+    "id": "0ac9de19-9fa2-5e65-a341-e54f5067434e",
+    "question": "QuerySet \"lazy\" nghĩa là gì và thường gây bug ở đâu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9206-queryset-lazy-nghia-la-gi-va-thuong-gay-bug-o-dau",
+    "slug": "queryset-lazy-nghia-la-gi-va-thuong-gay-bug-o-dau-0ac9de19-9fa2-5e65-a341-e54f5067434e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "QuerySet lazy nghĩa là Django chưa chạy SQL khi bạn tạo query, chỉ chạy khi evaluate — tức là iterate, list(), len(), bool(), slicing có step, hoặc serialize.",
+        "posts = list(qs)"
+      ],
+      "details": [
+        "Nhờ vậy bạn có thể .filter().exclude().order_by() nối nhiều bước mà cuối cùng vẫn chỉ phát một câu SQL duy nhất.",
+        "Một điểm tinh tế hay vấp: QuerySet có cache kết quả trong cùng instance sau lần evaluate đầu, nhưng nếu bạn .filter() thêm thì đó là QuerySet mới — cache không tồn tại nữa. Cần tái sử dụng kết quả thì gán biến và evaluate một lần."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "qs = Post.objects.filter(published=True)   # chưa hit DB\nqs = qs.order_by('-created_at')[:10]       # vẫn chưa hit\nfor p in qs:                                # ← hit DB ở đây\n    print(p.title)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "9206-queryset-lazy-nghia-la-gi-va-thuong-gay-bug-o-dau"
+  },
+  {
+    "id": "66f1c6fd-e6ed-5ad0-9ecc-6fba5a1235b2",
+    "question": "select_related và prefetch_related khác nhau ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9207-select-related-va-prefetch-related-khac-nhau-ra-sao",
+    "slug": "select-related-va-prefetch-related-khac-nhau-ra-sao-66f1c6fd-e6ed-5ad0-9ecc-6fba5a1235b2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai đều dùng để chống N+1 query, nhưng cho 2 loại quan hệ khác nhau. select_related(...) dành cho ForeignKey / OneToOneField (quan hệ single) — Django ghép JOIN vào 1 câu SQL, trả về object kèm related đã load."
+      ],
+      "details": [
+        "Còn prefetch_related(...) dành cho ManyToMany và reverse ForeignKey (quan hệ multiple) — Django chạy 2 query rồi ghép lại trong Python, vì JOIN nhiều-nhiều sẽ phồng kết quả lên rất nhanh.",
+        "Cài django-debug-toolbar hoặc xem connection.queries để đo trực tiếp, đừng đoán."
+      ],
+      "points": [],
+      "sections": [
+        "Khi cần lọc thêm related, dùng Prefetch:"
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# 1 query, JOIN posts ⨝ authors\nPost.objects.select_related('author').all()\n\n# 2 query: lấy authors, rồi lấy mọi posts của họ rồi ghép\nAuthor.objects.prefetch_related('post_set').all()"
+        },
+        {
+          "language": "PYTHON",
+          "code": "from django.db.models import Prefetch\nAuthor.objects.prefetch_related(\n    Prefetch('post_set', queryset=Post.objects.filter(published=True))\n)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "9207-select-related-va-prefetch-related-khac-nhau-ra-sao"
+  },
+  {
+    "id": "308e4dab-8abb-5dc8-82eb-4c9e43409bbd",
+    "question": "Khi nào dùng transaction.atomic() và đặt nó ở đâu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9208-khi-nao-dung-transaction-atomic-va-dat-no-o-dau",
+    "slug": "khi-nao-dung-transaction-atomic-va-dat-no-o-dau-308e4dab-8abb-5dc8-82eb-4c9e43409bbd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "transaction.atomic() bọc một khối code thành transaction theo nguyên tắc all or nothing. Bên trong raise exception → mọi INSERT/UPDATE/DELETE đã chạy trong khối đó được rollback hết.",
+        "layer service",
+        "@transaction.atomic"
+      ],
+      "details": [
+        "Dùng khi nhiều bước nghiệp vụ phải nhất quán với nhau: tạo đơn hàng + trừ kho + ghi audit log. Hoặc khi dùng select_for_update() để khoá hàng chống race condition.",
+        "Một cái sai rất phổ biến là gọi external API (HTTP, email, webhook) bên trong atomic — vừa chậm vừa dễ lỗi nửa chừng (mạng treo, response lâu). Cách đúng là transaction.on_commit(lambda: send_email(...)) — Django chỉ chạy callback đó sau khi transaction commit thành công."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from django.db import transaction\n\nwith transaction.atomic():\n    order = Order.objects.create(...)\n    Stock.objects.filter(sku=sku).update(qty=F('qty') - 1)\n    AuditLog.objects.create(action='order.created', order=order)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "9208-khi-nao-dung-transaction-atomic-va-dat-no-o-dau"
+  },
+  {
+    "id": "a1c6415e-6481-51d5-be81-9e741b9b2f74",
+    "question": "abstract = True, Meta và Proxy model dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9210-abstract-true-meta-va-proxy-model-dung-de-lam-gi",
+    "slug": "abstract-true-meta-va-proxy-model-dung-de-lam-gi-a1c6415e-6481-51d5-be81-9e741b9b2f74",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Có 3 cách để tái dùng hoặc định nghĩa lại model mà không phải tạo bảng mới không cần thiết.",
+        "OneToOneField"
+      ],
+      "details": [
+        "Meta.abstract = True biến class thành template — không tạo bảng, class con kế thừa field + method nhưng mỗi class có bảng riêng. Hay dùng cho TimestampedModel (created_at, updated_at) tái sử dụng khắp project. Meta (không abstract) thì để cấu hình bảng thật: ordering, indexes, constraints, verbose_name, db_table, UniqueConstraint (nên dùng thay cho unique_together đã deprecated). Còn Meta.proxy = True thì dùng chung bảng với class cha, chỉ thêm method/manager khác — tiện khi cần 2 admin view khác nhau cho cùng một bảng.",
+        "Đừng dùng nếu không thực sự cần polymorphism ở DB."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class TimestampedModel(models.Model):\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now=True)\n    class Meta:\n        abstract = True   # không tạo bảng\n\nclass Post(TimestampedModel):\n    title = models.CharField(max_length=200)\n    class Meta:\n        indexes = [models.Index(fields=['-created_at'])]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "9210-abstract-true-meta-va-proxy-model-dung-de-lam-gi"
+  },
+  {
+    "id": "47a0ed4f-1590-5066-ab3c-58d2af1ec770",
+    "question": "Generic CBV (ListView, DetailView, CreateView) tiết kiệm code thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9214-generic-cbv-listview-detailview-createview-tiet-kiem-code-the-nao",
+    "slug": "generic-cbv-listview-detailview-createview-tiet-kiem-code-the-nao-47a0ed4f-1590-5066-ab3c-58d2af1ec770",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "ListView lo phân trang, DetailView lo lookup theo pk/slug, CreateView/UpdateView lo form + save + redirect. Đủ dùng cho phần lớn case CRUD."
+      ],
+      "details": [
+        "Khi logic không khớp pattern (action không phải CRUD, response không phải HTML, flow đặc biệt), đừng cố ép vào generic CBV — nhảy về FBV hoặc kế thừa thẳng View đọc rõ hơn nhiều. Generic CBV mạnh cho 80% case CRUD, còn 20% case lạ thì viết tay sẽ tốn ít não hơn."
+      ],
+      "points": [],
+      "sections": [
+        "Generic CBV đóng gói sẵn pattern CRUD: lấy object/list, render template, xử lý form, redirect — bạn chỉ phải override những phần thực sự khác."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class PostListView(ListView):\n    model = Post\n    paginate_by = 20\n    template_name = 'posts/list.html'   # mặc định: posts/post_list.html nếu bỏ\n    context_object_name = 'posts'\n\n    def get_queryset(self):\n        return Post.objects.published().select_related('author')\n\nclass PostCreateView(LoginRequiredMixin, CreateView):\n    model = Post\n    form_class = PostForm\n    success_url = reverse_lazy('blog:post-list')"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "9214-generic-cbv-listview-detailview-createview-tiet-kiem-code-the-nao"
+  },
+  {
+    "id": "7d488ece-5658-517e-8840-2ea076cef97c",
+    "question": "Decorator @login_required, @permission_required, @require_http_methods dùng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9215-decorator-login-required-permission-required-require-http-methods-dung-the-nao",
+    "slug": "decorator-login-required-permission-required-require-http-methods-dung-the-nao-7d488ece-5658-517e-8840-2ea076cef97c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ngắn gọn từng cái: @login_required chưa login thì redirect về LOGIN_URL. @permission_required('app.codename', raise_exception=True) thiếu perm thì raise PermissionDenied (403) thay vì redirect. @require_http_methods(['POST']) method khác trả 405 Method Not Allowed."
+      ],
+      "details": [
+        "Lỗi rất hay gặp: dán @login_required thẳng vào method get của CBV — không có tác dụng, vì Django đi qua dispatch() trước, không qua get trực tiếp. Trên CBV phải dùng mixin LoginRequiredMixin, hoặc nếu muốn giữ decorator thì @method_decorator(login_required, name='dispatch') ở cấp class."
+      ],
+      "points": [],
+      "sections": [
+        "Đây là 3 decorator dán lên FBV để chặn request trước khi vào logic — tương đương với mixin tương ứng trên CBV (LoginRequiredMixin, PermissionRequiredMixin)."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from django.contrib.auth.decorators import login_required, permission_required\nfrom django.views.decorators.http import require_http_methods\n\n@login_required(login_url='/login/')\ndef profile(request):\n    return render(request, 'profile.html')\n\n@permission_required('blog.delete_post', raise_exception=True)\n@require_http_methods(['POST'])\ndef delete_post(request, slug):\n    Post.objects.filter(slug=slug).delete()\n    return redirect('blog:post-list')"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "9215-decorator-login-required-permission-required-require-http-methods-dung-the-nao"
+  },
+  {
+    "id": "f62ea7c2-c783-59b6-9402-5f57d5912547",
+    "question": "HttpResponse, JsonResponse và StreamingHttpResponse khác nhau khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9217-httpresponse-jsonresponse-va-streaminghttpresponse-khac-nhau-khi-nao",
+    "slug": "httpresponse-jsonresponse-va-streaminghttpresponse-khac-nhau-khi-nao-f62ea7c2-c783-59b6-9402-5f57d5912547",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả 3 đều là response object, chọn cái nào tuỳ vào kiểu dữ liệu và kích thước."
+      ],
+      "details": [
+        "HttpResponse(content, content_type=...) buffer toàn bộ body trong RAM rồi trả — hợp với HTML, text, binary nhỏ. JsonResponse({...}) là wrapper quanh HttpResponse với content_type='application/json' cộng json.dumps — hợp với API trả dict; nếu trả list phải set safe=False. StreamingHttpResponse(generator) không buffer mà stream từng chunk — hợp với CSV export, file lớn, server-sent events.",
+        "Còn JsonResponse mặc định escape Unicode — set json_dumps_params={'ensure_ascii': False} để giữ UTF-8 đọc được."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from django.http import StreamingHttpResponse\nimport csv\n\ndef export_csv(request):\n    def rows():\n        yield ['id', 'title']\n        for p in Post.objects.iterator(chunk_size=2000):\n            yield [p.id, p.title]\n    pseudo = (','.join(map(str, r)) + '\\n' for r in rows())\n    response = StreamingHttpResponse(pseudo, content_type='text/csv')\n    response['Content-Disposition'] = 'attachment; filename=\"posts.csv\"'\n    return response"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "9217-httpresponse-jsonresponse-va-streaminghttpresponse-khac-nhau-khi-nao"
+  },
+  {
+    "id": "42bc1b1f-b4b9-5ccb-a0a4-ba8a37f6577c",
+    "question": "Form và ModelForm khác nhau thế nào, khi nào chọn cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9219-form-va-modelform-khac-nhau-the-nao-khi-nao-chon-cai-nao",
+    "slug": "form-va-modelform-khac-nhau-the-nao-khi-nao-chon-cai-nao-42bc1b1f-b4b9-5ccb-a0a4-ba8a37f6577c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Quy tắc đơn giản: input không map 1-1 với model (nhiều bảng, field tính toán) → dùng Form. CRUD chuẩn một model → dùng ModelForm, tiết kiệm code và tự động đồng bộ với validator của model."
+      ],
+      "details": [
+        "Cẩn thận: đừng bao giờ dùng fields = '__all__' ở ModelForm cho input người dùng — đó là cửa mở cho mass-assignment. Hôm nay model thêm field is_staff hay field internal nào đó là attacker có thể set giá trị qua form public mà bạn không hề biết."
+      ],
+      "points": [],
+      "sections": [
+        "Form khai báo field thủ công, không gắn với model — hợp với search, filter, contact form, multi-step wizard. ModelForm sinh field tự động từ model và có sẵn save() ghi DB — hợp với CRUD trực tiếp một model."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class ContactForm(forms.Form):\n    email = forms.EmailField()\n    message = forms.CharField(widget=forms.Textarea, max_length=2000)\n\nclass PostForm(forms.ModelForm):\n    class Meta:\n        model = Post\n        fields = ['title', 'body', 'tags']    # whitelist, KHÔNG dùng '__all__'\n        widgets = {'body': forms.Textarea(attrs={'rows': 10})}\n\n    def clean_title(self):\n        title = self.cleaned_data['title']\n        if Post.objects.filter(title=title).exists():\n            raise ValidationError('Title đã tồn tại')\n        return title"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "9219-form-va-modelform-khac-nhau-the-nao-khi-nao-chon-cai-nao"
+  },
+  {
+    "id": "26706933-df17-552a-809d-cf58bdc92711",
+    "question": "Quy trình validation của Form: is_valid(), clean_<field>, clean() chạy theo thứ tự nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9221-quy-trinh-validation-cua-form-is-valid-clean-field-clean-chay-theo-thu-tu-nao",
+    "slug": "quy-trinh-validation-cua-form-is-valid-clean-field-clean-chay-theo-thu-tu-nao-26706933-df17-552a-809d-cf58bdc92711",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khi gọi form.is_valid(), Django chạy validation theo 3 tầng nối tiếp nhau.",
+        "form.errors['<field>']",
+        "form.non_field_errors()"
+      ],
+      "details": [
+        "Tầng 1 (per-field): chạy to_python() → built-in validator của field (max_length, EmailValidator...) → custom validator trong validators=[...]. Tầng 2 (clean_<fieldname>()): method tự viết để clean 1 field, có quyền raise ValidationError hoặc trả giá trị đã clean qua self.cleaned_data['<field>']. Tầng 3 (clean()): method toàn form, dùng cho ràng buộc liên field (như password và confirm phải khớp), trả về dict cleaned_data.",
+        "Trong clean_<field>, nếu field trước đó đã fail validation thì key đó không có trong cleaned_data — dùng .get() thay vì [key] để tránh KeyError."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class SignupForm(forms.Form):\n    password = forms.CharField(widget=forms.PasswordInput)\n    password_confirm = forms.CharField(widget=forms.PasswordInput)\n\n    def clean_password(self):\n        pw = self.cleaned_data['password']\n        if len(pw) < 8:\n            raise ValidationError('Tối thiểu 8 ký tự')\n        return pw\n\n    def clean(self):\n        data = super().clean()\n        if data.get('password') != data.get('password_confirm'):\n            raise ValidationError({'password_confirm': 'Mật khẩu không khớp'})\n        return data"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "9221-quy-trinh-validation-cua-form-is-valid-clean-field-clean-chay-theo-thu-tu-nao"
+  },
+  {
+    "id": "8edbd69a-0e6c-5bd5-b321-c189db07bf8c",
+    "question": "Vòng đời một request đi qua Django theo các bước nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9223-vong-doi-mot-request-di-qua-django-theo-cac-buoc-nao",
+    "slug": "vong-doi-mot-request-di-qua-django-theo-cac-buoc-nao-8edbd69a-0e6c-5bd5-b321-c189db07bf8c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dịch ra code: server gọi application(request) → MIDDLEWARE[0] → MIDDLEWARE[1] → ... → resolve URL → gọi view → có response → middleware unwind theo chiều ngược. Nếu view raise exception, Django đi qua process_exception() của middleware từ dưới lên, cuối cùng tới handler500 nếu không ai xử lý."
+      ],
+      "details": [
+        "Vì middleware bao bọc 2 chiều, mọi blocking I/O trong middleware đều bị tính 2 lần phí. Async middleware phải khai báo async_capable = True; trộn sync/async thì Django tự wrap qua sync_to_async/async_to_sync và phải trả overhead cho mỗi lần wrap."
+      ],
+      "points": [],
+      "sections": [
+        "Hình dung request đi qua một stack middleware rồi quay ngược lại như đi vào hang rồi đi ra."
+      ],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "WSGI/ASGI server (gunicorn/uvicorn)\n  ↓\nMIDDLEWARE (top → bottom, gọi __call__)\n  ↓\nURL Resolver (URLconf match path → view)\n  ↓\nView (function hoặc CBV.dispatch())\n  ↓\nTemplate render hoặc serializer (nếu có)\n  ↑\nMIDDLEWARE (bottom → top, xử lý response)\n  ↑\nWSGI/ASGI trả response"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "9223-vong-doi-mot-request-di-qua-django-theo-cac-buoc-nao"
+  },
+  {
+    "id": "51b4247e-20ed-529c-8d65-c0be123bd3b2",
+    "question": "Thứ tự middleware trong MIDDLEWARE quan trọng thế nào và đặt sai gây bug gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9224-thu-tu-middleware-trong-middleware-quan-trong-the-nao-va-dat-sai-gay-bug-gi",
+    "slug": "thu-tu-middleware-trong-middleware-quan-trong-the-nao-va-dat-sai-gay-bug-gi-51b4247e-20ed-529c-8d65-c0be123bd3b2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Thứ tự MIDDLEWARE quyết định thứ tự bao bọc — middleware ở top chạy đầu tiên trên request và cuối cùng trên response. Đặt sai thì middleware sau không thấy thứ middleware trước đã set, hoặc tệ hơn là check security bị bypass.",
+        "AuthenticationMiddleware",
+        "SessionMiddleware",
+        "request.user",
+        "AnonymousMiddleware",
+        "SecurityMiddleware"
+      ],
+      "details": [
+        "Thứ tự mặc định của Django, kèm lý do:",
+        "Quy tắc đơn giản: custom middleware đụng request.user phải đặt sau AuthenticationMiddleware; đụng request.session phải sau SessionMiddleware. Nếu có dependency lẫn nhau, viết comment ngắn ngay trong settings.py để người sau không vô tình đổi thứ tự."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',           # HTTPS redirect sớm nhất\n    'django.contrib.sessions.middleware.SessionMiddleware',     # set request.session\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',                # cần session đã set\n    'django.contrib.auth.middleware.AuthenticationMiddleware',  # set request.user, cần session\n    'django.contrib.messages.middleware.MessageMiddleware',     # cần session\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "9224-thu-tu-middleware-trong-middleware-quan-trong-the-nao-va-dat-sai-gay-bug-gi"
+  },
+  {
+    "id": "81e18397-8fe5-57b4-bf74-db9ac71a7688",
+    "question": "AbstractUser và AbstractBaseUser khác nhau ra sao khi tạo custom user model?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9227-abstractuser-va-abstractbaseuser-khac-nhau-ra-sao-khi-tao-custom-user-model",
+    "slug": "abstractuser-va-abstractbaseuser-khac-nhau-ra-sao-khi-tao-custom-user-model-81e18397-8fe5-57b4-bf74-db9ac71a7688",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả 2 đều cho phép thay auth.User mặc định, khác nhau ở mức độ phải tự viết.",
+        "trước lần migrate đầu tiên",
+        "AUTH_USER_MODEL = 'accounts.User'"
+      ],
+      "details": [
+        "AbstractUser giữ nguyên schema của User (username, first_name, last_name, email, is_staff, is_active...), bạn chỉ thêm field hoặc tinh chỉnh nhẹ — dùng khi vẫn muốn giữ username và admin có sẵn. AbstractBaseUser thì gần như trắng — chỉ có password + last_login. Bạn tự định nghĩa identity field (email, phone), tự viết Manager (create_user, create_superuser), tự thêm is_active/is_staff nếu cần — dùng khi muốn login bằng email, schema gọn, không cần username.",
+        "Và mọi ForeignKey(User, ...) trong code dự án phải đổi sang ForeignKey(settings.AUTH_USER_MODEL, ...) để app reusable không hard-code reference."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class User(AbstractBaseUser, PermissionsMixin):\n    email = models.EmailField(unique=True)\n    full_name = models.CharField(max_length=120)\n    is_active = models.BooleanField(default=True)\n    is_staff = models.BooleanField(default=False)\n\n    objects = UserManager()       # custom manager với create_user / create_superuser\n    USERNAME_FIELD = 'email'\n    REQUIRED_FIELDS = ['full_name']"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "9227-abstractuser-va-abstractbaseuser-khac-nhau-ra-sao-khi-tao-custom-user-model"
+  },
+  {
+    "id": "2a0c9e5e-5cf2-5cb6-ba2f-ff880dd6c326",
+    "question": "Permission, Group và object-level permission hoạt động ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9228-permission-group-va-object-level-permission-hoat-dong-ra-sao",
+    "slug": "permission-group-va-object-level-permission-hoat-dong-ra-sao-2a0c9e5e-5cf2-5cb6-ba2f-ff880dd6c326",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Django built-in chỉ có model-level permission — tức là quyền làm hành động X trên toàn bộ model Y, chứ không có object-level out-of-the-box.",
+        "post của chính mình"
+      ],
+      "details": [
+        "Mỗi model tự sinh 4 permission khi migrate: add_post, change_post, delete_post, view_post. Muốn thêm custom thì khai báo trong Meta.permissions = [('publish_post', 'Can publish post')]. Group là một tập permission — gán user vào group thay vì gán từng perm cho từng user. Check quyền bằng user.has_perm('blog.publish_post') hoặc decorator @permission_required('blog.publish_post').",
+        "Lỗi bảo mật phổ biến: chỉ check perm ở template ({% if perms.blog.publish_post %}) — đó là gating UI cho đẹp thôi, không phải security thật. Template check không chặn được POST trực tiếp tới endpoint. Mọi check perm bắt buộc phải làm ở view/serializer trước khi gọi save()."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# Cho group editor có quyền publish\neditors, _ = Group.objects.get_or_create(name='editors')\neditors.permissions.add(Permission.objects.get(codename='publish_post'))\nuser.groups.add(editors)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "9228-permission-group-va-object-level-permission-hoat-dong-ra-sao"
+  },
+  {
+    "id": "3695a623-1b60-53a3-b48f-396b32986a23",
+    "question": "Serializer và ModelSerializer khác nhau ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9231-serializer-va-modelserializer-khac-nhau-ra-sao",
+    "slug": "serializer-va-modelserializer-khac-nhau-ra-sao-3695a623-1b60-53a3-b48f-396b32986a23",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Validation chạy theo thứ tự: field validator built-in → validate_<field> → validate(data) (cross-field)."
+      ],
+      "details": [
+        "Đừng dùng fields = '__all__' cho API public — vấn đề mass-assignment y hệt như ở Form. Và khi response cần nhiều field tính toán, tách PostReadSerializer vs PostWriteSerializer đọc dễ hơn nhiều so với việc override to_representation cho một serializer cồng kềnh."
+      ],
+      "points": [],
+      "sections": [
+        "Serializer khai báo field thủ công — dùng khi input/output không map trực tiếp 1-1 với model (multi-source, computed field, action không tạo entity). ModelSerializer sinh field tự động từ model và có sẵn create(), update() — dùng cho CRUD chuẩn."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class PostSerializer(serializers.ModelSerializer):\n    author_name = serializers.CharField(source='author.full_name', read_only=True)\n\n    class Meta:\n        model = Post\n        fields = ['id', 'title', 'body', 'author', 'author_name', 'created_at']\n        read_only_fields = ['created_at']\n\n    def validate_title(self, value):\n        if Post.objects.filter(title=value).exists():\n            raise serializers.ValidationError('Title đã tồn tại')\n        return value"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "9231-serializer-va-modelserializer-khac-nhau-ra-sao"
+  },
+  {
+    "id": "b5f825f4-fe6f-5b72-981e-d65051227825",
+    "question": "ViewSet và Router tiết kiệm code thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9232-viewset-va-router-tiet-kiem-code-the-nao",
+    "slug": "viewset-va-router-tiet-kiem-code-the-nao-b5f825f4-fe6f-5b72-981e-d65051227825",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khi cần custom queryset riêng cho từng action (ví dụ list filter theo user, retrieve cho admin xem được hết), override get_queryset() rồi check self.action."
+      ],
+      "details": [
+        "Và đừng nhồi 5 action không liên quan vào cùng 1 viewset — tách 2 viewset nhỏ luôn đọc rõ hơn."
+      ],
+      "points": [],
+      "sections": [
+        "ViewSet gom logic CRUD vào một class, mỗi method ứng với một action (list, retrieve, create, update, partial_update, destroy). Router đọc viewset rồi sinh URL tự động kèm name tương ứng."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# viewsets.ModelViewSet đã wrap sẵn 6 method CRUD\nclass PostViewSet(viewsets.ModelViewSet):\n    queryset = Post.objects.select_related('author')\n    serializer_class = PostSerializer\n\n    @action(detail=True, methods=['post'])\n    def publish(self, request, pk=None):\n        post = self.get_object()\n        post.publish()\n        return Response(PostSerializer(post).data)\n\nrouter = DefaultRouter()\nrouter.register('posts', PostViewSet, basename='post')\n# Sinh ra:\n# GET    /posts/           → list\n# POST   /posts/           → create\n# GET    /posts/{pk}/      → retrieve\n# PUT    /posts/{pk}/      → update\n# PATCH  /posts/{pk}/      → partial_update\n# DELETE /posts/{pk}/      → destroy\n# POST   /posts/{pk}/publish/  → custom action"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "9232-viewset-va-router-tiet-kiem-code-the-nao"
+  },
+  {
+    "id": "0122d5e8-30ce-5fda-afd0-4f6f68aa1524",
+    "question": "Authentication và Permission trong DRF kết hợp thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9233-authentication-va-permission-trong-drf-ket-hop-the-nao",
+    "slug": "authentication-va-permission-trong-drf-ket-hop-the-nao-0122d5e8-30ce-5fda-afd0-4f6f68aa1524",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "DRF gọi has_permission() cho list/create, và has_object_permission() cho retrieve/update/delete một cách tự động."
+      ],
+      "details": [
+        "Hai chỗ dễ vấp: DEFAULT_PERMISSION_CLASSES áp dụng cho mọi viewset không khai báo riêng, nên đặt IsAuthenticated làm default an toàn hơn AllowAny rất nhiều. Và has_object_permission chỉ chạy khi bạn gọi self.get_object() — nếu truy cập obj qua custom method, phải tự gọi self.check_object_permissions(request, obj), không thì lỗi bảo mật lặng lẽ trôi qua."
+      ],
+      "points": [],
+      "sections": [
+        "DRF chạy 2 lớp trước view: Authentication xác định bạn là ai (set request.user), Permission xác định bạn có được làm hành động này không."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# settings.py — default cho toàn project\nREST_FRAMEWORK = {\n    'DEFAULT_AUTHENTICATION_CLASSES': [\n        'rest_framework.authentication.SessionAuthentication',\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n    ],\n    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.IsAuthenticated'],\n}\n\n# Override per view\nclass PostViewSet(viewsets.ModelViewSet):\n    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]"
+        },
+        {
+          "language": "PYTHON",
+          "code": "class IsOwnerOrReadOnly(permissions.BasePermission):\n    def has_object_permission(self, request, view, obj):\n        if request.method in permissions.SAFE_METHODS:\n            return True\n        return obj.author_id == request.user.id"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "9233-authentication-va-permission-trong-drf-ket-hop-the-nao"
+  },
+  {
+    "id": "b2cd0ef5-2e42-5036-bafb-4513ede03961",
+    "question": "3 kiểu pagination trong DRF — chọn cái nào khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9234-3-kieu-pagination-trong-drf-chon-cai-nao-khi-nao",
+    "slug": "3-kieu-pagination-trong-drf-chon-cai-nao-khi-nao-b2cd0ef5-2e42-5036-bafb-4513ede03961",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "DRF cho 3 style pagination, mỗi cái tối ưu cho một kiểu UI/dataset khác nhau."
+      ],
+      "details": [
+        "PageNumberPagination (?page=2&page_size=20) hiển thị \"Page 1 / 2 / 3 ...\" — hợp với UI có số trang. Đơn giản, nhưng OFFSET càng lớn càng chậm. LimitOffsetPagination (?limit=20&offset=40) linh hoạt cho client tự quản, gặp cùng vấn đề OFFSET chậm trên bảng to. CursorPagination (?cursor=cD0yMDI2...) dùng cột sắp xếp (-created_at) làm cursor, nên mọi trang đều O(log n) — không có \"page number\" và \"tổng trang\" nhưng cực hợp infinite scroll, feed real-time.",
+        "Cách giải: hoặc override paginator.get_paginated_response để bỏ count, hoặc đổi sang cursor luôn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class PostCursorPagination(CursorPagination):\n    page_size = 20\n    ordering = '-created_at'\n    cursor_query_param = 'cursor'\n\nclass PostViewSet(viewsets.ModelViewSet):\n    pagination_class = PostCursorPagination"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "9234-3-kieu-pagination-trong-drf-chon-cai-nao-khi-nao"
+  },
+  {
+    "id": "7387900e-431a-5077-971e-ce7600d6bbef",
+    "question": "Signals (post_save, pre_delete, ...) hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9237-signals-post-save-pre-delete-hoat-dong-the-nao",
+    "slug": "signals-post-save-pre-delete-hoat-dong-the-nao-7387900e-431a-5077-971e-ce7600d6bbef",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Mấy signal built-in hay dùng: pre_save, post_save, pre_delete, post_delete, m2m_changed, request_started, request_finished."
+      ],
+      "details": [
+        "Signal chạy đồng bộ trong cùng transaction với code phát sender, nên lỗi trong receiver sẽ rollback luôn cả save() gốc. Khi cần side-effect ngoài DB (gửi email, gọi API), bọc bằng transaction.on_commit(lambda: ...) để chỉ chạy sau khi commit thành công — tránh tình trạng email đã bay đi mà transaction lại rollback."
+      ],
+      "points": [],
+      "sections": [
+        "Signals là cơ chế observer của Django: gắn listener vào một sự kiện (model lưu, xoá, request bắt đầu) — sender phát signal, mọi receiver chạy đồng bộ ngay sau đó, trừ khi bạn tự đẩy qua task queue."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# apps/blog/signals.py\nfrom django.db.models.signals import post_save\nfrom django.dispatch import receiver\n\n@receiver(post_save, sender=Post)\ndef notify_subscribers(sender, instance, created, **kwargs):\n    if created:\n        send_email_async.delay(instance.id)\n\n# apps/blog/apps.py\nclass BlogConfig(AppConfig):\n    def ready(self):\n        from . import signals     # nạp khi Django boot"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "9237-signals-post-save-pre-delete-hoat-dong-the-nao"
+  },
+  {
+    "id": "a6f74d40-fc66-5496-be19-91e88091ccfd",
+    "question": "Tích hợp Celery vào Django để chạy background task ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9239-tich-hop-celery-vao-django-de-chay-background-task-ra-sao",
+    "slug": "tich-hop-celery-vao-django-de-chay-background-task-ra-sao-a6f74d40-fc66-5496-be19-91e88091ccfd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Celery là task queue chạy ngoài request cycle — request handler đẩy task vào broker (Redis/RabbitMQ), worker process pick lên xử lý.",
+        "celery -A config worker -l info",
+        "celery -A config beat"
+      ],
+      "details": [
+        "Dùng cho gửi email, sinh thumbnail, export file, sync 3rd-party API.",
+        "Hai nguyên tắc quan trọng: đừng bao giờ pass model instance vào task — bằng lúc worker chạy thì instance đã stale, dữ liệu sai bét. Pass id rồi Model.objects.get(id=...) lại trong task. Và task phải idempotent vì worker có thể retry; mỗi task ghi DB phải đảm bảo chạy lần 2 không gây side-effect kép."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# config/celery.py\nimport os\nfrom celery import Celery\n\nos.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.prod')\napp = Celery('myproject')\napp.config_from_object('django.conf:settings', namespace='CELERY')\napp.autodiscover_tasks()\n\n# settings.py\nCELERY_BROKER_URL = 'redis://redis:6379/0'\nCELERY_RESULT_BACKEND = 'redis://redis:6379/1'\nCELERY_TASK_ALWAYS_EAGER = False   # True chỉ trong test\n\n# apps/blog/tasks.py\nfrom celery import shared_task\n\n@shared_task(bind=True, autoretry_for=(SMTPException,), retry_backoff=True, max_retries=5)\ndef send_post_email(self, post_id: int) -> None:\n    post = Post.objects.get(id=post_id)\n    EmailService.send_to_subscribers(post)\n\n# views.py\nsend_post_email.delay(post.id)   # non-blocking"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "9239-tich-hop-celery-vao-django-de-chay-background-task-ra-sao"
+  },
+  {
+    "id": "b74d27c5-53a0-5f3d-9e4f-9749212e99fa",
+    "question": "N+1 query problem trong Django biểu hiện ra sao và bắt thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9241-n-1-query-problem-trong-django-bieu-hien-ra-sao-va-bat-the-nao",
+    "slug": "n-1-query-problem-trong-django-bieu-hien-ra-sao-va-bat-the-nao-b74d27c5-53a0-5f3d-9e4f-9749212e99fa",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Bắt sớm trong dev có 3 cách: django-debug-toolbar (panel \"SQL\" hiện tất cả query của 1 request, có cảnh báo duplicate), django.db.connection.queries trong shell sau khi DEBUG=True, và viết test self.assertNumQueries(2): quanh code path quan trọng — fail ngay khi N+1 sinh thêm query."
+      ],
+      "details": [
+        "N+1 trong template rất dễ lọt qua review — {% for p in posts %}{{ p.author.name }} cũng tính. Khi serializer DRF nested mà queryset gốc không prefetch, mỗi item trong list lại phát sinh thêm 2-3 query. Luôn test với dataset ≥ 50 row, không phải 2-3 row — bug N+1 chỉ \"nhìn thấy\" được khi data đủ lớn."
+      ],
+      "points": [],
+      "sections": [
+        "N+1 xảy ra khi bạn chạy 1 query lấy N object, rồi với mỗi object lại chạy thêm 1 query để lấy related → tổng 1 + N query.",
+        "select_related",
+        "prefetch_related"
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "posts = Post.objects.all()          # 1 query\nfor p in posts:\n    print(p.author.full_name)       # +1 query mỗi vòng — N query!"
+        },
+        {
+          "language": "PYTHON",
+          "code": "posts = Post.objects.select_related('author')   # 1 query JOIN"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "9241-n-1-query-problem-trong-django-bieu-hien-ra-sao-va-bat-the-nao"
+  },
+  {
+    "id": "57806d54-f20c-5c65-bd9b-b76b95f50787",
+    "question": "Khai báo index trong Django model thế nào và đặt index ở cột nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9242-khai-bao-index-trong-django-model-the-nao-va-dat-index-o-cot-nao",
+    "slug": "khai-bao-index-trong-django-model-the-nao-va-dat-index-o-cot-nao-57806d54-f20c-5c65-bd9b-b76b95f50787",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Đặt index ở cột thường xuyên xuất hiện trong WHERE, JOIN, ORDER BY. Composite index đi từ trái sang phải — (author, created_at) phục vụ tốt query WHERE author=? ORDER BY created_at, nhưng không giúp gì cho query chỉ WHERE created_at=?."
+      ],
+      "details": [
+        "Index không miễn phí — mỗi index làm INSERT/UPDATE/DELETE chậm hơn vì DB phải maintain B-tree. Bảng ghi heavy + nhiều index = bottleneck. Trước khi thêm index mới, chạy EXPLAIN ANALYZE xem planner có thực sự chọn index hay vẫn seq scan; nếu không dùng tới thì bỏ luôn, đừng để cho có."
+      ],
+      "points": [],
+      "sections": [
+        "Có 2 cách khai báo index trong Django model:"
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class Post(models.Model):\n    slug = models.SlugField(unique=True)        # tạo index unique tự động\n    author = models.ForeignKey(User, on_delete=models.CASCADE, db_index=True)\n    created_at = models.DateTimeField()\n\n    class Meta:\n        indexes = [\n            models.Index(fields=['-created_at']),                # single column\n            models.Index(fields=['author', '-created_at']),       # composite\n            models.Index(\n                fields=['title'], name='post_title_published_idx',\n                condition=Q(status='published'),                  # partial index (Postgres)\n            ),\n        ]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "9242-khai-bao-index-trong-django-model-the-nao-va-dat-index-o-cot-nao"
+  },
+  {
+    "id": "962b6b50-3621-5fb7-b279-3506ab6e0245",
+    "question": "Cache framework của Django có những level nào và dùng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9243-cache-framework-cua-django-co-nhung-level-nao-va-dung-the-nao",
+    "slug": "cache-framework-cua-django-co-nhung-level-nao-va-dung-the-nao-962b6b50-3621-5fb7-b279-3506ab6e0245",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Django có 4 level cache, đi từ thô-rộng đến mịn-hẹp.",
+        "django.core.cache.backends.redis.RedisCache"
+      ],
+      "details": [
+        "Per-site cache (cặp UpdateCacheMiddleware + FetchFromCacheMiddleware) cache toàn bộ page response — hợp với site mostly-read như blog, landing. Per-view cache (decorator @cache_page(60 * 15) hoặc cache_page() ở URLconf) chỉ cache một view cụ thể. Template fragment (\nCopy\n{% load cache %}{% cache 300 sidebar request.user.id %}...{% endcache %}\n) cache một phần của template. Low-level cache API (cache.get / cache.set) cache object/queryset bất kỳ — linh hoạt nhất.",
+        "Vấn đề khó nhất của cache luôn là invalidation — khi nào xoá key cũ? Hai pattern thường dùng: gắn signal post_save để cache.delete(), hoặc thêm version suffix vào key (top_posts:v2) rồi tăng version khi schema/format thay đổi. Tránh TTL quá dài (1 ngày) cho dữ liệu mutable, vì user sẽ thấy giá trị cũ trong nhiều giờ liền."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from django.core.cache import cache\n\ndef top_posts():\n    key = 'top_posts:v2'\n    posts = cache.get(key)\n    if posts is None:\n        posts = list(Post.objects.popular()[:10])\n        cache.set(key, posts, timeout=300)\n    return posts"
+        },
+        {
+          "language": "PYTHON",
+          "code": "{% load cache %}{% cache 300 sidebar request.user.id %}...{% endcache %}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "9243-cache-framework-cua-django-co-nhung-level-nao-va-dung-the-nao"
+  },
+  {
+    "id": "4268069a-34f5-5a71-bfc7-3f98862dbfcc",
+    "question": "Django ORM chống SQL injection ra sao, và khi nào vẫn lọt?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9245-django-orm-chong-sql-injection-ra-sao-va-khi-nao-van-lot",
+    "slug": "django-orm-chong-sql-injection-ra-sao-va-khi-nao-van-lot-4268069a-34f5-5a71-bfc7-3f98862dbfcc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "extra() đã deprecated, tránh hoàn toàn. Func(), Expression, Subquery mới là cách Django chuẩn để build dynamic SQL an toàn."
+      ],
+      "details": [
+        "Quy ước review code nên cấm hẳn pattern f\"... {var} ...\" xuất hiện trong context SQL."
+      ],
+      "points": [],
+      "sections": [
+        "ORM mặc định dùng parameterized query — giá trị truyền vào không bao giờ string-format vào SQL, mà gửi riêng qua driver:",
+        "Lỗ hổng SQL injection vẫn lọt qua 3 đường:"
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# An toàn — Django sinh: WHERE email = %s và pass email làm param\nUser.objects.filter(email=user_input)"
+        },
+        {
+          "language": "PYTHON",
+          "code": "# 1. .extra() với raw SQL string-format — KHÔNG dùng\nUser.objects.extra(where=[f\"email = '{user_input}'\"])    # SQL injection!\n\n# 2. .raw() / cursor.execute string-format\nUser.objects.raw(f\"SELECT * FROM users WHERE email = '{user_input}'\")  # SQL injection!\n\n# 3. Truyền cột/bảng động qua format (params chỉ bind giá trị, không bind identifier)\nMyModel.objects.order_by(user_input)                       # nguy hiểm nếu user_input không whitelist"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "9245-django-orm-chong-sql-injection-ra-sao-va-khi-nao-van-lot"
+  },
+  {
+    "id": "522e621f-b98e-5d11-8f94-0ff7cdb4ce9f",
+    "question": "Cấu hình Gunicorn worker thế nào cho hiệu quả?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9247-cau-hinh-gunicorn-worker-the-nao-cho-hieu-qua",
+    "slug": "cau-hinh-gunicorn-worker-the-nao-cho-hieu-qua-522e621f-b98e-5d11-8f94-0ff7cdb4ce9f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Mấy quy tắc kinh nghiệm: workers = 2 * CPU_cores + 1 (theo Gunicorn docs); threads chỉ dùng với gthread, 4-8 thường đủ; max-requests rotate worker định kỳ để né memory leak (hay gặp với numpy/pandas trong long-running process); timeout phải đủ cho view chậm nhất chạy xong, lâu hơn thì đẩy ra background task chứ đừng tăng timeout tuỳ tiện."
+      ],
+      "details": [
+        "Quá nhiều worker tốn RAM (mỗi worker load một bản app vào memory); quá ít gây backlog dẫn tới 502. Không có \"magic number\" cho mọi app — đo bằng htop + gunicorn --stats rồi điều chỉnh."
+      ],
+      "points": [],
+      "sections": [
+        "Gunicorn có 3 worker type chính, mỗi cái hợp một loại workload. sync (mặc định) một request một worker, blocking I/O — đơn giản, hợp CPU-bound hoặc app I/O nhanh. gthread dùng pool thread cho mỗi worker — tốt cho I/O-bound (DB query nhiều, gọi external API). uvicorn.workers.UvicornWorker async, dùng với ASGI app khi cần WebSocket hoặc async view."
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "gunicorn config.wsgi:application \\\n  --workers 5 \\\n  --worker-class gthread \\\n  --threads 8 \\\n  --bind 0.0.0.0:8000 \\\n  --timeout 30 \\\n  --max-requests 1000 \\\n  --max-requests-jitter 100 \\\n  --access-logfile - --error-logfile -"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "9247-cau-hinh-gunicorn-worker-the-nao-cho-hieu-qua"
+  },
+  {
+    "id": "82b283ea-54a8-5fbb-91cc-b4311c3d23c3",
+    "question": "Khi nào dùng bulk_create, bulk_update, QuerySet.update() thay vì loop save()?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9250-khi-nao-dung-bulk-create-bulk-update-queryset-update-thay-vi-loop-save",
+    "slug": "khi-nao-dung-bulk-create-bulk-update-queryset-update-thay-vi-loop-save-82b283ea-54a8-5fbb-91cc-b4311c3d23c3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Loop instance.save() cho 10k row = 10k INSERT round-trip → tốn vài chục giây và ép DB ngộp connection. Bulk operations gom thành 1-N câu SQL, nhanh hơn 10–100 lần."
+      ],
+      "details": [
+        "Model.objects.bulk_create(objs, batch_size=1000) chạy 1 INSERT cho mỗi batch, có ignore_conflicts=True (skip duplicate) và update_conflicts=True (upsert kiểu Postgres). Model.objects.bulk_update(objs, fields, batch_size=1000) chạy 1 UPDATE ... CASE WHEN cho mỗi batch — object phải có sẵn pk. QuerySet.update(**kwargs) chạy 1 UPDATE SQL cho mọi row match filter, không cần load object về Python."
+      ],
+      "points": [],
+      "sections": [
+        "Bulk operation bỏ qua signal và bỏ qua Model.save() override — nếu logic phụ thuộc signal (audit log, invalidate cache) thì phải tự handle sau bulk. auto_now cũng không chạy với update(); truyền updated_at=timezone.now() thẳng vào kwargs khi cần."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# Sai: 10k query\nfor row in rows:\n    Item(sku=row.sku, price=row.price).save()\n\n# Đúng: 10 query (batch_size=1000)\nItem.objects.bulk_create(\n    [Item(sku=r.sku, price=r.price) for r in rows],\n    batch_size=1000,\n)\n\n# Cập nhật cùng giá trị, không cần load object\nItem.objects.filter(category='archived').update(visible=False)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "9250-khi-nao-dung-bulk-create-bulk-update-queryset-update-thay-vi-loop-save"
+  },
+  {
+    "id": "e9b27f4b-fc43-5b39-bad7-77aebd58bbf8",
+    "question": ".values(), .values_list(), .only(), .defer() khác nhau ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9251-values-values-list-only-defer-khac-nhau-ra-sao",
+    "slug": "values-values-list-only-defer-khac-nhau-ra-sao-e9b27f4b-fc43-5b39-bad7-77aebd58bbf8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả 4 đều giảm lượng dữ liệu kéo về từ DB, dùng khi không cần object đầy đủ."
+      ],
+      "details": [
+        ".values('id', 'name') trả về QuerySet của dict chỉ chứa field liệt kê — không khởi tạo model instance nên nhanh và tiết kiệm RAM. .values_list('id', 'name') giống vậy nhưng trả tuple; thêm flat=True cho một field duy nhất: Post.objects.values_list('id', flat=True) → [1, 2, 3]. .only('title', 'slug') vẫn trả về model instance đầy đủ nhưng chỉ load field liệt kê — các field khác lazy-load khi access (mỗi access là 1 query thêm). .defer('body') ngược lại .only(): load mọi field trừ field defer — hợp khi có một field rất to (TextField, JSONField) ít khi cần dùng.",
+        "Còn .values() / .values_list() không có method của model (như get_absolute_url(), __str__()) — chỉ dùng khi không cần logic instance."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# List dropdown — chỉ cần id+title, không cần object\ntitles = Post.objects.values_list('id', 'title')        # [(1, 'A'), (2, 'B')]\ntitles = Post.objects.values('id', 'title')             # [{'id': 1, ...}, ...]\n\n# Trang list, body rất nặng chỉ cần ở trang detail\nposts = Post.objects.defer('body').all()                # instance, body lazy"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "9251-values-values-list-only-defer-khac-nhau-ra-sao"
+  },
+  {
+    "id": "a8ec086a-76f3-55ad-9343-1336508c332c",
+    "question": "TestCase, TransactionTestCase, Client trong Django test dùng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9255-testcase-transactiontestcase-client-trong-django-test-dung-the-nao",
+    "slug": "testcase-transactiontestcase-client-trong-django-test-dung-the-nao-a8ec086a-76f3-55ad-9343-1336508c332c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Django có sẵn 3 lớp test khác nhau ở cách xử lý DB và mức độ isolation.",
+        "pytest-django",
+        "@pytest.mark.django_db"
+      ],
+      "details": [
+        "TestCase wrap mỗi test trong transaction.atomic() rồi rollback khi xong — DB sạch giữa các test, rất nhanh, là lựa chọn mặc định. TransactionTestCase không wrap transaction nên mỗi test commit/rollback thật — chậm hơn, nhưng bắt buộc khi test logic dùng transaction.on_commit, select_for_update, hoặc nhiều DB connection. SimpleTestCase không cho phép DB access — chỉ test pure logic (template, util, form không save). Client là fake HTTP client để gọi view như request thật, không cần chạy server.",
+        "Một bẫy nhỏ: setUpTestData chạy 1 lần per class (nhanh) nhưng object trả về shared giữa các test — test nào mutate object thì phải đổi sang setUp. Và signal post_save vẫn fire trong test; nếu signal gọi email/API thật thì mock bằng\nCopy\n@override_settings(EMAIL_BACKEND='django.core.mail.backends.locmem.EmailBackend')\nhoặc unittest.mock.patch."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from django.test import TestCase, Client\nfrom django.urls import reverse\n\nclass PostViewTest(TestCase):\n    @classmethod\n    def setUpTestData(cls):                    # chạy 1 lần cho cả class\n        cls.user = User.objects.create_user(email='a@b.com', password='x')\n        cls.post = Post.objects.create(title='Hi', author=cls.user)\n\n    def setUp(self):                            # chạy mỗi test\n        self.client = Client()\n        self.client.force_login(self.user)\n\n    def test_detail_page(self):\n        url = reverse('blog:post-detail', kwargs={'slug': self.post.slug})\n        response = self.client.get(url)\n        self.assertEqual(response.status_code, 200)\n        self.assertContains(response, 'Hi')"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "9255-testcase-transactiontestcase-client-trong-django-test-dung-the-nao"
+  },
+  {
+    "id": "448985a1-09c4-54ad-9fac-832ff47e32c8",
+    "question": "Filter, search, ordering trong DRF làm thế nào cho gọn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9256-filter-search-ordering-trong-drf-lam-the-nao-cho-gon",
+    "slug": "filter-search-ordering-trong-drf-lam-the-nao-cho-gon-448985a1-09c4-54ad-9fac-832ff47e32c8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "SearchFilter mặc định dùng icontains trên field liệt kê — trên bảng to là seq scan chậm."
+      ],
+      "details": [
+        "Production search nghiêm túc nên dùng Postgres FTS (SearchVector / SearchQuery) hoặc Elasticsearch/Meilisearch chứ đừng phụ thuộc SearchFilter cho dataset lớn."
+      ],
+      "points": [],
+      "sections": [
+        "DRF có 3 filter backend chuẩn, bật ở DEFAULT_FILTER_BACKENDS rồi khai báo trên viewset là xong, không phải tự viết logic query param.",
+        "Cần filter phức tạp (range, custom lookup) thì khai báo FilterSet class riêng:"
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# settings.py\nINSTALLED_APPS = [..., 'django_filters']\nREST_FRAMEWORK = {\n    'DEFAULT_FILTER_BACKENDS': [\n        'django_filters.rest_framework.DjangoFilterBackend',\n        'rest_framework.filters.SearchFilter',\n        'rest_framework.filters.OrderingFilter',\n    ],\n}\n\n# views.py\nclass PostViewSet(viewsets.ModelViewSet):\n    queryset = Post.objects.all()\n    serializer_class = PostSerializer\n    filterset_fields = ['status', 'author']           # ?status=published&author=12\n    search_fields = ['title', 'body']                  # ?search=django\n    ordering_fields = ['created_at', 'views']          # ?ordering=-views\n    ordering = ['-created_at']                         # default"
+        },
+        {
+          "language": "PYTHON",
+          "code": "import django_filters\n\nclass PostFilter(django_filters.FilterSet):\n    min_views = django_filters.NumberFilter(field_name='views', lookup_expr='gte')\n    created_after = django_filters.IsoDateTimeFilter(field_name='created_at', lookup_expr='gte')\n\n    class Meta:\n        model = Post\n        fields = ['status', 'author']\n\nclass PostViewSet(viewsets.ModelViewSet):\n    filterset_class = PostFilter"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "9256-filter-search-ordering-trong-drf-lam-the-nao-cho-gon"
+  },
+  {
+    "id": "00af9922-ce76-5c0a-b7f1-d858258dadd6",
+    "question": "Versioning API trong DRF có những kiểu nào, chọn cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9257-versioning-api-trong-drf-co-nhung-kieu-nao-chon-cai-nao",
+    "slug": "versioning-api-trong-drf-co-nhung-kieu-nao-chon-cai-nao-00af9922-ce76-5c0a-b7f1-d858258dadd6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Đừng version chỉ vì có thể sau này sẽ thay đổi — chỉ version khi thật sự breaking."
+      ],
+      "details": [],
+      "points": [
+        "Chiến lược phổ biến hơn nhiều team đang dùng: giữ field cũ, thêm field mới, gắn header Deprecation: ...; bump major chỉ khi không còn cách nào khác.",
+        "URL path versioning là default an toàn nhất cho team mới vì log, monitoring và cache key đều dễ tách riêng."
+      ],
+      "sections": [
+        "DRF cho 5 strategy, khác nhau ở nơi đặt version trong request:"
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "URL path        → /api/v1/posts/                    Phổ biến nhất, debug dễ, cache friendly\nNamespace       → /api/v1/posts/ (URLconf namespace) Tách hẳn module per version\nAccept header   → Accept: ...; version=1.0          REST-ist nhất, URL sạch — nhưng khó debug\nHost name       → v1.api.example.com                Khi version cần infrastructure khác\nQuery parameter → /api/posts/?version=1             Đơn giản, hợp prototype"
+        },
+        {
+          "language": "PYTHON",
+          "code": "# settings.py\nREST_FRAMEWORK = {\n    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',\n    'DEFAULT_VERSION': 'v1',\n    'ALLOWED_VERSIONS': ['v1', 'v2'],\n}\n\n# urls.py\nurlpatterns = [\n    path('api/<version>/posts/', PostViewSet.as_view({'get': 'list'})),\n]\n\n# views.py\nclass PostViewSet(viewsets.ModelViewSet):\n    def get_serializer_class(self):\n        if self.request.version == 'v2':\n            return PostV2Serializer\n        return PostV1Serializer"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "9257-versioning-api-trong-drf-co-nhung-kieu-nao-chon-cai-nao"
+  },
+  {
+    "id": "7546bdc9-4e74-57e3-9cbb-254d540b96d0",
+    "question": "CORS trong Django setup ra sao để SPA gọi được API?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9258-cors-trong-django-setup-ra-sao-de-spa-goi-duoc-api",
+    "slug": "cors-trong-django-setup-ra-sao-de-spa-goi-duoc-api-7546bdc9-4e74-57e3-9cbb-254d540b96d0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "CORS (Cross-Origin Resource Sharing) là cơ chế browser bắt server xác nhận đồng ý trước khi cho domain khác gọi API.",
+        "CORS_ALLOW_ALL_ORIGINS = True",
+        "CORS_ALLOW_CREDENTIALS = True"
+      ],
+      "details": [],
+      "points": [
+        "Khi SPA ở app.example.com fetch tới api.example.com, browser sẽ gửi preflight OPTIONS rồi check header Access-Control-Allow-* trong response — không pass là không cho gọi thật.",
+        "Django không có CORS built-in, dùng django-cors-headers.",
+        "Cũng đừng nhầm CORS với CSRF: CORS quản ai được phép gọi, CSRF quản request đó có hợp lệ với user hiện tại không.",
+        "Cả 2 đều cần thiết với cookie-based auth."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "pip install django-cors-headers"
+        },
+        {
+          "language": "PYTHON",
+          "code": "# settings.py\nINSTALLED_APPS = [..., 'corsheaders']\nMIDDLEWARE = [\n    'corsheaders.middleware.CorsMiddleware',         # PHẢI đặt TRƯỚC CommonMiddleware\n    'django.middleware.common.CommonMiddleware',\n    # ...\n]\n\n# Whitelist exact origin — đừng wildcard với credential\nCORS_ALLOWED_ORIGINS = [\n    'https://app.example.com',\n    'http://localhost:3000',\n]\nCORS_ALLOW_CREDENTIALS = True                          # gửi cookie/Auth header"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "9258-cors-trong-django-setup-ra-sao-de-spa-goi-duoc-api"
+  },
+  {
+    "id": "ed576753-12de-5dfd-a522-cda5b21e67cf",
+    "question": "Setting bảo mật bắt buộc khi deploy Django lên production là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9260-setting-bao-mat-bat-buoc-khi-deploy-django-len-production-la-gi",
+    "slug": "setting-bao-mat-bat-buoc-khi-deploy-django-len-production-la-gi-ed576753-12de-5dfd-a522-cda5b21e67cf",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ngoài DEBUG = False và ALLOWED_HOSTS (xem [[#9244]]), Django có nhóm setting SECURE_* cần bật cho production."
+      ],
+      "details": [
+        "Cách nhanh nhất để biết còn thiếu gì: chạy python manage.py check --deploy — Django liệt kê hết."
+      ],
+      "points": [
+        "Hai thứ phải cẩn thận.",
+        "HSTS preload là cam kết dài hạn — đặt sai sẽ kẹt site ở HTTPS với mọi subdomain trong nhiều tháng.",
+        "Test với SECURE_HSTS_SECONDS = 60 trước rồi mới tăng dần lên 1 năm. SECURE_PROXY_SSL_HEADER chỉ set khi thực sự có proxy strip TLS (Cloudflare, nginx, Vercel) — đặt nhầm là cho phép attacker spoof HTTPS qua header X-Forwarded-Proto: https."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "# settings/prod.py\nSECRET_KEY = os.environ['DJANGO_SECRET_KEY']\n\n# HTTPS\nSECURE_SSL_REDIRECT = True                            # http://... → https://...\nSECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')   # khi sau load balancer\nSECURE_HSTS_SECONDS = 31536000                        # 1 năm\nSECURE_HSTS_INCLUDE_SUBDOMAINS = True\nSECURE_HSTS_PRELOAD = True\n\n# Cookie an toàn\nSESSION_COOKIE_SECURE = True                          # chỉ gửi qua HTTPS\nSESSION_COOKIE_HTTPONLY = True                        # JS không đọc được\nCSRF_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = 'Lax'                       # 'Strict' nếu không cross-site\n\n# Header bảo vệ\nSECURE_CONTENT_TYPE_NOSNIFF = True                    # chống MIME-sniffing\nSECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'\nX_FRAME_OPTIONS = 'DENY'                              # chống clickjacking"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "9260-setting-bao-mat-bat-buoc-khi-deploy-django-len-production-la-gi"
+  },
+  {
+    "id": "14137a1c-b931-552e-afa3-b9ce15798a4c",
+    "question": "Custom Django Admin: list_display, list_filter, inlines, actions dùng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/9261-custom-django-admin-list-display-list-filter-inlines-actions-dung-the-nao",
+    "slug": "custom-django-admin-list-display-list-filter-inlines-actions-dung-the-nao-14137a1c-b931-552e-afa3-b9ce15798a4c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Admin là một trong những thứ \"miễn phí\" giá trị nhất của Django — vừa migrate xong, non-dev đã có chỗ nhập liệu và audit.",
+        "list_display",
+        "def total_display(self, obj): ...",
+        "search_fields",
+        "readonly_fields"
+      ],
+      "details": [
+        "Customize bằng cách viết ModelAdmin class rồi register cho mỗi model.",
+        "Admin rất dễ chậm với bảng to: list page query toàn bộ kèm count(*) cho pagination. Phải override get_queryset() để select_related(...) và set list_per_page giới hạn. Đừng dựa vào admin cho workflow non-dev quan trọng — admin thiếu approval flow và audit chi tiết. Nghiệp vụ phức tạp nên build app admin riêng (workspace này có luyenphongvan-admin chính vì lý do đó)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from django.contrib import admin\n\nclass OrderItemInline(admin.TabularInline):       # child rows inline\n    model = OrderItem\n    extra = 0\n\n@admin.register(Order)\nclass OrderAdmin(admin.ModelAdmin):\n    list_display = ('id', 'customer', 'total', 'status', 'created_at')\n    list_filter = ('status', 'created_at')         # sidebar filter\n    search_fields = ('customer__email', 'id')\n    date_hierarchy = 'created_at'                  # drilldown theo ngày\n    readonly_fields = ('created_at', 'total')\n    inlines = [OrderItemInline]\n    actions = ['mark_as_shipped']\n\n    @admin.action(description='Mark selected as shipped')\n    def mark_as_shipped(self, request, queryset):\n        updated = queryset.update(status='shipped')\n        self.message_user(request, f'{updated} orders shipped')\n\n    def get_queryset(self, request):\n        # N+1 fix cho list page\n        return super().get_queryset(request).select_related('customer')"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": "9261-custom-django-admin-list-display-list-filter-inlines-actions-dung-the-nao"
+  },
+  {
+    "id": "34c3a6d7-d70f-5477-84be-51d3b74ae0c2",
+    "question": "ForeignKey, OneToOneField, ManyToManyField — khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93532-foreignkey-onetoonefield-manytomanyfield-khi-nao-dung-cai-nao",
+    "slug": "foreignkey-onetoonefield-manytomanyfield-khi-nao-dung-cai-nao-34c3a6d7-d70f-5477-84be-51d3b74ae0c2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Chọn theo tính chất quan hệ:"
+      ],
+      "details": [
+        "Lưu ý ForeignKey/OneToOneField bắt buộc khai báo on_delete (CASCADE, PROTECT, SET_NULL, …) để định rõ hành vi khi bản ghi được trỏ tới bị xóa."
+      ],
+      "points": [
+        "ForeignKey — quan hệ nhiều-một: nhiều bản ghi trỏ về một. VD nhiều Order thuộc một User. Cột khóa nằm ở phía \"nhiều\".",
+        "OneToOneField — một-một, mỗi bên tối đa một. VD Profile mở rộng User. Bản chất là ForeignKey(unique=True).",
+        "ManyToManyField — nhiều-nhiều: Django tự tạo bảng trung gian (join table). VD Article ↔ Tag. Cần thêm cột cho quan hệ thì dùng through= một model riêng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "93532-foreignkey-onetoonefield-manytomanyfield-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "4f38a52c-ab7f-52da-a101-d7a85e81268c",
+    "question": "Context processor là gì? Dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93534-context-processor-la-gi-dung-de-lam-gi",
+    "slug": "context-processor-la-gi-dung-de-lam-gi-4f38a52c-ab7f-52da-a101-d7a85e81268c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Là một hàm nhận request và trả về một dict; dict đó được trộn vào context của mọi template render qua RequestContext. Đăng ký trong TEMPLATES['OPTIONS']['context_processors']."
+      ],
+      "details": [
+        "Dùng để inject biến toàn cục vào mọi template mà không phải truyền tay ở từng view — user hiện tại, cấu hình site, giỏ hàng, feature flag. Django có sẵn vài cái: auth cấp biến user, request cấp request."
+      ],
+      "points": [],
+      "sections": [
+        "Lưu ý: nó chạy cho mọi request → giữ nhẹ, tránh query DB nặng ở đây."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "def site_settings(request):\n    return {\"SITE_NAME\": \"Luyện Phỏng Vấn\"}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "93534-context-processor-la-gi-dung-de-lam-gi"
+  },
+  {
+    "id": "c2334fe5-3323-52c8-adaf-cc3c21cb28d8",
+    "question": "get_or_create() có an toàn khi hai request chạy song song không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96354-get-or-create-co-an-toan-khi-hai-request-chay-song-song-khong",
+    "slug": "get-or-create-co-an-toan-khi-hai-request-chay-song-song-khong-c2334fe5-3323-52c8-adaf-cc3c21cb28d8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Không, nếu thiếu ràng buộc unique ở tầng database.",
+        "get_or_create",
+        "defaults={...}",
+        "IntegrityError"
+      ],
+      "details": [
+        "get_or_create() thực chất là try get → except DoesNotExist → create. Hai request đồng thời có thể cùng get hụt, rồi cùng create → hai bản ghi trùng.",
+        "Django dựa vào database làm trọng tài: nếu field có unique=True (hoặc unique_together / UniqueConstraint), request thua sẽ nhận IntegrityError, Django bắt lại và get một lần nữa để trả về bản ghi mà request kia vừa tạo."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class Cart(models.Model):\n    user = models.OneToOneField(User, on_delete=models.CASCADE)  # unique enforced by DB\n\ncart, created = Cart.objects.get_or_create(user=request.user)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": "96354-get-or-create-co-an-toan-khi-hai-request-chay-song-song-khong"
+  },
+  {
+    "id": "e7481ac4-285a-5abf-9d05-99a453e2333b",
+    "question": "Muốn prefetch quan hệ nhưng chỉ lấy một phần bản ghi con thì làm thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96355-muon-prefetch-quan-he-nhung-chi-lay-mot-phan-ban-ghi-con-thi-lam-the-nao",
+    "slug": "muon-prefetch-quan-he-nhung-chi-lay-mot-phan-ban-ghi-con-thi-lam-the-nao-e7481ac4-285a-5abf-9d05-99a453e2333b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng đối tượng Prefetch để chỉ định QuerySet con, thay vì chuỗi string.",
+        "Ba tham số cần biết:",
+        "'comments__author'",
+        "select_related",
+        "post.comments.all()"
+      ],
+      "details": [
+        "prefetch_related('comments') luôn kéo toàn bộ comment. Nếu chỉ cần comment đã duyệt, sắp mới nhất trước:",
+        "Cạm bẫy: gọi .filter() trên related manager sau khi đã prefetch (post.comments.filter(...)) sẽ bỏ qua cache và bắn query mới cho từng dòng, tức là quay lại N+1."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from django.db.models import Prefetch\n\napproved = Comment.objects.filter(is_approved=True).order_by('-created_at')\nposts = Post.objects.prefetch_related(\n    Prefetch('comments', queryset=approved, to_attr='approved_comments')\n)\n\nfor post in posts:\n    post.approved_comments   # a plain Python list, no extra query"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": "96355-muon-prefetch-quan-he-nhung-chi-lay-mot-phan-ban-ghi-con-thi-lam-the-nao"
+  },
+  {
+    "id": "574688a5-5d67-59bf-aa7d-66911e161512",
+    "question": "Validation trong DRF serializer chạy theo thứ tự nào? validate_<field> và validate() khác gì nhau?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96356-validation-trong-drf-serializer-chay-theo-thu-tu-nao-validate-field-va-validate",
+    "slug": "validation-trong-drf-serializer-chay-theo-thu-tu-nao-validate-field-va-validate-khac-gi-nhau-574688a5-5d67-59bf-aa7d-66911e161512",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khi gọi serializer.is_valid(), DRF chạy lần lượt:",
+        "Khác biệt cốt lõi:",
+        "validate_<field>",
+        "non_field_errors"
+      ],
+      "details": [
+        "1. to_internal_value() — ép kiểu từng field (IntegerField sang int...) và chạy validator cấp field (max_length, UniqueValidator...). Field nào lỗi thì bị loại khỏi bước sau.\n2. validate_<field_name>(self, value) — kiểm tra riêng từng field, nhận giá trị đã ép kiểu, phải return value.\n3. validate(self, attrs) — kiểm tra liên field, nhận dict toàn bộ field đã qua bước 2.\n4. Class-level validators trong Meta (vd UniqueTogetherValidator).",
+        "Lưu ý với partial=True (PATCH): attrs chỉ chứa field được gửi lên, nên trong validate() phải dùng attrs.get(...) kèm giá trị từ self.instance, đừng truy cập bằng key trực tiếp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "class BookingSerializer(serializers.ModelSerializer):\n    def validate_start_date(self, value):\n        if value < timezone.now().date():\n            raise serializers.ValidationError('Start date must not be in the past.')\n        return value\n\n    def validate(self, attrs):\n        if attrs['end_date'] <= attrs['start_date']:\n            raise serializers.ValidationError({'end_date': 'Must be after start date.'})\n        return attrs"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": "96356-validation-trong-drf-serializer-chay-theo-thu-tu-nao-validate-field-va-validate"
+  },
+  {
+    "id": "ae29d12d-91db-54bd-9f94-2976ff7456b9",
+    "question": "Vì sao task Celery bắn từ post_save lại đọc không thấy bản ghi vừa tạo?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96357-vi-sao-task-celery-ban-tu-post-save-lai-doc-khong-thay-ban-ghi-vua-tao",
+    "slug": "vi-sao-task-celery-ban-tu-post-save-lai-doc-khong-thay-ban-ghi-vua-tao-ae29d12d-91db-54bd-9f94-2976ff7456b9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì post_save bắn ngay sau khi save() chạy xong, nhưng transaction chưa commit. Worker Celery là tiến trình khác, dùng connection khác, nên nó SELECT vào lúc dữ liệu còn nằm trong transaction chưa commit — kết quả là DoesNotExist, hoặc tệ hơn là đọc được bản cũ."
+      ],
+      "details": [
+        "Rõ nhất khi bật ATOMIC_REQUESTS hoặc bọc view trong transaction.atomic(): mọi save() nằm trong một transaction kéo dài đến hết request.",
+        "captureOnCommitCallbacks()",
+        "Cách xử lý: hoãn side effect đến sau commit bằng transaction.on_commit()."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from django.db import transaction\n\n@receiver(post_save, sender=Order)\ndef on_order_created(sender, instance, created, **kwargs):\n    if not created:\n        return\n    transaction.on_commit(lambda: send_invoice.delay(instance.pk))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": "96357-vi-sao-task-celery-ban-tu-post-save-lai-doc-khong-thay-ban-ghi-vua-tao"
+  },
+  {
+    "id": "b4841f54-e113-5a38-87ed-b3aba84b9018",
+    "question": "Data migration viết thế nào cho đúng? Vì sao không được import model trực tiếp trong đó?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96358-data-migration-viet-the-nao-cho-dung-vi-sao-khong-duoc-import-model-truc-tiep-tr",
+    "slug": "data-migration-viet-the-nao-cho-dung-vi-sao-khong-duoc-import-model-truc-tiep-trong-do-b4841f54-e113-5a38-87ed-b3aba84b9018",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì sao không import trực tiếp: migration chạy trên bảng ở trạng thái lịch sử của thời điểm đó, còn models.py là phiên bản mới nhất. Nếu sau này bạn xoá một field, migration cũ import model trực tiếp sẽ tham chiếu field không còn tồn tại và vỡ khi ai đó dựng lại DB từ đầu. apps.get_model() trả về model được dựng lại đúng theo state của migration."
+      ],
+      "details": [
+        "Ba lưu ý còn lại:\n- Truyền RunPython.noop (hoặc hàm reverse thật) làm tham số thứ hai để migration còn rollback được.\n- Model lịch sử không có custom method, không có signal, không có save() override — chỉ có field. Logic cần thiết phải viết lại trong migration.\n- Bảng lớn thì xử lý theo lô (iterator() + bulk_update), tránh giữ transaction quá lâu."
+      ],
+      "points": [],
+      "sections": [
+        "Data migration dùng operation RunPython, và phải lấy model qua apps.get_model() chứ không import từ models.py."
+      ],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from django.db import migrations\n\ndef backfill_slug(apps, schema_editor):\n    Article = apps.get_model('blog', 'Article')   # historical version of the model\n    for article in Article.objects.filter(slug='').iterator(chunk_size=2000):\n        article.slug = slugify(article.title)\n        article.save(update_fields=['slug'])\n\nclass Migration(migrations.Migration):\n    dependencies = [('blog', '0007_article_slug')]\n    operations = [migrations.RunPython(backfill_slug, migrations.RunPython.noop)]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": "96358-data-migration-viet-the-nao-cho-dung-vi-sao-khong-duoc-import-model-truc-tiep-tr"
+  },
+  {
+    "id": "2294ca36-d2d6-55c7-aa34-2cab19d1c84a",
+    "question": "Cache dữ liệu đọc nhiều trong Django thì invalidate thế nào cho đúng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96359-cache-du-lieu-doc-nhieu-trong-django-thi-invalidate-the-nao-cho-dung",
+    "slug": "cache-du-lieu-doc-nhieu-trong-django-thi-invalidate-the-nao-cho-dung-2294ca36-d2d6-55c7-aa34-2cab19d1c84a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Có ba chiến lược, chọn theo mức độ chấp nhận dữ liệu cũ.",
+        "3. Key theo phiên bản"
+      ],
+      "details": [
+        "1. TTL ngắn (đơn giản nhất) — chấp nhận dữ liệu cũ vài chục giây, không cần invalidate.",
+        "Ba điều hay bị bỏ sót:\n- Key phải chứa mọi biến làm đổi kết quả — user, locale, tham số filter. Thiếu một cái là dữ liệu người này lộ sang người khác.\n- LocMemCache là per-process, mỗi Gunicorn worker một bản riêng, invalidate không lan sang worker khác. Production dùng Redis/Memcached.\n- Key nóng hết hạn cùng lúc gây cache stampede — nhiều request cùng tính lại. Giảm bằng TTL có jitter hoặc khoá tính toán bằng cache.add()."
+      ],
+      "points": [
+        "Xoá key khi dữ liệu đổi** — chính xác nhất nhưng phải nhớ mọi chỗ ghi.",
+        "Đặt trong transaction.on_commit để không xoá cache của một transaction rồi rollback."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "from django.core.cache import cache\n\ndef top_products():\n    return cache.get_or_set('top_products', lambda: list(_query()), timeout=60)"
+        },
+        {
+          "language": "PYTHON",
+          "code": "@receiver(post_save, sender=Product)\ndef drop_cache(sender, instance, **kwargs):\n    transaction.on_commit(lambda: cache.delete(f'product:{instance.pk}'))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": "96359-cache-du-lieu-doc-nhieu-trong-django-thi-invalidate-the-nao-cho-dung"
+  },
+  {
+    "id": "d64f8676-70e6-5579-aac6-e1c2b128dfa9",
+    "question": "Task Celery gọi API thanh toán bị lỗi mạng — thiết kế retry thế nào để không trừ tiền hai lần?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96360-task-celery-goi-api-thanh-toan-bi-loi-mang-thiet-ke-retry-the-nao-de-khong-tru-t",
+    "slug": "task-celery-goi-api-thanh-toan-bi-loi-mang-thiet-ke-retry-the-nao-de-khong-tru-tien-hai-lan-d64f8676-70e6-5579-aac6-e1c2b128dfa9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Retry phải đi kèm idempotency, vì Celery mặc định là at-least-once: worker chết giữa chừng, hoặc acks_late bật, đều dẫn tới task chạy lại."
+      ],
+      "details": [
+        "Chốt: retry lo phần \"thử lại\", idempotency lo phần \"chạy lại không hại\". Thiếu vế thứ hai thì retry chính là nguyên nhân trừ tiền trùng.",
+        "Retry có kiểm soát:"
+      ],
+      "points": [
+        "Chỉ retry lỗi tạm thời (timeout, 5xx, mất kết nối). Lỗi nghiệp vụ (thẻ bị từ chối, payload sai) retry vô nghĩa — để task fail và ghi log.",
+        "retry_backoff + retry_jitter tránh cả cụm worker cùng đập vào API vừa hồi phục.",
+        "max_retries bắt buộc có; hết lượt thì đẩy sang dead-letter queue hoặc bảng chờ xử lý tay."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PYTHON",
+          "code": "@shared_task(\n    bind=True,\n    autoretry_for=(requests.RequestException,),\n    retry_backoff=5,       # 5s, 10s, 20s, 40s...\n    retry_jitter=True,     # spread retries out\n    max_retries=5,\n)\ndef charge(self, payment_id):\n    ..."
+        },
+        {
+          "language": "PYTHON",
+          "code": "UPDATE payment SET status='processing' WHERE id=%s AND status='pending'"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": "96360-task-celery-goi-api-thanh-toan-bi-loi-mang-thiet-ke-retry-the-nao-de-khong-tru-t"
+  },
+  {
+    "id": "79ad587d-1dbd-55e7-a289-c920b8455f7d",
+    "question": "Dùng F() và Q() thế nào và để giải quyết vấn đề gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dung-f-va-q-the-nao-va-de-giai-quyet-van-de-gi-79ad587d-1dbd-55e7-a289-c920b8455f7d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": null
+  },
+  {
+    "id": "3b8fede3-9090-5f23-a17e-1fe928468999",
+    "question": "Khi nào nên viết custom Manager, custom QuerySet, hay rơi xuống raw SQL?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-nen-viet-custom-manager-custom-queryset-hay-roi-xuong-raw-sql-3b8fede3-9090-5f23-a17e-1fe928468999",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": null
+  },
+  {
+    "id": "61486002-c07f-5fcd-8593-9b904757bec6",
+    "question": "Khi nào nên viết Mixin cho CBV và viết thế nào để không vỡ MRO?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-nen-viet-mixin-cho-cbv-va-viet-the-nao-de-khong-vo-mro-61486002-c07f-5fcd-8593-9b904757bec6",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": null
+  },
+  {
+    "id": "16e22b40-0d2f-5017-8da1-164b8c87311c",
+    "question": "Async middleware trong Django chạy ra sao và lỗi hay gặp?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "async-middleware-trong-django-chay-ra-sao-va-loi-hay-gap-16e22b40-0d2f-5017-8da1-164b8c87311c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": null
+  },
+  {
+    "id": "6d246191-bbf0-5439-b625-896fa79c3a23",
+    "question": "Session, Token và JWT — chọn cái nào cho project Django?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "session-token-va-jwt-chon-cai-nao-cho-project-django-6d246191-bbf0-5439-b625-896fa79c3a23",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": null
+  },
+  {
+    "id": "f2aac6a0-4bde-5762-b3aa-71a5851b1ace",
+    "question": "Throttling trong DRF dùng để làm gì và cấu hình ra sao cho hiệu quả?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "throttling-trong-drf-dung-de-lam-gi-va-cau-hinh-ra-sao-cho-hieu-qua-f2aac6a0-4bde-5762-b3aa-71a5851b1ace",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": null
+  },
+  {
+    "id": "6bb66ea4-80dc-5286-8f6e-1bf15f0be9ec",
+    "question": "Nested serializer (writable) có trade-off gì và xử lý thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "nested-serializer-writable-co-trade-off-gi-va-xu-ly-the-nao-6bb66ea4-80dc-5286-8f6e-1bf15f0be9ec",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": null
+  },
+  {
+    "id": "e601c286-58fe-5e55-befc-58b70dc036fa",
+    "question": "Khi nào KHÔNG nên dùng signals, thay bằng gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-khong-nen-dung-signals-thay-bang-gi-e601c286-58fe-5e55-befc-58b70dc036fa",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": null
+  },
+  {
+    "id": "805383d5-32c1-572c-8ed6-57cc81fe05d0",
+    "question": "Celery, RQ, django-q, Huey — chọn task queue nào cho Django?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "celery-rq-django-q-huey-chon-task-queue-nao-cho-django-805383d5-32c1-572c-8ed6-57cc81fe05d0",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": null
+  },
+  {
+    "id": "d85d3d15-2277-5955-aa96-0cdc8879ef1f",
+    "question": "Để DEBUG = True trên production gây hậu quả gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "de-debug-true-tren-production-gay-hau-qua-gi-d85d3d15-2277-5955-aa96-0cdc8879ef1f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": null
+  },
+  {
+    "id": "76e5a568-e086-5587-8c6a-6bb70a5eb805",
+    "question": "Async view trong Django dùng khi nào, và lỗi hay gặp với ORM ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "async-view-trong-django-dung-khi-nao-va-loi-hay-gap-voi-orm-ra-sao-76e5a568-e086-5587-8c6a-6bb70a5eb805",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": null
+  },
+  {
+    "id": "25bf8278-4431-566d-a343-865daaa51321",
+    "question": "Static files và media files khác nhau ra sao, deploy thế nào cho đúng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "static-files-va-media-files-khac-nhau-ra-sao-deploy-the-nao-cho-dung-25bf8278-4431-566d-a343-865daaa51321",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 76,
+    "sourceSlug": null
+  },
+  {
+    "id": "687922ca-bf91-5fc4-9002-7ccfa2975aaa",
+    "question": "select_for_update() dùng khi nào để tránh race condition?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "select-for-update-dung-khi-nao-de-tranh-race-condition-687922ca-bf91-5fc4-9002-7ccfa2975aaa",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 77,
+    "sourceSlug": null
+  },
+  {
+    "id": "e13099c1-abc7-553d-8621-d921f206ce9b",
+    "question": "Khi 2 branch cùng sinh migration, conflict thế nào và xử lý ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-2-branch-cung-sinh-migration-conflict-the-nao-va-xu-ly-ra-sao-e13099c1-abc7-553d-8621-d921f206ce9b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 78,
+    "sourceSlug": null
+  },
+  {
+    "id": "8924c4d5-7a1e-5fc0-b3ab-7dedcf93f7b8",
+    "question": "CONN_MAX_AGE và PgBouncer giải quyết vấn đề gì khi deploy Django?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "conn-max-age-va-pgbouncer-giai-quyet-van-de-gi-khi-deploy-django-8924c4d5-7a1e-5fc0-b3ab-7dedcf93f7b8",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 79,
+    "sourceSlug": null
+  },
+  {
+    "id": "46420a9e-4168-5a58-98b6-6bacd48c8a8c",
+    "question": "Vì sao annotate() với hai Count() cùng lúc lại trả về số bị nhân lên? Sửa ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vi-sao-annotate-voi-hai-count-cung-luc-lai-tra-ve-so-bi-nhan-len-sua-ra-sao-46420a9e-4168-5a58-98b6-6bacd48c8a8c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 80,
+    "sourceSlug": null
+  },
+  {
+    "id": "9d2d2a89-be76-510a-81b0-e8757c2da49a",
+    "question": "values().annotate() gom nhóm theo cột nào? Vì sao thêm order_by() lại làm kết quả sai?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "values-annotate-gom-nhom-theo-cot-nao-vi-sao-them-order-by-lai-lam-ket-qua-sai-9d2d2a89-be76-510a-81b0-e8757c2da49a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 81,
+    "sourceSlug": null
+  },
+  {
+    "id": "228c7d01-1786-5e5b-b441-9912b2dafe6d",
+    "question": "select_for_update() có những tùy chọn nào, và dùng sai gây vấn đề gì ở tải cao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "select-for-update-co-nhung-tuy-chon-nao-va-dung-sai-gay-van-de-gi-o-tai-cao-228c7d01-1786-5e5b-b441-9912b2dafe6d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 82,
+    "sourceSlug": null
+  },
+  {
+    "id": "2f52bfbe-36ba-5d4d-8824-741d6b06d799",
+    "question": "Thêm cột NOT NULL vào bảng vài chục triệu dòng đang chạy production — làm thế nào để không downtime?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "them-cot-not-null-vao-bang-vai-chuc-trieu-dong-dang-chay-production-lam-the-nao-de-khong-downtime-2f52bfbe-36ba-5d4d-8824-741d6b06d799",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 83,
+    "sourceSlug": null
+  },
+  {
+    "id": "3482e8d8-7025-514a-8a81-3cbe44f8360f",
+    "question": "Override get_queryset() trong manager mặc định để lọc soft-delete có rủi ro gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "override-get-queryset-trong-manager-mac-dinh-de-loc-soft-delete-co-rui-ro-gi-3482e8d8-7025-514a-8a81-3cbe44f8360f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 84,
+    "sourceSlug": null
+  }
+]

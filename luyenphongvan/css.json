@@ -1,0 +1,4359 @@
+[
+  {
+    "id": "3d29f159-ff2c-5d99-b228-487e4df9e557",
+    "question": "Cascade trong CSS nghĩa là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/77-cascade-trong-css-nghia-la-gi",
+    "slug": "cascade-trong-css-nghia-la-gi-3d29f159-ff2c-5d99-b228-487e4df9e557",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Cascade là thuật toán chọn ra giá trị thắng khi nhiều khai báo cùng nhắm vào một thuộc tính của một element.",
+        "Điểm hay sai: nhiều người xếp specificity lên trên @layer. Thực tế layer được xét trước specificity — một selector #id trong layer sớm vẫn thua một selector element ở layer sau."
+      ],
+      "details": [
+        "Thứ tự xét, từ trên xuống — dừng ngay khi phân định được:",
+        "1. Origin + !important: !important của user agent > !important của user > !important của tác giả > tác giả thường > user > user agent.\n2. @layer — layer khai báo sau thắng layer trước; CSS không nằm trong layer nào thắng mọi layer.\n3. Specificity — inline (1,0,0,0) > id (0,1,0,0) > class/attr/pseudo-class (0,0,1,0) > element (0,0,0,1).\n4. Thứ tự xuất hiện — khai báo sau thắng.",
+        "Chốt: @layer sinh ra để không phải chạy đua !important khi nhúng thư viện ngoài — nhét CSS của thư viện vào layer thấp là ghi đè được bằng class thường."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "@layer reset, components;\n\n@layer reset      { a { color: black; } }\n@layer components { a { color: blue; } }   /* thắng: layer khai báo sau */\n\na.link { color: red; }                     /* thắng cả hai: ngoài mọi layer */"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "77-cascade-trong-css-nghia-la-gi"
+  },
+  {
+    "id": "70b52056-90fc-5b83-aeb5-d9df5790db31",
+    "question": "Inheritance trong CSS là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/79-inheritance-trong-css-la-gi",
+    "slug": "inheritance-trong-css-la-gi-70b52056-90fc-5b83-aeb5-d9df5790db31",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Quy luật chung: thuộc tính về chữ thì kế thừa, thuộc tính về hộp thì không.",
+        "Lưu ý: <button>, <input>, <textarea> không kế thừa font từ cha vì browser stylesheet đặt sẵn font riêng."
+      ],
+      "details": [
+        "Bốn từ khoá điều khiển:",
+        "Reset thủ công là việc gần như dự án nào cũng phải làm:"
+      ],
+      "points": [],
+      "sections": [
+        "Một số thuộc tính CSS tự truyền xuống element con, số còn lại thì không."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "body { color: #333; font-family: system-ui; }\n/* mọi <p>, <span>, <li> bên trong đều nhận — không cần khai báo lại */\n\n.card { border: 1px solid #ddd; padding: 16px; }\n/* con của .card KHÔNG có border hay padding */"
+        },
+        {
+          "language": "CSS",
+          "code": ".child {\n  color: inherit;   /* ép lấy của cha, kể cả khi vốn không kế thừa */\n  border: initial;  /* về giá trị mặc định của spec */\n  margin: unset;    /* = inherit nếu thuộc tính kế thừa, ngược lại = initial */\n  all: revert;      /* về giá trị của browser stylesheet */\n}"
+        },
+        {
+          "language": "CSS",
+          "code": "button, input, select, textarea { font: inherit; }"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Kế thừa",
+            "Không kế thừa",
+            "color, font-*, line-height, letter-spacing",
+            "color",
+            "font-*",
+            "line-height",
+            "letter-spacing",
+            "margin, padding, border, background",
+            "margin",
+            "padding",
+            "border",
+            "background",
+            "text-align, visibility, cursor, list-style",
+            "text-align",
+            "visibility",
+            "cursor",
+            "list-style",
+            "width, height, display, position"
+          ]
+        }
+      ]
+    },
+    "legacyId": 2,
+    "sourceSlug": "79-inheritance-trong-css-la-gi"
+  },
+  {
+    "id": "529c1437-9e2f-5e77-8a7b-f973e0e51243",
+    "question": "Đơn vị px, em, rem, %, vw, vh khác nhau?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/80-don-vi-px-em-rem-vw-vh-khac-nhau",
+    "slug": "don-vi-px-em-rem-vw-vh-khac-nhau-529c1437-9e2f-5e77-8a7b-f973e0e51243",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý — vh trên mobile: thanh địa chỉ trượt lên/xuống làm 100vh cao hơn màn hình thật. Từ 2022 có bộ đơn vị mới:\n- svh — chiều cao khi thanh địa chỉ hiện\n- lvh — khi thanh địa chỉ ẩn\n- dvh — thay đổi theo thời gian thực (thường là thứ bạn muốn)",
+        "Lưu ý — em nhân dồn:"
+      ],
+      "details": [
+        "Chốt thực dụng: cỡ chữ và khoảng cách dùng rem; thứ cần co theo chữ của chính nó (padding trong nút) dùng em; chiều cao full màn hình dùng dvh thay vh."
+      ],
+      "points": [],
+      "sections": [
+        "Chia làm ba nhóm theo cái mà giá trị phụ thuộc vào."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".a { font-size: 16px; }     /* tuyệt đối, không đổi theo ngữ cảnh */\n.b { padding: 1em; }        /* = font-size CỦA CHÍNH element (kế thừa từ cha nếu không đặt) */\n.c { padding: 1rem; }       /* = font-size của <html>, thường 16px */\n.d { width: 50%; }          /* = kích thước của element cha */\n.e { width: 50vw; }         /* = 50% chiều rộng viewport */"
+        },
+        {
+          "language": "CSS",
+          "code": ".menu    { font-size: 0.9em; }\n.menu li { font-size: 0.9em; }   /* thực tế = 0.81em so với gốc */"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Đơn vị",
+            "Neo vào",
+            "không gì",
+            "px",
+            "em",
+            "rem",
+            "<html>",
+            "không co theo cỡ chữ người dùng đặt",
+            "%",
+            "vw",
+            "vh",
+            "font-size của element hiện tại",
+            "nhân dồn khi lồng nhiều lớp"
+          ]
+        }
+      ]
+    },
+    "legacyId": 3,
+    "sourceSlug": "80-don-vi-px-em-rem-vw-vh-khac-nhau"
+  },
+  {
+    "id": "865e2b17-3423-5060-9ec9-97627e2d807f",
+    "question": "!important dùng khi nào? Tại sao nên tránh?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/81-important-dung-khi-nao-tai-sao-nen-tranh",
+    "slug": "important-dung-khi-nao-tai-sao-nen-tranh-865e2b17-3423-5060-9ec9-97627e2d807f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì sao nên tránh: cách duy nhất để ghi đè một !important là một !important khác có specificity cao hơn. Trong một dự án đang chạy, việc đó lan rất nhanh — mỗi lần sửa lại thêm một !important, đến lúc không ai biết giá trị nào đang thắng.",
+        "Chốt phỏng vấn: trả lời \"tránh vì khó bảo trì\" là đủ mức trung bình."
+      ],
+      "details": [
+        "Hai chỗ dùng được:\n1. Utility class phải thắng mọi thứ theo thiết kế (.hidden { display: none !important }).\n2. Ghi đè CSS inline của thư viện ngoài khi không sửa được nguồn — inline style chỉ thua !important.",
+        "Giải pháp hiện đại thay cho nó là @layer:",
+        "Nói thêm được @layer là cách xử lý gốc rễ mới tạo khác biệt."
+      ],
+      "points": [],
+      "sections": [
+        "!important đưa một khai báo lên nhóm ưu tiên riêng, đứng trên mọi specificity trong cùng origin."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".btn { color: blue !important; }\n#page .btn.primary { color: red; }   /* thua, dù specificity cao hơn nhiều */"
+        },
+        {
+          "language": "CSS",
+          "code": "@layer vendor, app;\n@layer vendor { /* CSS thư viện */ }\n@layer app    { .btn { color: red; } }   /* thắng, không cần !important */"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "81-important-dung-khi-nao-tai-sao-nen-tranh"
+  },
+  {
+    "id": "a4e07b6f-2ab4-5917-be1e-80590e4e27e4",
+    "question": "Box model gồm những gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/91-box-model-gom-nhung-gi",
+    "slug": "box-model-gom-nhung-gi-a4e07b6f-2ab4-5917-be1e-80590e4e27e4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Margin khác ba lớp còn lại ở ba điểm: nằm ngoài viền, luôn trong suốt (không nhận background), và gộp theo chiều dọc với margin liền kề."
+      ],
+      "details": [
+        "Lưu ý: đặt width: 100% kèm padding trong content-box → element rộng hơn cha và tràn. Đây là lý do gần như mọi reset CSS đều mở đầu bằng box-sizing: border-box.",
+        "Mẹo debug: panel Computed trong DevTools vẽ sẵn sơ đồ box model với số đo từng lớp — nhanh hơn ngồi cộng tay."
+      ],
+      "points": [],
+      "sections": [
+        "Mỗi element là một hộp gồm bốn lớp, từ trong ra ngoài: content → padding → border → margin."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".box {\n  width: 200px;      /* mặc định: CHỈ tính phần content */\n  padding: 20px;\n  border: 5px solid;\n  margin: 10px;\n}\n/* chiều rộng chiếm chỗ thực tế = 200 + 20*2 + 5*2 = 250px\n   cộng thêm 10px margin mỗi bên khi tính khoảng cách với element khác */"
+        },
+        {
+          "language": "CSS",
+          "code": "/* chuẩn hoá cho cả dự án — width là width thật */\n*, *::before, *::after { box-sizing: border-box; }\n\n.box { width: 200px; padding: 20px; border: 5px solid; }\n/* giờ tổng chiều rộng đúng 200px, content tự co còn 150px */"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "91-box-model-gom-nhung-gi"
+  },
+  {
+    "id": "7ddfdcc6-0777-5553-a5a6-8880dbf4bd95",
+    "question": "box-sizing: content-box vs border-box?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/92-box-sizing-content-box-vs-border-box",
+    "slug": "box-sizing-content-box-vs-border-box-7ddfdcc6-0777-5553-a5a6-8880dbf4bd95",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Dòng gần như mọi dự án đều có:",
+        "Vì sao border-box dễ dùng hơn: khi làm layout bạn quan tâm ô này chiếm bao nhiêu chỗ, không phải \"phần chữ bên trong rộng bao nhiêu\". Với width: 50% + padding, content-box sẽ vỡ grid còn border-box thì không."
+      ],
+      "details": [
+        "Lưu ý: border-box không tính margin. width: 100% cộng margin: 10px vẫn tràn khỏi cha — chỗ này phải dùng calc(100% - 20px) hoặc bỏ margin, dùng gap của flex/grid."
+      ],
+      "points": [],
+      "sections": [
+        "Khác nhau ở width đang đo cái gì."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".a {\n  box-sizing: content-box;   /* mặc định của CSS */\n  width: 300px; padding: 20px; border: 2px solid;\n}\n/* chiếm chỗ: 300 + 40 + 4 = 344px */\n\n.b {\n  box-sizing: border-box;\n  width: 300px; padding: 20px; border: 2px solid;\n}\n/* chiếm chỗ: đúng 300px, content tự co còn 256px */"
+        },
+        {
+          "language": "CSS",
+          "code": "*, *::before, *::after { box-sizing: border-box; }"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "width bao gồm",
+            "width",
+            "content-box",
+            "border-box",
+            "chỉ content",
+            "content + padding + border",
+            "Thêm padding"
+          ]
+        }
+      ]
+    },
+    "legacyId": 6,
+    "sourceSlug": "92-box-sizing-content-box-vs-border-box"
+  },
+  {
+    "id": "b02a2a92-2a58-5063-8cba-db8b4b63da39",
+    "question": "Position property có những giá trị nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96-position-property-co-nhung-gia-tri-nao",
+    "slug": "position-property-co-nhung-gia-tri-nao-b02a2a92-2a58-5063-8cba-db8b4b63da39",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Công dụng phổ biến nhất của relative không phải để dịch chuyển, mà là làm mốc neo cho absolute con:",
+        "Lưu ý 1: absolute mà không tổ tiên nào có position → neo vào khối gốc, thường là văn bản trôi tận đầu trang."
+      ],
+      "details": [
+        "Lưu ý 2: fixed mất tác dụng neo-viewport khi tổ tiên có transform, filter hoặc will-change — nó chuyển sang neo vào tổ tiên đó. Đây là nguyên nhân thường gặp của \"modal fixed bỗng chạy theo trang\"."
+      ],
+      "points": [],
+      "sections": [
+        "position quyết định element có ở trong dòng chảy bình thường hay không, và top/right/bottom/left neo vào đâu."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".static   { position: static; }    /* mặc định — top/left KHÔNG có tác dụng */\n.relative { position: relative; top: 10px; }  /* dịch 10px, CHỖ CŨ vẫn được giữ */\n.absolute { position: absolute; top: 0; right: 0; }  /* thoát flow */\n.fixed    { position: fixed; bottom: 24px; right: 24px; }  /* neo vào viewport */\n.sticky   { position: sticky; top: 0; }  /* lai relative + fixed */"
+        },
+        {
+          "language": "CSS",
+          "code": ".card { position: relative; }\n.card .badge { position: absolute; top: 8px; right: 8px; }"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Giá trị",
+            "Còn chiếm chỗ",
+            "có",
+            "static",
+            "relative",
+            "absolute",
+            "fixed",
+            "—",
+            "sticky",
+            "có (chỗ cũ giữ nguyên)",
+            "chính nó"
+          ]
+        }
+      ]
+    },
+    "legacyId": 7,
+    "sourceSlug": "96-position-property-co-nhung-gia-tri-nao"
+  },
+  {
+    "id": "7325bf6f-5158-5d34-a727-cf3a25cfa14d",
+    "question": "Flexbox là gì? Khi nào nên dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/101-flexbox-la-gi-khi-nao-nen-dung",
+    "slug": "flexbox-la-gi-khi-nao-nen-dung-7325bf6f-5158-5d34-a727-cf3a25cfa14d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Flex hay Grid?"
+      ],
+      "details": [
+        "Lưu ý: flex item không tự co nhỏ hơn nội dung của nó vì min-width: auto mặc định. Một <pre> hay chuỗi dài làm cả cột phình ra và tràn:"
+      ],
+      "points": [],
+      "sections": [
+        "Flexbox là mô hình layout một chiều: bố trí item dọc theo một trục, và phân chia không gian còn thừa hoặc còn thiếu.",
+        "flex",
+        "co giãn theo nội dung"
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".nav {\n  display: flex;\n  align-items: center;      /* căn giữa theo trục phụ */\n  gap: 16px;                /* khoảng cách, thay margin */\n}\n.nav .spacer { flex: 1; }   /* nuốt hết chỗ trống, đẩy phần sau sang phải */"
+        },
+        {
+          "language": "CSS",
+          "code": ".sidebar { flex: 0 0 280px; }   /* không giãn, không co, cố định 280px */\n.content { flex: 1 1 auto; }    /* ăn hết phần còn lại */"
+        },
+        {
+          "language": "CSS",
+          "code": ".item { min-width: 0; }   /* cho phép co lại — dòng cứu sinh của flex layout */"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Tình huống",
+            "Chọn",
+            "Một hàng hoặc một cột, kích thước phụ thuộc nội dung",
+            "Cần hàng và cột khớp nhau thành lưới",
+            "Thanh điều hướng, nhóm nút, danh sách chip",
+            "Bố cục trang, dashboard, gallery đều ô"
+          ]
+        }
+      ]
+    },
+    "legacyId": 8,
+    "sourceSlug": "101-flexbox-la-gi-khi-nao-nen-dung"
+  },
+  {
+    "id": "ad439fa8-f253-5607-ad99-3add87b2ae11",
+    "question": "justify-content và align-items khác nhau?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/102-justify-content-va-align-items-khac-nhau",
+    "slug": "justify-content-va-align-items-khac-nhau-ad439fa8-f253-5607-ad99-3add87b2ae11",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "justify-content căn theo trục chính, align-items căn theo trục phụ.",
+        "Căn giữa hoàn toàn — cách ngắn nhất:",
+        "Lưu ý:",
+        "flex-direction: column",
+        "align-items: center"
+      ],
+      "details": [
+        "Trục nào là chính do flex-direction quyết định.",
+        "Ghi nhớ: justify-* luôn đi với trục chính, align-* luôn đi với trục phụ — quy ước này giữ nguyên cả trong CSS Grid."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".row {\n  display: flex;\n  flex-direction: row;      /* trục chính = ngang */\n  justify-content: space-between;  /* dàn ngang */\n  align-items: center;             /* căn giữa theo chiều dọc */\n}\n\n.col {\n  display: flex;\n  flex-direction: column;   /* trục chính = DỌC — hai thuộc tính ĐỔI VAI */\n  justify-content: center;  /* giờ căn giữa theo chiều DỌC */\n  align-items: stretch;     /* giờ kéo giãn theo chiều NGANG */\n}"
+        },
+        {
+          "language": "CSS",
+          "code": ".center { display: flex; justify-content: center; align-items: center; }\n/* hoặc: display: grid; place-items: center; */"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Trục",
+            "space-between",
+            "justify-content",
+            "align-items",
+            "space-around",
+            "chính",
+            "space-evenly",
+            "stretch",
+            "baseline",
+            "flex-start",
+            "phụ",
+            "center",
+            "flex-end",
+            "Giá trị riêng"
+          ]
+        }
+      ]
+    },
+    "legacyId": 9,
+    "sourceSlug": "102-justify-content-va-align-items-khac-nhau"
+  },
+  {
+    "id": "d1f3e54e-70a8-5129-8249-6f9747c4c4d8",
+    "question": "CSS Grid là gì? Khác Flexbox thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/109-css-grid-la-gi-khac-flexbox-the-nao",
+    "slug": "css-grid-la-gi-khac-flexbox-the-nao-d1f3e54e-70a8-5129-8249-6f9747c4c4d8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác biệt cốt lõi: Flexbox để nội dung tự quyết định chỗ, Grid để bạn quyết định trước rồi nội dung điền vào."
+      ],
+      "details": [
+        "Hai cái dùng chung được và trong thực tế luôn dùng chung: Grid dựng khung trang, Flex sắp xếp bên trong mỗi ô.",
+        "Chốt: dấu hiệu nên chuyển từ Flex sang Grid — bạn đang phải đặt width: 33.33% kèm calc() để trừ gap, hoặc phải ép các card ở hai hàng thẳng cột với nhau."
+      ],
+      "points": [],
+      "sections": [
+        "Grid là layout hai chiều: khai báo cả hàng và cột, và item được đặt vào ô của lưới đó."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".page {\n  display: grid;\n  grid-template-columns: 240px 1fr;\n  grid-template-rows: auto 1fr auto;\n  grid-template-areas:\n    'header  header'\n    'sidebar main'\n    'footer  footer';\n  min-height: 100dvh;\n  gap: 16px;\n}\n.header { grid-area: header; }\n.side   { grid-area: sidebar; }"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Flexbox",
+            "Grid",
+            "Số chiều",
+            "một (hàng hoặc cột)",
+            "hai (hàng và cột)",
+            "Bố cục quyết định bởi"
+          ]
+        }
+      ]
+    },
+    "legacyId": 10,
+    "sourceSlug": "109-css-grid-la-gi-khac-flexbox-the-nao"
+  },
+  {
+    "id": "c2c12b6f-753e-5b2a-8f21-ad474399b2dd",
+    "question": "fr unit là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/110-fr-unit-la-gi",
+    "slug": "fr-unit-la-gi-c2c12b6f-753e-5b2a-8f21-ad474399b2dd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: 1fr thực chất là minmax(auto, 1fr), nghĩa là không co nhỏ hơn nội dung."
+      ],
+      "details": [],
+      "points": [
+        "Một cột chứa chuỗi dài hoặc <pre> sẽ phá vỡ tỉ lệ dù bạn đặt 1fr 1fr.",
+        "Cách sửa:"
+      ],
+      "sections": [
+        "fr (fraction) chia phần không gian còn lại của grid container sau khi đã trừ mọi kích thước cố định và gap.",
+        "%",
+        "Kết hợp với minmax() để không co quá nhỏ:",
+        "Đây là bug grid hay gặp nhất khi trong ô có bảng hoặc code block."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".grid {\n  display: grid;\n  grid-template-columns: 200px 1fr 2fr;\n  gap: 16px;\n}\n/* container 1000px:\n   1000 - 200 (cột cố định) - 32 (2 gap) = 768px còn lại\n   1fr = 256px, 2fr = 512px */"
+        },
+        {
+          "language": "CSS",
+          "code": ".a { grid-template-columns: 33.33% 33.33% 33.33%; gap: 16px; }  /* TRÀN: % không trừ gap */\n.b { grid-template-columns: repeat(3, 1fr); gap: 16px; }        /* vừa khít */"
+        },
+        {
+          "language": "CSS",
+          "code": ".cards { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "110-fr-unit-la-gi"
+  },
+  {
+    "id": "c9a6536e-ffbc-5520-a5f9-631b8b91187f",
+    "question": "Responsive design là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/117-responsive-design-la-gi",
+    "slug": "responsive-design-la-gi-c9a6536e-ffbc-5520-a5f9-631b8b91187f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Responsive design là làm cho một bản mã hiển thị hợp lý trên mọi kích thước màn hình, thay vì dựng site riêng cho mobile.",
+        "Hai công cụ hiện đại đáng nhắc khi phỏng vấn:\n- Container query — component tự đáp ứng theo bề rộng container chứ không theo viewport, nên tái sử dụng được ở sidebar lẫn vùng nội dung chính.\n- clamp() — co giãn liên tục thay vì nhảy bậc theo breakpoint."
+      ],
+      "details": [
+        "Ba thành phần gốc (Ethan Marcotte, 2010):\n1. Lưới co giãn — %, fr, flex thay cho chiều rộng cố định.\n2. Ảnh linh hoạt — max-width: 100%, srcset.\n3. Media query — đổi bố cục tại các ngưỡng.",
+        "Lưu ý: đặt breakpoint theo tên thiết bị (\"iPhone\", \"iPad\"). Chọn ngưỡng theo chỗ layout bắt đầu vỡ, không theo model điện thoại — danh sách thiết bị thay đổi mỗi năm, còn layout thì không."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "/* mobile-first: base là mobile, thêm dần cho màn lớn */\n.grid { display: grid; gap: 16px; }\n\n@media (min-width: 768px)  { .grid { grid-template-columns: repeat(2, 1fr); } }\n@media (min-width: 1200px) { .grid { grid-template-columns: repeat(4, 1fr); } }\n\n/* nhiều trường hợp không cần media query nữa */\n.cards { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }\nh1     { font-size: clamp(1.5rem, 4vw, 2.5rem); }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "117-responsive-design-la-gi"
+  },
+  {
+    "id": "905e37cf-2518-5053-a1a0-bd51b1ced23e",
+    "question": "Mobile-first approach là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/118-mobile-first-approach-la-gi",
+    "slug": "mobile-first-approach-la-gi-905e37cf-2518-5053-a1a0-bd51b1ced23e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba lý do chọn mobile-first:\n1. Ít ghi đè hơn — mỗi breakpoint thêm thứ mới thay vì huỷ thứ cũ, CSS ngắn và dễ lần hơn.\n2. Ép ưu tiên nội dung — màn hình nhỏ không đủ chỗ cho mọi thứ, buộc phải quyết định cái gì quan trọng.\n3. Phù hợp thực tế truy cập — phần lớn lưu lượng ở Việt Nam đến từ điện thoại."
+      ],
+      "details": [
+        "Lưu ý: trộn min-width và max-width trong cùng một dự án. Hai chiều ghi đè nhau và thứ tự khai báo bắt đầu quyết định kết quả — chọn một hướng rồi giữ nhất quán.",
+        "Ghi chú: mobile-first là quy ước viết CSS, không đồng nghĩa với việc tải ít tài nguyên hơn trên mobile — muốn nhẹ hơn thật thì phải xử lý ở srcset, lazy load và tách bundle."
+      ],
+      "points": [],
+      "sections": [
+        "Mobile-first nghĩa là CSS mặc định viết cho màn hình nhỏ, rồi dùng min-width để bổ sung cho màn lớn hơn.",
+        "So với desktop-first:"
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "/* base: mobile — không media query */\n.nav { display: flex; flex-direction: column; gap: 8px; }\n\n/* bổ sung khi có chỗ */\n@media (min-width: 768px) {\n  .nav { flex-direction: row; gap: 24px; }\n}"
+        },
+        {
+          "language": "CSS",
+          "code": "/* desktop-first: base là desktop, phải GỠ BỎ dần cho mobile */\n.nav { display: flex; flex-direction: row; gap: 24px; }\n@media (max-width: 767px) {\n  .nav { flex-direction: column; gap: 8px; }   /* ghi đè lại thứ vừa viết */\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "118-mobile-first-approach-la-gi"
+  },
+  {
+    "id": "0d2e95a7-1a9e-59e5-9f5f-61a5f7c13661",
+    "question": "Media queries dùng như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/119-media-queries-dung-nhu-the-nao",
+    "slug": "media-queries-dung-nhu-the-nao-0d2e95a7-1a9e-59e5-9f5f-61a5f7c13661",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Ngưỡng hay dùng: 640 / 768 / 1024 / 1280px — nhưng đó là quy ước của Tailwind, không phải chuẩn."
+      ],
+      "details": [
+        "Lưu ý 1: đặt breakpoint theo tên thiết bị. Chọn ngưỡng ở chỗ layout bắt đầu vỡ, phát hiện bằng cách kéo cửa sổ nhỏ dần.",
+        "Lưu ý 2: max-width: 768px và min-width: 768px cùng khớp tại đúng 768px. Dùng max-width: 767.98px hoặc chuyển hẳn sang cú pháp khoảng.",
+        "Chốt: hai truy vấn hay bị bỏ quên nhưng interviewer đánh giá cao là prefers-reduced-motion và prefers-color-scheme — chúng thể hiện có nghĩ tới người dùng thật."
+      ],
+      "points": [],
+      "sections": [
+        "Media query áp một khối CSS khi điều kiện về thiết bị đúng."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "/* mobile-first: chỉ thêm khi màn đủ rộng */\n@media (min-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }\n\n/* kết hợp điều kiện */\n@media (min-width: 768px) and (max-width: 1023px) { ... }\n\n/* cú pháp khoảng, gọn hơn (Chrome 104+, Safari 16.4+) */\n@media (768px <= width < 1024px) { ... }\n\n/* không chỉ có kích thước */\n@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }\n@media (prefers-color-scheme: dark)     { ... }\n@media (hover: none)                    { .tooltip { display: none; } }\n@media print                            { nav { display: none; } }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "119-media-queries-dung-nhu-the-nao"
+  },
+  {
+    "id": "31dd51ac-e208-50d7-8fa7-2e34bad9b02c",
+    "question": "BEM (Block Element Modifier) là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/139-bem-block-element-modifier-la-gi",
+    "slug": "bem-block-element-modifier-la-gi-31dd51ac-e208-50d7-8fa7-2e34bad9b02c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Cái nó giải quyết: selector lồng sâu (.sidebar .card h3 span) rất dễ vỡ khi đổi cấu trúc DOM, và specificity leo thang không kiểm soát. BEM giữ mọi selector ở một class duy nhất, specificity phẳng, ghi đè dễ đoán."
+      ],
+      "details": [
+        "Lưu ý 1 — không có block__el1__el2. Element không lồng tên. Card chứa avatar thì viết .card__avatar, không phải .card__header__avatar; sâu hơn nữa thì đó nên là một block riêng.",
+        "Lưu ý 2 — modifier phải đi kèm block. class=\"card--featured\" mà thiếu card là sai; modifier chỉ thêm thay đổi lên base.",
+        "Khi nào không cần BEM: dự án dùng CSS Modules, styled-components hoặc Tailwind đã có cơ chế cô lập riêng — thêm BEM lên đó chỉ làm tên dài ra mà không giải quyết thêm gì."
+      ],
+      "points": [],
+      "sections": [
+        "BEM là quy ước đặt tên class để một class nói rõ nó thuộc component nào và đóng vai gì."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<article class=\"card card--featured\">\n  <h3 class=\"card__title\">Tiêu đề</h3>\n  <p  class=\"card__desc\">Mô tả</p>\n  <button class=\"card__btn card__btn--ghost\">Xem</button>\n</article>"
+        },
+        {
+          "language": "CSS",
+          "code": ".card { }                  /* Block: component đứng độc lập */\n.card__title { }           /* Element: bộ phận, không tồn tại ngoài block */\n.card--featured { }        /* Modifier: biến thể của block */\n.card__btn--ghost { }      /* Modifier của element */"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "139-bem-block-element-modifier-la-gi"
+  },
+  {
+    "id": "7661972f-0da3-5501-9566-ff6779249bcd",
+    "question": "border và outline trong CSS khác nhau như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93705-border-va-outline-trong-css-khac-nhau-nhu-the-nao",
+    "slug": "border-va-outline-trong-css-khac-nhau-nhu-the-nao-7661972f-0da3-5501-9566-ff6779249bcd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Hình dung: border là khung tranh tính vào kích thước bức tranh; outline là vệt sáng highlight vẽ đè bên ngoài, không xê dịch gì."
+      ],
+      "details": [
+        "Outline mặc định dùng làm focus indicator — đừng outline: none mà không thay bằng chỉ báo focus khác, sẽ hỏng khả năng truy cập (accessibility)."
+      ],
+      "points": [
+        "border: là một phần của box model, vẽ giữa padding và margin, chiếm chỗ nên làm tăng kích thước phần tử và đẩy layout. Đặt được từng cạnh (border-top...) và bo góc theo border-radius.",
+        "outline: vẽ bên ngoài border, không chiếm chỗ trong box model nên không ảnh hưởng layout (có thể chồng lên phần tử bên cạnh). Không tách riêng từng cạnh, và có outline-offset để đẩy ra xa."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "93705-border-va-outline-trong-css-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "606df3e3-3a96-54c6-a6b5-251066e38c85",
+    "question": "flex: 1 là viết tắt của những giá trị nào? Khác flex: auto ở đâu?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97350-flex-1-la-viet-tat-cua-nhung-gia-tri-nao-khac-flex-auto-o-dau",
+    "slug": "flex-1-la-viet-tat-cua-nhung-gia-tri-nao-khac-flex-auto-o-dau-606df3e3-3a96-54c6-a6b5-251066e38c85",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "flex: 1 là shorthand của flex-grow: 1; flex-shrink: 1; flex-basis: 0%."
+      ],
+      "details": [
+        "Điểm mấu chốt là flex-basis: 0%: trình duyệt coi kích thước khởi điểm của item là 0, rồi chia toàn bộ không gian còn lại theo tỉ lệ flex-grow. Kết quả là các item cùng flex: 1 có bề rộng bằng nhau bất kể nội dung dài ngắn.",
+        "flex: auto = 1 1 auto. Basis là auto nên item lấy kích thước nội dung làm mốc, phần dư mới đem chia. Item nội dung dài sẽ rộng hơn."
+      ],
+      "points": [],
+      "sections": [
+        "Các shorthand hay dùng khác: flex: none (0 0 auto, khoá cứng kích thước), flex: 0 0 240px (cột cố định 240px, không co không giãn)."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".equal > * { flex: 1; }      /* 1 1 0%  -> chia đều */\n.natural > * { flex: auto; } /* 1 1 auto -> theo nội dung + chia phần dư */"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "97350-flex-1-la-viet-tat-cua-nhung-gia-tri-nao-khac-flex-auto-o-dau"
+  },
+  {
+    "id": "57f765c1-9819-5660-9469-97d740216c24",
+    "question": "Với một thanh toolbar (logo trái, menu giữa, nút phải) và một lưới card sản phẩm, bạn chọn Flexbox hay Grid cho từng cái? Vì sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97351-voi-mot-thanh-toolbar-logo-trai-menu-giua-nut-phai-va-mot-luoi-card-san-pham-ban",
+    "slug": "voi-mot-thanh-toolbar-logo-trai-menu-giua-nut-phai-va-mot-luoi-card-san-pham-ban-chon-flexbox-hay-gr-57f765c1-9819-5660-9469-97d740216c24",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Toolbar cần các phần tử tự co giãn theo nội dung và căn theo trục ngang → Flexbox tự nhiên hơn. Lưới card cần các cột thẳng hàng cả ngang lẫn dọc và số cột đổi theo bề rộng → Grid làm được bằng một dòng khai báo, còn Flexbox phải tính width theo phần trăm và trừ gap thủ công.",
+        "Toolbar → Flexbox. Lưới card → Grid."
+      ],
+      "details": [
+        "Tiêu chí chọn: Flexbox là layout một chiều — bố trí một hàng (hoặc một cột) và phân phối không gian dư theo nội dung. Grid là layout hai chiều — định nghĩa hàng và cột trước, rồi xếp item vào ô.",
+        "Hai cái không loại trừ nhau: thường Grid cho khung trang, Flexbox cho nội dung bên trong từng ô."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".toolbar {\n  display: flex;\n  align-items: center;\n  gap: 16px;\n}\n.toolbar .menu { flex: 1; } /* đẩy nút sang phải */\n\n.products {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\n  gap: 16px;\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "97351-voi-mot-thanh-toolbar-logo-trai-menu-giua-nut-phai-va-mot-luoi-card-san-pham-ban"
+  },
+  {
+    "id": "817969ee-f069-500c-8429-36d6ced86bd8",
+    "question": "align-items và align-content khác nhau thế nào? Vì sao đặt align-content mà không thấy gì thay đổi?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97352-align-items-va-align-content-khac-nhau-the-nao-vi-sao-dat-align-content-ma-khong",
+    "slug": "align-items-va-align-content-khac-nhau-the-nao-vi-sao-dat-align-content-ma-khong-thay-gi-thay-doi-817969ee-f069-500c-8429-36d6ced86bd8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "align-content chỉ có tác dụng khi container có nhiều dòng và còn không gian thừa trên trục cross. Đó là lý do hay gặp: trong flex container mặc định (flex-wrap: nowrap) chỉ có một dòng nên align-content bị bỏ qua hoàn toàn."
+      ],
+      "details": [],
+      "points": [
+        "align-items: căn từng item bên trong dòng (line) của nó, theo trục cross.",
+        "align-content: căn cả tập hợp các dòng so với container, cũng theo trục cross."
+      ],
+      "sections": [
+        "Với Grid thì align-content luôn dùng được vì grid vốn nhiều hàng — nó dịch chuyển toàn bộ track theo chiều dọc trong container cao hơn nội dung."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".wrap {\n  display: flex;\n  flex-wrap: wrap;      /* bắt buộc, nếu không align-content vô nghĩa */\n  height: 400px;        /* phải có không gian thừa */\n  align-content: center; /* dồn các dòng vào giữa */\n  align-items: center;   /* căn item trong từng dòng */\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "97352-align-items-va-align-content-khac-nhau-the-nao-vi-sao-dat-align-content-ma-khong"
+  },
+  {
+    "id": "9a4437ba-bec2-52b2-a3d7-0af4b9ee95aa",
+    "question": "Vì sao nên dùng gap thay cho margin-right + :last-child { margin-right: 0 } khi tạo khoảng cách giữa các item?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97353-vi-sao-nen-dung-gap-thay-cho-margin-right-last-child-margin-right-0-khi-tao-khoa",
+    "slug": "vi-sao-nen-dung-gap-thay-cho-margin-right-last-child-margin-right-0-khi-tao-khoang-cach-giua-cac-ite-9a4437ba-bec2-52b2-a3d7-0af4b9ee95aa",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Ưu điểm cụ thể:\n- Wrap đúng: khi item xuống dòng, gap cũng tạo khoảng cách giữa các dòng (row-gap); margin-right thì không, phải thêm margin-bottom và lại thừa ở dòng cuối.\n- Không cộng dồn / không collapse: gap không tham gia margin collapsing nên khoảng cách luôn đúng bằng giá trị khai báo.\n- Không đụng tới con: khoảng cách do container quyết định, component con giữ được tính tái sử dụng (không tự mang margin theo)."
+      ],
+      "details": [
+        "Lưu ý: gap cần container là flex, grid hoặc multi-column. Với phần tử block thường vẫn phải dùng margin."
+      ],
+      "points": [],
+      "sections": [
+        "gap khai báo khoảng cách giữa các item và chỉ áp dụng ở phần ở giữa — không sinh margin thừa ở hai đầu, nên không cần luật bù :last-child."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "/* cách cũ: 2 luật, dễ sai khi item wrap xuống dòng */\n.list > * { margin-right: 12px; }\n.list > *:last-child { margin-right: 0; }\n\n/* cách hiện tại */\n.list { display: flex; flex-wrap: wrap; gap: 12px; }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "97353-vi-sao-nen-dung-gap-thay-cho-margin-right-last-child-margin-right-0-khi-tao-khoa"
+  },
+  {
+    "id": "fe859184-36c8-5e91-9789-ea63634a417f",
+    "question": "Một rule viết sau trong file vẫn không đè được rule viết trước. Bạn giải thích thứ tự thắng thua của CSS thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97400-mot-rule-viet-sau-trong-file-van-khong-de-duoc-rule-viet-truoc-ban-giai-thich-th",
+    "slug": "mot-rule-viet-sau-trong-file-van-khong-de-duoc-rule-viet-truoc-ban-giai-thich-thu-tu-thang-thua-cua-fe859184-36c8-5e91-9789-ea63634a417f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Trình duyệt chọn giá trị theo thứ tự ba tầng, chỉ khi hoà ở tầng trên mới xét tầng dưới:",
+        "Vì vậy rule viết sau không đè được là do rule kia cụ thể hơn."
+      ],
+      "details": [
+        "1. Nguồn và mức quan trọng — user-agent < author < !important (đảo ngược thứ tự).\n2. Độ cụ thể (specificity) — bộ ba (inline, id, class/attribute/pseudo-class, element/pseudo-element).\n3. Thứ tự khai báo — cái đứng sau thắng, chỉ khi hai tầng trên bằng nhau.",
+        "Cách đếm specificity: mỗi #id cộng vào cột id, mỗi .class / [attr] / :hover cộng vào cột class, mỗi tag / ::before cộng vào cột element. So sánh từ trái sang, cột trái lớn hơn là thắng ngay — 11 class vẫn thua 1 id."
+      ],
+      "points": [
+        "Cách sửa đúng: hạ specificity của rule cũ (bỏ bớt #id), hoặc viết selector cùng mức rồi đặt sau — không phải thêm !important.",
+        "Trong DevTools, giá trị bị gạch ngang chính là khai báo thua ở bước này."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "#sidebar .title { color: red; }   /* (1,1,0) */\n.page .card .title { color: blue; } /* (0,3,0) -> thua dù viết sau */"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "97400-mot-rule-viet-sau-trong-file-van-khong-de-duoc-rule-viet-truoc-ban-giai-thich-th"
+  },
+  {
+    "id": "8b41aa54-da35-5dd7-8b76-f2dedb0b4e5a",
+    "question": "Style của thư viện UI đè style của bạn, đồng nghiệp thêm !important cho nhanh. Vì sao đó là dấu hiệu xấu và bạn xử lý thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97401-style-cua-thu-vien-ui-de-style-cua-ban-dong-nghiep-them-important-cho-nhanh-vi-s",
+    "slug": "style-cua-thu-vien-ui-de-style-cua-ban-dong-nghiep-them-important-cho-nhanh-vi-sao-do-la-dau-hieu-xa-8b41aa54-da35-5dd7-8b76-f2dedb0b4e5a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "!important không sửa nguyên nhân, nó nhảy khỏi luật cascade. Hệ quả:"
+      ],
+      "details": [
+        "1. Kiểm tra DevTools xem rule của lib có specificity bao nhiêu, rồi viết selector cùng mức và đặt sau trong thứ tự import (CSS của app import sau CSS của lib).\n2. Dùng đúng điểm mở rộng lib cung cấp: prop className, CSS variable theme, hoặc class gốc của component.\n3. Với dự án mới, đặt CSS của lib vào một cascade layer thấp hơn (@layer vendor, app;) — mọi rule trong app thắng bất kể specificity.",
+        "Xử lý theo thứ tự ưu tiên:"
+      ],
+      "points": [
+        "Muốn đè lại một khai báo !important chỉ còn cách thêm !important khác cụ thể hơn — file CSS trượt dần vào cuộc đua leo thang.",
+        "Style inline từ JS (animation library, element.style) không còn đè được nữa nếu không cũng !important.",
+        "Người sau đọc code không biết rule đó thắng vì lý do gì, mọi override đều thành thử-và-sai."
+      ],
+      "sections": [
+        "!important chỉ hợp lý ở vài chỗ hẹp: utility class một-mục-đích (Tailwind cho phép prefix !), hoặc khi buộc phải đè style inline do bên thứ ba chèn vào mà không có cách nào khác."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "@layer vendor, app;\n@layer vendor { @import 'antd/dist/reset.css'; }\n@layer app   { .btn { padding: 12px; } }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "97401-style-cua-thu-vien-ui-de-style-cua-ban-dong-nghiep-them-important-cho-nhanh-vi-s"
+  },
+  {
+    "id": "cb724f78-6530-58ac-9769-d0f2c85d65df",
+    "question": "Bạn muốn dùng một thuộc tính CSS mới nhưng vẫn phải chạy được trên trình duyệt cũ. @supports viết thế nào và lưu ý gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97402-ban-muon-dung-mot-thuoc-tinh-css-moi-nhung-van-phai-chay-duoc-tren-trinh-duyet-c",
+    "slug": "ban-muon-dung-mot-thuoc-tinh-css-moi-nhung-van-phai-chay-duoc-tren-trinh-duyet-cu-supports-viet-the-cb724f78-6530-58ac-9769-d0f2c85d65df",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý khi phỏng vấn hay hỏi:"
+      ],
+      "details": [],
+      "points": [
+        "Viết fallback trước, @supports sau — trình duyệt cũ bỏ qua cả block nó không hiểu, trình duyệt mới ghi đè.",
+        "@supports chỉ trả lời \"có parse được không\", không trả lời \"có render đúng không\". Một property được nhận nhưng lỗi thực thi vẫn lọt qua.",
+        "Không cần @supports cho phần lớn CSS: cơ chế mặc định của CSS là bỏ qua khai báo không hiểu, nên display: flex; rồi display: grid; liền nhau đã là fallback tự nhiên. Chỉ cần feature query khi phải đổi nhiều thuộc tính cùng lúc theo một tính năng."
+      ],
+      "sections": [
+        "@supports là feature query: hỏi trình duyệt xem nó có hiểu một cặp property/value hay không, rồi mới áp dụng khối bên trong.",
+        "Cú pháp hỗ trợ not, and, or và cả selector() để kiểm tra selector:"
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".layout { display: flex; gap: 16px; }\n\n@supports (display: grid) {\n  .layout { display: grid; grid-template-columns: repeat(3, 1fr); }\n}"
+        },
+        {
+          "language": "CSS",
+          "code": "@supports selector(:has(a)) { /* browser understands :has() */ }\n@supports (backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px)) { }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "97402-ban-muon-dung-mot-thuoc-tinh-css-moi-nhung-van-phai-chay-duoc-tren-trinh-duyet-c"
+  },
+  {
+    "id": "b159bc9e-106b-5f86-a43c-6d22263c123f",
+    "question": "Biến CSS khai báo trong một component không dùng được ở component khác. Vì sao? var(--x, giá trị) fallback chạy khi nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97403-bien-css-khai-bao-trong-mot-component-khong-dung-duoc-o-component-khac-vi-sao-va",
+    "slug": "bien-css-khai-bao-trong-mot-component-khong-dung-duoc-o-component-khac-vi-sao-var-x-gia-tri-fallback-b159bc9e-106b-5f86-a43c-6d22263c123f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì custom property theo luật kế thừa của DOM, không phải biến toàn cục như SASS.",
+        "Muốn dùng chung thì khai báo ở tổ tiên chung, thường là :root (tức <html>)."
+      ],
+      "details": [
+        "Khai báo --gap trên .card thì chỉ .card và con cháu của nó đọc được; anh em bên ngoài cây đó nhận var(--gap) là không hợp lệ.",
+        "Fallback var(--x, 8px) chạy khi biến không được định nghĩa trong scope đó. Hai điểm hay bị nhầm:",
+        "Đặc tính động là điểm mạnh so với SASS variable: có thể đổi tại runtime bằng JS (el.style.setProperty('--gap', '20px')) hoặc theo media query, và giá trị mới lan xuống toàn bộ nhánh con."
+      ],
+      "points": [
+        "Nếu biến có định nghĩa nhưng giá trị sai kiểu (vd --gap: red gán vào gap), fallback không chạy. Khai báo thành invalid-at-computed-value-time và property nhận giá trị kế thừa hoặc initial.",
+        "Dấu phẩy đầu tiên phân tách fallback, phần còn lại tính là một giá trị: var(--shadow, 0 0 4px rgba(0,0,0,.2)) hợp lệ."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".card { --gap: 12px; }\n.card .row { gap: var(--gap); }   /* 12px */\n.footer   { gap: var(--gap); }   /* invalid: --gap not in scope */"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "97403-bien-css-khai-bao-trong-mot-component-khong-dung-duoc-o-component-khac-vi-sao-va"
+  },
+  {
+    "id": "d75bdcd4-b065-595c-9dac-070a930be029",
+    "question": ":has() selector là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/87-has-selector-la-gi",
+    "slug": "has-selector-la-gi-d75bdcd4-b065-595c-9dac-070a930be029",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        ":has() là selector cha — chọn element dựa trên thứ nằm bên trong nó.",
+        "Specificity lấy theo selector mạnh nhất bên trong (giống :is()), không phải 0 như :where()."
+      ],
+      "details": [
+        "Trước đây CSS không làm được việc này, phải nhờ JS gắn class.",
+        "Hỗ trợ: Baseline từ 2023 — Chrome 105+, Safari 15.4+, Firefox 121+.",
+        "body:has(.modal-open)",
+        ".card:has(...)",
+        "*:has(...)",
+        "Lưu ý 2:",
+        "Chốt:",
+        "Lưu ý 1: :has() không lồng được vào nhau và không dùng được với pseudo-element."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "/* card nào có ảnh thì đổi layout */\n.card:has(img) { grid-template-columns: 120px 1fr; }\n\n/* label đổi màu khi input bên trong invalid và đã nhập */\n.field:has(input:user-invalid) { color: var(--rose-ink); }\n\n/* form có checkbox đang tick thì hiện nút hành động hàng loạt */\n.list:has(input[type=\"checkbox\"]:checked) .bulk-actions { display: flex; }\n\n/* chỉ thêm khoảng cách khi có heading đứng ngay trước đoạn văn */\nh2:has(+ p) { margin-bottom: 8px; }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "87-has-selector-la-gi"
+  },
+  {
+    "id": "59219240-93e6-5259-b9b0-3ad6b86a5e38",
+    "question": "Combinator selectors (>, +, ~, space) khác nhau?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/88-combinator-selectors-space-khac-nhau",
+    "slug": "combinator-selectors-space-khac-nhau-59219240-93e6-5259-b9b0-3ad6b86a5e38",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng thực tế nhiều nhất là + cho khoảng cách giữa các phần tử liên tiếp:",
+        "Lưu ý: + và ~ chỉ nhìn về phía sau."
+      ],
+      "details": [
+        "Không có combinator \"anh em phía trước\" — muốn style element đứng trước thì phải dùng :has() (h2:has(+ p))."
+      ],
+      "points": [],
+      "sections": [
+        "Bốn combinator mô tả quan hệ giữa hai element:"
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<div>\n  <p>A</p>          <!-- con trực tiếp -->\n  <section>\n    <p>B</p>        <!-- cháu -->\n  </section>\n  <h2>C</h2>\n  <p>D</p>          <!-- anh em ngay sau h2 -->\n  <p>E</p>          <!-- anh em sau h2, không liền kề -->\n</div>"
+        },
+        {
+          "language": "CSS",
+          "code": "div p     { }   /* A, B, D, E — mọi con cháu */\ndiv > p   { }   /* A, D, E — chỉ con TRỰC TIẾP */\nh2 + p    { }   /* D — anh em LIỀN NGAY SAU */\nh2 ~ p    { }   /* D, E — mọi anh em SAU nó */"
+        },
+        {
+          "language": "CSS",
+          "code": ".list > * + * { margin-top: 12px; }   /* mọi phần tử trừ cái đầu */"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Ký hiệu",
+            "Tên",
+            "khoảng trắng",
+            ">",
+            "+",
+            "~",
+            "descendant",
+            "con cháu bất kỳ cấp",
+            "child"
+          ]
+        }
+      ]
+    },
+    "legacyId": 26,
+    "sourceSlug": "88-combinator-selectors-space-khac-nhau"
+  },
+  {
+    "id": "312c6fdb-9514-55f3-b3d7-d24f5359c225",
+    "question": "Margin collapsing là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93-margin-collapsing-la-gi",
+    "slug": "margin-collapsing-la-gi-312c6fdb-9514-55f3-b3d7-d24f5359c225",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Không xảy ra với: margin ngang, flex item, grid item, element position: absolute/fixed, element tạo block formatting context (overflow: hidden, display: flow-root)."
+      ],
+      "details": [
+        "Cách chặn ở trường hợp cha–con:"
+      ],
+      "points": [],
+      "sections": [
+        "Khi hai margin theo chiều dọc chạm nhau, browser gộp thành một, lấy giá trị lớn hơn chứ không cộng.",
+        "Ba tình huống xảy ra:",
+        "Chốt thực dụng: dùng gap của flex/grid thay cho margin dọc giữa các item: gap không bị gộp nên không phải nhớ quy tắc này."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".a { margin-bottom: 30px; }\n.b { margin-top: 20px; }\n/* khoảng cách thực tế giữa .a và .b = 30px, không phải 50px */"
+        },
+        {
+          "language": "HTML",
+          "code": "<!-- 1. anh em liền kề -->\n<p style=\"margin-bottom:30px\">A</p>\n<p style=\"margin-top:20px\">B</p>          <!-- cách 30px -->\n\n<!-- 2. cha - con: margin con \"thoát\" ra ngoài cha -->\n<div style=\"background:#eee\">              <!-- không padding, không border -->\n  <h2 style=\"margin-top:40px\">Tiêu đề</h2> <!-- 40px đẩy CẢ div xuống -->\n</div>\n\n<!-- 3. cha rỗng: margin-top và margin-bottom của chính nó gộp lại -->\n<div style=\"margin:20px 0\"></div>          <!-- chiếm 20px, không phải 40px -->"
+        },
+        {
+          "language": "CSS",
+          "code": ".parent { display: flow-root; }    /* sạch nhất, không tác dụng phụ */"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "93-margin-collapsing-la-gi"
+  },
+  {
+    "id": "ab26b206-671e-5fba-97fb-8d2077d30542",
+    "question": "Position sticky hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97-position-sticky-hoat-dong-the-nao",
+    "slug": "position-sticky-hoat-dong-the-nao-ab26b206-671e-5fba-97fb-8d2077d30542",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba điều kiện phải đủ, thiếu một là không chạy:",
+        "Lưu ý 1: đặt overflow: hidden ở một cha xa để cắt góc bo — sticky chết im lặng, không báo lỗi. Đây là nguyên nhân số một của \"sticky không chạy\"."
+      ],
+      "details": [
+        "1. Có ít nhất một trong top/right/bottom/left.\n2. Không tổ tiên nào có overflow: hidden | auto | scroll — nếu có, element dính trong khung cuộn đó chứ không phải theo trang.\n3. Cha phải cao hơn element — sticky chỉ di chuyển trong phạm vi cha, hết cha là nó đi theo.",
+        "Lưu ý 2: quên đặt background — nội dung cuộn phía dưới hiện xuyên qua header dính.",
+        "Lưu ý 3: cha là flex container với align-items: stretch (mặc định) làm con cao bằng cha, nên không còn khoảng nào để dính; đặt align-self: start cho con."
+      ],
+      "points": [],
+      "sections": [
+        "sticky là relative cho tới khi chạm ngưỡng, sau đó thành fixed trong phạm vi cha."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".toc {\n  position: sticky;\n  top: 16px;            /* BẮT BUỘC: không có ngưỡng thì không dính */\n}"
+        },
+        {
+          "language": "CSS",
+          "code": "/* header bảng dính khi cuộn */\nthead th { position: sticky; top: 0; background: var(--surface); z-index: 1; }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "97-position-sticky-hoat-dong-the-nao"
+  },
+  {
+    "id": "3e57a70f-5e89-5222-b503-f8145134b5cf",
+    "question": "Z-index hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98-z-index-hoat-dong-the-nao",
+    "slug": "z-index-hoat-dong-the-nao-3e57a70f-5e89-5222-b503-f8145134b5cf",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai điều kiện để z-index có tác dụng: element phải position khác static, hoặc là flex/grid item (trường hợp này z-index chạy mà không cần position).",
+        "Cách debug: trong DevTools, mở panel Layers hoặc kiểm tra từng tổ tiên xem có transform, filter, opacity < 1, will-change, contain hay không — đó là danh sách thủ phạm thường gặp."
+      ],
+      "details": [
+        "Vì sao z-index: 9999 vẫn bị che — vì tổ tiên của nó đã tạo một stacking context có mức thấp hơn:",
+        "Chốt: đừng chạy đua số. Dùng thang bậc cố định (10/100/1000) và isolation: isolate để nhốt z-index trong từng component."
+      ],
+      "points": [],
+      "sections": [
+        "z-index quyết định thứ tự xếp chồng, nhưng chỉ so sánh được giữa các element cùng một stacking context.",
+        "Con không bao giờ vượt ra khỏi thứ hạng của cha — 9999 chỉ có nghĩa bên trong cha đó."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".modal   { position: fixed; z-index: 100; }\n.tooltip { position: absolute; z-index: 10; }"
+        },
+        {
+          "language": "HTML",
+          "code": "<div style=\"transform: translateZ(0); z-index: 1; position: relative\">\n  <div style=\"z-index: 9999; position: absolute\">Vẫn nằm dưới .sibling</div>\n</div>\n<div style=\"position: relative; z-index: 2\" class=\"sibling\">Trên</div>"
+        },
+        {
+          "language": "CSS",
+          "code": "/* tạo stacking context có chủ đích, không cần z-index */\n.card { isolation: isolate; }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "98-z-index-hoat-dong-the-nao"
+  },
+  {
+    "id": "1b2674da-a71f-5b66-8cf7-4dc42dda1e28",
+    "question": "Stacking context là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/99-stacking-context-la-gi",
+    "slug": "stacking-context-la-gi-1b2674da-a71f-5b66-8cf7-4dc42dda1e28",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Stacking context là một nhóm xếp chồng độc lập: mọi so sánh z-index chỉ diễn ra bên trong nó, và cả nhóm được xếp như một khối duy nhất so với bên ngoài."
+      ],
+      "details": [
+        "Cái gì tạo ra nó:\n- element gốc <html>\n- position khác static kèm z-index khác auto\n- opacity nhỏ hơn 1\n- transform, filter, backdrop-filter, perspective, mix-blend-mode khác normal\n- will-change với bất kỳ giá trị nào tạo layer\n- isolation: isolate, contain: layout | paint | strict\n- flex/grid item có z-index khác auto"
+      ],
+      "points": [],
+      "sections": [
+        "Hai thứ hay gây bất ngờ vì không ai nghĩ chúng liên quan tới z-index: opacity: 0.99 (hay dùng để ép GPU) và transform (hay dùng cho animation).",
+        "Chốt khi debug: z-index không chạy thì đừng tăng số — đi ngược lên cây DOM tìm tổ tiên đầu tiên tạo stacking context, vấn đề nằm ở đó."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<div class=\"a\">     <!-- opacity: .99 → tạo stacking context, z-index nội bộ: 1 -->\n  <span style=\"z-index: 9999\">A1</span>\n</div>\n<div class=\"b\" style=\"position:relative; z-index:2\">B</div>\n<!-- B luôn nằm trên A1, vì so sánh diễn ra ở cấp .a vs .b -->"
+        },
+        {
+          "language": "CSS",
+          "code": ".component { isolation: isolate; }  /* nhốt z-index bên trong, không rò ra ngoài */"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "99-stacking-context-la-gi"
+  },
+  {
+    "id": "8e451dda-3ddc-59a9-ab08-399b7a59d6ee",
+    "question": "flex-grow, flex-shrink, flex-basis là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/104-flex-grow-flex-shrink-flex-basis-la-gi",
+    "slug": "flex-grow-flex-shrink-flex-basis-la-gi-8e451dda-3ddc-59a9-ab08-399b7a59d6ee",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Hiểu flex: 1 vs flex: auto — chỗ hay nhầm nhất:"
+      ],
+      "details": [
+        "Lưu ý: flex-basis thắng width khi cả hai cùng đặt. Đặt width: 200px; flex: 1 thì flex-basis: 0 sẽ vô hiệu hoá width — nhiều người sửa width mãi mà không thấy đổi vì lý do này."
+      ],
+      "points": [],
+      "sections": [
+        "Ba thuộc tính này trả lời ba câu hỏi khác nhau về một flex item:"
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".item {\n  flex-grow: 0;      /* còn thừa chỗ thì có giãn ra không, và giãn theo tỉ lệ nào */\n  flex-shrink: 1;    /* thiếu chỗ thì có co lại không, co theo tỉ lệ nào */\n  flex-basis: auto;  /* kích thước KHỞI ĐIỂM trước khi giãn/co */\n}\n\n/* shorthand: grow shrink basis */\n.sidebar { flex: 0 0 280px; }   /* cố định 280px, không giãn không co */\n.main    { flex: 1 1 0;     }   /* chia đều phần còn lại, bỏ qua nội dung */\n.auto    { flex: 1 1 auto;  }   /* chia phần còn lại nhưng vẫn tính nội dung */"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Viết tắt",
+            "Đầy đủ",
+            "hai item bằng nhau (basis 0, chia đều tất cả)",
+            "flex: 1",
+            "1 1 0",
+            "flex: auto",
+            "1 1 auto",
+            "item nội dung dài rộng hơn",
+            "flex: none",
+            "0 0 auto",
+            "không co không giãn"
+          ]
+        }
+      ]
+    },
+    "legacyId": 31,
+    "sourceSlug": "104-flex-grow-flex-shrink-flex-basis-la-gi"
+  },
+  {
+    "id": "d0b1af7d-c65f-56de-8d74-beb73aff06a3",
+    "question": "flex-wrap hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/105-flex-wrap-hoat-dong-the-nao",
+    "slug": "flex-wrap-hoat-dong-the-nao-d0b1af7d-c65f-56de-8d74-beb73aff06a3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Phân biệt hai thuộc tính hay bị lẫn khi đã wrap:\n- align-items — căn từng item trong một dòng.\n- align-content — căn các dòng với nhau trong container.",
+        "Lưu ý 1: nowrap không có nghĩa \"tràn ra ngoài\" — mặc định item sẽ co lại (flex-shrink: 1). Chỉ khi nội dung không co được nữa (min-width: auto) mới tràn."
+      ],
+      "details": [
+        "Shorthand gộp hướng và wrap:",
+        "Lưu ý 2: align-content không có tác dụng khi chỉ có một dòng. Nhiều người đặt nó rồi tưởng bị lỗi, trong khi thực ra cần align-items."
+      ],
+      "points": [],
+      "sections": [
+        "flex-wrap quyết định item có được xuống dòng khi hết chỗ hay không."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".row {\n  display: flex;\n  flex-wrap: nowrap;      /* mặc định: ép tất cả trên MỘT dòng, co lại nếu cần */\n}\n\n.tags {\n  display: flex;\n  flex-wrap: wrap;        /* hết chỗ thì xuống dòng */\n  gap: 8px;\n  align-content: flex-start;   /* căn các DÒNG, chỉ có tác dụng khi đã wrap */\n}"
+        },
+        {
+          "language": "CSS",
+          "code": ".list { flex-flow: row wrap; }   /* = flex-direction + flex-wrap */"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "105-flex-wrap-hoat-dong-the-nao"
+  },
+  {
+    "id": "c0902589-4b62-5755-bd83-9ba70e675ff7",
+    "question": "Gap property trong Flexbox là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/106-gap-property-trong-flexbox-la-gi",
+    "slug": "gap-property-trong-flexbox-la-gi-c0902589-4b62-5755-bd83-9ba70e675ff7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Ưu điểm cụ thể:\n- Không có margin thừa ở phần tử đầu/cuối, không cần :last-child.\n- Không bị margin collapsing — flex/grid vốn không gộp margin, nhưng gap còn tránh luôn việc tính toán tay.\n- Khi wrap nhiều dòng, khoảng cách giữa các dòng cũng đúng ngay."
+      ],
+      "details": [
+        "Hỗ trợ: gap trong Grid có từ lâu; trong Flexbox chỉ được hỗ trợ rộng từ 2021 (Safari 14.1+). Code phải chạy trên trình duyệt cũ hơn thì vẫn cần cách margin.",
+        "Lưu ý: gap chỉ có tác dụng trong flex, grid và multi-column. Đặt lên container display: block thì không xảy ra gì cả."
+      ],
+      "points": [],
+      "sections": [
+        "gap tạo khoảng cách giữa các item, không thêm khoảng thừa ở mép container.",
+        "So với cách cũ dùng margin:"
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".list {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 16px;              /* cả hàng và cột */\n  row-gap: 24px;          /* tách riêng nếu cần */\n  column-gap: 8px;\n}"
+        },
+        {
+          "language": "CSS",
+          "code": "/* cách cũ: 2 luật, dễ sai khi item wrap xuống dòng */\n.item { margin-right: 16px; }\n.item:last-child { margin-right: 0; }\n\n/* cách hiện tại */\n.list { gap: 16px; }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "106-gap-property-trong-flexbox-la-gi"
+  },
+  {
+    "id": "c18acc82-d6ed-5828-ac1d-cbbd8d644a7f",
+    "question": "grid-template-columns và grid-template-rows hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/111-grid-template-columns-va-grid-template-rows-hoat-dong-the-nao",
+    "slug": "grid-template-columns-va-grid-template-rows-hoat-dong-the-nao-c18acc82-d6ed-5828-ac1d-cbbd8d644a7f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Giá trị hay dùng cho một track: <độ dài>, %, fr, auto (vừa nội dung), min-content, max-content, minmax(a, b), fit-content(300px).",
+        "Lưu ý: grid-template-rows: 1fr trên container không có chiều cao thì 1fr bằng chiều cao nội dung, trông như không có tác dụng."
+      ],
+      "details": [
+        "Item vượt quá số track khai báo sẽ rơi vào lưới ngầm (implicit grid) — kích thước do grid-auto-rows/grid-auto-columns quyết định:",
+        "Grid theo chiều dọc gần như luôn cần height hoặc min-height trên container."
+      ],
+      "points": [],
+      "sections": [
+        "Hai thuộc tính này khai báo lưới rõ ràng (explicit grid): có bao nhiêu track và mỗi track rộng/cao bao nhiêu."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".grid {\n  display: grid;\n  grid-template-columns: 200px 1fr 1fr;      /* 3 cột */\n  grid-template-rows: auto 1fr auto;          /* 3 hàng */\n}\n\n/* repeat() cho track lặp lại */\n.g2 { grid-template-columns: repeat(4, 1fr); }\n.g3 { grid-template-columns: repeat(2, 200px) 1fr; }\n\n/* responsive không cần media query */\n.cards { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }\n\n/* đặt tên cho đường kẻ, dùng lại khi đặt item */\n.g4 { grid-template-columns: [full-start] 1fr [content-start] 720px [content-end] 1fr [full-end]; }"
+        },
+        {
+          "language": "CSS",
+          "code": ".grid { grid-auto-rows: minmax(120px, auto); }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "111-grid-template-columns-va-grid-template-rows-hoat-dong-the-nao"
+  },
+  {
+    "id": "f119cb4a-bcac-5db5-b2c5-1e5586afac2d",
+    "question": "auto-fit và auto-fill khác nhau?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/112-auto-fit-va-auto-fill-khac-nhau",
+    "slug": "auto-fit-va-auto-fill-khac-nhau-f119cb4a-bcac-5db5-b2c5-1e5586afac2d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Với container 1000px và chỉ 2 item:"
+      ],
+      "details": [
+        "Khi số item đủ lấp đầy mọi track thì hai giá trị cho kết quả giống hệt nhau — đó là lý do nhiều người không thấy khác biệt.",
+        "Chọn thế nào:\n- Muốn item luôn lấp đầy hàng, kể cả khi ít item → auto-fit (gallery, danh sách card).\n- Muốn giữ đúng khung lưới, item ít thì để trống chỗ → auto-fill (lịch, bảng chỗ ngồi).",
+        "Lưu ý: dùng auto-fit cho danh sách thường chỉ có 1–2 phần tử — card sẽ giãn hết chiều ngang trang, trông vỡ thiết kế. Chặn bằng minmax(200px, 320px) thay vì 1fr."
+      ],
+      "points": [],
+      "sections": [
+        "Cả hai đi cùng repeat() để browser tự tính số cột, khác nhau ở cách xử lý track rỗng."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".fill { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }\n.fit  { grid-template-columns: repeat(auto-fit,  minmax(200px, 1fr)); }"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Số track tạo ra",
+            "Kết quả nhìn thấy",
+            "5 (tạo cả track rỗng)",
+            "auto-fill",
+            "auto-fit",
+            "2 item rộng 200px, còn lại là chỗ trống bên phải",
+            "5 rồi thu track rỗng về 0",
+            "2 item giãn ra chia đôi 1000px"
+          ]
+        }
+      ]
+    },
+    "legacyId": 35,
+    "sourceSlug": "112-auto-fit-va-auto-fill-khac-nhau"
+  },
+  {
+    "id": "1c54e660-ae68-59c8-b4ea-63a8b5f2bff5",
+    "question": "minmax() function dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/113-minmax-function-dung-de-lam-gi",
+    "slug": "minmax-function-dung-de-lam-gi-1c54e660-ae68-59c8-b4ea-63a8b5f2bff5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Dòng cuối là công thức được dùng nhiều nhất trong CSS Grid hiện đại: mỗi card tối thiểu 260px, số cột tự tính theo bề rộng, và card giãn ra cho vừa hàng.",
+        "Lưu ý: minmax(260px, 1fr) vẫn tràn khi container hẹp hơn 260px (điện thoại nhỏ, hoặc sidebar)."
+      ],
+      "details": [
+        "Giá trị dùng được: độ dài, %, auto, min-content, max-content, và fr — nhưng fr chỉ được đặt ở vị trí max.",
+        "Cách chống:"
+      ],
+      "points": [],
+      "sections": [
+        "minmax(min, max) đặt cận dưới và cận trên cho một track của grid.",
+        "min(260px, 100%) đảm bảo cận dưới không bao giờ vượt bề rộng container."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "/* cột không bao giờ hẹp hơn 200px, tối đa chia đều phần còn lại */\n.grid { grid-template-columns: minmax(200px, 1fr) 2fr; }\n\n/* hàng cao tối thiểu 120px nhưng giãn được theo nội dung */\n.grid { grid-auto-rows: minmax(120px, auto); }\n\n/* lưới responsive không cần một dòng media query nào */\n.cards { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }"
+        },
+        {
+          "language": "CSS",
+          "code": "grid-template-columns: minmax(1fr, 300px);   /* KHÔNG hợp lệ */\ngrid-template-columns: minmax(200px, 1fr);   /* hợp lệ */"
+        },
+        {
+          "language": "CSS",
+          "code": "grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "113-minmax-function-dung-de-lam-gi"
+  },
+  {
+    "id": "f61274e7-fea3-5bbf-b4e5-37d1cf754d3d",
+    "question": "Grid template areas là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/114-grid-template-areas-la-gi",
+    "slug": "grid-template-areas-la-gi-f61274e7-fea3-5bbf-b4e5-37d1cf754d3d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý 1: mỗi chuỗi phải có cùng số ô, và vùng cùng tên phải tạo thành hình chữ nhật liền mạch — nếu không toàn bộ khai báo bị bỏ qua, im lặng không báo lỗi."
+      ],
+      "details": [
+        "Lưu ý 2: tên vùng không đặt trong dấu nháy riêng — cả một hàng là một chuỗi.",
+        "Chốt: đây là cách viết grid dễ đọc nhất khi review code — nhìn phần khai báo là thấy ngay bố cục, không phải dò grid-column: 1 / 3 của từng element."
+      ],
+      "points": [],
+      "sections": [
+        "grid-template-areas cho phép vẽ bố cục bằng chữ rồi gán item vào từng vùng theo tên.",
+        "Đổi bố cục cho mobile chỉ cần vẽ lại bức tranh, không đụng tới từng item:",
+        "Dùng dấu . cho ô cố ý để trống:"
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".page {\n  display: grid;\n  grid-template-columns: 240px 1fr;\n  grid-template-rows: auto 1fr auto;\n  grid-template-areas:\n    'header  header'\n    'sidebar main'\n    'footer  footer';\n  min-height: 100dvh;\n}\n\n.page > header { grid-area: header; }\n.page > aside  { grid-area: sidebar; }\n.page > main   { grid-area: main; }\n.page > footer { grid-area: footer; }"
+        },
+        {
+          "language": "CSS",
+          "code": "@media (max-width: 768px) {\n  .page {\n    grid-template-columns: 1fr;\n    grid-template-areas: 'header' 'main' 'sidebar' 'footer';\n  }\n}"
+        },
+        {
+          "language": "CSS",
+          "code": "grid-template-areas: 'a . b';"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "114-grid-template-areas-la-gi"
+  },
+  {
+    "id": "62a775aa-0495-52a4-8ab5-7a051fe72cb6",
+    "question": "clamp() function dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/120-clamp-function-dung-de-lam-gi",
+    "slug": "clamp-function-dung-de-lam-gi-62a775aa-0495-52a4-8ab5-7a051fe72cb6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý 1: dùng thuần vw ở phần giữa (clamp(1rem, 4vw, 2rem)) làm chữ không phản ứng với thiết lập cỡ chữ của hệ điều hành khi đang ở giữa khoảng — người cần chữ to phóng lên không thấy đổi. Kèm rem như công thức trên là an toàn."
+      ],
+      "details": [
+        "Lưu ý 2: nếu min lớn hơn max, clamp trả về min — không báo lỗi, chỉ lặng lẽ sai."
+      ],
+      "points": [],
+      "sections": [
+        "clamp(min, ưa-thích, max) khoá một giá trị trong khoảng, và co giãn liên tục ở giữa.",
+        "Thay thế cho việc nhảy bậc bằng media query:",
+        "Công thức thường dùng cho fluid typography — trộn rem với vw để vẫn co theo cỡ chữ người dùng đặt:"
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "h1 { font-size: clamp(1.5rem, 4vw, 2.5rem); }\n/* nhỏ nhất 1.5rem, lớn nhất 2.5rem, ở giữa thì bằng 4% bề rộng viewport */\n\n.container { width: clamp(320px, 90%, 1180px); }\n.section   { padding-inline: clamp(16px, 4vw, 32px); }"
+        },
+        {
+          "language": "CSS",
+          "code": "/* cách cũ: đổi đột ngột tại từng ngưỡng */\nh1 { font-size: 1.5rem; }\n@media (min-width: 768px)  { h1 { font-size: 2rem; } }\n@media (min-width: 1200px) { h1 { font-size: 2.5rem; } }"
+        },
+        {
+          "language": "CSS",
+          "code": "font-size: clamp(1rem, 0.75rem + 1.5vw, 2rem);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "120-clamp-function-dung-de-lam-gi"
+  },
+  {
+    "id": "8da44c22-9ac3-5cdc-9ac5-ed1b0353022a",
+    "question": "Container queries là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/121-container-queries-la-gi",
+    "slug": "container-queries-la-gi-8da44c22-9ac3-5cdc-9ac5-ed1b0353022a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Giá trị thực tế: cùng một component đặt trong sidebar 300px và trong vùng nội dung 900px sẽ tự hiển thị khác nhau — media query không làm được, vì viewport trong cả hai trường hợp là như nhau.",
+        "Hỗ trợ: Baseline 2023 (Chrome 105+, Safari 16+, Firefox 110+)."
+      ],
+      "details": [
+        "Đơn vị đi kèm: cqw, cqh, cqi, cqb — phần trăm kích thước container.",
+        "Lưu ý: container-type: inline-size tạo containment cho trục ngang, nghĩa là container không còn co theo nội dung theo chiều đó. Đặt nhầm lên chính element cần đo cũng khiến query không bao giờ khớp — luôn đặt lên element bọc ngoài, không đặt lên element đang style."
+      ],
+      "points": [],
+      "sections": [
+        "Container query cho component đáp ứng theo bề rộng của khối cha, không phải theo viewport.",
+        "Từ 2023 còn có style query — đáp ứng theo giá trị của custom property:"
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "/* 1. đánh dấu element làm container */\n.card-wrap {\n  container-type: inline-size;\n  container-name: card;        /* tuỳ chọn, cần khi có nhiều container lồng nhau */\n}\n\n/* 2. query theo container đó */\n@container card (min-width: 400px) {\n  .card { display: grid; grid-template-columns: 120px 1fr; }\n}"
+        },
+        {
+          "language": "CSS",
+          "code": ".card h3 { font-size: clamp(1rem, 5cqi, 1.5rem); }"
+        },
+        {
+          "language": "CSS",
+          "code": "@container style(--featured: true) { .card { border-color: var(--amber); } }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "121-container-queries-la-gi"
+  },
+  {
+    "id": "4bc25547-1201-54ad-b863-83315c6c5fa2",
+    "question": "Responsive images (srcset, sizes) hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/123-responsive-images-srcset-sizes-hoat-dong-the-nao",
+    "slug": "responsive-images-srcset-sizes-hoat-dong-the-nao-4bc25547-1201-54ad-b863-83315c6c5fa2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Cách browser quyết định với sizes=\"(min-width: 1024px) 50vw, 100vw\" trên màn 1280px, DPR 2:\n- Ảnh sẽ rộng 50vw = 640px CSS → cần 1280px thật → chọn photo-1600.jpg."
+      ],
+      "details": [
+        "Lưu ý 1: sizes phải khớp bề rộng thật do CSS quy định. Khai 100vw trong khi ảnh nằm trong container 600px sẽ khiến browser tải file lớn hơn cần thiết — đây là lỗi phổ biến nhất và nó âm thầm làm nặng trang.",
+        "Lưu ý 2: thiếu width/height gây layout shift (CLS). Có hai thuộc tính này, browser giữ chỗ đúng tỉ lệ trước khi ảnh tải xong.",
+        "Khi nào dùng <picture> thay vì srcset: khi cần đổi định dạng (AVIF/WebP kèm dự phòng) hoặc đổi bố cục ảnh (art direction) chứ không chỉ đổi kích thước."
+      ],
+      "points": [],
+      "sections": [
+        "srcset liệt kê nhiều phiên bản ảnh, sizes cho browser biết ảnh sẽ hiển thị rộng bao nhiêu để chọn đúng file."
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "123-responsive-images-srcset-sizes-hoat-dong-the-nao"
+  },
+  {
+    "id": "c410ddd9-c545-553c-b8bd-c809269a0150",
+    "question": "@keyframes hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/126-keyframes-hoat-dong-the-nao",
+    "slug": "keyframes-hoat-dong-the-nao-c410ddd9-c545-553c-b8bd-c809269a0150",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Các thuộc tính con của animation: name, duration, timing-function, delay, iteration-count, direction, fill-mode, play-state."
+      ],
+      "details": [
+        "fill-mode là thứ hay bị quên:\n- forwards — giữ trạng thái cuối sau khi chạy xong.\n- backwards — áp trạng thái đầu ngay trong lúc delay.\n- both — cả hai (thường là thứ bạn muốn).",
+        "Lưu ý 1: không có fill-mode, element bật ngược về style gốc ngay khi animation kết thúc — hiệu ứng nhấp nháy khó hiểu.",
+        "Bắt buộc:",
+        "Lưu ý 2: animate width, height, top, left gây layout lại mỗi khung hình. Ưu tiên transform và opacity."
+      ],
+      "points": [],
+      "sections": [
+        "@keyframes mô tả các mốc trạng thái, animation gắn chúng vào element."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "@keyframes fade-up {\n  from { opacity: 0; transform: translateY(8px); }\n  to   { opacity: 1; transform: translateY(0); }\n}\n\n@keyframes pulse {\n  0%, 100% { transform: scale(1); }\n  50%      { transform: scale(1.06); }\n}\n\n.toast {\n  animation: fade-up 0.28s ease-out both;\n  /*         tên     thời-lượng easing fill-mode */\n}"
+        },
+        {
+          "language": "CSS",
+          "code": "@media (prefers-reduced-motion: reduce) {\n  *, *::before, *::after { animation-duration: 0.01ms !important; }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "126-keyframes-hoat-dong-the-nao"
+  },
+  {
+    "id": "94f2f653-8586-5693-8455-6f3709a02384",
+    "question": "will-change property dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/127-will-change-property-dung-de-lam-gi",
+    "slug": "will-change-property-dung-de-lam-gi-94f2f653-8586-5693-8455-6f3709a02384",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vấn đề: mỗi layer chiếm bộ nhớ GPU. Đặt will-change cho hàng loạt element làm trang chậm hơn thay vì nhanh hơn — đặc biệt trên điện thoại tầm trung.",
+        "Lưu ý 1: đặt will-change: transform trong CSS tĩnh cho mọi card là kiểu lạm dụng phổ biến nhất — nó giữ layer sống suốt vòng đời trang."
+      ],
+      "details": [
+        "Cách dùng đúng — bật ngay trước khi cần, tắt ngay sau đó:",
+        "Lưu ý 2: will-change tạo stacking context mới, nên có thể làm hỏng thứ tự z-index đang đúng.",
+        "Chốt: đây là công cụ cuối cùng, không phải bước đầu. Đo bằng Performance panel trước; phần lớn trường hợp chỉ cần chuyển từ animate top/left sang transform là đủ mượt."
+      ],
+      "points": [],
+      "sections": [
+        "will-change báo trước cho browser rằng thuộc tính nào sắp đổi, để nó chuẩn bị (thường là tách element ra một composite layer riêng)."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".modal { will-change: transform, opacity; }"
+        },
+        {
+          "language": "CSS",
+          "code": ".card { transition: transform 0.18s ease; }\n.card:hover { will-change: transform; }   /* chỉ tồn tại trong lúc hover */"
+        },
+        {
+          "language": "JS",
+          "code": "el.style.willChange = 'transform'\nel.addEventListener('transitionend', () => { el.style.willChange = 'auto' }, { once: true })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "127-will-change-property-dung-de-lam-gi"
+  },
+  {
+    "id": "af1aaba2-122b-5014-975d-b98d576754c6",
+    "question": "CSS logical properties là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/133-css-logical-properties-la-gi",
+    "slug": "css-logical-properties-la-gi-af1aaba2-122b-5014-975d-b98d576754c6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai trục:\n- inline — hướng chữ chạy. LTR: trái→phải. RTL (Ả Rập, Do Thái): phải→trái.\n- block — hướng dòng xếp chồng. Thường là trên→dưới."
+      ],
+      "details": [
+        "Viết tắt hai chiều rất tiện, kể cả khi không làm đa ngôn ngữ:"
+      ],
+      "points": [],
+      "sections": [
+        "Logical property mô tả vị trí theo hướng viết của ngôn ngữ thay vì theo trái/phải/trên/dưới cố định.",
+        "Chốt: ngay cả dự án chỉ có tiếng Việt cũng nên dùng padding-inline / margin-block — ngắn hơn, ít lặp hơn, và nếu sau này thêm ngôn ngữ RTL thì không phải viết lại CSS."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "/* physical — cố định theo màn hình */\n.card { margin-left: 16px; padding-top: 12px; border-right: 1px solid; }\n\n/* logical — tự lật theo hướng viết */\n.card { margin-inline-start: 16px; padding-block-start: 12px; border-inline-end: 1px solid; }"
+        },
+        {
+          "language": "CSS",
+          "code": ".section { padding-inline: clamp(16px, 4vw, 32px); }   /* trái + phải */\n.stack   { margin-block: 24px; }                        /* trên + dưới */"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Physical",
+            "Logical",
+            "width / height",
+            "margin-left",
+            "margin-inline-start",
+            "margin-right",
+            "margin-inline-end",
+            "inline-size / block-size",
+            "padding-top",
+            "padding-block-start",
+            "width",
+            "height",
+            "inline-size",
+            "block-size",
+            "text-align: left",
+            "text-align: start"
+          ]
+        }
+      ]
+    },
+    "legacyId": 43,
+    "sourceSlug": "133-css-logical-properties-la-gi"
+  },
+  {
+    "id": "1ddf1104-680d-563a-a8ea-96007426e87c",
+    "question": "scroll-snap CSS là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/135-scroll-snap-css-la-gi",
+    "slug": "scroll-snap-css-la-gi-1ddf1104-680d-563a-a8ea-96007426e87c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng cho: carousel ảnh, danh sách card cuộn ngang, trang cuộn theo từng section, lịch theo tuần."
+      ],
+      "details": [
+        "Lưu ý 1: mandatory với nội dung cao/dài hơn container làm người dùng không cuộn tới được phần giữa — nội dung bị nhảy qua. Trường hợp đó dùng proximity.",
+        "Lưu ý 2: quên scroll-padding khi có header position: sticky — mốc dừng nằm khuất sau header.",
+        "Chốt: đây là ví dụ rõ nhất của xu hướng chuyển việc từ JS sang CSS — carousel cơ bản giờ không cần Swiper hay thư viện nào."
+      ],
+      "points": [],
+      "sections": [
+        "scroll-snap cho phép cuộn dừng đúng vào từng mốc, không cần thư viện JS."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".carousel {\n  display: flex;\n  overflow-x: auto;\n  scroll-snap-type: x mandatory;   /* trục x, buộc dừng đúng điểm */\n  scroll-padding-inline: 16px;     /* chừa chỗ cho phần header dính, nếu có */\n}\n\n.carousel > .slide {\n  flex: 0 0 100%;\n  scroll-snap-align: start;        /* mốc dừng: start | center | end */\n  scroll-snap-stop: always;        /* không cho lướt vượt nhiều slide một lần */\n}"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Giá trị",
+            "Hành vi",
+            "luôn dừng đúng mốc — hợp carousel toàn màn hình",
+            "mandatory",
+            "proximity",
+            "chỉ dính khi dừng gần mốc — hợp danh sách dài, tự nhiên hơn"
+          ]
+        }
+      ]
+    },
+    "legacyId": 44,
+    "sourceSlug": "135-scroll-snap-css-la-gi"
+  },
+  {
+    "id": "d4562db0-078a-5890-84e4-3434a2926c32",
+    "question": "Utility-first CSS (Tailwind) là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/140-utility-first-css-tailwind-la-gi",
+    "slug": "utility-first-css-tailwind-la-gi-d4562db0-078a-5890-84e4-3434a2926c32",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Điểm mạnh thật sự không phải \"viết nhanh\" mà là:\n1. Không phải đặt tên — phần lớn thời gian tranh luận CSS trong team là tranh luận tên class.\n2. Kích thước CSS gần như không tăng theo số trang — utility được dùng lại, chỉ có HTML dài thêm.\n3. Ràng buộc vào design token — p-4, text-lg lấy từ scale định sẵn nên khó lệch hệ thống."
+      ],
+      "details": [
+        "Nhược điểm thật: HTML dài, khó đọc khi một element có 15 class; và khi lặp lại một pattern thì phải tách component (React) hoặc @apply — không có cơ chế nào khác.",
+        "So với BEM: BEM đặt tên cho ý nghĩa (.card__title), utility mô tả hình thức (text-lg font-semibold). Sửa BEM là sửa một chỗ trong CSS; sửa utility là sửa mọi chỗ dùng trong HTML — đây là đánh đổi cốt lõi, không phải cái nào tốt hơn tuyệt đối.",
+        "Lưu ý: tưởng bundle nhỏ là do \"tree-shaking\". Tailwind quét nội dung file để biết class nào được dùng, nên class dựng động (` text-${color}-500 `) sẽ không được sinh ra. Phải viết đủ tên class hoặc khai báo safelist."
+      ],
+      "points": [],
+      "sections": [
+        "Utility-first là viết style bằng nhiều class nhỏ, mỗi class một thuộc tính, ngay trên HTML."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<article class=\"flex items-center gap-4 rounded-lg border border-zinc-200 p-4\">\n  <img class=\"size-12 rounded-full\" src=\"...\" alt=\"\">\n  <h3 class=\"text-lg font-semibold\">Tiêu đề</h3>\n</article>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "140-utility-first-css-tailwind-la-gi"
+  },
+  {
+    "id": "c6ebac2b-1c82-505a-86a6-6f3d5ac09e33",
+    "question": "CSS Modules là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/141-css-modules-la-gi",
+    "slug": "css-modules-la-gi-c6ebac2b-1c82-505a-86a6-6f3d5ac09e33",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Sau khi build, .root trở thành Button_root__x7f2a — hai component cùng đặt tên .root không đụng nhau.",
+        "Lưu ý 1: tên class có dấu gạch ngang phải truy cập bằng ngoặc vuông: styles['btn-primary']. Vì vậy quy ước trong CSS Modules thường là camelCase."
+      ],
+      "details": [
+        "Đặc điểm quan trọng: toàn bộ xử lý ở build time, không có runtime nào. Khác hẳn CSS-in-JS chạy lúc render.",
+        "Hai tính năng ít người dùng nhưng hữu ích:",
+        "Lưu ý 2: composes chỉ dùng được trong CSS Modules, không phải cú pháp CSS chuẩn — chuyển sang giải pháp khác là phải viết lại."
+      ],
+      "points": [],
+      "sections": [
+        "CSS Modules biên dịch mỗi file .module.css thành các class được đổi tên duy nhất, nên style không rò ra ngoài component."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "/* Button.module.css */\n.root { padding: 8px 16px; border-radius: 8px; }\n.primary { background: var(--accent-solid); color: #fff; }"
+        },
+        {
+          "language": "TSX",
+          "code": "import styles from './Button.module.css'\n\nexport function Button({ primary }: { primary?: boolean }) {\n  return <button className={`${styles.root} ${primary ? styles.primary : ''}`} />\n}"
+        },
+        {
+          "language": "CSS",
+          "code": ":global(.markdown h2) { margin-block: 1em; }   /* thoát scope có chủ đích */\n.btn { composes: base from './base.module.css'; }   /* tái sử dụng */"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "141-css-modules-la-gi"
+  },
+  {
+    "id": "856ad6b1-9e96-583e-9196-8cc6e02af0ac",
+    "question": "CSS-in-JS là gì? Ưu nhược điểm?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/142-css-in-js-la-gi-uu-nhuoc-diem",
+    "slug": "css-in-js-la-gi-uu-nhuoc-diem-856ad6b1-9e96-583e-9196-8cc6e02af0ac",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Ưu: scope tự động, style đổi theo props/state ngay trong cùng file, xoá component là xoá luôn style của nó (không còn CSS chết).",
+        "Nhóm này gồm Vanilla Extract, Panda CSS, Linaria."
+      ],
+      "details": [
+        "Nhược: thư viện runtime phải sinh và chèn CSS trong lúc render — tốn thời gian main thread, tăng bundle, và với SSR phải thu thập style rồi chèn vào HTML, cấu hình phức tạp hơn.",
+        "Hướng đi hiện tại là zero-runtime: viết cú pháp tương tự nhưng biên dịch ra CSS tĩnh lúc build.",
+        "Điểm quan trọng với Next.js App Router: thư viện CSS-in-JS chạy runtime không hoạt động trong Server Component vì cần context phía client. Đây là lý do phần lớn dự án Next.js mới chọn CSS Modules, Tailwind hoặc zero-runtime — trả lời được ý này cho thấy có theo dõi hệ sinh thái thật, không chỉ liệt kê ưu nhược."
+      ],
+      "points": [],
+      "sections": [
+        "CSS-in-JS viết style bằng JavaScript, gắn thẳng vào component."
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "import styled from 'styled-components'\n\nconst Button = styled.button<{ $variant: 'primary' | 'ghost' }>`\n  padding: 8px 16px;\n  border-radius: 8px;\n  background: ${(p) => (p.$variant === 'primary' ? 'var(--accent-solid)' : 'transparent')};\n`"
+        },
+        {
+          "language": "TS",
+          "code": "// vanilla-extract: chạy lúc build, ra file .css thật\nimport { style } from '@vanilla-extract/css'\nexport const button = style({ padding: '8px 16px', borderRadius: 8 })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "142-css-in-js-la-gi-uu-nhuoc-diem"
+  },
+  {
+    "id": "42d0a893-5e5e-5898-968c-d515d6a56938",
+    "question": "Critical CSS là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/143-critical-css-la-gi",
+    "slug": "critical-css-la-gi-42d0a893-5e5e-5898-968c-d515d6a56938",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Critical CSS là phần CSS tối thiểu để vẽ được nội dung ngay trên màn hình đầu tiên, nhúng thẳng vào <head> để không phải chờ tải file CSS ngoài.",
+        "Công cụ sinh tự động: critical, critters (Webpack/Next), beasties."
+      ],
+      "details": [
+        "Vấn đề nó giải: <link rel=\"stylesheet\"> là render-blocking — browser không vẽ gì cho tới khi file CSS về. Trên mạng chậm, đó là một khoảng trắng dài trước khi thấy nội dung.",
+        "Cải thiện trực tiếp FCP và LCP — rõ nhất trên điện thoại và mạng chậm.",
+        "Lưu ý 1: critical CSS quá lớn thì phản tác dụng — HTML phình ra và không cache được giữa các trang. Giữ dưới ~14KB (khoảng một cửa sổ TCP đầu)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "143-critical-css-la-gi"
+  },
+  {
+    "id": "afee31b3-b690-5d73-b8fc-54a544a4aabe",
+    "question": "font-display property có những giá trị nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/145-font-display-property-co-nhung-gia-tri-nao",
+    "slug": "font-display-property-co-nhung-gia-tri-nao-afee31b3-b690-5d73-b8fc-54a544a4aabe",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Chọn thế nào:\n- Ưu tiên nhìn thấy chữ sớm → swap, và bù CLS bằng size-adjust / ascent-override.\n- Ưu tiên không nhảy layout (điểm CLS quan trọng) → optional."
+      ],
+      "details": [
+        "Lưu ý: dùng swap mà không căn font dự phòng — chữ đổi font làm dòng chảy xô lệch, CLS tăng và Lighthouse trừ điểm. Cặp size-adjust + font-family dự phòng cùng metric là cách xử lý gốc.",
+        "Ghi chú: next/font tự làm phần này (tự host, tự sinh fallback đã căn metric) — nên trong dự án Next.js hiếm khi phải đụng tay."
+      ],
+      "points": [],
+      "sections": [
+        "font-display quyết định browser xử lý ra sao trong lúc font tuỳ chỉnh chưa tải xong."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "@font-face {\n  font-family: 'Be Vietnam Pro';\n  src: url('/fonts/bvp.woff2') format('woff2');\n  font-display: swap;\n  size-adjust: 100%;      /* căn kích thước với font dự phòng, giảm nhảy layout */\n}"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Giá trị",
+            "Giai đoạn chờ",
+            "~3s ẩn chữ",
+            "block",
+            "swap",
+            "fallback",
+            "optional",
+            "FOIT — trắng chữ, tệ nhất cho cảm nhận tốc độ",
+            "auto",
+            "block",
+            "0s",
+            "hiện font dự phòng ngay, đổi khi font về — FOUT, có thể gây CLS"
+          ]
+        }
+      ]
+    },
+    "legacyId": 49,
+    "sourceSlug": "145-font-display-property-co-nhung-gia-tri-nao"
+  },
+  {
+    "id": "41a39be4-2e05-5933-a4f9-387250f3ab6b",
+    "question": "Backdrop-filter dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/148-backdrop-filter-dung-de-lam-gi",
+    "slug": "backdrop-filter-dung-de-lam-gi-41a39be4-2e05-5933-a4f9-387250f3ab6b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng cho: thanh điều hướng dính trong suốt, lớp phủ modal, thẻ kiểu glassmorphism, overlay trên ảnh."
+      ],
+      "details": [
+        "Lưu ý 1: quên nền bán trong suốt. Nền đục hoàn toàn thì không có gì nhìn xuyên qua để làm mờ — hiệu ứng biến mất hoàn toàn.",
+        "Lưu ý 2: backdrop-filter tạo stacking context mới, có thể phá thứ tự z-index đang đúng.",
+        "Lưu ý 3: chi phí thật. Mỗi lần cuộn, browser phải vẽ lại vùng mờ; đặt trên element lớn hoặc nhiều element cùng lúc là nguyên nhân giật khi cuộn trên máy yếu. Giới hạn ở một thanh header hoặc một lớp overlay.",
+        "Dự phòng:"
+      ],
+      "points": [],
+      "sections": [
+        "backdrop-filter áp filter lên phần nền phía sau element, không phải lên chính element.",
+        "So với filter:"
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".app-bar {\n  background: rgb(255 255 255 / 0.72);   /* BẮT BUỘC bán trong suốt */\n  backdrop-filter: blur(12px) saturate(1.4);\n  border-bottom: 1px solid var(--border);\n}"
+        },
+        {
+          "language": "CSS",
+          "code": ".a { filter: blur(4px); }            /* làm mờ CHÍNH element và nội dung bên trong */\n.b { backdrop-filter: blur(4px); }   /* làm mờ những gì nằm SAU element */"
+        },
+        {
+          "language": "CSS",
+          "code": "@supports (backdrop-filter: blur(1px)) {\n  .app-bar { background: rgb(255 255 255 / 0.72); }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "148-backdrop-filter-dung-de-lam-gi"
+  },
+  {
+    "id": "567e0245-009a-5c7e-aa14-894f3075f719",
+    "question": "Text truncation (ellipsis) thực hiện thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/161-text-truncation-ellipsis-thuc-hien-the-nao",
+    "slug": "text-truncation-ellipsis-thuc-hien-the-nao-567e0245-009a-5c7e-aa14-894f3075f719",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai công thức, tuỳ số dòng cần giữ.",
+        "Dù mang tiền tố -webkit-, line-clamp chạy trên mọi browser hiện đại (Chrome, Safari, Firefox 68+, Edge) — đây là một trong số ít tiền tố đã thành chuẩn trên thực tế. Từ Chrome 126+ có thêm line-clamp không tiền tố.",
+        "min-width: 0"
+      ],
+      "details": [
+        "Lưu ý 1: một dòng mà nằm trong flex/grid item thì thường không cắt được, vì item không co nhỏ hơn nội dung:",
+        "Lưu ý 2: -webkit-line-clamp cần đúng bộ ba display: -webkit-box + -webkit-box-orient: vertical + overflow: hidden. Thiếu một dòng là không có tác dụng, và không có cảnh báo nào.",
+        "Một dòng:",
+        "Lưu ý 3: dấu ba chấm chỉ là hiển thị — nội dung đầy đủ vẫn nằm trong DOM, screen reader vẫn đọc hết. Cần cắt thật thì phải cắt ở dữ liệu."
+      ],
+      "points": [],
+      "sections": [
+        "Nhiều dòng:"
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".truncate {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}"
+        },
+        {
+          "language": "CSS",
+          "code": ".clamp-3 {\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 3;\n  overflow: hidden;\n}"
+        },
+        {
+          "language": "CSS",
+          "code": ".flex-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "161-text-truncation-ellipsis-thuc-hien-the-nao"
+  },
+  {
+    "id": "f52f4ba5-7648-51aa-baac-ff70f8ea6dc8",
+    "question": "Variable fonts là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/163-variable-fonts-la-gi",
+    "slug": "variable-fonts-la-gi-f52f4ba5-7648-51aa-baac-ff70f8ea6dc8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Các trục chuẩn: wght (weight), wdth (width), slnt (slant), ital (italic), opsz (optical size).",
+        "Lợi ích thật: một dự án dùng 4 độ đậm × 2 kiểu nghiêng = 8 file với font tĩnh; variable font là 1 file, thường nhỏ hơn tổng đó và chỉ tốn một request."
+      ],
+      "details": [
+        "Trục riêng của từng font truy cập qua:",
+        "Lưu ý 1: variable font không phải lúc nào cũng nhẹ hơn. Nếu chỉ dùng đúng 1–2 độ đậm, file tĩnh subset còn nhỏ hơn. Nó thắng khi cần nhiều biến thể.",
+        "Lưu ý 2: ưu tiên font-weight, font-stretch chuẩn hơn là font-variation-settings — thuộc tính chuẩn kế thừa và animate đúng cách, còn font-variation-settings ghi đè toàn bộ và không kế thừa từng trục."
+      ],
+      "points": [],
+      "sections": [
+        "Variable font là một file chứa cả một trục biến thiên (độ đậm, độ rộng, độ nghiêng) thay vì mỗi kiểu một file riêng."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "@font-face {\n  font-family: 'Inter var';\n  src: url('/fonts/inter.woff2') format('woff2-variations');\n  font-weight: 100 900;      /* khai báo KHOẢNG, không phải một giá trị */\n  font-display: swap;\n}\n\n.title { font-weight: 640; }      /* giá trị bất kỳ trong khoảng, không chỉ 600/700 */\n.title:hover { font-weight: 700; transition: font-weight 0.18s; }  /* chuyển mượt */"
+        },
+        {
+          "language": "CSS",
+          "code": ".custom { font-variation-settings: 'wght' 640, 'opsz' 32; }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "163-variable-fonts-la-gi"
+  },
+  {
+    "id": "29a801eb-1993-5595-a5f5-b70d9d383a7b",
+    "question": "prefers-reduced-motion media query dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/164-prefers-reduced-motion-media-query-dung-khi-nao",
+    "slug": "prefers-reduced-motion-media-query-dung-khi-nao-29a801eb-1993-5595-a5f5-b70d9d383a7b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "prefers-reduced-motion cho biết người dùng đã bật thiết lập giảm chuyển động ở cấp hệ điều hành. Đây không phải sở thích thẩm mỹ: chuyển động lớn gây chóng mặt, buồn nôn thật với người có rối loạn tiền đình.",
+        "Cách này an toàn hơn kiểu \"animate mặc định rồi tắt sau\", vì nếu quên một chỗ thì chỗ đó không có animation thay vì animate mất kiểm soát.",
+        "sự kiện animationend/transitionend vẫn bắn",
+        "0.01ms",
+        "none",
+        "Chốt:"
+      ],
+      "details": [
+        "Cách viết được khuyến nghị — mặc định là không animate, chỉ thêm khi người dùng không phản đối:",
+        "Khi phải áp lên codebase đã có sẵn animation, giảm thay vì xoá:",
+        "Trong JS:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".card { opacity: 1; }\n\n@media (prefers-reduced-motion: no-preference) {\n  .card { animation: fade-up 0.28s ease-out both; }\n}"
+        },
+        {
+          "language": "CSS",
+          "code": "@media (prefers-reduced-motion: reduce) {\n  *, *::before, *::after {\n    animation-duration: 0.01ms !important;\n    animation-iteration-count: 1 !important;\n    transition-duration: 0.01ms !important;\n    scroll-behavior: auto !important;\n  }\n}"
+        },
+        {
+          "language": "JS",
+          "code": "const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "164-prefers-reduced-motion-media-query-dung-khi-nao"
+  },
+  {
+    "id": "cfde62b4-30f9-517a-9530-e354fb2fb9bb",
+    "question": "prefers-color-scheme media query là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/165-prefers-color-scheme-media-query-la-gi",
+    "slug": "prefers-color-scheme-media-query-la-gi-cfde62b4-30f9-517a-9530-e354fb2fb9bb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "prefers-color-scheme cho biết hệ điều hành đang ở chế độ sáng hay tối.",
+        "Lưu ý:",
+        "Ba khối này xử lý đủ ba trạng thái: chọn sáng, chọn tối, và để theo hệ thống.",
+        "nháy trắng",
+        "localStorage",
+        "useEffect"
+      ],
+      "details": [
+        "Cách triển khai đúng là khai báo token màu ở :root, rồi chỉ ghi đè token trong dark — không viết lại từng luật CSS:",
+        "Báo cho browser biết trang hỗ trợ cả hai để form control và thanh cuộn cũng đổi theo:",
+        "Cách xử lý là một script nhỏ chạy đồng bộ trong <head>, đặt data-theme trước khi trang vẽ lần đầu."
+      ],
+      "points": [],
+      "sections": [
+        "Muốn người dùng tự chọn (sáng / tối / theo hệ thống) thì cần thêm một tầng nữa — theo data-theme trên <html>:"
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ":root {\n  --surface: #ffffff;\n  --ink: #18181b;\n  --border: #e4e4e7;\n}\n\n@media (prefers-color-scheme: dark) {\n  :root {\n    --surface: #18181b;\n    --ink: #fafafa;\n    --border: #27272a;\n  }\n}\n\n.card { background: var(--surface); color: var(--ink); border: 1px solid var(--border); }"
+        },
+        {
+          "language": "CSS",
+          "code": ":root { /* light */ }\n@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) { /* dark */ } }\n:root[data-theme='dark'] { /* dark */ }"
+        },
+        {
+          "language": "CSS",
+          "code": ":root { color-scheme: light dark; }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "165-prefers-color-scheme-media-query-la-gi"
+  },
+  {
+    "id": "c1e527a7-6970-5807-85a4-a1d3ba1d1ab0",
+    "question": "picture element và source dùng thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/166-picture-element-va-source-dung-the-nao",
+    "slug": "picture-element-va-source-dung-the-nao-c1e527a7-6970-5807-85a4-a1d3ba1d1ab0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Browser duyệt các <source> theo thứ tự và dừng ở cái đầu tiên khớp — nên định dạng mới nhất phải đứng trước."
+      ],
+      "details": [
+        "Lưu ý 1: alt đặt trên <img>, không phải trên <source>. Thiếu <img> bên trong thì <picture> không hiển thị gì.",
+        "Lưu ý 2: dùng <picture> chỉ để đổi kích thước là thừa — srcset + sizes làm việc đó gọn hơn và để browser tự quyết theo cả DPR lẫn mạng.",
+        "Khi nào dùng <picture>, khi nào srcset:"
+      ],
+      "points": [],
+      "sections": [
+        "<picture> cho phép browser chọn giữa các nguồn ảnh khác nhau về định dạng hoặc bố cục, với <img> là phương án cuối."
+      ],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Nhu cầu",
+            "Dùng",
+            "Cùng một ảnh, nhiều kích thước",
+            "<img srcset sizes>",
+            "<picture>",
+            "Đổi định dạng (AVIF/WebP + dự phòng)",
+            "Đổi khung hình / tỉ lệ theo màn hình"
+          ]
+        }
+      ]
+    },
+    "legacyId": 55,
+    "sourceSlug": "166-picture-element-va-source-dung-the-nao"
+  },
+  {
+    "id": "2e46532e-a8cf-5d89-83d8-add894776587",
+    "question": "box-shadow vs filter: drop-shadow() khác nhau?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/171-box-shadow-vs-filter-drop-shadow-khac-nhau",
+    "slug": "box-shadow-vs-filter-drop-shadow-khac-nhau-2e46532e-a8cf-5d89-83d8-add894776587",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: filter tạo stacking context mới và làm position: fixed bên trong neo vào element đó thay vì viewport — dùng cho card bọc modal là gãy layout."
+      ],
+      "details": [
+        "Chọn thế nào: hộp chữ nhật hoặc bo góc → box-shadow. Icon SVG, ảnh trong suốt, hình cắt bằng clip-path → drop-shadow()."
+      ],
+      "points": [],
+      "sections": [
+        "box-shadow đổ bóng theo hình hộp; filter: drop-shadow() đổ bóng theo hình thật của nội dung, kể cả phần trong suốt.",
+        "Khác biệt lộ rõ với PNG trong suốt, SVG icon, hoặc element có clip-path:"
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".a { box-shadow: 0 4px 12px rgb(0 0 0 / 0.15); }        /* bóng hình chữ nhật (theo border-radius) */\n.b { filter: drop-shadow(0 4px 12px rgb(0 0 0 / 0.15)); } /* bóng bám theo alpha channel */"
+        },
+        {
+          "language": "CSS",
+          "code": ".badge {\n  clip-path: polygon(50% 0, 100% 100%, 0 100%);   /* hình tam giác */\n}\n.badge { box-shadow: 0 4px 8px #0003; }    /* bóng vẫn HÌNH CHỮ NHẬT — sai */\n.badge { filter: drop-shadow(0 4px 8px #0003); }  /* bóng hình tam giác — đúng */"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Theo hình",
+            "border-radius",
+            "box-shadow",
+            "drop-shadow()",
+            "spread",
+            "hộp + border-radius",
+            "inset",
+            "drop-shadow()",
+            "alpha channel thật",
+            "có"
+          ]
+        }
+      ]
+    },
+    "legacyId": 56,
+    "sourceSlug": "171-box-shadow-vs-filter-drop-shadow-khac-nhau"
+  },
+  {
+    "id": "eb3a526c-8bfe-5cdf-8d7c-74afc349dc50",
+    "question": "Breakpoints nên đặt theo thiết bị hay theo content?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/175-breakpoints-nen-dat-theo-thiet-bi-hay-theo-content",
+    "slug": "breakpoints-nen-dat-theo-thiet-bi-hay-theo-content-eb3a526c-8bfe-5cdf-8d7c-74afc349dc50",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Theo nội dung, không theo thiết bị.",
+        "Dùng rem cho breakpoint để ngưỡng co theo cỡ chữ người dùng đặt — người phóng to chữ sẽ chuyển sang bố cục hẹp sớm hơn, đúng như mong đợi."
+      ],
+      "details": [
+        "Lý do đơn giản: danh sách thiết bị đổi mỗi năm — iPhone SE 375px, iPhone Pro Max 430px, tablet gập, cửa sổ desktop chia đôi màn hình. Không có tập \"kích thước chuẩn\" nào ổn định để mà nhắm.",
+        "Cách làm thực tế:\n1. Mở trang, kéo cửa sổ hẹp dần.\n2. Đến chỗ layout bắt đầu vỡ — chữ dài quá một dòng, card chật, bảng tràn — đó là một breakpoint.\n3. Đặt media query tại đó, làm tiếp cho tới hết.",
+        "Nhiều trường hợp còn không cần breakpoint nào:"
+      ],
+      "points": [],
+      "sections": [
+        "Chốt: breakpoint theo nội dung còn hợp với container query — component tự đáp ứng theo chỗ nó được cấp, khi đó khái niệm \"kích thước thiết bị\" mất hẳn ý nghĩa."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "/* breakpoint sinh ra từ chỗ card không còn đủ chỗ, không phải từ tên thiết bị */\n.cards { display: grid; gap: 16px; }\n@media (min-width: 34rem) { .cards { grid-template-columns: repeat(2, 1fr); } }\n@media (min-width: 62rem) { .cards { grid-template-columns: repeat(4, 1fr); } }"
+        },
+        {
+          "language": "CSS",
+          "code": ".cards { grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "175-breakpoints-nen-dat-theo-thiet-bi-hay-theo-content"
+  },
+  {
+    "id": "918dd353-b802-59af-9155-c5a842eb52c0",
+    "question": "Composite layers trong browser là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/178-composite-layers-trong-browser-la-gi",
+    "slug": "composite-layers-trong-browser-la-gi-918dd353-b802-59af-9155-c5a842eb52c0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Composite layer là một mặt phẳng vẽ riêng mà browser giao cho GPU ghép lại ở bước cuối. Element nằm trên layer riêng có thể di chuyển hoặc đổi độ mờ mà không phải vẽ lại phần còn lại của trang.",
+        "Đánh đổi: mỗi layer chiếm bộ nhớ GPU theo diện tích × 4 byte/pixel. Một layer full-HD tốn khoảng 8MB. Vài chục layer là đủ làm điện thoại tầm trung hết bộ nhớ và chậm hơn lúc chưa tối ưu."
+      ],
+      "details": [
+        "Cái gì khiến một element được tách layer:\n- transform hoặc opacity đang được animate\n- will-change: transform | opacity\n- position: fixed\n- <video>, <canvas>, iframe\n- backdrop-filter, filter trong một số trường hợp\n- element nằm trên một layer đã có (buộc phải nâng lên theo)",
+        "Cách kiểm tra: DevTools → menu ⋮ → More tools → Layers. Xem số layer, diện tích, bộ nhớ, và lý do từng layer được tạo.",
+        "Lưu ý — \"layer explosion\": một element được nâng layer sẽ kéo theo mọi element vẽ đè lên nó. Đặt will-change: transform cho một card trong danh sách dài có thể sinh ra hàng chục layer ngoài dự tính — đây là lý do phải kiểm tra ở panel Layers thay vì đoán."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".drawer {\n  transform: translateX(-100%);\n  transition: transform 0.24s ease;   /* animate transform → chạy ở bước composite */\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": "178-composite-layers-trong-browser-la-gi"
+  },
+  {
+    "id": "15f91d65-1e8a-508c-b744-ea52db49b227",
+    "question": "CSS math functions (calc, min, max, clamp) khác nhau?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/183-css-math-functions-calc-min-max-clamp-khac-nhau",
+    "slug": "css-math-functions-calc-min-max-clamp-khac-nhau-15f91d65-1e8a-508c-b744-ea52db49b227",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý 1 — khoảng trắng quanh toán tử. calc(100%-2rem) không hợp lệ; phải có khoảng trắng hai bên + và - (với * và / thì không bắt buộc). Đây là lỗi cú pháp CSS bị bỏ qua âm thầm, không báo gì."
+      ],
+      "details": [
+        "Lưu ý 2: chia cho biến bằng 0 hoặc trộn đơn vị vô nghĩa làm cả khai báo bị bỏ, element rơi về giá trị kế thừa, biểu hiện ra ngoài giống như CSS không được áp dụng.",
+        "Ghi chú: clamp(a, b, c) chính là max(a, min(b, c)) — biết điều này giúp suy ra hành vi khi min lớn hơn max: kết quả trả về min."
+      ],
+      "points": [],
+      "sections": [
+        "Bốn hàm toán, dùng được ở mọi chỗ nhận độ dài, số, góc hay tần số.",
+        "Mẹo hay dùng — min() thay max-width, max() thay min-width:",
+        "Cả bốn lồng nhau và cộng trừ với nhau được:"
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".a { width: calc(100% - 2rem); }              /* tính toán, trộn đơn vị được */\n.b { width: min(90%, 1200px); }                /* lấy giá trị NHỎ hơn */\n.c { padding: max(1rem, env(safe-area-inset-left)); }  /* lấy giá trị LỚN hơn */\n.d { font-size: clamp(1rem, 2.5vw, 2rem); }    /* khoá trong khoảng */"
+        },
+        {
+          "language": "CSS",
+          "code": ".container { width: min(90%, 1180px); }\n/* tương đương: width: 90%; max-width: 1180px; — nhưng chỉ một dòng và lồng được */"
+        },
+        {
+          "language": "CSS",
+          "code": "width: clamp(320px, calc(100% - 2rem), min(1180px, 90vw));"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": "183-css-math-functions-calc-min-max-clamp-khac-nhau"
+  },
+  {
+    "id": "94e5f35c-8e70-5108-917f-a2dbc3322b47",
+    "question": "Tại sao oklch tốt hơn hsl cho design systems?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/187-tai-sao-oklch-tot-hon-hsl-cho-design-systems",
+    "slug": "tai-sao-oklch-tot-hon-hsl-cho-design-systems-94e5f35c-8e70-5108-917f-a2dbc3322b47",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Hệ quả với design system:",
+        "Lưu ý: chroma cao vượt gamut sẽ bị cắt về màu gần nhất — cùng một giá trị hiển thị khác nhau giữa các màn hình."
+      ],
+      "details": [
+        "1. Thang màu sinh được bằng công thức. Với oklch, --blue-500 → --blue-600 chỉ là giảm L một bước; áp cùng công thức cho mọi tông đều ra kết quả cân. Với hsl mỗi tông phải chỉnh tay.\n2. Màu trạng thái đồng đều. primary, success, danger cùng L sẽ trông cùng \"trọng lượng\" — nút không có cái nào nổi bật quá mức so với thiết kế.\n3. Kiểm tra tương phản dễ đoán hơn vì L bám sát độ sáng cảm nhận.",
+        "Thêm nữa oklch chạm được gamut P3, rộng hơn sRGB trên màn hình hiện đại:",
+        "Với màu thương hiệu cần chính xác, giữ chroma vừa phải hoặc kiểm tra bằng @media (color-gamut: p3)."
+      ],
+      "points": [],
+      "sections": [
+        "Vì oklch đồng đều theo cảm nhận: giữ nguyên L và C, đổi H thì mắt thấy các màu sáng ngang nhau. hsl không có tính chất đó."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "/* hsl: cùng lightness 50%, nhưng vàng trông sáng hơn hẳn xanh dương */\n.a { background: hsl(60 100% 50%); }\n.b { background: hsl(240 100% 50%); }\n\n/* oklch: cùng L 70%, độ sáng cảm nhận tương đương */\n.c { background: oklch(70% 0.15 100); }\n.d { background: oklch(70% 0.15 260); }"
+        },
+        {
+          "language": "CSS",
+          "code": ".vivid { color: oklch(70% 0.28 145); }   /* vượt sRGB, hiển thị đậm hơn trên P3 */"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": "187-tai-sao-oklch-tot-hon-hsl-cho-design-systems"
+  },
+  {
+    "id": "a053adca-1c3f-564e-a55b-213decd6eece",
+    "question": "Dark mode implementation best practices?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/193-dark-mode-implementation-best-practices",
+    "slug": "dark-mode-implementation-best-practices-a053adca-1c3f-564e-a55b-213decd6eece",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba khối này xử lý đủ ba trạng thái: người dùng chọn sáng, chọn tối, hoặc để theo hệ thống."
+      ],
+      "details": [
+        "Bốn điểm về màu:\n1. Không dùng đen tuyệt đối #000 cho nền — tương phản quá gắt gây mỏi mắt và làm bóng đổ mất tác dụng. Dùng #18181b hoặc tương đương.\n2. Không dùng trắng tuyệt đối cho chữ vì lý do tương tự.\n3. Giảm độ bão hoà ở dark mode — màu rực trên nền tối bị \"rung\" thị giác.\n4. Kiểm tra lại tương phản cho cả hai chế độ; đạt AA ở light không đảm bảo đạt ở dark.",
+        "Lưu ý: đọc theme từ localStorage trong useEffect gây nháy trắng một khung hình. Cách xử lý là script đồng bộ trong <head> đặt data-theme trước lần vẽ đầu tiên.",
+        "Lưu ý 2: ảnh và biểu đồ nền trắng nổi bật khó chịu trên nền tối — cần bản riêng hoặc filter giảm sáng có kiểm soát."
+      ],
+      "points": [],
+      "sections": [
+        "Nguyên tắc gốc: mọi màu đi qua custom property, dark mode chỉ đổi giá trị token chứ không viết lại luật CSS."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ":root {\n  --surface: #ffffff;\n  --surface-raised: #f4f4f5;\n  --ink: #18181b;\n  --ink-muted: #71717a;\n  --border: #e4e4e7;\n  color-scheme: light dark;    /* form control, thanh cuộn cũng đổi theo */\n}\n\n:root[data-theme='dark'] {\n  --surface: #18181b;\n  --surface-raised: #27272a;\n  --ink: #fafafa;\n  --ink-muted: #a1a1aa;\n  --border: #3f3f46;\n}\n\n@media (prefers-color-scheme: dark) {\n  :root:not([data-theme='light']) { /* lặp lại bộ token dark */ }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": "193-dark-mode-implementation-best-practices"
+  },
+  {
+    "id": "9221aaf2-3554-5f73-a324-4badec136718",
+    "question": "touch-action property dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/195-touch-action-property-dung-de-lam-gi",
+    "slug": "touch-action-property-dung-de-lam-gi-9221aaf2-3554-5f73-a324-4badec136718",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Giá trị quan trọng nhất trong thực tế là manipulation: browser không cần chờ xem người dùng có chạm lần hai để zoom hay không, nên click bắn ngay — bỏ được độ trễ khoảng 300ms trên một số trình duyệt mobile."
+      ],
+      "details": [
+        "Các giá trị này còn quyết định browser có thể cuộn trên luồng riêng hay không. Đó là lý do touch-action ảnh hưởng trực tiếp tới độ mượt khi cuộn, không chỉ tới gesture.",
+        "Lưu ý 1: touch-action: none trên vùng lớn chặn luôn cuộn trang — người dùng kẹt, không cuộn tiếp được. Chỉ đặt lên đúng phần tử cần.",
+        "Lưu ý 2: đặt none rồi quên gọi preventDefault() trong handler, hoặc ngược lại — hai cơ chế này bổ sung cho nhau, không thay thế nhau."
+      ],
+      "points": [],
+      "sections": [
+        "touch-action cho browser biết thao tác chạm nào nó được xử lý, phần còn lại nhường cho JS của bạn."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".canvas   { touch-action: none; }         /* JS xử lý hết: vẽ, game, gesture riêng */\n.btn      { touch-action: manipulation; } /* bỏ double-tap zoom → mất độ trễ 300ms */\n.carousel { touch-action: pan-y; }        /* chỉ cho cuộn dọc; ngang để JS bắt swipe */\n.map      { touch-action: pinch-zoom; }"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Giá trị",
+            "Browser giữ",
+            "tất cả",
+            "auto",
+            "none",
+            "manipulation",
+            "pan-x",
+            "phần còn lại",
+            "pan-y",
+            "không gì",
+            "toàn bộ"
+          ]
+        }
+      ]
+    },
+    "legacyId": 62,
+    "sourceSlug": "195-touch-action-property-dung-de-lam-gi"
+  },
+  {
+    "id": "5f65e1f0-8bd3-59e1-84e2-8409bfb36ac5",
+    "question": "Flexbox vs Grid. Khi nào dùng cái nào? Tại sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/954-flexbox-vs-grid-khi-nao-dung-cai-nao-tai-sao",
+    "slug": "flexbox-vs-grid-khi-nao-dung-cai-nao-tai-sao-5f65e1f0-8bd3-59e1-84e2-8409bfb36ac5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Flexbox là hệ thống layout một chiều, phân bố item dọc theo một trục (hàng hoặc cột), phù hợp cho navigation bar, danh sách item, hoặc căn chỉnh đơn giản."
+      ],
+      "details": [],
+      "points": [
+        "CSS Grid là hệ thống layout hai chiều, cho phép định nghĩa cả hàng và cột cùng lúc, phù hợp cho layout trang, dashboard, hoặc layout phức tạp.",
+        "Trong thực tế thường kết hợp cả hai: Grid cho layout tổng thể của trang, Flexbox cho layout bên trong từng component.",
+        "Quy tắc đơn giản: nếu chỉ cần sắp xếp theo một hướng thì dùng Flexbox, nếu cần kiểm soát cả hai chiều thì dùng Grid."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": "954-flexbox-vs-grid-khi-nao-dung-cai-nao-tai-sao"
+  },
+  {
+    "id": "0b33fcf6-be32-5844-8ece-9fcab1344090",
+    "question": "BFC (Block Formatting Context) là gì? Cách trigger BFC?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/955-bfc-block-formatting-context-la-gi-cach-trigger-bfc",
+    "slug": "bfc-block-formatting-context-la-gi-cach-trigger-bfc-0b33fcf6-be32-5844-8ece-9fcab1344090",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "BFC (Block Formatting Context) là một vùng layout độc lập trong CSS, nơi các phần tử bên trong không ảnh hưởng đến layout bên ngoài và ngược lại. Cách tạo BFC gồm: overflow: auto hoặc hidden, display: flex hoặc grid, position: absolute hoặc fixed, float: left hoặc right."
+      ],
+      "details": [
+        "BFC hữu ích để giải quyết nhiều vấn đề CSS phổ biến như: ngăn margin collapse giữa parent và child, chứa float element bên trong container, và ngăn text bọc quanh float element. Hiểu BFC giúp debug layout CSS hiệu quả hơn nhiều."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": "955-bfc-block-formatting-context-la-gi-cach-trigger-bfc"
+  },
+  {
+    "id": "2e508f13-c38f-5fe1-882c-275b8f86aba8",
+    "question": "Margin collapsing trong CSS. Tại sao margin: 20px cộng với margin: 30px không bằng 50px?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/956-margin-collapsing-trong-css-tai-sao-margin-20px-cong-voi-margin-30px-khong-bang",
+    "slug": "margin-collapsing-trong-css-tai-sao-margin-20px-cong-voi-margin-30px-khong-bang-50px-2e508f13-c38f-5fe1-882c-275b8f86aba8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Margin collapsing là hiện tượng margin dọc (vertical) của hai block-level element liền kề bị gộp lại thành một margin duy nhất, lấy giá trị lớn hơn — nên margin 20px + 30px chỉ còn 30px chứ không phải 50px."
+      ],
+      "details": [],
+      "points": [
+        "Margin ngang (horizontal) không bị collapse.",
+        "Để ngăn collapse, có thể tạo BFC bằng overflow: hidden hoặc dùng padding thay thế.",
+        "Ngoài ra flexbox và grid cũng không bị margin collapse, nên khi dùng display: flex hoặc grid thì margin luôn cộng đúng như mong đợi."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": "956-margin-collapsing-trong-css-tai-sao-margin-20px-cong-voi-margin-30px-khong-bang"
+  },
+  {
+    "id": "7959f509-50d6-5d3b-994e-ddf5f2a5337d",
+    "question": "CSS Grid template areas. Làm sao layout dashboard responsive mà không thay đổi HTML?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/957-css-grid-template-areas-lam-sao-layout-dashboard-responsive-ma-khong-thay-doi-ht",
+    "slug": "css-grid-template-areas-lam-sao-layout-dashboard-responsive-ma-khong-thay-doi-html-7959f509-50d6-5d3b-994e-ddf5f2a5337d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "CSS Grid template-areas cho phép đặt tên cho các vùng trong grid và gán phần tử vào bằng property grid-area, tạo ra layout trực quan và dễ đọc."
+      ],
+      "details": [
+        "Ví dụ: grid-template-areas: 'header header' 'sidebar main' 'footer footer' rồi gán mỗi phần tử với grid-area: header, grid-area: sidebar, v.v. Để responsive, chỉ cần dùng @media query thay đổi grid-template-areas mà không cần sửa HTML — ví dụ trên mobile chuyển thành layout một cột. Đây là ưu điểm lớn nhất: thay đổi layout hoàn toàn chỉ bằng CSS, giữ nguyên cấu trúc HTML, dễ bảo trì và dễ hiểu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": "957-css-grid-template-areas-lam-sao-layout-dashboard-responsive-ma-khong-thay-doi-ht"
+  },
+  {
+    "id": "5c951580-2577-5551-a103-7d405ffab7d1",
+    "question": "Stacking context trong CSS. Tại sao z-index không work?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/958-stacking-context-trong-css-tai-sao-z-index-khong-work",
+    "slug": "stacking-context-trong-css-tai-sao-z-index-khong-work-5c951580-2577-5551-a103-7d405ffab7d1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Stacking context là hệ thống phân lớp trong CSS, mỗi context tạo ra một hệ thống z-index riêng biệt. Các thuộc tính tạo stacking context mới gồm: position kết hợp z-index, opacity nhỏ hơn 1, transform, filter, và nhiều thuộc tính khác. z-index không hoạt động thường vì hai phần tử nằm trong hai stacking context khác nhau — lúc này z-index chỉ so sánh trong cùng context, không xuyên qua được context cha."
+      ],
+      "details": [
+        "Giải pháp là kiểm tra stacking context của các phần tử cha, điều chỉnh cho chúng nằm cùng context, hoặc sắp xếp lại thứ tự HTML."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": "958-stacking-context-trong-css-tai-sao-z-index-khong-work"
+  },
+  {
+    "id": "3ec4292c-f805-5778-b661-93f5ce5a2c68",
+    "question": "CSS reset và normalize khác nhau như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93704-css-reset-va-normalize-khac-nhau-nhu-the-nao",
+    "slug": "css-reset-va-normalize-khac-nhau-nhu-the-nao-3ec4292c-f805-5778-b661-93f5ce5a2c68",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai xử lý việc trình duyệt có default styles khác nhau (margin <body>, cỡ <h1>, style <ul>...), nhưng theo hai triết lý ngược nhau:"
+      ],
+      "details": [
+        "Ngày nay nhiều dev dùng một custom reset nhỏ (đặt box-sizing: border-box, bỏ margin mặc định) — lai giữa hai hướng."
+      ],
+      "points": [
+        "Reset (vd Meyer reset): xóa sạch hầu hết style mặc định về 0 — margin, padding, font-size... Nền trắng hoàn toàn, bạn phải dựng lại mọi thứ từ đầu. Nhất quán tuyệt đối nhưng tốn công.",
+        "Normalize (normalize.css): giữ lại các mặc định hữu ích và chỉ san phẳng khác biệt giữa các trình duyệt, sửa từng bug cụ thể. Ít phá vỡ, giữ semantic sẵn có (<h1> vẫn to đậm)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": "93704-css-reset-va-normalize-khac-nhau-nhu-the-nao"
+  },
+  {
+    "id": "b905b066-d5dd-57f0-b225-f6d7ba8f8b20",
+    "question": "Một flex item chứa text dài hoặc overflow: hidden mà không chịu co lại, làm tràn container. Nguyên nhân và cách sửa?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97354-mot-flex-item-chua-text-dai-hoac-overflow-hidden-ma-khong-chiu-co-lai-lam-tran-c",
+    "slug": "mot-flex-item-chua-text-dai-hoac-overflow-hidden-ma-khong-chiu-co-lai-lam-tran-container-nguyen-nhan-b905b066-d5dd-57f0-b225-f6d7ba8f8b20",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Nguyên nhân là min-width: auto — giá trị mặc định của flex item theo trục chính. Nó nói rằng item không được co nhỏ hơn kích thước nội dung tối thiểu (min-content), tức là chữ dài nhất hoặc bề rộng tối thiểu của phần tử con. flex-shrink: 1 vẫn hoạt động nhưng bị chặn ở ngưỡng đó, nên item đẩy rộng container.",
+        "Dấu hiệu nhận biết: chỉ xảy ra khi con có nội dung không xuống dòng được (URL dài, white-space: nowrap, <table>, <pre>, hoặc chính nó là flex/grid container). Sau khi đặt min-width: 0 thì text-overflow: ellipsis mới ăn."
+      ],
+      "details": [
+        "Cách sửa: cho phép co xuống dưới min-content.",
+        "Lỗi tương đương ở Grid: dùng minmax(0, 1fr) thay cho 1fr."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".item {\n  flex: 1;\n  min-width: 0;   /* trục chính là row */\n}\n.item.column-child {\n  min-height: 0;  /* tương ứng khi flex-direction: column */\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": "97354-mot-flex-item-chua-text-dai-hoac-overflow-hidden-ma-khong-chiu-co-lai-lam-tran-c"
+  },
+  {
+    "id": "3b5d6912-d934-5b22-a630-583dec587b0a",
+    "question": "Dùng repeat(auto-fit, minmax(240px, 1fr)) mà khi chỉ còn 1 card thì nó kéo dài hết hàng. Vì sao? Đổi sang auto-fill thì sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97355-dung-repeat-auto-fit-minmax-240px-1fr-ma-khi-chi-con-1-card-thi-no-keo-dai-het-h",
+    "slug": "dung-repeat-auto-fit-minmax-240px-1fr-ma-khi-chi-con-1-card-thi-no-keo-dai-het-hang-vi-sao-doi-sang-3b5d6912-d934-5b22-a630-583dec587b0a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì auto-fit thu gọn (collapse) các track rỗng về 0 rồi để các track có nội dung ăn hết phần dư. Còn 1 card thì mọi track khác biến mất, card duy nhất giãn theo 1fr chiếm trọn hàng.",
+        "Chọn theo ý đồ:\n- Số item ít và muốn lấp đầy chiều rộng → auto-fit.\n- Muốn card giữ kích thước ổn định, lưới không nhảy khi danh sách ngắn → auto-fill."
+      ],
+      "details": [
+        "auto-fill giữ nguyên các track rỗng. Card duy nhất chỉ rộng bằng một cột, phần còn lại là ô trống.",
+        "Muốn auto-fit nhưng chặn card quá rộng: đổi max thành giá trị cụ thể, ví dụ minmax(240px, 360px), hoặc thêm max-width cho card bên trong. Khi container rộng hơn tổng track thì hai từ khoá cho kết quả giống hệt nhau — khác biệt chỉ lộ ra lúc thiếu item."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "/* card giãn full khi thiếu item */\ngrid-template-columns: repeat(auto-fit, minmax(240px, 1fr));\n\n/* card giữ đúng bề rộng cột, chừa chỗ trống */\ngrid-template-columns: repeat(auto-fill, minmax(240px, 1fr));"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": "97355-dung-repeat-auto-fit-minmax-240px-1fr-ma-khi-chi-con-1-card-thi-no-keo-dai-het-h"
+  },
+  {
+    "id": "fa41c115-a8b1-572a-b7b7-9823fb628a3f",
+    "question": "Grid có cột 1fr nhưng nội dung dài (bảng, URL không ngắt) làm cả grid tràn ngang. Sửa thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97356-grid-co-cot-1fr-nhung-noi-dung-dai-bang-url-khong-ngat-lam-ca-grid-tran-ngang-su",
+    "slug": "grid-co-cot-1fr-nhung-noi-dung-dai-bang-url-khong-ngat-lam-ca-grid-tran-ngang-sua-the-nao-fa41c115-a8b1-572a-b7b7-9823fb628a3f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Đổi 1fr thành minmax(0, 1fr).",
+        "minmax(min, max) định nghĩa track co giãn giữa hai mốc. Đặt min = 0 nghĩa là cho phép track nhỏ hơn nội dung, khi đó overflow: auto hay text-overflow: ellipsis bên trong mới có tác dụng."
+      ],
+      "details": [
+        "1fr thực chất là viết tắt của minmax(auto, 1fr). Phần auto đặt sàn tối thiểu bằng min-content của ô, nên khi bên trong có nội dung không ngắt được, track buộc phải rộng ra và cả grid tràn ngang khỏi container.",
+        "Các dạng hay dùng: minmax(200px, 1fr) (cột không hẹp hơn 200px), minmax(min-content, 320px), minmax(auto, 60ch) cho cột văn bản. Đây là cùng một lớp lỗi với min-width: auto của flex item."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "/* tràn khi cột phải chứa nội dung dài */\n.layout { display: grid; grid-template-columns: 240px 1fr; }\n\n/* an toàn */\n.layout { display: grid; grid-template-columns: 240px minmax(0, 1fr); }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": "97356-grid-co-cot-1fr-nhung-noi-dung-dai-bang-url-khong-ngat-lam-ca-grid-tran-ngang-su"
+  },
+  {
+    "id": "1a6a89f7-712e-5165-8cf1-d1c1094e01ed",
+    "question": "Dựng layout dashboard (header / sidebar / main / footer) và đổi thứ tự trên mobile bằng grid-template-areas như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97357-dung-layout-dashboard-header-sidebar-main-footer-va-doi-thu-tu-tren-mobile-bang",
+    "slug": "dung-layout-dashboard-header-sidebar-main-footer-va-doi-thu-tu-tren-mobile-bang-grid-template-areas-1a6a89f7-712e-5165-8cf1-d1c1094e01ed",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Quy tắc cần nhớ: mỗi chuỗi là một hàng, số token mỗi hàng phải bằng nhau, tên lặp lại thì vùng trải dài (span), dấu . là ô trống. Vùng phải là hình chữ nhật — nếu không, cả khai báo bị coi là không hợp lệ."
+      ],
+      "details": [
+        "Cảnh báo a11y: thứ tự hiển thị đã khác thứ tự DOM (sidebar tụt xuống dưới main) trong khi thứ tự đọc và tab vẫn theo DOM. Chỉ nên sắp lại khi trình tự đọc vẫn hợp lý."
+      ],
+      "points": [],
+      "sections": [
+        "grid-template-areas đặt tên cho vùng rồi vẽ layout bằng chuỗi ASCII; đổi responsive chỉ cần vẽ lại bản đồ, không đụng tới HTML hay order."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".dashboard {\n  display: grid;\n  grid-template-columns: 240px minmax(0, 1fr);\n  grid-template-rows: auto 1fr auto;\n  grid-template-areas:\n    \"header  header\"\n    \"sidebar main\"\n    \"footer  footer\";\n  min-height: 100dvh;\n  gap: 16px;\n}\n.header  { grid-area: header; }\n.sidebar { grid-area: sidebar; }\n.main    { grid-area: main; }\n.footer  { grid-area: footer; }\n\n@media (max-width: 768px) {\n  .dashboard {\n    grid-template-columns: 1fr;\n    grid-template-areas:\n      \"header\"\n      \"main\"\n      \"sidebar\"\n      \"footer\";\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": "97357-dung-layout-dashboard-header-sidebar-main-footer-va-doi-thu-tu-tren-mobile-bang"
+  },
+  {
+    "id": "db8e58e7-0fb6-5d1c-825e-fa33b5f3ae68",
+    "question": "Đặt position: sticky; top: 0 nhưng phần tử không dính. Bạn kiểm tra những nguyên nhân nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97358-dat-position-sticky-top-0-nhung-phan-tu-khong-dinh-ban-kiem-tra-nhung-nguyen-nha",
+    "slug": "dat-position-sticky-top-0-nhung-phan-tu-khong-dinh-ban-kiem-tra-nhung-nguyen-nhan-nao-db8e58e7-0fb6-5d1c-825e-fa33b5f3ae68",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Bốn nguyên nhân theo thứ tự hay gặp:"
+      ],
+      "details": [
+        "1. Thiếu offset: sticky không làm gì nếu không có ít nhất một trong top / right / bottom / left. Đây là lỗi phổ biến nhất.\n2. Tổ tiên có overflow khác visible: bất kỳ cha nào đặt overflow: hidden / auto / scroll sẽ trở thành scroll container mới; phần tử dính theo cha đó, mà cha đó lại không cuộn nên trông như không dính. Kiểm tra bằng cách duyệt ngược lên cây DOM.\n3. Cha không đủ chiều cao: sticky chỉ trượt trong phạm vi phần tử cha trực tiếp. Nếu cha cao bằng đúng chính nó (ví dụ sidebar trong grid row align-items: start co lại vừa nội dung), không còn quãng đường nào để dính.\n4. Cha là flex/grid item bị stretch sai: trong grid, mặc định item stretch nên thường ổn; nhưng nếu đã đặt align-self: start thì cha co lại và mất phạm vi sticky."
+      ],
+      "points": [],
+      "sections": [
+        "Cách debug nhanh: trong DevTools, xoá tạm overflow của từng tổ tiên; Chrome còn gắn nhãn cảnh báo cạnh khai báo position: sticky khi nó không có hiệu lực."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".sidebar { position: sticky; top: calc(var(--app-bar-height) + 20px); }\n/* và kiểm tra: không tổ tiên nào có overflow: hidden */"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": "97358-dat-position-sticky-top-0-nhung-phan-tu-khong-dinh-ban-kiem-tra-nhung-nguyen-nha"
+  },
+  {
+    "id": "9878f755-64f0-5f51-8f00-396de169f647",
+    "question": "Đặt margin-top: 40px cho phần tử con nhưng cả khối cha bị đẩy xuống thay vì con dịch trong cha. Vì sao và chặn thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97359-dat-margin-top-40px-cho-phan-tu-con-nhung-ca-khoi-cha-bi-day-xuong-thay-vi-con-d",
+    "slug": "dat-margin-top-40px-cho-phan-tu-con-nhung-ca-khoi-cha-bi-day-xuong-thay-vi-con-dich-trong-cha-vi-sao-9878f755-64f0-5f51-8f00-396de169f647",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Đó là margin collapsing giữa cha và con đầu tiên: khi không có gì ngăn cách ở cạnh trên (không border, không padding, không nội dung inline), margin-top của con thoát ra ngoài và hợp nhất với margin-top của cha. Giá trị cuối cùng là số lớn nhất, không phải tổng.",
+        "display: flow-root là lựa chọn hiện đại: tạo block formatting context mà không thêm pixel hay đổi mô hình layout của con."
+      ],
+      "details": [
+        "Ba trường hợp collapse: giữa hai anh em kề nhau, giữa cha và con đầu/cuối, và margin trên/dưới của một khối rỗng tự hợp nhất.",
+        "Cách chặn:",
+        "Lưu ý phạm vi: margin collapse chỉ xảy ra theo chiều dọc, chỉ trong block layout. Bên trong flex/grid container thì không có, đó là lý do gap cho khoảng cách đoán trước được."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".parent { padding-top: 1px; }      /* hoặc border-top */\n.parent { display: flow-root; }    /* tạo BFC, sạch nhất */\n.parent { display: flex; }         /* flex/grid không có margin collapse */"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": "97359-dat-margin-top-40px-cho-phan-tu-con-nhung-ca-khoi-cha-bi-day-xuong-thay-vi-con-d"
+  },
+  {
+    "id": "6a505e76-934b-578d-bc39-68df9447a2c3",
+    "question": "aspect-ratio dùng thế nào? Nó thay được kỹ thuật padding-top phần trăm ở điểm nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97360-aspect-ratio-dung-the-nao-no-thay-duoc-ky-thuat-padding-top-phan-tram-o-diem-nao",
+    "slug": "aspect-ratio-dung-the-nao-no-thay-duoc-ky-thuat-padding-top-phan-tram-o-diem-nao-6a505e76-934b-578d-bc39-68df9447a2c3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "So với kỹ thuật cũ padding-top: 56.25% cộng một lớp con position: absolute; inset: 0:\n- Không cần phần tử bọc thêm và không phải tính lại phần trăm khi đổi tỉ lệ.\n- Nội dung nằm trong luồng bình thường, không phải absolute → vẫn dùng được flex/grid bên trong.\n- Đọc ra ngay ý đồ (16 / 9) thay vì một con số phần trăm khó truy vết."
+      ],
+      "details": [
+        "Các điểm cần nắm:\n- Tỉ lệ bị ghi đè khi cả width và height cùng được xác định, hoặc khi nội dung buộc box cao hơn — muốn cắt cứng thì thêm overflow: hidden hoặc min-height: 0.\n- Với <img>/<video> nên đi kèm object-fit: cover để ảnh không méo.\n- Đặt sẵn tỉ lệ cho ảnh/embed cũng là cách giữ chỗ, tránh layout shift khi tài nguyên tải xong."
+      ],
+      "points": [],
+      "sections": [
+        "aspect-ratio khai báo trực tiếp tỉ lệ giữa chiều rộng và chiều cao; trình duyệt tự suy ra chiều còn lại từ chiều đã biết."
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".thumb   { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }\n.avatar  { width: 48px; aspect-ratio: 1; border-radius: 999px; }\n.map     { aspect-ratio: 4 / 3; }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": "97360-aspect-ratio-dung-the-nao-no-thay-duoc-ky-thuat-padding-top-phan-tram-o-diem-nao"
+  },
+  {
+    "id": "fcf31a2f-5158-532d-9266-8d8b5b4ff64c",
+    "question": "Bạn thiết kế dark mode bằng biến CSS thế nào để vừa theo cài đặt hệ thống vừa cho người dùng tự chọn, và không bị nháy màu lúc tải trang?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97404-ban-thiet-ke-dark-mode-bang-bien-css-the-nao-de-vua-theo-cai-dat-he-thong-vua-ch",
+    "slug": "ban-thiet-ke-dark-mode-bang-bien-css-the-nao-de-vua-theo-cai-dat-he-thong-vua-cho-nguoi-dung-tu-chon-fcf31a2f-5158-532d-9266-8d8b5b4ff64c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Nguyên tắc: component không biết màu, chỉ đọc token.",
+        "Chống nháy (flash of wrong theme): giá trị người dùng chọn nằm trong localStorage, mà React/Next render sau. Cách xử lý phổ biến là chèn một script đồng bộ nhỏ trong <head> đọc localStorage và gán document.documentElement.dataset.theme trước khi trình duyệt vẽ khung hình đầu tiên. Kèm <meta name=\"color-scheme\"> hoặc CSS color-scheme: light dark để form control và thanh cuộn của trình duyệt cũng đổi theo."
+      ],
+      "details": [
+        "Toàn bộ khác biệt sáng/tối nằm ở một chỗ.",
+        "Các sắc thái phái sinh nên tính từ token gốc thay vì khai báo tay từng cái: color-mix(in srgb, var(--ink) 12%, transparent) cho nền hover — tự đúng ở cả hai chế độ."
+      ],
+      "points": [
+        "prefers-color-scheme lo mặc định theo hệ điều hành.",
+        "Thuộc tính data-theme trên <html> lo lựa chọn thủ công và thắng media query nhờ selector cụ thể hơn.",
+        "Chỉ đặt token ngữ nghĩa (--surface, --ink, --border), đừng đặt --white; nếu không sang dark mode tên biến sẽ nói dối."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ":root { --surface: #fff; --ink: #111; }\n[data-theme='dark'] { --surface: #111; --ink: #f2f2f2; }\n\n@media (prefers-color-scheme: dark) {\n  :root:not([data-theme='light']) { --surface: #111; --ink: #f2f2f2; }\n}\n\n.card { background: var(--surface); color: var(--ink); }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 76,
+    "sourceSlug": "97404-ban-thiet-ke-dark-mode-bang-bien-css-the-nao-de-vua-theo-cai-dat-he-thong-vua-ch"
+  },
+  {
+    "id": "54bb686b-e111-5577-be5d-393a126152a6",
+    "question": ":is() và :where() viết giống hệt nhau thì khác gì? Khi nào bắt buộc chọn :where()?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97405-is-va-where-viet-giong-het-nhau-thi-khac-gi-khi-nao-bat-buoc-chon-where",
+    "slug": "is-va-where-viet-giong-het-nhau-thi-khac-gi-khi-nao-bat-buoc-chon-where-54bb686b-e111-5577-be5d-393a126152a6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai hàm nhóm selector này giống nhau hoàn toàn về phần khớp, chỉ khác specificity:",
+        "Hệ quả thực tế: rule dùng :is() với một #id lẫn trong danh sách bỗng khó đè, còn :where() cho ra rule dễ override bằng bất kỳ class nào."
+      ],
+      "details": [
+        "Chọn :is() khi muốn gom nhóm cho gọn mà vẫn giữ trọng số bình thường, vd :is(.btn, .link):hover.",
+        "Hai hàm còn dùng để rút gọn selector list dài, và cả hai đều forgiving: một selector sai cú pháp bên trong không làm hỏng cả rule — khác selector list truyền thống ngăn cách bằng dấu phẩy.",
+        "Chọn :where() khi:"
+      ],
+      "points": [
+        ":is(...) nhận specificity của selector có độ cụ thể cao nhất trong danh sách.",
+        ":where(...) luôn có specificity bằng 0, bất kể bên trong là gì.",
+        "Viết reset / base style hoặc CSS của thư viện dùng chung — người dùng phải đè được mà không cần đấu specificity. Các modern CSS reset đều bọc selector trong :where() vì lý do này.",
+        ".card :where(h1, h2, h3)"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ":is(#main, .post) h2 { color: red; }   /* (1,0,1) — vì có #main */\n:where(#main, .post) h2 { color: blue; } /* (0,0,1) — chỉ tính h2 */"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 77,
+    "sourceSlug": "97405-is-va-where-viet-giong-het-nhau-thi-khac-gi-khi-nao-bat-buoc-chon-where"
+  },
+  {
+    "id": "5231b061-f06c-549d-a08e-c5b306fd0d51",
+    "question": ":has() giải quyết được bài toán nào mà trước đây phải viết JS? Cho ví dụ thực tế.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97406-has-giai-quyet-duoc-bai-toan-nao-ma-truoc-day-phai-viet-js-cho-vi-du-thuc-te",
+    "slug": "has-giai-quyet-duoc-bai-toan-nao-ma-truoc-day-phai-viet-js-cho-vi-du-thuc-te-5231b061-f06c-549d-a08e-c5b306fd0d51",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        ":has() là parent selector: chọn phần tử dựa trên thứ nó chứa hoặc thứ đứng sau nó. Trước đó CSS chỉ đi xuống, nên mọi trạng thái phụ thuộc con đều phải để JS toggle class.",
+        "Lưu ý:"
+      ],
+      "details": [
+        "Ví dụ hay dùng trong dự án:"
+      ],
+      "points": [
+        "Specificity tính theo selector cụ thể nhất bên trong (giống :is()), nên .card:has(#hero) nặng bất ngờ.",
+        ":has() không lồng được :has() khác và không dùng được với pseudo-element.",
+        "Trình duyệt phải đánh giá lại khi cây DOM đổi; tránh selector quá rộng kiểu body:has(...) gắn với thay đổi liên tục, đặc biệt trên danh sách lớn."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "/* card có ảnh thì đổi layout, không cần class .card--has-image do JS gắn */\n.card:has(img) { grid-template-columns: 120px 1fr; }\n\n/* label đổi màu khi input bên trong invalid và đã nhập */\n.field:has(input:user-invalid) { border-color: var(--rose-ink); }\n\n/* form có checkbox tick thì hiện nút hành động hàng loạt */\n.list:has(input[type='checkbox']:checked) .bulk-bar { display: flex; }\n\n/* chỉ thêm khoảng cách khi có heading đứng ngay trước đoạn văn */\nh2:has(+ p) { margin-bottom: 8px; }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 78,
+    "sourceSlug": "97406-has-giai-quyet-duoc-bai-toan-nao-ma-truoc-day-phai-viet-js-cho-vi-du-thuc-te"
+  },
+  {
+    "id": "1777c9bf-f20f-5b69-a1e2-f40786283415",
+    "question": "Sản phẩm sắp hỗ trợ tiếng Ả Rập (RTL). Logical property giúp gì và bạn đổi CSS hiện có thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97407-san-pham-sap-ho-tro-tieng-a-rap-rtl-logical-property-giup-gi-va-ban-doi-css-hien",
+    "slug": "san-pham-sap-ho-tro-tieng-a-rap-rtl-logical-property-giup-gi-va-ban-doi-css-hien-co-the-nao-1777c9bf-f20f-5b69-a1e2-f40786283415",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Logical property mô tả vị trí theo dòng chảy văn bản thay vì theo trục vật lý trái/phải. Khi dir=\"rtl\", trình duyệt tự lật, không cần một file CSS RTL riêng.",
+        "Cách chuyển đổi thực tế:"
+      ],
+      "details": [
+        "inline là trục chữ chạy (ngang trong tiếng Việt/Anh/Ả Rập), block là trục các dòng xếp chồng. Viết tắt hai chiều cùng lúc: margin-inline: 16px, padding-block: 8px 12px.",
+        "Lật hướng chỉ là một nửa việc: icon mũi tên, biểu đồ tiến trình và nội dung nhúng vẫn phải xử lý riêng."
+      ],
+      "points": [
+        "Đổi trước những chỗ thật sự phụ thuộc hướng đọc: padding/margin ngang, text-align, border một cạnh, vị trí icon, inset-inline-start thay left.",
+        "Giữ nguyên vật lý ở nơi không liên quan hướng đọc: bóng đổ theo hướng ánh sáng, vị trí tuyệt đối của phần tử trang trí.",
+        "Ngoài RTL, logical property còn giúp khi đổi writing-mode (tiếng Nhật dọc) và làm cùng một component hoạt động đúng ở cả hai chiều mà không nhân đôi rule."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": ".badge { margin-inline-end: 8px; border-inline-start: 2px solid var(--border); }\n/* dir='rtl' -> margin lật sang trái, border lật sang phải, tự động */"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Vật lý",
+            "Logical",
+            "width / height",
+            "margin-left",
+            "margin-inline-start",
+            "padding-right",
+            "padding-inline-end",
+            "inline-size / block-size",
+            "text-align: left",
+            "text-align: start",
+            "border-top",
+            "border-block-start",
+            "width",
+            "height",
+            "inline-size",
+            "block-size"
+          ]
+        }
+      ]
+    },
+    "legacyId": 79,
+    "sourceSlug": "97407-san-pham-sap-ho-tro-tieng-a-rap-rtl-logical-property-giup-gi-va-ban-doi-css-hien"
+  },
+  {
+    "id": "d9934869-6a61-5058-851c-e1d161e312c5",
+    "question": "Team tranh luận giữa BEM và utility-first (Tailwind). Bạn phân tích đánh đổi của hai bên thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97408-team-tranh-luan-giua-bem-va-utility-first-tailwind-ban-phan-tich-danh-doi-cua-ha",
+    "slug": "team-tranh-luan-giua-bem-va-utility-first-tailwind-ban-phan-tich-danh-doi-cua-hai-ben-the-nao-d9934869-6a61-5058-851c-e1d161e312c5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Hai cách giải cùng một vấn đề: CSS không có scope, nên phải quy ước để tránh tên class đụng nhau và style rò rỉ."
+      ],
+      "details": [
+        "BEM — block__element--modifier, mỗi class một tầng ý nghĩa:",
+        "Utility-first — ghép sẵn class một-mục-đích:",
+        "Cách trả lời thực dụng: phụ thuộc vào việc UI đã được component hoá chưa. Có React/Vue thì bản thân component đã lo tái sử dụng, utility bù đúng khoảng trống còn lại và tránh chi phí đặt tên. Còn dự án render server, template nhiều nơi dùng chung, không có lớp component thì BEM (hoặc CSS Modules) giữ trật tự tốt hơn."
+      ],
+      "points": [
+        "Specificity phẳng (một class), dễ đoán thứ tự đè.",
+        "HTML sạch, tên class mô tả vai trò, dễ đọc khi review.",
+        "Đổi lại: file CSS chỉ tăng, hiếm khi giảm — không ai dám xoá vì không rõ còn dùng ở đâu. Nhảy qua lại giữa file markup và file CSS. Đặt tên thành gánh nặng thật."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 80,
+    "sourceSlug": "97408-team-tranh-luan-giua-bem-va-utility-first-tailwind-ban-phan-tich-danh-doi-cua-ha"
+  },
+  {
+    "id": "49c90eab-89ed-5dab-bfa9-da73654733ad",
+    "question": "Dùng clamp() cho cỡ chữ responsive thay vì hàng loạt media query. Công thức thế nào và có bẫy gì về accessibility?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97409-dung-clamp-cho-co-chu-responsive-thay-vi-hang-loat-media-query-cong-thuc-the-nao",
+    "slug": "dung-clamp-cho-co-chu-responsive-thay-vi-hang-loat-media-query-cong-thuc-the-nao-va-co-bay-gi-ve-acc-49c90eab-89ed-5dab-bfa9-da73654733ad",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Giá trị giữa phải có thành phần vw thì mới co giãn. Cách suy ra hệ số: chọn hai mốc (vd 360px → 28px, 1280px → 48px), tính độ dốc (48-28)/(1280-360) = 0.0217 → 2.17vw, phần bù cố định là giá trị tại 0px quy ra rem."
+      ],
+      "details": [
+        "Lưu ý về accessibility: nếu phần preferred chỉ có vw thuần (clamp(1rem, 4vw, 3rem)), người dùng phóng to chữ trong trình duyệt sẽ không thấy thay đổi vì vw không phụ thuộc font-size gốc — vi phạm WCAG 1.4.4 (resize text tới 200%). Luôn cộng thêm một phần rem như công thức trên để chữ vẫn nở theo cài đặt của người dùng.",
+        "Lưu ý khác:"
+      ],
+      "points": [
+        "Đừng để min quá nhỏ; dưới 16px trên mobile là ngưỡng khó đọc và làm iOS Safari tự zoom khi focus input.",
+        "clamp() cũng hợp cho padding, gap, max-width — không riêng font-size.",
+        "Với typography nhiều cấp, kẹp mỗi cấp riêng dễ làm vỡ tỉ lệ; nhiều team kẹp một biến gốc rồi nhân theo thang."
+      ],
+      "sections": [
+        "clamp(min, preferred, max) cho giá trị co giãn liên tục theo viewport, thay vì nhảy bậc tại breakpoint:"
+      ],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "h1 { font-size: clamp(1.75rem, 1.2rem + 2.5vw, 3rem); }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 81,
+    "sourceSlug": "97409-dung-clamp-cho-co-chu-responsive-thay-vi-hang-loat-media-query-cong-thuc-the-nao"
+  },
+  {
+    "id": "d823b84a-3782-5d8d-bcd1-4dd212d452c0",
+    "question": "Menu trượt ra bị giật trên máy yếu. Bạn chọn animate thuộc tính nào và vì sao đổi left/width sang transform lại mượt hơn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97410-menu-truot-ra-bi-giat-tren-may-yeu-ban-chon-animate-thuoc-tinh-nao-va-vi-sao-doi",
+    "slug": "menu-truot-ra-bi-giat-tren-may-yeu-ban-chon-animate-thuoc-tinh-nao-va-vi-sao-doi-left-width-sang-tra-d823b84a-3782-5d8d-bcd1-4dd212d452c0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì mỗi khung hình trình duyệt đi qua các bước style → layout → paint → composite, và thuộc tính bạn đổi quyết định phải chạy lại từ bước nào.",
+        "Khi buộc phải đổi kích thước: dùng transform: scale() cho hiệu ứng thị giác, hoặc animate max-height chấp nhận đánh đổi, hoặc dùng kỹ thuật FLIP (đo vị trí đầu/cuối rồi diễn hoạt bằng transform). Với accordion, grid-template-rows: 0fr -> 1fr là cách hiện đại nhưng vẫn là animation gây layout."
+      ],
+      "details": [
+        "Luôn kiểm chứng bằng Performance panel: xem có frame nào rơi vào Layout/Paint không, đừng kết luận bằng cảm nhận. Và bọc animation trong @media (prefers-reduced-motion: reduce) để tôn trọng người dùng tắt hiệu ứng."
+      ],
+      "points": [
+        "Đổi left, top, width, height, margin → layout lại (reflow) toàn bộ nhánh liên quan, rồi paint, rồi composite. Đắt nhất.",
+        "Đổi background-color, box-shadow, border-radius → bỏ qua layout nhưng vẫn paint lại.",
+        "Đổi transform và opacity → chỉ composite, chạy trên compositor thread, không đụng layout hay paint. Đây là hai thuộc tính an toàn nhất cho animation 60fps."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "CSS",
+          "code": "/* trigger layout every frame */\n.menu { left: -300px; transition: left .2s; }\n.menu.open { left: 0; }\n\n/* composite only */\n.menu { transform: translateX(-100%); transition: transform .2s ease; }\n.menu.open { transform: none; }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 82,
+    "sourceSlug": "97410-menu-truot-ra-bi-giat-tren-may-yeu-ban-chon-animate-thuoc-tinh-nao-va-vi-sao-doi"
+  },
+  {
+    "id": "f07183fc-066f-5b1c-9009-bca52a74a09e",
+    "question": ":is(), :where(), :not() khác nhau?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "is-where-not-khac-nhau-f07183fc-066f-5b1c-9009-bca52a74a09e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 83,
+    "sourceSlug": null
+  },
+  {
+    "id": "9c903a0b-9712-5c8d-9951-3016a3a17843",
+    "question": "Làm thế nào để center cả horizontal và vertical bằng Flexbox?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-the-nao-de-center-ca-horizontal-va-vertical-bang-flexbox-9c903a0b-9712-5c8d-9951-3016a3a17843",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 84,
+    "sourceSlug": null
+  },
+  {
+    "id": "51a44c13-ecf8-570c-821f-4388e64a5215",
+    "question": "Subgrid là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "subgrid-la-gi-51a44c13-ecf8-570c-821f-4388e64a5215",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 85,
+    "sourceSlug": null
+  },
+  {
+    "id": "bdba5e43-b979-5514-8f59-d6f274da43e2",
+    "question": "Grid placement (grid-column, grid-row) hoạt động thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "grid-placement-grid-column-grid-row-hoat-dong-the-nao-bdba5e43-b979-5514-8f59-d6f274da43e2",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 86,
+    "sourceSlug": null
+  },
+  {
+    "id": "a3e96402-1a9d-5f56-bf54-bef1e81eb7af",
+    "question": "Tại sao transform/opacity animate mượt hơn top/left?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "tai-sao-transform-opacity-animate-muot-hon-top-left-a3e96402-1a9d-5f56-bf54-bef1e81eb7af",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 87,
+    "sourceSlug": null
+  },
+  {
+    "id": "860850f5-1f90-5052-9628-105d044cdb0c",
+    "question": "Reflow và repaint là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "reflow-va-repaint-la-gi-860850f5-1f90-5052-9628-105d044cdb0c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 88,
+    "sourceSlug": null
+  },
+  {
+    "id": "77495d88-088a-57d8-9721-896cde042dc9",
+    "question": "Color spaces mới trong CSS (oklch, lab) là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "color-spaces-moi-trong-css-oklch-lab-la-gi-77495d88-088a-57d8-9721-896cde042dc9",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 89,
+    "sourceSlug": null
+  },
+  {
+    "id": "dfef83a4-f10d-50dd-be8e-ad7f7bcd7b55",
+    "question": "CSS Nesting native hoạt động thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "css-nesting-native-hoat-dong-the-nao-dfef83a4-f10d-50dd-be8e-ad7f7bcd7b55",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 90,
+    "sourceSlug": null
+  },
+  {
+    "id": "98211e4f-7cf9-5c9c-b674-4d8202744370",
+    "question": "@layer (Cascade Layers) là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "layer-cascade-layers-la-gi-98211e4f-7cf9-5c9c-b674-4d8202744370",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 91,
+    "sourceSlug": null
+  },
+  {
+    "id": "c212d037-cb49-5fd4-ae9b-9436fbe1075b",
+    "question": "Layout thrashing là gì? Cách tránh?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "layout-thrashing-la-gi-cach-tranh-c212d037-cb49-5fd4-ae9b-9436fbe1075b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 92,
+    "sourceSlug": null
+  },
+  {
+    "id": "02e5e257-7ee3-5203-9645-f24d9ca39b7a",
+    "question": "Scroll-driven animations là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "scroll-driven-animations-la-gi-02e5e257-7ee3-5203-9645-f24d9ca39b7a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 93,
+    "sourceSlug": null
+  },
+  {
+    "id": "4bacd282-ff36-5807-b894-a39b7dbbedf0",
+    "question": "CSS Anchor Positioning là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "css-anchor-positioning-la-gi-4bacd282-ff36-5807-b894-a39b7dbbedf0",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 94,
+    "sourceSlug": null
+  },
+  {
+    "id": "0cfc9cc3-228c-57cd-8a64-5862263fe5c3",
+    "question": "@property rule dùng để làm gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "property-rule-dung-de-lam-gi-0cfc9cc3-228c-57cd-8a64-5862263fe5c3",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 95,
+    "sourceSlug": null
+  },
+  {
+    "id": "61c94071-183a-574c-8420-2b72a6d14bc2",
+    "question": "CSS View Transitions API là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "css-view-transitions-api-la-gi-61c94071-183a-574c-8420-2b72a6d14bc2",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 96,
+    "sourceSlug": null
+  },
+  {
+    "id": "9131315a-7cad-53f7-96bd-7966c04c0329",
+    "question": "Popover API và CSS liên quan là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "popover-api-va-css-lien-quan-la-gi-9131315a-7cad-53f7-96bd-7966c04c0329",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 97,
+    "sourceSlug": null
+  },
+  {
+    "id": "47d6e6da-3d33-55d0-a644-7a102cb23367",
+    "question": "Tại sao nên dùng CSS Grid cho page layout thay vì float/position?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "tai-sao-nen-dung-css-grid-cho-page-layout-thay-vi-float-position-47d6e6da-3d33-55d0-a644-7a102cb23367",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 98,
+    "sourceSlug": null
+  },
+  {
+    "id": "18e5e5c3-0185-58a4-956e-2570438ba0aa",
+    "question": "Fluid typography công thức thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "fluid-typography-cong-thuc-the-nao-18e5e5c3-0185-58a4-956e-2570438ba0aa",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 99,
+    "sourceSlug": null
+  },
+  {
+    "id": "bba1162d-b20d-5f15-8eea-f9f90e3cd674",
+    "question": "Design tokens là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "design-tokens-la-gi-bba1162d-b20d-5f15-8eea-f9f90e3cd674",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 100,
+    "sourceSlug": null
+  },
+  {
+    "id": "4a0b14e0-115e-58ef-980e-31f56bab6d42",
+    "question": "content-visibility: auto là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "content-visibility-auto-la-gi-4a0b14e0-115e-58ef-980e-31f56bab6d42",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 101,
+    "sourceSlug": null
+  },
+  {
+    "id": "9dfccce7-89ab-5ebe-a0cb-c0190eb4b605",
+    "question": ":focus-visible vs :focus khác nhau?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "focus-visible-vs-focus-khac-nhau-9dfccce7-89ab-5ebe-a0cb-c0190eb4b605",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 102,
+    "sourceSlug": null
+  },
+  {
+    "id": "c6ad13e9-bfaf-5877-8111-6402dab6e85e",
+    "question": "color-mix() function dùng để làm gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "color-mix-function-dung-de-lam-gi-c6ad13e9-bfaf-5877-8111-6402dab6e85e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 103,
+    "sourceSlug": null
+  },
+  {
+    "id": "0b0985d7-26d6-58d4-83ea-77f9aacb7e94",
+    "question": "Cách tối ưu Cumulative Layout Shift (CLS)?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cach-toi-uu-cumulative-layout-shift-cls-0b0985d7-26d6-58d4-83ea-77f9aacb7e94",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 104,
+    "sourceSlug": null
+  },
+  {
+    "id": "1a1017f6-ee96-5097-8e19-05306e574d86",
+    "question": "Khi nào nên dùng CSS-in-JS vs CSS Modules vs Tailwind?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-nen-dung-css-in-js-vs-css-modules-vs-tailwind-1a1017f6-ee96-5097-8e19-05306e574d86",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 105,
+    "sourceSlug": null
+  },
+  {
+    "id": "3f8c5986-8615-51c7-8089-513ab3e89809",
+    "question": "Container queries so với media queries - khi nào dùng gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "container-queries-so-voi-media-queries-khi-nao-dung-gi-3f8c5986-8615-51c7-8089-513ab3e89809",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 106,
+    "sourceSlug": null
+  },
+  {
+    "id": "c8a544b8-46b0-5b48-93e8-565685d2eb91",
+    "question": "Cách optimize Largest Contentful Paint (LCP) bằng CSS?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cach-optimize-largest-contentful-paint-lcp-bang-css-c8a544b8-46b0-5b48-93e8-565685d2eb91",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 107,
+    "sourceSlug": null
+  },
+  {
+    "id": "6366ceea-0f72-529d-bb18-057860a27716",
+    "question": "Cách giảm CSS bundle size?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cach-giam-css-bundle-size-6366ceea-0f72-529d-bb18-057860a27716",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 108,
+    "sourceSlug": null
+  },
+  {
+    "id": "df20ee58-94fc-5525-a993-10043e4d1438",
+    "question": "Dropdown đặt z-index: 9999 vẫn bị phần tử khác che. Giải thích nguyên nhân và cách xử lý.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dropdown-dat-z-index-9999-van-bi-phan-tu-khac-che-giai-thich-nguyen-nhan-va-cach-xu-ly-df20ee58-94fc-5525-a993-10043e4d1438",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 109,
+    "sourceSlug": null
+  },
+  {
+    "id": "84fc65b2-3378-5faa-bead-789097270b18",
+    "question": "height: 100%, 100vh và 100dvh khác nhau thế nào? Vì sao 100vh gây lỗi trên mobile?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "height-100-100vh-va-100dvh-khac-nhau-the-nao-vi-sao-100vh-gay-loi-tren-mobile-84fc65b2-3378-5faa-bead-789097270b18",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 110,
+    "sourceSlug": null
+  },
+  {
+    "id": "37c3c68c-fdf7-5774-82c0-bf9e5f4f2173",
+    "question": "Trong flex column (header + vùng nội dung + footer), đặt overflow-y: auto cho vùng nội dung nhưng nó không cuộn mà kéo dài cả trang. Sửa thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "trong-flex-column-header-vung-noi-dung-footer-dat-overflow-y-auto-cho-vung-noi-dung-nhung-no-khong-c-37c3c68c-fdf7-5774-82c0-bf9e5f4f2173",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 111,
+    "sourceSlug": null
+  },
+  {
+    "id": "bd35bced-df63-594f-b0b2-0d2575cc87c6",
+    "question": "Khi nào dùng container query thay media query? Cần khai báo gì và có bẫy nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khi-nao-dung-container-query-thay-media-query-can-khai-bao-gi-va-co-bay-nao-bd35bced-df63-594f-b0b2-0d2575cc87c6",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 112,
+    "sourceSlug": null
+  },
+  {
+    "id": "2e89884d-0ea1-5a09-aec6-0fec906976ca",
+    "question": "Trang bị nhảy layout khi ảnh và font tải xong. Nguyên nhân và cách xử lý để giảm CLS?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "trang-bi-nhay-layout-khi-anh-va-font-tai-xong-nguyen-nhan-va-cach-xu-ly-de-giam-cls-2e89884d-0ea1-5a09-aec6-0fec906976ca",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 113,
+    "sourceSlug": null
+  },
+  {
+    "id": "4c3cc023-741b-5284-ae51-1b215f7fb14a",
+    "question": "Dự án lớn có reset, thư viện, component và utility đè lẫn nhau khó lường. @layer giải quyết thế nào và bẫy khi dùng là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "du-an-lon-co-reset-thu-vien-component-va-utility-de-lan-nhau-kho-luong-layer-giai-quyet-the-nao-va-b-4c3cc023-741b-5284-ae51-1b215f7fb14a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 114,
+    "sourceSlug": null
+  },
+  {
+    "id": "48832e43-def0-5e9c-8b31-482284242cba",
+    "question": "Chọn giữa CSS Modules, CSS-in-JS và Tailwind cho một app React mới, bạn dựa trên tiêu chí gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "chon-giua-css-modules-css-in-js-va-tailwind-cho-mot-app-react-moi-ban-dua-tren-tieu-chi-gi-48832e43-def0-5e9c-8b31-482284242cba",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 115,
+    "sourceSlug": null
+  },
+  {
+    "id": "4da9f5f0-a962-5099-9182-85c9854e0470",
+    "question": "Có người thêm will-change: transform cho mọi phần tử có animation để \"chạy mượt hơn\". Làm vậy hại gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "co-nguoi-them-will-change-transform-cho-moi-phan-tu-co-animation-de-chay-muot-hon-lam-vay-hai-gi-4da9f5f0-a962-5099-9182-85c9854e0470",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 116,
+    "sourceSlug": null
+  },
+  {
+    "id": "7b1262ba-ffc9-5fb7-9815-bef85d836777",
+    "question": "Trang danh sách dài (vài nghìn card) render chậm dù dữ liệu đã phân trang phía server. content-visibility và contain giúp gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "trang-danh-sach-dai-vai-nghin-card-render-cham-du-du-lieu-da-phan-trang-phia-server-content-visibili-7b1262ba-ffc9-5fb7-9815-bef85d836777",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 117,
+    "sourceSlug": null
+  },
+  {
+    "id": "ae8c5d13-e94d-59c4-aaba-b6815e9ad0cb",
+    "question": "File CSS của dự án tăng dần, không ai dám xoá vì sợ vỡ giao diện. Bạn đưa ra chiến lược kiểm soát thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "file-css-cua-du-an-tang-dan-khong-ai-dam-xoa-vi-so-vo-giao-dien-ban-dua-ra-chien-luoc-kiem-soat-the-ae8c5d13-e94d-59c4-aaba-b6815e9ad0cb",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 118,
+    "sourceSlug": null
+  }
+]

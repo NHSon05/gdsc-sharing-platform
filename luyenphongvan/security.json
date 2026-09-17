@@ -1,0 +1,2754 @@
+[
+  {
+    "id": "e3f21db8-7c7e-5170-925b-bd8bf9b577ae",
+    "question": "Authentication vs Authorization khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/95030-authentication-vs-authorization-khac-nhau-the-nao",
+    "slug": "authentication-vs-authorization-khac-nhau-the-nao-e3f21db8-7c7e-5170-925b-bd8bf9b577ae",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Authentication (authn) xác minh bạn là ai; Authorization (authz) quyết định bạn được làm gì — authn luôn xảy ra trước authz."
+      ],
+      "details": [],
+      "points": [
+        "Authentication — xác minh danh tính: đăng nhập bằng password, OTP, biometric, OAuth/SSO. Kết quả: hệ thống biết request đến từ user nào.",
+        "Authorization — kiểm tra quyền: user này có được vào trang admin, xóa bài viết, đọc resource X không — thường qua role (RBAC) hoặc permission cụ thể.",
+        "Hình dung — trình hộ chiếu ở sân bay là authentication; boarding pass quyết định bạn được lên chuyến bay nào là authorization.",
+        "HTTP status — 401 Unauthorized: chưa authenticate (tên status dễ gây nhầm — bản chất là 'unauthenticated'); 403 Forbidden: đã authenticate nhưng không đủ quyền.",
+        "Trong code — authn: NextAuth/Passport verify session/token; authz: check role/permission ở từng route và action — thiếu authz check là Broken Access Control, hạng #1 trong OWASP Top 10."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "95030-authentication-vs-authorization-khac-nhau-the-nao"
+  },
+  {
+    "id": "c451fcad-7d40-5590-a53c-a1d5c8f6fcc4",
+    "question": "Hashing vs Encryption vs Encoding khác nhau gì? Salt là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/95031-hashing-vs-encryption-vs-encoding-khac-nhau-gi-salt-la-gi",
+    "slug": "hashing-vs-encryption-vs-encoding-khac-nhau-gi-salt-la-gi-c451fcad-7d40-5590-a53c-a1d5c8f6fcc4",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hashing là một chiều (không đảo ngược được), encryption đảo ngược được khi có key, encoding đảo ngược được mà không cần key — dùng nhầm loại là lỗi bảo mật thường gặp."
+      ],
+      "details": [],
+      "points": [
+        "Hashing — biến input thành chuỗi độ dài cố định, không thể suy ngược: lưu password (bcrypt/argon2), checksum kiểm tra toàn vẹn file.",
+        "Encryption — mã hóa để giải mã lại được bằng key: TLS/HTTPS, mã hóa dữ liệu nhạy cảm trong DB; symmetric (AES — chung một key) vs asymmetric (RSA — cặp public/private key).",
+        "Encoding — đổi định dạng biểu diễn, ai cũng decode được: base64, URL encoding — không phải bảo mật; password base64 trong config vẫn là plaintext.",
+        "Salt — chuỗi ngẫu nhiên nối vào password trước khi hash, mỗi user một salt khác nhau: hai user trùng password vẫn ra hash khác nhau, và vô hiệu hóa rainbow table (bảng hash tính sẵn). bcrypt/argon2 tự sinh salt và nhúng vào chuỗi output.",
+        "Lỗi thường gặp — hash password bằng MD5/SHA-256 thuần (các hàm này được thiết kế để nhanh → brute-force dễ; password cần hàm hash cố tình chậm); nhầm encoding với encryption."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "95031-hashing-vs-encryption-vs-encoding-khac-nhau-gi-salt-la-gi"
+  },
+  {
+    "id": "97bb8ee8-68c9-53b5-8ee2-af6a154132af",
+    "question": "Authorization Code flow của OAuth2 chạy qua những bước nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96800-authorization-code-flow-cua-oauth2-chay-qua-nhung-buoc-nao",
+    "slug": "authorization-code-flow-cua-oauth2-chay-qua-nhung-buoc-nao-97bb8ee8-68c9-53b5-8ee2-af6a154132af",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ý tưởng cốt lõi: trình duyệt chỉ cầm một mã tạm (authorization code), còn access token được đổi ở kênh sau lưng (back-channel) nên không lộ ra thanh địa chỉ."
+      ],
+      "details": [
+        "Các bước:",
+        "1. App chuyển hướng user tới authorization endpoint của provider, kèm client_id, redirect_uri, scope, state, response_type=code.\n2. User đăng nhập và đồng ý cấp quyền tại trang của provider — mật khẩu không bao giờ đi qua app của bạn.\n3. Provider chuyển hướng ngược về redirect_uri kèm ?code=...&state=....\n4. Server của app gọi token endpoint (POST, server-to-server) đổi code lấy access_token (+ refresh_token).\n5. App dùng access token gọi resource server; code chỉ dùng được một lần và sống rất ngắn."
+      ],
+      "points": [],
+      "sections": [
+        "Hai điểm hay bị hỏi thêm: redirect_uri phải khớp tuyệt đối với giá trị đã đăng ký (chống chuyển hướng code sang site của kẻ tấn công), và state phải được sinh ngẫu nhiên rồi đối chiếu khi callback."
+      ],
+      "codeExamples": [
+        {
+          "language": "HTTP",
+          "code": "GET /authorize?response_type=code&client_id=abc\n  &redirect_uri=https://app.example.com/callback\n  &scope=openid%20email&state=xyz123"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "96800-authorization-code-flow-cua-oauth2-chay-qua-nhung-buoc-nao"
+  },
+  {
+    "id": "dbf24755-cd92-50be-9437-9e2abb7dd76c",
+    "question": "Trong OpenID Connect, id_token khác access_token thế nào? Dùng id_token gọi API được không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96802-trong-openid-connect-id-token-khac-access-token-the-nao-dung-id-token-goi-api-du",
+    "slug": "trong-openid-connect-id-token-khac-access-token-the-nao-dung-id-token-goi-api-duoc-khong-dbf24755-cd92-50be-9437-9e2abb7dd76c",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hai token phục vụ hai mục đích khác nhau:"
+      ],
+      "details": [
+        "id_token chứa các claim chuẩn: iss, sub (id ổn định của user), aud, exp, iat, nonce, cộng thêm email, name nếu scope cho phép.",
+        "Không dùng id_token để gọi API. Nó được phát cho client, không phải cho resource server; API nhận id_token mà chấp nhận là bỏ qua kiểm tra aud — nghĩa là token do một app khác cùng provider phát ra cũng lọt. Đúng bản chất: id_token dùng để tạo phiên đăng nhập phía client rồi vứt đi, access_token mới là thứ đính kèm Authorization: Bearer.",
+        "Khi verify id_token phải kiểm: chữ ký (JWKS của provider), iss khớp, aud khớp client_id, exp chưa hết hạn, nonce khớp giá trị đã gửi."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "id_token",
+            "access_token",
+            "Trả lời câu hỏi",
+            "User này là ai (authentication)",
+            "Bearer được làm gì (authorization)",
+            "Đối tượng nhận (aud)",
+            "Chính client app",
+            "Resource server / API",
+            "Định dạng",
+            "Luôn là JWT có chữ ký",
+            "Do provider quyết định — có thể là chuỗi đục (opaque)"
+          ]
+        }
+      ]
+    },
+    "legacyId": 4,
+    "sourceSlug": "96802-trong-openid-connect-id-token-khac-access-token-the-nao-dung-id-token-goi-api-du"
+  },
+  {
+    "id": "7a241cce-35a3-5c1d-8be9-4e1f12de1cb0",
+    "question": "Cookie phiên nên đặt những thuộc tính nào? SameSite, Secure, Domain, Path ảnh hưởng ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96809-cookie-phien-nen-dat-nhung-thuoc-tinh-nao-samesite-secure-domain-path-anh-huong",
+    "slug": "cookie-phien-nen-dat-nhung-thuoc-tinh-nao-samesite-secure-domain-path-anh-huong-ra-sao-7a241cce-35a3-5c1d-8be9-4e1f12de1cb0",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Muốn siết chặt hơn thì dùng tiền tố tên: __Host- buộc cookie phải có Secure, Path=/ và không có Domain — trình duyệt từ chối nếu vi phạm, nên subdomain không thể ghi đè cookie đó."
+      ],
+      "details": [],
+      "points": [
+        "HttpOnly — JavaScript không đọc được document.cookie. Đây là lớp chặn chính khi có XSS.",
+        "Secure — chỉ gửi qua HTTPS. Bắt buộc ở production.",
+        "SameSite — quyết định cookie có được gửi kèm request từ site khác không:",
+        "Strict: không gửi trong mọi điều hướng từ site ngoài (kể cả click link) → user bấm link từ email vào sẽ thấy như chưa đăng nhập.",
+        "Lax (mặc định hiện nay): gửi khi điều hướng top-level bằng GET, không gửi với POST/iframe/ảnh → chặn phần lớn CSRF mà vẫn giữ trải nghiệm.",
+        "ranh giới yếu",
+        "None: gửi cả cross-site nhưng bắt buộc kèm Secure. Chỉ dùng khi thật sự cần cookie bên thứ ba.",
+        "Domain — bỏ trống thì cookie chỉ thuộc đúng host đã set (an toàn hơn). Đặt Domain=example.com là cấp cho mọi subdomain — một subdomain bị chiếm sẽ đọc được cookie phiên.",
+        "Path"
+      ],
+      "sections": [
+        "Cookie phiên chuẩn:"
+      ],
+      "codeExamples": [
+        {
+          "language": "HTTP",
+          "code": "Set-Cookie: session=abc123; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=1209600"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "96809-cookie-phien-nen-dat-nhung-thuoc-tinh-nao-samesite-secure-domain-path-anh-huong"
+  },
+  {
+    "id": "52d1bee8-8e9a-5144-a8a3-90ea188d5d01",
+    "question": "Lưu mật khẩu trong DB thế nào cho đúng? Vì sao không dùng SHA-256?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96815-luu-mat-khau-trong-db-the-nao-cho-dung-vi-sao-khong-dung-sha-256",
+    "slug": "luu-mat-khau-trong-db-the-nao-cho-dung-vi-sao-khong-dung-sha-256-52d1bee8-8e9a-5144-a8a3-90ea188d5d01",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Dùng hàm băm mật khẩu chuyên dụng, chậm có chủ đích: Argon2id (khuyến nghị đầu tiên), hoặc bcrypt/scrypt khi hạ tầng chưa hỗ trợ Argon2. Không tự chế thuật toán."
+      ],
+      "details": [
+        "Vì sao không SHA-256: nó được thiết kế để nhanh. GPU băm SHA-256 ở mức hàng tỷ phép/giây, nên khi DB rò rỉ, kẻ tấn công dò từ điển và mật khẩu phổ biến gần như tức thời. Các hàm băm mật khẩu cố tình tốn thời gian và bộ nhớ (Argon2 có tham số memory cost) để mỗi lần thử đắt lên hàng triệu lần, làm việc dò trở nên bất khả thi về chi phí.",
+        "Salt — chuỗi ngẫu nhiên duy nhất cho mỗi user, khiến hai user cùng mật khẩu ra hai hash khác nhau và vô hiệu hóa rainbow table. Argon2/bcrypt tự sinh salt và nhúng vào chuỗi kết quả, không cần cột riêng:"
+      ],
+      "points": [
+        "So sánh bằng hàm verify của thư viện (so sánh hằng thời gian), không dùng == trên chuỗi hash.",
+        "bcrypt giới hạn 72 byte đầu vào — mật khẩu dài hơn bị cắt âm thầm; đây là gotcha hay được hỏi.",
+        "Đặt độ dài tối thiểu (8–12 ký tự) và đối chiếu danh sách mật khẩu đã lộ, thay vì ép quy tắc ký tự đặc biệt rườm rà.",
+        "Khi nâng tham số cost, rehash khi user đăng nhập thành công (lúc đó mới có mật khẩu thô)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "$argon2id$v=19$m=19456,t=2,p=1$c29tZXNhbHQ$hash..."
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "96815-luu-mat-khau-trong-db-the-nao-cho-dung-vi-sao-khong-dung-sha-256"
+  },
+  {
+    "id": "529dfb09-4a9d-569b-a015-1cd01b917b3a",
+    "question": "Reflected, stored và DOM-based XSS khác nhau ở chỗ nào? Đoạn code nào trong ứng dụng sinh ra từng loại?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98550-reflected-stored-va-dom-based-xss-khac-nhau-o-cho-nao-doan-code-nao-trong-ung-du",
+    "slug": "reflected-stored-va-dom-based-xss-khac-nhau-o-cho-nao-doan-code-nao-trong-ung-dung-sinh-ra-tung-loai-529dfb09-4a9d-569b-a015-1cd01b917b3a",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả ba đều là chèn script vào trang, khác nhau ở nơi payload đi qua và nơi HTML được ghép.",
+        "location.href/search/hash",
+        "document.referrer",
+        "postMessage",
+        "localStorage",
+        "Sink",
+        "innerHTML",
+        "outerHTML",
+        "document.write",
+        "eval",
+        "setTimeout(string)",
+        "element.setAttribute('href', ...)",
+        "javascript:"
+      ],
+      "details": [
+        "Điểm cần nói khi phỏng vấn: DOM-based XSS không đi qua server, nên WAF hay việc escape ở template phía server không chặn được — phải sửa ở chính đoạn JS."
+      ],
+      "points": [
+        "Reflected: payload nằm trong request (query string, form) và được server ghép thẳng vào HTML trả về. Code sinh lỗi nằm ở template phía server, kiểu res.send(\"<h1>Không tìm thấy: \" + req.query.q + \"</h1>\").",
+        "Stored: payload được ghi vào DB (bình luận, tên hiển thị, mô tả sản phẩm) rồi render lại cho mọi người xem. Nguy hiểm nhất vì không cần dụ nạn nhân bấm link.",
+        "DOM-based: request và response hoàn toàn sạch; lỗi nằm ở JavaScript phía client đọc dữ liệu từ một source rồi ghi vào một sink."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// DOM-based: source = location.hash, sink = innerHTML\nconst tab = location.hash.slice(1)\ndocument.querySelector('#panel').innerHTML = 'Tab: ' + tab\n// #<img src=x onerror=alert(1)>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "98550-reflected-stored-va-dom-based-xss-khac-nhau-o-cho-nao-doan-code-nao-trong-ung-du"
+  },
+  {
+    "id": "a9d26172-f674-5b2c-bf9c-bd1853a8f55a",
+    "question": "Vì sao innerHTML và dangerouslySetInnerHTML nguy hiểm? Khi buộc phải render HTML của user thì sanitize thế nào cho đúng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98551-vi-sao-innerhtml-va-dangerouslysetinnerhtml-nguy-hiem-khi-buoc-phai-render-html",
+    "slug": "vi-sao-innerhtml-va-dangerouslysetinnerhtml-nguy-hiem-khi-buoc-phai-render-html-cua-user-thi-sanitiz-a9d26172-f674-5b2c-bf9c-bd1853a8f55a",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai đều parse chuỗi thành HTML thật rồi gắn vào DOM. Mọi thẻ, thuộc tính sự kiện trong chuỗi đều sống. React mặc định escape khi bạn render {value}, nên dangerouslySetInnerHTML chính là chỗ bạn tự tay tắt lớp bảo vệ đó — tên prop dài dòng là cố ý.",
+        "textContent",
+        "không render HTML",
+        "Cách làm đúng:"
+      ],
+      "details": [
+        "Lưu ý: <script> chèn qua innerHTML không chạy, nên nhiều người tưởng là an toàn. Nhưng handler thì chạy:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "import DOMPurify from 'dompurify'\n\nconst clean = DOMPurify.sanitize(userHtml, {\n  ALLOWED_TAGS: ['p', 'b', 'i', 'a', 'ul', 'li', 'code'],\n  ALLOWED_ATTR: ['href'],\n})\nreturn <div dangerouslySetInnerHTML={{ __html: clean }} />"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "98551-vi-sao-innerhtml-va-dangerouslysetinnerhtml-nguy-hiem-khi-buoc-phai-render-html"
+  },
+  {
+    "id": "5d5c1a3c-2de4-5ac7-89d2-c55e2b898e4f",
+    "question": "Vì sao một hàm escapeHtml() duy nhất không đủ để chống XSS? Escape theo ngữ cảnh nghĩa là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98552-vi-sao-mot-ham-escapehtml-duy-nhat-khong-du-de-chong-xss-escape-theo-ngu-canh-ng",
+    "slug": "vi-sao-mot-ham-escapehtml-duy-nhat-khong-du-de-chong-xss-escape-theo-ngu-canh-nghia-la-gi-5d5c1a3c-2de4-5ac7-89d2-c55e2b898e4f",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì trình duyệt parse mỗi vị trí trong trang theo một bộ luật khác nhau. Chuỗi đã escape đúng cho thân HTML vẫn có thể thoát ra ở ngữ cảnh khác.",
+        "Chốt:"
+      ],
+      "details": [
+        "Ví dụ thuộc tính không bọc nháy — escape HTML không cứu được:",
+        "Dùng template engine tự động escape theo ngữ cảnh (React, Vue, Thymeleaf, Razor), và khi buộc phải ghép chuỗi thì phải biết rõ mình đang ghép vào ngữ cảnh nào.",
+        "Bốn ngữ cảnh cần nhớ:"
+      ],
+      "points": [],
+      "sections": [
+        "Ví dụ ngữ cảnh URL — encodeURIComponent không chặn scheme:"
+      ],
+      "codeExamples": [
+        {
+          "language": "HTML",
+          "code": "<a href={userUrl}>Trang cá nhân</a>   // userUrl = javascript:alert(1)"
+        },
+        {
+          "language": "JSX",
+          "code": "const u = new URL(userUrl, location.origin)\nif (u.protocol !== 'http:' && u.protocol !== 'https:') throw new Error('bad scheme')"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Thân HTML <div>HERE</div>",
+            "Escape < > & \" '",
+            "Giá trị thuộc tính <div title=\"HERE\">",
+            "Escape như trên và bắt buộc bọc nháy",
+            "Trong <script>",
+            "Encode theo luật JS string, an toàn nhất là truyền qua JSON.stringify",
+            "URL <a href=\"HERE\">",
+            "encodeURIComponent và kiểm tra scheme",
+            "Vị trí"
+          ]
+        }
+      ]
+    },
+    "legacyId": 9,
+    "sourceSlug": "98552-vi-sao-mot-ham-escapehtml-duy-nhat-khong-du-de-chong-xss-escape-theo-ngu-canh-ng"
+  },
+  {
+    "id": "012a63c7-5b0b-5a03-b6a9-55d21de439c7",
+    "question": "Open redirect là gì? Vì sao nó nguy hiểm dù chỉ là chuyển hướng, và chặn thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98553-open-redirect-la-gi-vi-sao-no-nguy-hiem-du-chi-la-chuyen-huong-va-chan-the-nao",
+    "slug": "open-redirect-la-gi-vi-sao-no-nguy-hiem-du-chi-la-chuyen-huong-va-chan-the-nao-012a63c7-5b0b-5a03-b6a9-55d21de439c7",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Sau khi đăng nhập, hệ thống đẩy user sang trang giả mạo. Người dùng thấy link bắt đầu bằng domain thật của bạn nên tin tưởng bấm.",
+        "new URL(...).host",
+        "startsWith",
+        "allowlist domain",
+        "includes",
+        "https://your-site.com.evil.example",
+        "chính xác",
+        "redirect_uri"
+      ],
+      "details": [
+        "Vì sao nguy hiểm hơn vẻ ngoài:\n- Mượn uy tín domain để phishing, và qua được bộ lọc link của email/chat.\n- Rò rỉ thông tin qua Referer khi trang đích ghi lại.\n- Nếu redirect nằm trong luồng OAuth (redirect_uri), kẻ tấn công có thể nhận được authorization code hoặc token.",
+        "Cách chặn:\n1. Tốt nhất là không nhận URL đầy đủ. Nhận một khoá và tra bảng: ?next=dashboard → /dashboard.\n2. Nếu buộc phải nhận đường dẫn, chỉ chấp nhận relative path:"
+      ],
+      "points": [],
+      "sections": [
+        "Open redirect là khi ứng dụng nhận URL đích từ tham số của user rồi chuyển hướng tới đó mà không kiểm tra."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "GET /login?returnUrl=https://evil.example/login"
+        },
+        {
+          "language": "",
+          "code": "function safeNext(next) {\n  // reject absolute URLs and protocol-relative //evil.com\n  if (!next.startsWith('/') || next.startsWith('//')) return '/'\n  return next\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "98553-open-redirect-la-gi-vi-sao-no-nguy-hiem-du-chi-la-chuyen-huong-va-chan-the-nao"
+  },
+  {
+    "id": "95b6fef5-67b9-5e53-b10a-5f91850e39e8",
+    "question": "Salt là gì và vì sao mỗi user phải có salt riêng? Pepper khác salt ở điểm nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98600-salt-la-gi-va-vi-sao-moi-user-phai-co-salt-rieng-pepper-khac-salt-o-diem-nao",
+    "slug": "salt-la-gi-va-vi-sao-moi-user-phai-co-salt-rieng-pepper-khac-salt-o-diem-nao-95b6fef5-67b9-5e53-b10a-5f91850e39e8",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Salt là một chuỗi ngẫu nhiên, duy nhất cho từng bản ghi mật khẩu, được trộn vào trước khi hash và lưu công khai cùng hash trong DB."
+      ],
+      "details": [
+        "Vì sao cần salt riêng cho mỗi user:\n- Hai user đặt trùng mật khẩu sẽ ra hai hash khác nhau → nhìn DB không suy ra được ai trùng mật khẩu ai.\n- Vô hiệu hoá rainbow table và bảng tra dựng sẵn: kẻ tấn công phải bẻ từng hash một, không tái sử dụng công sức.",
+        "Pepper là một khoá bí mật dùng chung cho cả hệ thống, KHÔNG lưu trong DB mà nằm ở nơi tách biệt (biến môi trường, HSM, secret manager). Cách áp dụng đúng là HMAC mật khẩu bằng pepper rồi mới đưa vào hàm hash, hoặc mã hoá hash bằng khoá đó.",
+        "Các thư viện bcrypt/Argon2 đã tự sinh salt và nhúng vào chuỗi hash — không cần tự quản. Pepper là lớp phòng thủ tuỳ chọn, chỉ có giá trị khi khoá thực sự nằm ngoài phạm vi rò rỉ của DB."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Phạm vi",
+            "Mỗi mật khẩu một cái",
+            "Toàn hệ thống",
+            "Lưu ở đâu",
+            "Cùng DB với hash",
+            "Ngoài DB (secret store)",
+            "Chống gì",
+            "Rainbow table, hash trùng",
+            "DB bị lộ nhưng secret store thì không",
+            "Salt"
+          ]
+        }
+      ]
+    },
+    "legacyId": 11,
+    "sourceSlug": "98600-salt-la-gi-va-vi-sao-moi-user-phai-co-salt-rieng-pepper-khac-salt-o-diem-nao"
+  },
+  {
+    "id": "b34f10ed-c433-5ddd-a606-228f09422b47",
+    "question": "Credential stuffing khác brute force thế nào? Vì sao phòng thủ cũng phải khác?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98601-credential-stuffing-khac-brute-force-the-nao-vi-sao-phong-thu-cung-phai-khac",
+    "slug": "credential-stuffing-khac-brute-force-the-nao-vi-sao-phong-thu-cung-phai-khac-b34f10ed-c433-5ddd-a606-228f09422b47",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Brute force là dò nhiều mật khẩu cho một tài khoản: cùng một username, thử hàng nghìn chuỗi ứng viên. Credential stuffing là thử cặp email/mật khẩu đã lộ từ site khác lên hệ thống của bạn — mỗi tài khoản có thể chỉ bị thử một lần duy nhất, nhưng thử trên hàng triệu tài khoản."
+      ],
+      "details": [
+        "Hệ quả về mặt phòng thủ:",
+        "Vì credential stuffing dùng mật khẩu đúng, các biện pháp đếm-số-lần-sai gần như vô hiệu. Phòng thủ đúng hướng:\n- Chặn mật khẩu đã lộ khi đăng ký/đổi mật khẩu (đối chiếu tập breached password).\n- MFA — thứ duy nhất chặn được kẻ đã có mật khẩu đúng.\n- Theo dõi tỉ lệ đăng nhập thất bại toàn hệ thống và số account khác nhau bị chạm từ một IP/ASN, thay vì chỉ đếm theo từng account.\n- Thêm ma sát cho request đáng ngờ: CAPTCHA có điều kiện, device fingerprint, chặn IP datacenter."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Hình dạng lưu lượng",
+            "Nhiều lần fail trên 1 account",
+            "Rải mỏng, 1-2 lần trên rất nhiều account",
+            "Tỉ lệ thành công",
+            "Rất thấp",
+            "Cao bất thường (0.1-2%) vì mật khẩu là thật",
+            "Khoá tài khoản có chặn được không",
+            "Có",
+            "Gần như không — chưa đủ ngưỡng đã sang account khác",
+            "Brute force"
+          ]
+        }
+      ]
+    },
+    "legacyId": 12,
+    "sourceSlug": "98601-credential-stuffing-khac-brute-force-the-nao-vi-sao-phong-thu-cung-phai-khac"
+  },
+  {
+    "id": "1175a136-2bb3-5adc-99dc-2dae32303337",
+    "question": "Chính sách mật khẩu theo khuyến nghị hiện đại (NIST SP 800-63B) gồm những gì? Vì sao bỏ ép đổi mật khẩu định kỳ?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98602-chinh-sach-mat-khau-theo-khuyen-nghi-hien-dai-nist-sp-800-63b-gom-nhung-gi-vi-sa",
+    "slug": "chinh-sach-mat-khau-theo-khuyen-nghi-hien-dai-nist-sp-800-63b-gom-nhung-gi-vi-sao-bo-ep-doi-mat-khau-1175a136-2bb3-5adc-99dc-2dae32303337",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "NIST SP 800-63B lật ngược khá nhiều quy tắc cũ vì chúng làm giảm chứ không tăng an toàn thực tế."
+      ],
+      "details": [
+        "Nên làm:\n- Cho phép mật khẩu dài tối thiểu 8 ký tự (khuyến khích 15+), tối đa ít nhất 64 ký tự.\n- Chấp nhận mọi ký tự in được, kể cả khoảng trắng và Unicode — để passphrase dùng được.\n- Đối chiếu với danh sách mật khẩu đã lộ / quá phổ biến và từ chối ngay khi user đặt.\n- Cho phép dán (paste) để người dùng dùng password manager được.",
+        "Không nên làm:\n- Không ép đổi định kỳ (60/90 ngày) trừ khi có bằng chứng lộ. Lý do: khi bị ép, người dùng chọn biến thể có thể đoán (Matkhau01 → Matkhau02) hoặc ghi ra giấy → entropy thực tế giảm.\n- Không ép luật thành phần kiểu \"phải có 1 hoa, 1 số, 1 ký tự đặc biệt\" — đẩy người dùng về những khuôn mẫu quen thuộc mà công cụ bẻ khoá đã học.\n- Không dùng câu hỏi bí mật (tên trường cấp 1, tên thú cưng) làm yếu tố xác thực.",
+        "Chốt: thay \"phức tạp + đổi liên tục\" bằng \"dài + chưa từng lộ + có MFA\", và chỉ ép đổi khi có dấu hiệu tài khoản bị xâm phạm."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "98602-chinh-sach-mat-khau-theo-khuyen-nghi-hien-dai-nist-sp-800-63b-gom-nhung-gi-vi-sa"
+  },
+  {
+    "id": "8a0b8a03-1439-5c4b-a3bc-6597e7673a32",
+    "question": "User enumeration là gì? Thông báo lỗi đăng nhập và thời gian phản hồi lộ thông tin ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98603-user-enumeration-la-gi-thong-bao-loi-dang-nhap-va-thoi-gian-phan-hoi-lo-thong-ti",
+    "slug": "user-enumeration-la-gi-thong-bao-loi-dang-nhap-va-thoi-gian-phan-hoi-lo-thong-tin-ra-sao-8a0b8a03-1439-5c4b-a3bc-6597e7673a32",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "User enumeration là việc kẻ tấn công xác định được email/username nào tồn tại trong hệ thống. Có danh sách account thật thì credential stuffing và phishing hiệu quả hơn nhiều."
+      ],
+      "details": [
+        "Ba kênh rò rỉ hay gặp:",
+        "1. Nội dung thông báo khác nhau — \"Email không tồn tại\" vs \"Mật khẩu sai\". Phải trả về một thông báo duy nhất: \"Email hoặc mật khẩu không đúng\".\n2. Mã trạng thái / cấu trúc response khác nhau — 404 cho email lạ nhưng 401 cho sai mật khẩu; hoặc chỉ khác nhau độ dài body. Phải đồng nhất status, body, header.\n3. Thời gian phản hồi khác nhau — đây là chỗ hay bị bỏ sót. Nếu email không tồn tại thì code return sớm mà không chạy bcrypt, còn email tồn tại thì chạy bcrypt mất ~100ms → chênh lệch thời gian đủ để phân biệt."
+      ],
+      "points": [],
+      "sections": [
+        "Các luồng khác cũng rò rỉ tương tự và thường bị quên: đăng ký (\"email đã được dùng\"), quên mật khẩu, và cả giới hạn tần suất nếu chỉ áp cho account có thật."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// Wrong: returns early, no hash comparison → measurably faster\nconst user = await findByEmail(email)\nif (!user) return fail()\nconst ok = await bcrypt.compare(password, user.hash)\n\n// Better: always spend the same work\nconst user = await findByEmail(email)\nconst hash = user?.hash ?? DUMMY_HASH   // precomputed hash of a random string\nconst ok = await bcrypt.compare(password, hash)\nif (!user || !ok) return fail()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "98603-user-enumeration-la-gi-thong-bao-loi-dang-nhap-va-thoi-gian-phan-hoi-lo-thong-ti"
+  },
+  {
+    "id": "629cce03-b2a7-503a-875d-feb10dad2350",
+    "question": "Vì sao không được commit file .env vào git? Vậy dev, CI và production lấy secret từ đâu?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98650-vi-sao-khong-duoc-commit-file-env-vao-git-vay-dev-ci-va-production-lay-secret-tu",
+    "slug": "vi-sao-khong-duoc-commit-file-env-vao-git-vay-dev-ci-va-production-lay-secret-tu-dau-629cce03-b2a7-503a-875d-feb10dad2350",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì git giữ lịch sử vĩnh viễn: một khi secret vào commit, nó còn nằm đó kể cả sau khi bạn xoá file ở commit sau. Repo private cũng không an toàn — chỉ cần một lần chuyển sang public, một fork, một bản clone trên máy nhân viên cũ là secret đã ra ngoài."
+      ],
+      "details": [
+        "Cách làm chuẩn:\n- .env nằm trong .gitignore; commit .env.example chỉ chứa tên biến, không chứa giá trị.\n- Dev: mỗi người tự tạo .env local, dùng credential của môi trường dev — không bao giờ dùng key production.\n- CI: secret nằm ở kho secret của CI (GitHub Actions secrets, GitLab CI variables), inject vào lúc chạy qua biến môi trường.\n- Production: platform env vars (Vercel, Railway) hoặc secret manager chuyên dụng (AWS Secrets Manager, HashiCorp Vault) — nơi có phân quyền và audit log.",
+        "Bật thêm secret scanning + push protection trên repo để chặn ngay lúc push, và một hook gitleaks/git-secrets ở local. Phòng ở khâu commit rẻ hơn nhiều so với đi rotate cả cụm key sau sự cố."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "98650-vi-sao-khong-duoc-commit-file-env-vao-git-vay-dev-ci-va-production-lay-secret-tu"
+  },
+  {
+    "id": "c0dcfb24-abaa-53b9-8aa3-d02f1a322374",
+    "question": "Mã hoá at-rest và in-transit khác nhau thế nào? Có TLS rồi thì còn cần mã hoá dữ liệu trong DB không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98651-ma-hoa-at-rest-va-in-transit-khac-nhau-the-nao-co-tls-roi-thi-con-can-ma-hoa-du",
+    "slug": "ma-hoa-at-rest-va-in-transit-khac-nhau-the-nao-co-tls-roi-thi-con-can-ma-hoa-du-lieu-trong-db-khong-c0dcfb24-abaa-53b9-8aa3-d02f1a322374",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hai lớp bảo vệ hai mối đe doạ khác nhau, không thay thế nhau."
+      ],
+      "details": [
+        "Vẫn cần cả hai. TLS không giúp gì nếu bản backup .sql bị tải về từ một bucket cấu hình public. Ngược lại disk encryption không giúp gì nếu API trả dữ liệu qua HTTP thường.",
+        "Lưu ý: disk encryption của cloud là mặc định gần như miễn phí và trong suốt với ứng dụng — nghĩa là bất cứ ai query được DB vẫn đọc được dữ liệu rõ. Muốn chống cả trường hợp đó thì phải mã hoá ở mức trường trong ứng dụng, đó là bài toán khác."
+      ],
+      "points": [
+        "In-transit: bảo vệ dữ liệu khi đang đi trên đường — trình duyệt tới server, service tới service, app tới database. Cơ chế là TLS (HTTPS, sslmode=require khi nối Postgres). Chống nghe lén và chống người đứng giữa sửa gói tin.",
+        "At-rest: bảo vệ dữ liệu khi nằm im trên đĩa — file DB, backup, snapshot, log. Cơ chế là disk/volume encryption của nhà cung cấp hoặc TDE của DB. Chống việc ai đó lấy được ổ đĩa, file backup hay snapshot."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "98651-ma-hoa-at-rest-va-in-transit-khac-nhau-the-nao-co-tls-roi-thi-con-can-ma-hoa-du"
+  },
+  {
+    "id": "c4e7b111-0bd6-5ecd-9197-5469267d2f13",
+    "question": "Khi nào dùng hash, khi nào dùng mã hoá? Cho ví dụ chọn sai thì hậu quả gì.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98652-khi-nao-dung-hash-khi-nao-dung-ma-hoa-cho-vi-du-chon-sai-thi-hau-qua-gi",
+    "slug": "khi-nao-dung-hash-khi-nao-dung-ma-hoa-cho-vi-du-chon-sai-thi-hau-qua-gi-c4e7b111-0bd6-5ecd-9197-5469267d2f13",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Phân biệt bằng một câu hỏi duy nhất: có cần lấy lại giá trị gốc không?"
+      ],
+      "details": [
+        "Quan trọng: không phải hash nào cũng như nhau. Mật khẩu phải dùng hàm chậm, có salt — Argon2id, bcrypt, scrypt. Dùng SHA-256 cho mật khẩu là sai vì nó được thiết kế để chạy nhanh, GPU thử hàng tỉ ứng viên mỗi giây.",
+        "Chọn sai điển hình:\n- Mã hoá mật khẩu thay vì hash → lộ khoá là lộ toàn bộ mật khẩu ở dạng rõ.\n- Hash số điện thoại rồi mới nhận ra cần gửi SMS → không có đường lấy lại, phải bắt user nhập lại.\n- Hash một tập giá trị hẹp (số điện thoại, email) mà không có secret → attacker hash toàn bộ dải số rồi tra ngược, coi như không mã hoá."
+      ],
+      "points": [
+        "Hash — một chiều, không giải ngược được. Dùng khi chỉ cần so khớp hoặc kiểm tra toàn vẹn: mật khẩu, checksum file, khoá cache.",
+        "Mã hoá — hai chiều, có khoá để giải. Dùng khi sau này phải đọc lại nội dung: số CCCD hiển thị lại cho user, access token của bên thứ ba mà server phải dùng để gọi API."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "98652-khi-nao-dung-hash-khi-nao-dung-ma-hoa-cho-vi-du-chon-sai-thi-hau-qua-gi"
+  },
+  {
+    "id": "6c486d09-7870-5f78-b134-b321e614f572",
+    "question": "Log của ứng dụng tuyệt đối không được chứa những gì? Làm sao đảm bảo điều đó khi team đông người?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98653-log-cua-ung-dung-tuyet-doi-khong-duoc-chua-nhung-gi-lam-sao-dam-bao-dieu-do-khi",
+    "slug": "log-cua-ung-dung-tuyet-doi-khong-duoc-chua-nhung-gi-lam-sao-dam-bao-dieu-do-khi-team-dong-nguoi-6c486d09-7870-5f78-b134-b321e614f572",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Log thường bị coi là vùng \"an toàn\" nhưng thực tế nó được đẩy sang hệ thống tập trung, giữ lâu, và nhiều người đọc được hơn cả database."
+      ],
+      "details": [
+        "Không ghi vào log:\n- Mật khẩu, kể cả trong payload đăng ký/đăng nhập.\n- Token, session id, API key, refresh token, mã OTP.\n- Số thẻ, CVV, khoá bí mật, chuỗi kết nối có kèm password.\n- Dữ liệu cá nhân không cần thiết: số CCCD, địa chỉ, hồ sơ y tế.",
+        "Cách bảo đảm ở quy mô team:\n- Đặt redaction ở tầng logger, không trông chờ mỗi người tự nhớ. Logger cấu hình danh sách key nhạy cảm (password, token, authorization, card) và tự thay bằng [REDACTED].\n- Không log nguyên request/response body ở production. Log id tương quan (request id, user id) rồi tra ngược khi cần.\n- Nhớ cả error object: nhiều HTTP client nhét đầy đủ header Authorization vào message của exception.\n- Đặt retention hữu hạn và giới hạn quyền xem log như một hệ thống dữ liệu thật, có audit.",
+        "Ngược lại, có những thứ phải log: đăng nhập thành công/thất bại, đổi quyền, thao tác quản trị — thiếu chúng thì lúc điều tra sự cố không dựng lại được chuyện gì đã xảy ra."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "98653-log-cua-ung-dung-tuyet-doi-khong-duoc-chua-nhung-gi-lam-sao-dam-bao-dieu-do-khi"
+  },
+  {
+    "id": "56676c4f-77ba-5724-baf8-e43b88e9fe25",
+    "question": "XSS (Cross-Site Scripting) là gì? Các loại XSS và cách phòng chống?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/791-xss-cross-site-scripting-la-gi-cac-loai-xss-va-cach-phong-chong",
+    "slug": "xss-cross-site-scripting-la-gi-cac-loai-xss-va-cach-phong-chong-56676c4f-77ba-5724-baf8-e43b88e9fe25",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "XSS là lỗ hổng cho phép attacker inject script độc hại chạy trong browser của nạn nhân — đánh cắp session, redirect user, sửa nội dung trang."
+      ],
+      "details": [],
+      "points": [
+        "Stored XSS — script được lưu vào DB (comment, profile), tấn công mọi user xem trang.",
+        "Reflected XSS — script nằm trong URL parameter, server phản chiếu lại trong response — thường phát tán qua link phishing.",
+        "DOM-based XSS — client-side code đọc từ URL/storage rồi inject vào DOM không qua server (location.hash → innerHTML).",
+        "Phòng chống — encode theo đúng context (HTML/JS/URL); React JSX tự escape nhưng dangerouslySetInnerHTML vẫn nguy hiểm; dùng textContent/createElement thay vì innerHTML với user input.",
+        "Khi phải render HTML từ user (rich text editor) — sanitize bằng DOMPurify: DOMPurify.sanitize(userHtml).",
+        "Defense in depth — Content Security Policy chặn inline script và script từ nguồn lạ; cookie HttpOnly khiến JS không đọc được session token dù có XSS; Subresource Integrity (SRI) verify script từ CDN không bị sửa đổi."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "791-xss-cross-site-scripting-la-gi-cac-loai-xss-va-cach-phong-chong"
+  },
+  {
+    "id": "878cca68-c023-5c86-aa6e-be8e0b1a2c04",
+    "question": "CSRF (Cross-Site Request Forgery) là gì? Cách phòng chống?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/792-csrf-cross-site-request-forgery-la-gi-cach-phong-chong",
+    "slug": "csrf-cross-site-request-forgery-la-gi-cach-phong-chong-878cca68-c023-5c86-aa6e-be8e0b1a2c04",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "CSRF lợi dụng việc browser tự động đính kèm cookie khi gửi request đến một domain — attacker đặt form/img trên evil.com trỏ đến bank.com, request mang theo session cookie của nạn nhân."
+      ],
+      "details": [],
+      "points": [
+        "Ví dụ — <img src='https://bank.com/transfer?to=attacker&amount=1000'>: nếu user đang đăng nhập và bank không có CSRF protection, lệnh chuyển tiền được thực thi.",
+        "SameSite cookie — defense chính hiện nay: Strict không gửi cookie trong mọi cross-site request (kể cả click link từ email); Lax (default Chrome từ 2020) chỉ gửi trong top-level GET navigation, không gửi trong POST/iframe/img — đủ cho đa số case; None gửi trong mọi cross-site request, bắt buộc kèm Secure.",
+        "CSRF token — token ngẫu nhiên lưu trong session, nhúng vào hidden field và verify server-side; attacker không đọc được token vì same-origin policy chặn đọc response cross-origin.",
+        "Double submit cookie — gửi token trong cả cookie lẫn body/header, server so khớp hai giá trị — không cần server-side state.",
+        "Custom header (AJAX) — request cross-origin kèm custom header (X-Requested-With, Content-Type: application/json) kích hoạt CORS preflight; server không cho phép thì browser không bao giờ gửi request thật — attacker vẫn dựng được request nhưng nó không được gửi đi.",
+        "Kiểm tra Origin header — hữu ích nhưng không đủ một mình: browser không cho attacker giả mạo Origin, vấn đề thực tế là header có thể vắng mặt (một số request/proxy lược bỏ nó)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "792-csrf-cross-site-request-forgery-la-gi-cach-phong-chong"
+  },
+  {
+    "id": "b8bdfb24-152e-5787-91df-eca7fa706c26",
+    "question": "OAuth 2.0 là gì? Luồng Authorization Code flow hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/794-oauth-2-0-la-gi-luong-authorization-code-flow-hoat-dong-the-nao",
+    "slug": "oauth-2-0-la-gi-luong-authorization-code-flow-hoat-dong-the-nao-b8bdfb24-152e-5787-91df-eca7fa706c26",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "OAuth 2.0 là framework ủy quyền (delegated authorization) — không phải authentication; OpenID Connect (OIDC) là layer trên OAuth bổ sung authentication, trả về id_token."
+      ],
+      "details": [],
+      "points": [
+        "Bốn vai trò — Resource Owner (user), Client (app), Authorization Server (cấp token), Resource Server (API).",
+        "Authorization Code flow — (1) app redirect user đến Authorization Server kèm client_id, redirect_uri, scope, state (chống CSRF); (2) user đăng nhập và consent; (3) server redirect về app kèm authorization code; (4) app đổi code lấy access token qua back-channel POST — client_secret không lộ trong URL; (5) app gọi API bằng access token; (6) dùng refresh token lấy access token mới khi hết hạn.",
+        "id_token vs access_token — id_token (JWT của OIDC) chứa danh tính user, dành cho client đọc; access_token dành cho Resource Server — client không nên tự parse.",
+        "PKCE — bắt buộc cho public client (SPA, mobile — không giữ được secret): chứng minh app đổi code chính là app đã khởi tạo flow — cơ chế verifier/challenge chi tiết xem câu OAuth security best practices.",
+        "Flow khác — Implicit đã deprecated (token lộ trong URL); Client Credentials cho machine-to-machine. OAuth 2.1 gộp best practices: PKCE bắt buộc cho mọi client, xóa Implicit và Password flow.",
+        "Lưu token phía SPA — access token trong memory, refresh token trong httpOnly cookie (chi tiết ở câu JWT vs Session)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "794-oauth-2-0-la-gi-luong-authorization-code-flow-hoat-dong-the-nao"
+  },
+  {
+    "id": "d0e47368-bc2d-5e77-96ee-3b71640819d6",
+    "question": "HTTPS và TLS là gì? Tại sao bắt buộc phải dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/795-https-va-tls-la-gi-tai-sao-bat-buoc-phai-dung",
+    "slug": "https-va-tls-la-gi-tai-sao-bat-buoc-phai-dung-d0e47368-bc2d-5e77-96ee-3b71640819d6",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "HTTPS là HTTP chạy trên TLS — mã hóa toàn bộ giao tiếp, xác thực danh tính server, đảm bảo toàn vẹn dữ liệu."
+      ],
+      "details": [],
+      "points": [
+        "TLS handshake — Client Hello (cipher suites, version) → Server Hello (cipher đã chọn + certificate) → client verify certificate với CA → key exchange (ECDHE, private key không bao giờ được truyền) → sinh session keys → giao tiếp mã hóa.",
+        "Certificate chain — leaf → intermediate CA → root CA (được browser/OS tin cậy); Let's Encrypt cấp certificate miễn phí, tự động renew.",
+        "HSTS — Strict-Transport-Security: max-age=31536000; includeSubDomains: browser chỉ kết nối HTTPS, chặn SSL stripping; HSTS Preload list được hardcode sẵn trong browser.",
+        "TLS 1.3 — handshake 1-RTT (TLS 1.2 cần 2-RTT), 0-RTT resumption cho kết nối sau, loại bỏ cipher suite yếu.",
+        "Mixed content — trang HTTPS load resource HTTP: browser chặn active content (script, XHR), cảnh báo passive content (ảnh).",
+        "Vì sao bắt buộc — chặn MITM; HTTP/2, Service Worker, PWA, getUserMedia đều yêu cầu HTTPS; là ranking factor SEO; cảnh báo 'Not Secure' làm tăng bounce rate."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "795-https-va-tls-la-gi-tai-sao-bat-buoc-phai-dung"
+  },
+  {
+    "id": "299b1881-514d-5952-b77c-a670e8c0131d",
+    "question": "CORS là gì? Tại sao browser enforce same-origin policy?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/796-cors-la-gi-tai-sao-browser-enforce-same-origin-policy",
+    "slug": "cors-la-gi-tai-sao-browser-enforce-same-origin-policy-299b1881-514d-5952-b77c-a670e8c0131d",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Same-origin policy (SOP) chặn JavaScript từ một origin (scheme + host + port) đọc response từ origin khác — bảo vệ khỏi việc đọc trộm dữ liệu cross-origin (data theft). Lưu ý: SOP không chặn việc GỬI request cross-site — vì vậy CSRF vẫn tồn tại và cần defense riêng (CSRF token, SameSite cookie)."
+      ],
+      "details": [],
+      "points": [
+        "CORS — cơ chế để server opt-in cho cross-origin request qua response headers.",
+        "Simple request — GET/POST với Content-Type cơ bản: browser gửi thẳng rồi kiểm tra response header.",
+        "Preflight (OPTIONS) — request có custom header, PUT/DELETE, hoặc Content-Type: application/json: browser gửi OPTIONS trước; request thật chỉ được gửi sau khi server trả về allowed methods/headers.",
+        "Response headers — Access-Control-Allow-Origin (origin cụ thể, hoặc * — không dùng được với credentials); Allow-Methods, Allow-Headers; Max-Age cache preflight; Allow-Credentials: true để gửi cookie — bắt buộc origin cụ thể.",
+        "Lỗi thường gặp — nginx và app cùng set CORS header → duplicate → browser reject; dùng * nhưng cần credentials; quên handle OPTIONS → 405.",
+        "Giới hạn — CORS chỉ ràng buộc browser; curl/Postman/server-to-server không bị ảnh hưởng."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "796-cors-la-gi-tai-sao-browser-enforce-same-origin-policy"
+  },
+  {
+    "id": "27d0f409-9496-5590-834c-b56219c4c3bf",
+    "question": "Security headers quan trọng trong web application là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/797-security-headers-quan-trong-trong-web-application-la-gi",
+    "slug": "security-headers-quan-trong-trong-web-application-la-gi-27d0f409-9496-5590-834c-b56219c4c3bf",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Security headers là các response header điều khiển hành vi browser để chặn tấn công — Helmet.js (app.use(helmet())) set sẵn bộ mặc định hợp lý."
+      ],
+      "details": [
+        "Test site bằng securityheaders.com."
+      ],
+      "points": [
+        "Strict-Transport-Security — max-age=31536000; includeSubDomains: ép HTTPS, chặn SSL stripping.",
+        "X-Content-Type-Options: nosniff — chặn MIME sniffing, browser không tự đoán content type khác header — ngăn polyglot file attack.",
+        "X-Frame-Options: DENY/SAMEORIGIN — chống clickjacking; CSP frame-ancestors là bản thay thế linh hoạt hơn.",
+        "Referrer-Policy — browser hiện đại mặc định strict-origin-when-cross-origin (Chrome 85+); dùng no-referrer cho trang nhạy cảm.",
+        "Permissions-Policy — tắt browser API không dùng: geolocation=(), camera=(), microphone=().",
+        "COOP/COEP — Cross-Origin-Opener-Policy: same-origin + Cross-Origin-Embedder-Policy: require-corp bật process isolation, cần cho SharedArrayBuffer.",
+        "X-XSS-Protection — đã deprecated, không cần set."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "797-security-headers-quan-trong-trong-web-application-la-gi"
+  },
+  {
+    "id": "5c7133ec-0b50-5623-bbe0-fe806e704977",
+    "question": "SQL Injection là gì? Cách phòng chống trong Node.js?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/798-sql-injection-la-gi-cach-phong-chong-trong-node-js",
+    "slug": "sql-injection-la-gi-cach-phong-chong-trong-node-js-5c7133ec-0b50-5623-bbe0-fe806e704977",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "SQL Injection là tấn công chèn SQL qua user input để thao túng query — bypass đăng nhập, trích xuất hoặc xóa dữ liệu."
+      ],
+      "details": [],
+      "points": [
+        "Ví dụ kinh điển — username ' OR '1'='1' -- biến query thành SELECT * FROM users WHERE username = '' OR '1'='1' --... — luôn true, vượt qua login.",
+        "Second-order injection — input được lưu vào DB rồi dùng trong query khác không qua kiểm soát — khó phát hiện hơn.",
+        "Phòng chống chính: parameterized query — db.query('SELECT * FROM users WHERE id = $1', [userId]): user input không bao giờ được diễn giải thành SQL.",
+        "ORM — Prisma/Sequelize/TypeORM tự parameterize; raw query vẫn rủi ro: prisma.$queryRaw với tagged template an toàn, $queryRawUnsafe('...' + userId) thì không.",
+        "Defense in depth — input validation bổ trợ nhưng không thay được parameterized query; DB user chỉ có quyền tối thiểu (không DROP TABLE); WAF là lớp thêm, không đủ một mình."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "798-sql-injection-la-gi-cach-phong-chong-trong-node-js"
+  },
+  {
+    "id": "8d84a5c5-7331-5026-9a25-88eb25dfa1e9",
+    "question": "Cookie security: HttpOnly, Secure, SameSite attributes là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/799-cookie-security-httponly-secure-samesite-attributes-la-gi",
+    "slug": "cookie-security-httponly-secure-samesite-attributes-la-gi-8d84a5c5-7331-5026-9a25-88eb25dfa1e9",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ba attribute kiểm soát mức lộ và cách gửi cookie: HttpOnly, Secure, SameSite."
+      ],
+      "details": [],
+      "points": [
+        "HttpOnly — JS không đọc được cookie qua document.cookie — XSS không đánh cắp được session token; cookie vẫn tự động gửi kèm HTTP request.",
+        "Secure — cookie chỉ gửi qua HTTPS — bắt buộc trong production.",
+        "SameSite — Strict: không gửi trong mọi cross-site request; Lax (default Chrome từ 2020): chỉ gửi trong top-level GET navigation; None: gửi mọi cross-site request, bắt buộc kèm Secure — ngữ nghĩa chi tiết xem câu CSRF.",
+        "Best practice cho session cookie —\nCopy\nSet-Cookie: sessionId=abc; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=3600",
+        "Cookie prefix — __Secure- (bắt buộc flag Secure); __Host- (Secure + không Domain + Path=/ — mạnh nhất, ghim vào host).",
+        "Max-Age vs Expires — Max-Age (giây, tương đối) được ưu tiên vì không phụ thuộc clock của client; cookie không có cả hai là session cookie, xóa khi đóng browser."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "Set-Cookie: sessionId=abc; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=3600"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "799-cookie-security-httponly-secure-samesite-attributes-la-gi"
+  },
+  {
+    "id": "b8a5f1ca-081f-502f-8165-a785c8597f0d",
+    "question": "JWT authentication flow trong Node.js?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/837-jwt-authentication-flow-trong-node-js",
+    "slug": "jwt-authentication-flow-trong-node-js-b8a5f1ca-081f-502f-8165-a785c8597f0d",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "JWT stateless auth dùng signed token thay vì server-side session — không cần DB lookup mỗi request."
+      ],
+      "details": [
+        "Refresh token cho long-lived sessions."
+      ],
+      "points": [
+        "Login: verify credentials → tạo JWT (sign với secret) → gửi token cho client.",
+        "Request: client gửi token trong Authorization header (Bearer token).",
+        "Server: middleware verify token, extract user info, attach vào req.user.",
+        "Lưu trữ: access token → memory (JS variable), refresh token → httpOnly cookie. KHÔNG lưu localStorage (XSS risk)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "837-jwt-authentication-flow-trong-node-js"
+  },
+  {
+    "id": "b3d358a8-216c-5cc6-8a82-8a6ecca26070",
+    "question": "OWASP Top 10 là gì? Những rủi ro bảo mật quan trọng nhất gồm những gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4083-owasp-top-10-la-gi-nhung-rui-ro-bao-mat-quan-trong-nhat-gom-nhung-gi",
+    "slug": "owasp-top-10-la-gi-nhung-rui-ro-bao-mat-quan-trong-nhat-gom-nhung-gi-b3d358a8-216c-5cc6-8a82-8a6ecca26070",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "OWASP Top 10 là danh sách 10 rủi ro bảo mật web phổ biến nhất, do Open Web Application Security Project cập nhật định kỳ vài năm một lần — bản 2021 là phiên bản được tham chiếu rộng rãi nhất; bản 2025 tái cấu trúc các nhóm rủi ro (Supply Chain Failures tách thành category riêng)."
+      ],
+      "details": [],
+      "points": [
+        "Ba rủi ro quan trọng nhất với web/Node.js dev thường là Broken Access Control, Injection, và Authentication Failures. A01: Broken Access Control (lên #1 từ #5) — user truy cập resources không được phép: thiếu authorization checks, IDOR (Insecure Direct Object Reference). A02: Cryptographic Failures — dữ liệu nhạy cảm không được mã hóa, dùng thuật toán yếu (MD5, SHA1 cho password). A03: Injection — SQL, NoSQL, command injection. A04: Insecure Design — thiếu threat modeling, security requirements. A05: Security Misconfiguration — default credentials, verbose errors, unnecessary features enabled. A06: Vulnerable Components — outdated dependencies với known CVEs. A07: Auth Failures — weak passwords, session fixation, no rate limiting trên login. A08: Software Integrity Failures — CI/CD pipeline không secure, unsigned packages. A09: Security Logging Failures — không log security events, không alert. A10: SSRF (Server-Side Request Forgery) — attacker khiến server fetch internal URLs.",
+        "Trong Node.js context: A03 (SQL injection → parameterized queries), A02 (bcrypt/argon2 thay MD5), A01 (middleware authorization), A06 (npm audit + Dependabot), A07 (rate limiting + account lockout)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "4083-owasp-top-10-la-gi-nhung-rui-ro-bao-mat-quan-trong-nhat-gom-nhung-gi"
+  },
+  {
+    "id": "31988694-2dd8-5886-a674-adc112c33dd2",
+    "question": "JWT vs Session-based authentication: khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4084-jwt-vs-session-based-authentication-khi-nao-dung-cai-nao",
+    "slug": "jwt-vs-session-based-authentication-khi-nao-dung-cai-nao-31988694-2dd8-5886-a674-adc112c33dd2",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Session dễ revoke nhưng cần Redis khi chạy nhiều server; JWT stateless nên dễ scale nhưng không revoke được trước khi hết hạn."
+      ],
+      "details": [
+        "Session-based: server giữ session data trong memory/Redis, client chỉ giữ session ID trong cookie. Server stateful nên phải lookup mỗi request.\n- Được: revoke tức thì (xoá session), không lộ data người dùng ra client, server kiểm soát hoàn toàn.\n- Mất: cần shared session store (Redis) khi nhiều server, horizontal scaling phức tạp hơn.",
+        "JWT: server stateless, client giữ toàn bộ claims trong token, verify chỉ cần kiểm chữ ký chứ không cần truy DB.\n- Được: dễ scale, microservice verify được token mà không cần auth service tập trung.\n- Mất: không revoke được trước hạn (muốn revoke phải có blacklist, tức là lại stateful), token nặng hơn session ID nhiều.",
+        "Chọn cái nào:\n- Dùng session khi cần revoke tức thì (admin ban user, đổi mật khẩu phải huỷ hết session), khi chạy một server hoặc đã sẵn Redis, hoặc web app truyền thống đăng nhập bằng form.\n- Dùng JWT khi làm microservice (auth giữa các service), API công khai cho mobile, SSO nhiều domain, hoặc bắt buộc kiến trúc stateless.\n- Hybrid là best practice: JWT ngắn hạn (15 phút) cho access token, refresh token thì lưu server-side."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "4084-jwt-vs-session-based-authentication-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "07a8a805-8bc3-570a-af06-0ee1db5360db",
+    "question": "Password hashing: bcrypt vs argon2, khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4085-password-hashing-bcrypt-vs-argon2-khi-nao-dung-cai-nao",
+    "slug": "password-hashing-bcrypt-vs-argon2-khi-nao-dung-cai-nao-07a8a805-8bc3-570a-af06-0ee1db5360db",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả bcrypt và Argon2 đều là password hashing function được thiết kế để chậm — ngược hẳn SHA-256/MD5 vốn tối ưu cho nhanh."
+      ],
+      "details": [
+        "bcrypt: đã đứng vững từ 1999, độ khó chỉnh bằng cost factor (saltRounds) và tăng theo hàm mũ — bcrypt.hash(password, 12).",
+        "Argon2: vô địch Password Hashing Competition 2015, có ba biến thể — argon2d (chống GPU), argon2i (chống side-channel), argon2id (cả hai, và là bản nên dùng). Tham số gồm memory-cost, time-cost và parallelism.",
+        "bcrypt.hash(password, 10)",
+        "Migration không downtime:",
+        "So sánh:\n- argon2id chống tấn công GPU lẫn side-channel tốt hơn bcrypt. OWASP Password Storage Cheat Sheet đặt mức tối thiểu cho argon2id là m=19MiB, t=2, p=1; còn 64MB/t=3 là mặc định theo RFC 9106 mà các thư viện hay dùng.\n- bcrypt cắt cụt input ở 72 byte — mật khẩu dài hơn bị mất phần đuôi, đây là điểm yếu thật sự. argon2 không có giới hạn này.\n- Chốt lại: argon2id là best practice hiện nay, nhưng bcrypt vẫn an toàn nếu cost đủ cao và không có mật khẩu dài quá 72 byte."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "4085-password-hashing-bcrypt-vs-argon2-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "e416ee44-40a9-5cc2-a7cf-973c20b2d8e2",
+    "question": "Rate limiting strategies: Fixed window vs Sliding window vs Token bucket?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4086-rate-limiting-strategies-fixed-window-vs-sliding-window-vs-token-bucket",
+    "slug": "rate-limiting-strategies-fixed-window-vs-sliding-window-vs-token-bucket-e416ee44-40a9-5cc2-a7cf-973c20b2d8e2",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Rate limiting ngăn abuse, brute-force và DoS. Bốn thuật toán hay gặp:",
+        "Token bucket"
+      ],
+      "details": [
+        "Fixed window đếm request trong khung thời gian cố định (0:00-0:59, 1:00-1:59). Dễ làm nhưng dễ lách: gửi 100 request cuối window cũ cộng 100 request đầu window mới thành 200 request trong 2 giây.",
+        "Sliding window lưu timestamp của request trong một cửa sổ trượt nên không dính lỗ hổng trên; cần lưu timestamp theo user trong Redis sorted set:",
+        "@upstash/ratelimit",
+        "express-rate-limit",
+        "rate-limit-redis",
+        "ioredis",
+        "/api/auth/login",
+        "/api/*",
+        "Lưu ý:",
+        "Leaky bucket đẩy request vào hàng đợi và xử lý ở tốc độ cố định — output mượt, không burst; hợp với API cần throughput dự đoán được."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "ZADD key timestamp timestamp\nZREMRANGEBYSCORE key 0 (now-window)\nZCARD key"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "4086-rate-limiting-strategies-fixed-window-vs-sliding-window-vs-token-bucket"
+  },
+  {
+    "id": "7e0f8f5d-c1b2-5bb7-b196-e5a944b26d1b",
+    "question": "Clickjacking là gì? X-Frame-Options và CSP frame-ancestors?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4089-clickjacking-la-gi-x-frame-options-va-csp-frame-ancestors",
+    "slug": "clickjacking-la-gi-x-frame-options-va-csp-frame-ancestors-7e0f8f5d-c1b2-5bb7-b196-e5a944b26d1b",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Clickjacking embed site trong invisible iframe để đánh lừa user click — fix bằng Content-Security-Policy: frame-ancestors 'none' (CSP, recommended) và X-Frame-Options: DENY (legacy, set cả hai để backward compatibility)."
+      ],
+      "details": [
+        "Clickjacking là attack embed target site trong invisible iframe, user nghĩ đang click button trên trang của attacker nhưng thực ra đang click element trong iframe — thực hiện actions trên target site mà user không biết. Ví dụ: evil.com embed bank.com trong iframe với opacity: 0, vị trí button 'Transfer Money' trùng với button 'Click to win!' của evil.com. X-Frame-Options header (legacy): X-Frame-Options: DENY — không cho phép embed trong bất kỳ iframe nào; X-Frame-Options: SAMEORIGIN — chỉ cho phép same origin iframe. CSP frame-ancestors directive (modern, recommended): Content-Security-Policy: frame-ancestors 'none' (tương đương DENY); frame-ancestors 'self' (tương đương SAMEORIGIN); frame-ancestors https://trusted.com — flexible hơn X-Frame-Options (cho phép specific origins). Nên set cả hai để backward compatibility. Helmet.js: helmet.frameguard({ action: 'deny' }) set X-Frame-Options; config CSP riêng với frame-ancestors. Khi nào cho phép iframe: legitimate embedding (payment widgets, video player, maps) — whitelist specific origins với frame-ancestors. Lưu ý: nếu cần embed legitimate content từ site của bạn vào third-party (widget, badge), phải loại trừ endpoint đó khỏi frame-ancestors restrictions hoặc dùng SAMEORIGIN."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "4089-clickjacking-la-gi-x-frame-options-va-csp-frame-ancestors"
+  },
+  {
+    "id": "c07fd3d8-7271-51c1-9af2-461a2a14194b",
+    "question": "SSO là gì? OIDC và SAML khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91217-sso-la-gi-oidc-va-saml-khac-nhau-the-nao",
+    "slug": "sso-la-gi-oidc-va-saml-khac-nhau-the-nao-c07fd3d8-7271-51c1-9af2-461a2a14194b",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "SSO (Single Sign-On): đăng nhập một lần tại nhà cung cấp danh tính trung tâm (IdP — Identity Provider), rồi truy cập nhiều ứng dụng (SP/relying party) mà không phải đăng nhập lại. Ứng dụng không giữ mật khẩu; nó tin vào \"giấy chứng nhận\" do IdP ký. Lợi ích: một nơi quản lý tài khoản/MFA, thu hồi truy cập tập trung, giảm số mật khẩu user phải nhớ."
+      ],
+      "details": [
+        "Hai giao thức SSO phổ biến:\n- SAML 2.0 (2005): chuẩn XML — IdP trả về SAMLResponse (assertion XML có chữ ký) qua browser redirect/POST. Phổ biến trong enterprise (nhân viên đăng nhập Salesforce, Workday qua Okta/AD FS). Nặng về XML signature, khó dùng cho mobile/SPA.\n- OIDC (OpenID Connect) (2014): lớp xác thực xây trên OAuth2 — trả về id_token dạng JWT chứa thông tin user. Dùng JSON + REST nên nhẹ, hợp mobile app, SPA, API hiện đại; \"Sign in with Google\" chính là OIDC.",
+        "Chọn thế nào: tích hợp mới → ưu tiên OIDC; SAML chủ yếu để nối các hệ thống enterprise có sẵn. Nhiều IdP (Okta, Auth0, Entra ID) nói được cả hai, đóng vai trò cầu nối."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "91217-sso-la-gi-oidc-va-saml-khac-nhau-the-nao"
+  },
+  {
+    "id": "c59145da-5d13-5cb7-b23e-96a43c9725db",
+    "question": "Cấu trúc JWT gồm gì? Các lỗ hổng phổ biến khi verify JWT?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/95032-cau-truc-jwt-gom-gi-cac-lo-hong-pho-bien-khi-verify-jwt",
+    "slug": "cau-truc-jwt-gom-gi-cac-lo-hong-pho-bien-khi-verify-jwt-c59145da-5d13-5cb7-b23e-96a43c9725db",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "JWT gồm ba phần header.payload.signature phân tách bằng dấu chấm, mỗi phần encode base64url — base64url là encoding chứ không phải mã hóa: ai cầm token đều đọc được payload."
+      ],
+      "details": [],
+      "points": [
+        "Cấu trúc — header ({ 'alg': 'RS256', 'typ': 'JWT' } — thuật toán ký); payload (claims: sub, exp, iss, aud...); signature ký trên header.payload để chống sửa đổi.",
+        "Tấn công alg: none — attacker sửa header thành 'alg': 'none' và bỏ signature; thư viện cấu hình sai vẫn chấp nhận → bypass verify. Fix: chỉ định danh sách thuật toán cho phép khi verify.",
+        "HS256/RS256 confusion — server ký RS256 nhưng verify chấp nhận cả HS256: attacker dùng public key (vốn công khai) làm HMAC secret để ký token giả → verify pass. Fix: pin đúng một thuật toán.",
+        "kid injection — header kid (key id) bị lợi dụng để trỏ bước lookup key sang key attacker kiểm soát (path traversal, SQL injection trong bước tra key).",
+        "Verify thiếu claim — signature đúng chưa đủ: phải kiểm tra exp (hết hạn), iss (issuer) và aud (audience) — nếu không, token cấp cho service khác vẫn bị dùng lại được."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "95032-cau-truc-jwt-gom-gi-cac-lo-hong-pho-bien-khi-verify-jwt"
+  },
+  {
+    "id": "9525fe1a-673e-5ed6-ab84-c9754950b89c",
+    "question": "PKCE chống được tấn công nào? Vì sao implicit flow không còn được khuyến nghị?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96801-pkce-chong-duoc-tan-cong-nao-vi-sao-implicit-flow-khong-con-duoc-khuyen-nghi",
+    "slug": "pkce-chong-duoc-tan-cong-nao-vi-sao-implicit-flow-khong-con-duoc-khuyen-nghi-9525fe1a-673e-5ed6-ab84-c9754950b89c",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "PKCE (Proof Key for Code Exchange) chống authorization code interception — trường hợp kẻ tấn công chặn được code ở bước redirect (app mobile đăng ký trùng custom URL scheme, log của trình duyệt, extension...) rồi tự đem đi đổi lấy token.",
+        "response_type=token",
+        "URL fragment",
+        "Implicit flow"
+      ],
+      "details": [
+        "Cách hoạt động:",
+        "1. Client sinh chuỗi ngẫu nhiên code_verifier, tính code_challenge = BASE64URL(SHA256(verifier)).\n2. Gửi code_challenge + code_challenge_method=S256 khi xin authorization code.\n3. Khi đổi code lấy token thì gửi kèm code_verifier gốc. Server băm lại và so khớp.",
+        "Kẻ tấn công cầm được code nhưng không có code_verifier nên không đổi được token."
+      ],
+      "points": [
+        "RFC 9700 nói rõ không dùng implicit; SPA và mobile giờ đều dùng Authorization Code + PKCE.",
+        "PKCE hiện được khuyến nghị cho mọi client, kể cả confidential client có client secret."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTTP",
+          "code": "POST /token\ngrant_type=authorization_code&code=SplxlOB&code_verifier=dBjftJeZ4CVP..."
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "96801-pkce-chong-duoc-tan-cong-nao-vi-sao-implicit-flow-khong-con-duoc-khuyen-nghi"
+  },
+  {
+    "id": "63191e54-8498-5f2c-98d3-c8abe88efd42",
+    "question": "Tham số state trong OAuth2 dùng làm gì? Khác nonce của OIDC ở điểm nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96803-tham-so-state-trong-oauth2-dung-lam-gi-khac-nonce-cua-oidc-o-diem-nao",
+    "slug": "tham-so-state-trong-oauth2-dung-lam-gi-khac-nonce-cua-oidc-o-diem-nao-63191e54-8498-5f2c-98d3-c8abe88efd42",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "state chống CSRF trên bước callback. Không có nó, kẻ tấn công có thể lấy authorization code của tài khoản của chính hắn rồi dụ nạn nhân mở link callback đó — kết quả là tài khoản của nạn nhân bị gắn (link) với tài khoản provider của kẻ tấn công, hoặc nạn nhân vô tình thao tác dưới danh nghĩa tài khoản lạ.",
+        "nonce",
+        "id_token",
+        "replay",
+        "OIDC"
+      ],
+      "details": [
+        "Cách làm đúng: sinh chuỗi ngẫu nhiên, lưu vào session/cookie phía server, gửi kèm request authorize, và khi callback thì so lại. Không khớp thì hủy luồng.",
+        "Gói gọn sự khác biệt:",
+        "Dùng PKCE rồi vẫn nên giữ state nếu cần chống CSRF; PKCE ràng buộc code với client, còn state ràng buộc luồng với phiên trình duyệt."
+      ],
+      "points": [
+        "state — bảo vệ luồng redirect, kiểm ở phía client/server app, không xuất hiện trong token.",
+        "nonce — bảo vệ token, được provider đưa vào claim của id_token để bạn đối chiếu."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const state = crypto.randomUUID()\nsession.oauthState = state\nredirect(`${authorizeUrl}?...&state=${state}`)\n// callback: if (query.state !== session.oauthState) throw new Error('state mismatch')"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "96803-tham-so-state-trong-oauth2-dung-lam-gi-khac-nonce-cua-oidc-o-diem-nao"
+  },
+  {
+    "id": "2340f29d-6a32-53a8-bced-44bb22e9be7e",
+    "question": "Làm sao cho phép user \"đăng xuất khỏi mọi thiết bị\"? Đổi mật khẩu thì các phiên cũ xử lý ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96807-lam-sao-cho-phep-user-dang-xuat-khoi-moi-thiet-bi-doi-mat-khau-thi-cac-phien-cu",
+    "slug": "lam-sao-cho-phep-user-dang-xuat-khoi-moi-thiet-bi-doi-mat-khau-thi-cac-phien-cu-xu-ly-ra-sao-2340f29d-6a32-53a8-bced-44bb22e9be7e",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cần một thứ phía server để phân biệt token phát trước và sau thời điểm thu hồi. Ba cách hay dùng:",
+        "iat < sessions_valid_from",
+        "now()",
+        "2. Mốc sessions_valid_from"
+      ],
+      "details": [
+        "1. Cột token_version trên user — đơn giản nhất. Access token mang claim ver; middleware so token.ver với user.token_version. Đăng xuất mọi thiết bị = update users set token_version = token_version + 1.",
+        "3. Bảng session/refresh token thật — mỗi thiết bị một hàng (kèm user agent, IP, lần dùng cuối). Cho phép hiển thị danh sách thiết bị và thu hồi từng cái, không phải tất cả. Đây là cách các sản phẩm lớn làm.",
+        "exp",
+        "Đổi mật khẩu:",
+        "Cách 1 và 2 tốn thêm một lần đọc user cho mỗi request — thường cache Redis với TTL ngắn để giảm tải."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "update users set token_version = token_version + 1 where id = $1;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "96807-lam-sao-cho-phep-user-dang-xuat-khoi-moi-thiet-bi-doi-mat-khau-thi-cac-phien-cu"
+  },
+  {
+    "id": "8408c45c-e4dc-5ea4-bc58-d2074974d70b",
+    "question": "Bạn sẽ thiết kế tính năng \"ghi nhớ đăng nhập\" (remember me) thế nào cho an toàn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96810-ban-se-thiet-ke-tinh-nang-ghi-nho-dang-nhap-remember-me-the-nao-cho-an-toan",
+    "slug": "ban-se-thiet-ke-tinh-nang-ghi-nho-dang-nhap-remember-me-the-nao-cho-an-toan-8408c45c-e4dc-5ea4-bc58-d2074974d70b",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không kéo dài tuổi thọ của cookie phiên thường. Cách chuẩn là tách làm hai token:",
+        "selector",
+        "validator",
+        "hàm so sánh hằng thời gian"
+      ],
+      "details": [
+        "Cách lưu remember-me token (mô hình selector/validator):",
+        "Các quy tắc kèm theo:"
+      ],
+      "points": [
+        "Session cookie — ngắn (vài chục phút tới vài giờ), là thứ dùng cho mọi request.",
+        "Remember-me token — dài (14–30 ngày), chỉ dùng một lần để tạo lại phiên khi session hết hạn.",
+        "Xoay token sau mỗi lần dùng — dùng xong thì xóa hàng cũ, phát hàng mới; token cũ tái xuất hiện là dấu hiệu bị đánh cắp.",
+        "Cookie phải HttpOnly; Secure; SameSite=Lax.",
+        "Đổi mật khẩu / đăng xuất mọi thiết bị phải xóa hết remember token của user.",
+        "Phiên khôi phục từ remember-me chỉ nên được coi là đã xác thực ở mức thấp: các thao tác nhạy cảm (đổi mật khẩu, đổi email, thanh toán) phải yêu cầu nhập lại mật khẩu.",
+        "Không nhét username/password hay bất kỳ dữ liệu tự giải mã được nào vào cookie."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "create table remember_tokens (\n  selector       text primary key,   -- lookup key, sent in clear\n  validator_hash text not null,      -- SHA-256 of the secret half\n  user_id        uuid not null,\n  expires_at     timestamptz not null\n);\n-- cookie value = selector + ':' + validator"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "96810-ban-se-thiet-ke-tinh-nang-ghi-nho-dang-nhap-remember-me-the-nao-cho-an-toan"
+  },
+  {
+    "id": "1a7fcbe4-bdab-5994-99b4-44b32bb97d36",
+    "question": "Hai service nội bộ gọi nhau thì xác thực thế nào? Client credentials và mTLS khác gì nhau?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96812-hai-service-noi-bo-goi-nhau-thi-xac-thuc-the-nao-client-credentials-va-mtls-khac",
+    "slug": "hai-service-noi-bo-goi-nhau-thi-xac-thuc-the-nao-client-credentials-va-mtls-khac-gi-nhau-1a7fcbe4-bdab-5994-99b4-44b32bb97d36",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ở đây không có user, nên không dùng authorization code. Hai lựa chọn phổ biến:",
+        "sub",
+        "client_secret",
+        "access token của service"
+      ],
+      "details": [
+        "Client credentials grant — service tự lấy token bằng chính danh tính của nó.",
+        "mTLS — hai bên cùng xuất trình chứng chỉ khi bắt tay TLS. Danh tính nằm ở tầng vận chuyển, không có secret nào đi trong request. Ưu điểm: mạnh hơn, chống replay tốt hơn, không lộ qua log. Nhược: cần hạ tầng PKI (cấp phát, xoay, thu hồi chứng chỉ) — thường được service mesh (Istio, Linkerd) lo giúp.",
+        "X-User-Id",
+        "Thực tế hay kết hợp: mTLS cho lớp mạng (ai được nói chuyện với ai) + token cho lớp ứng dụng (được làm gì, và chuyển tiếp ngữ cảnh user)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "HTTP",
+          "code": "POST /token\ngrant_type=client_credentials&client_id=svc-order&client_secret=...&scope=inventory:write"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "96812-hai-service-noi-bo-goi-nhau-thi-xac-thuc-the-nao-client-credentials-va-mtls-khac"
+  },
+  {
+    "id": "cbc25da4-7c4c-5263-9484-2bad80490993",
+    "question": "API key khác access token thế nào? Khi nào chọn cái nào, và lưu API key trong DB ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96813-api-key-khac-access-token-the-nao-khi-nao-chon-cai-nao-va-luu-api-key-trong-db-r",
+    "slug": "api-key-khac-access-token-the-nao-khi-nao-chon-cai-nao-va-luu-api-key-trong-db-ra-sao-cbc25da4-7c4c-5263-9484-2bad80490993",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khác biệt cốt lõi: API key định danh ứng dụng/khách hàng và sống rất lâu; access token chứng minh một quyền đã được cấp và hết hạn nhanh.",
+        "SHA-256 là đủ"
+      ],
+      "details": [
+        "Chọn API key khi bên gọi là hệ thống của đối tác cần thứ đơn giản, dán vào config là chạy. Chọn token khi cần ngữ cảnh user, scope chi tiết, hoặc muốn giới hạn thời gian.",
+        "Lưu trong DB: đối xử như mật khẩu — chỉ lưu hash, hiển thị giá trị thô đúng một lần lúc tạo.",
+        "Kèm theo: đặt prefix nhận diện được (sk_live_) để quét rò rỉ trên GitHub, ghi last_used_at để dọn key chết, và luôn gắn rate limit theo key."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "create table api_keys (\n  id          uuid primary key,\n  prefix      text not null,        -- e.g. 'sk_live_4f2a', shown in UI, indexed\n  key_hash    text not null,        -- SHA-256 of the full key\n  user_id     uuid not null,\n  scopes      text[] not null default '{}',\n  last_used_at timestamptz,\n  revoked_at  timestamptz\n);"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Tuổi thọ",
+            "Nhiều tháng/năm, đến khi thu hồi tay",
+            "Vài phút tới vài giờ",
+            "Nội dung",
+            "Chuỗi ngẫu nhiên, không tự mang thông tin",
+            "Có claim (sub, scope, exp)",
+            "Thu hồi",
+            "Xóa/khóa hàng trong DB, có hiệu lực ngay",
+            "Chờ hết hạn, trừ khi kiểm phía server",
+            "API key"
+          ]
+        }
+      ]
+    },
+    "legacyId": 40,
+    "sourceSlug": "96813-api-key-khac-access-token-the-nao-khi-nao-chon-cai-nao-va-luu-api-key-trong-db-r"
+  },
+  {
+    "id": "dde4ab09-ab48-50aa-afdd-09a350b14642",
+    "question": "Bạn sẽ thiết kế luồng đăng nhập bằng số điện thoại + OTP thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96814-ban-se-thiet-ke-luong-dang-nhap-bang-so-dien-thoai-otp-the-nao",
+    "slug": "ban-se-thiet-ke-luong-dang-nhap-bang-so-dien-thoai-otp-the-nao-dde4ab09-ab48-50aa-afdd-09a350b14642",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Luồng chính:"
+      ],
+      "details": [
+        "1. User nhập số điện thoại → server chuẩn hóa về E.164 (+84...) để tránh cùng số lưu hai dạng.\n2. Sinh OTP 6 chữ số bằng CSPRNG, lưu hash kèm expires_at (3–5 phút) và attempts = 0. Không lưu OTP thô.\n3. Gửi SMS, trả về client một request_id — không trả OTP về response dù ở môi trường dev.\n4. User nhập OTP → tra theo request_id, so hash bằng hàm so sánh hằng thời gian, kiểm hạn và số lần thử.\n5. Đúng → xóa OTP ngay (dùng một lần), tạo phiên. Sai → tăng attempts, quá 5 lần thì hủy mã, bắt gửi lại.",
+        "Một lưu ý nghề: OWASP xếp SMS là yếu tố yếu nhất trong MFA vì rủi ro SIM swap và chặn SMS. Với tài khoản có giá trị cao nên hướng user sang TOTP hoặc passkey; OTP SMS hợp với ngữ cảnh cần độ phủ rộng như thị trường VN."
+      ],
+      "points": [
+        "Rate limit hai chiều: theo số điện thoại (vd 1 mã/60 giây, 5 mã/giờ) và theo IP. Không có nó thì bị lạm dụng gửi SMS gây tốn tiền (SMS pumping).",
+        "Giới hạn số lần thử — OTP 6 số chỉ có 10^6 khả năng, không giới hạn thì dò được.",
+        "Phản hồi đồng nhất: số chưa đăng ký cũng trả về \"đã gửi mã\" để không lộ số nào tồn tại.",
+        "Không tái sử dụng mã khi user bấm gửi lại; mã cũ phải bị vô hiệu."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "SQL",
+          "code": "create table otp_requests (\n  id          uuid primary key,\n  phone       text not null,        -- E.164\n  code_hash   text not null,\n  attempts    int not null default 0,\n  expires_at  timestamptz not null,\n  consumed_at timestamptz\n);\ncreate index on otp_requests (phone, expires_at);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "96814-ban-se-thiet-ke-luong-dang-nhap-bang-so-dien-thoai-otp-the-nao"
+  },
+  {
+    "id": "e07e15e7-025a-5092-853f-93b1c9da4182",
+    "question": "Bạn sẽ viết CSP cho một app React/Next thế nào? Vì sao phải dùng nonce thay vì unsafe-inline?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98554-ban-se-viet-csp-cho-mot-app-react-next-the-nao-vi-sao-phai-dung-nonce-thay-vi-un",
+    "slug": "ban-se-viet-csp-cho-mot-app-react-next-the-nao-vi-sao-phai-dung-nonce-thay-vi-unsafe-inline-e07e15e7-025a-5092-853f-93b1c9da4182",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "CSP là lớp phòng thủ thứ hai sau escaping: kể cả khi payload lọt vào DOM, trình duyệt vẫn từ chối thực thi script không được cho phép.",
+        "x-nonce",
+        "headers()",
+        "<Script nonce={nonce}>"
+      ],
+      "details": [
+        "Vấn đề với framework SSR là trang luôn có inline script (hydration data, <Script> của Next). Nếu mở script-src 'unsafe-inline' thì CSP mất tác dụng chống XSS — payload <script> do kẻ tấn công chèn cũng là inline script hợp lệ.",
+        "Cách đúng: nonce sinh mới mỗi request. Trong Next.js sinh ở middleware rồi đọc lại trong Server Component:",
+        "Những điểm hay bị hỏi thêm:\n- Nonce phải ngẫu nhiên mỗi request; nonce cố định trong build là vô nghĩa.\n- Có nonce thì trang không thể là static — phải render động.\n- style-src thường vẫn phải để 'unsafe-inline' vì CSS-in-JS; chấp nhận được vì rủi ro thấp hơn nhiều so với script.\n- Triển khai dần bằng Content-Security-Policy-Report-Only + endpoint nhận report, xem log vài ngày rồi mới bật chế độ chặn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "// middleware.ts\nconst nonce = Buffer.from(crypto.randomUUID()).toString('base64')\nconst csp = [\n  \"default-src 'self'\",\n  `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,\n  \"style-src 'self' 'unsafe-inline'\",\n  \"img-src 'self' data: https:\",\n  \"connect-src 'self'\",\n  \"frame-ancestors 'none'\",\n  \"base-uri 'self'\",\n  \"object-src 'none'\",\n].join('; ')"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "98554-ban-se-viet-csp-cho-mot-app-react-next-the-nao-vi-sao-phai-dung-nonce-thay-vi-un"
+  },
+  {
+    "id": "5f7a70e8-eb37-5d70-b854-f9733def7e26",
+    "question": "Vì sao CSP kiểu whitelist domain (script-src 'self' cdn.example.com) thường bị bypass? strict-dynamic giải quyết gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98555-vi-sao-csp-kieu-whitelist-domain-script-src-self-cdn-example-com-thuong-bi-bypas",
+    "slug": "vi-sao-csp-kieu-whitelist-domain-script-src-self-cdn-example-com-thuong-bi-bypass-strict-dynamic-gia-5f7a70e8-eb37-5d70-b854-f9733def7e26",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Whitelist domain thất bại vì bạn tin cả một origin, trong khi origin đó có thể chứa những file khiến CSP vô hiệu."
+      ],
+      "details": [
+        "Ba đường bypass thường gặp:\n1. JSONP endpoint trên domain được whitelist: <script src=\"//cdn.example.com/jsonp?callback=alert(1)\"> — script chạy từ domain hợp lệ.\n2. Bản copy của thư viện có gadget (AngularJS cũ, một số template engine) nằm trên CDN được whitelist: kẻ tấn công load đúng phiên bản đó rồi dùng nó để eval chuỗi.\n3. CDN dùng chung (unpkg, cdnjs) — whitelist chúng gần như là whitelist mọi thư viện JS trên đời.",
+        "Ngoài ra whitelist rất khó bảo trì: mỗi lần thêm công cụ analytics/chat lại phải sửa header, và các script đó tự load thêm script con nên whitelist cứ dài ra.",
+        "strict-dynamic đổi mô hình: bỏ qua toàn bộ whitelist domain, chỉ tin script được đánh dấu nonce/hash, và truyền tiếp niềm tin cho script mà script đó tạo ra bằng DOM API."
+      ],
+      "points": [
+        "https: và 'unsafe-inline' để đó làm fallback cho trình duyệt cũ — trình duyệt hiểu strict-dynamic sẽ bỏ qua chúng.",
+        "Script loader (GTM, Sentry) chèn thêm script bằng document.createElement('script') vẫn chạy được.",
+        "Nhưng script chèn bằng innerHTML thì không được kế thừa niềm tin — đúng thứ ta muốn chặn."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "script-src 'nonce-r4nd0m' 'strict-dynamic' https: 'unsafe-inline';"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "98555-vi-sao-csp-kieu-whitelist-domain-script-src-self-cdn-example-com-thuong-bi-bypas"
+  },
+  {
+    "id": "6e235e3c-946d-59ab-9eef-65f6ef5758b9",
+    "question": "Đã có SameSite=Lax mặc định trên trình duyệt rồi thì còn cần CSRF token không? Kể ba lớp phòng và chỗ hở của từng lớp.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98556-da-co-samesite-lax-mac-dinh-tren-trinh-duyet-roi-thi-con-can-csrf-token-khong-ke",
+    "slug": "da-co-samesite-lax-mac-dinh-tren-trinh-duyet-roi-thi-con-can-csrf-token-khong-ke-ba-lop-phong-va-cho-6e235e3c-946d-59ab-9eef-65f6ef5758b9",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vẫn cần. SameSite=Lax thu hẹp rất nhiều bề mặt tấn công nhưng không phải là hàng rào đủ.",
+        "Hai lưu ý hay bị hỏi tiếp:",
+        "Authorization: Bearer",
+        "có XSS thì mọi phòng thủ CSRF đều vô nghĩa"
+      ],
+      "details": [
+        "Lớp 1 — SameSite cookie. Lax chặn cookie đi kèm request cross-site trừ điều hướng top-level bằng GET. Chỗ hở:\n- Nếu có endpoint đổi trạng thái bằng GET (/account/delete?id=5), Lax không cứu.\n- Một số trình duyệt/webview cũ không áp mặc định Lax.\n- Request từ subdomain bị chiếm vẫn là same-site (SameSite xét theo eTLD+1, không phải origin).",
+        "Lớp 2 — CSRF token. Server phát token gắn với phiên, form/AJAX gửi kèm trong body hoặc header tuỳ chỉnh; server so khớp. Biến thể double-submit cookie không cần lưu state nhưng yếu hơn nếu subdomain bị chiếm (kẻ tấn công ghi được cookie). Token đúng nghĩa phải gắn với session và không đoán được.",
+        "Lớp 3 — kiểm tra Origin / Sec-Fetch-Site. Với mọi request đổi trạng thái, so Origin với host của mình; thiếu Origin thì xét Referer. Rẻ và hiệu quả, nhưng cần cẩn thận với proxy làm mất header và với client không phải trình duyệt."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const origin = req.headers.origin\nif (req.method !== 'GET' && origin && new URL(origin).host !== req.headers.host) {\n  return res.status(403).end()\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "98556-da-co-samesite-lax-mac-dinh-tren-trinh-duyet-roi-thi-con-can-csrf-token-khong-ke"
+  },
+  {
+    "id": "ab64a1cd-2747-5770-8c08-b247df3d3a04",
+    "question": "Ứng dụng có tính năng \"tải ảnh từ URL\" và cho user tự nhập URL webhook. Bạn thiết kế phần chặn SSRF thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98557-ung-dung-co-tinh-nang-tai-anh-tu-url-va-cho-user-tu-nhap-url-webhook-ban-thiet-k",
+    "slug": "ung-dung-co-tinh-nang-tai-anh-tu-url-va-cho-user-tu-nhap-url-webhook-ban-thiet-ke-phan-chan-ssrf-the-ab64a1cd-2747-5770-8c08-b247df3d3a04",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đây là hai tính năng SSRF điển hình: server tự đi gọi một URL do user kiểm soát, và server đứng bên trong mạng nội bộ."
+      ],
+      "details": [
+        "Mục tiêu kẻ tấn công nhắm tới: http://169.254.169.254/ (metadata của cloud, lấy được IAM credential), http://localhost:port (admin panel, Redis, Elasticsearch không auth), dải nội bộ 10.x, 172.16-31.x, 192.168.x, và các scheme lạ file://, gopher://, dict://.",
+        "1. Allowlist scheme và port: chỉ http/https, chỉ 80/443. Từ chối mọi thứ khác ngay.\n2. Resolve DNS trước, rồi kiểm tra IP — không kiểm tra hostname bằng chuỗi. Chặn loopback, link-local, private, multicast, IPv6 ::1/fc00::/7 và cả IPv4-mapped IPv6.\n3. Chống DNS rebinding: khoảng giữa lúc kiểm tra và lúc gọi, DNS có thể đổi sang IP nội bộ. Cách chắc chắn là resolve một lần rồi kết nối thẳng tới IP đã kiểm tra (đặt Host header thủ công), hoặc dùng thư viện HTTP có hook kiểm tra socket trước khi connect.\n4. Không tự động follow redirect, hoặc follow thủ công và kiểm tra lại IP ở mỗi hop — chuyển hướng 302 sang 169.254.169.254 là bypass phổ biến nhất.\n5. Giới hạn tài nguyên: timeout, kích thước tải tối đa, và kiểm tra Content-Type thực tế của phản hồi.\n6. Chặn ở tầng hạ tầng: cho worker gọi ra ngoài qua egress proxy trong subnet riêng, chặn dải nội bộ bằng security group. Đây là lớp cứu bạn khi code có sót.\n7. Với cloud, bật IMDSv2 để metadata endpoint yêu cầu token, không lấy được bằng một GET đơn thuần.",
+        "Thiết kế phòng thủ theo lớp:",
+        "Cuối cùng: thông báo lỗi trả về phải chung chung. Trả nguyên body hay status code của request nội bộ sẽ biến SSRF mù thành SSRF đọc được dữ liệu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "98557-ung-dung-co-tinh-nang-tai-anh-tu-url-va-cho-user-tu-nhap-url-webhook-ban-thiet-k"
+  },
+  {
+    "id": "ed0a7874-6dec-5b58-aa6f-2d350c7a7d8d",
+    "question": "Chức năng upload avatar cho phép user chọn file bất kỳ. Bạn kiểm soát thế nào để không bị upload file độc?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98558-chuc-nang-upload-avatar-cho-phep-user-chon-file-bat-ky-ban-kiem-soat-the-nao-de",
+    "slug": "chuc-nang-upload-avatar-cho-phep-user-chon-file-bat-ky-ban-kiem-soat-the-nao-de-khong-bi-upload-file-ed0a7874-6dec-5b58-aa6f-2d350c7a7d8d",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ba câu hỏi phải trả lời: file có đúng loại không, lưu ở đâu, và phục vụ lại ra sao."
+      ],
+      "details": [
+        "1. Kiểm tra loại thật, không tin client.\n- Phần mở rộng và Content-Type do client gửi đều sửa được. evil.php đổi tên thành avatar.jpg vẫn qua.\n- Đọc magic bytes đầu file (FF D8 FF cho JPEG, 89 50 4E 47 cho PNG) hoặc dùng thư viện detect kiểu.\n- Chắc chắn nhất với ảnh: re-encode qua thư viện xử lý ảnh (sharp, ImageMagick). File polyglot vừa là ảnh vừa là script sẽ bị phá khi encode lại.",
+        "2. Tên file — không bao giờ dùng tên gốc.\n- Sinh tên mới (UUID) + phần mở rộng suy ra từ loại đã kiểm tra. Cách này diệt luôn path traversal (../../etc/passwd), null byte (a.php\\0.jpg), tên trùng lặp và ký tự Unicode gây rối.\n- Lưu tên gốc vào DB nếu cần hiển thị, và escape khi render.",
+        "<script>",
+        "onload",
+        "3. Nơi lưu và cách phục vụ.\n- Không lưu trong web root. Tốt nhất là object storage (S3/R2) ở bucket riêng, hoặc thư mục ngoài docroot rồi stream qua ứng dụng.\n- Phục vụ từ domain khác (sandbox domain) để file không chạy trong origin chính.\n- Đặt Content-Type tường minh theo loại đã kiểm tra, kèm X-Content-Type-Options: nosniff và Content-Disposition: attachment cho file không phải ảnh.\n- Vô hiệu hoá thực thi ở thư mục upload (không map PHP/CGI handler)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "98558-chuc-nang-upload-avatar-cho-phep-user-chon-file-bat-ky-ban-kiem-soat-the-nao-de"
+  },
+  {
+    "id": "4d20c4bc-4f8a-5bd6-a35d-c92918057813",
+    "question": "Path traversal xảy ra khi nào? Vì sao lọc chuỗi ../ là cách chống sai?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98559-path-traversal-xay-ra-khi-nao-vi-sao-loc-chuoi-la-cach-chong-sai",
+    "slug": "path-traversal-xay-ra-khi-nao-vi-sao-loc-chuoi-la-cach-chong-sai-4d20c4bc-4f8a-5bd6-a35d-c92918057813",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì sao lọc ../ không đủ:\n- Lọc một lần, không lặp: ....// sau khi bỏ ../ còn lại ../.\n- Biến thể encode: %2e%2e%2f, double-encode %252e%252e%252f, overlong UTF-8, backslash ..\\ trên Windows.\n- Absolute path hoàn toàn không chứa ../: ?name=/etc/passwd với hàm join có thể bỏ qua prefix.\n- Symlink trỏ ra ngoài thư mục cho phép.",
+        "resolve trước, so sánh sau"
+      ],
+      "details": [
+        "Blacklist luôn thua ở cuộc đua biến thể encoding.",
+        "1. Tốt nhất: không nhận đường dẫn. Nhận một id, tra DB lấy đường dẫn thật đã kiểm soát.\n2. Nếu buộc phải nhận tên, normalize rồi kiểm tra prefix:",
+        "Cách đúng — không lọc mà xác minh kết quả:"
+      ],
+      "points": [],
+      "sections": [
+        "Path traversal xảy ra khi tên file/đường dẫn lấy từ input của user rồi ghép vào thao tác đọc/ghi file."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// vulnerable\napp.get('/download', (req, res) => {\n  res.sendFile('/var/data/' + req.query.name)\n})\n// ?name=../../../../etc/passwd"
+        },
+        {
+          "language": "JS",
+          "code": "const path = require('node:path')\nconst ROOT = '/var/data'\nconst full = path.resolve(ROOT, req.query.name)\nif (full !== ROOT && !full.startsWith(ROOT + path.sep)) {\n  return res.status(400).end()\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "98559-path-traversal-xay-ra-khi-nao-vi-sao-loc-chuoi-la-cach-chong-sai"
+  },
+  {
+    "id": "fad07fc0-3680-5c99-882e-7a13801a498c",
+    "question": "Cấu hình CORS sai kiểu nào biến nó thành lỗ hổng? Vì sao \"phản chiếu Origin cho tiện\" lại nguy hiểm?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98560-cau-hinh-cors-sai-kieu-nao-bien-no-thanh-lo-hong-vi-sao-phan-chieu-origin-cho-ti",
+    "slug": "cau-hinh-cors-sai-kieu-nao-bien-no-thanh-lo-hong-vi-sao-phan-chieu-origin-cho-tien-lai-nguy-hiem-fad07fc0-3680-5c99-882e-7a13801a498c",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "CORS là cơ chế nới lỏng Same-Origin Policy. Cấu hình sai nghĩa là bạn tự tay mở dữ liệu của mình cho site khác đọc.",
+        "đọc được response"
+      ],
+      "details": [
+        "Các biến thể sai khác:\n- Khớp Origin bằng startsWith/endsWith: https://your-site.com.evil.example hoặc https://evilyour-site.com lọt qua. Phải so khớp chính xác với danh sách cho phép.\n- Cho phép null: Origin: null phát sinh từ iframe sandbox, redirect, data: URL — kẻ tấn công tạo được dễ dàng.\n- Whitelist toàn bộ subdomain (*.your-site.com) khi có subdomain do người dùng kiểm soát hoặc một subdomain cũ bị bỏ hoang (subdomain takeover).\n- Dùng * cho API nội bộ — với * trình duyệt không gửi credentials, nhưng nếu API tin tưởng theo IP mạng nội bộ thì vẫn rò dữ liệu.",
+        "Sai lầm nguy hiểm nhất — phản chiếu Origin kèm credentials:",
+        "Cấu hình đúng:"
+      ],
+      "points": [],
+      "sections": [
+        "Hai điểm hay quên: phải thêm Vary: Origin để CDN không cache nhầm header cho origin khác, và CORS không thay thế xác thực — endpoint vẫn phải kiểm tra quyền như thường."
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// dangerous\nres.setHeader('Access-Control-Allow-Origin', req.headers.origin)\nres.setHeader('Access-Control-Allow-Credentials', 'true')"
+        },
+        {
+          "language": "JS",
+          "code": "const ALLOWED = new Set(['https://app.your-site.com', 'https://admin.your-site.com'])\nconst origin = req.headers.origin\nif (origin && ALLOWED.has(origin)) {\n  res.setHeader('Access-Control-Allow-Origin', origin)\n  res.setHeader('Vary', 'Origin')   // bắt buộc so caches do not mix responses\n  res.setHeader('Access-Control-Allow-Credentials', 'true')\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "98560-cau-hinh-cors-sai-kieu-nao-bien-no-thanh-lo-hong-vi-sao-phan-chieu-origin-cho-ti"
+  },
+  {
+    "id": "0517f3f5-e2e6-5c20-95fe-76e317ee13fb",
+    "question": "Giữa bcrypt, scrypt và Argon2id thì chọn cái nào? Tham số đặt bao nhiêu là hợp lý?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98604-giua-bcrypt-scrypt-va-argon2id-thi-chon-cai-nao-tham-so-dat-bao-nhieu-la-hop-ly",
+    "slug": "giua-bcrypt-scrypt-va-argon2id-thi-chon-cai-nao-tham-so-dat-bao-nhieu-la-hop-ly-0517f3f5-e2e6-5c20-95fe-76e317ee13fb",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả ba đều là hàm hash chậm có tham số chi phí, khác nhau ở loại tài nguyên mà chúng bắt kẻ tấn công phải trả."
+      ],
+      "details": [
+        "Cách chọn tham số thực tế: không copy con số cố định — đo trên chính phần cứng production, tăng dần chi phí cho tới khi một lần verify mất khoảng 0.5-1 giây ở mức tải chấp nhận được, rồi lùi lại một nấc. Nhớ rằng hash chậm cũng là tài nguyên bị tiêu tốn khi bị flood đăng nhập, nên phải đi kèm giới hạn tần suất.",
+        "PBKDF2 chỉ nên chọn khi có ràng buộc tuân thủ (FIPS) — nó chống GPU kém nhất trong nhóm."
+      ],
+      "points": [
+        "Argon2id — lựa chọn mặc định cho hệ thống mới. Vừa tốn CPU vừa tốn bộ nhớ (memory-hard) nên GPU/ASIC mất lợi thế; biến thể id kết hợp chống side-channel của Argon2i và chống GPU của Argon2d. Tham số: m (bộ nhớ), t (số vòng), p (song song). Điểm khởi đầu hợp lý: m=19 MiB, t=2, p=1, tăng m nếu server dư RAM.",
+        "scrypt — cũng memory-hard, dùng khi runtime không có Argon2. Tham số N (chi phí CPU/bộ nhớ), r, p; ví dụ N=2^17, r=8, p=1.",
+        "bcrypt — chỉ tốn CPU, không memory-hard, nhưng đã được kiểm chứng lâu năm và có sẵn ở mọi ngôn ngữ. Đặt cost (work factor) ≥ 10, phổ biến 12. Hai bẫy riêng của bcrypt: giới hạn 72 byte đầu của mật khẩu (phần dư bị bỏ), và một số bản cài đặt có vấn đề với byte null. Muốn hỗ trợ mật khẩu dài thì pre-hash bằng SHA-256 rồi mã hoá base64 trước khi đưa vào bcrypt."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "98604-giua-bcrypt-scrypt-va-argon2id-thi-chon-cai-nao-tham-so-dat-bao-nhieu-la-hop-ly"
+  },
+  {
+    "id": "d40544c8-e24a-5ffc-a91e-d9892b0d40bd",
+    "question": "Hệ thống cũ đang lưu mật khẩu bằng MD5/SHA-1. Chuyển sang bcrypt/Argon2 thế nào mà không bắt toàn bộ user đổi mật khẩu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98605-he-thong-cu-dang-luu-mat-khau-bang-md5-sha-1-chuyen-sang-bcrypt-argon2-the-nao-m",
+    "slug": "he-thong-cu-dang-luu-mat-khau-bang-md5-sha-1-chuyen-sang-bcrypt-argon2-the-nao-ma-khong-bat-toan-bo-d40544c8-e24a-5ffc-a91e-d9892b0d40bd",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không thể \"giải mã\" hash cũ, nhưng có hai chiến lược nâng cấp mà user không phải làm gì."
+      ],
+      "details": [
+        "Cách 1 — nâng cấp khi đăng nhập (lazy rehash). Giữ nguyên hash cũ, thêm cột đánh dấu thuật toán. Khi user đăng nhập thành công, ta đang cầm mật khẩu dạng rõ trong bộ nhớ → hash lại bằng thuật toán mới rồi ghi đè.",
+        "Cách 2 — bọc hash cũ ngay lập tức (layered/wrapped hashing). Chạy một migration hàng loạt, đưa hash cũ qua thuật toán mới: argon2id(md5(password)), lưu cờ wrapped=true. Toàn bộ DB an toàn ngay trong một lần chạy, không cần biết mật khẩu. Khi verify thì tính md5 trước rồi verify Argon2. Sau đó vẫn nên kết hợp cách 1 để dần chuyển về dạng thuần argon2id(password).",
+        "Vận hành đi kèm: lưu định danh thuật toán + tham số ngay trong chuỗi hash (bcrypt/Argon2 đã làm sẵn) để lần đổi tham số sau chỉ là lazy rehash; bắt buộc đổi mật khẩu chỉ với nhóm tài khoản có dấu hiệu bị lộ; và cùng lúc kiểm tra mật khẩu đang dùng có nằm trong tập đã lộ hay không."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const user = await findByEmail(email)\nconst ok = user.algo === 'md5'\n  ? md5(password) === user.hash\n  : await argon2.verify(user.hash, password)\nif (!ok) return fail()\n\nif (user.algo !== 'argon2id' || argon2.needsRehash(user.hash, PARAMS)) {\n  await updateHash(user.id, await argon2.hash(password), 'argon2id')\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "98605-he-thong-cu-dang-luu-mat-khau-bang-md5-sha-1-chuyen-sang-bcrypt-argon2-the-nao-m"
+  },
+  {
+    "id": "487caedb-5d0e-56b3-be2f-be2e4ed639b0",
+    "question": "Khoá tài khoản sau N lần đăng nhập sai có an toàn không? Rủi ro DoS ngược là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98606-khoa-tai-khoan-sau-n-lan-dang-nhap-sai-co-an-toan-khong-rui-ro-dos-nguoc-la-gi",
+    "slug": "khoa-tai-khoan-sau-n-lan-dang-nhap-sai-co-an-toan-khong-rui-ro-dos-nguoc-la-gi-487caedb-5d0e-56b3-be2f-be2e4ed639b0",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khoá cứng tài khoản sau N lần sai tạo ra kênh tấn công từ chối dịch vụ: kẻ tấn công chỉ cần biết email nạn nhân, gửi N request sai mật khẩu là khoá được người ta. Với danh sách email lấy từ bước enumeration, có thể khoá hàng loạt tài khoản, thậm chí khoá tài khoản quản trị đúng lúc cần xử lý sự cố. Nó cũng đẩy chi phí sang bộ phận hỗ trợ và mở đường cho social engineering (\"tôi bị khoá, mở giúp\")."
+      ],
+      "details": [
+        "Các lựa chọn ít rủi ro hơn, xếp theo mức ưu tiên:",
+        "1. Trễ tăng dần (exponential backoff) theo tài khoản: lần sai thứ n phải chờ 2^n giây, tối đa vài phút. Chặn được dò tự động mà không tạo trạng thái khoá vĩnh viễn.\n2. Thêm ma sát có điều kiện: sau vài lần sai thì yêu cầu CAPTCHA hoặc bước xác minh phụ, thay vì chặn hẳn.\n3. Khoá tạm thời, tự mở (vd 15-30 phút) nếu bắt buộc phải có ngưỡng — không bao giờ khoá đến khi admin can thiệp thủ công.\n4. Bỏ qua các lần sai lặp cùng một mật khẩu (user gõ nhầm cùng chuỗi nhiều lần không nên tính là tấn công).",
+        "Dù chọn cách nào, hãy nhớ khoá tài khoản không chặn được credential stuffing vì ở đó kẻ tấn công gõ đúng mật khẩu ngay lần đầu. Giá trị thực của giới hạn tần suất nằm ở chỗ chặn dò mật khẩu; muốn chặn stuffing thì phải dùng MFA và phát hiện bất thường ở mức toàn hệ thống."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "98606-khoa-tai-khoan-sau-n-lan-dang-nhap-sai-co-an-toan-khong-rui-ro-dos-nguoc-la-gi"
+  },
+  {
+    "id": "8a21ed37-1342-50de-b286-bdab5194e861",
+    "question": "Giới hạn tần suất đăng nhập nên tính theo IP hay theo tài khoản? Thiết kế thế nào cho đúng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98607-gioi-han-tan-suat-dang-nhap-nen-tinh-theo-ip-hay-theo-tai-khoan-thiet-ke-the-nao",
+    "slug": "gioi-han-tan-suat-dang-nhap-nen-tinh-theo-ip-hay-theo-tai-khoan-thiet-ke-the-nao-cho-dung-8a21ed37-1342-50de-b286-bdab5194e861",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai — mỗi chiều chặn một dạng tấn công khác nhau, dùng một chiều là có lỗ hổng."
+      ],
+      "details": [
+        "Thiết kế thực dụng gồm nhiều tầng chạy song song:",
+        "1. Theo tài khoản — backoff tăng dần trên số lần sai liên tiếp.\n2. Theo IP — trần số lần đăng nhập thất bại trong cửa sổ thời gian, đặt đủ rộng để không chặn nhầm NAT của công ty.\n3. Theo (IP, tài khoản) — cặp này bắt đúng kịch bản dò tập trung.\n4. Theo ASN/subnet và toàn hệ thống — chống botnet phân tán: nếu tỉ lệ đăng nhập thất bại toàn cục vọt lên bất thường thì bật CAPTCHA cho mọi người, đây là tín hiệu duy nhất nhìn thấy được credential stuffing.",
+        "Các điểm hay sai khi cài đặt:\n- Đọc IP từ X-Forwarded-For mà không tin cậy proxy → kẻ tấn công tự đặt header để né. Chỉ lấy IP do lớp proxy của mình gán.\n- Bộ đếm để trong bộ nhớ tiến trình → chạy nhiều instance là vô hiệu. Dùng kho dùng chung (Redis).\n- Chỉ đếm ở endpoint /login mà quên các đường vào khác: đổi mật khẩu, refresh token, gửi lại OTP, API đăng nhập cho mobile.\n- Không giới hạn nên mỗi request đều chạy hash chậm → chính hàm bảo vệ mật khẩu trở thành điểm cạn tài nguyên."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Theo tài khoản",
+            "Dò mật khẩu một tài khoản từ botnet nhiều IP",
+            "Credential stuffing rải mỏng (mỗi account 1 lần)",
+            "Theo IP",
+            "Kịch bản dò từ một nguồn",
+            "Botnet, proxy xoay IP; và chặn nhầm cả văn phòng/nhà mạng đứng sau một NAT",
+            "Khoá đếm"
+          ]
+        }
+      ]
+    },
+    "legacyId": 52,
+    "sourceSlug": "98607-gioi-han-tan-suat-dang-nhap-nen-tinh-theo-ip-hay-theo-tai-khoan-thiet-ke-the-nao"
+  },
+  {
+    "id": "8131d014-bb36-5733-b582-949997c198b2",
+    "question": "TOTP (Google Authenticator) hoạt động thế nào? Backup code cần lưu ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98608-totp-google-authenticator-hoat-dong-the-nao-backup-code-can-luu-ra-sao",
+    "slug": "totp-google-authenticator-hoat-dong-the-nao-backup-code-can-luu-ra-sao-8131d014-bb36-5733-b582-949997c198b2",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "TOTP (RFC 6238) là HOTP với bộ đếm lấy từ thời gian.",
+        "hoàn toàn offline"
+      ],
+      "details": [
+        "Những điểm bắt buộc khi cài đặt:\n- Chấp nhận lệch múi thời gian ±1 bước (thường ±30s) cho đồng hồ lệch, không mở rộng hơn.\n- Chống dùng lại: lưu bước thời gian gần nhất đã dùng thành công, từ chối cùng một mã lần thứ hai — nếu không, kẻ đọc lén mã trong 30 giây vẫn dùng được.\n- Giới hạn tần suất trên bước nhập mã, vì không gian chỉ có 10^6 giá trị.\n- Secret phải mã hoá khi lưu (không phải hash — server cần giá trị gốc để tính lại), khoá nằm ở secret store.\n- Bắt user xác nhận một mã hợp lệ trước khi bật MFA, tránh khoá chính họ ra ngoài.",
+        "Backup code: sinh 8-10 mã ngẫu nhiên đủ entropy, hiển thị đúng một lần khi bật MFA. Trong DB chúng là thông tin xác thực, phải hash như mật khẩu (dùng cùng hàm hash chậm), mỗi mã chỉ dùng một lần rồi vô hiệu. Cho phép user sinh lại bộ mới — thao tác đó phải huỷ toàn bộ bộ cũ."
+      ],
+      "points": [
+        "Server và ứng dụng xác thực chia sẻ một secret ngẫu nhiên (mã hoá base32, thường trao qua QR code).",
+        "Mã 6 chữ số được tính:"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "T    = floor((now - T0) / X)        // X = 30s time step\ncode = truncate(HMAC-SHA1(secret, T)) mod 10^6"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "98608-totp-google-authenticator-hoat-dong-the-nao-backup-code-can-luu-ra-sao"
+  },
+  {
+    "id": "e62fcebc-8723-538f-a7a1-53e0f7a18044",
+    "question": "Thiết kế luồng quên mật khẩu an toàn thế nào? Token reset cần thoả những điều kiện gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98609-thiet-ke-luong-quen-mat-khau-an-toan-the-nao-token-reset-can-thoa-nhung-dieu-kie",
+    "slug": "thiet-ke-luong-quen-mat-khau-an-toan-the-nao-token-reset-can-thoa-nhung-dieu-kien-gi-e62fcebc-8723-538f-a7a1-53e0f7a18044",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Luồng chuẩn: user nhập email → server gửi link chứa token dùng một lần, hết hạn ngắn → user mở link, đặt mật khẩu mới → token bị huỷ."
+      ],
+      "details": [
+        "Yêu cầu với token:\n- Sinh bằng CSPRNG, tối thiểu 128 bit entropy (crypto.randomBytes(32)), không phải Math.random(), không phải hash email + timestamp (đoán được).\n- Lưu dạng hash trong DB (SHA-256 là đủ vì token đã đủ entropy, không cần hash chậm). Rò rỉ DB không cho phép reset mật khẩu người khác.\n- Hết hạn ngắn: 15-60 phút.\n- Dùng một lần — xoá ngay khi đổi mật khẩu thành công, và mỗi lần yêu cầu mới phải vô hiệu token cũ.\n- Nằm ở query string hoặc path của link, gửi qua HTTPS; trang reset không được nhúng tài nguyên bên thứ ba làm rò token qua header Referer.",
+        "Không rò rỉ email có tồn tại hay không: phản hồi luôn giống nhau — \"Nếu email tồn tại, chúng tôi đã gửi hướng dẫn\" — cùng mã trạng thái, cùng thời gian phản hồi. Nếu email không có trong hệ thống thì chỉ đơn giản không gửi mail, đừng báo lỗi.",
+        "Sau khi đổi mật khẩu thành công, bắt buộc:\n- Huỷ toàn bộ phiên đang mở và refresh token của tài khoản (trừ phiên hiện tại nếu muốn) — nếu không, kẻ đã chiếm phiên vẫn ở lại.\n- Gửi email thông báo \"mật khẩu vừa được đổi\" tới địa chỉ cũ.\n- Không tự động đăng nhập user chỉ dựa vào token; và không bao giờ gửi mật khẩu mới qua email."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "98609-thiet-ke-luong-quen-mat-khau-an-toan-the-nao-token-reset-can-thoa-nhung-dieu-kie"
+  },
+  {
+    "id": "1e3ef832-4b3f-5829-9212-82fb0e9e79fb",
+    "question": "Kiểm tra quyền nên đặt ở đâu? Vì sao ẩn nút trên UI không phải là phân quyền?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98610-kiem-tra-quyen-nen-dat-o-dau-vi-sao-an-nut-tren-ui-khong-phai-la-phan-quyen",
+    "slug": "kiem-tra-quyen-nen-dat-o-dau-vi-sao-an-nut-tren-ui-khong-phai-la-phan-quyen-1e3ef832-4b3f-5829-9212-82fb0e9e79fb",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Quyền phải được kiểm tra ở phía server, tại tầng gần dữ liệu nhất, trên mọi endpoint — UI chỉ quyết định hiển thị.",
+        "Quyền phải được kiểm tra ở phía server, tại tầng gần dữ liệu nhất, trên mọi endpoint"
+      ],
+      "details": [
+        "Ẩn nút \"Xoá\" chỉ làm người dùng bình thường không thấy chức năng. Kẻ tấn công không dùng UI: họ mở DevTools, đọc bundle JS để biết endpoint tồn tại, rồi gọi thẳng DELETE /api/users/42 bằng curl. Mọi thứ chạy trên máy client — HTML ẩn, route bị disable, cờ isAdmin trong response — đều sửa được. Đây chính là lỗi Broken Function Level Authorization (API5): endpoint quản trị không được bảo vệ, chỉ \"không được link tới\".",
+        "Nguyên tắc cài đặt:",
+        "1. Mặc định từ chối. Middleware chặn tất cả, route nào công khai thì khai báo tường minh. Ngược lại (mặc định cho phép, nhớ chặn từng route) là kiểu thiết kế sớm muộn cũng sót.\n2. Kiểm tra ở một chỗ, không rải rác. Đặt trong tầng service hoặc middleware chung, không copy điều kiện if (user.role === ...) vào từng controller — chỉ cần quên một chỗ là thủng.\n3. Kiểm tra cả quyền chức năng lẫn quyền trên đối tượng. \"Được xoá bài viết\" khác \"được xoá bài viết này\". Xem thêm câu về IDOR/BOLA.\n4. Danh tính lấy từ phiên/token đã verify, không bao giờ từ tham số client gửi lên (?userId=, header X-Role, trường role trong body).\n5. Ghi log các lần từ chối để phát hiện dò quét."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": "98610-kiem-tra-quyen-nen-dat-o-dau-vi-sao-an-nut-tren-ui-khong-phai-la-phan-quyen"
+  },
+  {
+    "id": "6e863c0a-142c-546e-9cb8-f98b51cbfc67",
+    "question": "Phát hiện API key production đã bị commit lên GitHub tuần trước. Bạn xử lý theo thứ tự nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98656-phat-hien-api-key-production-da-bi-commit-len-github-tuan-truoc-ban-xu-ly-theo-t",
+    "slug": "phat-hien-api-key-production-da-bi-commit-len-github-tuan-truoc-ban-xu-ly-theo-thu-tu-nao-6e863c0a-142c-546e-9cb8-f98b51cbfc67",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nguyên tắc số một: rotate trước, dọn lịch sử sau. Nhiều người làm ngược — mất hàng giờ viết lại git history trong khi key vẫn đang sống và đã bị bot quét từ vài phút sau lúc push."
+      ],
+      "details": [
+        "1. Coi như đã lộ hoàn toàn. Repo private, commit đã bị revert, không ai để ý — đều không thay đổi kết luận.\n2. Rotate ngay: tạo key mới, cập nhật nơi lưu secret của các môi trường, deploy, rồi thu hồi key cũ. Nếu nhà cung cấp cho phép, revoke trước và chấp nhận downtime ngắn.\n3. Điều tra dấu vết: xem audit log của dịch vụ trong khoảng từ lúc commit tới lúc revoke — có request từ IP lạ không, có tài nguyên nào bị tạo/xoá không. Đây là bước quyết định sự cố này có phải báo cáo lên trên hay không.\n4. Dọn lịch sử: git filter-repo (hoặc BFG) rồi force-push, yêu cầu mọi người re-clone. Lưu ý điều này không xoá được các fork, bản clone đã tồn tại và cache của GitHub — nên nó chỉ là dọn dẹp, không phải biện pháp khắc phục.\n5. Chặn tái diễn: bật secret scanning + push protection, thêm hook quét local, và xem lại vì sao secret production lại nằm trong tầm tay lúc code.",
+        "Các nhà cung cấp lớn (AWS, Stripe, GitHub) có chương trình quét công khai và có thể tự vô hiệu hoá key bị lộ — nhưng đừng phụ thuộc vào đó.",
+        "Thứ tự xử lý:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "98656-phat-hien-api-key-production-da-bi-commit-len-github-tuan-truoc-ban-xu-ly-theo-t"
+  },
+  {
+    "id": "6bd5bbef-9003-5b0c-ae1e-e6b282b41003",
+    "question": "pnpm audit báo 40 lỗ hổng, trong đó 5 critical. Bạn xử lý thế nào — có phải cứ nâng hết là xong?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98659-pnpm-audit-bao-40-lo-hong-trong-do-5-critical-ban-xu-ly-the-nao-co-phai-cu-nang",
+    "slug": "pnpm-audit-bao-40-lo-hong-trong-do-5-critical-ban-xu-ly-the-nao-co-phai-cu-nang-het-la-xong-6bd5bbef-9003-5b0c-ae1e-e6b282b41003",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không. Đọc kết quả audit theo kiểu \"số càng nhỏ càng tốt\" dẫn tới hai sai lầm: nâng bừa gây hỏng build, hoặc bỏ qua cả danh sách vì \"toàn cảnh báo giả\"."
+      ],
+      "details": [
+        "1. Phân loại theo đường đi thực tế. Lỗ hổng nằm trong devDependencies (build tool, test runner) không chạy trên production — mức độ khác hẳn với lỗ hổng trong package xử lý request của user. Xem thêm lỗ hổng có nằm trên đường code bạn thực sự gọi hay không.\n2. Ưu tiên critical/high có khai thác từ xa và có patch sẵn. Cập nhật trước nhóm này, mỗi lần một nhóm nhỏ, có test và có khả năng rollback.\n3. Với transitive dependency chưa được package cha nâng: dùng pnpm.overrides (npm là overrides, yarn là resolutions) để ép version vá, ghi lại lý do và hạn xem lại.\n4. Cái không sửa được thì ghi nhận có thời hạn — chấp nhận rủi ro là quyết định hợp lệ, nhưng phải thành văn bản và có ngày rà lại, không phải im lặng bỏ qua.",
+        "Về phòng ngừa:\n- Commit lockfile và cài bằng pnpm install --frozen-lockfile trong CI — nếu không, build hôm nay và hôm qua có thể ra cây phụ thuộc khác nhau.\n- Bật Dependabot/Renovate để cập nhật nhỏ, đều đặn. Nâng version thường xuyên rẻ hơn nhiều so với một lần nhảy 3 major khi có CVE gấp.\n- Giảm số lượng dependency ngay từ đầu: mỗi package thêm vào là thêm bề mặt tấn công và thêm việc phải theo dõi.",
+        "Quy trình hợp lý:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "98659-pnpm-audit-bao-40-lo-hong-trong-do-5-critical-ban-xu-ly-the-nao-co-phai-cu-nang"
+  },
+  {
+    "id": "9a8435da-28bc-55ab-a8f8-807b1c3e5e93",
+    "question": "Tối thiểu hoá dữ liệu (data minimization) nghĩa là gì? Ở mức lập trình viên, Nghị định 13 và GDPR đòi hỏi gì cụ thể?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98660-toi-thieu-hoa-du-lieu-data-minimization-nghia-la-gi-o-muc-lap-trinh-vien-nghi-di",
+    "slug": "toi-thieu-hoa-du-lieu-data-minimization-nghia-la-gi-o-muc-lap-trinh-vien-nghi-dinh-13-va-gdpr-doi-ho-9a8435da-28bc-55ab-a8f8-807b1c3e5e93",
+    "access": "free",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tối thiểu hoá dữ liệu là chỉ thu thập và lưu đúng những gì cần cho mục đích đã nêu, và chỉ giữ trong thời gian còn cần. Nó là lựa chọn kiến trúc, không phải việc của riêng bộ phận pháp chế: dữ liệu không lưu là dữ liệu không thể bị lộ."
+      ],
+      "details": [
+        "Việc cụ thể của lập trình viên:\n- Bỏ trường không dùng. Form đăng ký hỏi ngày sinh, giới tính, địa chỉ nhưng sản phẩm không dùng tới thì bỏ đi.\n- Lưu dạng ít nhạy cảm hơn khi đủ dùng: cần biết user đủ 18 tuổi thì lưu cờ boolean thay vì ngày sinh; cần thống kê theo tỉnh thì đừng lưu địa chỉ đầy đủ.\n- Đặt retention: log, session, dữ liệu phân tích đều phải có thời hạn xoá tự động.\n- Xoá là xoá thật, kể cả trong backup và hệ thống phân tích — nếu vì lý do kỹ thuật chỉ soft-delete được thì phải có kế hoạch dọn thật.\n- Kiểm soát truy cập nội bộ: dashboard nội bộ hiển thị đầy đủ CCCD của mọi khách hàng là một rủi ro thực tế; che bớt và ghi audit log ai xem gì.",
+        "Mặt pháp lý cần biết (mức dev): cả Nghị định 13/2023/NĐ-CP của Việt Nam và GDPR đều yêu cầu có cơ sở hợp pháp để xử lý dữ liệu, thông báo rõ mục đích, và cho chủ thể quyền truy cập / sửa / xoá dữ liệu của mình. Dịch sang việc kỹ thuật, điều đó nghĩa là hệ thống phải có sẵn: đường export dữ liệu của một user, đường xoá tài khoản kèm dữ liệu, bản ghi consent (ai đồng ý gì, lúc nào), và quy trình thông báo khi có sự cố lộ dữ liệu. Xây các đường này lúc thiết kế rẻ hơn nhiều so với việc chắp vá khi có yêu cầu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": "98660-toi-thieu-hoa-du-lieu-data-minimization-nghia-la-gi-o-muc-lap-trinh-vien-nghi-di"
+  },
+  {
+    "id": "fd3a2ff7-2cce-5a18-b11b-5320c1edc509",
+    "question": "Content Security Policy (CSP) là gì? Cách cấu hình?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "content-security-policy-csp-la-gi-cach-cau-hinh-fd3a2ff7-2cce-5a18-b11b-5320c1edc509",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": null
+  },
+  {
+    "id": "0e927e72-c122-5aac-8a2d-b59b6728c33b",
+    "question": "Dependency security: cách quản lý vulnerabilities trong npm packages?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dependency-security-cach-quan-ly-vulnerabilities-trong-npm-packages-0e927e72-c122-5aac-8a2d-b59b6728c33b",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": null
+  },
+  {
+    "id": "e2ced38e-425e-5552-b680-979a456102ff",
+    "question": "Secrets management: cách quản lý secrets an toàn trong production?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "secrets-management-cach-quan-ly-secrets-an-toan-trong-production-e2ced38e-425e-5552-b680-979a456102ff",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": null
+  },
+  {
+    "id": "c05949bc-168e-5669-989c-d4b09f750323",
+    "question": "OAuth 2.0 security best practices: PKCE, state param, token storage?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "oauth-2-0-security-best-practices-pkce-state-param-token-storage-c05949bc-168e-5669-989c-d4b09f750323",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": null
+  },
+  {
+    "id": "0a76dc89-e99a-505b-ba5e-85cb5603bd67",
+    "question": "SSRF (Server-Side Request Forgery) là gì? Cách phòng chống?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ssrf-server-side-request-forgery-la-gi-cach-phong-chong-0a76dc89-e99a-505b-ba5e-85cb5603bd67",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": null
+  },
+  {
+    "id": "4c7cf8c4-f978-5814-9459-e05a910b70b9",
+    "question": "Content Security Policy (CSP) là gì và giúp chống XSS thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "content-security-policy-csp-la-gi-va-giup-chong-xss-the-nao-4c7cf8c4-f978-5814-9459-e05a910b70b9",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": null
+  },
+  {
+    "id": "34d21d7e-76cb-5ac0-9cba-1fb831af3dfa",
+    "question": "BFF (Backend-for-Frontend) trong xác thực là gì? Vì sao được khuyến nghị thay cho việc SPA tự giữ token?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "bff-backend-for-frontend-trong-xac-thuc-la-gi-vi-sao-duoc-khuyen-nghi-thay-cho-viec-spa-tu-giu-token-34d21d7e-76cb-5ac0-9cba-1fb831af3dfa",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": null
+  },
+  {
+    "id": "9f26b51d-bbd1-5707-aa47-deb26d2cca72",
+    "question": "Refresh token rotation và reuse detection hoạt động ra sao? Vì sao cần cả hai?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "refresh-token-rotation-va-reuse-detection-hoat-dong-ra-sao-vi-sao-can-ca-hai-9f26b51d-bbd1-5707-aa47-deb26d2cca72",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": null
+  },
+  {
+    "id": "e6f56dff-8a0b-51d4-a8a0-a2a6faf0f6b0",
+    "question": "Verify JWT sao cho đúng? Kể các lỗi thường gặp khi tự viết phần kiểm tra token.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "verify-jwt-sao-cho-dung-ke-cac-loi-thuong-gap-khi-tu-viet-phan-kiem-tra-token-e6f56dff-8a0b-51d4-a8a0-a2a6faf0f6b0",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": null
+  },
+  {
+    "id": "1c1ab158-ce77-590b-87d3-0ada788f2552",
+    "question": "Bạn sẽ thiết kế SSO cho nhiều domain khác nhau thế nào (không phải subdomain chung)?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-se-thiet-ke-sso-cho-nhieu-domain-khac-nhau-the-nao-khong-phai-subdomain-chung-1c1ab158-ce77-590b-87d3-0ada788f2552",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": null
+  },
+  {
+    "id": "e326262b-6643-532d-8d4d-3b3d2f5880d8",
+    "question": "Trong hệ multi-tenant, bạn đặt scope/claim vào token thế nào để phân quyền theo tenant?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "trong-he-multi-tenant-ban-dat-scope-claim-vao-token-the-nao-de-phan-quyen-theo-tenant-e326262b-6643-532d-8d4d-3b3d2f5880d8",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": null
+  },
+  {
+    "id": "57269735-f6e0-526e-92d9-9515146a199d",
+    "question": "Prototype pollution trong JavaScript là gì? Nó dẫn tới RCE hay bypass xác thực bằng cách nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "prototype-pollution-trong-javascript-la-gi-no-dan-toi-rce-hay-bypass-xac-thuc-bang-cach-nao-57269735-f6e0-526e-92d9-9515146a199d",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": null
+  },
+  {
+    "id": "19fae50c-b9fb-5e8b-9bc0-41b6983f5b19",
+    "question": "Trang bạn nhúng script analytics/chat của bên thứ ba. Rủi ro là gì, và Subresource Integrity giúp tới đâu?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "trang-ban-nhung-script-analytics-chat-cua-ben-thu-ba-rui-ro-la-gi-va-subresource-integrity-giup-toi-19fae50c-b9fb-5e8b-9bc0-41b6983f5b19",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": null
+  },
+  {
+    "id": "34d8e4aa-8659-50cb-ac60-d03b5d34d617",
+    "question": "Sanitize HTML ở server rồi lưu DB, client render lại — cách này hở ở đâu? mXSS (mutation XSS) là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "sanitize-html-o-server-roi-luu-db-client-render-lai-cach-nay-ho-o-dau-mxss-mutation-xss-la-gi-34d8e4aa-8659-50cb-ac60-d03b5d34d617",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": null
+  },
+  {
+    "id": "a2ffd3ae-a8c6-57a3-8024-ae4526c9ddd4",
+    "question": "Thông báo lỗi và log rò rỉ thông tin thế nào? Bạn thiết kế cơ chế báo lỗi và ghi log ra sao cho an toàn?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "thong-bao-loi-va-log-ro-ri-thong-tin-the-nao-ban-thiet-ke-co-che-bao-loi-va-ghi-log-ra-sao-cho-an-to-a2ffd3ae-a8c6-57a3-8024-ae4526c9ddd4",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": null
+  },
+  {
+    "id": "c582a0fa-c3e1-5055-a9b4-fb232d74cb74",
+    "question": "Trước khi đưa một tính năng mới lên production, bạn rà soát bảo mật theo checklist nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "truoc-khi-dua-mot-tinh-nang-moi-len-production-ban-ra-soat-bao-mat-theo-checklist-nao-c582a0fa-c3e1-5055-a9b4-fb232d74cb74",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": null
+  },
+  {
+    "id": "373ede17-0f60-5b22-a7c3-c27d61ff32f5",
+    "question": "IDOR/BOLA là gì? Chặn ở mức hệ thống thế nào để không phụ thuộc việc lập trình viên nhớ kiểm tra?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "idor-bola-la-gi-chan-o-muc-he-thong-the-nao-de-khong-phu-thuoc-viec-lap-trinh-vien-nho-kiem-tra-373ede17-0f60-5b22-a7c3-c27d61ff32f5",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 75,
+    "sourceSlug": null
+  },
+  {
+    "id": "7e97b8d1-5a70-5789-9e2a-0bbd887645d6",
+    "question": "RBAC và ABAC khác nhau thế nào? Khi nào mô hình role thuần không còn đủ?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "rbac-va-abac-khac-nhau-the-nao-khi-nao-mo-hinh-role-thuan-khong-con-du-7e97b8d1-5a70-5789-9e2a-0bbd887645d6",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 76,
+    "sourceSlug": null
+  },
+  {
+    "id": "b5b5ac8e-8405-5936-b131-f2e99a668dc8",
+    "question": "Mass assignment dẫn tới leo thang đặc quyền ra sao? Chặn thế nào cho triệt để?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mass-assignment-dan-toi-leo-thang-dac-quyen-ra-sao-chan-the-nao-cho-triet-de-b5b5ac8e-8405-5936-b131-f2e99a668dc8",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 77,
+    "sourceSlug": null
+  },
+  {
+    "id": "0b0fbb63-1101-546e-839a-9acba32beea9",
+    "question": "Timing attack khi so sánh token là gì? Vì sao === không an toàn và thay bằng gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "timing-attack-khi-so-sanh-token-la-gi-vi-sao-khong-an-toan-va-thay-bang-gi-0b0fbb63-1101-546e-839a-9acba32beea9",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 78,
+    "sourceSlug": null
+  },
+  {
+    "id": "e799490d-f83c-5e16-93c9-a85eed9abb7d",
+    "question": "Bạn thiết kế việc ghi nhận và cảnh báo đăng nhập bất thường thế nào? Thông báo cho người dùng ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ban-thiet-ke-viec-ghi-nhan-va-canh-bao-dang-nhap-bat-thuong-the-nao-thong-bao-cho-nguoi-dung-ra-sao-e799490d-f83c-5e16-93c9-a85eed9abb7d",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 79,
+    "sourceSlug": null
+  },
+  {
+    "id": "ecb1e7f5-894f-57ab-9fa4-21138f11eb58",
+    "question": "Yêu cầu mã hoá số CCCD trong DB nhưng vẫn phải tra cứu được theo số đó. Bạn thiết kế thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "yeu-cau-ma-hoa-so-cccd-trong-db-nhung-van-phai-tra-cuu-duoc-theo-so-do-ban-thiet-ke-the-nao-ecb1e7f5-894f-57ab-9fa4-21138f11eb58",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 80,
+    "sourceSlug": null
+  },
+  {
+    "id": "25c0d7e5-269f-55a2-a63b-93e493e372de",
+    "question": "Typosquatting và package bị chiếm quyền trên npm nguy hiểm tới mức nào? Chặn ở khâu nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "typosquatting-va-package-bi-chiem-quyen-tren-npm-nguy-hiem-toi-muc-nao-chan-o-khau-nao-25c0d7e5-269f-55a2-a63b-93e493e372de",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 81,
+    "sourceSlug": null
+  },
+  {
+    "id": "ee80ea99-9a9a-55ac-9cdf-a74d5fe1b8f3",
+    "question": "Làm sao chứng minh artifact đang chạy trên production đúng là được build từ source trong repo? SLSA giải quyết gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "lam-sao-chung-minh-artifact-dang-chay-tren-production-dung-la-duoc-build-tu-source-trong-repo-slsa-g-ee80ea99-9a9a-55ac-9cdf-a74d5fe1b8f3",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 82,
+    "sourceSlug": null
+  },
+  {
+    "id": "d10b268a-e61f-5543-82cb-7d9773685f25",
+    "question": "Một researcher báo có lỗ hổng IDOR đang khai thác được trên production. Bạn xử lý theo trình tự nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mot-researcher-bao-co-lo-hong-idor-dang-khai-thac-duoc-tren-production-ban-xu-ly-theo-trinh-tu-nao-d10b268a-e61f-5543-82cb-7d9773685f25",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 83,
+    "sourceSlug": null
+  },
+  {
+    "id": "52e1641e-e1d4-594a-89b7-06056a7592c8",
+    "question": "Team sắp làm tính năng \"chuyển tiền giữa ví nội bộ\". Bạn làm threat modeling nhẹ và review bảo mật thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "team-sap-lam-tinh-nang-chuyen-tien-giua-vi-noi-bo-ban-lam-threat-modeling-nhe-va-review-bao-mat-the-52e1641e-e1d4-594a-89b7-06056a7592c8",
+    "access": "pro",
+    "departments": [
+      "quality-security"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 84,
+    "sourceSlug": null
+  }
+]

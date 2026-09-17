@@ -1,0 +1,4117 @@
+[
+  {
+    "id": "3b5b66c9-352b-5798-8983-9f7720c7ed88",
+    "question": "Spring Boot là gì và có những ưu điểm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2564-spring-boot-la-gi-va-co-nhung-uu-diem-gi",
+    "slug": "spring-boot-la-gi-va-co-nhung-uu-diem-gi-3b5b66c9-352b-5798-8983-9f7720c7ed88",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Spring Boot là framework tạo app Java/Spring nhanh, ít cấu hình, dựng trên Spring Framework để bỏ phần lớn XML và boilerplate."
+      ],
+      "details": [
+        "Gồm 3 phần chính:\n1. Auto-configuration — tự cấu hình theo dependency có sẵn (thêm Tomcat → tự set up web server).\n2. Starter dependencies — gói all-in-one: khai spring-boot-starter-web là có Spring MVC + Tomcat + Jackson đúng version.\n3. Embedded server — Tomcat nhúng trong JAR, chạy java -jar app.jar, không cần cài Tomcat hay file .war.",
+        "Ưu điểm: dựng project vài phút (Spring Initializr), không XML, sẵn Actuator + externalized config; chuẩn cho microservice, REST API, cloud-native."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "2564-spring-boot-la-gi-va-co-nhung-uu-diem-gi"
+  },
+  {
+    "id": "afd30f89-7b12-58bc-9998-e48667cb5fb3",
+    "question": "@Autowired là gì và hoạt động thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2567-autowired-la-gi-va-hoat-dong-the-nao",
+    "slug": "autowired-la-gi-va-hoat-dong-the-nao-afd30f89-7b12-58bc-9998-e48667cb5fb3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "@Autowired bật tự động inject — Spring resolve và inject bean phù hợp. Đặt được trên constructor, setter, field. Resolve mặc định by type; nhiều bean cùng type → ambiguity, fix bằng @Qualifier(\"beanName\") tại điểm inject hoặc @Primary trên bean mặc định. Dependency optional: @Autowired(required = false)."
+      ],
+      "details": [
+        "Quy tắc:\n- Nên: Constructor injection — rõ ràng, final, dễ test; class có 1 constructor duy nhất thì không cần ghi @Autowired (Spring 4.3+).\n- Không nên: Field injection — ẩn dependency, cần reflection để mock.\n- Setter injection cho dependency optional.",
+        "Lombok @RequiredArgsConstructor tự sinh constructor cho final field — cách viết constructor injection gọn phổ biến."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "2567-autowired-la-gi-va-hoat-dong-the-nao"
+  },
+  {
+    "id": "1a36037d-ce93-5a11-bda8-cbbac14d87ef",
+    "question": "Spring Boot DevTools có tác dụng gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3503-spring-boot-devtools-co-tac-dung-gi",
+    "slug": "spring-boot-devtools-co-tac-dung-gi-1a36037d-ce93-5a11-bda8-cbbac14d87ef",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "DevTools là optional dependency tăng tốc dev — auto restart + reload khi đổi file. Thêm dependency spring-boot-devtools (scope optional)."
+      ],
+      "details": [
+        "Tính năng:\n- Automatic restart — detect file đổi trên classpath → restart context ~1-2s (nhanh nhờ 2 ClassLoader: libs vs app code, chỉ reload app).\n- LiveReload — browser tự refresh sau restart.\n- Property defaults — tắt cache template (Thymeleaf), bật debug logging.",
+        "Tự động tắt khi chạy java -jar (fully packaged) hoặc môi trường production. Không dùng trong production — chậm, không an toàn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "3503-spring-boot-devtools-co-tac-dung-gi"
+  },
+  {
+    "id": "d185ca6f-0192-586d-b4cc-0e1b6496f88d",
+    "question": "@RestController và @Controller khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3509-restcontroller-va-controller-khac-nhau-the-nao",
+    "slug": "restcontroller-va-controller-khac-nhau-the-nao-d185ca6f-0192-586d-b4cc-0e1b6496f88d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "@RestController = @Controller + @ResponseBody."
+      ],
+      "details": [
+        "Cần trả JSON từ 1 method lẻ trong @Controller → gắn @ResponseBody trên method đó."
+      ],
+      "points": [
+        "@Controller method trả view name — return \"home\" → ViewResolver tìm template templates/home.html render thành HTML.",
+        "@RestController trả object — @ResponseBody bảo Spring bỏ qua view resolution, dùng Jackson serialize object thẳng thành JSON vào response body."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "@Controller",
+            "@RestController",
+            "Trả về",
+            "View name (template)",
+            "Data trực tiếp (JSON/XML)",
+            "Data trực tiếp",
+            "Dùng cho",
+            "Web MVC (Thymeleaf, JSP)",
+            "REST API"
+          ]
+        }
+      ]
+    },
+    "legacyId": 4,
+    "sourceSlug": "3509-restcontroller-va-controller-khac-nhau-the-nao"
+  },
+  {
+    "id": "45e8aa3b-8f88-5cb4-a9f7-085104b001ac",
+    "question": "@PathVariable, @RequestParam và @RequestBody khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3510-pathvariable-requestparam-va-requestbody-khac-nhau-the-nao",
+    "slug": "pathvariable-requestparam-va-requestbody-khac-nhau-the-nao-45e8aa3b-8f88-5cb4-a9f7-085104b001ac",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Kết hợp được trong cùng method: path cho ID, query cho option, body cho data."
+      ],
+      "details": [],
+      "points": [
+        "@PathVariable — resource identifier (ID, slug) trong path, bắt buộc: @GetMapping(\"/users/{id}\") + @PathVariable Long id.",
+        "@RequestParam — filter/paging/sort từ query string, optional và có default: @RequestParam(defaultValue = \"0\") int page."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "@PathVariable",
+            "GET /users/42",
+            "URI path segment",
+            "Query string",
+            "Request body (JSON)",
+            "Annotation",
+            "POST /users"
+          ]
+        }
+      ]
+    },
+    "legacyId": 5,
+    "sourceSlug": "3510-pathvariable-requestparam-va-requestbody-khac-nhau-the-nao"
+  },
+  {
+    "id": "53bf61fe-da97-547f-8906-3d989f862387",
+    "question": "@Component, @Service, @Repository và @Controller khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3543-component-service-repository-va-controller-khac-nhau-the-nao",
+    "slug": "component-service-repository-va-controller-khac-nhau-the-nao-53bf61fe-da97-547f-8906-3d989f862387",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Tất cả là chuyên biệt hóa của @Component → đều được component scan và tạo bean. Khác nhau ở ngữ nghĩa tầng + tính năng thêm:"
+      ],
+      "details": [
+        "Exception translation của @Repository: Spring tự convert exception DB (SQLException, HibernateException...) → DataAccessException (unchecked, đồng nhất) — caller không cần biết DB backend là gì.",
+        "Best practice: dùng đúng annotation theo tầng — code tự nói lên kiến trúc (đọc @Service biết ngay là business logic) + hưởng tính năng tương ứng. Đừng dùng @Component cho mọi thứ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "@Component",
+            "@Service",
+            "Generic",
+            "Không",
+            "Business logic",
+            "Không",
+            "Data access (DAO)",
+            "Có — Exception translation",
+            "Annotation",
+            "@Repository",
+            "@Controller",
+            "Web (trả view)",
+            "Có — Spring MVC handler",
+            "@RestController",
+            "Web (REST API)",
+            "Có — @ResponseBody mặc định",
+            "@ResponseBody"
+          ]
+        }
+      ]
+    },
+    "legacyId": 6,
+    "sourceSlug": "3543-component-service-repository-va-controller-khac-nhau-the-nao"
+  },
+  {
+    "id": "fa225589-74fe-5eb6-ae03-b84779f12f7f",
+    "question": "Spring Boot Starters là gì? Nêu các starter thường dùng.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3544-spring-boot-starters-la-gi-neu-cac-starter-thuong-dung",
+    "slug": "spring-boot-starters-la-gi-neu-cac-starter-thuong-dung-fa225589-74fe-5eb6-ae03-b84779f12f7f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Starters là dependency \"gói sẵn\" — thêm 1 starter kéo theo tất cả lib + auto-config tương ứng, không cần tự quản từng dependency/version."
+      ],
+      "details": [
+        "Khai báo 1 artifact là đủ, không cần version — spring-boot-dependencies BOM quản version tất cả lib supported → tương thích, không conflict.",
+        "Custom starter: tổ chức có thể tạo internal starter để share config chung (DB, auth, logging)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "spring-boot-starter-web",
+            "spring-boot-starter-data-jpa",
+            "Spring MVC + Tomcat + Jackson",
+            "Spring Data JPA + Hibernate + HikariCP",
+            "Spring Security",
+            "JUnit 5 + Mockito + AssertJ",
+            "Micrometer + Actuator endpoints",
+            "Jakarta Bean Validation + Hibernate Validator",
+            "Starter",
+            "spring-boot-starter-security",
+            "spring-boot-starter-test",
+            "spring-boot-starter-actuator",
+            "spring-boot-starter-validation"
+          ]
+        }
+      ]
+    },
+    "legacyId": 7,
+    "sourceSlug": "3544-spring-boot-starters-la-gi-neu-cac-starter-thuong-dung"
+  },
+  {
+    "id": "511852cb-0c7d-5cd1-9eb2-24364943df83",
+    "question": "Spring Boot Embedded Server là gì? Thay đổi sang Jetty như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3552-spring-boot-embedded-server-la-gi-thay-doi-sang-jetty-nhu-the-nao",
+    "slug": "spring-boot-embedded-server-la-gi-thay-doi-sang-jetty-nhu-the-nao-511852cb-0c7d-5cd1-9eb2-24364943df83",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Spring Boot nhúng web server (Tomcat/Jetty/Undertow) vào JAR — deploy như executable, không cần cài server riêng. Mặc định: Tomcat (spring-boot-starter-web).",
+        "Ưu điểm:",
+        "application.yml",
+        "server.tomcat.threads.max",
+        "java -jar app.jar"
+      ],
+      "details": [
+        "Đổi sang Jetty: exclude Tomcat khỏi starter-web rồi thêm spring-boot-starter-jetty:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "XML",
+          "code": "<dependency>\n  <artifactId>spring-boot-starter-web</artifactId>\n  <exclusions><exclusion><artifactId>spring-boot-starter-tomcat</artifactId></exclusion></exclusions>\n</dependency>\n<dependency><artifactId>spring-boot-starter-jetty</artifactId></dependency>"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Default",
+            "Có",
+            "Không",
+            "Không —",
+            "Memory",
+            "Trung bình",
+            "Tomcat",
+            "Thấp",
+            "Thấp",
+            "Use case",
+            "General"
+          ]
+        }
+      ]
+    },
+    "legacyId": 8,
+    "sourceSlug": "3552-spring-boot-embedded-server-la-gi-thay-doi-sang-jetty-nhu-the-nao"
+  },
+  {
+    "id": "6cc4b3db-ac04-53da-9a93-6b08f7b9399f",
+    "question": "Spring Framework và Spring Boot khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3563-spring-framework-va-spring-boot-khac-nhau-the-nao",
+    "slug": "spring-framework-va-spring-boot-khac-nhau-the-nao-6cc4b3db-ac04-53da-9a93-6b08f7b9399f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Spring Boot không thay thế Spring Framework — nó là lớp tiện ích xây trên Spring để bỏ cấu hình thủ công."
+      ],
+      "details": [
+        "Quan hệ: mọi tính năng Spring Boot đều là Spring Framework bên dưới (@Autowired, @Transactional, Spring MVC...). Spring Boot chỉ thêm auto-config + starter + embedded server.",
+        "Trả lời ngắn khi phỏng vấn: \"Spring Framework cung cấp IoC/DI và module cốt lõi nhưng cần nhiều cấu hình; Spring Boot xây trên Spring, dùng convention-over-configuration để chạy ngay với cấu hình tối thiểu.\""
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            ".war",
+            "java -jar",
+            "Vai trò",
+            "Nền tảng cốt lõi (IoC, DI, AOP, MVC)",
+            "Lớp tiện ích trên Spring",
+            "Spring Framework",
+            "Cấu hình",
+            "Thủ công (XML / nhiều Java config)",
+            "Auto-configuration",
+            "Dependency",
+            "Tự khai từng cái + lo version",
+            "Starter gom sẵn, version tương thích",
+            "Server"
+          ]
+        }
+      ]
+    },
+    "legacyId": 9,
+    "sourceSlug": "3563-spring-framework-va-spring-boot-khac-nhau-the-nao"
+  },
+  {
+    "id": "6cf49e17-5922-5d4d-9334-6baa991567da",
+    "question": "@Entity, @Id, @GeneratedValue và mapping quan hệ trong JPA hoạt động thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3565-entity-id-generatedvalue-va-mapping-quan-he-trong-jpa-hoat-dong-the-nao",
+    "slug": "entity-id-generatedvalue-va-mapping-quan-he-trong-jpa-hoat-dong-the-nao-6cf49e17-5922-5d4d-9334-6baa991567da",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "@JoinColumn = cột FK; mappedBy = bên không sở hữu quan hệ (tránh bảng join thừa); fetch = LAZY mặc định để tránh N+1.",
+        "Quan hệ:"
+      ],
+      "details": [
+        "Lưu ý: GenerationType.IDENTITY khiến Hibernate không batch insert được — production tải cao thường dùng SEQUENCE."
+      ],
+      "points": [
+        "@Entity — class là JPA entity (1 bảng); @Table — tên bảng.",
+        "@Id — khóa chính; @GeneratedValue — cách sinh ID (IDENTITY auto-increment phổ biến, SEQUENCE, UUID).",
+        "@Column — ràng buộc cột (nullable, length, unique)."
+      ],
+      "sections": [
+        "JPA map class Java ↔ bảng DB qua annotation — không viết SQL DDL thủ công."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Entity @Table(name = \"users\")\nclass User {\n  @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;\n  @Column(nullable = false, length = 100) private String name;\n  @Column(unique = true) private String email;\n}"
+        },
+        {
+          "language": "JAVA",
+          "code": "@ManyToOne(fetch = FetchType.LAZY)              // nhiều order thuộc 1 user\n@JoinColumn(name = \"user_id\") private User user;\n\n@OneToMany(mappedBy = \"order\", cascade = CascadeType.ALL)\nprivate List<OrderItem> items;"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "3565-entity-id-generatedvalue-va-mapping-quan-he-trong-jpa-hoat-dong-the-nao"
+  },
+  {
+    "id": "ea1b7299-6555-5b52-ae34-88863eb3e7d8",
+    "question": "@RequestMapping và @GetMapping khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/14031-requestmapping-va-getmapping-khac-nhau-the-nao",
+    "slug": "requestmapping-va-getmapping-khac-nhau-the-nao-ea1b7299-6555-5b52-ae34-88863eb3e7d8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "@GetMapping, @PostMapping, @PutMapping, @DeleteMapping, @PatchMapping là shortcut (composed annotation) của @RequestMapping(method = ...), có từ Spring 4.3:"
+      ],
+      "details": [
+        "Khác biệt đáng nhớ:\n- @RequestMapping đặt được ở class level làm base path chung cho cả controller; các shortcut chỉ đặt được trên method.\n- @RequestMapping không khai method → match mọi HTTP method — thường là bug ngầm (endpoint GET bỗng nhận cả POST).\n- @RequestMapping còn các attribute ít dùng: consumes, produces, params, headers — shortcut cũng có đủ.",
+        "Best practice: @RequestMapping(\"/api/users\") ở class cho base path + shortcut ở method — code gọn, HTTP verb đọc thấy ngay, không mở endpoint ngoài ý muốn."
+      ],
+      "points": [
+        "@GetMapping(\"/users\") = @RequestMapping(value = \"/users\", method = RequestMethod.GET)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "14031-requestmapping-va-getmapping-khac-nhau-the-nao"
+  },
+  {
+    "id": "17d2d15d-cdd8-56a5-b883-e9bdb0b84f9c",
+    "question": "Method có @Transactional ném checked exception thì transaction có rollback không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96100-method-co-transactional-nem-checked-exception-thi-transaction-co-rollback-khong",
+    "slug": "method-co-transactional-nem-checked-exception-thi-transaction-co-rollback-khong-17d2d15d-cdd8-56a5-b883-e9bdb0b84f9c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Không. Mặc định Spring chỉ đánh dấu rollback khi method ném RuntimeException (unchecked) hoặc Error.",
+        "loại khớp gần nhất",
+        "noRollbackFor"
+      ],
+      "details": [
+        "Checked exception ném ra từ method transactional vẫn commit như thường.",
+        "Trong dự án thực tế phổ biến nhất là để exception nghiệp vụ kế thừa RuntimeException để hành vi mặc định đã đúng, thay vì rải rollbackFor khắp nơi."
+      ],
+      "points": [],
+      "sections": [
+        "Muốn rollback với checked exception thì khai báo tường minh:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Transactional\npublic void transfer(Long from, Long to, long amount) throws InsufficientFundsException {\n    accountRepository.debit(from, amount);\n    if (balanceOf(from) < 0) {\n        // checked exception -> Spring COMMITS the debit above\n        throw new InsufficientFundsException();\n    }\n    accountRepository.credit(to, amount);\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "96100-method-co-transactional-nem-checked-exception-thi-transaction-co-rollback-khong"
+  },
+  {
+    "id": "280b43dc-17d1-56ae-9fa0-2a81e677d166",
+    "question": "Muốn chạy một đoạn code ngay sau khi app khởi động thì dùng gì? CommandLineRunner khác @PostConstruct thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96101-muon-chay-mot-doan-code-ngay-sau-khi-app-khoi-dong-thi-dung-gi-commandlinerunner",
+    "slug": "muon-chay-mot-doan-code-ngay-sau-khi-app-khoi-dong-thi-dung-gi-commandlinerunner-khac-postconstruct-280b43dc-17d1-56ae-9fa0-2a81e677d166",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng ApplicationRunner hoặc CommandLineRunner.",
+        "Khác nhau:",
+        "ApplicationArguments",
+        "@PostConstruct"
+      ],
+      "details": [
+        "Cả hai có duy nhất một method run(...), được gọi ngay trước khi SpringApplication.run(...) trả về — tức là toàn bộ context đã sẵn sàng, web server đã lên."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Component\npublic class WarmUpRunner implements ApplicationRunner {\n    private final CacheService cacheService;\n\n    public WarmUpRunner(CacheService cacheService) {\n        this.cacheService = cacheService;\n    }\n\n    @Override\n    public void run(ApplicationArguments args) {\n        cacheService.preload();\n    }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "96101-muon-chay-mot-doan-code-ngay-sau-khi-app-khoi-dong-thi-dung-gi-commandlinerunner"
+  },
+  {
+    "id": "4380123d-91f0-55b7-a0a4-6b48bf6aaed8",
+    "question": "@ConfigurationProperties cần gì để bind được? Relaxed binding hoạt động ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96102-configurationproperties-can-gi-de-bind-duoc-relaxed-binding-hoat-dong-ra-sao",
+    "slug": "configurationproperties-can-gi-de-bind-duoc-relaxed-binding-hoat-dong-ra-sao-4380123d-91f0-55b7-a0a4-6b48bf6aaed8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Class gắn @ConfigurationProperties(\"prefix\") phải trở thành bean thì Spring mới bind. Có ba cách:\n- @EnableConfigurationProperties(MyProperties.class) trên một class @Configuration.\n- @ConfigurationPropertiesScan trên class main (quét cả package).\n- Gắn thêm @Component lên chính class đó.",
+        "Relaxed binding:",
+        "app.payment.callback-url",
+        "app.payment.callbackUrl",
+        "app.payment.callback_url",
+        "APP_PAYMENT_CALLBACKURL"
+      ],
+      "details": [
+        "Thêm @Validated cùng các constraint (@NotBlank, @Min) lên class properties để app fail lúc khởi động nếu config sai, thay vì lỗi lúc chạy."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@ConfigurationProperties(\"app.payment\")\npublic class PaymentProperties {\n    private final Duration timeout;\n    private final String callbackUrl;\n\n    // đơn parameterized constructor -> constructor binding, fields can be final\n    public PaymentProperties(Duration timeout, String callbackUrl) {\n        this.timeout = timeout;\n        this.callbackUrl = callbackUrl;\n    }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "96102-configurationproperties-can-gi-de-bind-duoc-relaxed-binding-hoat-dong-ra-sao"
+  },
+  {
+    "id": "ebf9279f-776f-5a42-a22b-84e576594586",
+    "question": "Graceful shutdown trong Spring Boot là gì? Cấu hình thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96103-graceful-shutdown-trong-spring-boot-la-gi-cau-hinh-the-nao",
+    "slug": "graceful-shutdown-trong-spring-boot-la-gi-cau-hinh-the-nao-ebf9279f-776f-5a42-a22b-84e576594586",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Graceful shutdown là chế độ khi nhận tín hiệu dừng (SIGTERM), web server ngừng nhận request mới nhưng vẫn cho các request đang xử lý chạy hết trong một khoảng ân hạn rồi mới tắt.",
+        "terminationGracePeriodSeconds"
+      ],
+      "details": [
+        "Không có nó, container bị kill giữa chừng sẽ trả lỗi cho các request đang dở — vấn đề hay gặp khi deploy rolling update trên Kubernetes."
+      ],
+      "points": [
+        "Từ Spring Boot 3.4 graceful shutdown đã bật mặc định; muốn quay về hành vi cũ thì đặt server.shutdown=immediate.",
+        "Tomcat, Jetty và Reactor Netty ngừng nhận kết nối ở tầng network.",
+        "Hết timeout-per-shutdown-phase mà request chưa xong thì server tắt luôn."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PROPERTIES",
+          "code": "# Spring Boot 2.3 - 3.3: must be turned on explicitly\nserver.shutdown=graceful\n# grace period for in-flight requests\nspring.lifecycle.timeout-per-shutdown-phase=30s"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "96103-graceful-shutdown-trong-spring-boot-la-gi-cau-hinh-the-nao"
+  },
+  {
+    "id": "b66327cc-fe19-5e22-8ad9-0fae6ba76bc4",
+    "question": "Derived query method và @Query khác nhau thế nào? Khi nào dùng native query?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96150-derived-query-method-va-query-khac-nhau-the-nao-khi-nao-dung-native-query",
+    "slug": "derived-query-method-va-query-khac-nhau-the-nao-khi-nao-dung-native-query-b66327cc-fe19-5e22-8ad9-0fae6ba76bc4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Spring Data JPA có ba cách khai báo truy vấn, chọn theo độ phức tạp:",
+        "Đánh đổi:"
+      ],
+      "details": [
+        "1. Derived query — Spring sinh JPQL từ tên method. Ngắn gọn, an toàn kiểu, nhưng tên dài ra rất nhanh khi nhiều điều kiện.",
+        "Quy tắc thực dụng: derived query cho truy vấn 1-2 điều kiện, @Query JPQL cho phần còn lại, native chỉ khi thật sự cần."
+      ],
+      "points": [
+        "Native query** — SQL thuần, bật cờ nativeQuery = true.",
+        "Dùng khi cần thứ JPQL không diễn tả được: window function, CTE, hint tối ưu, cú pháp riêng của DB."
+      ],
+      "sections": [
+        "2. @Query với JPQL — viết truy vấn tay nhưng vẫn ở mức entity, độc lập với dialect DB."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "List<Order> findByStatusAndCreatedAtAfter(OrderStatus status, Instant since);"
+        },
+        {
+          "language": "JAVA",
+          "code": "@Query(\"select o from Order o where o.status = :status and o.total > :min\")\nList<Order> findExpensive(@Param(\"status\") OrderStatus status, @Param(\"min\") BigDecimal min);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "96150-derived-query-method-va-query-khac-nhau-the-nao-khi-nao-dung-native-query"
+  },
+  {
+    "id": "22351684-5c64-51b5-9d22-d19378da17bc",
+    "question": "LazyInitializationException xảy ra khi nào? Vì sao trên môi trường dev không thấy nhưng lên production lại gặp?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96151-lazyinitializationexception-xay-ra-khi-nao-vi-sao-tren-moi-truong-dev-khong-thay",
+    "slug": "lazyinitializationexception-xay-ra-khi-nao-vi-sao-tren-moi-truong-dev-khong-thay-nhung-len-productio-22351684-5c64-51b5-9d22-d19378da17bc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì sao dev không thấy: Spring Boot mặc định bật spring.jpa.open-in-view=true (Open Session In View). Interceptor giữ EntityManager mở đến hết vòng đời request, nên lazy load ở tầng controller/view vẫn chạy — chỉ là nó bắn thêm truy vấn ngoài transaction, âm thầm. Khi tắt cờ này (hoặc gọi từ luồng không có request, như @Async, @Scheduled, message consumer), exception xuất hiện."
+      ],
+      "details": [
+        "Cách xử lý đúng:\n- Nạp sẵn dữ liệu cần dùng trong transaction: join fetch hoặc @EntityGraph.\n- Trả DTO projection thay vì entity ra ngoài tầng service.",
+        "Cách sai thường gặp: đổi hết sang FetchType.EAGER — mọi truy vấn đều kéo theo dữ liệu thừa. Hibernate.initialize() chỉ là vá tạm."
+      ],
+      "points": [],
+      "sections": [
+        "Lỗi này ném ra khi bạn chạm vào một association LAZY sau khi persistence context đã đóng — proxy không còn EntityManager nào để nạp dữ liệu."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "Order order = orderRepository.findById(id).orElseThrow();  // transaction kết thúc ở đây\norder.getItems().size();                                    // LazyInitializationException"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "96151-lazyinitializationexception-xay-ra-khi-nao-vi-sao-tren-moi-truong-dev-khong-thay"
+  },
+  {
+    "id": "96c0db83-aca4-5417-aeb4-b6c962bc4e0b",
+    "question": "Password lưu trong DB thế nào? PasswordEncoder mặc định của Spring Security là gì và tiền tố {bcrypt} để làm gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96152-password-luu-trong-db-the-nao-passwordencoder-mac-dinh-cua-spring-security-la-gi",
+    "slug": "password-luu-trong-db-the-nao-passwordencoder-mac-dinh-cua-spring-security-la-gi-va-tien-to-bcrypt-d-96c0db83-aca4-5417-aeb4-b6c962bc4e0b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Password không bao giờ lưu dạng plaintext, và cũng không dùng hash nhanh (MD5, SHA-256) vì tấn công brute-force bằng GPU quá rẻ.",
+        "đọc được nhiều thuật toán cùng lúc"
+      ],
+      "details": [
+        "Spring Security dùng hàm băm chậm có salt, mặc định là BCrypt.",
+        "BCrypt tự sinh salt riêng cho từng password (nằm luôn trong chuỗi hash) nên không cần cột salt. Tham số strength mặc định 10; tăng lên khiến verify chậm hơn, tuning sao cho một lần verify khoảng 1 giây."
+      ],
+      "points": [],
+      "sections": [
+        "Hàm này trả về DelegatingPasswordEncoder — nó lưu chuỗi hash kèm tiền tố định danh thuật toán:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Bean\nPasswordEncoder passwordEncoder() {\n    return PasswordEncoderFactories.createDelegatingPasswordEncoder();\n}"
+        },
+        {
+          "language": "JAVA",
+          "code": "{bcrypt}$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzG3YB1tlRy.fqvM/BG"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "96152-password-luu-trong-db-the-nao-passwordencoder-mac-dinh-cua-spring-security-la-gi"
+  },
+  {
+    "id": "be61b6a2-e007-5cd5-a1b2-5350cd598bf4",
+    "question": "Spring Security 6 cấu hình bảo mật thế nào khi WebSecurityConfigurerAdapter đã bị bỏ?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96153-spring-security-6-cau-hinh-bao-mat-the-nao-khi-websecurityconfigureradapter-da-b",
+    "slug": "spring-security-6-cau-hinh-bao-mat-the-nao-khi-websecurityconfigureradapter-da-bi-bo-be61b6a2-e007-5cd5-a1b2-5350cd598bf4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Từ Spring Security 6 (Spring Boot 3), WebSecurityConfigurerAdapter không còn tồn tại.",
+        "antMatchers / mvcMatchers → requestMatchers",
+        "securityMatcher",
+        "SecurityFilterChain"
+      ],
+      "details": [
+        "Thay vì kế thừa một adapter và override method, bạn khai báo một bean SecurityFilterChain:",
+        "Lợi ích: cấu hình trở thành bean bình thường nên inject được dependency, test được, và không còn ràng buộc kế thừa."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Configuration\n@EnableWebSecurity\npublic class SecurityConfig {\n\n    @Bean\n    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\n        return http\n            .authorizeHttpRequests(auth -> auth\n                .requestMatchers(\"/api/public/**\").permitAll()\n                .requestMatchers(\"/api/admin/**\").hasRole(\"ADMIN\")\n                .anyRequest().authenticated())\n            .csrf(csrf -> csrf.disable())\n            .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))\n            .build();\n    }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "96153-spring-security-6-cau-hinh-bao-mat-the-nao-khi-websecurityconfigureradapter-da-b"
+  },
+  {
+    "id": "19f3bfb1-1c38-5106-b402-06d539829f80",
+    "question": "Dependency Injection (DI) là gì? Spring cài đặt DI thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2565-dependency-injection-di-la-gi-spring-cai-dat-di-the-nao",
+    "slug": "dependency-injection-di-la-gi-spring-cai-dat-di-the-nao-19f3bfb1-1c38-5106-b402-06d539829f80",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "DI: dependency được cung cấp từ bên ngoài thay vì object tự new → giảm coupling, tăng testability (mock được khi test). Thay vì khởi tạo cứng new UserRepository() bên trong class, constructor nhận sẵn UserRepository từ ngoài — class chỉ khai báo cần gì, không quan tâm tạo thế nào."
+      ],
+      "details": [
+        "3 cách inject:\n- Constructor — KHUYẾN NGHỊ: immutable (final), required dependency rõ ràng, dễ test. Spring 4.3+ có 1 constructor thì khỏi @Autowired.\n- Setter — cho dependency optional.\n- Field (@Autowired trên field) — gọn nhưng anti-pattern: khó test, ẩn dependency.",
+        "IoC container (ApplicationContext) quản lý lifecycle bean + tự wiring qua component scan. (Code minh hoạ 3 kiểu: xem câu constructor/setter/field injection.)"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "2565-dependency-injection-di-la-gi-spring-cai-dat-di-the-nao"
+  },
+  {
+    "id": "643bae6a-8560-5e33-aa1a-7b3ad6cb7980",
+    "question": "@Bean và @Component khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2568-bean-va-component-khac-nhau-the-nao",
+    "slug": "bean-va-component-khac-nhau-the-nao-643bae6a-8560-5e33-aa1a-7b3ad6cb7980",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng @Bean (method trong @Configuration return object) cho: class thư viện ngoài không gắn @Component được (vd RestTemplate, ObjectMapper), init phức tạp/cần cấu hình (timeout, builder), conditional bean (@ConditionalOnProperty), cần nhiều instance khác nhau của cùng class."
+      ],
+      "details": [
+        "Dùng @Component (và các biến thể @Service/@Repository/@Controller) cho class trong app của bạn, init đơn giản.",
+        "Cả 2 mặc định singleton scope."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "@Component",
+            "@Bean",
+            "Đặt ở",
+            "Class",
+            "Method trong @Configuration",
+            "Linh hoạt",
+            "Tạo bean",
+            "Spring new qua default constructor",
+            "Method return object",
+            "@Configuration",
+            "new",
+            "Kiểm soát init",
+            "Hạn chế",
+            "Linh hoạt — logic tuỳ ý",
+            "Discovery"
+          ]
+        }
+      ]
+    },
+    "legacyId": 21,
+    "sourceSlug": "2568-bean-va-component-khac-nhau-the-nao"
+  },
+  {
+    "id": "47af64b7-2838-598e-8a92-2ed035bc0354",
+    "question": "application.properties và application.yml là gì? Externalized config hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2569-application-properties-va-application-yml-la-gi-externalized-config-hoat-dong-th",
+    "slug": "application-properties-va-application-yml-la-gi-externalized-config-hoat-dong-the-nao-47af64b7-2838-598e-8a92-2ed035bc0354",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Config externalize settings ra ngoài code — giá trị theo môi trường (DB URL, port, log level...) đổi mà không rebuild.",
+        "application.properties",
+        "server.port=8080",
+        "spring.datasource.url=..."
+      ],
+      "details": [
+        "Hai format:",
+        "Profiles:",
+        "Thứ tự ưu tiên (cao→thấp):",
+        "application-{dev,prod}.yml",
+        "Đọc trong code: @Value(\"${server.port}\") cho 1 property; @ConfigurationProperties(prefix = \"app\") bind cả nhóm property vào record/class (typed, khuyến nghị — xem câu @Value vs @ConfigurationProperties).",
+        "spring.profiles.active=prod",
+        "application-{profile}.yml",
+        "application.yml"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "2569-application-properties-va-application-yml-la-gi-externalized-config-hoat-dong-th"
+  },
+  {
+    "id": "4f42d9c0-0935-513e-9eb4-524dbcd495dc",
+    "question": "Spring Boot Actuator dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2570-spring-boot-actuator-dung-de-lam-gi",
+    "slug": "spring-boot-actuator-dung-de-lam-gi-4f42d9c0-0935-513e-9eb4-524dbcd495dc",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Actuator cung cấp endpoint production-ready expose thông tin app qua HTTP/JMX — không cần viết code monitoring. Thêm starter spring-boot-starter-actuator, chọn endpoint expose qua management.endpoints.web.exposure.include: health, metrics, info, prometheus."
+      ],
+      "details": [
+        "Endpoint chính:\n- /actuator/health — liveness/readiness probe (Kubernetes).\n- /actuator/metrics — CPU, memory, HTTP latency.\n- /actuator/prometheus — format cho Prometheus scrape.\n- /actuator/info — build info, git commit.\n- /actuator/loggers — đổi log level runtime, không restart.",
+        "Dùng cho: operational visibility, debug production, health check K8s, monitoring Prometheus + Grafana. Bảo mật: endpoint nhạy cảm (/env, /heapdump) phải chặn qua Spring Security hoặc chỉ mở trên port nội bộ (xem câu bảo vệ Actuator)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "2570-spring-boot-actuator-dung-de-lam-gi"
+  },
+  {
+    "id": "e85cb257-a576-5297-b0b8-c15326cbfe82",
+    "question": "Spring Data JPA và @Repository là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2573-spring-data-jpa-va-repository-la-gi",
+    "slug": "spring-data-jpa-va-repository-la-gi-e85cb257-a576-5297-b0b8-c15326cbfe82",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "@Repository: đánh dấu data-access component + tự dịch exception DB (SQLException) → Spring DataAccessException (unchecked, đồng nhất giữa các DB). JpaRepository đã có @Repository ngầm."
+      ],
+      "details": [
+        "Lợi ích: ít code, query type-safe, transaction tự động qua @Transactional."
+      ],
+      "points": [],
+      "sections": [
+        "Spring Data JPA là abstraction trên JPA — khai báo interface, Spring sinh implementation tự động."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "public interface UserRepository extends JpaRepository<User, Long> {\n  // Sẵn có: save, findById, findAll, delete, count...\n  Optional<User> findByEmail(String email);                // query method — derive từ tên\n  Page<User> findByActive(boolean active, Pageable page);  // pagination/sorting\n\n  @Query(\"UPDATE User u SET u.active = false WHERE u.id = :id\")\n  @Modifying int deactivate(@Param(\"id\") Long id);         // JPQL/native tuỳ biến\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "2573-spring-data-jpa-va-repository-la-gi"
+  },
+  {
+    "id": "d50c62e6-4863-5452-8866-c32788e33a4a",
+    "question": "Spring transaction management và @Transactional là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2574-spring-transaction-management-va-transactional-la-gi",
+    "slug": "spring-transaction-management-va-transactional-la-gi-d50c62e6-4863-5452-8866-c32788e33a4a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "@Transactional — transaction khai báo: Spring tự begin → commit → rollback, không cần connection.commit() thủ công. Mọi thao tác DB trong method chạy trong 1 transaction — bất kỳ bước nào throw exception → rollback toàn bộ (vd placeOrder gồm save order → trừ kho → charge tiền: charge fail thì cả ba cùng rollback)."
+      ],
+      "details": [
+        "Attribute chính:\n- propagation — REQUIRED (default), REQUIRES_NEW (luôn tạo mới, suspend cái cũ), NESTED (savepoint).\n- isolation — READ_COMMITTED (default), REPEATABLE_READ, SERIALIZABLE.\n- readOnly=true — tắt dirty checking, DB route sang replica.\n- rollbackFor / timeout — exception trigger rollback / giây trước khi force rollback.",
+        "Rollback mặc định: chỉ với unchecked exception; checked exception (IOException...) không rollback trừ khi rollbackFor = Exception.class.",
+        "Lưu ý: gọi method @Transactional từ trong cùng class → bypass proxy → mất transaction. Fix: tách sang class khác (xem câu self-invocation)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "2574-spring-transaction-management-va-transactional-la-gi"
+  },
+  {
+    "id": "541acf0d-fa80-5ec0-a1f8-8569ccf415d4",
+    "question": "@Transactional(readOnly=true) có tác dụng gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2575-transactional-readonly-true-co-tac-dung-gi",
+    "slug": "transactional-readonly-true-co-tac-dung-gi-541acf0d-fa80-5ec0-a1f8-8569ccf415d4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "readOnly = true là hint cho transaction, không phải enforcement cứng."
+      ],
+      "details": [
+        "Tác dụng:\n1. Hibernate tắt dirty checking — không snapshot entity → giảm memory + CPU.\n2. Flush mode = MANUAL — không auto-flush.\n3. DB có thể optimize — route sang read replica, dùng read-only transaction (Postgres: SET TRANSACTION READ ONLY).",
+        "Lưu ý: không chặn write — code vẫn setX() được, chỉ là Hibernate không flush; vài driver ignore hint nếu không support.",
+        "Best practice: đặt ở class level, override cho method ghi:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Service\n@Transactional(readOnly = true)     // default mọi method\nclass UserService {\n  public User findById(Long id) { ... }\n\n  @Transactional                     // override cho write\n  public User create(User u) { ... }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "2575-transactional-readonly-true-co-tac-dung-gi"
+  },
+  {
+    "id": "89750a6c-a810-53df-afbc-416ece296a9d",
+    "question": "Mono, Flux và backpressure trong Spring WebFlux là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2587-mono-flux-va-backpressure-trong-spring-webflux-la-gi",
+    "slug": "mono-flux-va-backpressure-trong-spring-webflux-la-gi-89750a6c-a810-53df-afbc-416ece296a9d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Mono<T> — publisher phát 0 hoặc 1 phần tử (như Optional async).\nFlux<T> — publisher phát 0..N phần tử (như Stream async, có thể vô tận).\nCả 2 lazy — chỉ chạy khi có subscriber."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Backpressure: consumer báo producer \"chỉ nhận X item/giây\" → tránh OOM khi producer nhanh hơn consumer:",
+        "Operator chính:",
+        "Lưu ý 2026:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "Mono<User> findById(Long id) { return userRepo.findById(id); }\n\nFlux<Order> recent() {\n  return orderRepo.findAllByDateAfter(yesterday())\n    .filter(o -> o.getTotal().compareTo(BigDecimal.TEN) > 0)\n    .map(this::enrich);\n}"
+        },
+        {
+          "language": "JAVA",
+          "code": "Flux.fromStream(bigDbStream)\n  .onBackpressureBuffer(1000)   // hoặc onBackpressureDrop()\n  .subscribe(this::process);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "2587-mono-flux-va-backpressure-trong-spring-webflux-la-gi"
+  },
+  {
+    "id": "78bb81fa-c989-5a92-b6d8-78c8e9ac9e01",
+    "question": "@SpringBootApplication là gì? Gồm những annotation nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3500-springbootapplication-la-gi-gom-nhung-annotation-nao",
+    "slug": "springbootapplication-la-gi-gom-nhung-annotation-nao-78bb81fa-c989-5a92-b6d8-78c8e9ac9e01",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "@SpringBootApplication là meta-annotation gộp 3 annotation hay dùng nhất:"
+      ],
+      "details": [
+        "Dùng: đặt trên class main (chạy SpringApplication.run(App.class, args)) ở root package để @ComponentScan quét hết sub-package — đặt sai package → bean không được scan.",
+        "Tuỳ chỉnh: loại auto-config cụ thể bằng @SpringBootApplication(exclude = DataSourceAutoConfiguration.class); đổi phạm vi scan bằng scanBasePackages."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "@Configuration",
+            "@EnableAutoConfiguration",
+            "Class là nguồn bean definition",
+            "Bật auto-configuration",
+            "Scan component từ package hiện tại trở xuống",
+            "Annotation",
+            "@ComponentScan"
+          ]
+        }
+      ]
+    },
+    "legacyId": 28,
+    "sourceSlug": "3500-springbootapplication-la-gi-gom-nhung-annotation-nao"
+  },
+  {
+    "id": "4d4f7369-9a68-54a8-a14a-3bd95e6dc33e",
+    "question": "Auto-configuration trong Spring Boot hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3501-auto-configuration-trong-spring-boot-hoat-dong-the-nao",
+    "slug": "auto-configuration-trong-spring-boot-hoat-dong-the-nao-4d4f7369-9a68-54a8-a14a-3bd95e6dc33e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Auto-configuration tự configure bean dựa trên dependency trong classpath — không cần khai báo thủ công.",
+        "@ConditionalOnMissingBean"
+      ],
+      "details": [
+        "Cơ chế:\n1. @EnableAutoConfiguration scan file META-INF/spring/...AutoConfiguration.imports (Boot 3) / spring.factories (Boot 2).\n2. Mỗi entry là @Configuration có @Conditional guard:",
+        "Debug: chạy với --debug → Spring in auto-config report (pass/fail từng class). Tự viết: tạo file .imports, khai config class với @ConditionalOn* phù hợp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@AutoConfiguration\n   @ConditionalOnClass(DataSource.class)         // chỉ khi driver có trên classpath\n   @ConditionalOnMissingBean(DataSource.class)   // chỉ khi user chưa tự định nghĩa\n   public class DataSourceAutoConfiguration { ... }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "3501-auto-configuration-trong-spring-boot-hoat-dong-the-nao"
+  },
+  {
+    "id": "84a1f7ad-6a83-525c-9160-4caec6df5dd7",
+    "question": "Bean scope trong Spring là gì? Singleton và Prototype khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3502-bean-scope-trong-spring-la-gi-singleton-va-prototype-khac-nhau-the-nao",
+    "slug": "bean-scope-trong-spring-la-gi-singleton-va-prototype-khac-nhau-the-nao-84a1f7ad-6a83-525c-9160-4caec6df5dd7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Scope xác định vòng đời + số instance của bean."
+      ],
+      "details": [
+        "Khai báo scope khác default: @Scope(\"prototype\") trên class bean.",
+        "Lưu ý: inject prototype vào singleton → Spring inject 1 lần lúc startup → singleton giữ cùng 1 prototype instance mãi mãi. Fix: lấy instance mới qua ApplicationContext.getBean() hoặc method @Lookup.",
+        "Singleton phù hợp 99% Spring bean vì stateless."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "singleton (default)",
+            "1 dùng chung toàn app",
+            "Stateless service, repository",
+            "singleton",
+            "Mỗi lần inject/getBean tạo mới",
+            "Stateful object (command, builder)",
+            "request / session",
+            "Scope",
+            "Mỗi lần inject/getBean",
+            "1 / HTTP request / session (Web)",
+            "Request / session state"
+          ]
+        }
+      ]
+    },
+    "legacyId": 30,
+    "sourceSlug": "3502-bean-scope-trong-spring-la-gi-singleton-va-prototype-khac-nhau-the-nao"
+  },
+  {
+    "id": "571f1e20-4017-5b3b-80fe-afe50ab6ada2",
+    "question": "Bean lifecycle trong Spring Boot: @PostConstruct và @PreDestroy dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3504-bean-lifecycle-trong-spring-boot-postconstruct-va-predestroy-dung-khi-nao",
+    "slug": "bean-lifecycle-trong-spring-boot-postconstruct-va-predestroy-dung-khi-nao-571f1e20-4017-5b3b-80fe-afe50ab6ada2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Bean lifecycle: instantiate (constructor) → inject dependency (@Autowired) → @PostConstruct → bean ready → @PreDestroy (khi context đóng)."
+      ],
+      "details": [
+        "@PostConstruct — method init gọi sau khi DI xong (trong constructor dependency chưa được inject nên không init ở đó được): load cache từ DB, validate config, khởi tạo connection pool.",
+        "@PreDestroy — giải phóng resource khi shutdown: đóng connection pool, flush buffer, unregister khỏi external service.",
+        "Thay thế: implement InitializingBean/DisposableBean hoặc @Bean(initMethod, destroyMethod) — @PostConstruct/@PreDestroy được ưu tiên vì là chuẩn Jakarta, không phụ thuộc Spring API."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "3504-bean-lifecycle-trong-spring-boot-postconstruct-va-predestroy-dung-khi-nao"
+  },
+  {
+    "id": "64092ae0-95a8-5202-aea5-ddd7a64934f2",
+    "question": "@Value và @ConfigurationProperties khác nhau thế nào? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3505-value-va-configurationproperties-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "slug": "value-va-configurationproperties-khac-nhau-the-nao-khi-nao-dung-cai-nao-64092ae0-95a8-5202-aea5-ddd7a64934f2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "@Value: 1 property đơn lẻ, SpEL phức tạp. @ConfigurationProperties: config có cấu trúc (≥3 key liên quan), cần validation, viết test."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Value(\"${server.port:8080}\") int port;                    // 1 property\n\n@ConfigurationProperties(prefix = \"app.mail\") @Validated    // nhóm property (RECOMMENDED)\npublic record MailProps(@NotBlank String host, @Min(1) @Max(65535) int port, boolean ssl) {}\n// bật scan: @ConfigurationPropertiesScan trên class @SpringBootApplication"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "@Value",
+            "@ConfigurationProperties",
+            "Binding",
+            "1 property",
+            "Nhóm property vào class",
+            "Type-safe",
+            "Hạn chế (SpEL)",
+            "Có — Full type conversion",
+            "@Validated",
+            "Validation",
+            "Không",
+            "Có — @Validated + Bean Validation",
+            "IDE support"
+          ]
+        }
+      ]
+    },
+    "legacyId": 32,
+    "sourceSlug": "3505-value-va-configurationproperties-khac-nhau-the-nao-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "35fb6945-6d11-5d5e-ad35-58230b2628a0",
+    "question": "Spring Profiles là gì và cách dùng như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3506-spring-profiles-la-gi-va-cach-dung-nhu-the-nao",
+    "slug": "spring-profiles-la-gi-va-cach-dung-nhu-the-nao-35fb6945-6d11-5d5e-ad35-58230b2628a0",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Profiles cho phép config khác nhau theo môi trường (dev/staging/prod) — deploy 1 JAR cho tất cả."
+      ],
+      "details": [
+        "File config: application.yml (base) + application-{dev,prod}.yml (merge/override khi profile active). Activate: SPRING_PROFILES_ACTIVE=prod java -jar app.jar.",
+        "Lưu ý:",
+        "Bean theo profile: gắn @Profile(\"dev\") / @Profile(\"prod\") trên class bean → bean chỉ tồn tại ở env tương ứng (vd MockMailSender cho dev, SmtpMailSender cho prod). @Profile(\"!prod\") = mọi env trừ prod.",
+        "Profile groups (Boot 2.4+): spring.profiles.group.production: prod, monitoring, security — activate 1 group bật cả cụm.",
+        "application-prod.yml"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "3506-spring-profiles-la-gi-va-cach-dung-nhu-the-nao"
+  },
+  {
+    "id": "efd701b2-711a-5281-aca1-5df2a6fcda04",
+    "question": "Circular dependency trong Spring là gì? Cách phát hiện và fix?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3507-circular-dependency-trong-spring-la-gi-cach-phat-hien-va-fix",
+    "slug": "circular-dependency-trong-spring-la-gi-cach-phat-hien-va-fix-efd701b2-711a-5281-aca1-5df2a6fcda04",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Circular dependency: A cần B và B cần A → Spring không biết tạo cái nào trước. Spring Boot 2.6+ throw ngay lúc startup:"
+      ],
+      "details": [
+        "Fix (ưu tiên theo thứ tự):\n1. Tái cấu trúc — trích logic chung ra class C, A và B đều phụ thuộc C. Giải pháp đúng về kiến trúc — cycle thường là dấu hiệu chia trách nhiệm sai.\n2. @Lazy tại điểm inject (A(@Lazy B b)) — Spring inject proxy trước, tạo bean thật khi dùng lần đầu.\n3. Setter injection thay constructor — Spring init bean trước, inject sau.",
+        "Không nên: spring.main.allow-circular-references=true — giấu lỗi nhưng giữ nguyên vấn đề kiến trúc."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "The dependencies of some of the beans form a cycle: a → b → a"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "3507-circular-dependency-trong-spring-la-gi-cach-phat-hien-va-fix"
+  },
+  {
+    "id": "e6ea481c-f209-5d9f-8e30-b666638b509a",
+    "question": "@Primary và @Qualifier trong Spring dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3508-primary-va-qualifier-trong-spring-dung-khi-nao",
+    "slug": "primary-va-qualifier-trong-spring-dung-khi-nao-e6ea481c-f209-5d9f-8e30-b666638b509a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khi có nhiều bean cùng type, Spring không biết inject cái nào → ambiguity error lúc startup. Hai cách phân biệt:"
+      ],
+      "details": [
+        "Chọn: 1 bean là \"default hợp lý\" cho đa số nơi dùng → @Primary; điểm inject cụ thể cần bean khác → @Qualifier. Kết hợp @Profile khi muốn switch impl theo môi trường thay vì theo điểm inject."
+      ],
+      "points": [
+        "@Primary — đặt trên 1 bean làm default khi có nhiều candidate (vd impl production).",
+        "@Qualifier(\"beanName\") — đặt tại điểm inject (constructor param), chỉ định đích danh bean theo tên; ghi đè @Primary."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "3508-primary-va-qualifier-trong-spring-dung-khi-nao"
+  },
+  {
+    "id": "bc7f2227-6a63-526b-9b80-916681112f02",
+    "question": "JPA và Hibernate khác nhau thế nào? Spring Data JPA là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3512-jpa-va-hibernate-khac-nhau-the-nao-spring-data-jpa-la-gi",
+    "slug": "jpa-va-hibernate-khac-nhau-the-nao-spring-data-jpa-la-gi-bc7f2227-6a63-526b-9b80-916681112f02",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Chuỗi phụ thuộc: app code → Spring Data JPA → JPA API → Hibernate → JDBC → DB. Starter spring-boot-starter-data-jpa kéo sẵn Spring Data JPA + Hibernate + HikariCP."
+      ],
+      "details": [],
+      "points": [
+        "JPA = chuẩn (interface, annotation, JPQL) — chỉ định nghĩa, không chạy được một mình; nhiều implementation: Hibernate, EclipseLink.",
+        "Hibernate = JPA provider phổ biến nhất; thêm HQL, L2 cache, batch processing.",
+        "Spring Data JPA = abstraction phía trên — khai báo interface repository, Spring sinh implementation tự động (query method, pagination; xem câu Spring Data JPA & @Repository)."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Là gì",
+            "Specification (JSR-338)",
+            "Implementation của JPA",
+            "JPA",
+            "Abstraction trên JPA",
+            "Ai định nghĩa",
+            "Jakarta EE",
+            "Specification",
+            "Red Hat",
+            "Spring"
+          ]
+        }
+      ]
+    },
+    "legacyId": 36,
+    "sourceSlug": "3512-jpa-va-hibernate-khac-nhau-the-nao-spring-data-jpa-la-gi"
+  },
+  {
+    "id": "3c6748d2-af24-5464-add0-089485d40815",
+    "question": "Lazy loading và eager loading trong JPA là gì? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3513-lazy-loading-va-eager-loading-trong-jpa-la-gi-khi-nao-dung-cai-nao",
+    "slug": "lazy-loading-va-eager-loading-trong-jpa-la-gi-khi-nao-dung-cai-nao-3c6748d2-af24-5464-add0-089485d40815",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Đổi qua attribute fetch: @ManyToOne(fetch = FetchType.LAZY)."
+      ],
+      "details": [
+        "Vấn đề Eager: luôn load association dù không cần → query thừa, chậm.",
+        "Best practice:",
+        "Vấn đề Lazy: LazyInitializationException khi truy cập field ngoài transaction (session đã đóng).",
+        "Fix Lazy: @Transactional trên method service (giữ session mở); JOIN FETCH trong JPQL để load kèm trong 1 query; DTO projection chỉ lấy field cần (code cụ thể xem câu N+1)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "@OneToMany",
+            "@ManyToMany",
+            "Load khi",
+            "Lần đầu truy cập field",
+            "Luôn load cùng entity chính",
+            "Lazy",
+            "Default",
+            "@OneToMany, @ManyToMany",
+            "@ManyToOne, @OneToOne",
+            "truy cập field",
+            "@ManyToOne",
+            "@OneToOne"
+          ]
+        }
+      ]
+    },
+    "legacyId": 37,
+    "sourceSlug": "3513-lazy-loading-va-eager-loading-trong-jpa-la-gi-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "5936ab6a-1f2b-56f5-a21f-347b098eef2a",
+    "question": "N+1 query problem trong JPA là gì? Cách fix?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3514-n-1-query-problem-trong-jpa-la-gi-cach-fix",
+    "slug": "n-1-query-problem-trong-jpa-la-gi-cach-fix-5936ab6a-1f2b-56f5-a21f-347b098eef2a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Phát hiện: spring.jpa.show-sql=true → thấy query lặp."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "N+1 problem: load list entity (1 query), rồi mỗi entity gọi thêm 1 query lấy association → 1 + N query thay vì 1.",
+        "Lưu ý:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "List<Order> orders = orderRepo.findAll();          // Query 1\nfor (Order o : orders) o.getCustomer().getName();  // Query 2..N+1 → 100 order = 101 query"
+        },
+        {
+          "language": "JAVA",
+          "code": "// 1. JOIN FETCH\n@Query(\"SELECT o FROM Order o JOIN FETCH o.customer WHERE o.status = :s\")\nList<Order> findByStatus(@Param(\"s\") String s);\n\n// 2. @EntityGraph\n@EntityGraph(attributePaths = {\"customer\", \"items\"})\nList<Order> findByStatus(String status);\n\n// 3. DTO projection (tốt nhất cho read-only): interface có getId/getStatus/getCustomerName"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "3514-n-1-query-problem-trong-jpa-la-gi-cach-fix"
+  },
+  {
+    "id": "a900284c-c968-54af-9172-4d0165aad650",
+    "question": "Authentication và Authorization trong Spring Security khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3515-authentication-va-authorization-trong-spring-security-khac-nhau-the-nao",
+    "slug": "authentication-va-authorization-trong-spring-security-khac-nhau-the-nao-a900284c-c968-54af-9172-4d0165aad650",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Authentication (xác thực): \"Bạn là ai?\" — verify identity (login mật khẩu, JWT, OAuth). Authorization (phân quyền): \"Bạn được phép làm gì?\" — check permission (role, scope). Authentication luôn xảy ra trước Authorization."
+      ],
+      "details": [
+        "Trong Spring Security:\n- Authentication: implement UserDetailsService.loadUserByUsername() trả về UserDetails (username, password hash, danh sách authority) — Spring so credential và dựng Authentication object.\n- Authorization: rule theo URL qua authorizeHttpRequests — hasRole(\"ADMIN\"), authenticated(), permitAll() cho từng pattern; hoặc theo method qua @PreAuthorize (xem câu method-level security).\n- Sau khi xác thực thành công, SecurityContextHolder giữ Authentication (user info, roles) cho thread hiện tại — mọi check phân quyền phía sau đọc từ đây."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "3515-authentication-va-authorization-trong-spring-security-khac-nhau-the-nao"
+  },
+  {
+    "id": "1b3517a7-6f96-5893-aba9-58f0a070e59b",
+    "question": "Spring Security Filter Chain là gì? Hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3516-spring-security-filter-chain-la-gi-hoat-dong-nhu-the-nao",
+    "slug": "spring-security-filter-chain-la-gi-hoat-dong-nhu-the-nao-1b3517a7-6f96-5893-aba9-58f0a070e59b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Security Filter Chain là chuỗi servlet filter Spring Security đặt trước controller — mỗi filter xử lý 1 concern."
+      ],
+      "details": [
+        "Thứ tự filter:"
+      ],
+      "points": [],
+      "sections": [
+        "Custom filter: extend OncePerRequestFilter, override doFilterInternal (vd gắn request-id vào MDC cho logging), đăng ký như @Component hoặc addFilterBefore(...).",
+        "Config (Spring Security 6):"
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "Request\n  → SecurityContextHolderFilter          (load SecurityContext)\n  → UsernamePasswordAuthenticationFilter (form login)\n  → BearerTokenAuthenticationFilter      (JWT)\n  → ExceptionTranslationFilter           (→ 401/403)\n  → AuthorizationFilter                  (check phân quyền)\n  → Controller"
+        },
+        {
+          "language": "JAVA",
+          "code": "@Bean\nSecurityFilterChain chain(HttpSecurity http) throws Exception {\n  return http\n    .csrf(AbstractHttpConfigurer::disable)\n    .sessionManagement(s -> s.sessionCreationPolicy(STATELESS))\n    .authorizeHttpRequests(a -> a\n      .requestMatchers(\"/api/public/**\").permitAll()\n      .anyRequest().authenticated())\n    .oauth2ResourceServer(o -> o.jwt(Customizer.withDefaults()))\n    .build();\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "3516-spring-security-filter-chain-la-gi-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "5a4d917f-2399-57e2-a829-c2f803b7914b",
+    "question": "JWT authentication trong Spring Security hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3517-jwt-authentication-trong-spring-security-hoat-dong-the-nao",
+    "slug": "jwt-authentication-trong-spring-security-hoat-dong-the-nao-5a4d917f-2399-57e2-a829-c2f803b7914b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "JWT (JSON Web Token) = stateless authentication — server không lưu session, verify bằng chữ ký.",
+        "Config:",
+        "oauth2ResourceServer(o -> o.jwt(...))"
+      ],
+      "details": [
+        "Lưu ý quan trọng:\n- JWT không revoke được trước khi hết hạn (trừ khi duy trì blocklist).\n- Access token: TTL ngắn (15min–1h). Refresh token: TTL dài, lưu DB để revoke được.\n- Không đặt sensitive data trong payload — JWT chỉ sign, không encrypt; ai cũng decode được bằng base64.",
+        "Flow:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "1. POST /login → server verify credential → ký JWT trả về\n2. Client gửi mỗi request: \"Authorization: Bearer <token>\"\n3. Server verify chữ ký → extract claims (sub, roles, exp) → authorize"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "3517-jwt-authentication-trong-spring-security-hoat-dong-the-nao"
+  },
+  {
+    "id": "79699063-c104-58e1-9ad1-b81aeb8726cf",
+    "question": "CSRF protection trong Spring Security là gì? Khi nào cần bật/tắt?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3518-csrf-protection-trong-spring-security-la-gi-khi-nao-can-bat-tat",
+    "slug": "csrf-protection-trong-spring-security-la-gi-khi-nao-can-bat-tat-79699063-c104-58e1-9ad1-b81aeb8726cf",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "CSRF (Cross-Site Request Forgery): attacker lừa browser của user gửi request đến server — browser tự đính kèm cookie session nên server tưởng là request hợp lệ."
+      ],
+      "details": [
+        "Cơ chế chống: server phát CSRF token (random, per-session) nhúng vào form → mọi request thay đổi state phải kèm token → server verify. Token nằm ngoài cookie nên site khác không lấy được.",
+        "2026:",
+        "Khi TẮT (an toàn): stateless REST API dùng JWT/Bearer token — không có cookie session → CSRF không áp dụng. Tắt: http.csrf(AbstractHttpConfigurer::disable).",
+        "Khi BẬT (bắt buộc): web app dùng session cookie (Thymeleaf, JSP, MVC truyền thống), form submit từ browser. JS gọi API phải gửi kèm header X-CSRF-TOKEN."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "3518-csrf-protection-trong-spring-security-la-gi-khi-nao-can-bat-tat"
+  },
+  {
+    "id": "95719f23-e8a1-5191-9553-dae262bc10c6",
+    "question": "@SpringBootTest là gì? Khác gì với unit test thông thường?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3519-springboottest-la-gi-khac-gi-voi-unit-test-thong-thuong",
+    "slug": "springboottest-la-gi-khac-gi-voi-unit-test-thong-thuong-95719f23-e8a1-5191-9553-dae262bc10c6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "@SpringBootTest khởi động full ApplicationContext — load toàn bộ bean, auto-config, DB... như production; thường kèm @AutoConfigureMockMvc để gọi endpoint qua MockMvc không cần server thật."
+      ],
+      "details": [
+        "Modes: webEnvironment = MOCK (default — MockMvc, không mở port) · RANDOM_PORT (server thật, test bằng TestRestTemplate).",
+        "Best practice: dùng ít thôi (chậm, context cache dễ vỡ) — dành cho integration test full-flow; còn lại ưu tiên slice tests (@WebMvcTest, @DataJpaTest) load đúng layer cần test."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Context",
+            "Không có Spring",
+            "Full ApplicationContext",
+            "Unit test",
+            "Tốc độ",
+            "Nhanh (~ms)",
+            "Chậm (~5-30s startup)",
+            "Nhanh",
+            "DB",
+            "Mock/in-memory",
+            "Real hoặc Testcontainers"
+          ]
+        }
+      ]
+    },
+    "legacyId": 43,
+    "sourceSlug": "3519-springboottest-la-gi-khac-gi-voi-unit-test-thong-thuong"
+  },
+  {
+    "id": "4d73e825-5897-54b7-99cb-3dfadff8ffac",
+    "question": "Slice tests trong Spring Boot: @WebMvcTest và @DataJpaTest dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3520-slice-tests-trong-spring-boot-webmvctest-va-datajpatest-dung-khi-nao",
+    "slug": "slice-tests-trong-spring-boot-webmvctest-va-datajpatest-dung-khi-nao-4d73e825-5897-54b7-99cb-3dfadff8ffac",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Slice test chỉ load một phần ApplicationContext — nhanh hơn @SpringBootTest, isolate layer cần test.",
+        "@WebFluxTest",
+        "@RestClientTest",
+        "@DataMongoTest",
+        "@DataJpaTest",
+        "Slice khác:"
+      ],
+      "details": [
+        "(Boot 3.4+: @MockBean → @MockitoBean.)",
+        "@WebMvcTest — controller layer:"
+      ],
+      "points": [],
+      "sections": [
+        "@DataJpaTest — repository layer:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@WebMvcTest(UserController.class)\nclass UserControllerTest {\n  @Autowired MockMvc mvc;\n  @MockBean UserService service;\n\n  @Test void getUser() throws Exception {\n    when(service.find(1L)).thenReturn(new User(1L, \"Alice\"));\n    mvc.perform(get(\"/api/users/1\")).andExpect(status().isOk())\n       .andExpect(jsonPath(\"$.name\").value(\"Alice\"));\n  }\n}"
+        },
+        {
+          "language": "JAVA",
+          "code": "@DataJpaTest\nclass UserRepositoryTest {\n  @Autowired UserRepository repo;\n\n  @Test void findByEmail() {\n    repo.save(new User(\"alice@ex.com\"));\n    assertThat(repo.findByEmail(\"alice@ex.com\")).isPresent();\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "3520-slice-tests-trong-spring-boot-webmvctest-va-datajpatest-dung-khi-nao"
+  },
+  {
+    "id": "c4d0094c-7dd5-5dfd-a514-1a44a6b4659e",
+    "question": "@MockBean và @Mock khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3521-mockbean-va-mock-khac-nhau-the-nao",
+    "slug": "mockbean-va-mock-khac-nhau-the-nao-c4d0094c-7dd5-5dfd-a514-1a44a6b4659e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "@Mock — Mockito thuần: chạy với @ExtendWith(MockitoExtension.class), kết hợp @InjectMocks để đưa mock vào object đang test. Không có Spring context → nhanh, dùng cho test service/logic."
+      ],
+      "details": [
+        "@MockBean — thay bean thật trong Spring context bằng mock: dùng trong slice test (@WebMvcTest mock service layer) hoặc @SpringBootTest khi test phụ thuộc Spring wiring.",
+        "Quy tắc: không cần Spring context → @Mock; cần thay bean trong context → @MockBean.",
+        "Lưu ý version: Spring Boot 3.4+ deprecate @MockBean → thay bằng @MockitoBean (package spring-test), ngữ nghĩa tương đương."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "@Mock",
+            "@MockBean",
+            "Spring context",
+            "Không cần",
+            "Cần (thay bean trong context)",
+            "@Mock (Mockito)",
+            "Dùng với",
+            "Unit test thuần",
+            "Slice test / @SpringBootTest",
+            "@MockBean (Spring Boot)",
+            "@SpringBootTest",
+            "Tốc độ",
+            "Nhanh",
+            "Chậm hơn (invalidate context cache)"
+          ]
+        }
+      ]
+    },
+    "legacyId": 45,
+    "sourceSlug": "3521-mockbean-va-mock-khac-nhau-the-nao"
+  },
+  {
+    "id": "403966cc-e79e-5a9c-9499-4a7e5b22b1e6",
+    "question": "Cách tạo custom HealthIndicator trong Spring Boot Actuator?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3522-cach-tao-custom-healthindicator-trong-spring-boot-actuator",
+    "slug": "cach-tao-custom-healthindicator-trong-spring-boot-actuator-403966cc-e79e-5a9c-9499-4a7e5b22b1e6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Kết quả: /actuator/health → {\"status\":\"DOWN\",\"components\":{\"externalApi\":{\"status\":\"DOWN\"}}}."
+      ],
+      "details": [
+        "Liveness vs Readiness (K8s):"
+      ],
+      "points": [],
+      "sections": [
+        "HealthIndicator thêm custom health check vào /actuator/health — quan trọng cho Kubernetes liveness/readiness probe.",
+        "/actuator/health/readiness"
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Component(\"externalApi\")\nclass ExternalApiHealthIndicator implements HealthIndicator {\n  private final RestClient restClient;\n\n  @Override public Health health() {\n    try {\n      var resp = restClient.get().uri(\"https://api.external.com/health\")\n        .retrieve().toEntity(String.class);\n      return resp.getStatusCode().is2xxSuccessful()\n        ? Health.up().withDetail(\"status\", \"reachable\").build()\n        : Health.down().withDetail(\"statusCode\", resp.getStatusCode()).build();\n    } catch (Exception e) {\n      return Health.down(e).withDetail(\"message\", \"External API unreachable\").build();\n    }\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "3522-cach-tao-custom-healthindicator-trong-spring-boot-actuator"
+  },
+  {
+    "id": "ccfa10a3-ed26-5744-a291-9416010ded52",
+    "question": "@Async và @EnableAsync trong Spring Boot hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3523-async-va-enableasync-trong-spring-boot-hoat-dong-the-nao",
+    "slug": "async-va-enableasync-trong-spring-boot-hoat-dong-the-nao-ccfa10a3-ed26-5744-a291-9416010ded52",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "@Async chạy method trong thread pool riêng — non-blocking từ phía caller.",
+        "Thread pool config (quan trọng):",
+        "Không có custom executor: Spring dùng SimpleAsyncTaskExecutor (tạo thread mới mỗi task, không pool → OOM khi tải cao). Lưu ý — giống @Transactional: this.method() bypass proxy → không async; gọi qua bean khác."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@SpringBootApplication @EnableAsync\nclass App {}\n\n@Service\nclass EmailService {\n  @Async\n  public CompletableFuture<Void> sendWelcome(String email) {\n    mailSender.send(email);\n    return CompletableFuture.completedFuture(null);\n  }\n}\n// caller: emailService.sendWelcome(email);  // fire-and-forget, return ngay"
+        },
+        {
+          "language": "JAVA",
+          "code": "@Bean TaskExecutor taskExecutor() {\n  var exec = new ThreadPoolTaskExecutor();\n  exec.setCorePoolSize(5); exec.setMaxPoolSize(20); exec.setQueueCapacity(100);\n  exec.initialize(); return exec;\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "3523-async-va-enableasync-trong-spring-boot-hoat-dong-the-nao"
+  },
+  {
+    "id": "38d61072-3128-5d52-bf64-d523b79e8747",
+    "question": "@Cacheable và @CacheEvict trong Spring Cache hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3524-cacheable-va-cacheevict-trong-spring-cache-hoat-dong-the-nao",
+    "slug": "cacheable-va-cacheevict-trong-spring-cache-hoat-dong-the-nao-38d61072-3128-5d52-bf64-d523b79e8747",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Backend Redis: spring.cache.type: redis. TTL đặt qua RedisCacheManagerBuilderCustomizer (entryTtl(Duration.ofMinutes(10)))."
+      ],
+      "details": [
+        "Lưu ý: @Cacheable trên @Transactional method — nếu transaction rollback, cache vẫn giữ kết quả cũ (stale). Dùng @TransactionalEventListener(phase = AFTER_COMMIT) để populate cache chỉ sau khi commit."
+      ],
+      "points": [],
+      "sections": [
+        "Spring Cache cache kết quả method — swap backend (in-memory, Redis, Caffeine) không đổi code."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@SpringBootApplication @EnableCaching\nclass App {}\n\n@Service\nclass ProductService {\n  @Cacheable(value = \"products\", key = \"#id\")\n  public Product findById(Long id) { return repo.findById(id).orElseThrow(); }  // chỉ gọi khi cache miss\n\n  @CacheEvict(value = \"products\", key = \"#p.id\")\n  public Product update(Product p) { return repo.save(p); }\n\n  @CacheEvict(value = \"products\", allEntries = true)\n  public void invalidateAll() {}\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "3524-cacheable-va-cacheevict-trong-spring-cache-hoat-dong-the-nao"
+  },
+  {
+    "id": "66d2343d-53f4-5880-b786-9b56052c17da",
+    "question": "@ControllerAdvice và @ExceptionHandler dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3525-controlleradvice-va-exceptionhandler-dung-de-lam-gi",
+    "slug": "controlleradvice-va-exceptionhandler-dung-de-lam-gi-66d2343d-53f4-5880-b786-9b56052c17da",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Tương tự bắt MethodArgumentNotValidException (lỗi @Valid) trả 400 kèm map field→message từ ex.getBindingResult().getFieldErrors(), và Exception.class trả 500 generic (log full stack, không lộ chi tiết ra ngoài)."
+      ],
+      "details": [
+        "ProblemDetail (Spring 6, RFC 9457) = format error response chuẩn: type, title, status, detail + property tuỳ biến.",
+        "Scope: @ControllerAdvice áp cho mọi controller; thu hẹp bằng @ControllerAdvice(basePackages = \"com.example.api\")."
+      ],
+      "points": [],
+      "sections": [
+        "@RestControllerAdvice + @ExceptionHandler xử lý exception tập trung — không try/catch rải khắp controller."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@RestControllerAdvice\nclass GlobalExceptionHandler {\n  @ExceptionHandler(EntityNotFoundException.class)\n  @ResponseStatus(HttpStatus.NOT_FOUND)\n  ProblemDetail handleNotFound(EntityNotFoundException ex) {\n    return ProblemDetail.forStatusAndDetail(NOT_FOUND, ex.getMessage());\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "3525-controlleradvice-va-exceptionhandler-dung-de-lam-gi"
+  },
+  {
+    "id": "113f872e-f898-5070-94e2-5b2c45581725",
+    "question": "@Valid và @Validated trong Spring Boot khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3526-valid-va-validated-trong-spring-boot-khac-nhau-the-nao",
+    "slug": "valid-va-validated-trong-spring-boot-khac-nhau-the-nao-113f872e-f898-5070-94e2-5b2c45581725",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả 2 trigger Bean Validation trên method argument hoặc field."
+      ],
+      "details": [
+        "Cơ bản (dùng cái nào cũng được): create(@RequestBody @Valid CreateUserRequest req).",
+        "Khác biệt thực sự — validation groups:",
+        "@Validated đặt trên class còn bật validate tham số method thường: find(@NotNull @Positive Long id).",
+        "Validation fail → MethodArgumentNotValidException → bắt bằng @ExceptionHandler (xem câu @ControllerAdvice)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "interface OnCreate {}  interface OnUpdate {}\n\nrecord UserRequest(\n  @Null(groups = OnCreate.class) @NotNull(groups = OnUpdate.class) Long id,\n  @NotBlank String name\n) {}\n\n@PostMapping ResponseEntity<User> create(@RequestBody @Validated(OnCreate.class) UserRequest req) {}\n@PutMapping  ResponseEntity<User> update(@RequestBody @Validated(OnUpdate.class) UserRequest req) {}"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "@Valid",
+            "@Validated",
+            "Validation groups",
+            "Không",
+            "Có",
+            "Method-level validation",
+            "Không",
+            "Có — (đặt class level)",
+            "@Valid (Jakarta)"
+          ]
+        }
+      ]
+    },
+    "legacyId": 50,
+    "sourceSlug": "3526-valid-va-validated-trong-spring-boot-khac-nhau-the-nao"
+  },
+  {
+    "id": "79d65319-36a0-5433-bc40-5a5464dcb60f",
+    "question": "Thứ tự ưu tiên property trong Spring Boot như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3527-thu-tu-uu-tien-property-trong-spring-boot-nhu-the-nao",
+    "slug": "thu-tu-uu-tien-property-trong-spring-boot-nhu-the-nao-79d65319-36a0-5433-bc40-5a5464dcb60f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Spring Boot load property từ nhiều nguồn — nguồn ưu tiên cao override nguồn thấp (cao → thấp):"
+      ],
+      "details": [
+        "1. Command-line args (--server.port=9090)\n2. SPRING_APPLICATION_JSON (env var chứa JSON)\n3. Java system properties (-Dserver.port=9090)\n4. OS env vars (SERVER_PORT=9090)\n5. application-{profile}.yml ngoài JAR\n6. application.yml ngoài JAR\n7. application-{profile}.yml trong JAR\n8. application.yml trong JAR\n9. @PropertySource trên @Configuration\n10. Default (@Value(\"${x:default}\"), SpringApplication.setDefaultProperties)",
+        "Hai quy tắc dễ nhớ: file ngoài JAR > trong JAR; profile-specific > base ở cùng vị trí.",
+        "Relaxed binding: env var SPRING_DATASOURCE_URL = property spring.datasource.url — Spring tự convert _ → ., uppercase → lowercase.",
+        "Thực tế: base config trong JAR (application.yml) + secret/env-specific override qua env var hoặc --flag lúc deploy (Docker/K8s) → không commit secret vào git."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "3527-thu-tu-uu-tien-property-trong-spring-boot-nhu-the-nao"
+  },
+  {
+    "id": "cf0fb030-621a-5674-86c4-8af1d255bb1f",
+    "question": "@ConditionalOnProperty dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3528-conditionalonproperty-dung-de-lam-gi",
+    "slug": "conditionalonproperty-dung-de-lam-gi-cf0fb030-621a-5674-86c4-8af1d255bb1f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Set app.feature.email: true trong config → bean tồn tại; đổi false → biến mất, không sửa code. matchIfMissing = true → bean vẫn tạo khi property không được set."
+      ],
+      "details": [
+        "Họ conditional khác: @ConditionalOnClass (class có trên classpath), @ConditionalOnMissingBean (user chưa define bean), @ConditionalOnWebApplication, @ConditionalOnExpression (SpEL).",
+        "Dùng nhiều trong: custom auto-configuration, feature toggle, optional integration (Redis có thì dùng, không thì in-memory)."
+      ],
+      "points": [],
+      "sections": [
+        "@ConditionalOnProperty tạo bean chỉ khi property có giá trị nhất định — feature flag, optional component."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Component\n@ConditionalOnProperty(name = \"app.feature.email\", havingValue = \"true\")\nclass EmailNotificationService implements NotificationService {}\n\n@Component\n@ConditionalOnMissingBean(CacheService.class)   // fallback khi bean kia không được tạo\nclass InMemoryCacheService implements CacheService {}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "3528-conditionalonproperty-dung-de-lam-gi"
+  },
+  {
+    "id": "a6462001-618a-5ca1-b4bd-739b8fc0c368",
+    "question": "CrudRepository, JpaRepository và PagingAndSortingRepository khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3529-crudrepository-jparepository-va-pagingandsortingrepository-khac-nhau-the-nao",
+    "slug": "crudrepository-jparepository-va-pagingandsortingrepository-khac-nhau-the-nao-a6462001-618a-5ca1-b4bd-739b8fc0c368",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý Spring Data 3.x: PagingAndSortingRepository không còn extends CrudRepository (khác 2.x) — muốn cả CRUD lẫn paging phải extend cả hai, hoặc đơn giản dùng JpaRepository (gộp tất cả + method JPA-specific)."
+      ],
+      "details": [
+        "Thực tế: hầu hết extend JpaRepository. Dùng CrudRepository khi muốn interface tối giản, tránh coupling JPA (dễ swap sang MongoDB — các store khác cũng có CrudRepository).",
+        "Pagination trả Page<T> (getContent, getTotalElements, getTotalPages) — code chi tiết xem câu Pagination & Sorting."
+      ],
+      "points": [],
+      "sections": [
+        "Các interface trong Spring Data hierarchy:"
+      ],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "Repository (marker)\n ├─ CrudRepository / ListCrudRepository     // CRUD: save, findById, findAll, deleteById, count\n ├─ PagingAndSortingRepository              // findAll(Pageable), findAll(Sort)\n └─ JpaRepository                           // extends ListCrudRepository + ListPagingAndSortingRepository\n                                            // + saveAll, deleteAllInBatch, getReferenceById, flush"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "3529-crudrepository-jparepository-va-pagingandsortingrepository-khac-nhau-the-nao"
+  },
+  {
+    "id": "ee497f2d-b172-5184-944d-d3fbd5bbbf8f",
+    "question": "Database migration với Flyway trong Spring Boot hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3532-database-migration-voi-flyway-trong-spring-boot-hoat-dong-the-nao",
+    "slug": "database-migration-voi-flyway-trong-spring-boot-hoat-dong-the-nao-ee497f2d-b172-5184-944d-d3fbd5bbbf8f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Flyway quản lý schema migration dạng versioned SQL file — audit trail, schema reproducible mọi môi trường. Thêm dependency flyway-core là Spring Boot tự tích hợp (từ Flyway 10 / Boot 3.2+, Postgres/MySQL cần thêm module riêng, vd flyway-database-postgresql)."
+      ],
+      "details": [
+        "Quy ước: script đặt ở src/main/resources/db/migration/, tên V{version}__{description}.sql — vd V1__create_users_table.sql, V2__add_email_index.sql. Nội dung là SQL thuần (CREATE TABLE ...).",
+        "Auto-run khi startup: Flyway apply mọi migration pending theo thứ tự version, lưu trạng thái (version, checksum, thời điểm) vào bảng flyway_schema_history — biết chính xác migration nào đã chạy.",
+        "Config đáng nhớ: spring.flyway.baseline-on-migrate: true (khi DB đã có schema từ trước), validate-on-migrate: true (checksum lệch → fail sớm).",
+        "Vs Liquibase:",
+        "Quy tắc quan trọng: không sửa migration đã chạy — checksum đổi → Flyway fail; luôn tạo file mới (V4__alter_...)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "3532-database-migration-voi-flyway-trong-spring-boot-hoat-dong-the-nao"
+  },
+  {
+    "id": "74fabbd8-ca06-53ca-8077-f707828581c4",
+    "question": "HikariCP là gì? Tại sao là default connection pool trong Spring Boot?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3533-hikaricp-la-gi-tai-sao-la-default-connection-pool-trong-spring-boot",
+    "slug": "hikaricp-la-gi-tai-sao-la-default-connection-pool-trong-spring-boot-74fabbd8-ca06-53ca-8077-f707828581c4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "HikariCP là JDBC connection pool — giữ sẵn pool kết nối DB tái sử dụng thay vì mở/đóng connection mỗi request (mở connection tốn hàng chục ms + handshake)."
+      ],
+      "details": [
+        "Là default của Spring Boot 2+ vì: nhanh nhất trong benchmark (vs Tomcat CP, DBCP2, C3P0) — overhead borrow/return cực thấp; lightweight (~170KB); reliable.",
+        "Tham số chính (prefix spring.datasource.hikari.*):\n- maximum-pool-size — max connection (default 10).\n- minimum-idle — số connection idle giữ sẵn.\n- connection-timeout — ms chờ lấy connection trước khi throw.\n- max-lifetime — tuổi thọ tối đa 1 connection.\n- leak-detection-threshold — cảnh báo khi connection bị giữ quá lâu → bắt bug code quên trả pool.",
+        "Pool size: không phải càng nhiều càng tốt — DB giới hạn concurrent connection. Công thức HikariCP: (core_count × 2) + effective_spindle_count; Postgres khuyến nghị 10-20 connection/app instance."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": "3533-hikaricp-la-gi-tai-sao-la-default-connection-pool-trong-spring-boot"
+  },
+  {
+    "id": "14bad658-e791-5ef3-aa7f-bad0174930d9",
+    "question": "ResponseEntity trong Spring MVC dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3534-responseentity-trong-spring-mvc-dung-de-lam-gi",
+    "slug": "responseentity-trong-spring-mvc-dung-de-lam-gi-14bad658-e791-5ef3-aa7f-bad0174930d9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Trả object trực tiếp → Spring mặc định 200 OK."
+      ],
+      "details": [
+        "Dùng ResponseEntity khi cần status khác 200, custom header, hoặc body có thể null."
+      ],
+      "points": [],
+      "sections": [
+        "ResponseEntity<T> cho phép kiểm soát hoàn toàn HTTP response: status code, header, body."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@PostMapping\nResponseEntity<User> create(@RequestBody @Valid CreateUserRequest req) {\n  User user = userService.create(req);\n  return ResponseEntity.created(URI.create(\"/api/users/\" + user.getId())).body(user);  // 201 + Location\n}\n\n@GetMapping(\"/{id}\")\nResponseEntity<User> get(@PathVariable Long id) {\n  return userService.findById(id)\n    .map(ResponseEntity::ok)                     // 200 OK\n    .orElse(ResponseEntity.notFound().build());  // 404\n}\n\n@DeleteMapping(\"/{id}\")\nResponseEntity<Void> delete(@PathVariable Long id) {\n  userService.delete(id);\n  return ResponseEntity.noContent().build();     // 204\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "3534-responseentity-trong-spring-mvc-dung-de-lam-gi"
+  },
+  {
+    "id": "98dd47bf-986c-5b7e-b319-74d4b575ee75",
+    "question": "@Scheduled và @EnableScheduling dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3535-scheduled-va-enablescheduling-dung-de-lam-gi",
+    "slug": "scheduled-va-enablescheduling-dung-de-lam-gi-98dd47bf-986c-5b7e-b319-74d4b575ee75",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "@Scheduled chạy method theo lịch định kỳ — cron job, background task.",
+        "Cron Spring có 6 field",
+        "{giây} {phút} {giờ} {ngày} {tháng} {thứ}"
+      ],
+      "details": [
+        "Bật bằng @EnableScheduling trên class config.",
+        "Lưu ý quan trọng: mặc định mọi @Scheduled chạy trên 1 thread duy nhất → task chậm làm task khác trễ; nhiều job thì config ThreadPoolTaskScheduler với setPoolSize. Chạy nhiều instance: @Scheduled chạy trên MỌI instance → duplicate job; fix bằng ShedLock hoặc Quartz với DB-level lock."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Scheduled(fixedRate = 300_000)                                    // mỗi 5 phút (tính từ lúc BẮT ĐẦU lần trước)\nvoid syncExchangeRate() { ... }\n\n@Scheduled(fixedDelay = 30_000)                                    // 30s sau khi lần trước CHẠY XONG\nvoid cleanupTempFiles() { ... }\n\n@Scheduled(cron = \"0 0 8 * * MON-FRI\", zone = \"Asia/Ho_Chi_Minh\")  // cron + timezone\nvoid morningDigest() { ... }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": "3535-scheduled-va-enablescheduling-dung-de-lam-gi"
+  },
+  {
+    "id": "141e9c48-f47a-59e8-aa4d-f2bd9a577a4e",
+    "question": "RestTemplate, WebClient và RestClient khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3536-resttemplate-webclient-va-restclient-khac-nhau-the-nao",
+    "slug": "resttemplate-webclient-va-restclient-khac-nhau-the-nao-141e9c48-f47a-59e8-aa4d-f2bd9a577a4e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba cách gọi HTTP từ Spring app đến external API:",
+        "RestTemplate",
+        ".retrieve().bodyToMono(User.class)",
+        "getForObject(url, User.class)"
+      ],
+      "details": [
+        "RestClient (recommended cho Spring MVC):",
+        "2026: RestClient cho Spring MVC, WebClient cho WebFlux."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Bean\nRestClient restClient() {\n  return RestClient.builder().baseUrl(\"https://api.example.com\").build();\n}\n\nUser user = restClient.get().uri(\"/users/{id}\", 1L).retrieve().body(User.class);"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "Model",
+            "Blocking",
+            "Non-blocking (reactive)",
+            "RestTemplate",
+            "Blocking (fluent)",
+            "Status",
+            "Hạn chế — Maintenance mode",
+            "WebClient",
+            "Có — Active",
+            "Có — Active (Spring 6.1+)",
+            "API style",
+            "Template method"
+          ]
+        }
+      ]
+    },
+    "legacyId": 58,
+    "sourceSlug": "3536-resttemplate-webclient-va-restclient-khac-nhau-the-nao"
+  },
+  {
+    "id": "3b4af089-4220-5ac1-853b-c8549ad7dc2a",
+    "question": "Spring Kafka integration: cách produce và consume message?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3537-spring-kafka-integration-cach-produce-va-consume-message",
+    "slug": "spring-kafka-integration-cach-produce-va-consume-message-3b4af089-4220-5ac1-853b-c8549ad7dc2a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Spring Kafka — KafkaTemplate để produce, @KafkaListener để consume.",
+        "order.getId()"
+      ],
+      "details": [
+        "Thêm dependency spring-kafka, config qua spring.kafka.* (bootstrap-servers, consumer group-id, JSON serializer/deserializer).",
+        "Error handling: @RetryableTopic — retry tự động với backoff, đẩy vào Dead Letter Topic sau max retries."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "// Producer\n@Service\nclass OrderEventPublisher {\n  private final KafkaTemplate<String, OrderEvent> kafkaTemplate;\n\n  public void publish(Order order) {\n    kafkaTemplate.send(\"order-events\", order.getId().toString(),\n        new OrderEvent(order.getId(), \"ORDER_CREATED\"))\n      .whenComplete((result, ex) -> { if (ex != null) log.error(\"Send failed\", ex); });\n  }\n}\n\n// Consumer\n@KafkaListener(topics = \"order-events\", groupId = \"inventory-service\")\npublic void handle(OrderEvent event) {\n  inventoryService.reserve(event.getOrderId());\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": "3537-spring-kafka-integration-cach-produce-va-consume-message"
+  },
+  {
+    "id": "c95384cb-f33e-519c-9153-d8ddba17d5ce",
+    "question": "Service discovery và load balancing trong microservices với Spring Cloud?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3538-service-discovery-va-load-balancing-trong-microservices-voi-spring-cloud",
+    "slug": "service-discovery-va-load-balancing-trong-microservices-voi-spring-cloud-c95384cb-f33e-519c-9153-d8ddba17d5ce",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Service discovery cho service tìm nhau theo tên logic thay vì IP:port cứng (instance scale lên xuống, IP đổi liên tục)."
+      ],
+      "details": [
+        "1. Kubernetes Service (phổ biến nhất) — K8s tự discovery qua DNS: gọi http://order-service/api/orders là xong, kube-proxy tự phân tải qua các pod. Không cần Eureka hay Spring Cloud Discovery.",
+        "Lựa chọn 2026:",
+        "2. Spring Cloud + Eureka (truyền thống — on-premise, không K8s) — dựng Eureka Server (@EnableEurekaServer); client gắn @EnableDiscoveryClient + eureka.client.serviceUrl để tự register và discover.",
+        "Load balancing (Spring Cloud LoadBalancer): đánh dấu @LoadBalanced trên bean RestClient.Builder/RestTemplate → khi gọi http://order-service/..., Spring resolve tên service → danh sách IP:port từ registry và phân tải client-side (round-robin mặc định).",
+        "Thực tế: deploy Kubernetes → dùng built-in của K8s; Eureka/Consul chỉ khi không có K8s."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": "3538-service-discovery-va-load-balancing-trong-microservices-voi-spring-cloud"
+  },
+  {
+    "id": "dd37f3b8-3fc2-5b41-a165-d2481339a3d1",
+    "question": "Cách bảo vệ Actuator endpoint trong production?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3539-cach-bao-ve-actuator-endpoint-trong-production",
+    "slug": "cach-bao-ve-actuator-endpoint-trong-production-dd37f3b8-3fc2-5b41-a165-d2481339a3d1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Endpoint Actuator nhạy cảm (/env, /heapdump, /loggers) phải được bảo vệ — không để public."
+      ],
+      "details": [
+        "1. Chỉ expose cái cần + port riêng:",
+        "3 lớp (kết hợp được):",
+        "Chỉ expose cái cần + port riêng:",
+        "2. Spring Security: permitAll() cho /actuator/health + /actuator/info; hasRole(\"ADMIN\") cho /actuator/** còn lại (rule trong SecurityFilterChain).",
+        "3. /actuator/shutdown — luôn để tắt (endpoint.shutdown.enabled: false cũng là default); bật lên mà không auth = ai cũng tắt được app."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": "3539-cach-bao-ve-actuator-endpoint-trong-production"
+  },
+  {
+    "id": "bcdab61b-521f-51d4-a740-fb2935daccc9",
+    "question": "@ResponseStatus dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3540-responsestatus-dung-khi-nao",
+    "slug": "responsestatus-dung-khi-nao-bcdab61b-521f-51d4-a740-fb2935daccc9",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "@ResponseStatus gán HTTP status cho exception class hoặc controller method — khai báo tĩnh thay vì ResponseEntity."
+      ],
+      "details": [
+        "Trên exception class:",
+        "Trên controller method:"
+      ],
+      "points": [],
+      "sections": [
+        "vs ResponseEntity: @ResponseStatus cho status cố định, đơn giản; ResponseEntity khi status động, cần header, body có thể null. Lưu ý: nếu có @ExceptionHandler trong @ControllerAdvice, @ResponseStatus trên exception bị bỏ qua — handler ưu tiên."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@ResponseStatus(HttpStatus.NOT_FOUND)   // → 404\nclass UserNotFoundException extends RuntimeException {}\n\n@ResponseStatus(value = HttpStatus.CONFLICT, reason = \"Email already registered\")  // → 409\nclass DuplicateEmailException extends RuntimeException {}"
+        },
+        {
+          "language": "JAVA",
+          "code": "@PostMapping @ResponseStatus(HttpStatus.CREATED)   // → 201\nUser create(@RequestBody @Valid CreateUserRequest req) { return userService.create(req); }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": "3540-responsestatus-dung-khi-nao"
+  },
+  {
+    "id": "892101d5-d74a-55d9-97f4-8103543db8a5",
+    "question": "Spring Boot 3 khác gì so với Spring Boot 2? Những thay đổi lớn khi migrate?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3541-spring-boot-3-khac-gi-so-voi-spring-boot-2-nhung-thay-doi-lon-khi-migrate",
+    "slug": "spring-boot-3-khac-gi-so-voi-spring-boot-2-nhung-thay-doi-lon-khi-migrate-892101d5-d74a-55d9-97f4-8103543db8a5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Spring Boot 3 (2022) — bản major, breaking changes."
+      ],
+      "details": [
+        "Yêu cầu tối thiểu: Java 17 (Boot 2: Java 8), Jakarta EE 10.",
+        "Thay đổi lớn nhất — namespace: toàn bộ import javax.* → jakarta.* (vd javax.persistence.Entity → jakarta.persistence.Entity, tương tự validation/servlet; giữ nguyên javax.sql, javax.xml — không thuộc Jakarta EE).",
+        "Các thay đổi khác:\n- Spring Security 6 — Lambda DSL bắt buộc, bỏ WebSecurityConfigurerAdapter.\n- Spring Data — getOne() deprecated → getReferenceById().\n- Auto-config — spring.factories → AutoConfiguration.imports.\n- AOT + GraalVM Native Image hỗ trợ built-in.\n- HTTP interface (@HttpExchange) thay Feign/RestTemplate proxy.",
+        "Bước migrate: nâng Java 17+ → đổi namespace javax→jakarta (IDE/OpenRewrite hỗ trợ tự động) → update Security config sang Lambda DSL → soát deprecated API."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": "3541-spring-boot-3-khac-gi-so-voi-spring-boot-2-nhung-thay-doi-lon-khi-migrate"
+  },
+  {
+    "id": "733871de-98cd-57c3-a0ba-d3726693efe4",
+    "question": "Constructor injection, setter injection và field injection khác nhau thế nào? Cái nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3545-constructor-injection-setter-injection-va-field-injection-khac-nhau-the-nao-cai",
+    "slug": "constructor-injection-setter-injection-va-field-injection-khac-nhau-the-nao-cai-nao-nen-dung-733871de-98cd-57c3-a0ba-d3726693efe4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Vì sao constructor injection tốt nhất: final → immutable/thread-safe; bắt buộc dependency → null-safe; test không cần Spring (new OrderService(mock)); circular dependency lộ ngay lúc startup."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Service\nclass OrderService {\n  private final OrderRepository repo;                         // final → immutable\n  OrderService(OrderRepository repo) { this.repo = repo; }    // Spring 4.3+: 1 constructor khỏi @Autowired\n}\n\n// Setter — optional dependency:  @Autowired(required = false) void setMetrics(MetricService m) {...}\n// Field  — KHÔNG khuyến nghị:     @Autowired OrderRepository repo;  // khó test"
+        }
+      ],
+      "tables": [
+        {
+          "cells": [
+            "final",
+            "Immutability",
+            "Có — final",
+            "Không",
+            "Constructor",
+            "Không —",
+            "Mandatory dep",
+            "Có — Rõ ràng",
+            "Setter",
+            "Không — Optional mặc định",
+            "Không",
+            "Testability",
+            "Có — Tốt nhất",
+            "Có thể bị ẩn"
+          ]
+        }
+      ]
+    },
+    "legacyId": 64,
+    "sourceSlug": "3545-constructor-injection-setter-injection-va-field-injection-khac-nhau-the-nao-cai"
+  },
+  {
+    "id": "dd45b3db-7fd4-5a05-9e18-ebb8d14798f7",
+    "question": "@Transactional self-invocation problem là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3548-transactional-self-invocation-problem-la-gi",
+    "slug": "transactional-self-invocation-problem-la-gi-dd45b3db-7fd4-5a05-9e18-ebb8d14798f7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Self-invocation: method gọi method khác trong cùng class → @Transactional bị bỏ qua.",
+        "@Lazy @Autowired OrderService self;",
+        "self.processOne(id)"
+      ],
+      "details": [
+        "Spring transaction chạy qua AOP proxy — proxy bọc bean, chặn call từ ngoài để begin/commit. Gọi this.B() đi thẳng vào object, không qua proxy → annotation trên B vô hiệu.",
+        "Nguyên tắc: @Transactional chỉ có hiệu lực với public method gọi từ ngoài bean. @Async, @Cacheable cũng dính lỗi self-invocation này."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Service\nclass OrderService {\n  public void processOrders(List<Long> ids) {\n    ids.forEach(id -> processOne(id));   // BAD: self-invocation → không có transaction\n  }\n  @Transactional\n  public void processOne(Long id) { ... }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": "3548-transactional-self-invocation-problem-la-gi"
+  },
+  {
+    "id": "3ce01994-a21e-519d-b3c7-c06789c35c1c",
+    "question": "CORS trong Spring Boot cấu hình như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3549-cors-trong-spring-boot-cau-hinh-nhu-the-nao",
+    "slug": "cors-trong-spring-boot-cau-hinh-nhu-the-nao-3ce01994-a21e-519d-b3c7-c06789c35c1c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "CORS — browser chặn request từ origin khác. Spring Boot có nhiều cách config."
+      ],
+      "details": [
+        "Global config (recommended):"
+      ],
+      "points": [],
+      "sections": [
+        "Cách khác: @CrossOrigin(origins = \"...\") trên controller (đơn giản, per-controller). Lưu ý: khi dùng Spring Security, CORS phải cấu hình qua http.cors(...) trong SecurityFilterChain — config WebMvc bị Security filter chặn trước."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Bean\nWebMvcConfigurer corsConfig() {\n  return new WebMvcConfigurer() {\n    @Override public void addCorsMappings(CorsRegistry reg) {\n      reg.addMapping(\"/api/**\")\n        .allowedOrigins(\"https://app.example.com\", \"http://localhost:3000\")\n        .allowedMethods(\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\")\n        .allowCredentials(true).maxAge(3600);\n    }\n  };\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": "3549-cors-trong-spring-boot-cau-hinh-nhu-the-nao"
+  },
+  {
+    "id": "80a88cd6-0a72-5c93-b8dc-768d320cbe3d",
+    "question": "Testcontainers trong Spring Boot dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3550-testcontainers-trong-spring-boot-dung-de-lam-gi",
+    "slug": "testcontainers-trong-spring-boot-dung-de-lam-gi-80a88cd6-0a72-5c93-b8dc-768d320cbe3d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Testcontainers spin up Docker container thật (Postgres, Redis, Kafka...) trong test — integration test với infra thật, không phải H2. Thêm dependency spring-boot-testcontainers + org.testcontainers:postgresql (scope test)."
+      ],
+      "details": [
+        "Spring Boot 3.1+ — @ServiceConnection:"
+      ],
+      "points": [],
+      "sections": [
+        "Lợi ích: test với Postgres thật → bắt lỗi SQL mà H2 bỏ qua; Flyway migration chạy đúng môi trường; CI không cần cài sẵn DB. Nhược: chậm hơn H2 (~5-10s startup) → share container để giảm. Chọn: H2 cho unit test service; Testcontainers cho integration test repository/DB."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@SpringBootTest\n@Testcontainers\nclass UserRepositoryIT {\n  @Container\n  @ServiceConnection   // tự config spring.datasource.* từ container\n  static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(\"postgres:16\");\n\n  @Autowired UserRepository repo;\n\n  @Test void findByEmail() {\n    repo.save(new User(\"alice@ex.com\"));\n    assertThat(repo.findByEmail(\"alice@ex.com\")).isPresent();\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": "3550-testcontainers-trong-spring-boot-dung-de-lam-gi"
+  },
+  {
+    "id": "1b35602b-bedd-5756-8c19-0accfa34d930",
+    "question": "Cách implement Pagination và Sorting với Spring Data JPA?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3553-cach-implement-pagination-va-sorting-voi-spring-data-jpa",
+    "slug": "cach-implement-pagination-va-sorting-voi-spring-data-jpa-1b35602b-bedd-5756-8c19-0accfa34d930",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Page response gồm: content, totalElements, totalPages, size, number (trang hiện tại), first, last."
+      ],
+      "details": [
+        "Lưu ý: Page thêm 1 count query — với large table hoặc infinite scroll không cần tổng số, dùng Slice<T>."
+      ],
+      "points": [],
+      "sections": [
+        "Spring Data cung cấp Pageable/PageRequest cho pagination và Sort cho sorting."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "public interface UserRepository extends JpaRepository<User, Long> {\n  Page<User> findByActive(boolean active, Pageable pageable);\n}\n\n@GetMapping(\"/users\")\nPage<UserDTO> list(@RequestParam(defaultValue = \"0\") int page,\n                   @RequestParam(defaultValue = \"20\") int size,\n                   @RequestParam(defaultValue = \"createdAt\") String sort) {\n  Pageable pageable = PageRequest.of(page, size, Sort.by(sort).descending());  // page 0-indexed\n  return userRepo.findByActive(true, pageable).map(userMapper::toDTO);\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": "3553-cach-implement-pagination-va-sorting-voi-spring-data-jpa"
+  },
+  {
+    "id": "9984a6ba-8a19-5100-bfe0-ab3854fa2ed1",
+    "question": "Spring Boot Actuator metric với Prometheus và Grafana tích hợp thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3554-spring-boot-actuator-metric-voi-prometheus-va-grafana-tich-hop-the-nao",
+    "slug": "spring-boot-actuator-metric-voi-prometheus-va-grafana-tich-hop-the-nao-9984a6ba-8a19-5100-bfe0-ab3854fa2ed1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Actuator + Micrometer export metric sang Prometheus → Grafana visualize."
+      ],
+      "details": [
+        "Thêm spring-boot-starter-actuator + micrometer-registry-prometheus, rồi expose:"
+      ],
+      "points": [],
+      "sections": [
+        "Prometheus: thêm job metrics_path: /actuator/prometheus, target app:8080. Built-in metric: JVM memory/GC, Tomcat threads, HikariCP pool, HTTP count/latency, cache hit. Grafana: import dashboard \"Spring Boot Statistics\" để có sẵn overview.",
+        "Custom metric:"
+      ],
+      "codeExamples": [
+        {
+          "language": "YAML",
+          "code": "@Component\nclass OrderMetrics {\n  private final Counter orderCreated;\n  OrderMetrics(MeterRegistry registry) {\n    orderCreated = Counter.builder(\"orders.created\").register(registry);\n  }\n  void record() { orderCreated.increment(); }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": "3554-spring-boot-actuator-metric-voi-prometheus-va-grafana-tich-hop-the-nao"
+  },
+  {
+    "id": "eb97ddf3-0f7a-5982-8493-b13a6be1ff4a",
+    "question": "OpenAPI (Swagger) tích hợp với Spring Boot thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3556-openapi-swagger-tich-hop-voi-spring-boot-the-nao",
+    "slug": "openapi-swagger-tich-hop-voi-spring-boot-the-nao-eb97ddf3-0f7a-5982-8493-b13a6be1ff4a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "SpringDoc OpenAPI tự generate OpenAPI 3 spec từ controller/DTO — không viết YAML thủ công. Thêm springdoc-openapi-starter-webmvc-ui."
+      ],
+      "details": [
+        "Out of the box: GET /v3/api-docs (JSON spec), GET /swagger-ui.html (UI tương tác).",
+        "Customize:"
+      ],
+      "points": [],
+      "sections": [
+        "Tắt trên production: springdoc.swagger-ui.enabled: false, springdoc.api-docs.enabled: false. Vs Springfox: Springfox (Swagger 2) ngừng maintain (2020) → dùng SpringDoc cho Spring Boot 3+. CI: generate client SDK từ spec bằng openapi-generator → tránh \"API contract drift\"."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Bean\nOpenAPI customOpenAPI() {\n  return new OpenAPI()\n    .info(new Info().title(\"My API\").version(\"1.0\"))\n    .addSecurityItem(new SecurityRequirement().addList(\"bearerAuth\"))\n    .components(new Components().addSecuritySchemes(\"bearerAuth\",\n      new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme(\"bearer\").bearerFormat(\"JWT\")));\n}\n\n@Operation(summary = \"Lấy user theo ID\")\n@GetMapping(\"/{id}\")\nUser get(@PathVariable Long id) { ... }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": "3556-openapi-swagger-tich-hop-voi-spring-boot-the-nao"
+  },
+  {
+    "id": "9e5213e6-eb25-5d45-a6d3-beb68cb51e96",
+    "question": "ApplicationContext và BeanFactory khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3557-applicationcontext-va-beanfactory-khac-nhau-the-nao",
+    "slug": "applicationcontext-va-beanfactory-khac-nhau-the-nao-9e5213e6-eb25-5d45-a6d3-beb68cb51e96",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "BeanFactory và ApplicationContext đều là Spring IoC container — ApplicationContext là superset."
+      ],
+      "details": [
+        "Eager của ApplicationContext là ưu điểm production: lỗi config/wiring lộ ngay lúc startup thay vì lúc request đầu tiên chạm bean.",
+        "Event publishing dùng qua ApplicationEventPublisher.publishEvent(...) + @EventListener — chi tiết xem câu @TransactionalEventListener.",
+        "Kết luận: Spring Boot luôn dùng ApplicationContext (SpringApplication.run(...) trả về chính nó). BeanFactory là API low-level bên dưới, không dùng trực tiếp trong thực tế."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "ApplicationEvent",
+            "WebApplicationContext",
+            "Lazy loading",
+            "Có — Default",
+            "Không — Eager (singleton tạo lúc startup)",
+            "BeanFactory",
+            "AOP, @Transactional",
+            "Không",
+            "Có",
+            "Feature",
+            "ApplicationContext",
+            "Event publishing",
+            "Không",
+            "Có — (ApplicationEvent)",
+            "MessageSource (i18n)",
+            "Không",
+            "Auto-config, Starters",
+            "Không",
+            "Có"
+          ]
+        }
+      ]
+    },
+    "legacyId": 71,
+    "sourceSlug": "3557-applicationcontext-va-beanfactory-khac-nhau-the-nao"
+  },
+  {
+    "id": "c3f15d90-1cc9-5c49-897c-4bf3c9c16a5b",
+    "question": "Spring AOP là gì? @Aspect, @Around và pointcut hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3558-spring-aop-la-gi-aspect-around-va-pointcut-hoat-dong-the-nao",
+    "slug": "spring-aop-la-gi-aspect-around-va-pointcut-hoat-dong-the-nao-c3f15d90-1cc9-5c49-897c-4bf3c9c16a5b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "AOP (Aspect-Oriented Programming) tách cross-cutting concern (logging, security, transaction, metrics) khỏi business logic.",
+        "Pointcut expression phổ biến:",
+        "execution(* com.example.service.*.*(..))",
+        "@annotation(Transactional)",
+        "args(Long, ..)"
+      ],
+      "details": [
+        "Khái niệm: Aspect (module chứa logic), Pointcut (chọn method bị intercept), Advice (@Before/@After/@Around/@AfterThrowing), JoinPoint (điểm thực thi cụ thể).",
+        "Lưu ý: Spring Boot tự bật AOP khi có spring-boot-starter-aop — không cần @EnableAspectJAutoProxy. AOP chạy qua proxy (giống @Transactional) → self-invocation không được intercept."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Aspect @Component\nclass LoggingAspect {\n  @Pointcut(\"execution(public * com.example.service.*.*(..))\")\n  void serviceLayer() {}\n\n  @Around(\"serviceLayer()\")   // bao quanh method\n  Object logTime(ProceedingJoinPoint pjp) throws Throwable {\n    long start = System.currentTimeMillis();\n    try { return pjp.proceed(); }   // gọi method thật\n    finally { log.info(\"{} in {}ms\", pjp.getSignature().getName(), System.currentTimeMillis() - start); }\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": "3558-spring-aop-la-gi-aspect-around-va-pointcut-hoat-dong-the-nao"
+  },
+  {
+    "id": "2e7a09de-4b78-587d-8e37-05e713710ce3",
+    "question": "@TransactionalEventListener khác @EventListener thế nào? Dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3559-transactionaleventlistener-khac-eventlistener-the-nao-dung-khi-nao",
+    "slug": "transactionaleventlistener-khac-eventlistener-the-nao-dung-khi-nao-2e7a09de-4b78-587d-8e37-05e713710ce3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai lắng nghe ApplicationEvent, khác ở thời điểm chạy so với transaction.",
+        "Phases:",
+        "AFTER_COMMIT",
+        "AFTER_ROLLBACK",
+        "AFTER_COMPLETION",
+        "BEFORE_COMMIT"
+      ],
+      "details": [
+        "Vì sao quan trọng: email/notification chỉ nên gửi khi data đã thực sự lưu. Dùng @EventListener gửi email trước commit → order rollback nhưng email đã gửi rồi."
+      ],
+      "points": [
+        "@EventListener — chạy ngay khi publish, trong cùng transaction. Listener throw → transaction rollback toàn bộ.",
+        "@TransactionalEventListener — chạy sau khi transaction commit thành công. Transaction rollback → event bị bỏ qua."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Service\nclass OrderService {\n  @Transactional\n  void placeOrder(Order order) {\n    orderRepo.save(order);\n    events.publishEvent(new OrderPlacedEvent(order.getId()));  // listener chạy SAU commit\n  }\n}\n\n@TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)\nvoid onOrderPlaced(OrderPlacedEvent e) { emailService.sendConfirmation(e.getOrderId()); }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": "3559-transactionaleventlistener-khac-eventlistener-the-nao-dung-khi-nao"
+  },
+  {
+    "id": "91f3eb41-b3a7-583d-b0b4-bb5bddca5822",
+    "question": "@PreAuthorize và method-level security trong Spring Security hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3560-preauthorize-va-method-level-security-trong-spring-security-hoat-dong-the-nao",
+    "slug": "preauthorize-va-method-level-security-trong-spring-security-hoat-dong-the-nao-91f3eb41-b3a7-583d-b0b4-bb5bddca5822",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Method-level security bảo vệ từng method bằng annotation thay vì chỉ ở URL level. Bật bằng @EnableMethodSecurity (thay @EnableGlobalMethodSecurity đã deprecated).",
+        "@PostAuthorize(\"returnObject.owner == authentication.name\")",
+        "@Secured(\"ROLE_ADMIN\")"
+      ],
+      "details": [
+        "@PreAuthorize — kiểm tra trước khi method chạy (dùng SpEL):",
+        "Lưu ý: @PreAuthorize (SpEL) linh hoạt nhất, recommended; chạy qua AOP proxy → self-invocation không được bảo vệ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@PreAuthorize(\"hasRole('ADMIN')\")\nvoid deleteOrder(Long id) { ... }\n\n@PreAuthorize(\"#orderId == authentication.principal.id or hasRole('ADMIN')\")   // ownership\nOrder getOrder(Long orderId) { ... }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": "3560-preauthorize-va-method-level-security-trong-spring-security-hoat-dong-the-nao"
+  },
+  {
+    "id": "45b4aecf-f373-5104-993f-3b626b794e4d",
+    "question": "Virtual Threads (Java 21) trong Spring Boot 3.2 hoạt động thế nào? Khác gì WebFlux?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3561-virtual-threads-java-21-trong-spring-boot-3-2-hoat-dong-the-nao-khac-gi-webflux",
+    "slug": "virtual-threads-java-21-trong-spring-boot-3-2-hoat-dong-the-nao-khac-gi-webflux-45b4aecf-f373-5104-993f-3b626b794e4d",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Virtual Threads (Project Loom, Java 21) là thread cực nhẹ do JVM quản lý — không phải OS thread. Bật trong Spring Boot 3.2+ bằng 1 dòng config: spring.threads.virtual.enabled: true — Spring Boot tự dùng cho Tomcat, @Async, @Scheduled."
+      ],
+      "details": [
+        "Vì sao đáng giá: OS thread tốn ~1MB stack, context switch nặng → giới hạn vài nghìn. Virtual Thread tốn ~KB, chạy được hàng triệu; khi block I/O (DB call, HTTP) nó unmount khỏi carrier thread để carrier phục vụ request khác → code blocking quen thuộc scale như non-blocking.",
+        "Lưu ý:\n- MDC/ThreadLocal dễ leak → dùng Micrometer Observation API thay raw MDC.\n- synchronized pin Virtual Thread vào OS thread → mất lợi ích; dùng ReentrantLock (Java 24 đã gỡ hạn chế pinning này — JEP 491; Java 21 vẫn dính).\n- Không cải thiện CPU-bound."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Code style",
+            "Blocking (quen thuộc)",
+            "Non-blocking (Mono/Flux)",
+            "Virtual Threads",
+            "Complexity",
+            "Thấp",
+            "Cao (learning curve)",
+            "WebFlux (Reactive)",
+            "Dùng khi",
+            "I/O-bound, CRUD app",
+            "High-throughput streaming, backpressure",
+            "CPU-bound",
+            "Không giúp",
+            "Không giúp"
+          ]
+        }
+      ]
+    },
+    "legacyId": 75,
+    "sourceSlug": "3561-virtual-threads-java-21-trong-spring-boot-3-2-hoat-dong-the-nao-khac-gi-webflux"
+  },
+  {
+    "id": "0f93fb7e-6cc4-55c3-b2c8-08345e239cb5",
+    "question": "Filter và HandlerInterceptor trong Spring khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3564-filter-va-handlerinterceptor-trong-spring-khac-nhau-the-nao",
+    "slug": "filter-va-handlerinterceptor-trong-spring-khac-nhau-the-nao-0f93fb7e-6cc4-55c3-b2c8-08345e239cb5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai chặn request trước controller, nhưng ở tầng khác nhau."
+      ],
+      "details": [
+        "Cách viết:\n- Filter: extend OncePerRequestFilter, override doFilterInternal(req, res, chain) — nhớ gọi chain.doFilter(...) để request đi tiếp; đăng ký như @Component.\n- Interceptor: implement HandlerInterceptor — preHandle trả false → chặn request, không tới controller; postHandle sau controller; afterCompletion sau cùng (kể cả khi exception). Đăng ký qua WebMvcConfigurer.addInterceptors(...).addPathPatterns(\"/api/**\").",
+        "Chọn: xử lý sớm/thô (security, CORS, nén, sửa body) → Filter; cần biết handler nào xử lý hoặc dùng Spring bean → Interceptor."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "handler",
+            "Tầng",
+            "Servlet container (trước DispatcherServlet)",
+            "Bên trong DispatcherServlet",
+            "Filter (Servlet)",
+            "Biết controller xử lý?",
+            "Không — Chưa",
+            "Có — Có (handler argument)",
+            "HandlerInterceptor (Spring MVC)",
+            "Truy cập Spring context",
+            "Hạn chế",
+            "Có — Đầy đủ (là Spring bean)",
+            "Sửa request/response body",
+            "Có — (wrap stream)",
+            "Không — Khó",
+            "Use case",
+            "CORS, gzip, security (Spring Security là filter), logging thô"
+          ]
+        }
+      ]
+    },
+    "legacyId": 76,
+    "sourceSlug": "3564-filter-va-handlerinterceptor-trong-spring-khac-nhau-the-nao"
+  },
+  {
+    "id": "49b8d7a2-c01d-519d-9636-d627cf13b032",
+    "question": "Entity lifecycle trong JPA: transient, managed, detached, removed là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/14030-entity-lifecycle-trong-jpa-transient-managed-detached-removed-la-gi",
+    "slug": "entity-lifecycle-trong-jpa-transient-managed-detached-removed-la-gi-49b8d7a2-c01d-519d-9636-d627cf13b032",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "4 trạng thái của entity đối với Persistence Context:"
+      ],
+      "details": [
+        "Đây là gốc của nhiều bẫy quen thuộc:\n- LazyInitializationException = truy cập lazy field trên entity detached (ngoài transaction).\n- \"Sửa entity trong @Transactional mà không gọi save() vẫn được lưu\" = vì entity đang managed, dirty checking lo phần còn lại."
+      ],
+      "points": [
+        "Transient (new) — vừa new, JPA chưa biết đến, chưa có row trong DB.",
+        "Managed (persistent) — đang được Persistence Context theo dõi (sau persist(), find(), hoặc query trả về) → hưởng dirty checking: sửa field, đến lúc commit là tự UPDATE, không cần gọi save().",
+        "Detached — Persistence Context đã đóng (transaction kết thúc) hoặc bị detach() → object vẫn còn nhưng không được theo dõi; sửa gì JPA cũng không biết. Gắn lại bằng merge() — lưu ý merge trả về bản managed MỚI, không phải object cũ."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 77,
+    "sourceSlug": "14030-entity-lifecycle-trong-jpa-transient-managed-detached-removed-la-gi"
+  },
+  {
+    "id": "5f2fecfc-082d-59c5-b9ab-4f3def43ac9b",
+    "question": "DTO và Entity khác nhau thế nào? Vì sao không trả entity thẳng ra API?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/14032-dto-va-entity-khac-nhau-the-nao-vi-sao-khong-tra-entity-thang-ra-api",
+    "slug": "dto-va-entity-khac-nhau-the-nao-vi-sao-khong-tra-entity-thang-ra-api-5f2fecfc-082d-59c5-b9ab-4f3def43ac9b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Entity = object map với bảng DB, do JPA quản lý. DTO (Data Transfer Object) = object thuần chở data qua boundary (API response/request), không dính persistence."
+      ],
+      "details": [
+        "Vì sao không trả entity thẳng ra controller:\n1. Lộ cấu trúc DB — đổi schema là vỡ API contract; field nhạy cảm (passwordHash, cột nội bộ) dễ lộ ra JSON.\n2. LazyInitializationException / N+1 — Jackson serialize chạm vào lazy field khi transaction đã đóng.\n3. Vòng lặp quan hệ — quan hệ 2 chiều (Order ↔ Customer) làm JSON đệ quy vô hạn (phải vá bằng @JsonIgnore — dấu hiệu sai tầng).\n4. Over-posting khi nhận request — bind body thẳng vào entity cho phép client set cả field không được phép (role, id).",
+        "Mapping: thủ công qua record + factory method (UserDto.from(user)) cho case đơn giản; MapStruct (sinh code lúc compile, type-safe — khuyến nghị) khi nhiều; interface projection của Spring Data cho read-only. ModelMapper dùng reflection, chậm — hạn chế."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 78,
+    "sourceSlug": "14032-dto-va-entity-khac-nhau-the-nao-vi-sao-khong-tra-entity-thang-ra-api"
+  },
+  {
+    "id": "6c8cd8d1-3b8c-5250-a554-d831a75a9916",
+    "question": "Spring Cloud Config Server dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/14033-spring-cloud-config-server-dung-de-lam-gi",
+    "slug": "spring-cloud-config-server-dung-de-lam-gi-6c8cd8d1-3b8c-5250-a554-d831a75a9916",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Config Server tập trung config cho nhiều service — thay vì mỗi service tự giữ application.yml, tất cả đọc từ 1 nguồn chung, thường là Git repo (config được version, review, audit qua commit)."
+      ],
+      "details": [
+        "Server: dependency spring-cloud-config-server + @EnableConfigServer, trỏ spring.cloud.config.server.git.uri đến repo chứa file config.",
+        "Client: khai spring.config.import: configserver:http://config:8888 (cách hiện tại — thay bootstrap.properties cũ) → app kéo config lúc startup theo quy ước {application}-{profile}.yml.",
+        "Refresh không cần restart: đổi config trong Git → gọi POST /actuator/refresh trên service (bean gắn @RefreshScope được tạo lại với giá trị mới), hoặc Spring Cloud Bus (qua Kafka/RabbitMQ) broadcast refresh cho cả cụm.",
+        "2026: trên Kubernetes, nhiều team thay bằng ConfigMap/Secret; Config Server vẫn mạnh khi cần config theo Git-flow, chạy ngoài K8s, hoặc secret backend qua Vault."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 79,
+    "sourceSlug": "14033-spring-cloud-config-server-dung-de-lam-gi"
+  },
+  {
+    "id": "2d9ad955-d7bb-54f0-8e0f-3843272c7479",
+    "question": "API Gateway là gì? Spring Cloud Gateway hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/14034-api-gateway-la-gi-spring-cloud-gateway-hoat-dong-the-nao",
+    "slug": "api-gateway-la-gi-spring-cloud-gateway-hoat-dong-the-nao-2d9ad955-d7bb-54f0-8e0f-3843272c7479",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "API Gateway = cửa vào duy nhất của hệ microservices — client chỉ gọi 1 endpoint, gateway route đến đúng service phía sau. Giá trị chính: gom các concern chung về 1 chỗ — authentication, rate limiting, CORS, logging, retry — thay vì lặp lại ở từng service.",
+        "Bộ ba microservices hay bị hỏi cùng nhau:"
+      ],
+      "details": [
+        "Spring Cloud Gateway build trên WebFlux (non-blocking, chịu concurrency cao), thay thế Zuul 1 (blocking, đã vào maintenance mode). 3 khái niệm:"
+      ],
+      "points": [
+        "Route — đích đến (service phía sau).",
+        "Predicate — điều kiện match request: path, method, header, query...",
+        "Filter — biến đổi request/response: thêm/xoá header, StripPrefix, rate limit (Redis), tích hợp circuit breaker."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "YAML",
+          "code": "spring.cloud.gateway.routes:\n  - id: orders\n    uri: lb://order-service        # lb:// = load-balance qua service discovery\n    predicates: [ Path=/api/orders/** ]\n    filters: [ StripPrefix=1 ]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 80,
+    "sourceSlug": "14034-api-gateway-la-gi-spring-cloud-gateway-hoat-dong-the-nao"
+  },
+  {
+    "id": "eae60c18-edf4-5a50-bcff-03f6c40370bd",
+    "question": "Loại trừ/tắt một auto-configuration cụ thể trong Spring Boot thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93510-loai-tru-tat-mot-auto-configuration-cu-the-trong-spring-boot-the-nao",
+    "slug": "loai-tru-tat-mot-auto-configuration-cu-the-trong-spring-boot-the-nao-eae60c18-edf4-5a50-bcff-03f6c40370bd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Spring Boot tự bật auto-config dựa trên classpath. Tắt một cái cụ thể có 3 cách:",
+        "2. @EnableAutoConfiguration(exclude = ...)",
+        "spring-boot-starter-data-jpa",
+        "@EnableAutoConfiguration(exclude = ...)",
+        "DataSourceAutoConfiguration"
+      ],
+      "details": [
+        "1. Thuộc tính exclude của @SpringBootApplication (thực chất uỷ quyền cho @EnableAutoConfiguration):",
+        "3. Qua property — dùng khi class không có sẵn trên classpath để tham chiếu:",
+        "Muốn biết cái gì đang được auto-config → bật cờ --debug, Spring in ra báo cáo \"Positive/Negative matches\"."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })\npublic class App { }"
+        },
+        {
+          "language": "PROPERTIES",
+          "code": "spring.autoconfigure.exclude=\\\n  org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 81,
+    "sourceSlug": "93510-loai-tru-tat-mot-auto-configuration-cu-the-trong-spring-boot-the-nao"
+  },
+  {
+    "id": "295c5084-ae3e-58f7-abc0-65a5815e744f",
+    "question": "@ComponentScan hoạt động thế nào, đặt base packages ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93511-componentscan-hoat-dong-the-nao-dat-base-packages-ra-sao",
+    "slug": "componentscan-hoat-dong-the-nao-dat-base-packages-ra-sao-295c5084-ae3e-58f7-abc0-65a5815e744f",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "@ComponentScan bảo Spring quét package tìm class gắn stereotype (@Component, @Service, @Repository, @Controller, @Configuration) để đăng ký thành bean.",
+        "basePackageClasses trỏ tới một class làm mốc (type-safe, không gãy khi đổi tên package)."
+      ],
+      "details": [
+        "Base package mặc định: package chứa chính class khai báo annotation. Vì @SpringBootApplication đã gộp sẵn @ComponentScan, Spring quét từ package của lớp main trở xuống — nên đặt lớp @SpringBootApplication ở package gốc để mọi thứ nằm dưới nó đều được quét.",
+        "Chỉ định thủ công khi cần:",
+        "Lỗi thường gặp: đặt main ở package con, hoặc bean nằm ngoài cây quét → bean không được tạo, NoSuchBeanDefinitionException. Có thể lọc thêm bằng includeFilters/excludeFilters."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 82,
+    "sourceSlug": "93511-componentscan-hoat-dong-the-nao-dat-base-packages-ra-sao"
+  },
+  {
+    "id": "2638e901-2101-5d05-9fde-51c8e874ad4a",
+    "question": "Inject một bean scope prototype vào bean singleton thì mỗi lần dùng có ra instance mới không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96104-inject-mot-bean-scope-prototype-vao-bean-singleton-thi-moi-lan-dung-co-ra-instan",
+    "slug": "inject-mot-bean-scope-prototype-vao-bean-singleton-thi-moi-lan-dung-co-ra-instance-moi-khong-2638e901-2101-5d05-9fde-51c8e874ad4a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Không. Dependency được resolve một lần lúc singleton khởi tạo: Spring tạo đúng một instance prototype, tiêm vào, và singleton dùng lại instance đó suốt vòng đời. Đây là bẫy hay được hỏi vì code nhìn qua tưởng đúng.",
+        "Các cách khác cùng ý tưởng: ObjectFactory<T>, jakarta.inject.Provider<T>, hoặc method injection với @Lookup trên một method abstract."
+      ],
+      "details": [
+        "Muốn lấy instance mới mỗi lần thì phải hỏi container tại thời điểm dùng:",
+        "Lưu ý kèm theo: Spring không quản lý trọn vòng đời của prototype bean — callback khởi tạo vẫn chạy nhưng callback hủy thì không. Nếu prototype giữ tài nguyên (file handle, connection), code gọi phải tự đóng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Service\npublic class ReportService {\n    private final ObjectProvider<ReportContext> contextProvider;\n\n    public ReportService(ObjectProvider<ReportContext> contextProvider) {\n        this.contextProvider = contextProvider;\n    }\n\n    public Report build() {\n        ReportContext ctx = contextProvider.getObject(); // new instance per call\n        return ctx.render();\n    }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 83,
+    "sourceSlug": "96104-inject-mot-bean-scope-prototype-vao-bean-singleton-thi-moi-lan-dung-co-ra-instan"
+  },
+  {
+    "id": "a1e02ea9-587e-51c3-a395-b4aa80af0664",
+    "question": "Đặt @Bean trong class @Component thay vì @Configuration thì khác gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96105-dat-bean-trong-class-component-thay-vi-configuration-thi-khac-gi",
+    "slug": "dat-bean-trong-class-component-thay-vi-configuration-thi-khac-gi-a1e02ea9-587e-51c3-a395-b4aa80af0664",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác ở chỗ inter-bean call có được container quản lý hay không.",
+        "Hậu quả ở lite mode là hai connection pool cùng tồn tại — lỗi rất khó nhìn ra."
+      ],
+      "details": [
+        "Cách viết an toàn cho cả hai mode: đừng gọi chéo @Bean method, hãy nhận dependency qua tham số của factory method (jdbcTemplate(DataSource ds)). Khi đó bật proxyBeanMethods = false được và tiết kiệm một lớp proxy — đây là lý do auto-configuration của Spring Boot dùng dạng này."
+      ],
+      "points": [
+        "@Configuration (full mode): Spring tạo CGLIB subclass cho class config. Một @Bean method gọi trực tiếp @Bean method khác sẽ bị chặn và trả về singleton trong container.",
+        "@Bean trong class không có @Configuration, hoặc @Configuration(proxyBeanMethods = false) (lite mode): không sinh CGLIB subclass. Lời gọi giữa các @Bean method là lời gọi Java thuần → tạo instance mới mỗi lần, nằm ngoài container."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Configuration // full mode\npublic class AppConfig {\n    @Bean\n    public DataSource dataSource() { return new HikariDataSource(); }\n\n    @Bean\n    public JdbcTemplate jdbcTemplate() {\n        // full mode: returns the singleton above\n        // lite mode: builds a SECOND DataSource\n        return new JdbcTemplate(dataSource());\n    }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 84,
+    "sourceSlug": "96105-dat-bean-trong-class-component-thay-vi-configuration-thi-khac-gi"
+  },
+  {
+    "id": "830d8606-f93c-564e-9540-4b98ed2586da",
+    "question": "Spring chọn JDK dynamic proxy hay CGLIB proxy dựa trên tiêu chí gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96106-spring-chon-jdk-dynamic-proxy-hay-cglib-proxy-dua-tren-tieu-chi-gi",
+    "slug": "spring-chon-jdk-dynamic-proxy-hay-cglib-proxy-dua-tren-tieu-chi-gi-830d8606-f93c-564e-9540-4b98ed2586da",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Quy tắc gốc của Spring AOP:\n- Target implement ít nhất một interface → dùng JDK dynamic proxy, proxy chỉ expose các interface đó.\n- Target không implement interface nào → dùng CGLIB, tạo runtime một subclass của chính class đó."
+      ],
+      "details": [
+        "Ép dùng CGLIB bằng proxyTargetClass = true (@EnableAspectJAutoProxy(proxyTargetClass = true)). Spring Boot đặt sẵn spring.aop.proxy-target-class=true, nên mặc định trong ứng dụng Boot gần như luôn là CGLIB.",
+        "Hệ quả cần nhớ:\n- JDK proxy: ép kiểu về class cụ thể sẽ ném ClassCastException; chỉ method khai báo trong interface mới được advise. Đây là lý do @Autowired theo interface là an toàn hơn.\n- CGLIB: class final không proxy được, method final không advise được, method private cũng vậy. Constructor của target không được gọi lại vì proxy tạo qua Objenesis, nên đừng đặt logic khởi tạo trong constructor rồi trông chờ proxy chạy nó."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Service\npublic final class OrderService { } // CGLIB cannot subclass -> proxy creation fails"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 85,
+    "sourceSlug": "96106-spring-chon-jdk-dynamic-proxy-hay-cglib-proxy-dua-tren-tieu-chi-gi"
+  },
+  {
+    "id": "0cf84860-3938-5967-a8ca-7479098e4f20",
+    "question": "Vì sao validate @RequestBody và validate @RequestParam lại ném hai loại exception khác nhau?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96107-vi-sao-validate-requestbody-va-validate-requestparam-lai-nem-hai-loai-exception",
+    "slug": "vi-sao-validate-requestbody-va-validate-requestparam-lai-nem-hai-loai-exception-khac-nhau-0cf84860-3938-5967-a8ca-7479098e4f20",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì chúng đi qua hai cơ chế khác nhau.",
+        "Hậu quả thực tế: nếu @ControllerAdvice chỉ bắt MethodArgumentNotValidException thì lỗi ở query param sẽ rơi xuống handler mặc định và trả 500 thay vì 400. Phải viết handler cho cả hai loại và map về cùng một shape response."
+      ],
+      "details": [
+        "1. @Valid trên @RequestBody — validate do argument resolver của Spring MVC thực hiện sau khi deserialize JSON. Lỗi ném MethodArgumentNotValidException (kế thừa BindException), có BindingResult chứa từng FieldError.",
+        "2. Constraint đặt thẳng trên tham số (@RequestParam @Min(1) int page) — cần @Validated ở cấp class để bật method validation qua AOP proxy. Lỗi ném ConstraintViolationException (Jakarta Bean Validation), không có BindingResult, đường dẫn lỗi ở dạng methodName.argName.",
+        "(Từ Spring Framework 6.1 controller đã hỗ trợ built-in method validation, ném HandlerMethodValidationException khi không có @Validated — vẫn cần handler riêng.)"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@RestController\n@Validated // bắt buộc for parameter-level constraints\npublic class ProductController {\n\n    @PostMapping(\"/products\")\n    public void create(@Valid @RequestBody CreateProductRequest req) { }\n\n    @GetMapping(\"/products\")\n    public List<Product> list(@RequestParam @Min(1) int page) { }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 86,
+    "sourceSlug": "96107-vi-sao-validate-requestbody-va-validate-requestparam-lai-nem-hai-loai-exception"
+  },
+  {
+    "id": "1aad3ada-cf3b-55c7-b1d7-8f4e2eaed3c1",
+    "question": "Spring Boot 3 chuẩn hóa response lỗi bằng gì? ProblemDetail dùng ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96108-spring-boot-3-chuan-hoa-response-loi-bang-gi-problemdetail-dung-ra-sao",
+    "slug": "spring-boot-3-chuan-hoa-response-loi-bang-gi-problemdetail-dung-ra-sao-1aad3ada-cf3b-55c7-b1d7-8f4e2eaed3c1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Bằng ProblemDetail — cài đặt của RFC 9457 (bản kế thừa RFC 7807), trả Content-Type: application/problem+json với các field chuẩn type, title, status, detail, instance cộng field mở rộng tùy ý.",
+        "Kế thừa ResponseEntityExceptionHandler trong @ControllerAdvice để nhận sẵn handler cho toàn bộ exception chuẩn của Spring MVC (MethodArgumentNotValidException, HttpMessageNotReadableException...) và chỉ override cái nào cần đổi nội dung."
+      ],
+      "details": [
+        "Hai cách dùng:",
+        "Giá trị thực tế: client và các service khác parse một shape lỗi duy nhất, thay vì mỗi team tự chế {code, message, errors} riêng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "// 1. return ProblemDetail from a handler\n@RestControllerAdvice\npublic class ApiExceptionHandler {\n\n    @ExceptionHandler(OrderNotFoundException.class)\n    ProblemDetail handleNotFound(OrderNotFoundException ex) {\n        ProblemDetail pd = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());\n        pd.setTitle(\"Order not found\");\n        pd.setProperty(\"orderId\", ex.getOrderId());\n        return pd;\n    }\n}"
+        },
+        {
+          "language": "PROPERTIES",
+          "code": "# 2. let Spring render built-in MVC exceptions as problem details\nspring.mvc.problemdetails.enabled=true"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 87,
+    "sourceSlug": "96108-spring-boot-3-chuan-hoa-response-loi-bang-gi-problemdetail-dung-ra-sao"
+  },
+  {
+    "id": "2d8ebd3b-d53e-53c7-94a6-2ce7260f0b2b",
+    "question": "Nâng cấp lên Spring Boot 2.6+ thì app không khởi động được vì BeanCurrentlyInCreationException — xử lý thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96109-nang-cap-len-spring-boot-2-6-thi-app-khong-khoi-dong-duoc-vi-beancurrentlyincrea",
+    "slug": "nang-cap-len-spring-boot-2-6-thi-app-khong-khoi-dong-duoc-vi-beancurrentlyincreationexception-xu-ly-2d8ebd3b-d53e-53c7-94a6-2ce7260f0b2b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Từ Spring Boot 2.6, circular reference giữa các bean bị cấm mặc định. Trước đó container tự phá vòng lặp bằng cách tiêm bean chưa khởi tạo xong, giờ nó fail-fast ngay lúc startup.",
+        "Cách chữa đúng, theo thứ tự ưu tiên:\n1. Tách phần dùng chung của A và B ra một bean C, cả hai cùng phụ thuộc C. Vòng lặp thường là dấu hiệu hai service ôm chung một trách nhiệm.\n2. Đảo chiều bằng event: A publish ApplicationEvent, B lắng nghe — bỏ hẳn tham chiếu trực tiếp.\n3. @Lazy trên một đầu của vòng để Spring tiêm proxy, hoãn khởi tạo. Đây là giải pháp làm dịu triệu chứng, không sửa thiết kế."
+      ],
+      "details": [
+        "Lưu ý: chuyển từ constructor injection sang field injection cũng làm app chạy được, nhưng chỉ là giấu vòng lặp — constructor injection fail-fast chính là thứ đang giúp bạn phát hiện vấn đề.",
+        "Cách chữa nhanh (chỉ để unblock deploy):"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PROPERTIES",
+          "code": "spring.main.allow-circular-references=true"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 88,
+    "sourceSlug": "96109-nang-cap-len-spring-boot-2-6-thi-app-khong-khoi-dong-duoc-vi-beancurrentlyincrea"
+  },
+  {
+    "id": "5913cc48-9298-5cbf-bd02-3dcb066c9c82",
+    "question": "Cấu hình theo môi trường: spring.profiles.active, spring.profiles.include và spring.profiles.group khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96110-cau-hinh-theo-moi-truong-spring-profiles-active-spring-profiles-include-va-sprin",
+    "slug": "cau-hinh-theo-moi-truong-spring-profiles-active-spring-profiles-include-va-spring-profiles-group-kha-5913cc48-9298-5cbf-bd02-3dcb066c9c82",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Bên trong file config, phân đoạn theo profile dùng spring.config.activate.on-profile (thay cho spring.profiles kiểu cũ trước Boot 2.4). Ràng buộc quan trọng: active, default, group chỉ được khai báo ở phần config không thuộc profile nào — đặt trong một document đã gắn on-profile sẽ bị từ chối."
+      ],
+      "details": [
+        "Trên bean thì dùng @Profile(\"production\") cho @Component, @Configuration hoặc @ConfigurationProperties."
+      ],
+      "points": [
+        "spring.profiles.active: danh sách profile đang bật. Đặt lại giá trị này ở nơi có độ ưu tiên cao hơn sẽ thay thế danh sách cũ, không cộng dồn. Thường truyền lúc chạy: --spring.profiles.active=prod.",
+        "spring.profiles.include: cộng thêm profile vào danh sách đang bật, dùng cho profile nền luôn cần (vd common). Các profile include được kích hoạt trước các profile trong active.",
+        "spring.profiles.group: gom nhiều profile con dưới một tên, để bật một cái là bật cả cụm."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "PROPERTIES",
+          "code": "spring.profiles.group.production[0]=proddb\nspring.profiles.group.production[1]=prodmq\n# --spring.profiles.active=production -> production + proddb + prodmq"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 89,
+    "sourceSlug": "96110-cau-hinh-theo-moi-truong-spring-profiles-active-spring-profiles-include-va-sprin"
+  },
+  {
+    "id": "8b743405-4d5f-57b2-a63a-a775447d81ef",
+    "question": "Vì sao sửa field của entity trong method @Transactional mà không gọi save() thì DB vẫn được cập nhật?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96154-vi-sao-sua-field-cua-entity-trong-method-transactional-ma-khong-goi-save-thi-db",
+    "slug": "vi-sao-sua-field-cua-entity-trong-method-transactional-ma-khong-goi-save-thi-db-van-duoc-cap-nhat-8b743405-4d5f-57b2-a63a-a775447d81ef",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cơ chế: khi load entity, Hibernate giữ lại một snapshot giá trị các thuộc tính. Tại thời điểm flush (trước khi commit, hoặc trước một truy vấn có thể bị ảnh hưởng), nó so từng thuộc tính của entity managed với snapshot; thuộc tính nào lệch thì sinh câu UPDATE tương ứng."
+      ],
+      "details": [
+        "Hệ quả cần biết:\n- Snapshot khiến persistence context tốn khoảng gấp đôi bộ nhớ so với số entity đang quản lý; load hàng chục nghìn entity trong một transaction là chỗ hay bị chậm.\n- Entity detached (lấy từ transaction khác, hoặc deserialize từ request) không được dirty check — muốn ghi phải merge/save.\n- Sửa nhầm một entity managed sẽ ghi xuống DB dù bạn không có ý định đó. Đây là lý do không nên dùng entity làm DTO nhận request."
+      ],
+      "points": [],
+      "sections": [
+        "Vì entity lấy ra từ repository đang ở trạng thái managed trong persistence context, và Hibernate có cơ chế dirty checking tự động."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Transactional\npublic void deactivate(Long id) {\n    User user = userRepository.findById(id).orElseThrow();\n    user.setActive(false);   // không gọi save() nhưng UPDATE vẫn chạy\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 90,
+    "sourceSlug": "96154-vi-sao-sua-field-cua-entity-trong-method-transactional-ma-khong-goi-save-thi-db"
+  },
+  {
+    "id": "47e79584-e180-5d2f-9af6-73df63e9f53a",
+    "question": "@EntityGraph và join fetch khác nhau thế nào? Khi nào chọn cái nào để chữa N+1?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96155-entitygraph-va-join-fetch-khac-nhau-the-nao-khi-nao-chon-cai-nao-de-chua-n-1",
+    "slug": "entitygraph-va-join-fetch-khac-nhau-the-nao-khi-nao-chon-cai-nao-de-chua-n-1-47e79584-e180-5d2f-9af6-73df63e9f53a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Cả hai đều nói với Hibernate \"nạp luôn association này trong cùng một câu SQL\", nhưng khai báo ở tầng khác nhau.",
+        "Chọn thế nào:\n- Cần override fetch plan cho method có sẵn (findById, derived query) mà không muốn viết JPQL → @EntityGraph.\n- Truy vấn đã phải viết tay vì where/group by phức tạp → join fetch cho gọn một chỗ.\n- Cần nhiều fetch plan khác nhau cho cùng một entity → khai báo vài @NamedEntityGraph rồi tham chiếu theo tên."
+      ],
+      "details": [
+        "join fetch nằm trong JPQL — gắn chặt với truy vấn đó:",
+        "Cả hai đều dính chung hai bẫy: phân trang trên collection fetch bị Hibernate chuyển sang cắt trang trong bộ nhớ, và fetch hai collection kiểu List cùng lúc sẽ ném MultipleBagFetchException."
+      ],
+      "points": [],
+      "sections": [
+        "@EntityGraph là fetch plan khai báo tách rời, dán lên method — kể cả derived query hay method kế thừa từ JpaRepository:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Query(\"select distinct o from Order o join fetch o.items where o.status = :status\")\nList<Order> findWithItems(@Param(\"status\") OrderStatus status);"
+        },
+        {
+          "language": "JAVA",
+          "code": "@EntityGraph(attributePaths = { \"items\", \"customer\" })\nList<Order> findByStatus(OrderStatus status);\n\n@EntityGraph(attributePaths = \"items\")\n@Override\nOptional<Order> findById(Long id);"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 91,
+    "sourceSlug": "96155-entitygraph-va-join-fetch-khac-nhau-the-nao-khi-nao-chon-cai-nao-de-chua-n-1"
+  },
+  {
+    "id": "754a14f1-c75d-5372-998b-3b66898c73fd",
+    "question": "Viết equals() và hashCode() cho JPA entity thế nào cho đúng? Vì sao không dùng thẳng ID sinh tự động?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96156-viet-equals-va-hashcode-cho-jpa-entity-the-nao-cho-dung-vi-sao-khong-dung-thang",
+    "slug": "viet-equals-va-hashcode-cho-jpa-entity-the-nao-cho-dung-vi-sao-khong-dung-thang-id-sinh-tu-dong-754a14f1-c75d-5372-998b-3b66898c73fd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Yêu cầu cốt lõi: một entity phải bằng chính nó qua mọi trạng thái transient → managed → detached, và hashCode phải không đổi trong suốt vòng đời object."
+      ],
+      "details": [
+        "Vì sao dùng thẳng ID auto-increment là sai: lúc new entity, id còn null nên hashCode ra một giá trị; sau persist, DB gán id nên hashCode đổi. Nếu entity đã nằm trong HashSet (rất hay gặp với @OneToMany Set<...>), nó rơi vào bucket khác và contains() trả về false cho chính object vừa thêm vào.",
+        "Hai cách được chấp nhận:",
+        "1. Business key — dùng field định danh nghiệp vụ, bất biến, gán ngay lúc tạo object (orderCode, sku, email, hoặc một UUID tự sinh ở tầng ứng dụng). Đây là cách sạch nhất.",
+        "2. ID với hashCode hằng số — so sánh theo id trong equals, nhưng hashCode trả về hằng:"
+      ],
+      "points": [],
+      "sections": [
+        "Tránh: để Lombok @Data/@EqualsAndHashCode sinh mặc định — nó gộp cả association lazy vào, gây truy vấn ngoài ý muốn hoặc đệ quy vô hạn giữa hai chiều quan hệ."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Override\npublic boolean equals(Object o) {\n    if (this == o) return true;\n    if (!(o instanceof Order other)) return false;\n    return id != null && id.equals(other.getId());\n}\n\n@Override\npublic int hashCode() {\n    return getClass().hashCode();   // stable across all entity states\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 92,
+    "sourceSlug": "96156-viet-equals-va-hashcode-cho-jpa-entity-the-nao-cho-dung-vi-sao-khong-dung-thang"
+  },
+  {
+    "id": "8cf35a4a-7ab2-5f78-8a5f-4efd283d7e6c",
+    "question": "Mô tả luồng đăng nhập username/password trong Spring Security: request đi qua những thành phần nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96157-mo-ta-luong-dang-nhap-username-password-trong-spring-security-request-di-qua-nhu",
+    "slug": "mo-ta-luong-dang-nhap-username-password-trong-spring-security-request-di-qua-nhung-thanh-phan-nao-8cf35a4a-7ab2-5f78-8a5f-4efd283d7e6c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Luồng chuẩn đi qua bốn mắt xích, mỗi mắt xích một nhiệm vụ:",
+        "Điểm hay bị hỏi tiếp: UserDetailsService không so sánh password — nó chỉ trả dữ liệu, việc đối chiếu thuộc về PasswordEncoder trong provider."
+      ],
+      "details": [
+        "1. Authentication filter (vd UsernamePasswordAuthenticationFilter) bóc username/password khỏi request, gói thành UsernamePasswordAuthenticationToken chưa xác thực rồi đưa cho AuthenticationManager.\n2. AuthenticationManager (mặc định là ProviderManager) duyệt danh sách AuthenticationProvider để tìm cái xử lý được loại token này.\n3. DaoAuthenticationProvider gọi UserDetailsService.loadUserByUsername() để lấy UserDetails (username, hash password, authorities, các cờ enabled/locked/expired).\n4. Vẫn provider đó dùng PasswordEncoder.matches(raw, encoded) để đối chiếu mật khẩu. Khớp thì trả token đã xác thực kèm authorities; filter đặt nó vào SecurityContextHolder.",
+        "Và khi username không tồn tại, provider vẫn chạy một lần encode giả để thời gian phản hồi không tiết lộ tài khoản nào có thật."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Service\npublic class DbUserDetailsService implements UserDetailsService {\n\n    @Override\n    public UserDetails loadUserByUsername(String username) {\n        AppUser user = repository.findByUsername(username)\n            .orElseThrow(() -> new UsernameNotFoundException(username));\n        return User.withUsername(user.getUsername())\n            .password(user.getPasswordHash())\n            .authorities(user.getRoles().toArray(new String[0]))\n            .disabled(!user.isActive())\n            .build();\n    }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 93,
+    "sourceSlug": "96157-mo-ta-luong-dang-nhap-username-password-trong-spring-security-request-di-qua-nhu"
+  },
+  {
+    "id": "6726c540-aeba-5fe7-9e04-40c4e2bf2fdb",
+    "question": "Hai người cùng mở một đơn hàng và cùng bấm lưu, người sau ghi đè người trước. Em thiết kế luồng chống việc này thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96158-hai-nguoi-cung-mo-mot-don-hang-va-cung-bam-luu-nguoi-sau-ghi-de-nguoi-truoc-em-t",
+    "slug": "hai-nguoi-cung-mo-mot-don-hang-va-cung-bam-luu-nguoi-sau-ghi-de-nguoi-truoc-em-thiet-ke-luong-chong-6726c540-aeba-5fe7-9e04-40c4e2bf2fdb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Nếu người khác đã ghi trước, version trong DB không còn là 5 → 0 dòng bị ảnh hưởng → JPA ném OptimisticLockException, Spring bọc thành ObjectOptimisticLockingFailureException."
+      ],
+      "details": [
+        "Luồng đầy đủ ở tầng ứng dụng:\n- API trả version hiện tại về client cùng dữ liệu đơn; client gửi lại version đó khi lưu.\n- Bắt ObjectOptimisticLockingFailureException → trả HTTP 409 Conflict kèm dữ liệu mới nhất để người dùng xem thay đổi rồi quyết định.\n- Với thao tác chạy nền, tự động nạp lại entity trong transaction mới và thử lại 2-3 lần thay vì báo lỗi.",
+        "Chỉ chuyển sang pessimistic lock (SELECT ... FOR UPDATE) khi tranh chấp thực sự cao và transaction ngắn, vì nó giữ lock ở DB và có nguy cơ deadlock."
+      ],
+      "points": [],
+      "sections": [
+        "Đây là bài toán lost update, xử lý bằng optimistic locking với @Version — phù hợp vì đọc nhiều hơn ghi và người dùng giữ dữ liệu trên form khá lâu (entity ở trạng thái detached), không thể giữ lock DB suốt thời gian đó.",
+        "Cơ chế: mỗi UPDATE Hibernate sinh ra đều kèm điều kiện version và tự tăng nó:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Entity\npublic class Order {\n    @Id @GeneratedValue\n    private Long id;\n\n    @Version\n    private Long version;\n    // ...\n}"
+        },
+        {
+          "language": "SQL",
+          "code": "update orders set status = ?, version = 6 where id = ? and version = 5"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 94,
+    "sourceSlug": "96158-hai-nguoi-cung-mo-mot-don-hang-va-cung-bam-luu-nguoi-sau-ghi-de-nguoi-truoc-em-t"
+  },
+  {
+    "id": "0a8248f1-04ed-50a5-b51e-22936fe1b75c",
+    "question": "CascadeType.REMOVE và orphanRemoval = true khác nhau thế nào? Khi nào bắt buộc dùng orphanRemoval?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96159-cascadetype-remove-va-orphanremoval-true-khac-nhau-the-nao-khi-nao-bat-buoc-dung",
+    "slug": "cascadetype-remove-va-orphanremoval-true-khac-nhau-the-nao-khi-nao-bat-buoc-dung-orphanremoval-0a8248f1-04ed-50a5-b51e-22936fe1b75c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác nhau ở thời điểm kích hoạt, không phải ở kết quả xoá.",
+        "Khi nào bắt buộc: quan hệ composition — child không có ý nghĩa khi tách khỏi cha (dòng chi tiết đơn hàng, ảnh của một sản phẩm, địa chỉ của một user). Không có orphanRemoval, Hibernate chỉ set FK về null và câu lệnh sẽ lỗi nếu cột FK là NOT NULL, hoặc để lại dữ liệu mồ côi."
+      ],
+      "details": [
+        "Không dùng cho quan hệ association như Post - Tag: gỡ một tag khỏi bài viết không có nghĩa là xoá tag khỏi hệ thống. Với @ManyToMany thì càng phải tránh CascadeType.REMOVE — xoá một bài viết có thể kéo theo tag mà bài khác đang dùng."
+      ],
+      "points": [
+        "CascadeType.REMOVE: chỉ chạy khi xoá entity cha. Xoá Order thì các OrderItem bị xoá theo.",
+        "orphanRemoval = true: chạy khi child bị tách khỏi cha, dù cha vẫn tồn tại. Gỡ một OrderItem khỏi order.getItems() là nó bị DELETE."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@OneToMany(mappedBy = \"order\", cascade = CascadeType.ALL, orphanRemoval = true)\nprivate List<OrderItem> items = new ArrayList<>();\n\n// with orphanRemoval: row is deleted\norder.getItems().remove(item);\n// without it: only the FK is set to null -> fails if the column is NOT NULL"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 95,
+    "sourceSlug": "96159-cascadetype-remove-va-orphanremoval-true-khac-nhau-the-nao-khi-nao-bat-buoc-dung"
+  },
+  {
+    "id": "bf375149-a666-52a6-a3b9-8bf941bc7401",
+    "question": "Frontend gọi API bị lỗi CORS, request OPTIONS trả về 401 dù đã có @CrossOrigin. Nguyên nhân và cách sửa?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96160-frontend-goi-api-bi-loi-cors-request-options-tra-ve-401-du-da-co-crossorigin-ngu",
+    "slug": "frontend-goi-api-bi-loi-cors-request-options-tra-ve-401-du-da-co-crossorigin-nguyen-nhan-va-cach-sua-bf375149-a666-52a6-a3b9-8bf941bc7401",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [
+        "Nguyên nhân là thứ tự filter: preflight OPTIONS của trình duyệt không mang credential (không cookie, không header Authorization). Nếu filter chain của Spring Security chạy trước phần xử lý CORS, nó thấy request không xác thực và trả 401 ngay — chưa bao giờ tới được @CrossOrigin ở tầng controller, nên trình duyệt báo lỗi CORS.",
+        "Hai lưu ý khi phỏng vấn hỏi sâu:\n- allowCredentials(true) không đi kèm allowedOrigins(\"*\") — spec cấm; nếu cần wildcard thì dùng setAllowedOriginPatterns.\n- Cách \"mở OPTIONS cho tất cả\" bằng requestMatchers(HttpMethod.OPTIONS, \"/**\").permitAll() chạy được nhưng thô hơn: nó bỏ qua toàn bộ kiểm tra cho method OPTIONS thay vì để CorsFilter trả đúng header."
+      ],
+      "details": [
+        "Cách sửa đúng: bật CORS bên trong Spring Security để CorsFilter được đặt trước các filter xác thực."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "@Bean\nSecurityFilterChain filterChain(HttpSecurity http) throws Exception {\n    return http\n        .cors(Customizer.withDefaults())          // registers CorsFilter early in the chain\n        .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())\n        .build();\n}\n\n@Bean\nCorsConfigurationSource corsConfigurationSource() {\n    CorsConfiguration config = new CorsConfiguration();\n    config.setAllowedOrigins(List.of(\"https://app.example.com\"));\n    config.setAllowedMethods(List.of(\"GET\", \"POST\", \"PUT\", \"DELETE\"));\n    config.setAllowedHeaders(List.of(\"Authorization\", \"Content-Type\"));\n    config.setAllowCredentials(true);\n\n    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();\n    source.registerCorsConfiguration(\"/**\", config);\n    return source;\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 96,
+    "sourceSlug": "96160-frontend-goi-api-bi-loi-cors-request-options-tra-ve-401-du-da-co-crossorigin-ngu"
+  },
+  {
+    "id": "3ec29cbe-1a3b-5093-be16-7cf0a40aca61",
+    "question": "OAuth 2.1 + Spring Authorization Server hoạt động như thế nào trong kiến trúc microservices?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "oauth-2-1-spring-authorization-server-hoat-dong-nhu-the-nao-trong-kien-truc-microservices-3ec29cbe-1a3b-5093-be16-7cf0a40aca61",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 97,
+    "sourceSlug": null
+  },
+  {
+    "id": "8d72be93-d5e2-5239-a53a-4cd53d1e2865",
+    "question": "Sự khác biệt giữa Authorization Server và Resource Server trong Spring Security 6?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "su-khac-biet-giua-authorization-server-va-resource-server-trong-spring-security-6-8d72be93-d5e2-5239-a53a-4cd53d1e2865",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 98,
+    "sourceSlug": null
+  },
+  {
+    "id": "747dd6d4-0f05-5253-a9a3-e342fb8048c3",
+    "question": "Spring MVC và Spring WebFlux khác nhau thế nào? Khi nào chọn cái nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "spring-mvc-va-spring-webflux-khac-nhau-the-nao-khi-nao-chon-cai-nao-747dd6d4-0f05-5253-a9a3-e342fb8048c3",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 99,
+    "sourceSlug": null
+  },
+  {
+    "id": "91086911-60f5-5579-a1b8-37c2561555d0",
+    "question": "Đánh đổi giữa Testcontainers và H2 in-memory database trong CI/CD là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "danh-doi-giua-testcontainers-va-h2-in-memory-database-trong-ci-cd-la-gi-91086911-60f5-5579-a1b8-37c2561555d0",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 100,
+    "sourceSlug": null
+  },
+  {
+    "id": "7e5b8378-a1f4-568b-aa89-d74618e2490f",
+    "question": "DispatcherServlet trong Spring MVC hoạt động như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dispatcherservlet-trong-spring-mvc-hoat-dong-nhu-the-nao-7e5b8378-a1f4-568b-aa89-d74618e2490f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 101,
+    "sourceSlug": null
+  },
+  {
+    "id": "d9cafefa-64e2-5db8-91be-9e6f75bbada3",
+    "question": "Transaction propagation trong Spring: các loại phổ biến là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "transaction-propagation-trong-spring-cac-loai-pho-bien-la-gi-d9cafefa-64e2-5db8-91be-9e6f75bbada3",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 102,
+    "sourceSlug": null
+  },
+  {
+    "id": "fbe639de-01d9-560c-857a-91ca6fb5967b",
+    "question": "Transaction isolation levels trong Spring: READ_COMMITTED và REPEATABLE_READ khác nhau thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "transaction-isolation-levels-trong-spring-read-committed-va-repeatable-read-khac-nhau-the-nao-fbe639de-01d9-560c-857a-91ca6fb5967b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 103,
+    "sourceSlug": null
+  },
+  {
+    "id": "83313f00-1e88-5837-bd9a-11734a79a0af",
+    "question": "Saga pattern giải quyết bài toán gì trong microservices?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "saga-pattern-giai-quyet-bai-toan-gi-trong-microservices-83313f00-1e88-5837-bd9a-11734a79a0af",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 104,
+    "sourceSlug": null
+  },
+  {
+    "id": "c200a8af-e0a7-5bd5-b58e-60c620b648dc",
+    "question": "save(), saveAndFlush() và flush() trong JPA khác nhau thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "save-saveandflush-va-flush-trong-jpa-khac-nhau-the-nao-c200a8af-e0a7-5bd5-b58e-60c620b648dc",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 105,
+    "sourceSlug": null
+  },
+  {
+    "id": "77882882-6e73-57cd-afc0-8ba90268296f",
+    "question": "Circuit Breaker pattern với Resilience4j trong Spring Boot hoạt động thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "circuit-breaker-pattern-voi-resilience4j-trong-spring-boot-hoat-dong-the-nao-77882882-6e73-57cd-afc0-8ba90268296f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 106,
+    "sourceSlug": null
+  },
+  {
+    "id": "e4843950-8df4-50fc-a636-9ad28d723427",
+    "question": "GraalVM Native Image với Spring Boot 3 hoạt động thế nào? Ưu/nhược điểm?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "graalvm-native-image-voi-spring-boot-3-hoat-dong-the-nao-uu-nhuoc-diem-e4843950-8df4-50fc-a636-9ad28d723427",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 107,
+    "sourceSlug": null
+  },
+  {
+    "id": "26c0bb9f-deb3-5047-b99e-d722ca3d8b02",
+    "question": "Cấu hình liveness và readiness probe cho Kubernetes bằng Actuator như thế nào? Hai probe khác nhau ở đâu?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cau-hinh-liveness-va-readiness-probe-cho-kubernetes-bang-actuator-nhu-the-nao-hai-probe-khac-nhau-o-26c0bb9f-deb3-5047-b99e-d722ca3d8b02",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 108,
+    "sourceSlug": null
+  },
+  {
+    "id": "310ec932-4da1-5c5d-b460-95bf9a247cda",
+    "question": "Đã try/catch nuốt exception rồi mà vẫn nhận UnexpectedRollbackException: Transaction rolled back because it has been marked as rollback-only — vì sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "da-try-catch-nuot-exception-roi-ma-van-nhan-unexpectedrollbackexception-transaction-rolled-back-beca-310ec932-4da1-5c5d-b460-95bf9a247cda",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 109,
+    "sourceSlug": null
+  },
+  {
+    "id": "61dbfccd-5e45-539f-b528-5f1bb2777328",
+    "question": "REQUIRES_NEW và NESTED khác nhau thế nào? Rủi ro khi lạm dụng REQUIRES_NEW?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "requires-new-va-nested-khac-nhau-the-nao-rui-ro-khi-lam-dung-requires-new-61dbfccd-5e45-539f-b528-5f1bb2777328",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 110,
+    "sourceSlug": null
+  },
+  {
+    "id": "c0023691-a852-521b-83ba-bb473d69a22c",
+    "question": "Đặt @Transactional lên method private hoặc method final thì có chạy không?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dat-transactional-len-method-private-hoac-method-final-thi-co-chay-khong-c0023691-a852-521b-83ba-bb473d69a22c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 111,
+    "sourceSlug": null
+  },
+  {
+    "id": "65039b92-5f24-5479-b37f-ebf5afd78698",
+    "question": "Một bean khai báo cả @PostConstruct, InitializingBean và initMethod thì thứ tự chạy ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mot-bean-khai-bao-ca-postconstruct-initializingbean-va-initmethod-thi-thu-tu-chay-ra-sao-65039b92-5f24-5479-b37f-ebf5afd78698",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 112,
+    "sourceSlug": null
+  },
+  {
+    "id": "855ce266-751e-581a-8c85-14b9231ee8eb",
+    "question": "Log hiện cảnh báo HHH000104: firstResult/maxResults specified with collection fetch; applying in memory. Chuyện gì đang xảy ra và sửa thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "log-hien-canh-bao-hhh000104-firstresult-maxresults-specified-with-collection-fetch-applying-in-memor-855ce266-751e-581a-8c85-14b9231ee8eb",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 113,
+    "sourceSlug": null
+  },
+  {
+    "id": "b12e36fa-4a63-5062-9e72-6413abe6914b",
+    "question": "Ứng dụng ném MultipleBagFetchException: cannot simultaneously fetch multiple bags. Vì sao và xử lý ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ung-dung-nem-multiplebagfetchexception-cannot-simultaneously-fetch-multiple-bags-vi-sao-va-xu-ly-ra-b12e36fa-4a63-5062-9e72-6413abe6914b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 114,
+    "sourceSlug": null
+  },
+  {
+    "id": "03d95aba-ee9a-5a38-b174-c6d8fb2c43f1",
+    "question": "Import 100.000 bản ghi bằng saveAll() rất chậm. Em đã đặt hibernate.jdbc.batch_size=50 mà log vẫn ra từng câu INSERT một. Vì sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "import-100-000-ban-ghi-bang-saveall-rat-cham-em-da-dat-hibernate-jdbc-batch-size-50-ma-log-van-ra-tu-03d95aba-ee9a-5a38-b174-c6d8fb2c43f1",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 115,
+    "sourceSlug": null
+  },
+  {
+    "id": "15372cbc-eaea-5ef7-893c-141402e8a30d",
+    "question": "Production báo HikariPool-1 - Connection is not available, request timed out after 30000ms. Em chẩn đoán và xử lý thế nào? maximumPoolSize nên đặt bao nhiêu?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "production-bao-hikaripool-1-connection-is-not-available-request-timed-out-after-30000ms-em-chan-doan-15372cbc-eaea-5ef7-893c-141402e8a30d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 116,
+    "sourceSlug": null
+  },
+  {
+    "id": "630d14d1-6abe-58ac-a1a6-59ebd1e5ef16",
+    "question": "Với JWT stateless, em thiết kế luồng refresh token và xử lý logout/thu hồi quyền thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "voi-jwt-stateless-em-thiet-ke-luong-refresh-token-va-xu-ly-logout-thu-hoi-quyen-the-nao-630d14d1-6abe-58ac-a1a6-59ebd1e5ef16",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "backend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 117,
+    "sourceSlug": null
+  }
+]

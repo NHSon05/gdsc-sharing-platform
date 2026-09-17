@@ -1,0 +1,1215 @@
+[
+  {
+    "id": "242e0bb4-9923-596e-a739-8a156bf87fd6",
+    "question": "Apache Kafka là gì và tại sao nó được sử dụng phổ biến trong hệ thống phân tán?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2201-apache-kafka-la-gi-va-tai-sao-no-duoc-su-dung-pho-bien-trong-he-thong-phan-tan",
+    "slug": "apache-kafka-la-gi-va-tai-sao-no-duoc-su-dung-pho-bien-trong-he-thong-phan-tan-242e0bb4-9923-596e-a739-8a156bf87fd6",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Kafka là distributed event streaming platform cho phép xử lý dữ liệu real-time với throughput cao, latency thấp và khả năng replay message — lý do chính khiến nó phổ biến trong hệ thống phân tán."
+      ],
+      "details": [],
+      "points": [
+        "Apache Kafka được LinkedIn phát triển và open-source năm 2011.",
+        "Kafka được thiết kế để xử lý luồng dữ liệu thời gian thực với thông lượng cực cao, độ trễ thấp và khả năng mở rộng theo chiều ngang.",
+        "Điểm mạnh của Kafka so với các message broker truyền thống là khả năng lưu trữ message lâu dài trên disk (không xóa sau khi consumer đọc), cho phép nhiều consumer đọc lại cùng một message.",
+        "Kafka thường được dùng trong các use case như event sourcing, log aggregation, real-time analytics, data pipeline giữa các microservices, và change data capture (CDC) từ database."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "2201-apache-kafka-la-gi-va-tai-sao-no-duoc-su-dung-pho-bien-trong-he-thong-phan-tan"
+  },
+  {
+    "id": "34c3a0aa-01d7-5949-8355-5e924eead43a",
+    "question": "Giải thích kiến trúc Kafka: Broker, Topic, Partition, Consumer Group hoạt động như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2202-giai-thich-kien-truc-kafka-broker-topic-partition-consumer-group-hoat-dong-nhu-t",
+    "slug": "giai-thich-kien-truc-kafka-broker-topic-partition-consumer-group-hoat-dong-nhu-the-nao-34c3a0aa-01d7-5949-8355-5e924eead43a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Kafka cluster gồm nhiều Broker lưu Topic, mỗi Topic chia thành Partition để song song hoá, và Consumer Group để scale đọc. Broker là một server Kafka chạy độc lập; một Kafka cluster thường có nhiều broker để đảm bảo high availability. Topic là kênh logic để phân loại message (ví dụ: topic 'orders', topic 'payments'). Mỗi topic được chia thành nhiều Partition — đây là đơn vị song song hóa của Kafka; các message trong một partition được sắp xếp theo thứ tự và mỗi message có một offset duy nhất. Consumer Group là nhóm các consumer cùng nhau đọc một topic; mỗi partition chỉ được đọc bởi đúng một consumer trong group tại một thời điểm, cho phép scale out việc tiêu thụ message."
+      ],
+      "details": [
+        "Ví dụ: nếu topic có 6 partition và group có 3 consumer, mỗi consumer xử lý 2 partition."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "2202-giai-thich-kien-truc-kafka-broker-topic-partition-consumer-group-hoat-dong-nhu-t"
+  },
+  {
+    "id": "f8c64198-7ecc-5d0a-8ad1-d843d4635cb2",
+    "question": "Producer và Consumer trong Kafka hoạt động như thế nào? Các cấu hình quan trọng cần biết?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2203-producer-va-consumer-trong-kafka-hoat-dong-nhu-the-nao-cac-cau-hinh-quan-trong-c",
+    "slug": "producer-va-consumer-trong-kafka-hoat-dong-nhu-the-nao-cac-cau-hinh-quan-trong-can-biet-f8c64198-7ecc-5d0a-8ad1-d843d4635cb2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Producer gửi message đến một topic và Kafka tự động phân phối message vào các partition (theo key hash, round-robin, hoặc custom partitioner)."
+      ],
+      "details": [],
+      "points": [
+        "Cấu hình quan trọng của producer: acks (0=fire-and-forget, 1=leader ack, all=tất cả ISR ack), retries, batch.size và linger.ms để tối ưu throughput.",
+        "Consumer đọc message từ partition theo offset và có thể commit offset tự động (enable.auto.commit=true) hoặc thủ công.",
+        "Cấu hình quan trọng của consumer: auto.offset.reset (earliest/latest), max.poll.records, session.timeout.ms.",
+        "Trong thực tế, nên dùng manual commit để tránh mất message khi consumer crash trước khi xử lý xong."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "2203-producer-va-consumer-trong-kafka-hoat-dong-nhu-the-nao-cac-cau-hinh-quan-trong-c"
+  },
+  {
+    "id": "ae457a7e-945d-524f-9dcf-b282557f87bb",
+    "question": "Kafka Connect là gì? Nó giải quyết bài toán gì trong data pipeline?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2208-kafka-connect-la-gi-no-giai-quyet-bai-toan-gi-trong-data-pipeline",
+    "slug": "kafka-connect-la-gi-no-giai-quyet-bai-toan-gi-trong-data-pipeline-ae457a7e-945d-524f-9dcf-b282557f87bb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Kafka Connect là framework tích hợp sẵn trong Kafka ecosystem để kết nối Kafka với các external system (database, file system, cloud storage, search engine) mà không cần viết code."
+      ],
+      "details": [
+        "dùng Debezium Source Connector để capture mọi thay đổi trong MySQL database, publish vào Kafka topic, sau đó Elasticsearch Sink Connector index data để search — toàn bộ pipeline không cần viết một dòng code custom nào."
+      ],
+      "points": [
+        "Kafka Connect có hai loại connector: Source Connector (đọc data từ external system vào Kafka, ví dụ: Debezium CDC từ PostgreSQL) và Sink Connector (ghi data từ Kafka ra external system, ví dụ: Elasticsearch Sink).",
+        "Connect chạy ở chế độ distributed với worker pool, tự động handle fault tolerance và load balancing."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "2208-kafka-connect-la-gi-no-giai-quyet-bai-toan-gi-trong-data-pipeline"
+  },
+  {
+    "id": "8d91d5e1-1f98-5466-9591-2919256d2dba",
+    "question": "Các use case phổ biến nhất của Kafka trong thực tế là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2210-cac-use-case-pho-bien-nhat-cua-kafka-trong-thuc-te-la-gi",
+    "slug": "cac-use-case-pho-bien-nhat-cua-kafka-trong-thuc-te-la-gi-8d91d5e1-1f98-5466-9591-2919256d2dba",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Kafka được dùng rộng rãi cho log aggregation, event sourcing, CDC, và microservices communication nhờ khả năng lưu trữ và replay message."
+      ],
+      "details": [
+        "Các use case phổ biến của Kafka trong production:"
+      ],
+      "points": [
+        "Log aggregation: tập hợp log từ nhiều service vào một nơi, sau đó forward sang Elasticsearch hoặc S3 để phân tích.",
+        "Event sourcing: lưu tất cả sự kiện (thay vì chỉ state hiện tại) để rebuild state bất kỳ lúc nào.",
+        "Real-time analytics: stream data từ user activity vào Kafka, xử lý với Kafka Streams hoặc Flink để cập nhật dashboard real-time.",
+        "Microservices communication: thay vì gọi API trực tiếp (tight coupling), các service publish event và service khác subscribe — giảm coupling và tăng resilience.",
+        "Fraud detection: stream giao dịch tài chính qua Kafka, dùng ML model để detect bất thường trong real-time."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "2210-cac-use-case-pho-bien-nhat-cua-kafka-trong-thuc-te-la-gi"
+  },
+  {
+    "id": "41152487-defe-5005-97c8-73bcd3849655",
+    "question": "At-most-once, at-least-once, exactly-once khác nhau thế nào? Thực tế nên chọn cái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/96851-at-most-once-at-least-once-exactly-once-khac-nhau-the-nao-thuc-te-nen-chon-cai-n",
+    "slug": "at-most-once-at-least-once-exactly-once-khac-nhau-the-nao-thuc-te-nen-chon-cai-nao-41152487-defe-5005-97c8-73bcd3849655",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Ba mức đảm bảo giao message:"
+      ],
+      "details": [
+        "Chọn: dùng at-least-once + consumer idempotent. Đó là câu trả lời được chờ đợi: bạn chấp nhận bị giao lặp và thiết kế xử lý sao cho chạy lại nhiều lần vẫn ra cùng kết quả (dedup key, UPSERT, kiểm tra trạng thái trước khi ghi). Cách này rẻ và bền hơn nhiều so với đuổi theo exactly-once toàn hệ thống."
+      ],
+      "points": [
+        "At-most-once: mỗi message được xử lý tối đa một lần, có thể mất. Consumer commit offset trước khi xử lý; xử lý lỗi thì message coi như đã tiêu thụ. Chỉ hợp với dữ liệu chấp nhận mất (metric, log truy vết).",
+        "At-least-once: message không bao giờ mất nhưng có thể lặp. Consumer xử lý xong mới commit offset; nếu chết trước khi commit, message được giao lại. Đây là mặc định thực tế của Kafka và RabbitMQ.",
+        "Exactly-once: mỗi message có tác động đúng một lần. Kafka làm được trong phạm vi Kafka đọc → xử lý → ghi lại Kafka nhờ idempotent producer + transaction, nhưng khi consumer ghi ra hệ thống bên ngoài (DB, gọi API bên thứ ba) thì broker không kiểm soát được."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "96851-at-most-once-at-least-once-exactly-once-khac-nhau-the-nao-thuc-te-nen-chon-cai-n"
+  },
+  {
+    "id": "e62cf00e-f70e-5d85-82f8-183abe3476cb",
+    "question": "Offset management trong Kafka là gì? Phân biệt auto commit và manual commit?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2204-offset-management-trong-kafka-la-gi-phan-biet-auto-commit-va-manual-commit",
+    "slug": "offset-management-trong-kafka-la-gi-phan-biet-auto-commit-va-manual-commit-e62cf00e-f70e-5d85-82f8-183abe3476cb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Offset là số thứ tự của message trong một partition, bắt đầu từ 0."
+      ],
+      "details": [],
+      "points": [
+        "Kafka lưu offset của consumer vào một internal topic tên __consumer_offsets.",
+        "Auto commit (enable.auto.commit=true) sẽ tự động commit offset theo chu kỳ auto.commit.interval.ms (mặc định 5000ms), nhưng có thể dẫn đến mất message nếu consumer crash SAU khi auto-commit nhưng TRƯỚC khi xử lý xong message đó, hoặc xử lý trùng nếu consumer crash sau khi xử lý nhưng trước khi auto commit.",
+        "Manual commit (commitSync() hoặc commitAsync()) cho phép kiểm soát chính xác: chỉ commit sau khi xử lý thành công. commitSync() block cho đến khi commit thành công, commitAsync() không block nhưng cần callback để xử lý lỗi.",
+        "Trong production, nên dùng manual commit kết hợp với idempotent processing để đảm bảo at-least-once hoặc exactly-once semantics."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "2204-offset-management-trong-kafka-la-gi-phan-biet-auto-commit-va-manual-commit"
+  },
+  {
+    "id": "61e0741c-72cc-5a64-8e86-3d883041baf8",
+    "question": "Message ordering trong Kafka được đảm bảo như thế nào? Khi nào ordering bị phá vỡ?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2205-message-ordering-trong-kafka-duoc-dam-bao-nhu-the-nao-khi-nao-ordering-bi-pha-vo",
+    "slug": "message-ordering-trong-kafka-duoc-dam-bao-nhu-the-nao-khi-nao-ordering-bi-pha-vo-61e0741c-72cc-5a64-8e86-3d883041baf8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Kafka đảm bảo thứ tự message trong phạm vi một partition — các message được ghi và đọc theo đúng thứ tự FIFO."
+      ],
+      "details": [],
+      "points": [
+        "Tuy nhiên, không có đảm bảo thứ tự giữa các partition khác nhau.",
+        "Để đảm bảo ordering cho một nhóm message liên quan (ví dụ: tất cả sự kiện của một user), cần gán cùng một message key — Kafka sẽ hash key và luôn route message có cùng key vào cùng partition.",
+        "Ordering có thể bị phá vỡ khi: producer bật retries > 0 và max.in.flight.requests.per.connection > 1 (message sau có thể arrive trước message trước bị retry) — giải pháp là bật enable.idempotence=true.",
+        "Ngoài ra, rebalancing consumer group không ảnh hưởng đến thứ tự trong partition vì offset được duy trì."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "2205-message-ordering-trong-kafka-duoc-dam-bao-nhu-the-nao-khi-nao-ordering-bi-pha-vo"
+  },
+  {
+    "id": "614ed3ca-d3d6-5106-9526-eda25a649d10",
+    "question": "Replication và ISR (In-Sync Replicas) trong Kafka là gì? Cách Kafka đảm bảo fault tolerance?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2206-replication-va-isr-in-sync-replicas-trong-kafka-la-gi-cach-kafka-dam-bao-fault-t",
+    "slug": "replication-va-isr-in-sync-replicas-trong-kafka-la-gi-cach-kafka-dam-bao-fault-tolerance-614ed3ca-d3d6-5106-9526-eda25a649d10",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Mỗi partition có một leader và nhiều follower replica trên các broker khác nhau."
+      ],
+      "details": [],
+      "points": [
+        "Leader xử lý tất cả read/write, follower chủ động pull data từ leader để sync.",
+        "ISR (In-Sync Replicas) là tập hợp các replica đang sync kịp với leader (không bị lag quá replica.lag.time.max.ms).",
+        "Khi leader broker bị lỗi, một replica trong ISR sẽ được bầu làm leader mới.",
+        "Cấu hình replication.factor=3 và min.insync.replicas=2 kết hợp với acks=all đảm bảo message chỉ được acknowledge khi ít nhất 2 replica đã ghi — bảo vệ khỏi mất data kể cả khi 1 broker bị lỗi.",
+        "Trong production nên dùng replication.factor >= 3 để chịu được lỗi của 2 broker đồng thời."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "2206-replication-va-isr-in-sync-replicas-trong-kafka-la-gi-cach-kafka-dam-bao-fault-t"
+  },
+  {
+    "id": "62777096-7acd-5bc6-a598-69382d234ce8",
+    "question": "Kafka Streams là gì? Khác gì so với việc consume message thông thường?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2209-kafka-streams-la-gi-khac-gi-so-voi-viec-consume-message-thong-thuong",
+    "slug": "kafka-streams-la-gi-khac-gi-so-voi-viec-consume-message-thong-thuong-62777096-7acd-5bc6-a598-69382d234ce8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Kafka Streams là thư viện Java/Scala để xây dựng ứng dụng stream processing trực tiếp trên Kafka, không cần external cluster như Spark hay Flink. Kafka Streams cung cấp các operation high-level như filter, map, groupBy, aggregate, join giữa các stream. Điểm khác biệt: consumer thông thường chỉ đọc và xử lý message, còn Kafka Streams có khái niệm KStream (unbounded stream of events) và KTable (changelog stream, represents current state), cho phép stateful processing với local state store (RocksDB). Kafka Streams tự động handle partitioning, scaling, và fault recovery — khi thêm instance, Kafka tự rebalance partition."
+      ],
+      "details": [
+        "Ví dụ: tính tổng doanh thu mỗi 5 phút từ stream order events, join stream clicks với stream purchases để tính conversion rate."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "2209-kafka-streams-la-gi-khac-gi-so-voi-viec-consume-message-thong-thuong"
+  },
+  {
+    "id": "196ff426-208b-59ad-88c1-7a1c162bc62b",
+    "question": "Idempotent producer trong Kafka là gì? Cách bật và hoạt động như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2236-idempotent-producer-trong-kafka-la-gi-cach-bat-va-hoat-dong-nhu-the-nao",
+    "slug": "idempotent-producer-trong-kafka-la-gi-cach-bat-va-hoat-dong-nhu-the-nao-196ff426-208b-59ad-88c1-7a1c162bc62b",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Idempotent producer đảm bảo rằng dù producer retry gửi message bao nhiêu lần (do network error, timeout), mỗi message chỉ được ghi đúng một lần vào partition. Cách hoạt động: Kafka assign cho mỗi producer một Producer ID (PID) duy nhất và mỗi message có sequence number tăng dần per-partition. Broker reject nếu thấy message có sequence number đã nhận hoặc không liên tiếp. Bật bằng cách set enable.idempotence=true — tự động set acks=all, max.in.flight.requests.per.connection=5, retries=Integer.MAX_VALUE. Idempotence chỉ trong một producer session — nếu producer restart, PID mới và sequence reset. Để exactly-once across sessions và multiple partitions, cần Kafka Transactions."
+      ],
+      "details": [
+        "Ví dụ:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "props.put(\"enable.idempotence\", \"true\");\nprops.put(\"transactional.id\", \"my-tx-id\"); // cho transactions"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "2236-idempotent-producer-trong-kafka-la-gi-cach-bat-va-hoat-dong-nhu-the-nao"
+  },
+  {
+    "id": "865aa94c-76b8-5366-bcbc-f870dbda00b5",
+    "question": "Producer batching trong Kafka: linger.ms và batch.size hoạt động thế nào để tối ưu throughput?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2237-producer-batching-trong-kafka-linger-ms-va-batch-size-hoat-dong-the-nao-de-toi-u",
+    "slug": "producer-batching-trong-kafka-linger-ms-va-batch-size-hoat-dong-the-nao-de-toi-uu-throughput-865aa94c-76b8-5366-bcbc-f870dbda00b5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Mặc định Kafka producer gửi message ngay lập tức (linger.ms=0), nhưng cách này kém hiệu quả khi throughput cao vì mỗi request chứa ít record. batch.size (default 16384 bytes = 16KB) là kích thước tối đa của một batch per-partition — khi batch đầy, gửi ngay. linger.ms (default 0ms) là thời gian producer chờ thêm message trước khi gửi dù batch chưa đầy — tương tự Nagle's algorithm của TCP. Tuning throughput: tăng batch.size lên 128KB–1MB, thêm linger.ms=10–50ms để gom nhiều message hơn, bật compression.type=lz4 hoặc snappy. Kết quả: throughput tăng 3-5x, latency tăng nhẹ (chấp nhận được cho non-realtime). Với low-latency use case (trading, alerting) thì giữ linger.ms=0."
+      ],
+      "details": [
+        "Đánh đổi: linger.ms cao → throughput tốt, latency cao; linger.ms=0 → latency thấp nhất, throughput thấp hơn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "2237-producer-batching-trong-kafka-linger-ms-va-batch-size-hoat-dong-the-nao-de-toi-u"
+  },
+  {
+    "id": "caccd6ac-0425-5760-b15a-7e162d9ba1ec",
+    "question": "At-least-once vs at-most-once vs exactly-once trong Kafka: phân biệt và cách đạt được mỗi loại?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2239-at-least-once-vs-at-most-once-vs-exactly-once-trong-kafka-phan-biet-va-cach-dat",
+    "slug": "at-least-once-vs-at-most-once-vs-exactly-once-trong-kafka-phan-biet-va-cach-dat-duoc-moi-loai-caccd6ac-0425-5760-b15a-7e162d9ba1ec",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "At-most-once (fire-and-forget): producer đặt acks=0, consumer commit offset trước khi xử lý. Message có thể mất nhưng không bao giờ trùng. Hợp với metrics, log — những thứ không cần chính xác tuyệt đối."
+      ],
+      "details": [
+        "At-least-once: producer đặt acks=all kèm retries, consumer commit sau khi xử lý xong. Không mất message, nhưng có thể xử lý trùng nếu consumer chết sau lúc xử lý mà trước lúc commit. Vì vậy logic consumer bắt buộc phải idempotent.",
+        "Exactly-once: khó nhất, cần producer và consumer phối hợp.\n- Producer: bật enable.idempotence=true và dùng Kafka Transactions (transactional.id).\n- Consumer: đặt isolation.level=read_committed, và commit offset trong cùng transaction với business logic — nếu ghi xuống DB thì phải theo pattern transactional outbox.\n- Kafka Streams với processing.guarantee=exactly_once_v2 lo trọn gói phần này.",
+        "Lưu ý: exactly-once đắt khoảng 20-30% latency, nên chỉ dùng cho billing và giao dịch tài chính, đừng bật mặc định cho mọi topic."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "2239-at-least-once-vs-at-most-once-vs-exactly-once-trong-kafka-phan-biet-va-cach-dat"
+  },
+  {
+    "id": "97c429de-5d59-5a27-8365-ad999fea1176",
+    "question": "Consumer group và partition assignment: cách Kafka phân phối partition cho consumers?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2240-consumer-group-va-partition-assignment-cach-kafka-phan-phoi-partition-cho-consum",
+    "slug": "consumer-group-va-partition-assignment-cach-kafka-phan-phoi-partition-cho-consumers-97c429de-5d59-5a27-8365-ad999fea1176",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Kafka Group Coordinator (broker) quản lý consumer group lifecycle và partition assignment."
+      ],
+      "details": [],
+      "points": [
+        "Khi consumer join group, Group Coordinator trigger rebalance và chọn một consumer làm Group Leader — Leader thực hiện partition assignment theo strategy đã cấu hình và gửi kết quả về Coordinator. RangeAssignor (default): assign partition liên tiếp theo topic — consumer 0 nhận partition 0,1; consumer 1 nhận 2,3.",
+        "Nếu partition không chia đều, consumer đầu tiên nhận nhiều hơn (uneven distribution across topics). RoundRobinAssignor: phân phối đều hơn bằng cách xen kẽ — mỗi consumer nhận partition luân phiên. StickyAssignor: cố gắng minimize sự thay đổi so với assignment trước. CooperativeStickyAssignor: như Sticky nhưng dùng cooperative protocol (không stop-the-world) — khuyến nghị cho ứng dụng mới theo KIP-429.",
+        "Thực tế: số consumer không nên vượt số partition — consumer thừa sẽ idle.",
+        "Khi scale out, thêm partition TRƯỚC khi thêm consumer để tránh idle consumers."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "2240-consumer-group-va-partition-assignment-cach-kafka-phan-phoi-partition-cho-consum"
+  },
+  {
+    "id": "2bc6105c-2d98-517e-8e37-3181e20017d3",
+    "question": "Partition key design trong Kafka: cách chọn key để tránh hotspot và đảm bảo ordering?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2250-partition-key-design-trong-kafka-cach-chon-key-de-tranh-hotspot-va-dam-bao-order",
+    "slug": "partition-key-design-trong-kafka-cach-chon-key-de-tranh-hotspot-va-dam-bao-ordering-2bc6105c-2d98-517e-8e37-3181e20017d3",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Partition key quyết định message vào partition nào (hash(key) % numPartitions)."
+      ],
+      "details": [],
+      "points": [
+        "Chọn key sai dẫn đến: hotspot (một partition bị overload), hoặc mất ordering (message liên quan vào partition khác nhau). Nguyên tắc chọn key: chọn field có cardinality cao và phân phối đều — user_id, order_id, device_id tốt hơn country_code hay status.",
+        "Key phải là field mà ordering quan trọng trong context của nó: tất cả event của cùng order_id phải theo thứ tự → dùng order_id làm key. Tránh hotspot: nếu key phân phối không đều (một số user_id hoạt động cực nhiều), thêm random suffix: user_id + '-' + random(0, N) — nhưng sẽ mất ordering global per user.",
+        "Kỹ thuật khác: key salting key + timestamp_bucket — partition thay đổi theo thời gian.",
+        "Tăng số partition cũng giúp giảm hotspot nhưng không giải quyết root cause nếu key quá skewed."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "2250-partition-key-design-trong-kafka-cach-chon-key-de-tranh-hotspot-va-dam-bao-order"
+  },
+  {
+    "id": "27612850-f2bc-5bac-912d-6bbccc2e5ef2",
+    "question": "Message queue là gì và khi nào nên dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/91011-message-queue-la-gi-va-khi-nao-nen-dung",
+    "slug": "message-queue-la-gi-va-khi-nao-nen-dung-27612850-f2bc-5bac-912d-6bbccc2e5ef2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Message queue là kênh giao tiếp bất đồng bộ giữa các service: producer đẩy message vào queue, consumer lấy ra xử lý; message tồn tại tới khi được xử lý."
+      ],
+      "details": [
+        "Lợi ích:\n- Decoupling: producer và consumer không phụ thuộc trực tiếp, không cần online cùng lúc.\n- Buffering / load leveling: hàng đợi hấp thụ spike, consumer xử lý theo nhịp của mình.\n- Resilience: message được giữ lại → retry khi lỗi, không mất việc.",
+        "Dùng khi: tách tác vụ nặng khỏi luồng request (gửi mail, xử lý ảnh), làm phẳng traffic đột biến, giao tiếp giữa microservice. Ví dụ: RabbitMQ, Amazon SQS (point-to-point), Kafka (log/stream, throughput cao)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "91011-message-queue-la-gi-va-khi-nao-nen-dung"
+  },
+  {
+    "id": "2208193b-d2a7-51bc-b562-1358a75d3c9c",
+    "question": "Kafka giữ dữ liệu (data retention) theo cơ chế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94140-kafka-giu-du-lieu-data-retention-theo-co-che-nao",
+    "slug": "kafka-giu-du-lieu-data-retention-theo-co-che-nao-2208193b-d2a7-51bc-b562-1358a75d3c9c",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Kafka giữ message theo cấu hình retention của từng topic, độc lập với việc consumer đã đọc hay chưa. Hai chiều giới hạn:"
+      ],
+      "details": [
+        "Hai điều kiện chạy song song — cái nào tới trước thắng. Việc xóa diễn ra theo segment (nhóm message), nên segment.ms/segment.bytes quyết định độ mịn khi dọn.",
+        "cleanup.policy chọn cách dọn:\n- delete (mặc định): vứt bỏ segment cũ theo thời gian/dung lượng ở trên.\n- compact (log compaction): giữ lại giá trị mới nhất theo key, xóa bản cũ hơn của cùng key — hợp cho topic dạng \"trạng thái/changelog\".\n- Có thể đặt delete,compact để vừa nén vừa giới hạn tuổi.",
+        "Lưu ý: retention không phải \"message đã đọc thì xóa\" — Kafka là log, message sống tới khi hết hạn dù nhiều consumer group cùng đọc."
+      ],
+      "points": [
+        "Theo thời gian — retention.ms: giữ message trong khoảng thời gian đặt trước (mặc định 7 ngày = 604800000ms). Quá hạn, segment cũ bị xóa.",
+        "Theo dung lượng — retention.bytes: giới hạn kích thước mỗi partition; vượt ngưỡng thì segment cũ nhất bị dọn."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "94140-kafka-giu-du-lieu-data-retention-theo-co-che-nao"
+  },
+  {
+    "id": "80155d2a-21ed-59cd-87fe-9a5a7c750ad7",
+    "question": "Producer của Kafka nén dữ liệu ra sao, đánh đổi thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/94141-producer-cua-kafka-nen-du-lieu-ra-sao-danh-doi-the-nao",
+    "slug": "producer-cua-kafka-nen-du-lieu-ra-sao-danh-doi-the-nao-80155d2a-21ed-59cd-87fe-9a5a7c750ad7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Producer đặt qua compression.type, chọn một trong: none, gzip, snappy, lz4, zstd. Producer nén cả một batch message trước khi gửi, broker lưu nguyên dạng nén, consumer giải nén — tiết kiệm băng thông mạng lẫn dung lượng đĩa."
+      ],
+      "details": [
+        "Tương tác với batching: nén hoạt động trên batch, nên batch càng lớn thì tỉ lệ nén càng tốt. Tăng linger.ms và batch.size cho producer gom nhiều message hơn mỗi lần gửi → nén hiệu quả hơn.",
+        "Quy tắc: cần thông lượng cao/độ trễ thấp → lz4/snappy. Muốn tiết kiệm mạng và đĩa tối đa mà chịu được CPU → zstd (thường là lựa chọn cân bằng nhất) hoặc gzip.",
+        "Đánh đổi throughput vs CPU:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "94141-producer-cua-kafka-nen-du-lieu-ra-sao-danh-doi-the-nao"
+  },
+  {
+    "id": "85de00c7-79ac-5166-bf84-68d4c27f68c7",
+    "question": "DLQ dùng để làm gì? Quy trình xử lý message đã rơi vào DLQ ở production ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96855-dlq-dung-de-lam-gi-quy-trinh-xu-ly-message-da-roi-vao-dlq-o-production-ra-sao",
+    "slug": "dlq-dung-de-lam-gi-quy-trinh-xu-ly-message-da-roi-vao-dlq-o-production-ra-sao-85de00c7-79ac-5166-bf84-68d4c27f68c7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "DLQ (dead letter queue) là nơi chứa message không xử lý được sau khi hết số lần retry. Mục đích là tách message hỏng ra khỏi luồng chính để consumer tiếp tục chạy, đồng thời không mất dữ liệu."
+      ],
+      "details": [
+        "Message vào DLQ phải mang đủ ngữ cảnh để điều tra: payload gốc, original_topic/original_queue, số lần thử, thông báo lỗi + stack trace, thời điểm lỗi, trace_id.",
+        "Quy trình vận hành — điểm phân biệt ứng viên có kinh nghiệm thực tế:",
+        "1. Cảnh báo: DLQ có message là bất thường, phải bắn alert (số lượng > 0, hoặc vượt ngưỡng), không phải chờ tới lúc khách phàn nàn.\n2. Phân loại: lỗi do dữ liệu (payload sai) hay do hệ thống (DB down lúc đó). Nhóm theo thông báo lỗi để thấy nguyên nhân chung.\n3. Sửa nguyên nhân rồi mới replay. Replay khi bug chưa sửa chỉ đẩy message vòng lại DLQ.\n4. Replay có kiểm soát: có công cụ đẩy message từ DLQ về topic/queue gốc, chạy theo lô nhỏ, giới hạn tốc độ để không tạo đợt tải đột ngột. Consumer phải idempotent vì replay chắc chắn sinh trùng.\n5. Loại bỏ có chủ đích: message không bao giờ xử lý được (khách đã huỷ đơn) thì ghi nhận lý do rồi xoá, đừng để DLQ tích tụ vô hạn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "96855-dlq-dung-de-lam-gi-quy-trinh-xu-ly-message-da-roi-vao-dlq-o-production-ra-sao"
+  },
+  {
+    "id": "7393a034-976d-5f62-9b50-54d6229e6adb",
+    "question": "Làm sao đảm bảo thứ tự message? Chọn partition key thế nào và đánh đổi là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96857-lam-sao-dam-bao-thu-tu-message-chon-partition-key-the-nao-va-danh-doi-la-gi",
+    "slug": "lam-sao-dam-bao-thu-tu-message-chon-partition-key-the-nao-va-danh-doi-la-gi-7393a034-976d-5f62-9b50-54d6229e6adb",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Kafka chỉ đảm bảo thứ tự trong một partition, không đảm bảo giữa các partition.",
+        "Chọn key theo đơn vị cần đảm bảo thứ tự"
+      ],
+      "details": [
+        "Muốn các sự kiện liên quan nhau giữ đúng trình tự thì phải đưa chúng về cùng một partition bằng cách dùng chung key.",
+        "Một lối thoát thực dụng: thay vì ép thứ tự tuyệt đối, cho consumer tự bỏ qua sự kiện cũ bằng version/timestamp trong payload.",
+        "Các đánh đổi phải nêu được:"
+      ],
+      "points": [
+        "Song song bị giới hạn bởi số partition. Một partition chỉ do một consumer trong group đọc, nên thứ tự càng chặt thì mức song song càng thấp.",
+        "Key lệch (hot partition). Chọn key phân bố xấu — ví dụ tenant_id mà một tenant chiếm 80% lưu lượng — sẽ dồn tải vào một partition trong khi các partition khác rỗi.",
+        "Tăng số partition làm hỏng ánh xạ key → partition với message tương lai, nên phải chọn số partition dư từ đầu.",
+        "Retry phá thứ tự nếu producer cho phép nhiều request in-flight và không bật idempotence: message lỗi được gửi lại sau message kế tiếp. Bật enable.idempotence=true để Kafka giữ trật tự khi retry."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "// same key -> same partition -> ordered for that entity\nproducer.send(new ProducerRecord<>(\"orders\", order.getId(), event));"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "96857-lam-sao-dam-bao-thu-tu-message-chon-partition-key-the-nao-va-danh-doi-la-gi"
+  },
+  {
+    "id": "c92b4b84-d9af-5680-a9b1-a276ae63d3c8",
+    "question": "Consumer lag là gì, đo bằng cách nào? Lag tăng liên tục thì xử lý ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96858-consumer-lag-la-gi-do-bang-cach-nao-lag-tang-lien-tuc-thi-xu-ly-ra-sao",
+    "slug": "consumer-lag-la-gi-do-bang-cach-nao-lag-tang-lien-tuc-thi-xu-ly-ra-sao-c92b4b84-d9af-5680-a9b1-a276ae63d3c8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Consumer lag = offset mới nhất của partition (log end offset) trừ offset mà consumer group đã commit. Nó cho biết consumer đang chậm hơn producer bao nhiêu message."
+      ],
+      "details": [
+        "1. Lag chỉ dồn ở vài partition → key lệch hoặc consumer của partition đó chết. Không phải vấn đề công suất.\n2. Lag đều trên mọi partition → consumer chậm hơn producer thật sự. Xem consumer đang chờ ở đâu: gọi API bên ngoài, query DB chậm, hay xử lý từng message một.\n3. Rebalance liên tục → consumer bị đá ra vì xử lý một lô lâu hơn max.poll.interval.ms; giảm max.poll.records hoặc nới timeout.",
+        "Lag tăng liên tục — chẩn đoán theo thứ tự:",
+        "Cách khắc phục theo hiệu quả giảm dần: tối ưu phần chậm nhất (batch DB write, bỏ N+1, gọi ngoài song song) → tăng số consumer trong group (chỉ có tác dụng tới khi bằng số partition) → tăng số partition rồi mới tăng consumer. Không có kênh ưu tiên thì lúc backlog lớn, message mới cũng phải xếp hàng sau toàn bộ backlog."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "kafka-consumer-groups.sh --bootstrap-server localhost:9092 \\\n  --describe --group order-worker"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "96858-consumer-lag-la-gi-do-bang-cach-nao-lag-tang-lien-tuc-thi-xu-ly-ra-sao"
+  },
+  {
+    "id": "eb47e4ca-b7a7-5f75-aa91-9d52dfd3d103",
+    "question": "Rebalance trong consumer group là gì? Nó gây ảnh hưởng gì và giảm tác động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/96859-rebalance-trong-consumer-group-la-gi-no-gay-anh-huong-gi-va-giam-tac-dong-the-na",
+    "slug": "rebalance-trong-consumer-group-la-gi-no-gay-anh-huong-gi-va-giam-tac-dong-the-nao-eb47e4ca-b7a7-5f75-aa91-9d52dfd3d103",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [
+        "Rebalance là quá trình phân bổ lại partition cho các consumer trong group. Nó xảy ra khi consumer tham gia/rời group, khi consumer bị coi là chết (quá session.timeout.ms không gửi heartbeat, hoặc quá max.poll.interval.ms không gọi poll()), hoặc khi số partition của topic thay đổi."
+      ],
+      "details": [
+        "Ảnh hưởng: với giao thức eager mặc định trước đây, toàn bộ consumer nhả hết partition rồi mới nhận lại — cả group ngừng xử lý trong thời gian đó (stop-the-world). Ngoài ra:\n- Message đang xử lý dở mà chưa commit offset sẽ được xử lý lại bởi consumer mới → thêm bản trùng.\n- State cục bộ trong consumer (cache, buffer gom lô) mất theo.\n- Rebalance liên tiếp (rebalance storm) khiến throughput gần như bằng 0 dù consumer vẫn \"sống\".",
+        "Giảm tác động:"
+      ],
+      "points": [
+        "max.poll.records nhỏ lại để một vòng poll() luôn kết thúc trong max.poll.interval.ms. Đây là nguyên nhân số một của rebalance storm ở hệ thống thật: mỗi lô gọi API ngoài quá lâu.",
+        "Static membership (group.instance.id): consumer khởi động lại — khi deploy chẳng hạn — giữ nguyên partition cũ nếu quay lại trong session.timeout.ms, không kích hoạt rebalance.",
+        "Cooperative rebalancing (CooperativeStickyAssignor): chỉ chuyển những partition thực sự cần đổi chủ, các consumer khác tiếp tục chạy.",
+        "Commit offset trước khi partition bị thu hồi trong onPartitionsRevoked để giảm số message xử lý lặp.",
+        "Consumer idempotent — dù chỉnh gì thì rebalance vẫn sinh trùng, đây mới là lớp bảo vệ cuối."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "96859-rebalance-trong-consumer-group-la-gi-no-gay-anh-huong-gi-va-giam-tac-dong-the-na"
+  },
+  {
+    "id": "db397add-80bc-59c3-987a-5b65ce3f8e80",
+    "question": "Exactly-once semantics (EOS) trong Kafka hoạt động như thế nào? Giải thích idempotent producers và transactions.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "exactly-once-semantics-eos-trong-kafka-hoat-dong-nhu-the-nao-giai-thich-idempotent-producers-va-tran-db397add-80bc-59c3-987a-5b65ce3f8e80",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": null
+  },
+  {
+    "id": "6228d4f2-99a4-5269-8ff2-631b733a0c23",
+    "question": "Các chiến lược partition trong Kafka: khi nào dùng key-based, round-robin, hay custom partitioner?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cac-chien-luoc-partition-trong-kafka-khi-nao-dung-key-based-round-robin-hay-custom-partitioner-6228d4f2-99a4-5269-8ff2-631b733a0c23",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": null
+  },
+  {
+    "id": "cbf0f30e-5e50-5ba4-80f6-7c7e97e65dd2",
+    "question": "Consumer rebalancing trong Kafka: vấn đề gì có thể xảy ra và cách tối ưu?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "consumer-rebalancing-trong-kafka-van-de-gi-co-the-xay-ra-va-cach-toi-uu-cbf0f30e-5e50-5ba4-80f6-7c7e97e65dd2",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": null
+  },
+  {
+    "id": "07036148-bb4d-5769-a8e2-574e83bd2081",
+    "question": "Dead Letter Queue (DLQ) trong Kafka là gì? Cách implement xử lý message lỗi?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dead-letter-queue-dlq-trong-kafka-la-gi-cach-implement-xu-ly-message-loi-07036148-bb4d-5769-a8e2-574e83bd2081",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": null
+  },
+  {
+    "id": "63800cad-c80b-52d3-9502-b9066f0717aa",
+    "question": "Monitoring và performance tuning Kafka: các metrics quan trọng và cách tối ưu throughput/latency?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "monitoring-va-performance-tuning-kafka-cac-metrics-quan-trong-va-cach-toi-uu-throughput-latency-63800cad-c80b-52d3-9502-b9066f0717aa",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": null
+  },
+  {
+    "id": "f464bf60-d3dc-5eac-affd-0767d60bf70f",
+    "question": "Kafka trong kiến trúc microservices: event-driven architecture, saga pattern, và các lỗi cần tránh?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "kafka-trong-kien-truc-microservices-event-driven-architecture-saga-pattern-va-cac-loi-can-tranh-f464bf60-d3dc-5eac-affd-0767d60bf70f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": null
+  },
+  {
+    "id": "12d64017-7f78-5be8-965b-32a059c96040",
+    "question": "Schema Registry trong Kafka ecosystem là gì? Tại sao cần dùng Avro/Protobuf thay vì JSON?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "schema-registry-trong-kafka-ecosystem-la-gi-tai-sao-can-dung-avro-protobuf-thay-vi-json-12d64017-7f78-5be8-965b-32a059c96040",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": null
+  },
+  {
+    "id": "d71bcea8-ffcd-54a9-9067-9ccb18d2a5ae",
+    "question": "KRaft mode trong Kafka là gì? Tại sao Kafka loại bỏ ZooKeeper?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "kraft-mode-trong-kafka-la-gi-tai-sao-kafka-loai-bo-zookeeper-d71bcea8-ffcd-54a9-9067-9ccb18d2a5ae",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": null
+  },
+  {
+    "id": "42d6289c-59b6-5d89-8165-0b6a6f42da23",
+    "question": "Kafka consumer lag là gì? Cách monitor và alert khi lag quá cao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "kafka-consumer-lag-la-gi-cach-monitor-va-alert-khi-lag-qua-cao-42d6289c-59b6-5d89-8165-0b6a6f42da23",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": null
+  },
+  {
+    "id": "7c58b86a-b47e-5578-ac04-e0266764be6f",
+    "question": "Log compaction trong Kafka là gì? Tombstone record dùng để làm gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "log-compaction-trong-kafka-la-gi-tombstone-record-dung-de-lam-gi-7c58b86a-b47e-5578-ac04-e0266764be6f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": null
+  },
+  {
+    "id": "c64b81f4-5218-5c0d-8a00-2d33cd637a5f",
+    "question": "min.insync.replicas và acks=all kết hợp bảo vệ data như thế nào? Khi nào producer throw NotEnoughReplicasException?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "min-insync-replicas-va-acks-all-ket-hop-bao-ve-data-nhu-the-nao-khi-nao-producer-throw-notenoughrepl-c64b81f4-5218-5c0d-8a00-2d33cd637a5f",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": null
+  },
+  {
+    "id": "5fdb6fc9-97c0-5e5b-bd1a-e7ed9ece120e",
+    "question": "MirrorMaker 2 là gì? Cách thực hiện cross-cluster replication trong Kafka?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "mirrormaker-2-la-gi-cach-thuc-hien-cross-cluster-replication-trong-kafka-5fdb6fc9-97c0-5e5b-bd1a-e7ed9ece120e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": null
+  },
+  {
+    "id": "506840c1-9973-5712-8a82-787fa98d91b6",
+    "question": "ksqlDB là gì? Khác gì so với Kafka Streams?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ksqldb-la-gi-khac-gi-so-voi-kafka-streams-506840c1-9973-5712-8a82-787fa98d91b6",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": null
+  },
+  {
+    "id": "cc173839-66a5-5738-b980-c50a4fcb4ad5",
+    "question": "Event sourcing với Kafka: pattern hoạt động như thế nào và lợi ích/nhược điểm?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "event-sourcing-voi-kafka-pattern-hoat-dong-nhu-the-nao-va-loi-ich-nhuoc-diem-cc173839-66a5-5738-b980-c50a4fcb4ad5",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": null
+  },
+  {
+    "id": "e6dee8f6-a18b-5e04-8e47-77c83e5c9ce9",
+    "question": "Transactional Outbox Pattern là gì? Tại sao cần thiết khi dùng Kafka với database?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "transactional-outbox-pattern-la-gi-tai-sao-can-thiet-khi-dung-kafka-voi-database-e6dee8f6-a18b-5e04-8e47-77c83e5c9ce9",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": null
+  },
+  {
+    "id": "1c0fb11a-3ccf-5b70-8524-ca0e375a6bde",
+    "question": "Kafka vs RabbitMQ: so sánh chi tiết trade-offs để chọn đúng cho từng use case?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "kafka-vs-rabbitmq-so-sanh-chi-tiet-trade-offs-de-chon-dung-cho-tung-use-case-1c0fb11a-3ccf-5b70-8524-ca0e375a6bde",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": null
+  },
+  {
+    "id": "c2ba0586-8c33-54bd-944b-1795a4334cbc",
+    "question": "CQRS pattern với Kafka: Command side và Query side tách biệt như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cqrs-pattern-voi-kafka-command-side-va-query-side-tach-biet-nhu-the-nao-c2ba0586-8c33-54bd-944b-1795a4334cbc",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": null
+  },
+  {
+    "id": "aa75e0b6-ab60-5105-969f-f953ee385914",
+    "question": "Kafka Streams và Apache Flink — khi nào chọn cái nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "kafka-streams-va-apache-flink-khi-nao-chon-cai-nao-aa75e0b6-ab60-5105-969f-f953ee385914",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": null
+  },
+  {
+    "id": "dd1d904b-6d4c-5d5b-8047-3aa961a4e062",
+    "question": "Kafka làm exactly-once bằng cách nào? Giới hạn của nó nằm ở đâu?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "kafka-lam-exactly-once-bang-cach-nao-gioi-han-cua-no-nam-o-dau-dd1d904b-6d4c-5d5b-8047-3aa961a4e062",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": null
+  },
+  {
+    "id": "11ac03df-645a-568e-8dd5-7e929bd31682",
+    "question": "Message schema thay đổi thì làm sao không làm hỏng consumer? Backward và forward compatibility khác nhau ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "message-schema-thay-doi-thi-lam-sao-khong-lam-hong-consumer-backward-va-forward-compatibility-khac-n-11ac03df-645a-568e-8dd5-7e929bd31682",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "data-and-messaging"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": null
+  }
+]

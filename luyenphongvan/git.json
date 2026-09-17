@@ -1,0 +1,1718 @@
+[
+  {
+    "id": "6c81f489-f137-5e21-8858-06428f0e76ab",
+    "question": "Git Flow là gì? Có những branching strategy nào phổ biến?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/876-git-flow-la-gi-co-nhung-branching-strategy-nao-pho-bien",
+    "slug": "git-flow-la-gi-co-nhung-branching-strategy-nao-pho-bien-6c81f489-f137-5e21-8858-06428f0e76ab",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Git Flow có 5 loại branch: main (production), develop (tích hợp code), feature/* (tính năng mới), release/* (chuẩn bị release), hotfix/* (sửa lỗi khẩn cấp)."
+      ],
+      "details": [],
+      "points": [
+        "Trunk-based Development là hướng ngược lại: commit thẳng vào main với feature flags, phù hợp team CI/CD mature.",
+        "Thực tế phổ biến nhất: feature branch từ develop → PR review → merge develop → staging → merge main → production.",
+        "Naming convention quan trọng: feature/JIRA-123-add-login giúp trace thay đổi về requirement."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "876-git-flow-la-gi-co-nhung-branching-strategy-nao-pho-bien"
+  },
+  {
+    "id": "10347fcb-47b4-59cf-82d6-38b18f862403",
+    "question": "Vừa commit nhầm (message sai hoặc quên file), làm sao sửa mà không tạo commit mới?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/4011-vua-commit-nham-message-sai-hoac-quen-file-lam-sao-sua-ma-khong-tao-commit-moi",
+    "slug": "vua-commit-nham-message-sai-hoac-quen-file-lam-sao-sua-ma-khong-tao-commit-moi-10347fcb-47b4-59cf-82d6-38b18f862403",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Lưu ý quan trọng:\n- --amend tạo commit MỚI với hash khác — không phải edit in-place\n- KHÔNG amend commits trên main/develop hoặc bất kỳ shared branch\n- --force-with-lease an toàn hơn --force — sẽ fail nếu remote có commits mới mà local chưa có (tránh overwrite người khác)\n- Nếu cần sửa commit cũ hơn (không phải last): dùng git rebase -i"
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Amend last commit — chỉ dùng khi commit CHƯA push:",
+        "Nếu đã push (chỉ branch của riêng bạn):"
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# Chỉ sửa message:\ngit commit --amend -m \"feat: correct message here\"\n\n# Thêm file bị quên:\ngit add forgotten-file.ts\ngit commit --amend --no-edit  # giữ nguyên message\n\n# Sửa cả file lẫn message:\ngit add forgotten-file.ts\ngit commit --amend -m \"feat: complete implementation with tests\""
+        },
+        {
+          "language": "BASH",
+          "code": "git commit --amend -m \"corrected message\"\ngit push --force-with-lease origin feature/my-branch"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "4011-vua-commit-nham-message-sai-hoac-quen-file-lam-sao-sua-ma-khong-tao-commit-moi"
+  },
+  {
+    "id": "467c86f6-02a4-5703-b876-49026335057d",
+    "question": "git fetch và git pull khác nhau như thế nào? Khi nào chỉ nên fetch?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/4050-git-fetch-va-git-pull-khac-nhau-nhu-the-nao-khi-nao-chi-nen-fetch",
+    "slug": "git-fetch-va-git-pull-khac-nhau-nhu-the-nao-khi-nao-chi-nen-fetch-467c86f6-02a4-5703-b876-49026335057d",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Chỉ nên fetch khi: muốn xem thay đổi trước khi tích hợp (review diff), đang dở việc không muốn working directory bị thay đổi, hoặc script/CI chỉ cần cập nhật refs."
+      ],
+      "details": [
+        "Pull phù hợp khi: working directory sạch và bạn muốn cập nhật nhanh. Nên set git config --global pull.rebase true để tránh merge commit thừa mỗi lần pull."
+      ],
+      "points": [],
+      "sections": [
+        "git fetch tải commits/refs mới từ remote về remote-tracking branches (origin/main) — KHÔNG đụng vào working directory hay local branch. git pull = git fetch + git merge (hoặc + git rebase nếu config pull.rebase) — tích hợp thẳng vào branch hiện tại."
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "git fetch origin\ngit log main..origin/main --oneline  # xem team có gì mới trước khi tích hợp\ngit merge origin/main                # tích hợp khi đã sẵn sàng"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "4050-git-fetch-va-git-pull-khac-nhau-nhu-the-nao-khi-nao-chi-nen-fetch"
+  },
+  {
+    "id": "8eb05ad9-2397-57e5-b969-3dc6b018af3f",
+    "question": "Merge conflict xảy ra khi nào? Quy trình resolve một conflict cơ bản?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/4051-merge-conflict-xay-ra-khi-nao-quy-trinh-resolve-mot-conflict-co-ban",
+    "slug": "merge-conflict-xay-ra-khi-nao-quy-trinh-resolve-mot-conflict-co-ban-8eb05ad9-2397-57e5-b969-3dc6b018af3f",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Conflict xảy ra khi git không thể tự hợp nhất: 2 branch cùng sửa 1 vùng dòng của cùng file, hoặc 1 bên xóa file mà bên kia sửa.",
+        "git status",
+        "git add <file>",
+        "git merge --continue",
+        "git commit"
+      ],
+      "details": [
+        "Git dừng merge và chèn conflict markers vào file:",
+        "git merge --abort"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "<<<<<<< HEAD\nconst rate = 0.1   // thay đổi của bạn\n=======\nconst rate = 0.15  // thay đổi của branch kia\n>>>>>>> feature/pricing"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "4051-merge-conflict-xay-ra-khi-nao-quy-trinh-resolve-mot-conflict-co-ban"
+  },
+  {
+    "id": "aa56cf67-e5f5-5d32-87bc-ca97ebbf8839",
+    "question": "Detached HEAD là gì? Checkout một commit cũ để xem code rồi quay lại như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/4052-detached-head-la-gi-checkout-mot-commit-cu-de-xem-code-roi-quay-lai-nhu-the-nao",
+    "slug": "detached-head-la-gi-checkout-mot-commit-cu-de-xem-code-roi-quay-lai-nhu-the-nao-aa56cf67-e5f5-5d32-87bc-ca97ebbf8839",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bình thường HEAD trỏ vào một branch; commit mới sẽ kéo branch đi theo."
+      ],
+      "details": [],
+      "points": [
+        "Khi bạn git checkout <commit-hash> (hoặc checkout tag), HEAD trỏ thẳng vào commit — trạng thái \"detached HEAD\".",
+        "Code vẫn xem/build/test được bình thường, nhưng commit mới tạo ở đây không thuộc branch nào — rời đi là chúng trở thành unreachable (chỉ còn tìm lại được qua reflog)."
+      ],
+      "sections": [
+        "Nếu lỡ commit trong detached HEAD và muốn giữ:",
+        "checkout",
+        "git switch <branch>",
+        "git switch --detach <hash>"
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "git checkout abc123      # xem code tại commit cũ — detached HEAD\n# ... inspect, build, test ...\ngit switch -             # quay lại branch trước đó"
+        },
+        {
+          "language": "BASH",
+          "code": "git switch -c fix/from-old-commit  # tạo branch ngay tại đây — commits được giữ lại"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "4052-detached-head-la-gi-checkout-mot-commit-cu-de-xem-code-roi-quay-lai-nhu-the-nao"
+  },
+  {
+    "id": "b4efc5f5-bd79-53a7-b230-4994b65e844a",
+    "question": "File đã lỡ commit (vd node_modules/, file log) — thêm vào .gitignore rồi mà git vẫn track. Xử lý thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/4053-file-da-lo-commit-vd-node-modules-file-log-them-vao-gitignore-roi-ma-git-van-tra",
+    "slug": "file-da-lo-commit-vd-node-modules-file-log-them-vao-gitignore-roi-ma-git-van-track-xu-ly-the-nao-b4efc5f5-bd79-53a7-b230-4994b65e844a",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        ".gitignore chỉ có tác dụng với file chưa được track.",
+        "--cached",
+        "git rm",
+        "git filter-repo"
+      ],
+      "details": [
+        "File đã commit thì git tiếp tục track bất kể .gitignore — phải gỡ khỏi index:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# Gỡ khỏi git nhưng GIỮ file trên disk (--cached):\ngit rm -r --cached node_modules/\ngit rm --cached debug.log\n\n# Đảm bảo pattern đã có trong .gitignore:\necho \"node_modules/\" >> .gitignore\necho \"*.log\" >> .gitignore\n\ngit add .gitignore\ngit commit -m \"chore: stop tracking node_modules and log files\""
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "4053-file-da-lo-commit-vd-node-modules-file-log-them-vao-gitignore-roi-ma-git-van-tra"
+  },
+  {
+    "id": "a46ec61b-b884-5dd3-ab31-1dd8908c9071",
+    "question": "Git rebase vs merge khác nhau? Khi nào dùng gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/877-git-rebase-vs-merge-khac-nhau-khi-nao-dung-gi",
+    "slug": "git-rebase-vs-merge-khac-nhau-khi-nao-dung-gi-a46ec61b-b884-5dd3-ab31-1dd8908c9071",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "Merge: tạo merge commit, giữ history đầy đủ, safe cho shared branches.",
+        "Rebase: rewrite history thành linear, clean hơn, KHÔNG dùng cho shared branches.",
+        "Best practice: rebase feature branch lên develop trước khi merge (hoặc squash merge). git rebase -i để clean commits."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "877-git-rebase-vs-merge-khac-nhau-khi-nao-dung-gi"
+  },
+  {
+    "id": "37504cb3-86b0-5cba-a184-b60804b7c12e",
+    "question": "Git Flow và Trunk-based development khác nhau thế nào? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4000-git-flow-va-trunk-based-development-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "slug": "git-flow-va-trunk-based-development-khac-nhau-the-nao-khi-nao-dung-cai-nao-37504cb3-86b0-5cba-a184-b60804b7c12e",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Git Flow: nhiều nhánh dài hạn — main, develop, feature/*, release/*, hotfix/*. Hợp khi: release theo chu kỳ dài, cần maintain nhiều version song song, team lớn cần tách biệt. Nhược điểm: feature branch sống lâu → merge conflict lớn; hotfix phải merge vào cả main lẫn develop."
+      ],
+      "details": [
+        "Trunk-based development (TBD): mọi người push thẳng vào main hoặc nhánh rất ngắn (<1 ngày), tích hợp liên tục, deploy nhiều lần/ngày. Giảm conflict, hợp với team muốn CI/CD nhanh — nhưng cần commit nhỏ và kỷ luật (mỗi commit vào main phải deploy-ready).",
+        "Chọn cái nào: sản phẩm cần nhiều version / kỳ release dài → Git Flow; web/service deploy liên tục → TBD. Nhiều team VN dùng bản rút gọn GitHub Flow: main + feature branch ngắn + Pull Request review, cân bằng giữa hai thái cực."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "4000-git-flow-va-trunk-based-development-khac-nhau-the-nao-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "ed07b855-694e-5f14-9039-1fc7b54c5c47",
+    "question": "GitHub Flow vs Git Flow: dự án startup 5 người nên chọn cái nào và tại sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4001-github-flow-vs-git-flow-du-an-startup-5-nguoi-nen-chon-cai-nao-va-tai-sao",
+    "slug": "github-flow-vs-git-flow-du-an-startup-5-nguoi-nen-chon-cai-nao-va-tai-sao-ed07b855-694e-5f14-9039-1fc7b54c5c47",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "GitHub Flow (đơn giản): main là production-ready, mọi tính năng làm trên branch từ main, PR → review → merge → deploy ngay. Chỉ có 1 loại branch ngoài main."
+      ],
+      "details": [
+        "Git Flow (phức tạp): main + develop + feature/* + release/* + hotfix/*. Overhead cao nhưng kiểm soát release tốt hơn.",
+        "Startup 5 người → GitHub Flow:",
+        "Khi nào startup cần Git Flow: có enterprise customers yêu cầu quarterly release, app mobile cần app store review cycle, compliance yêu cầu release notes chính thức.",
+        "Branch naming convention cho GitHub Flow: feature/user-auth, fix/login-bug, chore/update-deps, docs/api-readme. Xóa branch ngay sau merge — đừng để branch zombie tích tụ."
+      ],
+      "points": [
+        "ít overhead, không cần ceremony",
+        "deploy liên tục không cần release branch",
+        "hotfix đơn giản — branch từ main, fix, PR, merge, deploy"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "4001-github-flow-vs-git-flow-du-an-startup-5-nguoi-nen-chon-cai-nao-va-tai-sao"
+  },
+  {
+    "id": "be74d766-4956-58bb-a122-f28b20fcb9e0",
+    "question": "Monorepo với nhiều teams: branching strategy nào phù hợp và làm sao tránh teams block lẫn nhau?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4003-monorepo-voi-nhieu-teams-branching-strategy-nao-phu-hop-va-lam-sao-tranh-teams-b",
+    "slug": "monorepo-voi-nhieu-teams-branching-strategy-nao-phu-hop-va-lam-sao-tranh-teams-block-lan-nhau-be74d766-4956-58bb-a122-f28b20fcb9e0",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Monorepo không thay đổi branching strategy cơ bản nhưng tăng complexity của conflict và CI."
+      ],
+      "details": [
+        "CODEOWNERS (/.github/CODEOWNERS): định nghĩa team nào review phần nào:",
+        "Recommended: trunk-based + CODEOWNERS + scoped CI",
+        "Scoped CI: chỉ chạy test của packages bị ảnh hưởng — dùng nx affected, turborepo --filter, hoặc changesets. Đừng chạy full test suite cho mọi PR.",
+        "Branch per team: mỗi team có team/frontend/feature-x namespace riêng, merge vào main thường xuyên.",
+        "Lưu ý: shared packages (/packages/shared) là bottleneck — thay đổi đây require tất cả teams test. Giải pháp: versioned internal packages với changelogs, không mutate shared package mà không notify."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "/apps/frontend/   @frontend-team\n/apps/backend/    @backend-team\n/packages/shared/ @core-team"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "4003-monorepo-voi-nhieu-teams-branching-strategy-nao-phu-hop-va-lam-sao-tranh-teams-b"
+  },
+  {
+    "id": "98ec0a9f-41fa-5fb4-9b90-7fbe2ca5dd31",
+    "question": "Production có bug nghiêm trọng lúc 2 giờ sáng, team đang giữa sprint. Quy trình hotfix đúng chuẩn là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4004-production-co-bug-nghiem-trong-luc-2-gio-sang-team-dang-giua-sprint-quy-trinh-ho",
+    "slug": "production-co-bug-nghiem-trong-luc-2-gio-sang-team-dang-giua-sprint-quy-trinh-hotfix-dung-chuan-la-g-98ec0a9f-41fa-5fb4-9b90-7fbe2ca5dd31",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Quan trọng: luôn merge hotfix vào cả production branch VÀ development branch — đừng để fix bị mất ở lần deploy tới."
+      ],
+      "details": [],
+      "points": [
+        "Tag version sau hotfix để dễ rollback.",
+        "Viết post-mortem sau khi hệ thống ổn định."
+      ],
+      "sections": [
+        "GitHub Flow hotfix (đơn giản hơn):",
+        "Git Flow hotfix:"
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "git checkout main\ngit pull origin main\ngit checkout -b hotfix/critical-payment-bug\n# Fix the bug\ngit commit -m \"fix: resolve payment calculation overflow\"\ngit checkout main && git merge --no-ff hotfix/critical-payment-bug\ngit tag -a v1.2.1 -m \"hotfix: payment bug\"\ngit push origin main --tags\n# Backport to develop\ngit checkout develop && git merge --no-ff hotfix/critical-payment-bug\ngit branch -d hotfix/critical-payment-bug"
+        },
+        {
+          "language": "BASH",
+          "code": "git checkout main && git pull\ngit checkout -b hotfix/payment-bug\n# Fix, test\ngit push origin hotfix/payment-bug\n# Tạo PR vào main, mark emergency, get fast review\n# Merge → deploy ngay"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "4004-production-co-bug-nghiem-trong-luc-2-gio-sang-team-dang-giua-sprint-quy-trinh-ho"
+  },
+  {
+    "id": "da5c14ad-c7a7-5591-b974-49de211ad25f",
+    "question": "Release branch có tác dụng gì? Khi nào cần và khi nào là overhead không cần thiết?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4005-release-branch-co-tac-dung-gi-khi-nao-can-va-khi-nao-la-overhead-khong-can-thiet",
+    "slug": "release-branch-co-tac-dung-gi-khi-nao-can-va-khi-nao-la-overhead-khong-can-thiet-da5c14ad-c7a7-5591-b974-49de211ad25f",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Release branch (release/1.5.0) tách quá trình stabilize một version khỏi ongoing development. Flow: feature freeze → tạo release branch → chỉ bug fixes được merge vào → QA → deploy → merge về main + tag."
+      ],
+      "details": [
+        "Cần release branch khi:\n- QA cycle dài (days/weeks) — cần isolate khỏi new features\n- Multiple release tracks song song (v1.5 và v2.0 cùng development)\n- Regulatory/compliance cần sign-off trước deploy\n- Mobile apps với app store review lag",
+        "Overhead không cần thiết khi:\n- Continuous deployment (deploy mỗi merged PR)\n- Team nhỏ, QA cycle <1 ngày\n- SaaS web app với rollback dễ dàng",
+        "Thực tế: nhiều teams tạo release branch vì \"đó là best practice\" nhưng chưa bao giờ thực sự cần. Nếu bạn deploy 5 lần/ngày, release branch là waste. Nếu deploy 1 lần/tháng với sign-off process, release branch là cần thiết."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "4005-release-branch-co-tac-dung-gi-khi-nao-can-va-khi-nao-la-overhead-khong-can-thiet"
+  },
+  {
+    "id": "c2219ef1-e776-5892-9cce-a99871c3d622",
+    "question": "Branch protection rules trên GitHub: cần cấu hình gì để prevent team push thẳng lên main?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4006-branch-protection-rules-tren-github-can-cau-hinh-gi-de-prevent-team-push-thang-l",
+    "slug": "branch-protection-rules-tren-github-can-cau-hinh-gi-de-prevent-team-push-thang-len-main-c2219ef1-e776-5892-9cce-a99871c3d622",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vào GitHub repo → Settings → Branches → Add branch protection rule cho main:"
+      ],
+      "details": [
+        "Tối thiểu cần bật:\n- Require a pull request before merging — không ai push thẳng\n- Require approvals (1-2 reviewers)\n- Dismiss stale pull request approvals when new commits are pushed — re-review sau mỗi force push\n- Require status checks to pass — CI phải xanh trước khi merge\n- Require branches to be up to date before merging — không merge stale branch\n- Include administrators — áp dụng cả cho repo owner",
+        "Nâng cao:\n- Require signed commits — GPG/SSH signature bắt buộc\n- Require linear history — chỉ cho phép squash/rebase merge (không merge commit)\n- Restrict who can push to matching branches — chỉ CI bot được push sau review",
+        "Lưu ý: Include administrators hay bị bỏ quên — không bật thì owner vẫn có thể bypass. Với GitHub Enterprise: dùng ruleset thay vì branch protection — linh hoạt hơn, có thể apply cho pattern nhiều branches."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "4006-branch-protection-rules-tren-github-can-cau-hinh-gi-de-prevent-team-push-thang-l"
+  },
+  {
+    "id": "0da2268f-a080-5a27-bfb6-b51d04ebf917",
+    "question": "Conventional Commits là gì? Tại sao nên enforce bằng commitlint thay vì chỉ \"agree\" trong team?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4008-conventional-commits-la-gi-tai-sao-nen-enforce-bang-commitlint-thay-vi-chi-agree",
+    "slug": "conventional-commits-la-gi-tai-sao-nen-enforce-bang-commitlint-thay-vi-chi-agree-trong-team-0da2268f-a080-5a27-bfb6-b51d04ebf917",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Conventional Commits là convention format: type(scope): description. Types: feat, fix, docs, style, refactor, test, chore, perf, ci, build, revert.",
+        "Lợi ích thực tế:\n- semantic-release tự động bump version và generate CHANGELOG từ commits\n- git log --oneline readable: thấy ngay đây là feature hay fix\n- PR title auto-generate từ commit message\n- Breaking changes: feat!: hoặc BREAKING CHANGE: footer tự động trigger major version bump"
+      ],
+      "details": [
+        "Tại sao không chỉ \"agree\": agreement không có enforcement = mọi người quên hoặc bỏ qua khi deadline gần. Sau 3 tháng, git log trở thành \"fix stuff\", \"update\", \"wip\", \"asdfgh\".",
+        "Setup commitlint + husky:",
+        "Lưu ý: đừng reject commit của mọi người khi scope sai — chỉ enforce type và description format, để scope optional."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "npm install --save-dev @commitlint/cli @commitlint/config-conventional husky\n# commitlint.config.js:\nmodule.exports = { extends: [\"@commitlint/config-conventional\"] }\n# .husky/commit-msg:\nnpx --no -- commitlint --edit $1"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "4008-conventional-commits-la-gi-tai-sao-nen-enforce-bang-commitlint-thay-vi-chi-agree"
+  },
+  {
+    "id": "4f2f002a-a318-514f-91bb-8baf26f491a4",
+    "question": "Interactive rebase: làm sao dùng squash, fixup, reword, drop để clean up history trước khi merge PR?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4009-interactive-rebase-lam-sao-dung-squash-fixup-reword-drop-de-clean-up-history-tru",
+    "slug": "interactive-rebase-lam-sao-dung-squash-fixup-reword-drop-de-clean-up-history-truoc-khi-merge-pr-4f2f002a-a318-514f-91bb-8baf26f491a4",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Interactive rebase (git rebase -i) cho phép edit lịch sử commit local trước khi share.",
+        "Thay đổi:\n- squash (s): merge commit này vào trước, giữ message\n- fixup (f): merge vào trước, BỎ message (dùng cho \"fix typo\", \"wip\")\n- reword (r): giữ commit, chỉ edit message\n- drop (d): xóa commit hoàn toàn\n- edit (e): dừng lại tại commit để amend"
+      ],
+      "details": [
+        "Ví dụ kết quả tốt: 5 WIP commits → 1 clean commit feat(auth): implement JWT login with refresh tokens",
+        "Workflow chuẩn trước merge PR:",
+        "Lưu ý quan trọng: CHỈ rebase commits chưa push lên remote (hoặc trên branch riêng của bạn). Rebase shared commits sẽ phá history của teammates."
+      ],
+      "points": [],
+      "sections": [
+        "Trong editor hiện ra:"
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "git rebase -i HEAD~5  # edit 5 commits gần nhất\n# hoặc\ngit rebase -i origin/main  # tất cả commits chưa merge"
+        },
+        {
+          "language": "",
+          "code": "pick abc123 feat: add user model\npick def456 fix typo\npick ghi789 wip: half done\npick jkl012 fix tests\npick mno345 final cleanup"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "4009-interactive-rebase-lam-sao-dung-squash-fixup-reword-drop-de-clean-up-history-tru"
+  },
+  {
+    "id": "960587bd-b95b-585b-9cb3-fe8e71e5cf20",
+    "question": "Khi nào nên squash merge PR thay vì merge commit? Trade-offs là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4010-khi-nao-nen-squash-merge-pr-thay-vi-merge-commit-trade-offs-la-gi",
+    "slug": "khi-nao-nen-squash-merge-pr-thay-vi-merge-commit-trade-offs-la-gi-960587bd-b95b-585b-9cb3-fe8e71e5cf20",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "3 merge strategies trên GitHub:"
+      ],
+      "details": [
+        "Merge commit (--no-ff): tạo merge commit, giữ toàn bộ history của branch. git log --graph thấy branch structure. Tốt cho: feature branches quan trọng muốn preserve full context.",
+        "Squash merge: tất cả commits của PR → 1 commit trên main. History linear và clean. Xấu: mất toàn bộ individual commit history của feature.",
+        "Rebase merge: replay từng commit của PR lên main, không có merge commit. Linear history nhưng giữ commit granularity.",
+        "Nên dùng merge commit khi:\n- Branch history có value (nhiều meaningful commits)\n- Muốn git bisect hoạt động trên từng small commit\n- Audit trail quan trọng",
+        "Nên dùng squash khi:\n- PR có nhiều WIP/fixup commits không meaningful\n- Team muốn main branch history = one-line-per-feature\n- Semantic release dựa trên commit messages trên main"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "4010-khi-nao-nen-squash-merge-pr-thay-vi-merge-commit-trade-offs-la-gi"
+  },
+  {
+    "id": "617adbb0-6963-54b6-9d72-41abafd960f5",
+    "question": "Signed commits với GPG/SSH là gì? Khi nào enterprise team cần enforce?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4013-signed-commits-voi-gpg-ssh-la-gi-khi-nao-enterprise-team-can-enforce",
+    "slug": "signed-commits-voi-gpg-ssh-la-gi-khi-nao-enterprise-team-can-enforce-617adbb0-6963-54b6-9d72-41abafd960f5",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Signed commits đảm bảo commit thực sự từ người có private key tương ứng — chống giả mạo identity (bất kỳ ai cũng có thể set git config user.email thành email của bạn).",
+        "GitHub hiển thị badge Verified trên commit khi signature hợp lệ."
+      ],
+      "details": [
+        "Khi nào enforce:\n- Regulated industries (fintech, healthcare) — audit trail\n- Open source projects — chống supply chain attack (ai đó push code giả tên maintainer)\n- Khi GitHub Actions deploy từ commits — đảm bảo chỉ deploy signed commits",
+        "Setup GPG signing:",
+        "Lưu ý: GPG key rotation phức tạp — SSH signing dễ manage hơn cho enterprise."
+      ],
+      "points": [],
+      "sections": [
+        "SSH signing (mới hơn, dễ hơn GPG):"
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "gpg --gen-key\ngpg --list-secret-keys --keyid-format=long\n# Lấy key ID, ví dụ: 3AA5C34371567BD2\ngit config --global user.signingkey 3AA5C34371567BD2\ngit config --global commit.gpgsign true\n# Upload public key lên GitHub Settings → SSH and GPG keys"
+        },
+        {
+          "language": "BASH",
+          "code": "git config --global gpg.format ssh\ngit config --global user.signingkey ~/.ssh/id_ed25519.pub\ngit config --global commit.gpgsign true"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "4013-signed-commits-voi-gpg-ssh-la-gi-khi-nao-enterprise-team-can-enforce"
+  },
+  {
+    "id": "d57a637b-517d-54e7-9607-42064f92604d",
+    "question": "Atomic commits là gì? Tại sao 1 commit \"feat: add user auth + fix navbar + update deps\" lại là anti-pattern?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4014-atomic-commits-la-gi-tai-sao-1-commit-feat-add-user-auth-fix-navbar-update-deps",
+    "slug": "atomic-commits-la-gi-tai-sao-1-commit-feat-add-user-auth-fix-navbar-update-deps-lai-la-anti-pattern-d57a637b-517d-54e7-9607-42064f92604d",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Atomic commit: mỗi commit chứa MỘT logical change hoàn chỉnh — pass tests độc lập, có thể revert độc lập, message mô tả đủ ý.",
+        "Trick: git add -p (patch mode) — interactive staging theo từng hunk, không phải toàn bộ file."
+      ],
+      "details": [
+        "1. Revert bị ràng buộc: cần revert chỉ navbar fix nhưng buộc phải revert cả auth + deps update\n2. git bisect bị nhiễu: khi tìm regression, mỗi commit nên là one thing — commit fat khó xác định cái gì gây bug\n3. Code review khó: reviewer phải context-switch giữa auth logic, CSS, và package.json\n4. git blame vô nghĩa: blame trên navbar file thấy commit \"add user auth\" → confusing",
+        "Tại sao commit \"fat\" là anti-pattern:",
+        "Cho phép tách 1 file có nhiều thay đổi thành nhiều commits."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "git add src/auth/     && git commit -m \"feat(auth): implement JWT authentication\"\ngit add src/navbar/   && git commit -m \"fix(navbar): correct mobile menu z-index\"\ngit add package.json  && git commit -m \"chore(deps): upgrade react to 18.3.1\""
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "4014-atomic-commits-la-gi-tai-sao-1-commit-feat-add-user-auth-fix-navbar-update-deps"
+  },
+  {
+    "id": "812a64ec-201e-5d3d-9177-93ba2f26dffc",
+    "question": "Merge vs Rebase: khi nào dùng cái nào? Giải thích golden rule of rebasing.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4016-merge-vs-rebase-khi-nao-dung-cai-nao-giai-thich-golden-rule-of-rebasing",
+    "slug": "merge-vs-rebase-khi-nao-dung-cai-nao-giai-thich-golden-rule-of-rebasing-812a64ec-201e-5d3d-9177-93ba2f26dffc",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Merge: tạo merge commit, preserve history đầy đủ. git log --graph thấy nhánh. Non-destructive — không thay đổi existing commits."
+      ],
+      "details": [
+        "Rebase: replay commits lên đỉnh của branch khác, tạo linear history. Rewrite commit hashes.",
+        "Golden Rule of Rebasing: KHÔNG BAO GIỜ rebase branch đã được share/push lên remote mà người khác đang dùng.",
+        "KHÔNG BAO GIỜ rebase branch đã được share/push lên remote mà người khác đang dùng.",
+        "Vì sao: rebase tạo commits MỚI với hash khác. Nếu teammate đã pull branch của bạn, họ có commits với hash cũ. Khi bạn force push sau rebase, history của họ và remote diverge → họ phải resolve \"fake conflicts\" khi pull.",
+        "Khi dùng merge:\n- Merge feature branch vào main (qua PR)\n- Tích hợp upstream changes vào long-lived branch của team\n- Khi branch đã được share",
+        "Khi dùng rebase (an toàn):\n- Trên local feature branch chưa push\n- git pull --rebase để sync với remote (thay vì tạo merge commit)\n- Clean up commits trước khi tạo PR: git rebase -i origin/main"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "4016-merge-vs-rebase-khi-nao-dung-cai-nao-giai-thich-golden-rule-of-rebasing"
+  },
+  {
+    "id": "1a63396f-446f-545b-abf6-77b3966bb554",
+    "question": "Fast-forward merge vs no-ff merge: khác nhau gì? GitHub mặc định dùng cái nào và tại sao team nên chủ động chọn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4018-fast-forward-merge-vs-no-ff-merge-khac-nhau-gi-github-mac-dinh-dung-cai-nao-va-t",
+    "slug": "fast-forward-merge-vs-no-ff-merge-khac-nhau-gi-github-mac-dinh-dung-cai-nao-va-tai-sao-team-nen-chu-1a63396f-446f-545b-abf6-77b3966bb554",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Fast-forward merge (mặc định khi có thể): nếu branch hiện tại là ancestor trực tiếp của branch cần merge, git chỉ di chuyển HEAD pointer lên — không tạo merge commit.",
+        "Trade-offs:\n- Fast-forward: history clean, dễ git log --oneline, nhưng mất context \"đây là feature branch\"\n- No-ff: thấy rõ feature grouping, dễ revert cả feature (git revert -m 1 <merge-commit>), nhưng log lộn xộn"
+      ],
+      "details": [
+        "History linear.",
+        "GitHub: repo mới bật sẵn cả 3 merge method (merge commit / squash / rebase) — vào Settings tắt bớt để ép team dùng 1 strategy thống nhất. Nút merge của PR không bao giờ fast-forward — luôn tạo commit mới (merge commit, hoặc commit squash/rebase).",
+        "Recommendation: enforce squash merge (1 commit/PR) để main history clean, hoặc no-ff nếu cần preserve feature grouping. Đừng mix strategies trong 1 repo."
+      ],
+      "points": [],
+      "sections": [
+        "No-ff merge (--no-ff): luôn tạo merge commit dù có thể fast-forward."
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "git checkout main\ngit merge feature/login  # nếu main chưa có commit mới → fast-forward\n# History: A - B - C(feature) ← HEAD/main"
+        },
+        {
+          "language": "BASH",
+          "code": "git merge --no-ff feature/login\n# History: A - B - M ← merge commit\n#               \\\n#                C(feature)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "4018-fast-forward-merge-vs-no-ff-merge-khac-nhau-gi-github-mac-dinh-dung-cai-nao-va-t"
+  },
+  {
+    "id": "4d3c7da1-22e4-5866-b517-dad350ceb3b7",
+    "question": "Đang merge feature branch vào main, gặp conflict trong file do cả 2 sides đều refactor. Quy trình resolve an toàn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4021-dang-merge-feature-branch-vao-main-gap-conflict-trong-file-do-ca-2-sides-deu-ref",
+    "slug": "dang-merge-feature-branch-vao-main-gap-conflict-trong-file-do-ca-2-sides-deu-refactor-quy-trinh-reso-4d3c7da1-22e4-5866-b517-dad350ceb3b7",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Worst case conflict: không phải thêm/xóa dòng đơn giản mà là structural refactor — function bị rename, logic được reorganize.",
+        "2. Dùng 3-panel merge tool — git mergetool (trái: ours, phải: theirs, giữa: base — common ancestor, dưới: result). Không resolve bằng tay trong terminal với structural conflict."
+      ],
+      "details": [
+        "3. Resolve và verify: git add src/file.ts, chạy test cho phần code đó TRƯỚC khi git merge --continue.",
+        "Quy trình an toàn:",
+        "4. Sau merge: review lại diff của merge commit — git diff main~1..main -- src/file.ts.",
+        "1. Hiểu context trước khi resolve:",
+        "Nguyên tắc: khi không chắc, chọn solution bảo toàn logic của cả 2 sides thay vì chọn 1 side. Đừng dùng -X ours hay -X theirs với structural conflicts."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "git log --oneline main..feature/my-branch   # commits của feature\ngit log --oneline feature/my-branch..main   # commits của main\ngit diff $(git merge-base HEAD feature/my-branch) feature/my-branch -- src/file.ts"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "4021-dang-merge-feature-branch-vao-main-gap-conflict-trong-file-do-ca-2-sides-deu-ref"
+  },
+  {
+    "id": "3f4ebe39-28a3-5a38-95bf-2cc6bb80fa0f",
+    "question": "Undo một public commit đã merge vào main: revert vs reset — khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4022-undo-mot-public-commit-da-merge-vao-main-revert-vs-reset-khi-nao-dung-cai-nao",
+    "slug": "undo-mot-public-commit-da-merge-vao-main-revert-vs-reset-khi-nao-dung-cai-nao-3f4ebe39-28a3-5a38-95bf-2cc6bb80fa0f",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Reset (git reset --hard HEAD~1): di chuyển HEAD pointer về commit cũ, xóa commits khỏi history. KHÔNG dùng trên main/shared branch — sẽ cần force push, làm hỏng history của mọi người đã pull.",
+        "Ví dụ thực tế: deploy feature lên production, users báo lỗi nghiêm trọng → git revert -m 1 <merge-commit> → push → deploy → feature bị undo ngay mà không ảnh hưởng history."
+      ],
+      "details": [
+        "Revert (git revert <commit>): tạo commit MỚI undo changes của commit cũ. An toàn cho shared branches vì không rewrite history.",
+        "Khi nào dùng reset: trên local branch chưa share, hoặc clean up local staging area.",
+        "Lưu ý revert merge commit: nếu sau đó muốn re-merge feature đó, phải revert lại revert commit trước — không thể merge thẳng vì git sẽ \"thấy\" commits đã được merge rồi."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# Revert 1 commit:\ngit revert abc123\n# Revert merge commit (phải chỉ định mainline parent):\ngit revert -m 1 abc123  # -m 1 = giữ lại parent thứ 1 (main branch)\n\n# Revert range commits:\ngit revert abc123..def456\n# Revert nhiều commits nhưng chỉ 1 commit revert:\ngit revert --no-commit abc123 def456\ngit commit -m \"revert: remove broken payment feature\""
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "4022-undo-mot-public-commit-da-merge-vao-main-revert-vs-reset-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "6f7e6ba6-220e-5c67-91e4-f852b904b699",
+    "question": "git log -S và git log -G dùng để làm gì? Khi nào chúng cứu bạn trong debug?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4026-git-log-s-va-git-log-g-dung-de-lam-gi-khi-nao-chung-cuu-ban-trong-debug",
+    "slug": "git-log-s-va-git-log-g-dung-de-lam-gi-khi-nao-chung-cuu-ban-trong-debug-6f7e6ba6-220e-5c67-91e4-f852b904b699",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Pickaxe search — tìm commits đã thêm/xóa một chuỗi cụ thể trong code.",
+        "Ví dụ thực tế: bug production — giá tính sai, không biết ai sửa khi nào. Pickaxe theo tên hàm thuế → thấy ngay commit, tác giả và diff."
+      ],
+      "details": [
+        "Kết hợp blame: git blame src/pricing.ts -L 45,60 xem ai viết dòng 45-60, rồi git show <commit> đọc full context."
+      ],
+      "points": [
+        "git log -S \"string\" (pickaxe): tìm commits mà số lần xuất hiện của string thay đổi (thêm hoặc xóa) — chính xác hơn khi code bị rename/move.",
+        "git log -G \"regex\": tìm commits mà diff có dòng match regex pattern."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "git log -S \"calculateDiscount\" --oneline       # commit nào thêm/xóa function này\ngit log -S \"SECRET_KEY\" --all                  # mọi branches — security audit\ngit log -G \"discountRate\\s*=\\s*[0-9]+\"         # mọi lần giá trị discountRate bị đổi\ngit log -S \"applyTax\" --since=\"2024-01-01\" -p  # -p kèm diff — ai đổi logic thuế lần cuối"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "4026-git-log-s-va-git-log-g-dung-de-lam-gi-khi-nao-chung-cuu-ban-trong-debug"
+  },
+  {
+    "id": "a54740df-7d3a-5bec-a84e-bed30ad99c16",
+    "question": "Branch bị xóa nhầm, chưa merge vào đâu cả. Recover như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4027-branch-bi-xoa-nham-chua-merge-vao-dau-ca-recover-nhu-the-nao",
+    "slug": "branch-bi-xoa-nham-chua-merge-vao-dau-ca-recover-nhu-the-nao-a54740df-7d3a-5bec-a84e-bed30ad99c16",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Branch chỉ là pointer đến commit. Xóa branch không xóa commits — chỉ xóa pointer. Commits vẫn tồn tại trong git object store cho đến khi git gc chạy.",
+        "Phòng tránh: trước khi xóa branch, push lên remote hoặc tag commit cuối: git tag backup/feature-before-delete <branch>."
+      ],
+      "details": [
+        "Recovery qua reflog:"
+      ],
+      "points": [
+        "Không nhớ tên branch: git reflog | grep \"checkout: moving from\" — tìm lần cuối bạn checkout khỏi branch đó.",
+        "Branch trên remote bị xóa: git fetch origin nếu remote còn lưu, hoặc hỏi teammate — họ có thể còn local copy.",
+        "Đã git gc chạy: git fsck --lost-found liệt kê dangling commits (không còn ref nào trỏ đến) vào .git/lost-found/commit/ — duyệt từng sha bằng git log --oneline -1 <sha>."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "git reflog --all | grep \"feature/deleted-branch\"\n# abc123 refs/heads/feature/deleted-branch@{0}: commit: feat: last work\ngit branch feature/deleted-branch abc123   # recreate branch tại commit đó"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "4027-branch-bi-xoa-nham-chua-merge-vao-dau-ca-recover-nhu-the-nao"
+  },
+  {
+    "id": "5cc595b6-bef0-5a6e-b477-8b74a384ca36",
+    "question": "git blame trong thực tế: nó không chỉ để \"đổ lỗi\" — những use case thực sự hữu ích là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4028-git-blame-trong-thuc-te-no-khong-chi-de-do-loi-nhung-use-case-thuc-su-huu-ich-la",
+    "slug": "git-blame-trong-thuc-te-no-khong-chi-de-do-loi-nhung-use-case-thuc-su-huu-ich-la-gi-5cc595b6-bef0-5a6e-b477-8b74a384ca36",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "git blame <file> hiển thị mỗi dòng: commit hash, author, date, line content — ai viết dòng đó khi nào.",
+        "3. Trong VSCode/IDE: GitLens extension hiển thị blame inline → hover để xem commit, click để open PR → truy ngược decision history."
+      ],
+      "details": [
+        "1. Hiểu context của code lạ: git blame src/utils/pricing.ts -L 23,35 → thấy dòng 28 do ai viết 6 tháng trước → git show <hash> đọc full commit message, hiểu lý do.",
+        "Use cases thực sự hữu ích:",
+        "4. File bị rename: git log --follow -p src/payments/stripe.ts — xem full history kể cả khi file đã đổi tên.",
+        "2. Truy vết chính xác hơn với flags:",
+        "5. Security audit: git log -S \"password=\" --all -p — tìm khi nào secret/credentials bị commit vào.",
+        "Lưu ý: blame thường trỏ về commit \"refactor\" hay \"format code\" — dùng git log --follow và -w để skip qua những thay đổi không có ý nghĩa, tìm commit thực sự thay đổi logic."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "git blame -w src/auth.ts  # -w: bỏ qua whitespace changes\ngit blame -M src/auth.ts  # -M: detect dòng bị move trong file\ngit blame -C src/auth.ts  # -C: detect dòng copy từ file khác"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "4028-git-blame-trong-thuc-te-no-khong-chi-de-do-loi-nhung-use-case-thuc-su-huu-ich-la"
+  },
+  {
+    "id": "8a3a4eb1-09fc-54e6-aac6-473295682b50",
+    "question": "--force vs --force-with-lease: tại sao force-with-lease an toàn hơn và team nên enforce như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4032-force-vs-force-with-lease-tai-sao-force-with-lease-an-toan-hon-va-team-nen-enfor",
+    "slug": "force-vs-force-with-lease-tai-sao-force-with-lease-an-toan-hon-va-team-nen-enforce-nhu-the-nao-8a3a4eb1-09fc-54e6-aac6-473295682b50",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "git push --force: overwrite remote không kiểm tra gì — nếu teammate đã push commits mới lên remote mà bạn chưa fetch, bạn sẽ overwrite và mất work của họ.",
+        "Kết hợp branch protection trên shared branches để chặn force push hoàn toàn ở phía server."
+      ],
+      "details": [
+        "git push --force-with-lease: kiểm tra remote ref trước khi overwrite — chỉ force push nếu remote ref khớp với lần fetch cuối của bạn. Nếu ai đó đã push thêm → lệnh fail, bạn được nhắc fetch trước.",
+        "Cẩn thận: --force-with-lease vẫn không an toàn nếu bạn vừa git fetch (remote ref match nhưng có thể còn work của người khác chưa pushed)."
+      ],
+      "points": [],
+      "sections": [
+        "Enforce trong team — dùng git alias để thành thói quen:"
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# An toàn:\ngit push --force-with-lease origin feature/my-branch\n# Error nếu remote đã thay đổi:\n# ! [rejected] feature/my-branch -> feature/my-branch (stale info)\n\n# Sau đó:\ngit fetch origin\ngit rebase origin/feature/my-branch\ngit push --force-with-lease origin feature/my-branch"
+        },
+        {
+          "language": "BASH",
+          "code": "git config --global alias.pushf \"push --force-with-lease\"\n# Dùng: git pushf origin feature/branch"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "4032-force-vs-force-with-lease-tai-sao-force-with-lease-an-toan-hon-va-team-nen-enfor"
+  },
+  {
+    "id": "9f426747-8f26-5eec-b9b5-b8022884b9bf",
+    "question": "Khi nào force push là acceptable và khi nào tuyệt đối không được phép?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4033-khi-nao-force-push-la-acceptable-va-khi-nao-tuyet-doi-khong-duoc-phep",
+    "slug": "khi-nao-force-push-la-acceptable-va-khi-nao-tuyet-doi-khong-duoc-phep-9f426747-8f26-5eec-b9b5-b8022884b9bf",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Rule đơn giản: nếu phải hỏi \"force push được không?\" → không.",
+        "Force push ACCEPTABLE:"
+      ],
+      "details": [
+        "1. Feature branch của riêng bạn, chưa ai review/pull: sau git rebase -i để clean up commits trước PR\n2. Personal fork: không ảnh hưởng ai\n3. Sau git commit --amend trên branch riêng: cần update remote\n4. Reset --hard và force push trên branch riêng nếu bạn vô tình push nhầm (credentials, large file)",
+        "1. main / master / develop — bất kỳ shared long-lived branch\n2. Branch đang có open PR mà người khác đang review\n3. Branch mà CI/CD đang build/deploy từ đó\n4. Tag đã được release — git tags không nên bị move",
+        "Force push KHÔNG BAO GIỜ:",
+        "Chỉ force push khi chắc 100% bạn là người duy nhất dùng branch đó."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# Ai đã pull branch này?\ngit log origin/feature/my-branch..feature/my-branch  # commits chỉ có local\ngit log feature/my-branch..origin/feature/my-branch  # commits chỉ có remote\n# Nếu remote có commits bạn không có → người khác đã push → KHÔNG force push"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "4033-khi-nao-force-push-la-acceptable-va-khi-nao-tuyet-doi-khong-duoc-phep"
+  },
+  {
+    "id": "c3eb0bb6-8a1c-5fd1-b121-4ec01145756e",
+    "question": "Vô tình commit file .env chứa credentials lên remote. Xử lý như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4035-vo-tinh-commit-file-env-chua-credentials-len-remote-xu-ly-nhu-the-nao",
+    "slug": "vo-tinh-commit-file-env-chua-credentials-len-remote-xu-ly-nhu-the-nao-c3eb0bb6-8a1c-5fd1-b121-4ec01145756e",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bước 3: Thông báo team re-clone (sau force push, local repos của mọi người bị stale).",
+        "Phòng tránh: pre-commit hook detect secrets (git-secrets, detect-secrets, Gitleaks).",
+        "Credentials đã push = credentials bị compromise. Rotate ngay lập tức — đây là ưu tiên số 1."
+      ],
+      "details": [
+        "Bước 1: Rotate credentials (NGAY LẬP TỨC):\n- API keys, DB passwords, JWT secrets → revoke và generate mới\n- Không chờ xóa khỏi git — ai đó có thể đã crawl rồi",
+        "GitHub secret scanning tự động notify nếu detect credentials trong push.",
+        "Bước 2: Xóa khỏi git history:",
+        "Bước 4: Thêm .env vào .gitignore:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# Dùng git filter-repo (khuyến nghị, thay thế filter-branch):\npip install git-filter-repo\ngit filter-repo --path .env --invert-paths\n\n# Hoặc BFG Repo Cleaner (nhanh hơn cho large repos):\njava -jar bfg.jar --delete-files .env\ngit reflog expire --expire=now --all\ngit gc --prune=now --aggressive\ngit push --force --all"
+        },
+        {
+          "language": "BASH",
+          "code": "echo \".env\" >> .gitignore\necho \".env.local\" >> .gitignore\ngit add .gitignore && git commit -m \"chore: add .env to gitignore\""
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "4035-vo-tinh-commit-file-env-chua-credentials-len-remote-xu-ly-nhu-the-nao"
+  },
+  {
+    "id": "f65875be-c846-5764-bd5f-f7c22b01ddfa",
+    "question": "git stash nâng cao: push, pop, apply, list, show, drop — những pattern thực tế cần biết?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4038-git-stash-nang-cao-push-pop-apply-list-show-drop-nhung-pattern-thuc-te-can-biet",
+    "slug": "git-stash-nang-cao-push-pop-apply-list-show-drop-nhung-pattern-thuc-te-can-biet-f65875be-c846-5764-bd5f-f7c22b01ddfa",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cơ bản hay bị hiểu nhầm:\n- git stash = git stash push — stash working dir + index\n- pop = apply + drop (xóa stash sau khi apply)\n- apply = apply nhưng GIỮ stash (dùng khi muốn apply vào nhiều branches)",
+        "Lưu ý:\n- Stash không track untracked files mặc định → dùng -u\n- Stash conflict khi apply: resolve như merge conflict, sau đó git stash drop thủ công\n- Stash list không hiển thị branch name mặc định → luôn đặt tên với -m"
+      ],
+      "details": [
+        "Thực tế: nhiều devs lạm dụng stash thay vì commit WIP. Commit WIP với feat(wip): prefix tốt hơn — có history, không bị mất.",
+        "Patterns thực tế:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# Stash có tên (dễ nhận dạng):\ngit stash push -m \"WIP: cart refactor — half done\"\n\n# Stash kể cả untracked files:\ngit stash push -u  # --include-untracked\n\n# Stash chỉ 1 file (non-interactive):\ngit stash push -- src/cart.ts  # pathspec — stash chính xác 1 file\n# Hoặc interactive patch (chọn từng hunk):\ngit stash push -p  # -p mở interactive hunk selection, không phải file filter đơn thuần\n\n# Xem nội dung stash trước khi apply:\ngit stash show -p stash@{2}  # show diff\n\n# Apply stash cụ thể (không nhất thiết top):\ngit stash apply stash@{2}\n\n# Xóa stash cụ thể:\ngit stash drop stash@{2}\n\n# Apply vào branch mới (tạo branch từ stash):\ngit stash branch feature/new-branch stash@{0}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "4038-git-stash-nang-cao-push-pop-apply-list-show-drop-nhung-pattern-thuc-te-can-biet"
+  },
+  {
+    "id": "9ad41359-44a1-56c4-8032-fc9715e77d2e",
+    "question": "git cherry-pick trong thực tế: khi nào là công cụ đúng và khi nào là dấu hiệu branching strategy có vấn đề?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4039-git-cherry-pick-trong-thuc-te-khi-nao-la-cong-cu-dung-va-khi-nao-la-dau-hieu-bra",
+    "slug": "git-cherry-pick-trong-thuc-te-khi-nao-la-cong-cu-dung-va-khi-nao-la-dau-hieu-branching-strategy-co-v-9ad41359-44a1-56c4-8032-fc9715e77d2e",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "git cherry-pick <commit> copy 1 commit từ branch khác vào branch hiện tại — tạo commit mới với cùng changes nhưng hash khác.",
+        "2. Lấy 1 commit cụ thể từ branch của đồng nghiệp mà bạn cần ngay — không cần merge cả branch.\n3. Recover commit từ deleted branch — commit vẫn tồn tại trong object store dù branch bị xóa."
+      ],
+      "details": [
+        "1. Hotfix cần apply vào nhiều release branches:",
+        "Khi cherry-pick là đúng:",
+        "Khi cherry-pick là dấu hiệu vấn đề:\n- Cherry-pick từ develop vào feature hàng ngày → nên rebase thay thế\n- \"Chúng ta cherry-pick hotfix vào 5 branches\" → cần reconsider branching strategy, quá nhiều long-lived branches\n- Cherry-pick để share code giữa features → nên extract thành shared module",
+        "Flags hữu ích: git cherry-pick abc123..def456 (range — KHÔNG gồm abc123, dùng abc123^..def456 nếu muốn gồm), -n apply changes nhưng không commit. Conflict: resolve → git add → git cherry-pick --continue."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "git checkout release/2.1 && git cherry-pick abc123  # hotfix commit từ main\ngit checkout release/2.0 && git cherry-pick abc123"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "4039-git-cherry-pick-trong-thuc-te-khi-nao-la-cong-cu-dung-va-khi-nao-la-dau-hieu-bra"
+  },
+  {
+    "id": "acf6e043-dfd0-5986-9ebd-d59a89521ff6",
+    "question": "Tại sao git pull thường tạo merge commit không cần thiết và cách fix với --rebase?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4044-tai-sao-git-pull-thuong-tao-merge-commit-khong-can-thiet-va-cach-fix-voi-rebase",
+    "slug": "tai-sao-git-pull-thuong-tao-merge-commit-khong-can-thiet-va-cach-fix-voi-rebase-acf6e043-dfd0-5986-9ebd-d59a89521ff6",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vấn đề: bạn có local commits chưa push. Teammate đã push lên remote. git pull = git fetch + git merge → tạo merge commit \"Merge branch 'main' of github.com/...\" không mang thông tin gì, git log --graph đầy những vòng merge vô nghĩa.",
+        "Nếu gặp conflict giữa chừng: resolve file → git add → git rebase --continue; hoặc git rebase --abort để về trạng thái trước pull."
+      ],
+      "details": [
+        "Khi nào dùng git pull (merge) thay vì rebase:\n- Branch đã có merge commits quan trọng (merge commit là intentional)\n- Long-lived feature branch muốn preserve merge history",
+        "Fix: dùng rebase khi pull:",
+        "Tip: git pull --rebase --autostash tự động stash local changes trước khi rebase, unstash sau."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "git pull --rebase origin main         # = fetch + rebase → history linear\ngit config --global pull.rebase true  # set làm default"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "4044-tai-sao-git-pull-thuong-tao-merge-commit-khong-can-thiet-va-cach-fix-voi-rebase"
+  },
+  {
+    "id": "eadce2c6-48e8-5ac2-af2a-66d4ea59d18f",
+    "question": "Setup pre-commit hook với Husky + lint-staged: tại sao chỉ lint files đang staged thay vì cả project?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4045-setup-pre-commit-hook-voi-husky-lint-staged-tai-sao-chi-lint-files-dang-staged-t",
+    "slug": "setup-pre-commit-hook-voi-husky-lint-staged-tai-sao-chi-lint-files-dang-staged-thay-vi-ca-project-eadce2c6-48e8-5ac2-af2a-66d4ea59d18f",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vấn đề nếu lint cả project trên mỗi commit:\n- Project lớn → eslint . mất 30-60 giây → developers tắt hooks\n- Không liên quan: bạn sửa 1 file nhưng phải đợi 500 files khác lint",
+        "Kết quả: chỉ 2-3 files được lint → hook chạy trong <3 giây → developers không bỏ hook."
+      ],
+      "details": [
+        "lint-staged giải pháp: chỉ chạy linter trên files đang trong git staging area.",
+        "Setup: npm i -D husky lint-staged && npx husky init, rồi file .husky/pre-commit chỉ cần 1 dòng npx lint-staged (Husky v9 — không cần header shell).",
+        "package.json:",
+        "Lưu ý quan trọng về type check trong lint-staged:\ntsc --noEmit luôn chạy TOÀN BỘ project typecheck — TypeScript cần full project graph để type-check chính xác, không thể chạy per-file. Nên đặt tsc trong CI thay vì lint-staged, hoặc chấp nhận chi phí full-project check mỗi commit.",
+        "Lưu ý: --fix auto-fix và re-stage files đã fix — không cần commit lại. Nhưng nếu auto-fix thay đổi logic → developer phải review."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "4045-setup-pre-commit-hook-voi-husky-lint-staged-tai-sao-chi-lint-files-dang-staged-t"
+  },
+  {
+    "id": "d802d103-2bab-51be-953a-507e056f520e",
+    "question": "commit-msg hook với commitlint: cách setup và làm thế nào để không block developer khi làm WIP commits?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4046-commit-msg-hook-voi-commitlint-cach-setup-va-lam-the-nao-de-khong-block-develope",
+    "slug": "commit-msg-hook-voi-commitlint-cach-setup-va-lam-the-nao-de-khong-block-developer-khi-lam-wip-commit-d802d103-2bab-51be-953a-507e056f520e",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "commit-msg hook chạy sau khi developer viết commit message — có thể reject nếu message không hợp lệ.",
+        "Cho phép WIP commits (không block nhưng vẫn có format): thêm \"wip\" vào type-enum → wip: payment refactor halfway pass."
+      ],
+      "details": [
+        "Setup: npm i -D @commitlint/cli @commitlint/config-conventional, file .husky/commit-msg (Husky v9) chỉ chứa 1 dòng npx --no -- commitlint --edit $1.",
+        "commitlint.config.js:",
+        "Bypass khi thực sự cần (emergency): git commit --no-verify — bỏ qua TẤT CẢ client-side hooks.",
+        "Lưu ý: commitlint enforce trên client — developer vẫn có thể bypass bằng --no-verify. Server-side enforcement cần CI check (dùng commitlint trong GitHub Actions trên PR title)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "module.exports = {\n  extends: [\"@commitlint/config-conventional\"],\n  rules: {\n    \"type-enum\": [2, \"always\", [\n      \"feat\", \"fix\", \"docs\", \"style\", \"refactor\",\n      \"test\", \"chore\", \"perf\", \"ci\", \"build\", \"revert\", \"wip\"\n    ]],\n    \"subject-max-length\": [1, \"always\", 100],  // warn, not error\n    \"body-max-line-length\": [0],  // disable\n  }\n};"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "4046-commit-msg-hook-voi-commitlint-cach-setup-va-lam-the-nao-de-khong-block-develope"
+  },
+  {
+    "id": "e64c0c70-5b84-553c-a2bb-b3f5dcda70b6",
+    "question": "pre-push hook chạy tests: trade-offs và cách configure để không làm chậm developer workflow?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/4047-pre-push-hook-chay-tests-trade-offs-va-cach-configure-de-khong-lam-cham-develope",
+    "slug": "pre-push-hook-chay-tests-trade-offs-va-cach-configure-de-khong-lam-cham-developer-workflow-e64c0c70-5b84-553c-a2bb-b3f5dcda70b6",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "pre-push hook chạy trước khi git push — có thể block push nếu tests fail.",
+        "Hoặc chạy fast subset: npm run test:unit — unit tests only (~30s), bỏ integration tests."
+      ],
+      "details": [
+        "Trade-off chính:\n- Bảo vệ remote branch khỏi broken code\n- Nhưng full test suite có thể mất 5-10 phút → developers làm theo cách khác (push thẳng không qua hook)",
+        "Pattern phổ biến: pre-commit → lint/format (fast), pre-push → unit tests (medium), CI → full test suite (slow).",
+        "Setup thực tế — chỉ chạy tests liên quan:",
+        "Client hooks vs Server hooks:\n- Client hooks: developer có thể bypass (--no-verify)\n- Server hooks (GitHub Actions): không thể bypass, bắt buộc\n- Recommendation: pre-push là safety net cho developer bản thân, CI là enforcement thực sự",
+        "Bypass khi cần: git push --no-verify — skip pre-push hook."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "# .husky/pre-push (Husky v9 — không cần header shell):\n# Lấy danh sách files đang thay đổi so với main:\nCHANGED=$(git diff --name-only origin/main HEAD | grep -E \"\\.(ts|tsx)$\")\n\nif [ -n \"$CHANGED\" ]; then\n  # Chỉ chạy tests của files bị thay đổi:\n  npx jest --findRelatedTests $CHANGED --passWithNoTests\nfi"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "4047-pre-push-hook-chay-tests-trade-offs-va-cach-configure-de-khong-lam-cham-develope"
+  },
+  {
+    "id": "533032d5-db95-5726-89d5-c4fbf921394b",
+    "question": "Feature branch của bạn đã sống được 2 tuần và bây giờ cách main 50 commits. Chiến lược nào để merge mà không gây sự cố nghiêm trọng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "feature-branch-cua-ban-da-song-duoc-2-tuan-va-bay-gio-cach-main-50-commits-chien-luoc-nao-de-merge-m-533032d5-db95-5726-89d5-c4fbf921394b",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": null
+  },
+  {
+    "id": "f9243509-809a-5d43-ab2d-389b06e80ce4",
+    "question": "Polyrepo vs Monorepo: git workflow khác nhau như thế nào và khi nào nên migrate?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "polyrepo-vs-monorepo-git-workflow-khac-nhau-nhu-the-nao-va-khi-nao-nen-migrate-f9243509-809a-5d43-ab2d-389b06e80ce4",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": null
+  },
+  {
+    "id": "92184955-aa9f-5bee-9840-1ef10d7b2107",
+    "question": "Vô tình git reset --hard xóa mất 3 commit chưa push, làm sao recover?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vo-tinh-git-reset-hard-xoa-mat-3-commit-chua-push-lam-sao-recover-92184955-aa9f-5bee-9840-1ef10d7b2107",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": null
+  },
+  {
+    "id": "a90f2278-8328-5014-8bc7-f118af412291",
+    "question": "CODEOWNERS file hoạt động như thế nào? Cách dùng để enforce review chính xác trong team lớn?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "codeowners-file-hoat-dong-nhu-the-nao-cach-dung-de-enforce-review-chinh-xac-trong-team-lon-a90f2278-8328-5014-8bc7-f118af412291",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": null
+  },
+  {
+    "id": "cdcb3c40-3070-51db-a1d9-80174feb5445",
+    "question": "Đang rebase gặp conflict phức tạp ở nhiều commits. Chiến lược xử lý mà không bị \"rebase hell\"?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "dang-rebase-gap-conflict-phuc-tap-o-nhieu-commits-chien-luoc-xu-ly-ma-khong-bi-rebase-hell-cdcb3c40-3070-51db-a1d9-80174feb5445",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": null
+  },
+  {
+    "id": "dd70f494-7dcc-507c-adba-aff0abe5fc35",
+    "question": "3-way merge là gì? Git tự động resolve như thế nào và khi nào phải manual resolve?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "3-way-merge-la-gi-git-tu-dong-resolve-nhu-the-nao-va-khi-nao-phai-manual-resolve-dd70f494-7dcc-507c-adba-aff0abe5fc35",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": null
+  },
+  {
+    "id": "5cc9aa60-5ad3-5774-a3ff-b5377a5785ea",
+    "question": "git rerere là gì? Khi nào nó cứu bạn khỏi resolve cùng conflict nhiều lần?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "git-rerere-la-gi-khi-nao-no-cuu-ban-khoi-resolve-cung-conflict-nhieu-lan-5cc9aa60-5ad3-5774-a3ff-b5377a5785ea",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": null
+  },
+  {
+    "id": "16eede36-e39d-5a74-b872-a9de9a0ba85f",
+    "question": "Rebase interactive: edit mode cho phép làm gì mà squash không làm được?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "rebase-interactive-edit-mode-cho-phep-lam-gi-ma-squash-khong-lam-duoc-16eede36-e39d-5a74-b872-a9de9a0ba85f",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": null
+  },
+  {
+    "id": "5dc706d9-e60e-54d0-9614-30e7c75e2d7b",
+    "question": "Teammate vừa force push lên shared branch làm mất commits của bạn. Recover như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "teammate-vua-force-push-len-shared-branch-lam-mat-commits-cua-ban-recover-nhu-the-nao-5dc706d9-e60e-54d0-9614-30e7c75e2d7b",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": null
+  },
+  {
+    "id": "718d868f-24b8-5b99-a021-4139198ba3cf",
+    "question": "git bisect hoạt động như thế nào? Scenario thực tế dùng nó tìm commit gây regression?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "git-bisect-hoat-dong-nhu-the-nao-scenario-thuc-te-dung-no-tim-commit-gay-regression-718d868f-24b8-5b99-a021-4139198ba3cf",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": null
+  },
+  {
+    "id": "b4cf2f9b-409c-5d0f-b58b-077bcc2f8f20",
+    "question": "Production deploy xong thì phát hiện bug. Cần rollback ngay. git revert hay deploy từ previous tag?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "production-deploy-xong-thi-phat-hien-bug-can-rollback-ngay-git-revert-hay-deploy-tu-previous-tag-b4cf2f9b-409c-5d0f-b58b-077bcc2f8f20",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": null
+  },
+  {
+    "id": "67b5da9d-e464-5411-9e89-9b58c178c6ef",
+    "question": "Vừa force push nhầm lên main, history bị overwrite. Quy trình khôi phục khẩn cấp?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vua-force-push-nham-len-main-history-bi-overwrite-quy-trinh-khoi-phuc-khan-cap-67b5da9d-e464-5411-9e89-9b58c178c6ef",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": null
+  },
+  {
+    "id": "6fbdb43e-a40e-5d6e-ad08-796d4d235e88",
+    "question": "Large file vô tình được commit vào git history, làm repo nặng. Xóa khỏi history mà không phá vỡ cộng tác?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "large-file-vo-tinh-duoc-commit-vao-git-history-lam-repo-nang-xoa-khoi-history-ma-khong-pha-vo-cong-t-6fbdb43e-a40e-5d6e-ad08-796d4d235e88",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": null
+  },
+  {
+    "id": "57ba6070-661c-5e22-a538-ba03e6d65c11",
+    "question": "git worktree là gì? Khi nào nó tốt hơn stash hoặc tạo clone thứ 2?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "git-worktree-la-gi-khi-nao-no-tot-hon-stash-hoac-tao-clone-thu-2-57ba6070-661c-5e22-a538-ba03e6d65c11",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": null
+  },
+  {
+    "id": "06b8d9de-21d7-5884-9eb8-90a4591d3a86",
+    "question": "Partial clone và shallow clone: khi nào dùng trong CI/CD để tăng tốc pipeline?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "partial-clone-va-shallow-clone-khi-nao-dung-trong-ci-cd-de-tang-toc-pipeline-06b8d9de-21d7-5884-9eb8-90a4591d3a86",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": null
+  },
+  {
+    "id": "44b19225-0a0f-5a5b-b0d3-f0d642b1b102",
+    "question": "Git submodules vs git subtrees: tại sao hầu hết teams tránh cả hai?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "git-submodules-vs-git-subtrees-tai-sao-hau-het-teams-tranh-ca-hai-44b19225-0a0f-5a5b-b0d3-f0d642b1b102",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": null
+  },
+  {
+    "id": "1586b80b-9a24-5b36-811d-c122c85945a0",
+    "question": "Git LFS là gì? Setup thực tế cho dự án có design files và build artifacts lớn?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "git-lfs-la-gi-setup-thuc-te-cho-du-an-co-design-files-va-build-artifacts-lon-1586b80b-9a24-5b36-811d-c122c85945a0",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": null
+  },
+  {
+    "id": "784f5c2e-7200-5a54-8ec7-677fcf74013c",
+    "question": "semantic-release: làm sao tự động hóa versioning và CHANGELOG từ conventional commits?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "semantic-release-lam-sao-tu-dong-hoa-versioning-va-changelog-tu-conventional-commits-784f5c2e-7200-5a54-8ec7-677fcf74013c",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": null
+  },
+  {
+    "id": "77875302-4c0e-5beb-88f9-9ca7ad1bffaf",
+    "question": "Server-side hooks (GitHub Actions) vs client-side hooks (Husky): nên dùng cái nào để enforce gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "server-side-hooks-github-actions-vs-client-side-hooks-husky-nen-dung-cai-nao-de-enforce-gi-77875302-4c0e-5beb-88f9-9ca7ad1bffaf",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": null
+  }
+]

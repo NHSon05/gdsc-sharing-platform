@@ -184,6 +184,7 @@ public static class DependencyInjection
         services.AddScoped<ILearningResourceService, LearningResourceService>();
 
         services.AddScoped<DatabaseSeeder>();
+        services.AddScoped<GdscSharingPlatform.Application.Features.Interviews.IInterviewQuestionService, InterviewQuestionService>();
         services.AddScoped<LegacyProfileBackfillService>();
 
         return services;

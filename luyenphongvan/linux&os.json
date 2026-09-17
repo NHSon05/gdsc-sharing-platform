@@ -1,0 +1,1345 @@
+[
+  {
+    "id": "61530601-a596-59c3-a053-45bf807d4885",
+    "question": "Process và Thread khác nhau thế nào? Khi nào nên dùng multi-process vs multi-thread?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2317-process-va-thread-khac-nhau-the-nao-khi-nao-nen-dung-multi-process-vs-multi-thre",
+    "slug": "process-va-thread-khac-nhau-the-nao-khi-nao-nen-dung-multi-process-vs-multi-thread-61530601-a596-59c3-a053-45bf807d4885",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Process là đơn vị thực thi độc lập với không gian bộ nhớ riêng (virtual address space, heap, stack, file descriptors). Thread là đơn vị thực thi nhẹ hơn bên trong process: các thread cùng process chia sẻ heap/code/file descriptors nhưng có stack riêng. Tạo process tốn kém hơn thread (fork copy page tables), giao tiếp giữa process phức tạp hơn (IPC), nhưng cô lập tốt hơn — crash một process không ảnh hưởng process khác."
+      ],
+      "details": [
+        "Multi-process phù hợp: Chrome (mỗi tab là process riêng để cô lập crash/security), Node.js cluster module để tận dụng CPU cores. Multi-thread phù hợp: ứng dụng cần chia sẻ dữ liệu nhiều và frequent (Java web server, game engine). Với Python, GIL (Global Interpreter Lock) ngăn true parallelism trong threads — phải dùng multiprocessing. Go goroutines là green threads cực nhẹ (~2KB stack), runtime scheduler map M goroutines lên N OS threads."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "2317-process-va-thread-khac-nhau-the-nao-khi-nao-nen-dung-multi-process-vs-multi-thre"
+  },
+  {
+    "id": "4639f110-cd47-5a15-bdf2-938618ed4457",
+    "question": "Context switching là gì? Chi phí của nó ảnh hưởng thế nào đến performance?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2318-context-switching-la-gi-chi-phi-cua-no-anh-huong-the-nao-den-performance",
+    "slug": "context-switching-la-gi-chi-phi-cua-no-anh-huong-the-nao-den-performance-4639f110-cd47-5a15-bdf2-938618ed4457",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Context switching là quá trình OS lưu trạng thái CPU (registers, program counter, stack pointer) của process/thread hiện tại vào PCB (Process Control Block), rồi nạp trạng thái của process/thread kế tiếp để chạy."
+      ],
+      "details": [
+        "Chi phí bao gồm:"
+      ],
+      "points": [
+        "Thời gian lưu/nạp CPU state (~microseconds)",
+        "Cache invalidation — khi switch process, CPU cache (L1/L2) bị flush, process mới phải warm up cache lại từ đầu (cold start)",
+        "TLB flush khi switch process (vì địa chỉ ảo khác nhau). Thread switching trong cùng process nhẹ hơn vì không flush TLB. Ảnh hưởng thực tế: hệ thống với quá nhiều thread (C10K problem) tốn nhiều thời gian context switching hơn là làm việc thực. Đó là lý do Node.js single-threaded event loop và Go goroutines thắng trong high-concurrency — ít context switch hơn 1000 OS threads. Lập trình viên nên tránh: vòng lặp tight với sleep(1ms), quá nhiều thread chờ I/O — dùng async/await thay thế"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "2318-context-switching-la-gi-chi-phi-cua-no-anh-huong-the-nao-den-performance"
+  },
+  {
+    "id": "e78d4f3c-0e1c-598d-baa6-69cfe2fa3b33",
+    "question": "Các thuật toán process scheduling phổ biến là gì? (FCFS, Round Robin, SJF)",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2319-cac-thuat-toan-process-scheduling-pho-bien-la-gi-fcfs-round-robin-sjf",
+    "slug": "cac-thuat-toan-process-scheduling-pho-bien-la-gi-fcfs-round-robin-sjf-e78d4f3c-0e1c-598d-baa6-69cfe2fa3b33",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Các thuật toán scheduling khác nhau về cách ưu tiên process: FCFS đơn giản nhưng tệ với latency, Round Robin fair nhất, SJF tối ưu throughput nhưng gây starvation."
+      ],
+      "details": [],
+      "points": [
+        "FCFS (First-Come First-Served): process đến trước chạy trước — đơn giản nhưng convoy effect: một process dài block tất cả process ngắn phía sau, average waiting time cao.",
+        "Round Robin (RR): mỗi process chạy một time quantum (10-100ms) rồi preempt — fair, responsive, phù hợp time-sharing systems; quantum quá nhỏ tốn context switch, quá lớn thành FCFS.",
+        "SJF (Shortest Job First): chạy process có burst time ngắn nhất trước — tối ưu average waiting time nhưng starvation cho process dài, và không biết trước burst time trong thực tế.",
+        "Multilevel Feedback Queue (Linux CFS): kết hợp nhiều queue, tự động điều chỉnh — đây là algorithm Linux kernel dùng, fair nhưng ưu tiên interactive process hơn batch."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "2319-cac-thuat-toan-process-scheduling-pho-bien-la-gi-fcfs-round-robin-sjf"
+  },
+  {
+    "id": "52e14b41-c0c3-59db-a630-78d2814bccea",
+    "question": "Concurrency và Parallelism khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/2323-concurrency-va-parallelism-khac-nhau-the-nao",
+    "slug": "concurrency-va-parallelism-khac-nhau-the-nao-52e14b41-c0c3-59db-a630-78d2814bccea",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Concurrency là khả năng xử lý nhiều task đồng thời về mặt logic — các task có thể interleave nhau (chạy một ít rồi nhường, rồi lại chạy) nhưng không nhất thiết cùng lúc trên nhiều CPU. Parallelism là thực sự chạy nhiều task cùng một lúc trên nhiều CPU core. Rob Pike (Go): 'Concurrency là về cấu trúc, Parallelism là về thực thi.'"
+      ],
+      "details": [
+        "Ví dụ: Node.js event loop là concurrent nhưng không parallel (single-threaded) — handle 10,000 I/O operations concurrently nhờ non-blocking I/O, nhưng chỉ 1 lúc chạy 1 JavaScript callback. Go runtime chạy goroutines concurrently VÀ parallel: GOMAXPROCS goroutines có thể thực sự chạy song song trên nhiều OS thread. Thực tế lập trình: concurrency giải quyết throughput (nhiều I/O operations); parallelism giải quyết CPU-bound tasks (image processing, ML inference). Async/await trong JavaScript/Python là concurrency pattern, không phải parallelism."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "2323-concurrency-va-parallelism-khac-nhau-the-nao"
+  },
+  {
+    "id": "1a3a5c23-f584-5dbd-ad60-0a7de4f4bc0c",
+    "question": "Mô hình 5 trạng thái của tiến trình gồm những trạng thái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93103-mo-hinh-5-trang-thai-cua-tien-trinh-gom-nhung-trang-thai-nao",
+    "slug": "mo-hinh-5-trang-thai-cua-tien-trinh-gom-nhung-trang-thai-nao-1a3a5c23-f584-5dbd-ad60-0a7de4f4bc0c",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vòng đời một tiến trình:"
+      ],
+      "details": [
+        "Các chuyển trạng thái chính: New→Ready (admit), Ready→Running (dispatch), Running→Ready (bị preempt hoặc hết time slice), Running→Waiting (chờ I/O), Waiting→Ready (I/O xong), Running→Terminated (exit)."
+      ],
+      "points": [
+        "New: đang được tạo, chưa nạp vào ready queue.",
+        "Ready: sẵn sàng chạy, chỉ chờ scheduler cấp CPU.",
+        "Running: đang thực thi trên CPU (chỉ 1 tiến trình mỗi lõi tại một thời điểm).",
+        "Waiting (Blocked): đang chờ một sự kiện (I/O xong, tín hiệu, lock) — không thể chạy dù có CPU.",
+        "Terminated: đã kết thúc, OS đang thu hồi tài nguyên."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "93103-mo-hinh-5-trang-thai-cua-tien-trinh-gom-nhung-trang-thai-nao"
+  },
+  {
+    "id": "fabed642-c660-5588-a173-1d95f11aff1d",
+    "question": "Process Control Block (PCB) chứa những thông tin gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93109-process-control-block-pcb-chua-nhung-thong-tin-gi",
+    "slug": "process-control-block-pcb-chua-nhung-thong-tin-gi-fabed642-c660-5588-a173-1d95f11aff1d",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "PCB là cấu trúc dữ liệu OS dùng để đại diện và quản lý mỗi tiến trình — một hồ sơ đầy đủ để có thể tạm dừng rồi khôi phục tiến trình. Thành phần chính:"
+      ],
+      "details": [
+        "Khi context switch, OS lưu trạng thái tiến trình hiện tại vào PCB của nó, rồi nạp trạng thái từ PCB của tiến trình kế tiếp. Chính việc lưu/nạp này là lý do context switch có overhead."
+      ],
+      "points": [
+        "Process state: new/ready/running/waiting/terminated.",
+        "PID: định danh tiến trình (và thường cả PID cha).",
+        "Program counter: địa chỉ lệnh kế tiếp sẽ chạy.",
+        "CPU registers: nội dung thanh ghi để lưu/khôi phục khi context switch.",
+        "Thông tin lập lịch: độ ưu tiên, con trỏ hàng đợi.",
+        "Thông tin quản lý bộ nhớ: base/limit, page table hoặc segment table.",
+        "Thông tin kế toán: thời gian CPU đã dùng, giới hạn thời gian."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "93109-process-control-block-pcb-chua-nhung-thong-tin-gi"
+  },
+  {
+    "id": "935d0455-5b0f-5bd2-8022-f7de826ceb66",
+    "question": "Lập lịch preemptive và non-preemptive khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93111-lap-lich-preemptive-va-non-preemptive-khac-nhau-the-nao",
+    "slug": "lap-lich-preemptive-va-non-preemptive-khac-nhau-the-nao-935d0455-5b0f-5bd2-8022-f7de826ceb66",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khác nhau ở chỗ OS có được quyền cướp CPU khỏi tiến trình đang chạy hay không."
+      ],
+      "details": [
+        "Non-preemptive (cooperative): một khi được cấp CPU, tiến trình giữ tới khi tự nguyện nhả — do kết thúc hoặc chuyển sang waiting (chờ I/O). Scheduler chỉ ra quyết định tại các thời điểm đó. Đơn giản, ít overhead, không lo data race chia sẻ giữa các lần chuyển; nhưng một tiến trình dài/lặp vô hạn có thể chiếm CPU, response time kém. Ví dụ: FCFS, SJF (bản non-preemptive).",
+        "Preemptive: OS có thể lấy lại CPU giữa chừng — khi hết time slice (timer interrupt) hoặc khi một tiến trình ưu tiên cao hơn sẵn sàng. Đáp ứng tốt, công bằng hơn, cần cho hệ thống tương tác/real-time; nhưng phát sinh chi phí context switch và cần cơ chế đồng bộ (lock) vì có thể bị ngắt giữa lúc đang sửa dữ liệu chia sẻ. Ví dụ: Round Robin, SRTF, priority preemptive. Đa số OS hiện đại (Linux, Windows) dùng preemptive."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "93111-lap-lich-preemptive-va-non-preemptive-khac-nhau-the-nao"
+  },
+  {
+    "id": "7933c3ff-e501-58eb-a631-1f35c5b45ad1",
+    "question": "Kernel mode và user mode là gì? System call hoạt động thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/93115-kernel-mode-va-user-mode-la-gi-system-call-hoat-dong-the-nao",
+    "slug": "kernel-mode-va-user-mode-la-gi-system-call-hoat-dong-the-nao-7933c3ff-e501-58eb-a631-1f35c5b45ad1",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "CPU hiện đại có ít nhất 2 mức đặc quyền, phân biệt bằng một bit chế độ (mode bit):\n- User mode: code ứng dụng chạy ở đây, KHÔNG được thực thi lệnh đặc quyền (truy cập trực tiếp phần cứng, sửa page table, tắt ngắt...).\n- Kernel mode (supervisor): code nhân chạy với toàn quyền trên phần cứng."
+      ],
+      "details": [
+        "Cách ly này bảo vệ hệ thống: một app lỗi/độc hại không thể trực tiếp phá phần cứng hay tiến trình khác.",
+        "System call là cầu để user code yêu cầu dịch vụ đặc quyền (đọc file, cấp bộ nhớ, tạo tiến trình...). Cơ chế:\n1. Ứng dụng đặt số hiệu syscall và tham số vào thanh ghi.\n2. Thực thi lệnh trap (syscall) → CPU chuyển sang kernel mode và nhảy tới handler cố định (qua trap table).\n3. Nhân kiểm tra tham số, thực hiện thao tác đặc quyền.\n4. Trả kết quả, return-from-trap chuyển lại về user mode và tiếp tục ứng dụng.",
+        "Việc ép qua điểm vào cố định (không cho app tự nhảy vào code kernel tùy ý) chính là điều giữ an toàn cho lần chuyển quyền này."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "93115-kernel-mode-va-user-mode-la-gi-system-call-hoat-dong-the-nao"
+  },
+  {
+    "id": "f7dbbc87-853a-5e59-941a-46ef7218dcb9",
+    "question": "Inter-Process Communication (IPC) là gì? Các cơ chế IPC phổ biến?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2320-inter-process-communication-ipc-la-gi-cac-co-che-ipc-pho-bien",
+    "slug": "inter-process-communication-ipc-la-gi-cac-co-che-ipc-pho-bien-f7dbbc87-853a-5e59-941a-46ef7218dcb9",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "IPC là các cơ chế để các process độc lập trao đổi dữ liệu, vì chúng không chia sẻ bộ nhớ trực tiếp."
+      ],
+      "details": [
+        "Thực tế: Nginx worker processes giao tiếp với master qua pipe và shared memory."
+      ],
+      "points": [
+        "Pipe (anonymous pipe): luồng dữ liệu một chiều giữa parent-child process.",
+        "Named pipe (FIFO): pipe có tên trong filesystem, không cần parent-child relationship.",
+        "Shared Memory: vùng nhớ được map vào address space của nhiều process — nhanh nhất vì không copy data, nhưng cần đồng bộ (mutex/semaphore).",
+        "Message Queue: process gửi/nhận messages qua kernel queue (POSIX mqueue, System V) — asynchronous, có thể buffer.",
+        "Socket: Unix domain socket (local) hoặc TCP/UDP socket (network) — linh hoạt nhất, dùng cả local và remote; microservices giao tiếp qua HTTP/gRPC là IPC qua socket.",
+        "Signal: notification đơn giản (SIGTERM, SIGKILL, SIGUSR1) — limited data.",
+        "Memory-mapped file (mmap): file được map vào memory, nhiều process cùng đọc/ghi — Node.js dùng cho large file processing."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "2320-inter-process-communication-ipc-la-gi-cac-co-che-ipc-pho-bien"
+  },
+  {
+    "id": "7497c69f-fa2d-5f11-bb6e-c1dc5a746c7d",
+    "question": "Deadlock là gì? 4 điều kiện cần thiết và các cách phòng tránh?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2321-deadlock-la-gi-4-dieu-kien-can-thiet-va-cac-cach-phong-tranh",
+    "slug": "deadlock-la-gi-4-dieu-kien-can-thiet-va-cac-cach-phong-tranh-7497c69f-fa2d-5f11-bb6e-c1dc5a746c7d",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Deadlock xảy ra khi nhiều process chờ nhau giải phóng resource mà không process nào có thể tiếp tục."
+      ],
+      "details": [
+        "Coffman",
+        "Phòng tránh bằng cách phá vỡ một điều kiện: Lock Ordering (phá Circular Wait): luôn acquire lock theo thứ tự cố định — ví dụ database luôn lock bảng A trước bảng B. Trylock với timeout (phá Hold and Wait): nếu không lấy được lock sau timeout thì release tất cả và retry. Banker's Algorithm: OS kiểm tra trước khi cấp resource. Thực tế: Java synchronized blocks, Go channel patterns, và database transaction isolation level đều phải xử lý deadlock — PostgreSQL phát hiện deadlock và rollback một transaction."
+      ],
+      "points": [
+        "xác định 4 điều kiện cần thiết đồng thời:",
+        "Mutual Exclusion: resource chỉ 1 process dùng tại một thời điểm",
+        "Hold and Wait: process giữ ít nhất 1 resource và chờ thêm resource khác",
+        "No Preemption: resource không thể bị lấy bắt buộc",
+        "Circular Wait: tồn tại chuỗi vòng P1→P2→...→Pn→P1 chờ nhau"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "2321-deadlock-la-gi-4-dieu-kien-can-thiet-va-cac-cach-phong-tranh"
+  },
+  {
+    "id": "74d11c61-fed1-5c7b-8aab-d630588ce81a",
+    "question": "Mutex và Semaphore khác nhau thế nào? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2322-mutex-va-semaphore-khac-nhau-the-nao-khi-nao-dung-cai-nao",
+    "slug": "mutex-va-semaphore-khac-nhau-the-nao-khi-nao-dung-cai-nao-74d11c61-fed1-5c7b-8aab-d630588ce81a",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mutex (Mutual Exclusion Lock) là binary lock: chỉ có 2 trạng thái locked/unlocked, và quan trọng là chỉ thread nào lock thì mới được unlock (ownership semantics). Dùng để bảo vệ critical section — chỉ 1 thread access vào một lúc."
+      ],
+      "details": [
+        "Semaphore là counter: counting semaphore cho phép N thread cùng access (semaphore=N); binary semaphore (N=1) tương tự mutex nhưng không có ownership — thread A có thể signal semaphore mà thread B đã wait.",
+        "Dùng mutex khi: bảo vệ shared data (HashMap, linked list) — một thread đọc/ghi tại một thời điểm. Dùng semaphore khi: giới hạn concurrent access (connection pool tối đa 10 connections), producer-consumer synchronization (producer signal khi có item mới). Deadlock risk: mutex thường dùng recursive mutex để tránh self-deadlock. Go dùng sync.Mutex và sync.RWMutex (nhiều reader, 1 writer); channel thường là cách idiomatic hơn để synchronize trong Go."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "2322-mutex-va-semaphore-khac-nhau-the-nao-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "9a107a6d-24b3-5a40-ac33-8c880870b472",
+    "question": "Thread pool là gì? Tại sao cần thread pool và cách sizing đúng cách?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2324-thread-pool-la-gi-tai-sao-can-thread-pool-va-cach-sizing-dung-cach",
+    "slug": "thread-pool-la-gi-tai-sao-can-thread-pool-va-cach-sizing-dung-cach-9a107a6d-24b3-5a40-ac33-8c880870b472",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Thread pool là một tập worker thread được tạo sẵn và tái sử dụng, thay vì sinh rồi huỷ thread cho từng task — bởi mỗi thread tốn khoảng 1MB stack, tốn thời gian để OS cấp phát, và tốn thêm overhead context switch."
+      ],
+      "details": [
+        "Cách chạy: task queue nhận việc, worker nào rảnh thì lấy task ra chạy rồi quay lại chờ task kế tiếp. ThreadPoolExecutor bên Java, pool worker_threads bên Node.js, worker pattern với goroutine bên Go đều là hình dạng của ý tưởng này.",
+        "Chọn kích thước pool mới là phần khó:\n- Task CPU-bound: pool size bằng số CPU core. Thêm thread không giúp gì, chỉ tốn context switch.\n- Task I/O-bound: pool lớn hơn số core, vì thread đang chờ I/O có chiếm CPU đâu. Công thức tham khảo: threads = cores * (1 + wait_time / service_time).",
+        "Hai đầu cực đều xấu: pool quá nhỏ thì queue dài và latency cao; pool quá lớn thì tốn bộ nhớ, context switch liên miên và hiệu năng tụt.",
+        "Vài con số mặc định để tham chiếu: Tomcat để 200, còn I/O thread pool của libuv trong Node.js mặc định chỉ 4 (UV_THREADPOOL_SIZE)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "2324-thread-pool-la-gi-tai-sao-can-thread-pool-va-cach-sizing-dung-cach"
+  },
+  {
+    "id": "c5391b0c-7bc5-577f-9578-2634d45f260a",
+    "question": "Virtual memory là gì? Tại sao cần virtual memory?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2325-virtual-memory-la-gi-tai-sao-can-virtual-memory",
+    "slug": "virtual-memory-la-gi-tai-sao-can-virtual-memory-c5391b0c-7bc5-577f-9578-2634d45f260a",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Virtual memory là abstraction layer giữa process và RAM vật lý: mỗi process có không gian địa chỉ ảo riêng (64-bit: 128TB), OS + MMU (Memory Management Unit) dịch virtual address sang physical address qua page table."
+      ],
+      "details": [
+        "Nhược điểm: page table overhead (~8MB per process với 4-level paging); TLB miss latency. Thực tế: docker stats show virtual memory rất lớn nhưng RSS (Resident Set Size) là RAM thực dùng; OOM Killer kill process dùng nhiều RAM nhất khi system hết memory.",
+        "Lợi ích:"
+      ],
+      "points": [
+        "Isolation: process A không thể đọc bộ nhớ process B dù cùng máy",
+        "Overcommit: tổng virtual memory của tất cả process có thể vượt RAM thực (OS swap ít-dùng pages ra disk)",
+        "Shared libraries: nhiều process share cùng physical pages của libc nhưng map vào virtual address space riêng",
+        "Memory-mapped files (mmap): file map vào virtual memory, OS lazily load pages khi access",
+        "Copy-on-Write (CoW) khi fork: parent và child share physical pages cho đến khi một bên write"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "2325-virtual-memory-la-gi-tai-sao-can-virtual-memory"
+  },
+  {
+    "id": "fa5e3b49-5f0e-5c96-89c4-71c77a2239ff",
+    "question": "Paging và Segmentation khác nhau thế nào? x86-64 dùng cơ chế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2326-paging-va-segmentation-khac-nhau-the-nao-x86-64-dung-co-che-nao",
+    "slug": "paging-va-segmentation-khac-nhau-the-nao-x86-64-dung-co-che-nao-fa5e3b49-5f0e-5c96-89c4-71c77a2239ff",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Paging chia physical memory thành các frame kích thước cố định (4KB, 2MB, 1GB huge pages), và virtual memory thành pages cùng kích thước — OS map pages lên frames qua page table. Fragmentation chỉ là internal (page cuối có thể dư), không có external fragmentation. Segmentation chia memory thành các segment logic kích thước khác nhau (code, data, stack, heap) — phản ánh structure của program; có external fragmentation vì segment size biến động."
+      ],
+      "details": [
+        "x86-64 trên thực tế dùng paging là primary mechanism: 4-level page table (PML4→PDPT→PD→PT) với page size 4KB mặc định; segmentation vẫn tồn tại nhưng flat segmentation (base=0, limit=max) — essentially disabled. Linux dùng huge pages (2MB/1GB) để giảm TLB pressure cho database workloads: PostgreSQL và Redis benefit từ transparent huge pages. Thực tế lập trình: stack overflow = page fault khi access stack guard page; segfault = access unmapped virtual address."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "2326-paging-va-segmentation-khac-nhau-the-nao-x86-64-dung-co-che-nao"
+  },
+  {
+    "id": "589051f7-ada8-5753-ad63-2dc966baef8b",
+    "question": "Memory leak là gì? Cách phát hiện và phòng tránh trong Node.js/Go?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2328-memory-leak-la-gi-cach-phat-hien-va-phong-tranh-trong-node-js-go",
+    "slug": "memory-leak-la-gi-cach-phat-hien-va-phong-tranh-trong-node-js-go-589051f7-ada8-5753-ad63-2dc966baef8b",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Memory leak xảy ra khi program allocate memory nhưng không release, dần dần RSS tăng cho đến khi OOM."
+      ],
+      "details": [
+        "Nguyên nhân phổ biến:\n- global/module-level variables tích lũy data.\n- event listeners không được removeListener.\n- closures capture large objects.\n- circular references (trong ngôn ngữ reference-counted).\n- unbounded cache/map.\n- timer setInterval không clearInterval.",
+        "Trong Node.js: dùng node --inspect + Chrome DevTools Memory tab để heap snapshot và so sánh; clinic.js heapprofiler cho production; process.memoryUsage().heapUsed monitor; WeakMap/WeakRef cho cache để GC tự thu dọn khi key không còn reference.",
+        "Trong Go: goroutine leak (goroutine blocked trên channel mãi mãi, không bao giờ exit) là phổ biến hơn memory leak; dùng pprof heap/goroutine profiler; runtime.ReadMemStats để monitor.",
+        "Best practice: giới hạn size của in-memory cache; dùng context cancellation để goroutines tự cleanup; integration test monitor memory growth theo thời gian."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "2328-memory-leak-la-gi-cach-phat-hien-va-phong-tranh-trong-node-js-go"
+  },
+  {
+    "id": "de97f25e-64d0-570f-ba21-6e559324929c",
+    "question": "File system hoạt động thế nào? So sánh ext4, NTFS và APFS.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2330-file-system-hoat-dong-the-nao-so-sanh-ext4-ntfs-va-apfs",
+    "slug": "file-system-hoat-dong-the-nao-so-sanh-ext4-ntfs-va-apfs-de97f25e-64d0-570f-ba21-6e559324929c",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "File system quản lý cách data được lưu trên storage: cấu trúc directory tree, metadata (inode: permissions/timestamps/size/data block pointers), free space management, journaling để tránh corruption khi crash."
+      ],
+      "details": [
+        "ext4 (Linux): journaling filesystem, extents thay vì block maps, delayed allocation, dir_index (HTree), max file 16TB, max volume 1EB — workhorse của Linux servers, stable và battle-tested. NTFS (Windows): journaling, Master File Table (MFT), support NTFS permissions/ACL, Alternate Data Streams, compression/encryption built-in, max 16EB — nhưng Linux support read/write NTFS qua ntfs-3g/ntfs3. APFS (Apple): Copy-on-Write (không corrupt khi crash), native encryption, snapshots (Time Machine), clones (copy-on-write files — cp instant), space sharing giữa volumes trong container — optimized cho SSD/Flash.",
+        "Thực tế DevOps: Docker image layers dùng overlay2 filesystem; ZFS (FreeBSD/Linux) thêm checksums và RAID tích hợp cho NAS; volume mount giữa host và container cần match permissions."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "2330-file-system-hoat-dong-the-nao-so-sanh-ext4-ntfs-va-apfs"
+  },
+  {
+    "id": "8e78d0f0-b2b9-5266-bb85-d769c4a4c8dd",
+    "question": "Linux signals là gì? Các signal quan trọng và cách handle graceful shutdown?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2333-linux-signals-la-gi-cac-signal-quan-trong-va-cach-handle-graceful-shutdown",
+    "slug": "linux-signals-la-gi-cac-signal-quan-trong-va-cach-handle-graceful-shutdown-8e78d0f0-b2b9-5266-bb85-d769c4a4c8dd",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Signal là cơ chế thông báo bất đồng bộ mà OS hoặc process khác gửi tới một process: SIGTERM (15, yêu cầu kết thúc — mặc định của kill PID), SIGKILL (9, giết cưỡng bức — không thể catch hay ignore), SIGINT (2, Ctrl+C), SIGHUP (1, đóng terminal / reload config), SIGUSR1 và SIGUSR2 (do người dùng định nghĩa; Node.js dùng SIGUSR1 để bật debugger), SIGCHLD (process con kết thúc), SIGPIPE (ghi vào pipe đã đứt).",
+        "terminationGracePeriodSeconds"
+      ],
+      "details": [
+        "Graceful shutdown là phần sống còn ở production: nhận SIGTERM thì server ngừng nhận kết nối mới, xử nốt request đang chạy, đóng kết nối DB, flush log rồi mới thoát.",
+        "Bên Go dùng signal.NotifyContext(ctx, syscall.SIGTERM) để lan cancellation xuống mọi goroutine khi có signal."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "process.on('SIGTERM', async () => {\n  await server.close()\n  await db.disconnect()\n  process.exit(0)\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "2333-linux-signals-la-gi-cac-signal-quan-trong-va-cach-handle-graceful-shutdown"
+  },
+  {
+    "id": "c96b4239-748c-52f0-9aab-9ae02adcfba1",
+    "question": "Race condition là gì? Cách detect và ngăn chặn trong code thực tế?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2371-race-condition-la-gi-cach-detect-va-ngan-chan-trong-code-thuc-te",
+    "slug": "race-condition-la-gi-cach-detect-va-ngan-chan-trong-code-thuc-te-c96b4239-748c-52f0-9aab-9ae02adcfba1",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Detect: Go race detector (go test -race, go run -race); Java ThreadSanitizer; Helgrind (Valgrind tool); code review tìm shared mutable state không có synchronization. Ngăn chặn:"
+      ],
+      "details": [],
+      "points": [
+        "Mutex/lock bảo vệ critical section;",
+        "Atomic operations (sync/atomic Go, java.util.concurrent.atomic);",
+        "Immutable data — không thể race nếu không ai write;",
+        "Message passing thay vì shared state (Go channels: \"Don't communicate by sharing memory, share memory by communicating\");",
+        "Database-level: optimistic locking (version column) hoặc pessimistic locking (SELECT FOR UPDATE);",
+        "CAS (Compare-And-Swap) cho lock-free algorithms"
+      ],
+      "sections": [
+        "Race condition xảy ra khi kết quả của chương trình phụ thuộc vào thứ tự/timing của các concurrent operations — thứ tự không được control → kết quả unpredictable. Ví dụ kinh điển (balance):"
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "2371-race-condition-la-gi-cach-detect-va-ngan-chan-trong-code-thuc-te"
+  },
+  {
+    "id": "af4c57a8-9d7d-579c-ba23-f5996e735ac7",
+    "question": "Monitor pattern là gì? Cách implement producer-consumer problem?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2372-monitor-pattern-la-gi-cach-implement-producer-consumer-problem",
+    "slug": "monitor-pattern-la-gi-cach-implement-producer-consumer-problem-af4c57a8-9d7d-579c-ba23-f5996e735ac7",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Monitor là high-level synchronization construct: object chứa mutex (đảm bảo mutual exclusion) + condition variables (cho phép threads wait/notify). Producer-Consumer problem: producer thêm item vào bounded buffer, consumer lấy ra; khi buffer đầy producer phải chờ; khi buffer rỗng consumer phải chờ. Implement với Java (built-in monitor):"
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVA",
+          "code": "synchronized void produce(Item item) {\n    while (buffer.isFull()) wait(); // release lock, wait\n    buffer.add(item);\n    notifyAll(); // wake up waiting consumers\n}\nsynchronized Item consume() {\n    while (buffer.isEmpty()) wait();\n    Item item = buffer.remove();\n    notifyAll(); // wake up waiting producers\n    return item;\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "2372-monitor-pattern-la-gi-cach-implement-producer-consumer-problem"
+  },
+  {
+    "id": "d90807d3-88ca-5820-9dbc-55948cf2213e",
+    "question": "select, poll, epoll, kqueue — tiến hóa của I/O multiplexing trong Linux/macOS?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2374-select-poll-epoll-kqueue-tien-hoa-cua-i-o-multiplexing-trong-linux-macos",
+    "slug": "select-poll-epoll-kqueue-tien-hoa-cua-i-o-multiplexing-trong-linux-macos-d90807d3-88ca-5820-9dbc-55948cf2213e",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "select/poll là O(n) scan không scale; epoll (Linux) và kqueue (BSD) dùng kernel-managed event notification, O(1) per event, scale đến hàng triệu FDs; io_uring là next-gen zero-copy async I/O."
+      ],
+      "details": [
+        "select (POSIX): monitor tối đa 1024 FDs (FD_SETSIZE), truyền full set mỗi syscall (O(n) scan), không biết FD nào ready phải scan toàn bộ, không scale. poll: tương tự select nhưng không giới hạn 1024 FDs (dùng dynamic array), vẫn O(n) scan. epoll (Linux 2.6+): kernel-side interest list — epoll_create, epoll_ctl(ADD/MOD/DEL), epoll_wait chỉ trả về ready FDs (O(1) per event). Edge-triggered (ET) mode: notify chỉ khi state change → must drain toàn bộ; Level-triggered (LT, default): notify khi FD vẫn readable/writable → simpler. kqueue (FreeBSD/macOS): tổng quát hơn epoll — kevent struct monitor FDs, signals, timers, processes, sockets; kevent() syscall combine register và wait. Không phải chỉ network — có thể monitor file changes (không cần inotify riêng). io_uring (Linux 5.1+): next-gen async I/O — submission queue + completion queue, zero-copy, batch syscalls, giảm context switch drastically. Đang được adopt bởi Rust tokio, Node.js 18+."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "2374-select-poll-epoll-kqueue-tien-hoa-cua-i-o-multiplexing-trong-linux-macos"
+  },
+  {
+    "id": "6281cf41-3cae-51e4-8bdd-05ced628bbb4",
+    "question": "Multilevel Feedback Queue (MLFQ) scheduler hoạt động như thế nào? Linux CFS là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2375-multilevel-feedback-queue-mlfq-scheduler-hoat-dong-nhu-the-nao-linux-cfs-la-gi",
+    "slug": "multilevel-feedback-queue-mlfq-scheduler-hoat-dong-nhu-the-nao-linux-cfs-la-gi-6281cf41-3cae-51e4-8bdd-05ced628bbb4",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "MLFQ ưu tiên interactive processes bằng cách tự động hạ priority của CPU-bound tasks; Linux CFS thay thế MLFQ bằng vruntime tracking để đảm bảo công bằng mà vẫn ưu tiên interactive."
+      ],
+      "details": [
+        "MLFQ: nhiều queue với priority khác nhau (Q0 highest priority, Q_n lowest). Rules: process mới vào Q0 (highest); nếu dùng hết time quantum → demote xuống queue thấp hơn (CPU-bound); nếu yield trước hết quantum (I/O-bound) → giữ hoặc promote; priority boost định kỳ (tất cả lên Q0) để tránh starvation. Kết quả: interactive processes (editor, browser) luôn responsive; CPU-bound background tasks chạy khi không có interactive job. Linux CFS (Completely Fair Scheduler): không dùng fixed time quantum — track vruntime (virtual runtime) của mỗi process, chọn process có vruntime nhỏ nhất để chạy tiếp. Process I/O-bound có vruntime nhỏ (ít chạy) → được ưu tiên cao khi wakeup. Nice value (-20 đến +19) tăng/giảm vruntime growth rate. Real-time scheduling: SCHED_FIFO, SCHED_RR cho realtime processes — preempt CFS processes. Practical: nice, renice command điều chỉnh priority; chrt set realtime policy; container CPU limits dùng CFS bandwidth controller (cpu.cfs_quota_us)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "2375-multilevel-feedback-queue-mlfq-scheduler-hoat-dong-nhu-the-nao-linux-cfs-la-gi"
+  },
+  {
+    "id": "8e75462c-e547-5ca6-ab5e-5be84c92995d",
+    "question": "File descriptors, pipes và /proc filesystem trong Linux là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2376-file-descriptors-pipes-va-proc-filesystem-trong-linux-la-gi",
+    "slug": "file-descriptors-pipes-va-proc-filesystem-trong-linux-la-gi-8e75462c-e547-5ca6-ab5e-5be84c92995d",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "File descriptor là abstraction cốt lõi của Linux I/O; pipe là unidirectional IPC qua kernel buffer; /proc là virtual FS cho phép introspect kernel state — ba concept liên kết chặt với nhau."
+      ],
+      "details": [
+        "File Descriptor (FD): là integer đại diện cho open file/socket/pipe/device. Process bắt đầu với 3 FDs: 0 (stdin), 1 (stdout), 2 (stderr). ulimit -n show max FDs per process (default 1024, production nên tăng lên 65536+). Leak FD: process mở file/socket nhưng không close → FD exhaustion → Too many open files. Check: lsof -p PID | wc -l. Pipe: anonymous pipe | trong shell — kernel buffer (thường 65536 bytes), unidirectional, một đầu write (stdout của process A), một đầu read (stdin của process B). Named pipe (FIFO): tồn tại trong filesystem, không cần parent-child. /proc filesystem: virtual filesystem kernel expose information: /proc/PID/fd/ (FDs của process), /proc/PID/maps (memory mapping), /proc/PID/status (process info), /proc/meminfo (RAM usage), /proc/cpuinfo, /proc/net/tcp (TCP connections). Mọi thứ là file — cat /proc/1/cmdline là command của init process. Docker stats đọc từ /proc và cgroups."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "2376-file-descriptors-pipes-va-proc-filesystem-trong-linux-la-gi"
+  },
+  {
+    "id": "b0114b78-6757-5d38-bd62-6fe3f11c3d5a",
+    "question": "Linux process states: R, S, D, Z, T có nghĩa gì? Khi nào process ở trạng thái D?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2377-linux-process-states-r-s-d-z-t-co-nghia-gi-khi-nao-process-o-trang-thai-d",
+    "slug": "linux-process-states-r-s-d-z-t-co-nghia-gi-khi-nao-process-o-trang-thai-d-b0114b78-6757-5d38-bd62-6fe3f11c3d5a",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Linux process có 5 trạng thái chính: R (running), S (interruptible sleep), D (uninterruptible — không thể kill), Z (zombie), T (stopped) — trạng thái D là dấu hiệu storage issue nghiêm trọng."
+      ],
+      "details": [
+        "Xem process state bằng ps aux hoặc top (cột STATUS/S):\n- R (Running/Runnable): đang chạy trên CPU hoặc trong run queue chờ CPU\n- S (Sleeping/Interruptible sleep): đang wait (I/O, event, timer) nhưng có thể bị interrupt bởi signal — phổ biến nhất\n- D (Disk sleep/Uninterruptible sleep): đang wait I/O không thể interrupt — kernel dùng để bảo vệ critical disk I/O operation. Process ở trạng thái D không respond SIGTERM/SIGKILL — không thể kill! Phổ biến khi NFS mount bị lỗi, disk hang, hoặc storage timeout. Quá nhiều D processes là dấu hiệu storage subsystem có vấn đề\n- Z (Zombie): process đã exit nhưng parent chưa wait() để thu dọn. Process zombie không tốn CPU/memory nhưng tốn PID slot. Dấu hiệu parent không handle SIGCHLD\n- T (Stopped): bị dừng bởi signal (SIGSTOP, SIGTSTP = Ctrl+Z) hoặc debugger. Resume bằng SIGCONT\n- I: Idle kernel thread (không phải running, không phải sleeping)",
+        "Debug: ps aux | grep ' D ' tìm D processes; strace -p PID xem syscall nào đang block."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "2377-linux-process-states-r-s-d-z-t-co-nghia-gi-khi-nao-process-o-trang-thai-d"
+  },
+  {
+    "id": "333abe46-1f32-56ad-91a4-5ee541d23409",
+    "question": "Copy-on-Write (CoW) khi fork() hoạt động như thế nào? Tại sao nó quan trọng với Redis?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2378-copy-on-write-cow-khi-fork-hoat-dong-nhu-the-nao-tai-sao-no-quan-trong-voi-redis",
+    "slug": "copy-on-write-cow-khi-fork-hoat-dong-nhu-the-nao-tai-sao-no-quan-trong-voi-redis-333abe46-1f32-56ad-91a4-5ee541d23409",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khi process A gọi fork(), OS tạo process B là bản copy của A. Nếu copy toàn bộ memory ngay lập tức thì tốn kém và lãng phí (nhất là khi child chỉ exec một program khác sau fork). Copy-on-Write (CoW): sau fork, parent và child share cùng physical memory pages, đều chỉ có read-only mapping. Khi một bên (thường là child) write vào page → hardware fault → OS copy chỉ page đó ra một bản riêng → write vào bản copy. Pages không bị write thì không bao giờ copy — save memory và time."
+      ],
+      "details": [
+        "Tại sao quan trọng với Redis RDB snapshot: khi Redis fork một child process để ghi RDB snapshot ra disk, child và parent share toàn bộ memory via CoW. Child đọc data để serialize (không write). Parent tiếp tục serve requests và write. Mỗi page parent write → copy của page đó. Nếu Redis đang write nhiều trong khi snapshot → nhiều page bị copy → memory tăng đột biến (used_memory + used_memory_rss diverge).",
+        "Monitoring: rdb_last_bgsave_time_sec, latest_fork_usec, Redis INFO stats. Tip: Redis fork nhanh nhất khi không có memory fragmentation và THP disabled."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "2378-copy-on-write-cow-khi-fork-hoat-dong-nhu-the-nao-tai-sao-no-quan-trong-voi-redis"
+  },
+  {
+    "id": "a6f33c30-30a7-5696-8b8c-3fb380f33ea4",
+    "question": "Inode, hard links và symbolic links: phân biệt và ứng dụng thực tế?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2380-inode-hard-links-va-symbolic-links-phan-biet-va-ung-dung-thuc-te",
+    "slug": "inode-hard-links-va-symbolic-links-phan-biet-va-ung-dung-thuc-te-a6f33c30-30a7-5696-8b8c-3fb380f33ea4",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Inode chứa metadata file (không phải tên); hard link là alias đến cùng inode; symlink là pointer đến path — khác nhau về behavior khi target bị xóa và khi cross-filesystem."
+      ],
+      "details": [
+        "Inode (Index Node): metadata của file trong filesystem — chứa permissions, owner, timestamps, file size, block pointers (địa chỉ data blocks trên disk). KHÔNG chứa filename! Filename chỉ là entry trong directory trỏ đến inode number. stat file.txt hiển thị inode info. df -i xem inode usage (có thể hết inodes dù còn disk space). Hard link: tạo thêm directory entry trỏ đến cùng inode. ln file.txt hardlink.txt. Cả hai file là same data, same inode, same permissions. Xóa một file không xóa data — data chỉ xóa khi link count = 0 (tất cả hard links bị xóa). Không thể hard link qua filesystem khác hay directory. Symbolic link (symlink): là special file chứa path đến target. ln -s /path/to/target symlink. Symlink có inode riêng. Nếu target bị xóa → dangling symlink. Có thể symlink qua filesystem và directory. Ứng dụng: /etc/nginx/sites-enabled/ chứa symlinks đến /etc/nginx/sites-available/ — enable/disable site bằng cách tạo/xóa symlink. current symlink → deployment rollback."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "2380-inode-hard-links-va-symbolic-links-phan-biet-va-ung-dung-thuc-te"
+  },
+  {
+    "id": "c0673be0-5e45-55f7-bf73-56a94891380d",
+    "question": "Page cache trong Linux là gì? Tại sao disk I/O thường nhanh hơn người ta nghĩ?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/2381-page-cache-trong-linux-la-gi-tai-sao-disk-i-o-thuong-nhanh-hon-nguoi-ta-nghi",
+    "slug": "page-cache-trong-linux-la-gi-tai-sao-disk-i-o-thuong-nhanh-hon-nguoi-ta-nghi-c0673be0-5e45-55f7-bf73-56a94891380d",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Linux page cache là phần RAM kernel dùng để cache file content từ disk — khi đọc file lần đầu, kernel load data vào page cache; lần sau đọc cùng file sẽ phục vụ từ RAM (không động đến disk). Write-back: write vào file chỉ update page cache (dirty pages), kernel flush xuống disk theo định kỳ hoặc khi fsync() được gọi.",
+        "O_SYNC",
+        "write-back vs write-through:"
+      ],
+      "details": [
+        "Vì vậy write thường nhanh (vào RAM), nhưng data chưa an toàn trên disk cho đến khi flush. Tại sao I/O nhanh: vì page cache absorb phần lớn I/O — database với shared_buffers nhỏ vẫn nhanh vì OS page cache bù đắp. free -h hiển thị buff/cache = page cache size. vmstat bi/bo = block in/out (disk I/O thực sự). Drop cache để benchmark thực sự:",
+        "Database (PostgreSQL, MySQL) tự gọi fsync tại write-ahead log để đảm bảo durability."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "sync; echo 3 > /proc/sys/vm/drop_caches"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "2381-page-cache-trong-linux-la-gi-tai-sao-disk-i-o-thuong-nhanh-hon-nguoi-ta-nghi"
+  },
+  {
+    "id": "ebc5d1c0-f412-57f2-b7c4-bd26cdcfabf5",
+    "question": "Các thuật toán thay trang FIFO, LRU và Optimal khác nhau thế nào? Belady’s Anomaly là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93100-cac-thuat-toan-thay-trang-fifo-lru-va-optimal-khac-nhau-the-nao-belady-s-anomaly",
+    "slug": "cac-thuat-toan-thay-trang-fifo-lru-va-optimal-khac-nhau-the-nao-belady-s-anomaly-la-gi-ebc5d1c0-f412-57f2-b7c4-bd26cdcfabf5",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khi bộ nhớ vật lý đầy mà cần nạp trang mới, OS phải chọn một trang để thay ra:"
+      ],
+      "details": [
+        "Belady’s Anomaly: với FIFO, tăng số khung trang (frame) đôi khi lại làm page fault TĂNG thay vì giảm — trái trực giác. LRU và OPT không gặp hiện tượng này vì chúng thuộc lớp stack algorithm."
+      ],
+      "points": [
+        "FIFO: thay trang được nạp vào sớm nhất. Đơn giản nhưng không quan tâm trang đó còn dùng nhiều hay không.",
+        "LRU (Least Recently Used): thay trang lâu nhất chưa được truy cập, dựa trên nguyên lý locality — trang vừa dùng thường sẽ được dùng lại. Xấp xỉ tốt Optimal nhưng tốn chi phí theo dõi thời điểm truy cập.",
+        "Optimal (OPT/Belady): thay trang sẽ được dùng xa nhất trong tương lai → số page fault tối thiểu. Nhưng cần biết trước tương lai nên chỉ dùng làm mốc so sánh, không cài đặt thực tế."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "93100-cac-thuat-toan-thay-trang-fifo-lru-va-optimal-khac-nhau-the-nao-belady-s-anomaly"
+  },
+  {
+    "id": "cf73808c-2ca9-5b0a-8c34-8cfeab0f9ff0",
+    "question": "Thrashing là gì? Xảy ra khi nào và xử lý ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93101-thrashing-la-gi-xay-ra-khi-nao-va-xu-ly-ra-sao",
+    "slug": "thrashing-la-gi-xay-ra-khi-nao-va-xu-ly-ra-sao-cf73808c-2ca9-5b0a-8c34-8cfeab0f9ff0",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Thrashing là trạng thái hệ thống dành phần lớn thời gian để swap trang vào/ra đĩa thay vì thực thi lệnh — CPU utilization tụt nhưng đĩa quay liên tục."
+      ],
+      "details": [
+        "Nguyên nhân: tổng nhu cầu bộ nhớ (working set) của các tiến trình đang chạy vượt quá RAM vật lý. Mỗi tiến trình không đủ khung trang để giữ working set → liên tục page fault → phải nạp trang từ đĩa (chậm hơn RAM hàng vạn lần). Tệ hơn, khi CPU rảnh, scheduler tưởng cần thêm việc nên nạp thêm tiến trình → càng thiếu bộ nhớ → càng thrash (vòng xoáy).",
+        "Cách xử lý:\n- Mô hình working-set: OS theo dõi tập trang mỗi tiến trình dùng gần đây, chỉ cho chạy khi đủ khung cho working set.\n- Page-fault frequency (PFF): cấp/thu khung theo tần suất page fault — quá cao thì cấp thêm, quá thấp thì thu bớt.\n- Giảm mức đa chương (swap hẳn vài tiến trình ra), hoặc thêm RAM."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "93101-thrashing-la-gi-xay-ra-khi-nao-va-xu-ly-ra-sao"
+  },
+  {
+    "id": "777c376c-89b1-5f33-a67f-9747ddce05b3",
+    "question": "Demand paging là gì? Chuyện gì xảy ra khi có page fault?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93102-demand-paging-la-gi-chuyen-gi-xay-ra-khi-co-page-fault",
+    "slug": "demand-paging-la-gi-chuyen-gi-xay-ra-khi-co-page-fault-777c376c-89b1-5f33-a67f-9747ddce05b3",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Demand paging: chỉ nạp trang vào RAM khi thực sự được truy cập, thay vì nạp toàn bộ chương trình lúc khởi động. Mỗi entry trong page table có valid/invalid bit đánh dấu trang đang ở RAM hay còn trên đĩa."
+      ],
+      "details": [
+        "Khi CPU truy cập một trang có bit invalid → phần cứng phát sinh page fault (một loại trap vào kernel). Xử lý:\n1. OS kiểm tra tham chiếu có hợp lệ không (nếu sai → segfault).\n2. Tìm khung trang trống; nếu hết thì chạy thuật toán thay trang.\n3. Đọc trang cần thiết từ đĩa vào khung (chậm — vài ms).\n4. Cập nhật page table, đặt valid bit.\n5. Khởi động lại đúng lệnh đã gây fault.",
+        "Lợi ích: khởi động nhanh, tiết kiệm RAM, cho phép chương trình lớn hơn RAM vật lý. Chi phí: mỗi page fault đắt, và thiếu RAM sẽ dẫn tới thrashing."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "93102-demand-paging-la-gi-chuyen-gi-xay-ra-khi-co-page-fault"
+  },
+  {
+    "id": "32c973b0-6e8a-5a4a-a198-f28344189432",
+    "question": "Zombie process và orphan process khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93104-zombie-process-va-orphan-process-khac-nhau-the-nao",
+    "slug": "zombie-process-va-orphan-process-khac-nhau-the-nao-32c973b0-6e8a-5a4a-a198-f28344189432",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai liên quan tới cách Unix quản lý quan hệ cha–con."
+      ],
+      "details": [
+        "Zombie (defunct): tiến trình con đã kết thúc (exit) nhưng cha CHƯA gọi wait()/waitpid() để đọc exit status. Con đã giải phóng hầu hết tài nguyên nhưng entry trong process table vẫn còn để giữ exit code → hiển thị trạng thái Z. Zombie không dùng CPU/RAM đáng kể, nhưng nếu tích nhiều sẽ cạn PID. Khắc phục: cha phải wait() (thường trong handler của SIGCHLD).",
+        "Orphan: tiến trình con vẫn đang chạy nhưng cha đã chết trước. Con được init/systemd (PID 1) nhận làm cha nuôi (re-parent); PID 1 sẽ tự wait() khi con kết thúc nên orphan không đọng lại thành zombie.",
+        "Hình dung: zombie = đã chết mà chưa ai ký giấy khai tử; orphan = còn sống nhưng mất cha, được nhà nước nhận nuôi."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "93104-zombie-process-va-orphan-process-khac-nhau-the-nao"
+  },
+  {
+    "id": "99ea6373-09f9-5439-b4e4-6dc8f51ac0ff",
+    "question": "Phân mảnh trong (internal) và phân mảnh ngoài (external) khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93107-phan-manh-trong-internal-va-phan-manh-ngoai-external-khac-nhau-the-nao",
+    "slug": "phan-manh-trong-internal-va-phan-manh-ngoai-external-khac-nhau-the-nao-99ea6373-09f9-5439-b4e4-6dc8f51ac0ff",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cả hai đều là bộ nhớ bị lãng phí, nhưng ở dạng khác nhau."
+      ],
+      "details": [
+        "Internal fragmentation: phần dư BÊN TRONG một khối đã cấp mà không dùng tới. Xảy ra khi cấp phát theo đơn vị cố định — ví dụ cần 3KB nhưng cấp cả một trang 4KB → 1KB thừa nằm trong trang, không ai dùng được. Paging luôn có internal fragmentation (trung bình nửa trang ở trang cuối).",
+        "External fragmentation: bộ nhớ trống bị chia nhỏ thành nhiều mảnh rời rạc xen kẽ giữa các vùng đã cấp. Tổng free đủ lớn nhưng không mảnh liền kề nào đủ chứa yêu cầu. Xảy ra với cấp phát theo phân đoạn / kích thước thay đổi (segmentation, variable partition).",
+        "Khắc phục: paging loại bỏ external fragmentation (mọi khung cùng kích thước, không cần vùng liền kề). External fragmentation còn có thể giảm bằng compaction (dồn vùng đã cấp lại) — tốn kém. Internal giảm bằng cách chọn kích thước trang/khối phù hợp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "93107-phan-manh-trong-internal-va-phan-manh-ngoai-external-khac-nhau-the-nao"
+  },
+  {
+    "id": "691ab43c-ff99-57bf-9f8e-989bd0172c48",
+    "question": "Địa chỉ logic (ảo) và địa chỉ vật lý khác nhau ra sao? MMU dịch địa chỉ thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93108-dia-chi-logic-ao-va-dia-chi-vat-ly-khac-nhau-ra-sao-mmu-dich-dia-chi-the-nao",
+    "slug": "dia-chi-logic-ao-va-dia-chi-vat-ly-khac-nhau-ra-sao-mmu-dich-dia-chi-the-nao-691ab43c-ff99-57bf-9f8e-989bd0172c48",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Địa chỉ logic (virtual): địa chỉ mà CPU/chương trình sinh ra; mỗi tiến trình thấy một không gian địa chỉ ảo riêng, liền mạch, bắt đầu từ 0.\nĐịa chỉ vật lý (physical): địa chỉ thật trên thanh RAM."
+      ],
+      "details": [
+        "MMU (Memory Management Unit) là phần cứng dịch virtual → physical ở mỗi lần truy cập bộ nhớ:\n- Paging: địa chỉ ảo tách thành (page number, offset). MMU tra page table để đổi page number → frame number, rồi ghép với offset ra địa chỉ vật lý. TLB (cache của page table) tăng tốc bước tra này.\n- Base-and-bound (đơn giản hơn): physical = virtual + base register, và bound register chặn truy cập ngoài vùng.",
+        "Lợi ích: cách ly tiến trình (không đọc/ghi lên nhau), relocation linh hoạt, hỗ trợ virtual memory (trang có thể nằm trên đĩa). Nhờ vậy chương trình được viết như thể sở hữu toàn bộ bộ nhớ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "93108-dia-chi-logic-ao-va-dia-chi-vat-ly-khac-nhau-ra-sao-mmu-dich-dia-chi-the-nao"
+  },
+  {
+    "id": "e38dbf27-86d1-5423-bbea-6f2f8bc569e6",
+    "question": "Starvation trong lập lịch CPU là gì? Aging giải quyết ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93110-starvation-trong-lap-lich-cpu-la-gi-aging-giai-quyet-ra-sao",
+    "slug": "starvation-trong-lap-lich-cpu-la-gi-aging-giai-quyet-ra-sao-e38dbf27-86d1-5423-bbea-6f2f8bc569e6",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Starvation (đói tài nguyên / indefinite blocking): một tiến trình bị trì hoãn vô hạn, không bao giờ được cấp CPU. Thường gặp ở lập lịch theo độ ưu tiên (priority scheduling): nếu luôn có tiến trình ưu tiên cao hơn tới, tiến trình ưu tiên thấp có thể chờ mãi."
+      ],
+      "details": [
+        "Aging: kỹ thuật tăng dần độ ưu tiên của tiến trình theo thời gian chờ. Ví dụ cứ mỗi khoảng thời gian chờ trong ready queue thì cộng thêm priority. Nhờ đó một tiến trình ưu tiên thấp, chờ đủ lâu, cuối cùng sẽ leo lên đủ cao để được chạy → bảo đảm ai cũng có lượt (no indefinite postponement).",
+        "Hình dung: xếp hàng có ưu tiên, nhưng ai đứng càng lâu càng được cộng điểm ưu tiên, nên không bị chen mãi.",
+        "Phân biệt với deadlock: starvation là tiến trình vẫn có thể chạy nếu được cấp, chỉ là không tới lượt; deadlock là các tiến trình chờ lẫn nhau và không cái nào tiến được."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "93110-starvation-trong-lap-lich-cpu-la-gi-aging-giai-quyet-ra-sao"
+  },
+  {
+    "id": "5675aa4c-6aca-5871-98c9-300ad77ed97e",
+    "question": "Thread mức người dùng (user-level) và mức nhân (kernel-level) khác nhau thế nào? Các mô hình ánh xạ?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93113-thread-muc-nguoi-dung-user-level-va-muc-nhan-kernel-level-khac-nhau-the-nao-cac",
+    "slug": "thread-muc-nguoi-dung-user-level-va-muc-nhan-kernel-level-khac-nhau-the-nao-cac-mo-hinh-anh-xa-5675aa4c-6aca-5871-98c9-300ad77ed97e",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Kernel-level threads: nhân biết và tự lập lịch từng thread. Chuyển thread cần vào kernel (tốn hơn), nhưng nhiều thread chạy song song thật trên nhiều lõi, và một thread block I/O không chặn cả tiến trình."
+      ],
+      "details": [
+        "User-level threads: quản lý bởi thư viện ở userspace, nhân chỉ thấy một tiến trình. Tạo/chuyển thread rất nhanh (không vào kernel); nhưng nếu một thread gọi blocking syscall thì cả tiến trình bị block, và khó tận dụng nhiều lõi (nhân không biết các thread).",
+        "Ba mô hình ánh xạ user ↔ kernel:\n- Many-to-One: nhiều user thread → 1 kernel thread. Nhanh nhưng một block là chặn hết, không song song thật.\n- One-to-One: mỗi user thread ↔ 1 kernel thread. Song song thật, block độc lập; nhưng tạo thread tốn kém, giới hạn số lượng. (Linux/Windows dùng mô hình này.)\n- Many-to-Many: ghép M user thread lên N kernel thread (N ≤ M). Linh hoạt nhất nhưng cài đặt phức tạp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "93113-thread-muc-nguoi-dung-user-level-va-muc-nhan-kernel-level-khac-nhau-the-nao-cac"
+  },
+  {
+    "id": "30b2981c-e089-5830-ab0c-e871e1070f91",
+    "question": "Monolithic kernel và microkernel khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93114-monolithic-kernel-va-microkernel-khac-nhau-the-nao",
+    "slug": "monolithic-kernel-va-microkernel-khac-nhau-the-nao-30b2981c-e089-5830-ab0c-e871e1070f91",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khác nhau ở việc bao nhiêu chức năng OS chạy trong không gian nhân (kernel space)."
+      ],
+      "details": [
+        "Monolithic kernel: gần như toàn bộ dịch vụ — quản lý tiến trình, bộ nhớ, file system, driver, network stack — chạy chung trong kernel space, gọi nhau trực tiếp qua function call.\n- Ưu: hiệu năng cao (ít chuyển ngữ cảnh, không IPC giữa các thành phần).\n- Nhược: kernel lớn, một driver lỗi có thể sập cả hệ thống; khó bảo trì.\n- Ví dụ: Linux, Unix truyền thống (Linux nạp module động được nhưng vẫn là monolithic).",
+        "Microkernel: giữ trong nhân phần tối thiểu — lập lịch cơ bản, quản lý bộ nhớ cấp thấp, IPC. Các dịch vụ khác (file system, driver, network) chạy như tiến trình ở user space, giao tiếp qua message passing.\n- Ưu: nhỏ gọn, cách ly lỗi tốt (driver sập chỉ ảnh hưởng service đó), dễ mở rộng, an toàn hơn.\n- Nhược: IPC qua ranh giới user/kernel nhiều lần → overhead, hiệu năng thường thấp hơn.\n- Ví dụ: QNX, Mach, MINIX; macOS (XNU) và Windows là hybrid."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "93114-monolithic-kernel-va-microkernel-khac-nhau-the-nao"
+  },
+  {
+    "id": "1c678623-a062-57e6-85c5-80bc5ffebb10",
+    "question": "Swapping là gì? Swap space dùng để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93116-swapping-la-gi-swap-space-dung-de-lam-gi",
+    "slug": "swapping-la-gi-swap-space-dung-de-lam-gi-1c678623-a062-57e6-85c5-80bc5ffebb10",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Swapping: OS chuyển trang (hoặc cả tiến trình, ở mô hình cũ) từ RAM ra vùng lưu trữ trên đĩa để giải phóng RAM, và nạp lại khi cần. Nhờ đó tổng không gian địa chỉ các tiến trình có thể vượt quá RAM vật lý — nền tảng của virtual memory."
+      ],
+      "details": [
+        "Swap space: vùng đĩa dành riêng (một partition riêng hoặc swap file) để chứa các trang bị đẩy ra. Khi RAM đầy và cần khung trống, thuật toán thay trang chọn nạn nhân; nếu trang đó bẩn (dirty — đã bị sửa) thì phải ghi ra swap trước khi lấy khung, còn trang sạch thì có thể bỏ và nạp lại từ file gốc.",
+        "Đánh đổi: swap cho phép chạy nhiều/lớn hơn RAM, nhưng đĩa chậm hơn RAM hàng vạn lần → truy cập trang đã swap ra gây page fault chậm. Swap quá nhiều dẫn tới thrashing. Thực tế swap là van an toàn khi thiếu RAM, không phải để thay RAM; SSD làm swap bớt đau nhưng vẫn chậm hơn RAM nhiều."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "93116-swapping-la-gi-swap-space-dung-de-lam-gi"
+  },
+  {
+    "id": "ec08c01d-544a-5e5e-af90-7679077929e0",
+    "question": "RAID là gì? Các mức 0, 1, 5, 6, 10 khác nhau ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/93117-raid-la-gi-cac-muc-0-1-5-6-10-khac-nhau-ra-sao",
+    "slug": "raid-la-gi-cac-muc-0-1-5-6-10-khac-nhau-ra-sao-ec08c01d-544a-5e5e-af90-7679077929e0",
+    "access": "free",
+    "departments": [
+      "base"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "RAID (Redundant Array of Independent Disks) ghép nhiều đĩa thành một khối logic để tăng hiệu năng và/hoặc độ tin cậy, dựa trên hai kỹ thuật: striping (chia dữ liệu ra nhiều đĩa để đọc/ghi song song) và mirroring/parity (dư thừa để chịu lỗi)."
+      ],
+      "details": [],
+      "points": [
+        "RAID 0 (striping): chia dữ liệu qua các đĩa. Nhanh, dùng hết dung lượng; KHÔNG dư thừa — hỏng 1 đĩa mất hết.",
+        "RAID 1 (mirroring): mỗi đĩa có bản sao y hệt. Chịu được hỏng 1 đĩa, đọc nhanh; nhưng tốn gấp đôi đĩa cho một lượng dữ liệu.",
+        "RAID 5 (striping + parity phân tán): dữ liệu và parity trải đều trên ≥3 đĩa; chịu được hỏng 1 đĩa, chỉ tốn dung lượng 1 đĩa cho parity. Ghi chậm hơn do phải tính parity.",
+        "RAID 6: như RAID 5 nhưng 2 khối parity → chịu được hỏng ĐỒNG THỜI 2 đĩa; cần ≥4 đĩa, ghi chậm hơn nữa. Phù hợp mảng đĩa lớn (rebuild lâu, dễ hỏng đĩa thứ hai khi đang rebuild).",
+        "RAID 10 (1+0): mirror rồi stripe các cặp mirror. Kết hợp tốc độ của striping và an toàn của mirroring; hiệu năng cao, chịu lỗi tốt — nhưng tốn 50% dung lượng. Thường dùng cho database."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "93117-raid-la-gi-cac-muc-0-1-5-6-10-khac-nhau-ra-sao"
+  },
+  {
+    "id": "d2d8c070-12d4-5198-ae65-d3d730cf60a3",
+    "question": "Garbage Collection hoạt động thế nào? So sánh GC trong JVM, Go và V8.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "garbage-collection-hoat-dong-the-nao-so-sanh-gc-trong-jvm-go-va-v8-d2d8c070-12d4-5198-ae65-d3d730cf60a3",
+    "access": "pro",
+    "departments": [
+      "base"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": null
+  },
+  {
+    "id": "fdd9557b-c1ab-5d65-a861-e56513f247f1",
+    "question": "Các I/O models là gì? So sánh blocking, non-blocking, I/O multiplexing và async I/O.",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cac-i-o-models-la-gi-so-sanh-blocking-non-blocking-i-o-multiplexing-va-async-i-o-fdd9557b-c1ab-5d65-a861-e56513f247f1",
+    "access": "pro",
+    "departments": [
+      "base"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": null
+  },
+  {
+    "id": "a4946946-da3f-5495-9b7c-6e6e177ef29c",
+    "question": "Container khác gì so với VM? Cách container hoạt động ở cấp OS?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "container-khac-gi-so-voi-vm-cach-container-hoat-dong-o-cap-os-a4946946-da3f-5495-9b7c-6e6e177ef29c",
+    "access": "pro",
+    "departments": [
+      "base"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": null
+  },
+  {
+    "id": "a4732ace-e692-5574-aa91-4f505d4447b7",
+    "question": "cgroups và namespaces là gì? Cách Kubernetes dùng chúng để quản lý pods?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "cgroups-va-namespaces-la-gi-cach-kubernetes-dung-chung-de-quan-ly-pods-a4732ace-e692-5574-aa91-4f505d4447b7",
+    "access": "pro",
+    "departments": [
+      "base"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": null
+  },
+  {
+    "id": "c722cab2-6998-5f33-afdd-1a54622dde8a",
+    "question": "Readers-Writers problem: cách giải quyết với read/write lock và trade-offs?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "readers-writers-problem-cach-giai-quyet-voi-read-write-lock-va-trade-offs-c722cab2-6998-5f33-afdd-1a54622dde8a",
+    "access": "pro",
+    "departments": [
+      "base"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": null
+  },
+  {
+    "id": "04d498ad-9e97-5fad-ade5-d59b1d29edbc",
+    "question": "OOM Killer trong Linux: cách hoạt động và cách bảo vệ process quan trọng?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "oom-killer-trong-linux-cach-hoat-dong-va-cach-bao-ve-process-quan-trong-04d498ad-9e97-5fad-ade5-d59b1d29edbc",
+    "access": "pro",
+    "departments": [
+      "base"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": null
+  },
+  {
+    "id": "dcc49d35-ca73-5104-aa0f-fb4bd2decf89",
+    "question": "Banker’s algorithm hoạt động thế nào? Safe state là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "banker-s-algorithm-hoat-dong-the-nao-safe-state-la-gi-dcc49d35-ca73-5104-aa0f-fb4bd2decf89",
+    "access": "pro",
+    "departments": [
+      "base"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": null
+  },
+  {
+    "id": "e98fdb79-e903-50b7-a654-9fe16344524a",
+    "question": "OS phát hiện và phục hồi khỏi deadlock như thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "os-phat-hien-va-phuc-hoi-khoi-deadlock-nhu-the-nao-e98fdb79-e903-50b7-a654-9fe16344524a",
+    "access": "pro",
+    "departments": [
+      "base"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": null
+  },
+  {
+    "id": "cbe85904-331c-542b-8378-87dbe3648cb2",
+    "question": "Bài toán critical-section là gì? Ba yêu cầu và giải pháp Peterson?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "bai-toan-critical-section-la-gi-ba-yeu-cau-va-giai-phap-peterson-cbe85904-331c-542b-8378-87dbe3648cb2",
+    "access": "pro",
+    "departments": [
+      "base"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": null
+  }
+]

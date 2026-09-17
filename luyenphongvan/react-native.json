@@ -1,0 +1,2452 @@
+[
+  {
+    "id": "8b0079e5-a190-5333-b26f-ac133efbbdbc",
+    "question": "React Native khác gì so với ReactJS?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/7500-react-native-khac-gi-so-voi-reactjs",
+    "slug": "react-native-khac-gi-so-voi-reactjs-8b0079e5-a190-5333-b26f-ac133efbbdbc",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "ReactJS là thư viện JavaScript render ra DOM trong browser, output là HTML/CSS. React Native là framework dùng cùng model component + JSX nhưng render ra native UI components (UIView trên iOS, ViewGroup/Android.View trên Android), không có DOM, không có HTML tag."
+      ],
+      "details": [
+        "Khác biệt cụ thể:\n- Tag: Web dùng <div>/<p>/<button>; RN dùng <View>/<Text>/<Pressable>. Mọi text bắt buộc nằm trong <Text> — viết text trần trong <View> là crash.\n- Style: Web dùng CSS file/inline với units px/rem/%; RN dùng StyleSheet.create() với object JS, đơn vị là DIP (density-independent pixels), không có cascading, không có display: block/inline, default flexDirection: column.\n- Routing: Web dùng react-router/Next.js; RN dùng react-navigation (stack/tab/drawer).\n- Build: Web build ra HTML+JS bundle; RN build ra binary .ipa/.apk qua Metro bundler + native toolchain (Xcode/Gradle).\n- API: RN có thêm Platform, Dimensions, AppState, AsyncStorage, không có window/document.",
+        "Điểm chung: hooks, JSX, component composition, props/state, context — code logic gần như copy-paste được."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "7500-react-native-khac-gi-so-voi-reactjs"
+  },
+  {
+    "id": "702c9937-410e-5f82-b1e5-7f24495be747",
+    "question": "JSX trong React Native khác JSX web ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/7501-jsx-trong-react-native-khac-jsx-web-ra-sao",
+    "slug": "jsx-trong-react-native-khac-jsx-web-ra-sao-702c9937-410e-5f82-b1e5-7f24495be747",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cú pháp JSX giống hệt — {} cho expression, className không tồn tại (RN dùng style), nhưng set tag hợp lệ khác hoàn toàn. Web JSX cho phép mọi HTML element vì cuối cùng compile ra DOM. RN JSX chỉ chấp nhận các component được export từ react-native hoặc do bạn viết — không có <div>, <span>, <p>, <button>, <input>, <a>, <ul>/<li>."
+      ],
+      "details": [
+        "Mapping thường dùng:\n- <div> → <View>\n- <span>/<p>/<h1> → <Text>\n- <button> → <Pressable> hoặc <TouchableOpacity>\n- <input> → <TextInput>\n- <img> → <Image source={{ uri: ... }} />\n- <a> → <Pressable onPress={() => Linking.openURL(...)}>",
+        "Thuộc tính style cũng nhận object JS thay vì string CSS, và không có pseudo-class (:hover, :focus) — phải tự xử qua state."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "7501-jsx-trong-react-native-khac-jsx-web-ra-sao"
+  },
+  {
+    "id": "c8909958-3880-5a1d-8dd1-69291c5ab61a",
+    "question": "Vì sao mọi text trong RN phải nằm trong <Text>?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/7502-vi-sao-moi-text-trong-rn-phai-nam-trong-text",
+    "slug": "vi-sao-moi-text-trong-rn-phai-nam-trong-text-c8909958-3880-5a1d-8dd1-69291c5ab61a",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Trên iOS và Android, string không phải là một loại view. UIView không biết cách render ký tự — chỉ UILabel/TextView mới làm được. RN buộc bạn bao text trong <Text> để binding sang đúng native component."
+      ],
+      "details": [
+        "Nếu viết <View>Hello</View>, RN throw runtime error: \"Text strings must be rendered within a <Text> component.\" Trên web, <div>Hello</div> chạy được vì DOM cho phép text node bất cứ đâu.",
+        "Khác biệt phụ kéo theo:\n- Style font, color, lineHeight chỉ áp dụng được trên <Text> — set trên <View> không có tác dụng.\n- <Text> lồng trong <Text> thì kế thừa style cha (giống <span> trong <p>); nhưng <Text> lồng trong <View> thì không kế thừa.\n- numberOfLines, ellipsizeMode chỉ tồn tại trên <Text>."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "7502-vi-sao-moi-text-trong-rn-phai-nam-trong-text"
+  },
+  {
+    "id": "7c54f492-4f91-58d3-b67a-bf9f9f0adb00",
+    "question": "Component lifecycle trong RN giống/khác React web ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/7505-component-lifecycle-trong-rn-giong-khac-react-web-ra-sao",
+    "slug": "component-lifecycle-trong-rn-giong-khac-react-web-ra-sao-7c54f492-4f91-58d3-b67a-bf9f9f0adb00",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Giống: RN dùng cùng React core nên hooks (useEffect, useLayoutEffect, useRef...) và class lifecycle (componentDidMount, componentWillUnmount) hoạt động y hệt web. Mount/update/unmount cycle giống."
+      ],
+      "details": [
+        "Khác:\n- Không có DOM event lifecycle (load, DOMContentLoaded).\n- useLayoutEffect vẫn tồn tại nhưng semantics khác theo architecture: trên Old Arch (Paper), commit UIView async qua bridge nên hook chạy \"trước paint\" không nghiêm ngặt như web; trên New Arch (Fabric), commit đồng bộ qua C++ ShadowTree nên hook thật sự chạy trước khi UI flush ra native.\n- AppState là khái niệm mới: app có thể vào background (background/inactive) khi user lock screen hoặc switch app. Nên subscribe AppState.addEventListener cho các tác vụ pause/resume (timer, video player).\n- Screen focus lifecycle (qua react-navigation): useFocusEffect/useIsFocused thay vì gắn vào component mount, vì màn hình bị navigation cache (không unmount khi đẩy stack).\n- Khi app bị OS kill (out of memory), không có lifecycle callback nào chạy — phải persist state vào storage chủ động."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "7505-component-lifecycle-trong-rn-giong-khac-react-web-ra-sao"
+  },
+  {
+    "id": "36e99470-5feb-5aa8-b93f-998008774c60",
+    "question": "Props vs State trong RN có khác biệt nào so với React web không?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/7506-props-vs-state-trong-rn-co-khac-biet-nao-so-voi-react-web-khong",
+    "slug": "props-vs-state-trong-rn-co-khac-biet-nao-so-voi-react-web-khong-36e99470-5feb-5aa8-b93f-998008774c60",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hoàn toàn không khác — đây là React core, RN không can thiệp. Props vẫn là dữ liệu cha truyền xuống, immutable từ phía con. State vẫn local, mutable qua setState/useState, trigger re-render khi đổi."
+      ],
+      "details": [
+        "Vài điểm cần lưu ý đặc thù RN:\n- Performance impact lớn hơn: mỗi re-render RN phải thông qua native side để cập nhật UIView — list lớn re-render lặp gây jank rõ rệt hơn web. Vì vậy React.memo/useCallback quan trọng hơn web.\n- State persist: state mất khi user kill app. Nếu cần giữ (vd login token), persist vào AsyncStorage/MMKV.\n- Props drilling cross-screen: vì navigation không phải parent-child relationship, không thể truyền prop xuyên screen — dùng route params, context, hoặc store toàn cục.\n- useState initializer pattern: useState(() => expensiveCompute()) quan trọng trên RN vì khởi tạo chậm sẽ block JS thread → chậm transition."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "7506-props-vs-state-trong-rn-co-khac-biet-nao-so-voi-react-web-khong"
+  },
+  {
+    "id": "5d95ebfa-5a9b-506e-9b47-ba0333703ec8",
+    "question": "StyleSheet.create vs inline style — khác gì, khi nào dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/7508-stylesheet-create-vs-inline-style-khac-gi-khi-nao-dung",
+    "slug": "stylesheet-create-vs-inline-style-khac-gi-khi-nao-dung-5d95ebfa-5a9b-506e-9b47-ba0333703ec8",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "StyleSheet.create({ ... }) validate keys lúc dev (warn nếu sai tên prop, vd colour), freeze object trả về để giữ reference ổn định giữa các render. Lịch sử (RN <0.59) còn thay object bằng integer id để tối ưu bridge — tối ưu này đã bị bỏ trong RN hiện đại nên đừng nhớ nhầm."
+      ],
+      "details": [
+        "Inline style style={{ padding: 10, color: 'red' }} tạo object mới mỗi render → nếu prop này truyền vào React.memo child, shallow compare fail → child re-render thừa.",
+        "Khi nào dùng cái nào:\n- StyleSheet.create cho style cố định, ưu tiên mặc định. Lợi ích thực tế 2026: dev-time validation, reference stability, ý đồ rõ ràng cho người đọc.\n- Inline cho style động phụ thuộc props/state: style={{ opacity: pressed ? 0.5 : 1 }}. Pattern chuẩn: gộp vào array để giữ phần tĩnh trong StyleSheet — style={[styles.btn, pressed && styles.btnPressed]}."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "7508-stylesheet-create-vs-inline-style-khac-gi-khi-nao-dung"
+  },
+  {
+    "id": "503ab22f-3082-5d0e-b0cf-20ebf056db2d",
+    "question": "Vì sao RN không dùng đơn vị px mà dùng \"density-independent pixels\"?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/7509-vi-sao-rn-khong-dung-don-vi-px-ma-dung-density-independent-pixels",
+    "slug": "vi-sao-rn-khong-dung-don-vi-px-ma-dung-density-independent-pixels-503ab22f-3082-5d0e-b0cf-20ebf056db2d",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Số trong style: { width: 100 } không phải physical pixel — đó là DIP (density-independent pixel), tương tự dp Android hay pt iOS. RN tự nhân với PixelRatio.get() để ra physical pixel khi render."
+      ],
+      "details": [
+        "Ví dụ trên iPhone 14 (3x density), width: 100 thật sự là 300 physical pixel; trên màn 1x là 100. Mục đích: cùng một số → kích thước vật lý ngang nhau giữa các màn hình mật độ khác nhau, để UI không bị tí hon trên màn 4K hay khổng lồ trên màn cũ.",
+        "Thông tin liên quan:\n- PixelRatio.get() trả 1, 1.5, 2, 2.5, 3, 3.5, 4 tùy device.\n- PixelRatio.getPixelSizeForLayoutSize(100) chuyển DIP → physical pixel (cần khi gọi native API yêu cầu pixel thật, vd Canvas).\n- StyleSheet.hairlineWidth là 1 physical pixel — dùng cho border mảnh (borderBottomWidth: StyleSheet.hairlineWidth).\n- Image asset gắn @2x/@3x để Metro pick đúng độ phân giải theo density."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "7509-vi-sao-rn-khong-dung-don-vi-px-ma-dung-density-independent-pixels"
+  },
+  {
+    "id": "a8cb1823-a6e7-5eef-91da-c48928849c59",
+    "question": "Khác biệt giữa View, Text, Image, ScrollView — mỗi cái dùng khi nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/7512-khac-biet-giua-view-text-image-scrollview-moi-cai-dung-khi-nao",
+    "slug": "khac-biet-giua-view-text-image-scrollview-moi-cai-dung-khi-nao-a8cb1823-a6e7-5eef-91da-c48928849c59",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "<View> là container cơ bản — tương đương <div> web, không có default text rendering. Dùng cho mọi layout block (row/column)."
+      ],
+      "details": [
+        "<Text> là bắt buộc cho mọi chuỗi ký tự. Hỗ trợ numberOfLines, ellipsizeMode, font style, lồng <Text> con để inline format.",
+        "ngắn",
+        "Không",
+        "<ScrollView>",
+        "<FlatList>",
+        "<Image source={{ uri }} /> (remote) hoặc <Image source={require('./logo.png')} /> (local). Phải set width/height rõ ràng cho remote — không có intrinsic size như HTML."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "7512-khac-biet-giua-view-text-image-scrollview-moi-cai-dung-khi-nao"
+  },
+  {
+    "id": "cf69df6a-f0ca-5816-b693-5ecbabb409ae",
+    "question": "keyExtractor trong FlatList quan trọng thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/7514-keyextractor-trong-flatlist-quan-trong-the-nao",
+    "slug": "keyextractor-trong-flatlist-quan-trong-the-nao-cf69df6a-f0ca-5816-b693-5ecbabb409ae",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nếu không cung cấp, FlatList fallback dùng item.key rồi item.id, cuối cùng là index. Dùng index gây bugs nghiêm trọng:\n- Xóa item ở giữa → các item sau \"shift\" key, RN tưởng là item cũ đổi nội dung → state internal (textinput, animation, scroll position con) chuyển nhầm sang item khác.\n- Animation transition không match: item mới fade-in trông như item cũ đổi data."
+      ],
+      "details": [
+        "Quy tắc: luôn dùng id thật từ backend, hoặc UUID stable. Đừng dùng Math.random() — mỗi render sinh key mới làm toàn bộ list re-render từ đầu."
+      ],
+      "points": [],
+      "sections": [
+        "keyExtractor trả về unique string cho mỗi item, để React reconciler biết phân biệt khi data thay đổi (giống key prop trong list React thường)."
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "<FlatList\n  data={users}\n  keyExtractor={(item) => item.id.toString()}\n  renderItem={({ item }) => <UserRow user={item} />}\n/>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "7514-keyextractor-trong-flatlist-quan-trong-the-nao"
+  },
+  {
+    "id": "9b35b928-63d4-58df-b659-ded57add5066",
+    "question": "TextInput controlled vs uncontrolled — pattern nào dùng trong RN?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/7517-textinput-controlled-vs-uncontrolled-pattern-nao-dung-trong-rn",
+    "slug": "textinput-controlled-vs-uncontrolled-pattern-nao-dung-trong-rn-9b35b928-63d4-58df-b659-ded57add5066",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Lợi thế: validate/format on-the-fly, sync với store toàn cục, easy reset.",
+        "inputRef.current.value",
+        "onChangeText"
+      ],
+      "details": [
+        "Uncontrolled: dùng defaultValue và onChangeText cache giá trị vào ref ngoài, không bind vào React state.",
+        "<TextInput>",
+        "race condition trên Android",
+        "Thực tế RN, uncontrolled thuần ít gặp; pattern thường gặp hơn là react-hook-form dùng Controller ẩn ref bên trong → có cảm giác controlled cho user nhưng không re-render parent mỗi keystroke. Form lớn (10+ inputs) trên Android low-end thấy khác biệt rõ."
+      ],
+      "points": [],
+      "sections": [
+        "Controlled (chuẩn React, recommend default): state cha giữ value, onChangeText cập nhật."
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "const [name, setName] = useState('')\n<TextInput value={name} onChangeText={setName} />"
+        },
+        {
+          "language": "TSX",
+          "code": "const valueRef = useRef('')\n<TextInput\n  defaultValue=\"\"\n  onChangeText={(t) => { valueRef.current = t }}\n/>\n// Lúc submit:\nconsole.log(valueRef.current)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "7517-textinput-controlled-vs-uncontrolled-pattern-nao-dung-trong-rn"
+  },
+  {
+    "id": "72f92687-30b7-5667-a1de-f3e159a76459",
+    "question": "Flexbox trong RN khác CSS web ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/7521-flexbox-trong-rn-khac-css-web-ra-sao",
+    "slug": "flexbox-trong-rn-khac-css-web-ra-sao-72f92687-30b7-5667-a1de-f3e159a76459",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "RN dùng Yoga engine của Meta — implement subset Flexbox. Khác biệt quan trọng:"
+      ],
+      "details": [
+        "Một số quirk: aspectRatio được hỗ trợ, transform array thay vì string, position: absolute định vị theo gần nhất parent có position: relative — giống web."
+      ],
+      "points": [
+        "Default flexDirection là column (web là row). Cần nhớ: <View> xếp children theo chiều dọc mặc định.",
+        "flex: 1 viết tắt cho flexGrow: 1, flexShrink: 1, flexBasis: 0 (đa số case web cũng vậy).",
+        "Không có display: block/inline — chỉ flex hoặc absolute. <Text> luôn inline-like trong cùng một <Text> cha, ngoài ra render block.",
+        "Không có gap đến RN 0.71; từ 0.71+ có gap/rowGap/columnGap.",
+        "Không có auto cho margin trong vài context cũ — marginLeft: 'auto' để đẩy phải hoạt động trong flex."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "7521-flexbox-trong-rn-khac-css-web-ra-sao"
+  },
+  {
+    "id": "8d391110-db46-55eb-bd06-2e9072fb063c",
+    "question": "react-navigation v7 — Stack / Tab / Drawer khi nào dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/7522-react-navigation-v7-stack-tab-drawer-khi-nao-dung",
+    "slug": "react-navigation-v7-stack-tab-drawer-khi-nao-dung-8d391110-db46-55eb-bd06-2e9072fb063c",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Stack Navigator (@react-navigation/native-stack hoặc stack): điều hướng kiểu push/pop — màn hình mới đè lên màn cũ, có animation slide từ phải. Dùng cho: detail flow, wizard, checkout. Mỗi navigate('X') push thêm screen vào stack, goBack() pop ra."
+      ],
+      "details": [
+        "Tab Navigator (bottom-tabs / material-top-tabs): chuyển ngang giữa các \"section\" của app — Home / Search / Profile. State của mỗi tab được giữ độc lập (chuyển tab không reset scroll). Dùng cho: navigation chính của app, không phải sub-flow.",
+        "Pattern lồng (nested):",
+        "Drawer Navigator (drawer): menu trượt từ cạnh — phổ biến trên Android, ít dùng iOS. Dùng cho: app có 5+ section chính không vừa tab bar. iOS HIG khuyến nghị tab bar hơn drawer."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "7522-react-navigation-v7-stack-tab-drawer-khi-nao-dung"
+  },
+  {
+    "id": "18d1632d-ae10-5ddc-ae78-d1a664f984b4",
+    "question": "AsyncStorage vs MMKV vs SecureStore — chọn theo nhu cầu nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/7528-asyncstorage-vs-mmkv-vs-securestore-chon-theo-nhu-cau-nao",
+    "slug": "asyncstorage-vs-mmkv-vs-securestore-chon-theo-nhu-cau-nao-18d1632d-ae10-5ddc-ae78-d1a664f984b4",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "@react-native-async-storage/async-storage: key-value persistent, async API, dữ liệu lưu file (iOS) hoặc SQLite (Android). Cross-platform, ổn định, hệ sinh thái lớn. Nhược: async (Promise mỗi call) → block render khi data nhiều, plain text không mã hóa, limit ~6MB Android."
+      ],
+      "details": [
+        "react-native-mmkv: key-value nhanh, đồng bộ API, dùng MMKV của Tencent (mmap-based). 30x nhanh hơn AsyncStorage. Hỗ trợ encryption AES (option). API:",
+        "Quy tắc:",
+        "Expo SecureStore / react-native-keychain: dùng Keychain (iOS) / Keystore (Android) để lưu sensitive data (token, password). Mã hóa hardware-backed. Slow hơn nhiều so với MMKV vì hardware roundtrip."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const storage = new MMKV()\nstorage.set('token', 'abc') // sync, không await\nconst token = storage.getString('token')"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "7528-asyncstorage-vs-mmkv-vs-securestore-chon-theo-nhu-cau-nao"
+  },
+  {
+    "id": "5085ce0f-2bad-5a78-b7c1-cedf1adbbc41",
+    "question": "LayoutAnimation — khi nào đủ dùng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/7558-layoutanimation-khi-nao-du-dung",
+    "slug": "layoutanimation-khi-nao-du-dung-5085ce0f-2bad-5a78-b7c1-cedf1adbbc41",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Use case phù hợp:\n- Add/remove item trong list ngắn (FlatList animation chuyển vị trí).\n- Expand/collapse accordion.\n- Show/hide UI block khi state đổi."
+      ],
+      "details": [
+        "Hạn chế:\n- Animation đơn giản — chỉ có 3 preset (easeInEaseOut, linear, spring).\n- Khó custom: timing fix, interpolation curve hạn chế.\n- Apply cho toàn bộ tree trong tick đó — không scope được vào component cụ thể.\n- Conflict với Reanimated layout animation nếu dùng song song.",
+        "LayoutAnimation",
+        "Khi nào dùng cái khác:\n- Cần animation precise → Reanimated entering={FadeIn}, layout={Layout.springify()}.\n- Cần gesture-driven → Reanimated worklet.\n- Cần per-item animation trong list dài → FlashList với cellAnimation."
+      ],
+      "points": [],
+      "sections": [
+        "LayoutAnimation là built-in API — khai báo \"tôi muốn next layout change được animate\", và RN tự interpolate giữa layout cũ và mới."
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "import { LayoutAnimation, UIManager, Platform } from 'react-native'\n\nif (Platform.OS === 'android') {\n  UIManager.setLayoutAnimationEnabledExperimental?.(true)\n}\n\nconst toggle = () => {\n  LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)\n  setExpanded(!expanded)\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "7558-layoutanimation-khi-nao-du-dung"
+  },
+  {
+    "id": "1be91c3f-1cdc-5a18-bb3a-f50d571829be",
+    "question": "Bridge cũ trong RN là gì? Tại sao 2024+ thay bằng JSI?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7503-bridge-cu-trong-rn-la-gi-tai-sao-2024-thay-bang-jsi",
+    "slug": "bridge-cu-trong-rn-la-gi-tai-sao-2024-thay-bang-jsi-1be91c3f-1cdc-5a18-bb3a-f50d571829be",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bridge cũ (legacy) là hàng đợi message bất đồng bộ giữa JS thread và Native thread. Mỗi lần JS gọi native (vd setState → re-render UIView), payload được serialize JSON, đẩy qua bridge, deserialize bên kia. Đặc điểm:\n- Async-only: không thể gọi native sync; mọi tương tác phải qua callback/Promise.\n- Batched: message gom batch để giảm overhead, nhưng vẫn có lag visible khi list scroll nặng.\n- JSON serialization: dữ liệu lớn (image, blob) tốn nhiều CPU."
+      ],
+      "details": [
+        "JSI (JavaScript Interface) thay bridge bằng C++ layer. JS engine (Hermes/JSC) giữ tham chiếu trực tiếp tới object C++ → có thể gọi native function đồng bộ, không serialize, không queue. Lợi ích:\n- TurboModule load lazy thay vì load toàn bộ lúc startup.\n- Fabric renderer dùng JSI để commit UI tree đồng bộ với React reconciler.\n- Reanimated 3 chạy worklet trên UI thread qua JSI — animation 60/120fps không bị block.",
+        "RN 0.74 (2024) giới thiệu Bridgeless mode; RN 0.76 (Q4 2024) đặt New Architecture (Fabric + TurboModules + Bridgeless) làm default cho project mới khởi tạo qua npx @react-native-community/cli@latest init. Project cũ vẫn có thể opt-in."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "7503-bridge-cu-trong-rn-la-gi-tai-sao-2024-thay-bang-jsi"
+  },
+  {
+    "id": "14689515-6430-576b-b099-0035f1df5ce4",
+    "question": "Hermes là gì, khác JSC ở đâu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7504-hermes-la-gi-khac-jsc-o-dau",
+    "slug": "hermes-la-gi-khac-jsc-o-dau-14689515-6430-576b-b099-0035f1df5ce4",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hermes là JavaScript engine open-source do Meta viết cho RN, tối ưu cho mobile. JSC (JavaScriptCore) là engine mặc định cũ — chính là engine của Safari/iOS."
+      ],
+      "details": [
+        "Khác biệt chính:\n- Bytecode pre-compile: Hermes compile JS bundle thành bytecode lúc build (hbc file). App startup không cần parse JS → giảm time-to-interactive 30–50%, đặc biệt thấy rõ trên Android low-end.\n- Memory: Hermes tiêu thụ RAM ít hơn JSC ~30% nhờ generational GC và string deduplication.\n- APK/IPA size: bytecode + Hermes runtime nhỏ hơn JSC bundle (RN 0.71+ Hermes được lazy-load đẹp).\n- Async/await native: Hermes implement async/await không cần regenerator-runtime polyfill.\n- Debugger: RN DevTools (RN 0.76+) dựa Chrome DevTools Protocol qua Hermes.",
+        "Nhược điểm Hermes: chậm hơn JSC ở vài benchmark CPU-intensive (regex, JSON.parse lớn). Bật Hermes mặc định từ RN 0.70 (Android) và 0.71 (iOS); chỉ tắt khi gặp lib không tương thích."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "7504-hermes-la-gi-khac-jsc-o-dau"
+  },
+  {
+    "id": "9fd495a5-32d9-5045-ba6a-7c1730fc5ef2",
+    "question": "RN render thế nào trên iOS vs Android?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7507-rn-render-the-nao-tren-ios-vs-android",
+    "slug": "rn-render-the-nao-tren-ios-vs-android-9fd495a5-32d9-5045-ba6a-7c1730fc5ef2",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "JS code không thay đổi giữa platform, nhưng layer dưới khác hẳn:"
+      ],
+      "details": [
+        "iOS: mỗi <View> map sang một UIView (Objective-C/Swift), <Text> → RCTTextView/UILabel, <Image> → RCTImageView/UIImageView. Layout dùng Yoga (cross-platform Flexbox engine của Meta), kết quả set frame cho UIView.",
+        "Android: <View> map sang ViewGroup hoặc View (Java/Kotlin), <Text> → ReactTextView/TextView, <Image> → ReactImageView. Cũng qua Yoga để compute layout, sau đó áp lên Android View hierarchy.",
+        "Dimensions.get('screen')",
+        "zIndex"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "7507-rn-render-the-nao-tren-ios-vs-android"
+  },
+  {
+    "id": "7c5b5e42-07f9-50f1-b1c4-45870a25a6e3",
+    "question": "Platform.OS / Platform.select — khi nào dùng, khi nào tách file .ios.tsx / .android.tsx?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7510-platform-os-platform-select-khi-nao-dung-khi-nao-tach-file-ios-tsx-android-tsx",
+    "slug": "platform-os-platform-select-khi-nao-dung-khi-nao-tach-file-ios-tsx-android-tsx-7c5b5e42-07f9-50f1-b1c4-45870a25a6e3",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tách file (Component.ios.tsx + Component.android.tsx) dùng khi:\n- Code khác biệt nhiều (>30%) — vd map view dùng react-native-maps iOS gọi Apple Maps, Android gọi Google Maps qua key khác.\n- Native module chỉ tồn tại một bên.\n- Performance: tránh ship code không dùng — Metro bundler tự pick .ios.tsx cho iOS, .android.tsx cho Android, code platform khác không vào bundle."
+      ],
+      "details": [
+        "Đánh đổi: tách file khó maintain (logic share phải extract ra Component.shared.ts), nên chỉ tách khi thật sự cần. Còn Platform.OS === 'ios' rải rác hơn 5–6 chỗ trong file thì chính là tín hiệu nên tách."
+      ],
+      "points": [],
+      "sections": [
+        "Inline check (Platform.OS / Platform.select) dùng cho khác biệt nhỏ trong cùng một component:"
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "const styles = StyleSheet.create({\n  shadow: Platform.select({\n    ios: { shadowColor: '#000', shadowOpacity: 0.2, shadowRadius: 4 },\n    android: { elevation: 4 },\n  }),\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "7510-platform-os-platform-select-khi-nao-dung-khi-nao-tach-file-ios-tsx-android-tsx"
+  },
+  {
+    "id": "12381185-ed41-5ea6-aa4c-0a374662922a",
+    "question": "FlatList vs SectionList vs ScrollView — khi nào chọn cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7513-flatlist-vs-sectionlist-vs-scrollview-khi-nao-chon-cai-nao",
+    "slug": "flatlist-vs-sectionlist-vs-scrollview-khi-nao-chon-cai-nao-12381185-ed41-5ea6-aa4c-0a374662922a",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "ScrollView: render toàn bộ children ngay lập tức. Dùng cho UI ngắn (form, profile screen), không có pattern data-driven. Chậm và tốn memory với list >20 items."
+      ],
+      "details": [
+        "FlatList: virtualized list — chỉ render items đang visible + windowSize buffer. Lazy mount và unmount khi scroll qua. API: data, renderItem, keyExtractor. Dùng cho list đồng nhất một loại item (chat, feed).",
+        "Hậu quả nếu chọn sai:",
+        "initialNumToRender={1000}",
+        "<FlatList ListHeaderComponent={...} ListFooterComponent={...}>",
+        "SectionList: như FlatList nhưng có header/footer cho từng section. Data shape [{ title, data: [...] }]. Dùng cho contact list, settings có grouping."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "7513-flatlist-vs-sectionlist-vs-scrollview-khi-nao-chon-cai-nao"
+  },
+  {
+    "id": "e7d24112-f8c9-5bff-9299-5022a2d901f2",
+    "question": "SafeAreaView built-in vs react-native-safe-area-context — vì sao team thường thay built-in?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7515-safeareaview-built-in-vs-react-native-safe-area-context-vi-sao-team-thuong-thay",
+    "slug": "safeareaview-built-in-vs-react-native-safe-area-context-vi-sao-team-thuong-thay-built-in-e7d24112-f8c9-5bff-9299-5022a2d901f2",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "RN core có <SafeAreaView>, hoạt động trên iOS only (đặt padding theo notch/home indicator). Trên Android render như <View> thường — không có effect. Bị deprecate-ish và không xử lý đúng khi rotate hay multi-window."
+      ],
+      "details": [
+        "react-native-safe-area-context (lib mặc định trong Expo) cung cấp:\n- Hoạt động cả iOS và Android (Android có status bar inset, gesture nav inset từ Android 10+).\n- useSafeAreaInsets() hook trả { top, right, bottom, left } numeric — dễ tùy biến hơn component bao toàn bộ.\n- SafeAreaProvider ở root để inset context lan xuống mọi screen.\n- Update đúng khi rotate, split-screen, foldable.",
+        "Pattern phổ biến:"
+      ],
+      "points": [],
+      "sections": [
+        "Dùng <SafeAreaView edges={['top']}> từ lib này khi muốn chỉ thoát notch trên (vd screen có tab bar bottom riêng)."
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "const insets = useSafeAreaInsets()\n<View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }} />"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "7515-safeareaview-built-in-vs-react-native-safe-area-context-vi-sao-team-thuong-thay"
+  },
+  {
+    "id": "de4f0d1b-2ead-57dd-90de-4a7710387bcd",
+    "question": "KeyboardAvoidingView — behavior chọn padding hay height?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7516-keyboardavoidingview-behavior-chon-padding-hay-height",
+    "slug": "keyboardavoidingview-behavior-chon-padding-hay-height-de4f0d1b-2ead-57dd-90de-4a7710387bcd",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "<KeyboardAvoidingView> đẩy nội dung lên khi keyboard mở để không che TextInput. Prop behavior:"
+      ],
+      "details": [
+        "Pattern thực tế cross-platform:"
+      ],
+      "points": [
+        "padding (recommend cho iOS): thêm padding bottom = chiều cao keyboard. Children giữ nguyên, chỉ vùng dưới được \"đẩy\" lên. Mượt và predictable.",
+        "height: shrink chiều cao container = screenHeight - keyboardHeight. Hữu ích khi container có background image — tránh image bị resize.",
+        "position: dịch toàn bộ container lên trên. Dễ gây content bị cắt nếu không có ScrollView ngoài.",
+        "undefined (Android): default Android có windowSoftInputMode=\"adjustResize\" trong AndroidManifest.xml xử lý việc này tự động."
+      ],
+      "sections": [
+        "keyboardVerticalOffset cần khi có header navigation bên trên — bù phần header để keyboard đẩy đúng vị trí."
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "<KeyboardAvoidingView\n  behavior={Platform.OS === 'ios' ? 'padding' : undefined}\n  style={{ flex: 1 }}\n  keyboardVerticalOffset={headerHeight}\n>\n  <ScrollView keyboardShouldPersistTaps=\"handled\">{...}</ScrollView>\n</KeyboardAvoidingView>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "7516-keyboardavoidingview-behavior-chon-padding-hay-height"
+  },
+  {
+    "id": "22f5af8e-3295-537e-bbd1-c0a1ed28ccf4",
+    "question": "Image caching trong RN — khi nào dùng expo-image / FastImage?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7518-image-caching-trong-rn-khi-nao-dung-expo-image-fastimage",
+    "slug": "image-caching-trong-rn-khi-nao-dung-expo-image-fastimage-22f5af8e-3295-537e-bbd1-c0a1ed28ccf4",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "<Image> core trong RN có cache rất cơ bản: iOS dùng NSURLCache (limit 20MB default), Android dùng OkHttp memory cache. Không có disk cache mạnh, không có placeholder/blur, không có priority queue. Hậu quả: list ảnh lớn → reload từ network khi user scroll lên/xuống nhiều lần, RAM spike."
+      ],
+      "details": [
+        "expo-image (recommended 2026):\n- Dùng SDWebImage (iOS) + Glide (Android) bên dưới — cache mạnh, disk + memory.\n- Hỗ trợ placeholder (blurhash, thumbnail), transition, contentFit (như CSS object-fit).\n- Hỗ trợ format mới: AVIF, WebP, GIF, animated WebP.\n- Cài qua Expo (dùng được cả bare workflow).",
+        "react-native-fast-image (lib cũ hơn): cũng dùng SDWebImage/Glide, có priority/headers/cache control. Maintain chậm dần khi expo-image phổ biến."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "7518-image-caching-trong-rn-khi-nao-dung-expo-image-fastimage"
+  },
+  {
+    "id": "fcc9d9cf-ca19-5041-933a-c6d65e274aad",
+    "question": "Pressable vs TouchableOpacity / TouchableHighlight — RN khuyến nghị 2026?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7519-pressable-vs-touchableopacity-touchablehighlight-rn-khuyen-nghi-2026",
+    "slug": "pressable-vs-touchableopacity-touchablehighlight-rn-khuyen-nghi-2026-fcc9d9cf-ca19-5041-933a-c6d65e274aad",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Pressable (recommend từ RN 0.63+): API hiện đại, một component thay cho cả family Touchable*.",
+        "TouchableOpacity"
+      ],
+      "details": [
+        "TouchableHighlight: đổi underlayColor khi press — phù hợp list row.",
+        "default Pressable",
+        "Touchable*",
+        "TouchableWithoutFeedback: không feedback gì — chỉ dùng cho overlay invisible (vd dismiss keyboard)."
+      ],
+      "points": [
+        "Function children có signature ({ pressed }) => ReactNode để render khác state, hoặc style function style={({ pressed }) => [...]} để áp style động.",
+        "Hỗ trợ onLongPress, delayLongPress, hitSlop, pressRetentionOffset."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "<Pressable\n  onPress={...}\n  style={({ pressed }) => [styles.btn, pressed && { opacity: 0.6 }]}\n  hitSlop={10}\n>\n  <Text>Submit</Text>\n</Pressable>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "7519-pressable-vs-touchableopacity-touchablehighlight-rn-khuyen-nghi-2026"
+  },
+  {
+    "id": "a2ce5e9e-ff1e-5646-905a-ef52832e36f7",
+    "question": "Modal built-in vs portal-based custom modal — chọn cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7520-modal-built-in-vs-portal-based-custom-modal-chon-cai-nao",
+    "slug": "modal-built-in-vs-portal-based-custom-modal-chon-cai-nao-a2ce5e9e-ff1e-5646-905a-ef52832e36f7",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Built-in <Modal>: render qua native modal API (UIViewController iOS, Dialog Android).",
+        "Custom modal qua portal-like pattern",
+        "<View style={StyleSheet.absoluteFill}>",
+        "react-native-modal",
+        "@gorhom/bottom-sheet"
+      ],
+      "details": [
+        "Quy tắc thực tế:\n- Confirm dialog đơn giản: built-in Modal.\n- Bottom sheet: @gorhom/bottom-sheet.\n- Toast/snackbar: lib khác (react-native-toast-message).\n- Full-screen overlay với navigation gesture: react-navigation presentation: 'modal' thay vì Modal component."
+      ],
+      "points": [
+        "Ưu điểm: tự xử lý back button Android, status bar, true full-screen overlay vượt qua mọi layer.",
+        "Nhược: animation hạn chế (slide, fade, none), khó style header/backdrop, prop presentationStyle chỉ iOS."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "<Modal visible={open} animationType=\"slide\" onRequestClose={() => setOpen(false)}>\n  <SafeAreaView style={{ flex: 1 }}>{...}</SafeAreaView>\n</Modal>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "7520-modal-built-in-vs-portal-based-custom-modal-chon-cai-nao"
+  },
+  {
+    "id": "9122a856-ef48-5743-a340-165fa23fbd8e",
+    "question": "Native stack (@react-navigation/native-stack) vs JS stack — khác biệt hiệu năng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7523-native-stack-react-navigation-native-stack-vs-js-stack-khac-biet-hieu-nang",
+    "slug": "native-stack-react-navigation-native-stack-vs-js-stack-khac-biet-hieu-nang-9122a856-ef48-5743-a340-165fa23fbd8e",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "JS stack (@react-navigation/stack): toàn bộ animation và transition viết bằng JS qua Reanimated. Linh hoạt: custom transition, modal effect, gesture-driven dismiss. Nhược: animation chạy JS thread → có thể jank nếu thread busy lúc transition."
+      ],
+      "details": [
+        "Native stack (@react-navigation/native-stack): wrap react-native-screens — dùng UINavigationController (iOS) và Fragment + FragmentTransaction (Android) bên dưới. Animation chạy trên native thread, hành vi y hệt navigation native (swipe-back iOS, header transition, large title iOS). Performance tốt hơn, đặc biệt trên Android low-end.",
+        "Khuyến nghị 2026:",
+        "native stack",
+        "Đánh đổi:\n- Native stack: customization animation hạn chế (chỉ vài preset), header style theo platform.\n- JS stack: tự do thiết kế, nhưng phải tự test performance."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "7523-native-stack-react-navigation-native-stack-vs-js-stack-khac-biet-hieu-nang"
+  },
+  {
+    "id": "d6514ea0-313d-58a0-b578-6731cc9d90b6",
+    "question": "Deep linking config trong RN — setup ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7524-deep-linking-config-trong-rn-setup-ra-sao",
+    "slug": "deep-linking-config-trong-rn-setup-ra-sao-d6514ea0-313d-58a0-b578-6731cc9d90b6",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Deep link cho phép URL bên ngoài (web link, push notification) mở thẳng vào một screen cụ thể trong app.",
+        "https://example.com/product/42",
+        "Detail",
+        "route.params.id === '42'"
+      ],
+      "details": [
+        "Bước 1 — Khai báo URL scheme:\n- iOS: Info.plist thêm CFBundleURLTypes với scheme custom (myapp://).\n- Android: AndroidManifest.xml thêm <intent-filter> cho android.intent.action.VIEW + <data android:scheme=\"myapp\" />.\n- Universal Link / App Link (recommend): dùng URL HTTPS thật (https://example.com/...) thay vì scheme custom — cần config Apple App Site Association và Android Asset Links file.",
+        "Bước 2 — Cấu hình react-navigation:",
+        "Lưu ý:",
+        "Bước 3 — Test: - iOS simulator: xcrun simctl openurl booted \"myapp://product/42\". - Android:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "const linking = {\n  prefixes: ['myapp://', 'https://example.com'],\n  config: {\n    screens: {\n      HomeTab: { screens: { Detail: 'product/:id' } },\n    },\n  },\n}\n<NavigationContainer linking={linking}>...</NavigationContainer>"
+        },
+        {
+          "language": null,
+          "code": "adb shell am start -a android.intent.action.VIEW -d \"myapp://product/42\""
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "7524-deep-linking-config-trong-rn-setup-ra-sao"
+  },
+  {
+    "id": "55c072ea-bab8-5ead-9572-c339f782cd1b",
+    "question": "useNavigation / useRoute — typing với TypeScript ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7525-usenavigation-useroute-typing-voi-typescript-ra-sao",
+    "slug": "usenavigation-useroute-typing-voi-typescript-ra-sao-55c072ea-bab8-5ead-9572-c339f782cd1b",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "react-navigation v7 cung cấp generic types để type-safe navigation prop và route params."
+      ],
+      "details": [
+        "Khai báo param list:"
+      ],
+      "points": [],
+      "sections": [
+        "Tip 2026: declare global type-safe navigation bằng module augmentation:",
+        "useNavigation()",
+        "Trong screen component:"
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "type RootStackParamList = {\n  Home: undefined\n  Detail: { productId: string; from?: 'home' | 'search' }\n  Profile: { userId: number }\n}"
+        },
+        {
+          "language": "TSX",
+          "code": "import type { NativeStackScreenProps } from '@react-navigation/native-stack'\n\ntype Props = NativeStackScreenProps<RootStackParamList, 'Detail'>\nfunction DetailScreen({ route, navigation }: Props) {\n  const { productId, from } = route.params // typed\n  navigation.navigate('Profile', { userId: 42 }) // typed\n}"
+        },
+        {
+          "language": "TS",
+          "code": "declare global {\n  namespace ReactNavigation {\n    interface RootParamList extends RootStackParamList {}\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "7525-usenavigation-useroute-typing-voi-typescript-ra-sao"
+  },
+  {
+    "id": "837fe75c-7dd8-5880-8649-11ed33382c54",
+    "question": "Truyền params giữa screens — những lỗi hay gặp?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7526-truyen-params-giua-screens-nhung-loi-hay-gap",
+    "slug": "truyen-params-giua-screens-nhung-loi-hay-gap-837fe75c-7dd8-5880-8649-11ed33382c54",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "navigation.navigate('Detail', { product }) truyền params qua route. Vài lỗi hay gặp:"
+      ],
+      "details": [
+        "1. Object reference vs value: params được serialize ngầm (clone) nội bộ navigation state. Truyền object lớn (nested deep, function, Date) trigger warning \"Non-serializable values were found in the navigation state\". Hậu quả: state không persist được, dev tools trace bị lỗi.",
+        "Detail",
+        "useEffect([])",
+        "3. Stale params:",
+        "useEffect([route.params.id], ...)",
+        "Screen.options",
+        "route.params?.x ?? defaultX",
+        "'42'",
+        "4. Default params:",
+        "5. Deep link params là string:",
+        "2. Function trong params: không bao giờ truyền callback onSubmit: (data) => ... qua params — vì serialize fail, và function không stable giữa render. Thay bằng:\n- Lift state lên context/store rồi screen sau đọc.\n- Dùng navigation.navigate('Prev', { result: x }) từ screen sau quay lại."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "7526-truyen-params-giua-screens-nhung-loi-hay-gap"
+  },
+  {
+    "id": "6ebf5ad6-1aa0-5df8-ab4c-5839cb893e5e",
+    "question": "Redux Toolkit vs Zustand vs Jotai trong RN 2026 — chọn cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7529-redux-toolkit-vs-zustand-vs-jotai-trong-rn-2026-chon-cai-nao",
+    "slug": "redux-toolkit-vs-zustand-vs-jotai-trong-rn-2026-chon-cai-nao-6ebf5ad6-1aa0-5df8-ab4c-5839cb893e5e",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Redux Toolkit (RTK): full-featured. RTK Query thay axios cho server state, devtools tốt nhất, time-travel debugging. Phù hợp app lớn (10+ engineers), cần audit trail rõ ràng. Boilerplate vẫn nặng dù RTK đã giảm so với Redux cổ điển. Trên RN, devtools cần Reactotron hoặc Flipper plugin."
+      ],
+      "details": [
+        "Zustand: API tối giản (hook + closure), không context, không boilerplate. Khoảng 1KB bundle. Dễ test (store là plain object). Persist middleware cho RN dùng MMKV/AsyncStorage adapter.",
+        "Khuyến nghị 2026:",
+        "RTK + RTK Query",
+        "Jotai: atom-based — chia state thành nhiều atom nhỏ, component subscribe atom nào re-render atom đó. Phù hợp UI nhiều nguồn state độc lập (form tự do, canvas)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "7529-redux-toolkit-vs-zustand-vs-jotai-trong-rn-2026-chon-cai-nao"
+  },
+  {
+    "id": "93b2cb5d-70ca-5506-ac9d-378f90f3eab7",
+    "question": "TanStack Query trong RN — cấu hình persister thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7530-tanstack-query-trong-rn-cau-hinh-persister-the-nao",
+    "slug": "tanstack-query-trong-rn-cau-hinh-persister-the-nao-93b2cb5d-70ca-5506-ac9d-378f90f3eab7",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "React Query lưu cache trong memory; reload app là mất. Persister cho phép serialize cache vào storage để hydrate khi mở lại app, UI hiển thị data ngay không chờ network.",
+        "Lưu ý:",
+        "focusManager",
+        "onlineManager.setEventListener",
+        "@react-native-community/netinfo"
+      ],
+      "details": [
+        "Setup với MMKV (recommend RN):"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "import { QueryClient, focusManager } from '@tanstack/react-query'\nimport { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'\nimport { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister'\nimport { MMKV } from 'react-native-mmkv'\nimport { AppState } from 'react-native'\n\nconst storage = new MMKV()\nconst persister = createSyncStoragePersister({\n  storage: {\n    getItem: (key) => storage.getString(key) ?? null,\n    setItem: (key, value) => storage.set(key, value),\n    removeItem: (key) => storage.delete(key),\n  },\n})\n\nconst queryClient = new QueryClient({\n  defaultOptions: { queries: { staleTime: 5 * 60_000, gcTime: 24 * 60 * 60_000 } },\n})\n\n// Bật refetch khi app trở về foreground\nfocusManager.setEventListener((handleFocus) => {\n  const sub = AppState.addEventListener('change', (s) => handleFocus(s === 'active'))\n  return () => sub.remove()\n})\n\n// Wrap root\nexport function App() {\n  return (\n    <PersistQueryClientProvider\n      client={queryClient}\n      persistOptions={{ persister, maxAge: 24 * 60 * 60_000 }}\n    >\n      <RootNavigator />\n    </PersistQueryClientProvider>\n  )\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "7530-tanstack-query-trong-rn-cau-hinh-persister-the-nao"
+  },
+  {
+    "id": "0a9b2082-5431-55c9-ba21-c3953d382179",
+    "question": "Context API trong RN — lỗi re-render cụ thể là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7531-context-api-trong-rn-loi-re-render-cu-the-la-gi",
+    "slug": "context-api-trong-rn-loi-re-render-cu-the-la-gi-0a9b2082-5431-55c9-ba21-c3953d382179",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Context không có shallow compare — bất kỳ consumer nào cũng re-render khi value object đổi reference, kể cả khi field họ đọc không đổi.",
+        "theme",
+        "user"
+      ],
+      "details": [
+        "Cách fix:\n1. Tách context: AuthContext riêng, ThemeContext riêng. Đơn giản và hiệu quả.\n2. Memo hóa value: useMemo(() => ({ user, setUser }), [user]).\n3. Tách \"value\" và \"setter\" thành 2 context: một cho data (đổi nhiều), một cho action (stable). Pattern Kent C. Dodds đề xuất.\n4. Dùng store ngoài (Zustand) thay context cho global state — selector có shallow compare built-in.",
+        "Anti-pattern phổ biến:",
+        "Hệ quả trên RN nặng hơn web: mỗi re-render → bridge serialize → UIView update. List 100 row mà có context không tách → mỗi keystroke trong TextInput re-render hết list."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "function AuthProvider({ children }) {\n  const [user, setUser] = useState(null)\n  const [theme, setTheme] = useState('dark')\n  // value mới mỗi render → mọi consumer re-render\n  return (\n    <AuthContext.Provider value={{ user, setUser, theme, setTheme }}>\n      {children}\n    </AuthContext.Provider>\n  )\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "7531-context-api-trong-rn-loi-re-render-cu-the-la-gi"
+  },
+  {
+    "id": "0fd168d7-1724-51ff-8dfb-a163ad5139c7",
+    "question": "Form library trong RN — vì sao react-hook-form thường được chọn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7532-form-library-trong-rn-vi-sao-react-hook-form-thuong-duoc-chon",
+    "slug": "form-library-trong-rn-vi-sao-react-hook-form-thuong-duoc-chon-0fd168d7-1724-51ff-8dfb-a163ad5139c7",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Form lớn (5+ inputs) trong RN thường gặp 2 vấn đề:\n1. Controlled state ở cha → mỗi keystroke re-render toàn form, lag visible trên Android low-end.\n2. Validation phức tạp (cross-field, async) viết tay rất rối."
+      ],
+      "details": [
+        "react-hook-form giải quyết:\n- State giữ trong ref nội bộ, không trong React state — không re-render component cha khi typing.\n- Component nào subscribe field đó qua useController hoặc Controller mới re-render.\n- Plugin Zod/Yup cho validation declarative."
+      ],
+      "points": [],
+      "sections": [
+        "Lựa chọn khác: Formik (cũ, re-render nhiều hơn), TanStack Form (mới, đang phát triển, type-safe hơn). 2026 react-hook-form vẫn là default trong RN ecosystem."
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "import { useForm, Controller } from 'react-hook-form'\nimport { zodResolver } from '@hookform/resolvers/zod'\n\nfunction LoginForm() {\n  const { control, handleSubmit } = useForm({ resolver: zodResolver(schema) })\n  return (\n    <Controller\n      control={control}\n      name=\"email\"\n      render={({ field: { onChange, value } }) => (\n        <TextInput value={value} onChangeText={onChange} />\n      )}\n    />\n  )\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "7532-form-library-trong-rn-vi-sao-react-hook-form-thuong-duoc-chon"
+  },
+  {
+    "id": "b8253368-0cf5-5116-85ee-804aaede50f3",
+    "question": "Networking trong RN — fetch vs axios, retry, offline detection ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7533-networking-trong-rn-fetch-vs-axios-retry-offline-detection-ra-sao",
+    "slug": "networking-trong-rn-fetch-vs-axios-retry-offline-detection-ra-sao-b8253368-0cf5-5116-85ee-804aaede50f3",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "fetch: built-in, đủ dùng cho 80% case. Yếu điểm: không timeout default (phải dùng AbortController), không retry, parse JSON cần .json() rời.",
+        "Retry / backoff: dùng axios-retry hoặc viết qua TanStack Query (built-in retry: 3, retryDelay: exponential).",
+        "NetInfoProvider",
+        "isOnline",
+        "onlineManager.setEventListener"
+      ],
+      "details": [
+        "axios: API gọn hơn, transformer built-in, interceptor cho auth header và refresh token, timeout config dễ.",
+        "NetInfo.fetch().isConnected",
+        "Lưu ý riêng của RN:",
+        "true",
+        "Offline detection: @react-native-community/netinfo:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "const api = axios.create({ baseURL: 'https://api.example.com', timeout: 10_000 })\napi.interceptors.request.use((config) => {\n  config.headers.Authorization = `Bearer ${getToken()}`\n  return config\n})"
+        },
+        {
+          "language": "TS",
+          "code": "import NetInfo from '@react-native-community/netinfo'\nNetInfo.addEventListener((state) => console.log(state.isConnected, state.type))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "7533-networking-trong-rn-fetch-vs-axios-retry-offline-detection-ra-sao"
+  },
+  {
+    "id": "b03ddb79-cbe7-5704-b100-c13abf9cada7",
+    "question": "Vì sao FlatList với 10k items vẫn mượt? Tinh chỉnh windowSize/maxToRenderPerBatch/getItemLayout ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7534-vi-sao-flatlist-voi-10k-items-van-muot-tinh-chinh-windowsize-maxtorenderperbatch",
+    "slug": "vi-sao-flatlist-voi-10k-items-van-muot-tinh-chinh-windowsize-maxtorenderperbatch-getitemlayout-ra-sa-b03ddb79-cbe7-5704-b100-c13abf9cada7",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "FlatList virtualize: chỉ mount items hiện đang trong \"window\" (vùng nhìn thấy + buffer hai phía), unmount items ngoài window khi scroll. Memory ổn định không phụ thuộc tổng số item.",
+        "→ FlatList biết offset trước khi render → scroll đến index xa, jump nhanh, không lag."
+      ],
+      "details": [
+        "Pattern thực tế: với list dài, cân nhắc thay bằng @shopify/flash-list — recycler view, performance gấp 2–3 lần FlatList trên list 10k+.",
+        "Tham số quan trọng:"
+      ],
+      "points": [
+        "windowSize (default 21): số \"screenful\" được render. 21 nghĩa là 1 screen visible + 10 screen trên + 10 screen dưới. Giảm xuống 5–10 cho list rất dài (10k+) → tiết kiệm RAM.",
+        "maxToRenderPerBatch (default 10): số item render mỗi batch khi scroll. Tăng (15–20) cho hardware mạnh → giảm trắng khi scroll nhanh; giảm (5) cho hardware yếu → giữ FPS scroll.",
+        "initialNumToRender (default 10): item render lúc mount đầu. Set bằng số item visible thực tế trên màn hình tiêu chuẩn.",
+        "getItemLayout: nếu mọi item cao bằng nhau, cung cấp function:",
+        "removeClippedSubviews (default false iOS, true Android): unmount khỏi native view tree khi scroll qua. Đôi khi gây bug ảnh trắng — test kỹ."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "getItemLayout={(_, index) => ({ length: 80, offset: 80 * index, index })}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "7534-vi-sao-flatlist-voi-10k-items-van-muot-tinh-chinh-windowsize-maxtorenderperbatch"
+  },
+  {
+    "id": "a88a43e9-6d70-5dbd-a8e2-c65d602a4d40",
+    "question": "useCallback / useMemo trong RN — khi nào thực sự cần?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7535-usecallback-usememo-trong-rn-khi-nao-thuc-su-can",
+    "slug": "usecallback-usememo-trong-rn-khi-nao-thuc-su-can-a88a43e9-6d70-5dbd-a8e2-c65d602a4d40",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Quy tắc giống React web nhưng stake cao hơn vì re-render trong RN tốn hơn (bridge/UIView update)."
+      ],
+      "details": [
+        "useCallback ổn định reference của function giữa các render. Cần khi:\n1. Truyền callback vào React.memo component → tránh unmemoize.\n2. Truyền vào FlatList props (renderItem, keyExtractor, onEndReached) — nếu function mới mỗi render, FlatList re-render hết items visible.\n3. Dùng làm dependency của useEffect — function mới mỗi render gây effect chạy lại liên tục.",
+        "Khi nào KHÔNG cần:",
+        "Cảnh báo:",
+        "x * 2",
+        "useMemo cache giá trị tính toán đắt:\n1. Filter/sort/transform array lớn (>1000 items).\n2. Tạo object/array làm prop cho React.memo component.\n3. Compute style object phức tạp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "7535-usecallback-usememo-trong-rn-khi-nao-thuc-su-can"
+  },
+  {
+    "id": "cec35e5f-1f99-547b-adbf-0e791da7af79",
+    "question": "Hermes engine — bật bằng cách nào, đo improvement ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7536-hermes-engine-bat-bang-cach-nao-do-improvement-ra-sao",
+    "slug": "hermes-engine-bat-bang-cach-nao-do-improvement-ra-sao-cec35e5f-1f99-547b-adbf-0e791da7af79",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hermes là default từ RN 0.70 (Android) và 0.71 (iOS). Dự án mới Expo SDK 50+ và bare CLI đều bật sẵn.",
+        "So sánh TTI giữa Hermes vs JSC build → thường thấy giảm 30–50% trên Android low-end."
+      ],
+      "details": [
+        "Bật/tắt Hermes:\n- Expo: app.json → \"jsEngine\": \"hermes\" (hoặc \"jsc\"). Build qua EAS.\n- Bare:\n- android/gradle.properties → hermesEnabled=true.\n- ios/Podfile → :hermes_enabled => true. Sau đó pod install.",
+        "Đo improvement:",
+        ".apk",
+        ".ipa",
+        "App size:",
+        "1. Time-to-Interactive (TTI):"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "import { Performance } from 'react-native'\n   // hoặc: const start = global.performance.now()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "7536-hermes-engine-bat-bang-cach-nao-do-improvement-ra-sao"
+  },
+  {
+    "id": "24ef8234-9c58-5a01-a952-3e5b9a202a58",
+    "question": "InteractionManager.runAfterInteractions — use case là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7538-interactionmanager-runafterinteractions-use-case-la-gi",
+    "slug": "interactionmanager-runafterinteractions-use-case-la-gi-24ef8234-9c58-5a01-a952-3e5b9a202a58",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "InteractionManager là API cũ trong RN cho phép defer task nặng cho đến khi animation/transition hoàn thành. Mục đích: tránh block animation, giữ FPS smooth lúc transition.",
+        "Khi user navigation.navigate('Detail'), animation slide chạy 300ms. Nếu fetch chạy ngay, JSON.parse + parse data có thể block frame → animation jank. runAfterInteractions đẩy fetch xuống sau animation."
+      ],
+      "details": [
+        "Khi nào KHÔNG cần (2026):\n- Native stack từ react-navigation chạy animation trên native thread → JS work không block.\n- Reanimated chạy worklet trên UI thread → animation độc lập với JS.\n- TanStack Query với useQuery đã có cơ chế suspend/loading state đẹp hơn.",
+        "Use case điển hình:",
+        "Modern alternative: dùng useTransition từ React 18+:"
+      ],
+      "points": [],
+      "sections": [
+        "Trong RN với New Architecture + Fabric, concurrent rendering giúp transition tự nhiên smooth hơn — InteractionManager trở thành legacy."
+      ],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "function DetailScreen() {\n  const [data, setData] = useState(null)\n  useEffect(() => {\n    // Đừng fetch ngay — wait until navigation animation done\n    const handle = InteractionManager.runAfterInteractions(() => {\n      fetchHeavyData().then(setData)\n    })\n    return () => handle.cancel()\n  }, [])\n}"
+        },
+        {
+          "language": "TSX",
+          "code": "const [pending, startTransition] = useTransition()\nstartTransition(() => setHeavyData(...))"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "7538-interactionmanager-runafterinteractions-use-case-la-gi"
+  },
+  {
+    "id": "3285b816-eb99-510b-8178-b2a4324f1be6",
+    "question": "Image-related perf bugs — thumbnails, blur placeholder, prefetch xử lý ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7539-image-related-perf-bugs-thumbnails-blur-placeholder-prefetch-xu-ly-ra-sao",
+    "slug": "image-related-perf-bugs-thumbnails-blur-placeholder-prefetch-xu-ly-ra-sao-3285b816-eb99-510b-8178-b2a4324f1be6",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "List nhiều ảnh thường gặp:",
+        "Blurhash là string ngắn (28 chars) encode preview blur — encode lúc upload server, decode trong app gần như miễn phí.",
+        "onEndReached"
+      ],
+      "details": [
+        "1. Layout shift do ảnh chưa load: ảnh remote không có intrinsic size → khi load xong, item thay đổi chiều cao → list jump. Fix: set width/height cứng hoặc aspectRatio.",
+        "3. Prefetch ảnh sắp scroll tới:",
+        "recyclingKey",
+        "priority",
+        "?w=200&h=200",
+        "resizeMode=\"cover\"",
+        "4. Thumbnail/full-res hai-bước:",
+        "5. Memory blow-up:",
+        "transition={...}",
+        "6. Cache invalidation:",
+        "contentFit",
+        "uri",
+        "cachePolicy=\"memory-disk\"",
+        "2. White flash trước khi ảnh load: dùng placeholder. Với expo-image:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "<Image\n  source={{ uri }}\n  placeholder={{ blurhash: 'L6PZfSi_.AyE_3t7t7R**0o#DgR4' }}\n  transition={200}\n/>"
+        },
+        {
+          "language": "TS",
+          "code": "import { Image } from 'expo-image'\nawait Image.prefetch([url1, url2, url3]) // download trước, vào disk cache"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "7539-image-related-perf-bugs-thumbnails-blur-placeholder-prefetch-xu-ly-ra-sao"
+  },
+  {
+    "id": "78433a68-f750-5e3d-8ac2-ada410773e63",
+    "question": "react-native-screens enableScreens(true) — tác dụng gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7540-react-native-screens-enablescreens-true-tac-dung-gi",
+    "slug": "react-native-screens-enablescreens-true-tac-dung-gi-78433a68-f750-5e3d-8ac2-ada410773e63",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mặc định trong RN cũ, mỗi screen của react-navigation render thành một <View> trong cùng cây React. Tất cả screen trong stack đều mount → giữ nguyên React tree → tốn memory và slow xuống khi navigate sâu.",
+        "Gọi một lần ở top file index.js/App.tsx trước khi import navigation."
+      ],
+      "details": [
+        "enableScreens() (default true từ react-navigation v6+) bật react-native-screens package — wrap mỗi screen trong native screen container (UIViewController iOS, Fragment Android). Lợi ích:",
+        "react-native-keyboard-aware-scroll-view",
+        "enableScreens(false)",
+        "1. OS-managed memory: screen không visible bị OS detach native views → giảm memory footprint.\n2. Native back gesture iOS: swipe-back hoạt động đúng (built-in iOS UINavigationController behavior).\n3. Native large title iOS: large title scroll-collapse animation chạy native.\n4. Performance navigate: transition trên native thread, JS thread tự do.\n5. Required cho native-stack: @react-navigation/native-stack mandate react-native-screens."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "import { enableScreens } from 'react-native-screens'\nenableScreens()"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "7540-react-native-screens-enablescreens-true-tac-dung-gi"
+  },
+  {
+    "id": "323e2bdb-71cd-546c-aaa7-623e97bac176",
+    "question": "New Architecture là gì, gồm những gì, mặc định từ RN version nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7542-new-architecture-la-gi-gom-nhung-gi-mac-dinh-tu-rn-version-nao",
+    "slug": "new-architecture-la-gi-gom-nhung-gi-mac-dinh-tu-rn-version-nao-323e2bdb-71cd-546c-aaa7-623e97bac176",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "New Architecture là tên gọi chung cho 3 phần Meta viết lại RN từ năm 2020:"
+      ],
+      "details": [
+        "1. JSI (JavaScript Interface): C++ layer thay Bridge cũ. JS engine có tham chiếu trực tiếp tới object C++/native — gọi sync, không serialize JSON.",
+        "npx @react-native-community/cli@latest init",
+        "Fabric:",
+        "Bridgeless mode",
+        "Mặc định:",
+        "RN 0.76 (2024-Q4): default",
+        "2. TurboModules: thay native modules cũ. Load lazy (chỉ khi gọi đến), type-safe qua Codegen, gọi qua JSI sync."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "7542-new-architecture-la-gi-gom-nhung-gi-mac-dinh-tu-rn-version-nao"
+  },
+  {
+    "id": "a59f81ac-731b-5223-85ca-3a0d482726e8",
+    "question": "Khi nào cần viết Native Module thay vì tìm package có sẵn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7550-khi-nao-can-viet-native-module-thay-vi-tim-package-co-san",
+    "slug": "khi-nao-can-viet-native-module-thay-vi-tim-package-co-san-a59f81ac-731b-5223-85ca-3a0d482726e8",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Quy tắc: luôn ưu tiên npm package trước. Lý do: lib có sẵn được test trên nhiều device, có CI cross-platform, được community fix bug. Tự viết = bạn own toàn bộ maintenance."
+      ],
+      "details": [
+        "1. Feature platform mới chưa có lib: vd iOS Live Activity (App Intents), Android Predictive Back gesture, Apple Watch companion. Lib mất 6–12 tháng để theo kịp.",
+        "Khi cần viết native module:",
+        "Performance critical:",
+        "Đụng platform-specific permission/hardware:",
+        "Existing native code legacy:",
+        "2. Wrap SDK third-party native: Stripe, Firebase Performance, Sentry, AdMob, Branch.io. Đa số có official RN wrapper, nhưng SDK ngách (vendor riêng, banking SDK) thì phải tự wrap."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "7550-khi-nao-can-viet-native-module-thay-vi-tim-package-co-san"
+  },
+  {
+    "id": "0bcda8c4-4d4a-5ce6-98fb-ae2ec78ab0bc",
+    "question": "Expo Modules API — khác biệt với TurboModule và khi nào dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7554-expo-modules-api-khac-biet-voi-turbomodule-va-khi-nao-dung",
+    "slug": "expo-modules-api-khac-biet-voi-turbomodule-va-khi-nao-dung-0bcda8c4-4d4a-5ce6-98fb-ae2ec78ab0bc",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Expo Modules API là layer abstraction cao hơn TurboModule do Expo team viết. Cùng mục đích (gọi native từ JS) nhưng API gọn hơn nhiều, đặc biệt khi viết Swift/Kotlin idiomatic.",
+        "Lợi điểm Expo Modules:\n- Không cần spec TypeScript riêng (TS type inference từ DSL).\n- Hỗ trợ event emitter, lifecycle, view component (cho Fabric) tích hợp sẵn.\n- Unit test dễ hơn (mock DSL gọn).\n- Expo team duy trì compat với RN versions."
+      ],
+      "details": [
+        "TurboModule (RN core):\n- Spec TypeScript bắt buộc.\n- Native code phải kế thừa class generated.\n- Codegen step manual.\n- Hỗ trợ Old + New Architecture.",
+        "expo-modules-core",
+        "npx install-expo-modules",
+        "Nhược:",
+        "Khi nào chọn:",
+        "Expo Modules:\n- Định nghĩa module bằng DSL Swift/Kotlin:"
+      ],
+      "points": [],
+      "sections": [
+        "JS side đơn giản:"
+      ],
+      "codeExamples": [
+        {
+          "language": "SWIFT",
+          "code": "// ios/MyModule/MyModule.swift\nimport ExpoModulesCore\n\npublic class MyModule: Module {\n  public func definition() -> ModuleDefinition {\n    Name(\"MyModule\")\n    Function(\"greet\") { (name: String) -> String in\n      \"Hello, \\(name)!\"\n    }\n    AsyncFunction(\"fetchData\") { (url: String) async throws -> [String: Any] in\n      // ...\n    }\n  }\n}"
+        },
+        {
+          "language": "KOTLIN",
+          "code": "// android/src/main/java/expo/modules/mymodule/MyModule.kt\nclass MyModule : Module() {\n  override fun definition() = ModuleDefinition {\n    Name(\"MyModule\")\n    Function(\"greet\") { name: String -> \"Hello, $name!\" }\n  }\n}"
+        },
+        {
+          "language": "TS",
+          "code": "import { requireNativeModule } from 'expo-modules-core'\nconst MyModule = requireNativeModule('MyModule')\nMyModule.greet('World')"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "7554-expo-modules-api-khac-biet-voi-turbomodule-va-khi-nao-dung"
+  },
+  {
+    "id": "c12ca0ff-aa45-56e2-b6d8-365b428d541f",
+    "question": "Animated API vs Reanimated 3 — chọn cái nào 2026?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7555-animated-api-vs-reanimated-3-chon-cai-nao-2026",
+    "slug": "animated-api-vs-reanimated-3-chon-cai-nao-2026-c12ca0ff-aa45-56e2-b6d8-365b428d541f",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Animated API (built-in RN core):\n- Driver useNativeDriver: true đẩy animation lên native thread, smooth.\n- Hạn chế: chỉ animate được layout/style không đụng tới layout (opacity, transform, backgroundColor); animate width/height/top phải useNativeDriver: false → JS thread, dễ jank.\n- API verbose: Animated.timing, Animated.Value, interpolate chuỗi dài.",
+        "Quy tắc: Reanimated 3 cho mọi animation mới. Animated API chỉ cho legacy hoặc lib bắt buộc (ScrollView event onScroll cũ). Reanimated bundled trong Expo SDK 50+."
+      ],
+      "details": [
+        "Reanimated 3 (recommend 2026):\n- Worklet chạy trên UI thread qua JSI — animation độc lập với JS thread, không bao giờ bị block bởi render React.\n- API hook-based gọn:"
+      ],
+      "points": [
+        "Animate được mọi prop (width, height, scroll offset).",
+        "withSpring, withTiming, withSequence, withRepeat compose dễ.",
+        "useDerivedValue, useAnimatedReaction cho logic phức tạp.",
+        "Layout animation built-in: entering, exiting, layout props."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "const offset = useSharedValue(0)\nconst style = useAnimatedStyle(() => ({\n  transform: [{ translateX: withSpring(offset.value) }],\n}))\n\n<Animated.View style={style} />\n<Pressable onPress={() => offset.value = 200}>...</Pressable>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "7555-animated-api-vs-reanimated-3-chon-cai-nao-2026"
+  },
+  {
+    "id": "46ae64ed-b9d8-5818-9214-d6a7416e5c06",
+    "question": "react-native-gesture-handler — vì sao thay PanResponder?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7557-react-native-gesture-handler-vi-sao-thay-panresponder",
+    "slug": "react-native-gesture-handler-vi-sao-thay-panresponder-46ae64ed-b9d8-5818-9214-d6a7416e5c06",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "PanResponder (built-in):\n- Mỗi gesture event đi qua bridge → JS xử lý → có lag.\n- Không support gesture native (long-press riêng cho iOS, fling Android).\n- Conflict với ScrollView/Modal hay xảy ra (event không propagate đúng).",
+        "Lợi ích:\n- 60+ FPS gesture, không lag.\n- Compose multi-gesture: Gesture.Race(pan, pinch), Gesture.Simultaneous(...).\n- Cancel/finalize lifecycle rõ ràng (.onBegin, .onUpdate, .onEnd, .onFinalize).\n- Tích hợp react-navigation: swipe-back, drawer mở/đóng."
+      ],
+      "details": [
+        "react-native-gesture-handler (RNGH):\n- Gesture detect và state machine chạy trên UI thread (native code).\n- Cooperate native với scroll, pinch, rotate.\n- API hook-based hợp với Reanimated:",
+        "Setup:\n- Cài react-native-gesture-handler.\n- iOS: tự setup qua autolinking.\n- Android: MainActivity.kt extends ReactActivity, override createReactActivityDelegate để add gesture handler.\n- Wrap app trong <GestureHandlerRootView style={{ flex: 1 }}> ở root."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "import { Gesture, GestureDetector } from 'react-native-gesture-handler'\nimport Animated, { useSharedValue, useAnimatedStyle } from 'react-native-reanimated'\n\nconst x = useSharedValue(0)\nconst pan = Gesture.Pan()\n  .onChange((e) => { x.value += e.changeX })\n  .onEnd(() => { x.value = withSpring(0) })\n\nconst style = useAnimatedStyle(() => ({\n  transform: [{ translateX: x.value }],\n}))\n\n<GestureDetector gesture={pan}>\n  <Animated.View style={style} />\n</GestureDetector>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "7557-react-native-gesture-handler-vi-sao-thay-panresponder"
+  },
+  {
+    "id": "8ff9517f-77af-55be-bd1f-f752b9f234fd",
+    "question": "Expo managed vs bare workflow vs vanilla CLI — quyết định 2026?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7560-expo-managed-vs-bare-workflow-vs-vanilla-cli-quyet-dinh-2026",
+    "slug": "expo-managed-vs-bare-workflow-vs-vanilla-cli-quyet-dinh-2026-8ff9517f-77af-55be-bd1f-f752b9f234fd",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Expo managed (npx create-expo-app):\n- Xcode/Android Studio không cần cài (build qua EAS Cloud).\n- Native config qua app.json + Expo plugins, không động ios//android/ folder.\n- Hot reload và OTA update mặc định.\n- Hạn chế: chỉ dùng module trong Expo SDK + module có Expo plugin. Native module custom phải eject hoặc dùng dev client."
+      ],
+      "details": [
+        "Expo bare workflow (npx expo prebuild từ managed, hoặc npx create-expo-app --template bare-minimum):\n- Có folder ios/ và android/ thật, edit native code tự do.\n- Vẫn dùng Expo modules ecosystem (expo-image, expo-router, expo-updates, ...).\n- EAS Build vẫn hoạt động.\n- \"Best of both worlds\" — recommend cho đa số dự án 2026.",
+        "Quyết định 2026:",
+        "Expo managed",
+        "Vanilla CLI",
+        "Vanilla RN CLI (npx @react-native-community/cli@latest init):\n- Pure RN, không Expo dependency.\n- Toàn quyền kiểm soát, nhưng phải tự setup nhiều thứ (linking, config, splash screen, icons).\n- Dùng khi: team đã có infrastructure native lớn, hoặc lib core cần feature pre-Expo."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "7560-expo-managed-vs-bare-workflow-vs-vanilla-cli-quyet-dinh-2026"
+  },
+  {
+    "id": "e5d72e28-e4e6-520e-b760-18aa8a3a7d92",
+    "question": "Metro bundler — khác Webpack ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7561-metro-bundler-khac-webpack-ra-sao",
+    "slug": "metro-bundler-khac-webpack-ra-sao-e5d72e28-e4e6-520e-b760-18aa8a3a7d92",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Metro là bundler default của RN, viết bởi Meta. Tối ưu cho dev experience mobile (hot reload nhanh, source map cho native).",
+        "Cải tiến 2026:\n- Metro 0.81+ tree-shaking ESM tốt hơn (giảm bundle size 10–20%).\n- Lazy bundle loading — bundle splitting cho RN screens.\n- Hermes-aware optimization (drop unused worklets)."
+      ],
+      "details": [
+        "Khi nào thay Metro:\n- Hiện tại không có alternative production-ready.\n- re.pack (project Callstack) port Webpack cho RN — dùng cho monorepo lớn cần code splitting cross-bundle, nhưng còn experimental.",
+        "Khác Webpack:",
+        "Config (metro.config.js):"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const { getDefaultConfig } = require('expo/metro-config')\n\nconst config = getDefaultConfig(__dirname)\nconfig.resolver.assetExts.push('lottie', 'glb') // custom asset\nconfig.transformer.babelTransformerPath = require.resolve('react-native-svg-transformer')\nmodule.exports = config"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "7561-metro-bundler-khac-webpack-ra-sao"
+  },
+  {
+    "id": "d086ac97-3cd6-5c8e-9962-1a6d2e7b47da",
+    "question": "EAS Build vs build local — trade-off?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7562-eas-build-vs-build-local-trade-off",
+    "slug": "eas-build-vs-build-local-trade-off-d086ac97-3cd6-5c8e-9962-1a6d2e7b47da",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Build local:\n- iOS: cần macOS + Xcode license.\n- Android: cần JDK + Android Studio + SDK.\n- Build time: 5–15 phút mỗi lần.\n- Code signing: tự manage cert/profile (iOS) và keystore (Android).\n- Pros: zero cost, debug build nhanh hơn (cache local), không phụ thuộc internet.\n- Cons: Mac-only cho iOS, manual setup, signing rủi ro nếu key mất."
+      ],
+      "details": [
+        "EAS Build (Expo Application Services):\n- Cloud build, không cần macOS local cho iOS.\n- Profile config (eas.json) cho dev/preview/production.\n- Code signing managed: EAS lưu cert/keystore + auto rotate.\n- Pros: setup 1 lần dùng forever, share build với team qua EAS Update channel, tích hợp OTA, free tier 30 build/month.\n- Cons: build thường 5–10 phút (cloud overhead), priority queue free tier có thể chờ; cost paid tier $99/month/team.",
+        "Hybrid:",
+        "Decision matrix:\n- Indie dev, không có Mac → EAS Build.\n- Team có infrastructure CI riêng (Jenkins, GitHub Actions self-hosted Mac) → build local hoặc CI custom.\n- Startup nhanh launch, ưu tiên dev velocity → EAS Build + EAS Update.\n- Enterprise nghiêm ngặt về security (code không leave premises) → build local hoặc EAS Self-hosted."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "7562-eas-build-vs-build-local-trade-off"
+  },
+  {
+    "id": "f69d02b0-a710-5916-8486-3020f95083ff",
+    "question": "OTA updates — Expo Updates / EAS Update / CodePush — option nào 2026?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7563-ota-updates-expo-updates-eas-update-codepush-option-nao-2026",
+    "slug": "ota-updates-expo-updates-eas-update-codepush-option-nao-2026-f69d02b0-a710-5916-8486-3020f95083ff",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "OTA (Over-The-Air) update cho phép push JS bundle mới mà không cần build/upload App Store/Play Store. User mở app → background fetch bundle → hot-swap.",
+        "Lưu ý:\n- OTA chỉ update JS bundle + assets. Native code (ios//android/) đổi → phải build mới + submit store.\n- App Store policy: OTA cho phép, nhưng không được dùng để bypass review (vd thay đổi feature lớn → reject).\n- Test rollback trên production trước khi push global."
+      ],
+      "details": [
+        "Microsoft CodePush (legacy):\n- Tool đầu tiên phổ biến (~2015).\n- Deprecated: Microsoft thông báo retire CodePush tháng 3/2025. Migrate sang EAS Update hoặc tự host.",
+        "Pattern triển khai:",
+        "Expo Updates (expo-updates library):\n- Built-in trong Expo bare/managed.\n- Self-host: bundle + manifest serve qua S3/Cloudflare → app fetch.\n- Free, control hoàn toàn, nhưng phải tự build pipeline."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "import * as Updates from 'expo-updates'\n\nasync function checkForUpdate() {\n  const update = await Updates.checkForUpdateAsync()\n  if (update.isAvailable) {\n    await Updates.fetchUpdateAsync()\n    await Updates.reloadAsync()\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "7563-ota-updates-expo-updates-eas-update-codepush-option-nao-2026"
+  },
+  {
+    "id": "97a26a00-e569-53cd-9b22-83a437c17fef",
+    "question": "Jest + React Native Testing Library — viết unit test cho component thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7565-jest-react-native-testing-library-viet-unit-test-cho-component-the-nao",
+    "slug": "jest-react-native-testing-library-viet-unit-test-cho-component-the-nao-97a26a00-e569-53cd-9b22-83a437c17fef",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "@testing-library/react-native (RNTL) cung cấp API tương tự @testing-library/react (web) nhưng adapt cho RN component tree.",
+        "Best practices:\n- Query bằng accessibility role/label (getByRole, getByLabelText) thay vì testID — tăng coverage a11y luôn.\n- Mock native module qua jest.mock('react-native-mmkv', () => ({ MMKV: jest.fn() })).\n- Mock navigation: jest.mock('@react-navigation/native') rồi mock useNavigation.\n- Snapshot test ít dùng — dễ false negative khi UI legitimate đổi."
+      ],
+      "details": [
+        "Coverage realistic: focus business logic + form validation + navigation flow. Skip pixel-perfect visual (dùng visual regression test thay).",
+        "Setup:"
+      ],
+      "points": [],
+      "sections": [
+        "jest.config.js:",
+        "Test ví dụ:"
+      ],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "pnpm add -D jest @testing-library/react-native @testing-library/jest-native"
+        },
+        {
+          "language": "JS",
+          "code": "module.exports = {\n  preset: 'react-native',\n  setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect'],\n  transformIgnorePatterns: [\n    'node_modules/(?!(react-native|@react-native|@react-navigation|expo|@expo)/)',\n  ],\n}"
+        },
+        {
+          "language": "TSX",
+          "code": "import { render, screen, fireEvent, waitFor } from '@testing-library/react-native'\nimport { LoginForm } from './LoginForm'\n\ntest('submit calls onLogin with email', async () => {\n  const onLogin = jest.fn()\n  render(<LoginForm onLogin={onLogin} />)\n\n  fireEvent.changeText(screen.getByPlaceholderText('Email'), 'a@b.com')\n  fireEvent.changeText(screen.getByPlaceholderText('Password'), 'pass1234')\n  fireEvent.press(screen.getByRole('button', { name: /sign in/i }))\n\n  await waitFor(() => expect(onLogin).toHaveBeenCalledWith('a@b.com'))\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "7565-jest-react-native-testing-library-viet-unit-test-cho-component-the-nao"
+  },
+  {
+    "id": "78fe53ef-c1fa-5ef3-b459-53c91704de98",
+    "question": "Detox vs Maestro — chọn cho E2E?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7566-detox-vs-maestro-chon-cho-e2e",
+    "slug": "detox-vs-maestro-chon-cho-e2e-78fe53ef-c1fa-5ef3-b459-53c91704de98",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Detox (Wix):\n- E2E test framework cho RN/iOS/Android, viết bằng JS/TS.\n- Cài đặt phức tạp: cần custom build (detox-cli), config simulator/emulator, sync với JS thread qua RN.\n- Mạnh: tích hợp sâu RN (sync với animations, async ops), assertion mạnh.\n- Yếu: setup khó, fail flaky khi animation hoặc timing không đoán được, chậm chạy 5–10 phút mỗi suite.",
+        "Quyết định 2026:\n- Maestro là default. DX tốt hơn, ít maintenance.\n- Detox vẫn dùng khi: cần test logic phức tạp (intercept network, mock state), tích hợp sâu với JS test (chia sẻ helper với Jest).\n- Cả hai: vài team chạy Maestro cho smoke tests + Detox cho edge case logic."
+      ],
+      "details": [
+        "Maestro (Mobile.dev, recommend 2026):\n- E2E framework đa nền tảng (iOS, Android, RN, native, Flutter), viết bằng YAML.\n- Cài đặt 1 lệnh, không cần custom build.\n- Mạnh: stability cao, retry tự động, syntax đơn giản, chạy nhanh.\n- Yếu: ít control logic phức tạp (không phải JS), debug session khó hơn Detox.",
+        "Maestro test ví dụ (flow.yaml):",
+        "Maestro Cloud cho parallel run trên device farm — tích hợp CI dễ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "7566-detox-vs-maestro-chon-cho-e2e"
+  },
+  {
+    "id": "cfbb1007-e6be-5d9d-bd90-f1a4b019ff47",
+    "question": "React Native DevTools (RN 0.76+) — thay Flipper ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7567-react-native-devtools-rn-0-76-thay-flipper-ra-sao",
+    "slug": "react-native-devtools-rn-0-76-thay-flipper-ra-sao-cfbb1007-e6be-5d9d-bd90-f1a4b019ff47",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Flipper là tool debug cũ do Meta xây cho RN — desktop app có console, network inspector, layout inspector, plugin ecosystem (database, AsyncStorage). Deprecated từ RN 0.74+ vì:\n- Khó maintain cross-platform (Java/Obj-C bridge).\n- Chậm và crash thường xuyên trên Apple Silicon.\n- Plugin ecosystem fragmented.",
+        "Hoặc shake device → \"Open DevTools\"."
+      ],
+      "details": [
+        "RN DevTools (default từ RN 0.76+):\n- Web-based, mở qua browser từ Metro CLI (nhấn j trong terminal).\n- Built trên Chrome DevTools Protocol — quen thuộc với web dev.\n- Tính năng:\n- Console: log JS, native warning, error stack với source map.\n- Network: inspect fetch/axios request, response body, headers.\n- React DevTools: component tree, props/state, profiler.\n- Hermes Sources: breakpoint trong JS bundle, step-through debug.\n- Memory: heap snapshot, allocation timeline.\n- Performance: CPU profile, thread timeline.\n- Tích hợp ngay với Hermes — không cần plugin riêng.",
+        "Flipper-*",
+        "gradle",
+        "Hạn chế so với Flipper:\n- Không có database inspector (tự dùng MMKV viewer hoặc DB tool ngoài).\n- Không có layout inspector visual giống Flipper (dùng React DevTools \"Inspect Element\" thay).\n- Plugin ecosystem mới, ít hơn Flipper cũ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "BASH",
+          "code": "pnpm start  # khởi Metro\n# Trong terminal: nhấn j → mở RN DevTools trong Chrome/Edge"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "7567-react-native-devtools-rn-0-76-thay-flipper-ra-sao"
+  },
+  {
+    "id": "0370c830-69e8-5f28-b84b-d27422c52bea",
+    "question": "Snapshot testing trong RN — khi nào hữu ích, khi nào hại?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7568-snapshot-testing-trong-rn-khi-nao-huu-ich-khi-nao-hai",
+    "slug": "snapshot-testing-trong-rn-khi-nao-huu-ich-khi-nao-hai-0370c830-69e8-5f28-b84b-d27422c52bea",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Snapshot test = render component, serialize tree thành text/JSON, lưu file .snap.",
+        "Hữu ích khi:\n- Component thuần presentation (Avatar, Badge, Tag) — UI ít đổi, snapshot bắt regression vô tình.\n- Lib component public — ngăn maintainer accidentally break public API shape.\n- Test pure rendering không có business logic — verify \"đầu ra\" không thay đổi sau refactor."
+      ],
+      "details": [
+        "Hại khi:\n- False positive cao: UI legitimate đổi (đổi padding, đổi label) → snapshot fail → dev quen tay --updateSnapshot không nhìn diff → không thật sự verify gì.\n- Diff không readable: snapshot dài 200 dòng → reviewer skip qua → không catch bug.\n- Coverage giả: đạt 80% coverage qua snapshot không đảm bảo behavior đúng — chỉ đảm bảo render giống lần trước.\n- Couple với implementation: đổi một class name → fail; refactor không ảnh hưởng UX → fail.",
+        "Quy tắc thực tế:\n- Avoid snapshot cho integration test, screen-level test.\n- Prefer behavior-driven test với getByRole, getByText từ RNTL.\n- Nếu phải snapshot: inline snapshot (.toMatchInlineSnapshot()) — diff ngay trong code, dễ review hơn file .snap.\n- Visual regression (Percy, Chromatic) tốt hơn snapshot cho UI test thực sự."
+      ],
+      "points": [
+        "Chạy lại sau, so với snapshot cũ.",
+        "Khác → fail."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "test('Button renders correctly', () => {\n  const tree = render(<Button label=\"Submit\" />).toJSON()\n  expect(tree).toMatchSnapshot()\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "7568-snapshot-testing-trong-rn-khi-nao-huu-ich-khi-nao-hai"
+  },
+  {
+    "id": "8710506a-3dbb-5c61-91ad-2700ef441a5f",
+    "question": "Permissions trong RN — react-native-permissions cross-platform pattern?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7569-permissions-trong-rn-react-native-permissions-cross-platform-pattern",
+    "slug": "permissions-trong-rn-react-native-permissions-cross-platform-pattern-8710506a-3dbb-5c61-91ad-2700ef441a5f",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "react-native-permissions là lib chuẩn cho iOS/Android permission.",
+        "Setup config:\n- iOS: Info.plist thêm key NSCameraUsageDescription, NSLocationWhenInUseUsageDescription, ... với mô tả lý do (App Store reject nếu thiếu hoặc generic).\n- Android: AndroidManifest.xml thêm <uses-permission>. Android 6+ cần runtime request, lib tự handle."
+      ],
+      "details": [
+        "API thống nhất:",
+        "PERMISSIONS.IOS.LOCATION_WHEN_IN_USE",
+        "LOCATION_ALWAYS",
+        "PERMISSIONS.IOS.APP_TRACKING_TRANSPARENCY",
+        "iOS 14+ specific:",
+        "Pattern UX 2026:\n1. Pre-prompt: trước khi popup native, hiển thị custom modal explain why → tăng grant rate.\n2. Just-in-time request: chỉ request khi feature cần (vd request camera khi user nhấn \"Take photo\", không request lúc app start).\n3. Graceful fallback: nếu denied, app vẫn hoạt động không crash; chỉ hide feature liên quan.\n4. Settings deeplink: với BLOCKED, deep link vào Settings app cho user enable manual."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions'\n\nasync function requestCamera() {\n  const permission = Platform.select({\n    ios: PERMISSIONS.IOS.CAMERA,\n    android: PERMISSIONS.ANDROID.CAMERA,\n  })!\n\n  const status = await check(permission)\n\n  switch (status) {\n    case RESULTS.UNAVAILABLE:\n      // device không có camera\n      break\n    case RESULTS.DENIED:\n      // chưa được hỏi → request lần đầu\n      const result = await request(permission)\n      return result === RESULTS.GRANTED\n    case RESULTS.GRANTED:\n      return true\n    case RESULTS.BLOCKED:\n      // user từ chối permanent → mở Settings\n      Linking.openSettings()\n      break\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "7569-permissions-trong-rn-react-native-permissions-cross-platform-pattern"
+  },
+  {
+    "id": "3043c98a-d0c8-56ee-8f52-551e1fbc481b",
+    "question": "Accessibility trong RN — accessibilityLabel, accessibilityRole, screen reader thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7570-accessibility-trong-rn-accessibilitylabel-accessibilityrole-screen-reader-the-na",
+    "slug": "accessibility-trong-rn-accessibilitylabel-accessibilityrole-screen-reader-the-nao-3043c98a-d0c8-56ee-8f52-551e1fbc481b",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "RN expose accessibility props từ iOS VoiceOver và Android TalkBack để screen reader mô tả UI cho user khiếm thị.",
+        "Test screen reader:\n- iOS: Settings → Accessibility → VoiceOver → bật. Triple-tap home button để toggle.\n- Android: Settings → Accessibility → TalkBack → bật.\n- Swipe để navigate, double-tap để activate, two-finger swipe để scroll."
+      ],
+      "details": [
+        "Props chính:\n- accessible={true}: bật accessibility cho component (mặc định false cho View, true cho Text/Button).\n- accessibilityLabel: text screen reader đọc. Override children text khi cần ngắn gọn hoặc rõ nghĩa hơn.\n- accessibilityRole: vai trò UI (button, link, header, image, checkbox, radio, switch, ...). Screen reader đọc role + state (vd \"checkbox, checked\").\n- accessibilityHint: hint thêm về hành động (vd \"Submits the form\").\n- accessibilityState: { selected, disabled, checked, busy, expanded }.\n- accessibilityValue: cho slider/progress bar ({ min, max, now, text }).",
+        "Ví dụ:",
+        "Tools:",
+        "Lưu ý:\n- Decorative icons không nên có accessibilityLabel → set accessible={false} hoặc accessibilityElementsHidden={true}.\n- Group label: dùng accessibilityLabel ở parent View với importantForAccessibility=\"yes-exclude-descendants\" (Android) hoặc accessibilityElementsHidden cho children (iOS).\n- Dynamic text (count, time) — ensure label cập nhật theo state.\n- Contrast: dùng useColorScheme + design system token."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TSX",
+          "code": "<Pressable\n  onPress={handleLike}\n  accessible\n  accessibilityRole=\"button\"\n  accessibilityLabel={liked ? 'Unlike post' : 'Like post'}\n  accessibilityState={{ selected: liked }}\n  accessibilityHint=\"Toggles like status for this post\"\n>\n  <Icon name={liked ? 'heart-filled' : 'heart-outline'} />\n</Pressable>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "7570-accessibility-trong-rn-accessibilitylabel-accessibilityrole-screen-reader-the-na"
+  },
+  {
+    "id": "7031a638-0adc-508c-9d6f-4fd294f338ce",
+    "question": "i18n trong RN — react-i18next / i18n-js, RTL support?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7571-i18n-trong-rn-react-i18next-i18n-js-rtl-support",
+    "slug": "i18n-trong-rn-react-i18next-i18n-js-rtl-support-7031a638-0adc-508c-9d6f-4fd294f338ce",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Library lựa chọn:\n- react-i18next: mạnh nhất, ecosystem React lớn. Hỗ trợ namespace, plural, interpolation, lazy load translation file.\n- i18n-js (cũ, FormatJS-style): nhẹ hơn, ít feature, vẫn dùng nhiều legacy.\n- expo-localization: detect locale từ device, dùng kèm react-i18next.",
+        "Khi I18nManager.isRTL === true:\n- Mọi flexbox tự đảo (row → row-reverse).\n- paddingLeft/paddingRight đổi thành paddingStart/paddingEnd để symmetric.\n- Icon directional (back arrow) phải tự flip với transform: [{ scaleX: -1 }].\n- Test cẩn thận text alignment, image asset (vd checkmark cũng có thể cần mirror)."
+      ],
+      "details": [
+        "Lưu ý:\n- Số/ngày format: dùng Intl.NumberFormat / Intl.DateTimeFormat thay self-format.\n- App restart sau đổi RTL — báo user trước.\n- iOS Right-to-Left language: nếu user device ngôn ngữ RTL nhưng app chỉ support LTR, set I18nManager.forceRTL(false) để override.",
+        "Setup react-i18next:"
+      ],
+      "points": [],
+      "sections": [
+        "Component:"
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "import i18n from 'i18next'\nimport { initReactI18next } from 'react-i18next'\nimport * as Localization from 'expo-localization'\nimport en from './locales/en.json'\nimport vi from './locales/vi.json'\n\ni18n.use(initReactI18next).init({\n  resources: { en: { translation: en }, vi: { translation: vi } },\n  lng: Localization.locale.split('-')[0],\n  fallbackLng: 'en',\n  interpolation: { escapeValue: false },\n})"
+        },
+        {
+          "language": "TSX",
+          "code": "import { useTranslation } from 'react-i18next'\n\nfunction Welcome() {\n  const { t, i18n } = useTranslation()\n  return (\n    <>\n      <Text>{t('welcome.title', { name: 'Linh' })}</Text>\n      <Pressable onPress={() => i18n.changeLanguage('vi')}>\n        <Text>VI</Text>\n      </Pressable>\n    </>\n  )\n}"
+        },
+        {
+          "language": "TS",
+          "code": "import { I18nManager } from 'react-native'\nimport * as Updates from 'expo-updates'\n\nasync function setRTL(rtl: boolean) {\n  if (I18nManager.isRTL !== rtl) {\n    I18nManager.allowRTL(rtl)\n    I18nManager.forceRTL(rtl)\n    await Updates.reloadAsync()  // RN cần reload để apply RTL\n  }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": "7571-i18n-trong-rn-react-i18next-i18n-js-rtl-support"
+  },
+  {
+    "id": "ce807b33-2bba-53fa-93c0-a8ea6c3461ee",
+    "question": "Push notifications — FCM + APNs, Expo Notifications, setup ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/7572-push-notifications-fcm-apns-expo-notifications-setup-ra-sao",
+    "slug": "push-notifications-fcm-apns-expo-notifications-setup-ra-sao-ce807b33-2bba-53fa-93c0-a8ea6c3461ee",
+    "access": "free",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hai dịch vụ native cần biết:\n- APNs (Apple Push Notification service): iOS push.\n- FCM (Firebase Cloud Messaging): Android push, có thể proxy iOS qua APNs.",
+        "Option 2 — Expo Notifications (recommend cho Expo project):\n- Wrapper hoàn chỉnh quanh APNs + FCM.\n- API thống nhất, không cần care platform khác biệt.\n- Có thể dùng Expo push service (FCM/APNs proxy) miễn phí, hoặc dùng FCM/APNs trực tiếp.",
+        "aps-environment",
+        "development",
+        "production",
+        "POST_NOTIFICATIONS"
+      ],
+      "details": [
+        "Option 1 — Direct (@react-native-firebase/messaging + APNs):\n- Setup phức tạp: cần Firebase project, push cert/auth key APNs, token registration.\n- Mạnh: full control, không lock vào Expo, miễn phí (chỉ trả cho FCM enterprise).\n- Code:"
+      ],
+      "points": [],
+      "sections": [
+        "Backend send (Expo example):"
+      ],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "import messaging from '@react-native-firebase/messaging'\n\nconst token = await messaging().getToken() // gửi lên backend\nmessaging().onMessage(async (msg) => console.log('foreground', msg))\nmessaging().setBackgroundMessageHandler(async (msg) => console.log('background', msg))"
+        },
+        {
+          "language": "TS",
+          "code": "import * as Notifications from 'expo-notifications'\n\nconst { status } = await Notifications.requestPermissionsAsync()\nconst token = (await Notifications.getExpoPushTokenAsync()).data\n// Gửi token lên backend, backend gọi Expo push API hoặc FCM\n\nNotifications.addNotificationReceivedListener((notification) => {...})\nNotifications.addNotificationResponseReceivedListener((response) => {\n  // user tap notification → navigate vào screen\n})"
+        },
+        {
+          "language": "TS",
+          "code": "await fetch('https://exp.host/--/api/v2/push/send', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/json' },\n  body: JSON.stringify({\n    to: expoPushToken,\n    title: 'New message',\n    body: 'Hello!',\n    data: { screen: 'Chat', chatId: 42 },\n  }),\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": "7572-push-notifications-fcm-apns-expo-notifications-setup-ra-sao"
+  },
+  {
+    "id": "3bfd9873-33d4-5314-ac58-7b288fe6b475",
+    "question": "Khác biệt cơ bản: RN vs Flutter vs native (Swift/Kotlin) cho dự án mới 2026?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "khac-biet-co-ban-rn-vs-flutter-vs-native-swift-kotlin-cho-du-an-moi-2026-3bfd9873-33d4-5314-ac58-7b288fe6b475",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": null
+  },
+  {
+    "id": "deea7926-afa3-5036-b12e-a175eca40518",
+    "question": "Authentication navigation pattern — split stacks là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "authentication-navigation-pattern-split-stacks-la-gi-deea7926-afa3-5036-b12e-a175eca40518",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": null
+  },
+  {
+    "id": "62b7892b-40e6-5675-b52d-789f5446c226",
+    "question": "removeClippedSubviews — đo trade-off thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "removeclippedsubviews-do-trade-off-the-nao-62b7892b-40e6-5675-b52d-789f5446c226",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": null
+  },
+  {
+    "id": "a1b69408-baf4-5938-b414-308055812759",
+    "question": "Profiling RN — RN DevTools, Systrace, Xcode Instruments dùng khi nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "profiling-rn-rn-devtools-systrace-xcode-instruments-dung-khi-nao-a1b69408-baf4-5938-b414-308055812759",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": null
+  },
+  {
+    "id": "5768369f-6904-5e58-bec3-8ec622b1ca3d",
+    "question": "JSI là gì, khác Bridge cũ thế nào về cơ chế gọi native?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "jsi-la-gi-khac-bridge-cu-the-nao-ve-co-che-goi-native-5768369f-6904-5e58-bec3-8ec622b1ca3d",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": null
+  },
+  {
+    "id": "1ec28cbb-fbbd-5e4d-9585-9b5f187dbfd8",
+    "question": "Fabric — renderer mới hoạt động ra sao, khác UIManager cũ điểm nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "fabric-renderer-moi-hoat-dong-ra-sao-khac-uimanager-cu-diem-nao-1ec28cbb-fbbd-5e4d-9585-9b5f187dbfd8",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": null
+  },
+  {
+    "id": "201f9722-9900-58bc-8240-cf9151921e7d",
+    "question": "TurboModules vs NativeModules cũ — khác biệt cụ thể?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "turbomodules-vs-nativemodules-cu-khac-biet-cu-the-201f9722-9900-58bc-8240-cf9151921e7d",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": null
+  },
+  {
+    "id": "e95bb452-d256-54ac-b098-1199c8f66cfd",
+    "question": "Codegen — vì sao bắt buộc trong New Architecture?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "codegen-vi-sao-bat-buoc-trong-new-architecture-e95bb452-d256-54ac-b098-1199c8f66cfd",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": null
+  },
+  {
+    "id": "b1f99a29-2173-500b-95ba-c7f90b600575",
+    "question": "Bridgeless mode là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "bridgeless-mode-la-gi-b1f99a29-2173-500b-95ba-c7f90b600575",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 65,
+    "sourceSlug": null
+  },
+  {
+    "id": "8f39576e-11fb-5f95-b043-308e11d1a928",
+    "question": "Migrate library cũ sang New Architecture — checklist gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "migrate-library-cu-sang-new-architecture-checklist-gi-8f39576e-11fb-5f95-b043-308e11d1a928",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 66,
+    "sourceSlug": null
+  },
+  {
+    "id": "2871fe72-5ce5-589c-872c-79fa6168932a",
+    "question": "Hermes + New Arch — vì sao là combo mặc định 2026?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "hermes-new-arch-vi-sao-la-combo-mac-dinh-2026-2871fe72-5ce5-589c-872c-79fa6168932a",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 67,
+    "sourceSlug": null
+  },
+  {
+    "id": "52e296cc-bf71-5ac7-88f8-4edb8d09dfee",
+    "question": "Viết Native Module Android (Kotlin) — hello world step-by-step?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "viet-native-module-android-kotlin-hello-world-step-by-step-52e296cc-bf71-5ac7-88f8-4edb8d09dfee",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 68,
+    "sourceSlug": null
+  },
+  {
+    "id": "7386dcf4-807a-5713-9efa-525dcd2de076",
+    "question": "Viết Native Module iOS (Swift) — hello world step-by-step?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "viet-native-module-ios-swift-hello-world-step-by-step-7386dcf4-807a-5713-9efa-525dcd2de076",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 69,
+    "sourceSlug": null
+  },
+  {
+    "id": "3bfbd109-018a-53ca-9036-cf50f304539e",
+    "question": "TurboModule spec file (.ts) → Codegen flow chi tiết?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "turbomodule-spec-file-ts-codegen-flow-chi-tiet-3bfbd109-018a-53ca-9036-cf50f304539e",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 70,
+    "sourceSlug": null
+  },
+  {
+    "id": "a890a5f6-df68-50d5-b15e-516c4a7e5f48",
+    "question": "useSharedValue / useAnimatedStyle — chạy trên UI thread thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "usesharedvalue-useanimatedstyle-chay-tren-ui-thread-the-nao-a890a5f6-df68-50d5-b15e-516c4a7e5f48",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 71,
+    "sourceSlug": null
+  },
+  {
+    "id": "e38b4971-b6e7-5294-9836-d26181edc604",
+    "question": "RN-Skia — use case (canvas, charts, blur, glassmorphism)?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "rn-skia-use-case-canvas-charts-blur-glassmorphism-e38b4971-b6e7-5294-9836-d26181edc604",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 72,
+    "sourceSlug": null
+  },
+  {
+    "id": "8c23bf92-31e6-53fb-bfe1-91ae8126f469",
+    "question": "App size optimization — ProGuard/R8, Hermes, ABI splits, asset compression?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "app-size-optimization-proguard-r8-hermes-abi-splits-asset-compression-8c23bf92-31e6-53fb-bfe1-91ae8126f469",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 73,
+    "sourceSlug": null
+  },
+  {
+    "id": "6dc5215b-bd08-5a0c-91f7-5996096f2074",
+    "question": "Security trong RN — Keychain/Keystore, certificate pinning, encrypted storage?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "security-trong-rn-keychain-keystore-certificate-pinning-encrypted-storage-6dc5215b-bd08-5a0c-91f7-5996096f2074",
+    "access": "pro",
+    "departments": [
+      "mobile"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 74,
+    "sourceSlug": null
+  }
+]

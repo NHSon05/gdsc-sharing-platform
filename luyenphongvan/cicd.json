@@ -1,0 +1,1393 @@
+[
+  {
+    "id": "07252ff4-402c-5074-9edd-ed9025e2c34f",
+    "question": "GitLab CI, Jenkins, CircleCI khác gì so với GitHub Actions?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8340-gitlab-ci-jenkins-circleci-khac-gi-so-voi-github-actions",
+    "slug": "gitlab-ci-jenkins-circleci-khac-gi-so-voi-github-actions-07252ff4-402c-5074-9edd-ed9025e2c34f",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "GitHub Actions (built-in GitHub, free cho public repo): YAML trong .github/workflows/, marketplace lớn nhất, ưu tiên cho dự án đã ở GitHub. GitLab CI (built-in GitLab): .gitlab-ci.yml ở root repo, runner self-host miễn phí, auto-DevOps stack đầy đủ — phù hợp self-hosted enterprise. Jenkins (self-hosted, open-source): pipeline-as-code dùng Jenkinsfile (Groovy DSL), plugin ecosystem khổng lồ nhưng phải tự maintain server + upgrade plugins, hợp công ty có sẵn ops team. CircleCI (cloud-first): docker-based executors, parallelism mạnh, free tier nhỏ — hợp startup chạy nhiều jobs song song. Khi nào chọn cái nào: project ở GitHub → Actions; ở GitLab → GitLab CI (tích hợp issue/CR); enterprise on-premise → Jenkins; cần fast parallel test cloud → CircleCI hoặc Buildkite. Tiêu chí đánh giá: pricing (per-minute vs per-user), runner location (cloud vs self-hosted), secret management, caching primitives, matrix builds, approval gates."
+      ],
+      "details": [
+        "Tránh lock-in: viết pipeline portable (shell scripts trong repo, gọi qua bất kỳ CI nào) — giúp migrate dễ dàng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "8340-gitlab-ci-jenkins-circleci-khac-gi-so-voi-github-actions"
+  },
+  {
+    "id": "516d3b5e-be2a-5512-a80f-edc5792807e6",
+    "question": "Trunk-based development vs Git Flow trong CI/CD hiện đại?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/8346-trunk-based-development-vs-git-flow-trong-ci-cd-hien-dai",
+    "slug": "trunk-based-development-vs-git-flow-trong-ci-cd-hien-dai-516d3b5e-be2a-5512-a80f-edc5792807e6",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Trunk-based development (TBD): mọi developer commit thẳng vào main (hoặc PR ngắn hạn < 1 ngày), feature flag để hide work-in-progress khỏi user."
+      ],
+      "details": [
+        "Phù hợp team CI/CD mature, deploy nhiều lần/ngày, test automation tốt. Git Flow (Vincent Driessen, 2010): branch develop riêng, feature/*, release/*, hotfix/* — quy trình lớn, hợp legacy software có release cycle dài (3-6 tháng), versioned product. Tại sao TBD thắng cho web modern:"
+      ],
+      "points": [
+        "Continuous delivery cần main luôn deployable — branch dài hạn rất dễ drift, merge nightmare;",
+        "feature flag cho phép merge code chưa hoàn chỉnh (ẩn sau flag) — không cần long-running feature branch;",
+        "review nhanh vì PR nhỏ (< 400 lines);",
+        "integration sớm phát hiện conflict trước khi tốn kém. Khi vẫn nên dùng Git Flow: phần mềm phát hành phiên bản (mobile app phải qua App Store review, desktop software, library với semver strict, embedded firmware). Practice TBD: short-lived branch (vài giờ tới 1 ngày), PR < 400 lines, CI gate strict (lint + types + tests + build, không skip), feature flag cho mọi tính năng lớn, monitor production aggressive (alerts, error tracking) vì deploy thường xuyên"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "8346-trunk-based-development-vs-git-flow-trong-ci-cd-hien-dai"
+  },
+  {
+    "id": "30bdb402-59fc-5038-b800-dd6debdb308b",
+    "question": "Bạn thiết kế một pipeline CI/CD nhiều stage thế nào? Job nào chạy song song, job nào phải tuần tự?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98400-ban-thiet-ke-mot-pipeline-ci-cd-nhieu-stage-the-nao-job-nao-chay-song-song-job-n",
+    "slug": "ban-thiet-ke-mot-pipeline-ci-cd-nhieu-stage-the-nao-job-nao-chay-song-song-job-nao-phai-tuan-tu-30bdb402-59fc-5038-b800-dd6debdb308b",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nguyên tắc: việc rẻ và hay hỏng đặt trước, việc đắt đặt sau. Một bố cục thường dùng:",
+        "phụ thuộc dữ liệu",
+        "phụ thuộc tài nguyên"
+      ],
+      "details": [
+        "Thêm concurrency theo branch để hủy run cũ khi có commit mới — không tốn runner cho commit đã lỗi thời."
+      ],
+      "points": [
+        "Stage 1 (song song): lint, typecheck, unit test — chỉ cần source code, không phụ thuộc nhau.",
+        "Stage 2: build → sinh ra một artifact duy nhất (image hoặc bundle).",
+        "Stage 3 (song song): integration test, e2e, security scan — cùng lấy artifact của stage 2.",
+        "Stage 4 (tuần tự): deploy staging → smoke test → deploy production."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "YAML",
+          "code": "jobs:\n  lint:\n    runs-on: ubuntu-latest\n  test:\n    runs-on: ubuntu-latest\n  build:\n    needs: [lint, test]\n  deploy:\n    needs: [build]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "98400-ban-thiet-ke-mot-pipeline-ci-cd-nhieu-stage-the-nao-job-nao-chay-song-song-job-n"
+  },
+  {
+    "id": "cdbfda79-8e95-558a-ba79-7fdfc2781bd7",
+    "question": "Cache dependency trong CI nên đặt key thế nào? Vì sao phải băm lockfile?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98401-cache-dependency-trong-ci-nen-dat-key-the-nao-vi-sao-phai-bam-lockfile",
+    "slug": "cache-dependency-trong-ci-nen-dat-key-the-nao-vi-sao-phai-bam-lockfile-cdbfda79-8e95-558a-ba79-7fdfc2781bd7",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cache key phải thay đổi khi và chỉ khi tập dependency thay đổi.",
+        "Hai lỗi hay gặp:"
+      ],
+      "details": [
+        "Cách chuẩn: băm nội dung lockfile (pnpm-lock.yaml, package-lock.json, go.sum, poetry.lock).",
+        "Key cố định",
+        "key: node-modules",
+        "Key theo commit SHA",
+        "restore-keys là prefix dự phòng: khi không khớp chính xác, CI lấy cache gần nhất rồi cài phần thiếu — vẫn nhanh hơn cài từ đầu.",
+        "Nên cache thư mục store của package manager thay vì node_modules: store là dữ liệu bất biến theo version, còn node_modules phụ thuộc nền tảng và dễ hỏng khi khôi phục lệch."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "98401-cache-dependency-trong-ci-nen-dat-key-the-nao-vi-sao-phai-bam-lockfile"
+  },
+  {
+    "id": "4383415b-174f-5e0d-8190-fe5fef438cdc",
+    "question": "Làm sao chuyển kết quả build từ job này sang job khác? Artifact khác cache thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98402-lam-sao-chuyen-ket-qua-build-tu-job-nay-sang-job-khac-artifact-khac-cache-the-na",
+    "slug": "lam-sao-chuyen-ket-qua-build-tu-job-nay-sang-job-khac-artifact-khac-cache-the-nao-4383415b-174f-5e0d-8190-fe5fef438cdc",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mỗi job trong CI chạy trên runner riêng, filesystem riêng — file build ở job A không tự có ở job B.",
+        "Khác biệt cốt lõi:"
+      ],
+      "details": [
+        "Cần đẩy qua artifact.",
+        "Chốt: artifact là dữ liệu bắt buộc phải có; cache là tối ưu có thể bỏ. Không bao giờ dùng cache để truyền build output — một lần cache miss là pipeline hỏng theo cách khó lần ra."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "YAML",
+          "code": "build:\n    steps:\n      - run: pnpm build\n      - uses: actions/upload-artifact@v4\n        with: { name: dist, path: dist/ }\n  deploy:\n    needs: [build]\n    steps:\n      - uses: actions/download-artifact@v4\n        with: { name: dist }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "98402-lam-sao-chuyen-ket-qua-build-tu-job-nay-sang-job-khac-artifact-khac-cache-the-na"
+  },
+  {
+    "id": "e8799096-9521-5204-86f2-bcd9e02753d6",
+    "question": "Matrix build là gì? Khi nào cần và cần lưu ý gì để không tốn thời gian?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98403-matrix-build-la-gi-khi-nao-can-va-can-luu-y-gi-de-khong-ton-thoi-gian",
+    "slug": "matrix-build-la-gi-khi-nao-can-va-can-luu-y-gi-de-khong-ton-thoi-gian-e8799096-9521-5204-86f2-bcd9e02753d6",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khai báo trên sinh ra 4 job. Dùng khi sản phẩm phải chạy trên nhiều môi trường thật: thư viện hỗ trợ nhiều version runtime, app phải chạy cả Linux lẫn Windows, hoặc test với nhiều version database."
+      ],
+      "details": [
+        "Lưu ý:"
+      ],
+      "points": [
+        "Số job = tích các chiều. Thêm một chiều 3 giá trị là nhân ba chi phí — chỉ thêm chiều khi thật sự có người dùng ở tổ hợp đó.",
+        "include / exclude để bỏ tổ hợp vô nghĩa (vd chỉ test Windows với version LTS mới nhất).",
+        "fail-fast: true (mặc định) hủy toàn bộ matrix khi một job hỏng — tiết kiệm runner nhưng che mất thông tin \"lỗi này chỉ xảy ra ở Node 20 hay ở mọi version\". Khi cần chẩn đoán, đặt false.",
+        "Matrix không phải công cụ chia nhỏ test suite; chia test suite dùng sharding."
+      ],
+      "sections": [
+        "Matrix cho phép khai báo một job rồi CI tự nhân bản job đó theo tổ hợp các biến — mỗi tổ hợp chạy song song trên runner riêng."
+      ],
+      "codeExamples": [
+        {
+          "language": "YAML",
+          "code": "strategy:\n  fail-fast: false\n  matrix:\n    node: [20, 22]\n    os: [ubuntu-latest, windows-latest]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "98403-matrix-build-la-gi-khi-nao-can-va-can-luu-y-gi-de-khong-ton-thoi-gian"
+  },
+  {
+    "id": "ff276716-3d47-598f-ad4d-e3a47979124a",
+    "question": "Log, metric và trace mỗi loại trả lời được câu hỏi gì? Khi có sự cố bạn nhìn cái nào trước?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98500-log-metric-va-trace-moi-loai-tra-loi-duoc-cau-hoi-gi-khi-co-su-co-ban-nhin-cai-n",
+    "slug": "log-metric-va-trace-moi-loai-tra-loi-duoc-cau-hoi-gi-khi-co-su-co-ban-nhin-cai-nao-truoc-ff276716-3d47-598f-ad4d-e3a47979124a",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ba tín hiệu trả lời ba câu hỏi khác nhau, không thay thế cho nhau:"
+      ],
+      "details": [
+        "Thứ tự thực tế khi có sự cố: metric phát hiện và khoanh vùng (dashboard cho thấy p99 của service checkout tăng lúc 14:05) → trace chỉ ra chặng nghi ngờ (span gọi payment mất 3s) → log của chặng đó cho nguyên nhân (timeout kết nối tới cổng thanh toán).",
+        "Đi ngược lại — mở log trước — thường tốn thời gian vì bạn chưa biết cần đọc log của service nào, khoảng thời gian nào."
+      ],
+      "points": [
+        "Metric — số liệu tổng hợp theo thời gian (request/s, tỉ lệ lỗi, độ trễ, CPU). Trả lời \"có đang hỏng không, hỏng từ lúc nào, mức độ ra sao\". Rẻ, giữ được lâu, nhưng không cho biết chi tiết một request cụ thể.",
+        "Trace — đường đi của một request qua nhiều service, gồm các span có thời lượng. Trả lời \"chậm ở chặng nào, service nào gọi service nào\".",
+        "Log — sự kiện rời rạc kèm ngữ cảnh. Trả lời \"cụ thể chuyện gì đã xảy ra trong lần đó\": giá trị tham số, stack trace, mã lỗi từ bên thứ ba."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "98500-log-metric-va-trace-moi-loai-tra-loi-duoc-cau-hoi-gi-khi-co-su-co-ban-nhin-cai-n"
+  },
+  {
+    "id": "f518c58b-7368-5457-a7ef-a09ea5666c33",
+    "question": "Structured log là gì? Correlation id (request id) hoạt động thế nào trong hệ nhiều service?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98501-structured-log-la-gi-correlation-id-request-id-hoat-dong-the-nao-trong-he-nhieu",
+    "slug": "structured-log-la-gi-correlation-id-request-id-hoat-dong-the-nao-trong-he-nhieu-service-f518c58b-7368-5457-a7ef-a09ea5666c33",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Structured log là log ghi ra dưới dạng dữ liệu có trường (thường là JSON) thay vì một câu văn xuôi.",
+        "logger.info(\"payment failed for user u_88 after 3021ms\")",
+        "level=error AND gateway=sepay"
+      ],
+      "details": [
+        "Nhờ đó hệ thống thu thập log có thể lọc và tổng hợp theo trường mà không cần regex mong manh.",
+        "Correlation id giải quyết việc một request người dùng chạy qua nhiều service:\n1. Edge (gateway hoặc service đầu tiên) sinh một id nếu client chưa gửi, đặt vào header — chuẩn hiện nay là traceparent của W3C Trace Context, nhiều hệ cũ dùng X-Request-Id.\n2. Mọi service nhận header đó, ghi vào mọi dòng log của mình, và truyền tiếp khi gọi service khác.\n3. Khi điều tra, lọc theo một id là ghép được toàn bộ chuỗi log của đúng request đó.",
+        "Điểm hay quên: id phải được truyền qua cả worker nền và message queue, không chỉ HTTP — nếu không, chuỗi log đứt ngay tại hàng đợi."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "98501-structured-log-la-gi-correlation-id-request-id-hoat-dong-the-nao-trong-he-nhieu"
+  },
+  {
+    "id": "b1de9b8a-c1fe-5730-9c42-7ca0e0a4b217",
+    "question": "Các log level dùng thế nào cho đúng? Những gì tuyệt đối không được ghi vào log?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98502-cac-log-level-dung-the-nao-cho-dung-nhung-gi-tuyet-doi-khong-duoc-ghi-vao-log",
+    "slug": "cac-log-level-dung-the-nao-cho-dung-nhung-gi-tuyet-doi-khong-duoc-ghi-vao-log-b1de9b8a-c1fe-5730-9c42-7ca0e0a4b217",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tiêu chí chọn level: ai sẽ đọc dòng này và họ phải làm gì."
+      ],
+      "details": [
+        "Tuyệt đối không ghi vào log: mật khẩu, token/API key, số thẻ và CVV, OTP, số CMND/CCCD, cookie phiên, toàn bộ request body của luồng đăng nhập hay thanh toán. Log thường được đẩy sang bên thứ ba, giữ nhiều tháng và cả team đọc được — coi log là vùng dữ liệu công khai nội bộ.",
+        "Cách phòng: dùng danh sách trường bị che (redaction) ngay trong logger (password, authorization, card_number → ***), log id thay vì nội dung (user_id thay vì email), và khi log lỗi thì ghi mã lỗi + trường liên quan chứ không dump nguyên object request."
+      ],
+      "points": [
+        "ERROR — đã có việc hỏng cần người xử lý (giao dịch thất bại, không ghi được DB). Nếu ERROR xuất hiện đều đặn mỗi phút mà không ai làm gì, nó đang bị dùng sai level.",
+        "WARN — bất thường nhưng hệ thống tự phục hồi (retry thành công, rơi về giá trị mặc định). Đáng xem lại sau, không cần đánh thức ai.",
+        "INFO — mốc nghiệp vụ quan trọng: đơn hàng tạo thành công, job chạy xong. Đây là mức mặc định ở production.",
+        "DEBUG — chi tiết cho lập trình viên, mặc định tắt ở production, bật tạm khi điều tra."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "98502-cac-log-level-dung-the-nao-cho-dung-nhung-gi-tuyet-doi-khong-duoc-ghi-vao-log"
+  },
+  {
+    "id": "67e15b3f-9ab3-51c1-bd25-60bd33b25d2f",
+    "question": "Dashboard cho một service nên có những gì? Sắp xếp ra sao để người trực dùng được lúc 3 giờ sáng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/98503-dashboard-cho-mot-service-nen-co-nhung-gi-sap-xep-ra-sao-de-nguoi-truc-dung-duoc",
+    "slug": "dashboard-cho-mot-service-nen-co-nhung-gi-sap-xep-ra-sao-de-nguoi-truc-dung-duoc-luc-3-gio-sang-67e15b3f-9ab3-51c1-bd25-60bd33b25d2f",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mục tiêu của dashboard trực ca không phải \"hiển thị mọi metric\" mà là trả lời trong 30 giây: service này có ổn không, nếu không thì hỏng ở đâu."
+      ],
+      "details": [
+        "1. Trải nghiệm người dùng (trên cùng) — traffic, tỉ lệ lỗi, độ trễ p50/p95/p99, và tình trạng so với SLO. Đây là phần duy nhất người trực cần nhìn khi mọi thứ bình thường.\n2. Phụ thuộc — độ trễ và tỉ lệ lỗi của từng downstream: database, cache, hàng đợi, API bên thứ ba. Tầng này trả lời \"lỗi của mình hay của người khác\".\n3. Tài nguyên — CPU, bộ nhớ, số kết nối DB, độ sâu hàng đợi, số pod đang chạy. Dùng để xác nhận giả thuyết, không phải để phát hiện sự cố.",
+        "Bố cục ba tầng, đọc từ trên xuống:",
+        "Nguyên tắc thực dụng:\n- Mỗi biểu đồ phải trả lời một câu hỏi cụ thể; biểu đồ không ai dùng thì xóa.\n- Cùng một trục thời gian cho mọi panel để so mốc tăng giảm.\n- Đánh dấu thời điểm deploy lên đồ thị — phần lớn sự cố trùng với một lần thay đổi.\n- Ghi ngay trên dashboard link tới runbook và tới dashboard của downstream.",
+        "Dashboard chi tiết theo từng thành phần vẫn nên có, nhưng tách riêng để không làm nhiễu màn hình chính."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "98503-dashboard-cho-mot-service-nen-co-nhung-gi-sap-xep-ra-sao-de-nguoi-truc-dung-duoc"
+  },
+  {
+    "id": "24462b33-09a3-5d70-baa8-c2ca3e651354",
+    "question": "CI/CD là gì? Sự khác biệt giữa CI và CD?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/758-ci-cd-la-gi-su-khac-biet-giua-ci-va-cd",
+    "slug": "ci-cd-la-gi-su-khac-biet-giua-ci-va-cd-24462b33-09a3-5d70-baa8-c2ca3e651354",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "CI (Continuous Integration): tự động build và test mỗi lần push hoặc mở PR, bắt lỗi lúc còn dễ sửa.\nCD (Continuous Delivery): CI xanh thì tự deploy lên staging, còn lên production vẫn cần người duyệt.\nContinuous Deployment: deploy thẳng lên production, không cần ai bấm."
+      ],
+      "details": [
+        "Pipeline điển hình: Lint → Type check → Unit test → Build → Integration test → Deploy staging → Smoke test → Deploy production.",
+        "Công cụ: GitHub Actions (gắn chặt với GitHub, marketplace lớn), GitLab CI (có sẵn, hợp self-hosted), Jenkins (linh hoạt nhưng nuôi mệt), CircleCI, Buildkite (runner self-hosted nhanh)."
+      ],
+      "points": [
+        "Environment promotion: code đi qua dev → staging → production, mỗi bậc có biến môi trường riêng và tuyệt đối không dùng chung secret giữa các môi trường.",
+        "Rollback: blue-green (trỏ traffic ngược lại), feature flag (tắt tính năng mà không cần deploy lại), rollback migration bằng down script — đây chính là lý do mỗi migration phải có down.",
+        "Feature flag: deploy code mới nhưng để tính năng tắt, rồi bật dần cho user; muốn tắt là tắt ngay không cần redeploy, và tiện cho A/B testing.",
+        "Secret: không commit secret vào code — dùng GitHub Secrets, HashiCorp Vault hoặc AWS Secrets Manager, và xoay vòng định kỳ."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "758-ci-cd-la-gi-su-khac-biet-giua-ci-va-cd"
+  },
+  {
+    "id": "2dbebc7c-6a17-5c2d-a67b-39bcc0b5f90d",
+    "question": "GitHub Actions là gì? Cấu trúc của một workflow file?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/759-github-actions-la-gi-cau-truc-cua-mot-workflow-file",
+    "slug": "github-actions-la-gi-cau-truc-cua-mot-workflow-file-2dbebc7c-6a17-5c2d-a67b-39bcc0b5f90d",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "GitHub Actions là nền tảng CI/CD tích hợp sẵn trong GitHub, kích hoạt bằng event (push, pull_request, schedule, workflow_dispatch). Workflow viết bằng YAML trong .github/workflows/: on khai báo trigger, jobs mặc định chạy song song (dùng needs: nếu muốn tuần tự), mỗi job gồm các steps là action hoặc lệnh run."
+      ],
+      "details": [],
+      "points": [
+        "Matrix strategy: matrix: { node: [18, 20], os: [ubuntu-latest, windows-latest] } tự sinh 4 job song song — cách gọn nhất để test đa nền tảng, đa phiên bản.",
+        "Caching: actions/cache cache node_modules và build artifact; đặt key theo hash của package-lock.json để tự invalidate khi dependency đổi — bước install nhanh lên thấy rõ.",
+        "Secret: lưu ở repo/org Settings → Secrets, đọc bằng ${{ secrets.MY_SECRET }}, và tuyệt đối không log ra.",
+        "Reusable workflow: workflow này gọi workflow kia bằng uses: ./.github/workflows/shared.yml — hết cảnh copy logic CI qua từng repo.",
+        "Self-hosted runner: chạy Actions trên máy của mình — rẻ hơn khi workload lớn, truy cập được tài nguyên nội bộ, và dùng được phần cứng đặc thù (GPU, ARM).",
+        "OIDC token: Actions auth được với AWS/GCP/Azure mà không cần credential dài hạn — đây là cách nên dùng khi deploy lên cloud."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "759-github-actions-la-gi-cau-truc-cua-mot-workflow-file"
+  },
+  {
+    "id": "eede3631-7b57-5eea-b71b-76e8cb765d38",
+    "question": "CI/CD pipeline là gì? Frontend project thường cấu hình pipeline gồm những bước nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/882-ci-cd-pipeline-la-gi-frontend-project-thuong-cau-hinh-pipeline-gom-nhung-buoc-na",
+    "slug": "ci-cd-pipeline-la-gi-frontend-project-thuong-cau-hinh-pipeline-gom-nhung-buoc-nao-eede3631-7b57-5eea-b71b-76e8cb765d38",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "CI/CD (Continuous Integration / Continuous Deployment) là quy trình tự động kiểm tra và deploy code mỗi khi có thay đổi. Pipeline frontend chạy tuần tự để fail-fast:"
+      ],
+      "details": [
+        "Ở tầng staging: deploy preview mỗi PR (Vercel preview URLs rất tiện), chạy E2E tests với Playwright. Deploy production khi merge vào main.",
+        "Công cụ phổ biến: GitHub Actions (miễn phí cho open source, tích hợp sẵn GitHub), GitLab CI, hoặc Jenkins/Azure DevOps cho enterprise on-premise."
+      ],
+      "points": [
+        "lint + format check (nhanh nhất)",
+        "type check tsc --noEmit",
+        "unit tests với coverage threshold",
+        "production build"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "882-ci-cd-pipeline-la-gi-frontend-project-thuong-cau-hinh-pipeline-gom-nhung-buoc-na"
+  },
+  {
+    "id": "d53740b8-b0ba-595f-a101-c75bd860906e",
+    "question": "GitOps là gì? ArgoCD và Flux hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8341-gitops-la-gi-argocd-va-flux-hoat-dong-the-nao",
+    "slug": "gitops-la-gi-argocd-va-flux-hoat-dong-the-nao-d53740b8-b0ba-595f-a101-c75bd860906e",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "GitOps = Git là single source of truth cho cả app code lẫn infrastructure state — cluster tự reconcile để match Git, không có ai kubectl apply bằng tay. Nguyên tắc cốt lõi:"
+      ],
+      "details": [
+        "UI đẹp, hỗ trợ multi-cluster, app-of-apps pattern, sync waves, hooks.",
+        "Truy cập qua argocd CLI hoặc web UI. Flux (CNCF graduated): nhỏ gọn hơn ArgoCD, không có UI native (dùng Flux extension hoặc Weave GitOps), tích hợp tốt với Kustomize và Helm Controllers, có Image Automation Controller tự bump image tag khi có release mới. Lợi ích GitOps: audit trail (mọi deploy đều có commit), rollback bằng git revert, disaster recovery (cluster gone? re-create từ Git), no CI credentials in cluster (pull thay vì push — bảo mật hơn). Trade-off: thêm 1 component (Argo/Flux) phải maintain; debug khó hơn khi sync fail; phải educate team về branch strategy cho config repo."
+      ],
+      "points": [
+        "Declarative — toàn bộ state mô tả bằng YAML/Helm/Kustomize trong Git;",
+        "Versioned & immutable — mọi thay đổi qua PR, history rõ ràng;",
+        "Pulled automatically — agent trong cluster pull config từ Git, không push từ CI;",
+        "Continuously reconciled — agent detect drift và tự sửa. ArgoCD: agent chạy trong K8s cluster, watch Git repo, sync resources tới namespace target"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "8341-gitops-la-gi-argocd-va-flux-hoat-dong-the-nao"
+  },
+  {
+    "id": "800dbbbe-94f7-5743-bd9c-22ffd8432e02",
+    "question": "Cách thiết kế CI pipeline fail-fast, hiệu quả về thời gian?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8342-cach-thiet-ke-ci-pipeline-fail-fast-hieu-qua-ve-thoi-gian",
+    "slug": "cach-thiet-ke-ci-pipeline-fail-fast-hieu-qua-ve-thoi-gian-800dbbbe-94f7-5743-bd9c-22ffd8432e02",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nguyên tắc: test rẻ chạy trước, test đắt chạy sau, song song hoá tối đa, cache mạnh tay, và chỉ chạy job liên quan tới file vừa đổi."
+      ],
+      "details": [
+        "Thứ tự stage (rẻ → đắt), stage sau chỉ chạy khi stage trước xanh:\n1. Lint + format check (5-10s)\n2. Type check tsc --noEmit (10-30s)\n3. Unit test, tắt watch mode, coverage chỉ trên file đã đổi (30s-2 phút)\n4. Build production (1-3 phút)\n5. Integration test (2-5 phút)\n6. E2E test trên bản staging vừa deploy (5-15 phút)",
+        "Chi phí ẩn ít ai tính: noise thông báo (chỉ nên ping khi main vỡ) và flaky test (retry tự động một lần rồi gắn cờ sửa sau, đừng giấu bằng --retries=5)."
+      ],
+      "points": [
+        "Song song hoá: matrix strategy chia test theo file (jest --shard=1/4), upload coverage artifact rồi merge ở job cuối.",
+        "Caching: cache node_modules theo hash package-lock.json để tự invalidate khi lockfile đổi; cache output của Turborepo/Nx để bỏ qua package không đổi (turbo run build --cache-dir=.turbo). Trên GitHub Actions dùng actions/cache@v4.",
+        "Chỉ chạy phần bị ảnh hưởng: trong monorepo dùng nx affected --target=test hoặc turbo run test --filter=...[origin/main].",
+        "Concurrency:\nCopy\nconcurrency: { group: ci-${{ github.ref }}, cancel-in-progress: true }\nđể push mới huỷ luôn run cũ trên cùng branch."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "concurrency: { group: ci-${{ github.ref }}, cancel-in-progress: true }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "8342-cach-thiet-ke-ci-pipeline-fail-fast-hieu-qua-ve-thoi-gian"
+  },
+  {
+    "id": "b595ef53-631e-552d-9649-3fed4bf47b85",
+    "question": "Quản lý secrets trong CI/CD an toàn như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8343-quan-ly-secrets-trong-ci-cd-an-toan-nhu-the-nao",
+    "slug": "quan-ly-secrets-trong-ci-cd-an-toan-nhu-the-nao-b595ef53-631e-552d-9649-3fed4bf47b85",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không bao giờ commit secret vào code, kể cả file .env. Chỗ để đúng là secret store của chính CI (GitHub Secrets, GitLab Variables) hoặc vault tập trung (HashiCorp Vault, AWS Secrets Manager)."
+      ],
+      "details": [
+        "Cách làm nên theo:\n- Secret của CI: GitHub Settings → Secrets and variables → Actions, đọc bằng ${{ secrets.MY_KEY }} và được tự động che trong log.\n- Environment secret: gắn secret vào environment (production, staging) để job phải qua bước duyệt của reviewer mới dùng được.\n- OIDC — nên dùng nhất khi deploy cloud: GitHub Actions phát OIDC token, AWS/GCP/Azure tin issuer đó rồi cấp credential ngắn hạn (15 phút). Không còn access key tĩnh nằm trong repo nữa.\n- Secret scanning: GitHub Secret Scanning kèm push protection chặn ngay commit chứa AWS key hay Stripe key trước khi lên remote; thêm gitleaks vào pre-commit hook để quét ngay ở máy.\n- Vault: những secret nhạy cảm hơn (mật khẩu DB production) để trong HashiCorp Vault hoặc AWS Secrets Manager, CI fetch lúc chạy với TTL ngắn.",
+        "Rotation: API key quan trọng xoay mỗi 90 ngày. Nghi ngờ lộ thì revoke ngay, rotate, rồi soi audit log để biết thiệt hại tới đâu.",
+        "Lưu ý — ba lỗi kinh điển: log cả env ra CI (set -x là lộ sạch); commit .env rồi xoá đi (nó vẫn nằm trong Git history — phải BFG repo-cleaner hoặc git filter-repo, force push, và rotate lại toàn bộ); echo secret vào artifact rồi upload công khai."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "8343-quan-ly-secrets-trong-ci-cd-an-toan-nhu-the-nao"
+  },
+  {
+    "id": "29bfd37e-3ec5-5fad-a392-acc903f4fc0b",
+    "question": "Rolling, recreate, canary, blue-green deploy: khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8344-rolling-recreate-canary-blue-green-deploy-khi-nao-dung-cai-nao",
+    "slug": "rolling-recreate-canary-blue-green-deploy-khi-nao-dung-cai-nao-29bfd37e-3ec5-5fad-a392-acc903f4fc0b",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Rolling update (default K8s Deployment): thay pods dần dần, maxSurge: 25%, maxUnavailable: 25% — zero-downtime, dễ hiểu, hợp với stateless service phần lớn case. Recreate: kill toàn bộ pod cũ trước khi start pod mới — có downtime, dùng khi schema migration không backward-compatible (không thể chạy v1 + v2 cùng lúc). Canary: deploy version mới chỉ cho 1-5% traffic, monitor metrics, tăng dần nếu OK — phù hợp release rủi ro cao, có cơ chế rollback nhanh; cần service mesh (Istio/Linkerd) hoặc Argo Rollouts/Flagger để split traffic theo % chính xác. Blue-Green: duy trì 2 môi trường song song, switch traffic instant tại load balancer — rollback < 1s nhưng tốn 2x infra; tốt cho release lớn, smoke test green trước khi switch. Quyết định theo bối cảnh: stateless API thông thường → rolling; release rủi ro (thuật toán mới, big refactor) → canary + feature flag; cần rollback tức thời / downtime không chấp nhận được → blue-green; migration DB phá compat → recreate (chấp nhận maintenance window). Feature flags là layer trên cùng: tách deployment (đẩy code lên prod) khỏi release (bật cho user) — deploy rolling vẫn an toàn vì code mới ẩn sau flag, bật dần qua LaunchDarkly/Unleash mà không cần redeploy."
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "8344-rolling-recreate-canary-blue-green-deploy-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "e9271c88-b874-596e-8f88-be6717ad45f8",
+    "question": "Build artifact, immutable image, semantic versioning trong CI/CD?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8345-build-artifact-immutable-image-semantic-versioning-trong-ci-cd",
+    "slug": "build-artifact-immutable-image-semantic-versioning-trong-ci-cd-e9271c88-b874-596e-8f88-be6717ad45f8",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Build once, deploy many: artifact (Docker image, jar, zip) build 1 lần ở stage CI, promote qua các môi trường (dev → staging → prod) — không bao giờ rebuild từ source ở mỗi môi trường. Tại sao immutable: rebuild ở mỗi env risk subtle drift (npm install cùng package.json nhưng khác lockfile resolution, base image cập nhật lén)."
+      ],
+      "details": [],
+      "points": [
+        "Image tag bằng commit SHA hoặc semver, không bao giờ overwrite latest cho production. Semantic versioning (semver): MAJOR.MINOR.PATCH — MAJOR khi breaking, MINOR cho feature mới backward-compat, PATCH cho bug fix.",
+        "Pre-release: 1.2.0-rc.1, 2.0.0-beta.3.",
+        "Automated tooling: semantic-release (commit message convention feat:, fix:, BREAKING CHANGE: → tự bump version + tạo changelog + tag Git + publish npm). Container image tag strategy: 3 tag cùng lúc — myapp:1.4.2 (semver), myapp:1.4.2-a3f8c9 (semver + commit SHA cho traceability), myapp:latest (chỉ cho dev/staging, không prod). Artifact registry: GitHub Container Registry, AWS ECR, Google Artifact Registry — lưu image với retention policy (xóa image > 30 ngày trừ tagged release). SBOM (Software Bill of Materials): generate khi build (syft hoặc cosign), lưu cùng artifact để audit compliance và detect vulnerable dependency sau publish."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "8345-build-artifact-immutable-image-semantic-versioning-trong-ci-cd"
+  },
+  {
+    "id": "cc0d7a27-3452-56b7-8c00-6cd950bd49cc",
+    "question": "Pre-commit hooks, lint-staged, husky — CI gate phía client vs phía server?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/8347-pre-commit-hooks-lint-staged-husky-ci-gate-phia-client-vs-phia-server",
+    "slug": "pre-commit-hooks-lint-staged-husky-ci-gate-phia-client-vs-phia-server-cc0d7a27-3452-56b7-8c00-6cd950bd49cc",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Client-side hooks (husky + lint-staged): chạy nhanh, kiểm tra cơ bản (format, lint file đã sửa) — UX tốt vì fail trước khi commit."
+      ],
+      "details": [
+        "Server-side CI gate: nguồn chân lý, không thể bypass — luôn phải có vì hook client có thể --no-verify. husky quản lý Git hooks trong package.json/.husky/: pre-commit chạy lint-staged, commit-msg validate conventional commits (commitlint), pre-push chạy test nhanh. lint-staged chạy lệnh chỉ trên file git add đã stage: ví dụ *.ts: eslint --fix, prettier --write — không lint toàn repo (chậm) mà chỉ file thay đổi. Defense in depth:",
+        "Giữ pre-commit < 5s. CI bypass: cấm push thẳng vào main ở branch protection, require PR + status check pass, require linear history nếu cần."
+      ],
+      "points": [
+        "Editor: ESLint extension highlight lỗi realtime;",
+        "Pre-commit hook: lint + format file staged;",
+        "Pre-push hook: test fast subset;",
+        "CI: full lint + type check + test + build — bắt mọi thứ hook client bỏ qua. Conventional Commits: feat: add login, fix(api): handle 401 — chuẩn hóa commit message giúp tự generate changelog với semantic-release. Lưu ý: hook client quá nặng (chạy full test) → dev frustrated, dùng --no-verify → mất ý nghĩa"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "8347-pre-commit-hooks-lint-staged-husky-ci-gate-phia-client-vs-phia-server"
+  },
+  {
+    "id": "354b2e52-56c5-5f6e-be44-77467cbb0428",
+    "question": "Test suite chạy 30 phút làm nghẽn pipeline. Bạn chia chạy song song thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98404-test-suite-chay-30-phut-lam-nghen-pipeline-ban-chia-chay-song-song-the-nao",
+    "slug": "test-suite-chay-30-phut-lam-nghen-pipeline-ban-chia-chay-song-song-the-nao-354b2e52-56c5-5f6e-be44-77467cbb0428",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hầu hết runner hiện đại (Vitest, Jest, Playwright, pytest-xdist) có sẵn cờ shard nên không cần tự chia file."
+      ],
+      "details": [
+        "Giới hạn cần nói khi phỏng vấn: song song hóa chỉ giảm thời gian chờ, không giảm tổng chi phí runner, và mỗi shard vẫn tốn thời gian khởi động (cài dependency, dựng DB). Chia quá nhỏ thì phần khởi động lấn át phần chạy test.",
+        "Điều kiện bắt buộc trước khi song song hóa:"
+      ],
+      "points": [
+        "Test phải độc lập. Nếu test dùng chung một database/schema/bucket, hai shard sẽ ghi đè nhau. Cấp cho mỗi shard một schema riêng theo index shard, hoặc chạy container DB riêng.",
+        "Không phụ thuộc thứ tự. Test dựa vào trạng thái do test trước tạo ra sẽ hỏng ngay khi bị tách shard.",
+        "Chia theo thời gian, không theo số file. Chia đều số file thường lệch vì vài file e2e nặng gấp chục lần; dùng timing report của lần chạy trước để cân bằng."
+      ],
+      "sections": [
+        "Chia suite thành shard — mỗi runner chạy một phần rời nhau, rồi gộp kết quả."
+      ],
+      "codeExamples": [
+        {
+          "language": "YAML",
+          "code": "strategy:\n  matrix:\n    shard: [1, 2, 3, 4]\nsteps:\n  - run: pnpm vitest --shard=${{ matrix.shard }}/4"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "98404-test-suite-chay-30-phut-lam-nghen-pipeline-ban-chia-chay-song-song-the-nao"
+  },
+  {
+    "id": "0729dfb3-9487-54b0-9ebd-14ba36dd99d7",
+    "question": "Pipeline thỉnh thoảng đỏ, chạy lại là xanh. Bạn xử lý test flaky thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98405-pipeline-thinh-thoang-do-chay-lai-la-xanh-ban-xu-ly-test-flaky-the-nao",
+    "slug": "pipeline-thinh-thoang-do-chay-lai-la-xanh-ban-xu-ly-test-flaky-the-nao-0729dfb3-9487-54b0-9ebd-14ba36dd99d7",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vấn đề lớn nhất không phải một test hỏng, mà là đội mất niềm tin vào CI: khi \"đỏ\" có thể là nhiễu, người ta bấm rerun theo phản xạ và bỏ qua cả lỗi thật."
+      ],
+      "details": [
+        "1. Ghi nhận, đừng rerun im lặng. Mỗi lần rerun cứu một job phải để lại dấu vết — gắn nhãn test, đếm tần suất. Không đo được thì không sửa được.\n2. Cách ly (quarantine). Chuyển test flaky ra khỏi tập chặn merge, cho chạy ở một job riêng không gate. Suite chính lại xanh có nghĩa, còn test vẫn được theo dõi.\n3. Đặt hạn sửa. Quarantine không có deadline sẽ biến thành nghĩa địa test chết. Không sửa trong sprint kế thì xóa — test không ai tin cũng không có giá trị.\n4. Truy nguyên nhân, thường thuộc vài nhóm: chờ theo thời gian cố định (sleep) thay vì chờ theo điều kiện; phụ thuộc thứ tự / trạng thái còn sót; phụ thuộc thời gian thực và timezone; tranh chấp tài nguyên khi chạy song song; gọi network thật.",
+        "Quy trình xử lý:",
+        "Không nên: bật retry: 3 toàn cục cho mọi test. Nó biến flaky thành vô hình, che luôn race condition có thật trong sản phẩm và làm pipeline chậm hơn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "98405-pipeline-thinh-thoang-do-chay-lai-la-xanh-ban-xu-ly-test-flaky-the-nao"
+  },
+  {
+    "id": "eb459091-b5d5-5dbe-b016-8eedaf7787c4",
+    "question": "Làm sao chặn merge khi lint / typecheck / coverage không đạt? Cấu hình gate thế nào cho hợp lý?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98406-lam-sao-chan-merge-khi-lint-typecheck-coverage-khong-dat-cau-hinh-gate-the-nao-c",
+    "slug": "lam-sao-chan-merge-khi-lint-typecheck-coverage-khong-dat-cau-hinh-gate-the-nao-cho-hop-ly-eb459091-b5d5-5dbe-b016-8eedaf7787c4",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Gate nằm ở branch protection, không nằm ở workflow. Pipeline chỉ báo cáo trạng thái; nhánh đích mới là nơi quyết định \"check này bắt buộc phải xanh mới merge được\".",
+        "Nguyên tắc:",
+        "nhanh và tất định"
+      ],
+      "details": [
+        "Ngưỡng coverage — điểm hay bị hỏi vặn: đặt ngưỡng tuyệt đối cao (vd 90%) cho codebase cũ chỉ dẫn tới test viết cho có để nâng số. Cách dùng được hơn là chặn theo coverage của phần code thay đổi trong PR (patch coverage), kèm quy tắc không được tụt so với baseline. Ngưỡng đo cái người ta kiểm soát được, không đo di sản.",
+        "Cấu hình tối thiểu cho nhánh chính:",
+        "Một check chậm hoặc flaky nằm trong tập bắt buộc sẽ bị đội gỡ ra sau vài ngày."
+      ],
+      "points": [
+        "Bật required status checks và chọn đúng tên job (lint, typecheck, test).",
+        "Bật require branches to be up to date — chống trường hợp hai PR xanh riêng lẻ nhưng gộp lại thì hỏng (semantic conflict).",
+        "Cấm push thẳng vào nhánh chính, kể cả admin."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "98406-lam-sao-chan-merge-khi-lint-typecheck-coverage-khong-dat-cau-hinh-gate-the-nao-c"
+  },
+  {
+    "id": "35c1ba02-e4c0-5538-87c4-9209c916b98d",
+    "question": "Secret trong CI: làm sao chắc chắn nó không lọt ra log?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98407-secret-trong-ci-lam-sao-chac-chan-no-khong-lot-ra-log",
+    "slug": "secret-trong-ci-lam-sao-chac-chan-no-khong-lot-ra-log-35c1ba02-e4c0-5538-87c4-9209c916b98d",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Secret phải nằm ở secret store của CI (encrypted secrets, GitLab masked variables, Vault), tiêm vào runtime dưới dạng biến môi trường — không bao giờ nằm trong repo, kể cả repo private.",
+        "permissions",
+        "Biện pháp bổ sung:"
+      ],
+      "details": [
+        "CI tự động che secret trong log, nhưng cơ chế này chỉ so khớp chuỗi nên vẫn rò trong nhiều tình huống thực tế:",
+        "Khi đã lộ, rotate là bắt buộc — xóa log không cứu được vì log có thể đã bị đọc."
+      ],
+      "points": [
+        "Secret bị biến đổi trước khi in: base64, JSON-encode, cắt chuỗi → không khớp mẫu, in ra nguyên văn.",
+        "set -x / debug mode của script in ra toàn bộ dòng lệnh kèm tham số.",
+        "Công cụ tự dump env khi lỗi (một số CLI in process.env trong stack trace).",
+        "Truyền secret qua tham số dòng lệnh — hiện trong danh sách process, không chỉ trong log."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "98407-secret-trong-ci-lam-sao-chac-chan-no-khong-lot-ra-log"
+  },
+  {
+    "id": "8b524121-6bc7-5745-88eb-64df0573e299",
+    "question": "Cùng một artifact deploy lên dev / staging / production thì config khác nhau xử lý thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98408-cung-mot-artifact-deploy-len-dev-staging-production-thi-config-khac-nhau-xu-ly-t",
+    "slug": "cung-mot-artifact-deploy-len-dev-staging-production-thi-config-khac-nhau-xu-ly-the-nao-8b524121-6bc7-5745-88eb-64df0573e299",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Vì sao quan trọng: nếu mỗi môi trường build lại, thứ chạy trên production chưa từng được test — dependency có thể đã đổi, base image đã đổi, và bug chỉ xuất hiện ở prod. Cùng một digest chạy qua mọi tầng thì kết quả test ở staging mới có giá trị suy ra cho prod."
+      ],
+      "details": [
+        "Thực hành đi kèm:"
+      ],
+      "points": [
+        "Tag image bằng commit SHA (hoặc pin theo digest), không dùng latest để deploy — latest khiến hai lần rollout ra hai thứ khác nhau.",
+        "Cùng một luồng promote: dev → staging → prod, không có nhánh nào build riêng cho prod.",
+        "Với frontend build-time (biến bị nhúng vào bundle), phần cấu hình khác môi trường phải chuyển sang đọc lúc runtime hoặc chấp nhận build riêng cho từng môi trường — nói rõ đánh đổi này thay vì lờ đi."
+      ],
+      "sections": [
+        "Build một lần, deploy nhiều nơi. Artifact (image) phải bất biến và không chứa bất kỳ giá trị nào phụ thuộc môi trường; khác biệt giữa các môi trường được tiêm lúc chạy, qua biến môi trường / ConfigMap / secret store."
+      ],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "build → image app:9f3c2ab\n            ├─ deploy staging  (DATABASE_URL=..., LOG_LEVEL=debug)\n            └─ deploy prod     (DATABASE_URL=..., LOG_LEVEL=info)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "98408-cung-mot-artifact-deploy-len-dev-staging-production-thi-config-khac-nhau-xu-ly-t"
+  },
+  {
+    "id": "19787e3e-9916-54c2-82f6-e4f6845157a4",
+    "question": "Feature flag giúp tách \"deploy\" khỏi \"release\" thế nào? Đánh đổi là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98409-feature-flag-giup-tach-deploy-khoi-release-the-nao-danh-doi-la-gi",
+    "slug": "feature-flag-giup-tach-deploy-khoi-release-the-nao-danh-doi-la-gi-19787e3e-9916-54c2-82f6-e4f6845157a4",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Deploy là đưa code lên server; release là để người dùng thấy tính năng.",
+        "Được gì:"
+      ],
+      "details": [
+        "Feature flag tách hai việc này: code lên production nhưng nhánh mới tắt, bật sau bằng cấu hình, không cần deploy lại.",
+        "Đánh đổi phải nói rõ:"
+      ],
+      "points": [
+        "Merge sớm vào nhánh chính → không còn nhánh sống lâu và merge hell, hợp với trunk-based.",
+        "Bật dần theo phần trăm user hoặc theo nhóm nội bộ; hỏng thì tắt flag trong vài giây, nhanh hơn rollback deploy.",
+        "Tách quyết định kinh doanh (bao giờ ra mắt) khỏi lịch kỹ thuật.",
+        "Mỗi flag nhân đôi số nhánh logic; nhiều flag cùng lúc tạo tổ hợp trạng thái không test hết được.",
+        "Flag chết không dọn sẽ tích lại thành code không ai dám xóa. Cần ngày hết hạn và task dọn ngay khi tính năng ra hết 100%.",
+        "Phân loại theo vòng đời: flag release (ngắn hạn, phải xóa) khác flag vận hành / kill switch (dài hạn, giữ có chủ đích)."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "if (flags.isEnabled('new-checkout', user)) {\n  return newCheckout(user)\n}\nreturn legacyCheckout(user)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "98409-feature-flag-giup-tach-deploy-khoi-release-the-nao-danh-doi-la-gi"
+  },
+  {
+    "id": "e13d82fc-dafb-5a6c-a7ec-6e12da983c25",
+    "question": "Deploy production xong phát hiện lỗi nghiêm trọng. Bạn rollback trong vài phút bằng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98410-deploy-production-xong-phat-hien-loi-nghiem-trong-ban-rollback-trong-vai-phut-ba",
+    "slug": "deploy-production-xong-phat-hien-loi-nghiem-trong-ban-rollback-trong-vai-phut-bang-cach-nao-e13d82fc-dafb-5a6c-a7ec-6e12da983c25",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ưu tiên phục hồi dịch vụ trước, điều tra sau. Thứ tự xử lý theo mức rủi ro tăng dần:"
+      ],
+      "details": [
+        "1. Tắt feature flag nếu tính năng có flag — vài giây, không đụng tới quy trình deploy.\n2. Chuyển traffic về version cũ (blue-green giữ nguyên môi trường cũ, hoặc kubectl rollout undo). Vẫn là artifact đã chạy ổn định trước đó nên rủi ro thấp nhất trong nhóm deploy.\n3. Deploy lại image của commit trước. Chỉ khả thi nếu artifact bất biến, tag theo SHA và còn trong registry.\n4. Revert commit rồi chờ pipeline build lại — chậm nhất, phụ thuộc pipeline đang xanh. Là phương án cuối, không phải phương án đầu.",
+        "Ràng buộc thường bị bỏ sót:",
+        "Rollback phải được tập dượt định kỳ; đường thoát chưa từng thử là đường thoát chưa có."
+      ],
+      "points": [
+        "Migration DB đã chạy thì rollback code không tự hoàn tác schema. Nếu migration không tương thích ngược, version cũ sẽ hỏng ngay khi quay lại — đây là lý do migration phải backward compatible.",
+        "Cache và message đang chờ có thể mang format mới; version cũ phải bỏ qua được field lạ.",
+        "Cần định nghĩa trước tiêu chí rollback (error rate, p99 latency vượt ngưỡng trong N phút) để người trực quyết định mà không cần họp."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "98410-deploy-production-xong-phat-hien-loi-nghiem-trong-ban-rollback-trong-vai-phut-ba"
+  },
+  {
+    "id": "b4ab5e80-57b6-5ae0-99f3-f82a9d8e86bc",
+    "question": "Chi phí log tăng gấp nhiều lần sau khi lên production. Bạn cắt giảm thế nào mà vẫn debug được?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98504-chi-phi-log-tang-gap-nhieu-lan-sau-khi-len-production-ban-cat-giam-the-nao-ma-va",
+    "slug": "chi-phi-log-tang-gap-nhieu-lan-sau-khi-len-production-ban-cat-giam-the-nao-ma-van-debug-duoc-b4ab5e80-57b6-5ae0-99f3-f82a9d8e86bc",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Chi phí log tỉ lệ với khối lượng nhân thời gian lưu. Cắt theo thứ tự tác động, không cắt bừa:",
+        "tail sampling"
+      ],
+      "details": [
+        "1. Bỏ log không ai đọc. Phần lớn dung lượng đến từ INFO/DEBUG lặp lại trong vòng lặp nóng và access log trùng với metric đã có. Nếu một dòng log không bao giờ xuất hiện trong truy vấn điều tra, nó chỉ là chi phí.",
+        "ERROR",
+        "2. Chuyển thứ đếm được sang metric. \"Đã xử lý xong item\" ghi mỗi lần là log; đếm số item là counter — rẻ hơn nhiều bậc và vẫn vẽ được đồ thị.",
+        "3. Sampling có chọn lọc, không sample đều. Giữ 100% lỗi và request chậm, chỉ lấy mẫu phần thành công:"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "// keep every failure, sample only the boring successes\nconst keep = res.statusCode >= 400 || durationMs > 1000 || Math.random() < 0.05\nif (keep) logger.info(entry)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "98504-chi-phi-log-tang-gap-nhieu-lan-sau-khi-len-production-ban-cat-giam-the-nao-ma-va"
+  },
+  {
+    "id": "ba19e261-5011-5299-aa6e-163cfed84f76",
+    "question": "Vì sao không được đặt user_id (hay request_id) làm label của metric? Cardinality là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98505-vi-sao-khong-duoc-dat-user-id-hay-request-id-lam-label-cua-metric-cardinality-la",
+    "slug": "vi-sao-khong-duoc-dat-user-id-hay-request-id-lam-label-cua-metric-cardinality-la-gi-ba19e261-5011-5299-aa6e-163cfed84f76",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cardinality là số chuỗi thời gian (time series) riêng biệt mà một metric sinh ra.",
+        "route",
+        "số người dùng",
+        "status"
+      ],
+      "details": [
+        "Với Prometheus, mỗi tổ hợp giá trị label là một chuỗi riêng, lưu riêng, đánh chỉ mục riêng.",
+        "Nguyên tắc: label chỉ dùng cho giá trị có tập hợp nhỏ và bị chặn — route, method, status_code, env, region. Không dùng: user_id, email, order_id, request_id, trace_id, URL đầy đủ còn nguyên query string, message lỗi tự do.",
+        "Vậy chi tiết theo user đặt ở đâu? Ở log và trace — hai loại này vốn dành cho dữ liệu cardinality cao: đặt user_id làm trường log hoặc span attribute rồi truy vấn theo nó. Metric để tổng hợp, log/trace để tra cứu từng trường hợp.",
+        "Một biến thể hay gặp: route lấy nguyên đường dẫn thật (/orders/8831) thay vì mẫu (/orders/:id) — cũng làm nổ cardinality y hệt."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "",
+          "code": "http_requests_total{route=\"/orders\", status=\"200\"}          # vai chuc chuoi\nhttp_requests_total{route=\"/orders\", user_id=\"u_1\"}         # bang so user"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "98505-vi-sao-khong-duoc-dat-user-id-hay-request-id-lam-label-cua-metric-cardinality-la"
+  },
+  {
+    "id": "8a8b27f5-c9b4-5138-8b14-daad740f57c1",
+    "question": "RED và USE method là gì? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98506-red-va-use-method-la-gi-khi-nao-dung-cai-nao",
+    "slug": "red-va-use-method-la-gi-khi-nao-dung-cai-nao-8a8b27f5-c9b4-5138-8b14-daad740f57c1",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hai bộ khung chọn metric, khác nhau ở đối tượng đo."
+      ],
+      "details": [
+        "RED — đo dịch vụ (góc nhìn người dùng gửi request vào):\n- Rate: số request mỗi giây.\n- Errors: số/tỉ lệ request thất bại.\n- Duration: phân bố độ trễ (p50/p95/p99).",
+        "Áp cho mọi API, endpoint, hàng đợi. Ba con số này đủ để nói \"service có ổn không\" mà không cần biết nó chạy trên gì.",
+        "USE — đo tài nguyên (góc nhìn tài nguyên bị tiêu thụ):\n- Utilization: phần trăm thời gian tài nguyên bận (CPU, disk).\n- Saturation: mức xếp hàng chờ (độ dài run queue, số kết nối chờ trong pool).\n- Errors: lỗi ở tầng tài nguyên (I/O error, packet drop).",
+        "Áp cho CPU, bộ nhớ, disk, network, connection pool, thread pool."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "98506-red-va-use-method-la-gi-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "f4543ba2-b539-52f3-b2a5-5497d291569a",
+    "question": "Trace nối được xuyên nhiều service nhờ cơ chế gì? Qua message queue thì làm sao giữ được trace?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98508-trace-noi-duoc-xuyen-nhieu-service-nho-co-che-gi-qua-message-queue-thi-lam-sao-g",
+    "slug": "trace-noi-duoc-xuyen-nhieu-service-nho-co-che-gi-qua-message-queue-thi-lam-sao-giu-duoc-trace-f4543ba2-b539-52f3-b2a5-5497d291569a",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhờ context propagation: trace context được truyền kèm request chứ không phải suy ra từ log.",
+        "trace_id",
+        "parent_span_id",
+        "inject"
+      ],
+      "details": [
+        "Với HTTP: chuẩn W3C Trace Context dùng header traceparent chứa trace_id (chung cho cả trace) và span_id của span hiện tại (đóng vai trò parent cho chặng sau).",
+        "Qua message queue: không có header HTTP, nên phải đưa trace context vào message — thường là message header/attribute (Kafka headers, RabbitMQ headers, SQS message attributes), không nhét vào payload nghiệp vụ. Producer inject lúc publish, consumer extract lúc nhận rồi mở span mới."
+      ],
+      "points": [
+        "quên propagate ở worker nền khiến trace đứt tại hàng đợi, mỗi bên thành một trace rời;",
+        "dùng quan hệ cha-con cho luồng bất đồng bộ chạy rất lâu — trường hợp đó nên dùng span link để nối mà không ràng buộc thời lượng"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "traceparent: 00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01\n             ver   trace_id                         parent span_id   flags"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "98508-trace-noi-duoc-xuyen-nhieu-service-nho-co-che-gi-qua-message-queue-thi-lam-sao-g"
+  },
+  {
+    "id": "6d055dcf-c879-5f19-8e12-1bde8bb74f7e",
+    "question": "OpenTelemetry giải quyết vấn đề gì? Gồm những thành phần nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98509-opentelemetry-giai-quyet-van-de-gi-gom-nhung-thanh-phan-nao",
+    "slug": "opentelemetry-giai-quyet-van-de-gi-gom-nhung-thanh-phan-nao-6d055dcf-c879-5f19-8e12-1bde8bb74f7e",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Trước OpenTelemetry, mỗi nhà cung cấp giám sát có agent và SDK riêng. Đổi từ vendor này sang vendor khác nghĩa là sửa code trong toàn bộ service. OpenTelemetry tách việc sinh dữ liệu (instrumentation) khỏi nơi lưu và hiển thị (backend) bằng một chuẩn chung."
+      ],
+      "details": [
+        "Thành phần chính:\n- API + SDK theo từng ngôn ngữ — nơi code tạo span, metric, log. API là bề mặt ổn định; SDK lo lấy mẫu, gom batch, xuất dữ liệu.\n- Instrumentation dựng sẵn cho framework phổ biến (HTTP server/client, gRPC, driver DB, client hàng đợi) — cắm vào là có trace cơ bản mà gần như không sửa code nghiệp vụ.\n- Semantic conventions — quy ước đặt tên thuộc tính (http.request.method, db.system, server.address). Đây là phần dễ bị xem nhẹ nhưng chính nó làm dashboard dùng lại được giữa các service và các đội.\n- OTLP — giao thức truyền dữ liệu chung.\n- Collector — tiến trình trung gian nhận dữ liệu, xử lý (lọc, che dữ liệu nhạy cảm, tail sampling, thêm thuộc tính) rồi xuất đi một hoặc nhiều backend.",
+        "Lợi ích thực tế: đổi backend chỉ là đổi cấu hình exporter ở Collector, không đụng vào service. Ngoài ra có thể gửi song song sang hai backend trong giai đoạn chuyển đổi.",
+        "Mức độ ổn định khác nhau theo tín hiệu và theo ngôn ngữ: trace và metric đã ổn định, phần log ra sau và ở một số ngôn ngữ vẫn đang hoàn thiện — nên kiểm tra trạng thái của ngôn ngữ mình dùng trước khi cam kết toàn bộ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "98509-opentelemetry-giai-quyet-van-de-gi-gom-nhung-thanh-phan-nao"
+  },
+  {
+    "id": "6dbb2039-7461-5a87-8463-32d7c2139a41",
+    "question": "Vì sao nên alert theo triệu chứng thay vì theo nguyên nhân? Cho ví dụ cụ thể.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/98510-vi-sao-nen-alert-theo-trieu-chung-thay-vi-theo-nguyen-nhan-cho-vi-du-cu-the",
+    "slug": "vi-sao-nen-alert-theo-trieu-chung-thay-vi-theo-nguyen-nhan-cho-vi-du-cu-the-6dbb2039-7461-5a87-8463-32d7c2139a41",
+    "access": "free",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Alert theo triệu chứng là cảnh báo dựa trên thứ người dùng cảm nhận: tỉ lệ lỗi, độ trễ, không đặt được đơn. Alert theo nguyên nhân dựa trên trạng thái nội bộ: CPU > 80%, số pod giảm, cache miss tăng."
+      ],
+      "details": [
+        "Ba vấn đề của alert theo nguyên nhân:\n1. Báo động giả. CPU 90% trong đợt xử lý theo lô là bình thường, người dùng không thấy gì. Đánh thức người trực để rồi kết luận \"vẫn ổn\" là cách nhanh nhất tạo ra thói quen bỏ qua cảnh báo.\n2. Bỏ sót. Danh sách nguyên nhân là vô hạn. Sự cố lần sau đến từ một nguyên nhân chưa ai nghĩ tới, và không có rule nào bắt được — trong khi triệu chứng thì luôn giống nhau: người dùng gặp lỗi hoặc phải chờ.\n3. Nhiễu khi có sự cố thật. Một nguyên nhân gốc kích hoạt hàng chục rule nguyên nhân cùng lúc, người trực phải lọc thay vì xử lý.",
+        "Ví dụ: thay vì mysql_connections > 900, hãy alert tỉ lệ 5xx của /checkout > 1% trong 10 phút. Số kết nối cao mà đơn vẫn đặt được thì không cần ai thức dậy; còn nếu đơn hỏng vì lý do khác hẳn (bug ở code mới, cổng thanh toán chết), alert triệu chứng vẫn nổ đúng lúc.",
+        "Nguyên nhân thì đặt ở đâu: đưa vào dashboard và runbook, hoặc alert mức ticket không paging. Chúng dùng để chẩn đoán sau khi triệu chứng đã đánh thức người trực.",
+        "Ngoại lệ hợp lý là các cảnh báo sắp cạn có thời gian phản ứng dài: đĩa sẽ đầy trong 4 giờ, chứng chỉ TLS hết hạn sau 14 ngày — chưa có triệu chứng nhưng chắc chắn sẽ có, và xử lý trước rẻ hơn nhiều."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "98510-vi-sao-nen-alert-theo-trieu-chung-thay-vi-theo-nguyen-nhan-cho-vi-du-cu-the"
+  },
+  {
+    "id": "1b648f6a-5208-552a-bb86-187289bc5591",
+    "question": "Blue-Green deployment và Canary deployment là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "blue-green-deployment-va-canary-deployment-la-gi-1b648f6a-5208-552a-bb86-187289bc5591",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": null
+  },
+  {
+    "id": "978f0e83-36b2-5ef8-aef7-c55cbebabf4b",
+    "question": "Chaos engineering là gì? Vì sao lại chủ động gây lỗi cho hệ thống?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "chaos-engineering-la-gi-vi-sao-lai-chu-dong-gay-loi-cho-he-thong-978f0e83-36b2-5ef8-aef7-c55cbebabf4b",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": null
+  },
+  {
+    "id": "75a3f039-9c34-54ad-acf7-3b01eb46d82d",
+    "question": "Quy trình quét lỗ hổng image nên đặt ở đâu trong CI? Scanner báo hàng trăm CVE thì xử lý thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "quy-trinh-quet-lo-hong-image-nen-dat-o-dau-trong-ci-scanner-bao-hang-tram-cve-thi-xu-ly-the-nao-75a3f039-9c34-54ad-acf7-3b01eb46d82d",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": null
+  },
+  {
+    "id": "d5a840f8-ff7d-5b9d-9ab8-2705e51190ea",
+    "question": "Migration DB đặt ở đâu trong pipeline — trước hay sau khi deploy code? Làm sao deploy không downtime?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "migration-db-dat-o-dau-trong-pipeline-truoc-hay-sau-khi-deploy-code-lam-sao-deploy-khong-downtime-d5a840f8-ff7d-5b9d-9ab8-2705e51190ea",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": null
+  },
+  {
+    "id": "fa57fca4-465e-5214-8664-9b32b9950104",
+    "question": "Vì sao nên dùng OIDC thay cho access key dài hạn khi CI deploy lên cloud? Cơ chế hoạt động ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vi-sao-nen-dung-oidc-thay-cho-access-key-dai-han-khi-ci-deploy-len-cloud-co-che-hoat-dong-ra-sao-fa57fca4-465e-5214-8664-9b32b9950104",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": null
+  },
+  {
+    "id": "08552304-3e5a-5a1d-b4a0-d1fa17334b59",
+    "question": "PR từ fork chạy CI có rủi ro gì? Bạn cho pipeline chạy an toàn thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "pr-tu-fork-chay-ci-co-rui-ro-gi-ban-cho-pipeline-chay-an-toan-the-nao-08552304-3e5a-5a1d-b4a0-d1fa17334b59",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": null
+  },
+  {
+    "id": "35663547-0e80-5a5e-82df-0dac0ec0878a",
+    "question": "Monorepo nhiều service: làm sao mỗi PR chỉ chạy job của phần thật sự thay đổi?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "monorepo-nhieu-service-lam-sao-moi-pr-chi-chay-job-cua-phan-that-su-thay-doi-35663547-0e80-5a5e-82df-0dac0ec0878a",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": null
+  },
+  {
+    "id": "c2f04e03-fc6c-50f7-8ef8-a9f520b6a370",
+    "question": "Deploy production cần phê duyệt, thông báo và vết audit. Bạn dựng cơ chế đó trong pipeline thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "deploy-production-can-phe-duyet-thong-bao-va-vet-audit-ban-dung-co-che-do-trong-pipeline-the-nao-c2f04e03-fc6c-50f7-8ef8-a9f520b6a370",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": null
+  },
+  {
+    "id": "afecf156-8a71-5004-b6be-293aea387023",
+    "question": "Alert fatigue là gì? Bạn giảm nó bằng cách nào? Multi-window multi-burn-rate hoạt động ra sao?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "alert-fatigue-la-gi-ban-giam-no-bang-cach-nao-multi-window-multi-burn-rate-hoat-dong-ra-sao-afecf156-8a71-5004-b6be-293aea387023",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": null
+  },
+  {
+    "id": "ff19e16a-0865-53da-bab6-025a228d339b",
+    "question": "Error budget dùng để quyết định điều gì? SLO đặt 100% có được không?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "error-budget-dung-de-quyet-dinh-dieu-gi-slo-dat-100-co-duoc-khong-ff19e16a-0865-53da-bab6-025a228d339b",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": null
+  },
+  {
+    "id": "44b62c30-be76-578e-b31f-7d2f241dad0f",
+    "question": "Quy trình xử lý một sự cố production diễn ra thế nào? Vì sao giảm thiểu phải đi trước khắc phục nguyên nhân?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "quy-trinh-xu-ly-mot-su-co-production-dien-ra-the-nao-vi-sao-giam-thieu-phai-di-truoc-khac-phuc-nguye-44b62c30-be76-578e-b31f-7d2f241dad0f",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": null
+  },
+  {
+    "id": "b6fcaaec-305a-53aa-9702-0bdf7c3a6a48",
+    "question": "Postmortem không đổ lỗi (blameless) là gì? Một postmortem tốt gồm những phần nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "postmortem-khong-do-loi-blameless-la-gi-mot-postmortem-tot-gom-nhung-phan-nao-b6fcaaec-305a-53aa-9702-0bdf7c3a6a48",
+    "access": "pro",
+    "departments": [
+      "infrastructure"
+    ],
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": null
+  }
+]

@@ -1,0 +1,1770 @@
+[
+  {
+    "id": "50fc287a-4001-5594-9907-501e2f9298e2",
+    "question": "Business Analyst là ai? Vai trò và trách nhiệm chính trong một dự án phần mềm là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100400-business-analyst-la-ai-vai-tro-va-trach-nhiem-chinh-trong-mot-du-an-phan-mem-la",
+    "slug": "business-analyst-la-ai-vai-tro-va-trach-nhiem-chinh-trong-mot-du-an-phan-mem-la-gi-50fc287a-4001-5594-9907-501e2f9298e2",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "BA là người đứng giữa bên nghiệp vụ và bên kỹ thuật: biến nhu cầu kinh doanh thành yêu cầu mà đội phát triển làm được, và đảm bảo thứ làm ra đúng vấn đề ban đầu."
+      ],
+      "details": [
+        "Trách nhiệm theo vòng đời dự án:\n- Trước khi code — tìm hiểu bối cảnh nghiệp vụ, xác định vấn đề thật (không phải giải pháp khách hàng đã tự nghĩ ra), thu thập và làm rõ yêu cầu với các bên liên quan.\n- Khi lập kế hoạch — viết tài liệu (BRD, SRS, user story), vẽ quy trình và luồng màn hình, chốt phạm vi và mức ưu tiên.\n- Trong lúc phát triển — trả lời câu hỏi của dev và tester, xử lý yêu cầu thay đổi, giữ tài liệu khớp với thực tế đang làm.\n- Khi bàn giao — hỗ trợ UAT, viết tài liệu hướng dẫn, đo lại xem giải pháp có giải quyết được vấn đề nghiệp vụ không.",
+        "Điểm phân biệt người trả lời tốt: nói được rằng BA chịu trách nhiệm về tính đúng của yêu cầu, không phải về tiến độ (đó là PM) hay về chất lượng mã nguồn (đó là dev/QC). Trả lời chỉ dừng ở \"cầu nối giữa khách hàng và dev\" là mô tả đúng nhưng quá mỏng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "100400-business-analyst-la-ai-vai-tro-va-trach-nhiem-chinh-trong-mot-du-an-phan-mem-la",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "bf5f4e0f-7bca-59f6-9905-2e2811e64c8c",
+    "question": "Business Analyst khác Data Analyst ở điểm nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100401-business-analyst-khac-data-analyst-o-diem-nao",
+    "slug": "business-analyst-khac-data-analyst-o-diem-nao-bf5f4e0f-7bca-59f6-9905-2e2811e64c8c",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hai vai trò khác nhau ở câu hỏi mà mỗi bên phải trả lời."
+      ],
+      "details": [
+        "Business Analyst trả lời câu hỏi \"nên xây cái gì và vì sao\". Đầu vào là con người và quy trình: phỏng vấn các bên liên quan, mô tả quy trình hiện tại, đề xuất quy trình mới, viết yêu cầu. Đầu ra là tài liệu, luồng nghiệp vụ, user story.",
+        "Phần chồng lấn:",
+        "Lưu ý:",
+        "Data Analyst trả lời câu hỏi \"chuyện gì đang xảy ra trong số liệu\". Đầu vào là dữ liệu đã có: truy vấn kho dữ liệu, làm sạch, dựng báo cáo và dashboard, kiểm định giả thuyết. Đầu ra là số liệu, biểu đồ, kết luận thống kê."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "100401-business-analyst-khac-data-analyst-o-diem-nao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "52275fe4-893c-5752-984f-3ff82f8e5f30",
+    "question": "Trong một dự án, BA thường tạo ra và sử dụng những loại tài liệu nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100404-trong-mot-du-an-ba-thuong-tao-ra-va-su-dung-nhung-loai-tai-lieu-nao",
+    "slug": "trong-mot-du-an-ba-thuong-tao-ra-va-su-dung-nhung-loai-tai-lieu-nao-52275fe4-893c-5752-984f-3ff82f8e5f30",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tuỳ mô hình dự án, nhưng nhóm tài liệu thường gặp gồm:"
+      ],
+      "details": [
+        "Nhóm mô tả nhu cầu và phạm vi\n- BRD (Business Requirement Document) — vấn đề nghiệp vụ, mục tiêu, phạm vi, các bên liên quan. Viết cho người ra quyết định.\n- SRS / FRD — đặc tả chi tiết hệ thống phải làm gì, gồm cả yêu cầu phi chức năng. Viết cho đội phát triển.\n- User story + acceptance criteria — dạng thay thế BRD/SRS trong dự án Agile.",
+        "Nhóm mô tả hành vi hệ thống\n- Use case và luồng chính, luồng thay thế, luồng ngoại lệ.\n- Sơ đồ quy trình nghiệp vụ (BPMN, activity diagram), sơ đồ luồng dữ liệu, ERD.\n- Wireframe, mockup, prototype cho phần giao diện.",
+        "Nhóm theo dõi và bàn giao",
+        "RTM",
+        "Lưu ý: đừng liệt kê hết mọi thứ như đọc thuộc. Nêu 3-4 tài liệu bạn thực sự đã viết, nói rõ ai là người đọc và tài liệu đó chốt được điều gì — như vậy thuyết phục hơn nhiều so với danh sách dài."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "100404-trong-mot-du-an-ba-thuong-tao-ra-va-su-dung-nhung-loai-tai-lieu-nao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "edcf20e3-09ba-5ca2-91ac-527367ba8801",
+    "question": "Một BA cần những kỹ năng gì? Kỹ năng kỹ thuật tới mức nào là đủ?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100405-mot-ba-can-nhung-ky-nang-gi-ky-nang-ky-thuat-toi-muc-nao-la-du",
+    "slug": "mot-ba-can-nhung-ky-nang-gi-ky-nang-ky-thuat-toi-muc-nao-la-du-edcf20e3-09ba-5ca2-91ac-527367ba8801",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Kỹ năng phân tích — bóc tách vấn đề, phân biệt triệu chứng với nguyên nhân, mô hình hoá quy trình, đặt câu hỏi tới khi yêu cầu hết mơ hồ."
+      ],
+      "details": [
+        "Kỹ năng giao tiếp và tài liệu — phỏng vấn các bên liên quan, điều phối cuộc họp có nhiều quan điểm trái nhau, viết ngắn gọn và không nước đôi. Đây là phần bị đánh trượt nhiều nhất, không phải phần kỹ thuật.",
+        "Kỹ năng kỹ thuật, mức đủ dùng cho IT BA:\n- SQL ở mức truy vấn được: SELECT, JOIN, GROUP BY, lọc theo điều kiện — để tự kiểm tra dữ liệu thay vì chờ dev.\n- Đọc hiểu API và JSON: biết một trường đến từ đâu, hệ thống nào gọi hệ thống nào.\n- Hiểu mô hình dữ liệu quan hệ đủ để đọc ERD và nhận ra ràng buộc.\n- Dùng được công cụ vẽ (Figma, Draw.io, Balsamiq) và quản lý công việc (Jira, Confluence).",
+        "Không cần: viết được sản phẩm chạy thật, tối ưu truy vấn, thiết kế kiến trúc. Ranh giới hợp lý là đủ hiểu để hỏi đúng và thẩm định được câu trả lời của dev."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "100405-mot-ba-can-nhung-ky-nang-gi-ky-nang-ky-thuat-toi-muc-nao-la-du",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "ac9ccebc-a546-5b16-84be-a1094e121ec8",
+    "question": "Định hướng phát triển nghề nghiệp của một BA là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100407-dinh-huong-phat-trien-nghe-nghiep-cua-mot-ba-la-gi",
+    "slug": "dinh-huong-phat-trien-nghe-nghiep-cua-mot-ba-la-gi-ac9ccebc-a546-5b16-84be-a1094e121ec8",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Từ vị trí BA có bốn hướng đi thường gặp, khác nhau ở thứ bạn muốn làm sâu."
+      ],
+      "details": [
+        "1. Đi sâu chuyên môn phân tích — Junior BA → BA → Senior BA → Lead BA / BA Manager. Càng lên cao càng ít viết tài liệu, càng nhiều việc định hình giải pháp, dẫn dắt buổi làm việc với khách hàng lớn và kèm cặp BA mới.",
+        "4. Chuyên sâu theo miền nghiệp vụ",
+        "Khi trả lời phỏng vấn:",
+        "2. Chuyển sang sản phẩm — Product Owner rồi Product Manager. Đổi từ trách nhiệm về yêu cầu sang trách nhiệm về giá trị và ưu tiên. Đây là hướng phổ biến nhất ở công ty product.",
+        "3. Chuyển sang quản lý dự án — Project Manager / Delivery Manager. Hợp với người mạnh về điều phối, tiến độ và quản lý rủi ro hơn là phân tích chi tiết."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "100407-dinh-huong-phat-trien-nghe-nghiep-cua-mot-ba-la-gi",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "4d5b9f5a-cd03-54ce-9313-2e3efb02d796",
+    "question": "Vì sao bạn chọn nghề BA? Động lực theo đuổi vị trí này là gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100408-vi-sao-ban-chon-nghe-ba-dong-luc-theo-duoi-vi-tri-nay-la-gi",
+    "slug": "vi-sao-ban-chon-nghe-ba-dong-luc-theo-duoi-vi-tri-nay-la-gi-4d5b9f5a-cd03-54ce-9313-2e3efb02d796",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đây là câu kiểm tra xem bạn đã tìm hiểu nghề thật chưa, hay chỉ thấy nghề đang tuyển nhiều."
+      ],
+      "details": [
+        "Cấu trúc trả lời hiệu quả:\n1. Điểm khởi đầu cụ thể — một việc bạn từng làm và thấy hợp: viết lại quy trình cho câu lạc bộ, làm khảo sát người dùng cho đồ án, dựng báo cáo ở công việc cũ.\n2. Điều bạn nhận ra về nghề — BA làm việc với sự mơ hồ: cùng một yêu cầu, hai bên hiểu hai kiểu, và phần việc là biến nó thành thứ triển khai được. Nói ra đúng phần khó của nghề cho thấy bạn không nhìn nghề qua tin tuyển dụng.\n3. Bằng chứng đã chuẩn bị — khoá học đã học, tài liệu đã đọc (BABOK, cộng đồng BA trong nước), bài tập đã tự làm như viết một BRD hay vẽ luồng cho một ứng dụng bạn hay dùng.",
+        "Nên tránh: \"nghề BA lương cao và không cần code\". Người phỏng vấn nghe câu này rất nhiều, và nó gợi ý bạn chọn nghề để né việc lập trình chứ không phải vì phần phân tích.",
+        "Với ứng viên trái ngành, nói rõ phần nền cũ dùng được: dân kinh tế có sẵn tư duy quy trình và số liệu, dân kỹ thuật có sẵn khả năng đọc tài liệu hệ thống."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "100408-vi-sao-ban-chon-nghe-ba-dong-luc-theo-duoi-vi-tri-nay-la-gi",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "912787e2-4977-57d0-91f7-dbda6167d450",
+    "question": "Phân biệt nhu cầu (need) và yêu cầu (requirement). Vì sao BA phải tách hai thứ này?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100420-phan-biet-nhu-cau-need-va-yeu-cau-requirement-vi-sao-ba-phai-tach-hai-thu-nay",
+    "slug": "phan-biet-nhu-cau-need-va-yeu-cau-requirement-vi-sao-ba-phai-tach-hai-thu-nay-912787e2-4977-57d0-91f7-dbda6167d450",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhu cầu là vấn đề hoặc mong muốn ở phía nghiệp vụ, phát biểu theo ngôn ngữ kết quả. Yêu cầu là điều hệ thống hoặc giải pháp phải làm được để đáp ứng nhu cầu đó, phát biểu ở mức kiểm chứng được."
+      ],
+      "details": [
+        "Ví dụ:\n- Nhu cầu: \"Bộ phận chăm sóc khách hàng mất quá nhiều thời gian tra cứu đơn hàng.\"\n- Yêu cầu: \"Nhân viên tra được đơn theo số điện thoại và trả kết quả trong 3 giây.\"",
+        "Vì sao phải tách: khách hàng thường không nói nhu cầu mà nói thẳng giải pháp họ tự nghĩ ra — \"cho tôi thêm nút xuất Excel\". Nếu BA nhận nguyên giải pháp và viết thành yêu cầu, đội phát triển sẽ làm đúng thứ được đặt hàng nhưng vấn đề gốc vẫn còn. Việc của BA là hỏi ngược lên tới nhu cầu (\"xuất Excel để làm gì tiếp?\") rồi mới xét xem giải pháp nào phù hợp.",
+        "Lưu ý: yêu cầu chỉ dùng được khi có cách kiểm chứng. Câu \"hệ thống phải thân thiện với người dùng\" là mong muốn, chưa phải yêu cầu; nó chỉ thành yêu cầu khi quy về đo được, ví dụ số bước để hoàn tất một thao tác."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "100420-phan-biet-nhu-cau-need-va-yeu-cau-requirement-vi-sao-ba-phai-tach-hai-thu-nay",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "0b2e55e5-e924-5403-b4db-d310b9d16f56",
+    "question": "Yêu cầu chức năng và yêu cầu phi chức năng khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100421-yeu-cau-chuc-nang-va-yeu-cau-phi-chuc-nang-khac-nhau-the-nao",
+    "slug": "yeu-cau-chuc-nang-va-yeu-cau-phi-chuc-nang-khac-nhau-the-nao-0b2e55e5-e924-5403-b4db-d310b9d16f56",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Yêu cầu chức năng mô tả hệ thống làm được gì — hành vi, đầu vào, đầu ra, quy tắc nghiệp vụ.\n> \"Người dùng đặt lại mật khẩu qua email; liên kết hết hạn sau 15 phút.\""
+      ],
+      "details": [
+        "Yêu cầu phi chức năng mô tả hệ thống phải tốt tới mức nào — thuộc tính chất lượng áp lên nhiều chức năng cùng lúc.",
+        "Các nhóm phi chức năng thường phải hỏi:\n- Hiệu năng — thời gian phản hồi, số người dùng đồng thời, khối lượng dữ liệu sau 3 năm.\n- Sẵn sàng — giờ hoạt động, thời gian được phép ngừng, mục tiêu khôi phục sau sự cố.\n- Bảo mật — phân quyền, mã hoá, nhật ký thao tác, tuân thủ quy định về dữ liệu cá nhân.\n- Khả dụng — hỗ trợ trình duyệt và thiết bị nào, ngôn ngữ, tiêu chuẩn tiếp cận.\n- Vận hành — sao lưu, giám sát, cách triển khai bản mới.",
+        "Vì sao đây là câu hỏi lọc: yêu cầu phi chức năng bị bỏ sót là nguyên nhân phổ biến khiến dự án phải làm lại sau khi đã chạy được — hệ thống đúng chức năng nhưng chậm, hoặc không chịu nổi lượng truy cập thật. Trả lời tốt là nêu được rằng chúng phải có con số đi kèm, không phải mô tả định tính."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "100421-yeu-cau-chuc-nang-va-yeu-cau-phi-chuc-nang-khac-nhau-the-nao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "4a745db1-f4c9-5ea4-90d5-f3abc4b25267",
+    "question": "BRD là gì? BRD khác SRS/FRD như thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100423-brd-la-gi-brd-khac-srs-frd-nhu-the-nao",
+    "slug": "brd-la-gi-brd-khac-srs-frd-nhu-the-nao-4a745db1-f4c9-5ea4-90d5-f3abc4b25267",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ba tài liệu khác nhau ở người đọc và mức chi tiết."
+      ],
+      "details": [
+        "BRD — Business Requirement Document\nTrả lời câu hỏi vì sao làm và làm để đạt gì. Nội dung: bối cảnh nghiệp vụ, vấn đề, mục tiêu và chỉ số đo, phạm vi trong và ngoài, các bên liên quan, giả định và ràng buộc. Người đọc là cấp quyết định và người tài trợ dự án. Viết bằng ngôn ngữ nghiệp vụ, không có chi tiết kỹ thuật.",
+        "Quan hệ:",
+        "Trong dự án Agile",
+        "FRD — Functional Requirement Document\nTrả lời câu hỏi hệ thống phải làm gì. Diễn giải từng chức năng: đầu vào, xử lý, đầu ra, quy tắc nghiệp vụ, trường hợp ngoại lệ.",
+        "SRS — Software/System Requirement Specification\nRộng hơn FRD: gồm cả chức năng lẫn phi chức năng, giao diện với hệ thống khác, ràng buộc thiết kế. Trong nhiều tổ chức FRD và SRS được dùng thay thế nhau, khác biệt tuỳ quy ước nội bộ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "100423-brd-la-gi-brd-khac-srs-frd-nhu-the-nao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "6e47d29e-dbfa-5c8b-8edc-08b562680a53",
+    "question": "Requirement elicitation là gì? Có những kỹ thuật nào và chọn kỹ thuật ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100425-requirement-elicitation-la-gi-co-nhung-ky-thuat-nao-va-chon-ky-thuat-ra-sao",
+    "slug": "requirement-elicitation-la-gi-co-nhung-ky-thuat-nao-va-chon-ky-thuat-ra-sao-6e47d29e-dbfa-5c8b-8edc-08b562680a53",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Elicitation là hoạt động khai thác thông tin về nhu cầu và yêu cầu từ các bên liên quan và các nguồn khác. Dùng từ \"khai thác\" chứ không phải \"thu thập\" là có chủ đích: phần lớn yêu cầu không nằm sẵn ở đâu để nhặt, người dùng chỉ nói ra khi được hỏi đúng cách."
+      ],
+      "details": [
+        "Các kỹ thuật thường dùng:\n- Phỏng vấn — sâu, phù hợp khi cần hiểu bối cảnh và động cơ. Tốn thời gian, dễ lệch theo quan điểm một người.\n- Workshop — nhiều bên cùng ngồi, chốt nhanh những điểm mâu thuẫn. Cần người điều phối tốt.\n- Quan sát công việc thực tế — lộ ra các bước mà người trong nghề làm theo thói quen và quên kể.\n- Khảo sát — phủ số đông, hợp khi cần định lượng, nhưng không đào sâu được.\n- Phân tích tài liệu — hợp đồng, quy trình, hệ thống cũ. Nên làm trước tiên vì rẻ nhất.\n- Prototype / wireframe — cho người dùng phản ứng trên thứ nhìn thấy được, hiệu quả khi họ khó diễn đạt bằng lời.",
+        "Cách chọn: căn theo mức độ mơ hồ và số bên liên quan. Miền nghiệp vụ lạ và nhiều bên thì bắt đầu bằng phân tích tài liệu rồi phỏng vấn; yêu cầu đã rõ nhưng cần chốt nhanh thì workshop; yêu cầu về giao diện thì prototype cho kết quả tốt hơn mọi cuộc họp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "100425-requirement-elicitation-la-gi-co-nhung-ky-thuat-nao-va-chon-ky-thuat-ra-sao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "a1a01896-e7b4-533e-8880-c9ac143d023c",
+    "question": "Bạn viết user story như thế nào? Một user story tốt gồm những gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100433-ban-viet-user-story-nhu-the-nao-mot-user-story-tot-gom-nhung-gi",
+    "slug": "ban-viet-user-story-nhu-the-nao-mot-user-story-tot-gom-nhung-gi-a1a01896-e7b4-533e-8880-c9ac143d023c",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khuôn mẫu quen thuộc:\n> Là một [vai trò], tôi muốn [việc cần làm], để [đạt được giá trị gì]."
+      ],
+      "details": [
+        "Ví dụ: Là nhân viên chăm sóc khách hàng, tôi muốn tra đơn hàng bằng số điện thoại, để không phải hỏi khách mã đơn khi họ gọi tới.",
+        "Ba phần của một user story theo cách hiểu phổ biến:\n- Card — câu mô tả ngắn ở trên, đủ để nhắc nhớ, không phải đặc tả đầy đủ.\n- Conversation — phần trao đổi giữa BA, dev, tester để làm rõ. Chi tiết nằm ở đây nhiều hơn ở câu chữ trên thẻ.\n- Confirmation — acceptance criteria, tức điều kiện để nói là xong.",
+        "Lỗi thường gặp khi viết:\n- Vai trò ghi chung chung là \"người dùng\" cho mọi story, làm mất thông tin ai thật sự cần và vì sao.\n- Phần \"để\" chép lại phần \"tôi muốn\" bằng từ khác, không nêu được giá trị.\n- Viết story theo tầng kỹ thuật (\"tạo bảng cơ sở dữ liệu cho đơn hàng\") thay vì theo giá trị người dùng nhận được.\n- Story quá lớn, không xong nổi trong một sprint — trường hợp này phải tách nhỏ theo luồng nghiệp vụ, không tách theo tầng kỹ thuật.",
+        "Lưu ý: user story không thay thế được mọi tài liệu. Quy tắc nghiệp vụ phức tạp, mô hình dữ liệu và yêu cầu phi chức năng vẫn cần chỗ ghi riêng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "100433-ban-viet-user-story-nhu-the-nao-mot-user-story-tot-gom-nhung-gi",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "8c0d44cd-4eab-5899-8688-ffdd213f97c9",
+    "question": "Use case là gì? Giải thích mô hình use case.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100440-use-case-la-gi-giai-thich-mo-hinh-use-case",
+    "slug": "use-case-la-gi-giai-thich-mo-hinh-use-case-8c0d44cd-4eab-5899-8688-ffdd213f97c9",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Use case mô tả một chuỗi tương tác giữa actor và hệ thống nhằm đạt được một mục tiêu cụ thể. Nó trả lời câu hỏi: ai làm gì với hệ thống, theo trình tự nào, và kết thúc ở kết quả gì."
+      ],
+      "details": [
+        "Một use case viết đầy đủ gồm:\n- Tên — động từ chỉ mục tiêu: \"Đặt hàng\", \"Huỷ đơn\", không phải \"Màn hình đơn hàng\".\n- Actor chính và các actor liên quan.\n- Điều kiện trước — trạng thái phải đúng trước khi bắt đầu.\n- Luồng chính — các bước khi mọi thứ thuận lợi.\n- Luồng thay thế và luồng ngoại lệ.\n- Điều kiện sau — trạng thái hệ thống sau khi kết thúc.",
+        "Mô hình use case là bộ gồm sơ đồ use case (bức tranh tổng thể: actor nào dùng chức năng nào, phạm vi hệ thống tới đâu) cộng với các đặc tả use case chi tiết đi kèm. Sơ đồ dùng để thống nhất phạm vi với bên nghiệp vụ; đặc tả dùng để đội phát triển triển khai và đội kiểm thử viết ca kiểm thử.",
+        "Lưu ý: use case mô tả tương tác nhìn từ ngoài, không mô tả cách hệ thống xử lý bên trong. Viết bước kiểu \"hệ thống ghi vào bảng orders\" là đã lấn sang phần thiết kế."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "100440-use-case-la-gi-giai-thich-mo-hinh-use-case",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "c9a6baf9-378d-57ca-b0bd-d7ede4e65f93",
+    "question": "Use case diagram là gì và khi nào nên dùng? Có những loại actor nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100441-use-case-diagram-la-gi-va-khi-nao-nen-dung-co-nhung-loai-actor-nao",
+    "slug": "use-case-diagram-la-gi-va-khi-nao-nen-dung-co-nhung-loai-actor-nao-c9a6baf9-378d-57ca-b0bd-d7ede4e65f93",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Use case diagram là sơ đồ tổng thể chỉ ra: hệ thống cung cấp những chức năng nào, ai dùng chúng, và ranh giới hệ thống nằm ở đâu. Nó cố tình không đi vào chi tiết — giá trị nằm ở chỗ nhìn một trang là thấy toàn cảnh phạm vi."
+      ],
+      "details": [
+        "Khi nên dùng:\n- Giai đoạn đầu dự án, khi cần chốt phạm vi với bên nghiệp vụ.\n- Khi hệ thống có nhiều nhóm người dùng với quyền khác nhau và cần thấy ai được làm gì.\n- Khi cần chỉ ra hệ thống ngoài nào tham gia vào luồng.",
+        "Khi không nên dùng: để mô tả trình tự xử lý chi tiết hoặc điều kiện rẽ nhánh — phần đó thuộc về đặc tả use case, activity diagram hoặc sequence diagram.",
+        "Các loại actor:\n- Actor chính — người khởi động use case để đạt mục tiêu của mình (khách hàng đặt hàng).\n- Actor phụ — tham gia để use case hoàn tất nhưng không phải người khởi động (nhân viên kho xác nhận xuất hàng).\n- Actor là hệ thống — hệ thống ngoài tham gia luồng (cổng thanh toán, dịch vụ gửi tin nhắn).\n- Actor theo thời gian — sự kiện định kỳ kích hoạt chức năng (tác vụ chạy cuối ngày).",
+        "Lưu ý: actor là vai trò, không phải người cụ thể. Một nhân viên có thể đóng hai vai; hai chức danh khác nhau có thể cùng một vai trong hệ thống."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "100441-use-case-diagram-la-gi-va-khi-nao-nen-dung-co-nhung-loai-actor-nao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "73110ce2-9e7d-5646-a3f2-a180f70972ce",
+    "question": "Activity diagram là gì? Gồm những thành phần chính nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100445-activity-diagram-la-gi-gom-nhung-thanh-phan-chinh-nao",
+    "slug": "activity-diagram-la-gi-gom-nhung-thanh-phan-chinh-nao-73110ce2-9e7d-5646-a3f2-a180f70972ce",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Activity diagram mô tả trình tự các hoạt động trong một quy trình, gồm cả điểm rẽ nhánh theo điều kiện và các nhánh chạy song song. Nó trả lời câu hỏi việc gì xảy ra trước, việc gì sau, và khi nào thì rẽ hướng."
+      ],
+      "details": [
+        "Thành phần chính:\n- Điểm bắt đầu và điểm kết thúc.\n- Activity — một việc được thực hiện, đặt tên bằng động từ (\"Kiểm tra tồn kho\").\n- Decision — điểm rẽ nhánh theo điều kiện, mỗi nhánh ghi rõ điều kiện; các nhánh gộp lại ở merge.\n- Fork / join — tách các nhánh chạy song song và chờ chúng cùng xong.\n- Swimlane — cột phân vai, chỉ ra hoạt động nào thuộc về ai. Đây là phần có giá trị nhất với BA vì nó lộ ra điểm bàn giao giữa các bộ phận, nơi quy trình hay tắc.",
+        "Khác với use case: use case mô tả tương tác giữa actor và hệ thống để đạt một mục tiêu; activity diagram mô tả dòng chảy công việc, có thể gồm cả các bước thủ công ngoài hệ thống.",
+        "Khi nào dùng: mô tả quy trình nghiệp vụ hiện tại và quy trình mong muốn, mô tả luồng xử lý phức tạp có nhiều nhánh, hoặc chỉ ra khác biệt giữa hai phương án quy trình để bên nghiệp vụ chọn."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "100445-activity-diagram-la-gi-gom-nhung-thanh-phan-chinh-nao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "06388ae8-dd86-5492-be2e-81eb749346b2",
+    "question": "BPMN là gì? Các thành phần cơ bản và khác gì so với flowchart?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100446-bpmn-la-gi-cac-thanh-phan-co-ban-va-khac-gi-so-voi-flowchart",
+    "slug": "bpmn-la-gi-cac-thanh-phan-co-ban-va-khac-gi-so-voi-flowchart-06388ae8-dd86-5492-be2e-81eb749346b2",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "BPMN (Business Process Model and Notation) là chuẩn ký hiệu do OMG ban hành để mô hình hoá quy trình nghiệp vụ. Điểm mạnh là một ký hiệu có nghĩa xác định, nên bên nghiệp vụ, BA và đội kỹ thuật đọc ra cùng một điều."
+      ],
+      "details": [
+        "Nhóm thành phần cơ bản:\n- Flow object — event (sự kiện bắt đầu, giữa chừng, kết thúc), activity (task, subprocess), gateway (rẽ nhánh: loại chọn một, loại chạy song song, loại chờ sự kiện).\n- Connecting object — sequence flow (thứ tự thực hiện), message flow (trao đổi giữa hai bên tham gia), association.\n- Swimlane — pool đại diện một bên tham gia, lane chia vai bên trong pool.\n- Artifact — data object, group, annotation để ghi chú thêm.",
+        "Khác flowchart: flowchart chỉ có vài ký hiệu chung chung và không quy ước chặt, ai vẽ theo cách người đó. BPMN phân biệt được sự kiện theo thời gian, sự kiện lỗi, tín hiệu, tiến trình con, và tách được message flow giữa các bên — những thứ flowchart không diễn đạt nổi.",
+        "Khi nào chọn cái nào: quy trình đơn giản, vẽ nhanh để thống nhất trong nội bộ thì flowchart là đủ. Quy trình có nhiều bên tham gia, nhiều điểm chờ và ngoại lệ, hoặc sẽ được dùng làm đầu vào cho hệ thống tự động hoá quy trình thì dùng BPMN."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "100446-bpmn-la-gi-cac-thanh-phan-co-ban-va-khac-gi-so-voi-flowchart",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "414e8483-0c89-5314-9cf1-b2fe1f4aa372",
+    "question": "So sánh sketch, wireframe, mockup và prototype.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100448-so-sanh-sketch-wireframe-mockup-va-prototype",
+    "slug": "so-sanh-sketch-wireframe-mockup-va-prototype-414e8483-0c89-5314-9cf1-b2fe1f4aa372",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bốn thứ này nằm trên cùng một trục mức độ hoàn thiện tăng dần, mỗi mức phục vụ một câu hỏi khác nhau."
+      ],
+      "details": [
+        "Sketch — bản vẽ tay hoặc phác thô, không cần đúng tỷ lệ. Dùng trong lúc trao đổi để thống nhất ý tưởng bố cục. Giá trị nằm ở chỗ vẽ trong vài phút và bỏ đi không tiếc.",
+        "Phần BA thường phụ trách:",
+        "Wireframe — bố cục ở mức khung xám: vị trí các khối, thứ tự thông tin, luồng chuyển màn hình. Không màu sắc, không hình ảnh thật. Trả lời câu hỏi thông tin gì nằm ở đâu và người dùng đi qua các màn theo trình tự nào.",
+        "Lưu ý:",
+        "Mockup — bản tĩnh đã có màu, chữ, hình ảnh, đúng bộ nhận diện. Trả lời câu hỏi sản phẩm trông như thế nào. Chưa bấm được.",
+        "Prototype — bản có tương tác: bấm được, chuyển màn được, đôi khi mô phỏng cả dữ liệu. Trả lời câu hỏi dùng nó cảm giác ra sao, và là công cụ tốt nhất để kiểm chứng luồng với người dùng thật trước khi viết mã."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "100448-so-sanh-sketch-wireframe-mockup-va-prototype",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "20768130-f2e3-50ba-87c1-b71d587aa633",
+    "question": "Agile và Waterfall khác nhau thế nào? Công việc của BA thay đổi ra sao giữa hai mô hình?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100450-agile-va-waterfall-khac-nhau-the-nao-cong-viec-cua-ba-thay-doi-ra-sao-giua-hai-m",
+    "slug": "agile-va-waterfall-khac-nhau-the-nao-cong-viec-cua-ba-thay-doi-ra-sao-giua-hai-mo-hinh-20768130-f2e3-50ba-87c1-b71d587aa633",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Waterfall đi tuần tự: phân tích xong mới thiết kế, thiết kế xong mới lập trình, rồi kiểm thử, rồi triển khai. Yêu cầu được chốt và ký duyệt ở đầu; thay đổi sau đó đi qua quy trình change request."
+      ],
+      "details": [
+        "Agile chia thành các chu kỳ ngắn, mỗi chu kỳ cho ra phần dùng được và lấy phản hồi để điều chỉnh. Yêu cầu được làm rõ dần theo mức ưu tiên thay vì chốt hết từ đầu.",
+        "Công việc BA khác nhau ở đâu:",
+        "Chọn mô hình nào: Waterfall hợp khi yêu cầu ổn định, ràng buộc pháp lý chặt và cần nghiệm thu theo hợp đồng cố định — hệ thống ngân hàng lõi, dự án theo quy định nhà nước. Agile hợp khi yêu cầu còn mơ hồ, thị trường thay đổi nhanh, cần đưa ra bản dùng được sớm để học từ người dùng thật.",
+        "Lưu ý: phần lớn dự án ở Việt Nam chạy dạng lai — có tài liệu đặc tả và ký duyệt như Waterfall nhưng triển khai theo sprint. Nói được điều này thường sát thực tế hơn là chọn hẳn một phe."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Waterfall",
+            "Agile",
+            "Thời điểm làm việc nặng",
+            "Dồn ở đầu dự án",
+            "Rải đều theo từng sprint",
+            "Sản phẩm chính",
+            "BRD, SRS/FRD ký duyệt",
+            "User story, acceptance criteria, backlog",
+            "Cách xử lý thay đổi",
+            "Change request có đánh giá tác động",
+            "Đưa vào backlog, xếp lại ưu tiên",
+            "Tương tác với dev",
+            "Chủ yếu qua tài liệu",
+            "Trao đổi trực tiếp hằng ngày"
+          ]
+        }
+      ]
+    },
+    "legacyId": 17,
+    "sourceSlug": "100450-agile-va-waterfall-khac-nhau-the-nao-cong-viec-cua-ba-thay-doi-ra-sao-giua-hai-m",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "f5621e62-f761-578b-b03e-72aea87be509",
+    "question": "Tuyên ngôn Agile nói gì? Nó ảnh hưởng tới cách BA làm việc ra sao?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100451-tuyen-ngon-agile-noi-gi-no-anh-huong-toi-cach-ba-lam-viec-ra-sao",
+    "slug": "tuyen-ngon-agile-noi-gi-no-anh-huong-toi-cach-ba-lam-viec-ra-sao-f5621e62-f761-578b-b03e-72aea87be509",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Tuyên ngôn Agile nêu bốn cặp giá trị, mỗi cặp có dạng \"coi trọng vế trái hơn vế phải\", không phải bỏ vế phải:"
+      ],
+      "details": [
+        "1. Cá nhân và tương tác hơn quy trình và công cụ.\n2. Phần mềm chạy được hơn tài liệu đầy đủ.\n3. Cộng tác với khách hàng hơn đàm phán hợp đồng.\n4. Phản hồi với thay đổi hơn bám theo kế hoạch.",
+        "Ảnh hưởng tới công việc BA:\n- Tài liệu vẫn cần, nhưng viết vừa đủ để đội làm được và giữ nó cập nhật, thay vì viết một tập dày rồi bỏ đó. Câu hỏi kiểm chứng: tài liệu này ai sẽ đọc và đọc để làm gì.\n- Làm rõ yêu cầu bằng trao đổi trực tiếp với dev và tester trước và trong sprint, thay vì bàn giao đặc tả một chiều rồi chờ.\n- Yêu cầu mới không bị coi là sự cố; nó vào backlog và cạnh tranh ưu tiên.\n- BA làm việc theo nhịp lặp: chuẩn bị đủ chi tiết cho sprint sắp tới, giữ các hạng mục xa hơn ở mức thô.",
+        "Lưu ý khi trả lời: hiểu sai phổ biến nhất là \"Agile nghĩa là không cần tài liệu\". Nêu rõ vế phải vẫn có giá trị, chỉ là thứ tự ưu tiên khác đi, cho thấy bạn đọc nguyên văn chứ không nghe kể lại."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "100451-tuyen-ngon-agile-noi-gi-no-anh-huong-toi-cach-ba-lam-viec-ra-sao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "0552ff1a-4d91-504c-af58-ba4ba1fc90ff",
+    "question": "Acceptance Criteria là gì? Viết AC để làm gì và viết thế nào cho tốt?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100453-acceptance-criteria-la-gi-viet-ac-de-lam-gi-va-viet-the-nao-cho-tot",
+    "slug": "acceptance-criteria-la-gi-viet-ac-de-lam-gi-va-viet-the-nao-cho-tot-0552ff1a-4d91-504c-af58-ba4ba1fc90ff",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Acceptance Criteria (AC) là tập điều kiện phải thoả để một user story được coi là hoàn thành. Đây là chỗ chứa chi tiết mà câu mô tả ngắn của story không mang hết."
+      ],
+      "details": [
+        "Viết AC để:\n- Chốt một cách hiểu duy nhất giữa BA, dev, tester và bên nghiệp vụ trước khi bắt đầu làm.\n- Cho tester đầu vào trực tiếp để viết ca kiểm thử.\n- Làm mốc nghiệm thu khách quan, thay cho tranh luận cảm tính lúc demo.\n- Chặn phạm vi phình trong lúc làm: thứ không nằm trong AC là thứ chưa được đồng ý.",
+        "Hai cách viết phổ biến:",
+        "Dạng danh sách điều kiện:\n> - Chỉ tài khoản có quyền quản trị thấy được nút xoá.\n> - Xoá xong hiện thông báo xác nhận và bản ghi chuyển sang trạng thái đã xoá, không mất khỏi cơ sở dữ liệu.\n> - Người dùng thường bấm vào đường dẫn xoá trực tiếp thì nhận lỗi không đủ quyền.",
+        "Dạng Given-When-Then:\n> Given người dùng có quyền quản trị và đang xem một bản ghi\n> When bấm xoá và xác nhận\n> Then bản ghi chuyển sang trạng thái đã xoá và biến mất khỏi danh sách mặc định",
+        "Dấu hiệu AC viết tốt: kiểm chứng được, có cả trường hợp lỗi và trường hợp biên, không mô tả cách triển khai bên trong, và mỗi điều kiện chỉ nói một chuyện."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "100453-acceptance-criteria-la-gi-viet-ac-de-lam-gi-va-viet-the-nao-cho-tot",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "33fab0dd-4297-50fe-bb76-5776da733173",
+    "question": "Pareto Analysis là gì? BA dùng nó vào việc gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100461-pareto-analysis-la-gi-ba-dung-no-vao-viec-gi",
+    "slug": "pareto-analysis-la-gi-ba-dung-no-vao-viec-gi-33fab0dd-4297-50fe-bb76-5776da733173",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Pareto Analysis dựa trên quan sát rằng phần lớn hệ quả đến từ một phần nhỏ nguyên nhân — thường được nhắc tới như tỷ lệ 80/20. Cách làm: liệt kê nguyên nhân, đo tần suất hoặc mức tác động của từng nguyên nhân, sắp xếp giảm dần, rồi tập trung vào nhóm đứng đầu."
+      ],
+      "details": [
+        "BA dùng vào các việc:\n- Xác định vấn đề đáng giải quyết — thống kê phiếu hỗ trợ theo loại: nếu 3 loại chiếm 70% số phiếu thì phạm vi dự án nên bắt đầu ở đó, không dàn đều.\n- Xếp ưu tiên yêu cầu — chọn nhóm yêu cầu phục vụ phần lớn khối lượng giao dịch thật thay vì các trường hợp hiếm.\n- Phân tích nguyên nhân lỗi — nhóm lỗi theo module để biết chỗ nào cần sửa trước.\n- Chốt phạm vi bản phát hành đầu — chọn nhóm chức năng phủ được đa số tình huống sử dụng.",
+        "Điểm cần cẩn thận khi trả lời: tỷ lệ 80/20 là quy ước mô tả, không phải quy luật đúng với mọi tập dữ liệu. Cần đo thật trên số liệu của tổ chức. Ngoài ra, phần đuôi không phải lúc nào cũng bỏ được — một trường hợp hiếm nhưng vi phạm quy định pháp lý vẫn phải xử lý dù tần suất rất thấp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "100461-pareto-analysis-la-gi-ba-dung-no-vao-viec-gi",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "2bfe0ba6-a924-5a7c-ab6d-fe696d2de7a1",
+    "question": "Risk và Issue khác nhau thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100464-risk-va-issue-khac-nhau-the-nao",
+    "slug": "risk-va-issue-khac-nhau-the-nao-2bfe0ba6-a924-5a7c-ab6d-fe696d2de7a1",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khác nhau ở thời điểm: risk là chuyện chưa xảy ra, issue là chuyện đã xảy ra."
+      ],
+      "details": [
+        "Risk (rủi ro) — sự kiện có thể xảy ra và nếu xảy ra sẽ ảnh hưởng tới dự án. Được mô tả bằng xác suất và mức tác động, và được xử lý bằng kế hoạch phòng ngừa hoặc kế hoạch dự phòng.\n> \"Nhà cung cấp cổng thanh toán có thể chậm cấp môi trường thử nghiệm, làm lùi việc tích hợp.\"",
+        "Lưu ý:",
+        "Issue (vấn đề) — sự kiện đã xảy ra và đang gây ảnh hưởng. Cần người chịu trách nhiệm xử lý, hành động cụ thể và hạn xử lý.\n> \"Môi trường thử nghiệm của cổng thanh toán đã chậm hai tuần, việc tích hợp đang dừng.\"",
+        "Quan hệ giữa hai thứ: một risk không được xử lý và rồi xảy ra thì trở thành issue. Vì vậy sổ theo dõi rủi ro và sổ theo dõi vấn đề thường đi cùng nhau.",
+        "Vai trò của BA: phát hiện rủi ro từ phía yêu cầu và nghiệp vụ — yêu cầu chưa được bên có thẩm quyền xác nhận, phụ thuộc vào một hệ thống bên thứ ba chưa rõ năng lực, dữ liệu cũ có thể không chuyển đổi được. Việc chính là nêu ra và ghi lại; quyết định xử lý thuộc về quản lý dự án."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "100464-risk-va-issue-khac-nhau-the-nao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "4d2b86ae-591b-5f7a-a1ef-234579b6e414",
+    "question": "BA thường dùng những công cụ nào trong công việc?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100466-ba-thuong-dung-nhung-cong-cu-nao-trong-cong-viec",
+    "slug": "ba-thuong-dung-nhung-cong-cu-nao-trong-cong-viec-4d2b86ae-591b-5f7a-a1ef-234579b6e414",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nhóm công cụ theo việc chúng giải quyết, và chỉ nêu thứ bạn thực sự dùng — người phỏng vấn hay hỏi tiếp một câu chi tiết để kiểm tra."
+      ],
+      "details": [
+        "Quản lý yêu cầu và công việc — Jira, Azure DevOps, Trello: quản lý backlog, gắn user story với hạng mục phát triển và ca kiểm thử.",
+        "Dữ liệu",
+        "Tài liệu và cộng tác — Confluence, Notion, Google Docs: nơi ở của đặc tả, biên bản họp, từ điển thuật ngữ. Điều quan trọng hơn công cụ là quy ước phiên bản và người duyệt.",
+        "Kiểm thử API",
+        "Cách trả lời có trọng lượng:",
+        "Vẽ sơ đồ — Draw.io, Lucidchart, Visio, Miro: use case diagram, BPMN, activity diagram, ERD.",
+        "Thiết kế giao diện — Figma, Balsamiq, Axure: wireframe và prototype. BA thường dừng ở mức wireframe."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "100466-ba-thuong-dung-nhung-cong-cu-nao-trong-cong-viec",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "94e4f2db-f690-5285-8390-5989a20ffe4d",
+    "question": "Hãy kể về một lần bạn không hoàn thành đúng hạn.",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/100473-hay-ke-ve-mot-lan-ban-khong-hoan-thanh-dung-han",
+    "slug": "hay-ke-ve-mot-lan-ban-khong-hoan-thanh-dung-han-94e4f2db-f690-5285-8390-5989a20ffe4d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Câu hỏi này kiểm tra tính trung thực và cách bạn phản ứng khi kế hoạch trượt, không kiểm tra xem bạn có hoàn hảo hay không. Trả lời \"em chưa từng trễ hạn\" là câu trả lời tệ nhất."
+      ],
+      "details": [
+        "Cấu trúc dùng được:\n1. Bối cảnh ngắn — việc gì, hạn khi nào, vì sao có hạn đó.\n2. Nguyên nhân trượt, nêu thẳng — ví dụ: đánh giá thiếu khối lượng vì bên nghiệp vụ chỉ có thể họp một buổi mỗi tuần, hoặc phát hiện thêm ba luồng ngoại lệ giữa chừng.\n3. Hành động khi phát hiện — quan trọng nhất là thời điểm báo. Báo sớm khi thấy dấu hiệu trượt, kèm phương án: cắt phạm vi phần chưa cấp thiết, xin thêm buổi làm việc, hoặc bàn giao theo đợt.\n4. Kết quả và ảnh hưởng thật — trễ bao lâu, ảnh hưởng tới ai.\n5. Điều đã thay đổi sau đó — cách làm cụ thể bạn áp dụng từ đó, ví dụ chốt lịch làm việc với bên nghiệp vụ ngay từ đầu thay vì hẹn từng buổi, hoặc luôn cộng thêm phần dự phòng cho việc chờ phản hồi.",
+        "Nên tránh: đổ hết lỗi cho người khác, hoặc chọn ví dụ quá nhỏ tới mức không có gì để rút ra. Trường hợp trượt hạn vì lý do khách quan cũng cần chỉ ra được phần bạn kiểm soát được và đã làm khác đi.",
+        "Lưu ý: người phỏng vấn thường hỏi tiếp \"bạn báo cho ai và báo lúc nào\" — chuẩn bị sẵn phần này."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "100473-hay-ke-ve-mot-lan-ban-khong-hoan-thanh-dung-han",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "591d3c2b-3bc3-5a2a-a07a-29c6e8a28ce5",
+    "question": "IT Business Analyst khác Business Analyst nghiệp vụ thuần ở chỗ nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100402-it-business-analyst-khac-business-analyst-nghiep-vu-thuan-o-cho-nao",
+    "slug": "it-business-analyst-khac-business-analyst-nghiep-vu-thuan-o-cho-nao-591d3c2b-3bc3-5a2a-a07a-29c6e8a28ce5",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "BA nghiệp vụ làm việc ở tầng doanh nghiệp: phân tích quy trình, cơ cấu tổ chức, chi phí, đề xuất cải tiến. Giải pháp đưa ra có thể hoàn toàn không liên quan tới phần mềm — đổi quy trình duyệt, sắp xếp lại nhân sự, đàm phán lại với nhà cung cấp."
+      ],
+      "details": [
+        "IT BA làm việc trong bối cảnh một hệ thống phần mềm sẽ được xây hoặc sửa. Ngoài kỹ năng phân tích, vị trí này cần hiểu đủ về kỹ thuật để:\n- Đọc được đặc tả API, hiểu request/response dạng JSON, biết dữ liệu đi qua những hệ thống nào.\n- Viết yêu cầu ở mức dev triển khai được: đủ ràng buộc dữ liệu, trạng thái, trường hợp lỗi.\n- Ước lượng được tính khả thi trước khi hứa với khách hàng.\n- Làm việc trực tiếp với dev, QC trong sprint, hỗ trợ UAT.",
+        "Ở thị trường Việt Nam, tin tuyển dụng ghi \"BA\" phần lớn là IT BA trong công ty phần mềm hoặc outsourcing, và kỳ vọng ứng viên đọc được tài liệu kỹ thuật, viết được user story, dùng được SQL cơ bản. Nên khi phỏng vấn, hỏi lại phạm vi công việc thực tế của vị trí là một câu hỏi hợp lý."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "100402-it-business-analyst-khac-business-analyst-nghiep-vu-thuan-o-cho-nao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "71795d51-82a3-5d38-94ad-3f9c68bff803",
+    "question": "Phân biệt BA, Product Owner và Project Manager. Ba vị trí này chồng lấn nhau ở đâu?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100403-phan-biet-ba-product-owner-va-project-manager-ba-vi-tri-nay-chong-lan-nhau-o-dau",
+    "slug": "phan-biet-ba-product-owner-va-project-manager-ba-vi-tri-nay-chong-lan-nhau-o-dau-71795d51-82a3-5d38-94ad-3f9c68bff803",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Ba vị trí khác nhau ở thứ mà mỗi người chịu trách nhiệm cuối cùng."
+      ],
+      "details": [
+        "Chồng lấn thực tế: ở công ty Việt Nam quy mô vừa và nhỏ, một người thường kiêm cả BA lẫn PO — vừa viết yêu cầu vừa xếp ưu tiên backlog. Ở công ty outsourcing, BA hay gánh thêm phần giao tiếp khách hàng vốn thuộc PM.",
+        "Cách trả lời an toàn: nêu ranh giới theo trách nhiệm như trên, rồi nói rõ ở dự án gần nhất bạn đã kiêm những phần nào. Nhà tuyển dụng hỏi câu này thường để xem bạn có nhận diện được ranh giới trước khi bước vào một tổ chức đang phân vai khác đi hay không."
+      ],
+      "points": [
+        "Business Analyst chịu trách nhiệm về tính đúng và đủ của yêu cầu. Câu hỏi trung tâm: giải pháp này có giải quyết đúng vấn đề nghiệp vụ không, mô tả đã đủ rõ để làm chưa.",
+        "Product Owner chịu trách nhiệm về giá trị sản phẩm. Có quyền quyết định thứ tự backlog, chấp nhận hay từ chối kết quả sprint. Đây là vai trò trong Scrum, có thẩm quyền ra quyết định.",
+        "Project Manager chịu trách nhiệm về tiến độ, nguồn lực, chi phí, rủi ro. Câu hỏi trung tâm: có kịp hạn với số người và ngân sách này không."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "100403-phan-biet-ba-product-owner-va-project-manager-ba-vi-tri-nay-chong-lan-nhau-o-dau",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "a2e2baf5-10f8-5c90-8ff1-984f5678c038",
+    "question": "BA cần điểm mạnh gì để làm việc hiệu quả với nhiều stakeholder cùng lúc?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100406-ba-can-diem-manh-gi-de-lam-viec-hieu-qua-voi-nhieu-stakeholder-cung-luc",
+    "slug": "ba-can-diem-manh-gi-de-lam-viec-hieu-qua-voi-nhieu-stakeholder-cung-luc-a2e2baf5-10f8-5c90-8ff1-984f5678c038",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Điểm mạnh cốt lõi là giữ được cùng một sự thật giữa nhiều nhóm có mối quan tâm khác nhau."
+      ],
+      "details": [
+        "Cụ thể là:\n- Xác định đúng ai là bên liên quan ngay từ đầu, kể cả nhóm không ngồi trong phòng họp — đội vận hành, chăm sóc khách hàng, kế toán. Yêu cầu bị sót thường đến từ nhóm bị bỏ quên.\n- Điều chỉnh cách trình bày theo người nghe: lãnh đạo cần tác động và chi phí, dev cần ràng buộc và trường hợp lỗi, người dùng cuối cần thao tác hằng ngày thay đổi ra sao. Cùng một yêu cầu, ba cách kể.\n- Ghi lại và xác nhận: sau mỗi buổi làm việc gửi biên bản, nêu rõ điều đã chốt, điều còn treo và ai quyết. Đây là thứ giúp bạn không bị đẩy vào tranh luận \"tôi đâu có nói vậy\" ở cuối dự án.\n- Không tự quyết thay người có thẩm quyền: khi hai bên mâu thuẫn, việc của BA là làm rõ đánh đổi và đưa lên đúng người quyết, không phải chọn giúp.",
+        "Lưu ý: câu hỏi này thường đi kèm yêu cầu kể một tình huống thật. Chuẩn bị sẵn một ví dụ có mâu thuẫn cụ thể, cách bạn xử lý và kết quả đo được."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "100406-ba-can-diem-manh-gi-de-lam-viec-hieu-qua-voi-nhieu-stakeholder-cung-luc",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "7ee95dfe-b850-5802-9cea-09367fed4df2",
+    "question": "Các giai đoạn của một dự án phần mềm là gì? BA làm gì ở từng giai đoạn?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100411-cac-giai-doan-cua-mot-du-an-phan-mem-la-gi-ba-lam-gi-o-tung-giai-doan",
+    "slug": "cac-giai-doan-cua-mot-du-an-phan-mem-la-gi-ba-lam-gi-o-tung-giai-doan-7ee95dfe-b850-5802-9cea-09367fed4df2",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Lấy khung chung của một dự án, phần việc BA đổi theo từng giai đoạn:"
+      ],
+      "details": [
+        "1. Khởi tạo — làm rõ vấn đề nghiệp vụ và mục tiêu, xác định các bên liên quan, đánh giá sơ bộ tính khả thi, chốt phạm vi ở mức lớn.",
+        "5. Kiểm thử và UAT",
+        "2. Phân tích yêu cầu — phỏng vấn, khảo sát, quan sát quy trình hiện tại; mô hình hoá quy trình hiện tại và quy trình mong muốn; viết yêu cầu và xếp mức ưu tiên. Đây là giai đoạn BA nặng việc nhất.",
+        "6. Triển khai và sau triển khai",
+        "3. Thiết kế — làm việc với đội kỹ thuật để chuyển yêu cầu thành thiết kế; dựng wireframe, mô tả luồng màn hình, xác nhận lại với bên nghiệp vụ.",
+        "4. Phát triển — giải thích yêu cầu cho dev và tester, giữ tài liệu đồng bộ, xử lý yêu cầu thay đổi, cập nhật ma trận truy vết."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "100411-cac-giai-doan-cua-mot-du-an-phan-mem-la-gi-ba-lam-gi-o-tung-giai-doan",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "d13ffa11-6984-52a0-9558-b69125a38c21",
+    "question": "Những khó khăn thường gặp của BA khi triển khai dự án là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100413-nhung-kho-khan-thuong-gap-cua-ba-khi-trien-khai-du-an-la-gi",
+    "slug": "nhung-kho-khan-thuong-gap-cua-ba-khi-trien-khai-du-an-la-gi-d13ffa11-6984-52a0-9558-b69125a38c21",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nêu khó khăn kèm cách xử lý, vì câu hỏi thật ra đang kiểm tra kinh nghiệm chứ không phải sự bi quan."
+      ],
+      "details": [
+        "Yêu cầu mơ hồ hoặc mâu thuẫn — mỗi bên liên quan mô tả một kiểu. Xử lý: quy về ví dụ cụ thể và dữ liệu thật, viết acceptance criteria để buộc mọi người thống nhất trên một cách hiểu duy nhất.",
+        "Bị đẩy vào vai người quyết",
+        "Phạm vi phình ra trong lúc làm — yêu cầu mới xuất hiện liên tục dưới dạng \"sửa chút thôi\". Xử lý: mọi thay đổi đi qua quy trình change request, nêu rõ tác động lên thời gian và chi phí để người có thẩm quyền quyết.",
+        "Lưu ý:",
+        "Không tiếp cận được người thật sự nắm nghiệp vụ — chỉ gặp được đầu mối trung gian. Xử lý: yêu cầu buổi làm việc trực tiếp với người vận hành, hoặc quan sát công việc thực tế của họ.",
+        "Tài liệu lệch với thứ đang chạy — dev đã sửa nhưng tài liệu chưa cập nhật. Xử lý: gắn việc cập nhật tài liệu vào định nghĩa hoàn thành của mỗi hạng mục."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "100413-nhung-kho-khan-thuong-gap-cua-ba-khi-trien-khai-du-an-la-gi",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "5b62b433-d26c-5e4e-a124-f2d2180255a4",
+    "question": "CBAP là gì? Chứng chỉ BA có cần thiết không?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100410-cbap-la-gi-chung-chi-ba-co-can-thiet-khong",
+    "slug": "cbap-la-gi-chung-chi-ba-co-can-thiet-khong-5b62b433-d26c-5e4e-a124-f2d2180255a4",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "CBAP (Certified Business Analysis Professional) là chứng chỉ cấp cao của IIBA, dựa trên khung kiến thức BABOK. Điều kiện dự thi gồm số giờ làm phân tích nghiệp vụ tích luỹ, giờ đào tạo và thư giới thiệu — nghĩa là đây là chứng chỉ cho người đã có kinh nghiệm, không phải cho người mới."
+      ],
+      "details": [
+        "IIBA còn có bậc thấp hơn cho người mới vào nghề và người ít kinh nghiệm hơn, cùng các chứng chỉ theo hướng phân tích dữ liệu, sản phẩm hoặc Agile.",
+        "Chứng chỉ có cần không, xét theo bối cảnh:\n- Ở công ty outsourcing làm cho khách nước ngoài, chứng chỉ giúp qua vòng hồ sơ và đôi khi là điều kiện trong hợp đồng với khách hàng.\n- Ở công ty product trong nước, phần lớn nhà tuyển dụng nhìn vào dự án đã làm và bài kiểm tra thực tế nhiều hơn.\n- Với người trái ngành, một chứng chỉ nền tảng có tác dụng chứng minh bạn đã học nghề bài bản, nhưng không thay được sản phẩm thật.",
+        "Cách trả lời khi chưa có chứng chỉ: nói thẳng là chưa, kèm thứ bạn dùng để thay thế — tài liệu đã viết, dự án đã tham gia, phần BABOK bạn đã đọc và áp dụng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "100410-cbap-la-gi-chung-chi-ba-co-can-thiet-khong",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "b642e450-bc50-5e98-81c0-673a9fbb203b",
+    "question": "Làm sao để nắm nhanh một miền nghiệp vụ hoàn toàn mới?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100412-lam-sao-de-nam-nhanh-mot-mien-nghiep-vu-hoan-toan-moi",
+    "slug": "lam-sao-de-nam-nhanh-mot-mien-nghiep-vu-hoan-toan-moi-b642e450-bc50-5e98-81c0-673a9fbb203b",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Câu này hay gặp ở công ty outsourcing, nơi dự án đổi miền nghiệp vụ liên tục. Người phỏng vấn muốn nghe một cách làm có trình tự, không phải \"em sẽ cố gắng học\"."
+      ],
+      "details": [
+        "Trình tự dùng được:\n1. Đọc tài liệu sẵn có trước khi hỏi người — hợp đồng, tài liệu dự án cũ, hướng dẫn vận hành, màn hình hệ thống đang chạy. Hỏi những thứ đã có sẵn trong tài liệu làm mất uy tín rất nhanh.\n2. Dựng từ điển thuật ngữ — mỗi miền có bộ từ riêng, và cùng một từ hai phòng ban hiểu khác nhau. Ghi lại và xác nhận định nghĩa là việc trả về giá trị sớm nhất.\n3. Vẽ luồng đầu-cuối ở mức thô rồi mang đi hỏi. Một sơ đồ sai để người ta sửa hiệu quả hơn nhiều so với một trang câu hỏi mở.\n4. Bám theo một giao dịch thật từ lúc phát sinh tới lúc kết thúc: đơn hàng, hồ sơ vay, ca bệnh. Cách này lộ ra các bước ngoại lệ mà không ai chủ động kể.\n5. Tìm người thạo việc trong đội vận hành, không chỉ nghe cấp quản lý. Quy trình trên giấy và quy trình thực tế thường lệch nhau.",
+        "Mốc kiểm chứng: bạn nắm được miền khi mô tả lại quy trình mà người trong nghề không phải sửa, và khi bạn đoán trước được câu hỏi họ sắp đặt ra."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "100412-lam-sao-de-nam-nhanh-mot-mien-nghiep-vu-hoan-toan-moi",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "bf0ad445-2df5-5c90-8908-d952d42d0c60",
+    "question": "Làm thế nào để nắm bắt yêu cầu phi chức năng khi khách hàng không tự nêu ra?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100422-lam-the-nao-de-nam-bat-yeu-cau-phi-chuc-nang-khi-khach-hang-khong-tu-neu-ra",
+    "slug": "lam-the-nao-de-nam-bat-yeu-cau-phi-chuc-nang-khi-khach-hang-khong-tu-neu-ra-bf0ad445-2df5-5c90-8908-d952d42d0c60",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Khách hàng gần như không bao giờ chủ động nói về hiệu năng hay khả năng chịu tải. Việc của BA là hỏi ra bằng câu hỏi có số."
+      ],
+      "details": [
+        "Cách khai thác từng nhóm:\n- Khối lượng — \"Một ngày phát sinh bao nhiêu đơn? Ngày cao điểm gấp mấy lần ngày thường? Sau 3 năm dự kiến bao nhiêu?\"\n- Thời gian chấp nhận được — \"Màn hình này chậm tới mức nào thì nhân viên bắt đầu phàn nàn?\" Câu hỏi theo ngưỡng chịu đựng dễ trả lời hơn câu hỏi mục tiêu lý tưởng.\n- Ngừng hoạt động — \"Nếu hệ thống ngừng 30 phút giữa giờ làm việc thì hậu quả là gì? Có quy trình thủ công thay thế không?\"\n- Bảo mật và tuân thủ — \"Ai được xem dữ liệu này? Có cần lưu vết ai đã sửa gì không? Ngành của anh chị có quy định bắt buộc nào không?\"",
+        "Ghi ở đâu: trong SRS/FRD chúng đứng thành một mục riêng, và mỗi mục phải kiểm chứng được. Nếu dự án chạy Agile, phần lớn yêu cầu phi chức năng trở thành ràng buộc chung trong definition of done thay vì nằm rải trong từng user story.",
+        "Lưu ý: khi khách hàng đưa con số quá cao so với nhu cầu thật, hỏi ngược lại căn cứ. Cam kết mức phi chức năng không cần thiết làm chi phí hạ tầng tăng mà không đổi lấy giá trị nào."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "100422-lam-the-nao-de-nam-bat-yeu-cau-phi-chuc-nang-khi-khach-hang-khong-tu-neu-ra",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "95ae14d6-33d5-576c-a574-b9c45abb602c",
+    "question": "Các thành phần chính của một tài liệu SRS là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100424-cac-thanh-phan-chinh-cua-mot-tai-lieu-srs-la-gi",
+    "slug": "cac-thanh-phan-chinh-cua-mot-tai-lieu-srs-la-gi-95ae14d6-33d5-576c-a574-b9c45abb602c",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Cấu trúc thường gặp của SRS:"
+      ],
+      "details": [
+        "1. Giới thiệu — mục đích tài liệu, phạm vi sản phẩm, người đọc, từ điển thuật ngữ và viết tắt, tài liệu tham chiếu. Phần từ điển quan trọng hơn vẻ ngoài của nó: đa số tranh cãi cuối dự án bắt nguồn từ một thuật ngữ hiểu hai kiểu.",
+        "5. Yêu cầu phi chức năng",
+        "2. Mô tả tổng thể — bối cảnh sản phẩm và vị trí trong hệ thống hiện có, các nhóm người dùng, môi trường vận hành, giả định và phụ thuộc.",
+        "6. Ràng buộc và phụ lục",
+        "Tiêu chí một SRS dùng được:",
+        "3. Yêu cầu chức năng — theo module hoặc theo use case. Mỗi yêu cầu có mã định danh riêng để truy vết và kiểm thử.",
+        "kiểm chứng được",
+        "4. Yêu cầu giao diện — giao diện người dùng, giao diện với hệ thống ngoài (API, tệp trao đổi, cơ sở dữ liệu dùng chung), giao diện phần cứng nếu có.",
+        "không mâu thuẫn"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "100424-cac-thanh-phan-chinh-cua-mot-tai-lieu-srs-la-gi",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "1e384a19-136a-5ba1-92b2-2f46b2031b6f",
+    "question": "Làm sao để chắc chắn đã thu thập đủ yêu cầu, không bỏ sót?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100426-lam-sao-de-chac-chan-da-thu-thap-du-yeu-cau-khong-bo-sot",
+    "slug": "lam-sao-de-chac-chan-da-thu-thap-du-yeu-cau-khong-bo-sot-1e384a19-136a-5ba1-92b2-2f46b2031b6f",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không có cách nào chứng minh tuyệt đối là đủ, nên trả lời tốt là nêu các lớp kiểm tra chéo thay vì khẳng định chắc chắn."
+      ],
+      "details": [
+        "1. Phủ hết bên liên quan — lập danh sách bên liên quan có chủ đích, gồm cả nhóm chỉ chịu tác động gián tiếp: kế toán, chăm sóc khách hàng, đội vận hành, bộ phận tuân thủ. Yêu cầu bị sót thường thuộc về nhóm không được mời họp.",
+        "5. Xác nhận lại bằng vật thể",
+        "2. Đi hết luồng đầu-cuối — bám theo một giao dịch thật từ khi phát sinh tới khi kết thúc, gồm cả nhánh huỷ, hoàn, sửa sai. Luồng thuận lợi luôn được kể; luồng ngoại lệ thì không.",
+        "Lưu ý:",
+        "3. Soát theo danh mục — với mỗi chức năng, hỏi đủ bộ: ai được làm, làm khi nào, dữ liệu lấy từ đâu, lỗi thì sao, có cần lưu vết không, số liệu này lên báo cáo nào.",
+        "4. Truy vết hai chiều — mọi yêu cầu phải nối được lên mục tiêu nghiệp vụ, và mọi mục tiêu phải có ít nhất một yêu cầu phục vụ. Ma trận truy vết làm lộ cả phần thiếu lẫn phần thừa."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "100426-lam-sao-de-chac-chan-da-thu-thap-du-yeu-cau-khong-bo-sot",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "a6a14188-0836-5335-a250-6a3d1beeb030",
+    "question": "Bạn xác định mức ưu tiên cho yêu cầu như thế nào? Có những kỹ thuật nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100428-ban-xac-dinh-muc-uu-tien-cho-yeu-cau-nhu-the-nao-co-nhung-ky-thuat-nao",
+    "slug": "ban-xac-dinh-muc-uu-tien-cho-yeu-cau-nhu-the-nao-co-nhung-ky-thuat-nao-a6a14188-0836-5335-a250-6a3d1beeb030",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Nguyên tắc chung: ưu tiên là quyết định của bên nghiệp vụ, BA cung cấp căn cứ và điều phối, không tự xếp thay."
+      ],
+      "details": [
+        "MoSCoW — chia thành Must have, Should have, Could have, Will not have (lần này). Dễ dùng, hợp khi cần chốt phạm vi cho một bản phát hành. Rủi ro là ai cũng gắn nhãn Must; cách khắc phục là giới hạn tỷ lệ Must trong tổng khối lượng.",
+        "Các kỹ thuật thường dùng:",
+        "Giá trị so với công sức — chấm mỗi yêu cầu theo giá trị nghiệp vụ và chi phí triển khai rồi xếp lên ma trận hai chiều. Nhóm giá trị cao chi phí thấp làm trước. Cần dev tham gia ước lượng.",
+        "Căn cứ nên đưa vào khi xếp:",
+        "Xếp hạng tuyệt đối — buộc sắp thứ tự 1, 2, 3 không cho phép đồng hạng. Khó chịu nhưng dứt điểm, hợp khi backlog nhỏ.",
+        "Phân tích Kano — phân loại theo mức ảnh hưởng tới sự hài lòng: yêu cầu bắt buộc (thiếu thì phản ứng gay gắt, có cũng không ai khen), yêu cầu tuyến tính (càng nhiều càng hài lòng), yêu cầu gây thích thú (không ai đòi nhưng có thì tạo khác biệt). Dùng để tránh dồn hết nguồn lực vào nhóm bắt buộc mà không có điểm khác biệt nào."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "100428-ban-xac-dinh-muc-uu-tien-cho-yeu-cau-nhu-the-nao-co-nhung-ky-thuat-nao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "f8328023-4121-5e5b-ad5e-3c77714393ab",
+    "question": "Scope creep là gì? Nguyên nhân và cách phòng tránh?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100429-scope-creep-la-gi-nguyen-nhan-va-cach-phong-tranh",
+    "slug": "scope-creep-la-gi-nguyen-nhan-va-cach-phong-tranh-f8328023-4121-5e5b-ad5e-3c77714393ab",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Scope creep là hiện tượng phạm vi dự án lớn dần lên trong lúc thực hiện mà không đi kèm điều chỉnh thời gian, chi phí hay nguồn lực. Khác với thay đổi phạm vi có kiểm soát: thay đổi được duyệt là bình thường, phần nguy hiểm là phần trôi vào âm thầm."
+      ],
+      "details": [
+        "Nguyên nhân thường gặp:\n- Phạm vi ban đầu mô tả mơ hồ, không nêu rõ phần nằm ngoài.\n- Yêu cầu đi vào qua kênh không chính thức — trao đổi trực tiếp giữa khách hàng và dev, tin nhắn riêng, câu \"sửa chút thôi\".\n- Không có quy trình duyệt thay đổi, hoặc có nhưng ai cũng bỏ qua vì chậm.\n- Yêu cầu ban đầu thu thập thiếu, nên phần bổ sung sau bị hiểu nhầm là phát sinh mới.\n- Nhiều người cùng có quyền yêu cầu nhưng không ai có quyền từ chối.",
+        "Cách phòng:\n- Viết rõ cả phần ngoài phạm vi trong tài liệu, không chỉ phần trong.\n- Mọi yêu cầu mới đi qua một cửa duy nhất và được đánh giá tác động tới lịch, chi phí, rủi ro trước khi quyết.\n- Chỉ định rõ ai là người có quyền phê duyệt thay đổi.\n- Ghi biên bản và xác nhận sau mỗi buổi làm việc để cách hiểu không trôi dần.\n- Với dự án Agile, phạm vi mỗi sprint được khoá; yêu cầu mới vào backlog và cạnh tranh ưu tiên ở lần lập kế hoạch sau, chứ không chen ngang."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "100429-scope-creep-la-gi-nguyen-nhan-va-cach-phong-tranh",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "88324487-3289-5939-aa69-60aaad918f14",
+    "question": "Requirement Traceability Matrix (RTM) là gì? Lập ra để làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100430-requirement-traceability-matrix-rtm-la-gi-lap-ra-de-lam-gi",
+    "slug": "requirement-traceability-matrix-rtm-la-gi-lap-ra-de-lam-gi-88324487-3289-5939-aa69-60aaad918f14",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "RTM là bảng nối mỗi yêu cầu với những thứ sinh ra từ nó: mục tiêu nghiệp vụ ở phía trên, và thiết kế, hạng mục phát triển, ca kiểm thử ở phía dưới."
+      ],
+      "details": [
+        "Lập ra để:\n- Phát hiện phần thiếu — yêu cầu chưa có ca kiểm thử nào, hoặc mục tiêu nghiệp vụ không có yêu cầu nào phục vụ.\n- Phát hiện phần thừa — hạng mục đang làm nhưng không truy về được yêu cầu nào; đây là dấu hiệu phạm vi phình.\n- Đánh giá tác động khi có thay đổi — sửa một yêu cầu thì biết ngay phải sửa tài liệu nào, kiểm thử lại phần nào.\n- Chứng minh độ phủ khi nghiệm thu — nhiều hợp đồng, nhất là với khách nước ngoài hoặc ngành có quy định chặt, yêu cầu nộp RTM như bằng chứng bàn giao.",
+        "Hình dạng tối giản:",
+        "Lưu ý thực tế: RTM chỉ có giá trị khi được cập nhật liên tục. Một ma trận lập ở đầu dự án rồi bỏ đó gây hại hơn là không có, vì nó tạo cảm giác đã kiểm soát trong khi số liệu đã cũ. Ở dự án nhỏ chạy Agile, phần lớn tác dụng này đạt được bằng cách liên kết trực tiếp trong công cụ quản lý công việc."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "Mã YC",
+            "Mục tiêu nghiệp vụ",
+            "FR-012",
+            "Giảm thời gian tra cứu",
+            "Tra đơn theo số điện thoại",
+            "SD-04",
+            "JIRA-233",
+            "TC-45, TC-46",
+            "Đã kiểm thử"
+          ]
+        }
+      ]
+    },
+    "legacyId": 36,
+    "sourceSlug": "100430-requirement-traceability-matrix-rtm-la-gi-lap-ra-de-lam-gi",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "c4554ef1-d073-5211-82e5-7cdfb627c583",
+    "question": "Yêu cầu thay đổi giữa chừng dự án — bạn quản lý change request ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100432-yeu-cau-thay-doi-giua-chung-du-an-ban-quan-ly-change-request-ra-sao",
+    "slug": "yeu-cau-thay-doi-giua-chung-du-an-ban-quan-ly-change-request-ra-sao-c4554ef1-d073-5211-82e5-7cdfb627c583",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Trả lời tốt là mô tả một quy trình, vì câu hỏi đang kiểm tra bạn có làm việc theo hệ thống hay xử lý theo cảm tính."
+      ],
+      "details": [
+        "Các bước:\n1. Ghi nhận qua một cửa — mọi yêu cầu thay đổi vào cùng một nơi, có người đề xuất, ngày, mô tả và lý do nghiệp vụ. Yêu cầu vào bằng tin nhắn riêng thì vẫn phải được ghi lại vào đây.\n2. Làm rõ trước khi đánh giá — đây là lỗi mới phát hiện, phần thiếu của yêu cầu cũ, hay nhu cầu mới thật sự? Ba loại này xử lý và tính chi phí khác nhau.\n3. Đánh giá tác động — cùng đội kỹ thuật ước lượng ảnh hưởng tới khối lượng, lịch, chi phí, các hạng mục liên quan và phần phải kiểm thử lại. Dùng ma trận truy vết cho bước này.\n4. Trình người có thẩm quyền quyết — kèm phương án: làm ngay và lùi hạn, làm và cắt hạng mục khác đổi lại, hoặc đưa vào giai đoạn sau. BA đưa lựa chọn kèm đánh đổi, không tự quyết.\n5. Cập nhật đồng bộ sau khi duyệt — tài liệu, backlog, ma trận truy vết, ca kiểm thử, và thông báo cho mọi bên bị ảnh hưởng.",
+        "Ở dự án Agile: thay đổi được coi là bình thường, nhưng vẫn có kỷ luật — phạm vi sprint đang chạy giữ nguyên, thay đổi vào backlog và cạnh tranh ưu tiên ở lần lập kế hoạch tiếp theo.",
+        "Lưu ý: phần hay bị bỏ là ghi lại lý do của thay đổi. Sáu tháng sau, không ai nhớ vì sao quy tắc nghiệp vụ này lại có ngoại lệ nếu không có dòng ghi chú đó."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "100432-yeu-cau-thay-doi-giua-chung-du-an-ban-quan-ly-change-request-ra-sao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "9a645040-686c-5c87-af40-4b58c9277d11",
+    "question": "Alternate flow và exception flow khác nhau thế nào? Xác định luồng thay thế ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100442-alternate-flow-va-exception-flow-khac-nhau-the-nao-xac-dinh-luong-thay-the-ra-sa",
+    "slug": "alternate-flow-va-exception-flow-khac-nhau-the-nao-xac-dinh-luong-thay-the-ra-sao-9a645040-686c-5c87-af40-4b58c9277d11",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Alternate flow (luồng thay thế) — một cách khác để đi tới cùng mục tiêu thành công. Use case vẫn kết thúc như mong muốn, chỉ khác đường đi.\n> Đặt hàng: luồng chính thanh toán bằng thẻ; luồng thay thế thanh toán bằng ví điện tử hoặc nhận hàng trả tiền. Đơn vẫn được tạo."
+      ],
+      "details": [
+        "Exception flow (luồng ngoại lệ) — tình huống khiến use case không đạt được mục tiêu, hệ thống phải xử lý lỗi và kết thúc ở trạng thái khác.\n> Đặt hàng: thẻ bị từ chối, hết hàng trong lúc thanh toán, mất kết nối tới cổng thanh toán. Đơn không được tạo, hoặc được tạo ở trạng thái chờ.",
+        "Cách xác định luồng thay thế một cách có hệ thống: duyệt lại từng bước của luồng chính và đặt ba câu hỏi:\n1. Bước này có cách làm khác không? (chọn phương thức khác, nhập bằng cách khác)\n2. Bước này có thể thất bại vì lý do gì? (dữ liệu sai, quyền không đủ, hệ thống ngoài không phản hồi)\n3. Actor có thể dừng giữa chừng không, và khi đó trạng thái để lại là gì?",
+        "Vì sao phần này quan trọng: phần lớn khối lượng phát triển và lỗi khi vận hành nằm ở luồng ngoại lệ, không nằm ở luồng chính. Đặc tả chỉ mô tả luồng thuận lợi là nguyên nhân phổ biến khiến ước lượng sai và phát sinh yêu cầu giữa chừng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "100442-alternate-flow-va-exception-flow-khac-nhau-the-nao-xac-dinh-luong-thay-the-ra-sa",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "6a6bf339-f51b-5b90-b5b6-a6caa3b2bcd1",
+    "question": "Trong use case diagram, include và extend khác nhau thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100443-trong-use-case-diagram-include-va-extend-khac-nhau-the-nao",
+    "slug": "trong-use-case-diagram-include-va-extend-khac-nhau-the-nao-6a6bf339-f51b-5b90-b5b6-a6caa3b2bcd1",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Hai quan hệ này giống nhau ở chỗ đều tách một phần hành vi ra khỏi use case gốc, nhưng khác ở tính bắt buộc và hướng phụ thuộc."
+      ],
+      "details": [
+        "include — luôn xảy ra\nUse case gốc luôn gọi tới use case được include; phần được tách ra là bước bắt buộc và thường dùng chung cho nhiều use case.\n> \"Đặt hàng\" include \"Xác thực người dùng\". Không xác thực thì không đặt được.",
+        "extend — có điều kiện\nUse case mở rộng chỉ chạy khi thoả một điều kiện, tại một điểm mở rộng xác định trong use case gốc. Bỏ phần mở rộng đi thì use case gốc vẫn hoàn chỉnh.\n> \"Đặt hàng\" được extend bởi \"Áp mã giảm giá\" — chỉ chạy khi người dùng có nhập mã.",
+        "Hướng mũi tên: include trỏ từ use case gốc tới use case được dùng lại; extend trỏ ngược, từ use case mở rộng về use case gốc. Đây là chi tiết hay bị hỏi lại để kiểm tra bạn có thực sự vẽ hay chỉ học thuộc.",
+        "Lưu ý thực tế: lạm dụng hai quan hệ này làm sơ đồ khó đọc mà không thêm thông tin cho bên nghiệp vụ. Nhiều nhóm chỉ dùng include cho phần dùng lại rõ ràng, còn các nhánh có điều kiện thì mô tả trong luồng thay thế của đặc tả thay vì vẽ ra sơ đồ."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "100443-trong-use-case-diagram-include-va-extend-khac-nhau-the-nao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "691430f4-5d0f-5238-9a7d-553eea1687d5",
+    "question": "Các bước để thiết kế một use case là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100444-cac-buoc-de-thiet-ke-mot-use-case-la-gi",
+    "slug": "cac-buoc-de-thiet-ke-mot-use-case-la-gi-691430f4-5d0f-5238-9a7d-553eea1687d5",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Trình tự dùng được trong thực tế:"
+      ],
+      "details": [
+        "1. Xác định phạm vi hệ thống — chốt cái gì nằm trong hệ thống, cái gì là bên ngoài. Ranh giới sai ở bước này kéo theo sai toàn bộ.",
+        "5. Bổ sung luồng thay thế và ngoại lệ",
+        "2. Liệt kê actor — các vai trò dùng hệ thống, cộng hệ thống ngoài và sự kiện định kỳ. Với mỗi actor, hỏi họ cần đạt được gì.",
+        "6. Thêm điều kiện trước, điều kiện sau, quy tắc nghiệp vụ",
+        "7. Rà lại cùng bên nghiệp vụ và đội kỹ thuật",
+        "3. Xác định use case theo mục tiêu — mỗi use case là một mục tiêu hoàn chỉnh của actor, đặt tên bằng động từ. Kiểm tra bằng câu hỏi: sau khi làm xong bước này, actor đã đạt được thứ họ cần chưa? Nếu chưa thì đó mới là một bước, không phải một use case.",
+        "4. Viết luồng chính — dạng đánh số, mỗi bước một hành động, xen kẽ giữa actor và hệ thống. Giữ ở mức tương tác nhìn từ ngoài.",
+        "Mốc kiểm chứng: tester đọc use case và viết được ca kiểm thử mà không phải hỏi thêm."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "100444-cac-buoc-de-thiet-ke-mot-use-case-la-gi",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "c6085a78-76c2-5823-bbb6-f5c8e45aeb14",
+    "question": "BA thường dùng những loại sơ đồ nào? Kể hai loại bạn dùng nhiều nhất và vì sao.",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100447-ba-thuong-dung-nhung-loai-so-do-nao-ke-hai-loai-ban-dung-nhieu-nhat-va-vi-sao",
+    "slug": "ba-thuong-dung-nhung-loai-so-do-nao-ke-hai-loai-ban-dung-nhieu-nhat-va-vi-sao-c6085a78-76c2-5823-bbb6-f5c8e45aeb14",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Câu này kiểm tra bạn có chọn sơ đồ theo mục đích hay vẽ theo thói quen."
+      ],
+      "details": [
+        "Các loại thường dùng và việc chúng giải quyết:\n- Use case diagram — chốt phạm vi: ai dùng chức năng nào.\n- Activity diagram / BPMN — mô tả dòng chảy quy trình, lộ điểm bàn giao và điểm tắc giữa các bộ phận.\n- Sequence diagram — chỉ ra thứ tự trao đổi giữa các thành phần hệ thống theo thời gian; hữu ích khi luồng đi qua nhiều hệ thống.\n- ERD — mô hình dữ liệu: thực thể, thuộc tính, quan hệ và ràng buộc. Đây là công cụ tốt để lộ ra quy tắc nghiệp vụ ẩn, ví dụ một khách hàng có được nhiều tài khoản hay không.\n- Data flow diagram — dữ liệu đi từ đâu tới đâu, được biến đổi ở bước nào.\n- State diagram — vòng đời trạng thái của một đối tượng (đơn hàng: mới, đã xác nhận, đang giao, hoàn tất, đã huỷ) và các chuyển trạng thái hợp lệ.",
+        "Cách trả lời có trọng lượng: chọn hai loại và gắn với tình huống thật. Ví dụ: dùng activity diagram có swimlane cho quy trình duyệt hồ sơ vì cần chỉ ra hồ sơ nằm chờ ở bộ phận nào; dùng state diagram cho vòng đời đơn hàng vì tranh cãi chính là đơn ở trạng thái nào thì còn huỷ được.",
+        "Lưu ý: nêu được rằng state diagram bắt được các chuyển trạng thái không hợp lệ mà đặc tả văn xuôi hay bỏ sót thường tạo ấn tượng tốt."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "100447-ba-thuong-dung-nhung-loai-so-do-nao-ke-hai-loai-ban-dung-nhieu-nhat-va-vi-sao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "cba986ee-32dd-5725-9ed8-4139eba3d8c9",
+    "question": "Persona là gì? BA dùng persona vào việc gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100449-persona-la-gi-ba-dung-persona-vao-viec-gi",
+    "slug": "persona-la-gi-ba-dung-persona-vao-viec-gi-cba986ee-32dd-5725-9ed8-4139eba3d8c9",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Persona là hồ sơ mô tả một nhóm người dùng điển hình, dựng từ dữ liệu khảo sát và phỏng vấn thật, không phải tưởng tượng. Một persona thường gồm: bối cảnh công việc, mục tiêu khi dùng sản phẩm, khó khăn đang gặp, mức thành thạo công nghệ, và môi trường sử dụng (thiết bị, chỗ ngồi, thời điểm)."
+      ],
+      "details": [
+        "BA dùng persona để:\n- Chặn kiểu yêu cầu chung chung — thay vì \"người dùng cần bộ lọc\", câu hỏi trở thành \"nhân viên kho, đứng dùng máy quét, mỗi ca xử lý 200 kiện, cần lọc theo cái gì\".\n- Xếp ưu tiên — khi hai yêu cầu xung đột, biết yêu cầu nào thuộc nhóm người dùng chính giúp quyết định dựa trên căn cứ thay vì theo người nói to nhất.\n- Viết user story đúng vai — phần \"là một...\" lấy trực tiếp từ persona, thay vì ghi \"người dùng\" cho mọi story.\n- Kiểm thử và UAT — chọn đúng người tham gia nghiệm thu theo nhóm persona.",
+        "Lưu ý: persona chỉ có giá trị khi dựng từ dữ liệu thật. Persona tự nghĩ ra trong phòng họp thành cái cớ để hợp thức hoá phỏng đoán, và tệ hơn là không ai dám phản bác vì nó trông có vẻ đã nghiên cứu. Khi trả lời phỏng vấn, nói rõ nguồn dữ liệu bạn dùng để dựng persona là điểm cộng."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "100449-persona-la-gi-ba-dung-persona-vao-viec-gi",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "39932fce-ea4b-50d9-9f9d-83048014fdb5",
+    "question": "INVEST là gì? Dùng nó để đánh giá user story như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100452-invest-la-gi-dung-no-de-danh-gia-user-story-nhu-the-nao",
+    "slug": "invest-la-gi-dung-no-de-danh-gia-user-story-nhu-the-nao-39932fce-ea4b-50d9-9f9d-83048014fdb5",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "INVEST là bộ sáu tiêu chí soát chất lượng một user story:"
+      ],
+      "details": [
+        "Cách dùng trong thực tế: đây là danh mục soát trước khi đưa story vào sprint. Story trượt tiêu chí S thì tách nhỏ theo luồng nghiệp vụ hoặc theo quy tắc nghiệp vụ, không tách theo tầng kỹ thuật. Trượt tiêu chí T thì quay lại viết acceptance criteria trước.",
+        "Lưu ý: không phải story nào cũng đạt cả sáu. INVEST là công cụ phát hiện chỗ cần bàn thêm, không phải điều kiện cứng để chặn công việc."
+      ],
+      "points": [
+        "I — Independent: làm được độc lập, không buộc phải làm sau một story khác. Story phụ thuộc chồng chéo khiến việc xếp ưu tiên mất tự do.",
+        "N — Negotiable: mô tả điều cần đạt, chừa chỗ để bàn cách làm. Story viết như một bản đặc tả đóng kín thì mất phần trao đổi vốn là giá trị chính.",
+        "E — Estimable",
+        "V — Valuable: mang lại giá trị thấy được cho người dùng hoặc bên nghiệp vụ. Story dạng \"tạo bảng dữ liệu\" không đạt tiêu chí này.",
+        "S — Small",
+        "T — Testable: có acceptance criteria kiểm chứng được. Không viết ra được cách kiểm thử thì cũng không có cách nào nói là xong."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "100452-invest-la-gi-dung-no-de-danh-gia-user-story-nhu-the-nao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "0ca9ed56-07d2-51cb-97bf-f0f9834d6340",
+    "question": "User story và use case giống và khác nhau ở chỗ nào? Khi nào dùng cái nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100454-user-story-va-use-case-giong-va-khac-nhau-o-cho-nao-khi-nao-dung-cai-nao",
+    "slug": "user-story-va-use-case-giong-va-khac-nhau-o-cho-nao-khi-nao-dung-cai-nao-0ca9ed56-07d2-51cb-97bf-f0f9834d6340",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Giống nhau: cả hai đều mô tả nhu cầu từ góc nhìn người dùng, đều gắn với một vai trò và một mục tiêu, và đều là đầu vào để đội phát triển triển khai."
+      ],
+      "details": [
+        "Chọn theo bối cảnh:\n- User story khi đội trao đổi trực tiếp được hằng ngày và yêu cầu còn thay đổi. Chi tiết bù bằng đối thoại.\n- Use case khi luồng nghiệp vụ dài với nhiều điều kiện rẽ nhánh, khi đội phát triển ở xa hoặc khác múi giờ, hoặc khi hợp đồng đòi tài liệu nghiệm thu.",
+        "Khác nhau:",
+        "Trong thực tế hai thứ hay được dùng chung: use case để mô tả toàn bộ quy trình cho bên nghiệp vụ duyệt, rồi cắt thành các user story để đưa vào sprint. Nêu được cách kết hợp này thường được đánh giá cao hơn là chọn một bên và bác bên còn lại."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": [
+        {
+          "cells": [
+            "User story",
+            "Use case",
+            "Độ dài",
+            "Một câu, chi tiết nằm ở AC",
+            "Đặc tả có cấu trúc, nhiều bước",
+            "Trọng tâm",
+            "Giá trị người dùng nhận được",
+            "Trình tự tương tác đầy đủ",
+            "Luồng ngoại lệ",
+            "Nằm trong acceptance criteria",
+            "Có mục riêng cho luồng thay thế và ngoại lệ",
+            "Vòng đời",
+            "Làm rõ dần, có thể viết lại",
+            "Viết đầy đủ trước khi triển khai"
+          ]
+        }
+      ]
+    },
+    "legacyId": 44,
+    "sourceSlug": "100454-user-story-va-use-case-giong-va-khac-nhau-o-cho-nao-khi-nao-dung-cai-nao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "31d06a10-caf5-5ff2-9dbb-4964234039eb",
+    "question": "Một Agile Business Analyst cần những phẩm chất gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100455-mot-agile-business-analyst-can-nhung-pham-chat-gi",
+    "slug": "mot-agile-business-analyst-can-nhung-pham-chat-gi-31d06a10-caf5-5ff2-9dbb-4964234039eb",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Phẩm chất khác biệt của một Agile BA nằm ở chỗ làm rõ yêu cầu theo nhịp lặp, thay vì bàn giao một tập đặc tả đã đóng rồi đứng ngoài."
+      ],
+      "details": [
+        "Nhịp làm việc cụ thể quanh một sprint:\n- Trước sprint — làm rõ yêu cầu với bên nghiệp vụ, viết user story và acceptance criteria, dựng wireframe nếu cần. Đây là phần nặng nhất.\n- Buổi làm mịn backlog — tách hạng mục quá lớn, bổ sung thông tin còn thiếu để đội ước lượng được.\n- Trong sprint — giải đáp cho dev và tester, soát ca kiểm thử xem có phủ đủ acceptance criteria không.\n- Cuối sprint — dự demo và nghiệm thu, phân loại phản hồi thành lỗi hay yêu cầu mới rồi đưa vào backlog.",
+        "Lưu ý: ở đội có cả BA lẫn Product Owner, ranh giới phải thống nhất từ đầu — thường BA phụ trách làm rõ và mô tả yêu cầu, còn PO giữ quyền quyết định thứ tự ưu tiên."
+      ],
+      "points": [
+        "Làm việc theo nhịp — chuẩn bị đủ chi tiết cho sprint sắp tới, giữ hạng mục xa ở mức thô. Cố viết đặc tả đầy đủ cho cả sản phẩm ngay từ đầu là cách nhanh nhất để bỏ phí phần lớn công sức.",
+        "Trao đổi trực tiếp thay vì bàn giao một chiều — phần lớn chi tiết nằm ở đối thoại với dev và tester, không nằm ở câu chữ trên thẻ.",
+        "Chịu được thay đổi nhưng có kỷ luật — yêu cầu mới vào backlog và cạnh tranh ưu tiên ở lần lập kế hoạch sau, không chen ngang sprint đang chạy.",
+        "Ở gần đội phát triển và kiểm thử",
+        "Viết được acceptance criteria kiểm chứng được — đây là thứ thay cho tập đặc tả dày, và là mốc để nói một hạng mục đã xong."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "100455-mot-agile-business-analyst-can-nhung-pham-chat-gi",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "944db1f3-4e6d-5a04-bf78-d56c8dcc6b8c",
+    "question": "GAP Analysis là gì? Làm ở giai đoạn nào và có những loại khoảng cách nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100460-gap-analysis-la-gi-lam-o-giai-doan-nao-va-co-nhung-loai-khoang-cach-nao",
+    "slug": "gap-analysis-la-gi-lam-o-giai-doan-nao-va-co-nhung-loai-khoang-cach-nao-944db1f3-4e6d-5a04-bf78-d56c8dcc6b8c",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "GAP Analysis là việc so sánh trạng thái hiện tại với trạng thái mong muốn để chỉ ra phần còn thiếu và việc phải làm để lấp phần đó."
+      ],
+      "details": [
+        "Ba bước:\n1. Mô tả trạng thái hiện tại bằng dữ liệu thật — quy trình đang chạy ra sao, mất bao lâu, sai sót bao nhiêu, ai làm gì.\n2. Mô tả trạng thái mong muốn gắn với mục tiêu nghiệp vụ và chỉ số đo được.\n3. Liệt kê khoảng cách và chuyển thành yêu cầu, kèm ước lượng và mức ưu tiên.",
+        "Các loại khoảng cách thường gặp:\n- Khoảng cách chức năng — hệ thống hiện tại chưa làm được việc cần làm.\n- Khoảng cách quy trình — quy trình thừa bước, thiếu bước kiểm soát, hoặc tắc ở điểm bàn giao giữa hai bộ phận.\n- Khoảng cách dữ liệu — thiếu dữ liệu, dữ liệu nằm rải ở nhiều nơi không khớp nhau, hoặc chất lượng không đủ để ra quyết định.\n- Khoảng cách kỹ năng và tổ chức — người dùng chưa được đào tạo, chưa có ai chịu trách nhiệm cho bước mới.\n- Khoảng cách công nghệ — hạ tầng hoặc hệ thống hiện tại không đáp ứng được mức yêu cầu.",
+        "Làm ở giai đoạn nào: chủ yếu ở giai đoạn phân tích đầu dự án, và lặp lại khi đánh giá giải pháp sau triển khai để xem khoảng cách đã đóng được tới đâu.",
+        "Lưu ý: phần hay bị bỏ là nhóm kỹ năng và tổ chức. Hệ thống mới chạy đúng nhưng không ai đổi cách làm việc là kiểu thất bại phổ biến và ít được nói tới."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "100460-gap-analysis-la-gi-lam-o-giai-doan-nao-va-co-nhung-loai-khoang-cach-nao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "9dc336ae-9e05-5a3d-b15b-b0ff65988e86",
+    "question": "Bạn xác định tính khả thi của một giải pháp như thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100463-ban-xac-dinh-tinh-kha-thi-cua-mot-giai-phap-nhu-the-nao",
+    "slug": "ban-xac-dinh-tinh-kha-thi-cua-mot-giai-phap-nhu-the-nao-9dc336ae-9e05-5a3d-b15b-b0ff65988e86",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Xét khả thi theo năm mặt, mỗi mặt có câu hỏi riêng và người xác nhận riêng — BA tổng hợp chứ không tự kết luận cả năm."
+      ],
+      "details": [
+        "Kỹ thuật — công nghệ hiện có làm được không, đội có đủ năng lực không, tích hợp được với hệ thống đang chạy không, chịu được khối lượng dự kiến không. Người xác nhận: kiến trúc sư hoặc lead kỹ thuật.",
+        "Kinh tế — chi phí xây và chi phí vận hành so với lợi ích đo được. Cần cả phần chi phí sau khi bàn giao, phần này hay bị bỏ khỏi bài toán.",
+        "Cách trình bày kết quả:",
+        "Lưu ý:",
+        "Vận hành — tổ chức có vận hành nổi không: ai làm bước mới, cần đào tạo bao nhiêu người, quy trình thủ công thay thế khi hệ thống ngừng là gì.",
+        "Thời gian — làm kịp mốc nghiệp vụ không. Có mốc bất di bất dịch như kỳ quyết toán hay hạn tuân thủ quy định không.",
+        "Pháp lý và tuân thủ — có vướng quy định về dữ liệu cá nhân, lưu trữ chứng từ, hay điều khoản hợp đồng với bên thứ ba không."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": "100463-ban-xac-dinh-tinh-kha-thi-cua-mot-giai-phap-nhu-the-nao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "c8a225a5-9f51-5524-a601-b67ca0c73c73",
+    "question": "Có những cách xử lý rủi ro nào? Giảm thiểu và né tránh khác nhau ra sao?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100465-co-nhung-cach-xu-ly-rui-ro-nao-giam-thieu-va-ne-tranh-khac-nhau-ra-sao",
+    "slug": "co-nhung-cach-xu-ly-rui-ro-nao-giam-thieu-va-ne-tranh-khac-nhau-ra-sao-c8a225a5-9f51-5524-a601-b67ca0c73c73",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Sau khi nhận diện và xếp hạng rủi ro theo xác suất và mức tác động, có bốn hướng xử lý:"
+      ],
+      "details": [
+        "Né tránh (avoid) — đổi kế hoạch để rủi ro không còn khả năng xảy ra. Bỏ hẳn phần chức năng phụ thuộc vào hệ thống bên thứ ba chưa đáng tin, hoặc chọn công nghệ đội đã thạo thay vì công nghệ mới. Đánh đổi thường là mất một phần giá trị hoặc phạm vi.",
+        "Giảm thiểu (mitigate) — vẫn giữ kế hoạch nhưng làm giảm xác suất hoặc mức tác động. Làm bản thử tích hợp sớm để phát hiện trục trặc trước, chuẩn bị dữ liệu mẫu, tách phần rủi ro cao ra làm trước để có thời gian xử lý.",
+        "Chuyển giao (transfer) — đẩy hậu quả sang bên khác: điều khoản phạt trong hợp đồng, thuê dịch vụ có cam kết mức phục vụ, mua bảo hiểm. Rủi ro vẫn xảy ra, chỉ khác ai chịu chi phí.",
+        "Chấp nhận (accept) — biết và ghi nhận nhưng không hành động, thường vì chi phí xử lý lớn hơn thiệt hại dự kiến. Có thể kèm kế hoạch dự phòng để dùng khi rủi ro thành hiện thực.",
+        "Khác biệt cốt lõi giữa né tránh và giảm thiểu: né tránh nhắm vào xác suất bằng không bằng cách đổi cách làm; giảm thiểu chấp nhận rủi ro vẫn tồn tại và chỉ kéo mức nguy hiểm xuống. Né tránh thường tốn phạm vi hoặc giá trị, giảm thiểu thường tốn công sức và thời gian."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": "100465-co-nhung-cach-xu-ly-rui-ro-nao-giam-thieu-va-ne-tranh-khac-nhau-ra-sao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "40953699-649e-5441-9663-0005b37f106a",
+    "question": "BA cần biết SQL tới mức nào? Những câu SQL nào hay được hỏi khi phỏng vấn BA?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100467-ba-can-biet-sql-toi-muc-nao-nhung-cau-sql-nao-hay-duoc-hoi-khi-phong-van-ba",
+    "slug": "ba-can-biet-sql-toi-muc-nao-nhung-cau-sql-nao-hay-duoc-hoi-khi-phong-van-ba-40953699-649e-5441-9663-0005b37f106a",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Mức cần: truy vấn và kiểm chứng dữ liệu, không phải tối ưu hay thiết kế cơ sở dữ liệu. Mục đích là tự trả lời được câu hỏi nghiệp vụ thay vì chờ dev chạy giúp.",
+        "Lưu ý:"
+      ],
+      "details": [
+        "Phần kiến thức thường bị hỏi:\n- SELECT kèm WHERE, ORDER BY, LIMIT.\n- GROUP BY với các hàm tổng hợp, và HAVING khác WHERE ở chỗ nào.\n- Các loại JOIN, đặc biệt là khác biệt giữa INNER JOIN và LEFT JOIN — đây là câu hỏi hay gặp nhất.\n- NULL và cách nó ảnh hưởng tới điều kiện lọc và hàm tổng hợp.\n- DISTINCT, UNION khác UNION ALL.\n- Khái niệm khoá chính, khoá ngoại, quan hệ một-nhiều và nhiều-nhiều.",
+        "Ví dụ dạng bài hay được đưa ra:",
+        "Khoảng thời gian cũng viết dạng nửa mở (>= đầu tháng, < đầu tháng sau) thay vì BETWEEN, để không phụ thuộc vào phần giờ-phút-giây của cột."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": "100467-ba-can-biet-sql-toi-muc-nao-nhung-cau-sql-nao-hay-duoc-hoi-khi-phong-van-ba",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "f8af32eb-c180-5360-ad17-0c93fa5f81e1",
+    "question": "BA có nên tham gia kiểm thử không? Vai trò của BA trong UAT là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100468-ba-co-nen-tham-gia-kiem-thu-khong-vai-tro-cua-ba-trong-uat-la-gi",
+    "slug": "ba-co-nen-tham-gia-kiem-thu-khong-vai-tro-cua-ba-trong-uat-la-gi-f8af32eb-c180-5360-ad17-0c93fa5f81e1",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Có, nhưng ở đúng vai. BA không thay thế đội kiểm thử; phần đóng góp của BA là đối chiếu sản phẩm với yêu cầu và với nghiệp vụ thật."
+      ],
+      "details": [
+        "Việc BA làm được trong kiểm thử:\n- Soát ca kiểm thử — kiểm tra ca kiểm thử có phủ hết acceptance criteria không, có bỏ sót luồng ngoại lệ không.\n- Giải thích quy tắc nghiệp vụ khi tester gặp trường hợp không có trong tài liệu, và cập nhật lại tài liệu nếu đúng là thiếu.\n- Phân loại kết quả — một kết quả bất thường là lỗi triển khai, là yêu cầu bị hiểu sai, hay là yêu cầu chưa từng được nêu. Ba loại này xử lý khác nhau.",
+        "Trong UAT, người kiểm thử là người dùng thật, BA giữ vai tổ chức:\n- Chuẩn bị kịch bản UAT theo tình huống nghiệp vụ hằng ngày, không theo từng chức năng rời rạc.\n- Chuẩn bị dữ liệu thử đủ giống thật, gồm cả các trường hợp khó.\n- Hướng dẫn và hỗ trợ người dùng trong lúc chạy, ghi nhận phản hồi.\n- Phân loại phản hồi thành lỗi hoặc yêu cầu mới, đưa yêu cầu mới qua quy trình thay đổi thay vì lặng lẽ làm thêm.\n- Tổng hợp kết quả làm căn cứ nghiệm thu.",
+        "Lưu ý: BA quá gần sản phẩm nên dễ có thiên kiến — biết trước phải bấm theo trình tự nào nên không thấy chỗ người dùng mới sẽ vấp. Đây là lý do UAT phải do người dùng thật thực hiện."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": "100468-ba-co-nen-tham-gia-kiem-thu-khong-vai-tro-cua-ba-trong-uat-la-gi",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "c2a67fc4-57b7-561c-b593-a02bbf28984d",
+    "question": "Khi các stakeholder đưa ra yêu cầu mâu thuẫn nhau, bạn xử lý thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100469-khi-cac-stakeholder-dua-ra-yeu-cau-mau-thuan-nhau-ban-xu-ly-the-nao",
+    "slug": "khi-cac-stakeholder-dua-ra-yeu-cau-mau-thuan-nhau-ban-xu-ly-the-nao-c2a67fc4-57b7-561c-b593-a02bbf28984d",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Đây là câu hỏi tình huống hay gặp nhất với vị trí BA. Trả lời theo trình tự xử lý, kèm một ví dụ thật."
+      ],
+      "details": [
+        "1. Làm rõ mâu thuẫn thật sự nằm ở đâu. Nhiều trường hợp hai bên dùng cùng một từ với hai nghĩa khác nhau, hoặc mô tả hai giải pháp cho cùng một nhu cầu. Quy về nhu cầu gốc trước khi coi đó là xung đột.",
+        "2. Đưa về căn cứ đo được. Mỗi bên nêu yêu cầu kèm tác động: ảnh hưởng bao nhiêu giao dịch một ngày, tiết kiệm bao nhiêu thời gian, có ràng buộc pháp lý nào không. Tranh luận dựa trên số liệu ngắn hơn tranh luận dựa trên quan điểm.",
+        "6. Ghi lại quyết định và lý do",
+        "Lưu ý:",
+        "3. Xét theo mục tiêu chung của dự án. Yêu cầu nào phục vụ mục tiêu đã ghi trong tài liệu ban đầu thì có trọng số cao hơn.",
+        "4. Tìm phương án không loại trừ nhau. Nhiều xung đột giải được bằng phân quyền theo vai, cấu hình theo từng đơn vị, hoặc chia giai đoạn — làm phần chung trước, phần riêng sau.",
+        "5. Đưa lên đúng người quyết khi vẫn còn xung đột. BA trình bày các phương án kèm đánh đổi và khuyến nghị; người có thẩm quyền chọn. Không tự quyết thay và cũng không để mâu thuẫn treo."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": "100469-khi-cac-stakeholder-dua-ra-yeu-cau-mau-thuan-nhau-ban-xu-ly-the-nao",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "295c031c-f8b6-5c43-bba0-55ba8996c907",
+    "question": "Bạn phát hiện yêu cầu của khách hàng không khả thi về mặt kỹ thuật. Bạn xử lý thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100470-ban-phat-hien-yeu-cau-cua-khach-hang-khong-kha-thi-ve-mat-ky-thuat-ban-xu-ly-the",
+    "slug": "ban-phat-hien-yeu-cau-cua-khach-hang-khong-kha-thi-ve-mat-ky-thuat-ban-xu-ly-the-nao-295c031c-f8b6-5c43-bba0-55ba8996c907",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Không nhận lời trước rồi tính sau, và cũng không từ chối thẳng. Trình tự xử lý:"
+      ],
+      "details": [
+        "1. Xác nhận với đội kỹ thuật trước khi nói gì với khách. Làm rõ không khả thi ở mức nào: không làm được bằng công nghệ hiện tại, làm được nhưng vượt ngân sách hoặc thời gian, hay làm được nhưng phá vỡ một ràng buộc khác của hệ thống. Ba mức này dẫn tới ba cuộc trao đổi khác nhau.",
+        "2. Quay lại nhu cầu gốc. Hỏi khách hàng cần đạt được điều gì phía sau yêu cầu đó. Rất nhiều trường hợp yêu cầu không khả thi là một giải pháp cụ thể khách tự nghĩ ra, còn nhu cầu bên dưới thì có đường khác để đáp ứng.",
+        "Lưu ý:",
+        "3. Chuẩn bị phương án thay thế trước khi báo lại. Đi vào cuộc họp chỉ với tin xấu là cách nhanh nhất làm mất niềm tin. Nên có ít nhất hai lựa chọn kèm đánh đổi rõ ràng: phương án gần đúng làm được ngay, phương án đầy đủ cần thêm thời gian hoặc chi phí.",
+        "4. Trình bày bằng ngôn ngữ nghiệp vụ, có số. Không diễn giải bằng thuật ngữ kỹ thuật. Nêu ảnh hưởng tới thời gian, chi phí, rủi ro vận hành để khách quyết trên căn cứ.",
+        "5. Ghi lại quyết định. Cả phương án được chọn lẫn lý do bỏ phương án ban đầu."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": "100470-ban-phat-hien-yeu-cau-cua-khach-hang-khong-kha-thi-ve-mat-ky-thuat-ban-xu-ly-the",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "1f181084-5b2d-5289-b07f-ef1c4fa8f0f0",
+    "question": "Lập trình viên phản đối yêu cầu bạn đưa ra. Bạn làm gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100471-lap-trinh-vien-phan-doi-yeu-cau-ban-dua-ra-ban-lam-gi",
+    "slug": "lap-trinh-vien-phan-doi-yeu-cau-ban-dua-ra-ban-lam-gi-1f181084-5b2d-5289-b07f-ef1c4fa8f0f0",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Bắt đầu bằng giả định rằng phản đối có lý do, vì dev thường thấy trước ràng buộc mà tài liệu chưa nêu."
+      ],
+      "details": [
+        "1. Nghe hết lý do và phân loại. Ba loại phản đối phổ biến:\n- Kỹ thuật — làm được nhưng phá vỡ thiết kế hiện tại, gây rủi ro dữ liệu, hoặc chi phí bảo trì cao. Loại này thường đúng và cần điều chỉnh yêu cầu.\n- Khối lượng — làm được nhưng không kịp trong sprint. Đây là vấn đề phạm vi và ưu tiên, không phải vấn đề đúng sai.\n- Cách hiểu — dev đọc yêu cầu ra một nghĩa khác. Đây là lỗi ở khâu viết yêu cầu, cần sửa mô tả chứ không tranh luận.",
+        "2. Quay lại nhu cầu nghiệp vụ và lý do. Giải thích vì sao yêu cầu này tồn tại, ai bị ảnh hưởng nếu bỏ. Nhiều phản đối tan khi dev thấy được bối cảnh; và ngược lại, khi biết bối cảnh dev thường đề xuất được cách làm rẻ hơn đạt cùng mục tiêu.",
+        "3. Tách phần bắt buộc khỏi phần cách làm. Nếu điều bắt buộc là kết quả nghiệp vụ, còn cách triển khai thì linh hoạt, hãy nói rõ như vậy — nhiều xung đột đến từ chỗ yêu cầu vô tình mô tả sẵn giải pháp.",
+        "4. Đưa lên trên khi cần. Nếu vẫn không thống nhất và có ràng buộc nghiệp vụ hoặc pháp lý bắt buộc, đưa cùng lúc cho lead kỹ thuật và người có thẩm quyền nghiệp vụ, kèm đánh đổi của cả hai phương án.",
+        "Lưu ý: không dùng vị thế để ép (\"khách hàng yêu cầu vậy\"). Quan hệ làm việc với đội phát triển là tài sản dài hạn của một BA."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": "100471-lap-trinh-vien-phan-doi-yeu-cau-ban-dua-ra-ban-lam-gi",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "16687370-250e-52d0-bda9-3efb7e782145",
+    "question": "Bạn sẽ làm gì khi phải làm việc với một stakeholder khó tính, hay phản ứng gay gắt?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/100472-ban-se-lam-gi-khi-phai-lam-viec-voi-mot-stakeholder-kho-tinh-hay-phan-ung-gay-ga",
+    "slug": "ban-se-lam-gi-khi-phai-lam-viec-voi-mot-stakeholder-kho-tinh-hay-phan-ung-gay-gat-16687370-250e-52d0-bda9-3efb7e782145",
+    "access": "free",
+    "upgrade": null,
+    "answer": {
+      "summary": [
+        "Người phỏng vấn muốn xem bạn giữ được công việc chạy tiếp hay không, chứ không kiểm tra bạn có dễ chịu hay không."
+      ],
+      "details": [
+        "Trước buổi làm việc:\n- Chuẩn bị kỹ hơn bình thường: tài liệu, số liệu, câu hỏi đã sắp thứ tự. Phần lớn phản ứng gay gắt đến từ cảm giác đang mất thời gian.\n- Tìm hiểu điều họ thực sự quan tâm và áp lực họ đang chịu. Người phản đối một chức năng thường vì nó tạo thêm việc cho bộ phận của họ, không phải vì chức năng đó sai.",
+        "Trong buổi làm việc:\n- Tách nội dung khỏi giọng điệu. Phản hồi phần nội dung, không phản hồi phần cảm xúc.\n- Ghi lại ý kiến của họ ngay tại chỗ và đọc lại để xác nhận. Cảm giác được ghi nhận làm hạ nhiệt nhanh hơn mọi lời giải thích.\n- Khi bị chất vấn về một điều chưa chắc, nói thẳng là sẽ kiểm tra lại và hẹn thời điểm trả lời. Đoán bừa để giữ thể diện là cách hỏng quan hệ nhanh nhất.",
+        "Sau buổi làm việc:\n- Gửi biên bản ngắn: điều đã chốt, điều còn treo, ai làm gì trước khi nào.\n- Làm đúng cam kết đúng hạn. Uy tín được xây bằng vài lần giữ lời, và đó là thứ làm giảm căng thẳng ở những lần sau.",
+        "Khi vẫn không tiến triển: trao đổi với quản lý dự án để điều chỉnh cách làm việc — đổi kênh trao đổi, có thêm người cùng dự họp, hoặc xác định lại ai là đầu mối. Đây là điều chỉnh cách vận hành, không phải phàn nàn về con người."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": "100472-ban-se-lam-gi-khi-phai-lam-viec-voi-mot-stakeholder-kho-tinh-hay-phan-ung-gay-ga",
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "762934e8-42d4-5600-a8ae-9c477de045e9",
+    "question": "Là BA, bạn đo chất lượng của một yêu cầu bằng tiêu chí nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "la-ba-ban-do-chat-luong-cua-mot-yeu-cau-bang-tieu-chi-nao-762934e8-42d4-5600-a8ae-9c477de045e9",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": null,
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "d4ced920-39a4-5e29-b555-70cd6557659e",
+    "question": "Phân loại yêu cầu theo BABOK gồm những nhóm nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "phan-loai-yeu-cau-theo-babok-gom-nhung-nhom-nao-d4ced920-39a4-5e29-b555-70cd6557659e",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": null,
+    "departments": [
+      "business-analysis"
+    ]
+  },
+  {
+    "id": "084f6a18-529a-5a93-a8b8-45531be4096d",
+    "question": "CATWOE là gì? Dùng khi nào trong phân tích nghiệp vụ?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "catwoe-la-gi-dung-khi-nao-trong-phan-tich-nghiep-vu-084f6a18-529a-5a93-a8b8-45531be4096d",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": null,
+    "departments": [
+      "business-analysis"
+    ]
+  }
+]

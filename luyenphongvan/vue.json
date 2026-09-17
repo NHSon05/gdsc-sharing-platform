@@ -1,0 +1,2008 @@
+[
+  {
+    "id": "baee952c-7356-5384-8aa3-7d2587b4d92e",
+    "question": "Vue.js là gì? Khác React/Angular thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3200-vue-js-la-gi-khac-react-angular-the-nao",
+    "slug": "vue-js-la-gi-khac-react-angular-the-nao-baee952c-7356-5384-8aa3-7d2587b4d92e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vue.js là progressive JavaScript framework để xây dựng UI."
+      ],
+      "details": [],
+      "points": [
+        "So với React: Vue có template syntax rõ ràng hơn, two-way binding tích hợp sẵn, learning curve thấp hơn; React dùng JSX, unidirectional flow, hệ sinh thái lớn hơn",
+        "So với Angular: Vue nhẹ hơn, ít opinionated hơn; Angular là full framework với DI, OOP, TypeScript bắt buộc",
+        "Progressive: có thể dùng để add vào một phần app hoặc build full SPA"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 1,
+    "sourceSlug": "3200-vue-js-la-gi-khac-react-angular-the-nao"
+  },
+  {
+    "id": "3da13fee-9d66-5d0d-9fad-7478eae01a45",
+    "question": "Options API vs Composition API — khác nhau gì?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3201-options-api-vs-composition-api-khac-nhau-gi",
+    "slug": "options-api-vs-composition-api-khac-nhau-gi-3da13fee-9d66-5d0d-9fad-7478eae01a45",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Options API (Vue 2 style): tổ chức code theo loại (data, methods, computed, watch)."
+      ],
+      "details": [
+        "Composition API (Vue 3): tổ chức code theo logic concern, dùng setup() hoặc <script setup>.",
+        "Khuyến nghị dùng Composition API với <script setup> cho project mới."
+      ],
+      "points": [
+        "Composition API dễ tái sử dụng logic hơn qua composables",
+        "TypeScript support tốt hơn trong Composition API",
+        "Options API vẫn được hỗ trợ đầy đủ trong Vue 3"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 2,
+    "sourceSlug": "3201-options-api-vs-composition-api-khac-nhau-gi"
+  },
+  {
+    "id": "6d3d2d4d-10eb-55cc-b7d2-efe15209d974",
+    "question": "<script setup> là gì? Lợi ích so với setup() thông thường?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3202-script-setup-la-gi-loi-ich-so-voi-setup-thong-thuong",
+    "slug": "script-setup-la-gi-loi-ich-so-voi-setup-thong-thuong-6d3d2d4d-10eb-55cc-b7d2-efe15209d974",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "<script setup> là syntactic sugar cho Composition API — tất cả code bên trong tự động expose ra template mà không cần return."
+      ],
+      "details": [
+        "Lưu ý: biến và function trong <script setup> khác file KHÔNG cần export — tự exposed."
+      ],
+      "points": [
+        "Gọn hơn: không cần export default, không cần return",
+        "Hiệu năng tốt hơn: compiler tối ưu hóa tốt hơn",
+        "TypeScript integration tốt hơn",
+        "defineProps, defineEmits, defineExpose thay cho options props/emits"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 3,
+    "sourceSlug": "3202-script-setup-la-gi-loi-ich-so-voi-setup-thong-thuong"
+  },
+  {
+    "id": "22d59647-eba2-54e2-b457-7705aa7b4b8e",
+    "question": "Các directive phổ biến trong Vue: v-if, v-show, v-for, v-model, v-bind, v-on?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3205-cac-directive-pho-bien-trong-vue-v-if-v-show-v-for-v-model-v-bind-v-on",
+    "slug": "cac-directive-pho-bien-trong-vue-v-if-v-show-v-for-v-model-v-bind-v-on-22d59647-eba2-54e2-b457-7705aa7b4b8e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vue directives là các HTML attribute đặc biệt gắn kết reactive behavior vào DOM."
+      ],
+      "details": [],
+      "points": [
+        "Phổ biến nhất: v-if/v-else/v-else-if: điều kiện render, xóa/tạo DOM thật. v-show: ẩn bằng display:none, DOM vẫn tồn tại. v-for: loop render, luôn cần :key. v-model: two-way binding cho input. v-bind (:attr): bind attribute động. v-on (@event): gắn event listener.",
+        "Lưu ý: v-if và v-for không nên dùng trên cùng element — v-if ưu tiên cao hơn v-for trong Vue 3 (ngược với Vue 2), dùng <template v-for> bọc bên ngoài."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 4,
+    "sourceSlug": "3205-cac-directive-pho-bien-trong-vue-v-if-v-show-v-for-v-model-v-bind-v-on"
+  },
+  {
+    "id": "98feba1a-7533-5d14-b84a-087a7d0fde34",
+    "question": "v-if vs v-show — khi nào dùng cái nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3206-v-if-vs-v-show-khi-nao-dung-cai-nao",
+    "slug": "v-if-vs-v-show-khi-nao-dung-cai-nao-98feba1a-7533-5d14-b84a-087a7d0fde34",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "v-if: xóa hoàn toàn DOM khi false — chi phí cao khi toggle thường xuyên, nhưng không render child khi không cần (lazy). v-show: chỉ toggle display:none — DOM luôn được render, chi phí thấp khi toggle."
+      ],
+      "details": [],
+      "points": [
+        "Dùng v-show khi element cần toggle thường xuyên.",
+        "Dùng v-if khi điều kiện ít thay đổi, hoặc khi child component có side-effects cần tránh khởi tạo."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 5,
+    "sourceSlug": "3206-v-if-vs-v-show-khi-nao-dung-cai-nao"
+  },
+  {
+    "id": "e4794503-5ddf-5c47-8571-70d061378aaa",
+    "question": "Các cách truyền data giữa components trong Vue?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3217-cac-cach-truyen-data-giua-components-trong-vue",
+    "slug": "cac-cach-truyen-data-giua-components-trong-vue-e4794503-5ddf-5c47-8571-70d061378aaa",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vue components giao tiếp qua nhiều cơ chế tùy quan hệ và chiều dữ liệu."
+      ],
+      "details": [
+        "Lưu ý: tránh emit từ child để trực tiếp modify prop của parent — luôn emit event để parent tự update."
+      ],
+      "points": [
+        "Props (parent → child): dữ liệu đi xuống, one-way",
+        "Emits (child → parent): event đi lên, gọi emit()",
+        "v-model: two-way binding, kết hợp props + emits",
+        "provide/inject: ancestor → descendant, bỏ qua intermediaries",
+        "mitt"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 6,
+    "sourceSlug": "3217-cac-cach-truyen-data-giua-components-trong-vue"
+  },
+  {
+    "id": "78379f29-4cd8-5f5f-be96-63289034f3ab",
+    "question": "Vue Router cơ bản: cách setup và navigate?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3220-vue-router-co-ban-cach-setup-va-navigate",
+    "slug": "vue-router-co-ban-cach-setup-va-navigate-78379f29-4cd8-5f5f-be96-63289034f3ab",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Vue Router là official router cho Vue.js — quản lý navigation, URL history, route matching.",
+        "Navigate: <RouterLink to=\"/about\"> trong template, hoặc router.push('/about') trong script. <RouterView /> là nơi component được render."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "// router/index.ts\nimport { createRouter, createWebHistory } from 'vue-router'\nconst router = createRouter({\n  history: createWebHistory(),\n  routes: [\n    { path: '/', component: Home },\n    { path: '/user/:id', component: User },\n    { path: '/:pathMatch(.*)*', component: NotFound },\n  ]\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 7,
+    "sourceSlug": "3220-vue-router-co-ban-cach-setup-va-navigate"
+  },
+  {
+    "id": "f78743ed-077d-5cf3-a89a-62d06f4eba52",
+    "question": "Pinia là gì? Tại sao thay thế Vuex?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/3223-pinia-la-gi-tai-sao-thay-the-vuex",
+    "slug": "pinia-la-gi-tai-sao-thay-the-vuex-f78743ed-077d-5cf3-a89a-62d06f4eba52",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Pinia là official state management library cho Vue 3 — thay thế Vuex."
+      ],
+      "details": [
+        "Ưu điểm:"
+      ],
+      "points": [
+        "Composition API-friendly, không cần mutations",
+        "TypeScript support tốt hơn nhiều",
+        "Không có nested modules, mỗi store là một module độc lập",
+        "Bundle nhỏ hơn (~1KB)"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 8,
+    "sourceSlug": "3223-pinia-la-gi-tai-sao-thay-the-vuex"
+  },
+  {
+    "id": "dc83608d-a5b2-51f5-9044-3fd64d755b88",
+    "question": "Vì sao không nên đặt v-if và v-for trên cùng một thẻ? Viết lại thế nào cho đúng?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97600-vi-sao-khong-nen-dat-v-if-va-v-for-tren-cung-mot-the-viet-lai-the-nao-cho-dung",
+    "slug": "vi-sao-khong-nen-dat-v-if-va-v-for-tren-cung-mot-the-viet-lai-the-nao-cho-dung-dc83608d-a5b2-51f5-9044-3fd64d755b88",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì trong Vue 3, v-if có độ ưu tiên cao hơn v-for — điều kiện được đánh giá trước, nên nó không nhìn thấy biến của vòng lặp.",
+        "Cách 1 tốt hơn về hiệu năng: computed được cache, danh sách lọc chỉ tính lại khi users đổi, còn đặt v-if trong vòng lặp thì mỗi lần re-render đều duyệt toàn bộ phần tử."
+      ],
+      "details": [
+        "Đoạn dưới ném lỗi vì user chưa tồn tại ở thời điểm v-if chạy:",
+        "Lưu ý :key phải gắn vào phần tử thật sự lặp — với <template v-for> thì :key nằm trên <template>."
+      ],
+      "points": [],
+      "sections": [
+        "Hai cách sửa:"
+      ],
+      "codeExamples": [
+        {
+          "language": "VUE",
+          "code": "<!-- wrong: `user` is not defined yet -->\n<li v-for=\"user in users\" v-if=\"user.isActive\" :key=\"user.id\">\n  {{ user.name }}\n</li>"
+        },
+        {
+          "language": "VUE",
+          "code": "<!-- 1. filter in a computed (preferred) -->\n<li v-for=\"user in activeUsers\" :key=\"user.id\">{{ user.name }}</li>\n\n<!-- 2. wrap with <template v-for> and put v-if inside -->\n<template v-for=\"user in users\" :key=\"user.id\">\n  <li v-if=\"user.isActive\">{{ user.name }}</li>\n</template>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 9,
+    "sourceSlug": "97600-vi-sao-khong-nen-dat-v-if-va-v-for-tren-cung-mot-the-viet-lai-the-nao-cho-dung"
+  },
+  {
+    "id": "e6910416-2652-5aa7-b9a4-535be7b8a29a",
+    "question": "Vì sao gán trực tiếp vào props bị cảnh báo? Con muốn sửa dữ liệu cha truyền xuống thì làm thế nào?",
+    "level": "basic",
+    "levelLabel": "CƠ BẢN",
+    "sourceUrl": "https://luyenphongvan.online/q/97601-vi-sao-gan-truc-tiep-vao-props-bi-canh-bao-con-muon-sua-du-lieu-cha-truyen-xuong",
+    "slug": "vi-sao-gan-truc-tiep-vao-props-bi-canh-bao-con-muon-sua-du-lieu-cha-truyen-xuong-thi-lam-the-nao-e6910416-2652-5aa7-b9a4-535be7b8a29a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vue áp dụng one-way data flow: props chỉ chảy từ cha xuống con. Gán props.title = ... sẽ bị Vue cảnh báo (và ở chế độ dev là lỗi) vì mỗi lần cha re-render, giá trị đó bị ghi đè lại — sửa ở con là thay đổi sẽ mất và luồng dữ liệu trở nên khó truy vết.",
+        "Lưu ý: với prop là object/array, Vue chỉ chặn gán lại chính prop đó, không chặn sửa thuộc tính bên trong (props.items.push(x) vẫn chạy)."
+      ],
+      "details": [
+        "Ba cách xử lý tuỳ mục đích:",
+        "Nhưng đó là mutate state của cha từ xa — nên tránh, thay bằng emit để cha tự quyết định."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const props = defineProps({ title: String, items: Array })\nconst emit = defineEmits(['update:title'])\n\n// 1. prop chỉ là giá trị khởi tạo → copy sang local state\nconst draft = ref(props.title)\n\n// 2. cần biến đổi để hiển thị → computed\nconst upper = computed(() => props.title.toUpperCase())\n\n// 3. cần cha đổi theo → emit ngược lên (v-model pattern)\nfunction rename(next) { emit('update:title', next) }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 10,
+    "sourceSlug": "97601-vi-sao-gan-truc-tiep-vao-props-bi-canh-bao-con-muon-sua-du-lieu-cha-truyen-xuong"
+  },
+  {
+    "id": "0f8ced75-0b88-5417-adc7-7bdbee2ab50e",
+    "question": "Single File Component (SFC) là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3204-single-file-component-sfc-la-gi",
+    "slug": "single-file-component-sfc-la-gi-0f8ced75-0b88-5417-adc7-7bdbee2ab50e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "SFC (.vue file) gom template, script, style vào một file duy nhất — tiện lợi cho development."
+      ],
+      "details": [
+        "Cấu trúc: <template> (HTML), <script setup> (logic), <style scoped> (CSS).",
+        "Lưu ý: scoped CSS không ảnh hưởng lên child components — dùng :deep() nếu cần."
+      ],
+      "points": [
+        "scoped attribute: CSS chỉ áp dụng cho component đó, tránh conflict",
+        "Compiler (Vite/webpack) parse và compile SFC thành JavaScript",
+        "Hỗ trợ lang attribute: <script lang=\"ts\">, <style lang=\"scss\">"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 11,
+    "sourceSlug": "3204-single-file-component-sfc-la-gi"
+  },
+  {
+    "id": "bf595c19-854c-5a7e-8f87-1bdc7d541fc2",
+    "question": "Tại sao :key trong v-for quan trọng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3207-tai-sao-key-trong-v-for-quan-trong",
+    "slug": "tai-sao-key-trong-v-for-quan-trong-bf595c19-854c-5a7e-8f87-1bdc7d541fc2",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vue dùng :key để identify mỗi vnode khi diff — giúp tái sử dụng và reorder DOM nodes đúng cách thay vì re-render toàn bộ."
+      ],
+      "details": [],
+      "points": [
+        "Thiếu key: Vue dùng \"in-place patch\" — có thể gây lỗi với stateful components hoặc animation",
+        "Dùng index làm key: không nên khi list có thể bị sort/filter — index thay đổi gây re-render sai",
+        "Dùng unique stable ID (e.g., item.id) là best practice"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 12,
+    "sourceSlug": "3207-tai-sao-key-trong-v-for-quan-trong"
+  },
+  {
+    "id": "db93fd13-dadc-529d-a9ff-0d332c9086ac",
+    "question": "v-model hoạt động thế nào? Custom v-model?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3208-v-model-hoat-dong-the-nao-custom-v-model",
+    "slug": "v-model-hoat-dong-the-nao-custom-v-model-db93fd13-dadc-529d-a9ff-0d332c9086ac",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "v-model là shorthand: :modelValue + @update:modelValue."
+      ],
+      "details": [
+        "Mặc định cho input:"
+      ],
+      "points": [],
+      "sections": [
+        "Custom component v-model:",
+        "Vue 3 hỗ trợ multiple v-model: v-model:title, v-model:content với props tương ứng."
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 13,
+    "sourceSlug": "3208-v-model-hoat-dong-the-nao-custom-v-model"
+  },
+  {
+    "id": "c508feb9-9d13-5508-b57e-9211602aa4f8",
+    "question": "Reactivity system trong Vue 3 hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3209-reactivity-system-trong-vue-3-hoat-dong-the-nao",
+    "slug": "reactivity-system-trong-vue-3-hoat-dong-the-nao-c508feb9-9d13-5508-b57e-9211602aa4f8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vue 3 dùng ES6 Proxy để intercept get/set operations trên reactive objects."
+      ],
+      "details": [
+        "Khi đọc property trong effect (computed, watcher, render): dependency được track.",
+        "Object.defineProperty",
+        "Khi set property: trigger cập nhật tất cả dependents."
+      ],
+      "points": [
+        "Detect thêm/xóa property động",
+        "Detect array index changes và .length",
+        "Lazy — không cần walk toàn bộ object tree upfront"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 14,
+    "sourceSlug": "3209-reactivity-system-trong-vue-3-hoat-dong-the-nao"
+  },
+  {
+    "id": "a0fc8d97-82ef-5d95-86d7-a8d81a17b2a4",
+    "question": "ref vs reactive — khác nhau gì? Dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3210-ref-vs-reactive-khac-nhau-gi-dung-khi-nao",
+    "slug": "ref-vs-reactive-khac-nhau-gi-dung-khi-nao-a0fc8d97-82ef-5d95-86d7-a8d81a17b2a4",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "ref: wrap bất kỳ giá trị nào (primitives, objects) thành reactive container — truy cập qua .value trong script, tự unwrap trong template.\nreactive: wrap object/array thành reactive Proxy — truy cập trực tiếp, không cần .value."
+      ],
+      "details": [
+        "Khuyến nghị hiện tại (Vue 3.2+): Dùng ref cho tất cả — kể cả objects. Vue core team đã cập nhật docs ưu tiên ref universally vì reactive có nhiều bẫy: mất reactivity khi destructure, mất reactivity khi re-assign cả object. reactive chỉ nên dùng khi cần nhóm nhiều state liên quan.\nLưu ý: destructure từ reactive sẽ mất reactivity — dùng toRefs():"
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "const state = reactive({ count: 0, name: 'Vue' })\nconst { count, name } = toRefs(state) // giữ reactivity"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 15,
+    "sourceSlug": "3210-ref-vs-reactive-khac-nhau-gi-dung-khi-nao"
+  },
+  {
+    "id": "ffbece46-1abd-5e18-b5ed-59be4e90fd7a",
+    "question": "computed vs watch vs watchEffect — dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3211-computed-vs-watch-vs-watcheffect-dung-khi-nao",
+    "slug": "computed-vs-watch-vs-watcheffect-dung-khi-nao-ffbece46-1abd-5e18-b5ed-59be4e90fd7a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "computed: derive giá trị từ reactive state, kết quả được cache, chỉ recompute khi dependency thay đổi — dùng để transform/calculate data cho template."
+      ],
+      "details": [
+        "watch: observe cụ thể một hoặc vài sources, có access vào old/new value, lazy by default — dùng khi cần side effect (API call, DOM manipulation) khi data thay đổi.",
+        "watchEffect: auto-track tất cả reactive dependencies dùng bên trong, chạy ngay khi mount — dùng khi không cần old value và muốn auto-dependency detection."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 16,
+    "sourceSlug": "3211-computed-vs-watch-vs-watcheffect-dung-khi-nao"
+  },
+  {
+    "id": "08b3b3f9-deb5-5468-b9dc-75385341b9f5",
+    "question": "Composable là gì? So sánh với Mixins?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3213-composable-la-gi-so-sanh-voi-mixins",
+    "slug": "composable-la-gi-so-sanh-voi-mixins-08b3b3f9-deb5-5468-b9dc-75385341b9f5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Composable là function dùng Composition API để đóng gói và tái sử dụng stateful logic.",
+        "So với Mixins:"
+      ],
+      "details": [
+        "Mixins vẫn được hỗ trợ trong Vue 3 nhưng bị discouraged — Composition API là alternative được khuyến nghị.",
+        "Ví dụ:"
+      ],
+      "points": [
+        "Không có naming collision — return value rõ ràng",
+        "Source rõ ràng — biết data từ đâu",
+        "Có thể nhận arguments (dynamic)",
+        "Không có implicit state sharing"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "// useFetch.js\nexport function useFetch(url) {\n  const data = ref(null)\n  const loading = ref(true)\n  fetch(url).then(r => r.json()).then(d => { data.value = d; loading.value = false })\n  return { data, loading }\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 17,
+    "sourceSlug": "3213-composable-la-gi-so-sanh-voi-mixins"
+  },
+  {
+    "id": "79c1093d-ef13-5809-8764-dae7f16d75de",
+    "question": "Lifecycle hooks trong Composition API?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3214-lifecycle-hooks-trong-composition-api",
+    "slug": "lifecycle-hooks-trong-composition-api-79c1093d-ef13-5809-8764-dae7f16d75de",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Mapping từ Options API (bao gồm Vue 2 → Vue 3): beforeCreate/created → code trong setup() chạy thay thế, mounted → onMounted, updated → onUpdated, beforeUpdate → onBeforeUpdate, unmounted → onUnmounted, beforeMount → onBeforeMount."
+      ],
+      "details": [],
+      "points": [
+        "Vue 2: beforeDestroy → onBeforeUnmount, destroyed → onUnmounted.",
+        "Lưu ý: onMounted trong SSR (Nuxt) không chạy server-side — dùng cho browser-only code."
+      ],
+      "sections": [
+        "Trong <script setup>, lifecycle hooks được import và dùng như functions:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "import { onMounted, onUpdated, onUnmounted, onBeforeMount, onBeforeUpdate, onBeforeUnmount } from 'vue'\n\nonMounted(() => { console.log('mounted') })\nonUnmounted(() => { /* cleanup */ })"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 18,
+    "sourceSlug": "3214-lifecycle-hooks-trong-composition-api"
+  },
+  {
+    "id": "e53f62a2-f6d0-58ee-9936-3747accd1363",
+    "question": "provide / inject là gì? Khi nào dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3215-provide-inject-la-gi-khi-nao-dung",
+    "slug": "provide-inject-la-gi-khi-nao-dung-e53f62a2-f6d0-58ee-9936-3747accd1363",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "provide / inject cho phép truyền data qua component tree mà không cần props drilling.",
+        "Dùng khi:"
+      ],
+      "details": [
+        "Parent provide, bất kỳ descendant nào có thể inject:",
+        "Lưu ý: khó debug hơn props vì data flow không explicit — dùng Symbol key để tránh naming collision."
+      ],
+      "points": [
+        "Shared state cho subtree (theme, locale, auth)",
+        "Plugin/library cung cấp context"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "// Parent\nimport { provide, ref } from 'vue'\nconst theme = ref('dark')\nprovide('theme', theme)\n\n// Child (bất kỳ cấp)\nimport { inject } from 'vue'\nconst theme = inject('theme', 'light') // 'light' là default"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 19,
+    "sourceSlug": "3215-provide-inject-la-gi-khi-nao-dung"
+  },
+  {
+    "id": "d0a31f28-1c53-5a22-bff3-307545661942",
+    "question": "defineProps và defineEmits trong <script setup>?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3216-defineprops-va-defineemits-trong-script-setup",
+    "slug": "defineprops-va-defineemits-trong-script-setup-d0a31f28-1c53-5a22-bff3-307545661942",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: defineProps không thể destructure trực tiếp mà giữ reactivity trong Vue 3.4 trở về trước — dùng toRefs(props)."
+      ],
+      "details": [
+        "Từ Vue 3.5+: destructure props với const { title } = defineProps() giữ reactivity."
+      ],
+      "points": [],
+      "sections": [
+        "defineProps khai báo props mà component nhận, defineEmits khai báo events mà component emit:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "// TypeScript style (recommended)\nconst props = defineProps<{\n  title: string\n  count?: number\n}>()\n\nconst emit = defineEmits<{\n  (e: 'update', value: number): void\n  (e: 'close'): void\n}>()\n\n// Sử dụng\nemit('update', 42)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 20,
+    "sourceSlug": "3216-defineprops-va-defineemits-trong-script-setup"
+  },
+  {
+    "id": "61a2645d-1094-5e0f-bbd4-cab5bb075bb8",
+    "question": "Slots là gì? Named slots và scoped slots?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3218-slots-la-gi-named-slots-va-scoped-slots",
+    "slug": "slots-la-gi-named-slots-va-scoped-slots-61a2645d-1094-5e0f-bbd4-cab5bb075bb8",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Slots cho phép parent inject content vào template của child component.",
+        "Dùng scoped slots khi child biết cách lấy data nhưng parent quyết định cách render (render prop pattern)."
+      ],
+      "details": [
+        "Lưu ý: không mix slot và v-if trên cùng <template> — tách riêng."
+      ],
+      "points": [
+        "Default slot: <slot />.",
+        "Named slots: <slot name=\"header\" /> — parent dùng <template #header>.",
+        "Scoped slot: child truyền data lên parent qua slot:"
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "VUE",
+          "code": "<!-- Child -->\n<slot :item=\"item\" :index=\"i\" />\n\n<!-- Parent -->\n<template #default=\"{ item, index }\">\n  <span>{{ index }}: {{ item.name }}</span>\n</template>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 21,
+    "sourceSlug": "3218-slots-la-gi-named-slots-va-scoped-slots"
+  },
+  {
+    "id": "f448abd6-5165-563a-8ef6-10e8d2af45ab",
+    "question": "defineExpose trong <script setup> là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3219-defineexpose-trong-script-setup-la-gi",
+    "slug": "defineexpose-trong-script-setup-la-gi-f448abd6-5165-563a-8ef6-10e8d2af45ab",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Trong <script setup>, component instance mặc định không expose properties ra ngoài (không access được qua template ref). defineExpose cho phép explicitly expose các methods/properties để parent gọi qua ref."
+      ],
+      "details": [
+        "Ví dụ: defineExpose({ focus, reset }) — parent gọi childRef.value.focus(). Dùng khi cần imperative control (focus, scroll, reset form). Lưu ý: không expose quá nhiều — tránh biến component thành \"god object\", ưu tiên event-based communication."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 22,
+    "sourceSlug": "3219-defineexpose-trong-script-setup-la-gi"
+  },
+  {
+    "id": "36f6bfa7-8d37-5976-95f0-6a1a422811f7",
+    "question": "Navigation guards là gì? beforeEach, beforeEnter, beforeRouteEnter?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3221-navigation-guards-la-gi-beforeeach-beforeenter-beforerouteenter",
+    "slug": "navigation-guards-la-gi-beforeeach-beforeenter-beforerouteenter-36f6bfa7-8d37-5976-95f0-6a1a422811f7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "In-component guards (Options API): beforeRouteEnter, beforeRouteUpdate, beforeRouteLeave."
+      ],
+      "details": [],
+      "points": [
+        "Trong Composition API dùng onBeforeRouteLeave, onBeforeRouteUpdate.",
+        "Return false để cancel, return route location để redirect, return undefined/true để proceed."
+      ],
+      "sections": [
+        "Navigation guards cho phép control navigation — xác thực, redirect, cancel."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "// Global guard\nrouter.beforeEach((to, from) => {\n  if (to.meta.requiresAuth && !isLoggedIn()) {\n    return { name: 'Login' }  // redirect\n  }\n})\n\n// Per-route guard\n{ path: '/admin', component: Admin, beforeEnter: (to, from) => { ... } }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 23,
+    "sourceSlug": "3221-navigation-guards-la-gi-beforeeach-beforeenter-beforerouteenter"
+  },
+  {
+    "id": "6e77474e-aafd-54cc-95a1-7a6ada8bc030",
+    "question": "Dynamic routes và lazy loading routes?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3222-dynamic-routes-va-lazy-loading-routes",
+    "slug": "dynamic-routes-va-lazy-loading-routes-6e77474e-aafd-54cc-95a1-7a6ada8bc030",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Dynamic segment: path: '/user/:id' — đọc qua route.params.id."
+      ],
+      "details": [
+        "Lazy loading với dynamic import:"
+      ],
+      "points": [
+        "Lazy loading: component chỉ được download khi navigate đến route đó — giảm initial bundle size.",
+        "Lưu ý: /* webpackChunkName */ là Webpack magic comment, không có tác dụng trong Vite.",
+        "Lưu ý: đọc route.params.id trong <script setup>: dùng const route = useRoute()."
+      ],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "const routes = [\n  {\n    path: '/dashboard',\n    component: () => import('./views/Dashboard.vue')\n  },\n  {\n    path: '/user/:id',\n    // Với Vite: không cần webpackChunkName; tên chunk cấu hình qua build.rollupOptions\n    component: () => import('./views/User.vue')\n  }\n]"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 24,
+    "sourceSlug": "3222-dynamic-routes-va-lazy-loading-routes"
+  },
+  {
+    "id": "f103f852-a224-55a1-86b7-331eef030125",
+    "question": "Cách tạo và dùng Pinia store?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3224-cach-tao-va-dung-pinia-store",
+    "slug": "cach-tao-va-dung-pinia-store-f103f852-a224-55a1-86b7-331eef030125",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Pinia stores được tạo với defineStore() dùng setup-store syntax (khuyến nghị), trả về refs cho state, computed getters, và action functions.",
+        "Lưu ý: destructure store mất reactivity — dùng storeToRefs: const { count, double } = storeToRefs(store) (methods thì destructure thường)."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "// stores/counter.ts\nimport { defineStore } from 'pinia'\nimport { ref, computed } from 'vue'\n\nexport const useCounterStore = defineStore('counter', () => {\n  const count = ref(0)\n  const double = computed(() => count.value * 2)\n\n  function increment() { count.value++ }\n  function reset() { count.value = 0 }\n\n  return { count, double, increment, reset }\n})"
+        },
+        {
+          "language": "JAVASCRIPT",
+          "code": "// Trong component\nimport { useCounterStore } from '@/stores/counter'\nconst store = useCounterStore()\nstore.increment()\nconsole.log(store.count, store.double)"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 25,
+    "sourceSlug": "3224-cach-tao-va-dung-pinia-store"
+  },
+  {
+    "id": "c3137629-8e5e-584e-95c4-9145d7805b49",
+    "question": "storeToRefs là gì? Tại sao cần?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3225-storetorefs-la-gi-tai-sao-can",
+    "slug": "storetorefs-la-gi-tai-sao-can-c3137629-8e5e-584e-95c4-9145d7805b49",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Pinia store là reactive object — destructuring trực tiếp sẽ mất reactivity (tương tự reactive()). storeToRefs() convert state và getters thành refs để destructure an toàn: const { count, name } = storeToRefs(store)."
+      ],
+      "details": [],
+      "points": [
+        "Methods (actions) không cần storeToRefs — destructure thường: const { increment } = store.",
+        "Lưu ý: nếu dùng storeToRefs với methods, chúng trở thành refs — không gọi được như function."
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 26,
+    "sourceSlug": "3225-storetorefs-la-gi-tai-sao-can"
+  },
+  {
+    "id": "66d1e724-1871-53c7-81de-f1612806ca8e",
+    "question": "v-memo directive là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3227-v-memo-directive-la-gi",
+    "slug": "v-memo-directive-la-gi-66d1e724-1871-53c7-81de-f1612806ca8e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng cho:"
+      ],
+      "details": [
+        "Lưu ý: không lạm dụng — dependency array phải đầy đủ, thiếu dependency sẽ gây stale render."
+      ],
+      "points": [
+        "Long lists với expensive child renders",
+        "Chỉ một vài properties ảnh hưởng đến render"
+      ],
+      "sections": [
+        "v-memo skip re-render một subtree nếu array dependency không thay đổi — tương tự React.memo nhưng ở template level:"
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 27,
+    "sourceSlug": "3227-v-memo-directive-la-gi"
+  },
+  {
+    "id": "edf5d349-5d36-53fd-b267-4dd3b79d9aaa",
+    "question": "KeepAlive component là gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3228-keepalive-component-la-gi",
+    "slug": "keepalive-component-la-gi-edf5d349-5d36-53fd-b267-4dd3b79d9aaa",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [
+        "Lifecycle hooks cho cached components: onActivated (khi cache hit, component show lại), onDeactivated (khi bị hide, không unmount).",
+        "Dùng cho: tab views, multi-step forms, expensive components cần giữ state.",
+        "Lưu ý: cached components vẫn chiếm bộ nhớ — dùng :max để limit, tránh cache tất cả."
+      ],
+      "sections": [
+        "<KeepAlive> cache component instance khi unmount — state được giữ nguyên khi switch lại:"
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 28,
+    "sourceSlug": "3228-keepalive-component-la-gi"
+  },
+  {
+    "id": "c22810df-63d7-5672-b2dd-d03688be1739",
+    "question": "Lazy loading components trong Vue?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3231-lazy-loading-components-trong-vue",
+    "slug": "lazy-loading-components-trong-vue-c22810df-63d7-5672-b2dd-d03688be1739",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Dùng dynamic import để lazy load component — chỉ download khi cần:",
+        "Kết hợp với <Suspense> để handle loading state elegantly."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "import { defineAsyncComponent } from 'vue'\n\n// Basic\nconst HeavyChart = defineAsyncComponent(() =>\n  import('./components/HeavyChart.vue')\n)\n\n// Với loading/error states\nconst AsyncComp = defineAsyncComponent({\n  loader: () => import('./HeavyComponent.vue'),\n  loadingComponent: LoadingSpinner,\n  errorComponent: ErrorDisplay,\n  delay: 200,      // delay trước khi show loading\n  timeout: 3000,   // timeout sau 3s\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 29,
+    "sourceSlug": "3231-lazy-loading-components-trong-vue"
+  },
+  {
+    "id": "00554f5a-35f7-59b3-bab0-f55348e26370",
+    "question": "Error handling trong Vue: errorCaptured và onErrorCaptured?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3237-error-handling-trong-vue-errorcaptured-va-onerrorcaptured",
+    "slug": "error-handling-trong-vue-errorcaptured-va-onerrorcaptured-00554f5a-35f7-59b3-bab0-f55348e26370",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [
+        "Global handler:"
+      ],
+      "points": [],
+      "sections": [
+        "Vue cung cấp error boundary mechanism qua errorCaptured (Options API) / onErrorCaptured (Composition API):"
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "// App.vue — global error boundary\nimport { onErrorCaptured } from 'vue'\n\nonErrorCaptured((err, instance, info) => {\n  console.error('Caught:', err, info)\n  // Return false để prevent propagation\n  return false\n})"
+        },
+        {
+          "language": null,
+          "code": "app.config.errorHandler = (err, instance, info) => { ... }"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 30,
+    "sourceSlug": "3237-error-handling-trong-vue-errorcaptured-va-onerrorcaptured"
+  },
+  {
+    "id": "ab262947-dbbb-552e-aad9-422ab5016673",
+    "question": "Testing Vue components với Vitest và Vue Test Utils?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3239-testing-vue-components-voi-vitest-va-vue-test-utils",
+    "slug": "testing-vue-components-voi-vitest-va-vue-test-utils-ab262947-dbbb-552e-aad9-422ab5016673",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng shallowMount để stub child components."
+      ],
+      "details": [
+        "Test behavior, không test implementation details."
+      ],
+      "points": [],
+      "sections": [
+        "Vue components được test bằng cách mount chúng với @vue/test-utils và assert trên rendered output và emitted events, dùng Vitest làm test runner."
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "import { mount } from '@vue/test-utils'\nimport { describe, it, expect } from 'vitest'\nimport Counter from './Counter.vue'\n\ndescribe('Counter', () => {\n  it('increments when button clicked', async () => {\n    const wrapper = mount(Counter, {\n      props: { initialCount: 0 }\n    })\n\n    await wrapper.find('button').trigger('click')\n\n    expect(wrapper.text()).toContain('1')\n    expect(wrapper.emitted('update')).toBeTruthy()\n  })\n\n  it('renders slot content', () => {\n    const wrapper = mount(Counter, {\n      slots: { default: '<span>Label</span>' }\n    })\n    expect(wrapper.find('span').exists()).toBe(true)\n  })\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 31,
+    "sourceSlug": "3239-testing-vue-components-voi-vitest-va-vue-test-utils"
+  },
+  {
+    "id": "67da8e8e-bd12-50b2-b4a3-02bab569f8c7",
+    "question": "nextTick là gì? Khi nào dùng?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3240-nexttick-la-gi-khi-nao-dung",
+    "slug": "nexttick-la-gi-khi-nao-dung-67da8e8e-bd12-50b2-b4a3-02bab569f8c7",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Dùng khi:"
+      ],
+      "details": [],
+      "points": [
+        "Cần đọc DOM sau khi state update",
+        "Focus element sau khi v-if toggle",
+        "Scroll sau khi append item vào list"
+      ],
+      "sections": [
+        "Vue batch DOM updates — không update ngay khi state thay đổi, mà queue updates và flush async. nextTick cho phép chờ DOM được update xong:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "import { nextTick, ref } from 'vue'\n\nconst count = ref(0)\n\nasync function handleClick() {\n  count.value++\n  // DOM chưa update ở đây\n  await nextTick()\n  // DOM đã update — giờ có thể đọc DOM hoặc scroll\n  console.log(document.querySelector('.count')?.textContent)\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 32,
+    "sourceSlug": "3240-nexttick-la-gi-khi-nao-dung"
+  },
+  {
+    "id": "dd19235f-a864-5618-9aec-cc4e5c39a05a",
+    "question": "toRef, toRefs, toValue — dùng khi nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3246-toref-torefs-tovalue-dung-khi-nao",
+    "slug": "toref-torefs-tovalue-dung-khi-nao-dd19235f-a864-5618-9aec-cc4e5c39a05a",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "toRef: tạo ref từ một property của reactive object — giữ reactive connection:",
+        "toRefs: convert toàn bộ reactive object thành object of refs — dùng khi destructure:",
+        "toValue"
+      ],
+      "codeExamples": [
+        {
+          "language": "JAVASCRIPT",
+          "code": "const state = reactive({ count: 0, name: 'Vue' })\nconst countRef = toRef(state, 'count') // linked to state.count"
+        },
+        {
+          "language": "JAVASCRIPT",
+          "code": "const { count, name } = toRefs(state)"
+        },
+        {
+          "language": "JAVASCRIPT",
+          "code": "function useFeature(id: MaybeRefOrGetter<string>) {\n  const resolvedId = toValue(id) // unwrap nếu là ref\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 33,
+    "sourceSlug": "3246-toref-torefs-tovalue-dung-khi-nao"
+  },
+  {
+    "id": "5e0210e4-4f61-542e-922e-f9dccc31f811",
+    "question": "accessiblity (a11y) trong Vue — best practices?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3248-accessiblity-a11y-trong-vue-best-practices",
+    "slug": "accessiblity-a11y-trong-vue-best-practices-5e0210e4-4f61-542e-922e-f9dccc31f811",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vue a11y best practices theo chuẩn ARIA và semantic HTML, kết hợp Vue-specific tooling như vue-axe và eslint-plugin-vuejs-accessibility để phát hiện vấn đề sớm."
+      ],
+      "details": [
+        "Dùng eslint-plugin-vuejs-accessibility để lint a11y issues."
+      ],
+      "points": [
+        "Dùng semantic HTML trong templates (<button> không phải <div @click>)",
+        ":aria-label, :aria-expanded, :aria-live với dynamic content",
+        "Focus management với nextTick và el.focus() sau modal open/close",
+        "v-bind=\"$attrs\" để inherit aria attrs",
+        "axe-core"
+      ],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 34,
+    "sourceSlug": "3248-accessiblity-a11y-trong-vue-best-practices"
+  },
+  {
+    "id": "b6e2547c-82ad-5245-8720-61f0098b04ff",
+    "question": "Template refs — cách truy cập DOM element và child component trong Vue 3?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3250-template-refs-cach-truy-cap-dom-element-va-child-component-trong-vue-3",
+    "slug": "template-refs-cach-truy-cap-dom-element-va-child-component-trong-vue-3-b6e2547c-82ad-5245-8720-61f0098b04ff",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Template ref cho phép truy cập DOM element hoặc component instance trực tiếp:",
+        "Lưu ý: ref.value là null trước khi component mount — luôn kiểm tra trong onMounted hoặc dùng optional chaining ref.value?.method()."
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 35,
+    "sourceSlug": "3250-template-refs-cach-truy-cap-dom-element-va-child-component-trong-vue-3"
+  },
+  {
+    "id": "6168982d-c31e-50f7-bb47-b7d399e1bd0e",
+    "question": "Cách fetch async data đúng cách trong Vue 3 Composition API?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3251-cach-fetch-async-data-dung-cach-trong-vue-3-composition-api",
+    "slug": "cach-fetch-async-data-dung-cach-trong-vue-3-composition-api-6168982d-c31e-50f7-bb47-b7d399e1bd0e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Lưu ý: không gọi async setup() trực tiếp mà không có <Suspense> bọc ngoài — dùng onMounted hoặc composable thay."
+      ],
+      "details": [
+        "Với Nuxt: dùng useFetch() / useAsyncData() để SSR-compatible."
+      ],
+      "points": [],
+      "sections": [
+        "Pattern chuẩn để fetch async data trong Vue 3 Composition API là dùng onMounted với try/catch/finally, hoặc trích xuất thành composable tái sử dụng."
+      ],
+      "codeExamples": [
+        {
+          "language": "VUE",
+          "code": "<script setup>\nimport { ref, onMounted } from 'vue'\n\nconst users = ref([])\nconst loading = ref(true)\nconst error = ref(null)\n\n// Pattern 1: onMounted (phổ biến nhất)\nonMounted(async () => {\n  try {\n    const res = await fetch('/api/users')\n    users.value = await res.json()\n  } catch (e) {\n    error.value = e.message\n  } finally {\n    loading.value = false\n  }\n})\n\n// Pattern 2: Composable reusable\n// useFetch.ts — tái sử dụng ở nhiều components\n</script>\n\n<template>\n  <div v-if=\"loading\">Loading...</div>\n  <div v-else-if=\"error\">Error: {{ error }}</div>\n  <ul v-else>\n    <li v-for=\"u in users\" :key=\"u.id\">{{ u.name }}</li>\n  </ul>\n</template>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 36,
+    "sourceSlug": "3251-cach-fetch-async-data-dung-cach-trong-vue-3-composition-api"
+  },
+  {
+    "id": "d4a5eda4-cb92-5eb5-a032-fea123bd5ffd",
+    "question": "Ref unwrapping trong templates và reactive objects hoạt động thế nào?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3403-ref-unwrapping-trong-templates-va-reactive-objects-hoat-dong-the-nao",
+    "slug": "ref-unwrapping-trong-templates-va-reactive-objects-hoat-dong-the-nao-d4a5eda4-cb92-5eb5-a032-fea123bd5ffd",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vue tự động unwrap refs trong một số contexts — hiểu rõ để tránh bugs:"
+      ],
+      "details": [
+        "Template auto-unwrap: refs được auto-unwrap trong template, không cần .value:"
+      ],
+      "points": [],
+      "sections": [
+        "Reactive object unwrap: ref là property của reactive object được tự động unwrap khi access:",
+        "Không unwrap: ref trong array hoặc Map KHÔNG tự động unwrap:"
+      ],
+      "codeExamples": [
+        {
+          "language": "VUE",
+          "code": "<script setup>\nconst count = ref(0)\nconst state = reactive({ count: ref(0) })\n</script>\n\n<template>\n  <!-- Tự động unwrap — không cần .value -->\n  <p>{{ count }}</p>\n  <p>{{ state.count }}</p>\n</template>"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "const count = ref(0)\nconst state = reactive({ count })  // Wrap ref trong reactive\n\nconsole.log(state.count)  // 0, không phải Ref<0> — auto-unwrap!\nstate.count++             // Tương đương count.value++\nconsole.log(count.value)  // 1 — linked!"
+        },
+        {
+          "language": "TYPESCRIPT",
+          "code": "const list = reactive([ref(0)])\nconsole.log(list[0].value)  // Phải dùng .value!\n\nconst map = reactive(new Map([['key', ref(0)]]))\nconsole.log(map.get('key').value)  // Phải dùng .value!"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 37,
+    "sourceSlug": "3403-ref-unwrapping-trong-templates-va-reactive-objects-hoat-dong-the-nao"
+  },
+  {
+    "id": "1dae413c-e037-5a3a-9a0c-db6122750f09",
+    "question": "Route meta và type-safe route meta trong Vue Router 4?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3405-route-meta-va-type-safe-route-meta-trong-vue-router-4",
+    "slug": "route-meta-va-type-safe-route-meta-trong-vue-router-4-1dae413c-e037-5a3a-9a0c-db6122750f09",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Route meta cho phép đính kèm custom data vào routes — thường dùng cho auth, breadcrumbs, page titles:",
+        "Lưu ý: to.meta tổng hợp metadata từ tất cả matched routes (parent + child) — child ghi đè parent."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "// router/index.ts — declare meta type\nimport 'vue-router'\n\ndeclare module 'vue-router' {\n  interface RouteMeta {\n    requiresAuth?: boolean\n    roles?: string[]\n    title?: string\n    breadcrumb?: string\n  }\n}\n\nconst routes = [\n  {\n    path: '/admin',\n    component: AdminLayout,\n    meta: { requiresAuth: true, roles: ['admin'], title: 'Admin Panel' },\n    children: [\n      {\n        path: 'users',\n        component: UsersView,\n        meta: { breadcrumb: 'Users Management' },\n      }\n    ]\n  },\n]\n\n// Global guard dùng meta\nrouter.beforeEach((to) => {\n  if (to.meta.requiresAuth && !isAuthenticated()) {\n    return { name: 'Login', query: { redirect: to.fullPath } }\n  }\n})\n\n// Component access\nconst route = useRoute()\nconsole.log(route.meta.title)  // Type-safe nhờ declaration merging"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 38,
+    "sourceSlug": "3405-route-meta-va-type-safe-route-meta-trong-vue-router-4"
+  },
+  {
+    "id": "7a0405b4-69a1-5216-a01d-112cfbcda339",
+    "question": "Scroll behavior trong Vue Router — restore scroll position?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3406-scroll-behavior-trong-vue-router-restore-scroll-position",
+    "slug": "scroll-behavior-trong-vue-router-restore-scroll-position-7a0405b4-69a1-5216-a01d-112cfbcda339",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Vue Router cho phép kiểm soát scroll behavior khi navigate:",
+        "Dùng savedPosition để implement proper back/forward scroll restoration — trải nghiệm native-like."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "const router = createRouter({\n  history: createWebHistory(),\n  routes,\n  scrollBehavior(to, from, savedPosition) {\n    // savedPosition: vị trí scroll trước đó khi dùng browser back/forward\n    if (savedPosition) {\n      return savedPosition  // Restore khi back/forward\n    }\n\n    // Scroll đến named anchor\n    if (to.hash) {\n      return {\n        el: to.hash,\n        behavior: 'smooth',\n        top: 80,  // Offset cho fixed header\n      }\n    }\n\n    // Scroll về đầu trang khi navigate thường\n    return { top: 0, behavior: 'smooth' }\n  },\n})\n\n// Async scroll — chờ transition xong\nscrollBehavior(to, from, savedPosition) {\n  return new Promise((resolve) => {\n    setTimeout(() => {\n      resolve({ top: 0, behavior: 'smooth' })\n    }, 300)  // Chờ page transition 300ms\n  })\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 39,
+    "sourceSlug": "3406-scroll-behavior-trong-vue-router-restore-scroll-position"
+  },
+  {
+    "id": "e193c9ef-4c28-5ee4-92a8-b76425637f19",
+    "question": "Typed provide / inject với InjectionKey — best practice?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3408-typed-provide-inject-voi-injectionkey-best-practice",
+    "slug": "typed-provide-inject-voi-injectionkey-best-practice-e193c9ef-4c28-5ee4-92a8-b76425637f19",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Dùng InjectionKey để provide/inject type-safe, tránh string key collisions:",
+        "Dùng Symbol làm key thay vì string để tránh naming collision trong large apps hoặc libraries."
+      ],
+      "codeExamples": [
+        {
+          "language": "TYPESCRIPT",
+          "code": "// keys.ts — export typed keys\nimport type { InjectionKey, Ref } from 'vue'\n\nexport interface UserContext {\n  id: number\n  email: string\n  role: string\n}\n\nexport const userContextKey: InjectionKey<UserContext> = Symbol('userContext')\nexport const themeKey: InjectionKey<Ref<'light' | 'dark'>> = Symbol('theme')\n\n// Parent component\nimport { provide, ref } from 'vue'\nimport { userContextKey, themeKey } from './keys'\n\nconst theme = ref<'light' | 'dark'>('dark')\nprovide(themeKey, theme)\nprovide(userContextKey, { id: 1, email: 'user@test.com', role: 'admin' })\n\n// Child component — fully typed\nimport { inject } from 'vue'\nimport { themeKey, userContextKey } from './keys'\n\nconst theme = inject(themeKey)     // Ref<'light' | 'dark'> | undefined\nconst user = inject(userContextKey)  // UserContext | undefined\n\n// Với default value — loại bỏ undefined\nconst theme = inject(themeKey, ref('light'))  // Ref<'light' | 'dark'>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 40,
+    "sourceSlug": "3408-typed-provide-inject-voi-injectionkey-best-practice"
+  },
+  {
+    "id": "8ffd89d6-0ee0-52a9-851e-20d963a706b1",
+    "question": "v-once và v-pre — dùng khi nào để skip rendering?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3409-v-once-va-v-pre-dung-khi-nao-de-skip-rendering",
+    "slug": "v-once-va-v-pre-dung-khi-nao-de-skip-rendering-8ffd89d6-0ee0-52a9-851e-20d963a706b1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "v-once: render element/component một lần duy nhất — skip future updates.",
+        "Khác nhau: v-once render rồi freeze (tốt cho performance). v-pre skip compile entirely (tốt cho mustache syntax display)."
+      ],
+      "details": [
+        "Sau khi render, element được xử lý như static content:",
+        "Lưu ý: v-once trong component vẫn chạy setup() và reactive setup — chỉ DOM update bị skip."
+      ],
+      "points": [],
+      "sections": [
+        "v-pre: skip compilation toàn bộ subtree — dùng cho content muốn hiển thị mustache syntax như raw text:"
+      ],
+      "codeExamples": [
+        {
+          "language": "VUE",
+          "code": "<!-- Static content không bao giờ thay đổi -->\n<h1 v-once>{{ appName }}</h1>\n\n<!-- Expensive initial render, không bao giờ update -->\n<StaticBanner v-once :data=\"bannerConfig\" />\n\n<!-- Kết hợp với v-for — freeze sau render đầu -->\n<div v-for=\"item in list\" :key=\"item.id\" v-once>\n  {{ item.name }}\n</div>"
+        },
+        {
+          "language": "VUE",
+          "code": "<!-- Hiển thị '{{ this is NOT compiled }}' -->\n<span v-pre>{{ this is NOT compiled }}</span>\n\n<!-- Dùng trong docs/code display components -->\n<code v-pre>const x = ref(0)</code>"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 41,
+    "sourceSlug": "3409-v-once-va-v-pre-dung-khi-nao-de-skip-rendering"
+  },
+  {
+    "id": "0466fbf7-1a08-56d5-ab94-5b49f2b65225",
+    "question": "v-model modifiers — built-in và custom modifiers?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/3411-v-model-modifiers-built-in-va-custom-modifiers",
+    "slug": "v-model-modifiers-built-in-va-custom-modifiers-0466fbf7-1a08-56d5-ab94-5b49f2b65225",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Built-in modifiers:\n- .lazy: sync sau change event thay vì input — giảm updates\n- .number: auto convert sang number (tương đương parseFloat)\n- .trim: auto trim whitespace"
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "Custom modifiers cho component v-model:"
+      ],
+      "codeExamples": [
+        {
+          "language": "VUE",
+          "code": "// Child component\nconst props = defineProps<{\n  modelValue: string\n  modelModifiers?: { uppercase?: boolean; capitalize?: boolean }\n}>()\nconst emit = defineEmits<{ 'update:modelValue': [value: string] }>()\n\nfunction handleInput(e: Event) {\n  let value = (e.target as HTMLInputElement).value\n  if (props.modelModifiers?.uppercase) value = value.toUpperCase()\n  if (props.modelModifiers?.capitalize) value = value.charAt(0).toUpperCase() + value.slice(1)\n  emit('update:modelValue', value)\n}"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 42,
+    "sourceSlug": "3411-v-model-modifiers-built-in-va-custom-modifiers"
+  },
+  {
+    "id": "222e3f04-cf31-5b89-b2d4-9a880a0e8cc5",
+    "question": "Vì sao destructure một object reactive (hoặc props) lại mất reactivity? Cách giữ lại?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97602-vi-sao-destructure-mot-object-reactive-hoac-props-lai-mat-reactivity-cach-giu-la",
+    "slug": "vi-sao-destructure-mot-object-reactive-hoac-props-lai-mat-reactivity-cach-giu-lai-222e3f04-cf31-5b89-b2d4-9a880a0e8cc5",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Vì reactive() trả về một Proxy — reactivity nằm ở thao tác truy cập thuộc tính qua proxy, không nằm trong giá trị.",
+        "Với props cũng vậy: const { title } = defineProps() sẽ đóng băng giá trị. Dùng props.title trực tiếp, hoặc toRefs(props) khi cần truyền vào composable/watch."
+      ],
+      "details": [
+        "Destructure lấy ra giá trị nguyên thuỷ tại thời điểm đó, cắt đứt liên kết với proxy:",
+        "Hai điểm hay bị hỏi thêm:\n- Truyền một giá trị đã destructure vào hàm cũng mất reactivity → truyền cả object, hoặc truyền ref rồi đọc bằng toValue().\n- Từ Vue 3.5, reactive props destructure đã ổn định: compiler tự biến biến destructure từ defineProps thành truy cập props.x, nên riêng trường hợp props thì vẫn giữ được reactivity."
+      ],
+      "points": [],
+      "sections": [
+        "Cách giữ liên kết:"
+      ],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "const state = reactive({ count: 0 })\nlet { count } = state   // count is just the number 0 now\nstate.count++           // count is still 0, template does not update"
+        },
+        {
+          "language": "JS",
+          "code": "const { count } = toRefs(state)   // count is a ref linked back to state.count\nconst count2 = toRef(state, 'count')\nconsole.log(count.value)          // 1 after state.count++"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 43,
+    "sourceSlug": "97602-vi-sao-destructure-mot-object-reactive-hoac-props-lai-mat-reactivity-cach-giu-la"
+  },
+  {
+    "id": "d0ad4854-9384-5faf-8b6c-796eed3dd21e",
+    "question": "watch trên một object: khi nào cần deep, vì sao oldValue lại bằng newValue, và flush ảnh hưởng gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97603-watch-tren-mot-object-khi-nao-can-deep-vi-sao-oldvalue-lai-bang-newvalue-va-flus",
+    "slug": "watch-tren-mot-object-khi-nao-can-deep-vi-sao-oldvalue-lai-bang-newvalue-va-flush-anh-huong-gi-d0ad4854-9384-5faf-8b6c-796eed3dd21e",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Ba điểm hay vướng khi watch dữ liệu dạng object:",
+        "2. oldValue === newValue. Với deep watcher trên object, callback nhận cùng một tham chiếu cho cả cũ và mới, vì object bị mutate tại chỗ. Cần giá trị cũ thật thì watch một getter trả về giá trị nguyên thuỷ, hoặc tự copy trước."
+      ],
+      "details": [
+        "1. deep. watch một ref chứa object chỉ chạy khi thay cả object (obj.value = {...}). Đổi thuộc tính bên trong thì không kích hoạt — trừ khi bật { deep: true }. Riêng khi nguồn là chính một object reactive, Vue tự deep.",
+        "3. flush. Mặc định pre — callback chạy trước khi component re-render, nên DOM còn là trạng thái cũ. Cần đọc DOM sau cập nhật thì dùng { flush: 'post' } (tương đương gọi nextTick bên trong). flush: 'sync' chạy ngay lập tức, không gộp batch, chỉ dùng cho trường hợp đặc biệt vì dễ gây gọi lặp."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "JS",
+          "code": "watch(user, cb)                  // fires only when user.value is replaced\nwatch(user, cb, { deep: true })  // fires on nested changes too\nwatch(() => user.value.name, cb) // better: watch the exact field"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 44,
+    "sourceSlug": "97603-watch-tren-mot-object-khi-nao-can-deep-vi-sao-oldvalue-lai-bang-newvalue-va-flus"
+  },
+  {
+    "id": "83a78902-4521-50d1-975e-b42e2f7c79f1",
+    "question": "defineModel khác gì so với tự viết props + emit('update:modelValue') khi làm v-model cho component?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97604-definemodel-khac-gi-so-voi-tu-viet-props-emit-update-modelvalue-khi-lam-v-model",
+    "slug": "definemodel-khac-gi-so-voi-tu-viet-props-emit-update-modelvalue-khi-lam-v-model-cho-component-83a78902-4521-50d1-975e-b42e2f7c79f1",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Khác biệt đáng nói:\n- Ghi model.value = x sẽ tự emit update:modelValue; đọc model.value lấy giá trị prop hiện tại. Không cần đồng bộ tay.\n- Hỗ trợ nhiều model trên một component: defineModel('firstName'), defineModel('lastName') → v-model:first-name, v-model:last-name.\n- Nhận option như prop thường: defineModel({ required: true, default: 0 }), và lấy modifier qua const [model, mods] = defineModel().\n- Nếu cha không dùng v-model, ref này hoạt động như local state, nên component vẫn dùng được độc lập."
+      ],
+      "details": [],
+      "points": [],
+      "sections": [
+        "defineModel() là macro (ổn định từ Vue 3.4) gói lại đúng cặp prop + emit mà trước đây phải khai báo tay, và trả về một ref hai chiều."
+      ],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 45,
+    "sourceSlug": "97604-definemodel-khac-gi-so-voi-tu-viet-props-emit-update-modelvalue-khi-lam-v-model"
+  },
+  {
+    "id": "baaf5890-ec62-589d-ba34-167538d7f329",
+    "question": "Setup store (composition-style) trong Pinia khác option store thế nào? Có hạn chế gì?",
+    "level": "intermediate",
+    "levelLabel": "TRUNG BÌNH",
+    "sourceUrl": "https://luyenphongvan.online/q/97605-setup-store-composition-style-trong-pinia-khac-option-store-the-nao-co-han-che-g",
+    "slug": "setup-store-composition-style-trong-pinia-khac-option-store-the-nao-co-han-che-gi-baaf5890-ec62-589d-ba34-167538d7f329",
+    "access": "free",
+    "upgrade": null,
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [
+        "Setup store dùng đúng cú pháp setup(): ref là state, computed là getter, function là action.",
+        "So với option store ({ state, getters, actions }):\n- Linh hoạt hơn: dùng được watch, composable khác, hoặc tạo biến private (khai báo nhưng không return).\n- Đổi lại, mất một số tiện ích tự động: $reset() không có sẵn — phải tự viết action reset() gán lại giá trị ban đầu. Một vài plugin dựa trên state khai báo kiểu option cũng cần xử lý thêm.\n- Bắt buộc return mọi state cần dùng, nếu quên thì devtools và SSR serialize không thấy."
+      ],
+      "details": [
+        "Cuối hàm phải return những gì muốn công khai.",
+        "Dù dùng kiểu nào, khi lấy state ra ngoài component vẫn phải storeToRefs(store) cho state/getter (action thì destructure thẳng được)."
+      ],
+      "points": [],
+      "sections": [],
+      "codeExamples": [
+        {
+          "language": "TS",
+          "code": "export const useCartStore = defineStore('cart', () => {\n  const items = ref<Item[]>([])\n  const total = computed(() => items.value.reduce((s, i) => s + i.price, 0))\n\n  async function load() {\n    items.value = await fetchCart()\n  }\n\n  return { items, total, load }\n})"
+        }
+      ],
+      "tables": []
+    },
+    "legacyId": 46,
+    "sourceSlug": "97605-setup-store-composition-style-trong-pinia-khac-option-store-the-nao-co-han-che-g"
+  },
+  {
+    "id": "4ac29ed8-174b-5499-8422-d927b2121fec",
+    "question": "Persist Pinia store với localStorage?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "persist-pinia-store-voi-localstorage-4ac29ed8-174b-5499-8422-d927b2121fec",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 47,
+    "sourceSlug": null
+  },
+  {
+    "id": "9f9a7f3e-3356-52f9-8b5d-ef44b1fd52fd",
+    "question": "Teleport component là gì? Use case?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "teleport-component-la-gi-use-case-9f9a7f3e-3356-52f9-8b5d-ef44b1fd52fd",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 48,
+    "sourceSlug": null
+  },
+  {
+    "id": "96045187-9b06-5992-861d-bbef1248de25",
+    "question": "Suspense component là gì?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "suspense-component-la-gi-96045187-9b06-5992-861d-bbef1248de25",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 49,
+    "sourceSlug": null
+  },
+  {
+    "id": "6acf743c-792d-5253-9681-716f787b6c51",
+    "question": "Custom directives trong Vue 3?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "custom-directives-trong-vue-3-6acf743c-792d-5253-9681-716f787b6c51",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 50,
+    "sourceSlug": null
+  },
+  {
+    "id": "0cf7a937-125e-5532-81c8-57976b47bb4b",
+    "question": "Vue 3 vs Vue 2 — những thay đổi lớn nhất?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vue-3-vs-vue-2-nhung-thay-doi-lon-nhat-0cf7a937-125e-5532-81c8-57976b47bb4b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 51,
+    "sourceSlug": null
+  },
+  {
+    "id": "b0ffd674-37ce-56c3-b1df-4b1f9c0ca93b",
+    "question": "SSR với Nuxt.js — Vue SSR hoạt động thế nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "ssr-voi-nuxt-js-vue-ssr-hoat-dong-the-nao-b0ffd674-37ce-56c3-b1df-4b1f9c0ca93b",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 52,
+    "sourceSlug": null
+  },
+  {
+    "id": "012756d5-95f4-53fa-83a2-37ed3e167d30",
+    "question": "Render functions và h() trong Vue 3?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "render-functions-va-h-trong-vue-3-012756d5-95f4-53fa-83a2-37ed3e167d30",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 53,
+    "sourceSlug": null
+  },
+  {
+    "id": "ae1e7025-82fa-520e-bdb0-804dfa6464f4",
+    "question": "Transition và TransitionGroup trong Vue?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "transition-va-transitiongroup-trong-vue-ae1e7025-82fa-520e-bdb0-804dfa6464f4",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 54,
+    "sourceSlug": null
+  },
+  {
+    "id": "dd09e778-1c29-57dd-9c12-c178428cc7fa",
+    "question": "Vue 3 performance optimization best practices?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vue-3-performance-optimization-best-practices-dd09e778-1c29-57dd-9c12-c178428cc7fa",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 55,
+    "sourceSlug": null
+  },
+  {
+    "id": "a47f538d-5050-5ce5-ad68-68e8a1f75dc8",
+    "question": "Hydration mismatch trong Nuxt/Vue SSR — nguyên nhân và cách fix?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "hydration-mismatch-trong-nuxt-vue-ssr-nguyen-nhan-va-cach-fix-a47f538d-5050-5ce5-ad68-68e8a1f75dc8",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 56,
+    "sourceSlug": null
+  },
+  {
+    "id": "1e8e01ed-687e-5cb5-a97e-628fb974855a",
+    "question": "Nuxt 3 data fetching — useFetch vs useAsyncData vs $fetch?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "nuxt-3-data-fetching-usefetch-vs-useasyncdata-vs-fetch-1e8e01ed-687e-5cb5-a97e-628fb974855a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 57,
+    "sourceSlug": null
+  },
+  {
+    "id": "4d2372b2-5f3d-5830-9966-5b977af3dad5",
+    "question": "shallowRef, shallowReactive, markRaw — khi nào dùng để tối ưu?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "shallowref-shallowreactive-markraw-khi-nao-dung-de-toi-uu-4d2372b2-5f3d-5830-9966-5b977af3dad5",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 58,
+    "sourceSlug": null
+  },
+  {
+    "id": "91be737e-464f-53da-b66a-f4d9c930e856",
+    "question": "Pinia plugins — cách tạo custom plugin và use cases?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "pinia-plugins-cach-tao-custom-plugin-va-use-cases-91be737e-464f-53da-b66a-f4d9c930e856",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 59,
+    "sourceSlug": null
+  },
+  {
+    "id": "fac92222-2b2c-57bb-bfd2-eb4cff04351a",
+    "question": "watchEffect deep dive — cleanup, flush timing và stop watcher?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "watcheffect-deep-dive-cleanup-flush-timing-va-stop-watcher-fac92222-2b2c-57bb-bfd2-eb4cff04351a",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 60,
+    "sourceSlug": null
+  },
+  {
+    "id": "0464ea7a-b36d-536e-a8c0-3c4dfaeb7c9c",
+    "question": "Virtual scrolling trong Vue — xử lý large lists hiệu quả?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "virtual-scrolling-trong-vue-xu-ly-large-lists-hieu-qua-0464ea7a-b36d-536e-a8c0-3c4dfaeb7c9c",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 61,
+    "sourceSlug": null
+  },
+  {
+    "id": "6e28687d-b8e9-5944-b06b-8cde46833fbe",
+    "question": "Nuxt 3 middleware — route middleware vs server middleware?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "nuxt-3-middleware-route-middleware-vs-server-middleware-6e28687d-b8e9-5944-b06b-8cde46833fbe",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 62,
+    "sourceSlug": null
+  },
+  {
+    "id": "bcad7f18-818e-5e95-b424-b8abe4edcf99",
+    "question": "Vì sao composable phải được gọi đồng bộ trong setup? Điều gì hỏng nếu gọi sau await?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "vi-sao-composable-phai-duoc-goi-dong-bo-trong-setup-dieu-gi-hong-neu-goi-sau-await-bcad7f18-818e-5e95-b424-b8abe4edcf99",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 63,
+    "sourceSlug": null
+  },
+  {
+    "id": "df408e03-d5c5-54d6-b228-4d1515d6f9bb",
+    "question": "Bảng 20.000 dòng render chậm và tốn RAM: shallowRef / markRaw giúp gì? triggerRef dùng khi nào?",
+    "level": "advanced",
+    "levelLabel": "NÂNG CAO",
+    "sourceUrl": null,
+    "slug": "bang-20-000-dong-render-cham-va-ton-ram-shallowref-markraw-giup-gi-triggerref-dung-khi-nao-df408e03-d5c5-54d6-b228-4d1515d6f9bb",
+    "access": "pro",
+    "upgrade": {
+      "message": "Nâng cấp Pro mở trọn bộ tính năng",
+      "url": "https://luyenphongvan.online/checkout?plan=monthly",
+      "cta": "Pro — 49k/tháng"
+    },
+    "departments": [
+      "frontend"
+    ],
+    "answer": {
+      "summary": [],
+      "details": [],
+      "points": [],
+      "sections": [],
+      "codeExamples": [],
+      "tables": []
+    },
+    "legacyId": 64,
+    "sourceSlug": null
+  }
+]
