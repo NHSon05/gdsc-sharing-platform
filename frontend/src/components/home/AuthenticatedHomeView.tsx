@@ -297,7 +297,7 @@ export function AuthenticatedHomeView({
               <div className="mt-3 space-y-2 text-xs">
                 <Link
                   href="/sharing/mine"
-                  className="hover:border-brand/40 hover:text-brand flex items-center justify-between rounded-xl border border-neutral-200/60 bg-white/80 p-2.5 font-semibold text-neutral-800 transition-all hover:shadow-2xs dark:border-zinc-700/60 dark:bg-zinc-800/80 dark:text-zinc-200"
+                  className="hover:border-brand/40 hover:text-brand flex items-center justify-between rounded-xl border border-neutral-200/60 bg-white/80 p-2.5 font-semibold text-neutral-900 transition-all hover:shadow-2xs dark:border-zinc-700/60 dark:bg-zinc-800/80 dark:text-zinc-200"
                 >
                   <span className="flex items-center gap-2">
                     <FileText className="text-brand size-4" />
@@ -308,7 +308,7 @@ export function AuthenticatedHomeView({
 
                 <Link
                   href="/schedule"
-                  className="hover:border-brand/40 hover:text-brand flex items-center justify-between rounded-xl border border-neutral-200/60 bg-white/80 p-2.5 font-semibold text-neutral-800 transition-all hover:shadow-2xs dark:border-zinc-700/60 dark:bg-zinc-800/80 dark:text-zinc-200"
+                  className="hover:border-brand/40 hover:text-brand flex items-center justify-between rounded-xl border border-neutral-200/60 bg-white/80 p-2.5 font-semibold text-neutral-900 transition-all hover:shadow-2xs dark:border-zinc-700/60 dark:bg-zinc-800/80 dark:text-zinc-200"
                 >
                   <span className="flex items-center gap-2">
                     <Calendar className="size-4 text-emerald-600" />

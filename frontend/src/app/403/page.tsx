@@ -43,7 +43,7 @@ export default function ForbiddenPage() {
           <button
             type="button"
             onClick={() => window.history.back()}
-            className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-neutral-200/80 bg-neutral-100 px-4 py-2.5 text-sm font-semibold text-neutral-800 transition-colors hover:bg-neutral-200/60 dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700/60"
+            className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-neutral-200/80 bg-neutral-100 px-4 py-2.5 text-sm font-semibold text-neutral-900 transition-colors hover:bg-neutral-200/60 dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700/60"
           >
             <ArrowLeft className="size-4" />
             <span>Quay lại</span>

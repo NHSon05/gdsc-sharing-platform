@@ -22,7 +22,7 @@ export function RoadmapPillItem({
   return (
     <Link
       href={`/roadmaps/${encodeURIComponent(slug)}`}
-      className="group hover:border-brand/70 relative flex h-13 w-full items-center justify-between rounded-xl border border-neutral-200/90 bg-white/85 px-4 text-neutral-800 shadow-2xs backdrop-blur-md transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md dark:border-zinc-800/80 dark:bg-[#111827]/70 dark:text-zinc-200 dark:hover:border-zinc-600 dark:hover:bg-zinc-800/70"
+      className="group hover:border-brand/70 relative flex h-13 w-full items-center justify-between rounded-xl border border-neutral-200/90 bg-white/85 px-4 text-neutral-900 shadow-2xs backdrop-blur-md transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md dark:border-zinc-800/80 dark:bg-[#111827]/70 dark:text-zinc-200 dark:hover:border-zinc-600 dark:hover:bg-zinc-800/70"
     >
       <div className="flex min-w-0 items-center gap-2 pr-2">
         <span className="group-hover:text-brand truncate text-[13.5px] font-semibold tracking-tight transition-colors dark:group-hover:text-white">

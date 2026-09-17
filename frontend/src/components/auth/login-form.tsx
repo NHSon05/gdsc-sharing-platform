@@ -82,7 +82,7 @@ export function LoginForm({
                 <div className="mb-1.5 flex items-center justify-between">
                   <label
                     htmlFor="password"
-                    className="text-xs font-medium tracking-tight text-neutral-800 md:text-sm dark:text-zinc-200"
+                    className="text-xs font-medium tracking-tight text-neutral-900 md:text-sm dark:text-zinc-200"
                   >
                     {t("login.passwordLabel")}{" "}
                     <span className="text-rose-500">*</span>

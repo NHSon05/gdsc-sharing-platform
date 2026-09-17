@@ -155,13 +155,13 @@ function LearningPageContent() {
               <h1 className="text-lg font-bold tracking-tight text-neutral-900 dark:text-white">
                 {displayCategoryTitle}
               </h1>
-              <p className="text-sm text-neutral-800 dark:text-zinc-400">
+              <p className="text-sm text-neutral-900 dark:text-zinc-400">
                 {countText}
               </p>
             </div>
 
             {/* Level indicator note */}
-            <div className="flex items-center gap-4 text-sm text-neutral-800 dark:text-zinc-500">
+            <div className="flex items-center gap-4 text-sm text-neutral-900 dark:text-zinc-500">
               <span className="inline-block size-2 rounded-full bg-blue-500" />
               <span>{t("learning.basicLevel")}</span>
               <span className="inline-block size-2 rounded-full bg-amber-500" />
@@ -177,7 +177,7 @@ function LearningPageContent() {
           ) : isError ? (
             <div className="flex min-h-64 flex-col items-center justify-center rounded-3xl border border-neutral-200 bg-white p-8 text-center dark:border-zinc-800 dark:bg-[#0C0C0E]">
               <AlertCircle className="size-8 text-rose-500" />
-              <p className="mt-2 text-sm font-bold text-neutral-800 dark:text-zinc-200">
+              <p className="mt-2 text-sm font-bold text-neutral-900 dark:text-zinc-200">
                 {t("learning.loadFailed")}
               </p>
               <p className="mt-1 text-xs text-neutral-500 dark:text-zinc-400">

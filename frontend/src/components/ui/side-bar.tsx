@@ -159,7 +159,7 @@ export function SidebarNavItem({
             "size-6 shrink-0 transition-colors",
             active
               ? "text-brand dark:text-brand-hover stroke-[2.2]"
-              : "stroke-[1.8] text-neutral-800 group-hover:text-neutral-800 dark:text-zinc-400 dark:group-hover:text-zinc-200"
+              : "stroke-[1.8] text-neutral-900 group-hover:text-neutral-900 dark:text-zinc-400 dark:group-hover:text-zinc-200"
           )}
         />
       )}
@@ -180,7 +180,7 @@ export function SidebarNavItem({
         collapsed ? "mx-auto size-10 justify-center" : "gap-4 px-3 py-2.5",
         active
           ? "bg-brand/10 text-brand dark:bg-brand/15 dark:text-brand-hover border-brand/20 dark:border-brand/30 border font-semibold shadow-2xs"
-          : "text-neutral-600 hover:bg-neutral-200/50 hover:text-neutral-900 dark:text-zinc-400 dark:hover:bg-zinc-800/40 dark:hover:text-zinc-100",
+          : "text-neutral-900 hover:bg-neutral-200/50 hover:text-neutral-900 dark:text-zinc-400 dark:hover:bg-zinc-800/40 dark:hover:text-zinc-100",
         className
       )}
       {...props}
@@ -231,7 +231,7 @@ export function SidebarAccordion({
       <button
         type="button"
         onClick={handleToggle}
-        className="flex w-full cursor-pointer items-center justify-between px-3 py-1.5 text-xs font-semibold tracking-wider text-neutral-500 uppercase transition-colors hover:text-neutral-800 dark:text-zinc-400 dark:hover:text-zinc-200"
+        className="flex w-full cursor-pointer items-center justify-between px-3 py-1.5 text-xs font-semibold tracking-wider text-neutral-500 uppercase transition-colors hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-zinc-200"
       >
         <span>{title}</span>
         {open ? (

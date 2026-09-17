@@ -154,7 +154,7 @@ export function ProfileBlogSection({
       ) : isError ? (
         <div className="flex min-h-64 flex-col items-center justify-center rounded-3xl border border-neutral-200/80 bg-white p-8 text-center dark:border-zinc-800/80 dark:bg-[#0C0C0E]">
           <AlertCircle className="size-8 text-rose-500" />
-          <p className="mt-2 text-sm font-bold text-neutral-800 dark:text-zinc-200">
+          <p className="mt-2 text-sm font-bold text-neutral-900 dark:text-zinc-200">
             Không thể tải bài viết
           </p>
           <p className="mt-1 text-xs text-neutral-500 dark:text-zinc-400">

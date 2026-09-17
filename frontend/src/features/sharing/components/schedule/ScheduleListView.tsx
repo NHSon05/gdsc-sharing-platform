@@ -343,7 +343,7 @@ export function ScheduleListView({
                 <div className="flex items-center gap-3 pt-2">
                   <div className="flex items-center gap-2">
                     <CalendarDays className="size-4 text-neutral-400 dark:text-zinc-500" />
-                    <h3 className="text-sm font-bold tracking-tight text-neutral-800 dark:text-zinc-200">
+                    <h3 className="text-sm font-bold tracking-tight text-neutral-900 dark:text-zinc-200">
                       {group.dateLabel}
                     </h3>
                     {group.isToday && (

@@ -37,10 +37,10 @@ export function QuestionAnswerView({
   const hasPoints = answer.points && answer.points.length > 0;
 
   return (
-    <div className={`space-y-4 text-sm leading-relaxed text-neutral-800 dark:text-zinc-200 ${className}`}>
+    <div className={`space-y-4 text-sm leading-relaxed text-neutral-900 dark:text-zinc-200 ${className}`}>
       {/* Summary Bullet Points */}
       {hasSummary && (
-        <div className="space-y-2 rounded-2xl bg-blue-50/60 p-4 text-neutral-800 dark:bg-blue-950/30 dark:text-blue-200">
+        <div className="space-y-2 rounded-2xl bg-blue-50/60 p-4 text-neutral-900 dark:bg-blue-950/30 dark:text-blue-200">
           <div className="flex items-center gap-1.5 font-bold text-blue-700 dark:text-blue-300">
             <BookOpen className="size-4" />
             <span>{t("learning.coreSummary")}</span>
@@ -59,7 +59,7 @@ export function QuestionAnswerView({
       {hasDetails && (
         <div className="space-y-2 pt-1">
           {answer.details.map((detail, i) => (
-            <p key={i} className="text-sm leading-relaxed text-neutral-800 dark:text-zinc-200">
+            <p key={i} className="text-sm leading-relaxed text-neutral-900 dark:text-zinc-200">
               {detail}
             </p>
           ))}
@@ -73,7 +73,7 @@ export function QuestionAnswerView({
             <Layers className="size-4 text-brand" />
             <span>{t("learning.keyPoints")}</span>
           </div>
-          <ul className="list-disc space-y-1 pl-4 text-sm text-neutral-800 dark:text-zinc-200">
+          <ul className="list-disc space-y-1 pl-4 text-sm text-neutral-900 dark:text-zinc-200">
             {answer.points?.map((pt, i) => (
               <li key={i}>{pt}</li>
             ))}

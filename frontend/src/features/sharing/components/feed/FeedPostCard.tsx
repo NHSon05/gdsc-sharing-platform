@@ -57,7 +57,7 @@ export function FeedPostCard({
 
   const authorRoleBadge = isAuthorAdmin
     ? "Admin"
-    : (primaryAuthor?.role || "Member");
+    : primaryAuthor?.role || "Member";
 
   let timeAgo = "";
   if (content.publishedAtUtc) {
@@ -155,7 +155,7 @@ export function FeedPostCard({
         </Link>
 
         {/* Summary */}
-        <p className="line-clamp-3 text-sm leading-relaxed text-neutral-600 dark:text-zinc-300">
+        <p className="text-md line-clamp-3 leading-relaxed text-neutral-900 dark:text-zinc-300">
           {content.summary}
         </p>
 
@@ -165,7 +165,7 @@ export function FeedPostCard({
             href={`/sharing/${content.slug}`}
             className="block overflow-hidden rounded-xl border border-neutral-100 dark:border-zinc-800"
           >
-            <div className="relative aspect-[21/9] w-full overflow-hidden bg-neutral-100 sm:aspect-[2/1] dark:bg-zinc-800">
+            <div className="relative aspect-21/9 w-full overflow-hidden bg-neutral-100 sm:aspect-2/1 dark:bg-zinc-800">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={content.coverImageUrl}

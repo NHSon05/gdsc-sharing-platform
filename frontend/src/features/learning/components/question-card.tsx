@@ -99,7 +99,7 @@ export function QuestionCard({
           </span>
 
           <div className="flex min-w-0 flex-1 items-center gap-2">
-            <h3 className="text-sm font-bold leading-normal text-neutral-800 transition-colors group-hover:text-blue-600 dark:text-zinc-100 dark:group-hover:text-blue-400">
+            <h3 className="text-sm font-bold leading-normal text-neutral-900 transition-colors group-hover:text-blue-600 dark:text-zinc-100 dark:group-hover:text-blue-400">
               {item.question}
             </h3>
 

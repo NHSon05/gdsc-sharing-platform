@@ -165,8 +165,8 @@ export function ProfileHeroCard({
             {roleTitle}
           </p>
 
-          <div className="flex items-center gap-1.5 text-sm text-neutral-800 dark:text-zinc-400">
-            <MapPin className="size-4 shrink-0 text-neutral-800 dark:text-zinc-500" />
+          <div className="flex items-center gap-1.5 text-sm text-neutral-900 dark:text-zinc-400">
+            <MapPin className="size-4 shrink-0 text-neutral-900 dark:text-zinc-500" />
             <span>{locationText}</span>
           </div>
         </div>

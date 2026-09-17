@@ -126,7 +126,7 @@ export function OrbitingIcons() {
               >
                 <div
                   title={icon.label}
-                  className="hover:text-brand dark:hover:text-brand-hover hover:border-brand/40 dark:hover:border-brand/40 flex h-[52px] w-[52px] cursor-pointer items-center justify-center rounded-2xl border border-neutral-100/90 bg-white text-neutral-800 shadow-[0_10px_28px_-6px_rgba(0,0,0,0.08)] transition-all duration-200 hover:scale-110 dark:border-zinc-800/90 dark:bg-zinc-900/95 dark:text-zinc-200 dark:shadow-[0_10px_28px_-6px_rgba(0,0,0,0.5)]"
+                  className="hover:text-brand dark:hover:text-brand-hover hover:border-brand/40 dark:hover:border-brand/40 flex h-[52px] w-[52px] cursor-pointer items-center justify-center rounded-2xl border border-neutral-100/90 bg-white text-neutral-900 shadow-[0_10px_28px_-6px_rgba(0,0,0,0.08)] transition-all duration-200 hover:scale-110 dark:border-zinc-800/90 dark:bg-zinc-900/95 dark:text-zinc-200 dark:shadow-[0_10px_28px_-6px_rgba(0,0,0,0.5)]"
                 >
                   {icon.render()}
                 </div>

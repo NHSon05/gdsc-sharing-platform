@@ -164,7 +164,7 @@ function getCategoryIcon(id: string, label: string) {
     case "fastapi":
       return <span className="text-md font-black text-teal-500">⚡</span>;
     case "kafka":
-      return <span className="text-md font-black text-neutral-800 dark:text-neutral-200">K</span>;
+      return <span className="text-md font-black text-neutral-900 dark:text-neutral-200">K</span>;
     case "cicd":
       return <Zap className="size-4 text-indigo-500" />;
     default:
@@ -222,7 +222,7 @@ export function LearningSidebar({
       <button
         type="button"
         onClick={() => setCollapsed(!collapsed)}
-        className="absolute top-6 -right-3.5 z-20 flex size-8 cursor-pointer items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-800 shadow-xs transition-colors hover:bg-neutral-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
+        className="absolute top-6 -right-3.5 z-20 flex size-8 cursor-pointer items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-900 shadow-xs transition-colors hover:bg-neutral-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
         title={
           collapsed
             ? isEn
@@ -249,7 +249,7 @@ export function LearningSidebar({
             className={`flex w-full cursor-pointer items-center justify-between rounded-xl px-4 py-2 text-sm font-bold transition-all ${
               activeCategory === "all" || !activeCategory
                 ? "border border-blue-500/30 bg-blue-100 text-blue-600 shadow-2xs dark:border-blue-500/30 dark:bg-blue-950/40 dark:text-blue-400"
-                : "text-neutral-800 hover:bg-neutral-100 dark:text-zinc-300 dark:hover:bg-zinc-900"
+                : "text-neutral-900 hover:bg-neutral-100 dark:text-zinc-300 dark:hover:bg-zinc-900"
             }`}
           >
             <span>{t("learning.allCategories")}</span>
@@ -274,7 +274,7 @@ export function LearningSidebar({
               value={filterText}
               onChange={(e) => setFilterText(e.target.value)}
               placeholder={t("learning.filterCategoriesPlaceholder")}
-              className="focus:border-brand w-full rounded-xl border border-neutral-200/90 bg-neutral-50/50 py-2 pr-3 pl-8 text-sm text-neutral-800 transition-colors placeholder:text-neutral-400 focus:bg-white focus:outline-hidden dark:border-zinc-800 dark:bg-zinc-900/80 dark:text-zinc-200"
+              className="focus:border-brand w-full rounded-xl border border-neutral-200/90 bg-neutral-50/50 py-2 pr-3 pl-8 text-sm text-neutral-900 transition-colors placeholder:text-neutral-400 focus:bg-white focus:outline-hidden dark:border-zinc-800 dark:bg-zinc-900/80 dark:text-zinc-200"
             />
           </div>
 
@@ -314,7 +314,7 @@ export function LearningSidebar({
                           className={`group flex w-full cursor-pointer items-center justify-between rounded-xl px-2 py-2 text-sm font-medium transition-colors ${
                             isSelected
                               ? "bg-blue-100 font-semibold text-blue-600 dark:bg-blue-950/40 dark:text-blue-400"
-                              : "text-neutral-800 hover:bg-neutral-100 hover:text-neutral-900 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
+                              : "text-neutral-900 hover:bg-neutral-100 hover:text-neutral-900 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
                           }`}
                         >
                           <div className="flex items-center gap-2.5 truncate">

@@ -63,7 +63,7 @@ function parseInline(text: string): React.ReactNode[] {
       return (
         <code
           key={index}
-          className="rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-xs font-semibold text-pink-600 dark:bg-zinc-800 dark:text-pink-400"
+          className="rounded-md bg-pink-50 px-1.5 py-0.5 font-mono text-sm font-semibold text-pink-600 dark:bg-pink-950/40 dark:text-pink-300"
         >
           {part.slice(1, -1)}
         </code>
@@ -85,7 +85,7 @@ function parseInline(text: string): React.ReactNode[] {
     // Italic
     if (part.startsWith("*") && part.endsWith("*")) {
       return (
-        <em key={index} className="text-neutral-800 italic dark:text-zinc-200">
+        <em key={index} className="text-neutral-900 italic dark:text-zinc-200">
           {part.slice(1, -1)}
         </em>
       );
@@ -257,7 +257,7 @@ export function MarkdownViewer({ content, className }: MarkdownViewerProps) {
       elements.push(
         <blockquote
           key={`quote-${index}`}
-          className="my-3 rounded-r-lg border-l-4 border-blue-500 bg-blue-50/50 py-2 pr-4 pl-4 text-neutral-700 italic dark:bg-blue-950/20 dark:text-zinc-300"
+          className="my-3 rounded-r-lg border-l-4 border-blue-500 bg-blue-50/50 py-2 pr-4 pl-4 text-sm leading-relaxed text-neutral-700 italic dark:bg-blue-950/20 dark:text-zinc-300"
         >
           {parseInline(line.slice(2))}
         </blockquote>
@@ -295,7 +295,7 @@ export function MarkdownViewer({ content, className }: MarkdownViewerProps) {
       elements.push(
         <p
           key={`p-${index}`}
-          className="my-2.5 text-sm leading-relaxed text-neutral-700 dark:text-zinc-300"
+          className="text-md my-2.5 leading-relaxed text-neutral-900 dark:text-zinc-300"
         >
           {parseInline(line)}
         </p>

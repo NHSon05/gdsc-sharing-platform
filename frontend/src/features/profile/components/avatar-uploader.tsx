@@ -178,7 +178,7 @@ export function AvatarUploader({
             <div className="bg-brand/10 text-brand mb-2 flex size-10 items-center justify-center rounded-xl">
               <UploadCloud className="size-5" />
             </div>
-            <p className="text-xs font-semibold text-neutral-800 dark:text-zinc-200">
+            <p className="text-xs font-semibold text-neutral-900 dark:text-zinc-200">
               {selectedFile ? selectedFile.name : t("profile.changeAvatar")}
             </p>
             <p className="mt-1 text-[11px] text-neutral-400 dark:text-zinc-500">

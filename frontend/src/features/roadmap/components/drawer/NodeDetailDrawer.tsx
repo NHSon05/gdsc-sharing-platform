@@ -188,7 +188,7 @@ export function NodeDetailDrawer({
                         key={p.id}
                         type="button"
                         onClick={() => onSelectNodeById(p.id)}
-                        className="group hover:border-brand hover:text-brand dark:hover:border-brand flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-semibold text-neutral-800 shadow-2xs dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200"
+                        className="group hover:border-brand hover:text-brand dark:hover:border-brand flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-semibold text-neutral-900 shadow-2xs dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200"
                       >
                         <span>{p.title}</span>
                         <ArrowRight className="size-3 transition-transform group-hover:translate-x-0.5" />
@@ -211,7 +211,7 @@ export function NodeDetailDrawer({
                         key={n.id}
                         type="button"
                         onClick={() => onSelectNodeById(n.id)}
-                        className="group flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-semibold text-neutral-800 shadow-2xs hover:border-emerald-500 hover:text-emerald-600 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:border-emerald-500"
+                        className="group flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-semibold text-neutral-900 shadow-2xs hover:border-emerald-500 hover:text-emerald-600 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:border-emerald-500"
                       >
                         <span>{n.title}</span>
                         <ArrowRight className="size-3 transition-transform group-hover:translate-x-0.5" />

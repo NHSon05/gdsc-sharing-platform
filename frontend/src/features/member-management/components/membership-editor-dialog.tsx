@@ -194,7 +194,7 @@ export function MembershipEditorDialog({
           <div className="space-y-6">
             {/* Action Bar: Assign to Gen */}
             <div className="flex items-center justify-between border-b border-neutral-100 pb-4 dark:border-zinc-800/80">
-              <span className="text-xs font-bold text-neutral-800 dark:text-zinc-200">
+              <span className="text-xs font-bold text-neutral-900 dark:text-zinc-200">
                 Danh sách nhiệm kỳ ({memberships.length})
               </span>
 

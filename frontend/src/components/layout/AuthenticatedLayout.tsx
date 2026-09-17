@@ -174,7 +174,7 @@ export function AuthenticatedLayout({
                 )}
                 showAdminBadge={false}
               />
-              <span className="hidden max-w-30 truncate text-xs font-semibold text-neutral-800 sm:inline-block dark:text-zinc-200">
+              <span className="hidden max-w-30 truncate text-xs font-semibold text-neutral-900 sm:inline-block dark:text-zinc-200">
                 {displayName}
               </span>
             </Link>

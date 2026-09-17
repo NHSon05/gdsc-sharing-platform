@@ -270,7 +270,7 @@ export function EventCalendar({
           <div className="space-y-3 border-t border-neutral-200/70 pt-5 dark:border-zinc-800/70">
             <button
               type="button"
-              className="flex w-full items-center justify-between text-xs font-semibold text-neutral-800 hover:text-neutral-950 dark:text-zinc-200 dark:hover:text-white"
+              className="flex w-full items-center justify-between text-xs font-semibold text-neutral-900 hover:text-neutral-950 dark:text-zinc-200 dark:hover:text-white"
             >
               <span className="truncate">{accountEmail}</span>
               <ChevronDown className="size-3.5 shrink-0 text-neutral-400" />
@@ -326,7 +326,7 @@ export function EventCalendar({
               <button
                 type="button"
                 onClick={handleToday}
-                className="text-md cursor-pointer rounded-xl bg-white px-3 py-1.5 font-semibold text-neutral-800 transition-colors hover:bg-neutral-100 hover:text-neutral-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 dark:hover:text-white"
+                className="text-md cursor-pointer rounded-xl bg-white px-3 py-1.5 font-semibold text-neutral-900 transition-colors hover:bg-neutral-100 hover:text-neutral-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 dark:hover:text-white"
               >
                 {t("schedule.today")}
               </button>

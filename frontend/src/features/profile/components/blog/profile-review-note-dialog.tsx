@@ -35,7 +35,7 @@ export function ProfileReviewNoteDialog({
             </DialogTitle>
           </div>
           <p className="mt-1 text-xs text-neutral-500 dark:text-zinc-400">
-            Bài viết: <span className="font-semibold text-neutral-800 dark:text-zinc-200">{title}</span>
+            Bài viết: <span className="font-semibold text-neutral-900 dark:text-zinc-200">{title}</span>
           </p>
         </DialogHeader>
 

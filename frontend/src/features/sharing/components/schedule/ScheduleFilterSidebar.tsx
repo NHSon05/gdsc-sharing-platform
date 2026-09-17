@@ -78,7 +78,7 @@ export function ScheduleFilterSidebar({
       {/* 1. Delivery Mode Checkboxes */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-sm font-bold tracking-wider text-neutral-800 dark:text-zinc-200">
+          <div className="flex items-center gap-2 text-sm font-bold tracking-wider text-neutral-900 dark:text-zinc-200">
             <span>{t("sharing.deliveryMode")}</span>
           </div>
           {selectedDeliveryModes.length < deliveryModes.length && (
@@ -132,7 +132,7 @@ export function ScheduleFilterSidebar({
       {/* 2. Sharing Type Checkboxes */}
       <div className="space-y-3 border-t border-neutral-200/50 pt-5 dark:border-zinc-800/50">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-sm font-bold tracking-wider text-neutral-800 dark:text-zinc-200">
+          <div className="flex items-center gap-2 text-sm font-bold tracking-wider text-neutral-900 dark:text-zinc-200">
             <span>{t("sharing.sharingType")}</span>
           </div>
           {selectedSharingTypes.length < sharingTypes.length && (

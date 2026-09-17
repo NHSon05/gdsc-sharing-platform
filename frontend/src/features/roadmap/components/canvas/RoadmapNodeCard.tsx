@@ -143,7 +143,7 @@ export function RoadmapNodeCard({
         <div className="flex items-center justify-between gap-1.5">
           <div className="flex items-center gap-1.5">
             <Layers className="size-3.5 text-neutral-600 dark:text-zinc-400" />
-            <span className="text-[11px] font-bold tracking-tight text-neutral-800 uppercase dark:text-zinc-200">
+            <span className="text-[11px] font-bold tracking-tight text-neutral-900 uppercase dark:text-zinc-200">
               {node.title}
             </span>
           </div>

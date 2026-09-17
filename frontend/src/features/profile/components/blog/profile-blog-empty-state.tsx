@@ -27,7 +27,7 @@ export function ProfileBlogEmptyState({
         <BookOpen className="size-7" />
       </div>
 
-      <h3 className="mt-3 text-sm font-bold text-neutral-800 dark:text-zinc-200">
+      <h3 className="mt-3 text-sm font-bold text-neutral-900 dark:text-zinc-200">
         {searchTerm
           ? "Không tìm thấy bài viết nào phù hợp"
           : activeFilter === "ALL"

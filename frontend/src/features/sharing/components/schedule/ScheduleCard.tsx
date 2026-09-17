@@ -105,7 +105,7 @@ export function ScheduleCard({
         {/* Footer Info */}
         <div className="mt-5 space-y-2 border-t border-neutral-100 pt-3 text-xs text-neutral-600 dark:border-zinc-800/80 dark:text-zinc-400">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-neutral-800 dark:text-zinc-200">
+            <span className="font-semibold text-neutral-900 dark:text-zinc-200">
               {format(startDate, "EEE, MMM d, yyyy")} •{" "}
               {format(startDate, "HH:mm")} - {format(endDate, "HH:mm")} (
               {schedule.timeZoneId || "UTC"})

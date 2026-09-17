@@ -109,7 +109,7 @@ export default function ContentDetailPage() {
         </h1>
 
         {/* Summary */}
-        <p className="text-base leading-relaxed text-neutral-600 dark:text-zinc-300">
+        <p className="text-sm leading-relaxed text-neutral-600 dark:text-zinc-400">
           {content.summary}
         </p>
 
@@ -121,7 +121,7 @@ export default function ContentDetailPage() {
               <div className="flex items-center gap-2.5">
                 <UserAvatar
                   name={primaryAuthor.fullName}
-                  size="sm"
+                  size="md"
                   isAdmin={
                     primaryAuthor.fullName === "System Administrator" ||
                     primaryAuthor.fullName.toLowerCase().includes("admin")
@@ -132,10 +132,10 @@ export default function ContentDetailPage() {
                   }
                 />
                 <div>
-                  <p className="text-xs font-bold text-neutral-900 dark:text-white">
+                  <p className="text-md font-bold text-neutral-900 dark:text-white">
                     {primaryAuthor.fullName}
                   </p>
-                  <p className="text-[11px] text-neutral-400 dark:text-zinc-500">
+                  <p className="text-[12px] text-neutral-600 dark:text-zinc-500">
                     {primaryAuthor.fullName === "System Administrator" ||
                     primaryAuthor.fullName.toLowerCase().includes("admin")
                       ? "Admin"
@@ -210,7 +210,7 @@ export default function ContentDetailPage() {
               <Link
                 key={s.id}
                 href={`/schedule?id=${s.id}`}
-                className="flex items-center justify-between rounded-xl border border-neutral-100 bg-neutral-50/60 p-3 text-sm font-semibold text-neutral-800 transition-colors hover:border-neutral-300 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200"
+                className="flex items-center justify-between rounded-xl border border-neutral-100 bg-neutral-50/60 p-3 text-sm font-semibold text-neutral-900 transition-colors hover:border-neutral-300 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200"
               >
                 <span>{s.title}</span>
                 <span className="text-xs text-neutral-400">

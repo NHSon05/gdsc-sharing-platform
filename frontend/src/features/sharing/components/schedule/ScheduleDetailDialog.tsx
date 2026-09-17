@@ -179,7 +179,7 @@ export function ScheduleDetailDialog({
           {/* Presenters */}
           {schedule.presenters && schedule.presenters.length > 0 && (
             <div>
-              <h4 className="text-md mb-3 font-bold tracking-wider text-neutral-800 dark:text-zinc-500">
+              <h4 className="text-md mb-3 font-bold tracking-wider text-neutral-900 dark:text-zinc-500">
                 {t("sharing.presenters")}
               </h4>
               <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
@@ -219,7 +219,7 @@ export function ScheduleDetailDialog({
                   <a
                     key={c.id}
                     href={`/sharing/${c.slug}`}
-                    className="flex items-center justify-between rounded-xl border border-neutral-200 bg-white p-3 text-sm font-semibold text-neutral-800 hover:border-neutral-300 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200"
+                    className="flex items-center justify-between rounded-xl border border-neutral-200 bg-white p-3 text-sm font-semibold text-neutral-900 hover:border-neutral-300 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200"
                   >
                     <div className="flex min-w-0 items-center gap-2">
                       <BookOpen className="size-4 shrink-0 text-blue-500" />

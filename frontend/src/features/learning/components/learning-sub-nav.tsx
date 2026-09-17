@@ -27,7 +27,7 @@ export function LearningSubNav({
         <nav className="flex items-center gap-6 text-sm font-semibold">
           <Link
             href="/"
-            className="text-neutral-800 transition-colors hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-white"
+            className="text-neutral-900 transition-colors hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-white"
           >
             {t("learning.home")}
           </Link>
@@ -38,7 +38,7 @@ export function LearningSubNav({
             <ChevronDown className="size-4" />
           </div>
 
-          <div className="flex items-center gap-1.5 text-neutral-800 transition-colors hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-white">
+          <div className="flex items-center gap-1.5 text-neutral-900 transition-colors hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-white">
             <span>{t("learning.quiz")}</span>
             <span className="py-0.2 rounded-full bg-blue-100 px-1.5 text-[9px] font-bold text-blue-600 dark:bg-blue-950/80 dark:text-blue-400">
               {t("learning.isNew")}
@@ -47,14 +47,14 @@ export function LearningSubNav({
 
           <Link
             href="#interview-review"
-            className="hidden text-neutral-800 transition-colors hover:text-neutral-900 md:inline-block dark:text-zinc-400 dark:hover:text-white"
+            className="hidden text-neutral-900 transition-colors hover:text-neutral-900 md:inline-block dark:text-zinc-400 dark:hover:text-white"
           >
             {t("learning.interviewReviews")}
           </Link>
 
           <Link
             href="#community"
-            className="hidden text-neutral-800 transition-colors hover:text-neutral-900 md:inline-block dark:text-zinc-400 dark:hover:text-white"
+            className="hidden text-neutral-900 transition-colors hover:text-neutral-900 md:inline-block dark:text-zinc-400 dark:hover:text-white"
           >
             {t("learning.community")}
           </Link>

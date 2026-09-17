@@ -55,7 +55,7 @@ export function ProfileAskMeAboutCard({
         {topics.map((topic, idx) => (
           <div
             key={idx}
-            className="flex items-center gap-2 rounded-xl border border-neutral-200/80 bg-neutral-50/60 px-3 py-1.5 text-sm font-medium text-neutral-800 transition-colors hover:border-neutral-300 dark:border-zinc-800 dark:bg-zinc-900/60 dark:text-zinc-300 dark:hover:border-zinc-700"
+            className="flex items-center gap-2 rounded-xl border border-neutral-200/80 bg-neutral-50/60 px-3 py-1.5 text-sm font-medium text-neutral-900 transition-colors hover:border-neutral-300 dark:border-zinc-800 dark:bg-zinc-900/60 dark:text-zinc-300 dark:hover:border-zinc-700"
           >
             <span
               className={`flex size-4.5 items-center justify-center rounded-md text-[10px] ${

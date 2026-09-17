@@ -26,7 +26,7 @@ export function LearningEmptyState({
         <Search className="size-7" />
       </div>
 
-      <h3 className="mt-3 text-sm font-bold text-neutral-800 dark:text-zinc-200">
+      <h3 className="mt-3 text-sm font-bold text-neutral-900 dark:text-zinc-200">
         {searchTerm
           ? t("learning.notFoundTitle").replace("{search}", searchTerm)
           : t("learning.emptyCategoryTitle")}

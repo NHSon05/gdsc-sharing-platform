@@ -124,7 +124,7 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
                 ? "text-rose-600 dark:text-rose-400"
                 : disabled
                   ? "text-neutral-400 dark:text-zinc-600"
-                  : "text-neutral-800 dark:text-zinc-200"
+                  : "text-neutral-900 dark:text-zinc-200"
             )}
           >
             <span>{label}</span>

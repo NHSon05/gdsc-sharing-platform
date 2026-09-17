@@ -497,7 +497,7 @@ export function AdminReviewQueue({
                               author.toLowerCase().includes("admin")
                             }
                           />
-                          <span className="font-semibold text-neutral-800 dark:text-zinc-200">
+                          <span className="font-semibold text-neutral-900 dark:text-zinc-200">
                             {author}
                           </span>
                         </div>
