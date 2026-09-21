@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -153,6 +154,72 @@ public class AuthEndpointsIntegrationTests : IClassFixture<WebApplicationFactory
         var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         Assert.Empty(await db.RefreshTokens.ToListAsync());
         Assert.Null((await db.Users.SingleAsync()).LastLoginAt);
+    }
+
+    [Fact]
+    public async Task Session_ShouldWaitForDatabaseSaveBeforeReturningTokens()
+    {
+        var saveGate = new RefreshTokenSaveGate();
+        using var factory = _factory.WithWebHostBuilder(builder =>
+            builder.ConfigureServices(services =>
+                services.AddDbContext<ApplicationDbContext>(options =>
+                    options.AddInterceptors(saveGate))));
+        using var scope = factory.Services.CreateScope();
+        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        var user = new ApplicationUser
+        {
+            Id = Guid.NewGuid(),
+            UserName = "await-save@test.app",
+            Email = "await-save@test.app",
+            FullName = "Await Save",
+            Status = UserStatus.Active
+        };
+        db.Users.Add(user);
+        await db.SaveChangesAsync();
+
+        var service = scope.ServiceProvider.GetRequiredService<IUserSessionService>();
+        var pendingLogin = service.CreateAsync(user, null, null, CancellationToken.None);
+        try
+        {
+            await saveGate.Started.Task.WaitAsync(TimeSpan.FromSeconds(10));
+            Assert.False(pendingLogin.IsCompleted,
+                "Session creation must await persistence before returning tokens to its caller.");
+        }
+        finally
+        {
+            saveGate.Release.TrySetResult(true);
+            await pendingLogin;
+        }
+
+        var response = await pendingLogin;
+        using var verificationScope = factory.Services.CreateScope();
+        var savedDb = verificationScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        var generator = verificationScope.ServiceProvider.GetRequiredService<IJwtTokenGenerator>();
+        var saved = await savedDb.RefreshTokens.SingleAsync(token => token.UserId == user.Id);
+        Assert.Equal(generator.HashToken(response.RefreshToken), saved.TokenHash);
+    }
+
+    private sealed class RefreshTokenSaveGate : SaveChangesInterceptor
+    {
+        public TaskCompletionSource<bool> Started { get; } =
+            new(TaskCreationOptions.RunContinuationsAsynchronously);
+        public TaskCompletionSource<bool> Release { get; } =
+            new(TaskCreationOptions.RunContinuationsAsynchronously);
+
+        public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(
+            DbContextEventData eventData,
+            InterceptionResult<int> result,
+            CancellationToken cancellationToken = default)
+        {
+            if (eventData.Context!.ChangeTracker.Entries<RefreshToken>()
+                .Any(entry => entry.State == EntityState.Added))
+            {
+                Started.TrySetResult(true);
+                await Release.Task.WaitAsync(cancellationToken);
+            }
+
+            return result;
+        }
     }
 
     [Fact]
