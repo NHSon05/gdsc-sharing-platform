@@ -82,6 +82,7 @@ public static class DependencyInjection
             .AddDefaultTokenProviders();
 
         services.AddJwtAuthentication(configuration);
+        services.AddGoogleAuthentication(configuration);
         services.AddApplicationAuthorization();
 
         services
@@ -163,6 +164,8 @@ public static class DependencyInjection
         services.AddScoped<IDepartmentService, DepartmentService>();
         services.AddScoped<IGenerationService, GenerationService>();
         services.AddScoped<IMemberMembershipService, MemberMembershipService>();
+        services.AddScoped<IUserSessionService, UserSessionService>();
+        services.AddScoped<IExternalLoginService, ExternalLoginService>();
 
         services.AddOptions<RoadmapStorageOptions>()
             .Bind(configuration.GetSection(RoadmapStorageOptions.SectionName))

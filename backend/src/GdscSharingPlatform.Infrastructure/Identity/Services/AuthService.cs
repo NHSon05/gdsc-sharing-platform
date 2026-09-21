@@ -26,6 +26,7 @@ public sealed class AuthService : IAuthService
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly IJwtTokenGenerator _tokenGenerator;
+    private readonly IUserSessionService _sessionService;
     private readonly JwtOptions _jwtOptions;
     private readonly ILogger<AuthService> _logger;
 
@@ -34,6 +35,7 @@ public sealed class AuthService : IAuthService
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
         IJwtTokenGenerator tokenGenerator,
+        IUserSessionService sessionService,
         IOptions<JwtOptions> jwtOptions,
         ILogger<AuthService> logger)
     {
@@ -43,6 +45,7 @@ public sealed class AuthService : IAuthService
         _tokenGenerator = tokenGenerator;
         _jwtOptions = jwtOptions.Value;
         _logger = logger;
+        _sessionService = sessionService;
     }
 
     public async Task<AuthResponse> LoginAsync(
@@ -81,50 +84,25 @@ public sealed class AuthService : IAuthService
         if (!passwordResult.Succeeded)
         {
             _logger.LogWarning(
-                "Authentication failed for UserId {UserId}. " +
-                "LockedOut: {LockedOut}.",
+                "Authentication failed for UserId {UserId}. LockedOut: {LockedOut}.",
                 user.Id,
                 passwordResult.IsLockedOut);
 
-            throw new AuthenticationException(
-                InvalidCredentialsMessage);
+            throw new AuthenticationException(InvalidCredentialsMessage);
         }
 
-        await _dbContext.Entry(user)
-            .Reference(currentUser => currentUser.Department)
-            .LoadAsync(cancellationToken);
-
-        var roles = await _userManager.GetRolesAsync(user);
-
-        var tokenPair = CreateTokenPair(
+        var response = await _sessionService.CreateAsync(
             user,
-            roles,
             ipAddress,
-            userAgent);
-
-        user.LastLoginAt = DateTimeOffset.UtcNow;
-        user.UpdatedAt = DateTimeOffset.UtcNow;
-
-        _dbContext.RefreshTokens.Add(
-            tokenPair.RefreshTokenEntity);
-
-        await _dbContext.SaveChangesAsync(
-            cancellationToken);
+            userAgent,
+            cancellationToken
+        );
 
         _logger.LogInformation(
-            "User {UserId} logged in successfully.",
+            "Password login succeeded for UserId {UserId}.",
             user.Id);
 
-        var currentUser = MapCurrentUser(
-            user,
-            roles);
-
-        return new AuthResponse(
-            AccessToken: tokenPair.AccessToken,
-            RefreshToken: tokenPair.RawRefreshToken,
-            TokenType: TokenType,
-            ExpiresIn: tokenPair.ExpiresInSeconds,
-            User: currentUser);
+        return response;
     }
 
     public async Task<TokenResponse> RefreshTokenAsync(
@@ -478,50 +456,7 @@ public sealed class AuthService : IAuthService
 
         var roles = await _userManager.GetRolesAsync(user);
 
-        return MapCurrentUser(
-            user,
-            roles);
-    }
-
-    private TokenPair CreateTokenPair(
-        ApplicationUser user,
-        IEnumerable<string> roles,
-        string? ipAddress,
-        string? userAgent)
-    {
-        var accessToken =
-            _tokenGenerator.GenerateAccessToken(
-                user.Id,
-                user.Email ?? string.Empty,
-                user.FullName,
-                roles,
-                user.DepartmentId,
-                user.Status.ToString(),
-                user.TokenVersion);
-
-        var rawRefreshToken =
-            _tokenGenerator.GenerateRefreshToken();
-
-        var refreshTokenHash =
-            _tokenGenerator.HashToken(
-                rawRefreshToken);
-
-        var utcNow = DateTimeOffset.UtcNow;
-
-        var refreshTokenEntity = new RefreshToken(
-            userId: user.Id,
-            tokenHash: refreshTokenHash,
-            createdAt: utcNow,
-            expiresAt: utcNow.AddDays(
-                _jwtOptions.RefreshTokenExpirationDays),
-            createdByIp: ipAddress,
-            userAgent: userAgent);
-
-        return new TokenPair(
-            AccessToken: accessToken.Token,
-            RawRefreshToken: rawRefreshToken,
-            ExpiresInSeconds: accessToken.ExpiresInSeconds,
-            RefreshTokenEntity: refreshTokenEntity);
+        return CurrentUserMapper.Map(user, roles);
     }
 
     private async Task RevokeAllActiveSessionsAsync(
@@ -586,36 +521,4 @@ public sealed class AuthService : IAuthService
         }
     }
 
-    private static CurrentUserDto MapCurrentUser(
-        ApplicationUser user,
-        IEnumerable<string> roles)
-    {
-        DepartmentDto? department = null;
-
-        if (user.Department is not null)
-        {
-            department = new DepartmentDto(
-                Id: user.Department.Id,
-                Name: user.Department.Name);
-        }
-
-        return new CurrentUserDto(
-            Id: user.Id,
-            Email: user.Email ?? string.Empty,
-            DisplayName: user.DisplayName ?? user.FullName,
-            StudentCode: user.StudentCode,
-            Generation: user.Generation,
-            AvatarUrl: user.AvatarUrl,
-            Status: user.Status.ToString(),
-            Department: department,
-            Roles: roles
-                .Distinct(StringComparer.Ordinal)
-                .ToArray());
-    }
-
-    private sealed record TokenPair(
-        string AccessToken,
-        string RawRefreshToken,
-        int ExpiresInSeconds,
-        RefreshToken RefreshTokenEntity);
 }

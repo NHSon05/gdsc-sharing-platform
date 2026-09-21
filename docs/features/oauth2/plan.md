@@ -68,13 +68,13 @@ Authorization Code Flow + PKCE + OIDC
 
 ### 3.1. Token boundary
 
-| Token | Issuer | Dùng cho |
-|---|---|---|
-| `authorization_code` | Google | Đổi lấy token, không dùng gọi API |
-| Google `id_token` | Google | Xác minh danh tính người dùng |
-| Google `access_token` | Google | Chỉ dùng nếu cần gọi Google API |
-| GDSC `accessToken` | GDSC API | Gọi API nội bộ |
-| GDSC `refreshToken` | GDSC API | Làm mới session GDSC |
+| Token                 | Issuer   | Dùng cho                          |
+| --------------------- | -------- | --------------------------------- |
+| `authorization_code`  | Google   | Đổi lấy token, không dùng gọi API |
+| Google `id_token`     | Google   | Xác minh danh tính người dùng     |
+| Google `access_token` | Google   | Chỉ dùng nếu cần gọi Google API   |
+| GDSC `accessToken`    | GDSC API | Gọi API nội bộ                    |
+| GDSC `refreshToken`   | GDSC API | Làm mới session GDSC              |
 
 API GDSC chỉ chấp nhận JWT do GDSC phát hành. Google token không được gửi trực tiếp tới các endpoint nghiệp vụ của GDSC.
 
@@ -199,14 +199,14 @@ Chỉ cho phép hủy liên kết khi user vẫn còn một phương thức đă
 
 ## 6. Phân chia trách nhiệm theo layer
 
-| Layer | Thành phần | Trách nhiệm |
-|---|---|---|
-| Domain | Constants/enums | Tên provider và các rule nghiệp vụ thuần túy nếu cần |
-| Application | Interfaces, DTOs, use cases | Hợp đồng external login, liên kết user, policy liên kết |
-| Infrastructure | Identity/OIDC services | Middleware provider, gọi token endpoint, xử lý `UserManager`, persistence |
-| API | Controller/configuration | Callback HTTP, redirect, cookie, error mapping |
-| Frontend | Next.js route/button | Bắt đầu flow, nhận redirect, tải `/api/auth/me` |
-| Tests | Unit/integration | Kiểm thử flow, security và liên kết user |
+| Layer          | Thành phần                  | Trách nhiệm                                                               |
+| -------------- | --------------------------- | ------------------------------------------------------------------------- |
+| Domain         | Constants/enums             | Tên provider và các rule nghiệp vụ thuần túy nếu cần                      |
+| Application    | Interfaces, DTOs, use cases | Hợp đồng external login, liên kết user, policy liên kết                   |
+| Infrastructure | Identity/OIDC services      | Middleware provider, gọi token endpoint, xử lý `UserManager`, persistence |
+| API            | Controller/configuration    | Callback HTTP, redirect, cookie, error mapping                            |
+| Frontend       | Next.js route/button        | Bắt đầu flow, nhận redirect, tải `/api/auth/me`                           |
+| Tests          | Unit/integration            | Kiểm thử flow, security và liên kết user                                  |
 
 Dependency direction vẫn giữ nguyên:
 
@@ -224,43 +224,43 @@ Application → Domain
 
 ### Phase 0 — Chuẩn bị provider
 
-- [ ] Tạo Google OAuth/OIDC application cho development.
-- [ ] Tạo OAuth/OIDC application riêng cho production.
-- [ ] Đăng ký callback URL chính xác theo từng môi trường.
-- [ ] Xác định allowed frontend redirect URLs.
-- [ ] Đưa `ClientId` và `ClientSecret` vào User Secrets/environment variables.
-- [ ] Không commit credential vào `appsettings.json`, `.env` hoặc repository.
+- [x] Tạo Google OAuth/OIDC application cho development.
+- [x] Tạo OAuth/OIDC application riêng cho production.
+- [x] Đăng ký callback URL chính xác theo từng môi trường.
+- [x] Xác định allowed frontend redirect URLs.
+- [x] Đưa `ClientId` và `ClientSecret` vào User Secrets/environment variables.
+- [x] Không commit credential vào `appsettings.json`, `.env` hoặc repository.
 
 ### Phase 1 — Cấu hình OIDC backend
 
-- [ ] Tạo options `GoogleAuthenticationOptions` hoặc cấu hình section `Authentication:Google`.
-- [ ] Validate bắt buộc `ClientId`, `ClientSecret`, callback path khi ứng dụng khởi động.
-- [ ] Đăng ký authentication scheme Google/OIDC.
-- [ ] Cấu hình `CallbackPath`.
-- [ ] Bật kiểm tra HTTPS ở production.
-- [ ] Không lưu provider token nếu không có use case gọi Google API.
-- [ ] Cấu hình `state`, `nonce` và PKCE.
+- [x] Tạo options `GoogleAuthenticationOptions` hoặc cấu hình section `Authentication:Google`.
+- [x] Validate bắt buộc `ClientId`, `ClientSecret`, callback path khi ứng dụng khởi động.
+- [x] Đăng ký authentication scheme Google/OIDC.
+- [x] Cấu hình `CallbackPath`.
+- [x] Bật kiểm tra HTTPS ở production.
+- [x] Không lưu provider token nếu không có use case gọi Google API.
+- [x] Cấu hình `state`, `nonce` và PKCE.
 
 ### Phase 2 — External login application service
 
-- [ ] Tạo `IExternalLoginService` trong Application.
-- [ ] Tạo DTO kết quả xác minh provider, không đưa provider token ra ngoài service.
-- [ ] Tìm user bằng `UserManager.FindByLoginAsync`.
-- [ ] Xử lý first login, returning login và account linking.
-- [ ] Kiểm tra email verified, provider subject, issuer, audience và expiry.
-- [ ] Kiểm tra user active trước khi tạo session.
-- [ ] Tái sử dụng `IJwtTokenGenerator` và logic refresh token hiện tại.
-- [ ] Ghi nhận `LastLoginAt` và security audit event.
+- [x] Tạo `IExternalLoginService` trong Application.
+- [x] Tạo DTO kết quả xác minh provider, không đưa provider token ra ngoài service.
+- [x] Tìm user bằng `UserManager.FindByLoginAsync`.
+- [x] Xử lý first login, returning login và account linking.
+- [x] Kiểm tra email verified, provider subject, issuer, audience và expiry.
+- [x] Kiểm tra user active trước khi tạo session.
+- [x] Tái sử dụng `IJwtTokenGenerator` và logic refresh token hiện tại.
+- [x] Ghi nhận `LastLoginAt` và security audit event.
 
 ### Phase 3 — API endpoints
 
-- [ ] Thêm `GET /api/auth/google/start`.
-- [ ] Thêm `GET /api/auth/google/callback`.
-- [ ] Giữ nguyên `/api/auth/refresh`, `/api/auth/logout`, `/api/auth/me`.
-- [ ] Map lỗi callback về mã lỗi an toàn, không trả chi tiết token/provider.
-- [ ] Không log authorization code, id token, access token hoặc refresh token.
-- [ ] Bảo đảm callback không bị chặn bởi policy `RequireActiveUser`.
-- [ ] Chỉ callback thành công mới tạo session nội bộ.
+- [x] Thêm `GET /api/auth/google/start`.
+- [x] Thêm `GET /api/auth/google/callback`.
+- [x] Giữ nguyên `/api/auth/refresh`, `/api/auth/logout`, `/api/auth/me`.
+- [x] Map lỗi callback về mã lỗi an toàn, không trả chi tiết token/provider.
+- [x] Không log authorization code, id token, access token hoặc refresh token.
+- [x] Bảo đảm callback không bị chặn bởi policy `RequireActiveUser`.
+- [x] Chỉ callback thành công mới tạo session nội bộ.
 
 ### Phase 4 — Next.js client/BFF
 
@@ -362,17 +362,17 @@ Tên biến cần thống nhất với convention cấu hình .NET hiện tại.
 
 ## 11. Rủi ro và cách giảm thiểu
 
-| Rủi ro | Cách giảm thiểu |
-|---|---|
-| Authorization code bị chặn | Authorization Code + PKCE, HTTPS, state một lần |
-| CSRF callback | Kiểm tra state và nonce |
-| Account takeover do liên kết email | Chỉ liên kết email verified và theo policy rõ ràng |
-| Open redirect | Allowlist redirect URL, không tin `returnUrl` từ client |
-| Token bị lộ trong browser | Không dùng Implicit Flow, token ở HttpOnly cookie |
-| Provider token bị dùng nhầm | Chỉ API GDSC token mới được chấp nhận ở resource server |
-| Callback bị replay | Authorization code dùng một lần, state transaction TTL ngắn |
-| User bị cấp sai quyền | Role lấy từ database nội bộ, không lấy từ provider claim |
-| Hai nguồn quản lý cookie | Chọn Next.js BFF làm cookie owner cho browser |
+| Rủi ro                             | Cách giảm thiểu                                             |
+| ---------------------------------- | ----------------------------------------------------------- |
+| Authorization code bị chặn         | Authorization Code + PKCE, HTTPS, state một lần             |
+| CSRF callback                      | Kiểm tra state và nonce                                     |
+| Account takeover do liên kết email | Chỉ liên kết email verified và theo policy rõ ràng          |
+| Open redirect                      | Allowlist redirect URL, không tin `returnUrl` từ client     |
+| Token bị lộ trong browser          | Không dùng Implicit Flow, token ở HttpOnly cookie           |
+| Provider token bị dùng nhầm        | Chỉ API GDSC token mới được chấp nhận ở resource server     |
+| Callback bị replay                 | Authorization code dùng một lần, state transaction TTL ngắn |
+| User bị cấp sai quyền              | Role lấy từ database nội bộ, không lấy từ provider claim    |
+| Hai nguồn quản lý cookie           | Chọn Next.js BFF làm cookie owner cho browser               |
 
 ---
 

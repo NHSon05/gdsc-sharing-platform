@@ -1,14 +1,18 @@
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using GdscSharingPlatform.Application.Common.Interfaces;
 using GdscSharingPlatform.Application.Common.Security;
+using GdscSharingPlatform.Application.Features.Auth.Interfaces;
 using GdscSharingPlatform.Application.Features.Auth.Models;
 using GdscSharingPlatform.Domain.Departments;
 using GdscSharingPlatform.Domain.Enums;
 using GdscSharingPlatform.Infrastructure.Identity;
+using GdscSharingPlatform.Infrastructure.Identity.Services;
 using GdscSharingPlatform.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
@@ -26,11 +30,22 @@ public class AuthEndpointsIntegrationTests : IClassFixture<WebApplicationFactory
         var dbName = "AuthTestsDb_" + Guid.NewGuid();
         _factory = factory.WithWebHostBuilder(builder =>
         {
+            builder.UseEnvironment("Testing");
+            // JWT bearer registration reads these settings during Program startup.
+            builder.UseSetting("Jwt:Issuer", "AuthRegressionTests");
+            builder.UseSetting("Jwt:Audience", "AuthRegressionClient");
+            builder.UseSetting("Jwt:SecretKey", "test-only-auth-regression-signing-key-1234567890");
             builder.ConfigureAppConfiguration((_, configuration) =>
             {
                 configuration.AddInMemoryCollection(new Dictionary<string, string?>
                 {
-                    ["SeedAdmin:Enabled"] = "false"
+                    ["SeedAdmin:Enabled"] = "false",
+                    ["Jwt:Issuer"] = "AuthRegressionTests",
+                    ["Jwt:Audience"] = "AuthRegressionClient",
+                    ["Jwt:SecretKey"] = "test-only-auth-regression-signing-key-1234567890",
+                    ["Authentication:Google:ClientId"] = "test-only-client",
+                    ["Authentication:Google:ClientSecret"] = "test-only-secret",
+                    ["Authentication:Google:CallbackPath"] = "/api/auth/google/callback"
                 });
             });
 
@@ -111,6 +126,14 @@ public class AuthEndpointsIntegrationTests : IClassFixture<WebApplicationFactory
         Assert.Equal("Bearer", authResponse.TokenType);
         Assert.Equal("admin@test.app", authResponse.User.Email);
         Assert.Contains(RoleNames.Admin, authResponse.User.Roles);
+
+        using var scope = _factory.Services.CreateScope();
+        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        var generator = scope.ServiceProvider.GetRequiredService<IJwtTokenGenerator>();
+        var token = Assert.Single(await db.RefreshTokens.ToListAsync());
+        Assert.Equal(generator.HashToken(authResponse.RefreshToken), token.TokenHash);
+        Assert.NotEqual(authResponse.RefreshToken, token.TokenHash);
+        Assert.NotNull((await db.Users.SingleAsync()).LastLoginAt);
     }
 
     [Fact]
@@ -125,6 +148,126 @@ public class AuthEndpointsIntegrationTests : IClassFixture<WebApplicationFactory
 
         // Assert
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+
+        using var scope = _factory.Services.CreateScope();
+        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        Assert.Empty(await db.RefreshTokens.ToListAsync());
+        Assert.Null((await db.Users.SingleAsync()).LastLoginAt);
+    }
+
+    [Fact]
+    public async Task Login_WithEmptyPassword_ShouldNotCreateSession()
+    {
+        var client = _factory.CreateClient();
+        await SeedUserAsync("empty@test.app", "Password123!", RoleNames.Member, "SOFTWARE", "Empty Test");
+
+        var response = await client.PostAsJsonAsync(
+            "/api/auth/login", new LoginRequest("empty@test.app", string.Empty));
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        using var scope = _factory.Services.CreateScope();
+        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        Assert.Empty(await db.RefreshTokens.ToListAsync());
+    }
+
+    [Fact]
+    public async Task ExternalLogin_FirstAndReturningLogin_ShouldPersistMemberAndRefreshableSessions()
+    {
+        var client = _factory.CreateClient();
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var roles = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+            if (!await roles.RoleExistsAsync(RoleNames.Member))
+            {
+                Assert.True((await roles.CreateAsync(new IdentityRole<Guid>(RoleNames.Member))).Succeeded);
+            }
+        }
+
+        var identity = new VerifiedExternalIdentity(
+            "Google", "google-sub-test", "google@test.app", true, "Google Member");
+        AuthResponse first;
+        using (var scope = _factory.Services.CreateScope())
+        {
+            first = await scope.ServiceProvider.GetRequiredService<IExternalLoginService>()
+                .LoginAsync(identity, "127.0.0.1", "test-agent", CancellationToken.None);
+        }
+
+        // A fresh scope verifies data was saved, not merely tracked.
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            var user = await db.Users.SingleAsync();
+            Assert.Equal(first.User.Id, user.Id);
+            Assert.Null(user.PasswordHash);
+            Assert.True(user.EmailConfirmed);
+            Assert.Equal(UserStatus.Active, user.Status);
+            Assert.NotNull(user.LastLoginAt);
+            var login = await db.UserLogins.SingleAsync();
+            Assert.Equal(identity.Subject, login.ProviderKey);
+            Assert.Equal(user.Id, login.UserId);
+            Assert.Equal(new[] { RoleNames.Member }, first.User.Roles);
+            Assert.Single(await db.RefreshTokens.ToListAsync());
+
+            var second = await scope.ServiceProvider.GetRequiredService<IExternalLoginService>()
+                .LoginAsync(identity, null, null, CancellationToken.None);
+            Assert.Equal(first.User.Id, second.User.Id);
+            Assert.NotEqual(first.RefreshToken, second.RefreshToken);
+            Assert.Single(await db.Users.ToListAsync());
+            Assert.Single(await db.UserLogins.ToListAsync());
+            Assert.Equal(2, await db.RefreshTokens.CountAsync());
+        }
+
+        var refresh = await client.PostAsJsonAsync(
+            "/api/auth/refresh", new RefreshTokenRequest(first.RefreshToken));
+        Assert.Equal(HttpStatusCode.OK, refresh.StatusCode);
+    }
+
+    [Fact]
+    public async Task ExternalLogin_UnverifiedEmail_ShouldNotCreateUserOrSession()
+    {
+        using var scope = _factory.Services.CreateScope();
+        var service = scope.ServiceProvider.GetRequiredService<IExternalLoginService>();
+        var exception = await Assert.ThrowsAsync<ExternalLoginException>(() => service.LoginAsync(
+            new VerifiedExternalIdentity("Google", "unverified-sub", "new@test.app", false, "New"),
+            null, null, CancellationToken.None));
+
+        Assert.Equal("verified_email_required", exception.Code);
+        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        Assert.Empty(await db.Users.ToListAsync());
+        Assert.Empty(await db.RefreshTokens.ToListAsync());
+    }
+
+    [Fact]
+    public async Task ExternalLogin_ExistingEmail_ShouldRequireLinking()
+    {
+        await SeedUserAsync("existing@test.app", "Password123!", RoleNames.Member, "SOFTWARE", "Existing");
+        using var scope = _factory.Services.CreateScope();
+        var service = scope.ServiceProvider.GetRequiredService<IExternalLoginService>();
+        var exception = await Assert.ThrowsAsync<ExternalLoginException>(() => service.LoginAsync(
+            new VerifiedExternalIdentity("Google", "new-sub", "existing@test.app", true, "Existing"),
+            null, null, CancellationToken.None));
+
+        Assert.Equal("account_link_required", exception.Code);
+        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        Assert.Single(await db.Users.ToListAsync());
+        Assert.Empty(await db.UserLogins.ToListAsync());
+        Assert.Empty(await db.RefreshTokens.ToListAsync());
+    }
+
+    [Fact]
+    public async Task Session_DeletedUser_ShouldThrowApplicationAuthenticationException()
+    {
+        await SeedUserAsync("deleted@test.app", "Password123!", RoleNames.Member, "SOFTWARE", "Deleted");
+        using var scope = _factory.Services.CreateScope();
+        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        var user = await db.Users.SingleAsync();
+        user.IsDeleted = true;
+        await db.SaveChangesAsync();
+
+        var service = scope.ServiceProvider.GetRequiredService<IUserSessionService>();
+        await Assert.ThrowsAsync<GdscSharingPlatform.Application.Common.Exceptions.AuthenticationException>(
+            () => service.CreateAsync(user, null, null, CancellationToken.None));
+        Assert.Empty(await db.RefreshTokens.ToListAsync());
     }
 
     [Fact]

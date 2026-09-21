@@ -86,6 +86,7 @@ builder.Services.AddProblemDetails(options =>
 });
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddSingleton<GdscSharingPlatform.Api.Authentication.ExternalLoginAttemptStore>();
 
 var app = builder.Build();
 await app.Services.InitializeDatabaseAsync();
