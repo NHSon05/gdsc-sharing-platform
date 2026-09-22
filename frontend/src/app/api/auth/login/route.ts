@@ -1,72 +1,73 @@
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { AUTH_COOKIE_NAMES } from "@/core/session/session.cookies";
-
-const BACKEND_INTERNAL_URL =
-  process.env.INTERNAL_API_URL ||
-  process.env.BACKEND_API_URL ||
-  process.env.NEXT_PUBLIC_API_URL ||
-  "http://localhost:5184";
+import { parseUserProfile } from "@/core/session/user-profile";
+import {
+  backendFetch,
+  clearSession,
+  noStore,
+  parseTokenPair,
+  trustedMutation,
+  unavailable,
+  writeSession,
+} from "@/core/session/bff.server";
 
 export async function POST(request: Request) {
+  if (!trustedMutation(request)) return new NextResponse(null, { status: 403 });
+  let body: unknown;
   try {
-    const body = await request.json();
-
-    const res = await fetch(`${BACKEND_INTERNAL_URL}/api/auth/login`, {
+    body = await request.json();
+  } catch {
+    return new NextResponse(null, { status: 400 });
+  }
+  try {
+    const result = await backendFetch("/api/auth/login", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      return NextResponse.json(data, { status: res.status });
+    if (!result.ok) {
+      const body: unknown = await result.json().catch(() => null);
+      const traceId =
+        body &&
+        typeof body === "object" &&
+        "traceId" in body &&
+        typeof body.traceId === "string"
+          ? body.traceId
+          : undefined;
+      const rawErrors =
+        body && typeof body === "object" && "errors" in body
+          ? body.errors
+          : null;
+      const errors: Record<string, string[]> = {};
+      if (rawErrors && typeof rawErrors === "object") {
+        for (const [key, messages] of Object.entries(rawErrors)) {
+          if (
+            ["email", "password"].includes(key.toLowerCase()) &&
+            Array.isArray(messages) &&
+            messages.every((message: unknown) => typeof message === "string")
+          )
+            errors[key] = messages;
+        }
+      }
+      const response = noStore(
+        NextResponse.json(
+          { title: "Login failed", traceId, errors },
+          { status: result.status >= 400 ? result.status : 502 }
+        )
+      );
+      return result.status === 401 || result.status === 403
+        ? clearSession(response)
+        : response;
     }
-
-    const cookieStore = await cookies();
-    const isProd = process.env.NODE_ENV === "production";
-
-    if (data.accessToken) {
-      cookieStore.set(AUTH_COOKIE_NAMES.ACCESS_TOKEN, data.accessToken, {
-        httpOnly: true,
-        secure: isProd,
-        sameSite: "lax",
-        path: "/",
-        maxAge: data.expiresIn || 15 * 60,
-      });
-    }
-
-    if (data.refreshToken) {
-      cookieStore.set(AUTH_COOKIE_NAMES.REFRESH_TOKEN, data.refreshToken, {
-        httpOnly: true,
-        secure: isProd,
-        sameSite: "lax",
-        path: "/",
-        maxAge: 7 * 24 * 60 * 60,
-      });
-    }
-
-    if (data.user?.roles) {
-      const primaryRole = data.user.roles.includes("Admin")
-        ? "Admin"
-        : data.user.roles[0] || "Member";
-      cookieStore.set("userRole", primaryRole, {
-        secure: isProd,
-        sameSite: "lax",
-        path: "/",
-        maxAge: 7 * 24 * 60 * 60,
-      });
-    }
-
-    return NextResponse.json(data);
-  } catch (error) {
-    console.error("[Route /api/auth/login] Error:", error);
-    return NextResponse.json(
-      { title: "Internal Server Error", detail: "Login request failed" },
-      { status: 500 }
+    const data: unknown = await result.json();
+    const pair = parseTokenPair(data);
+    // Browser receives profile only; tokens never cross the server/client boundary.
+    const user =
+      data && typeof data === "object" && "user" in data ? data.user : null;
+    return writeSession(
+      NextResponse.json({ user: parseUserProfile(user) }),
+      pair
     );
+  } catch {
+    return unavailable();
   }
 }

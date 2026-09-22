@@ -108,7 +108,7 @@ All HTTP calls must go through the shared client under `src/core/http/` or a fea
 
 API rules:
 
-- Keep the API origin in `NEXT_PUBLIC_API_URL`; do not hard-code deployment hosts in components.
+- Browser API calls use same-origin BFF routes. Backend origins are server-only configuration; do not hard-code deployment hosts in components.
 - Confirm the real backend route before coding. Authentication endpoints are currently rooted at `/api/auth`, while `/api/v1` is a separate API status endpoint. Do not assume every endpoint is below `/api/v1`.
 - Send `Content-Type: application/json` only when the request has a JSON body. Support `FormData` for uploads.
 - Preserve caller-provided headers and options.
@@ -124,7 +124,7 @@ API rules:
 - Never log passwords, access tokens, refresh tokens, or full Authorization headers.
 - Never embed secrets in `NEXT_PUBLIC_*` variables. These variables are visible in the browser; only public configuration belongs there.
 - Do not persist refresh tokens in `localStorage`, `sessionStorage`, IndexedDB, or non-HttpOnly cookies.
-- Prefer a backend-controlled `Secure`, `HttpOnly`, `SameSite` refresh cookie and keep short-lived access tokens in memory (Zustand session store).
+- In the Phase 4 BFF model, both tokens belong in server-written HttpOnly cookies (Secure in production). Zustand contains only UX status and public profile information.
 - Refresh tokens are rotating and single-use. The `refresh-coordinator.ts` manages single-flight refresh promises to prevent concurrent refresh token invalidation.
 - When refresh fails with `401`, clear local authentication state, clear QueryClient private cache, and redirect to login once. Prevent refresh loops.
 - After `logout-all`, clear every local session artifact and cached private user response.

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "test:auth": "node --test tests/auth-bff.test.mjs",
     "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",

@@ -4,7 +4,6 @@ import type {
   LoginRequest,
   AuthResponse,
   UserProfile,
-  LogoutRequest,
 } from "../types/auth.types";
 
 /**
@@ -24,7 +23,7 @@ export async function loginApi(
 
 /**
  * CLIENT-SIDE API: Fetches current user profile from backend via Axios httpClient.
- * Automatically attaches Bearer token from Zustand store and handles silent token refresh on 401.
+ * BFF attaches the HttpOnly credential; the client retries once after refresh.
  */
 export async function getCurrentUserApi(
   signal?: AbortSignal
@@ -38,11 +37,8 @@ export async function getCurrentUserApi(
 /**
  * CLIENT-SIDE API: Logs out current session.
  */
-export async function logoutApi(
-  request?: LogoutRequest,
-  signal?: AbortSignal
-): Promise<void> {
-  await httpClient.post("/api/auth/logout", request, { signal });
+export async function logoutApi(signal?: AbortSignal): Promise<void> {
+  await publicHttpClient.post("/api/auth/logout", undefined, { signal });
 }
 
 /**

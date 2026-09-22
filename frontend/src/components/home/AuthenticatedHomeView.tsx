@@ -38,20 +38,16 @@ import {
 
 interface AuthenticatedHomeViewProps {
   user?: CurrentUserDto | null;
-  accessToken?: string | null;
-  refreshToken?: string | null;
 }
 
 export function AuthenticatedHomeView({
   user: initialUser,
-  accessToken,
-  refreshToken,
 }: AuthenticatedHomeViewProps) {
   const { t, locale } = useTranslation();
   const now = useCurrentTime(10_000);
   const { data: userQuery } = useCurrentUserQuery(initialUser);
   const storeUser = useSessionStore(selectCurrentUser);
-  const user = initialUser || userQuery || storeUser;
+  const user = userQuery || storeUser;
 
   // Fetch real upcoming sharing sessions
   const { data: schedulesData } = useSchedulesQuery({
@@ -96,8 +92,6 @@ export function AuthenticatedHomeView({
   return (
     <AuthenticatedLayout
       user={user}
-      accessToken={accessToken}
-      refreshToken={refreshToken}
     >
       {/* Main Container */}
       <div className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">

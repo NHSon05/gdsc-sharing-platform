@@ -87,6 +87,15 @@ builder.Services.AddProblemDetails(options =>
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddSingleton<GdscSharingPlatform.Api.Authentication.ExternalLoginAttemptStore>();
+builder.Services.AddSingleton(TimeProvider.System);
+builder.Services.AddSingleton<GdscSharingPlatform.Api.Authentication.GoogleLoginHandoffStore>();
+builder.Services.AddOptions<GdscSharingPlatform.Api.Authentication.GoogleBffOptions>()
+    .Configure(options => options.CallbackUrl =
+        builder.Configuration["Authentication:Google:BffCallbackUrl"]
+        ?? (builder.Environment.IsProduction() ? "" : "http://localhost:3000/api/auth/google/callback"))
+    .Validate(options => GdscSharingPlatform.Api.Authentication.GoogleBffOptions.IsValid(
+        options, !builder.Environment.IsProduction()), "Invalid Google BFF callback URL; production requires HTTPS.")
+    .ValidateOnStart();
 
 var app = builder.Build();
 await app.Services.InitializeDatabaseAsync();

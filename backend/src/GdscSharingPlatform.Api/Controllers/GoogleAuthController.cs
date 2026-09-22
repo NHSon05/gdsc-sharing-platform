@@ -2,7 +2,6 @@ using GdscSharingPlatform.Api.Authentication;
 using GdscSharingPlatform.Application.Features.Auth.Interfaces;
 using GdscSharingPlatform.Application.Features.Auth.Models;
 using GdscSharingPlatform.Infrastructure;
-using GdscSharingPlatform.Infrastructure.Identity.Options;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,14 +16,17 @@ namespace GdscSharingPlatform.Api.Controllers;
 public sealed class GoogleAuthController(
     IExternalLoginService externalLoginService,
     ExternalLoginAttemptStore attemptStore,
-    IOptions<JwtOptions> jwtOptions,
+    GoogleLoginHandoffStore handoffStore,
+    IOptions<GoogleBffOptions> bffOptions,
     ILogger<GoogleAuthController> logger) : ControllerBase
 {
     private const string AttemptKey = "gdsc.external.attempt";
+    private const string ChallengeKey = "gdsc.external.challenge";
 
     [HttpGet("start")]
-    public async Task<IActionResult> Start()
+    public async Task<IActionResult> Start([FromQuery] string? challenge)
     {
+        if (!GoogleLoginHandoffStore.IsChallenge(challenge)) return BadRequest();
         await HttpContext.SignOutAsync(
             GoogleAuthenticationExtensions.ExternalCookieScheme);
 
@@ -35,6 +37,7 @@ public sealed class GoogleAuthController(
         };
 
         properties.Items[AttemptKey] = attemptStore.Create();
+        properties.Items[ChallengeKey] = challenge;
 
         return Challenge(
             properties,
@@ -68,6 +71,9 @@ public sealed class GoogleAuthController(
                 return LoginFailed();
             }
 
+            result.Properties.Items.TryGetValue(ChallengeKey, out var challenge);
+            if (!GoogleLoginHandoffStore.IsChallenge(challenge)) return LoginFailed();
+
             var principal = result.Principal;
             var subject = principal.FindFirst("sub")?.Value;
 
@@ -95,11 +101,8 @@ public sealed class GoogleAuthController(
                 Request.Headers.UserAgent.ToString(),
                 cancellationToken);
 
-            WriteSessionCookies(response);
-
-            // Chỉ trả profile để kiểm thử backend.
-            // Không trả access/refresh token vào JSON của browser.
-            return Ok(response.User);
+            var code = handoffStore.Issue(response, challenge!);
+            return Redirect(bffOptions.Value.CallbackUrl + "?code=" + Uri.EscapeDataString(code));
         }
         catch (ExternalLoginException exception)
         {
@@ -125,7 +128,7 @@ public sealed class GoogleAuthController(
                 exception.GetType().Name,
                 HttpContext.TraceIdentifier);
 
-            return LoginFailed(StatusCodes.Status500InternalServerError);
+            return LoginFailed();
         }
         finally
         {
@@ -140,50 +143,18 @@ public sealed class GoogleAuthController(
         return LoginFailed();
     }
 
-    private ObjectResult LoginFailed(
-        int status = StatusCodes.Status401Unauthorized)
+    public sealed record ExchangeRequest(string? Code, string? Verifier);
+
+    [HttpPost("exchange")]
+    public IActionResult Exchange([FromBody] ExchangeRequest request)
     {
-        var problem = new ProblemDetails
-        {
-            Status = status,
-            Title = "Không thể hoàn tất đăng nhập Google.",
-            Detail = "Vui lòng thử lại hoặc đăng nhập bằng tài khoản GDSC."
-        };
-
-        problem.Extensions["code"] = "external_login_failed";
-        problem.Extensions["traceId"] = HttpContext.TraceIdentifier;
-
-        return new ObjectResult(problem)
-        {
-            StatusCode = status
-        };
+        var session = handoffStore.Redeem(request.Code, request.Verifier);
+        return session is null ? Unauthorized(new { code = "external_login_failed" }) : Ok(session);
     }
 
-    private void WriteSessionCookies(AuthResponse response)
+    private RedirectResult LoginFailed()
     {
-        Response.Cookies.Append(
-            "accessToken",
-            response.AccessToken,
-            CreateCookieOptions(
-                TimeSpan.FromSeconds(response.ExpiresIn)));
-
-        Response.Cookies.Append(
-            "refreshToken",
-            response.RefreshToken,
-            CreateCookieOptions(
-                TimeSpan.FromDays(
-                    jwtOptions.Value.RefreshTokenExpirationDays)));
-    }
-
-    private static CookieOptions CreateCookieOptions(TimeSpan lifetime)
-    {
-        return new CookieOptions
-        {
-            HttpOnly = true,
-            Secure = true,
-            SameSite = SameSiteMode.Strict,
-            Path = "/",
-            MaxAge = lifetime
-        };
+        Response.Headers["Referrer-Policy"] = "no-referrer";
+        return Redirect(bffOptions.Value.CallbackUrl + "?error=external_login_failed");
     }
 }

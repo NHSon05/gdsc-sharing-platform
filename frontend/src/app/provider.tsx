@@ -1,18 +1,15 @@
 "use client";
-
-import React, { useEffect } from "react";
+import React from "react";
 import { QueryProvider } from "@/core/query/query-provider";
 import { I18nProvider } from "@/core/i18n/i18n.context";
-import { initSessionFromCookies } from "@/core/session/session.store";
+import { SessionBoundary } from "@/features/auth/components/session-boundary";
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    initSessionFromCookies();
-  }, []);
-
   return (
     <QueryProvider>
-      <I18nProvider>{children}</I18nProvider>
+      <SessionBoundary>
+        <I18nProvider>{children}</I18nProvider>
+      </SessionBoundary>
     </QueryProvider>
   );
 }

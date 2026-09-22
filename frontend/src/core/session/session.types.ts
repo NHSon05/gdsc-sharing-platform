@@ -1,18 +1,24 @@
-import type { CurrentUserDto } from "@/features/auth/types/auth.types";
-
+export interface DepartmentDto {
+  id: string;
+  name: string;
+}
+export interface CurrentUserDto {
+  id: string;
+  email: string;
+  displayName: string;
+  studentCode?: string;
+  generation?: string;
+  avatarUrl?: string;
+  status: string;
+  department?: DepartmentDto;
+  roles: string[];
+}
 export type AuthenticationStatus =
   "idle" | "authenticated" | "unauthenticated" | "loading";
-
 export interface SessionState {
-  accessToken: string | null;
-  refreshToken: string | null;
+  revision: number;
   user: CurrentUserDto | null;
   status: AuthenticationStatus;
-  setTokens: (tokens: {
-    accessToken: string;
-    refreshToken?: string | null;
-  }) => void;
-  setAccessToken: (accessToken: string) => void;
   setUser: (user: CurrentUserDto | null) => void;
   clearSession: () => void;
 }

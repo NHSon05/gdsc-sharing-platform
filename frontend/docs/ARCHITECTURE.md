@@ -6,7 +6,7 @@ This document defines the target frontend architecture for GDSC Sharing
 Platform. It describes module ownership, dependency direction, API flow, state
 ownership and authentication behavior.
 
-This is an architecture specification, not an implementation file.
+This is an architecture specification. The current browser authentication contract is the Phase 4 BFF model below; historical token-in-memory examples are not used by this implementation.
 
 ## 2. Architectural goals
 
@@ -247,19 +247,12 @@ POST /api/auth/logout
 POST /api/auth/logout-all
 ```
 
-Request interceptor responsibilities:
-
-- read the current access token from the session store;
-- attach `Authorization: Bearer <token>`;
-- preserve existing request headers.
-
-Response interceptor responsibilities:
-
-- normalize non-authentication failures;
-- react only to eligible `401` responses;
-- call the refresh coordinator;
-- retry the original request at most once;
-- stop after refresh failure.
+Browser API calls use same-origin BFF routes. JavaScript never reads or attaches
+tokens. Next.js reads HttpOnly cookies and forwards a Bearer header to the API.
+A response interceptor refreshes on an eligible 401 and retries once. The client
+uses a single-flight promise and Web Locks across tabs where available; inside
+the lock it rechecks /me before rotating. A 403 from a business endpoint does not
+trigger refresh. Session revision checks prevent old requests invalidating a new login.
 
 Interceptors must not:
 
@@ -375,283 +368,58 @@ Zustand is the owner of client-only state, not server state.
 
 ### 11.1 Session store
 
-The session store may contain:
-
-```text
-accessToken
-refreshToken while the backend remains body-token based
-authenticationStatus
-setTokens
-clearSession
-```
-
-The current user profile belongs in the TanStack Query cache and should not be
-duplicated in the session store.
-
-### 11.2 UI stores
-
-Separate UI concerns into focused stores when global sharing is required:
-
-```text
-layout.store
-theme.store
-modal.store
-```
-
-Do not create one application-wide store containing authentication, filters,
-entities, forms and layout state.
-
-### 11.3 Selector usage
-
-Components subscribe through selectors so a component does not rerender for
-unrelated store fields.
+The session store contains only authentication status, a session revision,
+and a public user-profile mirror for existing UX selectors. The authoritative
+profile is loaded from /api/auth/me and cached by TanStack Query. No tokens,
+browser-cookie helpers or localStorage persistence are permitted. Session loss
+from any API clears private query state through SessionBoundary.
 
 ## 12. Authentication lifecycle
 
-### 12.1 Login
+1. Password login goes through the BFF, which writes token cookies and returns
+   only the validated public profile. The client hydrates using /api/auth/me.
+2. Google start creates an HttpOnly verifier cookie and sends its SHA256 challenge
+   to the backend. Google OIDC callback remains owned by ASP.NET Core.
+3. After OIDC validation the API creates an internal session and a 60-second,
+   single-use handoff code bound to that challenge. Next.js exchanges code plus
+   verifier over the server channel, writes token cookies, deletes temporary
+   cookies and redirects to a validated local path.
+4. Only the BFF refresh route rotates tokens and persists both new cookies.
+   Middleware and Server Components never rotate or serialize tokens.
+5. Rejected refresh or failed callback clears cookies. A temporary refresh
+   outage does not erase the session. Browser state/cache is cleared on session loss.
+6. Logout clears local cookies even if backend revocation is unreachable.
+   Logout-all reports backend failure instead of pretending all devices were revoked.
 
-```mermaid
-sequenceDiagram
-    participant UI as Login form
-    participant Q as Login mutation
-    participant API as Auth API
-    participant S as Session store
-    participant C as Query cache
-
-    UI->>Q: Submit credentials
-    Q->>API: Login request
-    API-->>Q: Tokens and user
-    Q->>S: Store in-memory tokens
-    Q->>C: Set current-user cache
-    Q-->>UI: Success
-```
-
-Password values must not be trimmed or logged.
-
-### 12.2 Authenticated request
-
-```text
-Feature query
-→ authenticated Axios client
-→ request interceptor reads access token
-→ backend
-```
-
-### 12.3 Refresh-token rotation
-
-The backend treats refresh tokens as rotating and single-use. Therefore all
-concurrent refresh attempts must share one in-flight promise.
-
-```mermaid
-flowchart TD
-    A["Request A receives 401"]
-    B["Request B receives 401"]
-    C["Request C receives 401"]
-    R["One refresh operation"]
-    T["Replace token pair"]
-
-    A --> R
-    B --> R
-    C --> R
-    R --> T
-```
-
-After refresh succeeds:
-
-1. replace both tokens atomically in the session store;
-2. discard the old refresh token immediately;
-3. replay queued requests once with the new access token.
-
-After refresh fails:
-
-1. clear the session once;
-2. reject queued requests;
-3. clear private query data;
-4. allow the authentication boundary to send the user to login;
-5. do not start another refresh loop.
-
-### 12.4 Logout
-
-Logout should:
-
-1. send the current refresh token to the logout endpoint when required by the
-   current backend contract;
-2. clear the local session even when the remote logout is already idempotently
-   completed;
-3. remove private QueryClient data;
-4. redirect through the route/authentication layer, not an Axios interceptor.
-
-### 12.5 Logout all
-
-After logout-all succeeds:
-
-- clear session tokens;
-- remove every private cached query;
-- treat the current access token as invalid;
-- return the user to login.
+The API handoff store and BFF refresh map are process-local. Multiple replicas,
+serverless instances, and durable exchange across restarts require shared atomic
+storage/coordination before deployment. Web Locks are an additional browser-side
+safeguard, not a replacement for shared server coordination.
 
 ## 13. Token storage decision
 
-Preferred production model:
+Both GDSC access and refresh tokens live exclusively in HttpOnly, SameSite=Lax,
+host-only cookies; Secure is enabled in production. Google provider tokens are
+not persisted. No token enters browser JSON responses, Zustand, localStorage,
+redirect URLs or React Server Component props. The internal handoff code is not
+a provider authorization code or access token and requires the verifier cookie.
 
-| Token         | Storage                         |
-| ------------- | ------------------------------- |
-| Access token  | Zustand memory                  |
-| Refresh token | Secure HttpOnly SameSite cookie |
-| Current user  | TanStack Query cache            |
+State-changing BFF routes validate the exact canonical Origin. The generic proxy
+accepts only known business route roots, rejects ambiguous encoded paths, and
+does not forward auth endpoints or upstream Set-Cookie headers. API authorization
+remains mandatory; client guards and middleware are UX aids only.
 
-Current body-token compatibility model:
+Browser API requests always use same-origin BFF routes, regardless of
+NEXT_PUBLIC_API_URL. Server-only configuration:
 
-| Token         | Storage             |
-| ------------- | ------------------- |
-| Access token  | Zustand memory      |
-| Refresh token | Zustand memory only |
+- APP_ORIGIN: canonical frontend origin for redirects and mutation Origin checks.
+- BACKEND_PUBLIC_ORIGIN: HTTPS backend origin used by browser OIDC navigation,
+  including local development (Secure correlation/nonce cookies).
+- INTERNAL_API_URL: backend server channel; BACKEND_API_URL is its fallback and
+  also serves public uploads.
+- Authentication:Google:BffCallbackUrl (backend): exact Next.js handoff callback.
 
-Do not use Zustand persistence middleware for refresh tokens.
+Production origins require HTTPS. Do not expose Google credentials or internal
+tokens through NEXT_PUBLIC_* variables. See .env.example and the root README.
 
-The compatibility model means a full browser refresh loses the session. If
-persistent login is required, the backend contract should move refresh tokens
-to HttpOnly cookies instead of weakening browser storage security.
-
-## 14. Provider composition
-
-The root client provider owns long-lived client infrastructure:
-
-```text
-AppProviders
-└── QueryClientProvider
-    └── future cross-cutting providers when approved
-```
-
-The QueryClient must be created once per browser application lifecycle, not on
-every render.
-
-Do not add feature-specific providers to the root unless the feature genuinely
-requires application-wide context.
-
-## 15. Next.js rendering strategy
-
-- Prefer Server Components for static and public composition.
-- Use Client Components for TanStack Query hooks, Zustand subscriptions, forms
-  and browser interaction.
-- Keep the provider boundary narrow but high enough for authenticated features.
-- Do not convert the complete route tree into Client Components solely because
-  one child uses TanStack Query.
-- Protected server rendering requires an HttpOnly-cookie authentication model.
-  With memory-only tokens, protected data is loaded after client authentication
-  becomes known.
-- TanStack Query server prefetch and hydration may be added for public or
-  cookie-authenticated data when needed.
-
-## 16. Environment contract
-
-`NEXT_PUBLIC_API_URL` contains the public API origin only.
-
-Example conceptual value:
-
-```text
-http://localhost:5080
-```
-
-Feature API modules append real endpoint paths such as `/api/auth/login`.
-
-Do not set the base URL to `/api/v1` unless the backend routes are actually
-versioned below that prefix. In the current backend, `/api/v1` is an API status
-endpoint while authentication is rooted at `/api/auth`.
-
-No password, JWT secret, refresh token or private infrastructure credential may
-use a `NEXT_PUBLIC_*` variable.
-
-## 17. Feature template
-
-Every business feature follows this conceptual structure:
-
-```text
-feature-name/
-├── api/
-│   └── feature-name.api.ts
-├── components/
-├── hooks/
-│   ├── use-feature-list-query.ts
-│   └── use-create-feature-mutation.ts
-├── queries/
-│   └── feature-name.keys.ts
-├── types/
-│   └── feature-name.types.ts
-└── index.ts
-```
-
-Public components consume hooks. Hooks consume API functions. API functions
-consume Axios clients.
-
-## 18. Naming conventions
-
-- Files and folders: `kebab-case`.
-- React components: `PascalCase`.
-- Hooks: `useXxxQuery`, `useXxxMutation` or `useXxx`.
-- API modules: `feature.api.ts`.
-- Query keys: `feature.keys.ts`.
-- Zustand stores: `concern.store.ts`.
-- Request types: `XxxRequest`.
-- Response types: `XxxResponse`.
-- Domain view types: business names such as `Roadmap`, `Member` or
-  `SharingSession`.
-
-Avoid generic files such as `utils.ts`, `helpers.ts`, `service.ts` and
-`types.ts` when their ownership is unclear.
-
-## 19. Testing architecture
-
-Recommended test ownership:
-
-| Layer          | Test focus                                                     |
-| -------------- | -------------------------------------------------------------- |
-| Core HTTP      | Error normalization, header behavior and refresh coordination  |
-| Query hooks    | Query keys, cache effects, invalidation and errors             |
-| Zustand stores | State transitions and selector behavior                        |
-| Components     | User interaction and accessibility                             |
-| E2E            | Login, refresh, logout, logout-all and role-protected journeys |
-
-Mock the network boundary rather than mocking internal feature hooks in most
-component tests.
-
-Critical refresh tests must include:
-
-- one `401` refreshes and replays once;
-- several simultaneous `401` responses trigger one refresh request;
-- refresh failure clears the session;
-- a replayed request receiving another `401` is not refreshed again;
-- logout clears private QueryClient data.
-
-## 20. Architecture decisions summary
-
-| Decision                           | Reason                                                               |
-| ---------------------------------- | -------------------------------------------------------------------- |
-| Feature-based modules              | Keeps business ownership clear as the project grows                  |
-| Axios only in API/core layers      | Prevents transport details leaking into UI                           |
-| TanStack Query owns server state   | Avoids custom cache and duplicated loading logic                     |
-| Zustand owns client state only     | Prevents two competing server-state stores                           |
-| Session store placed in `core`     | Allows Axios to access tokens without importing auth feature code    |
-| Current user stored in Query cache | User profile is server-owned data                                    |
-| Two Axios clients                  | Separates public refresh/login calls from authenticated interception |
-| Single-flight refresh              | Prevents rotating refresh-token reuse detection                      |
-| Feature query-key factories        | Makes invalidation predictable and type-safe                         |
-| HttpOnly refresh cookie preferred  | Reduces token exposure to browser JavaScript                         |
-
-## 21. Architecture change policy
-
-Update this document when a change affects:
-
-- top-level folders or layers;
-- dependency direction;
-- Axios client behavior;
-- session or token storage;
-- QueryClient defaults;
-- query-key conventions;
-- state ownership between TanStack Query and Zustand;
-- authentication refresh behavior;
-- provider composition;
-- Server Component or hydration strategy.
-
-Small feature implementation details that preserve these boundaries do not
-require an architecture-document update.
+.

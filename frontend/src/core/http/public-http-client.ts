@@ -1,10 +1,9 @@
 import axios, { type AxiosInstance } from "axios";
-import { ENV } from "@/core/config/env";
 import { normalizeAxiosError } from "./api-error";
 
 export const publicHttpClient: AxiosInstance = axios.create({
-  baseURL: ENV.API_BASE_URL,
-  timeout: 15000,
+  baseURL: "",
+  timeout: 20000,
   headers: {
     Accept: "application/json",
   },

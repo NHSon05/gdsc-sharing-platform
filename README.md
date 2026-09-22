@@ -304,9 +304,10 @@ dotnet user-secrets set \
 ## Running the Frontend Locally
 
 ```bash
-cd web
-npm ci
-npm run dev
+cd frontend
+cp .env.example .env
+pnpm install --frozen-lockfile
+pnpm run dev
 ```
 
 Frontend runs at:
@@ -314,6 +315,35 @@ Frontend runs at:
 ```text
 http://localhost:3000
 ```
+
+### Google login through the Next.js BFF
+
+Set the server-only variables in `frontend/.env`:
+
+| Variable                | Purpose                                             | Local example           |
+| ----------------------- | --------------------------------------------------- | ----------------------- |
+| `APP_ORIGIN`            | Canonical frontend origin and mutation origin check | `http://localhost:3000` |
+| `BACKEND_PUBLIC_ORIGIN` | Browser-accessible HTTPS API origin for Google start | `https://localhost:7160` |
+| `INTERNAL_API_URL`      | API origin used by Next.js server requests          | `http://localhost:5184` |
+| `BACKEND_API_URL`       | Public uploads proxy and fallback API origin        | `http://localhost:5184` |
+
+Use HTTPS origins in production. Browser API calls stay on the frontend origin;
+The browser-facing backend must also use HTTPS locally because OIDC correlation,
+nonce and external-login cookies are Secure. Trust the .NET development certificate
+and register `https://localhost:7160/api/auth/google/callback` in Google Console.
+`NEXT_PUBLIC_API_URL` can remain empty. Keep Google credentials exclusively in
+backend User Secrets or environment variables.
+
+Set backend `Authentication__Google__BffCallbackUrl` to
+`http://localhost:3000/api/auth/google/callback` locally, or the corresponding
+HTTPS frontend URL in production. The Google Console authorized redirect URI
+remains the **backend** OIDC callback (`/api/auth/google/callback` on the API origin).
+The frontend callback receives a short-lived, single-use handoff code bound to an
+HttpOnly verifier cookie, exchanges it server-side, and writes HttpOnly session
+cookies. Access and refresh tokens never enter the redirect URL or client state.
+
+The current handoff store and refresh coordination are in memory. Run a single
+instance of each service until shared atomic storage/coordination is implemented.
 
 ## Entity Framework Core Migrations
 

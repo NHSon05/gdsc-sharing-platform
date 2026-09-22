@@ -26,7 +26,8 @@ export function RoleGuard({
 }: RoleGuardProps) {
   const { data: queriedUser } = useCurrentUserQuery();
   const storeUser = useSessionStore(selectCurrentUser);
-  const user = queriedUser || storeUser;
+  const status = useSessionStore((state) => state.status);
+  const user = status === "unauthenticated" ? null : queriedUser || storeUser;
 
   const isAllowed = hasAnyRole(user, allowedRoles);
 

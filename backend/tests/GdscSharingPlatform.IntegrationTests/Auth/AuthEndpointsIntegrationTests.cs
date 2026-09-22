@@ -24,6 +24,49 @@ namespace GdscSharingPlatform.IntegrationTests.Auth;
 
 public class AuthEndpointsIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
 {
+    [Fact]
+    public async Task GoogleExchange_RequiresVerifier_AndRejectsReplay()
+    {
+        var client = _factory.CreateClient();
+        await SeedUserAsync("handoff@test.app", "Password123!", RoleNames.Member, "SOFTWARE", "Handoff User");
+        var login = await client.PostAsJsonAsync("/api/auth/login", new LoginRequest("handoff@test.app", "Password123!"));
+        var session = await login.Content.ReadFromJsonAsync<AuthResponse>();
+        Assert.NotNull(session);
+        var verifier = Microsoft.AspNetCore.WebUtilities.WebEncoders.Base64UrlEncode(System.Security.Cryptography.RandomNumberGenerator.GetBytes(32));
+        var challenge = Microsoft.AspNetCore.WebUtilities.WebEncoders.Base64UrlEncode(
+            System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.ASCII.GetBytes(verifier)));
+        var store = _factory.Services.GetRequiredService<GdscSharingPlatform.Api.Authentication.GoogleLoginHandoffStore>();
+        var code = store.Issue(session, challenge);
+        var wrong = await client.PostAsJsonAsync("/api/auth/google/exchange", new { code, verifier = new string('a', 43) });
+        Assert.Equal(HttpStatusCode.Unauthorized, wrong.StatusCode);
+        var success = await client.PostAsJsonAsync("/api/auth/google/exchange", new { code, verifier });
+        Assert.Equal(HttpStatusCode.OK, success.StatusCode);
+        Assert.Equal("no-store,no-cache", success.Headers.CacheControl?.ToString()?.Replace(" ", ""));
+        Assert.False(success.Headers.Contains("Set-Cookie"));
+        var exchanged = await success.Content.ReadFromJsonAsync<AuthResponse>();
+        Assert.Equal(session.AccessToken, exchanged?.AccessToken);
+        var replay = await client.PostAsJsonAsync("/api/auth/google/exchange", new { code, verifier });
+        Assert.Equal(HttpStatusCode.Unauthorized, replay.StatusCode);
+    }
+
+    [Fact]
+    public async Task GoogleComplete_WithoutExternalIdentity_RedirectsOnlyToFixedFailureCallback()
+    {
+        var client = _factory.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = false, BaseAddress = new Uri("https://localhost") });
+        var response = await client.GetAsync("/api/auth/google/complete?returnUrl=https://evil.test");
+        Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
+        Assert.Equal("http://localhost:3000/api/auth/google/callback?error=external_login_failed", response.Headers.Location?.ToString());
+        using var scope = _factory.Services.CreateScope();
+        Assert.Empty(await scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().RefreshTokens.ToListAsync());
+    }
+
+    [Fact]
+    public async Task GoogleStart_WithoutChallenge_IsRejectedBeforeContactingProvider()
+    {
+        var response = await _factory.CreateClient().GetAsync("/api/auth/google/start");
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+    }
+
     private readonly WebApplicationFactory<Program> _factory;
 
     public AuthEndpointsIntegrationTests(WebApplicationFactory<Program> factory)

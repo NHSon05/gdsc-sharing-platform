@@ -8,6 +8,7 @@ import { useCurrentUserQuery } from "@/features/auth/hooks/use-current-user-quer
 import type { CurrentUserDto } from "@/features/auth/types/auth.types";
 import { Menu, X, PanelLeftOpen, PanelLeftClose } from "lucide-react";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import logoSvg from "@/assets/images/logo.svg";
 import { UserAvatar } from "@/components/ui/user-avatar";
@@ -18,54 +19,59 @@ import { selectCurrentUser } from "@/core/session/session.selectors";
 interface AuthenticatedLayoutProps {
   children: React.ReactNode;
   user?: CurrentUserDto | null;
-  accessToken?: string | null;
-  refreshToken?: string | null;
+  requiredRole?: string;
 }
 
 export function AuthenticatedLayout({
   children,
   user: initialUser,
-  accessToken: initialAccessToken,
-  refreshToken: initialRefreshToken,
+  requiredRole,
 }: AuthenticatedLayoutProps) {
-  // 1. Immediately hydrate Zustand store from server-provided props on client
-  if (typeof window !== "undefined") {
-    const currentState = useSessionStore.getState();
-    if (initialAccessToken && currentState.accessToken !== initialAccessToken) {
-      useSessionStore.setState({
-        accessToken: initialAccessToken,
-        refreshToken: initialRefreshToken ?? currentState.refreshToken,
-        user: initialUser ?? currentState.user,
-        status: "authenticated",
-      });
-    } else if (initialUser && !currentState.user) {
-      useSessionStore.setState({ user: initialUser });
-    }
-  }
-
-  useEffect(() => {
-    if (initialAccessToken || initialUser) {
-      useSessionStore.setState((state) => ({
-        accessToken: initialAccessToken ?? state.accessToken,
-        refreshToken: initialRefreshToken ?? state.refreshToken,
-        user: initialUser ?? state.user,
-        status:
-          (initialAccessToken ?? state.accessToken)
-            ? "authenticated"
-            : state.status,
-      }));
-    }
-  }, [initialAccessToken, initialRefreshToken, initialUser]);
-
-  const { data: queriedUser } = useCurrentUserQuery(initialUser);
+  const router = useRouter();
+  const pathname = usePathname();
+  const query = useCurrentUserQuery(initialUser);
   const storeUser = useSessionStore(selectCurrentUser);
-  const user = initialUser || queriedUser || storeUser;
+  const status = useSessionStore((state) => state.status);
+  const user =
+    query.error || status === "unauthenticated"
+      ? null
+      : query.data || storeUser;
+  const denied = Boolean(
+    user && requiredRole && !user.roles.includes(requiredRole)
+  );
+  useEffect(() => {
+    if (
+      status === "unauthenticated" ||
+      query.error?.status === 401 ||
+      query.error?.status === 403
+    ) {
+      router.replace(
+        "/login?returnUrl=" +
+          encodeURIComponent(pathname + window.location.search)
+      );
+    } else if (denied) router.replace("/403");
+  }, [query.error, denied, pathname, router, status]);
 
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const displayName = user?.displayName || "User";
   const avatarUrl = user?.avatarUrl;
+
+  if (query.error && query.error.status !== 401 && query.error.status !== 403) {
+    return (
+      <div role="alert" className="p-8">
+        Unable to load your session.{" "}
+        <button onClick={() => void query.refetch()}>Retry</button>
+      </div>
+    );
+  }
+  if (!user || denied)
+    return (
+      <div role="status" className="p-8">
+        Loading session…
+      </div>
+    );
 
   return (
     <div className="relative flex min-h-dvh w-full bg-[#F4F4F6] font-sans text-neutral-900 transition-colors duration-300 dark:bg-[#09090B] dark:text-zinc-100">
