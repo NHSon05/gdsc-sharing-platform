@@ -18,11 +18,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
     healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"
-        ]
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -47,6 +43,11 @@ services:
       ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
       ASPNETCORE_HTTP_PORTS: "8080"
 
+      AUTHENTICATION__GOOGLE__CLIENTID: ${AUTHENTICATION__GOOGLE__CLIENTID}
+      AUTHENTICATION__GOOGLE__CLIENTSECRET: ${AUTHENTICATION__GOOGLE__CLIENTSECRET}
+      AUTHENTICATION__GOOGLE__CALLBACKPATH: /api/auth/google/callback
+      AUTHENTICATION__GOOGLE__BFFCALLBACKURL: ${Authentication__Google__BffCallbackUrl}
+
       ConnectionStrings__DefaultConnection: >-
         Host=postgres;
         Port=5432;
@@ -59,7 +60,7 @@ services:
       SeedAdmin__FullName: ${SEED_ADMIN_FULL_NAME:-System Administrator}
       SeedAdmin__DisplayName: ${SEED_ADMIN_DISPLAY_NAME:-System Administrator}
       SeedAdmin__DepartmentCode: ${SEED_ADMIN_DEPARTMENT_CODE:-MANAGEMENT}
-      SeedAdmin__Password: ${SEED_ADMIN_PASSWORD:-AdminPassword@123!}
+      SeedAdmin__Password: ${SEED_ADMIN_PASSWORD:?Set a non-empty SEED_ADMIN_PASSWORD in your environment or .env file}
       SeedAdmin__PhoneNumber: ${SEED_ADMIN_PHONE:-0901234567}
       SeedAdmin__StudentCode: ${SEED_ADMIN_STUDENT_CODE:-ADMIN001}
       SeedAdmin__GithubUrl: ${SEED_ADMIN_GITHUB:-https://github.com/gdsc-admin}
@@ -69,7 +70,7 @@ services:
 
       SeedMember__Enabled: ${SEED_MEMBER_ENABLED:-false}
       SeedMember__Email: ${SEED_MEMBER_EMAIL:-member@gdsc.dev}
-      SeedMember__Password: ${SEED_MEMBER_PASSWORD:-MemberPassword@123!}
+      SeedMember__Password: ${SEED_MEMBER_PASSWORD:?Set a non-empty SEED_MEMBER_PASSWORD in your environment or .env file}
       SeedMember__FullName: ${SEED_MEMBER_FULL_NAME:-Club Member}
       SeedMember__DisplayName: ${SEED_MEMBER_DISPLAY_NAME:-Club Member}
       SeedMember__DepartmentCode: ${SEED_MEMBER_DEPARTMENT_CODE:-SOFTWARE}
@@ -79,7 +80,6 @@ services:
       SeedMember__Bio: ${SEED_MEMBER_BIO:-Software Team Member}
       SeedMember__GenerationNumber: ${SEED_MEMBER_GENERATION:-8}
       SeedMember__RoleCode: ${SEED_MEMBER_ROLE_CODE:-CORETEAM}
-
 
       Jwt__Issuer: ${JWT_ISSUER:-GdscSharingPlatform.Api}
       Jwt__Audience: ${JWT_AUDIENCE:-GdscSharingPlatform.Web}
@@ -104,7 +104,7 @@ services:
           "curl",
           "--fail",
           "--silent",
-          "http://localhost:8080/health/live"
+          "http://localhost:8080/health/live",
         ]
       interval: 10s
       timeout: 5s

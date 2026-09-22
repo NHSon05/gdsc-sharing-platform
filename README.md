@@ -134,31 +134,35 @@ Passwords must be provided via:
 ### Step 1: Create the Environment File
 
 ```bash
-cp deploy/.env.example deploy/.env
+cp backend/.env.example backend/.env
 ```
 
-Open `deploy/.env` and update:
+Open `backend/.env` and update:
 
 ```dotenv
 POSTGRES_DB=gdsc_sharing
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=your-strong-database-password
 
-ADMIN_EMAIL=admin@gdsc.local
-ADMIN_PASSWORD=your-strong-admin-password
-ADMIN_DISPLAY_NAME=System Administrator
+SEED_ADMIN_EMAIL=admin@gdsc.local
+SEED_ADMIN_PASSWORD=
+SEED_MEMBER_PASSWORD=
+SEED_ADMIN_DISPLAY_NAME=System Administrator
 ```
 
-Do not commit the `deploy/.env` file.
+Fill both password variables with strong, distinct values before running Compose.
+Compose rejects missing or empty values, even when the corresponding seed is
+disabled. These settings do not reset passwords for existing accounts.
+Do not commit the `backend/.env` file.
 
 ### Step 2: Build and Start Containers
 
-Run from the directory containing `GdscSharing.slnx`:
+Run from the repository root:
 
 ```bash
 docker compose \
-  --env-file deploy/.env \
-  -f deploy/docker-compose.yml \
+  --env-file backend/.env \
+  -f backend/docker-compose.yml \
   up -d --build
 ```
 
