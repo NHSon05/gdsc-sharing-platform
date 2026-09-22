@@ -141,6 +141,8 @@ export function AvatarUploader({
               {displayImage ? (
                 <Image
                   src={displayImage}
+                  unoptimized={displayImage.startsWith("https://")}
+                  referrerPolicy="no-referrer"
                   alt={displayName}
                   fill
                   sizes="112px"

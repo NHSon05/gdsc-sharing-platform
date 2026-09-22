@@ -38,6 +38,8 @@ export function ProfileHeader({ profile, className }: ProfileHeaderProps) {
             {profile.avatarUrl ? (
               <Image
                 src={profile.avatarUrl}
+                unoptimized={profile.avatarUrl.startsWith("https://")}
+                referrerPolicy="no-referrer"
                 alt={profile.displayName}
                 fill
                 sizes="96px"

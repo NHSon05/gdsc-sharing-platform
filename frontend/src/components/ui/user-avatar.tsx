@@ -53,7 +53,7 @@ export function UserAvatar({
   className,
   fallbackClassName,
 }: UserAvatarProps) {
-  const [imageError, setImageError] = React.useState(false);
+  const [failedImageUrl, setFailedImageUrl] = React.useState<string | null>(null);
 
   const trimmedName = name?.trim() || "";
   const initials = avatarInitial?.trim() || getAvatarInitials(trimmedName);
@@ -75,12 +75,13 @@ export function UserAvatar({
         className
       )}
     >
-      {avatarUrl && !imageError ? (
+      {avatarUrl && avatarUrl !== failedImageUrl ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={avatarUrl}
           alt={trimmedName || "Avatar"}
-          onError={() => setImageError(true)}
+          onError={() => setFailedImageUrl(avatarUrl)}
+          referrerPolicy="no-referrer"
           className="size-full rounded-full object-cover"
         />
       ) : (

@@ -5,5 +5,6 @@ public sealed record VerifiedExternalIdentity(
     string Subject,
     string? Email,
     bool EmailVerified,
-    string? DisplayName
+    string? DisplayName,
+    string? AvatarUrl = null
 );

@@ -113,6 +113,13 @@ public sealed class ExternalLoginService(
                 "account_unavailable");
         }
 
+        // Import only when empty, preserving avatars chosen in the GDSC profile.
+        // Session creation persists this tracked change in the same transaction.
+        if (string.IsNullOrWhiteSpace(user.AvatarUrl))
+        {
+            user.AvatarUrl = ValidatedAvatarUrl(identity.AvatarUrl);
+        }
+
         var response = await sessionService.CreateAsync(
             user,
             ipAddress,
@@ -132,6 +139,23 @@ public sealed class ExternalLoginService(
             isNewUser);
 
         return response;
+    }
+
+    private static string? ValidatedAvatarUrl(string? value)
+    {
+        // Optional metadata must never prevent login. Never download provider images here.
+        var candidate = value?.Trim();
+        if (string.IsNullOrEmpty(candidate) || candidate.Length > 2048 ||
+            candidate.Any(char.IsControl) ||
+            !Uri.TryCreate(candidate, UriKind.Absolute, out var uri) ||
+            uri.Scheme != Uri.UriSchemeHttps || !uri.IsDefaultPort ||
+            !string.IsNullOrEmpty(uri.UserInfo) || !string.IsNullOrEmpty(uri.Fragment) ||
+            uri.HostNameType != UriHostNameType.Dns || uri.IsLoopback)
+        {
+            return null;
+        }
+
+        return uri.AbsoluteUri.Length <= 2048 ? uri.AbsoluteUri : null;
     }
 
     private static void EnsureSucceeded(

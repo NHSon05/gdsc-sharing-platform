@@ -120,6 +120,8 @@ export function ProfileHeroCard({
             {profile.avatarUrl ? (
               <Image
                 src={profile.avatarUrl}
+                unoptimized={profile.avatarUrl.startsWith("https://")}
+                referrerPolicy="no-referrer"
                 alt={profile.displayName}
                 fill
                 sizes="(max-width: 640px) 112px, 128px"

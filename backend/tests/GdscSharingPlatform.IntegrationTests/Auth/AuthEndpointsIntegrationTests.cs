@@ -294,7 +294,8 @@ public class AuthEndpointsIntegrationTests : IClassFixture<WebApplicationFactory
         }
 
         var identity = new VerifiedExternalIdentity(
-            "Google", "google-sub-test", "google@test.app", true, "Google Member");
+            "Google", "google-sub-test", "google@test.app", true, "Google Member",
+            "https://lh3.googleusercontent.com/test-avatar=s96-c");
         AuthResponse first;
         using (var scope = _factory.Services.CreateScope())
         {
@@ -308,6 +309,8 @@ public class AuthEndpointsIntegrationTests : IClassFixture<WebApplicationFactory
             var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             var user = await db.Users.SingleAsync();
             Assert.Equal(first.User.Id, user.Id);
+            Assert.Equal(identity.AvatarUrl, user.AvatarUrl);
+            Assert.Equal(identity.AvatarUrl, first.User.AvatarUrl);
             Assert.Null(user.PasswordHash);
             Assert.True(user.EmailConfirmed);
             Assert.Equal(UserStatus.Active, user.Status);
@@ -321,15 +324,79 @@ public class AuthEndpointsIntegrationTests : IClassFixture<WebApplicationFactory
             var second = await scope.ServiceProvider.GetRequiredService<IExternalLoginService>()
                 .LoginAsync(identity, null, null, CancellationToken.None);
             Assert.Equal(first.User.Id, second.User.Id);
+            Assert.Equal(identity.AvatarUrl, second.User.AvatarUrl);
             Assert.NotEqual(first.RefreshToken, second.RefreshToken);
             Assert.Single(await db.Users.ToListAsync());
             Assert.Single(await db.UserLogins.ToListAsync());
             Assert.Equal(2, await db.RefreshTokens.CountAsync());
         }
 
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", first.AccessToken);
+        var me = await client.GetFromJsonAsync<CurrentUserDto>("/api/auth/me");
+        Assert.Equal(identity.AvatarUrl, me?.AvatarUrl);
+
         var refresh = await client.PostAsJsonAsync(
             "/api/auth/refresh", new RefreshTokenRequest(first.RefreshToken));
         Assert.Equal(HttpStatusCode.OK, refresh.StatusCode);
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("/uploads/avatars/custom.png")]
+    [InlineData("https://lh3.googleusercontent.com/previous-avatar")]
+    public async Task ExternalLogin_ReturningUser_OnlyFillsMissingAvatar(string? existingAvatar)
+    {
+        await SeedUserAsync("avatar@test.app", "Password123!", RoleNames.Member, "SOFTWARE", "Avatar Member");
+        const string googleAvatar = "https://lh3.googleusercontent.com/new-avatar=s96-c";
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var manager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var user = await manager.FindByEmailAsync("avatar@test.app");
+            Assert.NotNull(user);
+            user.AvatarUrl = existingAvatar;
+            Assert.True((await manager.UpdateAsync(user)).Succeeded);
+            Assert.True((await manager.AddLoginAsync(user, new UserLoginInfo("Google", "avatar-sub", "Google"))).Succeeded);
+        }
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var response = await scope.ServiceProvider.GetRequiredService<IExternalLoginService>().LoginAsync(
+                new VerifiedExternalIdentity("Google", "avatar-sub", "avatar@test.app", true, "Member", googleAvatar),
+                null, null, CancellationToken.None);
+            Assert.Equal(existingAvatar ?? googleAvatar, response.User.AvatarUrl);
+        }
+        using var verification = _factory.Services.CreateScope();
+        var db = verification.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        Assert.Equal(existingAvatar ?? googleAvatar, (await db.Users.SingleAsync()).AvatarUrl);
+    }
+
+    public static IEnumerable<object?[]> InvalidAvatarUrls()
+    {
+        foreach (var url in new string?[] { null, "", "http://example.test/a.png", "javascript:alert(1)",
+            "data:image/png;base64,test", "/relative.png", "https://user:password@example.test/a.png",
+            "https://example.test/a.png#fragment", "https://localhost/a.png", "https://127.0.0.1/a.png",
+            "https://example.test:8443/a.png", "https://example.test/" + new string('a', 2048) })
+            yield return [url];
+    }
+
+    [Theory]
+    [MemberData(nameof(InvalidAvatarUrls))]
+    public async Task ExternalLogin_InvalidOrMissingAvatar_DoesNotPreventFirstLogin(string? avatarUrl)
+    {
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var roles = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+            if (!await roles.RoleExistsAsync(RoleNames.Member))
+                Assert.True((await roles.CreateAsync(new IdentityRole<Guid>(RoleNames.Member))).Succeeded);
+            var response = await scope.ServiceProvider.GetRequiredService<IExternalLoginService>().LoginAsync(
+                new VerifiedExternalIdentity("Google", "invalid-avatar-sub", "invalid-avatar@test.app", true, "Member", avatarUrl),
+                null, null, CancellationToken.None);
+            Assert.Null(response.User.AvatarUrl);
+            Assert.NotEmpty(response.AccessToken);
+        }
+        using var verification = _factory.Services.CreateScope();
+        var db = verification.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        Assert.Null((await db.Users.SingleAsync()).AvatarUrl);
+        Assert.Single(await db.RefreshTokens.ToListAsync());
     }
 
     [Fact]

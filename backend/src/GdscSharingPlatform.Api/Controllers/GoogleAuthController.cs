@@ -93,7 +93,8 @@ public sealed class GoogleAuthController(
                 Subject: subject,
                 Email: principal.FindFirst("email")?.Value,
                 EmailVerified: emailVerified,
-                DisplayName: principal.FindFirst("name")?.Value);
+                DisplayName: principal.FindFirst("name")?.Value,
+                AvatarUrl: principal.FindFirst("picture")?.Value);
 
             var response = await externalLoginService.LoginAsync(
                 identity,
