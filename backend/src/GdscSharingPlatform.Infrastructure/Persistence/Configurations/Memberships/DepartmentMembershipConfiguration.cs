@@ -55,5 +55,8 @@ public class DepartmentMembershipConfiguration : IEntityTypeConfiguration<Depart
             .WithOne(ra => ra.DepartmentMembership)
             .HasForeignKey(ra => ra.DepartmentMembershipId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasQueryFilter(
+            dm => !dm.Department.IsDeleted);
     }
 }
