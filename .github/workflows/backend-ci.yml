@@ -25,6 +25,9 @@ jobs:
 
     env:
       ROADMAP_TEST_POSTGRES: Host=localhost;Port=5432;Username=postgres;Database=postgres
+      Authentication__Google__ClientId: test-google-client-id
+      Authentication__Google__ClientSecret: test-google-client-secret
+      Authentication__Google__CallbackPath: /api/auth/google/callback
 
     defaults:
       run:
