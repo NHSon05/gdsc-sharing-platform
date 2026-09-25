@@ -74,7 +74,7 @@ export function AuthenticatedLayout({
     );
 
   return (
-    <div className="relative flex min-h-dvh w-full bg-[#F4F4F6] font-sans text-neutral-900 transition-colors duration-300 dark:bg-[#09090B] dark:text-zinc-100">
+    <div className="relative flex min-h-dvh w-full bg-[#FFFFFF] font-sans text-neutral-900 transition-colors duration-300 dark:bg-[#09090B] dark:text-zinc-100">
       {/* Desktop Left Sidebar (Sticky) */}
       <div className="hidden shrink-0 md:flex">
         <AppSidebar
