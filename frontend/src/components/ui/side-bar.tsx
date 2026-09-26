@@ -179,7 +179,7 @@ export function SidebarNavItem({
         "group flex cursor-pointer items-center rounded-xl text-sm font-medium transition-all duration-200",
         collapsed ? "mx-auto size-10 justify-center" : "gap-4 px-3 py-2.5",
         active
-          ? "bg-brand/10 text-brand dark:bg-brand/15 dark:text-brand-hover border-brand/20 dark:border-brand/30 border font-semibold shadow-2xs"
+          ? "text-brand dark:bg-brand/15 dark:text-brand-hover border-brand/20 dark:border-brand/30 font-semibold"
           : "text-neutral-900 hover:bg-neutral-200/50 hover:text-neutral-900 dark:text-zinc-400 dark:hover:bg-zinc-800/40 dark:hover:text-zinc-100",
         className
       )}
