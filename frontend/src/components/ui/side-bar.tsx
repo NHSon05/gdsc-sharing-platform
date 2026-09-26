@@ -279,7 +279,7 @@ export function SidebarUserProfile({
   return (
     <div
       className={cn(
-        "flex items-center rounded-2xl border border-neutral-200/80 bg-white shadow-2xs transition-all dark:border-zinc-800 dark:bg-zinc-900/90",
+        "flex items-center bg-white shadow-2xs transition-all dark:border-zinc-800 dark:bg-zinc-900/90",
         collapsed ? "justify-center p-1.5" : "justify-between p-2.5",
         className
       )}
