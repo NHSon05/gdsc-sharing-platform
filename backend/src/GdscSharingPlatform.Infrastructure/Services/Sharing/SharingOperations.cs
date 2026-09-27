@@ -147,7 +147,11 @@ public sealed class SharingOperations(ApplicationDbContext db, ICurrentUserServi
                 .Select(a => new AuthorResponse(a.UserId, db.Users.Where(u => u.Id == a.UserId)
                     .Select(u => !string.IsNullOrEmpty(u.DisplayName) ? u.DisplayName : u.FullName).First(), a.AuthorRole, a.SortOrder)).ToList(),
             Tags = x.Tags.OrderBy(t => t.Tag.Name).ThenBy(t => t.SharingTagId)
-                .Select(t => new TagResponse(t.Tag.Id, t.Tag.Name, t.Tag.Slug, t.Tag.Color, t.Tag.IsActive)).ToList()
+                .Select(t => new TagResponse(t.Tag.Id, t.Tag.Name, t.Tag.Slug, t.Tag.Color, t.Tag.IsActive)).ToList(),
+            LikeCount = db.ContentLikes.Count(l => l.SharingContentId == x.Id),
+            CommentCount = db.ContentComments.Count(c => c.SharingContentId == x.Id && c.Status == ContentCommentStatus.Active),
+            IsLikedByCurrentUser = db.ContentLikes.Any(l => l.SharingContentId == x.Id && l.UserId == UserId),
+            IsSavedByCurrentUser = db.SavedContents.Any(s => s.SharingContentId == x.Id && s.UserId == UserId)
         };
     public static Expression<Func<SharingResource, ResourceResponse>> Resource => x =>
         new(x.Id, x.SharingContentId, x.Title, x.Description, x.ResourceType, x.ExternalUrl,

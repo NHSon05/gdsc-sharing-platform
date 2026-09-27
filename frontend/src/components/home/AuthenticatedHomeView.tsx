@@ -90,9 +90,7 @@ export function AuthenticatedHomeView({
   ];
 
   return (
-    <AuthenticatedLayout
-      user={user}
-    >
+    <AuthenticatedLayout user={user}>
       {/* Main Container */}
       <div className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
         {/* 2-Column Community Layout */}
@@ -111,14 +109,14 @@ export function AuthenticatedHomeView({
             {/* Upcoming Sharing Sessions Widget */}
             <Card
               variant="default"
-              className="rounded-2xl border border-neutral-200/80 bg-white p-5 shadow-2xs dark:border-zinc-800 dark:bg-zinc-900/90"
+              className="rounded-2xl border border-gray-200 bg-white p-4 shadow-2xs dark:border-zinc-800 dark:bg-zinc-900/90"
             >
-              <div className="flex items-center justify-between border-b border-neutral-100 pb-3 dark:border-zinc-800">
+              <div className="flex items-center justify-between border-b border-gray-100 pb-3 dark:border-zinc-800">
                 <div className="flex items-center gap-2">
                   <div className="bg-brand/10 text-brand flex size-7 items-center justify-center rounded-lg">
                     <Calendar className="size-4" />
                   </div>
-                  <h3 className="text-sm font-bold text-neutral-900 dark:text-white">
+                  <h3 className="text-base font-bold text-neutral-900 dark:text-white">
                     {t("dashboard.upcomingSessions")}
                   </h3>
                 </div>
@@ -165,28 +163,28 @@ export function AuthenticatedHomeView({
                           <div className="flex items-center gap-1.5">
                             <DeliveryModeBadge mode={session.deliveryMode} />
                             {realtime.isLive ? (
-                              <span className="inline-flex animate-pulse items-center gap-1 rounded-full border border-rose-200 bg-rose-50 px-2 py-0.5 text-[10px] font-bold text-rose-600 dark:border-rose-900/60 dark:bg-rose-950/40 dark:text-rose-300">
+                              <span className="inline-flex animate-pulse items-center gap-1 rounded-full border border-rose-200 bg-rose-50 px-2 py-0.5 text-xs font-bold text-rose-600 dark:border-rose-900/60 dark:bg-rose-950/40 dark:text-rose-300">
                                 <span className="size-1.5 animate-ping rounded-full bg-rose-500" />
                                 LIVE
                               </span>
                             ) : (
                               realtime.relativeTimeText && (
-                                <span className="rounded-md border border-blue-200/60 bg-blue-50/60 px-1.5 py-0.5 text-[10px] font-semibold text-blue-700 dark:border-blue-900/60 dark:bg-blue-950/40 dark:text-blue-300">
+                                <span className="rounded-md border border-blue-200/60 bg-blue-50/60 px-1.5 py-0.5 text-xs font-semibold text-blue-700 dark:border-blue-900/60 dark:bg-blue-950/40 dark:text-blue-300">
                                   {realtime.relativeTimeText}
                                 </span>
                               )
                             )}
                           </div>
-                          <span className="text-[10px] font-semibold tracking-wider text-neutral-400 uppercase">
+                          <span className="text-xs font-semibold tracking-wider text-neutral-400 uppercase">
                             {session.sharingType}
                           </span>
                         </div>
 
-                        <h4 className="group-hover:text-brand mt-1.5 line-clamp-1 text-xs font-bold text-neutral-900 transition-colors dark:text-zinc-100">
+                        <h4 className="group-hover:text-brand mt-1.5 line-clamp-1 text-sm font-bold text-neutral-900 transition-colors dark:text-zinc-100">
                           {session.title}
                         </h4>
 
-                        <div className="mt-2 flex items-center justify-between text-[11px] text-neutral-500 dark:text-zinc-400">
+                        <div className="mt-2 flex items-center justify-between text-xs text-neutral-500 dark:text-zinc-400">
                           <span className="flex items-center gap-1">
                             <Clock className="size-3 text-neutral-400" />
                             {formattedDate}
@@ -230,14 +228,14 @@ export function AuthenticatedHomeView({
             {/* Active Roadmaps Quick Progress Widget */}
             <Card
               variant="default"
-              className="rounded-2xl border border-neutral-200/80 bg-white p-5 shadow-2xs dark:border-zinc-800 dark:bg-zinc-900/90"
+              className="rounded-2xl border border-gray-200 bg-white p-4 shadow-2xs dark:border-zinc-800 dark:bg-zinc-900/90"
             >
               <div className="flex items-center justify-between border-b border-neutral-100 pb-3 dark:border-zinc-800">
                 <div className="flex items-center gap-2">
                   <div className="flex size-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 dark:bg-emerald-950/50 dark:text-emerald-400">
                     <BookOpen className="size-4" />
                   </div>
-                  <h3 className="text-sm font-bold text-neutral-900 dark:text-white">
+                  <h3 className="text-base font-bold text-neutral-900 dark:text-white">
                     {t("dashboard.activeRoadmaps")}
                   </h3>
                 </div>
@@ -260,7 +258,7 @@ export function AuthenticatedHomeView({
                     <div className="flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
                         {rm.icon}
-                        <span className="group-hover:text-brand line-clamp-1 text-xs font-bold text-neutral-900 transition-colors dark:text-zinc-100">
+                        <span className="group-hover:text-brand line-clamp-1 text-sm font-bold text-neutral-900 transition-colors dark:text-zinc-100">
                           {rm.title}
                         </span>
                       </div>
@@ -285,13 +283,13 @@ export function AuthenticatedHomeView({
               variant="default"
               className="from-brand-muted/30 dark:from-brand-muted/10 rounded-2xl border border-neutral-200/80 bg-linear-to-br to-sky-50/20 p-5 shadow-2xs dark:border-zinc-800 dark:to-zinc-900"
             >
-              <h3 className="text-brand text-xs font-bold tracking-wider uppercase">
+              <h3 className="text-brand text-base font-bold tracking-wider uppercase">
                 Quick Shortcuts
               </h3>
-              <div className="mt-3 space-y-2 text-xs">
+              <div className="mt-3 space-y-2 text-sm">
                 <Link
                   href="/sharing/mine"
-                  className="hover:border-brand/40 hover:text-brand flex items-center justify-between rounded-xl border border-neutral-200/60 bg-white/80 p-2.5 font-semibold text-neutral-900 transition-all hover:shadow-2xs dark:border-zinc-700/60 dark:bg-zinc-800/80 dark:text-zinc-200"
+                  className="hover:border-brand/40 hover:text-brand flex items-center justify-between rounded-xl border border-gray-200/60 bg-white/80 p-2.5 font-semibold text-neutral-900 transition-all hover:shadow-2xs dark:border-zinc-700/60 dark:bg-zinc-800/80 dark:text-zinc-200"
                 >
                   <span className="flex items-center gap-2">
                     <FileText className="text-brand size-4" />

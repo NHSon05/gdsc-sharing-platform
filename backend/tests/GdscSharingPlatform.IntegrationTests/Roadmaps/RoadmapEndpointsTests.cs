@@ -309,7 +309,13 @@ public sealed partial class RoadmapEndpointsTests : IAsyncLifetime
     {
         var document = await ReadAsync<JsonElement>(await _admin.GetAsync("/swagger/v1/swagger.json"));
         var paths = document.GetProperty("paths");
-        foreach (var path in paths.EnumerateObject())
+        // Sprint 5 intentionally uses idempotent PUT for Like, Saved, RSVP and comment replacement.
+        var socialPutPaths = new HashSet<string>
+        {
+            "/api/sharing/contents/{contentId}/like", "/api/sharing/contents/{contentId}/saved",
+            "/api/sharing/comments/{commentId}", "/api/sharing/schedules/{scheduleId}/rsvp"
+        };
+        foreach (var path in paths.EnumerateObject().Where(p => !socialPutPaths.Contains(p.Name)))
         {
             Assert.False(path.Value.TryGetProperty("put", out _), $"PUT is still exposed at {path.Name}.");
         }

@@ -8,11 +8,13 @@ public sealed class SharingOperationFilter : IOperationFilter
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
         var path = context.ApiDescription.RelativePath ?? "";
-        if (!path.StartsWith("api/sharing") && !path.StartsWith("api/admin/sharing")) return;
+        if (!path.StartsWith("api/sharing") && !path.StartsWith("api/admin/sharing") && !path.StartsWith("api/notifications")) return;
         operation.Description = (operation.Description ?? "") +
             " Requires an active Member or Admin. Admin routes require Admin. Draft content is private to Owner/Admin; Member-created schedules belong to their creator.";
-        if (context.ApiDescription.HttpMethod is "PATCH" or "DELETE" or "POST"
-            && !path.Contains("/tags") && path.Contains('{'))
+        var social = path.Contains("/comments") || path.Contains("/rsvp") || path.EndsWith("/like") || path.EndsWith("/saved") || path.StartsWith("api/notifications");
+        if ((social && path.EndsWith("/rsvp") && context.ApiDescription.HttpMethod == "DELETE")
+            || (!social && context.ApiDescription.HttpMethod is "PATCH" or "DELETE" or "POST"
+            && !path.Contains("/tags") && path.Contains('{')))
         {
             operation.Parameters.Add(new OpenApiParameter
             {

@@ -22,7 +22,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace GdscSharingPlatform.IntegrationTests.Sharing;
 
-public sealed class SharingEndpointsTests : IAsyncLifetime
+public sealed partial class SharingEndpointsTests : IAsyncLifetime
 {
     private readonly string _root = Path.Combine(Path.GetTempPath(), $"sharing_test_{Guid.NewGuid():N}");
     private readonly PostgresTestDatabase? _postgres = PostgresTestDatabase.FromEnvironment();

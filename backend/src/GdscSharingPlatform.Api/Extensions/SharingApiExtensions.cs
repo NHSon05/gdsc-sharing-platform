@@ -6,14 +6,19 @@ namespace GdscSharingPlatform.Api.Extensions;
 
 public static class SharingApiExtensions
 {
-    public static IServiceCollection AddSharingRateLimits(this IServiceCollection services)
+    public static IServiceCollection AddSharingRateLimits(this IServiceCollection services, IConfiguration? configuration = null)
     {
         return services.AddRateLimiter(options =>
         {
-            foreach (var (name, limit) in new[] { ("sharing-upload", 10), ("sharing-submit", 5) })
+            foreach (var (name, baseline) in new[] { ("sharing-upload", 10), ("sharing-submit", 5),
+                ("social-like", 60), ("social-save", 60), ("social-comment", 10), ("social-edit", 20), ("social-rsvp", 20), ("social-read", 60) })
+            {
+                var limit = configuration?.GetValue<int?>($"RateLimits:{name}") ?? baseline;
+                if (limit <= 0) throw new InvalidOperationException($"RateLimits:{name} must be positive.");
                 options.AddPolicy(name, context => RateLimitPartition.GetFixedWindowLimiter(
                     context.User.FindFirst("sub")?.Value ?? context.Connection.RemoteIpAddress?.ToString() ?? "anonymous",
                     _ => new FixedWindowRateLimiterOptions { PermitLimit = limit, Window = TimeSpan.FromMinutes(1), QueueLimit = 0, AutoReplenishment = true }));
+            }
             options.OnRejected = async (context, ct) =>
             {
                 context.HttpContext.Response.StatusCode = 429;

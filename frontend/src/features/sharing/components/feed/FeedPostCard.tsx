@@ -15,14 +15,20 @@ import {
   Clock,
   Share2,
   Check,
-  ArrowRight,
   Sparkles,
-  BookOpen,
   FileEdit,
   Send,
   RotateCcw,
   MessageSquare,
+  Heart,
+  MessageCircle,
+  Bookmark,
+  ChevronDown,
+  ChevronUp,
+  Loader2,
 } from "lucide-react";
+import { useContentBySlugQuery } from "../../hooks/use-content-detail-query";
+import { MarkdownViewer } from "../common/MarkdownViewer";
 
 export interface FeedPostCardProps {
   content: ContentSummary;
@@ -47,6 +53,16 @@ export function FeedPostCard({
 }: FeedPostCardProps) {
   const { t, locale } = useTranslation();
   const [copied, setCopied] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+  const [isSaved, setIsSaved] = useState(false);
+
+  // Fetch full article content on demand
+  const { data: detailData, isLoading: isLoadingDetail } = useContentBySlugQuery(
+    content.slug,
+    true
+  );
 
   const primaryAuthor =
     content.authors.find((a) => a.role === "Owner") ?? content.authors[0];
@@ -84,9 +100,29 @@ export function FeedPostCard({
     }
   };
 
+  const handleToggleLike = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsLiked((prev) => {
+      const next = !prev;
+      setLikeCount((c) => (next ? c + 1 : Math.max(0, c - 1)));
+      return next;
+    });
+  };
+
+  const handleToggleSave = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsSaved((prev) => !prev);
+  };
+
   // Estimate reading time from summary
   const words = content.summary.split(/\s+/).length + 200;
   const readingTime = Math.max(1, Math.ceil(words / 150));
+
+  const bodyMarkdown = detailData?.bodyMarkdown ?? "";
+  const displayContent = bodyMarkdown || content.summary;
+  const isLongContent = displayContent.length > 300 || displayContent.split("\n").length > 6;
 
   return (
     <Card
@@ -154,10 +190,62 @@ export function FeedPostCard({
           </h3>
         </Link>
 
-        {/* Summary */}
-        <p className="text-md line-clamp-3 leading-relaxed text-neutral-900 dark:text-zinc-300">
-          {content.summary}
-        </p>
+        {/* Article Body Content */}
+        {isLoadingDetail && !bodyMarkdown ? (
+          <div className="space-y-2 py-2">
+            <p className="text-sm leading-relaxed text-neutral-700 dark:text-zinc-300">
+              {content.summary}
+            </p>
+            <div className="flex items-center gap-2 text-xs text-neutral-400">
+              <Loader2 className="size-3.5 animate-spin" />
+              <span>Đang tải nội dung bài viết...</span>
+            </div>
+          </div>
+        ) : (
+          <div className="relative">
+            <div
+              className={`overflow-hidden transition-all duration-300 ${
+                !isExpanded && isLongContent
+                  ? "max-h-56 mask-gradient-b"
+                  : "max-h-none"
+              }`}
+              style={
+                !isExpanded && isLongContent
+                  ? {
+                      WebkitMaskImage:
+                        "linear-gradient(to bottom, black 65%, transparent 100%)",
+                      maskImage:
+                        "linear-gradient(to bottom, black 65%, transparent 100%)",
+                    }
+                  : undefined
+              }
+            >
+              <MarkdownViewer content={displayContent} />
+            </div>
+
+            {/* View More / View Less Toggle Button */}
+            {isLongContent && (
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className="text-brand hover:text-brand-hover inline-flex cursor-pointer items-center gap-1 text-sm font-semibold transition-colors"
+                >
+                  <span>
+                    {isExpanded
+                      ? t("sharing.viewLess") || "Thu gọn"
+                      : t("sharing.viewMore") || "Xem thêm"}
+                  </span>
+                  {isExpanded ? (
+                    <ChevronUp className="size-4" />
+                  ) : (
+                    <ChevronDown className="size-4" />
+                  )}
+                </button>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Optional Cover Image */}
         {content.coverImageUrl && (
@@ -180,31 +268,77 @@ export function FeedPostCard({
 
       {/* Tags & Action Footer */}
       <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-neutral-100 pt-4 dark:border-zinc-800/80">
-        {/* Tags */}
-        <div className="flex flex-wrap items-center gap-1.5">
-          {content.tags && content.tags.length > 0 ? (
-            content.tags.map((tag) => (
-              <Badge
-                key={tag.id}
-                variant="outline"
-                className="hover:border-brand/40 hover:bg-brand-muted hover:text-brand border-neutral-200 bg-neutral-50/80 text-xs font-medium text-neutral-600 transition-colors dark:border-zinc-800 dark:bg-zinc-800/60 dark:text-zinc-300"
-                style={
-                  tag.color
-                    ? { borderLeftColor: tag.color, borderLeftWidth: "3px" }
-                    : undefined
-                }
-              >
-                {tag.name}
-              </Badge>
-            ))
-          ) : (
-            <span className="text-[11px] text-neutral-400 dark:text-zinc-500">
-              #GDSCSharing
-            </span>
+        {/* Left: Like, Comment, Save Interaction Buttons & Tags */}
+        <div className="flex flex-wrap items-center gap-3">
+          {/* Interaction Bar */}
+          <div className="flex items-center gap-1 text-neutral-500 dark:text-zinc-400">
+            {/* Like Button */}
+            <button
+              type="button"
+              onClick={handleToggleLike}
+              className={`flex cursor-pointer items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium transition-colors ${
+                isLiked
+                  ? "bg-rose-50 text-rose-600 dark:bg-rose-950/30 dark:text-rose-400"
+                  : "hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+              }`}
+              title={t("sharing.like") || "Thích"}
+            >
+              <Heart
+                className={`size-4 ${isLiked ? "fill-rose-500 text-rose-500" : ""}`}
+              />
+              <span>{likeCount > 0 ? likeCount : t("sharing.like") || "Thích"}</span>
+            </button>
+
+            {/* Comment Button */}
+            <Link
+              href={`/sharing/${content.slug}`}
+              className="flex cursor-pointer items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+              title={t("sharing.comment") || "Bình luận"}
+            >
+              <MessageCircle className="size-4" />
+              <span>{t("sharing.comment") || "Bình luận"}</span>
+            </Link>
+
+            {/* Save Button */}
+            <button
+              type="button"
+              onClick={handleToggleSave}
+              className={`flex cursor-pointer items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium transition-colors ${
+                isSaved
+                  ? "bg-amber-50 text-amber-600 dark:bg-amber-950/30 dark:text-amber-400"
+                  : "hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+              }`}
+              title={isSaved ? t("sharing.saved") || "Đã lưu" : t("sharing.save") || "Lưu"}
+            >
+              <Bookmark
+                className={`size-4 ${isSaved ? "fill-amber-500 text-amber-500" : ""}`}
+              />
+              <span>{isSaved ? t("sharing.saved") || "Đã lưu" : t("sharing.save") || "Lưu"}</span>
+            </button>
+          </div>
+
+          {/* Tags */}
+          {content.tags && content.tags.length > 0 && (
+            <div className="flex flex-wrap items-center gap-1.5 pl-1">
+              {content.tags.map((tag) => (
+                <Badge
+                  key={tag.id}
+                  variant="outline"
+                  className="hover:border-brand/40 hover:bg-brand-muted hover:text-brand border-neutral-200 bg-neutral-50/80 text-xs font-medium text-neutral-600 transition-colors dark:border-zinc-800 dark:bg-zinc-800/60 dark:text-zinc-300"
+                  style={
+                    tag.color
+                      ? { borderLeftColor: tag.color, borderLeftWidth: "3px" }
+                      : undefined
+                  }
+                >
+                  {tag.name}
+                </Badge>
+              ))}
+            </div>
           )}
         </div>
 
-        {/* Read More CTA & Author Actions */}
+        {/* Author Actions (Edit, Review, Withdraw...) */}
         <div className="flex flex-wrap items-center gap-2">
           {onEdit && (
             <Button
@@ -271,18 +405,6 @@ export function FeedPostCard({
               <span>{t("sharing.reviewNote") || "Lý do từ chối"}</span>
             </Button>
           )}
-
-          <Link href={`/sharing/${content.slug}`}>
-            <Button
-              variant="brand"
-              size="sm"
-              className="font-semibold shadow-xs"
-              rightIcon={<ArrowRight className="size-3.5" />}
-            >
-              <BookOpen className="size-3.5" />
-              <span>{t("sharing.readMore")}</span>
-            </Button>
-          </Link>
         </div>
       </div>
     </Card>

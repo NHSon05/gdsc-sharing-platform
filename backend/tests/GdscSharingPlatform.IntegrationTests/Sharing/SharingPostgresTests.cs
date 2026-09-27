@@ -18,7 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GdscSharingPlatform.IntegrationTests.Sharing;
 
-public sealed class SharingPostgresTests : IAsyncLifetime
+public sealed partial class SharingPostgresTests : IAsyncLifetime
 {
     private readonly PostgresTestDatabase? _postgres = PostgresTestDatabase.FromEnvironment();
     private readonly Guid _uid = Guid.NewGuid();
@@ -41,6 +41,8 @@ public sealed class SharingPostgresTests : IAsyncLifetime
         services.AddDbContext<ApplicationDbContext>(o =>
         { o.UseNpgsql(_postgres!.ConnectionString); if (interceptor is not null) o.AddInterceptors(interceptor); });
         services.AddScoped<SharingOperations>(); services.AddScoped<SharingScheduleService>();
+        services.AddSingleton(TimeProvider.System); services.AddScoped<SocialOperations>();
+        services.AddScoped<ContentInteractionService>();
         services.AddScoped<SharingContentService>(); services.AddScoped<SharingResourceService>();
         services.AddSingleton<IFileStorage>(storage ?? new MemoryStorage());
         return services.BuildServiceProvider();

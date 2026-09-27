@@ -59,6 +59,12 @@ public class ApplicationDbContext(
     public DbSet<SharingScheduleContent> SharingScheduleContents => Set<SharingScheduleContent>();
     public DbSet<SharingScheduleAudienceGeneration> SharingScheduleAudienceGenerations => Set<SharingScheduleAudienceGeneration>();
     public DbSet<SharingScheduleAudienceDepartment> SharingScheduleAudienceDepartments => Set<SharingScheduleAudienceDepartment>();
+    public DbSet<ContentLike> ContentLikes => Set<ContentLike>();
+    public DbSet<SavedContent> SavedContents => Set<SavedContent>();
+    public DbSet<ContentComment> ContentComments => Set<ContentComment>();
+    public DbSet<ScheduleRsvp> ScheduleRsvps => Set<ScheduleRsvp>();
+    public DbSet<Notification> Notifications => Set<Notification>();
+    public DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
 
     protected override void OnModelCreating(
         ModelBuilder builder)

@@ -51,19 +51,36 @@ function CodeBlock({ code, language }: { code: string; language?: string }) {
 }
 
 function parseInline(text: string): React.ReactNode[] {
-  // Regex to match inline code, bold, italic, and links safely
-  const regex = /(`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*|\[[^\]]+\]\([^)]+\))/g;
+  // Regex to match images, inline code, bold, italic, and links safely
+  const regex =
+    /(!\[[^\]]*\]\([^)]+\)|`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*|\[[^\]]+\]\([^)]+\))/g;
   const parts = text.split(regex);
 
   return parts.map((part, index) => {
     if (!part) return null;
+
+    // Image ![alt](url)
+    const imgMatch = part.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+    if (imgMatch) {
+      return (
+        <span key={index} className="my-2 block overflow-hidden rounded-xl">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={imgMatch[2]}
+            alt={imgMatch[1] || "image"}
+            className="max-h-96 w-auto max-w-full rounded-xl object-contain"
+            loading="lazy"
+          />
+        </span>
+      );
+    }
 
     // Inline code
     if (part.startsWith("`") && part.endsWith("`")) {
       return (
         <code
           key={index}
-          className="rounded-md bg-pink-50 px-1.5 py-0.5 font-mono text-sm font-semibold text-pink-600 dark:bg-pink-950/40 dark:text-pink-300"
+          className="rounded-md bg-pink-50 px-1.5 py-0.5 font-mono text-lg font-semibold text-pink-600 dark:bg-pink-950/40 dark:text-pink-300"
         >
           {part.slice(1, -1)}
         </code>
@@ -295,7 +312,7 @@ export function MarkdownViewer({ content, className }: MarkdownViewerProps) {
       elements.push(
         <p
           key={`p-${index}`}
-          className="text-md my-2.5 leading-relaxed text-neutral-900 dark:text-zinc-300"
+          className="my-2.5 text-base leading-relaxed text-neutral-900 dark:text-zinc-300"
         >
           {parseInline(line)}
         </p>

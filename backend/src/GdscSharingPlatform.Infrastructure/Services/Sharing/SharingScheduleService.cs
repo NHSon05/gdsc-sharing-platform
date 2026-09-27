@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GdscSharingPlatform.Infrastructure.Services.Sharing;
 
-public sealed class SharingScheduleService(SharingOperations op) : ISharingScheduleService
+public sealed class SharingScheduleService(SharingOperations op, SocialOperations social) : ISharingScheduleService
 {
     public async Task<SharingPage<ScheduleResponse>> ListAsync(ScheduleQuery query, bool mine, bool admin, CancellationToken ct)
     {
@@ -86,6 +86,10 @@ public sealed class SharingScheduleService(SharingOperations op) : ISharingSched
             var schedule = await FindAsync(id, version, ct);
             RequireManage(schedule);
             EnsureMutable(schedule);
+            var notify = schedule.Status == SharingScheduleStatus.Scheduled
+                && (schedule.StartsAtUtc != start || schedule.EndsAtUtc != end || schedule.TimeZoneId != request.TimeZoneId
+                    || schedule.Location != request.Location?.Trim() || schedule.MeetingUrl != request.MeetingUrl?.Trim()
+                    || schedule.DeliveryMode != request.DeliveryMode);
             // Admin assignment is authoritative, including on schedules originally created by a Member.
             if (!op.IsAdmin)
             {
@@ -104,6 +108,7 @@ public sealed class SharingScheduleService(SharingOperations op) : ISharingSched
             await EnsurePublishableAsync(schedule, ct);
             await CheckOverlapAsync(schedule, ct);
             op.Audit("Update", "Schedule", id, new { schedule.Version, schedule.StartsAtUtc, schedule.EndsAtUtc });
+            if (notify) await social.NotifyScheduleAsync(schedule, false, ct);
             return true;
         }, ct);
         return await GetAsync(id, false, ct);
@@ -168,6 +173,7 @@ public sealed class SharingScheduleService(SharingOperations op) : ISharingSched
                 }
             });
             op.Audit(action.ToString(), "Schedule", id, new { schedule.Version });
+            if (action == ScheduleAction.Cancel) await social.NotifyScheduleAsync(schedule, true, ct);
             return true;
         }, ct);
         return await GetAsync(id, true, ct);

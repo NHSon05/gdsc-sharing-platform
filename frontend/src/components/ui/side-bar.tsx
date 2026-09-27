@@ -176,7 +176,7 @@ export function SidebarNavItem({
     <div
       title={collapsed ? title : undefined}
       className={cn(
-        "group flex cursor-pointer items-center rounded-xl text-sm font-medium transition-all duration-200",
+        "group flex cursor-pointer items-center rounded-xl text-base font-medium transition-all duration-200",
         collapsed ? "mx-auto size-10 justify-center" : "gap-4 px-3 py-2.5",
         active
           ? "text-brand dark:bg-brand/15 dark:text-brand-hover border-brand/20 dark:border-brand/30 font-semibold"

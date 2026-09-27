@@ -8,12 +8,11 @@ const cardVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "bg-card text-card-foreground ring-1 ring-foreground/10 shadow-xs",
+        default: "bg-card text-card-foreground shadow-2xl",
         outline:
-          "bg-transparent text-card-foreground border border-neutral-200 dark:border-zinc-800 shadow-none",
+          "bg-transparent text-card-foreground border border-gray-200 dark:border-zinc-800 shadow-none",
         glass:
-          "bg-white/70 dark:bg-zinc-900/60 backdrop-blur-md border border-neutral-200/80 dark:border-zinc-800/80 text-card-foreground shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)]",
+          "bg-white/70 dark:bg-zinc-900/60 backdrop-blur-md border border-gray-200/80 dark:border-zinc-800/80 text-card-foreground shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)]",
         liquid_glass:
           "bg-white/75 dark:bg-zinc-900/65 backdrop-blur-xl border border-white/90 dark:border-white/10 text-card-foreground shadow-[0_15px_35px_-10px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.85)] dark:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.12)] ring-0",
         "liquid-glass":

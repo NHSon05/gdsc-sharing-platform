@@ -68,14 +68,14 @@ export default function ContentDetailPage() {
   const primaryAuthor = authors.find((a) => a.role === "Owner") || authors[0];
 
   return (
-    <article className="mx-auto max-w-4xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
+    <article className="mx-auto space-y-8 p-4 px-10">
       {/* Top Back Navigation */}
       <div>
         <Link
-          href="/sharing"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-500 transition-colors hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-white"
+          href="/"
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-500 transition-colors hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-white"
         >
-          <ArrowLeft className="size-4" />
+          <ArrowLeft className="size-6" />
           <span>Back to all content</span>
         </Link>
       </div>

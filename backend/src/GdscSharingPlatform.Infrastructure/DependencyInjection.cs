@@ -176,6 +176,23 @@ public static class DependencyInjection
         services.AddScoped<IFileStorage, LocalRoadmapFileStorage>();
         services.AddScoped<RoadmapOperations>();
         services.AddScoped<GdscSharingPlatform.Infrastructure.Services.Sharing.SharingOperations>();
+        services.AddScoped<GdscSharingPlatform.Infrastructure.Services.Sharing.SocialOperations>();
+        services.AddScoped<GdscSharingPlatform.Application.Features.Sharing.IContentInteractionService, GdscSharingPlatform.Infrastructure.Services.Sharing.ContentInteractionService>();
+        services.AddScoped<GdscSharingPlatform.Application.Features.Sharing.IContentCommentService, GdscSharingPlatform.Infrastructure.Services.Sharing.ContentCommentService>();
+        services.AddScoped<GdscSharingPlatform.Application.Features.Sharing.IScheduleRsvpService, GdscSharingPlatform.Infrastructure.Services.Sharing.ScheduleRsvpService>();
+        services.AddScoped<GdscSharingPlatform.Application.Features.Sharing.INotificationService, GdscSharingPlatform.Infrastructure.Services.Sharing.NotificationService>();
+        services.AddOptions<GdscSharingPlatform.Infrastructure.Services.Sharing.SocialOutboxOptions>()
+            .Bind(configuration.GetSection("SocialOutbox"))
+            .Validate(x => x.PollSeconds > 0 && x.BatchSize is > 0 and <= 100 && x.MaxAttempts > 0
+                && x.BaseDelaySeconds > 0 && x.MaxDelaySeconds >= x.BaseDelaySeconds && x.TimeoutSeconds is > 0 and <= 60,
+                "Invalid outbox retry/poll settings.")
+            .Validate(x => !x.Enabled || !string.IsNullOrWhiteSpace(x.ServiceToken)
+                && Uri.TryCreate(x.GatewayUrl, UriKind.Absolute, out var uri) && uri.Scheme is "http" or "https"
+                && string.IsNullOrEmpty(uri.UserInfo), "Enabled outbox requires a gateway URL and service token.")
+            .ValidateOnStart();
+        services.AddHttpClient("social-outbox").ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { AllowAutoRedirect = false });
+        services.AddScoped<GdscSharingPlatform.Infrastructure.Services.Sharing.OutboxDispatcher>();
+        services.AddHostedService<GdscSharingPlatform.Infrastructure.Services.Sharing.OutboxWorker>();
         services.AddScoped<GdscSharingPlatform.Application.Features.Sharing.ISharingContentService, GdscSharingPlatform.Infrastructure.Services.Sharing.SharingContentService>();
         services.AddScoped<GdscSharingPlatform.Application.Features.Sharing.ISharingTagService, GdscSharingPlatform.Infrastructure.Services.Sharing.SharingTagService>();
         services.AddScoped<GdscSharingPlatform.Application.Features.Sharing.ISharingResourceService, GdscSharingPlatform.Infrastructure.Services.Sharing.SharingResourceService>();

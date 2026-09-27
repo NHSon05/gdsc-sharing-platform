@@ -153,3 +153,56 @@ public sealed class ScheduleQueryValidator : AbstractValidator<ScheduleQuery>
         RuleFor(x => x.To).GreaterThan(x => x.From).When(x => x.From.HasValue && x.To.HasValue);
     }
 }
+
+public sealed class CreateCommentRequestValidator : AbstractValidator<CreateCommentRequest>
+{
+    public CreateCommentRequestValidator() => RuleFor(x => x.BodyMarkdown).Must(ValidBody);
+    internal static bool ValidBody(string? value)
+    {
+        if (value is null || value.Trim().Length is < 1 or > 2_000) return false;
+        // Limited Markdown: no raw HTML or executable URL schemes. Rendering still needs a sanitizer.
+        var decoded = System.Net.WebUtility.HtmlDecode(value);
+        for (var i = 0; i < 3; i++) decoded = Uri.UnescapeDataString(decoded);
+        var compact = string.Concat(decoded.Where(c => !char.IsWhiteSpace(c) && !char.IsControl(c)));
+        return !System.Text.RegularExpressions.Regex.IsMatch(decoded, @"<[/!?a-zA-Z]", System.Text.RegularExpressions.RegexOptions.CultureInvariant)
+            && !new[] { "javascript:", "vbscript:", "data:" }.Any(x => compact.Contains(x, StringComparison.OrdinalIgnoreCase));
+    }
+}
+public sealed class UpdateCommentRequestValidator : AbstractValidator<UpdateCommentRequest>
+{
+    public UpdateCommentRequestValidator()
+    {
+        RuleFor(x => x.BodyMarkdown).Must(CreateCommentRequestValidator.ValidBody);
+        RuleFor(x => x.Version).GreaterThanOrEqualTo(0);
+    }
+}
+public sealed class HideCommentRequestValidator : AbstractValidator<HideCommentRequest>
+{
+    public HideCommentRequestValidator() => RuleFor(x => x.Reason).NotEmpty().MaximumLength(2_000);
+}
+public sealed class CommentQueryValidator : AbstractValidator<CommentQuery>
+{
+    public CommentQueryValidator()
+    {
+        RuleFor(x => x.Cursor).MaximumLength(512);
+        RuleFor(x => x.PageSize).InclusiveBetween(1, 100);
+        RuleFor(x => x.Sort).Must(x => x is "oldest" or "newest");
+    }
+}
+public sealed class RsvpRequestValidator : AbstractValidator<RsvpRequest>
+{
+    public RsvpRequestValidator()
+    {
+        RuleFor(x => x.Status).IsInEnum();
+        RuleFor(x => x.Version).GreaterThanOrEqualTo(0).When(x => x.Version.HasValue);
+    }
+}
+public sealed class NotificationQueryValidator : AbstractValidator<NotificationQuery>
+{
+    public NotificationQueryValidator()
+    {
+        RuleFor(x => x.Cursor).MaximumLength(512);
+        RuleFor(x => x.PageSize).InclusiveBetween(1, 100);
+        RuleFor(x => x.Type).IsInEnum();
+    }
+}

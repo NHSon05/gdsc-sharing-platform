@@ -51,6 +51,10 @@ public sealed record ContentSummary(Guid Id, string Title, string Slug, string S
 {
     public IReadOnlyList<AuthorResponse> Authors { get; init; } = [];
     public IReadOnlyList<TagResponse> Tags { get; init; } = [];
+    public int LikeCount { get; init; }
+    public int CommentCount { get; init; }
+    public bool IsLikedByCurrentUser { get; init; }
+    public bool IsSavedByCurrentUser { get; init; }
 }
 public sealed record ContentReference(Guid Id, string Title, string Slug, int SortOrder);
 public sealed record ScheduleReference(Guid Id, string Title, DateTimeOffset StartsAtUtc, SharingScheduleStatus Status);
@@ -68,6 +72,49 @@ public sealed record ScheduleResponse(Guid Id, string Title, string? Description
     string? Location, string? MeetingUrl, SharingScheduleStatus Status, AudienceScope AudienceScope,
     string? CancellationReason, Guid CreatedByUserId, long Version, IReadOnlyList<PresenterResponse> Presenters,
     IReadOnlyList<ContentReference> Contents, IReadOnlyList<Guid> GenerationIds, IReadOnlyList<Guid> DepartmentIds);
+
+public sealed record InteractionResponse(Guid ContentId, bool IsLikedByCurrentUser, int LikeCount);
+public sealed record SavedContentResponse(Guid ContentId, bool IsSavedByCurrentUser);
+public sealed record SavedContentItem(ContentSummary Content, DateTimeOffset SavedAtUtc);
+public sealed record CreateCommentRequest(string BodyMarkdown);
+public sealed record UpdateCommentRequest(string BodyMarkdown, [property: System.Text.Json.Serialization.JsonRequired] long Version);
+public sealed record HideCommentRequest(string Reason);
+public sealed record CommentResponse(Guid Id, Guid SharingContentId, Guid AuthorUserId, Guid? ParentCommentId,
+    string? BodyMarkdown, ContentCommentStatus Status, string? ModerationReason, Guid? ModeratedByUserId,
+    DateTimeOffset CreatedAtUtc, DateTimeOffset? UpdatedAtUtc, DateTimeOffset? DeletedAtUtc, long Version);
+public sealed class CommentQuery
+{
+    public string? Cursor { get; set; }
+    public int PageSize { get; set; } = 20;
+    public string Sort { get; set; } = "oldest";
+}
+public sealed record RsvpRequest([property: System.Text.Json.Serialization.JsonRequired] ScheduleRsvpStatus Status, long? Version = null);
+public sealed record RsvpResponse(Guid ScheduleId, ScheduleRsvpStatus Status, DateTimeOffset UpdatedAtUtc, long Version);
+public sealed record RsvpSummary(Guid ScheduleId, int Going, int Maybe, int NotGoing, int NoResponse);
+public sealed record ScheduleRsvpResponse(Guid UserId, ScheduleRsvpStatus Status, DateTimeOffset RespondedAtUtc,
+    DateTimeOffset? UpdatedAtUtc, long Version);
+public sealed class NotificationQuery
+{
+    public string? Cursor { get; set; }
+    public int PageSize { get; set; } = 20;
+    public bool? IsRead { get; set; }
+    public NotificationType? Type { get; set; }
+}
+public sealed record NotificationResponse(Guid Id, NotificationType Type, Guid? ActorUserId, string EntityType,
+    Guid EntityId, string Title, string Message, string? Route, bool IsRead, DateTimeOffset CreatedAtUtc);
+public sealed record NotificationPage(IReadOnlyList<NotificationResponse> Items, string? NextCursor);
+public sealed record UnreadNotificationCount(int Count);
+
+public static class SocialEventNames
+{
+    public const string NotificationCreated = "notification.created";
+    public const string ContentInteractionUpdated = "content.interaction.updated";
+    public const string CommentCreated = "comment.created";
+    public const string CommentUpdated = "comment.updated";
+    public const string CommentDeleted = "comment.deleted";
+    public const string CommentHidden = "comment.hidden";
+    public const string ScheduleRsvpUpdated = "schedule.rsvp.updated";
+}
 
 public enum ContentAction { Submit, Withdraw, Approve, Reject, ReturnToDraft, Archive }
 public enum ScheduleAction { Publish, Start, Complete, Cancel }
@@ -109,3 +156,42 @@ public interface ISharingScheduleService
     Task<ScheduleResponse> TransitionAsync(Guid id, ScheduleAction action, long version, string? reason, CancellationToken ct);
     Task DeleteAsync(Guid id, long version, CancellationToken ct);
 }
+
+public interface IContentInteractionService
+{
+    Task<InteractionResponse> LikeAsync(Guid contentId, CancellationToken ct);
+    Task<InteractionResponse> UnlikeAsync(Guid contentId, CancellationToken ct);
+    Task<SavedContentResponse> SaveAsync(Guid contentId, CancellationToken ct);
+    Task<SavedContentResponse> UnsaveAsync(Guid contentId, CancellationToken ct);
+    Task<SharingPage<SavedContentItem>> ListSavedAsync(ContentQuery query, CancellationToken ct);
+}
+
+public interface IContentCommentService
+{
+    Task<CursorPage<CommentResponse>> ListAsync(Guid contentId, CommentQuery query, CancellationToken ct);
+    Task<CommentResponse> CreateAsync(Guid contentId, CreateCommentRequest request, CancellationToken ct);
+    Task<CommentResponse> ReplyAsync(Guid commentId, CreateCommentRequest request, CancellationToken ct);
+    Task<CommentResponse> UpdateAsync(Guid commentId, UpdateCommentRequest request, CancellationToken ct);
+    Task DeleteAsync(Guid commentId, CancellationToken ct);
+    Task<CommentResponse> HideAsync(Guid commentId, HideCommentRequest request, CancellationToken ct);
+    Task<CommentResponse> RestoreAsync(Guid commentId, CancellationToken ct);
+}
+
+public interface IScheduleRsvpService
+{
+    Task<RsvpResponse> UpsertAsync(Guid scheduleId, RsvpRequest request, CancellationToken ct);
+    Task WithdrawAsync(Guid scheduleId, long version, CancellationToken ct);
+    Task<RsvpResponse?> GetMineAsync(Guid scheduleId, CancellationToken ct);
+    Task<CursorPage<ScheduleRsvpResponse>> ListForAdminAsync(Guid scheduleId, string? cursor, int pageSize, CancellationToken ct);
+    Task<RsvpSummary> GetSummaryAsync(Guid scheduleId, CancellationToken ct);
+}
+
+public interface INotificationService
+{
+    Task<NotificationPage> ListAsync(NotificationQuery query, CancellationToken ct);
+    Task<UnreadNotificationCount> GetUnreadCountAsync(CancellationToken ct);
+    Task MarkReadAsync(Guid notificationId, CancellationToken ct);
+    Task MarkAllReadAsync(CancellationToken ct);
+}
+
+public sealed record CursorPage<T>(IReadOnlyList<T> Items, string? NextCursor);

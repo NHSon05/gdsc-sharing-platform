@@ -29,6 +29,9 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<DeliveryMode>());
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<AudienceScope>());
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<PresenterRole>());
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<ContentCommentStatus>());
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<ScheduleRsvpStatus>());
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter<NotificationType>());
         options.JsonSerializerOptions.AllowTrailingCommas = true;
         options.JsonSerializerOptions.ReadCommentHandling = System.Text.Json.JsonCommentHandling.Skip;
     });
@@ -59,7 +62,7 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 
 // API Documents (OpenAPI/Swagger)
 builder.Services.AddApiDocumentation();
-builder.Services.AddSharingRateLimits();
+builder.Services.AddSharingRateLimits(builder.Configuration);
 
 // Đăng ký dịch vụ thuộc tầng Application & Infrastructure
 builder.Services.AddApplication();
