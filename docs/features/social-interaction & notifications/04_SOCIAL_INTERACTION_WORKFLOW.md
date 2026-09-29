@@ -13,7 +13,7 @@ User bấm Like
 → Ghi OutboxMessage content.interaction.updated khi trạng thái Like thực sự thay đổi
 → Commit toàn bộ Like, Notification và OutboxMessage trong cùng transaction
 → Trả likeCount mới
-→ Worker phát event qua Socket.IO
+→ Worker phát event qua SignalR
 ```
 
 Unlike:

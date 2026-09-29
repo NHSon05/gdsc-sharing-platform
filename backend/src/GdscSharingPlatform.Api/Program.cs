@@ -8,6 +8,8 @@ using GdscSharingPlatform.Application;
 using GdscSharingPlatform.Infrastructure;
 using GdscSharingPlatform.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using GdscSharingPlatform.Api.Realtime;
+using GdscSharingPlatform.Application.Features.Sharing;
 
 // Khởi tạo builder
 var builder = WebApplication.CreateBuilder(args);
@@ -67,9 +69,29 @@ builder.Services.AddSharingRateLimits(builder.Configuration);
 // Đăng ký dịch vụ thuộc tầng Application & Infrastructure
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddSignalR(options =>
+{
+    options.MaximumReceiveMessageSize = 16 * 1024;
+    options.MaximumParallelInvocationsPerClient = 1;
+    options.KeepAliveInterval = TimeSpan.FromSeconds(15);
+    options.ClientTimeoutInterval = TimeSpan.FromSeconds(30);
+    options.HandshakeTimeout = TimeSpan.FromSeconds(15);
+    options.EnableDetailedErrors = false;
+});
+builder.Services.AddSingleton<RealtimeConnections>();
+builder.Services.AddOptions<RealtimeOptions>().Bind(builder.Configuration.GetSection("Realtime"))
+    .Validate(o => o.SubscribePerMinute > 0 && o.MaxSubscriptions is > 0 and <= 100
+        && o.SessionRecheckSeconds is > 0 and <= 60, "Invalid realtime limits.").ValidateOnStart();
+builder.Services.AddScoped<RealtimeAccess>();
+builder.Services.AddScoped<IRealtimeEventPublisher, SignalRRealtimePublisher>();
+builder.Services.AddHostedService<RealtimeSessionMonitor>();
+builder.Services.Configure<HostOptions>(options => options.ShutdownTimeout = TimeSpan.FromSeconds(30));
+var realtimeOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
 
 builder.Services.AddCors(options =>
 {
+    options.AddPolicy("Realtime", policy => policy.WithOrigins(realtimeOrigins)
+        .AllowAnyHeader().AllowAnyMethod().AllowCredentials());
     options.AddDefaultPolicy(policy =>
     {
         policy.SetIsOriginAllowed(_ => true)
@@ -104,6 +126,15 @@ var app = builder.Build();
 await app.Services.InitializeDatabaseAsync();
 
 app.UseExceptionHandler();
+// CORS does not protect WebSocket upgrades. Enforce the same exact origin allowlist here.
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.StartsWithSegments("/hubs/notifications")
+        && context.Request.Headers.TryGetValue("Origin", out var origin)
+        && !realtimeOrigins.Contains(origin.ToString(), StringComparer.Ordinal))
+    { context.Response.StatusCode = StatusCodes.Status403Forbidden; return; }
+    await next(context);
+});
 
 // Swagger UI & OpenAPI document
 app.UseApiDocumentation();
@@ -146,6 +177,12 @@ app.MapHealthChecks(
     });
 
 app.MapControllers();
+app.MapHub<NotificationHub>("/hubs/notifications", options =>
+{
+    options.CloseOnAuthenticationExpiration = true;
+    options.ApplicationMaxBufferSize = 64 * 1024;
+    options.TransportMaxBufferSize = 64 * 1024;
+}).RequireCors("Realtime");
 
 app.Run();
 

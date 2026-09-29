@@ -46,26 +46,28 @@
 - Áp dụng authentication, authorization và rate limiting.
 - Bổ sung Problem Details và Swagger.
 
-## Phase 6 — Socket.IO Gateway
+## Phase 6 — ASP.NET Core SignalR
 
-- Tạo service Node.js TypeScript riêng tại `realtime/`.
-- Cấu hình namespace `/realtime`.
-- Cấu hình JWT middleware.
-- Tạo user/content/schedule room.
-- Tạo internal endpoint nhận event từ Outbox Worker.
-- Kiểm tra internal service credential và EventId.
-- Cấu hình connection state recovery.
-- Cấu hình CORS, payload limit và graceful shutdown.
+- Cài đặt SignalR Hub trong backend ASP.NET Core, ví dụ `NotificationHub`.
+- Cấu hình endpoint hub, ví dụ `/hubs/notifications`.
+- Cấu hình JWT authentication cho SignalR handshake, hỗ trợ lấy access token từ query string khi client kết nối hub.
+- Tạo user group theo user hiện tại; client không được tự chọn user group.
+- Tạo content/schedule group khi cần subscribe theo quyền đọc hiện tại.
+- Tạo service phát realtime event từ Outbox Worker qua `IHubContext<NotificationHub>`.
+- Kiểm tra session, TokenVersion, trạng thái user và quyền đọc trước khi cho kết nối hoặc join group.
+- Kiểm tra EventId, event name và payload trước khi gửi event.
+- Cấu hình CORS, giới hạn payload, keep-alive/client-timeout và graceful shutdown trong backend.
+- Giữ Notification trong database là nguồn dữ liệu chuẩn; SignalR chỉ dùng để báo client refetch hoặc cập nhật cache an toàn.
 
 ## Phase 7 — Frontend realtime
 
-- Cài `socket.io-client`.
-- Tạo authenticated Socket provider duy nhất.
-- Tạo event contract TypeScript.
-- Đăng ký `on` và cleanup bằng `off`.
+- Cài `@microsoft/signalr`.
+- Tạo authenticated SignalR provider duy nhất.
+- Tạo event contract TypeScript tương ứng với backend envelope.
+- Đăng ký handler bằng `connection.on` và cleanup bằng `connection.off`.
 - Đồng bộ TanStack Query cache.
-- Dedupe `eventId` và dùng `unreadCount` trong payload làm giá trị chuẩn cho notification badge.
-- Refetch khi reconnect không recover.
+- Dedupe `eventId`; `unreadCount` trong payload là snapshot, refetch REST để tránh giá trị cũ ghi đè và không tăng badge cục bộ.
+- Refetch khi reconnect hoặc khi connection bị gián đoạn.
 - Tạo Notification bell và Notification page.
 
 ## Phase 8 — Frontend interaction
@@ -81,7 +83,7 @@
 
 - Unit Test domain và validator.
 - Integration Test REST và transaction.
-- Socket gateway test.
+- SignalR hub/realtime integration test.
 - Outbox reliability test.
 - Frontend hook/component test.
 - End-to-end test cho like → notification realtime.
@@ -94,9 +96,9 @@ Domain
 → Persistence + Outbox
 → REST Application/Infrastructure/API
 → Backend tests
-→ Socket.IO Gateway
-→ Gateway tests
-→ Frontend Socket provider
+→ SignalR Hub
+→ Realtime integration tests
+→ Frontend SignalR provider
 → Interaction + Notification UI
 → End-to-end tests
 → Documentation
@@ -106,14 +108,14 @@ Domain
 
 - Like, Comment, Saved và RSVP hoạt động đúng quyền và idempotency.
 - Content author nhận notification khi có người khác like.
-- Notification tồn tại trong database trước khi emit.
-- Socket.IO xác thực JWT và emit đúng user room.
-- Client `on` event và cập nhật Query Cache không trùng.
-- Mất kết nối không làm mất notification.
+- Notification tồn tại trong database trước khi gửi realtime event.
+- SignalR xác thực JWT và gửi event đúng user group.
+- Client đăng ký handler realtime và cập nhật Query Cache không trùng.
+- Mất kết nối không làm mất notification vì client refetch từ REST khi reconnect.
 - Outbox retry và dead-letter hoạt động.
 - Comment được xóa mềm và moderation có audit.
 - RSVP tuân thủ audience và thời gian Schedule.
 - Rate limiting và XSS protection hoạt động.
-- Unit, integration, gateway, frontend và end-to-end test đều pass.
+- Unit, integration, SignalR hub, frontend và end-to-end test đều pass.
 - Swagger và event contract được cập nhật.
 - Authentication, Profile, Roadmap và Sharing của sprint trước không bị ảnh hưởng.

@@ -99,7 +99,7 @@ Index thứ ba phục vụ kiểm tra cửa sổ chống spam 5 phút của `Con
 | `Type` | String | Có | Loại realtime event |
 | `PayloadJson` | JSONB | Có | Payload đã chuẩn hóa |
 | `OccurredAtUtc` | DateTime | Có | Thời điểm nghiệp vụ |
-| `ProcessedAtUtc` | DateTime | Không | Thời điểm gateway nhận thành công |
+| `ProcessedAtUtc` | DateTime | Không | Thời điểm publisher hoàn tất gửi (không phải client receipt) |
 | `RetryCount` | Integer | Có | Số lần thử |
 | `NextAttemptAtUtc` | DateTime | Không | Lần thử tiếp theo |
 | `LastError` | String | Không | Lỗi gần nhất đã rút gọn |

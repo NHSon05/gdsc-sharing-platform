@@ -30,7 +30,7 @@
 | AC-23  | Mất socket không làm mất notification đã lưu.                                                                       |
 | AC-24  | Reconnect không recover được sẽ refetch REST.                                                                       |
 | AC-25  | Event trùng `eventId` không cập nhật UI hai lần.                                                                    |
-| AC-26  | Outbox retry khi gateway tạm thời lỗi.                                                                              |
+| AC-26  | Outbox retry khi SignalR publisher tạm thời lỗi.                                                                   |
 | AC-27  | Member gọi moderation hoặc RSVP admin API nhận 403.                                                                 |
 | AC-28  | Rate limit trả 429 đúng trường hợp.                                                                                 |
 
@@ -76,7 +76,7 @@
 - Schedule cancellation tạo notification đúng đối tượng.
 - Cursor pagination không bỏ sót hoặc lặp item.
 
-## 4. Socket.IO Test
+## 4. SignalR Test
 
 - Kết nối token hợp lệ.
 - Từ chối token sai, hết hạn hoặc user inactive.
@@ -84,8 +84,8 @@
 - User khác không nhận notification.
 - Subscribe content room được kiểm tra quyền.
 - Listener `on/off` không bị đăng ký trùng.
-- Reconnect và connection state recovery.
-- Gateway nhận cùng EventId hai lần nhưng không emit trùng trong cửa sổ dedupe.
+- Reconnect xác thực lại, subscribe lại và refetch REST; không replay cache cũ.
+- Retry giữ nguyên EventId; client dedupe, không tăng count hai lần. Publisher không hứa exactly-once qua crash.
 - Client nhận EventId trùng không tăng unread count; EventId mới dùng `unreadCount` từ server, không tự cộng cục bộ.
 
 ## 5. Outbox Test

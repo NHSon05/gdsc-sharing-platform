@@ -1,6 +1,5 @@
 using System.Diagnostics.Metrics;
-using System.Net.Http.Headers;
-using System.Text;
+using GdscSharingPlatform.Application.Features.Sharing;
 using GdscSharingPlatform.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,8 +12,6 @@ namespace GdscSharingPlatform.Infrastructure.Services.Sharing;
 public sealed class SocialOutboxOptions
 {
     public bool Enabled { get; set; }
-    public string GatewayUrl { get; set; } = "";
-    public string ServiceToken { get; set; } = "";
     public int PollSeconds { get; set; } = 2;
     public int BatchSize { get; set; } = 20;
     public int MaxAttempts { get; set; } = 8;
@@ -23,7 +20,7 @@ public sealed class SocialOutboxOptions
     public int TimeoutSeconds { get; set; } = 10;
 }
 
-public sealed class OutboxDispatcher(ApplicationDbContext db, IHttpClientFactory clients, IOptions<SocialOutboxOptions> options, TimeProvider clock)
+public sealed class OutboxDispatcher(ApplicationDbContext db, IRealtimeEventPublisher publisher, IOptions<SocialOutboxOptions> options, TimeProvider clock)
 {
     private static readonly Meter Meter = new("Gdsc.Social.Outbox", "1.0");
     private static readonly Counter<long> Delivered = Meter.CreateCounter<long>("outbox.delivered");
@@ -36,7 +33,7 @@ public sealed class OutboxDispatcher(ApplicationDbContext db, IHttpClientFactory
     {
         var config = options.Value;
         var handled = 0;
-        // One row per transaction bounds lock duration to one HTTP timeout. Other workers skip locked rows.
+        // One row per transaction bounds lock duration to one publish timeout. Other workers skip locked rows.
         for (; handled < config.BatchSize; handled++)
         {
             var now = clock.GetUtcNow();
@@ -54,24 +51,19 @@ public sealed class OutboxDispatcher(ApplicationDbContext db, IHttpClientFactory
             if (message is null) break;
             try
             {
-                using var request = new HttpRequestMessage(HttpMethod.Post, config.GatewayUrl);
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", config.ServiceToken);
-                request.Headers.Add("Idempotency-Key", message.Id.ToString());
-                request.Content = new StringContent(message.PayloadJson, Encoding.UTF8, "application/json");
                 using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct);
                 timeout.CancelAfter(TimeSpan.FromSeconds(config.TimeoutSeconds));
-                using var response = await clients.CreateClient("social-outbox").SendAsync(request, timeout.Token);
-                response.EnsureSuccessStatusCode();
+                await publisher.PublishAsync(message.Id, message.Type, message.PayloadJson, timeout.Token);
                 message.MarkProcessed();
                 Delivered.Add(1);
                 Latency.Record((clock.GetUtcNow() - message.OccurredAtUtc).TotalSeconds);
             }
-            catch (Exception e) when (!ct.IsCancellationRequested && e is HttpRequestException or OperationCanceledException)
+            catch (Exception e) when (!ct.IsCancellationRequested)
             {
                 // Never persist remote response bodies, tokens or URLs in error logs.
                 var delay = Math.Min(config.MaxDelaySeconds, config.BaseDelaySeconds * Math.Pow(2, Math.Min(message.RetryCount, 20)));
-                message.RecordFailure(clock.GetUtcNow().AddSeconds(delay), e is HttpRequestException http
-                    ? $"Gateway request failed (HTTP {(int?)http.StatusCode})." : "Gateway request timed out.");
+                message.RecordFailure(clock.GetUtcNow().AddSeconds(delay), e is OperationCanceledException
+                    ? "Realtime publish timed out." : "Realtime publish failed.");
                 if (message.RetryCount >= config.MaxAttempts) message.DeadLetter(clock.GetUtcNow());
                 Failed.Add(1);
             }

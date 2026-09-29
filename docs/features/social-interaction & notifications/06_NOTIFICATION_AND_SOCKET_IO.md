@@ -1,209 +1,92 @@
-# Sprint 5 — Notification và Socket.IO
+# Sprint 5 — Notification và ASP.NET Core SignalR
 
-## 1. Kiến trúc
+Tên file được giữ để không làm hỏng link cũ. Kế hoạch Phase 6 mới thay thế Socket.IO/Node gateway bằng SignalR trong backend.
 
-ASP.NET Core API tiếp tục sở hữu nghiệp vụ và database. Bổ sung một Node.js Socket.IO Gateway độc lập:
+## 1. Luồng triển khai
 
-```text
-REST Mutation
-→ PostgreSQL transaction
-   ├── Business data
-   ├── Notification
-   └── OutboxMessage
-→ Outbox Worker
-→ Internal authenticated request
-→ Socket.IO Gateway
-→ emit đến room
-→ Client on event
-```
+REST mutation → transaction PostgreSQL (business data + Notification + OutboxMessage) → Outbox Worker → IRealtimeEventPublisher → IHubContext<NotificationHub> → client handler.
 
-Socket.IO Gateway không tự ghi Like, Comment, Saved hoặc RSVP.
+Hub không ghi Like, Comment, Saved hoặc RSVP. Không có service Node.js, HTTP gateway endpoint, service credential hay cổng realtime riêng.
 
-## 2. Namespace và room
+## 2. Endpoint và group
 
-Namespace:
+- Hub: `/hubs/notifications`.
+- `user:{userId}`: server tự join theo JWT, không có method cho client chọn user group.
+- `content:{contentId}`: quyền đọc giống REST content, bao gồm trạng thái Published và quyền tác giả/Admin.
+- `schedule:{scheduleId}:admins`: Admin-only, đồng nhất REST RSVP stats Phase 5; chưa cấp stats cho Presenter.
+- Methods: `SubscribeContent(contentId)`, `UnsubscribeContent(contentId)`, `SubscribeSchedule(scheduleId)`, `UnsubscribeSchedule(scheduleId)`; đối số UUID dạng chuỗi. Gọi bằng `connection.invoke` và chờ completion; lỗi trả HubException với mã AUTH_INVALID/FORBIDDEN/RATE_LIMITED/GROUP_LIMIT.
+- Tối đa 20 subscriptions và 60 subscribe/unsubscribe mỗi phút/kết nối, cấu hình qua Realtime options.
 
-```text
-/realtime
-```
+## 3. Authentication và bảo mật
 
-Room:
+Dùng JWT hiện tại: signature, issuer, audience, expiry. Kiểm DB Active, IsDeleted, TokenVersion, lockout khi connect, khi gọi method và trước khi phát tới từng recipient đang online. Recheck định kỳ mặc định 30 giây; mất quyền sẽ đóng kết nối. Token hết hạn tự đóng qua `CloseOnAuthenticationExpiration`.
 
-```text
-user:{userId}
-content:{contentId}
-schedule:{scheduleId}:admins
-```
+Client SignalR dùng `accessTokenFactory`; Authorization header được ưu tiên. Browser WebSocket/SSE dùng `access_token` query theo giao thức SignalR. Backend chỉ chấp nhận query credential trên đường dẫn chính xác `/hubs/notifications`, không chấp nhận trên REST hoặc negotiate. Không log query/token; proxy phải redact access_token. Dùng HTTPS production.
 
-- Sau khi xác thực, server tự join `user:{userId}`.
-- Client không được tự chọn user room.
-- Client có thể request subscribe content room; gateway xác thực trước khi join.
-- Schedule admin room chỉ dành cho Admin và Presenter được phép xem thống kê realtime.
+`Cors:AllowedOrigins` là allowlist chính xác; kiểm Origin riêng cho cả WebSocket upgrade, không dựa vào CORS đơn thuần. Client không có Origin vẫn cần JWT hợp lệ.
 
-## 3. Authentication handshake
+## 4. Event contract
 
-Client gửi access token trong `auth`, không gửi token trong query string:
-
-```ts
-const socket = io(`${REALTIME_URL}/realtime`, {
-  auth: { accessToken },
-  transports: ["websocket", "polling"],
-});
-```
-
-Gateway middleware kiểm tra:
-
-- Chữ ký JWT.
-- Issuer và audience.
-- Expiration.
-- TokenVersion hoặc session validity nếu kiến trúc hiện tại hỗ trợ kiểm tra.
-- User còn hoạt động.
-
-Token hết hạn:
-
-```text
-connect_error AUTH_EXPIRED
-→ Client gọi refresh qua REST
-→ Cập nhật auth.accessToken
-→ socket.connect()
-```
-
-## 4. Event envelope
-
-Mọi event dùng một envelope thống nhất:
+Outbox JSON giữ nguyên để xử lý cả các record Phase 4–5 đã lưu:
 
 ```json
 {
-  "eventId": "uuid",
-  "eventName": "notification.created",
-  "occurredAtUtc": "2026-09-26T15:30:00Z",
-  "version": 1,
-  "data": {}
+  "room": "user:<uuid>",
+  "envelope": {
+    "eventId": "<uuid>",
+    "eventName": "notification.created",
+    "occurredAtUtc": "2026-09-28T00:00:00Z",
+    "version": 1,
+    "data": {}
+  }
 }
 ```
 
-Client lưu ngắn hạn các `eventId` đã xử lý để tránh áp dụng trùng. `eventId` xác định một realtime message và không đổi khi outbox/gateway retry. Với notification, mỗi recipient có event ID riêng; content/schedule room event có ID độc lập.
+Client nhận envelope, không nhận wrapper room. `eventId` phải khớp ID outbox, eventName khớp Type; version=1, payload tối đa 64 KiB. Validator kiểm shape, UUID, counts không âm, timestamp, route nội bộ, event allowlist và group tương ứng.
 
-## 5. Server emit và client on
+- `notification.created`: data `{notification, unreadCount}`. Notification có id, type, actorUserId (nullable), entityType, entityId, title, message, route (nullable), isRead, createdAtUtc.
+- `content.interaction.updated`: contentId, likeCount, commentCount.
+- `comment.created`: contentId, commentId.
+- `comment.updated/deleted/hidden`: contentId, commentId, version.
+- `schedule.rsvp.updated`: scheduleId, going, maybe, notGoing.
 
-### Notification mới
+Notification event ID riêng từng recipient; room event có ID độc lập. Retry luôn giữ cùng ID. Re-like dưới 5 phút vẫn do DB xử lý; SignalR không thay đổi cooldown và không đặt timer gửi notification sau 5 phút.
 
-Server:
-
-```ts
-io.of("/realtime")
-  .to(`user:${recipientUserId}`)
-  .emit("notification.created", envelope);
-```
-
-Client:
+## 5. Client Phase 7
 
 ```ts
-socket.on("notification.created", (event) => {
+const connection = new HubConnectionBuilder()
+  .withUrl(API_URL + "/hubs/notifications", { accessTokenFactory })
+  .withAutomaticReconnect()
+  .build();
+
+connection.on("notification.created", (event) => {
   if (seenEventIds.has(event.eventId)) return;
   seenEventIds.add(event.eventId);
-  // Count snapshots can arrive out of order or after a mark-read mutation.
+  // Bounded, per-session dedupe cache; clear on logout/user switch.
   queryClient.invalidateQueries({ queryKey: notificationKeys.unreadCount() });
   queryClient.invalidateQueries({ queryKey: notificationKeys.list() });
 });
+await connection.start();
+await connection.invoke("SubscribeContent", contentId);
 ```
 
-`unreadCount` trong payload là snapshot được tính trong transaction ghi notification. REST count là trạng thái hiện tại; client refetch sau event để tránh snapshot cũ ghi đè trạng thái mới. Không tự tăng `+1`. Sau reconnect không recovery hoặc khi REST mutation mark-read/read-all hoàn tất, client refetch từ REST. `seenEventIds` là cache giới hạn dung lượng theo user session, xóa khi logout/đổi user.
+Ví dụ minh họa, chưa tích hợp frontend. BFF cookie HttpOnly hiện tại cần cơ chế cấp credential hub phù hợp ở Phase 7; không public refresh token/JWT secret. Cleanup bằng connection.off/stop khi unmount hoặc logout.
 
-### Tương tác bài viết
+## 6. Delivery, reconnect và shutdown
 
-```text
-content.interaction.updated
-comment.created
-comment.updated
-comment.deleted
-comment.hidden
-```
+- Notification DB là nguồn chuẩn. SendAsync hoàn tất không chứng minh client đã nhận/đọc.
+- Outbox chỉ MarkProcessed sau publisher thành công; lỗi validation hoặc send đều retry/backoff/dead-letter. Không có HTTP gateway ACK.
+- At-least-once dispatch: crash sau send trước commit có thể phát lại cùng eventId. Không hứa exactly-once hoặc server dedupe bền vững. Client dedupe và refetch, không tăng badge +1.
+- unreadCount là snapshot transaction, có thể đến trễ/sai thứ tự; refetch REST để lấy hiện tại, kể cả sau mark-read/read-all.
+- Không bật stateful reconnect/replay. Mỗi reconnect xác thực lại, subscribe lại entity đang mở và refetch notification/count/entity. AutomaticReconnect không tự retry lần start đầu hoặc thay thế refresh token.
+- Keep-alive 15 giây, client timeout 30 giây, handshake timeout 15 giây, hub receive limit 16 KiB, transport/application buffers 64 KiB.
+- Host shutdown timeout 30 giây; cancellation dừng worker và đóng connections. Event chưa commit vẫn pending để xử lý sau restart.
 
-### RSVP
+## 7. Vận hành
 
-```text
-schedule.rsvp.updated
-```
+Bật `SocialOutbox__Enabled=true` trong backend để worker phát; mặc định false nhằm bật chủ động. Không cần GatewayUrl/ServiceToken. Realtime__SubscribePerMinute, Realtime__MaxSubscriptions, Realtime__SessionRecheckSeconds cấu hình giới hạn. CORS dùng cấu hình hiện có.
 
-## 6. Payload đề xuất
+Registry connections hiện local, chỉ hỗ trợ một API instance. Không chạy nhiều replica/worker độc lập: SKIP LOCKED có thể giao event cho instance không sở hữu connection. Scale-out cần shared connection routing + authorization-aware distribution; chỉ thêm Redis backplane chưa đủ với registry hiện tại.
 
-`notification.created`:
-
-```json
-{
-  "notification": {
-    "id": "uuid",
-    "type": "ContentLiked",
-    "message": "Nguyễn Văn A đã thích bài viết của bạn.",
-    "route": "/sharing/clean-architecture",
-    "isRead": false,
-    "createdAtUtc": "2026-09-26T15:30:00Z"
-  },
-  "unreadCount": 6
-}
-```
-
-`content.interaction.updated`:
-
-```json
-{
-  "contentId": "uuid",
-  "likeCount": 25,
-  "commentCount": 8
-}
-```
-
-`schedule.rsvp.updated`:
-
-```json
-{
-  "scheduleId": "uuid",
-  "going": 33,
-  "maybe": 7,
-  "notGoing": 4
-}
-```
-
-## 7. Subscribe và unsubscribe
-
-Client emit:
-
-```ts
-socket.emit("content.subscribe", { contentId }, acknowledgement);
-socket.emit("content.unsubscribe", { contentId });
-```
-
-Gateway on:
-
-```ts
-socket.on("content.subscribe", async ({ contentId }, ack) => {
-  // validate access, then join content room
-});
-```
-
-Mọi event client → gateway cần acknowledgement và validation. Không dùng socket event để thay thế REST mutation nghiệp vụ.
-
-## 8. Reconnect và đồng bộ lại
-
-- Bật connection state recovery trong khoảng ngắn.
-- Đặt `skipMiddlewares: false` để xác thực lại khi cần.
-- Khi `socket.recovered === false`, client refetch notification list, unread count và entity đang mở.
-- REST API vẫn là cơ chế khôi phục đầy đủ sau mất kết nối dài hoặc restart server.
-
-## 9. Outbox Worker
-
-- Đọc message chưa xử lý theo batch.
-- Gửi `eventId` đến gateway.
-- Gateway xử lý idempotent theo `eventId` trong cửa sổ chống trùng.
-- Thành công mới cập nhật `ProcessedAtUtc`.
-- Thất bại tăng RetryCount và exponential backoff.
-- Có dead-letter policy sau số lần thử tối đa.
-
-## 10. Scale out
-
-Giai đoạn đầu có thể chạy một Socket.IO Gateway. Khi chạy nhiều instance:
-
-- Dùng Socket.IO adapter phù hợp để chia sẻ room/broadcast.
-- Không dùng `socket.id` làm user ID.
-- Giữ room theo `user:{stableUserId}`.
+Tham khảo chính thức: [authentication](https://learn.microsoft.com/en-us/aspnet/core/signalr/authn-and-authz?view=aspnetcore-10.0), [configuration](https://learn.microsoft.com/en-us/aspnet/core/signalr/configuration?view=aspnetcore-10.0).

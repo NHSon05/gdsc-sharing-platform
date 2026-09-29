@@ -25,15 +25,13 @@
 
 ## Cấu hình worker cho Phase 6
 
-`SocialOutbox:Enabled` mặc định false vì gateway chưa được triển khai. REST vẫn lưu Notification/Outbox bền vững. Đặt các biến cấu hình khi gateway sẵn sàng:
+Phase 6 mới đã thay HTTP gateway bằng SignalR publisher trong backend. `SocialOutbox:Enabled` vẫn mặc định false để bật chủ động; REST luôn lưu Notification/Outbox bền vững:
 
 ```text
 SocialOutbox__Enabled=true
-SocialOutbox__GatewayUrl=https://<internal-gateway>/internal/events
-SocialOutbox__ServiceToken=<secret>
 ```
 
-Worker gửi POST với `Authorization: Bearer <secret>` và `Idempotency-Key: <OutboxMessage.Id>`, body `{ room, envelope }`. Gateway chỉ trả 2xx khi đã chấp nhận emit; retry cùng event ID phải trả thành công mà không emit trùng trong cửa sổ dedupe. `ProcessedAtUtc` là ACK gateway, không phải xác nhận mọi browser đã nhận.
+Worker gọi `IRealtimeEventPublisher`, implementation dùng `IHubContext<NotificationHub>`. JSON `{ room, envelope }` cũ vẫn dùng được. Không còn GatewayUrl/ServiceToken. `ProcessedAtUtc` ghi sau publish thành công, không phải browser receipt. Crash sau send trước commit có thể gửi trùng cùng EventId; client dedupe/refetch. Phần “Đã triển khai” phía trên mô tả lịch sử Phase 4–5 trước thay đổi transport này.
 
 Mặc định: poll 2 giây, batch 20, timeout 10 giây, tối đa 8 lần thử; backoff từ 2 đến 300 giây. Message đã dead-letter được giữ để điều tra; chưa có REST endpoint replay/xóa. Không tự xóa notification hoặc outbox trong giai đoạn này.
 

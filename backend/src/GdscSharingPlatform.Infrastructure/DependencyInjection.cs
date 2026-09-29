@@ -186,11 +186,7 @@ public static class DependencyInjection
             .Validate(x => x.PollSeconds > 0 && x.BatchSize is > 0 and <= 100 && x.MaxAttempts > 0
                 && x.BaseDelaySeconds > 0 && x.MaxDelaySeconds >= x.BaseDelaySeconds && x.TimeoutSeconds is > 0 and <= 60,
                 "Invalid outbox retry/poll settings.")
-            .Validate(x => !x.Enabled || !string.IsNullOrWhiteSpace(x.ServiceToken)
-                && Uri.TryCreate(x.GatewayUrl, UriKind.Absolute, out var uri) && uri.Scheme is "http" or "https"
-                && string.IsNullOrEmpty(uri.UserInfo), "Enabled outbox requires a gateway URL and service token.")
             .ValidateOnStart();
-        services.AddHttpClient("social-outbox").ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { AllowAutoRedirect = false });
         services.AddScoped<GdscSharingPlatform.Infrastructure.Services.Sharing.OutboxDispatcher>();
         services.AddHostedService<GdscSharingPlatform.Infrastructure.Services.Sharing.OutboxWorker>();
         services.AddScoped<GdscSharingPlatform.Application.Features.Sharing.ISharingContentService, GdscSharingPlatform.Infrastructure.Services.Sharing.SharingContentService>();
@@ -268,8 +264,14 @@ public static class DependencyInjection
                 {
                     OnMessageReceived = context =>
                     {
+                        // Browser WebSocket/SSE transports cannot set Authorization headers.
+                        // Never accept URL credentials on REST routes.
+                        if (context.Request.Path == "/hubs/notifications"
+                            && !context.Request.Headers.ContainsKey("Authorization")
+                            && context.Request.Query.TryGetValue("access_token", out var accessToken))
+                            context.Token = accessToken.ToString();
                         // Ưu tiên Authorization Header (Mobile/API clients), nếu không có thì đọc từ HttpOnly Cookie
-                        if (string.IsNullOrEmpty(context.Token) &&
+                        if (string.IsNullOrEmpty(context.Token) && !context.Request.Headers.ContainsKey("Authorization") &&
                             context.Request.Cookies.TryGetValue("accessToken", out var cookieToken))
                         {
                             context.Token = cookieToken;

@@ -8,7 +8,7 @@ Trang Sharing Content hiển thị:
 - Nút Comment và tổng số comment.
 - Nút Saved riêng cho current user.
 - Trạng thái nút thay đổi ngay sau REST response.
-- Khi nhận Socket.IO event, số lượng được đồng bộ mà không tải lại trang.
+- Khi nhận SignalR event, số lượng được đồng bộ mà không tải lại trang.
 
 Không optimistic toggle trước khi server phản hồi nếu chưa có cơ chế rollback rõ ràng.
 
@@ -78,7 +78,7 @@ Không tham gia
 - Zustand chỉ giữ UI state như notification panel đang mở.
 - Socket listener invalidate hoặc cập nhật Query Cache.
 - Mỗi listener phải được `off` khi provider unmount để tránh nhận trùng event.
-- Chỉ tạo một Socket.IO connection dùng chung trong authenticated app shell.
+- Chỉ tạo một SignalR connection dùng chung trong authenticated app shell.
 
 ## 8. Accessibility
 

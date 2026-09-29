@@ -61,7 +61,7 @@ public sealed partial class SharingPostgresTests
         db.OutboxMessages.Add(new(Guid.NewGuid(), "notification.created", "{}", DateTimeOffset.UtcNow));
         await db.SaveChangesAsync();
         var handler = new BlockingGateway();
-        var config = Options.Create(new SocialOutboxOptions { BatchSize = 1, GatewayUrl = "https://gateway.test/events", ServiceToken = "test" });
+        var config = Options.Create(new SocialOutboxOptions { BatchSize = 1 });
         await using var firstDb = Context(); await using var secondDb = Context();
         var first = new OutboxDispatcher(firstDb, handler, config, TimeProvider.System).DispatchAsync(default);
         await handler.Entered.Task.WaitAsync(TimeSpan.FromSeconds(10));
@@ -71,13 +71,12 @@ public sealed partial class SharingPostgresTests
         Assert.Equal(1, handler.Calls);
         Assert.NotNull((await db.OutboxMessages.AsNoTracking().SingleAsync()).ProcessedAtUtc);
     }
-    private sealed class BlockingGateway : HttpMessageHandler, IHttpClientFactory
+    private sealed class BlockingGateway : GdscSharingPlatform.Application.Features.Sharing.IRealtimeEventPublisher
     {
         public TaskCompletionSource Entered { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
         public TaskCompletionSource Release { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
         public int Calls;
-        public HttpClient CreateClient(string name) => new(this, false);
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        { Interlocked.Increment(ref Calls); Entered.TrySetResult(); await Release.Task.WaitAsync(cancellationToken); return new(HttpStatusCode.NoContent); }
+        public async Task PublishAsync(Guid eventId, string eventName, string payloadJson, CancellationToken cancellationToken)
+        { Interlocked.Increment(ref Calls); Entered.TrySetResult(); await Release.Task.WaitAsync(cancellationToken); }
     }
 }

@@ -1,4 +1,4 @@
-using System.Net;
+using GdscSharingPlatform.Application.Features.Sharing;
 using GdscSharingPlatform.Domain.Sharing;
 using GdscSharingPlatform.Infrastructure.Persistence;
 using GdscSharingPlatform.Infrastructure.Services.Sharing;
@@ -19,8 +19,8 @@ public sealed class OutboxDispatcherTests
         var message = new OutboxMessage(Guid.NewGuid(), "notification.created", "{}", clock.GetUtcNow());
         db.Add(message); await db.SaveChangesAsync();
         var handler = new Handler(success);
-        var dispatcher = new OutboxDispatcher(db, new Clients(handler), Options.Create(new SocialOutboxOptions
-        { GatewayUrl = "https://gateway.test/internal/events", ServiceToken = "test-token", MaxAttempts = 2, BaseDelaySeconds = 2 }), clock);
+        var dispatcher = new OutboxDispatcher(db, handler, Options.Create(new SocialOutboxOptions
+        { MaxAttempts = 2, BaseDelaySeconds = 2 }), clock);
         Assert.Equal(1, await dispatcher.DispatchAsync(default));
         db.ChangeTracker.Clear();
         var result = await db.OutboxMessages.SingleAsync();
@@ -49,16 +49,13 @@ public sealed class OutboxDispatcherTests
         public override DateTimeOffset GetUtcNow() => _now;
         public void Advance(TimeSpan duration) => _now += duration;
     }
-    private sealed class Clients(Handler handler) : IHttpClientFactory
-    { public HttpClient CreateClient(string name) => new(handler, false); }
-    private sealed class Handler(bool success) : HttpMessageHandler
+    private sealed class Handler(bool success) : IRealtimeEventPublisher
     {
         public List<string> Keys { get; } = [];
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        public Task PublishAsync(Guid eventId, string eventName, string payloadJson, CancellationToken ct)
         {
-            Assert.Equal("Bearer", request.Headers.Authorization?.Scheme);
-            Keys.Add(request.Headers.GetValues("Idempotency-Key").Single());
-            return Task.FromResult(new HttpResponseMessage(success ? HttpStatusCode.NoContent : HttpStatusCode.ServiceUnavailable));
+            Keys.Add(eventId.ToString());
+            return success ? Task.CompletedTask : Task.FromException(new IOException("Publish failed"));
         }
     }
 }
